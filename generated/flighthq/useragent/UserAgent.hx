@@ -8,6 +8,7 @@ import flighthq.types.Platform.PlatformEngine;
 import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
 import flighthq.types.Platform.PlatformRuntime;
+import flighthq.useragent.UserAgentParse.parseUserAgentOsVersion;
 
 class UserAgent {
   public static function detectEndianness():PlatformEndianness {
@@ -43,7 +44,9 @@ class UserAgent {
   }
 
   public static function parseUserAgentEngine(ua:String):PlatformEngine {
+    if ((cast _Runtime.callProperty(_Runtime.regexp('iphone|ipad|ipod', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'webkit'; }
     if ((cast _Runtime.callProperty(_Runtime.regexp('firefox', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'gecko'; }
+    if ((cast _Runtime.callProperty(_Runtime.regexp('edge\\/\\d', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'unknown'; }
     if ((cast _Runtime.callProperty(_Runtime.regexp('chrome|chromium|edg|opr|samsung', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'blink'; }
     if ((cast _Runtime.callProperty(_Runtime.regexp('safari|webkit', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast 'webkit'; }
     return cast 'unknown';
@@ -119,39 +122,9 @@ class UserAgent {
   }
 
   public static function parseUserAgentVersion(ua:String, name:PlatformName):String {
-    {
-      var __switchValue = name;
-      if (__switchValue == 'windows') {
-        {
-          var m:Dynamic = _Runtime.callProperty(_Runtime.regexp('windows nt ([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
-          return cast _Runtime.select(m, function():Dynamic return cast _Runtime.getIndex(m, 1.0), function():Dynamic return cast '');
-        }
-      }
-      else if (__switchValue == 'macos') {
-        {
-          var m:Dynamic = _Runtime.callProperty(_Runtime.regexp('mac os x ([\\d_.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
-          return cast _Runtime.select(m, function():Dynamic return cast _Runtime.replace(_Runtime.getIndex(m, 1.0), _Runtime.regexp('_', 'g'), '.', false), function():Dynamic return cast '');
-        }
-      }
-      else if (__switchValue == 'ios') {
-        {
-          var m:Dynamic = _Runtime.callProperty(_Runtime.regexp('cpu(?: iphone)? os ([\\d_]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
-          return cast _Runtime.select(m, function():Dynamic return cast _Runtime.replace(_Runtime.getIndex(m, 1.0), _Runtime.regexp('_', 'g'), '.', false), function():Dynamic return cast '');
-        }
-      }
-      else if (__switchValue == 'android') {
-        {
-          var m:Dynamic = _Runtime.callProperty(_Runtime.regexp('android ([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
-          return cast _Runtime.select(m, function():Dynamic return cast _Runtime.getIndex(m, 1.0), function():Dynamic return cast '');
-        }
-      }
-      else if (__switchValue == 'linux') {
-        return cast '';
-      }
-      else  {
-        return cast '';
-      }
-    }
+    if ((cast ((cast _Runtime.strictEquals(name, 'linux') : Bool) || (cast _Runtime.strictEquals(name, 'web') : Bool)) : Bool)) { return cast ''; }
+    if ((cast !_Runtime.strictEquals(_Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)), name) : Bool)) { return cast ''; }
+    return cast _Runtime.callValue(parseUserAgentOsVersion, cast ([ua] : Array<Dynamic>));
     return cast null;
   }
 }

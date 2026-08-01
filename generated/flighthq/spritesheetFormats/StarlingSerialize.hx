@@ -3,9 +3,9 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spritesheetFormats.StarlingSchema.StarlingDocument;
-import flighthq.spritesheetFormats.StarlingSchema.StarlingSubTexture;
 import flighthq.types.SpritesheetData;
+import flighthq.types.StarlingSchema.StarlingDocument;
+import flighthq.types.StarlingSchema.StarlingSubTexture;
 
 class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {

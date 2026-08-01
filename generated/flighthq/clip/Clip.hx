@@ -83,10 +83,6 @@ class Clip {
     Facade_Clip_flighthq_clip_ClipRegion.intersectClipRegions(out, a, b);
   }
 
-  public static function invalidateClipRegion(clip:ClipRegion):Void {
-    Facade_Clip_flighthq_clip_ClipRegion.invalidateClipRegion(clip);
-  }
-
   public static function isClipRegionEmpty(clip:ClipRegion):Bool {
     return cast Facade_Clip_flighthq_clip_ClipRegion.isClipRegionEmpty(clip);
     return cast null;

@@ -6,10 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
-import flighthq.types.Types.DefaultMaterialKind;
+import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
-import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
+import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class WgpuMaterialRegistry {
   public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
@@ -35,7 +35,7 @@ class WgpuMaterialRegistry {
       var renderer:Dynamic = ((cast map : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
       if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
     }
-    return cast _Runtime.coalesce(((cast map : flighthq._internal._Map).get(DefaultMaterialKind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast map : flighthq._internal._Map).get(StandardMaterialKindValue)), function():Dynamic return cast null);
     return cast null;
   }
 }

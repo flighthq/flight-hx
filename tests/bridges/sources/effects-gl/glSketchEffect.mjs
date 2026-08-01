@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySketchEffectToGl = api.applySketchEffectToGl;
 export const defaultGlSketchEffectRunner = api.defaultGlSketchEffectRunner;
+export const registerGlSketchEffect = api.registerGlSketchEffect;

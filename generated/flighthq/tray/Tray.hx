@@ -3,6 +3,7 @@ package flighthq.tray;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.tray.EnableTrayGuards as Facade_Tray_flighthq_tray_EnableTrayGuards;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Tray.TrayBackend;
@@ -14,7 +15,14 @@ import flighthq.types.Tray.TrayIconOptions;
 import flighthq.types.Vector2.Vector2Like;
 
 class Tray {
+  public static var _animationGuard__tray:Null<Dynamic> = _Runtime.explicitNull();
+
+  public static final _animations__tray:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+
   public static var _backend__tray:Null<TrayBackend> = _Runtime.explicitNull();
+
+  public static function _noopStop__tray():Void {
+  }
 
   public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
     var id:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,9 +35,9 @@ class Tray {
     return cast { create: function() {
       return cast -1.0;
     }, destroy: function() {
-    
+
     }, displayBalloon: function() {
-    
+
     }, getBounds: function() {
       return cast null;
     }, getCapabilities: function() {
@@ -43,37 +51,46 @@ class Tray {
     }, listIds: function() {
       return cast cast ([] : Array<Dynamic>);
     }, popUpContextMenu: function() {
-    
+
     }, removeBalloon: function() {
-    
+
     }, setContextMenu: function() {
-    
+
     }, setIcon: function() {
-    
+
     }, setIgnoreDoubleClickEvents: function() {
-    
+
     }, setPressedIcon: function() {
-    
+
     }, setTemplate: function() {
-    
+
     }, setTitle: function() {
-    
+
     }, setTooltip: function() {
-    
+
     }, subscribe: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;
   }
 
   public static function destroyTrayIcon(tray:TrayIcon):Void {
+    _Runtime.callValue(stopTrayIconAnimation, cast ([tray] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'destroy', cast ([tray.id] : Array<Dynamic>));
+  }
+
+  public static function disableTrayGuards():Void {
+    Facade_Tray_flighthq_tray_EnableTrayGuards.disableTrayGuards();
   }
 
   public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
     _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'displayBalloon', cast ([tray.id, options] : Array<Dynamic>));
+  }
+
+  public static function enableTrayGuards():Void {
+    Facade_Tray_flighthq_tray_EnableTrayGuards.enableTrayGuards();
   }
 
   public static function getTrayBackend():TrayBackend {
@@ -112,6 +129,11 @@ class Tray {
     return cast null;
   }
 
+  public static function isTrayIconAnimating(tray:TrayIcon):Bool {
+    return cast ((cast Tray._animations__tray : flighthq._internal._Map).has(tray.id));
+    return cast null;
+  }
+
   public static function onTrayEvent(listener:Dynamic):Dynamic {
     return cast _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([listener] : Array<Dynamic>));
     return cast null;
@@ -123,6 +145,10 @@ class Tray {
 
   public static function removeTrayBalloon(tray:TrayIcon):Void {
     _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'removeBalloon', cast ([tray.id] : Array<Dynamic>));
+  }
+
+  public static function setTrayAnimationGuard(guard:Null<Dynamic>):Void {
+    (Tray._animationGuard__tray = cast (guard : Dynamic));
   }
 
   public static function setTrayBackend(backend:Null<TrayBackend>):Void {
@@ -160,17 +186,30 @@ class Tray {
   public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Dynamic {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var handle:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return cast function() {
-    
-    }; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return cast Tray._noopStop__tray; }
+    _Runtime.callOptionalValue(Tray._animationGuard__tray, cast ([tray, _Runtime.field(frames, 'length'), intervalMs] : Array<Dynamic>));
+    _Runtime.callValue(stopTrayIconAnimation, cast ([tray] : Array<Dynamic>));
     index = 0.0;
     _Runtime.callValue(setTrayIcon, cast ([tray, flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
     handle = _Runtime.setInterval(function() {
       (index = cast (_Runtime.fmod((index + 1.0), _Runtime.field(frames, 'length')) : Dynamic));
       _Runtime.callValue(setTrayIcon, cast ([tray, flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
     }, intervalMs);
-    return cast function() return _Runtime.clearInterval(handle);
+    ((cast Tray._animations__tray : flighthq._internal._Map).set(tray.id, handle));
+    return cast function() {
+      if ((cast !_Runtime.strictEquals(((cast Tray._animations__tray : flighthq._internal._Map).get(tray.id)), handle) : Bool)) { return; }
+      _Runtime.clearInterval(handle);
+      ((cast Tray._animations__tray : flighthq._internal._Map).delete_(tray.id));
+    };
     return cast null;
+  }
+
+  public static function stopTrayIconAnimation(tray:TrayIcon):Void {
+    var handle:Dynamic = cast _Runtime.UNDEFINED;
+    handle = ((cast Tray._animations__tray : flighthq._internal._Map).get(tray.id));
+    if ((cast _Runtime.strictEquals(handle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
+    _Runtime.clearInterval(handle);
+    ((cast Tray._animations__tray : flighthq._internal._Map).delete_(tray.id));
   }
 
   public static final WEB_CAPABILITIES__tray:TrayCapabilities = { balloon: false, bounds: false, clickEvents: false, dropFiles: false, pressedIcon: false, title: false };

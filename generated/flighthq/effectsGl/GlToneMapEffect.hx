@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -27,6 +28,10 @@ class GlToneMapEffect {
   public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyToneMapEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlToneMapEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ToneMapEffect', defaultGlToneMapEffectRunner] : Array<Dynamic>));
+  }
 
   public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {
     return cast ((GlToneMapEffect.TONEMAP_FRAGMENT_HEAD__glToneMapEffect + _Runtime.coalesce(_Runtime.getIndex(GlToneMapEffect.TONEMAP_OPERATORS__glToneMapEffect, operator_), function():Dynamic return cast GlToneMapEffect.TONEMAP_OPERATORS__glToneMapEffect.aces)) + GlToneMapEffect.TONEMAP_FRAGMENT_TAIL__glToneMapEffect);

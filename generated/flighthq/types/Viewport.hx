@@ -4,6 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Node.NodeTraits;
 
-typedef Viewport<Traits> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var root:Null<Node<Traits>>; var scaleMode:ViewportScaleMode; };
+typedef Viewport = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; };
+
+typedef ViewportLike = Dynamic;

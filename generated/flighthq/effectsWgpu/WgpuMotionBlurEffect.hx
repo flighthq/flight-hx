@@ -3,10 +3,11 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.MotionBlurEffect;
+import flighthq.types.WgpuDualSourceEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -43,6 +44,10 @@ class WgpuMotionBlurEffect {
   public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyMotionBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : MotionBlurEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'MotionBlurEffect', defaultWgpuMotionBlurEffectRunner] : Array<Dynamic>));
+  }
 
   public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;

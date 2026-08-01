@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyDirectionalBlurEffectToGl = api.applyDirectionalBlurEffectToGl;
 export const defaultGlDirectionalBlurEffectRunner = api.defaultGlDirectionalBlurEffectRunner;
+export const registerGlDirectionalBlurEffect = api.registerGlDirectionalBlurEffect;

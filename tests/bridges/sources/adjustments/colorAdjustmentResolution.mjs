@@ -9,4 +9,5 @@ export const COLOR_ADJUSTMENT_AFFINE = api.COLOR_ADJUSTMENT_AFFINE;
 export const COLOR_ADJUSTMENT_CHANNEL_MIXING = api.COLOR_ADJUSTMENT_CHANNEL_MIXING;
 export const COLOR_ADJUSTMENT_NONE = api.COLOR_ADJUSTMENT_NONE;
 export const isAffineColorMatrix = api.isAffineColorMatrix;
-export const resolveColorAdjustmentsColorTransform = api.resolveColorAdjustmentsColorTransform;
+export const resolveColorAdjustmentsColorMatrix = api.resolveColorAdjustmentsColorMatrix;
+export const resolveColorAdjustmentsColorScaleBias = api.resolveColorAdjustmentsColorScaleBias;

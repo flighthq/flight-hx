@@ -22,17 +22,17 @@ class GlPresentRenderTarget {
 
   public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).get(state));
+    program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (program = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget] : Array<Dynamic>)) : Dynamic));
-      ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).set(state, program));
+      ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), program));
     }
     return cast program;
     return cast null;
   }
 
   public static final NOOP__glPresentRenderTarget:Dynamic = function() {
-  
+
   };
 
   public static final _programs__glPresentRenderTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

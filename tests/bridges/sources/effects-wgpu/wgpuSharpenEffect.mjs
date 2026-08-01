@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySharpenEffectToWgpu = api.applySharpenEffectToWgpu;
 export const defaultWgpuSharpenEffectRunner = api.defaultWgpuSharpenEffectRunner;
+export const registerWgpuSharpenEffect = api.registerWgpuSharpenEffect;

@@ -97,7 +97,7 @@ class Keyboard {
       var virtualKeyboard:Dynamic = cast _Runtime.UNDEFINED;
       var viewport:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
-      
+
       }; }
       transition = { durationSeconds: 0.0, height: 0.0 };
       fire = function() return _Runtime.callValue(listener, cast (['did', transition] : Array<Dynamic>));
@@ -108,7 +108,7 @@ class Keyboard {
       }
       viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
       if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function() {
-      
+
       }; }
       _Runtime.callProperty(viewport, 'addEventListener', cast (['resize', fire] : Array<Dynamic>));
       _Runtime.callProperty(viewport, 'addEventListener', cast (['scroll', fire] : Array<Dynamic>));

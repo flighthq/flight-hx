@@ -2,17 +2,13 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachScreenSignals = compiled.flighthq.screen.Screen.attachScreenSignals;
-export const createScreenInfo = compiled.flighthq.screen.Screen.createScreenInfo;
 export const createScreenMode = compiled.flighthq.screen.Screen.createScreenMode;
-export const createScreenSignals = compiled.flighthq.screen.Screen.createScreenSignals;
-export const createWebScreenBackend = compiled.flighthq.screen.Screen.createWebScreenBackend;
 export const detachScreenSignals = compiled.flighthq.screen.Screen.detachScreenSignals;
 export const dipToScreenPoint = compiled.flighthq.screen.Screen.dipToScreenPoint;
 export const dipToScreenRect = compiled.flighthq.screen.Screen.dipToScreenRect;
 export const disposeScreenSignals = compiled.flighthq.screen.Screen.disposeScreenSignals;
 export const enableScreenSignals = compiled.flighthq.screen.Screen.enableScreenSignals;
 export const getPrimaryScreen = compiled.flighthq.screen.Screen.getPrimaryScreen;
-export const getScreenBackend = compiled.flighthq.screen.Screen.getScreenBackend;
 export const getScreenBounds = compiled.flighthq.screen.Screen.getScreenBounds;
 export const getScreenById = compiled.flighthq.screen.Screen.getScreenById;
 export const getScreenContainingRect = compiled.flighthq.screen.Screen.getScreenContainingRect;
@@ -31,4 +27,3 @@ export const refreshScreens = compiled.flighthq.screen.Screen.refreshScreens;
 export const requestScreenDetails = compiled.flighthq.screen.Screen.requestScreenDetails;
 export const screenToDipPoint = compiled.flighthq.screen.Screen.screenToDipPoint;
 export const screenToDipRect = compiled.flighthq.screen.Screen.screenToDipRect;
-export const setScreenBackend = compiled.flighthq.screen.Screen.setScreenBackend;

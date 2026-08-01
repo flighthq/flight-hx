@@ -39,33 +39,33 @@ class _WgpuTestHelper {
 
   public static function makeBuffer__wgpuTestHelper():Dynamic {
     return cast (cast (cast { destroy: function() {
-    
+
     } } : Dynamic) : Dynamic);
     return cast null;
   }
 
   public static function makeTexture__wgpuTestHelper():Dynamic {
     return cast (cast (cast { createView: function() return (cast {  } : Dynamic), destroy: function() {
-    
+
     } } : Dynamic) : Dynamic);
     return cast null;
   }
 
   public static function makeRenderPassEncoder__wgpuTestHelper():Dynamic {
     return cast (cast (cast { draw: function() {
-    
+
     }, end: function() {
-    
+
     }, setBindGroup: function() {
-    
+
     }, setPipeline: function() {
-    
+
     }, setScissorRect: function() {
-    
+
     }, setStencilReference: function() {
-    
+
     }, setViewport: function() {
-    
+
     } } : Dynamic) : Dynamic);
     return cast null;
   }
@@ -96,20 +96,30 @@ class _WgpuTestHelper {
   }
 
   public static function makeDevice__wgpuTestHelper():Dynamic {
-    return cast (cast (cast { limits: { minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroup__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBindGroupLayout: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBuffer: function() return _Runtime.callValue(_WgpuTestHelper.makeBuffer__wgpuTestHelper, cast ([] : Array<Dynamic>)), createCommandEncoder: function() return _Runtime.callValue(_WgpuTestHelper.makeCommandEncoder__wgpuTestHelper, cast ([] : Array<Dynamic>)), createPipelineLayout: function() return _Runtime.callValue(_WgpuTestHelper.makePipelineLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createRenderPipeline: function(descriptor:Dynamic) return _Runtime.callValue(_WgpuTestHelper.makePipeline__wgpuTestHelper, cast ([descriptor] : Array<Dynamic>)), createSampler: function() return _Runtime.callValue(_WgpuTestHelper.makeSampler__wgpuTestHelper, cast ([] : Array<Dynamic>)), createShaderModule: function() return _Runtime.callValue(_WgpuTestHelper.makeShaderModule__wgpuTestHelper, cast ([] : Array<Dynamic>)), createTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)), queue: { copyExternalImageToTexture: function() {
-    
+    return cast (cast (cast { features: _Runtime.construct(_Runtime.globalValue('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroup__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBindGroupLayout: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBuffer: function() return _Runtime.callValue(_WgpuTestHelper.makeBuffer__wgpuTestHelper, cast ([] : Array<Dynamic>)), createCommandEncoder: function() return _Runtime.callValue(_WgpuTestHelper.makeCommandEncoder__wgpuTestHelper, cast ([] : Array<Dynamic>)), createPipelineLayout: function() return _Runtime.callValue(_WgpuTestHelper.makePipelineLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createRenderPipeline: function(descriptor:Dynamic) return _Runtime.callValue(_WgpuTestHelper.makePipeline__wgpuTestHelper, cast ([descriptor] : Array<Dynamic>)), createSampler: function() return _Runtime.callValue(_WgpuTestHelper.makeSampler__wgpuTestHelper, cast ([] : Array<Dynamic>)), createShaderModule: function() return _Runtime.callValue(_WgpuTestHelper.makeShaderModule__wgpuTestHelper, cast ([] : Array<Dynamic>)), createTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)), queue: { copyExternalImageToTexture: function() {
+
     }, submit: function() {
-    
+
     }, writeBuffer: function() {
-    
+
     }, writeTexture: function() {
-    
+
     } } } : Dynamic) : Dynamic);
     return cast null;
   }
 
   public static function makeAdapter__wgpuTestHelper():Dynamic {
-    return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, requestDevice: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : Dynamic);
+    return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, features: _Runtime.construct(_Runtime.globalValue('Set'), []), requestDevice: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : Dynamic);
+    return cast null;
+  }
+
+  public static function createReadyImageElementForTest(width:Dynamic = 1.0, height:Dynamic = 1.0):Dynamic {
+    var image:Dynamic = cast _Runtime.UNDEFINED;
+    image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>));
+    _Runtime.setField(image, 'width', width);
+    _Runtime.setField(image, 'height', height);
+    flighthq._internal.DynamicObject.defineProperties(image, { complete: { configurable: true, value: true }, naturalHeight: { configurable: true, value: height }, naturalWidth: { configurable: true, value: width } });
+    return cast image;
     return cast null;
   }
 
@@ -136,7 +146,7 @@ class _WgpuTestHelper {
     _Runtime.setField((cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : { var getContext:Dynamic; }), 'getContext', function(contextId:String, ?options:Dynamic) {
       if ((cast _Runtime.strictEquals(contextId, 'webgpu') : Bool)) {
         return cast (cast (cast { configure: function() {
-        
+
         }, getCurrentTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)) } : Dynamic) : Dynamic);
       }
       return cast _Runtime.callProperty((cast origGetContext : Dynamic), 'call', cast ([_Runtime.thisValue(), contextId, options] : Array<Dynamic>));

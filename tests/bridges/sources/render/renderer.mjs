@@ -7,5 +7,7 @@ __syncDependencies();
 
 export const copyAllRenderersFromRenderState = api.copyAllRenderersFromRenderState;
 export const copyRenderersFromRenderState = api.copyRenderersFromRenderState;
+export const copyRenderStateRegistrations = api.copyRenderStateRegistrations;
 export const noopRendererData = api.noopRendererData;
 export const registerRenderer = api.registerRenderer;
+export const registerRenderers = api.registerRenderers;

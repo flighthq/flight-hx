@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.DirectionalBlurEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
@@ -31,6 +32,10 @@ class GlDirectionalBlurEffect {
   public static final defaultGlDirectionalBlurEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyDirectionalBlurEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DirectionalBlurEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlDirectionalBlurEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'DirectionalBlurEffect', defaultGlDirectionalBlurEffectRunner] : Array<Dynamic>));
+  }
 
   public static final DIRECTIONAL_BLUR_FRAGMENT_SRC__glDirectionalBlurEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_angle;\nuniform float u_length;\nuniform float u_samples;\nuniform vec2 u_resolution;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 dir = vec2(cos(u_angle), sin(u_angle)) * (u_length / u_resolution);\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? (float(i) / (count - 1.0)) - 0.5 : 0.0;\n    vec2 uv = v_texCoord + dir * t;\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
 }

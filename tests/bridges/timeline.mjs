@@ -2,6 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const addTimelineFrameScript = compiled.flighthq.timeline.Timeline.addTimelineFrameScript;
+export const clearTimelineFrameScripts = compiled.flighthq.timeline.Timeline.clearTimelineFrameScripts;
 export const createTimeline = compiled.flighthq.timeline.Timeline.createTimeline;
 export const createTimelineSource = compiled.flighthq.timeline.Timeline.createTimelineSource;
 export const disposeTimelineSignals = compiled.flighthq.timeline.Timeline.disposeTimelineSignals;
@@ -9,6 +10,8 @@ export const enableTimelineSignals = compiled.flighthq.timeline.Timeline.enableT
 export const findTimelineLabel = compiled.flighthq.timeline.Timeline.findTimelineLabel;
 export const getTimelineCurrentLabel = compiled.flighthq.timeline.Timeline.getTimelineCurrentLabel;
 export const getTimelineFrameScript = compiled.flighthq.timeline.Timeline.getTimelineFrameScript;
+export const getTimelineFrameScriptFrames = compiled.flighthq.timeline.Timeline.getTimelineFrameScriptFrames;
+export const getTimelineLabels = compiled.flighthq.timeline.Timeline.getTimelineLabels;
 export const gotoAndPlayTimeline = compiled.flighthq.timeline.Timeline.gotoAndPlayTimeline;
 export const gotoAndStopTimeline = compiled.flighthq.timeline.Timeline.gotoAndStopTimeline;
 export const nextFrameTimeline = compiled.flighthq.timeline.Timeline.nextFrameTimeline;

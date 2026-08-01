@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.types.DisplayObject;
+import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
 
 class SpatialQuery {
-  public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
@@ -22,14 +22,14 @@ class SpatialQuery {
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        _Runtime.callValue(hitTestAreaQuery, cast ([(cast child : DisplayObject), rect, out] : Array<Dynamic>));
+        _Runtime.callValue(hitTestAreaQuery, cast ([(cast child : Node2D), rect, out] : Array<Dynamic>));
       }
     }
     return cast out;
     return cast null;
   }
 
-  public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQueryCircle(root:Node2D, cx:Float, cy:Float, radius:Float, ?out:Array<Node2D>):Array<Node2D> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var nearX:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,7 +49,7 @@ class SpatialQuery {
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        _Runtime.callValue(hitTestAreaQueryCircle, cast ([(cast child : DisplayObject), cx, cy, radius, out] : Array<Dynamic>));
+        _Runtime.callValue(hitTestAreaQueryCircle, cast ([(cast child : Node2D), cx, cy, radius, out] : Array<Dynamic>));
       }
     }
     return cast out;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlBlendEffect.getGlBlendEffectBackdrop;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectUniformLocation;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
@@ -43,6 +44,10 @@ class GlCompositeEffect {
   public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
     return cast _Runtime.coalesce(_Runtime.getIndex(GlCompositeEffect.COMPOSITE_OPERATOR_INDEX__glCompositeEffect, operator_), function():Dynamic return cast 0.0);
     return cast null;
+  }
+
+  public static function registerGlCompositeEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CompositeEffect', defaultGlCompositeEffectRunner] : Array<Dynamic>));
   }
 
   public static final COMPOSITE_OPERATOR_INDEX__glCompositeEffect:Dynamic = _Runtime.objectFromPairs([{ key: CompositeOperatorValues.SourceOver, value: 0.0 }, { key: CompositeOperatorValues.DestinationOver, value: 1.0 }, { key: CompositeOperatorValues.SourceIn, value: 2.0 }, { key: CompositeOperatorValues.DestinationIn, value: 3.0 }, { key: CompositeOperatorValues.SourceOut, value: 4.0 }, { key: CompositeOperatorValues.DestinationOut, value: 5.0 }, { key: CompositeOperatorValues.SourceAtop, value: 6.0 }, { key: CompositeOperatorValues.DestinationAtop, value: 7.0 }, { key: CompositeOperatorValues.Xor, value: 8.0 }, { key: CompositeOperatorValues.Copy, value: 9.0 }, { key: CompositeOperatorValues.Clear, value: 10.0 }]);

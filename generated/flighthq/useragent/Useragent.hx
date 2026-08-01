@@ -8,7 +8,6 @@ import flighthq.types.Platform.PlatformEndianness;
 import flighthq.types.Platform.PlatformEngine;
 import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
-import flighthq.types.Platform.PlatformRuntime;
 import flighthq.useragent.UserAgent as Facade_Useragent_flighthq_useragent_UserAgent;
 import flighthq.useragent.UserAgentParse as Facade_Useragent_flighthq_useragent_UserAgentParse;
 
@@ -60,11 +59,6 @@ class Useragent {
 
   public static function parseUserAgentPointerWidth(arch:String):Float {
     return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentPointerWidth(arch);
-    return cast null;
-  }
-
-  public static function parseUserAgentRuntime(win:Null<Dynamic>):PlatformRuntime {
-    return cast Facade_Useragent_flighthq_useragent_UserAgent.parseUserAgentRuntime(win);
     return cast null;
   }
 

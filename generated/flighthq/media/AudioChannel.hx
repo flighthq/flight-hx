@@ -178,7 +178,7 @@ class AudioChannel {
     _Runtime.callProperty(sourceNode, 'start', cast ([0.0, (currentTime / 1000.0)] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(runtime, 'context'), 'state'), 'suspended') : Bool)) {
       flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.field(runtime, 'context'), 'resume', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
     }
   }

@@ -18,7 +18,7 @@ import flighthq.types.ParticleConfigIssue;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterSignals;
 import flighthq.types.ParticleEmitterState;
@@ -29,11 +29,11 @@ import flighthq.types.ParticleObjectsUpdateOptions;
 import flighthq.types.RandomSource;
 
 class Particles {
-  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:ParticleEmitter2D, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions(emitter, state, colliders);
   }
 
-  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:ParticleEmitter2D, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleForces(emitter, state, forces, deltaTime);
   }
 
@@ -60,11 +60,6 @@ class Particles {
     return cast null;
   }
 
-  public static function createParticleEmitterSignals():ParticleEmitterSignals {
-    return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.createParticleEmitterSignals();
-    return cast null;
-  }
-
   public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
     return cast Facade_Particles_flighthq_particles_ParticleEmitterState.createParticleEmitterState(random);
     return cast null;
@@ -78,14 +73,6 @@ class Particles {
   public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
     return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.enableParticleEmitterSignals(state);
     return cast null;
-  }
-
-  public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
-    Facade_Particles_flighthq_particles_ParticleEmitterState.ensureParticleEmitterStateCapacity(state, capacity, hasColorVariance);
-  }
-
-  public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
-    Facade_Particles_flighthq_particles_ParticleObjectsState.ensureParticleObjectsStateCapacity(state, capacity);
   }
 
   public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
@@ -110,8 +97,6 @@ class Particles {
     return cast Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.normalizeParticleEmitterConfig(config);
     return cast null;
   }
-
-  public static final PARTICLE_VELOCITY_STRIDE:Dynamic = Facade_Particles_flighthq_particles_ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 
   public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, ?samples:Dynamic):Array<Float> {
     return cast Facade_Particles_flighthq_particles_Curve.particleColorCurveFromKeyframes(keys, samples);

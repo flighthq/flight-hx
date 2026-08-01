@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.ConvolutionEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
@@ -62,6 +63,10 @@ class GlConvolutionEffect {
   public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyConvolutionEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlConvolutionEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ConvolutionEffect', defaultGlConvolutionEffectRunner] : Array<Dynamic>));
+  }
 
   public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {
     var sum:Dynamic = cast _Runtime.UNDEFINED;

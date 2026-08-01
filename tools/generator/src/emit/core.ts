@@ -1399,7 +1399,9 @@ function emitJavaScriptBridge(
           `export { ${originName}${originName === publicName ? '' : ` as ${publicName}`} } from './${originDirectory}.mjs';`,
       ),
     '',
-  ].join('\n');
+  ]
+    .join('\n')
+    .replace(/\n+$/u, '\n');
 }
 
 function emitJavaScriptSourceBridge(
@@ -1589,7 +1591,9 @@ function emitJavaScriptSourceBridge(
     }),
     ...reexports.sort(),
     '',
-  ].join('\n');
+  ]
+    .join('\n')
+    .replace(/\n+$/u, '\n');
 }
 
 function collectAdjacentTestMocks(sourceFile: string): Set<string> {

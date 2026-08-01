@@ -103,12 +103,12 @@ class InputManager {
       _Runtime.callValue(pollGamepadInput, cast ([manager] : Array<Dynamic>));
       (rafId = cast (_Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([loop] : Array<Dynamic>)) : Dynamic));
     };
-    _Runtime.callProperty(target, 'addEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
-    _Runtime.callProperty(target, 'addEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
+    flighthq._internal.backend.DomWindowBackend.call(target, 'addEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
+    flighthq._internal.backend.DomWindowBackend.call(target, 'addEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
     (rafId = cast (_Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([loop] : Array<Dynamic>)) : Dynamic));
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, target, InputManager.kGamepadInput__inputManager, function() {
-      _Runtime.callProperty(target, 'removeEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
-      _Runtime.callProperty(target, 'removeEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(target, 'removeEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(target, 'removeEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
       _Runtime.callValue(_Runtime.globalValue('cancelAnimationFrame'), cast ([rafId] : Array<Dynamic>));
     }] : Array<Dynamic>));
     _Runtime.voidValue(options);
@@ -206,8 +206,8 @@ class InputManager {
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, me, _Runtime.field(me, 'movementX'), _Runtime.field(me, 'movementY')] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerMoveRelative')], [InputManager._pointerData__inputManager]]), 1);
     };
-    _Runtime.callProperty(target, 'addEventListener', cast (['mousemove', handler] : Array<Dynamic>));
-    _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kRelativePointerInput__inputManager, function() return _Runtime.callProperty(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.backend.DomDocumentBackend.call(target, 'addEventListener', cast (['mousemove', handler] : Array<Dynamic>));
+    _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kRelativePointerInput__inputManager, function() return flighthq._internal.backend.DomDocumentBackend.call(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function attachTextInput(manager:flighthq.types.InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
@@ -271,14 +271,12 @@ class InputManager {
     var onGamepadConnect:Dynamic = cast _Runtime.UNDEFINED;
     var onGamepadDisconnect:Dynamic = cast _Runtime.UNDEFINED;
     onKeyDown = function(data:InputKeyboardData) {
+      if ((cast !(cast ((cast _Runtime.field(state, 'keysDown') : flighthq._internal._Set).has(_Runtime.field(data, 'keyCode'))) : Bool) : Bool)) { ((cast _Runtime.field(state, 'justPressedKeys') : flighthq._internal._Set).add(_Runtime.field(data, 'keyCode'))); }
       ((cast _Runtime.field(state, 'keysDown') : flighthq._internal._Set).add(_Runtime.field(data, 'keyCode')));
-      ((cast _Runtime.field(state, 'justPressedKeys') : flighthq._internal._Set).add(_Runtime.field(data, 'keyCode')));
-      ((cast _Runtime.field(state, 'justReleasedKeys') : flighthq._internal._Set).delete_(_Runtime.field(data, 'keyCode')));
     };
     onKeyUp = function(data:InputKeyboardData) {
       ((cast _Runtime.field(state, 'keysDown') : flighthq._internal._Set).delete_(_Runtime.field(data, 'keyCode')));
       ((cast _Runtime.field(state, 'justReleasedKeys') : flighthq._internal._Set).add(_Runtime.field(data, 'keyCode')));
-      ((cast _Runtime.field(state, 'justPressedKeys') : flighthq._internal._Set).delete_(_Runtime.field(data, 'keyCode')));
     };
     onPointerDown = function(data:InputPointerData) {
       var prev:Dynamic = cast _Runtime.UNDEFINED;
@@ -302,16 +300,14 @@ class InputManager {
     onGamepadButtonDown = function(data:InputGamepadButtonData) {
       var key:Dynamic = cast _Runtime.UNDEFINED;
       key = ((data.gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + data.button);
+      if ((cast !(cast ((cast _Runtime.field(state, 'gamepadButtonsDown') : flighthq._internal._Set).has(key)) : Bool) : Bool)) { ((cast _Runtime.field(state, 'justPressedGamepadButtons') : flighthq._internal._Set).add(key)); }
       ((cast _Runtime.field(state, 'gamepadButtonsDown') : flighthq._internal._Set).add(key));
-      ((cast _Runtime.field(state, 'justPressedGamepadButtons') : flighthq._internal._Set).add(key));
-      ((cast _Runtime.field(state, 'justReleasedGamepadButtons') : flighthq._internal._Set).delete_(key));
     };
     onGamepadButtonUp = function(data:InputGamepadButtonData) {
       var key:Dynamic = cast _Runtime.UNDEFINED;
       key = ((data.gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + data.button);
       ((cast _Runtime.field(state, 'gamepadButtonsDown') : flighthq._internal._Set).delete_(key));
       ((cast _Runtime.field(state, 'justReleasedGamepadButtons') : flighthq._internal._Set).add(key));
-      ((cast _Runtime.field(state, 'justPressedGamepadButtons') : flighthq._internal._Set).delete_(key));
     };
     onGamepadAxisMove = function(data:InputGamepadAxisData) {
       ((cast _Runtime.field(state, 'axisValues') : flighthq._internal._Map).set(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + data.axis), data.value));

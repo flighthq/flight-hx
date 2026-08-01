@@ -2,18 +2,13 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const comparePlatformVersions = compiled.flighthq.platform.Platform.comparePlatformVersions;
-export const createPlatformInfo = compiled.flighthq.platform.Platform.createPlatformInfo;
-export const createWebPlatformBackend = compiled.flighthq.platform.Platform.createWebPlatformBackend;
-export const getPlatformBackend = compiled.flighthq.platform.Platform.getPlatformBackend;
 export const getPlatformEngine = compiled.flighthq.platform.Platform.getPlatformEngine;
 export const getPlatformInfo = compiled.flighthq.platform.Platform.getPlatformInfo;
 export const getPlatformKind = compiled.flighthq.platform.Platform.getPlatformKind;
 export const getPlatformName = compiled.flighthq.platform.Platform.getPlatformName;
-export const getPlatformRuntime = compiled.flighthq.platform.Platform.getPlatformRuntime;
 export const isPlatformDesktop = compiled.flighthq.platform.Platform.isPlatformDesktop;
 export const isPlatformMobile = compiled.flighthq.platform.Platform.isPlatformMobile;
 export const isPlatformNative = compiled.flighthq.platform.Platform.isPlatformNative;
 export const isPlatformTouch = compiled.flighthq.platform.Platform.isPlatformTouch;
 export const isPlatformVersionAtLeast = compiled.flighthq.platform.Platform.isPlatformVersionAtLeast;
 export const isPlatformWeb = compiled.flighthq.platform.Platform.isPlatformWeb;
-export const setPlatformBackend = compiled.flighthq.platform.Platform.setPlatformBackend;

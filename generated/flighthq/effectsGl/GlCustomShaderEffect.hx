@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectUniformLocation;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.CustomShaderEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
@@ -65,6 +66,10 @@ class GlCustomShaderEffect {
     return cast null;
   }
 
+  public static function registerGlCustomShaderEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CustomShaderEffect', defaultGlCustomShaderEffectRunner] : Array<Dynamic>));
+  }
+
   public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state));
@@ -76,7 +81,7 @@ class GlCustomShaderEffect {
   }
 
   public static final NO_UNIFORMS__glCustomShaderEffect:Dynamic = function() {
-  
+
   };
 
   public static final PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 o_color;\nvoid main() {\n  o_color = texture(u_texture0, v_texCoord);\n}';

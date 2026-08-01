@@ -9,23 +9,17 @@ import flighthq.text.TextFormatFont as Facade_Text_flighthq_text_TextFormatFont;
 import flighthq.text.TextLabel as Facade_Text_flighthq_text_TextLabel;
 import flighthq.text.TextLabelLayout as Facade_Text_flighthq_text_TextLabelLayout;
 import flighthq.types.NativeText;
-import flighthq.types.NativeText.NativeTextData;
-import flighthq.types.NativeText.NativeTextRuntime;
 import flighthq.types.NativeText.NativeTextStyle;
 import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFieldSignals;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
@@ -73,48 +67,13 @@ class Text {
     return cast null;
   }
 
-  public static function createNativeTextData(?data:Dynamic):NativeTextData {
-    return cast Facade_Text_flighthq_text_NativeText.createNativeTextData(data);
-    return cast null;
-  }
-
-  public static function createNativeTextRuntime():NativeTextRuntime {
-    return cast Facade_Text_flighthq_text_NativeText.createNativeTextRuntime();
-    return cast null;
-  }
-
   public static function createRichText(?obj:PartialNode<RichText>):RichText {
     return cast Facade_Text_flighthq_text_RichText.createRichText(obj);
     return cast null;
   }
 
-  public static function createRichTextData(?data:Dynamic):RichTextData {
-    return cast Facade_Text_flighthq_text_RichText.createRichTextData(data);
-    return cast null;
-  }
-
-  public static function createRichTextRuntime():RichTextRuntime {
-    return cast Facade_Text_flighthq_text_RichText.createRichTextRuntime();
-    return cast null;
-  }
-
-  public static function createTextFieldSignals():TextFieldSignals {
-    return cast Facade_Text_flighthq_text_RichText.createTextFieldSignals();
-    return cast null;
-  }
-
   public static function createTextLabel(?obj:PartialNode<TextLabel>):TextLabel {
     return cast Facade_Text_flighthq_text_TextLabel.createTextLabel(obj);
-    return cast null;
-  }
-
-  public static function createTextLabelData(?data:Dynamic):TextLabelData {
-    return cast Facade_Text_flighthq_text_TextLabel.createTextLabelData(data);
-    return cast null;
-  }
-
-  public static function createTextLabelRuntime():TextLabelRuntime {
-    return cast Facade_Text_flighthq_text_TextLabel.createTextLabelRuntime();
     return cast null;
   }
 
@@ -132,10 +91,6 @@ class Text {
     return cast null;
   }
 
-  public static function ensureTextLayout(source:TextLabel):Void {
-    Facade_Text_flighthq_text_TextLabelLayout.ensureTextLayout(source);
-  }
-
   public static function getNativeTextMeasuredHeight(source:NativeText):Float {
     return cast Facade_Text_flighthq_text_NativeText.getNativeTextMeasuredHeight(source);
     return cast null;
@@ -143,11 +98,6 @@ class Text {
 
   public static function getNativeTextMeasuredWidth(source:NativeText):Float {
     return cast Facade_Text_flighthq_text_NativeText.getNativeTextMeasuredWidth(source);
-    return cast null;
-  }
-
-  public static function getNativeTextRuntime(source:NativeText):NativeTextRuntime {
-    return cast Facade_Text_flighthq_text_NativeText.getNativeTextRuntime(source);
     return cast null;
   }
 
@@ -224,11 +174,6 @@ class Text {
     return cast null;
   }
 
-  public static function getRichTextRuntime(source:RichText):RichTextRuntime {
-    return cast Facade_Text_flighthq_text_RichText.getRichTextRuntime(source);
-    return cast null;
-  }
-
   public static function getRichTextString(source:RichText):String {
     return cast Facade_Text_flighthq_text_RichText.getRichTextString(source);
     return cast null;
@@ -251,11 +196,6 @@ class Text {
 
   public static function getTextLabelFormat(source:TextLabel):TextFormat {
     return cast Facade_Text_flighthq_text_TextLabel.getTextLabelFormat(source);
-    return cast null;
-  }
-
-  public static function getTextLabelRuntime(source:TextLabel):TextLabelRuntime {
-    return cast Facade_Text_flighthq_text_TextLabel.getTextLabelRuntime(source);
     return cast null;
   }
 

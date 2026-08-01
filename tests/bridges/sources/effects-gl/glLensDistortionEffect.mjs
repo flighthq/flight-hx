@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyLensDistortionEffectToGl = api.applyLensDistortionEffectToGl;
 export const defaultGlLensDistortionEffectRunner = api.defaultGlLensDistortionEffectRunner;
+export const registerGlLensDistortionEffect = api.registerGlLensDistortionEffect;

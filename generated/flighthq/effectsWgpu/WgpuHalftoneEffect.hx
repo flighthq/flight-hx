@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.HalftoneEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -29,6 +30,10 @@ class WgpuHalftoneEffect {
   public static final defaultWgpuHalftoneEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyHalftoneEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : HalftoneEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuHalftoneEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'HalftoneEffect', defaultWgpuHalftoneEffectRunner] : Array<Dynamic>));
+  }
 
   public static final HALFTONE_FRAGMENT_WGSL__wgpuHalftoneEffect:Dynamic = '\nstruct Uniforms {\n  u_scale : f32,\n  u_angle : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let lum = dot(c.rgb, vec3f(0.2126, 0.7152, 0.0722));\n  let p = uv * uni.u_resolution;\n  let s = sin(uni.u_angle);\n  let co = cos(uni.u_angle);\n  let rp = vec2f(p.x * co - p.y * s, p.x * s + p.y * co);\n  let cell = (rp % vec2f(uni.u_scale)) - uni.u_scale * 0.5;\n  let dist = length(cell) / (uni.u_scale * 0.5);\n  let radius = sqrt(1.0 - lum);\n  let dot1 = step(dist, radius);\n  return vec4f(c.rgb * dot1, c.a);\n}';
 }

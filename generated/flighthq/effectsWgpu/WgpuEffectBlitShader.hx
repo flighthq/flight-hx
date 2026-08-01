@@ -3,9 +3,9 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
@@ -29,7 +29,7 @@ class WgpuEffectBlitShader {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBlitShader.getWgpuBlitShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function() {
-    
+
     }] : Array<Dynamic>));
   }
 
@@ -37,7 +37,7 @@ class WgpuEffectBlitShader {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBlitShader.getWgpuEraseShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function() {
-    
+
     }] : Array<Dynamic>));
   }
 

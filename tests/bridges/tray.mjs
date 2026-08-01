@@ -2,20 +2,20 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createTrayIcon = compiled.flighthq.tray.Tray.createTrayIcon;
-export const createWebTrayBackend = compiled.flighthq.tray.Tray.createWebTrayBackend;
 export const destroyTrayIcon = compiled.flighthq.tray.Tray.destroyTrayIcon;
+export const disableTrayGuards = compiled.flighthq.tray.Tray.disableTrayGuards;
 export const displayTrayBalloon = compiled.flighthq.tray.Tray.displayTrayBalloon;
-export const getTrayBackend = compiled.flighthq.tray.Tray.getTrayBackend;
+export const enableTrayGuards = compiled.flighthq.tray.Tray.enableTrayGuards;
 export const getTrayCapabilities = compiled.flighthq.tray.Tray.getTrayCapabilities;
 export const getTrayIconBounds = compiled.flighthq.tray.Tray.getTrayIconBounds;
 export const getTrayIcons = compiled.flighthq.tray.Tray.getTrayIcons;
 export const getTrayIconTitle = compiled.flighthq.tray.Tray.getTrayIconTitle;
 export const getTrayIconTooltip = compiled.flighthq.tray.Tray.getTrayIconTooltip;
 export const isTrayDestroyed = compiled.flighthq.tray.Tray.isTrayDestroyed;
+export const isTrayIconAnimating = compiled.flighthq.tray.Tray.isTrayIconAnimating;
 export const onTrayEvent = compiled.flighthq.tray.Tray.onTrayEvent;
 export const popupTrayContextMenu = compiled.flighthq.tray.Tray.popupTrayContextMenu;
 export const removeTrayBalloon = compiled.flighthq.tray.Tray.removeTrayBalloon;
-export const setTrayBackend = compiled.flighthq.tray.Tray.setTrayBackend;
 export const setTrayIcon = compiled.flighthq.tray.Tray.setTrayIcon;
 export const setTrayIconContextMenu = compiled.flighthq.tray.Tray.setTrayIconContextMenu;
 export const setTrayIconTemplate = compiled.flighthq.tray.Tray.setTrayIconTemplate;
@@ -24,3 +24,4 @@ export const setTrayIconTooltip = compiled.flighthq.tray.Tray.setTrayIconTooltip
 export const setTrayIgnoreDoubleClickEvents = compiled.flighthq.tray.Tray.setTrayIgnoreDoubleClickEvents;
 export const setTrayPressedIcon = compiled.flighthq.tray.Tray.setTrayPressedIcon;
 export const startTrayIconAnimation = compiled.flighthq.tray.Tray.startTrayIconAnimation;
+export const stopTrayIconAnimation = compiled.flighthq.tray.Tray.stopTrayIconAnimation;

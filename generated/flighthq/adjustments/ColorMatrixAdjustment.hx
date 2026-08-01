@@ -7,6 +7,14 @@ import flighthq.adjustments.ColorMatrixMath.COLOR_MATRIX_LENGTH;
 import flighthq.types.ColorMatrixAdjustment;
 
 class ColorMatrixAdjustment {
+  public static function createColorMatrixAdjustment(colorMatrix:Array<Float>):flighthq.types.ColorMatrixAdjustment {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(colorMatrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) {
+      throw _Runtime.error('Color matrix must contain ' + Std.string(COLOR_MATRIX_LENGTH) + ' values.');
+    }
+    return cast { kind: 'ColorMatrixAdjustment', colorMatrix: _Runtime.concatArrays([_Runtime.toArray(colorMatrix)]) };
+    return cast null;
+  }
+
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     matrix = _Runtime.field((cast operation : Dynamic), 'colorMatrix');

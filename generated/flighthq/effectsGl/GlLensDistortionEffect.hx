@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -27,6 +28,10 @@ class GlLensDistortionEffect {
   public static final defaultGlLensDistortionEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyLensDistortionEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDistortionEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlLensDistortionEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'LensDistortionEffect', defaultGlLensDistortionEffectRunner] : Array<Dynamic>));
+  }
 
   public static final LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform float u_scale;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = (v_texCoord - 0.5) / u_scale;\n  float r2 = dot(centered, centered);\n  vec2 distorted = centered * (1.0 + u_amount * r2) + 0.5;\n  if (distorted.x < 0.0 || distorted.x > 1.0 || distorted.y < 0.0 || distorted.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n  } else {\n    o_color = texture(u_texture0, distorted);\n  }\n}';
 }

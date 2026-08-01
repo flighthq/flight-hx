@@ -4,12 +4,13 @@ package flighthq.bitmapfontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
-import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
-import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
-import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;
-import flighthq.bitmapfontFormats._internal._BitmapFontRecordValues.buildBitmapFontFromRecord;
+import flighthq.bitmapfontFormats.BitmapFontRecord.buildBitmapFontFromRecord;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontRecord;
+import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
+import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
+import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.types.GlyphSource.GlyphEntry;
 
 class BitmapFontFnt {
@@ -17,6 +18,7 @@ class BitmapFontFnt {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     var lineHeight:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
+    var primaryTexture:Dynamic = cast _Runtime.UNDEFINED;
     var primaryImage:Dynamic = cast _Runtime.UNDEFINED;
     var scaleW:Dynamic = cast _Runtime.UNDEFINED;
     var scaleH:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,9 +29,10 @@ class BitmapFontFnt {
     metrics = _Runtime.callValue(getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
     lineHeight = ((metrics.ascent + metrics.descent) + metrics.lineGap);
     base = metrics.ascent;
-    primaryImage = _Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.image; }), function():Dynamic return cast null);
-    scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast primaryImage.width : Dynamic) : (cast 0.0 : Dynamic));
-    scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast primaryImage.height : Dynamic) : (cast 0.0 : Dynamic));
+    primaryTexture = ({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; });
+    primaryImage = ((cast _Runtime.strictEquals(_Runtime.optionalField(primaryTexture, 'dimension'), '2d') : Bool) ? (cast _Runtime.field(primaryTexture, 'source') : Dynamic) : (cast null : Dynamic));
+    scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast _Runtime.field(primaryImage, 'width') : Dynamic) : (cast 0.0 : Dynamic));
+    scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast _Runtime.field(primaryImage, 'height') : Dynamic) : (cast 0.0 : Dynamic));
     pageCount = HxMath.max(_Runtime.field(font.pages, 'length'), 1.0);
     lines = cast ([] : Array<Dynamic>);
     _Runtime.callProperty(lines, 'push', cast (['info face="" size=' + Std.string(lineHeight) + ' bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0'] : Array<Dynamic>));

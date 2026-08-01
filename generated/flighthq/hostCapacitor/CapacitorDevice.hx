@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorDeviceInfo;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorDeviceInfo;
 import flighthq.types.Device.DeviceBackend;
 import flighthq.types.Device.DeviceInfo;
 import flighthq.types.Device.SafeAreaInsets;
@@ -26,12 +26,12 @@ class CapacitorDevice {
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(device, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
       (cachedInfo = cast (info : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(device, 'getId', cast ([] : Array<Dynamic>)), 'then', cast ([function(id:Dynamic) {
       (cachedId = cast (_Runtime.field(id, 'identifier') : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { getCapabilities: function(out:DeviceCapabilities) {
       (out.hasKeyboard = cast (false : Dynamic));

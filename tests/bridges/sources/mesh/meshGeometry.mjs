@@ -14,5 +14,6 @@ export const getMeshGeometryMorphBindPose = api.getMeshGeometryMorphBindPose;
 export const getMeshGeometrySkinBindPose = api.getMeshGeometrySkinBindPose;
 export const getMeshGeometryVertexCount = api.getMeshGeometryVertexCount;
 export const hasMeshGeometrySkin = api.hasMeshGeometrySkin;
+export const invalidateMeshGeometry = api.invalidateMeshGeometry;
 export const setMeshGeometryMorphBindPose = api.setMeshGeometryMorphBindPose;
 export const setMeshGeometrySkinBindPose = api.setMeshGeometrySkinBindPose;

@@ -8,13 +8,14 @@ import flighthq.adjustments.ColorLutCache.bakeColorLutForRun;
 import flighthq.adjustments.ColorLutCache.createColorLutCache;
 import flighthq.adjustments.ColorMatrixAdjustment.getAdjustmentColorMatrix;
 import flighthq.adjustments.ColorMatrixMath.fuseColorMatrices;
-import flighthq.displayobjectCanvas.CanvasRenderTarget.beginCanvasRenderPass;
-import flighthq.displayobjectCanvas.CanvasRenderTarget.createCanvasRenderTarget;
-import flighthq.displayobjectCanvas.CanvasRenderTarget.endCanvasRenderPass;
-import flighthq.displayobjectCanvas.CanvasRenderTarget.resizeCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasColorLutPass.applyColorLutPassToCanvas;
 import flighthq.effectsCanvas.CanvasColorMatrixPass.applyColorMatrixPassToCanvas;
+import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.getCanvasRenderEffectRunner;
+import flighthq.scene2dCanvas.CanvasRenderTarget.beginCanvasRenderPass;
+import flighthq.scene2dCanvas.CanvasRenderTarget.createCanvasRenderTarget;
+import flighthq.scene2dCanvas.CanvasRenderTarget.endCanvasRenderPass;
+import flighthq.scene2dCanvas.CanvasRenderTarget.resizeCanvasRenderTarget;
 import flighthq.types.Adjustment;
 import flighthq.types.CanvasRenderEffectPipeline;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
@@ -114,11 +115,10 @@ class CanvasRenderEffectPipeline {
         continue;
       }
       var runner:Dynamic = _Runtime.callValue(getCanvasRenderEffectRunner, cast ([state, _Runtime.field(operation, 'kind')] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { continue; }
       _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));
       _Runtime.callValue(ensureScratch, cast ([] : Array<Dynamic>));
       var dest:Dynamic = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      _Runtime.callValue(runner, cast ([{ state: state, source: source, dest: dest, pool: pool }, operation] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>)); } else { _Runtime.callValue(runner, cast ([{ state: state, source: source, dest: dest, pool: pool }, operation] : Array<Dynamic>)); }
       (source = cast (dest : Dynamic));
     }
     _Runtime.callValue(flushAdjustments, cast ([] : Array<Dynamic>));

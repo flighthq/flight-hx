@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createBokehDepthOfFieldEffect = api.createBokehDepthOfFieldEffect;
+export const getBokehDepthOfFieldEffectPadding = api.getBokehDepthOfFieldEffectPadding;
+export const registerBokehDepthOfFieldEffectPaddingResolver = api.registerBokehDepthOfFieldEffectPaddingResolver;

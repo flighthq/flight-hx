@@ -20,8 +20,9 @@ class SpatialIndex {
     return cast null;
   }
 
-  public static function insertSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'insertSpatialObject', cast ([id, bounds] : Array<Dynamic>));
+  public static function insertSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
+    return cast _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'insertSpatialObject', cast ([id, bounds] : Array<Dynamic>));
+    return cast null;
   }
 
   public static function querySpatialPairs(index:flighthq.types.Spatial.SpatialIndex, out:Array<SpatialPair>):Void {
@@ -44,8 +45,9 @@ class SpatialIndex {
     _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'removeSpatialObject', cast ([id] : Array<Dynamic>));
   }
 
-  public static function updateSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'updateSpatialObject', cast ([id, bounds] : Array<Dynamic>));
+  public static function updateSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
+    return cast _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'updateSpatialObject', cast ([id, bounds] : Array<Dynamic>));
+    return cast null;
   }
 
   public static final DEFAULT_SPATIAL_CELL_SIZE__spatialIndex:Dynamic = 128.0;

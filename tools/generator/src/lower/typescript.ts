@@ -217,6 +217,7 @@ const platformGlobalValues = new Set([
   'TextEncoder',
   'URL',
   'URLSearchParams',
+  'VideoFrame',
   'WebSocket',
   'atob',
   'btoa',
@@ -1953,6 +1954,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       arguments: node.arguments?.map((argument) => lowerExpression(argument, context)) ?? [],
       callee: lowerExpression(node.expression, context),
       kind: 'new',
+      runtime: isLocallyBoundRuntimeConstructor(node.expression, context),
     };
   }
   if (ts.isConditionalExpression(node)) {
@@ -1968,7 +1970,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const assignment =
       node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
       node.operatorToken.kind <= ts.SyntaxKind.LastAssignment;
-    const left = lowerExpression(node.left, context);
+    const left = lowerExpression(assignment ? unwrapAssignmentTarget(node.left) : node.left, context);
     const right = lowerExpression(node.right, context);
     if (assignment) return { kind: 'assignment', left, operator, right };
     return {
@@ -2034,6 +2036,9 @@ function promiseOfDynamic(): IrType {
 
 function lowerIdentifier(name: string, context: LoweringContext, locallyBound = false): IrExpression {
   if (name === 'Math') return { kind: 'identifier', name: 'HxMath' };
+  if (name === 'Boolean' && !locallyBound) {
+    return { kind: 'identifier', name: '_Runtime.truthy' };
+  }
   if (name === 'undefined') {
     return { kind: 'property', name: 'UNDEFINED', object: { kind: 'identifier', name: '_Runtime' } };
   }
@@ -2072,6 +2077,26 @@ function lowerIdentifier(name: string, context: LoweringContext, locallyBound = 
     };
   }
   return { kind: 'identifier', name };
+}
+
+function unwrapAssignmentTarget(node: ts.Expression): ts.Expression {
+  let target = node;
+  while (
+    ts.isParenthesizedExpression(target) ||
+    ts.isAsExpression(target) ||
+    ts.isTypeAssertionExpression(target) ||
+    ts.isNonNullExpression(target)
+  ) {
+    target = target.expression;
+  }
+  return target;
+}
+
+function isLocallyBoundRuntimeConstructor(node: ts.Expression, context: LoweringContext): boolean {
+  const target = unwrapAssignmentTarget(node);
+  if (!ts.isIdentifier(target) || !context.checker || !isLexicallyBound(target, context)) return false;
+  const symbol = context.checker.getSymbolAtLocation(target);
+  return !symbol?.declarations?.some((declaration) => ts.isClassDeclaration(declaration));
 }
 
 function isLexicallyBound(identifier: ts.Identifier, context: LoweringContext): boolean {

@@ -3,7 +3,7 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
+import flighthq.types.CapacitorApi;
 import flighthq.types.Clipboard.ClipboardBackend;
 
 class CapacitorClipboard {
@@ -198,7 +198,7 @@ class CapacitorClipboard {
       return cast -1.0;
     }, subscribeClipboardChange: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

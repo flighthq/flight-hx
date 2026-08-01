@@ -16,14 +16,14 @@ class ColorMatrixMath {
     var gOut:Dynamic = cast _Runtime.UNDEFINED;
     var bOut:Dynamic = cast _Runtime.UNDEFINED;
     var aOut:Dynamic = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 24)) & 255);
-    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255);
-    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255);
-    a = (_Runtime.toInt32(packedRgba) & 255);
-    rOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 0.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 1.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 2.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 3.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>));
-    gOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 5.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 6.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 7.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 8.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>));
-    bOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 10.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 11.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 12.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 13.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>));
-    aOut = _Runtime.callValue(ColorMatrixMath.clampByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 15.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 16.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 17.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 18.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>));
+    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 24)) & 255) / 255.0);
+    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255) / 255.0);
+    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255) / 255.0);
+    a = ((_Runtime.toInt32(packedRgba) & 255) / 255.0);
+    rOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 0.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 1.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 2.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 3.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>));
+    gOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 5.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 6.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 7.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 8.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>));
+    bOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 10.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 11.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 12.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 13.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>));
+    aOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 15.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 16.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 17.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 18.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rOut) << 24)) | _Runtime.toInt32((_Runtime.toInt32(gOut) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(bOut) << 8)))) | _Runtime.toInt32(aOut))), 0);
     return cast null;
   }
@@ -47,7 +47,7 @@ class ColorMatrixMath {
     var rOff:Dynamic = cast _Runtime.UNDEFINED;
     var gOff:Dynamic = cast _Runtime.UNDEFINED;
     var bOff:Dynamic = cast _Runtime.UNDEFINED;
-    scale = (255.0 / 100.0);
+    scale = (1.0 / 100.0);
     rOff = ((((flighthq._internal._StaticIndex.readArray(shadows, 0.0) * 0.25) + (flighthq._internal._StaticIndex.readArray(midtones, 0.0) * 0.5)) + (flighthq._internal._StaticIndex.readArray(highlights, 0.0) * 0.25)) * scale);
     gOff = ((((flighthq._internal._StaticIndex.readArray(shadows, 1.0) * 0.25) + (flighthq._internal._StaticIndex.readArray(midtones, 1.0) * 0.5)) + (flighthq._internal._StaticIndex.readArray(highlights, 1.0) * 0.25)) * scale);
     bOff = ((((flighthq._internal._StaticIndex.readArray(shadows, 2.0) * 0.25) + (flighthq._internal._StaticIndex.readArray(midtones, 2.0) * 0.5)) + (flighthq._internal._StaticIndex.readArray(highlights, 2.0) * 0.25)) * scale);
@@ -60,9 +60,9 @@ class ColorMatrixMath {
     var tg:Dynamic = cast _Runtime.UNDEFINED;
     var tb:Dynamic = cast _Runtime.UNDEFINED;
     var keep:Dynamic = cast _Runtime.UNDEFINED;
-    tr = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 24)) & 255) * amount);
-    tg = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255) * amount);
-    tb = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255) * amount);
+    tr = (((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 24)) & 255) / 255.0) * amount);
+    tg = (((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255) / 255.0) * amount);
+    tb = (((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255) / 255.0) * amount);
     keep = (1.0 - amount);
     return cast cast ([keep, 0.0, 0.0, 0.0, tr, 0.0, keep, 0.0, 0.0, tg, 0.0, 0.0, keep, 0.0, tb, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
@@ -70,7 +70,7 @@ class ColorMatrixMath {
 
   public static function createContrastColorMatrix(amount:Float):Array<Float> {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
-    offset = (128.0 * (1.0 - amount));
+    offset = (0.5 * (1.0 - amount));
     return cast cast ([amount, 0.0, 0.0, 0.0, offset, 0.0, amount, 0.0, 0.0, offset, 0.0, 0.0, amount, 0.0, offset, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
@@ -114,7 +114,7 @@ class ColorMatrixMath {
   }
 
   public static function createInvertColorMatrix():Array<Float> {
-    return cast cast ([-1.0, 0.0, 0.0, 0.0, 255.0, 0.0, -1.0, 0.0, 0.0, 255.0, 0.0, 0.0, -1.0, 0.0, 255.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    return cast cast ([-1.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
@@ -137,7 +137,7 @@ class ColorMatrixMath {
   }
 
   public static function createPolaroidColorMatrix():Array<Float> {
-    return cast cast ([1.438, -0.062, -0.062, 0.0, -31.8, -0.122, 1.378, -0.122, 0.0, 16.2, -0.016, -0.016, 1.484, 0.0, -47.6, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    return cast cast ([1.438, -0.062, -0.062, 0.0, (-31.8 / 255.0), -0.122, 1.378, -0.122, 0.0, (16.2 / 255.0), -0.016, -0.016, 1.484, 0.0, (-47.6 / 255.0), 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
@@ -158,12 +158,12 @@ class ColorMatrixMath {
   }
 
   public static function createTechnicolorColorMatrix():Array<Float> {
-    return cast cast ([1.9126, -0.8, -0.09, 0.0, 11.79, -0.2, 1.7, -0.27, 0.0, -14.69, -0.14, -0.21, 1.62, 0.0, -3.38, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    return cast cast ([1.9126, -0.8, -0.09, 0.0, (11.79 / 255.0), -0.2, 1.7, -0.27, 0.0, (-14.69 / 255.0), -0.14, -0.21, 1.62, 0.0, (-3.38 / 255.0), 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
   public static function createVintageColorMatrix():Array<Float> {
-    return cast cast ([0.9, 0.05, 0.05, 0.0, 10.0, 0.0, 0.85, 0.0, 0.0, 5.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    return cast cast ([0.9, 0.05, 0.05, 0.0, (10.0 / 255.0), 0.0, 0.85, 0.0, 0.0, (5.0 / 255.0), 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
@@ -304,8 +304,8 @@ class ColorMatrixMath {
     return cast null;
   }
 
-  public static function clampByte__colorMatrixMath(v:Float):Float {
-    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(v)));
+  public static function clampNormalizedByte__colorMatrixMath(v:Float):Float {
+    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round((v * 255.0))));
     return cast null;
   }
 }

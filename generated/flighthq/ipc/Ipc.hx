@@ -46,12 +46,12 @@ class Ipc {
 
   public static function createWebIpcBackend():IpcBackend {
     return cast { send: function() {
-    
+
     }, invoke: function() {
       return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
     }, subscribe: function() {
       return cast function() {
-      
+
       };
     }, getCapabilities: function() {
       return cast { canHandle: false, canInvoke: false, canSend: false, canTarget: false };
@@ -125,7 +125,7 @@ class Ipc {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getIpcBackend, cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(backend, 'handle')), 'function') : Bool)) { return cast function() {
-    
+
     }; }
     return cast _Runtime.callProperty(backend, 'handle', cast ([_Runtime.callValue(Ipc.resolveChannel__ipc, cast ([channel] : Array<Dynamic>)), handler] : Array<Dynamic>));
     return cast null;

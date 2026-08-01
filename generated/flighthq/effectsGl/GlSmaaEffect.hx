@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -25,6 +26,10 @@ class GlSmaaEffect {
   public static final defaultGlSmaaEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applySmaaEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SmaaEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlSmaaEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'SmaaEffect', defaultGlSmaaEffectRunner] : Array<Dynamic>));
+  }
 
   public static final SMAA_FRAGMENT_SRC__glSmaaEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_threshold;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lumaC = luma(center.rgb);\n  float lumaL = luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb);\n  float lumaR = luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb);\n  float lumaT = luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb);\n  float lumaB = luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb);\n  float edge = max(abs(lumaC - lumaL), max(abs(lumaC - lumaR), max(abs(lumaC - lumaT), abs(lumaC - lumaB))));\n  if (edge < u_threshold) {\n    o_color = center;\n    return;\n  }\n  vec3 blurred = (\n    texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb +\n    center.rgb) / 5.0;\n  o_color = vec4(blurred, center.a);\n}';
 }

@@ -17,5 +17,6 @@ export const isShareAvailable = api.isShareAvailable;
 export const setShareBackend = api.setShareBackend;
 export const shareContent = api.shareContent;
 export const shareContentWithResult = api.shareContentWithResult;
+export const shareFiles = api.shareFiles;
 export const shareText = api.shareText;
 export const shareUrl = api.shareUrl;

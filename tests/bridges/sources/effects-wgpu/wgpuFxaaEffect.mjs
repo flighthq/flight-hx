@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyFxaaEffectToWgpu = api.applyFxaaEffectToWgpu;
 export const defaultWgpuFxaaEffectRunner = api.defaultWgpuFxaaEffectRunner;
+export const registerWgpuFxaaEffect = api.registerWgpuFxaaEffect;

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGodRaysEffectToWgpu = api.applyGodRaysEffectToWgpu;
 export const defaultWgpuGodRaysEffectRunner = api.defaultWgpuGodRaysEffectRunner;
+export const registerWgpuGodRaysEffect = api.registerWgpuGodRaysEffect;

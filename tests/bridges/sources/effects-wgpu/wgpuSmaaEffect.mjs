@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySmaaEffectToWgpu = api.applySmaaEffectToWgpu;
 export const defaultWgpuSmaaEffectRunner = api.defaultWgpuSmaaEffectRunner;
+export const registerWgpuSmaaEffect = api.registerWgpuSmaaEffect;

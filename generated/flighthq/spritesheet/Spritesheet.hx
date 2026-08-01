@@ -21,7 +21,6 @@ import flighthq.types.SpritesheetFrameData;
 import flighthq.types.SpritesheetPlayer;
 import flighthq.types.SpritesheetValidationDiagnostic;
 import flighthq.types.TextureAtlas;
-import flighthq.types.Tileset;
 
 class Spritesheet {
   public static function acquireSpritesheetPlayer():SpritesheetPlayer {
@@ -83,11 +82,6 @@ class Spritesheet {
 
   public static function createSpritesheetFromGrid(options:GridSliceOptions):flighthq.types.Spritesheet {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrom.createSpritesheetFromGrid(options);
-    return cast null;
-  }
-
-  public static function createSpritesheetFromTileset(tileset:Tileset):flighthq.types.Spritesheet {
-    return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrom.createSpritesheetFromTileset(tileset);
     return cast null;
   }
 

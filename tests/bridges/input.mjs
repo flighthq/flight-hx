@@ -12,7 +12,6 @@ export const attachWheelInput = compiled.flighthq.input.Input.attachWheelInput;
 export const connectInputStateToInputManager = compiled.flighthq.input.Input.connectInputStateToInputManager;
 export const createInputKeyRepeatTimer = compiled.flighthq.input.Input.createInputKeyRepeatTimer;
 export const createInputManager = compiled.flighthq.input.Input.createInputManager;
-export const createInputSignals = compiled.flighthq.input.Input.createInputSignals;
 export const createInputState = compiled.flighthq.input.Input.createInputState;
 export const detachGamepadInput = compiled.flighthq.input.Input.detachGamepadInput;
 export const detachKeyboardInput = compiled.flighthq.input.Input.detachKeyboardInput;

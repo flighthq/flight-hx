@@ -22,7 +22,7 @@ class GlFullscreenPass {
       _Runtime.setField(runtime, 'currentFramebuffer', _Runtime.field(target, 'framebuffer'));
     }
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'));
-    _Runtime.setField(runtime, 'renderTargetViewport', { width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height') });
+    _Runtime.setField(runtime, 'renderTargetViewport', { height: _Runtime.field(target, 'height'), width: _Runtime.field(target, 'width'), x: 0.0, y: 0.0 });
     flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT);
     _Runtime.setField(runtime, 'currentTexture', null);
@@ -69,7 +69,7 @@ class GlFullscreenPass {
     destWidth = _Runtime.coalesce(_Runtime.optionalField(dest, 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'));
     destHeight = _Runtime.coalesce(_Runtime.optionalField(dest, 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, destWidth, destHeight);
-    _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.select(dest, function():Dynamic return cast { width: destWidth, height: destHeight }, function():Dynamic return cast null));
+    _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.select(dest, function():Dynamic return cast { height: destHeight, width: destWidth, x: 0.0, y: 0.0 }, function():Dynamic return cast null));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
@@ -107,10 +107,10 @@ class GlFullscreenPass {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    quadVao = ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).get(state));
+    quadVao = ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).get(gl));
     if ((cast _Runtime.strictEquals(quadVao, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (quadVao = cast (flighthq._internal.backend.WebGl2Backend.createVertexArray(gl) : Dynamic));
-      ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).set(state, quadVao));
+      ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap).set(gl, quadVao));
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, quadVao);
     v = _Runtime.field(runtime, 'quadVertexData');

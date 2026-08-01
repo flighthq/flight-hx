@@ -5,5 +5,6 @@ const api = compiled.flighthq.adjustments.ColorMatrixAdjustment;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const createColorMatrixAdjustment = api.createColorMatrixAdjustment;
 export const getAdjustmentColorMatrix = api.getAdjustmentColorMatrix;
 export const isColorMatrixAdjustment = api.isColorMatrixAdjustment;

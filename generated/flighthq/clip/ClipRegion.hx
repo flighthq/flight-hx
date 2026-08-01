@@ -18,6 +18,7 @@ import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.types.ClipRegion;
+import flighthq.types.ClipRegion.ClipRegionReleaseGuard;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Path;
 import flighthq.types.Rectangle.RectangleLike;
@@ -321,8 +322,15 @@ class ClipRegion {
   }
 
   public static function releaseClipRegion(clip:flighthq.types.ClipRegion):Void {
+    if ((cast ((cast !_Runtime.strictEquals(ClipRegion._releaseGuard__clipRegion, null) : Bool) && (cast _Runtime.includes(ClipRegion.clipRegionPool__clipRegion, clip) : Bool)) : Bool)) { _Runtime.callValue(ClipRegion._releaseGuard__clipRegion, cast ([clip] : Array<Dynamic>)); }
     _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'push', cast ([clip] : Array<Dynamic>));
   }
+
+  public static function setClipRegionReleaseGuard(guard:Null<ClipRegionReleaseGuard>):Void {
+    (ClipRegion._releaseGuard__clipRegion = cast (guard : Dynamic));
+  }
+
+  public static var _releaseGuard__clipRegion:Null<ClipRegionReleaseGuard> = _Runtime.explicitNull();
 
   public static function setClipRegionToRectangle(out:flighthq.types.ClipRegion, rectangle:RectangleLike):Void {
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), rectangle] : Array<Dynamic>));

@@ -3,60 +3,48 @@ package flighthq.interaction;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.interaction.DisplayHitTests.defaultBitmapHitTestHandler;
-import flighthq.interaction.DisplayHitTests.defaultDisplayObjectHitTestHandler;
 import flighthq.interaction.DisplayHitTests.defaultHtmlViewHitTestHandler;
 import flighthq.interaction.DisplayHitTests.defaultMovieClipHitTestHandler;
-import flighthq.interaction.DisplayHitTests.defaultRenderViewHitTestHandler;
+import flighthq.interaction.DisplayHitTests.defaultNode2DHitTestHandler;
 import flighthq.interaction.DisplayHitTests.defaultRichTextHitTestHandler;
 import flighthq.interaction.DisplayHitTests.defaultShapeHitTestHandler;
 import flighthq.interaction.DisplayHitTests.defaultTextHitTestHandler;
-import flighthq.interaction.DisplayHitTests.defaultVideoHitTestHandler;
 import flighthq.interaction.HitTests.registerHitTest;
 import flighthq.interaction.SpriteHitTests.defaultQuadBatchHitTestHandler;
 import flighthq.interaction.SpriteHitTests.defaultSpriteHitTestHandler;
 import flighthq.interaction.SpriteHitTests.defaultTilemapHitTestHandler;
-import flighthq.types.Types.BitmapKind;
 import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types.Types.HtmlViewKind;
 import flighthq.types.Types.MovieClipKind;
 import flighthq.types.Types.QuadBatchKind;
-import flighthq.types.Types.RenderViewKind;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types.Types.SpriteKind;
 import flighthq.types.Types.TextLabelKind;
 import flighthq.types.Types.TilemapKind;
-import flighthq.types.Types.VideoKind;
-import flighthq.types._internal._BitmapValues.BitmapKind;
-import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 import flighthq.types._internal._MovieClipValues.MovieClipKind;
+import flighthq.types._internal._Node2DValues.DisplayObjectKind;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
-import flighthq.types._internal._RenderViewValues.RenderViewKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 import flighthq.types._internal._SpriteValues.SpriteKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 import flighthq.types._internal._TilemapValues.TilemapKind;
-import flighthq.types._internal._VideoValues.VideoKind;
 
 class RegisterDefaultHitTests {
   public static function registerDefaultHitTests():Void {
-    _Runtime.callValue(registerHitTest, cast ([BitmapKind, defaultBitmapHitTestHandler] : Array<Dynamic>));
-    _Runtime.callValue(registerHitTest, cast ([DisplayObjectKind, defaultDisplayObjectHitTestHandler] : Array<Dynamic>));
+    _Runtime.callValue(registerHitTest, cast ([DisplayObjectKind, defaultNode2DHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([HtmlViewKind, defaultHtmlViewHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([MovieClipKind, defaultMovieClipHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([QuadBatchKind, defaultQuadBatchHitTestHandler] : Array<Dynamic>));
-    _Runtime.callValue(registerHitTest, cast ([RenderViewKind, defaultRenderViewHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([RichTextKind, defaultRichTextHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([Scale9ShapeKind, defaultShapeHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([ShapeKind, defaultShapeHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([SpriteKind, defaultSpriteHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([TextLabelKind, defaultTextHitTestHandler] : Array<Dynamic>));
     _Runtime.callValue(registerHitTest, cast ([TilemapKind, defaultTilemapHitTestHandler] : Array<Dynamic>));
-    _Runtime.callValue(registerHitTest, cast ([VideoKind, defaultVideoHitTestHandler] : Array<Dynamic>));
   }
 }

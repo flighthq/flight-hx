@@ -8,4 +8,5 @@ __syncDependencies();
 export const areEntityRuntimeGuardsEnabled = api.areEntityRuntimeGuardsEnabled;
 export const createGuardedEntity = api.createGuardedEntity;
 export const createGuardedEntityRuntime = api.createGuardedEntityRuntime;
-export const enableEntityRuntimeGuards = api.enableEntityRuntimeGuards;
+export const setEntityRuntimeGuardMode = api.setEntityRuntimeGuardMode;
+export const setEntityRuntimeWriteGuard = api.setEntityRuntimeWriteGuard;

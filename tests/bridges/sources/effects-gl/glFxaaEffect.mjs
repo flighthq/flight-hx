@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyFxaaEffectToGl = api.applyFxaaEffectToGl;
 export const defaultGlFxaaEffectRunner = api.defaultGlFxaaEffectRunner;
+export const registerGlFxaaEffect = api.registerGlFxaaEffect;

@@ -8,22 +8,22 @@ import flighthq.geometry.Rectangle.containsRectanglePointXY;
 import flighthq.geometry.Rectangle.enclosesRectangle;
 import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
-import flighthq.types.DisplayObject;
+import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
 
 class DisplayObjectOverlap {
-  public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
+  public static function containsNode2D(outer:Node2D, inner:Node2D):Bool {
     return cast _Runtime.callValue(enclosesRectangle, cast ([_Runtime.callValue(getNodeWorldBoundsRectangle, cast ([outer] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([inner] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
+  public static function getNode2DOverlapRectangle(source:Node2D, other:Node2D, out:Rectangle):Rectangle {
     _Runtime.callValue(computeRectangleIntersection, cast ([out, _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
     return cast out;
     return cast null;
   }
 
-  public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestNode2DsShape(source:Node2D, other:Node2D):Bool {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var aCenterX:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyHalftoneEffectToGl = api.applyHalftoneEffectToGl;
 export const defaultGlHalftoneEffectRunner = api.defaultGlHalftoneEffectRunner;
+export const registerGlHalftoneEffect = api.registerGlHalftoneEffect;

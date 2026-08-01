@@ -3,8 +3,8 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SceneNode;
-import flighthq.types.SceneNode.SceneNodeRuntime;
+import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
 
 class _GroupValues {
   public static final GroupKind:Dynamic = 'Group';

@@ -6,6 +6,9 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const applyGlBlendMode = api.applyGlBlendMode;
+export const applyGlSamplerState = api.applyGlSamplerState;
+export const bindGlBitmapTexture = api.bindGlBitmapTexture;
+export const bindGlCompressedImageTexture = api.bindGlCompressedImageTexture;
 export const bindGlImageResourceTexture = api.bindGlImageResourceTexture;
 export const bindGlTexture = api.bindGlTexture;
 export const bindGlVideoTexture = api.bindGlVideoTexture;

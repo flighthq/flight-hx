@@ -6,8 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.types.Material;
 import flighthq.types.Matrix4;
 import flighthq.types.MeshGeometry;
-import flighthq.types.SceneNode;
-import flighthq.types.SceneNode.SceneNodeRuntime;
+import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
 
 class _InstancedMeshValues {
   public static final InstancedMeshKind:Dynamic = 'InstancedMesh';

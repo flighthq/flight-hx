@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BufferedLogSink;
+import flighthq.types.FileLogSink;
 import flighthq.types.Log.LogContext;
 import flighthq.types.Log.LogData;
 import flighthq.types.Log.LogDataProvider;
@@ -16,18 +18,12 @@ import flighthq.types.Log.LogSpan;
 import flighthq.types.Log.LogTimer;
 import flighthq.types.Log.LogTransportBackend;
 import flighthq.types.LogSignals;
-
-typedef BufferedLogSink = { var sink:LogSink; };
+import flighthq.types.MemoryLogSink;
+import flighthq.types.RateLimitedLogSink;
 
 typedef BufferedLogSinkState__log = { var buf:Array<LogEntry>; var flush:Dynamic; var timer:Null<Dynamic>; };
 
-typedef FileLogSink = { var sink:LogSink; };
-
-typedef MemoryLogSink = { var sink:LogSink; };
-
 typedef MemoryLogSinkState__log = { var buf:Array<LogEntry>; var head:Float; };
-
-typedef RateLimitedLogSink = { var sink:LogSink; };
 
 class Log {
   public static function _applyRedaction__log(data:Dynamic):Dynamic {
@@ -187,6 +183,11 @@ class Log {
     }
   }
 
+  public static function _writeConsoleLogEntry__log(entry:LogEntry, formatter:LogFormatter):Void {
+    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined') : Bool)) { return; }
+    _Runtime.console(Std.string(_Runtime.getIndex(Log._consoleMethods__log, _Runtime.field(entry, 'level'))), [_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))]);
+  }
+
   public static function addLogSink(sink:LogSink):Void {
     if ((cast _Runtime.includes(Log._sinks__log, sink) : Bool)) { return; }
     _Runtime.callProperty(Log._sinks__log, 'push', cast ([sink] : Array<Dynamic>));
@@ -276,6 +277,14 @@ class Log {
     var envelopeFormatter:Dynamic = cast _Runtime.UNDEFINED;
     envelopeFormatter = _Runtime.coalesce(_Runtime.field(options, 'formatter'), function():Dynamic return cast Log._defaultJsonFormatter__log);
     return cast function(entry:LogEntry) return _Runtime.callValue(Log._writeConsoleCaptureEntry__log, cast ([entry, envelopeFormatter] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createConsoleLogSink(?options:{ @:optional var formatter:LogFormatter; }):LogSink {
+    if (options == null) options = cast ({  } : Dynamic);
+    var formatter:Dynamic = cast _Runtime.UNDEFINED;
+    formatter = _Runtime.coalesce(_Runtime.field(options, 'formatter'), function():Dynamic return cast _Runtime.callValue(createTextLogFormatter, cast ([{ levelPrefix: true }] : Array<Dynamic>)));
+    return cast function(entry:LogEntry) return _Runtime.callValue(Log._writeConsoleLogEntry__log, cast ([entry, formatter] : Array<Dynamic>));
     return cast null;
   }
 
@@ -436,7 +445,7 @@ class Log {
 
   public static function createWebLogTransportBackend():LogTransportBackend {
     return cast { write: function(_line:String) {
-    
+
     } };
     return cast null;
   }

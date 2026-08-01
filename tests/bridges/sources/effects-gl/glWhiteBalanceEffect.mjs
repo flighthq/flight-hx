@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyWhiteBalanceEffectToGl = api.applyWhiteBalanceEffectToGl;
 export const defaultGlWhiteBalanceEffectRunner = api.defaultGlWhiteBalanceEffectRunner;
+export const registerGlWhiteBalanceEffect = api.registerGlWhiteBalanceEffect;

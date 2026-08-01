@@ -2,13 +2,9 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const booleanPaths = compiled.flighthq.pathBoolean.PathBoolean.booleanPaths;
-export const createDefaultPathBooleanBackend = compiled.flighthq.pathBoolean.PathBoolean.createDefaultPathBooleanBackend;
-export const createMartinezPathBooleanBackend = compiled.flighthq.pathBoolean.PathBoolean.createMartinezPathBooleanBackend;
 export const differencePaths = compiled.flighthq.pathBoolean.PathBoolean.differencePaths;
-export const getPathBooleanBackend = compiled.flighthq.pathBoolean.PathBoolean.getPathBooleanBackend;
 export const intersectPaths = compiled.flighthq.pathBoolean.PathBoolean.intersectPaths;
 export const offsetPath = compiled.flighthq.pathBoolean.PathBoolean.offsetPath;
-export const setPathBooleanBackend = compiled.flighthq.pathBoolean.PathBoolean.setPathBooleanBackend;
 export const simplifyPath = compiled.flighthq.pathBoolean.PathBoolean.simplifyPath;
 export const unionAllPaths = compiled.flighthq.pathBoolean.PathBoolean.unionAllPaths;
 export const unionPaths = compiled.flighthq.pathBoolean.PathBoolean.unionPaths;

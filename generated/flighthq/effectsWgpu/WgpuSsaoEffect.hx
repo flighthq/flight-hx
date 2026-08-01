@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.SsaoEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -29,6 +30,10 @@ class WgpuSsaoEffect {
   public static final defaultWgpuSsaoEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applySsaoEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SsaoEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuSsaoEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SsaoEffect', defaultWgpuSsaoEffectRunner] : Array<Dynamic>));
+  }
 
   public static final SSAO_FRAGMENT_WGSL__wgpuSsaoEffect:Dynamic = '\nstruct Uniforms {\n  u_radius : f32,\n  u_intensity : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn luma(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.299, 0.587, 0.114));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = (1.0 / uni.u_resolution) * max(uni.u_radius, 1.0);\n  let center = textureSampleLevel(tex, smp, uv, 0.0);\n  let lc = luma(center.rgb);\n  var variation = 0.0;\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(-1.0, 0.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(1.0, 0.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, -1.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, 1.0) * texel, 0.0).rgb));\n  variation = variation * 0.25;\n  let occlusion = clamp(variation * uni.u_intensity, 0.0, 1.0);\n  return vec4f(center.rgb * (1.0 - occlusion), center.a);\n}';
 }

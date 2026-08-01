@@ -2,6 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createBitmapFont = compiled.flighthq.bitmapfont.Bitmapfont.createBitmapFont;
+export const createBitmapFontFromGlyphAtlas = compiled.flighthq.bitmapfont.Bitmapfont.createBitmapFontFromGlyphAtlas;
 export const createGlyphSourceFromBitmapFont = compiled.flighthq.bitmapfont.Bitmapfont.createGlyphSourceFromBitmapFont;
 export const getBitmapFontGlyph = compiled.flighthq.bitmapfont.Bitmapfont.getBitmapFontGlyph;
 export const getBitmapFontKerning = compiled.flighthq.bitmapfont.Bitmapfont.getBitmapFontKerning;

@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createDropShadowEffect = api.createDropShadowEffect;
+export const getDropShadowEffectPadding = api.getDropShadowEffectPadding;
+export const registerDropShadowEffectPaddingResolver = api.registerDropShadowEffectPaddingResolver;

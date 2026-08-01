@@ -3,11 +3,27 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
+
+typedef RenderTargetDimensions = { var height:Float; var width:Float; };
 
 typedef RenderTargetFormat = String;
+
+typedef RenderTargetFormatPolicy = String;
 
 typedef RenderTargetDepth = String;
 
 typedef RenderTargetColorSpace = String;
 
+typedef RenderTargetAxes = { var width:Float; var height:Float; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var sampleCount:Float; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; };
+
+typedef RenderTargetAxisDifference = { var axis:RenderTargetAxes; var effective:Dynamic; var requested:Dynamic; };
+
+typedef RenderTargetExplanation = { var differences:Array<RenderTargetAxisDifference>; var effective:RenderTargetAxes; var requested:RenderTargetAxes; };
+
 typedef RenderTargetDescriptor = { var width:Float; var height:Float; @:optional var format:RenderTargetFormat; @:optional var colorAttachments:Float; @:optional var colorFormats:Array<RenderTargetFormat>; @:optional var sampleCount:Float; @:optional var depth:RenderTargetDepth; @:optional var colorSpace:RenderTargetColorSpace; @:optional var clearColors:Array<Float>; @:optional var clearDepth:Float; };
+
+typedef RenderTarget = { var width:Float; var height:Float; @:optional var format:RenderTargetFormat; @:optional var colorAttachments:Float; @:optional var colorFormats:Array<RenderTargetFormat>; @:optional var sampleCount:Float; @:optional var depth:RenderTargetDepth; @:optional var colorSpace:RenderTargetColorSpace; @:optional var clearColors:Array<Float>; @:optional var clearDepth:Float; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:TextureSourceKind; var version:Float; };
+
+typedef ResolvedRenderTargetDescriptor = { var width:Float; var height:Float; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var sampleCount:Float; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; };

@@ -3,9 +3,9 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorConnectionStatus;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPluginListenerHandle;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorConnectionStatus;
+import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityConnectionType;
 import flighthq.types.Connectivity.ConnectivityStatus;
@@ -19,12 +19,12 @@ class CapacitorConnectivity {
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(network, 'getStatus', cast ([] : Array<Dynamic>)), 'then', cast ([function(status:Dynamic) {
       (mirror = cast (status : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     flighthq._internal._Async.recover(_Runtime.callProperty(network, 'addListener', cast (['networkStatusChange', function(status:Dynamic) {
       (mirror = cast (status : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { getStatus: function(out:ConnectivityStatus) {
       (out.online = cast (_Runtime.field(mirror, 'connected') : Dynamic));
@@ -58,15 +58,15 @@ class CapacitorConnectivity {
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
       if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
-      
+
       }); }
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast function() {
       (removed = cast (true : Dynamic));
       if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
-      
+
       }); }
     };
     return cast null;

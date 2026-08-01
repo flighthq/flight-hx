@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGlitchEffectToGl = api.applyGlitchEffectToGl;
 export const defaultGlGlitchEffectRunner = api.defaultGlGlitchEffectRunner;
+export const registerGlGlitchEffect = api.registerGlGlitchEffect;

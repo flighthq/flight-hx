@@ -3,11 +3,11 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject;
-import flighthq.types.DisplayObject.DisplayObjectData;
-import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.Material.MaterialData;
-import flighthq.types.Tileset;
+import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DData;
+import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.TextureAtlas;
 
 class _TilemapValues {
   public static final TilemapKind:Dynamic = 'Tilemap';

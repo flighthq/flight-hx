@@ -34,7 +34,12 @@ class Menu {
     if ((cast ((cast ((cast !_Runtime.strictEquals(item.type, 'submenu') : Bool) && (cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast ((cast _Runtime.field(item.submenu, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast 'item type "' + Std.string(_Runtime.coalesce(item.type, function():Dynamic return cast 'normal')) + '" has a submenu (only type "submenu" should carry children)';
     }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(item.checked, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(item.type, 'checkbox') : Bool)) : Bool) && (cast !_Runtime.strictEquals(item.type, 'radio') : Bool)) : Bool)) {
+      return cast 'item type "' + Std.string(_Runtime.coalesce(item.type, function():Dynamic return cast 'normal')) + '" has "checked" (only "checkbox" and "radio" items are checkable)';
+    }
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      var groupError:Dynamic = _Runtime.callValue(Menu._validateRadioGroups__menu, cast ([item.submenu] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(groupError, null) : Bool)) { return cast groupError; }
       ((cast seen : flighthq._internal._Set).add(item));
       for (child in _Runtime.iterable(item.submenu)) {
         var err:Dynamic = _Runtime.callValue(Menu._validateItem__menu, cast ([child, seen] : Array<Dynamic>));
@@ -46,11 +51,29 @@ class Menu {
     return cast null;
   }
 
+  public static function _validateRadioGroups__menu(items:Array<MenuItemTemplate>):Null<String> {
+    var checkedInRun:Dynamic = cast _Runtime.UNDEFINED;
+    checkedInRun = 0.0;
+    for (item in _Runtime.iterable(items)) {
+      if ((cast !_Runtime.strictEquals(item.type, 'radio') : Bool)) {
+        (checkedInRun = cast (0.0 : Dynamic));
+        continue;
+      }
+      if ((cast _Runtime.strictEquals(item.checked, true) : Bool)) { checkedInRun++; }
+      if ((cast ((cast checkedInRun : Float) > (cast 1.0 : Float)) : Bool)) {
+        return cast 'radio group has ' + Std.string(checkedInRun) + ' checked items (a radio group may have at most one)';
+      }
+    }
+    return cast null;
+    return cast null;
+  }
+
   public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:Dynamic):Dynamic {
     var menu:Dynamic = cast _Runtime.UNDEFINED;
     menu = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['ul'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(menu, 'style'), 'cssText', _Runtime.join(cast (['position:fixed', 'z-index:2147483647', 'margin:0', 'padding:4px 0', 'list-style:none', 'background:#fff', 'border:1px solid #ccc', 'border-radius:4px', 'box-shadow:0 4px 12px rgba(0,0,0,.15)', 'min-width:160px', 'font:13px/1.4 system-ui,sans-serif', 'color:#111', 'user-select:none'] : Array<Dynamic>), ';'));
     for (item in _Runtime.iterable(items)) {
+      if ((cast _Runtime.strictEquals(item.visible, false) : Bool)) { continue; }
       var li:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['li'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
         _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', 'height:1px;margin:4px 8px;background:#e0e0e0;');
@@ -71,7 +94,14 @@ class Menu {
       var labelEl:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
       _Runtime.setField(labelEl, 'textContent', _Runtime.coalesce(item.label, function():Dynamic return cast ''));
       _Runtime.setField(_Runtime.field(labelEl, 'style'), 'cssText', 'flex:1;');
+      if ((cast !_Runtime.strictEquals(item.sublabel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        var sublabelEl:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
+        _Runtime.setField(sublabelEl, 'textContent', item.sublabel);
+        _Runtime.setField(_Runtime.field(sublabelEl, 'style'), 'cssText', 'display:block;font-size:11px;color:#888;');
+        _Runtime.callProperty(labelEl, 'appendChild', cast ([sublabelEl] : Array<Dynamic>));
+      }
       _Runtime.callProperty(li, 'appendChild', cast ([labelEl] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(item.toolTip, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(li, 'title', item.toolTip); }
       if ((cast hasSubmenu : Bool)) {
         var arrow:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(arrow, 'textContent', '▶');
@@ -185,7 +215,7 @@ class Menu {
       return cast _Runtime.callValue(Menu.showWebContextMenu__menu, cast ([items, x, y] : Array<Dynamic>));
     }, subscribeSelect: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;
@@ -274,13 +304,13 @@ class Menu {
         _Runtime.callProperty(menu, 'remove', cast ([] : Array<Dynamic>));
         _Runtime.callValue(resolve, cast ([selectedId] : Array<Dynamic>));
       };
-      focusableItems = _Runtime.callProperty(menu, 'querySelectorAll', cast (['li[data-enabled="true"]'] : Array<Dynamic>));
+      focusableItems = _Runtime.callProperty(menu, 'querySelectorAll', cast ([':scope > li[data-enabled="true"]'] : Array<Dynamic>));
       focusIndex = -1.0;
       moveFocus = function moveFocus(delta:Float):Void {
         var items:Dynamic = cast _Runtime.UNDEFINED;
         items = _Runtime.toArray(focusableItems);
         if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return; }
-        (focusIndex = cast (_Runtime.fmod(((focusIndex + delta) + _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic));
+        (focusIndex = cast (((cast _Runtime.strictEquals(focusIndex, -1.0) : Bool) ? (cast ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(items, 'length') - 1.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic) : (cast _Runtime.fmod(((focusIndex + delta) + _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic)) : Dynamic));
         _Runtime.callProperty(items, 'forEach', cast ([function(el:Dynamic, i:Dynamic) {
           if ((cast _Runtime.strictEquals(i, focusIndex) : Bool)) {
             _Runtime.callProperty(el, 'setAttribute', cast (['data-focused', 'true'] : Array<Dynamic>));

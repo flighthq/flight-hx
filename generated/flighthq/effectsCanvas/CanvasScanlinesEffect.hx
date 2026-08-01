@@ -4,7 +4,9 @@ package flighthq.effectsCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
+import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.ScanlinesEffect;
 
@@ -47,4 +49,8 @@ class CanvasScanlinesEffect {
   public static final defaultCanvasScanlinesEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyScanlinesEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect)] : Array<Dynamic>));
   };
+
+  public static function registerCanvasScanlinesEffect(state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'ScanlinesEffect', defaultCanvasScanlinesEffectRunner] : Array<Dynamic>));
+  }
 }

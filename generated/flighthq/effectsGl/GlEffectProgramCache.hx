@@ -12,10 +12,10 @@ class GlEffectProgramCache {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
-    cache = ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).get(state));
+    cache = ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
-      ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).set(state, cache));
+      ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), cache));
     }
     existing = ((cast cache : flighthq._internal._Map).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }

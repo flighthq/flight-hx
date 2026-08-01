@@ -3,10 +3,10 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPluginListenerHandle;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 
 class CapacitorApp {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
@@ -20,20 +20,20 @@ class CapacitorApp {
       (cachedName = cast (_Runtime.field(info, 'name') : Dynamic));
       (cachedVersion = cast (_Runtime.field(info, 'version') : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { addRecentDocument: function() {
-    
+
     }, bounceDock: function() {
       return cast -1.0;
     }, cancelAttention: function() {
-    
+
     }, cancelDockBounce: function() {
-    
+
     }, clearRecentDocuments: function() {
-    
+
     }, focus: function() {
-    
+
     }, getAppDirectoryPath: function() {
       return cast '';
     }, getAppPath: function() {
@@ -60,31 +60,31 @@ class CapacitorApp {
       return cast false;
     }, hideApp: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(app, 'minimizeApp', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(app, 'exitApp', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
     }, relaunch: function() {
-    
+
     }, releaseSingleInstanceLock: function() {
-    
+
     }, requestAttention: function() {
       return cast -1.0;
     }, requestSingleInstanceLock: function() {
       return cast true;
     }, setActivationPolicy: function() {
-    
+
     }, setBadgeCount: function() {
       return cast false;
     }, setDockBadge: function() {
-    
+
     }, setDockMenu: function() {
-    
+
     }, setLoginItem: function() {
       return cast false;
     }, setName: function() {
@@ -99,21 +99,21 @@ class CapacitorApp {
       }] : Array<Dynamic>))] : Array<Dynamic>));
     }, subscribeAllWindowsClosed: function() {
       return cast function() {
-      
+
       };
     }, subscribeOpenFile: function(listener:Dynamic) {
       return cast _Runtime.callValue(CapacitorApp.toUnsubscribe__capacitorApp, cast ([_Runtime.callProperty(app, 'addListener', cast (['appUrlOpen', function(event:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.field(event, 'url')] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     }, subscribeQuitRequest: function() {
       return cast function() {
-      
+
       };
     }, subscribeReady: function() {
       return cast function() {
-      
+
       };
     }, subscribeSecondInstance: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;
@@ -127,15 +127,15 @@ class CapacitorApp {
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
       (handle = cast (resolved : Dynamic));
       if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
-      
+
       }); }
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast function() {
       (removed = cast (true : Dynamic));
       if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
-      
+
       }); }
     };
     return cast null;

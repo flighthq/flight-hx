@@ -3,9 +3,12 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.RenderTarget.RenderTargetAxes;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTarget.RenderTargetDepth;
+import flighthq.types.RenderTarget.RenderTargetDimensions;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
-typedef GlRenderTarget = { var width:Float; var height:Float; var format:RenderTargetFormat; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; var sampleCount:Float; var framebuffer:Dynamic; var resolveFramebuffer:Null<Dynamic>; var textures:Array<Dynamic>; var texture:Dynamic; var depthTexture:Null<Dynamic>; var colorRenderbuffers:Array<Dynamic>; var depthStencilRenderbuffer:Null<Dynamic>; };
+typedef GlRenderTarget = { var height:Float; var width:Float; var requestedAxes:RenderTargetAxes; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; var sampleCount:Float; var framebuffer:Dynamic; var resolveFramebuffer:Null<Dynamic>; var textures:Array<Dynamic>; var texture:Dynamic; var depthTexture:Null<Dynamic>; var colorRenderbuffers:Array<Dynamic>; var depthStencilRenderbuffer:Null<Dynamic>; };
 
 typedef GlRenderTargetPool = { var free:Array<flighthq.types.GlRenderTarget>; };

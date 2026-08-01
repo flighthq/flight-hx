@@ -110,66 +110,66 @@ class Updater {
     _config = _Runtime.callValue(createUpdaterConfig, cast ([] : Array<Dynamic>));
     _channel = 'stable';
     return cast { cancelDownload: function() {
-    
+
     }, checkForUpdates: function() {
-    
+
     }, downloadUpdate: function() {
-    
+
     }, getChannel: function() {
       return cast _channel;
     }, getConfig: function() {
       return cast _config;
     }, quitAndInstall: function() {
-    
+
     }, rollback: function() {
-    
+
     }, setChannel: function(channel:Dynamic) {
       (_channel = cast (channel : Dynamic));
     }, setConfig: function(config:Dynamic) {
       (_config = cast (_Runtime.mergeObjects([config]) : Dynamic));
     }, setFeedUrl: function() {
-    
+
     }, setSignatureConfig: function() {
-    
+
     }, subscribeChecking: function() {
       return cast function() {
-      
+
       };
     }, subscribeDownloadProgress: function() {
       return cast function() {
-      
+
       };
     }, subscribeError: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateAvailable: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateCancelled: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateDownloaded: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateNotAvailable: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateRolledBack: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateStaging: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateVerified: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

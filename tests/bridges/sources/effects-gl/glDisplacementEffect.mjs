@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyDisplacementEffectToGl = api.applyDisplacementEffectToGl;
 export const defaultGlDisplacementEffectRunner = api.defaultGlDisplacementEffectRunner;
+export const registerGlDisplacementEffect = api.registerGlDisplacementEffect;

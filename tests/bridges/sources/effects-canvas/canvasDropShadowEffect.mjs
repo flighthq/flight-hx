@@ -19,3 +19,4 @@ __syncDependencies();
 
 export const applyDropShadowEffectToCanvas = api.applyDropShadowEffectToCanvas;
 export const defaultCanvasDropShadowEffectRunner = api.defaultCanvasDropShadowEffectRunner;
+export const registerCanvasDropShadowEffect = api.registerCanvasDropShadowEffect;

@@ -3,12 +3,9 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachSoftKeyboard = compiled.flighthq.keyboard.Keyboard.attachSoftKeyboard;
 export const createSoftKeyboard = compiled.flighthq.keyboard.Keyboard.createSoftKeyboard;
-export const createSoftKeyboardInfo = compiled.flighthq.keyboard.Keyboard.createSoftKeyboardInfo;
 export const createSoftKeyboardTransition = compiled.flighthq.keyboard.Keyboard.createSoftKeyboardTransition;
-export const createWebSoftKeyboardBackend = compiled.flighthq.keyboard.Keyboard.createWebSoftKeyboardBackend;
 export const detachSoftKeyboard = compiled.flighthq.keyboard.Keyboard.detachSoftKeyboard;
 export const disposeSoftKeyboard = compiled.flighthq.keyboard.Keyboard.disposeSoftKeyboard;
-export const getSoftKeyboardBackend = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardBackend;
 export const getSoftKeyboardHeight = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardHeight;
 export const getSoftKeyboardInfo = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardInfo;
 export const getSoftKeyboardResizeMode = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardResizeMode;
@@ -16,7 +13,6 @@ export const hideSoftKeyboard = compiled.flighthq.keyboard.Keyboard.hideSoftKeyb
 export const isSoftKeyboardAccessoryBarVisible = compiled.flighthq.keyboard.Keyboard.isSoftKeyboardAccessoryBarVisible;
 export const isSoftKeyboardScrollAssistEnabled = compiled.flighthq.keyboard.Keyboard.isSoftKeyboardScrollAssistEnabled;
 export const setSoftKeyboardAccessoryBarVisible = compiled.flighthq.keyboard.Keyboard.setSoftKeyboardAccessoryBarVisible;
-export const setSoftKeyboardBackend = compiled.flighthq.keyboard.Keyboard.setSoftKeyboardBackend;
 export const setSoftKeyboardResizeMode = compiled.flighthq.keyboard.Keyboard.setSoftKeyboardResizeMode;
 export const setSoftKeyboardScrollAssistEnabled = compiled.flighthq.keyboard.Keyboard.setSoftKeyboardScrollAssistEnabled;
 export const setSoftKeyboardStyle = compiled.flighthq.keyboard.Keyboard.setSoftKeyboardStyle;

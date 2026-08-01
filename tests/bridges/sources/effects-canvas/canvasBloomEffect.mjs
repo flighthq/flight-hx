@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBloomEffectToCanvas = api.applyBloomEffectToCanvas;
 export const defaultCanvasBloomEffectRunner = api.defaultCanvasBloomEffectRunner;
+export const registerCanvasBloomEffect = api.registerCanvasBloomEffect;

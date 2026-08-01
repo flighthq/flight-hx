@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyPosterizeEffectToGl = api.applyPosterizeEffectToGl;
 export const defaultGlPosterizeEffectRunner = api.defaultGlPosterizeEffectRunner;
+export const registerGlPosterizeEffect = api.registerGlPosterizeEffect;

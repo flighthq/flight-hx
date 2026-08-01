@@ -7,7 +7,6 @@ import flighthq.textlayout.RichTextContent as Facade_Textlayout_flighthq_textlay
 import flighthq.textlayout.RichTextMetrics as Facade_Textlayout_flighthq_textlayout_RichTextMetrics;
 import flighthq.textlayout.RichTextQuery as Facade_Textlayout_flighthq_textlayout_RichTextQuery;
 import flighthq.textlayout.TextBounds as Facade_Textlayout_flighthq_textlayout_TextBounds;
-import flighthq.textlayout.TextBounds.TextBoundsSpec;
 import flighthq.textlayout.TextFormat as Facade_Textlayout_flighthq_textlayout_TextFormat;
 import flighthq.textlayout.TextFormatRange as Facade_Textlayout_flighthq_textlayout_TextFormatRange;
 import flighthq.textlayout.TextLayout as Facade_Textlayout_flighthq_textlayout_TextLayout;
@@ -21,6 +20,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.TextBoundsSpec;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel.TextLabelRuntime;
@@ -125,11 +125,6 @@ class Textlayout {
 
   public static function createTextLayoutResult():TextLayoutResult {
     return cast Facade_Textlayout_flighthq_textlayout_TextLayout.createTextLayoutResult();
-    return cast null;
-  }
-
-  public static function createTextMetrics():TextMetrics {
-    return cast Facade_Textlayout_flighthq_textlayout_TextMetrics.createTextMetrics();
     return cast null;
   }
 
@@ -248,8 +243,4 @@ class Textlayout {
   public static function setTextLayoutMeasureProvider(measure:Null<TextMeasureFunction>):Void {
     Facade_Textlayout_flighthq_textlayout_TextLayoutMeasure.setTextLayoutMeasureProvider(measure);
   }
-
-  public static final TEXT_BOUNDS_GUTTER:Dynamic = Facade_Textlayout_flighthq_textlayout_TextBounds.TEXT_BOUNDS_GUTTER;
-
-  public static final TEXT_LAYOUT_GUTTER:Dynamic = Facade_Textlayout_flighthq_textlayout_TextLayout.TEXT_LAYOUT_GUTTER;
 }

@@ -8,6 +8,7 @@ import flighthq.types.VideoResource.VideoResourceLoadOptions;
 import flighthq.types.VideoResource.VideoResourceUrl;
 import flighthq.video.VideoFormat.selectVideoResourceUrl;
 import flighthq.video.VideoResource.createVideoResource;
+import flighthq.video.VideoResource.disposeVideoResource;
 
 class VideoResourceFrom {
   public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
@@ -22,16 +23,22 @@ class VideoResourceFrom {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var url:Dynamic = cast _Runtime.UNDEFINED;
+        var resource:VideoResource = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(_Runtime.globalValue('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
-        return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
-            return flighthq._internal._Async.flowReturn(__awaitValue2);
+        return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
+          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            (resource = cast (__awaitValue0 : Dynamic));
+            return flighthq._internal._Async.flowNormal();
+          });
+        }), function(__caughtError:Dynamic):Dynamic {
+          var error:Dynamic = __caughtError;
+          return flighthq._internal._Async.protect(function():Dynamic {
+            _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+            return flighthq._internal._Async.reject(error);
           });
         }), function():Dynamic {
-          _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
-          return flighthq._internal._Async.flowNormal();
-        }), function():Dynamic {
-          return flighthq._internal._Async.flowNormal();
+          (resource.objectUrl = cast (url : Dynamic));
+          return flighthq._internal._Async.flowReturn(resource);
         });
       })
     );
@@ -47,22 +54,23 @@ class VideoResourceFrom {
       var onAbort:Dynamic = cast _Runtime.UNDEFINED;
       var cleanup:Dynamic = cast _Runtime.UNDEFINED;
       element = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
-      _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.preload; }), function():Dynamic return cast 'auto') : Dynamic));
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'crossOrigin', options.crossOrigin); }
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'muted', options.muted); }
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'playsInline', options.playsInline); }
-      readyEvent = _Runtime.callValue(VideoResourceFrom.readinessEventName__videoResourceFrom, cast ([({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.readiness; })] : Array<Dynamic>));
+      _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.preload; }), function():Dynamic return cast 'auto') : Dynamic));
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'crossOrigin', options.crossOrigin); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'muted', options.muted); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(element, 'playsInline', options.playsInline); }
+      readyEvent = _Runtime.callValue(VideoResourceFrom.readinessEventName__videoResourceFrom, cast ([({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.readiness; })] : Array<Dynamic>));
       onReady = function() {
         _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
         _Runtime.callValue(resolve, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
       };
       onError = function() {
         _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
+        _Runtime.callValue(disposeVideoResource, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callValue(reject, cast ([_Runtime.error('Failed to load video: ' + Std.string(url) + '')] : Array<Dynamic>));
       };
       onAbort = function() {
         _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
-        _Runtime.setField(element, 'src', '');
+        _Runtime.callValue(disposeVideoResource, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callValue(reject, cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>));
       };
       cleanup = function() {

@@ -3,7 +3,7 @@ package flighthq.renderGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ImageResource;
+import flighthq.types.Image;
 
 class GlTextureUpload {
   public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
@@ -14,7 +14,7 @@ class GlTextureUpload {
     flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, target, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, source);
   }
 
-  public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:ImageResource):Void {
-    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) { _Runtime.callValue(uploadGlTextureElement, cast ([gl, target, (cast image.source : Dynamic)] : Array<Dynamic>)); } else { _Runtime.callValue(uploadGlTextureData, cast ([gl, target, image.width, image.height, image.data] : Array<Dynamic>)); }
+  public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:Dynamic):Void {
+    _Runtime.callValue(uploadGlTextureElement, cast ([gl, target, (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
   }
 }

@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const computeNodeBoundsRectangle = api.computeNodeBoundsRectangle;
+export const computeNodeRootLocalBoundsRectangle = api.computeNodeRootLocalBoundsRectangle;
 export const ensureNodeLocalBoundsRectangle = api.ensureNodeLocalBoundsRectangle;
 export const ensureNodeParentBoundsRectangle = api.ensureNodeParentBoundsRectangle;
 export const ensureNodeWorldBoundsRectangle = api.ensureNodeWorldBoundsRectangle;

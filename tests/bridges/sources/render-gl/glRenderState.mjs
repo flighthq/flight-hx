@@ -5,6 +5,8 @@ const api = compiled.flighthq.renderGl.GlRenderState;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const copyGlRenderStateRegistrations = api.copyGlRenderStateRegistrations;
+export const createGlOffscreenRenderState = api.createGlOffscreenRenderState;
 export const createGlRenderState = api.createGlRenderState;
 export const createGlRenderStateRuntime = api.createGlRenderStateRuntime;
 export const destroyGlRenderState = api.destroyGlRenderState;

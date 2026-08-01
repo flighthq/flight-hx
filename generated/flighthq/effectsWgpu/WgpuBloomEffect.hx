@@ -7,14 +7,15 @@ import flighthq.effects.BloomEffect.computeBloomBlurRadius;
 import flighthq.effects.BloomEffect.computeBloomIntensity;
 import flighthq.effects.BloomEffect.computeBloomThreshold;
 import flighthq.effectsWgpu.WgpuBlurEffect.applyGaussianBlurToWgpu;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.BloomEffect;
+import flighthq.types.WgpuDualSourceEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -55,6 +56,10 @@ class WgpuBloomEffect {
   public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyBloomEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuBloomEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BloomEffect', defaultWgpuBloomEffectRunner] : Array<Dynamic>));
+  }
 
   public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;

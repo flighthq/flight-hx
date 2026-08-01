@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const easeSteps = api.easeSteps;
+export const setEasingStepsGuard = api.setEasingStepsGuard;

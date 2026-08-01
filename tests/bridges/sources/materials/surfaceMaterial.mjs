@@ -6,7 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSurfaceMaterial = api.createSurfaceMaterial;
-export const getMaterialAlphaMode = api.getMaterialAlphaMode;
-export const isMaterialBlended = api.isMaterialBlended;
-export const isMaterialMasked = api.isMaterialMasked;
-export const isMaterialOpaque = api.isMaterialOpaque;
+export const getSurfaceMaterialAlphaMode = api.getSurfaceMaterialAlphaMode;
+export const isSurfaceMaterialBlended = api.isSurfaceMaterialBlended;
+export const isSurfaceMaterialMasked = api.isSurfaceMaterialMasked;
+export const isSurfaceMaterialOpaque = api.isSurfaceMaterialOpaque;

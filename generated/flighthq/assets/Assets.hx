@@ -4,6 +4,7 @@ package flighthq.assets;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary as Facade_Assets_flighthq_assets_AssetLibrary;
+import flighthq.types.Assets.AssetDescriptor;
 import flighthq.types.Assets.AssetGroupLoadOptions;
 import flighthq.types.Assets.AssetLibrary;
 import flighthq.types.Assets.AssetLoaderAdapter;
@@ -40,12 +41,16 @@ class Assets {
     return cast null;
   }
 
-  public static function loadAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
-    Facade_Assets_flighthq_assets_AssetLibrary.loadAssetManifest(library, manifest);
+  public static function registerAssetDescriptor(library:AssetLibrary, descriptor:AssetDescriptor):Void {
+    Facade_Assets_flighthq_assets_AssetLibrary.registerAssetDescriptor(library, descriptor);
   }
 
   public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
     Facade_Assets_flighthq_assets_AssetLibrary.registerAssetLoader(library, type, adapter);
+  }
+
+  public static function registerAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
+    Facade_Assets_flighthq_assets_AssetLibrary.registerAssetManifest(library, manifest);
   }
 
   public static function releaseAsset(library:AssetLibrary, id:String):Void {

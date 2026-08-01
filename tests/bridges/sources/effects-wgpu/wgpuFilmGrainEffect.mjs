@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyFilmGrainEffectToWgpu = api.applyFilmGrainEffectToWgpu;
 export const defaultWgpuFilmGrainEffectRunner = api.defaultWgpuFilmGrainEffectRunner;
+export const registerWgpuFilmGrainEffect = api.registerWgpuFilmGrainEffect;

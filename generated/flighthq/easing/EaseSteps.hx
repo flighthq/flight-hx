@@ -5,11 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 import flighthq.types.StepPosition;
+import flighthq.types.StepPosition.EasingStepsGuard;
 
 class EaseSteps {
   public static function easeSteps(count:Float, position:StepPosition = 'jumpEnd'):EasingFunction {
     var jumps:Dynamic = cast _Runtime.UNDEFINED;
     var startOffset:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals(position, 'jumpNone') : Bool) && (cast ((cast count : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { _Runtime.callOptionalValue(EaseSteps._stepsGuard__easeSteps, cast ([count, position] : Array<Dynamic>)); }
     jumps = ((cast _Runtime.strictEquals(position, 'jumpNone') : Bool) ? (cast (count - 1.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(position, 'jumpBoth') : Bool) ? (cast (count + 1.0) : Dynamic) : (cast count : Dynamic)) : Dynamic));
     startOffset = ((cast ((cast _Runtime.strictEquals(position, 'jumpStart') : Bool) || (cast _Runtime.strictEquals(position, 'jumpBoth') : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
     return cast function(t:Dynamic) {
@@ -25,4 +27,10 @@ class EaseSteps {
     };
     return cast null;
   }
+
+  public static function setEasingStepsGuard(guard:Null<EasingStepsGuard>):Void {
+    (EaseSteps._stepsGuard__easeSteps = cast (guard : Dynamic));
+  }
+
+  public static var _stepsGuard__easeSteps:Null<EasingStepsGuard> = _Runtime.explicitNull();
 }

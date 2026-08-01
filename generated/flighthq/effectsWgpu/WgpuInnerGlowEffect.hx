@@ -8,6 +8,7 @@ import flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur;
 import flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInnerClipPass;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInvertTintPass;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.InnerGlowEffect;
@@ -56,6 +57,10 @@ class WgpuInnerGlowEffect {
   public static final defaultWgpuInnerGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyInnerGlowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuInnerGlowEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'InnerGlowEffect', defaultWgpuInnerGlowEffectRunner] : Array<Dynamic>));
+  }
 
   public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;

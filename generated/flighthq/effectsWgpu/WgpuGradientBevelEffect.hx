@@ -8,13 +8,14 @@ import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectErasePass;
 import flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur;
 import flighthq.effectsWgpu.WgpuEffectGradientRamp.getWgpuEffectGradientRampTexture;
 import flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget;
 import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.GradientBevelEffect;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -87,7 +88,7 @@ class WgpuGradientBevelEffect {
     applyPipeline = _Runtime.callValue(WgpuGradientBevelEffect.getApplyPipeline__wgpuGradientBevelEffect, cast ([state] : Array<Dynamic>));
     applySlot = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([applySlot, function() {
-    
+
     }] : Array<Dynamic>));
     applyPass = _Runtime.callProperty(fs, 'beginPass', cast ([s1, 'load'] : Array<Dynamic>));
     _Runtime.callProperty(applyPass, 'setPipeline', cast ([_Runtime.field(applyPipeline, 'pipeline')] : Array<Dynamic>));
@@ -109,6 +110,10 @@ class WgpuGradientBevelEffect {
   public static final defaultWgpuGradientBevelEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyGradientBevelEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuGradientBevelEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GradientBevelEffect', defaultWgpuGradientBevelEffectRunner] : Array<Dynamic>));
+  }
 
   public static final BEVEL_ENCODE_FRAGMENT_WGSL__wgpuGradientBevelEffect:Dynamic = '\nstruct Uniforms {\n  offset : vec2f,\n  _pad : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let high = textureSampleLevel(tex, smp, uv - uni.offset, 0.0).a;\n  let low  = textureSampleLevel(tex, smp, uv + uni.offset, 0.0).a;\n  let bevelVal = clamp((high - low) * 0.5 + 0.5, 0.0, 1.0);\n  return vec4f(bevelVal, 0.0, 0.0, 1.0);\n}';
 

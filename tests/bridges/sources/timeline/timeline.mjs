@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const addTimelineFrameScript = api.addTimelineFrameScript;
+export const clearTimelineFrameScripts = api.clearTimelineFrameScripts;
 export const createTimeline = api.createTimeline;
 export const createTimelineSource = api.createTimelineSource;
 export const disposeTimelineSignals = api.disposeTimelineSignals;
@@ -13,6 +14,8 @@ export const enableTimelineSignals = api.enableTimelineSignals;
 export const findTimelineLabel = api.findTimelineLabel;
 export const getTimelineCurrentLabel = api.getTimelineCurrentLabel;
 export const getTimelineFrameScript = api.getTimelineFrameScript;
+export const getTimelineFrameScriptFrames = api.getTimelineFrameScriptFrames;
+export const getTimelineLabels = api.getTimelineLabels;
 export const gotoAndPlayTimeline = api.gotoAndPlayTimeline;
 export const gotoAndStopTimeline = api.gotoAndStopTimeline;
 export const nextFrameTimeline = api.nextFrameTimeline;

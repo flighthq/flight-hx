@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyLensDirtEffectToWgpu = api.applyLensDirtEffectToWgpu;
 export const defaultWgpuLensDirtEffectRunner = api.defaultWgpuLensDirtEffectRunner;
+export const registerWgpuLensDirtEffect = api.registerWgpuLensDirtEffect;

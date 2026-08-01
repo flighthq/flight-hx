@@ -22,6 +22,14 @@ class Renderer {
     }));
   }
 
+  public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
+    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceRegistry:Dynamic = cast _Runtime.UNDEFINED;
+    targetRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([target] : Array<Dynamic>));
+    sourceRegistry = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'renderEffectPaddingResolverRegistry');
+    _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourceRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourceRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourceRegistry]) : Dynamic)));
+  }
+
   public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
@@ -33,5 +41,13 @@ class Renderer {
     if ((cast _Runtime.strictEquals(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind)), renderer) : Bool)) { return; }
     _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'rendererMapId') + 1.0)), 0));
     ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).set(kind, renderer));
+  }
+
+  public static function registerRenderers(state:RenderState, entries:Array<Array<Dynamic>>):Void {
+    for (__iteration0 in _Runtime.iterable(entries)) {
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var renderer:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      _Runtime.callValue(registerRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
+    }
   }
 }

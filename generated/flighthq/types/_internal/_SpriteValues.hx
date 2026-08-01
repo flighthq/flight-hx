@@ -3,11 +3,10 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject;
-import flighthq.types.DisplayObject.DisplayObjectData;
-import flighthq.types.DisplayObject.DisplayObjectRuntime;
-import flighthq.types.Rectangle;
-import flighthq.types.TextureAtlas;
+import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DData;
+import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Texture;
 
 class _SpriteValues {
   public static final SpriteKind:Dynamic = 'Sprite';

@@ -4,6 +4,7 @@ package flighthq.snapshot;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.snapshot.CaptureSnapshot as Facade_Snapshot_flighthq_snapshot_CaptureSnapshot;
+import flighthq.snapshot.EnableSnapshotGuards as Facade_Snapshot_flighthq_snapshot_EnableSnapshotGuards;
 import flighthq.snapshot.EqualsSnapshot as Facade_Snapshot_flighthq_snapshot_EqualsSnapshot;
 import flighthq.snapshot.InterpolateSnapshots as Facade_Snapshot_flighthq_snapshot_InterpolateSnapshots;
 import flighthq.snapshot.RestoreSnapshot as Facade_Snapshot_flighthq_snapshot_RestoreSnapshot;
@@ -14,6 +15,14 @@ class Snapshot {
   public static function captureSnapshot<T>(source:Dynamic):flighthq.types.Snapshot<Dynamic> {
     return cast Facade_Snapshot_flighthq_snapshot_CaptureSnapshot.captureSnapshot(source);
     return cast null;
+  }
+
+  public static function disableSnapshotGuards():Void {
+    Facade_Snapshot_flighthq_snapshot_EnableSnapshotGuards.disableSnapshotGuards();
+  }
+
+  public static function enableSnapshotGuards():Void {
+    Facade_Snapshot_flighthq_snapshot_EnableSnapshotGuards.enableSnapshotGuards();
   }
 
   public static function equalsSnapshot<T>(a:flighthq.types.Snapshot<Dynamic>, b:flighthq.types.Snapshot<Dynamic>):Bool {

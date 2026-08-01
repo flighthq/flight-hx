@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
-import flighthq.types.VideoTexture;
 
 class _UnlitMaterialValues {
   public static final UnlitMaterialKind:Dynamic = 'UnlitMaterial';

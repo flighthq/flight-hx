@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -25,6 +26,10 @@ class GlSharpenEffect {
   public static final defaultGlSharpenEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applySharpenEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SharpenEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlSharpenEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'SharpenEffect', defaultGlSharpenEffectRunner] : Array<Dynamic>));
+  }
 
   public static final SHARPEN_FRAGMENT_SRC__glSharpenEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec3 c = texture(u_texture0, v_texCoord).rgb;\n  vec3 n = texture(u_texture0, v_texCoord + vec2(0.0, -texel.y)).rgb;\n  vec3 s = texture(u_texture0, v_texCoord + vec2(0.0, texel.y)).rgb;\n  vec3 e = texture(u_texture0, v_texCoord + vec2(texel.x, 0.0)).rgb;\n  vec3 w = texture(u_texture0, v_texCoord + vec2(-texel.x, 0.0)).rgb;\n  vec3 high = c * 4.0 - n - s - e - w;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(clamp(c + high * u_amount, 0.0, 1.0), a);\n}';
 }

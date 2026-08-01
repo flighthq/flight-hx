@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyDirectionalBlurEffectToWgpu = api.applyDirectionalBlurEffectToWgpu;
 export const defaultWgpuDirectionalBlurEffectRunner = api.defaultWgpuDirectionalBlurEffectRunner;
+export const registerWgpuDirectionalBlurEffect = api.registerWgpuDirectionalBlurEffect;

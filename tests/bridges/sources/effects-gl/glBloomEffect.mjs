@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBloomEffectToGl = api.applyBloomEffectToGl;
 export const defaultGlBloomEffectRunner = api.defaultGlBloomEffectRunner;
+export const registerGlBloomEffect = api.registerGlBloomEffect;

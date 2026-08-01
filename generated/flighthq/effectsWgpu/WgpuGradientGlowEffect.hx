@@ -8,13 +8,14 @@ import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectErasePass;
 import flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur;
 import flighthq.effectsWgpu.WgpuEffectGradientRamp.getWgpuEffectGradientRampTexture;
 import flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget;
 import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.GradientGlowEffect;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -60,7 +61,7 @@ class WgpuGradientGlowEffect {
     pipeline = _Runtime.callValue(WgpuGradientGlowEffect.getLookupPipeline__wgpuGradientGlowEffect, cast ([state] : Array<Dynamic>));
     slotOffset = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([slotOffset, function() {
-    
+
     }] : Array<Dynamic>));
     pass = _Runtime.callProperty(fs, 'beginPass', cast ([s0, 'load'] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>));
@@ -84,6 +85,10 @@ class WgpuGradientGlowEffect {
   public static final defaultWgpuGradientGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyGradientGlowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientGlowEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuGradientGlowEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GradientGlowEffect', defaultWgpuGradientGlowEffectRunner] : Array<Dynamic>));
+  }
 
   public static final GRADIENT_LOOKUP_FRAGMENT_WGSL__wgpuGradientGlowEffect:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var texBlurred : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var texRamp : texture_2d<f32>;\n@group(2) @binding(1) var smp2 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let alpha = textureSampleLevel(texBlurred, smp, uv, 0.0).a;\n  return textureSampleLevel(texRamp, smp2, vec2f(alpha, 0.5), 0.0);\n}';
 

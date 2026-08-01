@@ -6,7 +6,7 @@ class TypedStructClassSmoke {
   }
 
   public static function run():Void {
-    final camera = flighthq.camera2d.Camera2d.createCamera2D(640, 480, {x: 12, y: 34, zoom: 2, rotation: 0.25});
+    final camera = flighthq.camera.Camera2d.createCamera2D(640, 480, {x: 12, y: 34, zoom: 2, rotation: 0.25});
     if (camera.x != 12 || camera.y != 34 || camera.zoom != 2 || camera.rotation != 0.25) {
       throw 'Camera2D construction lost field values';
     }

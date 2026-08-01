@@ -10,13 +10,15 @@ import flighthq.types.Snapshot.SnapshotSchema;
 
 class InterpolateSnapshots {
   public static function interpolateSnapshots<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
+    var paths:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(a), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(b), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(out, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(out), 'object') : Bool)) : Bool)) {
       return;
     }
-    _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([(cast out : Dynamic), (cast a : Dynamic), (cast b : Dynamic), _Runtime.callValue(clamp, cast ([t, 0.0, 1.0] : Array<Dynamic>)), schema, ''] : Array<Dynamic>));
+    paths = ((cast _Runtime.strictEquals(schema, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Set'), [schema]) : Dynamic));
+    _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([(cast out : Dynamic), (cast a : Dynamic), (cast b : Dynamic), _Runtime.callValue(clamp, cast ([t, 0.0, 1.0] : Array<Dynamic>)), paths, ''] : Array<Dynamic>));
   }
 
-  public static function interpolateSnapshotsInto__interpolateSnapshots(out:Dynamic, a:Dynamic, b:Dynamic, t:Float, schema:Null<SnapshotSchema>, prefix:String):Void {
+  public static function interpolateSnapshotsInto__interpolateSnapshots(out:Dynamic, a:Dynamic, b:Dynamic, t:Float, paths:Null<Dynamic>, prefix:String):Void {
     var outRecord:Dynamic = cast _Runtime.UNDEFINED;
     var aRecord:Dynamic = cast _Runtime.UNDEFINED;
     var bRecord:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,25 +29,24 @@ class InterpolateSnapshots {
       _Runtime.setLength((cast out : Array<Dynamic>), _Runtime.field((cast b : Array<Dynamic>), 'length'));
     }
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRecord))) {
-      var path:Dynamic = ((cast _Runtime.strictEquals(prefix, '') : Bool) ? (cast key : Dynamic) : (cast '' + Std.string(prefix) + '.' + Std.string(key) + '' : Dynamic));
       var aValue:Dynamic = _Runtime.getIndex(aRecord, key);
       var bValue:Dynamic = _Runtime.getIndex(bRecord, key);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'number') : Bool)) : Bool)) {
-        _Runtime.setIndex(outRecord, key, ((cast _Runtime.callValue(InterpolateSnapshots.isSnapshotPathInterpolated__interpolateSnapshots, cast ([schema, path] : Array<Dynamic>)) : Bool) ? (cast _Runtime.callValue(lerp, cast ([aValue, bValue, t] : Array<Dynamic>)) : Dynamic) : (cast bValue : Dynamic)));
+        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flighthq._internal._Set).has(_Runtime.callValue(InterpolateSnapshots.snapshotPath__interpolateSnapshots, cast ([prefix, key] : Array<Dynamic>)))) : Bool)) : Bool) ? (cast _Runtime.callValue(lerp, cast ([aValue, bValue, t] : Array<Dynamic>)) : Dynamic) : (cast bValue : Dynamic)));
         continue;
       }
       if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(aValue, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'object') : Bool)) : Bool) && (cast !_Runtime.strictEquals(bValue, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(aValue), _Runtime.isArray(bValue)) : Bool)) : Bool)) {
         var container:Dynamic = _Runtime.callValue(InterpolateSnapshots.ensureSnapshotContainer__interpolateSnapshots, cast ([_Runtime.getIndex(outRecord, key), _Runtime.isArray(bValue)] : Array<Dynamic>));
         _Runtime.setIndex(outRecord, key, container);
-        _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([container, aValue, bValue, t, schema, path] : Array<Dynamic>));
+        _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([container, aValue, bValue, t, paths, ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.callValue(InterpolateSnapshots.snapshotPath__interpolateSnapshots, cast ([prefix, key] : Array<Dynamic>)) : Dynamic))] : Array<Dynamic>));
         continue;
       }
       _Runtime.setIndex(outRecord, key, _Runtime.callValue(InterpolateSnapshots.cloneSnapshotValue__interpolateSnapshots, cast ([bValue] : Array<Dynamic>)));
     }
   }
 
-  public static function isSnapshotPathInterpolated__interpolateSnapshots(schema:Null<SnapshotSchema>, path:String):Bool {
-    return cast ((cast _Runtime.strictEquals(schema, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.includes(schema, path) : Bool));
+  public static function snapshotPath__interpolateSnapshots(prefix:String, key:String):String {
+    return cast ((cast _Runtime.strictEquals(prefix, '') : Bool) ? (cast key : Dynamic) : (cast '' + Std.string(prefix) + '.' + Std.string(key) + '' : Dynamic));
     return cast null;
   }
 

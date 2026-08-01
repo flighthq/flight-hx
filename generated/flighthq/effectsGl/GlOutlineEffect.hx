@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -31,6 +32,10 @@ class GlOutlineEffect {
   public static final defaultGlOutlineEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyOutlineEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : OutlineEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlOutlineEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'OutlineEffect', defaultGlOutlineEffectRunner] : Array<Dynamic>));
+  }
 
   public static final OUTLINE_FRAGMENT_SRC__glOutlineEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nuniform float u_thickness;\nuniform vec4 u_color;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat lum(vec2 uv) {\n  return dot(texture(u_texture0, uv).rgb, vec3(0.2126, 0.7152, 0.0722));\n}\nvoid main() {\n  vec2 texel = u_thickness / u_resolution;\n  float tl = lum(v_texCoord + texel * vec2(-1.0, -1.0));\n  float t = lum(v_texCoord + texel * vec2(0.0, -1.0));\n  float tr = lum(v_texCoord + texel * vec2(1.0, -1.0));\n  float l = lum(v_texCoord + texel * vec2(-1.0, 0.0));\n  float rr = lum(v_texCoord + texel * vec2(1.0, 0.0));\n  float bl = lum(v_texCoord + texel * vec2(-1.0, 1.0));\n  float b = lum(v_texCoord + texel * vec2(0.0, 1.0));\n  float br = lum(v_texCoord + texel * vec2(1.0, 1.0));\n  float gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  float edge = sqrt(gx * gx + gy * gy);\n  vec4 c = texture(u_texture0, v_texCoord);\n  float k = step(u_threshold, edge);\n  o_color = mix(c, u_color, k * u_color.a);\n}';
 }

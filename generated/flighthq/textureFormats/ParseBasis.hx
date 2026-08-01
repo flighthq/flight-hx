@@ -3,11 +3,12 @@ package flighthq.textureFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.textureFormats._internal._ByteReaderValues.createByteReader;
-import flighthq.textureFormats._internal._ByteReaderValues.hasByteReaderBytes;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU16;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU32;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU8;
+import flighthq.textureFormats.ByteReader.createByteReader;
+import flighthq.textureFormats.ByteReader.hasByteReaderBytes;
+import flighthq.textureFormats.ByteReader.readByteReaderU16;
+import flighthq.textureFormats.ByteReader.readByteReaderU24;
+import flighthq.textureFormats.ByteReader.readByteReaderU32;
+import flighthq.textureFormats.ByteReader.readByteReaderU8;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
@@ -18,6 +19,7 @@ class ParseBasis {
     var totalSlices:Dynamic = cast _Runtime.UNDEFINED;
     var totalImages:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
+    var shape:Dynamic = cast _Runtime.UNDEFINED;
     var sliceDescReader:Dynamic = cast _Runtime.UNDEFINED;
     var sliceDescOffset:Dynamic = cast _Runtime.UNDEFINED;
     var table:Dynamic = cast _Runtime.UNDEFINED;
@@ -28,11 +30,13 @@ class ParseBasis {
     if ((cast !(cast _Runtime.callValue(ParseBasis.hasBasisSignature__parseBasis, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseBasis.basisHeaderMinSize__parseBasis : Float)) : Bool)) { return cast null; }
     header = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisTotalSlicesOffset__parseBasis] : Array<Dynamic>));
-    totalSlices = _Runtime.callValue(readByteReaderU16, cast ([header] : Array<Dynamic>));
-    totalImages = _Runtime.callValue(readByteReaderU16, cast ([header] : Array<Dynamic>));
+    totalSlices = _Runtime.callValue(readByteReaderU24, cast ([header] : Array<Dynamic>));
+    totalImages = _Runtime.callValue(readByteReaderU24, cast ([header] : Array<Dynamic>));
     format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexFormatOffset__parseBasis));
     if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast null; }
+    shape = _Runtime.callValue(ParseBasis.getBasisTextureShape__parseBasis, cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexTypeOffset__parseBasis), totalImages] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast null; }
     sliceDescReader = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisSliceDescOffsetField__parseBasis] : Array<Dynamic>));
     sliceDescOffset = _Runtime.callValue(readByteReaderU32, cast ([sliceDescReader] : Array<Dynamic>));
     table = _Runtime.callValue(createByteReader, cast ([bytes, sliceDescOffset] : Array<Dynamic>));
@@ -44,7 +48,7 @@ class ParseBasis {
     {
       var slice:Dynamic = 0.0;
       while ((cast ((cast slice : Float) < (cast totalSlices : Float)) : Bool)) {
-        var imageIndex:Dynamic = _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
+        var imageIndex:Dynamic = _Runtime.callValue(readByteReaderU24, cast ([table] : Array<Dynamic>));
         var levelIndex:Dynamic = _Runtime.callValue(readByteReaderU8, cast ([table] : Array<Dynamic>));
         _Runtime.callValue(readByteReaderU8, cast ([table] : Array<Dynamic>));
         var width:Dynamic = _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
@@ -64,7 +68,32 @@ class ParseBasis {
         (slice = cast ((slice + 1.0) : Dynamic));
       }
     }
-    return cast { depth: 1.0, faces: 1.0, format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: HxMath.max(1.0, totalImages), levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
+    return cast { depth: _Runtime.field(shape, 'depth'), faces: _Runtime.field(shape, 'faces'), format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: _Runtime.field(shape, 'layers'), levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
+    return cast null;
+  }
+
+  public static function getBasisTextureShape__parseBasis(textureType:Float, totalImages:Float):Null<{ var depth:Float; var faces:Float; var layers:Float; }> {
+    var images:Dynamic = cast _Runtime.UNDEFINED;
+    images = HxMath.max(1.0, totalImages);
+    {
+      var __switchValue = textureType;
+      if (__switchValue == ParseBasis.basisTextureType2d__parseBasis || __switchValue == ParseBasis.basisTextureType2dArray__parseBasis) {
+        return cast { depth: 1.0, faces: 1.0, layers: images };
+      }
+      else if (__switchValue == ParseBasis.basisTextureTypeCubemapArray__parseBasis) {
+        if ((cast ((cast _Runtime.strictEquals(totalImages, 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(totalImages, 6.0), 0.0) : Bool)) : Bool)) { return cast null; }
+        return cast { depth: 1.0, faces: 6.0, layers: (totalImages / 6.0) };
+      }
+      else if (__switchValue == ParseBasis.basisTextureTypeVideoFrames__parseBasis) {
+        return cast null;
+      }
+      else if (__switchValue == ParseBasis.basisTextureTypeVolume__parseBasis) {
+        return cast { depth: images, faces: 1.0, layers: 1.0 };
+      }
+      else  {
+        return cast null;
+      }
+    }
     return cast null;
   }
 
@@ -73,15 +102,27 @@ class ParseBasis {
     return cast null;
   }
 
-  public static final basisTotalSlicesOffset__parseBasis:Dynamic = 12.0;
+  public static final basisTotalSlicesOffset__parseBasis:Dynamic = 14.0;
 
-  public static final basisTexFormatOffset__parseBasis:Dynamic = 16.0;
+  public static final basisTexFormatOffset__parseBasis:Dynamic = 20.0;
 
-  public static final basisSliceDescOffsetField__parseBasis:Dynamic = 61.0;
+  public static final basisTexTypeOffset__parseBasis:Dynamic = 23.0;
 
-  public static final basisHeaderMinSize__parseBasis:Dynamic = 65.0;
+  public static final basisSliceDescOffsetField__parseBasis:Dynamic = 63.0;
 
-  public static final basisSliceDescSize__parseBasis:Dynamic = 22.0;
+  public static final basisHeaderMinSize__parseBasis:Dynamic = 67.0;
+
+  public static final basisSliceDescSize__parseBasis:Dynamic = 23.0;
+
+  public static final basisTextureType2d__parseBasis:Dynamic = 0.0;
+
+  public static final basisTextureType2dArray__parseBasis:Dynamic = 1.0;
+
+  public static final basisTextureTypeCubemapArray__parseBasis:Dynamic = 2.0;
+
+  public static final basisTextureTypeVideoFrames__parseBasis:Dynamic = 3.0;
+
+  public static final basisTextureTypeVolume__parseBasis:Dynamic = 4.0;
 
   public static final basisTexFormat__parseBasis:Dynamic = _Runtime.objectFromPairs([{ key: '0', value: 'etc1s' }, { key: '1', value: 'uastc' }]);
 }

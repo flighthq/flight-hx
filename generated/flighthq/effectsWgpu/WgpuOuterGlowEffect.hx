@@ -8,6 +8,7 @@ import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectErasePass;
 import flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur;
 import flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.OuterGlowEffect;
@@ -67,4 +68,8 @@ class WgpuOuterGlowEffect {
   public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyOuterGlowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuOuterGlowEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'OuterGlowEffect', defaultWgpuOuterGlowEffectRunner] : Array<Dynamic>));
+  }
 }

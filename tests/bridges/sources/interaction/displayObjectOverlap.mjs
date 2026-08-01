@@ -5,6 +5,6 @@ const api = compiled.flighthq.interaction.DisplayObjectOverlap;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const containsDisplayObject = api.containsDisplayObject;
-export const getDisplayObjectOverlapRectangle = api.getDisplayObjectOverlapRectangle;
-export const hitTestDisplayObjectsShape = api.hitTestDisplayObjectsShape;
+export const containsNode2D = api.containsNode2D;
+export const getNode2DOverlapRectangle = api.getNode2DOverlapRectangle;
+export const hitTestNode2DsShape = api.hitTestNode2DsShape;

@@ -3,7 +3,7 @@ package flighthq.glyphatlas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.glyphatlas.GlyphAtlas.getGlyphAtlasSurface;
+import flighthq.glyphatlas.GlyphAtlas.getGlyphAtlasBitmap;
 import flighthq.glyphatlas.GlyphAtlasEntry.getGlyphAtlasEntry;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasKerning;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasMetrics;
@@ -13,7 +13,7 @@ import flighthq.types.GlyphSource.GlyphAtlas;
 class GlyphSource {
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
-      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast _Runtime.callValue(getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast _Runtime.callValue(getGlyphAtlasBitmap, cast ([atlas] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     }, getGlyphEntry: function(codepoint:Dynamic) {
       return cast _Runtime.callValue(getGlyphAtlasEntry, cast ([atlas, codepoint] : Array<Dynamic>));
     }, getGlyphKerning: function(left:Dynamic, right:Dynamic) {

@@ -16,7 +16,6 @@ export const createClipRegionFromRoundedRectangle = compiled.flighthq.clip.Clip.
 export const equalsClipRegion = compiled.flighthq.clip.Clip.equalsClipRegion;
 export const getClipRegionBounds = compiled.flighthq.clip.Clip.getClipRegionBounds;
 export const intersectClipRegions = compiled.flighthq.clip.Clip.intersectClipRegions;
-export const invalidateClipRegion = compiled.flighthq.clip.Clip.invalidateClipRegion;
 export const isClipRegionEmpty = compiled.flighthq.clip.Clip.isClipRegionEmpty;
 export const isClipRegionRectangular = compiled.flighthq.clip.Clip.isClipRegionRectangular;
 export const normalizeClipRegion = compiled.flighthq.clip.Clip.normalizeClipRegion;

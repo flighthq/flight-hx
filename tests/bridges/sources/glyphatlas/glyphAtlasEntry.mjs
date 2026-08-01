@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const getGlyphAtlasEntry = api.getGlyphAtlasEntry;
+export const setGlyphAtlasEntryGuard = api.setGlyphAtlasEntryGuard;

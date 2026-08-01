@@ -4,19 +4,19 @@ package flighthq.textshaper;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaper as Facade_Textshaper_flighthq_textshaper_TextShaper;
+import flighthq.textshaper.TextShaperCache as Facade_Textshaper_flighthq_textshaper_TextShaperCache;
 import flighthq.textshaper.TextShaperCluster as Facade_Textshaper_flighthq_textshaper_TextShaperCluster;
 import flighthq.textshaper.TextShaperItemize as Facade_Textshaper_flighthq_textshaper_TextShaperItemize;
 import flighthq.textshaper.TextShaperPool as Facade_Textshaper_flighthq_textshaper_TextShaperPool;
 import flighthq.textshaper.TextShaperRun as Facade_Textshaper_flighthq_textshaper_TextShaperRun;
 import flighthq.textshaper.TextShaperSignals as Facade_Textshaper_flighthq_textshaper_TextShaperSignals;
-import flighthq.textshaper._internal._TextShaperCacheValues as Facade_Textshaper_flighthq_textshaper__internal__TextShaperCacheValues;
 import flighthq.types.FontMetrics;
 import flighthq.types.GlyphExtents;
 import flighthq.types.ShapedRun;
 import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
 import flighthq.types.TextShaper.ShapeRunOptions;
-import flighthq.types.TextShaper.TextShaperBackend;
+import flighthq.types.TextShaperCache;
 import flighthq.types.TextShaperOptions;
 import flighthq.types.TextShaperSignals;
 
@@ -32,7 +32,7 @@ class Textshaper {
   }
 
   public static function clearTextShaperCache(cache:TextShaperCache):Void {
-    Facade_Textshaper_flighthq_textshaper__internal__TextShaperCacheValues.clearTextShaperCache(cache);
+    Facade_Textshaper_flighthq_textshaper_TextShaperCache.clearTextShaperCache(cache);
   }
 
   public static function createShapedRun():ShapedRun {
@@ -41,12 +41,12 @@ class Textshaper {
   }
 
   public static function createTextShaperCache():TextShaperCache {
-    return cast Facade_Textshaper_flighthq_textshaper__internal__TextShaperCacheValues.createTextShaperCache();
+    return cast Facade_Textshaper_flighthq_textshaper_TextShaperCache.createTextShaperCache();
     return cast null;
   }
 
   public static function disposeTextShaperCache(cache:TextShaperCache):Void {
-    Facade_Textshaper_flighthq_textshaper__internal__TextShaperCacheValues.disposeTextShaperCache(cache);
+    Facade_Textshaper_flighthq_textshaper_TextShaperCache.disposeTextShaperCache(cache);
   }
 
   public static function disposeTextShaperSignals():Void {
@@ -118,11 +118,6 @@ class Textshaper {
     return cast null;
   }
 
-  public static function getTextShaperBackend():Null<TextShaperBackend> {
-    return cast Facade_Textshaper_flighthq_textshaper_TextShaper.getTextShaperBackend();
-    return cast null;
-  }
-
   public static function getTextShaperSignals():Null<TextShaperSignals> {
     return cast Facade_Textshaper_flighthq_textshaper_TextShaperSignals.getTextShaperSignals();
     return cast null;
@@ -142,17 +137,13 @@ class Textshaper {
     Facade_Textshaper_flighthq_textshaper_TextShaperPool.releaseShapedRun(run);
   }
 
-  public static function setTextShaperBackend(backend:Null<TextShaperBackend>):Void {
-    Facade_Textshaper_flighthq_textshaper_TextShaper.setTextShaperBackend(backend);
-  }
-
   public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
     return cast Facade_Textshaper_flighthq_textshaper_TextShaperRun.shapeTextRun(text, format, options);
     return cast null;
   }
 
   public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
-    return cast Facade_Textshaper_flighthq_textshaper__internal__TextShaperCacheValues.shapeTextRunCached(cache, text, format, options);
+    return cast Facade_Textshaper_flighthq_textshaper_TextShaperCache.shapeTextRunCached(cache, text, format, options);
     return cast null;
   }
 

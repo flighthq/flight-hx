@@ -3,25 +3,13 @@ package flighthq.textbidi;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.textbidi.BidiClassBackend as Facade_Textbidi_flighthq_textbidi_BidiClassBackend;
 import flighthq.textbidi.GetBidiRuns as Facade_Textbidi_flighthq_textbidi_GetBidiRuns;
 import flighthq.textbidi.ReorderBidiLine as Facade_Textbidi_flighthq_textbidi_ReorderBidiLine;
 import flighthq.textbidi.ResolveBidiLevels as Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels;
-import flighthq.types.Bidi.BidiClassBackend;
 import flighthq.types.Bidi.BidiDirection;
 import flighthq.types.Bidi.BidiRun;
 
 class Textbidi {
-  public static function createCompactBidiClassBackend():BidiClassBackend {
-    return cast Facade_Textbidi_flighthq_textbidi_BidiClassBackend.createCompactBidiClassBackend();
-    return cast null;
-  }
-
-  public static function getBidiClassBackend():BidiClassBackend {
-    return cast Facade_Textbidi_flighthq_textbidi_BidiClassBackend.getBidiClassBackend();
-    return cast null;
-  }
-
   public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
     return cast Facade_Textbidi_flighthq_textbidi_GetBidiRuns.getBidiRuns(text, baseDirection);
     return cast null;
@@ -34,9 +22,5 @@ class Textbidi {
   public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flighthq._internal._UInt8Array {
     return cast Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels.resolveBidiLevels(text, baseDirection);
     return cast null;
-  }
-
-  public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
-    Facade_Textbidi_flighthq_textbidi_BidiClassBackend.setBidiClassBackend(backend);
   }
 }

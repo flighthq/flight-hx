@@ -3,12 +3,35 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.getDirectionalRenderEffectPadding;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.DropShadowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class DropShadowEffect {
   public static function createDropShadowEffect(?options:Dynamic):flighthq.types.DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DropShadowEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getDropShadowEffectPadding(effect:flighthq.types.DropShadowEffect):RenderEffectPadding {
+    var angle:Dynamic = cast _Runtime.UNDEFINED;
+    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
+    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), (HxMath.cos(angle) * distance), (HxMath.sin(angle) * distance)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function registerDropShadowEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'DropShadowEffect', DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveDropShadowEffectPadding__dropShadowEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getDropShadowEffectPadding, cast ([(cast effect : flighthq.types.DropShadowEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

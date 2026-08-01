@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGradientGlowEffectToGl = api.applyGradientGlowEffectToGl;
 export const defaultGlGradientGlowEffectRunner = api.defaultGlGradientGlowEffectRunner;
+export const registerGlGradientGlowEffect = api.registerGlGradientGlowEffect;

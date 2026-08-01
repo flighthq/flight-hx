@@ -3,12 +3,32 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 import flighthq.types.TiltShiftEffect;
 
 class TiltShiftEffect {
   public static function createTiltShiftEffect(?options:Dynamic):flighthq.types.TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'TiltShiftEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getTiltShiftEffectPadding(effect:flighthq.types.TiltShiftEffect):RenderEffectPadding {
+    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    vertical = HxMath.ceil((HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0)) * 3.0));
+    return cast { bottom: vertical, left: 0.0, right: 0.0, top: vertical };
+    return cast null;
+  }
+
+  public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'TiltShiftEffect', TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveTiltShiftEffectPadding__tiltShiftEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getTiltShiftEffectPadding, cast ([(cast effect : flighthq.types.TiltShiftEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

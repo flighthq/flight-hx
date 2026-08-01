@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.CameraMotionBlurEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -27,6 +28,10 @@ class WgpuCameraMotionBlurEffect {
   public static final defaultWgpuCameraMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyCameraMotionBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CameraMotionBlurEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuCameraMotionBlurEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'CameraMotionBlurEffect', defaultWgpuCameraMotionBlurEffectRunner] : Array<Dynamic>));
+  }
 
   public static final CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_samples : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let toCenter = vec2f(0.5) - uv;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, f32(i) / (count - 1.0), count > 1.0);\n    let p = uv + toCenter * (t * uni.u_intensity);\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';
 }

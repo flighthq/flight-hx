@@ -3,17 +3,17 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.StarlingPexSchema.StarlingPexColor;
-import flighthq.particlesFormats.StarlingPexSchema.StarlingPexDocument;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef StarlingPexParseOptions = { @:optional var textureSize:Float; };
-
-typedef StarlingPexParseResult = { var config:ParticleEmitterConfig; var document:StarlingPexDocument; var warnings:Array<String>; };
-
-typedef StarlingPexParsed = StarlingPexParseResult;
+import flighthq.types.StarlingPexSchema.StarlingPexColor;
+import flighthq.types.StarlingPexSchema.StarlingPexDocument;
+import flighthq.types.StarlingPexSchema.StarlingPexParseOptions;
+import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef PexDict__starlingPexParse = Dynamic;
 
@@ -38,25 +38,31 @@ class StarlingPexParse {
     }
     d = _Runtime.callValue(StarlingPexParse.parsePexXml__starlingPexParse, cast ([xml] : Array<Dynamic>));
     doc = _Runtime.callValue(StarlingPexParse.dictToDocument__starlingPexParse, cast ([d] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(StarlingPexParse.documentToConfig__starlingPexParse, cast ([doc, _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0)] : Array<Dynamic>)), document: doc, warnings: _Runtime.callValue(StarlingPexParse.collectStarlingPexWarnings__starlingPexParse, cast ([doc] : Array<Dynamic>)) };
+    return cast { config: _Runtime.callValue(StarlingPexParse.documentToConfig__starlingPexParse, cast ([doc, _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0)] : Array<Dynamic>)), diagnostics: _Runtime.callValue(StarlingPexParse.collectStarlingPexDiagnostics__starlingPexParse, cast ([doc] : Array<Dynamic>)), document: doc };
     return cast null;
   }
 
   public static final DEG2RAD__starlingPexParse:Dynamic = (HxMath.PI / 180.0);
 
-  public static function collectStarlingPexWarnings__starlingPexParse(doc:StarlingPexDocument):Array<String> {
-    var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+  public static function collectStarlingPexDiagnostics__starlingPexParse(doc:StarlingPexDocument):Array<ImportDiagnostic> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
+    diagnostics = cast ([] : Array<Dynamic>);
     if ((cast _Runtime.strictEquals(doc.emitterType, 1.0) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Radial (emitterType=1) emitter was approximated as a gravity emitter; radial motion is not simulated'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'starlingpex.radial-approximated', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.radialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.radialAccelVariance, 0.0) : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['radialAcceleration is not supported and was ignored'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.radial-acceleration-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.tangentialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.tangentialAccelVariance, 0.0) : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['tangentialAcceleration is not supported and was ignored'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.tangential-acceleration-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
     }
-    return cast warnings;
+    if ((cast !_Runtime.strictEquals(doc.finishParticleSizeVariance, 0.0) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.finish-size-variance-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+    }
+    if ((cast ((cast !_Runtime.strictEquals(doc.startColorVariance.alpha, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.finishColorVariance.alpha, 0.0) : Bool)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.alpha-variance-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+    }
+    return cast diagnostics;
     return cast null;
   }
 

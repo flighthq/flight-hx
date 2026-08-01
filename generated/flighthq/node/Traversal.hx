@@ -38,7 +38,7 @@ class Traversal {
     var current:Dynamic = cast _Runtime.UNDEFINED;
     current = _Runtime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-      if ((cast !(cast _Runtime.callValue(callback, cast ([current] : Array<Dynamic>)) : Bool) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.callValue(callback, cast ([current] : Array<Dynamic>)), false) : Bool)) { return; }
       (current = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
     }
   }

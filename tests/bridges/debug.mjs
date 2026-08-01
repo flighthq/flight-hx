@@ -4,6 +4,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 export const beginDebugSpan = compiled.flighthq.debug.Debug.beginDebugSpan;
 export const disableDebug = compiled.flighthq.debug.Debug.disableDebug;
 export const enableDebug = compiled.flighthq.debug.Debug.enableDebug;
+export const enableFlightDiagnostics = compiled.flighthq.debug.Debug.enableFlightDiagnostics;
 export const endDebugSpan = compiled.flighthq.debug.Debug.endDebugSpan;
 export const isDebugEnabled = compiled.flighthq.debug.Debug.isDebugEnabled;
 export const markDebugFrame = compiled.flighthq.debug.Debug.markDebugFrame;

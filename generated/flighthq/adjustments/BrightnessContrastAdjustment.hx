@@ -16,7 +16,7 @@ class BrightnessContrastAdjustment {
     brightness = _Runtime.coalesce(_Runtime.field(options, 'brightness'), function():Dynamic return cast 0.0);
     contrast = _Runtime.coalesce(_Runtime.field(options, 'contrast'), function():Dynamic return cast 1.0);
     s = contrast;
-    o = (255.0 * ((brightness * contrast) + (0.5 * (1.0 - contrast))));
+    o = ((brightness * contrast) + (0.5 * (1.0 - contrast)));
     colorMatrix = cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast _Runtime.mergeObjects([{ kind: 'BrightnessContrastAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;

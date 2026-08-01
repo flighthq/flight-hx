@@ -3,26 +3,28 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.Curve.particleColorCurveFromKeyframes;
 import flighthq.particles.Curve.particleCurveFromKeyframes;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.UnitySchema.UnityColor;
-import flighthq.particlesFormats.UnitySchema.UnityColorOverLifetime;
-import flighthq.particlesFormats.UnitySchema.UnityEmission;
-import flighthq.particlesFormats.UnitySchema.UnityMinMaxValue;
-import flighthq.particlesFormats.UnitySchema.UnityParticleDocument;
-import flighthq.particlesFormats.UnitySchema.UnityRotationOverLifetime;
-import flighthq.particlesFormats.UnitySchema.UnityShape;
-import flighthq.particlesFormats.UnitySchema.UnitySizeOverLifetime;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef UnityParseOptions = { @:optional var pixelsPerUnit:Float; };
-
-typedef UnityParsed = { var config:ParticleEmitterConfig; var document:UnityParticleDocument; var warnings:Array<String>; };
+import flighthq.types.UnitySchema.UnityColor;
+import flighthq.types.UnitySchema.UnityColorOverLifetime;
+import flighthq.types.UnitySchema.UnityEmission;
+import flighthq.types.UnitySchema.UnityMinMaxValue;
+import flighthq.types.UnitySchema.UnityParseOptions;
+import flighthq.types.UnitySchema.UnityParsed;
+import flighthq.types.UnitySchema.UnityParticleDocument;
+import flighthq.types.UnitySchema.UnityRotationOverLifetime;
+import flighthq.types.UnitySchema.UnityShape;
+import flighthq.types.UnitySchema.UnitySizeOverLifetime;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class UnityParse {
   public static final DEG2RAD__unityParse:Dynamic = (HxMath.PI / 180.0);
@@ -194,25 +196,52 @@ class UnityParse {
 
   public static final UNSUPPORTED_UNITY_MODULES__unityParse:Array<Array<String>> = cast ([cast (['velocityOverLifetime', 'velocity-over-lifetime'] : Array<Dynamic>), cast (['forceOverLifetime', 'force-over-lifetime'] : Array<Dynamic>), cast (['limitVelocityOverLifetime', 'limit-velocity-over-lifetime'] : Array<Dynamic>), cast (['inheritVelocity', 'inherit-velocity'] : Array<Dynamic>), cast (['noise', 'noise'] : Array<Dynamic>), cast (['collision', 'collision'] : Array<Dynamic>), cast (['subEmitters', 'sub-emitters'] : Array<Dynamic>), cast (['trails', 'trails'] : Array<Dynamic>), cast (['textureSheetAnimation', 'texture-sheet-animation'] : Array<Dynamic>), cast (['externalForces', 'external-forces'] : Array<Dynamic>), cast (['lights', 'lights'] : Array<Dynamic>)] : Array<Dynamic>);
 
-  public static function collectUnityWarnings__unityParse(raw:Dynamic):Array<String> {
-    var warnings:Array<String> = cast _Runtime.UNDEFINED;
+  public static function collectUnityDiagnostics__unityParse(raw:Dynamic):Array<ImportDiagnostic> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
+    var unsupportedModules:Array<String> = cast _Runtime.UNDEFINED;
     var em:Dynamic = cast _Runtime.UNDEFINED;
     var bursts:Dynamic = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+    var shape:Dynamic = cast _Runtime.UNDEFINED;
+    var startRotation:Dynamic = cast _Runtime.UNDEFINED;
+    var startRotationDropped:Dynamic = cast _Runtime.UNDEFINED;
+    diagnostics = cast ([] : Array<Dynamic>);
+    unsupportedModules = cast ([] : Array<Dynamic>);
     for (__iteration0 in _Runtime.iterable(UnityParse.UNSUPPORTED_UNITY_MODULES__unityParse)) {
       var key:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var label:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       var mod:Dynamic = _Runtime.getIndex(raw, key);
       if ((cast ((cast ((cast !_Runtime.looseEquals(mod, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(mod), 'object') : Bool)) : Bool) && (cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field((cast mod : Dynamic), 'enabled'), false] : Array<Dynamic>)) : Bool)) : Bool)) {
-        _Runtime.callProperty(warnings, 'push', cast (['Unity ' + Std.string(label) + ' module is not supported and was ignored'] : Array<Dynamic>));
+        _Runtime.callProperty(unsupportedModules, 'push', cast ([label] : Array<Dynamic>));
       }
+    }
+    for (module in _Runtime.iterable(unsupportedModules)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'unity.module-unsupported', 'collectUnityDiagnostics', { module: module }] : Array<Dynamic>));
     }
     em = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
     bursts = ((cast _Runtime.isArray(_Runtime.optionalField(em, 'bursts')) : Bool) ? (cast _Runtime.field(em, 'bursts') : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    if ((cast ((cast _Runtime.field(bursts, 'length') : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['Only the first of ' + Std.string(_Runtime.field(bursts, 'length')) + ' emission bursts was imported'] : Array<Dynamic>)); }
-    return cast warnings;
+    if ((cast ((cast _Runtime.field(bursts, 'length') : Float) > (cast 1.0 : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'unity.extra-bursts-dropped', 'collectUnityDiagnostics', { burstCount: _Runtime.field(bursts, 'length') }] : Array<Dynamic>));
+    }
+    shape = (cast _Runtime.field(raw, 'shape') : Null<Dynamic>);
+    if ((cast ((cast ((cast !_Runtime.looseEquals(shape, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) && (cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(shape, 'enabled'), false] : Array<Dynamic>)) : Bool)) : Bool)) {
+      var shapeType:Dynamic = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(shape, 'shapeType'), 'Cone'] : Array<Dynamic>));
+      if ((cast !(cast ((cast UnityParse.KNOWN_UNITY_SHAPES__unityParse : flighthq._internal._Set).has(shapeType)) : Bool) : Bool)) {
+        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'unity.shape-unsupported', 'collectUnityDiagnostics', { shapeType: shapeType }] : Array<Dynamic>));
+      }
+    }
+    if ((cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'prewarm'), false] : Array<Dynamic>)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'unity.prewarm-unsupported', 'collectUnityDiagnostics'] : Array<Dynamic>));
+    }
+    startRotation = _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(raw, 'startRotation'), 0.0] : Array<Dynamic>));
+    startRotationDropped = ((cast ((cast ((cast ((cast _Runtime.strictEquals(startRotation.mode, 'curve') : Bool) || (cast _Runtime.strictEquals(startRotation.mode, 'twoCurves') : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constant, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constantMin, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constantMax, 0.0) : Bool));
+    if ((cast startRotationDropped : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'unity.start-rotation-unsupported', 'collectUnityDiagnostics'] : Array<Dynamic>));
+    }
+    return cast diagnostics;
     return cast null;
   }
+
+  public static final KNOWN_UNITY_SHAPES__unityParse:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast (['Sphere', 'Hemisphere', 'Circle', 'Box', 'Rectangle', 'Cone'] : Array<Dynamic>)]);
 
   public static function colorKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
@@ -340,16 +369,16 @@ class UnityParse {
   }
 
   public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
-    return cast _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([_Runtime.callValue(UnityParse.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>)), _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse)] : Array<Dynamic>));
+    return cast _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([_Runtime.callValue(UnityParse.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>)), _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse)] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseUnityParticleDocument(json:String, ?options:UnityParseOptions):UnityParsed {
     var ppu:Dynamic = cast _Runtime.UNDEFINED;
     var raw:Dynamic = cast _Runtime.UNDEFINED;
-    ppu = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse);
+    ppu = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse);
     raw = _Runtime.callValue(UnityParse.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([raw, ppu] : Array<Dynamic>)), document: _Runtime.callValue(UnityParse.rawToDocument__unityParse, cast ([raw] : Array<Dynamic>)), warnings: _Runtime.callValue(UnityParse.collectUnityWarnings__unityParse, cast ([raw] : Array<Dynamic>)) };
+    return cast { config: _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([raw, ppu] : Array<Dynamic>)), diagnostics: _Runtime.callValue(UnityParse.collectUnityDiagnostics__unityParse, cast ([raw] : Array<Dynamic>)), document: _Runtime.callValue(UnityParse.rawToDocument__unityParse, cast ([raw] : Array<Dynamic>)) };
     return cast null;
   }
 }

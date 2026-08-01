@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyOutlineEffectToWgpu = api.applyOutlineEffectToWgpu;
 export const defaultWgpuOutlineEffectRunner = api.defaultWgpuOutlineEffectRunner;
+export const registerWgpuOutlineEffect = api.registerWgpuOutlineEffect;

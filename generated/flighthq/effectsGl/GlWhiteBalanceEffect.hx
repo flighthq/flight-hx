@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -27,6 +28,10 @@ class GlWhiteBalanceEffect {
   public static final defaultGlWhiteBalanceEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyWhiteBalanceEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : WhiteBalanceEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlWhiteBalanceEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'WhiteBalanceEffect', defaultGlWhiteBalanceEffectRunner] : Array<Dynamic>));
+  }
 
   public static final WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_temperature;\nuniform float u_tint;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = c.rgb;\n  rgb.r += u_temperature * 0.5;\n  rgb.b -= u_temperature * 0.5;\n  rgb.g += u_tint * 0.5;\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';
 }

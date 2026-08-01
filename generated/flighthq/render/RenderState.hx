@@ -8,6 +8,7 @@ import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.types.BlendMode;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.Renderable;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
@@ -23,11 +24,16 @@ class RenderState {
   public static function createRenderStateRuntime():RenderStateRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : RenderStateRuntime);
-    _Runtime.setField(runtime, 'colorAdjustmentChannelMixingGuard', null);
+    _Runtime.setField(runtime, 'colorAdjustmentUnsupportedGuard', null);
     _Runtime.setField(runtime, 'currentFrameId', 0.0);
     _Runtime.setField(runtime, 'renderAdaptHook', null);
     _Runtime.setField(runtime, 'renderProxyAdapterMap', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'renderProxyMap', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'renderProxySources', _Runtime.construct(_Runtime.globalValue('Set'), []));
+    _Runtime.setField(runtime, 'registryMiss', null);
+    _Runtime.setField(runtime, 'renderEffectPaddingResolverRegistry', null);
+    _Runtime.setField(runtime, 'renderRootGuard', null);
+    _Runtime.setField(runtime, 'strokeTessellator', null);
     _Runtime.setField(runtime, 'rendererMap', _Runtime.construct(_Runtime.globalValue('Map'), []));
     _Runtime.setField(runtime, 'rendererMapId', 0.0);
     _Runtime.setField(runtime, 'tempStack', cast ([] : Array<Dynamic>));
@@ -35,8 +41,32 @@ class RenderState {
     return cast null;
   }
 
+  public static function destroyRenderState(state:flighthq.types.RenderState):Void {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    for (source in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(runtime, 'renderProxySources'))]))) {
+      _Runtime.callValue(RenderState.disposeRenderProxyForShutdown__renderState, cast ([state, source] : Array<Dynamic>));
+    }
+    _Runtime.callOptionalProperty(_Runtime.field(runtime, 'registryMiss'), 'clear', cast ([] : Array<Dynamic>));
+    _Runtime.setField(runtime, 'registryMiss', null);
+    _Runtime.setField(runtime, 'renderEffectPaddingResolverRegistry', null);
+    _Runtime.setLength(_Runtime.field(runtime, 'tempStack'), 0.0);
+  }
+
   public static function getRenderStateRuntime(state:flighthq.types.RenderState):RenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : RenderStateRuntime);
     return cast null;
+  }
+
+  public static function disposeRenderProxyForShutdown__renderState(state:flighthq.types.RenderState, source:Renderable):Void {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var proxy:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    proxy = ((cast _Runtime.field(runtime, 'renderProxyMap') : flighthq._internal._WeakMap).get(source));
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(proxy, 'rendererData'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.optionalField(proxy, 'rendererData'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+      _Runtime.callOptionalProperty(_Runtime.field(proxy, 'renderer'), 'destroyData', cast ([state, _Runtime.field(proxy, 'rendererData')] : Array<Dynamic>));
+    }
+    ((cast _Runtime.field(runtime, 'renderProxyMap') : flighthq._internal._WeakMap).delete_(source));
+    ((cast _Runtime.field(runtime, 'renderProxySources') : flighthq._internal._Set).delete_(source));
   }
 }

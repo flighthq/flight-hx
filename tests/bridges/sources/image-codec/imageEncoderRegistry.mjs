@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const clearImageEncoders = api.clearImageEncoders;
 export const getImageEncoder = api.getImageEncoder;
+export const getImageEncoderMimeTypes = api.getImageEncoderMimeTypes;
 export const hasImageEncoder = api.hasImageEncoder;
 export const registerImageEncoder = api.registerImageEncoder;
 export const unregisterImageEncoder = api.unregisterImageEncoder;

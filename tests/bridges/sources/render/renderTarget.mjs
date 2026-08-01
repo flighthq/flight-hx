@@ -5,6 +5,8 @@ const api = compiled.flighthq.render.RenderTarget;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const computeDisplayObjectRenderTargetTransform = api.computeDisplayObjectRenderTargetTransform;
 export const computeRenderCacheTransform = api.computeRenderCacheTransform;
 export const computeRenderTargetSize = api.computeRenderTargetSize;
+export const computeScene2DRenderTargetTransform = api.computeScene2DRenderTargetTransform;
+export const explainRenderTargetAxes = api.explainRenderTargetAxes;
+export const resolveRenderTargetDescriptor = api.resolveRenderTargetDescriptor;

@@ -3,7 +3,7 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.types.ElectronApi;
 import flighthq.types.Updater.UpdateInfo;
 import flighthq.types.Updater.UpdaterBackend;
 import flighthq.types.Updater.UpdaterConfig;
@@ -24,11 +24,11 @@ class ElectronUpdater {
     }, downloadUpdate: function() {
       _Runtime.callProperty(autoUpdater, 'checkForUpdates', cast ([] : Array<Dynamic>));
     }, cancelDownload: function() {
-    
+
     }, quitAndInstall: function() {
       _Runtime.callProperty(autoUpdater, 'quitAndInstall', cast ([] : Array<Dynamic>));
     }, rollback: function() {
-    
+
     }, getChannel: function() {
       return cast channel;
     }, setChannel: function(next:Dynamic) {
@@ -38,7 +38,7 @@ class ElectronUpdater {
     }, setConfig: function(next:Dynamic) {
       (config = cast (next : Dynamic));
     }, setSignatureConfig: function() {
-    
+
     }, subscribeChecking: function(listener:Dynamic) {
       _Runtime.callProperty(autoUpdater, 'on', cast (['checking-for-update', listener] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['checking-for-update', listener] : Array<Dynamic>));
@@ -52,7 +52,7 @@ class ElectronUpdater {
       return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['update-not-available', listener] : Array<Dynamic>));
     }, subscribeDownloadProgress: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateDownloaded: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,19 +74,19 @@ class ElectronUpdater {
       return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['error', handler] : Array<Dynamic>));
     }, subscribeUpdateCancelled: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateRolledBack: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateStaging: function() {
       return cast function() {
-      
+
       };
     }, subscribeUpdateVerified: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

@@ -3,10 +3,10 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronClipboardData;
 import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.Clipboard.ClipboardBookmark;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronClipboardData;
 
 class ElectronClipboard {
   public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
@@ -207,7 +207,7 @@ class ElectronClipboard {
       return cast -1.0;
     }, subscribeClipboardChange: function() {
       return cast function() {
-      
+
       };
     }, clear: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {

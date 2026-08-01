@@ -10,7 +10,7 @@ import flighthq.interaction.InteractionSpatialIndex.findSpatialInteractionTarget
 import flighthq.interaction.NodeInteractionState.getNodeCursor;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
@@ -21,6 +21,7 @@ import flighthq.types.FocusEventData;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.InputPointerData;
+import flighthq.types.InteractionConnectGuard;
 import flighthq.types.InteractionManager;
 import flighthq.types.InteractionManager.AnyInteractionSignalSlot;
 import flighthq.types.InteractionManager.InteractionInputSource;
@@ -41,8 +42,6 @@ typedef KeyboardSignalName__interactionManager = String;
 typedef FocusSignalName__interactionManager = String;
 
 typedef PointerSignalName__interactionManager = InteractionSignalName;
-
-typedef InteractionConnectGuard = Dynamic;
 
 typedef InteractionSignalPayload__interactionManager<Name> = Dynamic;
 

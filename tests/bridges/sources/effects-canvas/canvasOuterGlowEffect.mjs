@@ -19,3 +19,4 @@ __syncDependencies();
 
 export const applyOuterGlowEffectToCanvas = api.applyOuterGlowEffectToCanvas;
 export const defaultCanvasOuterGlowEffectRunner = api.defaultCanvasOuterGlowEffectRunner;
+export const registerCanvasOuterGlowEffect = api.registerCanvasOuterGlowEffect;

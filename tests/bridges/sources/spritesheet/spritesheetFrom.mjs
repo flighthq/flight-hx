@@ -7,4 +7,3 @@ __syncDependencies();
 
 export const createSpritesheetFromData = api.createSpritesheetFromData;
 export const createSpritesheetFromGrid = api.createSpritesheetFromGrid;
-export const createSpritesheetFromTileset = api.createSpritesheetFromTileset;

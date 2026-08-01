@@ -3,7 +3,7 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
+import flighthq.types.CapacitorApi;
 import flighthq.types.Haptics.HapticImpactStyle;
 import flighthq.types.Haptics.HapticNotificationType;
 import flighthq.types.Haptics.HapticsBackend;
@@ -24,24 +24,24 @@ class CapacitorHaptics {
       return cast out;
     }, impact: function(style:HapticImpactStyle) {
       flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'impact', cast ([{ style: _Runtime.callValue(CapacitorHaptics.toCapacitorImpactStyle__capacitorHaptics, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, isSupported: function() {
       return cast true;
     }, notification: function(type:HapticNotificationType) {
       flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'notification', cast ([{ type: _Runtime.callProperty(type, 'toUpperCase', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, selection: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'selectionChanged', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, vibrate: function(durationMs:Float) {
       flighthq._internal._Async.recover(_Runtime.callProperty(haptics, 'vibrate', cast ([{ duration: durationMs }] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, vibratePattern: function() {

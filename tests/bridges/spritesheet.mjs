@@ -13,7 +13,6 @@ export const createSpritesheetFrame = compiled.flighthq.spritesheet.Spritesheet.
 export const createSpritesheetFrameData = compiled.flighthq.spritesheet.Spritesheet.createSpritesheetFrameData;
 export const createSpritesheetFromData = compiled.flighthq.spritesheet.Spritesheet.createSpritesheetFromData;
 export const createSpritesheetFromGrid = compiled.flighthq.spritesheet.Spritesheet.createSpritesheetFromGrid;
-export const createSpritesheetFromTileset = compiled.flighthq.spritesheet.Spritesheet.createSpritesheetFromTileset;
 export const createSpritesheetPlayer = compiled.flighthq.spritesheet.Spritesheet.createSpritesheetPlayer;
 export const disposeSpritesheetPlayer = compiled.flighthq.spritesheet.Spritesheet.disposeSpritesheetPlayer;
 export const getSpritesheetAnimation = compiled.flighthq.spritesheet.Spritesheet.getSpritesheetAnimation;

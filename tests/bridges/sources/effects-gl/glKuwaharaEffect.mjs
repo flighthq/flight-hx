@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyKuwaharaEffectToGl = api.applyKuwaharaEffectToGl;
 export const defaultGlKuwaharaEffectRunner = api.defaultGlKuwaharaEffectRunner;
+export const registerGlKuwaharaEffect = api.registerGlKuwaharaEffect;

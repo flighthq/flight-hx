@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySsaoEffectToGl = api.applySsaoEffectToGl;
 export const defaultGlSsaoEffectRunner = api.defaultGlSsaoEffectRunner;
+export const registerGlSsaoEffect = api.registerGlSsaoEffect;

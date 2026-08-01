@@ -8,6 +8,12 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasColorMatrixPass {
   public static function applyColorMatrixPassToCanvas(source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
+    _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
+      _Runtime.callValue(applyColorMatrixToImageDataBytes, cast ([data, pixelCount, matrix] : Array<Dynamic>));
+    }] : Array<Dynamic>));
+  }
+
+  public static function applyColorMatrixToImageDataBytes(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float, matrix:Array<Float>):Void {
     var m0:Dynamic = cast _Runtime.UNDEFINED;
     var m1:Dynamic = cast _Runtime.UNDEFINED;
     var m2:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,22 +54,20 @@ class CanvasColorMatrixPass {
     m17 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 17.0), function():Dynamic return cast 0.0);
     m18 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 18.0), function():Dynamic return cast 0.0);
     m19 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 19.0), function():Dynamic return cast 0.0);
-    _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
-          var p:Dynamic = (i * 4.0);
-          var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, p);
-          var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0));
-          var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0));
-          var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 3.0));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, (((((m0 * r) + (m1 * g)) + (m2 * b)) + (m3 * a)) + m4));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), (((((m5 * r) + (m6 * g)) + (m7 * b)) + (m8 * a)) + m9));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), (((((m10 * r) + (m11 * g)) + (m12 * b)) + (m13 * a)) + m14));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 3.0), (((((m15 * r) + (m16 * g)) + (m17 * b)) + (m18 * a)) + m19));
-          i++;
-        }
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
+        var p:Dynamic = (i * 4.0);
+        var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, p);
+        var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0));
+        var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0));
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 3.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, (((((m0 * r) + (m1 * g)) + (m2 * b)) + (m3 * a)) + (m4 * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), (((((m5 * r) + (m6 * g)) + (m7 * b)) + (m8 * a)) + (m9 * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), (((((m10 * r) + (m11 * g)) + (m12 * b)) + (m13 * a)) + (m14 * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 3.0), (((((m15 * r) + (m16 * g)) + (m17 * b)) + (m18 * a)) + (m19 * 255.0)));
+        i++;
       }
-    }] : Array<Dynamic>));
+    }
   }
 }

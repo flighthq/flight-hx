@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyLensFlareEffectToGl = api.applyLensFlareEffectToGl;
 export const defaultGlLensFlareEffectRunner = api.defaultGlLensFlareEffectRunner;
+export const registerGlLensFlareEffect = api.registerGlLensFlareEffect;

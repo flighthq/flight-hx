@@ -148,7 +148,7 @@ type IrExpressionNode =
     }
   | { domRootBinding?: IrDomRootBinding | undefined; kind: 'identifier'; name: string }
   | { kind: 'literal'; value: boolean | null | number | string }
-  | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression }
+  | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression; runtime?: boolean | undefined }
   | {
       cppStructInit?: IrCppStructInitConstruction | undefined;
       kind: 'object';

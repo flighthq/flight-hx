@@ -3,45 +3,58 @@ package flighthq.materials;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.materials.AnisotropyPbrExtension as Facade_Materials_flighthq_materials_AnisotropyPbrExtension;
 import flighthq.materials.ClassicMaterials as Facade_Materials_flighthq_materials_ClassicMaterials;
-import flighthq.materials.ColorTransform as Facade_Materials_flighthq_materials_ColorTransform;
+import flighthq.materials.ClearcoatPbrExtension as Facade_Materials_flighthq_materials_ClearcoatPbrExtension;
+import flighthq.materials.ColorScaleBias as Facade_Materials_flighthq_materials_ColorScaleBias;
 import flighthq.materials.CustomShaderMaterial as Facade_Materials_flighthq_materials_CustomShaderMaterial;
+import flighthq.materials.ExtendedPbrMaterial as Facade_Materials_flighthq_materials_ExtendedPbrMaterial;
+import flighthq.materials.IridescencePbrExtension as Facade_Materials_flighthq_materials_IridescencePbrExtension;
 import flighthq.materials.Material as Facade_Materials_flighthq_materials_Material;
 import flighthq.materials.MaterialPresets as Facade_Materials_flighthq_materials_MaterialPresets;
 import flighthq.materials.MaterialValidation as Facade_Materials_flighthq_materials_MaterialValidation;
-import flighthq.materials.PbrExtensionMaterials as Facade_Materials_flighthq_materials_PbrExtensionMaterials;
+import flighthq.materials.PbrExtension as Facade_Materials_flighthq_materials_PbrExtension;
 import flighthq.materials.PbrMaterials as Facade_Materials_flighthq_materials_PbrMaterials;
 import flighthq.materials.PhongToPbr as Facade_Materials_flighthq_materials_PhongToPbr;
+import flighthq.materials.SheenPbrExtension as Facade_Materials_flighthq_materials_SheenPbrExtension;
+import flighthq.materials.SpecularPbrExtension as Facade_Materials_flighthq_materials_SpecularPbrExtension;
+import flighthq.materials.StandardMaterial as Facade_Materials_flighthq_materials_StandardMaterial;
 import flighthq.materials.SurfaceMaterial as Facade_Materials_flighthq_materials_SurfaceMaterial;
+import flighthq.materials.TransmissionVolumePbrExtension as Facade_Materials_flighthq_materials_TransmissionVolumePbrExtension;
 import flighthq.materials.UnlitMaterials as Facade_Materials_flighthq_materials_UnlitMaterials;
-import flighthq.types.AnisotropyPbrMaterial;
+import flighthq.materials.WrappedDiffusePbrExtension as Facade_Materials_flighthq_materials_WrappedDiffusePbrExtension;
+import flighthq.types.AnisotropyPbrExtension;
 import flighthq.types.BlinnPhongMaterial;
-import flighthq.types.ClearcoatPbrMaterial;
-import flighthq.types.ColorTransform;
-import flighthq.types.ColorTransform.ColorTransformLike;
+import flighthq.types.ClearcoatPbrExtension;
+import flighthq.types.ColorScaleBias;
+import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
 import flighthq.types.CustomShaderMaterial;
 import flighthq.types.DepthMaterial;
 import flighthq.types.EmissiveMaterial;
 import flighthq.types.Entity.Kind;
-import flighthq.types.IridescencePbrMaterial;
+import flighthq.types.ExtendedPbrMaterial;
+import flighthq.types.GlassExtendedPbrMaterialOptions;
+import flighthq.types.IridescencePbrExtension;
 import flighthq.types.LambertMaterial;
 import flighthq.types.MatcapMaterial;
 import flighthq.types.Material;
 import flighthq.types.NormalMaterial;
 import flighthq.types.PhongMaterial;
-import flighthq.types.SheenPbrMaterial;
+import flighthq.types.SheenPbrExtension;
 import flighthq.types.SpecularGlossinessPbrMaterial;
-import flighthq.types.SpecularPbrMaterial;
+import flighthq.types.SpecularPbrExtension;
+import flighthq.types.StandardMaterial;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.SubsurfacePbrMaterial;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.SurfaceMaterialOptions;
 import flighthq.types.ToonMaterial;
-import flighthq.types.TransmissionVolumePbrMaterial;
+import flighthq.types.TransmissionVolumePbrExtension;
 import flighthq.types.UnlitMaterial;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types.WireframeMaterial;
+import flighthq.types.WrappedDiffusePbrExtension;
 
 class Materials {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
@@ -49,8 +62,8 @@ class Materials {
     return cast null;
   }
 
-  public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.cloneColorTransform(source);
+  public static function cloneColorScaleBias(source:ColorScaleBiasLike):ColorScaleBias {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.cloneColorScaleBias(source);
     return cast null;
   }
 
@@ -59,8 +72,8 @@ class Materials {
     return cast null;
   }
 
-  public static function concatColorTransform(out:ColorTransformLike, source:ColorTransformLike, other:ColorTransformLike):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.concatColorTransform(out, source, other);
+  public static function concatColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike, other:ColorScaleBiasLike):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.concatColorScaleBias(out, source, other);
   }
 
   public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
@@ -72,12 +85,12 @@ class Materials {
     Facade_Materials_flighthq_materials_PbrMaterials.convertSpecularGlossinessToStandardPbr(out, source);
   }
 
-  public static function copyColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.copyColorTransform(out, source);
+  public static function copyColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.copyColorScaleBias(out, source);
   }
 
-  public static function copyColorTransformToArrays(outColorMultipliers:Array<Float>, outColorOffsets:Array<Float>, source:ColorTransformLike):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.copyColorTransformToArrays(outColorMultipliers, outColorOffsets, source);
+  public static function copyColorScaleBiasToArrays(outColorScales:Array<Float>, outColorBiases:Array<Float>, source:ColorScaleBiasLike):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.copyColorScaleBiasToArrays(outColorScales, outColorBiases, source);
   }
 
   public static function copyMaterial(out:Material, source:Material):Void {
@@ -89,8 +102,8 @@ class Materials {
     return cast null;
   }
 
-  public static function createAnisotropyPbrMaterial(?opts:Dynamic):AnisotropyPbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createAnisotropyPbrMaterial(opts);
+  public static function createAnisotropyPbrExtension(?opts:Dynamic):AnisotropyPbrExtension {
+    return cast Facade_Materials_flighthq_materials_AnisotropyPbrExtension.createAnisotropyPbrExtension(opts);
     return cast null;
   }
 
@@ -104,13 +117,13 @@ class Materials {
     return cast null;
   }
 
-  public static function createClearcoatPbrMaterial(?opts:Dynamic):ClearcoatPbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createClearcoatPbrMaterial(opts);
+  public static function createClearcoatPbrExtension(?opts:Dynamic):ClearcoatPbrExtension {
+    return cast Facade_Materials_flighthq_materials_ClearcoatPbrExtension.createClearcoatPbrExtension(opts);
     return cast null;
   }
 
-  public static function createColorTransform(?opts:Dynamic):ColorTransform {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.createColorTransform(opts);
+  public static function createColorScaleBias(?opts:Dynamic):ColorScaleBias {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.createColorScaleBias(opts);
     return cast null;
   }
 
@@ -129,8 +142,13 @@ class Materials {
     return cast null;
   }
 
-  public static function createGlassTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
-    return cast Facade_Materials_flighthq_materials_MaterialPresets.createGlassTransmissionVolumePbrMaterial(opts);
+  public static function createExtendedPbrMaterial(?opts:Dynamic):ExtendedPbrMaterial {
+    return cast Facade_Materials_flighthq_materials_ExtendedPbrMaterial.createExtendedPbrMaterial(opts);
+    return cast null;
+  }
+
+  public static function createGlassExtendedPbrMaterial(?opts:GlassExtendedPbrMaterialOptions):ExtendedPbrMaterial {
+    return cast Facade_Materials_flighthq_materials_MaterialPresets.createGlassExtendedPbrMaterial(opts);
     return cast null;
   }
 
@@ -139,8 +157,8 @@ class Materials {
     return cast null;
   }
 
-  public static function createIridescencePbrMaterial(?opts:Dynamic):IridescencePbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createIridescencePbrMaterial(opts);
+  public static function createIridescencePbrExtension(?opts:Dynamic):IridescencePbrExtension {
+    return cast Facade_Materials_flighthq_materials_IridescencePbrExtension.createIridescencePbrExtension(opts);
     return cast null;
   }
 
@@ -189,8 +207,8 @@ class Materials {
     return cast null;
   }
 
-  public static function createSheenPbrMaterial(?opts:Dynamic):SheenPbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSheenPbrMaterial(opts);
+  public static function createSheenPbrExtension(?opts:Dynamic):SheenPbrExtension {
+    return cast Facade_Materials_flighthq_materials_SheenPbrExtension.createSheenPbrExtension(opts);
     return cast null;
   }
 
@@ -209,8 +227,13 @@ class Materials {
     return cast null;
   }
 
-  public static function createSpecularPbrMaterial(?opts:Dynamic):SpecularPbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSpecularPbrMaterial(opts);
+  public static function createSpecularPbrExtension(?opts:Dynamic):SpecularPbrExtension {
+    return cast Facade_Materials_flighthq_materials_SpecularPbrExtension.createSpecularPbrExtension(opts);
+    return cast null;
+  }
+
+  public static function createStandardMaterial(?options:Dynamic):StandardMaterial {
+    return cast Facade_Materials_flighthq_materials_StandardMaterial.createStandardMaterial(options);
     return cast null;
   }
 
@@ -224,13 +247,8 @@ class Materials {
     return cast null;
   }
 
-  public static function createSubsurfacePbrMaterial(?opts:Dynamic):SubsurfacePbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createSubsurfacePbrMaterial(opts);
-    return cast null;
-  }
-
-  public static function createSurfaceMaterial(kind:Kind):SurfaceMaterial {
-    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.createSurfaceMaterial(kind);
+  public static function createSurfaceMaterial(kind:Kind, ?opts:SurfaceMaterialOptions):SurfaceMaterial {
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.createSurfaceMaterial(kind, opts);
     return cast null;
   }
 
@@ -239,8 +257,8 @@ class Materials {
     return cast null;
   }
 
-  public static function createTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
-    return cast Facade_Materials_flighthq_materials_PbrExtensionMaterials.createTransmissionVolumePbrMaterial(opts);
+  public static function createTransmissionVolumePbrExtension(?opts:Dynamic):TransmissionVolumePbrExtension {
+    return cast Facade_Materials_flighthq_materials_TransmissionVolumePbrExtension.createTransmissionVolumePbrExtension(opts);
     return cast null;
   }
 
@@ -264,18 +282,23 @@ class Materials {
     return cast null;
   }
 
-  public static function equalsColorTransform(a:ColorTransformLike, b:ColorTransformLike):Bool {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransform(a, b);
+  public static function createWrappedDiffusePbrExtension(?opts:Dynamic):WrappedDiffusePbrExtension {
+    return cast Facade_Materials_flighthq_materials_WrappedDiffusePbrExtension.createWrappedDiffusePbrExtension(opts);
     return cast null;
   }
 
-  public static function equalsColorTransformMultipliers(a:ColorTransformLike, b:ColorTransformLike, ?compareAlpha:Bool):Bool {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransformMultipliers(a, b, compareAlpha);
+  public static function equalsColorScaleBias(a:ColorScaleBiasLike, b:ColorScaleBiasLike):Bool {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.equalsColorScaleBias(a, b);
     return cast null;
   }
 
-  public static function equalsColorTransformOffsets(a:ColorTransformLike, b:ColorTransformLike, ?compareAlpha:Bool):Bool {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.equalsColorTransformOffsets(a, b, compareAlpha);
+  public static function equalsColorScaleBiasBiases(a:ColorScaleBiasLike, b:ColorScaleBiasLike, ?compareAlpha:Bool):Bool {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.equalsColorScaleBiasBiases(a, b, compareAlpha);
+    return cast null;
+  }
+
+  public static function equalsColorScaleBiasScales(a:ColorScaleBiasLike, b:ColorScaleBiasLike, ?compareAlpha:Bool):Bool {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.equalsColorScaleBiasScales(a, b, compareAlpha);
     return cast null;
   }
 
@@ -284,18 +307,18 @@ class Materials {
     return cast null;
   }
 
-  public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.getColorTransformOffsetRgb(source);
+  public static function getColorScaleBiasBiasRgb(source:ColorScaleBiasLike):Float {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.getColorScaleBiasBiasRgb(source);
     return cast null;
   }
 
-  public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.getColorTransformOffsetRgba(source);
+  public static function getColorScaleBiasBiasRgba(source:ColorScaleBiasLike):Float {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.getColorScaleBiasBiasRgba(source);
     return cast null;
   }
 
-  public static function getMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
-    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.getMaterialAlphaMode(source);
+  public static function getMaterialOfKind<T>(material:Null<Material>, kind:Kind):Null<Dynamic> {
+    return cast Facade_Materials_flighthq_materials_Material.getMaterialOfKind(material, kind);
     return cast null;
   }
 
@@ -314,27 +337,47 @@ class Materials {
     return cast null;
   }
 
-  public static function invertColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.invertColorTransform(out, source);
-  }
-
-  public static function isIdentityColorTransform(source:ColorTransformLike, ?compareAlphaMultiplier:Bool):Bool {
-    return cast Facade_Materials_flighthq_materials_ColorTransform.isIdentityColorTransform(source, compareAlphaMultiplier);
+  public static function getSurfaceMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.getSurfaceMaterialAlphaMode(source);
     return cast null;
   }
 
-  public static function isMaterialBlended(source:SurfaceMaterial):Bool {
-    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialBlended(source);
+  public static function invertColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.invertColorScaleBias(out, source);
+  }
+
+  public static function isIdentityColorScaleBias(source:ColorScaleBiasLike, ?compareAlphaScale:Bool):Bool {
+    return cast Facade_Materials_flighthq_materials_ColorScaleBias.isIdentityColorScaleBias(source, compareAlphaScale);
     return cast null;
   }
 
-  public static function isMaterialMasked(source:SurfaceMaterial):Bool {
-    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialMasked(source);
+  public static function isSurfaceMaterialBlended(source:SurfaceMaterial):Bool {
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isSurfaceMaterialBlended(source);
     return cast null;
   }
 
-  public static function isMaterialOpaque(source:SurfaceMaterial):Bool {
-    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialOpaque(source);
+  public static function isSurfaceMaterialMasked(source:SurfaceMaterial):Bool {
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isSurfaceMaterialMasked(source);
+    return cast null;
+  }
+
+  public static function isSurfaceMaterialOpaque(source:SurfaceMaterial):Bool {
+    return cast Facade_Materials_flighthq_materials_SurfaceMaterial.isSurfaceMaterialOpaque(source);
+    return cast null;
+  }
+
+  public static function isValidAnisotropyPbrExtension(value:AnisotropyPbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_AnisotropyPbrExtension.isValidAnisotropyPbrExtension(value);
+    return cast null;
+  }
+
+  public static function isValidClearcoatPbrExtension(value:ClearcoatPbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_ClearcoatPbrExtension.isValidClearcoatPbrExtension(value);
+    return cast null;
+  }
+
+  public static function isValidIridescencePbrExtension(value:IridescencePbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_IridescencePbrExtension.isValidIridescencePbrExtension(value);
     return cast null;
   }
 
@@ -358,19 +401,44 @@ class Materials {
     return cast null;
   }
 
-  public static function setColorTransform(out:ColorTransformLike, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float, redOffset:Float, greenOffset:Float, blueOffset:Float, alphaOffset:Float):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.setColorTransform(out, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset);
+  public static function isValidPbrUvSet(value:Float):Bool {
+    return cast Facade_Materials_flighthq_materials_PbrExtension.isValidPbrUvSet(value);
+    return cast null;
   }
 
-  public static function setColorTransformIdentity(out:ColorTransform):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.setColorTransformIdentity(out);
+  public static function isValidSheenPbrExtension(value:SheenPbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_SheenPbrExtension.isValidSheenPbrExtension(value);
+    return cast null;
   }
 
-  public static function setColorTransformOffsetRgb(out:ColorTransformLike, value:Float):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.setColorTransformOffsetRgb(out, value);
+  public static function isValidSpecularPbrExtension(value:SpecularPbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_SpecularPbrExtension.isValidSpecularPbrExtension(value);
+    return cast null;
   }
 
-  public static function setColorTransformOffsetRgba(out:ColorTransformLike, value:Float):Void {
-    Facade_Materials_flighthq_materials_ColorTransform.setColorTransformOffsetRgba(out, value);
+  public static function isValidTransmissionVolumePbrExtension(value:TransmissionVolumePbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_TransmissionVolumePbrExtension.isValidTransmissionVolumePbrExtension(value);
+    return cast null;
+  }
+
+  public static function isValidWrappedDiffusePbrExtension(value:WrappedDiffusePbrExtension):Bool {
+    return cast Facade_Materials_flighthq_materials_WrappedDiffusePbrExtension.isValidWrappedDiffusePbrExtension(value);
+    return cast null;
+  }
+
+  public static function setColorScaleBias(out:ColorScaleBiasLike, redScale:Float, greenScale:Float, blueScale:Float, alphaScale:Float, redBias:Float, greenBias:Float, blueBias:Float, alphaBias:Float):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.setColorScaleBias(out, redScale, greenScale, blueScale, alphaScale, redBias, greenBias, blueBias, alphaBias);
+  }
+
+  public static function setColorScaleBiasBiasRgb(out:ColorScaleBiasLike, value:Float):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.setColorScaleBiasBiasRgb(out, value);
+  }
+
+  public static function setColorScaleBiasBiasRgba(out:ColorScaleBiasLike, value:Float):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.setColorScaleBiasBiasRgba(out, value);
+  }
+
+  public static function setColorScaleBiasIdentity(out:ColorScaleBias):Void {
+    Facade_Materials_flighthq_materials_ColorScaleBias.setColorScaleBiasIdentity(out);
   }
 }

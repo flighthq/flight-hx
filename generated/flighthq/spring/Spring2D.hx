@@ -3,9 +3,9 @@ package flighthq.spring;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spring.CreateSpring.createSpring;
-import flighthq.spring.IsSpringSettled.isSpringSettled;
-import flighthq.spring.UpdateSpring.updateSpring;
+import flighthq.spring.Spring.createSpring;
+import flighthq.spring.Spring.isSpringSettled;
+import flighthq.spring.Spring.updateSpring;
 import flighthq.types.Spring.Spring2D;
 import flighthq.types.Spring.SpringConfig;
 

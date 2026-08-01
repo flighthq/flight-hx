@@ -9,33 +9,48 @@ import flighthq.geometry.Vector2.cloneVector2;
 import flighthq.geometry.Vector2.copyVector2;
 import flighthq.geometry.Vector2.createVector2;
 import flighthq.texture.CubeTexture as Facade_Texture_flighthq_texture_CubeTexture;
+import flighthq.texture.RenderTexture as Facade_Texture_flighthq_texture_RenderTexture;
 import flighthq.texture.Sampler as Facade_Texture_flighthq_texture_Sampler;
 import flighthq.texture.Sampler.cloneSampler;
 import flighthq.texture.Sampler.copySampler;
 import flighthq.texture.Sampler.createSampler;
 import flighthq.texture.Sampler.equalsSampler;
 import flighthq.texture.VideoTexture as Facade_Texture_flighthq_texture_VideoTexture;
+import flighthq.texture.VoxelGrid as Facade_Texture_flighthq_texture_VoxelGrid;
+import flighthq.types.CreateCubeTextureOptions;
+import flighthq.types.CreateRenderTextureOptions;
+import flighthq.types.CreateTextureOptions;
 import flighthq.types.CubeTexture;
-import flighthq.types.CubeTexture.CubeTextureLike;
-import flighthq.types.ImageResource;
 import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.RenderTexture;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceKind;
 import flighthq.types.TextureUvTransform;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.VideoResource;
-import flighthq.types.VideoTexture;
-import flighthq.types.VideoTexture.VideoTextureLike;
+import flighthq.types.VoxelGrid;
+
+typedef CreateTexture2DArrayOptions__texture = CreateTextureOptions;
+
+typedef CreateTexture2DOptions__texture = CreateTextureOptions;
+
+typedef CreateTexture3DOptions__texture = CreateTextureOptions;
+
+typedef CreateTextureCubeOptions__texture = CreateTextureOptions;
 
 class Texture {
-  public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
-    return cast Facade_Texture_flighthq_texture_VideoTexture.advanceVideoTexture(videoTexture);
+  public static function advanceVideoTexture(texture:TextureLike):Float {
+    return cast Facade_Texture_flighthq_texture_VideoTexture.advanceVideoTexture(texture);
     return cast null;
   }
 
-  public static function cloneCubeTexture(source:CubeTextureLike):CubeTexture {
+  public static function cloneCubeTexture(source:CubeTexture):CubeTexture {
     return cast Facade_Texture_flighthq_texture_CubeTexture.cloneCubeTexture(source);
     return cast null;
   }
@@ -46,16 +61,32 @@ class Texture {
   }
 
   public static function cloneTexture(source:TextureLike):flighthq.types.Texture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: source.colorSpace, image: source.image, resource: _Runtime.coalesce(source.resource, function():Dynamic return cast null), sampler: _Runtime.callValue(cloneSampler, cast ([source.sampler] : Array<Dynamic>)), uvOffset: _Runtime.callValue(cloneVector2, cast ([source.uvOffset] : Array<Dynamic>)), uvRotation: source.uvRotation, uvScale: _Runtime.callValue(cloneVector2, cast ([source.uvScale] : Array<Dynamic>)) }] : Array<Dynamic>));
+    var common:Dynamic = cast _Runtime.UNDEFINED;
+    common = { colorSpace: _Runtime.field(source, 'colorSpace'), flipX: _Runtime.field(source, 'flipX'), flipY: _Runtime.field(source, 'flipY'), sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)), uvOffset: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: _Runtime.field(source, 'uvRotation'), uvScale: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvScale')] : Array<Dynamic>)), version: _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(source, 'version')), 0) };
+    {
+      var __switchValue = _Runtime.field(source, 'dimension');
+      if (__switchValue == '2d') {
+        return cast (cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: '2d' }, { source: _Runtime.field(source, 'source') }])] : Array<Dynamic>)) : Texture2D);
+      }
+      else if (__switchValue == '2d-array') {
+        return cast (cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) }])] : Array<Dynamic>)) : flighthq.types.Texture);
+      }
+      else if (__switchValue == '3d') {
+        return cast (cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.field(source, 'source') }])] : Array<Dynamic>)) : flighthq.types.Texture);
+      }
+      else if (__switchValue == 'cube') {
+        return cast (cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) : Dynamic) : TextureSourceCubeFaces) }])] : Array<Dynamic>)) : flighthq.types.Texture);
+      }
+    }
     return cast null;
   }
 
-  public static function cloneVideoTexture(source:VideoTextureLike):VideoTexture {
+  public static function cloneVideoTexture(source:TextureLike):flighthq.types.Texture {
     return cast Facade_Texture_flighthq_texture_VideoTexture.cloneVideoTexture(source);
     return cast null;
   }
 
-  public static function copyCubeTexture(out:CubeTextureLike, source:CubeTextureLike):Void {
+  public static function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void {
     Facade_Texture_flighthq_texture_CubeTexture.copyCubeTexture(out, source);
   }
 
@@ -65,23 +96,46 @@ class Texture {
 
   public static function copyTexture(out:TextureLike, source:TextureLike):Void {
     var colorSpace:Dynamic = cast _Runtime.UNDEFINED;
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    var resource:Dynamic = cast _Runtime.UNDEFINED;
+    var flipX:Dynamic = cast _Runtime.UNDEFINED;
+    var flipY:Dynamic = cast _Runtime.UNDEFINED;
     var uvRotation:Dynamic = cast _Runtime.UNDEFINED;
-    colorSpace = source.colorSpace;
-    image = source.image;
-    resource = _Runtime.coalesce(source.resource, function():Dynamic return cast null);
-    uvRotation = source.uvRotation;
-    _Runtime.callValue(copySampler, cast ([out.sampler, source.sampler] : Array<Dynamic>));
-    _Runtime.callValue(copyVector2, cast ([out.uvOffset, source.uvOffset] : Array<Dynamic>));
-    _Runtime.callValue(copyVector2, cast ([out.uvScale, source.uvScale] : Array<Dynamic>));
-    (out.colorSpace = cast (colorSpace : Dynamic));
-    (out.image = cast (image : Dynamic));
-    (out.resource = cast (resource : Dynamic));
-    (out.uvRotation = cast (uvRotation : Dynamic));
+    var version:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(_Runtime.field(out, 'dimension'), _Runtime.field(source, 'dimension')) : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+    colorSpace = _Runtime.field(source, 'colorSpace');
+    flipX = _Runtime.field(source, 'flipX');
+    flipY = _Runtime.field(source, 'flipY');
+    uvRotation = _Runtime.field(source, 'uvRotation');
+    version = _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(source, 'version')), 0);
+    _Runtime.callValue(copySampler, cast ([_Runtime.field(out, 'sampler'), _Runtime.field(source, 'sampler')] : Array<Dynamic>));
+    _Runtime.callValue(copyVector2, cast ([_Runtime.field(out, 'uvOffset'), _Runtime.field(source, 'uvOffset')] : Array<Dynamic>));
+    _Runtime.callValue(copyVector2, cast ([_Runtime.field(out, 'uvScale'), _Runtime.field(source, 'uvScale')] : Array<Dynamic>));
+    _Runtime.setField(out, 'colorSpace', colorSpace);
+    _Runtime.setField(out, 'flipX', flipX);
+    _Runtime.setField(out, 'flipY', flipY);
+    {
+      var __switchValue = _Runtime.field(out, 'dimension');
+      if (__switchValue == '2d') {
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '2d') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        _Runtime.setField(out, 'source', _Runtime.field(source, 'source'));
+      }
+      else if (__switchValue == '2d-array') {
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '2d-array') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        _Runtime.setField(out, 'sources', _Runtime.slice(_Runtime.field(source, 'sources'), 0, null));
+      }
+      else if (__switchValue == '3d') {
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '3d') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        _Runtime.setField(out, 'source', _Runtime.field(source, 'source'));
+      }
+      else if (__switchValue == 'cube') {
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), 'cube') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        _Runtime.setField(out, 'sources', (cast (cast _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) : Dynamic) : TextureSourceCubeFaces));
+      }
+    }
+    _Runtime.setField(out, 'uvRotation', uvRotation);
+    _Runtime.setField(out, 'version', version);
   }
 
-  public static function copyVideoTexture(out:VideoTextureLike, source:VideoTextureLike):Void {
+  public static function copyVideoTexture(out:TextureLike, source:TextureLike):Void {
     Facade_Texture_flighthq_texture_VideoTexture.copyVideoTexture(out, source);
   }
 
@@ -95,7 +149,7 @@ class Texture {
     return cast null;
   }
 
-  public static function createCubeTexture(?opts:Dynamic):CubeTexture {
+  public static function createCubeTexture(?opts:CreateCubeTextureOptions):CubeTexture {
     return cast Facade_Texture_flighthq_texture_CubeTexture.createCubeTexture(opts);
     return cast null;
   }
@@ -105,13 +159,44 @@ class Texture {
     return cast null;
   }
 
+  public static function createRenderTexture(options:CreateRenderTextureOptions):RenderTexture {
+    return cast Facade_Texture_flighthq_texture_RenderTexture.createRenderTexture(options);
+    return cast null;
+  }
+
   public static function createSampler(?opts:Dynamic):Sampler {
     return cast Facade_Texture_flighthq_texture_Sampler.createSampler(opts);
     return cast null;
   }
 
-  public static function createTexture(?opts:Dynamic):flighthq.types.Texture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), image: _Runtime.coalesce(_Runtime.optionalField(opts, 'image'), function():Dynamic return cast null), resource: _Runtime.coalesce(_Runtime.optionalField(opts, 'resource'), function():Dynamic return cast null), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
+  public static function createTexture(?opts:CreateTextureOptions):flighthq.types.Texture {
+    var common:Dynamic = cast _Runtime.UNDEFINED;
+    var texture:flighthq.types.Texture = cast _Runtime.UNDEFINED;
+    var resource:Dynamic = cast _Runtime.UNDEFINED;
+    common = { colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), flipX: _Runtime.coalesce(_Runtime.optionalField(opts, 'flipX'), function():Dynamic return cast false), flipY: _Runtime.coalesce(_Runtime.optionalField(opts, 'flipY'), function():Dynamic return cast false), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))), version: _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.coalesce(_Runtime.optionalField(opts, 'version'), function():Dynamic return cast 0.0)), 0) };
+    {
+      var __switchValue = _Runtime.optionalField(opts, 'dimension');
+      if (__switchValue == '2d-array') {
+        (texture = cast ((cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(opts, 'sources'), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }])] : Array<Dynamic>)) : flighthq.types.Texture) : Dynamic));
+      }
+      else if (__switchValue == '3d') {
+        (texture = cast ((cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.coalesce(_Runtime.field(opts, 'source'), function():Dynamic return cast null) }])] : Array<Dynamic>)) : flighthq.types.Texture) : Dynamic));
+      }
+      else if (__switchValue == 'cube') {
+        (texture = cast ((cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(opts, 'sources'), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) : Dynamic) : TextureSourceCubeFaces) }])] : Array<Dynamic>)) : flighthq.types.Texture) : Dynamic));
+      }
+      else  {
+        {
+          var options:Dynamic = (cast opts : Null<CreateTexture2DOptions__texture>);
+          (texture = cast ((cast _Runtime.callValue(createEntity, cast ([_Runtime.mergeObjects([common, { dimension: '2d' }, { source: _Runtime.coalesce(_Runtime.optionalField(options, 'source'), function():Dynamic return cast null) }])] : Array<Dynamic>)) : Texture2D) : Dynamic));
+        }
+      }
+    }
+    resource = _Runtime.optionalField(opts, 'resource');
+    if ((cast !_Runtime.looseEquals(resource, null) : Bool)) {
+      _Runtime.callProperty(_Runtime.setField(resource, 'textures', (_Runtime.field(resource, 'textures') ?? cast ([] : Array<Dynamic>))), 'push', cast ([texture] : Array<Dynamic>));
+    }
+    return cast texture;
     return cast null;
   }
 
@@ -120,12 +205,12 @@ class Texture {
     return cast null;
   }
 
-  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):VideoTexture {
+  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):flighthq.types.Texture {
     return cast Facade_Texture_flighthq_texture_VideoTexture.createVideoTexture(source, opts);
     return cast null;
   }
 
-  public static function equalsCubeTexture(a:Null<CubeTextureLike>, b:Null<CubeTextureLike>):Bool {
+  public static function equalsCubeTexture(a:Null<CubeTexture>, b:Null<CubeTexture>):Bool {
     return cast Facade_Texture_flighthq_texture_CubeTexture.equalsCubeTexture(a, b);
     return cast null;
   }
@@ -138,17 +223,44 @@ class Texture {
   public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a.colorSpace, b.colorSpace) : Bool) && (cast _Runtime.strictEquals(a.image, b.image) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.uvRotation, b.uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.uvOffset.x, b.uvOffset.x) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.uvOffset.y, b.uvOffset.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.uvScale.x, b.uvScale.x) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.uvScale.y, b.uvScale.y) : Bool)), function():Dynamic return cast _Runtime.callValue(equalsSampler, cast ([a.sampler, b.sampler] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'flipX'), _Runtime.field(b, 'flipX')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'flipY'), _Runtime.field(b, 'flipY')) : Bool)) : Bool) && (cast _Runtime.callValue(Texture.equalsTextureContent__texture, cast ([a, b] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvRotation'), _Runtime.field(b, 'uvRotation')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvOffset').x, _Runtime.field(b, 'uvOffset').x) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvOffset').y, _Runtime.field(b, 'uvOffset').y) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvScale').x, _Runtime.field(b, 'uvScale').x) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'uvScale').y, _Runtime.field(b, 'uvScale').y) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'version'), _Runtime.field(b, 'version')) : Bool)), function():Dynamic return cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function getCubeTextureFaceSize(cube:CubeTextureLike):Float {
+  public static function equalsTextureContent__texture(a:TextureLike, b:TextureLike):Bool {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'dimension'), _Runtime.field(b, 'dimension')) : Bool)) { return cast false; }
+    {
+      var __switchValue = _Runtime.field(a, 'dimension');
+      if (__switchValue == '2d' || __switchValue == '3d') {
+        return cast ((cast _Runtime.strictEquals(_Runtime.field(b, 'dimension'), _Runtime.field(a, 'dimension')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'source'), _Runtime.field(b, 'source')) : Bool));
+      }
+      else if (__switchValue == '2d-array' || __switchValue == 'cube') {
+        return cast _Runtime.andValue(((cast _Runtime.strictEquals(_Runtime.field(b, 'dimension'), _Runtime.field(a, 'dimension')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'sources'), 'length'), _Runtime.field(_Runtime.field(b, 'sources'), 'length')) : Bool)), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(a, 'sources'), 'every', cast ([function(source:Dynamic, index:Dynamic) return _Runtime.strictEquals(source, flighthq._internal._StaticIndex.readArray(_Runtime.field(b, 'sources'), index))] : Array<Dynamic>)));
+      }
+    }
+    return cast null;
+  }
+
+  public static function getCubeTextureFaceSize(cube:CubeTexture):Float {
     return cast Facade_Texture_flighthq_texture_CubeTexture.getCubeTextureFaceSize(cube);
     return cast null;
   }
 
+  public static function getFirstTextureSource__texture(texture:TextureLike):Null<TextureSource> {
+    {
+      var __switchValue = _Runtime.field(texture, 'dimension');
+      if (__switchValue == '2d' || __switchValue == '3d') {
+        return cast _Runtime.field(texture, 'source');
+      }
+      else if (__switchValue == '2d-array' || __switchValue == 'cube') {
+        return cast _Runtime.coalesce(_Runtime.find(_Runtime.field(texture, 'sources'), function(source:Dynamic) return !_Runtime.strictEquals(source, null)), function():Dynamic return cast null);
+      }
+    }
+    return cast null;
+  }
+
   public static function getTextureHeight(texture:TextureLike):Float {
-    return cast ((cast !_Runtime.strictEquals(texture.image, null) : Bool) ? (cast texture.image.height : Dynamic) : (cast -1.0 : Dynamic));
+    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(Texture.getFirstTextureSource__texture, cast ([texture] : Array<Dynamic>)), 'height'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
@@ -157,22 +269,40 @@ class Texture {
     _Runtime.callValue(inverseMatrix3, cast ([out, out] : Array<Dynamic>));
   }
 
+  public static function getTextureSource(texture:TextureLike):Null<TextureSource> {
+    return cast _Runtime.callValue(Texture.getFirstTextureSource__texture, cast ([texture] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getTextureSourceKind(texture:TextureLike):Null<TextureSourceKind> {
+    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(Texture.getFirstTextureSource__texture, cast ([texture] : Array<Dynamic>)), 'kind'), function():Dynamic return cast null);
+    return cast null;
+  }
+
   public static function getTextureUvMatrix(out:Matrix3Like, texture:TextureUvTransform):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
+    var flipScaleX:Dynamic = cast _Runtime.UNDEFINED;
+    var flipScaleY:Dynamic = cast _Runtime.UNDEFINED;
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
+    var preOffsetX:Dynamic = cast _Runtime.UNDEFINED;
+    var preOffsetY:Dynamic = cast _Runtime.UNDEFINED;
     var cosR:Dynamic = cast _Runtime.UNDEFINED;
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
+    var tx:Dynamic = cast _Runtime.UNDEFINED;
+    var ty:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     r = texture.uvRotation;
-    sx = texture.uvScale.x;
-    sy = texture.uvScale.y;
-    tx = texture.uvOffset.x;
-    ty = texture.uvOffset.y;
+    flipScaleX = ((cast texture.flipX : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
+    flipScaleY = ((cast texture.flipY : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
+    sx = (texture.uvScale.x * flipScaleX);
+    sy = (texture.uvScale.y * flipScaleY);
+    preOffsetX = ((cast texture.flipX : Bool) ? (cast texture.uvScale.x : Dynamic) : (cast 0.0 : Dynamic));
+    preOffsetY = ((cast texture.flipY : Bool) ? (cast texture.uvScale.y : Dynamic) : (cast 0.0 : Dynamic));
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
+    tx = ((texture.uvOffset.x + (cosR * preOffsetX)) - (sinR * preOffsetY));
+    ty = ((texture.uvOffset.y + (sinR * preOffsetX)) + (cosR * preOffsetY));
     m = out.m;
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (sx * cosR));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (sx * sinR));
@@ -186,87 +316,126 @@ class Texture {
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {
-    return cast ((cast !_Runtime.strictEquals(texture.image, null) : Bool) ? (cast texture.image.width : Dynamic) : (cast -1.0 : Dynamic));
+    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(Texture.getFirstTextureSource__texture, cast ([texture] : Array<Dynamic>)), 'width'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
-    return cast Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureHeight(videoTexture);
+  public static function getVideoTextureHeight(texture:TextureLike):Float {
+    return cast Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureHeight(texture);
     return cast null;
   }
 
-  public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
-    Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureInverseUvMatrix(out, videoTexture);
+  public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
+    Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureInverseUvMatrix(out, texture);
   }
 
-  public static function getVideoTextureUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
-    Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureUvMatrix(out, videoTexture);
+  public static function getVideoTextureUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
+    Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureUvMatrix(out, texture);
   }
 
-  public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
-    return cast Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureWidth(videoTexture);
+  public static function getVideoTextureWidth(texture:TextureLike):Float {
+    return cast Facade_Texture_flighthq_texture_VideoTexture.getVideoTextureWidth(texture);
+    return cast null;
+  }
+
+  public static function hasTextureSource(texture:TextureLike):Bool {
+    return cast !_Runtime.strictEquals(_Runtime.callValue(getTextureSourceKind, cast ([texture] : Array<Dynamic>)), null);
     return cast null;
   }
 
   public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
-    return cast _Runtime.orValue(((cast ((cast ((cast !_Runtime.strictEquals(texture.uvScale.x, 1.0) : Bool) || (cast !_Runtime.strictEquals(texture.uvScale.y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(texture.uvRotation, 0.0));
+    return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast texture.flipX : Bool) || (cast texture.flipY : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvScale.x, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvScale.y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(texture.uvRotation, 0.0));
     return cast null;
   }
 
-  public static function isCubeTextureComplete(cube:CubeTextureLike):Bool {
+  public static function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
+    Facade_Texture_flighthq_texture_VoxelGrid.invalidateVoxelGrid(voxelGrid);
+  }
+
+  public static function isCubeTextureComplete(cube:CubeTexture):Bool {
     return cast Facade_Texture_flighthq_texture_CubeTexture.isCubeTextureComplete(cube);
     return cast null;
   }
 
   public static function isTextureReady(texture:TextureLike):Bool {
-    return cast !_Runtime.strictEquals(texture.image, null);
+    return cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
-    return cast Facade_Texture_flighthq_texture_VideoTexture.isVideoTextureFrameReady(videoTexture);
+  public static function isVideoTextureFrameReady(texture:TextureLike):Bool {
+    return cast Facade_Texture_flighthq_texture_VideoTexture.isVideoTextureFrameReady(texture);
     return cast null;
   }
 
   public static function resetTextureUvTransform(texture:TextureLike):Void {
-    (texture.uvOffset.x = cast (0.0 : Dynamic));
-    (texture.uvOffset.y = cast (0.0 : Dynamic));
-    (texture.uvRotation = cast (0.0 : Dynamic));
-    (texture.uvScale.x = cast (1.0 : Dynamic));
-    (texture.uvScale.y = cast (1.0 : Dynamic));
+    _Runtime.setField(texture, 'flipX', false);
+    _Runtime.setField(texture, 'flipY', false);
+    (_Runtime.field(texture, 'uvOffset').x = cast (0.0 : Dynamic));
+    (_Runtime.field(texture, 'uvOffset').y = cast (0.0 : Dynamic));
+    _Runtime.setField(texture, 'uvRotation', 0.0);
+    (_Runtime.field(texture, 'uvScale').x = cast (1.0 : Dynamic));
+    (_Runtime.field(texture, 'uvScale').y = cast (1.0 : Dynamic));
   }
 
-  public static function resetVideoTextureFrame(videoTexture:VideoTextureLike):Void {
-    Facade_Texture_flighthq_texture_VideoTexture.resetVideoTextureFrame(videoTexture);
+  public static function resetVideoTextureFrame(texture:TextureLike):Void {
+    Facade_Texture_flighthq_texture_VideoTexture.resetVideoTextureFrame(texture);
   }
 
-  public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
-    Facade_Texture_flighthq_texture_CubeTexture.setCubeTextureFace(cube, faceIndex, image);
+  public static function setCubeTextureFace(cube:CubeTexture, faceIndex:Float, source:Null<TextureSource>):Void {
+    Facade_Texture_flighthq_texture_CubeTexture.setCubeTextureFace(cube, faceIndex, source);
   }
 
-  public static function setTextureImage(texture:TextureLike, image:Null<ImageResource>):Void {
-    (texture.image = cast (image : Dynamic));
+  public static function setTextureFlip(texture:TextureLike, flipX:Bool, flipY:Bool):Void {
+    _Runtime.setField(texture, 'flipX', flipX);
+    _Runtime.setField(texture, 'flipY', flipY);
+  }
+
+  public static function setTextureSource(texture:TextureLike, source:Null<TextureSource>):Void {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { throw _Runtime.error('setTextureSource requires a Texture2D'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(texture, 'source'), source) : Bool)) { return; }
+    _Runtime.setField(texture, 'source', source);
+    _Runtime.setField(texture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(texture, 'version') + 1.0)), 0));
+  }
+
+  public static function setTextureUvFromPixelRect(texture:TextureLike, x:Float, y:Float, width:Float, height:Float):Void {
+    var textureWidth:Dynamic = cast _Runtime.UNDEFINED;
+    var textureHeight:Dynamic = cast _Runtime.UNDEFINED;
+    textureWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
+    textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
+    if ((cast ((cast ((cast textureWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast textureHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+      (_Runtime.field(texture, 'uvOffset').x = cast (0.0 : Dynamic));
+      (_Runtime.field(texture, 'uvOffset').y = cast (0.0 : Dynamic));
+      (_Runtime.field(texture, 'uvScale').x = cast (0.0 : Dynamic));
+      (_Runtime.field(texture, 'uvScale').y = cast (0.0 : Dynamic));
+      return;
+    }
+    (_Runtime.field(texture, 'uvOffset').x = cast ((x / textureWidth) : Dynamic));
+    (_Runtime.field(texture, 'uvOffset').y = cast ((y / textureHeight) : Dynamic));
+    (_Runtime.field(texture, 'uvScale').x = cast ((width / textureWidth) : Dynamic));
+    (_Runtime.field(texture, 'uvScale').y = cast ((height / textureHeight) : Dynamic));
   }
 
   public static function setTextureUvOffset(texture:TextureLike, x:Float, y:Float):Void {
-    (texture.uvOffset.x = cast (x : Dynamic));
-    (texture.uvOffset.y = cast (y : Dynamic));
+    (_Runtime.field(texture, 'uvOffset').x = cast (x : Dynamic));
+    (_Runtime.field(texture, 'uvOffset').y = cast (y : Dynamic));
   }
 
   public static function setTextureUvRotation(texture:TextureLike, radians:Float):Void {
-    (texture.uvRotation = cast (radians : Dynamic));
+    _Runtime.setField(texture, 'uvRotation', radians);
   }
 
   public static function setTextureUvScale(texture:TextureLike, x:Float, y:Float):Void {
-    (texture.uvScale.x = cast (x : Dynamic));
-    (texture.uvScale.y = cast (y : Dynamic));
+    (_Runtime.field(texture, 'uvScale').x = cast (x : Dynamic));
+    (_Runtime.field(texture, 'uvScale').y = cast (y : Dynamic));
   }
 
-  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
-    Facade_Texture_flighthq_texture_VideoTexture.setVideoTextureSource(videoTexture, source);
+  public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
+    Facade_Texture_flighthq_texture_VideoTexture.setVideoTextureSource(texture, source);
   }
 
   public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {
+    var fu:Dynamic = cast _Runtime.UNDEFINED;
+    var fv:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
@@ -274,14 +443,16 @@ class Texture {
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var cosR:Dynamic = cast _Runtime.UNDEFINED;
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
-    r = texture.uvRotation;
-    sx = texture.uvScale.x;
-    sy = texture.uvScale.y;
-    tx = texture.uvOffset.x;
-    ty = texture.uvOffset.y;
+    fu = ((cast _Runtime.field(texture, 'flipX') : Bool) ? (cast (1.0 - u) : Dynamic) : (cast u : Dynamic));
+    fv = ((cast _Runtime.field(texture, 'flipY') : Bool) ? (cast (1.0 - v) : Dynamic) : (cast v : Dynamic));
+    r = _Runtime.field(texture, 'uvRotation');
+    sx = _Runtime.field(texture, 'uvScale').x;
+    sy = _Runtime.field(texture, 'uvScale').y;
+    tx = _Runtime.field(texture, 'uvOffset').x;
+    ty = _Runtime.field(texture, 'uvOffset').y;
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
-    (out.x = cast (((((sx * cosR) * u) - ((sy * sinR) * v)) + tx) : Dynamic));
-    (out.y = cast (((((sx * sinR) * u) + ((sy * cosR) * v)) + ty) : Dynamic));
+    (out.x = cast (((((sx * cosR) * fu) - ((sy * sinR) * fv)) + tx) : Dynamic));
+    (out.y = cast (((((sx * sinR) * fu) + ((sy * cosR) * fv)) + ty) : Dynamic));
   }
 }

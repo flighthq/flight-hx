@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTiltShiftEffect = api.createTiltShiftEffect;
+export const getTiltShiftEffectPadding = api.getTiltShiftEffectPadding;
+export const registerTiltShiftEffectPaddingResolver = api.registerTiltShiftEffectPaddingResolver;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.OutlineEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -43,6 +44,10 @@ class WgpuOutlineEffect {
   public static final defaultWgpuOutlineEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyOutlineEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : OutlineEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuOutlineEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'OutlineEffect', defaultWgpuOutlineEffectRunner] : Array<Dynamic>));
+  }
 
   public static final OUTLINE_FRAGMENT_WGSL__wgpuOutlineEffect:Dynamic = '\nstruct Uniforms {\n  u_threshold : f32,\n  u_thickness : f32,\n  u_resolution : vec2f,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn lum(uv : vec2f) -> f32 {\n  return dot(textureSampleLevel(tex, smp, uv, 0.0).rgb, vec3f(0.2126, 0.7152, 0.0722));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = uni.u_thickness / uni.u_resolution;\n  let tl = lum(uv + texel * vec2f(-1.0, -1.0));\n  let t = lum(uv + texel * vec2f(0.0, -1.0));\n  let tr = lum(uv + texel * vec2f(1.0, -1.0));\n  let l = lum(uv + texel * vec2f(-1.0, 0.0));\n  let rr = lum(uv + texel * vec2f(1.0, 0.0));\n  let bl = lum(uv + texel * vec2f(-1.0, 1.0));\n  let b = lum(uv + texel * vec2f(0.0, 1.0));\n  let br = lum(uv + texel * vec2f(1.0, 1.0));\n  let gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  let gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  let edge = sqrt(gx * gx + gy * gy);\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let k = step(uni.u_threshold, edge);\n  return mix(c, uni.u_color, k * uni.u_color.a);\n}';
 }

@@ -3,36 +3,70 @@ package flighthq.picking;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.picking.PickScene as Facade_Picking_flighthq_picking_PickScene;
-import flighthq.picking.PickScene.ScenePickOptions;
-import flighthq.types.Camera;
+import flighthq.picking.PickScene3D as Facade_Picking_flighthq_picking_PickScene3D;
+import flighthq.picking.SceneHitAttributes as Facade_Picking_flighthq_picking_SceneHitAttributes;
+import flighthq.types.Camera3D;
+import flighthq.types.Material;
+import flighthq.types.Node3D;
 import flighthq.types.Ray3D;
-import flighthq.types.SceneHit;
-import flighthq.types.SceneNode;
+import flighthq.types.Scene3DHit;
+import flighthq.types.Scene3DPickOptions;
+import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector3.Vector3Like;
 
 class Picking {
-  public static function createSceneHit():SceneHit {
-    return cast Facade_Picking_flighthq_picking_PickScene.createSceneHit();
+  public static function createScene3DHit():Scene3DHit {
+    return cast Facade_Picking_flighthq_picking_PickScene3D.createScene3DHit();
     return cast null;
   }
 
-  public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
-    return cast Facade_Picking_flighthq_picking_PickScene.pickScene(scene, camera, screenX, screenY, out, options);
+  public static function getScene3DHitMaterial(hit:Scene3DHit):Null<Material> {
+    return cast Facade_Picking_flighthq_picking_SceneHitAttributes.getScene3DHitMaterial(hit);
     return cast null;
   }
 
-  public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
-    return cast Facade_Picking_flighthq_picking_PickScene.pickSceneAll(scene, camera, screenX, screenY, outArray, options);
+  public static function getScene3DHitSubsetIndex(hit:Scene3DHit):Float {
+    return cast Facade_Picking_flighthq_picking_SceneHitAttributes.getScene3DHitSubsetIndex(hit);
     return cast null;
   }
 
-  public static function pickSceneAllWithRay3D(scene:SceneNode, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
-    return cast Facade_Picking_flighthq_picking_PickScene.pickSceneAllWithRay3D(scene, ray, outArray, options);
+  public static function getScene3DHitUv0(out:Vector2Like, hit:Scene3DHit):Bool {
+    return cast Facade_Picking_flighthq_picking_SceneHitAttributes.getScene3DHitUv0(out, hit);
     return cast null;
   }
 
-  public static function pickSceneWithRay3D(scene:SceneNode, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
-    return cast Facade_Picking_flighthq_picking_PickScene.pickSceneWithRay3D(scene, ray, out, options);
+  public static function getScene3DHitVertexNormal(out:Vector3Like, hit:Scene3DHit):Bool {
+    return cast Facade_Picking_flighthq_picking_SceneHitAttributes.getScene3DHitVertexNormal(out, hit);
+    return cast null;
+  }
+
+  public static function getScene3DHitVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, hit:Scene3DHit):Bool {
+    return cast Facade_Picking_flighthq_picking_SceneHitAttributes.getScene3DHitVertexTangent(out, hit);
+    return cast null;
+  }
+
+  public static function isScene3DHitFrontFacing(hit:Scene3DHit, ray:Ray3D):Bool {
+    return cast Facade_Picking_flighthq_picking_SceneHitAttributes.isScene3DHitFrontFacing(hit, ray);
+    return cast null;
+  }
+
+  public static function pickScene3D(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, out:Scene3DHit, ?options:Scene3DPickOptions):Null<Scene3DHit> {
+    return cast Facade_Picking_flighthq_picking_PickScene3D.pickScene3D(scene, camera, screenX, screenY, out, options);
+    return cast null;
+  }
+
+  public static function pickScene3DAll(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, outArray:Array<Scene3DHit>, ?options:Scene3DPickOptions):Array<Scene3DHit> {
+    return cast Facade_Picking_flighthq_picking_PickScene3D.pickScene3DAll(scene, camera, screenX, screenY, outArray, options);
+    return cast null;
+  }
+
+  public static function pickScene3DAllWithRay3D(scene:Node3D, ray:Ray3D, outArray:Array<Scene3DHit>, ?options:Scene3DPickOptions):Array<Scene3DHit> {
+    return cast Facade_Picking_flighthq_picking_PickScene3D.pickScene3DAllWithRay3D(scene, ray, outArray, options);
+    return cast null;
+  }
+
+  public static function pickScene3DWithRay3D(scene:Node3D, ray:Ray3D, out:Scene3DHit, ?options:Scene3DPickOptions):Null<Scene3DHit> {
+    return cast Facade_Picking_flighthq_picking_PickScene3D.pickScene3DWithRay3D(scene, ray, out, options);
     return cast null;
   }
 }

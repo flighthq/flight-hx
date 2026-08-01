@@ -4,17 +4,36 @@ package flighthq.textureatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.image.ImageResource.getImageResourceByteSize;
+import flighthq.types.Bitmap;
+import flighthq.types.CompressedImage;
 import flighthq.types.TextureAtlas;
+import flighthq.types.Types.BitmapTextureSourceKind;
+import flighthq.types.Types.CompressedImageTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureSourceKind;
 
 class TextureAtlas {
   public static function createTextureAtlas(?obj:Dynamic):flighthq.types.TextureAtlas {
-    return cast _Runtime.callValue(createEntity, cast ([{ image: _Runtime.coalesce(_Runtime.optionalField(obj, 'image'), function():Dynamic return cast null), regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(_Runtime.optionalField(obj, 'texture'), function():Dynamic return cast null) }] : Array<Dynamic>));
     return cast null;
   }
 
+  public static function disposeTextureAtlas(atlas:flighthq.types.TextureAtlas):Void {
+    _Runtime.setLength(atlas.regions, 0.0);
+    (atlas.texture = cast (null : Dynamic));
+  }
+
   public static function getTextureAtlasByteSize(atlas:flighthq.types.TextureAtlas):Float {
-    return cast ((cast !_Runtime.strictEquals(atlas.image, null) : Bool) ? (cast _Runtime.callValue(getImageResourceByteSize, cast ([atlas.image] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+    var texture:Dynamic = cast _Runtime.UNDEFINED;
+    var image:Dynamic = cast _Runtime.UNDEFINED;
+    texture = atlas.texture;
+    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(texture, 'source'), null) : Bool)) : Bool)) { return cast 0.0; }
+    image = _Runtime.field(texture, 'source');
+    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast image : Bitmap).data, 'byteLength'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), CompressedImageTextureSourceKind) : Bool)) {
+      return cast _Runtime.field(_Runtime.field((cast image : CompressedImage), 'compressed').payload, 'byteLength');
+    }
+    return cast 0.0;
     return cast null;
   }
 }

@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const disableDebug = api.disableDebug;
 export const enableDebug = api.enableDebug;
+export const enableFlightDiagnostics = api.enableFlightDiagnostics;
 export const isDebugEnabled = api.isDebugEnabled;
 export const registerDebugSubsystem = api.registerDebugSubsystem;
 export const unregisterDebugSubsystem = api.unregisterDebugSubsystem;

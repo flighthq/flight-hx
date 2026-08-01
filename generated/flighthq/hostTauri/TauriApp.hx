@@ -3,9 +3,9 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
+import flighthq.types.TauriApi;
 
 class TauriApp {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
@@ -22,25 +22,25 @@ class TauriApp {
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getName', cast ([] : Array<Dynamic>)), 'then', cast ([function(name:Dynamic) {
       (cachedName = cast (name : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getVersion', cast ([] : Array<Dynamic>)), 'then', cast ([function(version:Dynamic) {
       (cachedVersion = cast (version : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { addRecentDocument: function() {
-    
+
     }, bounceDock: function() {
       return cast -1.0;
     }, cancelAttention: function() {
-    
+
     }, cancelDockBounce: function() {
-    
+
     }, clearRecentDocuments: function() {
-    
+
     }, focus: function() {
-    
+
     }, getAppDirectoryPath: function() {
       return cast '';
     }, getAppPath: function() {
@@ -69,33 +69,33 @@ class TauriApp {
       return cast false;
     }, hideApp: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(app, 'hide', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(process, 'exit', cast ([0.0] : Array<Dynamic>)), function() {
-      
+
       });
     }, relaunch: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(process, 'relaunch', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
     }, releaseSingleInstanceLock: function() {
-    
+
     }, requestAttention: function() {
       return cast -1.0;
     }, requestSingleInstanceLock: function() {
       return cast true;
     }, setActivationPolicy: function() {
-    
+
     }, setBadgeCount: function() {
       return cast false;
     }, setDockBadge: function() {
-    
+
     }, setDockMenu: function() {
-    
+
     }, setLoginItem: function() {
       return cast false;
     }, setName: function() {
@@ -104,32 +104,32 @@ class TauriApp {
       return cast false;
     }, showApp: function() {
       flighthq._internal._Async.recover(_Runtime.callProperty(app, 'show', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, subscribeActivate: function() {
       return cast function() {
-      
+
       };
     }, subscribeAllWindowsClosed: function() {
       return cast function() {
-      
+
       };
     }, subscribeOpenFile: function() {
       return cast function() {
-      
+
       };
     }, subscribeQuitRequest: function() {
       return cast function() {
-      
+
       };
     }, subscribeReady: function() {
       return cast function() {
-      
+
       };
     }, subscribeSecondInstance: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

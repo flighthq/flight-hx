@@ -5,7 +5,7 @@ const api = compiled.flighthq.camera.Culling;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCameraFrustum = api.getCameraFrustum;
-export const isBoxInCameraFrustum = api.isBoxInCameraFrustum;
-export const isPointInCameraFrustum = api.isPointInCameraFrustum;
-export const isSphereInCameraFrustum = api.isSphereInCameraFrustum;
+export const getCamera3DFrustum = api.getCamera3DFrustum;
+export const isBoxInCamera3DFrustum = api.isBoxInCamera3DFrustum;
+export const isPointInCamera3DFrustum = api.isPointInCamera3DFrustum;
+export const isSphereInCamera3DFrustum = api.isSphereInCamera3DFrustum;

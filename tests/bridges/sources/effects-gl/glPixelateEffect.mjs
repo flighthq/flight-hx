@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyPixelateEffectToGl = api.applyPixelateEffectToGl;
 export const defaultGlPixelateEffectRunner = api.defaultGlPixelateEffectRunner;
+export const registerGlPixelateEffect = api.registerGlPixelateEffect;

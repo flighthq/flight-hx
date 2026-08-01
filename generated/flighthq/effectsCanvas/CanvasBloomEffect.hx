@@ -7,9 +7,11 @@ import flighthq.effects.BloomEffect.computeBloomBlurRadius;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
+import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.BloomEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasBloomEffect {
@@ -51,4 +53,8 @@ class CanvasBloomEffect {
   public static final defaultCanvasBloomEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyBloomEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
   };
+
+  public static function registerCanvasBloomEffect(state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BloomEffect', defaultCanvasBloomEffectRunner] : Array<Dynamic>));
+  }
 }

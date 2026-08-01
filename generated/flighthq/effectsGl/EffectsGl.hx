@@ -3,6 +3,7 @@ package flighthq.effectsGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsGl.EnableGlRenderEffectGuards as Facade_EffectsGl_flighthq_effectsGl_EnableGlRenderEffectGuards;
 import flighthq.effectsGl.GlBevelEffect as Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect;
 import flighthq.effectsGl.GlBlendEffect as Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect;
 import flighthq.effectsGl.GlBloomEffect as Facade_EffectsGl_flighthq_effectsGl_GlBloomEffect;
@@ -10,9 +11,8 @@ import flighthq.effectsGl.GlBlurEffect as Facade_EffectsGl_flighthq_effectsGl_Gl
 import flighthq.effectsGl.GlBokehDepthOfFieldEffect as Facade_EffectsGl_flighthq_effectsGl_GlBokehDepthOfFieldEffect;
 import flighthq.effectsGl.GlCameraMotionBlurEffect as Facade_EffectsGl_flighthq_effectsGl_GlCameraMotionBlurEffect;
 import flighthq.effectsGl.GlChromaticAberrationEffect as Facade_EffectsGl_flighthq_effectsGl_GlChromaticAberrationEffect;
-import flighthq.effectsGl.GlColorLutPass as Facade_EffectsGl_flighthq_effectsGl_GlColorLutPass;
-import flighthq.effectsGl.GlColorMatrixPass as Facade_EffectsGl_flighthq_effectsGl_GlColorMatrixPass;
 import flighthq.effectsGl.GlCompositeEffect as Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect;
+import flighthq.effectsGl.GlContactShadowsEffect as Facade_EffectsGl_flighthq_effectsGl_GlContactShadowsEffect;
 import flighthq.effectsGl.GlConvolutionEffect as Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect;
 import flighthq.effectsGl.GlCrtEffect as Facade_EffectsGl_flighthq_effectsGl_GlCrtEffect;
 import flighthq.effectsGl.GlCustomShaderEffect as Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect;
@@ -20,11 +20,6 @@ import flighthq.effectsGl.GlDirectionalBlurEffect as Facade_EffectsGl_flighthq_e
 import flighthq.effectsGl.GlDisplacementEffect as Facade_EffectsGl_flighthq_effectsGl_GlDisplacementEffect;
 import flighthq.effectsGl.GlDitherEffect as Facade_EffectsGl_flighthq_effectsGl_GlDitherEffect;
 import flighthq.effectsGl.GlDropShadowEffect as Facade_EffectsGl_flighthq_effectsGl_GlDropShadowEffect;
-import flighthq.effectsGl.GlEffectBlitShader as Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader;
-import flighthq.effectsGl.GlEffectBoxBlur as Facade_EffectsGl_flighthq_effectsGl_GlEffectBoxBlur;
-import flighthq.effectsGl.GlEffectGradientRamp as Facade_EffectsGl_flighthq_effectsGl_GlEffectGradientRamp;
-import flighthq.effectsGl.GlEffectProgramCache as Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache;
-import flighthq.effectsGl.GlEffectTintShader as Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader;
 import flighthq.effectsGl.GlFilmGrainEffect as Facade_EffectsGl_flighthq_effectsGl_GlFilmGrainEffect;
 import flighthq.effectsGl.GlFxaaEffect as Facade_EffectsGl_flighthq_effectsGl_GlFxaaEffect;
 import flighthq.effectsGl.GlGlitchEffect as Facade_EffectsGl_flighthq_effectsGl_GlGlitchEffect;
@@ -46,311 +41,47 @@ import flighthq.effectsGl.GlPixelateEffect as Facade_EffectsGl_flighthq_effectsG
 import flighthq.effectsGl.GlPosterizeEffect as Facade_EffectsGl_flighthq_effectsGl_GlPosterizeEffect;
 import flighthq.effectsGl.GlRadialBlurEffect as Facade_EffectsGl_flighthq_effectsGl_GlRadialBlurEffect;
 import flighthq.effectsGl.GlRenderEffectPipeline as Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline;
-import flighthq.effectsGl.GlRenderEffectRegistrar as Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar;
 import flighthq.effectsGl.GlRenderEffectRegistry as Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry;
+import flighthq.effectsGl.GlRenderTextureEffect as Facade_EffectsGl_flighthq_effectsGl_GlRenderTextureEffect;
 import flighthq.effectsGl.GlScanlinesEffect as Facade_EffectsGl_flighthq_effectsGl_GlScanlinesEffect;
 import flighthq.effectsGl.GlScreenSpaceFogEffect as Facade_EffectsGl_flighthq_effectsGl_GlScreenSpaceFogEffect;
 import flighthq.effectsGl.GlSharpenEffect as Facade_EffectsGl_flighthq_effectsGl_GlSharpenEffect;
 import flighthq.effectsGl.GlSketchEffect as Facade_EffectsGl_flighthq_effectsGl_GlSketchEffect;
 import flighthq.effectsGl.GlSmaaEffect as Facade_EffectsGl_flighthq_effectsGl_GlSmaaEffect;
 import flighthq.effectsGl.GlSsaoEffect as Facade_EffectsGl_flighthq_effectsGl_GlSsaoEffect;
-import flighthq.effectsGl.GlSsrEffect as Facade_EffectsGl_flighthq_effectsGl_GlSsrEffect;
-import flighthq.effectsGl.GlTaaEffect as Facade_EffectsGl_flighthq_effectsGl_GlTaaEffect;
 import flighthq.effectsGl.GlTiltShiftEffect as Facade_EffectsGl_flighthq_effectsGl_GlTiltShiftEffect;
 import flighthq.effectsGl.GlToneMapEffect as Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect;
 import flighthq.effectsGl.GlVignetteEffect as Facade_EffectsGl_flighthq_effectsGl_GlVignetteEffect;
 import flighthq.effectsGl.GlWhiteBalanceEffect as Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect;
-import flighthq.types.AdvancedBlendMode;
-import flighthq.types.BevelEffect;
-import flighthq.types.BlendEffect;
-import flighthq.types.BloomEffect;
 import flighthq.types.BlurEffect;
-import flighthq.types.BokehDepthOfFieldEffect;
-import flighthq.types.CameraMotionBlurEffect;
-import flighthq.types.ChromaticAberrationEffect;
-import flighthq.types.ColorLut;
-import flighthq.types.CompositeEffect;
-import flighthq.types.CompositeOperator;
-import flighthq.types.ConvolutionEffect;
-import flighthq.types.CrtEffect;
-import flighthq.types.CustomShaderEffect;
-import flighthq.types.DirectionalBlurEffect;
-import flighthq.types.DisplacementEffect;
-import flighthq.types.DitherEffect;
-import flighthq.types.DropShadowEffect;
-import flighthq.types.FilmGrainEffect;
-import flighthq.types.FxaaEffect;
-import flighthq.types.GlColorLutTextureCache;
-import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderEffectPipeline;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
-import flighthq.types.GlitchEffect;
-import flighthq.types.GodRaysEffect;
-import flighthq.types.GradientBevelEffect;
-import flighthq.types.GradientGlowEffect;
-import flighthq.types.HalftoneEffect;
-import flighthq.types.InnerGlowEffect;
-import flighthq.types.InnerShadowEffect;
-import flighthq.types.KuwaharaEffect;
-import flighthq.types.LensDirtEffect;
-import flighthq.types.LensDistortionEffect;
-import flighthq.types.LensFlareEffect;
-import flighthq.types.MedianEffect;
-import flighthq.types.MotionBlurEffect;
-import flighthq.types.OuterGlowEffect;
-import flighthq.types.OutlineEffect;
-import flighthq.types.PixelateEffect;
-import flighthq.types.PosterizeEffect;
-import flighthq.types.RadialBlurEffect;
-import flighthq.types.ScanlinesEffect;
-import flighthq.types.ScreenSpaceFogEffect;
-import flighthq.types.SharpenEffect;
-import flighthq.types.SketchEffect;
-import flighthq.types.SmaaEffect;
-import flighthq.types.SsaoEffect;
-import flighthq.types.SsrEffect;
-import flighthq.types.TaaEffect;
-import flighthq.types.TiltShiftEffect;
-import flighthq.types.ToneMapEffect;
-import flighthq.types.VignetteEffect;
-import flighthq.types.WhiteBalanceEffect;
+import flighthq.types.GlRenderTexture.GlRenderTexturePool;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTexture;
 
 class EffectsGl {
-  public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect.applyBevelEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.applyBlendEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlBloomEffect.applyBloomEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyBlurEffectToGl(state, source, dest, temp, effect);
-  }
-
-  public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToGl(state, source, dest, depthTexture, effect);
-  }
-
-  public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlCameraMotionBlurEffect.applyCameraMotionBlurEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlChromaticAberrationEffect.applyChromaticAberrationEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlColorLutPass.applyColorLutPassToGl(state, source, dest, lut, cache);
-  }
-
-  public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlColorMatrixPass.applyColorMatrixPassToGl(state, source, dest, matrix);
-  }
-
-  public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.applyCompositeEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect.applyConvolutionEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlCrtEffect.applyCrtEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.applyCustomShaderEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlDirectionalBlurEffect.applyDirectionalBlurEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlDisplacementEffect.applyDisplacementEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlDitherEffect.applyDitherEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlDropShadowEffect.applyDropShadowEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlFilmGrainEffect.applyFilmGrainEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlFxaaEffect.applyFxaaEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyGaussianBlurToGl(state, source, dest, temp, options);
-  }
-
-  public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitOffsetPass(state, source, dest, dx, dy);
-  }
-
-  public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitPass(state, source, dest);
-  }
-
-  public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlEffectBoxBlur.applyGlEffectBoxBlur(state, source, dest, temp, options);
-  }
-
-  public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectErasePass(state, source, dest);
-  }
-
-  public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader.applyGlEffectInvertTintPass(state, source, dest, color, alpha, strength);
-  }
-
-  public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlEffectTintShader.applyGlEffectTintPass(state, source, dest, color, alpha, strength);
-  }
-
-  public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlGlitchEffect.applyGlitchEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlGodRaysEffect.applyGodRaysEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlGradientBevelEffect.applyGradientBevelEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlGradientGlowEffect.applyGradientGlowEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlHalftoneEffect.applyHalftoneEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlInnerGlowEffect.applyInnerGlowEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlInnerShadowEffect.applyInnerShadowEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlKuwaharaEffect.applyKuwaharaEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlLensDirtEffect.applyLensDirtEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlLensDistortionEffect.applyLensDistortionEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlLensFlareEffect.applyLensFlareEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlMedianEffect.applyMedianEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlMotionBlurEffect.applyMotionBlurEffectToGl(state, source, dest, velocityTexture, effect);
-  }
-
-  public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlOuterGlowEffect.applyOuterGlowEffectToGl(state, source, dest, pool, effect);
-  }
-
-  public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlOutlineEffect.applyOutlineEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlPixelateEffect.applyPixelateEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlPosterizeEffect.applyPosterizeEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRadialBlurEffect.applyRadialBlurEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlScanlinesEffect.applyScanlinesEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlScreenSpaceFogEffect.applyScreenSpaceFogEffectToGl(state, source, dest, depthTexture, effect);
-  }
-
-  public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlSharpenEffect.applySharpenEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlSketchEffect.applySketchEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlSmaaEffect.applySmaaEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlSsaoEffect.applySsaoEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applySsrEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsrEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlSsrEffect.applySsrEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlTaaEffect.applyTaaEffectToGl(state, source, dest, _effect);
-  }
-
-  public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlTiltShiftEffect.applyTiltShiftEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect.applyToneMapEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlVignetteEffect.applyVignetteEffectToGl(state, source, dest, effect);
-  }
-
-  public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.applyWhiteBalanceEffectToGl(state, source, dest, effect);
-  }
-
-  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.beginGlRenderEffectPipeline(state, pipeline);
-  }
-
-  public static function createGlEffectGradientRampTexture(gl:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlEffectGradientRamp.createGlEffectGradientRampTexture(gl, colors, alphas, ratios);
+  public static function applyBlurEffectToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, effect:BlurEffect):Bool {
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyBlurEffectToGlRenderTextures(state, source, dest, temp, effect);
     return cast null;
+  }
+
+  public static function applyGaussianBlurToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Bool {
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.applyGaussianBlurToGlRenderTextures(state, source, dest, temp, options);
+    return cast null;
+  }
+
+  public static function applyGlRenderEffectsToRenderTexture(state:GlRenderState, pool:GlRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderTextureEffect.applyGlRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
+    return cast null;
+  }
+
+  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, ?colorSpace:RenderTargetColorSpace):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.beginGlRenderEffectPipeline(state, pipeline, colorSpace);
   }
 
   public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):GlRenderEffectPipeline {
@@ -373,6 +104,8 @@ class EffectsGl {
   public static final defaultGlChromaticAberrationEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlChromaticAberrationEffect.defaultGlChromaticAberrationEffectRunner;
 
   public static final defaultGlCompositeEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.defaultGlCompositeEffectRunner;
+
+  public static final defaultGlContactShadowsEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlContactShadowsEffect.defaultGlContactShadowsEffectRunner;
 
   public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect.defaultGlConvolutionEffectRunner;
 
@@ -440,10 +173,6 @@ class EffectsGl {
 
   public static final defaultGlSsaoEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlSsaoEffect.defaultGlSsaoEffectRunner;
 
-  public static final defaultGlSsrEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlSsrEffect.defaultGlSsrEffectRunner;
-
-  public static final defaultGlTaaEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlTaaEffect.defaultGlTaaEffectRunner;
-
   public static final defaultGlTiltShiftEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlTiltShiftEffect.defaultGlTiltShiftEffectRunner;
 
   public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect.defaultGlToneMapEffectRunner;
@@ -452,125 +181,216 @@ class EffectsGl {
 
   public static final defaultGlWhiteBalanceEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.defaultGlWhiteBalanceEffectRunner;
 
-  public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.destroyGlRenderEffectPipeline(state, pipeline);
+  public static function disableGlRenderEffectGuards(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_EnableGlRenderEffectGuards.disableGlRenderEffectGuards(state);
+  }
+
+  public static function enableGlRenderEffectGuards(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_EnableGlRenderEffectGuards.enableGlRenderEffectGuards(state);
   }
 
   public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.endGlRenderEffectPipeline(state, pipeline, operations);
   }
 
-  public static function getBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.getBlendEffectModeIndex(mode);
+  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool):GlRenderEffectApplicationExplanation {
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderTextureEffect.explainGlRenderEffectApplication(state, effects, sourceAvailable);
     return cast null;
   }
 
-  public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.getCompositeEffectOperatorIndex(operator_);
-    return cast null;
+  public static function registerGlBevelEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect.registerGlBevelEffect(state);
   }
 
-  public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.getGlBlendEffectBackdrop(state, backdropKey);
-    return cast null;
-  }
-
-  public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.getGlCustomShaderSource(state, shaderKey);
-    return cast null;
-  }
-
-  public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache.getGlEffectProgram(state, key, fragmentSource);
-    return cast null;
-  }
-
-  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlEffectProgramCache.getGlEffectUniformLocation(state, program, name);
-    return cast null;
-  }
-
-  public static function getGlRenderEffectKinds():Array<String> {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.getGlRenderEffectKinds();
-    return cast null;
-  }
-
-  public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.getGlRenderEffectRunner(state, kind);
-    return cast null;
-  }
-
-  public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.hasGlRenderEffectRunner(state, kind);
-    return cast null;
-  }
-
-  public static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Dynamic = Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect.MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE;
-
-  public static final MAX_MEDIAN_EFFECT_GL_RADIUS:Dynamic = Facade_EffectsGl_flighthq_effectsGl_GlMedianEffect.MAX_MEDIAN_EFFECT_GL_RADIUS;
-
-  public static function registerAntialiasingGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerAntialiasingGlRenderEffects(state);
-  }
-
-  public static function registerBloomGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerBloomGlRenderEffects(state);
-  }
-
-  public static function registerBlurGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerBlurGlRenderEffects(state);
-  }
-
-  public static function registerColorGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGlRenderEffects(state);
-  }
-
-  public static function registerColorGradeGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGradeGlRenderEffects(state);
-  }
-
-  public static function registerCompositeGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerCompositeGlRenderEffects(state);
-  }
-
-  public static function registerCustomShaderGlRenderEffect(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerCustomShaderGlRenderEffect(state);
-  }
-
-  public static function registerDefaultGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerDefaultGlRenderEffects(state);
+  public static function registerGlBlendEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffect(state);
   }
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffectBackdrop(state, backdropKey, texture);
   }
 
-  public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderSource(state, shaderKey, fragmentSource);
+  public static function registerGlBloomEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlBloomEffect.registerGlBloomEffect(state);
+  }
+
+  public static function registerGlBlurEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlBlurEffect.registerGlBlurEffect(state);
+  }
+
+  public static function registerGlBokehDepthOfFieldEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlBokehDepthOfFieldEffect.registerGlBokehDepthOfFieldEffect(state);
+  }
+
+  public static function registerGlCameraMotionBlurEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlCameraMotionBlurEffect.registerGlCameraMotionBlurEffect(state);
+  }
+
+  public static function registerGlChromaticAberrationEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlChromaticAberrationEffect.registerGlChromaticAberrationEffect(state);
+  }
+
+  public static function registerGlCompositeEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlCompositeEffect.registerGlCompositeEffect(state);
+  }
+
+  public static function registerGlContactShadowsEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlContactShadowsEffect.registerGlContactShadowsEffect(state);
+  }
+
+  public static function registerGlConvolutionEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlConvolutionEffect.registerGlConvolutionEffect(state);
+  }
+
+  public static function registerGlCrtEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlCrtEffect.registerGlCrtEffect(state);
+  }
+
+  public static function registerGlCustomShaderEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderEffect(state);
+  }
+
+  public static function registerGlDirectionalBlurEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlDirectionalBlurEffect.registerGlDirectionalBlurEffect(state);
+  }
+
+  public static function registerGlDisplacementEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlDisplacementEffect.registerGlDisplacementEffect(state);
+  }
+
+  public static function registerGlDitherEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlDitherEffect.registerGlDitherEffect(state);
+  }
+
+  public static function registerGlDropShadowEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlDropShadowEffect.registerGlDropShadowEffect(state);
+  }
+
+  public static function registerGlFilmGrainEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlFilmGrainEffect.registerGlFilmGrainEffect(state);
+  }
+
+  public static function registerGlFxaaEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlFxaaEffect.registerGlFxaaEffect(state);
+  }
+
+  public static function registerGlGlitchEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlGlitchEffect.registerGlGlitchEffect(state);
+  }
+
+  public static function registerGlGodRaysEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlGodRaysEffect.registerGlGodRaysEffect(state);
+  }
+
+  public static function registerGlGradientBevelEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlGradientBevelEffect.registerGlGradientBevelEffect(state);
+  }
+
+  public static function registerGlGradientGlowEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlGradientGlowEffect.registerGlGradientGlowEffect(state);
+  }
+
+  public static function registerGlHalftoneEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlHalftoneEffect.registerGlHalftoneEffect(state);
+  }
+
+  public static function registerGlInnerGlowEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlInnerGlowEffect.registerGlInnerGlowEffect(state);
+  }
+
+  public static function registerGlInnerShadowEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlInnerShadowEffect.registerGlInnerShadowEffect(state);
+  }
+
+  public static function registerGlKuwaharaEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlKuwaharaEffect.registerGlKuwaharaEffect(state);
+  }
+
+  public static function registerGlLensDirtEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlLensDirtEffect.registerGlLensDirtEffect(state);
+  }
+
+  public static function registerGlLensDistortionEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlLensDistortionEffect.registerGlLensDistortionEffect(state);
+  }
+
+  public static function registerGlLensFlareEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlLensFlareEffect.registerGlLensFlareEffect(state);
+  }
+
+  public static function registerGlMedianEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlMedianEffect.registerGlMedianEffect(state);
+  }
+
+  public static function registerGlMotionBlurEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlMotionBlurEffect.registerGlMotionBlurEffect(state);
+  }
+
+  public static function registerGlOuterGlowEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlOuterGlowEffect.registerGlOuterGlowEffect(state);
+  }
+
+  public static function registerGlOutlineEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlOutlineEffect.registerGlOutlineEffect(state);
+  }
+
+  public static function registerGlPixelateEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlPixelateEffect.registerGlPixelateEffect(state);
+  }
+
+  public static function registerGlPosterizeEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlPosterizeEffect.registerGlPosterizeEffect(state);
+  }
+
+  public static function registerGlRadialBlurEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlRadialBlurEffect.registerGlRadialBlurEffect(state);
   }
 
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.registerGlRenderEffect(state, kind, runner);
   }
 
-  public static function registerScreenSpaceGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerScreenSpaceGlRenderEffects(state);
+  public static function registerGlScanlinesEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlScanlinesEffect.registerGlScanlinesEffect(state);
   }
 
-  public static function registerStandardGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerStandardGlRenderEffects(state);
+  public static function registerGlScreenSpaceFogEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlScreenSpaceFogEffect.registerGlScreenSpaceFogEffect(state);
   }
 
-  public static function registerStylizeGlRenderEffects(state:GlRenderState):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistrar.registerStylizeGlRenderEffects(state);
+  public static function registerGlSharpenEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlSharpenEffect.registerGlSharpenEffect(state);
+  }
+
+  public static function registerGlSketchEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlSketchEffect.registerGlSketchEffect(state);
+  }
+
+  public static function registerGlSmaaEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlSmaaEffect.registerGlSmaaEffect(state);
+  }
+
+  public static function registerGlSsaoEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlSsaoEffect.registerGlSsaoEffect(state);
+  }
+
+  public static function registerGlTiltShiftEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlTiltShiftEffect.registerGlTiltShiftEffect(state);
+  }
+
+  public static function registerGlToneMapEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect.registerGlToneMapEffect(state);
+  }
+
+  public static function registerGlVignetteEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlVignetteEffect.registerGlVignetteEffect(state);
+  }
+
+  public static function registerGlWhiteBalanceEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.registerGlWhiteBalanceEffect(state);
   }
 
   public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture(pipeline, texture);
-  }
-
-  public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.unregisterGlBlendEffectBackdrop(state, backdropKey);
-    return cast null;
   }
 }

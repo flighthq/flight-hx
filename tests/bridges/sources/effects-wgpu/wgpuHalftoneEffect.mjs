@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyHalftoneEffectToWgpu = api.applyHalftoneEffectToWgpu;
 export const defaultWgpuHalftoneEffectRunner = api.defaultWgpuHalftoneEffectRunner;
+export const registerWgpuHalftoneEffect = api.registerWgpuHalftoneEffect;

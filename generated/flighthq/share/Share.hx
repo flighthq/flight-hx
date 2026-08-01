@@ -9,16 +9,16 @@ import flighthq.types.Share.ShareBackend;
 import flighthq.types.Share.ShareContent;
 import flighthq.types.Share.ShareOptions;
 import flighthq.types.Share.ShareResult;
+import flighthq.types.ShareFile;
 import flighthq.types.ShareSignals;
 
 class Share {
+  public static final _attachedSignals__share:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
+
   public static var _backend__share:Null<ShareBackend> = _Runtime.explicitNull();
 
-  public static final _signalListeners__share:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
-
   public static function attachShareSignals(signals:ShareSignals):Void {
-    _Runtime.callValue(detachShareSignals, cast ([signals] : Array<Dynamic>));
-    ((cast Share._signalListeners__share : flighthq._internal._Map).set(signals, true));
+    ((cast Share._attachedSignals__share : flighthq._internal._Set).add(signals));
   }
 
   public static function canShareContent(content:ShareContent):Bool {
@@ -104,7 +104,7 @@ class Share {
   }
 
   public static function detachShareSignals(signals:ShareSignals):Void {
-    ((cast Share._signalListeners__share : flighthq._internal._Map).delete_(signals));
+    ((cast Share._attachedSignals__share : flighthq._internal._Set).delete_(signals));
   }
 
   public static function disposeShareSignals(signals:ShareSignals):Void {
@@ -174,33 +174,29 @@ class Share {
         return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
           return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'shareWithResult', cast ([content, options] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
             result = __awaitValue7;
-            var __flowBranch8:Dynamic;
-            if ((cast ((cast (cast Share._signalListeners__share : flighthq._internal._Map).size : Float) > (cast 0.0 : Float)) : Bool)) {
-              __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
-                for (signals in _Runtime.iterable(((cast Share._signalListeners__share : flighthq._internal._Map).keys()))) {
-                  _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onShareResult], [result]]), 1);
-                }
-                return flighthq._internal._Async.flowNormal();
-              });
-            } else {
-              __flowBranch8 = flighthq._internal._Async.flowNormal();
+            for (signals in _Runtime.iterable(Share._attachedSignals__share)) {
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onShareResult], [result]]), 1);
             }
-            return flighthq._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
-              return flighthq._internal._Async.flowReturn(result);
-            });
+            return flighthq._internal._Async.flowReturn(result);
           });
         });
       })
     );
   }
 
-  public static function shareFileToDomFile__share(file:{ var dataUrl:String; var mimeType:String; var name:String; }):Dynamic {
+  public static function shareFiles(files:Array<ShareFile>, ?options:ShareOptions):flighthq._internal._Promise<Bool> {
+    return cast _Runtime.callValue(shareContent, cast ([{ files: files }, options] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function shareFileToDomFile__share(file:ShareFile):Dynamic {
     var comma:Dynamic = cast _Runtime.UNDEFINED;
     var header:Dynamic = cast _Runtime.UNDEFINED;
     var body:Dynamic = cast _Runtime.UNDEFINED;
     var isBase64:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     comma = _Runtime.callProperty(_Runtime.field(file, 'dataUrl'), 'indexOf', cast ([','] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(comma, -1.0) : Bool)) { throw _Runtime.error('share: dataUrl is not a data URL (no comma)'); }
     header = _Runtime.substring(_Runtime.field(file, 'dataUrl'), 0.0, comma);
     body = _Runtime.substring(_Runtime.field(file, 'dataUrl'), (comma + 1.0), null);
     isBase64 = _Runtime.includes(header, ';base64');

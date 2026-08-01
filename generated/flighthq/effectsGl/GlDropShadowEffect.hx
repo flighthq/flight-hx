@@ -8,6 +8,7 @@ import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitPass;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectErasePass;
 import flighthq.effectsGl.GlEffectBoxBlur.applyGlEffectBoxBlur;
 import flighthq.effectsGl.GlEffectTintShader.applyGlEffectTintPass;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
@@ -84,4 +85,8 @@ class GlDropShadowEffect {
   public static final defaultGlDropShadowEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyDropShadowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlDropShadowEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'DropShadowEffect', defaultGlDropShadowEffectRunner] : Array<Dynamic>));
+  }
 }

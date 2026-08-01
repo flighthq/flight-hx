@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyPosterizeEffectToWgpu = api.applyPosterizeEffectToWgpu;
 export const defaultWgpuPosterizeEffectRunner = api.defaultWgpuPosterizeEffectRunner;
+export const registerWgpuPosterizeEffect = api.registerWgpuPosterizeEffect;

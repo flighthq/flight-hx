@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyCameraMotionBlurEffectToWgpu = api.applyCameraMotionBlurEffectToWgpu;
 export const defaultWgpuCameraMotionBlurEffectRunner = api.defaultWgpuCameraMotionBlurEffectRunner;
+export const registerWgpuCameraMotionBlurEffect = api.registerWgpuCameraMotionBlurEffect;

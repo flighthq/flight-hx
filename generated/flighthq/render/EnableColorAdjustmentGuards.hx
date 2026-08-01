@@ -10,15 +10,15 @@ import flighthq.types.RenderState;
 
 class EnableColorAdjustmentGuards {
   public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard'), null);
+    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentUnsupportedGuard'), null);
     return cast null;
   }
 
   public static function enableColorAdjustmentGuards(state:RenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard', EnableColorAdjustmentGuards.warnColorAdjustmentChannelMixingNotInlineable__enableColorAdjustmentGuards);
+    _Runtime.setField(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentUnsupportedGuard', EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards);
   }
 
-  public static function warnColorAdjustmentChannelMixingNotInlineable__enableColorAdjustmentGuards():Void {
-    _Runtime.callValue(logOnce, cast (['render:color-adjustment-channel-mixing-not-inlineable', LogLevel.Warn, { message: 'updateRenderProxyColorTransform: per-object channel-mixing color adjustment (saturation/hue/sepia/channelMixer) is not inline-able yet — the 4×5 fold is deferred, so only the affine part of the stack was applied. Use an Effect pass for the channel-mixing op.' }, 'render'] : Array<Dynamic>));
+  public static function warnUnsupportedColorAdjustment__enableColorAdjustmentGuards():Void {
+    _Runtime.callValue(logOnce, cast (['render:unsupported-color-adjustment', LogLevel.Warn, { message: 'updateRenderProxyColorScaleBias: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' }, 'render'] : Array<Dynamic>));
   }
 }

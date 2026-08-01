@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const attachStatusBar = api.attachStatusBar;
+export const clearStatusBarStyleStack = api.clearStatusBarStyleStack;
 export const createStatusBar = api.createStatusBar;
 export const createStatusBarInfo = api.createStatusBarInfo;
 export const createWebStatusBarBackend = api.createWebStatusBarBackend;
@@ -14,6 +15,7 @@ export const disposeStatusBar = api.disposeStatusBar;
 export const getStatusBarBackend = api.getStatusBarBackend;
 export const getStatusBarHeight = api.getStatusBarHeight;
 export const getStatusBarInfo = api.getStatusBarInfo;
+export const hasStatusBarStyleEntry = api.hasStatusBarStyleEntry;
 export const popStatusBarStyleEntry = api.popStatusBarStyleEntry;
 export const pushStatusBarStyleEntry = api.pushStatusBarStyleEntry;
 export const setStatusBarBackend = api.setStatusBarBackend;

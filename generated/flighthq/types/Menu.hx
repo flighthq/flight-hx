@@ -9,6 +9,6 @@ typedef MenuItemType = String;
 
 typedef MenuItemRole = Dynamic;
 
-typedef MenuItemTemplate = { @:optional var id:String; @:optional var label:String; @:optional var type:MenuItemType; @:optional var role:MenuItemRole; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var submenu:Array<MenuItemTemplate>; };
+typedef MenuItemTemplate = { @:optional var id:String; @:optional var label:String; @:optional var type:MenuItemType; @:optional var role:MenuItemRole; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var visible:Bool; @:optional var sublabel:String; @:optional var toolTip:String; @:optional var submenu:Array<MenuItemTemplate>; };
 
 typedef MenuBackend = { var setApplicationMenu:Dynamic; var popupContextMenu:Dynamic; var subscribeSelect:Dynamic; };

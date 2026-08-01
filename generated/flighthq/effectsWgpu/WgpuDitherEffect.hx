@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.DitherEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -26,6 +27,10 @@ class WgpuDitherEffect {
   public static final defaultWgpuDitherEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyDitherEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DitherEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuDitherEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'DitherEffect', defaultWgpuDitherEffectRunner] : Array<Dynamic>));
+  }
 
   public static final DITHER_FRAGMENT_WGSL__wgpuDitherEffect:Dynamic = '\nstruct Uniforms {\n  u_levels : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn bayer(p : vec2i) -> f32 {\n  let x = p.x & 3;\n  let y = p.y & 3;\n  var m = array<i32, 16>(0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);\n  return f32(m[y * 4 + x]) / 16.0;\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let px = vec2i(uv * uni.u_resolution);\n  let t = bayer(px) - 0.5;\n  let steps = uni.u_levels - 1.0;\n  let q = floor(c.rgb * steps + 0.5 + t) / steps;\n  return vec4f(clamp(q, vec3f(0.0), vec3f(1.0)), c.a);\n}';
 }

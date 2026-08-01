@@ -3,7 +3,7 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
+import flighthq.types.CapacitorApi;
 import flighthq.types.Share.ShareBackend;
 import flighthq.types.Share.ShareContent;
 
@@ -16,7 +16,7 @@ class CapacitorShare {
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(share, 'canShare', cast ([] : Array<Dynamic>)), 'then', cast ([function(result:Dynamic) {
       (cachedAvailable = cast (_Runtime.field(result, 'value') : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { isAvailable: function() {
       return cast cachedAvailable;

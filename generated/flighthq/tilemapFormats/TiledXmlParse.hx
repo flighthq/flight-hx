@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.tilemapFormats.TiledColor.parseTiledColor;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledBase64Layer;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledCsvLayer;
-import flighthq.tilemapFormats.TiledOptions.TiledCompression;
-import flighthq.tilemapFormats.TiledOptions.TiledParseOptions;
 import flighthq.types.TiledLayer;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledMap.TiledOrientation;
 import flighthq.types.TiledMap.TiledRenderOrder;
 import flighthq.types.TiledObject;
+import flighthq.types.TiledParseOptions;
+import flighthq.types.TiledParseOptions.TiledCompression;
 import flighthq.types.TiledProperty;
 import flighthq.types.TiledProperty.TiledPropertyType;
 import flighthq.types.TiledTileset;
@@ -20,7 +20,7 @@ import flighthq.types.TiledTileset.TiledTilesetRef;
 import flighthq.types.TiledTileset.TiledTilesetTile;
 import flighthq.types.TiledTileset.TiledTilesetTileFrame;
 import flighthq.types.Vector2.Vector2Like;
-import flighthq.xml.XmlParse.XmlElement;
+import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 import flighthq.xml.XmlQuery.getXmlElementAttribute;
 import flighthq.xml.XmlQuery.getXmlElementChildByName;
@@ -127,7 +127,7 @@ class TiledXmlParse {
     } else { if ((cast _Runtime.strictEquals(encoding, 'base64') : Bool)) {
       (decoded = cast (_Runtime.callValue(decodeTiledBase64Layer, cast ([data.text, _Runtime.callValue(TiledXmlParse.asCompression__tiledXmlParse, cast ([_Runtime.callValue(getXmlElementAttribute, cast ([data, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.inflate; })] : Array<Dynamic>)) : Dynamic));
     } else {
-      (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([data, 'tile'] : Array<Dynamic>)), 'map', cast ([function(tile:Dynamic) return _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([tile, 'gid', 0.0] : Array<Dynamic>))), 0)] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (new flighthq._internal._UInt32Array(_Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([data, 'tile'] : Array<Dynamic>)), 'map', cast ([function(tile:Dynamic) return _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([tile, 'gid', 0.0] : Array<Dynamic>))), 0)] : Array<Dynamic>))) : Dynamic));
     } }
     if ((cast _Runtime.strictEquals(decoded, null) : Bool)) { return cast grid; }
     _Runtime.callProperty(grid, 'set', cast ([(cast decoded : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));

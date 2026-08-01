@@ -3,12 +3,16 @@ package flighthq.glyphatlas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.glyphatlas.EnableGlyphAtlasGuards as Facade_Glyphatlas_flighthq_glyphatlas_EnableGlyphAtlasGuards;
+import flighthq.glyphatlas.ExplainGlyphAtlasEntry as Facade_Glyphatlas_flighthq_glyphatlas_ExplainGlyphAtlasEntry;
 import flighthq.glyphatlas.GlyphAtlas as Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas;
 import flighthq.glyphatlas.GlyphAtlasDirty as Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty;
 import flighthq.glyphatlas.GlyphAtlasEntry as Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasEntry;
 import flighthq.glyphatlas.GlyphAtlasMetrics as Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics;
 import flighthq.glyphatlas.GlyphRasterizerBackend as Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend;
 import flighthq.glyphatlas.GlyphSource as Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource;
+import flighthq.types.Bitmap;
+import flighthq.types.GlyphAtlasEntryExplanation;
 import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
@@ -16,7 +20,6 @@ import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 import flighthq.types.Rectangle;
-import flighthq.types.Surface;
 
 class Glyphatlas {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
@@ -48,8 +51,26 @@ class Glyphatlas {
     return cast null;
   }
 
+  public static function disableGlyphAtlasGuards():Void {
+    Facade_Glyphatlas_flighthq_glyphatlas_EnableGlyphAtlasGuards.disableGlyphAtlasGuards();
+  }
+
   public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
     Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.disposeGlyphAtlas(atlas);
+  }
+
+  public static function enableGlyphAtlasGuards():Void {
+    Facade_Glyphatlas_flighthq_glyphatlas_EnableGlyphAtlasGuards.enableGlyphAtlasGuards();
+  }
+
+  public static function explainGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):GlyphAtlasEntryExplanation {
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_ExplainGlyphAtlasEntry.explainGlyphAtlasEntry(atlas, codepoint);
+    return cast null;
+  }
+
+  public static function getGlyphAtlasBitmap(atlas:GlyphAtlas):Bitmap {
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.getGlyphAtlasBitmap(atlas);
+    return cast null;
   }
 
   public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
@@ -69,16 +90,6 @@ class Glyphatlas {
 
   public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
     return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasMetrics(atlas);
-    return cast null;
-  }
-
-  public static function getGlyphAtlasSurface(atlas:GlyphAtlas):Surface {
-    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.getGlyphAtlasSurface(atlas);
-    return cast null;
-  }
-
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend();
     return cast null;
   }
 

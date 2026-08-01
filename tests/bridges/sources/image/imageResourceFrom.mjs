@@ -5,11 +5,11 @@ const api = compiled.flighthq.image.ImageResourceFrom;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createCanvasFromImageResource = api.createCanvasFromImageResource;
+export const createImageResourceFromBitmap = api.createImageResourceFromBitmap;
 export const createImageResourceFromCanvas = api.createImageResourceFromCanvas;
 export const createImageResourceFromImageBitmap = api.createImageResourceFromImageBitmap;
 export const createImageResourceFromImageElement = api.createImageResourceFromImageElement;
-export const isImageResourceSameOrigin = api.isImageResourceSameOrigin;
+export const isImageUrlSameOrigin = api.isImageUrlSameOrigin;
 export const loadImageResourceFromBase64 = api.loadImageResourceFromBase64;
 export const loadImageResourceFromBlob = api.loadImageResourceFromBlob;
 export const loadImageResourceFromBytes = api.loadImageResourceFromBytes;

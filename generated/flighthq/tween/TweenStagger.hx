@@ -9,8 +9,7 @@ import flighthq.types.Tween;
 import flighthq.types.Tween.NumericProps;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
-
-typedef TweenStaggerOptions = { @:optional var each:Float; @:optional var from:Dynamic; @:optional var staggerEase:EasingFunction; };
+import flighthq.types.TweenStaggerOptions;
 
 class TweenStagger {
   public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<Dynamic>> {

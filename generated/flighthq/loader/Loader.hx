@@ -4,6 +4,8 @@ package flighthq.loader;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.loader.ResourceLoader as Facade_Loader_flighthq_loader_ResourceLoader;
+import flighthq.types.ResourceLoadBytes;
+import flighthq.types.ResourceLoadCounts;
 import flighthq.types.ResourceLoadHandle;
 import flighthq.types.ResourceLoadItemStatus;
 import flighthq.types.ResourceLoader;
@@ -26,6 +28,16 @@ class Loader {
 
   public static function enableResourceLoaderItemSignals(loader:ResourceLoader):ResourceLoaderItemSignals {
     return cast Facade_Loader_flighthq_loader_ResourceLoader.enableResourceLoaderItemSignals(loader);
+    return cast null;
+  }
+
+  public static function getResourceLoadBytes(loader:ResourceLoader):ResourceLoadBytes {
+    return cast Facade_Loader_flighthq_loader_ResourceLoader.getResourceLoadBytes(loader);
+    return cast null;
+  }
+
+  public static function getResourceLoadCounts(loader:ResourceLoader):ResourceLoadCounts {
+    return cast Facade_Loader_flighthq_loader_ResourceLoader.getResourceLoadCounts(loader);
     return cast null;
   }
 

@@ -5,5 +5,6 @@ const api = compiled.flighthq.render.SceneRender;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const packSceneLightBlock = api.packSceneLightBlock;
-export const prepareSceneRender = api.prepareSceneRender;
+export const packScene3DLightBlock = api.packScene3DLightBlock;
+export const prepareScene3DRender = api.prepareScene3DRender;
+export const setSkinnedMeshBoundsGuard = api.setSkinnedMeshBoundsGuard;

@@ -11,7 +11,6 @@ import flighthq.types.InputKeyRepeatOptions;
 import flighthq.types.InputKeyRepeatTimer;
 import flighthq.types.InputManager;
 import flighthq.types.InputManager.AttachInputOptions;
-import flighthq.types.InputSignals;
 import flighthq.types.InputState;
 import flighthq.types.MouseWheelMode;
 
@@ -61,11 +60,6 @@ class Input {
 
   public static function createInputManager():InputManager {
     return cast Facade_Input_flighthq_input_InputManager.createInputManager();
-    return cast null;
-  }
-
-  public static function createInputSignals():InputSignals {
-    return cast Facade_Input_flighthq_input_InputManager.createInputSignals();
     return cast null;
   }
 

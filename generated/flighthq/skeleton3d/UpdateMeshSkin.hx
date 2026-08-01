@@ -8,6 +8,7 @@ import flighthq.mesh.MeshGeometry.setMeshGeometrySkinBindPose;
 import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
 import flighthq.skeleton3d.SkinMeshGeometry.captureMeshSkinBindPose;
 import flighthq.skeleton3d.SkinMeshGeometry.skinMeshGeometry;
+import flighthq.skeleton3d.SkinMeshGeometry.updateMeshSkinBindPoseDeformInput;
 import flighthq.types.Mesh;
 
 class UpdateMeshSkin {
@@ -23,7 +24,9 @@ class UpdateMeshSkin {
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
       (bindPose = cast (_Runtime.callValue(captureMeshSkinBindPose, cast ([geometry] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(setMeshGeometrySkinBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
-    }
+    } else { if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) {
+      _Runtime.callValue(updateMeshSkinBindPoseDeformInput, cast ([bindPose, geometry] : Array<Dynamic>));
+    } }
     _Runtime.callValue(skinMeshGeometry, cast ([geometry, _Runtime.field(skin, 'skeleton'), bindPose] : Array<Dynamic>));
   }
 }

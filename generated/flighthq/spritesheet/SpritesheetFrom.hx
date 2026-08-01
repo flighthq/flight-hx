@@ -6,14 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.spritesheet.Spritesheet.createSpritesheet;
 import flighthq.spritesheet.SpritesheetAnimation.createSpritesheetAnimation;
 import flighthq.spritesheet.SpritesheetFrame.createSpritesheetFrame;
-import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
-import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
+import flighthq.textureatlas.TextureAtlasGrid.createTextureAtlasFromGrid;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetData;
 import flighthq.types.TextureAtlas;
-import flighthq.types.Tileset;
 
 class SpritesheetFrom {
   public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
@@ -53,65 +51,10 @@ class SpritesheetFrom {
   }
 
   public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var columns:Dynamic = cast _Runtime.UNDEFINED;
-    var rows:Dynamic = cast _Runtime.UNDEFINED;
-    var imageWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var imageHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var marginX:Dynamic = cast _Runtime.UNDEFINED;
-    var marginY:Dynamic = cast _Runtime.UNDEFINED;
-    var spacingX:Dynamic = cast _Runtime.UNDEFINED;
-    var spacingY:Dynamic = cast _Runtime.UNDEFINED;
-    var namePrefix:Dynamic = cast _Runtime.UNDEFINED;
-    var frameWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var frameHeight:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;
-    var id:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure0 = options;
-    columns = _Runtime.field(__destructure0, 'columns');
-    rows = _Runtime.field(__destructure0, 'rows');
-    imageWidth = _Runtime.field(__destructure0, 'imageWidth');
-    imageHeight = _Runtime.field(__destructure0, 'imageHeight');
-    marginX = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'marginX'), function():Dynamic return cast 0.0);
-    marginY = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'marginY'), function():Dynamic return cast 0.0);
-    spacingX = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingX'), function():Dynamic return cast 0.0);
-    spacingY = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingY'), function():Dynamic return cast 0.0);
-    namePrefix = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'namePrefix'), function():Dynamic return cast 'frame_');
-    frameWidth = _Runtime.coalesce(options.frameWidth, function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
-    frameHeight = _Runtime.coalesce(options.frameHeight, function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
-    atlas = _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>));
-    frames = cast ([] : Array<Dynamic>);
-    id = 0.0;
-    {
-      var row:Dynamic = 0.0;
-      while ((cast ((cast row : Float) < (cast rows : Float)) : Bool)) {
-        {
-          var col:Dynamic = 0.0;
-          while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
-            var x:Dynamic = (marginX + (col * (frameWidth + spacingX)));
-            var y:Dynamic = (marginY + (row * (frameHeight + spacingY)));
-            var region:Dynamic = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: frameHeight, id: id, name: '' + Std.string(namePrefix) + '' + Std.string(id) + '', width: frameWidth, x: x, y: y }] : Array<Dynamic>));
-            _Runtime.callProperty(atlas.regions, 'push', cast ([region] : Array<Dynamic>));
-            _Runtime.callProperty(frames, 'push', cast ([_Runtime.callValue(createSpritesheetFrame, cast ([{ id: id }] : Array<Dynamic>))] : Array<Dynamic>));
-            id++;
-            col++;
-          }
-        }
-        row++;
-      }
-    }
-    return cast _Runtime.callValue(createSpritesheet, cast ([{ atlas: atlas, frames: frames }] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function createSpritesheetFromTileset(tileset:Tileset):Spritesheet {
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure1 = tileset;
-    atlas = _Runtime.field(__destructure1, 'atlas');
-    frames = _Runtime.callProperty(_Runtime.coalesce(({ final __typedStruct6 = atlas; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.regions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: region.id }] : Array<Dynamic>))] : Array<Dynamic>));
+    atlas = _Runtime.callValue(createTextureAtlasFromGrid, cast ([options] : Array<Dynamic>));
+    frames = _Runtime.callProperty(atlas.regions, 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: region.id }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast _Runtime.callValue(createSpritesheet, cast ([{ atlas: atlas, frames: frames }] : Array<Dynamic>));
     return cast null;
   }

@@ -3,10 +3,10 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
+import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.SceneNode;
-import flighthq.types.SceneNode.SceneNodeRuntime;
 
 class _ParticleEmitter3DValues {
   public static final ParticleEmitter3DKind:Dynamic = 'ParticleEmitter3D';

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyScreenSpaceFogEffectToWgpu = api.applyScreenSpaceFogEffectToWgpu;
 export const defaultWgpuScreenSpaceFogEffectRunner = api.defaultWgpuScreenSpaceFogEffectRunner;
+export const registerWgpuScreenSpaceFogEffect = api.registerWgpuScreenSpaceFogEffect;

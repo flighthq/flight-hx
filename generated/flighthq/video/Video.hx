@@ -16,8 +16,8 @@ class Video {
     return cast null;
   }
 
-  public static function createVideoResource(?element:Dynamic):VideoResource {
-    return cast Facade_Video_flighthq_video_VideoResource.createVideoResource(element);
+  public static function createVideoResource(?element:Dynamic, ?objectUrl:String):VideoResource {
+    return cast Facade_Video_flighthq_video_VideoResource.createVideoResource(element, objectUrl);
     return cast null;
   }
 

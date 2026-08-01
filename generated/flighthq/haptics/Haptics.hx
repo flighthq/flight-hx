@@ -41,7 +41,7 @@ class Haptics {
       pattern = ((cast _Runtime.strictEquals(type, 'error') : Bool) ? (cast cast ([20.0, 60.0, 20.0] : Array<Dynamic>) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'warning') : Bool) ? (cast cast ([20.0, 60.0, 20.0, 60.0] : Array<Dynamic>) : Dynamic) : (cast cast ([15.0, 50.0, 15.0] : Array<Dynamic>) : Dynamic)) : Dynamic));
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([pattern] : Array<Dynamic>));
     }, prepare: function() {
-    
+
     }, selection: function() {
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([5.0] : Array<Dynamic>));
     }, vibrate: function(durationMs:Float) {

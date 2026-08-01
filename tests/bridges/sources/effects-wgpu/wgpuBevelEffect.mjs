@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBevelEffectToWgpu = api.applyBevelEffectToWgpu;
 export const defaultWgpuBevelEffectRunner = api.defaultWgpuBevelEffectRunner;
+export const registerWgpuBevelEffect = api.registerWgpuBevelEffect;

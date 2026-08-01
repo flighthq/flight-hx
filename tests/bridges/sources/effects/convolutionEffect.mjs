@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createConvolutionEffect = api.createConvolutionEffect;
+export const getConvolutionEffectPadding = api.getConvolutionEffectPadding;
+export const registerConvolutionEffectPaddingResolver = api.registerConvolutionEffectPaddingResolver;

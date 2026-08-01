@@ -8,4 +8,4 @@ __syncDependencies();
 export const createGlyphAtlas = api.createGlyphAtlas;
 export const deriveGlyphMetricsFromFontSize = api.deriveGlyphMetricsFromFontSize;
 export const disposeGlyphAtlas = api.disposeGlyphAtlas;
-export const getGlyphAtlasSurface = api.getGlyphAtlasSurface;
+export const getGlyphAtlasBitmap = api.getGlyphAtlasBitmap;

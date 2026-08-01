@@ -3,8 +3,8 @@ package flighthq.tilemapFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.tilemapFormats.TiledOptions.TiledCompression;
-import flighthq.tilemapFormats.TiledOptions.TiledInflate;
+import flighthq.types.TiledParseOptions.TiledCompression;
+import flighthq.types.TiledParseOptions.TiledInflate;
 
 class TiledLayerData {
   public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<flighthq._internal._UInt32Array> {
@@ -41,7 +41,7 @@ class TiledLayerData {
       var n:Dynamic = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([trimmed] : Array<Dynamic>));
       _Runtime.callProperty(out, 'push', cast ([((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(n), 0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
     }
-    return cast _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([out] : Array<Dynamic>));
+    return cast new flighthq._internal._UInt32Array(out);
     return cast null;
   }
 

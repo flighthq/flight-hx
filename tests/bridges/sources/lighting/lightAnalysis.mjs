@@ -5,7 +5,8 @@ const api = compiled.flighthq.lighting.LightAnalysis;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getLightContributionAtBoundingSphere = api.getLightContributionAtBoundingSphere;
 export const getLightInfluenceBounds = api.getLightInfluenceBounds;
 export const getLightLuminance = api.getLightLuminance;
 export const hasLightInfluenceOnBounds = api.hasLightInfluenceOnBounds;
-export const isLightShadowCasting = api.isLightShadowCasting;
+export const isLightCastingShadow = api.isLightCastingShadow;

@@ -46,7 +46,7 @@ class Device {
       var maxTouch:Dynamic = cast _Runtime.UNDEFINED;
       var ua:Dynamic = cast _Runtime.UNDEFINED;
       nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
-      maxTouch = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast _Runtime.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic));
+      maxTouch = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic));
       (out.hasMouse = cast (_Runtime.strictEquals(maxTouch, 0.0) : Dynamic));
       ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
       (out.hasKeyboard = cast (_Runtime.callValue(Device.detectDesktopUa__device, cast ([ua] : Array<Dynamic>)) : Dynamic));
@@ -62,7 +62,7 @@ class Device {
       (out.densityDpi = cast (-1.0 : Dynamic));
       (out.logicalHeight = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast _Runtime.field(scr, 'height') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.logicalWidth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast _Runtime.field(scr, 'width') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      pixelRatio = ((cast !_Runtime.strictEquals(win, null) : Bool) ? (cast _Runtime.field(win, 'devicePixelRatio') : Dynamic) : (cast -1.0 : Dynamic));
+      pixelRatio = ((cast !_Runtime.strictEquals(win, null) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(win, 'devicePixelRatio') : Dynamic) : (cast -1.0 : Dynamic));
       (out.pixelRatio = cast (pixelRatio : Dynamic));
       (out.physicalWidth = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round((_Runtime.field(scr, 'width') * pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.physicalHeight = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round((_Runtime.field(scr, 'height') * pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
@@ -96,7 +96,7 @@ class Device {
       cores = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'hardwareConcurrency') : Bool)) : Bool) ? (cast _Runtime.coalesce(_Runtime.field(nav, 'hardwareConcurrency'), function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
       (out.cpuCores = cast (cores : Dynamic));
       (out.fontScale = cast (-1.0 : Dynamic));
-      (out.formFactor = cast (_Runtime.callValue(parseUserAgentFormFactor, cast ([ua, ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast _Runtime.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic))] : Array<Dynamic>)) : Dynamic));
+      (out.formFactor = cast (_Runtime.callValue(parseUserAgentFormFactor, cast ([ua, ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic))] : Array<Dynamic>)) : Dynamic));
       gpuInfo = _Runtime.callValue(Device.readWebGpuInfo__device, cast ([] : Array<Dynamic>));
       (out.gpuRenderer = cast (_Runtime.field(gpuInfo, 'renderer') : Dynamic));
       (out.gpuVendor = cast (_Runtime.field(gpuInfo, 'vendor') : Dynamic));
@@ -154,7 +154,7 @@ class Device {
     var readInsets:Void->Void = cast _Runtime.UNDEFINED;
     var observer:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
-    
+
     }; }
     el = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(el, 'style'), 'cssText', (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;'));
@@ -212,10 +212,10 @@ class Device {
       var canvas:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
       if ((cast _Runtime.strictEquals(gl, null) : Bool)) { return cast { renderer: '', vendor: '' }; }
-      var ext:Dynamic = flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_debug_renderer_info');
+      var ext:Dynamic = _Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(ext, null) : Bool)) { return cast { renderer: '', vendor: '' }; }
-      var vendor:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, _Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL')) : String), function():Dynamic return cast '');
-      var renderer:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, _Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL')) : String), function():Dynamic return cast '');
+      var vendor:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
+      var renderer:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
       return cast { renderer: renderer, vendor: vendor };
     } catch (__error:Dynamic) {
       return cast { renderer: '', vendor: '' };

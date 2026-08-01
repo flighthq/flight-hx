@@ -2,12 +2,9 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createIpcChannel = compiled.flighthq.ipc.Ipc.createIpcChannel;
-export const createWebIpcBackend = compiled.flighthq.ipc.Ipc.createWebIpcBackend;
 export const enableIpcSignals = compiled.flighthq.ipc.Ipc.enableIpcSignals;
-export const getIpcBackend = compiled.flighthq.ipc.Ipc.getIpcBackend;
 export const getIpcListenerCount = compiled.flighthq.ipc.Ipc.getIpcListenerCount;
 export const getIpcSignals = compiled.flighthq.ipc.Ipc.getIpcSignals;
-export const hasIpcBackend = compiled.flighthq.ipc.Ipc.hasIpcBackend;
 export const invokeIpc = compiled.flighthq.ipc.Ipc.invokeIpc;
 export const invokeIpcWithTimeout = compiled.flighthq.ipc.Ipc.invokeIpcWithTimeout;
 export const onceIpcMessage = compiled.flighthq.ipc.Ipc.onceIpcMessage;
@@ -17,4 +14,3 @@ export const onIpcMessageEvent = compiled.flighthq.ipc.Ipc.onIpcMessageEvent;
 export const removeAllIpcListeners = compiled.flighthq.ipc.Ipc.removeAllIpcListeners;
 export const sendIpcMessage = compiled.flighthq.ipc.Ipc.sendIpcMessage;
 export const sendIpcMessageTo = compiled.flighthq.ipc.Ipc.sendIpcMessageTo;
-export const setIpcBackend = compiled.flighthq.ipc.Ipc.setIpcBackend;

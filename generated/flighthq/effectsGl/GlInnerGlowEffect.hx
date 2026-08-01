@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitPass;
 import flighthq.effectsGl.GlEffectBoxBlur.applyGlEffectBoxBlur;
 import flighthq.effectsGl.GlEffectTintShader.applyGlEffectInvertTintPass;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
@@ -66,6 +67,10 @@ class GlInnerGlowEffect {
     _Runtime.callValue(applyInnerGlowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect)] : Array<Dynamic>));
   };
 
+  public static function registerGlInnerGlowEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'InnerGlowEffect', defaultGlInnerGlowEffectRunner] : Array<Dynamic>));
+  }
+
   public static function applyGlInnerClipPass__glInnerGlowEffect(state:GlRenderState, glow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlInnerGlowEffect.getClipShader__glInnerGlowEffect, cast ([state] : Array<Dynamic>));
@@ -76,12 +81,12 @@ class GlInnerGlowEffect {
 
   public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap).get(state));
+    loc = ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlInnerGlowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap).set(state, loc));
+      ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), loc));
     }
     return cast loc;
     return cast null;

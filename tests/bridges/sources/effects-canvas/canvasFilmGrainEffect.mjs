@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyFilmGrainEffectToCanvas = api.applyFilmGrainEffectToCanvas;
 export const defaultCanvasFilmGrainEffectRunner = api.defaultCanvasFilmGrainEffectRunner;
+export const registerCanvasFilmGrainEffect = api.registerCanvasFilmGrainEffect;

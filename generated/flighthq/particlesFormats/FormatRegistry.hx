@@ -3,13 +3,14 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.ParseParticleConfig.ParticleConfigParseResult;
-import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
-import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
+import flighthq.types.ParticleFormatCodec;
 import flighthq.types.ParticleFormatKind;
-
-typedef ParticleFormatCodec = { var detect:Dynamic; var parseToConfig:Dynamic; var parseToDocument:Dynamic; var serialize:Dynamic; };
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class FormatRegistry {
   public static function detectRegisteredParticleFormat(text:String):Null<String> {
@@ -39,13 +40,17 @@ class FormatRegistry {
     var codec:Dynamic = cast _Runtime.UNDEFINED;
     codec = ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).get(kind));
     if ((cast !_Runtime.truthy(codec) : Bool)) {
-      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: kind, warnings: cast (['unknown-format: format \'' + Std.string(kind) + '\' has no registered codec'] : Array<Dynamic>) };
+      var diagnostics:Array<ImportDiagnostic> = cast ([] : Array<Dynamic>);
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.unknown-format', 'parseRegisteredParticleFormat', { reason: 'no-registered-codec' }] : Array<Dynamic>));
+      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: kind };
     }
     try {
       var result:Dynamic = _Runtime.callProperty(codec, 'parseToDocument', cast ([text] : Array<Dynamic>));
-      return cast { config: _Runtime.field(result, 'config'), format: kind, warnings: _Runtime.field(result, 'warnings') };
+      return cast { config: _Runtime.field(result, 'config'), diagnostics: _Runtime.field(result, 'diagnostics'), format: kind };
     } catch (err:Dynamic) {
-      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: kind, warnings: cast (['parse-error: ' + Std.string(_Runtime.field((cast err : haxe.Exception), 'message')) + ''] : Array<Dynamic>) };
+      var diagnostics:Array<ImportDiagnostic> = cast ([] : Array<Dynamic>);
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.parse-error', 'parseRegisteredParticleFormat', { message: _Runtime.field((cast err : haxe.Exception), 'message') }] : Array<Dynamic>));
+      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: kind };
     }
     return cast null;
   }

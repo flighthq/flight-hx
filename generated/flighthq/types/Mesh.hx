@@ -7,9 +7,12 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
-import flighthq.types.SceneNode.SceneNodeRuntime;
-import flighthq.types.SceneNode.SceneNodeTraits;
+import flighthq.types.Node.NodeTraitsKey;
+import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3D.Node3DTraits;
 
-typedef Mesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var materials:Array<Null<Material>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; };
+typedef Mesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var materials:Array<Null<Material>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; };
 
-typedef MeshRuntime = SceneNodeRuntime;
+typedef MeshDeformRuntime = { @:optional var deformedLocalBounds:Null<Aabb>; };
+
+typedef MeshRuntime = { var binding:Null<Dynamic>; var colorAdjustments:Null<Array<Adjustment>>; var colorAdjustmentsUnsupported:Bool; var resolvedColorMatrix:Null<Array<Float>>; var resolvedColorScaleBias:Null<ColorScaleBias>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Dynamic; var children:Null<Array<Node<Node3DTraits>>>; @:optional var traits:NodeTraitsKey<Node3DTraits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<Node<Node3DTraits>>; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; var worldAlpha:Null<Float>; var worldAlphaUsingAppearanceId:Float; var worldAlphaUsingParentAppearanceId:Float; var worldAppearanceId:Float; var localMatrix4:Null<Matrix4>; var localMatrix4Detached:Bool; var worldMatrix4:Null<Matrix4>; @:optional var deformedLocalBounds:Null<Aabb>; };

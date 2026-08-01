@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.DisplayObject;
+import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuBitmapShader;
@@ -31,7 +31,7 @@ class WgpuShaderBinding {
     return cast null;
   }
 
-  public static function setWgpuShader(state:WgpuRenderState, node:DisplayObject, shader:Null<WgpuBitmapShader>):Void {
+  public static function setWgpuShader(state:WgpuRenderState, node:Node2D, shader:Null<WgpuBitmapShader>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(shader, null) : Bool)) {

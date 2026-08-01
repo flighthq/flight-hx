@@ -4,10 +4,10 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
 import flighthq.types.ColorLut;
 import flighthq.types.WgpuColorLutTextureCache;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
@@ -105,7 +105,7 @@ class WgpuColorLutPass {
         i++;
       }
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: _Runtime.field(cache, 'texture') }, data, { bytesPerRow: (n * 4.0), rowsPerImage: n }, cast ([n, n, n] : Array<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: _Runtime.field(cache, 'texture') }, data, { bytesPerRow: (n * 4.0), rowsPerImage: n }, cast ([n, n, n] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.setField(cache, 'lut', lut);
     return cast _Runtime.field(cache, 'texture');
     return cast null;

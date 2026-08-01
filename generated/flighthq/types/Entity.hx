@@ -11,3 +11,7 @@ typedef Entity = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
 typedef EntityWithoutRuntime<Type> = Dynamic;
 
 typedef EntityRuntime = { var binding:Null<Dynamic>; };
+
+typedef EntityRuntimeWriteSlot = String;
+
+typedef EntityRuntimeWriteGuard = Dynamic;

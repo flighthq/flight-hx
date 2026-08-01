@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyCameraMotionBlurEffectToGl = api.applyCameraMotionBlurEffectToGl;
 export const defaultGlCameraMotionBlurEffectRunner = api.defaultGlCameraMotionBlurEffectRunner;
+export const registerGlCameraMotionBlurEffect = api.registerGlCameraMotionBlurEffect;

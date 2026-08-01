@@ -6,4 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const NodeKind = api.NodeKind;
-export const NullScene = api.NullScene;
+export const NullScene3D = api.NullScene3D;

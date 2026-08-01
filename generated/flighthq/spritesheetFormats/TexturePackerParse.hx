@@ -6,17 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetAnimationData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerDocument;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerFrameTag;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerMeta;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasPackerParse.parseTextureAtlasPackerDocument;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlasRegion;
-
-typedef TexturePackerParsed = { var data:SpritesheetData; var document:TexturePackerDocument; };
+import flighthq.types.TexturePackerSchema.TexturePackerDocument;
+import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
+import flighthq.types.TexturePackerSchema.TexturePackerMeta;
+import flighthq.types.TexturePackerSchema.TexturePackerParsed;
 
 class TexturePackerParse {
   public static function frameFromRegion__texturePackerParse(region:TextureAtlasRegion):SpritesheetFrameData {
@@ -53,14 +52,31 @@ class TexturePackerParse {
   }
 
   public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
-    return cast _Runtime.callValue(TexturePackerParse.documentToData__texturePackerParse, cast ([(cast _Runtime.jsonParse(json) : TexturePackerDocument)] : Array<Dynamic>));
+    var document:TexturePackerDocument = cast _Runtime.UNDEFINED;
+    try {
+      (document = cast ((cast _Runtime.jsonParse(json) : TexturePackerDocument) : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>));
+    }
+    return cast _Runtime.callValue(TexturePackerParse.documentToData__texturePackerParse, cast ([document] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseTexturePackerSpritesheetDocument(json:String):TexturePackerParsed {
-    var document:Dynamic = cast _Runtime.UNDEFINED;
-    document = (cast _Runtime.jsonParse(json) : TexturePackerDocument);
+    var document:TexturePackerDocument = cast _Runtime.UNDEFINED;
+    try {
+      (document = cast ((cast _Runtime.jsonParse(json) : TexturePackerDocument) : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast { data: _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>)), document: _Runtime.callValue(TexturePackerParse.createEmptyTexturePackerDocument__texturePackerParse, cast ([] : Array<Dynamic>)) };
+    }
     return cast { data: _Runtime.callValue(TexturePackerParse.documentToData__texturePackerParse, cast ([document] : Array<Dynamic>)), document: document };
+    return cast null;
+  }
+
+  public static function createEmptyTexturePackerDocument__texturePackerParse():TexturePackerDocument {
+    var meta:TexturePackerMeta = cast _Runtime.UNDEFINED;
+    meta = { app: '', format: '', image: '', scale: 1.0, size: { h: 0.0, w: 0.0 }, version: '' };
+    return cast { frames: cast ([] : Array<Dynamic>), meta: meta };
     return cast null;
   }
 }

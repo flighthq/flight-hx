@@ -4,28 +4,19 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuBevelEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect;
+import flighthq.effectsWgpu.WgpuBlendEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlendEffect;
 import flighthq.effectsWgpu.WgpuBloomEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBloomEffect;
 import flighthq.effectsWgpu.WgpuBlurEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect;
-import flighthq.effectsWgpu.WgpuBokehDepthOfFieldEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBokehDepthOfFieldEffect;
 import flighthq.effectsWgpu.WgpuCameraMotionBlurEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCameraMotionBlurEffect;
 import flighthq.effectsWgpu.WgpuChromaticAberrationEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuChromaticAberrationEffect;
-import flighthq.effectsWgpu.WgpuColorLutPass as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuColorLutPass;
-import flighthq.effectsWgpu.WgpuColorMatrixPass as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuColorMatrixPass;
+import flighthq.effectsWgpu.WgpuCompositeEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCompositeEffect;
+import flighthq.effectsWgpu.WgpuContactShadowsEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuContactShadowsEffect;
 import flighthq.effectsWgpu.WgpuConvolutionEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuConvolutionEffect;
 import flighthq.effectsWgpu.WgpuCrtEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCrtEffect;
 import flighthq.effectsWgpu.WgpuDirectionalBlurEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDirectionalBlurEffect;
 import flighthq.effectsWgpu.WgpuDisplacementEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDisplacementEffect;
 import flighthq.effectsWgpu.WgpuDitherEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDitherEffect;
 import flighthq.effectsWgpu.WgpuDropShadowEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDropShadowEffect;
-import flighthq.effectsWgpu.WgpuEffectBlitShader as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader;
-import flighthq.effectsWgpu.WgpuEffectBoxBlur as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBoxBlur;
-import flighthq.effectsWgpu.WgpuEffectGradientRamp as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectGradientRamp;
-import flighthq.effectsWgpu.WgpuEffectPass as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectBlendMode;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
-import flighthq.effectsWgpu.WgpuEffectProgramCache as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectProgramCache;
-import flighthq.effectsWgpu.WgpuEffectTintShader as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader;
 import flighthq.effectsWgpu.WgpuFilmGrainEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFilmGrainEffect;
 import flighthq.effectsWgpu.WgpuFxaaEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFxaaEffect;
 import flighthq.effectsWgpu.WgpuGlitchEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGlitchEffect;
@@ -47,306 +38,36 @@ import flighthq.effectsWgpu.WgpuPixelateEffect as Facade_EffectsWgpu_flighthq_ef
 import flighthq.effectsWgpu.WgpuPosterizeEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPosterizeEffect;
 import flighthq.effectsWgpu.WgpuRadialBlurEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRadialBlurEffect;
 import flighthq.effectsWgpu.WgpuRenderEffectPipeline as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline;
-import flighthq.effectsWgpu.WgpuRenderEffectRegistrants as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry;
+import flighthq.effectsWgpu.WgpuRenderTextureEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderTextureEffect;
 import flighthq.effectsWgpu.WgpuScanlinesEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScanlinesEffect;
 import flighthq.effectsWgpu.WgpuScreenSpaceFogEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect;
 import flighthq.effectsWgpu.WgpuSharpenEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSharpenEffect;
 import flighthq.effectsWgpu.WgpuSketchEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSketchEffect;
 import flighthq.effectsWgpu.WgpuSmaaEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSmaaEffect;
 import flighthq.effectsWgpu.WgpuSsaoEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsaoEffect;
-import flighthq.effectsWgpu.WgpuSsrEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsrEffect;
-import flighthq.effectsWgpu.WgpuTaaEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTaaEffect;
 import flighthq.effectsWgpu.WgpuTiltShiftEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTiltShiftEffect;
 import flighthq.effectsWgpu.WgpuToneMapEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect;
 import flighthq.effectsWgpu.WgpuVignetteEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect;
 import flighthq.effectsWgpu.WgpuWhiteBalanceEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect;
-import flighthq.types.BevelEffect;
-import flighthq.types.BloomEffect;
-import flighthq.types.BlurEffect;
-import flighthq.types.BokehDepthOfFieldEffect;
-import flighthq.types.CameraMotionBlurEffect;
-import flighthq.types.ChromaticAberrationEffect;
-import flighthq.types.ColorLut;
-import flighthq.types.ConvolutionEffect;
-import flighthq.types.CrtEffect;
-import flighthq.types.DirectionalBlurEffect;
-import flighthq.types.DisplacementEffect;
-import flighthq.types.DitherEffect;
-import flighthq.types.DropShadowEffect;
-import flighthq.types.FilmGrainEffect;
-import flighthq.types.FxaaEffect;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
-import flighthq.types.GlitchEffect;
-import flighthq.types.GodRaysEffect;
-import flighthq.types.GradientBevelEffect;
-import flighthq.types.GradientGlowEffect;
-import flighthq.types.HalftoneEffect;
-import flighthq.types.InnerGlowEffect;
-import flighthq.types.InnerShadowEffect;
-import flighthq.types.KuwaharaEffect;
-import flighthq.types.LensDirtEffect;
-import flighthq.types.LensDistortionEffect;
-import flighthq.types.LensFlareEffect;
-import flighthq.types.MedianEffect;
-import flighthq.types.MotionBlurEffect;
-import flighthq.types.OuterGlowEffect;
-import flighthq.types.OutlineEffect;
-import flighthq.types.PixelateEffect;
-import flighthq.types.PosterizeEffect;
-import flighthq.types.RadialBlurEffect;
-import flighthq.types.ScanlinesEffect;
-import flighthq.types.ScreenSpaceFogEffect;
-import flighthq.types.SharpenEffect;
-import flighthq.types.SketchEffect;
-import flighthq.types.SmaaEffect;
-import flighthq.types.SsaoEffect;
-import flighthq.types.SsrEffect;
-import flighthq.types.TaaEffect;
-import flighthq.types.TiltShiftEffect;
-import flighthq.types.ToneMapEffect;
-import flighthq.types.VignetteEffect;
-import flighthq.types.WgpuColorLutTextureCache;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTexture;
 import flighthq.types.WgpuRenderEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
-import flighthq.types.WhiteBalanceEffect;
+import flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool;
 
 class EffectsWgpu {
-  public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect.applyBevelEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBloomEffect.applyBloomEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect.applyBlurEffectToWgpu(state, source, dest, temp, effect);
-  }
-
-  public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyCameraMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CameraMotionBlurEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCameraMotionBlurEffect.applyCameraMotionBlurEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuChromaticAberrationEffect.applyChromaticAberrationEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuColorLutPass.applyColorLutPassToWgpu(state, source, dest, lut, cache);
-  }
-
-  public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuColorMatrixPass.applyColorMatrixPassToWgpu(state, source, dest, matrix);
-  }
-
-  public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuConvolutionEffect.applyConvolutionEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCrtEffect.applyCrtEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDirectionalBlurEffect.applyDirectionalBlurEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDisplacementEffect.applyDisplacementEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyDitherEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DitherEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDitherEffect.applyDitherEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDropShadowEffect.applyDropShadowEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFilmGrainEffect.applyFilmGrainEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFxaaEffect.applyFxaaEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect.applyGaussianBlurToWgpu(state, source, dest, temp, options);
-  }
-
-  public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGlitchEffect.applyGlitchEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGodRaysEffect.applyGodRaysEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGradientBevelEffect.applyGradientBevelEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyGradientGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientGlowEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGradientGlowEffect.applyGradientGlowEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyHalftoneEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:HalftoneEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuHalftoneEffect.applyHalftoneEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuInnerGlowEffect.applyInnerGlowEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuInnerShadowEffect.applyInnerShadowEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuKuwaharaEffect.applyKuwaharaEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensDirtEffect.applyLensDirtEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyLensDistortionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDistortionEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensDistortionEffect.applyLensDistortionEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensFlareEffect.applyLensFlareEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMedianEffect.applyMedianEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMotionBlurEffect.applyMotionBlurEffectToWgpu(state, source, dest, velocityTexture, effect);
-  }
-
-  public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuOuterGlowEffect.applyOuterGlowEffectToWgpu(state, source, dest, pool, effect);
-  }
-
-  public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuOutlineEffect.applyOutlineEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPixelateEffect.applyPixelateEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPosterizeEffect.applyPosterizeEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRadialBlurEffect.applyRadialBlurEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScanlinesEffect.applyScanlinesEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect.applyScreenSpaceFogEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSharpenEffect.applySharpenEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applySketchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SketchEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSketchEffect.applySketchEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSmaaEffect.applySmaaEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsaoEffect.applySsaoEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applySsrEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsrEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsrEffect.applySsrEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTaaEffect.applyTaaEffectToWgpu(state, source, dest, _effect);
-  }
-
-  public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTiltShiftEffect.applyTiltShiftEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect.applyToneMapEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect.applyVignetteEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectBlitOffsetPass(state, source, dest, dx, dy);
-  }
-
-  public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectBlitPass(state, source, dest);
-  }
-
-  public static function applyWgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBoxBlur.applyWgpuEffectBoxBlur(state, source, dest, temp, options);
-  }
-
-  public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectErasePass(state, source, dest);
-  }
-
-  public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectInnerClipPass(state, glow, source, dest);
-  }
-
-  public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectInvertTintPass(state, source, dest, color, alpha, strength);
-  }
-
-  public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectTintPass(state, source, dest, color, alpha, strength);
-  }
-
-  public static function applyWhiteBalanceEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:WhiteBalanceEffect):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.applyWhiteBalanceEffectToWgpu(state, source, dest, effect);
-  }
-
-  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.beginWgpuRenderEffectPipeline(state, pipeline);
-  }
-
-  public static function clearWgpuEffectTarget(state:WgpuRenderState, target:WgpuRenderTarget):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.clearWgpuEffectTarget(state, target);
-  }
-
-  public static function createWgpuDualSourceEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuDualSourceEffectPipeline {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.createWgpuDualSourceEffectPipeline(state, fragmentWGSL, blend);
+  public static function applyWgpuRenderEffectsToRenderTexture(state:WgpuRenderState, pool:WgpuRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
+    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderTextureEffect.applyWgpuRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
     return cast null;
   }
 
-  public static function createWgpuEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuEffectPipeline {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.createWgpuEffectPipeline(state, fragmentWGSL, blend);
-    return cast null;
+  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, ?colorSpace:RenderTargetColorSpace):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.beginWgpuRenderEffectPipeline(state, pipeline, colorSpace);
   }
 
   public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
@@ -356,15 +77,19 @@ class EffectsWgpu {
 
   public static final defaultWgpuBevelEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect.defaultWgpuBevelEffectRunner;
 
+  public static final defaultWgpuBlendEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlendEffect.defaultWgpuBlendEffectRunner;
+
   public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBloomEffect.defaultWgpuBloomEffectRunner;
 
   public static final defaultWgpuBlurEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect.defaultWgpuBlurEffectRunner;
 
-  public static final defaultWgpuBokehDepthOfFieldEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBokehDepthOfFieldEffect.defaultWgpuBokehDepthOfFieldEffectRunner;
-
   public static final defaultWgpuCameraMotionBlurEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCameraMotionBlurEffect.defaultWgpuCameraMotionBlurEffectRunner;
 
   public static final defaultWgpuChromaticAberrationEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuChromaticAberrationEffect.defaultWgpuChromaticAberrationEffectRunner;
+
+  public static final defaultWgpuCompositeEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCompositeEffect.defaultWgpuCompositeEffectRunner;
+
+  public static final defaultWgpuContactShadowsEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuContactShadowsEffect.defaultWgpuContactShadowsEffectRunner;
 
   public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuConvolutionEffect.defaultWgpuConvolutionEffectRunner;
 
@@ -430,10 +155,6 @@ class EffectsWgpu {
 
   public static final defaultWgpuSsaoEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsaoEffect.defaultWgpuSsaoEffectRunner;
 
-  public static final defaultWgpuSsrEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsrEffect.defaultWgpuSsrEffectRunner;
-
-  public static final defaultWgpuTaaEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTaaEffect.defaultWgpuTaaEffectRunner;
-
   public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTiltShiftEffect.defaultWgpuTiltShiftEffectRunner;
 
   public static final defaultWgpuToneMapEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect.defaultWgpuToneMapEffectRunner;
@@ -442,87 +163,192 @@ class EffectsWgpu {
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
 
-  public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.destroyWgpuRenderEffectPipeline(state, pipeline);
-  }
-
-  public static function drawWgpuDualSourceEffectPass(state:WgpuRenderState, source0:WgpuRenderTarget, source1:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.drawWgpuDualSourceEffectPass(state, source0, source1, dest, pipeline, setUniforms);
-  }
-
-  public static function drawWgpuEffectPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.drawWgpuEffectPass(state, source, dest, pipeline, setUniforms);
-  }
-
-  public static final EFFECT_VERTEX_WGSL:Dynamic = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.EFFECT_VERTEX_WGSL;
-
   public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<Dynamic>):Void {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.endWgpuRenderEffectPipeline(state, pipeline, operations);
   }
 
-  public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectGradientRamp.getWgpuEffectGradientRampTexture(state, colors, alphas, ratios);
-    return cast null;
+  public static function registerWgpuBevelEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect.registerWgpuBevelEffect(state);
   }
 
-  public static function getWgpuEffectPassState(state:WgpuRenderState):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.getWgpuEffectPassState(state);
-    return cast null;
+  public static function registerWgpuBlendEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlendEffect.registerWgpuBlendEffect(state);
   }
 
-  public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, ?blend:String):WgpuEffectPipeline {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectProgramCache.getWgpuEffectPipeline(state, key, fragmentWGSL, blend);
-    return cast null;
+  public static function registerWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:String, target:WgpuRenderTarget):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlendEffect.registerWgpuBlendEffectBackdrop(state, backdropKey, target);
   }
 
-  public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry.getWgpuRenderEffectRunner(state, kind);
-    return cast null;
+  public static function registerWgpuBloomEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBloomEffect.registerWgpuBloomEffect(state);
   }
 
-  public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry.hasWgpuRenderEffectRunner(state, kind);
-    return cast null;
+  public static function registerWgpuBlurEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect.registerWgpuBlurEffect(state);
   }
 
-  public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Dynamic = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuConvolutionEffect.MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE;
-
-  public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Dynamic = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMedianEffect.MAX_MEDIAN_EFFECT_WGPU_RADIUS;
-
-  public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerAntialiasingWgpuRenderEffects(state);
+  public static function registerWgpuCameraMotionBlurEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCameraMotionBlurEffect.registerWgpuCameraMotionBlurEffect(state);
   }
 
-  public static function registerBloomWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerBloomWgpuRenderEffects(state);
+  public static function registerWgpuChromaticAberrationEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuChromaticAberrationEffect.registerWgpuChromaticAberrationEffect(state);
   }
 
-  public static function registerBlurWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerBlurWgpuRenderEffects(state);
+  public static function registerWgpuCompositeEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCompositeEffect.registerWgpuCompositeEffect(state);
   }
 
-  public static function registerColorWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerColorWgpuRenderEffects(state);
+  public static function registerWgpuContactShadowsEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuContactShadowsEffect.registerWgpuContactShadowsEffect(state);
   }
 
-  public static function registerCompositeWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerCompositeWgpuRenderEffects(state);
+  public static function registerWgpuConvolutionEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuConvolutionEffect.registerWgpuConvolutionEffect(state);
   }
 
-  public static function registerScreenSpaceWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerScreenSpaceWgpuRenderEffects(state);
+  public static function registerWgpuCrtEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCrtEffect.registerWgpuCrtEffect(state);
   }
 
-  public static function registerStandardWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerStandardWgpuRenderEffects(state);
+  public static function registerWgpuDirectionalBlurEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDirectionalBlurEffect.registerWgpuDirectionalBlurEffect(state);
   }
 
-  public static function registerStylizeWgpuRenderEffects(state:WgpuRenderState):Void {
-    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerStylizeWgpuRenderEffects(state);
+  public static function registerWgpuDisplacementEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDisplacementEffect.registerWgpuDisplacementEffect(state);
+  }
+
+  public static function registerWgpuDitherEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDitherEffect.registerWgpuDitherEffect(state);
+  }
+
+  public static function registerWgpuDropShadowEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDropShadowEffect.registerWgpuDropShadowEffect(state);
+  }
+
+  public static function registerWgpuFilmGrainEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFilmGrainEffect.registerWgpuFilmGrainEffect(state);
+  }
+
+  public static function registerWgpuFxaaEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFxaaEffect.registerWgpuFxaaEffect(state);
+  }
+
+  public static function registerWgpuGlitchEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGlitchEffect.registerWgpuGlitchEffect(state);
+  }
+
+  public static function registerWgpuGodRaysEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGodRaysEffect.registerWgpuGodRaysEffect(state);
+  }
+
+  public static function registerWgpuGradientBevelEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGradientBevelEffect.registerWgpuGradientBevelEffect(state);
+  }
+
+  public static function registerWgpuGradientGlowEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGradientGlowEffect.registerWgpuGradientGlowEffect(state);
+  }
+
+  public static function registerWgpuHalftoneEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuHalftoneEffect.registerWgpuHalftoneEffect(state);
+  }
+
+  public static function registerWgpuInnerGlowEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuInnerGlowEffect.registerWgpuInnerGlowEffect(state);
+  }
+
+  public static function registerWgpuInnerShadowEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuInnerShadowEffect.registerWgpuInnerShadowEffect(state);
+  }
+
+  public static function registerWgpuKuwaharaEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuKuwaharaEffect.registerWgpuKuwaharaEffect(state);
+  }
+
+  public static function registerWgpuLensDirtEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensDirtEffect.registerWgpuLensDirtEffect(state);
+  }
+
+  public static function registerWgpuLensDistortionEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensDistortionEffect.registerWgpuLensDistortionEffect(state);
+  }
+
+  public static function registerWgpuLensFlareEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensFlareEffect.registerWgpuLensFlareEffect(state);
+  }
+
+  public static function registerWgpuMedianEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMedianEffect.registerWgpuMedianEffect(state);
+  }
+
+  public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMotionBlurEffect.registerWgpuMotionBlurEffect(state);
+  }
+
+  public static function registerWgpuOuterGlowEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuOuterGlowEffect.registerWgpuOuterGlowEffect(state);
+  }
+
+  public static function registerWgpuOutlineEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuOutlineEffect.registerWgpuOutlineEffect(state);
+  }
+
+  public static function registerWgpuPixelateEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPixelateEffect.registerWgpuPixelateEffect(state);
+  }
+
+  public static function registerWgpuPosterizeEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPosterizeEffect.registerWgpuPosterizeEffect(state);
+  }
+
+  public static function registerWgpuRadialBlurEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRadialBlurEffect.registerWgpuRadialBlurEffect(state);
   }
 
   public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry.registerWgpuRenderEffect(state, kind, runner);
+  }
+
+  public static function registerWgpuScanlinesEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScanlinesEffect.registerWgpuScanlinesEffect(state);
+  }
+
+  public static function registerWgpuScreenSpaceFogEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect.registerWgpuScreenSpaceFogEffect(state);
+  }
+
+  public static function registerWgpuSharpenEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSharpenEffect.registerWgpuSharpenEffect(state);
+  }
+
+  public static function registerWgpuSketchEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSketchEffect.registerWgpuSketchEffect(state);
+  }
+
+  public static function registerWgpuSmaaEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSmaaEffect.registerWgpuSmaaEffect(state);
+  }
+
+  public static function registerWgpuSsaoEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsaoEffect.registerWgpuSsaoEffect(state);
+  }
+
+  public static function registerWgpuTiltShiftEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTiltShiftEffect.registerWgpuTiltShiftEffect(state);
+  }
+
+  public static function registerWgpuToneMapEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect.registerWgpuToneMapEffect(state);
+  }
+
+  public static function registerWgpuVignetteEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect.registerWgpuVignetteEffect(state);
+  }
+
+  public static function registerWgpuWhiteBalanceEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.registerWgpuWhiteBalanceEffect(state);
   }
 
   public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {

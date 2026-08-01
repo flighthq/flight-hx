@@ -3,10 +3,10 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
+import flighthq.types.TauriApi;
 
 class TauriNotification {
   public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
@@ -19,7 +19,7 @@ class TauriNotification {
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(notification, 'isPermissionGranted', cast ([] : Array<Dynamic>)), 'then', cast ([function(granted:Dynamic) {
       (cachedPermission = cast (((cast granted : Bool) ? (cast 'granted' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
@@ -76,34 +76,34 @@ class TauriNotification {
         return flighthq._internal._Async.resolve('');
       });
     }, cancelScheduledNotification: function() {
-    
+
     }, closeNotification: function() {
-    
+
     }, closeAllNotifications: function() {
-    
+
     }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       });
     }, subscribeClick: function() {
       return cast function() {
-      
+
       };
     }, subscribeAction: function() {
       return cast function() {
-      
+
       };
     }, subscribeDismiss: function() {
       return cast function() {
-      
+
       };
     }, subscribeReply: function() {
       return cast function() {
-      
+
       };
     }, subscribeShow: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

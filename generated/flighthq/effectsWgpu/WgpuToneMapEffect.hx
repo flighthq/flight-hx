@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.ToneMapEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -29,6 +30,10 @@ class WgpuToneMapEffect {
   public static final defaultWgpuToneMapEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyToneMapEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuToneMapEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ToneMapEffect', defaultWgpuToneMapEffectRunner] : Array<Dynamic>));
+  }
 
   public static function buildToneMapFragment__wgpuToneMapEffect(operator_:String):String {
     return cast ((WgpuToneMapEffect.TONEMAP_FRAGMENT_HEAD__wgpuToneMapEffect + _Runtime.coalesce(_Runtime.getIndex(WgpuToneMapEffect.TONEMAP_OPERATORS__wgpuToneMapEffect, operator_), function():Dynamic return cast WgpuToneMapEffect.TONEMAP_OPERATORS__wgpuToneMapEffect.aces)) + WgpuToneMapEffect.TONEMAP_FRAGMENT_TAIL__wgpuToneMapEffect);

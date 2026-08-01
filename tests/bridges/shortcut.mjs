@@ -2,19 +2,23 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createParsedAccelerator = compiled.flighthq.shortcut.Shortcut.createParsedAccelerator;
-export const createWebShortcutBackend = compiled.flighthq.shortcut.Shortcut.createWebShortcutBackend;
 export const disableGlobalShortcut = compiled.flighthq.shortcut.Shortcut.disableGlobalShortcut;
+export const disableShortcutGuards = compiled.flighthq.shortcut.Shortcut.disableShortcutGuards;
+export const disposeGlobalShortcutSignals = compiled.flighthq.shortcut.Shortcut.disposeGlobalShortcutSignals;
 export const enableGlobalShortcut = compiled.flighthq.shortcut.Shortcut.enableGlobalShortcut;
 export const enableGlobalShortcutSignals = compiled.flighthq.shortcut.Shortcut.enableGlobalShortcutSignals;
+export const enableShortcutGuards = compiled.flighthq.shortcut.Shortcut.enableShortcutGuards;
 export const equalsAccelerator = compiled.flighthq.shortcut.Shortcut.equalsAccelerator;
+export const explainGlobalShortcutRegistration = compiled.flighthq.shortcut.Shortcut.explainGlobalShortcutRegistration;
+export const findAcceleratorConflict = compiled.flighthq.shortcut.Shortcut.findAcceleratorConflict;
 export const formatAcceleratorForDisplay = compiled.flighthq.shortcut.Shortcut.formatAcceleratorForDisplay;
 export const getAcceleratorKey = compiled.flighthq.shortcut.Shortcut.getAcceleratorKey;
 export const getAcceleratorKeyLabel = compiled.flighthq.shortcut.Shortcut.getAcceleratorKeyLabel;
 export const getAcceleratorModifierLabel = compiled.flighthq.shortcut.Shortcut.getAcceleratorModifierLabel;
 export const getAcceleratorModifiers = compiled.flighthq.shortcut.Shortcut.getAcceleratorModifiers;
 export const getRegisteredGlobalShortcuts = compiled.flighthq.shortcut.Shortcut.getRegisteredGlobalShortcuts;
-export const getShortcutBackend = compiled.flighthq.shortcut.Shortcut.getShortcutBackend;
 export const hasGlobalShortcutConflict = compiled.flighthq.shortcut.Shortcut.hasGlobalShortcutConflict;
+export const hasNativeShortcutBackend = compiled.flighthq.shortcut.Shortcut.hasNativeShortcutBackend;
 export const isAcceleratorValid = compiled.flighthq.shortcut.Shortcut.isAcceleratorValid;
 export const isGlobalShortcutRegistered = compiled.flighthq.shortcut.Shortcut.isGlobalShortcutRegistered;
 export const normalizeAccelerator = compiled.flighthq.shortcut.Shortcut.normalizeAccelerator;
@@ -23,7 +27,6 @@ export const parseAcceleratorDetailed = compiled.flighthq.shortcut.Shortcut.pars
 export const registerGlobalShortcut = compiled.flighthq.shortcut.Shortcut.registerGlobalShortcut;
 export const resolveCommandOrControlModifier = compiled.flighthq.shortcut.Shortcut.resolveCommandOrControlModifier;
 export const resumeAllGlobalShortcuts = compiled.flighthq.shortcut.Shortcut.resumeAllGlobalShortcuts;
-export const setShortcutBackend = compiled.flighthq.shortcut.Shortcut.setShortcutBackend;
 export const suspendAllGlobalShortcuts = compiled.flighthq.shortcut.Shortcut.suspendAllGlobalShortcuts;
 export const unregisterAllGlobalShortcuts = compiled.flighthq.shortcut.Shortcut.unregisterAllGlobalShortcuts;
 export const unregisterGlobalShortcut = compiled.flighthq.shortcut.Shortcut.unregisterGlobalShortcut;

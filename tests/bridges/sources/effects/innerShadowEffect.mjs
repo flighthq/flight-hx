@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createInnerShadowEffect = api.createInnerShadowEffect;
+export const getInnerShadowEffectPadding = api.getInnerShadowEffectPadding;
+export const registerInnerShadowEffectPaddingResolver = api.registerInnerShadowEffectPaddingResolver;

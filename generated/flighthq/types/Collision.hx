@@ -21,3 +21,7 @@ typedef CollisionPoint = { var x:Float; var y:Float; };
 typedef CollisionShape = Dynamic;
 
 typedef CollisionManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; };
+
+typedef CollisionContactPoint = { var x:Float; var y:Float; var depth:Float; var featureId:Float; };
+
+typedef CollisionContactManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; var pointCount:Float; var points:Array<CollisionContactPoint>; };

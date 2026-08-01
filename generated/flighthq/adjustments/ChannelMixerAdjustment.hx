@@ -15,9 +15,9 @@ class ChannelMixerAdjustment {
     matrix = _Runtime.coalesce(_Runtime.field(options, 'matrix'), function():Dynamic return cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment);
     m = function(i:Float) return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, i), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment, i));
     colorMatrix = _Runtime.callValue(createChannelMixerColorMatrix, cast ([cast ([_Runtime.callValue(m, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(m, cast ([1.0] : Array<Dynamic>)), _Runtime.callValue(m, cast ([2.0] : Array<Dynamic>))] : Array<Dynamic>), cast ([_Runtime.callValue(m, cast ([4.0] : Array<Dynamic>)), _Runtime.callValue(m, cast ([5.0] : Array<Dynamic>)), _Runtime.callValue(m, cast ([6.0] : Array<Dynamic>))] : Array<Dynamic>), cast ([_Runtime.callValue(m, cast ([8.0] : Array<Dynamic>)), _Runtime.callValue(m, cast ([9.0] : Array<Dynamic>)), _Runtime.callValue(m, cast ([10.0] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
-    flighthq._internal._StaticIndex.writeArray(colorMatrix, 4.0, (_Runtime.callValue(m, cast ([3.0] : Array<Dynamic>)) * 255.0));
-    flighthq._internal._StaticIndex.writeArray(colorMatrix, 9.0, (_Runtime.callValue(m, cast ([7.0] : Array<Dynamic>)) * 255.0));
-    flighthq._internal._StaticIndex.writeArray(colorMatrix, 14.0, (_Runtime.callValue(m, cast ([11.0] : Array<Dynamic>)) * 255.0));
+    flighthq._internal._StaticIndex.writeArray(colorMatrix, 4.0, _Runtime.callValue(m, cast ([3.0] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeArray(colorMatrix, 9.0, _Runtime.callValue(m, cast ([7.0] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeArray(colorMatrix, 14.0, _Runtime.callValue(m, cast ([11.0] : Array<Dynamic>)));
     return cast _Runtime.mergeObjects([{ kind: 'ChannelMixerAdjustment' }, options, { matrix: matrix }, { colorMatrix: colorMatrix }]);
     return cast null;
   }

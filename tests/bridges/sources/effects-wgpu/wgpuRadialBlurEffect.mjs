@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyRadialBlurEffectToWgpu = api.applyRadialBlurEffectToWgpu;
 export const defaultWgpuRadialBlurEffectRunner = api.defaultWgpuRadialBlurEffectRunner;
+export const registerWgpuRadialBlurEffect = api.registerWgpuRadialBlurEffect;

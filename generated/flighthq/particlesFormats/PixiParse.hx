@@ -3,13 +3,14 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef PixiParseResult = { var config:ParticleEmitterConfig; var warnings:Array<String>; };
-
-typedef PixiParsed = PixiParseResult;
+import flighthq.types.PixiParseResult;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef PixiRaw__pixiParse = Dynamic;
 
@@ -22,30 +23,30 @@ class PixiParse {
   public static function parsePixiParticleDocument(json:String):PixiParseResult {
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     raw = _Runtime.callValue(PixiParse.parsePixiJson__pixiParse, cast ([json] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(PixiParse.rawToConfig__pixiParse, cast ([raw] : Array<Dynamic>)), warnings: _Runtime.callValue(PixiParse.collectPixiWarnings__pixiParse, cast ([raw] : Array<Dynamic>)) };
+    return cast { config: _Runtime.callValue(PixiParse.rawToConfig__pixiParse, cast ([raw] : Array<Dynamic>)), diagnostics: _Runtime.callValue(PixiParse.collectPixiDiagnostics__pixiParse, cast ([raw] : Array<Dynamic>)) };
     return cast null;
   }
 
   public static final DEG2RAD__pixiParse:Dynamic = (HxMath.PI / 180.0);
 
-  public static function collectPixiWarnings__pixiParse(raw:PixiRaw__pixiParse):Array<String> {
-    var warnings:Array<String> = cast _Runtime.UNDEFINED;
+  public static function collectPixiDiagnostics__pixiParse(raw:PixiRaw__pixiParse):Array<ImportDiagnostic> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var accel:Dynamic = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+    diagnostics = cast ([] : Array<Dynamic>);
     if ((cast !_Runtime.strictEquals(_Runtime.field(raw, 'spawnBurst'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Pixi spawnBurst spawn type has no equivalent and was mapped to point emitter'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'pixi.spawn-burst-mapped-to-point', 'collectPixiDiagnostics'] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(raw, 'spawnPolygon'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Pixi spawnPolygon spawn type has no equivalent and was mapped to point emitter'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'pixi.spawn-polygon-mapped-to-point', 'collectPixiDiagnostics'] : Array<Dynamic>));
     }
     accel = (cast _Runtime.field(raw, 'acceleration') : Null<{ @:optional var x:Dynamic; @:optional var y:Dynamic; }>);
     if ((cast ((cast !_Runtime.strictEquals(accel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(accel, 'x'), 0.0] : Array<Dynamic>)), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(accel, 'y'), 0.0] : Array<Dynamic>)), 0.0)) : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Pixi acceleration is not supported and was ignored'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'pixi.acceleration-unsupported', 'collectPixiDiagnostics'] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(raw, 'behaviors'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Pixi v5+ behaviors array is partially supported; only core properties were imported'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'pixi.behaviors-partial', 'collectPixiDiagnostics'] : Array<Dynamic>));
     }
-    return cast warnings;
+    return cast diagnostics;
     return cast null;
   }
 

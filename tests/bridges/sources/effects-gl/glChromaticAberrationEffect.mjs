@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyChromaticAberrationEffectToGl = api.applyChromaticAberrationEffectToGl;
 export const defaultGlChromaticAberrationEffectRunner = api.defaultGlChromaticAberrationEffectRunner;
+export const registerGlChromaticAberrationEffect = api.registerGlChromaticAberrationEffect;

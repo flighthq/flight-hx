@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyVignetteEffectToCanvas = api.applyVignetteEffectToCanvas;
 export const defaultCanvasVignetteEffectRunner = api.defaultCanvasVignetteEffectRunner;
+export const registerCanvasVignetteEffect = api.registerCanvasVignetteEffect;

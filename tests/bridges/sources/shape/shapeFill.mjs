@@ -5,5 +5,8 @@ const api = compiled.flighthq.shape.ShapeFill;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const appendShapeGeometryCommand = api.appendShapeGeometryCommand;
+export const getPathCommandOperandCount = api.getPathCommandOperandCount;
 export const getShapeFillRegions = api.getShapeFillRegions;
 export const hasNonSolidShapeFill = api.hasNonSolidShapeFill;
+export const hasShapeFill = api.hasShapeFill;

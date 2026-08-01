@@ -5,17 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textsegment.TextSegment as Facade_Textsegment_flighthq_textsegment_TextSegment;
 import flighthq.textsegment.TextSegmentBoundary as Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary;
-import flighthq.textsegment.TextSegmenterBackend as Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend;
 import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentRange;
-import flighthq.types.TextSegment.TextSegmenterBackend;
 
 class Textsegment {
-  public static function createWebTextSegmenterBackend():TextSegmenterBackend {
-    return cast Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.createWebTextSegmenterBackend();
-    return cast null;
-  }
-
   public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
     return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getNextGraphemeBoundary(text, index, locale);
     return cast null;
@@ -33,11 +26,6 @@ class Textsegment {
 
   public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
     return cast Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary.getPreviousWordBoundary(text, index, locale);
-    return cast null;
-  }
-
-  public static function getTextSegmenterBackend():TextSegmenterBackend {
-    return cast Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.getTextSegmenterBackend();
     return cast null;
   }
 
@@ -59,9 +47,5 @@ class Textsegment {
   public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
     return cast Facade_Textsegment_flighthq_textsegment_TextSegment.segmentWords(text, locale);
     return cast null;
-  }
-
-  public static function setTextSegmenterBackend(backend:Null<TextSegmenterBackend>):Void {
-    Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.setTextSegmenterBackend(backend);
   }
 }

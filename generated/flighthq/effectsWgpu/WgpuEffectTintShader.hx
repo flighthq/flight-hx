@@ -3,12 +3,12 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
+import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
@@ -21,7 +21,7 @@ class WgpuEffectTintShader {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuInnerClipShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, glow, source, dest, pipeline, function() {
-    
+
     }] : Array<Dynamic>));
   }
 

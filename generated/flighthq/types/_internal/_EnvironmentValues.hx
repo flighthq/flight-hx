@@ -3,8 +3,8 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CubeTexture;
 import flighthq.types.Light;
+import flighthq.types.Texture;
 
 class _EnvironmentValues {
   public static final EnvironmentKind:Dynamic = 'Environment';

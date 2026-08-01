@@ -5,9 +5,5 @@ const api = compiled.flighthq.node.Viewport;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const computeViewportAlignX = api.computeViewportAlignX;
-export const computeViewportAlignY = api.computeViewportAlignY;
-export const computeViewportFillScale = api.computeViewportFillScale;
-export const computeViewportFitScale = api.computeViewportFitScale;
-export const computeViewportRenderTransform = api.computeViewportRenderTransform;
 export const createViewport = api.createViewport;
+export const getViewportAspect = api.getViewportAspect;

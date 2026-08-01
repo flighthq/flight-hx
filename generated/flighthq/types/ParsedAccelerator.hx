@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParsedAccelerator = { var key:String; var modifiers:Array<ShortcutModifier>; };
+typedef ParsedAccelerator = { var key:Dynamic; var modifiers:Array<ShortcutModifier>; };

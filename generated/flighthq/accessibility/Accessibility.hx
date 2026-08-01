@@ -41,7 +41,7 @@ class Accessibility {
   public static function _createHiddenAccessibilityContainer__accessibility(doc:Dynamic):Dynamic {
     var container:Dynamic = cast _Runtime.UNDEFINED;
     var style:Dynamic = cast _Runtime.UNDEFINED;
-    container = _Runtime.callProperty(doc, 'createElement', cast (['div'] : Array<Dynamic>));
+    container = flighthq._internal.backend.DomDocumentBackend.call(doc, 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.callProperty(container, 'setAttribute', cast (['data-flight-accessibility', 'true'] : Array<Dynamic>));
     style = _Runtime.field(container, 'style');
     _Runtime.setField(style, 'position', 'absolute');
@@ -64,7 +64,7 @@ class Accessibility {
     var region:Dynamic = cast _Runtime.UNDEFINED;
     region = ((cast liveRegions : flighthq._internal._Map).get(liveness));
     if ((cast ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(region, 'parentNode'), null) : Bool)) : Bool)) {
-      (region = cast (_Runtime.callProperty(_Runtime.field(root, 'ownerDocument'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
+      (region = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.field(root, 'ownerDocument'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
       _Runtime.callProperty(region, 'setAttribute', cast (['aria-live', liveness] : Array<Dynamic>));
       _Runtime.callProperty(region, 'setAttribute', cast (['aria-atomic', 'true'] : Array<Dynamic>));
       _Runtime.callProperty(region, 'setAttribute', cast (['data-flight-accessibility-live', liveness] : Array<Dynamic>));
@@ -120,7 +120,7 @@ class Accessibility {
       _Runtime.setField(first, 'nodeValue', value);
       return;
     }
-    _Runtime.callProperty(element, 'insertBefore', cast ([_Runtime.callProperty(_Runtime.field(element, 'ownerDocument'), 'createTextNode', cast ([value] : Array<Dynamic>)), first] : Array<Dynamic>));
+    _Runtime.callProperty(element, 'insertBefore', cast ([flighthq._internal.backend.DomDocumentBackend.call(_Runtime.field(element, 'ownerDocument'), 'createTextNode', cast ([value] : Array<Dynamic>)), first] : Array<Dynamic>));
   }
 
   public static final _TEXT_NODE__accessibility:Dynamic = 3.0;
@@ -161,7 +161,7 @@ class Accessibility {
       if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return; }
       element = ((cast elements : flighthq._internal._Map).get(_Runtime.field(node, 'id')));
       if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (element = cast (_Runtime.callProperty(_Runtime.field(overlayRoot, 'ownerDocument'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
+        (element = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.field(overlayRoot, 'ownerDocument'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(element, 'setAttribute', cast (['data-flight-accessibility-id', _Runtime.field(node, 'id')] : Array<Dynamic>));
         ((cast elements : flighthq._internal._Map).set(_Runtime.field(node, 'id'), element));
       }

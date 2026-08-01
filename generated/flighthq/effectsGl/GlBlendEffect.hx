@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectUniformLocation;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendEffect;
@@ -53,6 +54,10 @@ class GlBlendEffect {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
+  }
+
+  public static function registerGlBlendEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BlendEffect', defaultGlBlendEffectRunner] : Array<Dynamic>));
   }
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {

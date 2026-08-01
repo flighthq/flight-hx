@@ -3,14 +3,11 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachAppLifecycle = compiled.flighthq.lifecycle.Lifecycle.attachAppLifecycle;
 export const createAppLifecycle = compiled.flighthq.lifecycle.Lifecycle.createAppLifecycle;
-export const createWebLifecycleBackend = compiled.flighthq.lifecycle.Lifecycle.createWebLifecycleBackend;
 export const detachAppLifecycle = compiled.flighthq.lifecycle.Lifecycle.detachAppLifecycle;
 export const disposeAppLifecycle = compiled.flighthq.lifecycle.Lifecycle.disposeAppLifecycle;
 export const getAppLaunchKind = compiled.flighthq.lifecycle.Lifecycle.getAppLaunchKind;
 export const getAppLifecycleState = compiled.flighthq.lifecycle.Lifecycle.getAppLifecycleState;
-export const getLifecycleBackend = compiled.flighthq.lifecycle.Lifecycle.getLifecycleBackend;
 export const isAppActive = compiled.flighthq.lifecycle.Lifecycle.isAppActive;
 export const isAppBackground = compiled.flighthq.lifecycle.Lifecycle.isAppBackground;
 export const isAppInactive = compiled.flighthq.lifecycle.Lifecycle.isAppInactive;
 export const requestAppBack = compiled.flighthq.lifecycle.Lifecycle.requestAppBack;
-export const setLifecycleBackend = compiled.flighthq.lifecycle.Lifecycle.setLifecycleBackend;

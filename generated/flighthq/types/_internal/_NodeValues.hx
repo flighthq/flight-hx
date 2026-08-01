@@ -3,8 +3,7 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Adjustment;
-import flighthq.types.ColorTransform;
+import flighthq.types.ColorAdjustmentRuntime;
 import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
@@ -18,5 +17,5 @@ class _NodeValues {
 
   public static final NodeKind:Dynamic = 'Node';
 
-  public static final NullScene:Dynamic = _Runtime.symbol('NullScene');
+  public static final NullScene3D:Dynamic = _Runtime.symbol('NullScene3D');
 }

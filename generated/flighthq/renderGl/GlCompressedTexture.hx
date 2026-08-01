@@ -4,10 +4,10 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.CompressedImage;
 import flighthq.types.GlCompressedTextureDecoder;
 import flighthq.types.GlCompressedTextureSupport;
 import flighthq.types.GlRenderState;
-import flighthq.types.ImageResource;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
@@ -199,7 +199,7 @@ class GlCompressedTexture {
   }
 
   public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
-    _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImageResource__glCompressedTexture : Dynamic)));
+    _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)));
   }
 
   public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
@@ -207,6 +207,7 @@ class GlCompressedTexture {
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var layers:Dynamic = cast _Runtime.UNDEFINED;
     var mipLevels:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !(cast _Runtime.callValue(GlCompressedTexture.isSupportedGlCompressedTextureContainerShape__glCompressedTexture, cast ([container] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool)) { return cast false; }
     nativeFormat = _Runtime.callValue(getGlCompressedTextureFormat, cast ([gl, _Runtime.field(container, 'format')] : Array<Dynamic>));
     faces = _Runtime.field(container, 'faces');
@@ -257,11 +258,20 @@ class GlCompressedTexture {
     return cast null;
   }
 
-  public static function uploadGlCompressedImageResource__glCompressedTexture(gl:Dynamic, image:ImageResource, decode:Null<GlCompressedTextureDecoder>):Bool {
+  public static function isSupportedGlCompressedTextureContainerShape__glCompressedTexture(container:TextureContainer):Bool {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) { return cast true; }
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0) : Bool));
+    return cast null;
+  }
+
+  public static function uploadGlCompressedImage__glCompressedTexture(gl:Dynamic, image:CompressedImage, decode:Null<GlCompressedTextureDecoder>):Bool {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
-    compressed = image.compressed;
-    if ((cast _Runtime.strictEquals(compressed, null) : Bool)) { return cast false; }
-    return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, compressed.container, compressed.payload, _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    var container:Dynamic = cast _Runtime.UNDEFINED;
+    compressed = _Runtime.field(image, 'compressed');
+    container = compressed.container;
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0) : Bool)) : Bool)) { return cast false; }
+    return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, container, compressed.payload, _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     return cast null;
   }
 }

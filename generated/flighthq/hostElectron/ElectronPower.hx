@@ -3,7 +3,7 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.types.ElectronApi;
 import flighthq.types.Power.PowerBackend;
 import flighthq.types.Power.PowerIdleState;
 
@@ -47,7 +47,7 @@ class ElectronPower {
       return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['lock-screen', listener] : Array<Dynamic>));
     }, subscribeLowPowerModeChange: function() {
       return cast function() {
-      
+
       };
     }, subscribeResume: function(listener:Dynamic) {
       _Runtime.callProperty(powerMonitor, 'on', cast (['resume', listener] : Array<Dynamic>));

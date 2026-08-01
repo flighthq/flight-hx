@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGradientGlowEffectToWgpu = api.applyGradientGlowEffectToWgpu;
 export const defaultWgpuGradientGlowEffectRunner = api.defaultWgpuGradientGlowEffectRunner;
+export const registerWgpuGradientGlowEffect = api.registerWgpuGradientGlowEffect;

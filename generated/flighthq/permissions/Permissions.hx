@@ -4,21 +4,10 @@ package flighthq.permissions;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.permissions.Permission as Facade_Permissions_flighthq_permissions_Permission;
-import flighthq.types.Permission.PermissionBackend;
 import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
 
 class Permissions {
-  public static function createWebPermissionBackend():PermissionBackend {
-    return cast Facade_Permissions_flighthq_permissions_Permission.createWebPermissionBackend();
-    return cast null;
-  }
-
-  public static function getPermissionBackend():PermissionBackend {
-    return cast Facade_Permissions_flighthq_permissions_Permission.getPermissionBackend();
-    return cast null;
-  }
-
   public static function getPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionState> {
     return cast Facade_Permissions_flighthq_permissions_Permission.getPermissionState(name);
     return cast null;
@@ -27,9 +16,5 @@ class Permissions {
   public static function requestPermission(name:PermissionName):flighthq._internal._Promise<PermissionState> {
     return cast Facade_Permissions_flighthq_permissions_Permission.requestPermission(name);
     return cast null;
-  }
-
-  public static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
-    Facade_Permissions_flighthq_permissions_Permission.setPermissionBackend(backend);
   }
 }

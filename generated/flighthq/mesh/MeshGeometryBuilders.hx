@@ -3,10 +3,9 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
-import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
+import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
@@ -858,7 +857,6 @@ class MeshGeometryBuilders {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var indexArray:Dynamic = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
     vertexCount = (_Runtime.field(positions, 'length') / 3.0);
     vertices = new flighthq._internal._Float32Array((vertexCount * MeshGeometryBuilders.CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders));
     {
@@ -880,9 +878,7 @@ class MeshGeometryBuilders {
     _Runtime.callProperty(indexArray, 'set', cast ([indices] : Array<Dynamic>));
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices }] : Array<Dynamic>));
     _Runtime.callValue(computeMeshGeometryTangents, cast ([geometry, geometry] : Array<Dynamic>));
-    bounds = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
-    (geometry.bounds = cast (bounds : Dynamic));
+    _Runtime.callValue(refreshMeshGeometryBounds, cast ([geometry] : Array<Dynamic>));
     return cast geometry;
     return cast null;
   }

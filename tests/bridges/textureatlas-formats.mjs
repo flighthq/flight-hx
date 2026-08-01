@@ -2,9 +2,12 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const detectTextureAtlasFormat = compiled.flighthq.textureatlasFormats.TextureatlasFormats.detectTextureAtlasFormat;
+export const getTextureAtlasFormat = compiled.flighthq.textureatlasFormats.TextureatlasFormats.getTextureAtlasFormat;
+export const parseTextureAtlas = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlas;
 export const parseTextureAtlasAsepriteDocument = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlasAsepriteDocument;
 export const parseTextureAtlasAsepriteJson = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlasAsepriteJson;
 export const parseTextureAtlasLibgdxAtlas = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlasLibgdxAtlas;
 export const parseTextureAtlasPackerDocument = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlasPackerDocument;
 export const parseTextureAtlasPackerJson = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlasPackerJson;
 export const parseTextureAtlasStarlingXml = compiled.flighthq.textureatlasFormats.TextureatlasFormats.parseTextureAtlasStarlingXml;
+export const registerTextureAtlasFormat = compiled.flighthq.textureatlasFormats.TextureatlasFormats.registerTextureAtlasFormat;

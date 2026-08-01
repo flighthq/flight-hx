@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBevelEffectToGl = api.applyBevelEffectToGl;
 export const defaultGlBevelEffectRunner = api.defaultGlBevelEffectRunner;
+export const registerGlBevelEffect = api.registerGlBevelEffect;

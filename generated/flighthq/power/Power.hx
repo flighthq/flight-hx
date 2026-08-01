@@ -159,7 +159,7 @@ class Power {
       try {
         if ((cast !(cast enabled : Bool) : Bool)) {
           _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(Power._wakeLockSentinel__power, 'release', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
-          
+
           }] : Array<Dynamic>));
           (Power._wakeLockSentinel__power = cast (null : Dynamic));
           return cast true;
@@ -171,12 +171,12 @@ class Power {
               flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(newSentinel:Dynamic) {
                 if ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool)) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
               }] : Array<Dynamic>)), function() {
-              
+
               });
             }
           }] : Array<Dynamic>));
         }] : Array<Dynamic>)), function() {
-        
+
         });
         return cast true;
       } catch (__error:Dynamic) {
@@ -192,7 +192,7 @@ class Power {
       var cancelled:Dynamic = cast _Runtime.UNDEFINED;
       battery = _Runtime.callValue(Power.getWebBatteryManagerPromise__power, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(battery, null) : Bool)) { return cast function() {
-      
+
       }; }
       manager = null;
       onLevelChange = function() {
@@ -231,7 +231,7 @@ class Power {
         _Runtime.callOptionalProperty(m, 'addEventListener', cast (['dischargingtimechange', onDischargingTimeChange] : Array<Dynamic>));
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       }] : Array<Dynamic>)), function() {
-      
+
       });
       return cast function() {
         (cancelled = cast (true : Dynamic));
@@ -243,31 +243,31 @@ class Power {
       };
     }, subscribeLockScreen: function() {
       return cast function() {
-      
+
       };
     }, subscribeLowPowerModeChange: function() {
       return cast function() {
-      
+
       };
     }, subscribeResume: function(listener:Dynamic) {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
-      
+
       }; }
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
       return cast function() return flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
     }, subscribeSuspend: function(listener:Dynamic) {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
-      
+
       }; }
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
       return cast function() return flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>));
     }, subscribeThermalStateChange: function() {
       return cast function() {
-      
+
       };
     }, subscribeUnlockScreen: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

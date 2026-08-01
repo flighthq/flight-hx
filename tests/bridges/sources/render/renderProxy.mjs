@@ -7,14 +7,14 @@ __syncDependencies();
 
 export const createRenderProxy = api.createRenderProxy;
 export const createRenderProxy2D = api.createRenderProxy2D;
-export const disposeDisplayObjectRender = api.disposeDisplayObjectRender;
 export const disposeRenderProxy = api.disposeRenderProxy;
+export const disposeScene2DRender = api.disposeScene2DRender;
 export const getOrCreateRenderProxy2D = api.getOrCreateRenderProxy2D;
 export const getRenderProxy2D = api.getRenderProxy2D;
 export const installRenderAdaptHook = api.installRenderAdaptHook;
 export const isRenderProxyDirty = api.isRenderProxyDirty;
 export const isRenderProxyVisible = api.isRenderProxyVisible;
-export const prepareDisplayObjectRender = api.prepareDisplayObjectRender;
+export const prepareScene2DRender = api.prepareScene2DRender;
 export const updateNodeClip = api.updateNodeClip;
 export const updateRenderProxy2D = api.updateRenderProxy2D;
 export const updateRenderProxyRenderer = api.updateRenderProxyRenderer;

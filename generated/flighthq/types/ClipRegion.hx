@@ -6,3 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.ShapeCommand.PathWinding;
 
 typedef ClipRegion = { var rect:Rectangle; var contours:Null<Array<Array<Float>>>; var winding:PathWinding; var version:Float; };
+
+typedef ClipRegionReleaseGuard = Dynamic;

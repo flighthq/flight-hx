@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBloomEffectToWgpu = api.applyBloomEffectToWgpu;
 export const defaultWgpuBloomEffectRunner = api.defaultWgpuBloomEffectRunner;
+export const registerWgpuBloomEffect = api.registerWgpuBloomEffect;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -27,6 +28,10 @@ class WgpuWhiteBalanceEffect {
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyWhiteBalanceEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : WhiteBalanceEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuWhiteBalanceEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'WhiteBalanceEffect', defaultWgpuWhiteBalanceEffectRunner] : Array<Dynamic>));
+  }
 
   public static final WHITE_BALANCE_FRAGMENT_WGSL__wgpuWhiteBalanceEffect:Dynamic = '\nstruct Uniforms { u_temperature : f32, u_tint : f32, _pad0 : f32, _pad1 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  var rgb = c.rgb;\n  rgb.r += uni.u_temperature * 0.5;\n  rgb.b -= uni.u_temperature * 0.5;\n  rgb.g += uni.u_tint * 0.5;\n  return vec4f(clamp(rgb, vec3f(0.0), vec3f(1.0)), c.a);\n}';
 }

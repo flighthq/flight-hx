@@ -3,306 +3,84 @@ package flighthq.render;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.render.EnableColorAdjustmentGuards as Facade_Render_flighthq_render_EnableColorAdjustmentGuards;
-import flighthq.render.ExplainDisplayObjectRender as Facade_Render_flighthq_render_ExplainDisplayObjectRender;
-import flighthq.render.ExplainDisplayObjectRender.DisplayObjectRenderExplanation;
-import flighthq.render.RenderAppearance as Facade_Render_flighthq_render_RenderAppearance;
+import flighthq.render.EnableSceneRenderGuards as Facade_Render_flighthq_render_EnableSceneRenderGuards;
 import flighthq.render.RenderCache as Facade_Render_flighthq_render_RenderCache;
-import flighthq.render.RenderColor as Facade_Render_flighthq_render_RenderColor;
-import flighthq.render.RenderColorTransform as Facade_Render_flighthq_render_RenderColorTransform;
-import flighthq.render.RenderMaterial as Facade_Render_flighthq_render_RenderMaterial;
 import flighthq.render.RenderProxy as Facade_Render_flighthq_render_RenderProxy;
-import flighthq.render.RenderProxy.AdaptHook__renderProxy;
-import flighthq.render.RenderProxy.RenderProxyVisitor;
-import flighthq.render.RenderProxyAdapter as Facade_Render_flighthq_render_RenderProxyAdapter;
-import flighthq.render.RenderQueue as Facade_Render_flighthq_render_RenderQueue;
+import flighthq.render.RenderRegistryGuards as Facade_Render_flighthq_render_RenderRegistryGuards;
+import flighthq.render.RenderRegistrySignals as Facade_Render_flighthq_render_RenderRegistrySignals;
 import flighthq.render.RenderState as Facade_Render_flighthq_render_RenderState;
-import flighthq.render.RenderTarget as Facade_Render_flighthq_render_RenderTarget;
-import flighthq.render.RenderTransform2d as Facade_Render_flighthq_render_RenderTransform2d;
-import flighthq.render.RenderViewport as Facade_Render_flighthq_render_RenderViewport;
 import flighthq.render.Renderer as Facade_Render_flighthq_render_Renderer;
 import flighthq.render.SceneRender as Facade_Render_flighthq_render_SceneRender;
-import flighthq.types.Camera;
-import flighthq.types.DisplayObject;
+import flighthq.types.Camera3D;
 import flighthq.types.Entity.Kind;
-import flighthq.types.HasBoundsRectangle;
-import flighthq.types.HasTransform2D;
-import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.Node3D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheAdapter;
-import flighthq.types.RenderProxy;
-import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderProxyAdapter;
-import flighthq.types.RenderQueue;
-import flighthq.types.RenderQueue.RenderQueueEntry;
-import flighthq.types.RenderQueue.RenderSortKey;
+import flighthq.types.RenderRegistrySignals;
+import flighthq.types.RenderRegistrySignals.RenderRegistryMissExplanation;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.RenderViewport2D;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
-import flighthq.types.RendererData;
-import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
-import flighthq.types.SceneRenderList;
+import flighthq.types.Scene3DLightBlock;
+import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DRenderList;
 
 class Render {
-  public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
-    Facade_Render_flighthq_render_RenderProxyAdapter.applyRenderProxyAdapter(state, source, data);
-  }
-
-  public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
-    return cast Facade_Render_flighthq_render_EnableColorAdjustmentGuards.areColorAdjustmentGuardsEnabled(state);
-    return cast null;
-  }
-
-  public static function buildRenderQueue(state:RenderState, source:Renderable, out:RenderQueue):Void {
-    Facade_Render_flighthq_render_RenderQueue.buildRenderQueue(state, source, out);
-  }
-
-  public static function clearRenderQueue(queue:RenderQueue):Void {
-    Facade_Render_flighthq_render_RenderQueue.clearRenderQueue(queue);
-  }
-
-  public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
-    return cast Facade_Render_flighthq_render_RenderQueue.compareRenderQueueEntries(a, b);
-    return cast null;
-  }
-
-  public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:DisplayObject, bounds:RectangleLike, ?contentX:Float, ?contentY:Float):Void {
-    Facade_Render_flighthq_render_RenderTarget.computeDisplayObjectRenderTargetTransform(outRenderTransform, source, bounds, contentX, contentY);
-  }
-
-  public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, ?contentX:Float, ?contentY:Float):Void {
-    Facade_Render_flighthq_render_RenderTarget.computeRenderCacheTransform(outCacheTransform, bounds, contentX, contentY);
-  }
-
-  public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
-    return cast Facade_Render_flighthq_render_RenderViewport.computeRenderProxyWorldBounds(out, source);
-    return cast null;
-  }
-
-  public static function computeRenderTargetSize(bounds:RectangleLike, ?padding:Float, ?minWidth:Float, ?minHeight:Float):{ var width:Float; var height:Float; } {
-    return cast Facade_Render_flighthq_render_RenderTarget.computeRenderTargetSize(bounds, padding, minWidth, minHeight);
-    return cast null;
-  }
-
-  public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    Facade_Render_flighthq_render_Renderer.copyAllRenderersFromRenderState(target, source);
-  }
-
-  public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    Facade_Render_flighthq_render_Renderer.copyRenderersFromRenderState(target, source);
-  }
-
   public static function createRenderCache():RenderCache {
     return cast Facade_Render_flighthq_render_RenderCache.createRenderCache();
     return cast null;
   }
 
-  public static function createRenderCacheAdapter(?cache:Null<RenderCache>):RenderCacheAdapter {
-    return cast Facade_Render_flighthq_render_RenderCache.createRenderCacheAdapter(cache);
+  public static function destroyRenderState(state:RenderState):Void {
+    Facade_Render_flighthq_render_RenderState.destroyRenderState(state);
+  }
+
+  public static function disableSceneRenderGuards():Void {
+    Facade_Render_flighthq_render_EnableSceneRenderGuards.disableSceneRenderGuards();
+  }
+
+  public static function disposeScene2DRender(state:RenderState, root:Renderable):Void {
+    Facade_Render_flighthq_render_RenderProxy.disposeScene2DRender(state, root);
+  }
+
+  public static function enableRenderRegistryGuards(state:RenderState):Void {
+    Facade_Render_flighthq_render_RenderRegistryGuards.enableRenderRegistryGuards(state);
+  }
+
+  public static function enableRenderRegistrySignals(state:RenderState):RenderRegistrySignals {
+    return cast Facade_Render_flighthq_render_RenderRegistrySignals.enableRenderRegistrySignals(state);
     return cast null;
   }
 
-  public static function createRenderProxy(state:RenderState, source:Renderable):RenderProxy {
-    return cast Facade_Render_flighthq_render_RenderProxy.createRenderProxy(state, source);
+  public static function enableSceneRenderGuards():Void {
+    Facade_Render_flighthq_render_EnableSceneRenderGuards.enableSceneRenderGuards();
+  }
+
+  public static function explainRenderRegistryMisses(state:RenderState):RenderRegistryMissExplanation {
+    return cast Facade_Render_flighthq_render_RenderRegistryGuards.explainRenderRegistryMisses(state);
     return cast null;
   }
 
-  public static function createRenderProxy2D(state:RenderState, source:Dynamic):RenderProxy2D {
-    return cast Facade_Render_flighthq_render_RenderProxy.createRenderProxy2D(state, source);
+  public static function packScene3DLightBlock(out:Scene3DLightBlock, lights:Scene3DLightsLike):Void {
+    Facade_Render_flighthq_render_SceneRender.packScene3DLightBlock(out, lights);
+  }
+
+  public static function prepareScene2DRender(state:RenderState, source:Renderable):Bool {
+    return cast Facade_Render_flighthq_render_RenderProxy.prepareScene2DRender(state, source);
     return cast null;
   }
 
-  public static function createRenderQueue():RenderQueue {
-    return cast Facade_Render_flighthq_render_RenderQueue.createRenderQueue();
+  public static function prepareScene3DRender(state:RenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?viewportAspect:Float):Scene3DRenderList {
+    return cast Facade_Render_flighthq_render_SceneRender.prepareScene3DRender(state, scene, camera, lights, viewportAspect);
     return cast null;
-  }
-
-  public static function createRenderState(?obj:Dynamic):RenderState {
-    return cast Facade_Render_flighthq_render_RenderState.createRenderState(obj);
-    return cast null;
-  }
-
-  public static function createRenderStateRuntime():RenderStateRuntime {
-    return cast Facade_Render_flighthq_render_RenderState.createRenderStateRuntime();
-    return cast null;
-  }
-
-  public static function createRenderViewport2D(x:Float, y:Float, width:Float, height:Float):RenderViewport2D {
-    return cast Facade_Render_flighthq_render_RenderViewport.createRenderViewport2D(x, y, width, height);
-    return cast null;
-  }
-
-  public static function disposeDisplayObjectRender(state:RenderState, root:Renderable):Void {
-    Facade_Render_flighthq_render_RenderProxy.disposeDisplayObjectRender(state, root);
-  }
-
-  public static function disposeRenderProxy(state:RenderState, source:Renderable):Void {
-    Facade_Render_flighthq_render_RenderProxy.disposeRenderProxy(state, source);
-  }
-
-  public static function enableColorAdjustmentGuards(state:RenderState):Void {
-    Facade_Render_flighthq_render_EnableColorAdjustmentGuards.enableColorAdjustmentGuards(state);
-  }
-
-  public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
-    Facade_Render_flighthq_render_RenderCache.enableRenderCacheAdapterSignals(adapter);
-  }
-
-  public static function explainDisplayObjectRender(state:RenderState, source:Renderable):DisplayObjectRenderExplanation {
-    return cast Facade_Render_flighthq_render_ExplainDisplayObjectRender.explainDisplayObjectRender(state, source);
-    return cast null;
-  }
-
-  public static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
-    return cast Facade_Render_flighthq_render_RenderProxy.getOrCreateRenderProxy2D(state, source);
-    return cast null;
-  }
-
-  public static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
-    return cast Facade_Render_flighthq_render_RenderProxy.getRenderProxy2D(state, source);
-    return cast null;
-  }
-
-  public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<RenderProxyAdapter> {
-    return cast Facade_Render_flighthq_render_RenderProxyAdapter.getRenderProxyAdapter(state, source);
-    return cast null;
-  }
-
-  public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<RenderCache> {
-    return cast Facade_Render_flighthq_render_RenderCache.getRenderProxyCache(state, source);
-    return cast null;
-  }
-
-  public static function getRenderStateRuntime(state:RenderState):RenderStateRuntime {
-    return cast Facade_Render_flighthq_render_RenderState.getRenderStateRuntime(state);
-    return cast null;
-  }
-
-  public static function installRenderAdaptHook(state:RenderState, fn:AdaptHook__renderProxy):Void {
-    Facade_Render_flighthq_render_RenderProxy.installRenderAdaptHook(state, fn);
-  }
-
-  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast Facade_Render_flighthq_render_RenderViewport.isRenderableInViewport(source, viewport, renderTransform2D);
-    return cast null;
-  }
-
-  public static function isRenderCache(source:Dynamic):Bool {
-    return cast Facade_Render_flighthq_render_RenderCache.isRenderCache(source);
-    return cast null;
-  }
-
-  public static function isRenderCacheAdapter(value:Dynamic):Bool {
-    return cast Facade_Render_flighthq_render_RenderCache.isRenderCacheAdapter(value);
-    return cast null;
-  }
-
-  public static function isRenderProxyDirty(state:RenderState, source:Renderable, data:RenderProxy, ?parentData:RenderProxy):Bool {
-    return cast Facade_Render_flighthq_render_RenderProxy.isRenderProxyDirty(state, source, data, parentData);
-    return cast null;
-  }
-
-  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast Facade_Render_flighthq_render_RenderViewport.isRenderProxyInViewport(proxy, viewport, renderTransform2D);
-    return cast null;
-  }
-
-  public static function isRenderProxyVisible(data:RenderProxy2D):Bool {
-    return cast Facade_Render_flighthq_render_RenderProxy.isRenderProxyVisible(data);
-    return cast null;
-  }
-
-  public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
-    return cast Facade_Render_flighthq_render_Renderer.noopRendererData(_state, _source);
-    return cast null;
-  }
-
-  public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
-    return cast Facade_Render_flighthq_render_RenderQueue.packRenderSortKey(layer, depth, isTransparent);
-    return cast null;
-  }
-
-  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
-    Facade_Render_flighthq_render_SceneRender.packSceneLightBlock(out, lights);
-  }
-
-  public static function prepareDisplayObjectRender(state:RenderState, source:Renderable):Bool {
-    return cast Facade_Render_flighthq_render_RenderProxy.prepareDisplayObjectRender(state, source);
-    return cast null;
-  }
-
-  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
-    return cast Facade_Render_flighthq_render_SceneRender.prepareSceneRender(state, scene, camera, lights);
-    return cast null;
-  }
-
-  public static function pushRenderQueueEntry(queue:RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
-    Facade_Render_flighthq_render_RenderQueue.pushRenderQueueEntry(queue, proxy, sortKey);
-  }
-
-  public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
-    Facade_Render_flighthq_render_RenderCache.registerRenderCacheRenderer(state, renderer);
   }
 
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:Renderer):Void {
     Facade_Render_flighthq_render_Renderer.registerRenderer(state, kind, renderer);
   }
 
-  public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<RenderProxyAdapter>):Void {
-    Facade_Render_flighthq_render_RenderProxyAdapter.setRenderProxyAdapter(state, source, adapter);
-  }
-
-  public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
-    Facade_Render_flighthq_render_RenderColor.setRenderStateBackgroundColor(state, color);
-  }
-
-  public static function sortRenderQueue(queue:RenderQueue, ?compare:Dynamic):Void {
-    Facade_Render_flighthq_render_RenderQueue.sortRenderQueue(queue, compare);
-  }
-
-  public static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
-    Facade_Render_flighthq_render_RenderProxy.updateNodeClip(_state, source, data, parentData);
-  }
-
-  public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
-    Facade_Render_flighthq_render_RenderProxy.updateRenderProxy2D(state, source, data, parentData);
-  }
-
-  public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
-    return cast Facade_Render_flighthq_render_RenderTransform2d.updateRenderProxy2DTransform(state, data, parentData);
-    return cast null;
-  }
-
-  public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
-    return cast Facade_Render_flighthq_render_RenderAppearance.updateRenderProxyAppearance(state, data, parentData);
-    return cast null;
-  }
-
-  public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
-    Facade_Render_flighthq_render_RenderColorTransform.updateRenderProxyColorTransform(state, data, _parentData);
-  }
-
-  public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
-    Facade_Render_flighthq_render_RenderMaterial.updateRenderProxyMaterial(state, data, _parentData);
-  }
-
-  public static function updateRenderProxyRenderer(state:RenderState, node:RenderProxy):Void {
-    Facade_Render_flighthq_render_RenderProxy.updateRenderProxyRenderer(state, node);
-  }
-
   public static function useRenderCache(state:RenderState, source:Renderable, cache:RenderCache):RenderCacheAdapter {
     return cast Facade_Render_flighthq_render_RenderCache.useRenderCache(state, source, cache);
-    return cast null;
-  }
-
-  public static function walkNode(state:RenderState, root:Renderable, visit:RenderProxyVisitor):Bool {
-    return cast Facade_Render_flighthq_render_RenderProxy.walkNode(state, root, visit);
     return cast null;
   }
 }

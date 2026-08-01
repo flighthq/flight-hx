@@ -10,9 +10,9 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.spatial.SpatialIndex.clearSpatialIndex;
 import flighthq.spatial.SpatialIndex.insertSpatialObject;
 import flighthq.spatial.SpatialIndex.querySpatialPoint;
-import flighthq.types.DisplayObject;
 import flighthq.types.InteractionManager;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node2D;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialObjectId;
 
@@ -58,7 +58,7 @@ class InteractionSpatialIndex {
     {
       var rank:Dynamic = 0.0;
       while ((cast ((cast rank : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast flighthq._internal._StaticIndex.readArray(nodes, rank) : DisplayObject)] : Array<Dynamic>));
+        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast flighthq._internal._StaticIndex.readArray(nodes, rank) : Node2D)] : Array<Dynamic>));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (_Runtime.field(bounds, 'x') : Dynamic));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (_Runtime.field(bounds, 'y') : Dynamic));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')) : Dynamic));

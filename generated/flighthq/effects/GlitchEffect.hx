@@ -3,12 +3,36 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.GlitchEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class GlitchEffect {
   public static function createGlitchEffect(?options:Dynamic):flighthq.types.GlitchEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'GlitchEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getGlitchEffectPadding(effect:flighthq.types.GlitchEffect):RenderEffectPadding {
+    var tear:Dynamic = cast _Runtime.UNDEFINED;
+    var channelShift:Dynamic = cast _Runtime.UNDEFINED;
+    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
+    tear = (HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5)) * 40.0);
+    channelShift = (HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0)) * 1.4);
+    horizontal = HxMath.ceil((tear + channelShift));
+    return cast { bottom: 0.0, left: horizontal, right: horizontal, top: 0.0 };
+    return cast null;
+  }
+
+  public static function registerGlitchEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'GlitchEffect', GlitchEffect.resolveGlitchEffectPadding__glitchEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveGlitchEffectPadding__glitchEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getGlitchEffectPadding, cast ([(cast effect : flighthq.types.GlitchEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

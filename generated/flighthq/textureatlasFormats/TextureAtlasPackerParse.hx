@@ -4,12 +4,11 @@ package flighthq.textureatlasFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
-import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerArrayFrame;
-import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
-import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerHashFrame;
 import flighthq.types.TextureAtlas;
-
-typedef TextureAtlasPackerParseOptions = { @:optional var stripPathPrefix:Bool; };
+import flighthq.types.TextureAtlasPackerParseOptions;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerArrayFrame;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerHashFrame;
 
 class TextureAtlasPackerParse {
   public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
@@ -19,8 +18,12 @@ class TextureAtlasPackerParse {
   }
 
   public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
-    doc = (cast _Runtime.jsonParse(json) : TextureAtlasPackerDocument);
+    var doc:TextureAtlasPackerDocument = cast _Runtime.UNDEFINED;
+    try {
+      (doc = cast ((cast _Runtime.jsonParse(json) : TextureAtlasPackerDocument) : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast atlas;
+    }
     _Runtime.callValue(TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse, cast ([atlas, doc, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
     return cast atlas;
     return cast null;
@@ -42,10 +45,19 @@ class TextureAtlasPackerParse {
   }
 
   public static function applyFrame__textureAtlasPackerParse(atlas:TextureAtlas, name:String, entry:Dynamic, options:TextureAtlasPackerParseOptions):Void {
+    var frame:Dynamic = cast _Runtime.UNDEFINED;
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
+    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceSize:Dynamic = cast _Runtime.UNDEFINED;
+    var spriteSourceSize:Dynamic = cast _Runtime.UNDEFINED;
     var region:Dynamic = cast _Runtime.UNDEFINED;
+    frame = _Runtime.field(entry, 'frame');
+    if ((cast ((cast _Runtime.strictEquals(frame, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(frame), 'object') : Bool)) : Bool)) { return; }
     normalized = _Runtime.callValue(TextureAtlasPackerParse.normalizeFrameName__textureAtlasPackerParse, cast ([name, _Runtime.coalesce(options.stripPathPrefix, function():Dynamic return cast false)] : Array<Dynamic>));
-    region = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast _Runtime.field(entry, 'frame').w : Dynamic) : (cast _Runtime.field(entry, 'frame').h : Dynamic)), id: _Runtime.field(atlas.regions, 'length'), name: normalized, originalHeight: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(entry, 'sourceSize').h : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast _Runtime.field(entry, 'trimmed') : Bool) ? (cast _Runtime.field(entry, 'sourceSize').w : Dynamic) : (cast null : Dynamic)), pivotX: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(entry, 'pivot').x : Dynamic) : (cast null : Dynamic)), pivotY: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(entry, 'pivot').y : Dynamic) : (cast null : Dynamic)), rotated: _Runtime.field(entry, 'rotated'), sourceX: _Runtime.field(entry, 'spriteSourceSize').x, sourceY: _Runtime.field(entry, 'spriteSourceSize').y, trimmed: _Runtime.field(entry, 'trimmed'), width: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast _Runtime.field(entry, 'frame').h : Dynamic) : (cast _Runtime.field(entry, 'frame').w : Dynamic)), x: _Runtime.field(entry, 'frame').x, y: _Runtime.field(entry, 'frame').y }] : Array<Dynamic>));
+    trimmed = _Runtime.strictEquals(_Runtime.field(entry, 'trimmed'), true);
+    sourceSize = _Runtime.field(entry, 'sourceSize');
+    spriteSourceSize = _Runtime.field(entry, 'spriteSourceSize');
+    region = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast frame.w : Dynamic) : (cast frame.h : Dynamic)), id: _Runtime.field(atlas.regions, 'length'), name: normalized, originalHeight: ((cast ((cast trimmed : Bool) && (cast !_Runtime.strictEquals(sourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast sourceSize.h : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast ((cast trimmed : Bool) && (cast !_Runtime.strictEquals(sourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast sourceSize.w : Dynamic) : (cast null : Dynamic)), pivotX: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(entry, 'pivot').x : Dynamic) : (cast null : Dynamic)), pivotY: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(entry, 'pivot').y : Dynamic) : (cast null : Dynamic)), rotated: _Runtime.field(entry, 'rotated'), sourceX: ((cast !_Runtime.strictEquals(spriteSourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast spriteSourceSize.x : Dynamic) : (cast 0.0 : Dynamic)), sourceY: ((cast !_Runtime.strictEquals(spriteSourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast spriteSourceSize.y : Dynamic) : (cast 0.0 : Dynamic)), trimmed: trimmed, width: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast frame.h : Dynamic) : (cast frame.w : Dynamic)), x: frame.x, y: frame.y }] : Array<Dynamic>));
     _Runtime.callProperty(atlas.regions, 'push', cast ([region] : Array<Dynamic>));
   }
 

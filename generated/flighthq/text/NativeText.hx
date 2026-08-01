@@ -3,11 +3,11 @@ package flighthq.text;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
-import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
+import flighthq.scene2d.DisplayObject.createNode2D;
+import flighthq.scene2d.DisplayObject.createNode2DRuntime;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.NativeText;
 import flighthq.types.NativeText.NativeTextData;
@@ -41,7 +41,7 @@ class NativeText {
   }
 
   public static function createNativeText(?obj:PartialNode<flighthq.types.NativeText>):flighthq.types.NativeText {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([NativeTextKind, obj, createNativeTextData, createNativeTextRuntime] : Array<Dynamic>)) : flighthq.types.NativeText);
+    return cast (cast _Runtime.callValue(createNode2D, cast ([NativeTextKind, obj, createNativeTextData, createNativeTextRuntime] : Array<Dynamic>)) : flighthq.types.NativeText);
     return cast null;
   }
 
@@ -52,7 +52,7 @@ class NativeText {
 
   public static function createNativeTextRuntime():NativeTextRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([NativeText.defaultMethods__nativeText] : Array<Dynamic>)) : NativeTextRuntime);
+    out = (cast _Runtime.callValue(createNode2DRuntime, cast ([NativeText.defaultMethods__nativeText] : Array<Dynamic>)) : NativeTextRuntime);
     _Runtime.setField(out, 'element', null);
     _Runtime.setField(out, 'measuredHeight', 0.0);
     _Runtime.setField(out, 'measuredWidth', 0.0);
@@ -61,17 +61,17 @@ class NativeText {
   }
 
   public static function getNativeTextMeasuredHeight(source:flighthq.types.NativeText):Float {
-    return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredHeight');
+    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredHeight');
     return cast null;
   }
 
   public static function getNativeTextMeasuredWidth(source:flighthq.types.NativeText):Float {
-    return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredWidth');
+    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredWidth');
     return cast null;
   }
 
   public static function getNativeTextRuntime(source:flighthq.types.NativeText):NativeTextRuntime {
-    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
+    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
     return cast null;
   }
 

@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
 import flighthq.interaction.HitTests.registerHitTestPrecise;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
-import flighthq.types.DisplayObject;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node2D;
 import flighthq.types.TextLabel;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.TextLabelKind;
@@ -28,7 +28,7 @@ class RegisterTextHitTest {
     if ((cast !(cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>)) : Bool) : Bool)) { return cast -1.0; }
     layout = _Runtime.callValue(getTextLayout, cast ([(cast source : TextLabel)] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     return cast _Runtime.callValue(computeRichTextCharIndexAtPoint, cast ([layout, _Runtime.field(RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, 'x'), _Runtime.field(RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, 'y')] : Array<Dynamic>));
     return cast null;
   }

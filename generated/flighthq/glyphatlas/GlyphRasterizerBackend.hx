@@ -3,6 +3,7 @@ package flighthq.glyphatlas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.GlyphSource.GlyphRasterizeOptions;
 import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 import flighthq.types.GlyphSource.GlyphRasterizerBackend;
@@ -25,7 +26,20 @@ class GlyphRasterizerBackend {
   }
 
   public static function createWebGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
-    return cast { rasterize: function(codepoint:Dynamic, options:Dynamic) {
+    return cast { measureMetrics: function(options:Dynamic) {
+      var context:Dynamic = cast _Runtime.UNDEFINED;
+      var metrics:Dynamic = cast _Runtime.UNDEFINED;
+      var ascent:Dynamic = cast _Runtime.UNDEFINED;
+      var descent:Dynamic = cast _Runtime.UNDEFINED;
+      context = _Runtime.callValue(GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
+      _Runtime.callValue(GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend, cast ([context, options] : Array<Dynamic>));
+      metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast (['Hg'] : Array<Dynamic>));
+      ascent = _Runtime.field(metrics, 'fontBoundingBoxAscent');
+      descent = _Runtime.field(metrics, 'fontBoundingBoxDescent');
+      if ((cast ((cast !(cast _Runtime.compare(ascent, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(descent, 0.0, '>=') : Bool) : Bool)) : Bool)) { return cast null; }
+      return cast { ascent: ascent, descent: descent, lineGap: 0.0 };
+    }, rasterize: function(codepoint:Dynamic, options:Dynamic) {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
@@ -65,8 +79,6 @@ class GlyphRasterizerBackend {
 
   public static function _rasterizeGlyphOnContext__glyphRasterizerBackend(context:Dynamic, codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
     var text:Dynamic = cast _Runtime.UNDEFINED;
-    var fontStyle:Dynamic = cast _Runtime.UNDEFINED;
-    var fontWeight:Dynamic = cast _Runtime.UNDEFINED;
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     var advance:Dynamic = cast _Runtime.UNDEFINED;
     var left:Dynamic = cast _Runtime.UNDEFINED;
@@ -79,9 +91,7 @@ class GlyphRasterizerBackend {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.fromCodePoint(codepoint);
-    fontStyle = _Runtime.coalesce(options.fontStyle, function():Dynamic return cast 'normal');
-    fontWeight = _Runtime.coalesce(options.fontWeight, function():Dynamic return cast 'normal');
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(options.fontSize) + 'px ' + Std.string(options.fontFamily) + '');
+    _Runtime.callValue(GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend, cast ([context, options] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
@@ -97,7 +107,7 @@ class GlyphRasterizerBackend {
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(options.fontSize) + 'px ' + Std.string(options.fontFamily) + '');
+    _Runtime.callValue(GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend, cast ([context, options] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
@@ -106,5 +116,13 @@ class GlyphRasterizerBackend {
     image = flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
     return cast { advance: advance, bearingX: -left, bearingY: ascent, height: height, pixels: new flighthq._internal._UInt8ClampedArray(_Runtime.field(image, 'data')), width: width };
     return cast null;
+  }
+
+  public static function _applyGlyphRasterFont__glyphRasterizerBackend(context:Dynamic, options:GlyphRasterizeOptions):Void {
+    var fontStyle:Dynamic = cast _Runtime.UNDEFINED;
+    var fontWeight:Dynamic = cast _Runtime.UNDEFINED;
+    fontStyle = _Runtime.coalesce(options.fontStyle, function():Dynamic return cast 'normal');
+    fontWeight = _Runtime.coalesce(options.fontWeight, function():Dynamic return cast 'normal');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(options.fontSize) + 'px ' + Std.string(options.fontFamily) + '');
   }
 }

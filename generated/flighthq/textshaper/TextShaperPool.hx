@@ -8,18 +8,25 @@ import flighthq.types.ShapedRun;
 
 class TextShaperPool {
   public static function acquireShapedRun():ShapedRun {
-    if ((cast ((cast _Runtime.field(TextShaperPool._pool__textShaperPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'pop', cast ([] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(createShapedRun, cast ([] : Array<Dynamic>));
+    var pooled:Dynamic = cast _Runtime.UNDEFINED;
+    pooled = _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'pop', cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(pooled, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(createShapedRun, cast ([] : Array<Dynamic>)); }
+    ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet).delete_(pooled));
+    return cast pooled;
     return cast null;
   }
 
   public static function releaseShapedRun(run:ShapedRun):Void {
+    if ((cast ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet).has(run)) : Bool)) { return; }
     if ((cast ((cast _Runtime.field(TextShaperPool._pool__textShaperPool, 'length') : Float) < (cast TextShaperPool._POOL_MAX_SIZE__textShaperPool : Float)) : Bool)) {
       _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'push', cast ([run] : Array<Dynamic>));
+      ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet).add(run));
     }
   }
 
   public static final _POOL_MAX_SIZE__textShaperPool:Dynamic = 64.0;
 
   public static final _pool__textShaperPool:Array<ShapedRun> = cast ([] : Array<Dynamic>);
+
+  public static final _pooled__textShaperPool:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
 }

@@ -17,7 +17,8 @@ import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 class ClassicMaterials {
   public static function createBlinnPhongMaterial(?opts:Dynamic):BlinnPhongMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([BlinnPhongMaterialKind] : Array<Dynamic>)) : BlinnPhongMaterial);
+    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([BlinnPhongMaterialKind, opts] : Array<Dynamic>)) : BlinnPhongMaterial);
+    _Runtime.setField(material, 'alphaMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuseMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'normalMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
@@ -31,7 +32,7 @@ class ClassicMaterials {
 
   public static function createLambertMaterial(?opts:Dynamic):LambertMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([LambertMaterialKind] : Array<Dynamic>)) : LambertMaterial);
+    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([LambertMaterialKind, opts] : Array<Dynamic>)) : LambertMaterial);
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuseMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'emissive', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
@@ -42,7 +43,7 @@ class ClassicMaterials {
 
   public static function createPhongMaterial(?opts:Dynamic):PhongMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([PhongMaterialKind] : Array<Dynamic>)) : PhongMaterial);
+    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([PhongMaterialKind, opts] : Array<Dynamic>)) : PhongMaterial);
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuseMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'normalMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));

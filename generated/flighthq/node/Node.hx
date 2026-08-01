@@ -6,38 +6,23 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.entity.Runtime.getEntityRuntime;
 import flighthq.node.BoundsRectangle as Facade_Node_flighthq_node_BoundsRectangle;
-import flighthq.node.HasAppearance as Facade_Node_flighthq_node_HasAppearance;
-import flighthq.node.HasBlendMode as Facade_Node_flighthq_node_HasBlendMode;
-import flighthq.node.HasBoundsRectangle as Facade_Node_flighthq_node_HasBoundsRectangle;
-import flighthq.node.HasClip as Facade_Node_flighthq_node_HasClip;
-import flighthq.node.HasMaterial as Facade_Node_flighthq_node_HasMaterial;
-import flighthq.node.HasTransform2d as Facade_Node_flighthq_node_HasTransform2d;
-import flighthq.node.HasTransform3d as Facade_Node_flighthq_node_HasTransform3d;
 import flighthq.node.Hierarchy as Facade_Node_flighthq_node_Hierarchy;
 import flighthq.node.Hierarchy.removeNodeChild;
+import flighthq.node.NodeColorAdjustment as Facade_Node_flighthq_node_NodeColorAdjustment;
+import flighthq.node.NodeTransform2d as Facade_Node_flighthq_node_NodeTransform2d;
+import flighthq.node.NodeTransform3d as Facade_Node_flighthq_node_NodeTransform3d;
 import flighthq.node.Revision as Facade_Node_flighthq_node_Revision;
 import flighthq.node.Revision.invalidateNode;
-import flighthq.node.Transform2d as Facade_Node_flighthq_node_Transform2d;
-import flighthq.node.Transform3d as Facade_Node_flighthq_node_Transform3d;
+import flighthq.node.StageFit as Facade_Node_flighthq_node_StageFit;
 import flighthq.node.Traversal as Facade_Node_flighthq_node_Traversal;
 import flighthq.node.Viewport as Facade_Node_flighthq_node_Viewport;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
+import flighthq.types.Adjustment;
 import flighthq.types.Entity.Kind;
-import flighthq.types.HasAppearance;
-import flighthq.types.HasBlendMode;
-import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.BoundsNode;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasClip;
-import flighthq.types.HasMaterial;
-import flighthq.types.HasTransform2D;
-import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.HasTransform2D.Transform2DNode;
-import flighthq.types.HasTransform3D;
-import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.HasTransform3D.Transform3DNode;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
@@ -55,11 +40,13 @@ import flighthq.types.NodeSignals;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.Scene2DFitContext;
 import flighthq.types.Transform2D.Transform2DLike;
 import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.Viewport;
+import flighthq.types.Viewport.ViewportLike;
 import flighthq.types.ViewportAlign;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
@@ -78,36 +65,40 @@ class Node {
     _Runtime.callHaxeRestValue(Facade_Node_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]), 1);
   }
 
+  public static function addNodeColorAdjustment<Traits>(source:flighthq.types.Node<Traits>, adjustment:Adjustment):Void {
+    Facade_Node_flighthq_node_NodeColorAdjustment.addNodeColorAdjustment(source, adjustment);
+  }
+
   public static function computeNodeBoundsRectangle<Traits>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
     Facade_Node_flighthq_node_BoundsRectangle.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
   }
 
-  public static function computeNodeWorldTransformRevision<Traits>(runtime:NodeRuntime<Traits>, ?parentRuntime:NodeRuntime<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.computeNodeWorldTransformRevision(runtime, parentRuntime);
+  public static function computeNodeRootLocalBoundsRectangle<Traits>(out:RectangleLike, root:Spatial2DNode<Traits>):Void {
+    Facade_Node_flighthq_node_BoundsRectangle.computeNodeRootLocalBoundsRectangle(out, root);
   }
 
-  public static function computeViewportAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
-    return cast Facade_Node_flighthq_node_Viewport.computeViewportAlignX(scaledContentWidth, viewWidth, align);
+  public static function computeScene2DFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
+    return cast Facade_Node_flighthq_node_StageFit.computeScene2DFitAlignX(scaledContentWidth, viewWidth, align);
     return cast null;
   }
 
-  public static function computeViewportAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
-    return cast Facade_Node_flighthq_node_Viewport.computeViewportAlignY(scaledContentHeight, viewHeight, align);
+  public static function computeScene2DFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
+    return cast Facade_Node_flighthq_node_StageFit.computeScene2DFitAlignY(scaledContentHeight, viewHeight, align);
     return cast null;
   }
 
-  public static function computeViewportFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
-    return cast Facade_Node_flighthq_node_Viewport.computeViewportFillScale(contentWidth, contentHeight, viewWidth, viewHeight);
+  public static function computeScene2DFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+    return cast Facade_Node_flighthq_node_StageFit.computeScene2DFitFillScale(contentWidth, contentHeight, viewWidth, viewHeight);
     return cast null;
   }
 
-  public static function computeViewportFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
-    return cast Facade_Node_flighthq_node_Viewport.computeViewportFitScale(contentWidth, contentHeight, viewWidth, viewHeight);
+  public static function computeScene2DFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+    return cast Facade_Node_flighthq_node_StageFit.computeScene2DFitScale(contentWidth, contentHeight, viewWidth, viewHeight);
     return cast null;
   }
 
-  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Viewport<Traits>, viewWidth:Float, viewHeight:Float):Void {
-    Facade_Node_flighthq_node_Viewport.computeViewportRenderTransform(out, scene, viewWidth, viewHeight);
+  public static function computeScene2DFitTransform<Traits>(out:MatrixLike, scene2d:Scene2DFitContext<Traits>, viewWidth:Float, viewHeight:Float):Void {
+    Facade_Node_flighthq_node_StageFit.computeScene2DFitTransform(out, scene2d, viewWidth, viewHeight);
   }
 
   public static function containsNodeChild<Traits>(source:flighthq.types.Node<Traits>, child:flighthq.types.Node<Traits>):Bool {
@@ -116,19 +107,19 @@ class Node {
   }
 
   public static function convertNodeVector2GlobalToLocal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    Facade_Node_flighthq_node_Transform2d.convertNodeVector2GlobalToLocal(out, source, vector);
+    Facade_Node_flighthq_node_NodeTransform2d.convertNodeVector2GlobalToLocal(out, source, vector);
   }
 
   public static function convertNodeVector2LocalToGlobal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    Facade_Node_flighthq_node_Transform2d.convertNodeVector2LocalToGlobal(out, source, vector);
+    Facade_Node_flighthq_node_NodeTransform2d.convertNodeVector2LocalToGlobal(out, source, vector);
   }
 
   public static function convertNodeVector3GlobalToLocal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
-    Facade_Node_flighthq_node_Transform3d.convertNodeVector3GlobalToLocal(out, source, point);
+    Facade_Node_flighthq_node_NodeTransform3d.convertNodeVector3GlobalToLocal(out, source, point);
   }
 
   public static function convertNodeVector3LocalToGlobal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
-    Facade_Node_flighthq_node_Transform3d.convertNodeVector3LocalToGlobal(out, source, point);
+    Facade_Node_flighthq_node_NodeTransform3d.convertNodeVector3LocalToGlobal(out, source, point);
   }
 
   public static function createNode<Traits, Data, Runtime>(nodeKind:Kind, ?obj:PartialNode<flighthq.types.Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):flighthq.types.Node<Traits> {
@@ -150,8 +141,7 @@ class Node {
     _Runtime.setField(out, 'canAddChild', _Runtime.coalesce(_Runtime.optionalField(methods, 'canAddChild'), function():Dynamic return cast defaultNodeRuntimeCanAddChild));
     _Runtime.setField(out, 'children', null);
     _Runtime.setField(out, 'colorAdjustments', null);
-    _Runtime.setField(out, 'resolvedColorTransform', null);
-    _Runtime.setField(out, 'colorAdjustmentsChannelMixing', false);
+    _Runtime.setField(out, 'colorAdjustmentsUnsupported', false);
     _Runtime.setField(out, 'nodeSignals', null);
     _Runtime.setField(out, 'interactionSignals', null);
     _Runtime.setField(out, 'interactionState', null);
@@ -161,6 +151,8 @@ class Node {
     _Runtime.setField(out, 'localTransformId', 0.0);
     _Runtime.setField(out, 'localTransformUsingLocalTransformId', -1.0);
     _Runtime.setField(out, 'parent', null);
+    _Runtime.setField(out, 'resolvedColorMatrix', null);
+    _Runtime.setField(out, 'resolvedColorScaleBias', null);
     _Runtime.setField(out, 'worldBoundsUsingLocalBoundsId', -1.0);
     _Runtime.setField(out, 'worldBoundsUsingWorldTransformId', -1.0);
     _Runtime.setField(out, 'worldTransformId', 0.0);
@@ -175,13 +167,9 @@ class Node {
     return cast null;
   }
 
-  public static function createViewport<Traits>(?obj:Dynamic):Viewport<Traits> {
+  public static function createViewport(?obj:ViewportLike):Viewport {
     return cast Facade_Node_flighthq_node_Viewport.createViewport(obj);
     return cast null;
-  }
-
-  public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
-    Facade_Node_flighthq_node_HasBoundsRectangle.defaultComputeLocalBoundsRectangle(_out, _source);
   }
 
   public static function defaultNodeRuntimeCanAddChild<Traits>(_target:flighthq.types.Node<Traits>, _child:flighthq.types.Node<Traits>):Bool {
@@ -233,34 +221,6 @@ class Node {
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
     return cast _Runtime.setField(runtime, 'nodeSignals', (_Runtime.field(runtime, 'nodeSignals') ?? _Runtime.callValue(createNodeSignals, cast ([] : Array<Dynamic>))));
     return cast null;
-  }
-
-  public static function ensureNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Void {
-    Facade_Node_flighthq_node_BoundsRectangle.ensureNodeLocalBoundsRectangle(target);
-  }
-
-  public static function ensureNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform2d.ensureNodeLocalMatrix(target);
-  }
-
-  public static function ensureNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform3d.ensureNodeLocalMatrix4(target);
-  }
-
-  public static function ensureNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
-    Facade_Node_flighthq_node_BoundsRectangle.ensureNodeParentBoundsRectangle(target);
-  }
-
-  public static function ensureNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
-    Facade_Node_flighthq_node_BoundsRectangle.ensureNodeWorldBoundsRectangle(target);
-  }
-
-  public static function ensureNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform2d.ensureNodeWorldMatrix(target);
-  }
-
-  public static function ensureNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform3d.ensureNodeWorldMatrix4(target);
   }
 
   public static function findNode<Traits>(source:flighthq.types.Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
@@ -320,6 +280,11 @@ class Node {
     return cast null;
   }
 
+  public static function getNodeColorAdjustments<Traits>(source:flighthq.types.Node<Traits>):Null<Array<Adjustment>> {
+    return cast Facade_Node_flighthq_node_NodeColorAdjustment.getNodeColorAdjustments(source);
+    return cast null;
+  }
+
   public static function getNodeCommonAncestor<Traits>(a:flighthq.types.Node<Traits>, b:flighthq.types.Node<Traits>):Null<NodeOf<Traits>> {
     return cast Facade_Node_flighthq_node_Hierarchy.getNodeCommonAncestor(a, b);
     return cast null;
@@ -351,12 +316,12 @@ class Node {
   }
 
   public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
-    return cast Facade_Node_flighthq_node_Transform2d.getNodeLocalMatrix(target);
+    return cast Facade_Node_flighthq_node_NodeTransform2d.getNodeLocalMatrix(target);
     return cast null;
   }
 
   public static function getNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
-    return cast Facade_Node_flighthq_node_Transform3d.getNodeLocalMatrix4(target);
+    return cast Facade_Node_flighthq_node_NodeTransform3d.getNodeLocalMatrix4(target);
     return cast null;
   }
 
@@ -401,11 +366,11 @@ class Node {
   }
 
   public static function getNodeTransform2D<Traits>(out:Transform2DLike, source:Transform2DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform2d.getNodeTransform2D(out, source);
+    Facade_Node_flighthq_node_NodeTransform2d.getNodeTransform2D(out, source);
   }
 
   public static function getNodeTransform3D<Traits>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform3d.getNodeTransform3D(out, source);
+    Facade_Node_flighthq_node_NodeTransform3d.getNodeTransform3D(out, source);
   }
 
   public static function getNodeWidth<Traits>(source:Spatial2DNode<Traits>):Float {
@@ -419,12 +384,12 @@ class Node {
   }
 
   public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
-    return cast Facade_Node_flighthq_node_Transform2d.getNodeWorldMatrix(target);
+    return cast Facade_Node_flighthq_node_NodeTransform2d.getNodeWorldMatrix(target);
     return cast null;
   }
 
   public static function getNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
-    return cast Facade_Node_flighthq_node_Transform3d.getNodeWorldMatrix4(target);
+    return cast Facade_Node_flighthq_node_NodeTransform3d.getNodeWorldMatrix4(target);
     return cast null;
   }
 
@@ -433,80 +398,21 @@ class Node {
     return cast null;
   }
 
-  public static function initAppearanceTrait(target:HasAppearance, ?obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasAppearance.initAppearanceTrait(target, obj);
-  }
-
-  public static function initBlendModeTrait(target:HasBlendMode, ?obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasBlendMode.initBlendModeTrait(target, obj);
-  }
-
-  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
-    Facade_Node_flighthq_node_HasBoundsRectangle.initBoundsRectangleRuntimeTrait(target, methods);
-  }
-
-  public static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasBoundsRectangle.initBoundsRectangleTrait(_target, _obj);
-  }
-
-  public static function initClipTrait(target:HasClip, ?obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasClip.initClipTrait(target, obj);
-  }
-
-  public static function initMaterialTrait(target:HasMaterial, ?obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasMaterial.initMaterialTrait(target, obj);
-  }
-
-  public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:Dynamic):Void {
-    Facade_Node_flighthq_node_HasTransform2d.initTransform2DRuntimeTrait(target, _methods);
-  }
-
-  public static function initTransform2DTrait(target:HasTransform2D, ?obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasTransform2d.initTransform2DTrait(target, obj);
-  }
-
-  public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
-    Facade_Node_flighthq_node_HasTransform3d.initTransform3DRuntimeTrait(target);
-  }
-
-  public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
-    Facade_Node_flighthq_node_HasTransform3d.initTransform3DTrait(target, obj);
-  }
-
-  public static function invalidateContent<Traits>(target:flighthq.types.Node<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.invalidateContent(target);
-  }
-
-  public static function invalidateNode<Traits>(target:flighthq.types.Node<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.invalidateNode(target);
+  public static function getViewportAspect(viewport:Viewport):Float {
+    return cast Facade_Node_flighthq_node_Viewport.getViewportAspect(viewport);
+    return cast null;
   }
 
   public static function invalidateNodeAppearance<Traits>(target:flighthq.types.Node<Traits>):Void {
     Facade_Node_flighthq_node_Revision.invalidateNodeAppearance(target);
   }
 
-  public static function invalidateNodeLocalBounds<Traits>(target:flighthq.types.Node<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.invalidateNodeLocalBounds(target);
-  }
-
-  public static function invalidateNodeLocalContent<Traits>(target:flighthq.types.Node<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.invalidateNodeLocalContent(target);
-  }
-
   public static function invalidateNodeLocalTransform<Traits>(target:flighthq.types.Node<Traits>):Void {
     Facade_Node_flighthq_node_Revision.invalidateNodeLocalTransform(target);
   }
 
-  public static function invalidateNodeParentReference<Traits>(target:flighthq.types.Node<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.invalidateNodeParentReference(target);
-  }
-
   public static function invalidateNodeRender<Traits>(target:flighthq.types.Node<Traits>):Void {
     Facade_Node_flighthq_node_Revision.invalidateNodeRender(target);
-  }
-
-  public static function invalidateNodeWorldBounds<Traits>(target:flighthq.types.Node<Traits>):Void {
-    Facade_Node_flighthq_node_Revision.invalidateNodeWorldBounds(target);
   }
 
   public static function isNodeAncestorOf<Traits>(ancestor:flighthq.types.Node<Traits>, descendant:flighthq.types.Node<Traits>):Bool {
@@ -515,7 +421,7 @@ class Node {
   }
 
   public static function isNodeLocalMatrix4Detached<Traits>(target:Transform3DNode<Traits>):Bool {
-    return cast Facade_Node_flighthq_node_Transform3d.isNodeLocalMatrix4Detached(target);
+    return cast Facade_Node_flighthq_node_NodeTransform3d.isNodeLocalMatrix4Detached(target);
     return cast null;
   }
 
@@ -546,6 +452,14 @@ class Node {
     Facade_Node_flighthq_node_Hierarchy.setNodeChildIndex(target, child, index);
   }
 
+  public static function setNodeColorAdjustments<Traits>(source:flighthq.types.Node<Traits>, value:Null<Array<Adjustment>>):Void {
+    Facade_Node_flighthq_node_NodeColorAdjustment.setNodeColorAdjustments(source, value);
+  }
+
+  public static function setNodeColorAdjustmentsTint<Traits>(source:flighthq.types.Node<Traits>, tint:Float):Void {
+    Facade_Node_flighthq_node_NodeColorAdjustment.setNodeColorAdjustmentsTint(source, tint);
+  }
+
   public static function setNodeEnabled<Traits>(target:flighthq.types.Node<Traits>, value:Bool):Void {
     _Runtime.setField(target, 'enabled', value);
     _Runtime.callValue(invalidateNode, cast ([target] : Array<Dynamic>));
@@ -556,19 +470,19 @@ class Node {
   }
 
   public static function setNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
-    Facade_Node_flighthq_node_Transform2d.setNodeLocalMatrix(target, source);
+    Facade_Node_flighthq_node_NodeTransform2d.setNodeLocalMatrix(target, source);
   }
 
   public static function setNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
-    Facade_Node_flighthq_node_Transform3d.setNodeLocalMatrix4(target, source);
+    Facade_Node_flighthq_node_NodeTransform3d.setNodeLocalMatrix4(target, source);
   }
 
   public static function setNodeTransform2D<Traits>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
-    Facade_Node_flighthq_node_Transform2d.setNodeTransform2D(target, source);
+    Facade_Node_flighthq_node_NodeTransform2d.setNodeTransform2D(target, source);
   }
 
   public static function setNodeTransform3D<Traits>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
-    Facade_Node_flighthq_node_Transform3d.setNodeTransform3D(target, source);
+    Facade_Node_flighthq_node_NodeTransform3d.setNodeTransform3D(target, source);
   }
 
   public static function setNodeWidth<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
@@ -581,10 +495,6 @@ class Node {
 
   public static function swapNodeChildrenAt<Traits>(target:flighthq.types.Node<Traits>, index1:Float, index2:Float):Void {
     Facade_Node_flighthq_node_Hierarchy.swapNodeChildrenAt(target, index1, index2);
-  }
-
-  public static function syncNodeTransform3DFromMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
-    Facade_Node_flighthq_node_Transform3d.syncNodeTransform3DFromMatrix4(target);
   }
 
   public static function walkNodeDescendants<Traits>(source:flighthq.types.Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {

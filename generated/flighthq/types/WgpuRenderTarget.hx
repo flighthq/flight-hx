@@ -3,7 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTarget.RenderTargetDimensions;
 
-typedef WgpuRenderTarget = { var bindGroup:Dynamic; var depthStencilTexture:Dynamic; var depthStencilView:Dynamic; var format:Dynamic; var height:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:Dynamic; var view:Dynamic; var width:Float; };
+typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindGroup:Dynamic; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:Dynamic; var depthStencilView:Dynamic; var format:Dynamic; var clearColors:Array<Float>; var clearDepth:Float; var texture:Dynamic; var view:Dynamic; };
 
 typedef WgpuRenderTargetPool = { var free:Array<flighthq.types.WgpuRenderTarget>; };

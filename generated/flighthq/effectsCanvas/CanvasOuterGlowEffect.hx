@@ -8,12 +8,14 @@ import flighthq.effectsCanvas.CanvasEffectDropShadowCss.computeOuterGlowEffectCs
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.createCanvasRenderTargetPool;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
+import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceMode;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.OuterGlowEffect;
 
@@ -35,6 +37,10 @@ class CanvasOuterGlowEffect {
   public static final defaultCanvasOuterGlowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyOuterGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
   };
+
+  public static function registerCanvasOuterGlowEffect(state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'OuterGlowEffect', defaultCanvasOuterGlowEffectRunner] : Array<Dynamic>));
+  }
 
   public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:OuterGlowEffect):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;

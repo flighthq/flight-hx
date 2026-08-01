@@ -7,7 +7,7 @@ __syncDependencies();
 
 export const createAluminumStandardPbrMaterial = api.createAluminumStandardPbrMaterial;
 export const createCarbonStandardPbrMaterial = api.createCarbonStandardPbrMaterial;
-export const createGlassTransmissionVolumePbrMaterial = api.createGlassTransmissionVolumePbrMaterial;
+export const createGlassExtendedPbrMaterial = api.createGlassExtendedPbrMaterial;
 export const createGoldStandardPbrMaterial = api.createGoldStandardPbrMaterial;
 export const createIronStandardPbrMaterial = api.createIronStandardPbrMaterial;
 export const createMarbleStandardPbrMaterial = api.createMarbleStandardPbrMaterial;

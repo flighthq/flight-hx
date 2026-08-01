@@ -84,15 +84,15 @@ class App {
 
   public static function createWebAppBackend():AppBackend {
     return cast { addRecentDocument: function() {
-    
+
     }, bounceDock: function() {
       return cast -1.0;
     }, cancelAttention: function() {
-    
+
     }, cancelDockBounce: function() {
-    
+
     }, clearRecentDocuments: function() {
-    
+
     }, focus: function() {
       if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
         try {
@@ -148,13 +148,13 @@ class App {
         }
       }
     }, releaseSingleInstanceLock: function() {
-    
+
     }, requestAttention: function() {
       return cast -1.0;
     }, requestSingleInstanceLock: function() {
       return cast true;
     }, setActivationPolicy: function() {
-    
+
     }, setBadgeCount: function(count:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
@@ -164,9 +164,9 @@ class App {
         return cast false;
       }
     }, setDockBadge: function() {
-    
+
     }, setDockMenu: function() {
-    
+
     }, setLoginItem: function() {
       return cast false;
     }, setName: function() {
@@ -177,30 +177,30 @@ class App {
       return cast false;
     }, subscribeActivate: function() {
       return cast function() {
-      
+
       };
     }, subscribeAllWindowsClosed: function() {
       return cast function() {
-      
+
       };
     }, subscribeOpenFile: function() {
       return cast function() {
-      
+
       };
     }, subscribeQuitRequest: function(_listener:Dynamic) {
       return cast function() {
-      
+
       };
     }, subscribeReady: function(listener:Dynamic) {
       var id:Dynamic = cast _Runtime.UNDEFINED;
       id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.voidValue(id);
       return cast function() {
-      
+
       };
     }, subscribeSecondInstance: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

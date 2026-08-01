@@ -7,7 +7,7 @@ import flighthq.particleemitter.UpdateParticleEmitter3D.updateParticleEmitter3D;
 import flighthq.particles.ApplyParticleCollisions.applyParticleCollisions;
 import flighthq.particles.ApplyParticleForces.applyParticleForces;
 import flighthq.types.ParticleCollider;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
@@ -17,7 +17,7 @@ import flighthq.types.ParticleForce;
 class StepParticleEmitter3D {
   public static function stepParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     var asEmitter:Dynamic = cast _Runtime.UNDEFINED;
-    asEmitter = (cast (cast emitter : Dynamic) : ParticleEmitter);
+    asEmitter = (cast (cast emitter : Dynamic) : ParticleEmitter2D);
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(applyParticleForces, cast ([asEmitter, state, forces, deltaTime] : Array<Dynamic>));
     }

@@ -6,5 +6,8 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const applyBlurEffectToGl = api.applyBlurEffectToGl;
+export const applyBlurEffectToGlRenderTextures = api.applyBlurEffectToGlRenderTextures;
 export const applyGaussianBlurToGl = api.applyGaussianBlurToGl;
+export const applyGaussianBlurToGlRenderTextures = api.applyGaussianBlurToGlRenderTextures;
 export const defaultGlBlurEffectRunner = api.defaultGlBlurEffectRunner;
+export const registerGlBlurEffect = api.registerGlBlurEffect;

@@ -11,6 +11,12 @@ typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTa
 
 typedef GlRenderEffectRunner = Dynamic;
 
+typedef GlRenderEffectApplicationStatus = String;
+
+typedef GlRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:GlRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; };
+
+typedef GlRenderEffectApplicationGuard = Dynamic;
+
 typedef RenderEffectPipelineOptions = { @:optional var sampleCount:Float; @:optional var format:RenderTargetFormat; @:optional var depth:RenderTargetDepth; };
 
 typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<Dynamic>; };

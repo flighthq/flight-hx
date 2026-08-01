@@ -4,13 +4,10 @@ package flighthq.pathBoolean;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.pathBoolean.BooleanPaths as Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths;
-import flighthq.pathBoolean.MartinezKernel as Facade_PathBoolean_flighthq_pathBoolean_MartinezKernel;
 import flighthq.pathBoolean.OffsetPath as Facade_PathBoolean_flighthq_pathBoolean_OffsetPath;
-import flighthq.pathBoolean.PathBooleanBackend as Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend;
 import flighthq.pathBoolean.SimplifyPath as Facade_PathBoolean_flighthq_pathBoolean_SimplifyPath;
 import flighthq.pathBoolean.UnionAllPaths as Facade_PathBoolean_flighthq_pathBoolean_UnionAllPaths;
 import flighthq.types.Path;
-import flighthq.types.PathBooleanBackend;
 import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
 import flighthq.types.PathOffsetOptions;
@@ -21,23 +18,8 @@ class PathBoolean {
     return cast null;
   }
 
-  public static function createDefaultPathBooleanBackend():PathBooleanBackend {
-    return cast Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.createDefaultPathBooleanBackend();
-    return cast null;
-  }
-
-  public static function createMartinezPathBooleanBackend():PathBooleanBackend {
-    return cast Facade_PathBoolean_flighthq_pathBoolean_MartinezKernel.createMartinezPathBooleanBackend();
-    return cast null;
-  }
-
   public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast Facade_PathBoolean_flighthq_pathBoolean_BooleanPaths.differencePaths(a, b, out, options);
-    return cast null;
-  }
-
-  public static function getPathBooleanBackend():PathBooleanBackend {
-    return cast Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.getPathBooleanBackend();
     return cast null;
   }
 
@@ -49,10 +31,6 @@ class PathBoolean {
   public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
     return cast Facade_PathBoolean_flighthq_pathBoolean_OffsetPath.offsetPath(path, delta, options);
     return cast null;
-  }
-
-  public static function setPathBooleanBackend(backend:Null<PathBooleanBackend>):Void {
-    Facade_PathBoolean_flighthq_pathBoolean_PathBooleanBackend.setPathBooleanBackend(backend);
   }
 
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {

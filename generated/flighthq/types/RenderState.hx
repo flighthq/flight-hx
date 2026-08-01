@@ -3,12 +3,14 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
+import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
-typedef SceneGraphSyncPolicy = String;
+typedef Scene3DGraphSyncPolicy = String;
 
-typedef RenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<DisplayObjectClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:SceneGraphSyncPolicy; var roundPixels:Bool; };
+typedef RenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; };
 
-typedef RenderStateRuntime = { var binding:Null<Dynamic>; var colorAdjustmentChannelMixingGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; };
+typedef RenderStateRuntime = { var binding:Null<Dynamic>; var colorAdjustmentUnsupportedGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var renderProxySources:Dynamic; var registryMiss:Null<{ var clear:Dynamic; var signals:RenderRegistrySignals; }>; @:optional var renderEffectPaddingResolverRegistry:Null<Dynamic>; var renderRootGuard:Null<Dynamic>; var strokeTessellator:Null<Dynamic>; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; };
