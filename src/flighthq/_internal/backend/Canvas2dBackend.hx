@@ -74,6 +74,9 @@ class Canvas2dBackend {
         js.Syntax.code('{0}.roundRect({1}, {2}, {3}, {4}, {5})', context, arguments[0], arguments[1], arguments[2],
           arguments[3], arguments[4]);
         return null;
+      // Newish browser API: absent on older engines, so feature-test instead of extern.
+      case 'isContextLost':
+        return js.Syntax.code("(typeof {0}.isContextLost === 'function' ? {0}.isContextLost() : false)", context);
       case 'save': ctx.save(); return null;
       case 'scale': ctx.scale(arguments[0], arguments[1]); return null;
       case 'setTransform':
@@ -100,6 +103,8 @@ class Canvas2dBackend {
     final ctx:js.html.CanvasRenderingContext2D = context;
     switch (name) {
       case 'canvas': return ctx.canvas;
+      case 'isContextLost':
+        return js.Syntax.code("(typeof {0}.isContextLost === 'function' ? {0}.isContextLost.bind({0}) : function() { return false; })", context);
       case 'imageSmoothingEnabled': return ctx.imageSmoothingEnabled;
       default:
         throw 'Canvas2dBackend: unmapped 2D field ' + name;
@@ -188,6 +193,8 @@ class Canvas2dBackend {
       case 'rect': ctx.rect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'restore': ctx.restore(); return null;
       case 'roundRect': ctx.roundRect(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]); return null;
+      // A cairo surface context has no loss mechanism; report never-lost.
+      case 'isContextLost': return false;
       case 'save': ctx.save(); return null;
       case 'setTransform':
         ctx.setTransform(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
@@ -213,6 +220,7 @@ class Canvas2dBackend {
     final ctx:NativeCanvas2dContext = context;
     switch (name) {
       case 'canvas': return ctx.canvas;
+      case 'isContextLost': return function():Dynamic return false;
       case 'imageSmoothingEnabled': return ctx.imageSmoothingEnabled;
       default:
         throw 'Canvas2dBackend: unmapped 2D field ' + name;
