@@ -10,12 +10,13 @@ import type { LoweringAudit } from '../analyze/lowering.ts';
 export function createApiReport(inventory: UpstreamInventory): ApiReport {
   return {
     packages: inventory.packages.map((item) => ({
-      exports: item.exports,
+      exportLanes: item.exportLanes,
       haxeModule: item.haxeModule,
       name: item.name,
+      sdkExposures: item.sdkExposures,
       sdkIncluded: item.sdkIncluded,
     })),
-    schemaVersion: 1,
+    schemaVersion: 2,
     upstreamCommit: inventory.upstreamCommit,
   };
 }
@@ -31,16 +32,28 @@ export function inventorySummary(inventory: UpstreamInventory): string {
     `| Packages | ${inventory.summary.packages} |`,
     `| Source files | ${inventory.summary.sourceFiles} |`,
     `| Test files | ${inventory.summary.testFiles} |`,
-    `| Public exports | ${inventory.summary.exports} |`,
+    `| Public export lanes | ${inventory.summary.exportLanes} |`,
+    `| Public export records | ${inventory.summary.exports} |`,
+    `| Root-lane exports | ${inventory.summary.rootExports} |`,
     `| Export conflicts | ${inventory.summary.exportConflicts} |`,
     '',
-    '| Upstream package | Haxe module | Sources | Tests | Exports | SDK | Conflicts |',
-    '| --- | --- | ---: | ---: | ---: | :---: | ---: |',
+    '| Upstream package | Haxe module | Sources | Tests | Lanes | Export records | SDK | Conflicts |',
+    '| --- | --- | ---: | ---: | ---: | ---: | :---: | ---: |',
   ];
   for (const item of inventory.packages) {
+    const exports = item.exportLanes.reduce((total, lane) => total + lane.exports.length, 0);
+    const conflicts = item.exportLanes.reduce((total, lane) => total + lane.exportConflicts.length, 0);
     lines.push(
-      `| \`${item.name}\` | \`${item.haxeModule}\` | ${item.sourceFiles} | ${item.testFiles} | ${item.exports.length} | ${item.sdkIncluded ? 'yes' : 'no'} | ${item.exportConflicts.length} |`,
+      `| \`${item.name}\` | \`${item.haxeModule}\` | ${item.sourceFiles} | ${item.testFiles} | ${item.exportLanes.length} | ${exports} | ${item.sdkIncluded ? 'yes' : 'no'} | ${conflicts} |`,
     );
+  }
+  lines.push('', '| Public specifier | Source barrel | Exports | Conflicts |', '| --- | --- | ---: | ---: |');
+  for (const item of inventory.packages) {
+    for (const lane of item.exportLanes) {
+      lines.push(
+        `| \`${lane.specifier}\` | \`${lane.source}\` | ${lane.exports.length} | ${lane.exportConflicts.length} |`,
+      );
+    }
   }
   lines.push('');
   return lines.join('\n');

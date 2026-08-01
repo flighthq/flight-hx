@@ -8,6 +8,8 @@ import {
   analyzeUpstream,
   packageNameToHaxePackage,
   packageNameToModule,
+  packageRootExportLane,
+  resolvePackageExportLane,
   sourcePathToHaxePackage,
   sourcePathToImplementationModule,
   sourcePathToModule,
@@ -16,6 +18,7 @@ import { upstreamTypeScriptProgram } from '../analyze/program.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import { cppStructInitTypedStructIds, type TypedStructRegistry } from '../analyze/typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
+import type { ExportRecord } from '../model/inventory.ts';
 import type {
   IrDeclaration,
   IrExpression,
@@ -79,7 +82,9 @@ export function generateCoreModules(
     .map((entry) => {
       const packageName = `@flighthq/${entry.name}`;
       const publicSourceNames = new Set(
-        (inventoryByName.get(packageName)?.exports ?? []).map((record) => path.basename(record.source)),
+        (inventoryByName.get(packageName)?.exportLanes ?? []).flatMap((lane) =>
+          lane.exports.map((record) => path.basename(record.source)),
+        ),
       );
       return {
         directoryName: entry.name,
@@ -195,13 +200,15 @@ export function generateCoreModules(
   mkdirSync(path.join(workspaceDirectory, 'tests', 'bridges'), { recursive: true });
   for (const item of loweredPackages) {
     const packageInventory = inventoryByName.get(item.packageName);
+    if (!packageInventory) throw new Error(`Expected package inventory for ${item.packageName}`);
+    const rootExports = packageRootExportLane(packageInventory).exports;
     const facade = modules.find(
       (module) =>
         module.haxePackage === packageNameToHaxePackage(item.packageName) &&
         module.name === packageNameToModule(item.packageName),
     );
     if (!facade) throw new Error(`Expected generated facade for ${item.packageName}`);
-    const externalExports = (packageInventory?.exports ?? []).flatMap((record) => {
+    const externalExports = rootExports.flatMap((record) => {
       const sourcePackage = /^upstream\/packages\/([^/]+)\//u.exec(record.source)?.[1];
       if (!sourcePackage || sourcePackage === item.directoryName) return [];
       if (
@@ -211,9 +218,10 @@ export function generateCoreModules(
         return [];
       const originInventory = inventoryByName.get(`@flighthq/${sourcePackage}`);
       const originName =
-        originInventory?.exports.find(
-          (candidate) => candidate.fingerprint === record.fingerprint && candidate.source === record.source,
-        )?.name ?? record.name;
+        originInventory?.exportLanes
+          .flatMap((lane) => lane.exports)
+          .find((candidate) => candidate.fingerprint === record.fingerprint && candidate.source === record.source)
+          ?.name ?? record.name;
       return [{ originDirectory: sourcePackage, originName, publicName: record.name }];
     });
     writeOrCheck(
@@ -221,7 +229,7 @@ export function generateCoreModules(
       emitJavaScriptBridge(
         modulePath(facade),
         item.lowered.declarations,
-        packageInventory?.exports ?? [],
+        rootExports,
         modules,
         item.packageName === '@flighthq/types' ? canonicalValueAliases : undefined,
         externalExports,
@@ -415,12 +423,8 @@ function populateSourceImports(
     throw new Error(`Cannot resolve Haxe owner for ${record.source}`);
   };
   const resolvePackageImport = (packageName: string, importedName: string) => {
-    // A subpath specifier (`@flighthq/surface/surfaceFingerprint`) resolves the same export as
-    // its base package (`@flighthq/surface`); fall back to the base package's export inventory.
-    const basePackage = /^(@flighthq\/[^/]+)/u.exec(packageName)?.[1] ?? packageName;
-    const record =
-      inventoryByName.get(packageName)?.exports.find((candidate) => candidate.name === importedName) ??
-      inventoryByName.get(basePackage)?.exports.find((candidate) => candidate.name === importedName);
+    const lane = resolvePackageExportLane(inventoryByName, packageName);
+    const record = lane.exports.find((candidate) => candidate.name === importedName);
     if (!record) throw new Error(`Cannot resolve imported export ${packageName}.${importedName}`);
     return resolveRecord(record);
   };
@@ -439,9 +443,11 @@ function populateSourceImports(
       );
       if (declaration) return { declaration, module };
     }
-    const reexport = inventoryByName
-      .get(packageName)
-      ?.exports.find((candidate) => candidate.name === importedName && candidate.source !== relativeTarget);
+    const packageInventory = inventoryByName.get(packageName);
+    const targetLane = packageInventory?.exportLanes.find((lane) => lane.source === relativeTarget);
+    const reexport = (targetLane ? [targetLane] : (packageInventory?.exportLanes ?? []))
+      .flatMap((lane) => lane.exports)
+      .find((candidate) => candidate.name === importedName && candidate.source !== relativeTarget);
     if (reexport) return resolveRecord(reexport);
     throw new Error(`Cannot resolve imported declaration ${importedName} from ${relativeTarget}`);
   };
@@ -817,6 +823,7 @@ function buildPublicFacades(
   const sdk = facadeForPackage('@flighthq/sdk');
   const sdkInventory = inventoryByName.get('@flighthq/sdk');
   if (!sdk || !sdkInventory) throw new Error('Expected @flighthq/sdk module and inventory');
+  const sdkRootExports = packageRootExportLane(sdkInventory).exports;
   const typeOwnerByName = new Map<string, IrModule>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
@@ -826,9 +833,7 @@ function buildPublicFacades(
     }
   }
 
-  const resolveDeclaration = (
-    record: (typeof sdkInventory.exports)[number],
-  ): { declaration: IrDeclaration; module: IrModule } | undefined => {
+  const resolveDeclaration = (record: ExportRecord): { declaration: IrDeclaration; module: IrModule } | undefined => {
     for (const module of modules) {
       const declaration = module.declarations.find(
         (candidate) => candidate.origin.fingerprint === record.fingerprint && candidate.origin.source === record.source,
@@ -837,7 +842,7 @@ function buildPublicFacades(
     }
     return undefined;
   };
-  const resolveDirectDeclaration = (record: (typeof sdkInventory.exports)[number]) => {
+  const resolveDirectDeclaration = (record: ExportRecord) => {
     const resolved = resolveDeclaration(record);
     return resolved && (resolved.declaration.kind === 'function' || resolved.declaration.kind === 'variable')
       ? {
@@ -934,7 +939,7 @@ function buildPublicFacades(
     if (excludedPackageNames.has(packageInventory.name)) continue;
     const target = facadeForPackage(packageInventory.name);
     if (!target) throw new Error(`Expected facade module for ${packageInventory.name}`);
-    for (const record of packageInventory.exports) {
+    for (const record of packageRootExportLane(packageInventory).exports) {
       if (!sourcePathToModule(record.source)) continue;
       const resolvedDeclaration = resolveDeclaration(record);
       if (resolvedDeclaration?.declaration.kind === 'enum') {
@@ -959,7 +964,7 @@ function buildPublicFacades(
   // Mirror the SDK from public package names, retaining renamed re-exports.
   sdk.declarations = [];
   sdk.imports = [];
-  for (const record of sdkInventory.exports) {
+  for (const record of sdkRootExports) {
     if (!sourcePathToModule(record.source)) continue;
     const resolvedDeclaration = resolveDeclaration(record);
     if (resolvedDeclaration?.declaration.kind === 'enum') {
