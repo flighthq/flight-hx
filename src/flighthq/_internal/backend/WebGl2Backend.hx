@@ -81,23 +81,34 @@ abstract GlBufferDataSource(Dynamic) from Float from Int from flighthq._internal
  * values fixed by the WebGL specification and identical on every target.
  */
 class WebGl2Backend {
+  public static inline final ACTIVE_TEXTURE:Int = 34016;
   public static inline final ACTIVE_UNIFORMS:Int = 35718;
   public static inline final ALWAYS:Int = 519;
   public static inline final ARRAY_BUFFER:Int = 34962;
   public static inline final BACK:Int = 1029;
   public static inline final BLEND:Int = 3042;
+  public static inline final BLEND_DST_ALPHA:Int = 32970;
+  public static inline final BLEND_DST_RGB:Int = 32968;
+  public static inline final BLEND_EQUATION_ALPHA:Int = 34877;
+  public static inline final BLEND_EQUATION_RGB:Int = 32777;
+  public static inline final BLEND_SRC_ALPHA:Int = 32971;
+  public static inline final BLEND_SRC_RGB:Int = 32969;
   public static inline final CLAMP_TO_EDGE:Int = 33071;
   public static inline final COLOR:Int = 6144;
   public static inline final COLOR_ATTACHMENT0:Int = 36064;
   public static inline final COLOR_BUFFER_BIT:Int = 16384;
   public static inline final COMPILE_STATUS:Int = 35713;
   public static inline final CULL_FACE:Int = 2884;
+  public static inline final CULL_FACE_MODE:Int = 2885;
+  public static inline final CURRENT_PROGRAM:Int = 35725;
   public static inline final DECR_WRAP:Int = 34056;
   public static inline final DEPTH24_STENCIL8:Int = 35056;
   public static inline final DEPTH_BUFFER_BIT:Int = 256;
+  public static inline final DEPTH_FUNC:Int = 2932;
   public static inline final DEPTH_STENCIL:Int = 34041;
   public static inline final DEPTH_STENCIL_ATTACHMENT:Int = 33306;
   public static inline final DEPTH_TEST:Int = 2929;
+  public static inline final DEPTH_WRITEMASK:Int = 2930;
   public static inline final DRAW_FRAMEBUFFER:Int = 36009;
   public static inline final DST_COLOR:Int = 774;
   public static inline final DYNAMIC_DRAW:Int = 35048;
@@ -130,6 +141,7 @@ class WebGl2Backend {
   public static inline final LINK_STATUS:Int = 35714;
   public static inline final MAX:Int = 32776;
   public static inline final MAX_SAMPLES:Int = 36183;
+  public static inline final MAX_TEXTURE_IMAGE_UNITS:Int = 34930;
   public static inline final MIN:Int = 32775;
   public static inline final MIRRORED_REPEAT:Int = 33648;
   public static inline final NEAREST:Int = 9728;
@@ -148,18 +160,28 @@ class WebGl2Backend {
   public static inline final RGBA16F:Int = 34842;
   public static inline final RGBA32F:Int = 34836;
   public static inline final RGBA8:Int = 32856;
+  public static inline final SCISSOR_BOX:Int = 3088;
   public static inline final SCISSOR_TEST:Int = 3089;
   public static inline final SRC_ALPHA:Int = 770;
   public static inline final STATIC_DRAW:Int = 35044;
   public static inline final STENCIL_BUFFER_BIT:Int = 1024;
+  public static inline final STENCIL_FAIL:Int = 2964;
+  public static inline final STENCIL_FUNC:Int = 2962;
+  public static inline final STENCIL_PASS_DEPTH_FAIL:Int = 2965;
+  public static inline final STENCIL_PASS_DEPTH_PASS:Int = 2966;
+  public static inline final STENCIL_REF:Int = 2967;
   public static inline final STENCIL_TEST:Int = 2960;
+  public static inline final STENCIL_VALUE_MASK:Int = 2963;
+  public static inline final STENCIL_WRITEMASK:Int = 2968;
   public static inline final STREAM_DRAW:Int = 35040;
   public static inline final TEXTURE0:Int = 33984;
   public static inline final TEXTURE1:Int = 33985;
   public static inline final TEXTURE2:Int = 33986;
+  public static inline final TEXTURE3:Int = 33987;
   public static inline final TEXTURE_2D:Int = 3553;
   public static inline final TEXTURE_2D_ARRAY:Int = 35866;
   public static inline final TEXTURE_3D:Int = 32879;
+  public static inline final TEXTURE_BINDING_2D:Int = 32873;
   public static inline final TEXTURE_CUBE_MAP:Int = 34067;
   public static inline final TEXTURE_CUBE_MAP_POSITIVE_X:Int = 34069;
   public static inline final TEXTURE_MAG_FILTER:Int = 10240;
@@ -176,6 +198,7 @@ class WebGl2Backend {
   public static inline final UNSIGNED_INT:Int = 5125;
   public static inline final UNSIGNED_INT_24_8:Int = 34042;
   public static inline final UNSIGNED_SHORT:Int = 5123;
+  public static inline final VERTEX_ARRAY_BINDING:Int = 34229;
   public static inline final VERTEX_SHADER:Int = 35633;
   public static inline final VIEWPORT:Int = 2978;
   public static inline final ZERO:Int = 0;
@@ -221,8 +244,17 @@ class WebGl2Backend {
     gl.blendEquation(Std.int(mode));
   }
 
+  public static inline function blendEquationSeparate(gl:GlContext, modeRGB:Float, modeAlpha:Float):Void {
+    gl.blendEquationSeparate(Std.int(modeRGB), Std.int(modeAlpha));
+  }
+
   public static inline function blendFunc(gl:GlContext, sfactor:Float, dfactor:Float):Void {
     gl.blendFunc(Std.int(sfactor), Std.int(dfactor));
+  }
+
+  public static inline function blendFuncSeparate(gl:GlContext, srcRGB:Float, dstRGB:Float, srcAlpha:Float,
+      dstAlpha:Float):Void {
+    gl.blendFuncSeparate(Std.int(srcRGB), Std.int(dstRGB), Std.int(srcAlpha), Std.int(dstAlpha));
   }
 
   public static inline function blitFramebuffer(gl:GlContext, srcX0:Float, srcY0:Float, srcX1:Float, srcY1:Float,
@@ -543,6 +575,10 @@ class WebGl2Backend {
     final result = gl.getUniformLocation(program, name);
     #if flight_gl_trace glTrace('getUniformLocation(' + name + ') -> ' + ((result : Dynamic) == null ? 'NULL' : Std.string(result))); #end
     return result;
+  }
+
+  public static inline function isEnabled(gl:GlContext, cap:Float):Bool {
+    return gl.isEnabled(Std.int(cap));
   }
 
   public static inline function linkProgram(gl:GlContext, program:GlProgram):Void {
