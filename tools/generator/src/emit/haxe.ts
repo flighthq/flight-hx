@@ -764,6 +764,25 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         lines.push(...emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation));
         return lines;
       });
+    case 'forIn':
+      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      return emitAwaitedExpression(statement.object, (object) => {
+        const keys = `__flowKeys${String(temporaryIndex++)}`;
+        const indexName = `__flowIndex${String(temporaryIndex++)}`;
+        const body = emitFlowScopedStatements(statementToStatements(statement.body));
+        const iteration = [
+          'function():Dynamic {',
+          `  if (${indexName} >= ${keys}.length) return flighthq._internal._Async.flowBreak();`,
+          `  var ${safeName(statement.variable)}:String = ${keys}[${indexName}++];`,
+          ...indent(body),
+          '}',
+        ].join('\n');
+        return [
+          `var ${keys}:Array<String> = ${emitForInKeys(statement.enumeration, object)};`,
+          `var ${indexName}:Int = 0;`,
+          ...emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation),
+        ];
+      });
     case 'do':
     case 'switch':
       return [...emitStatement(statement), ...continuation()];
@@ -1076,6 +1095,12 @@ function canFlowStatements(statements: IrStatement[], inLoop = false): boolean {
             ) &&
             canFlowStatements(statementToStatements(statement.body), true))
         );
+      case 'forIn':
+        return (
+          (!statementContainsAwait(statement) && !statementContainsReturn(statement)) ||
+          (expressionSupportsFlatMapExtraction(statement.object) &&
+            canFlowStatements(statementToStatements(statement.body), true))
+        );
       case 'do':
       case 'switch':
         return !statementContainsAwait(statement) && !statementContainsReturn(statement);
@@ -1196,6 +1221,8 @@ function statementContainsAwait(statement: IrStatement): boolean {
         statement.bindings.some((variable) => variable.initializer && expressionContainsAwait(variable.initializer)) ||
         statementContainsAwait(statement.body)
       );
+    case 'forIn':
+      return expressionContainsAwait(statement.object) || statementContainsAwait(statement.body);
     case 'if':
       return (
         expressionContainsAwait(statement.condition) ||
@@ -1235,6 +1262,7 @@ function statementContainsReturn(statement: IrStatement): boolean {
       return statementContainsReturn(statement.body);
     case 'for':
     case 'forOf':
+    case 'forIn':
       return statementContainsReturn(statement.body);
     case 'if':
       return (
@@ -1362,6 +1390,12 @@ function isHaxeConstant(expression: IrExpression): boolean {
   return expression.kind === 'literal' && expression.value !== null;
 }
 
+function emitForInKeys(enumeration: 'direct-record' | 'runtime', object: string): string {
+  return enumeration === 'direct-record'
+    ? `flighthq._internal.DynamicObject.keys(${object})`
+    : `_Runtime.forInKeys(${object})`;
+}
+
 function emitStatement(statement: IrStatement): string[] {
   switch (statement.kind) {
     case 'block': {
@@ -1431,6 +1465,21 @@ function emitStatement(statement: IrStatement): string[] {
         currentContinueIncrement = previousContinueIncrement;
       }
       lines.push(...(statement.async ? ['  }', '}'] : ['}']));
+      return lines;
+    }
+    case 'forIn': {
+      const lines = [
+        `for (${safeName(statement.variable)} in ${emitForInKeys(statement.enumeration, emitExpression(statement.object))}) {`,
+      ];
+      const body = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
+      const previousContinueIncrement = currentContinueIncrement;
+      currentContinueIncrement = undefined;
+      try {
+        for (const item of body) lines.push(...indent(emitStatement(item)));
+      } finally {
+        currentContinueIncrement = previousContinueIncrement;
+      }
+      lines.push('}');
       return lines;
     }
     case 'if': {

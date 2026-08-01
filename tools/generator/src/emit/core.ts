@@ -1736,7 +1736,9 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         }
       }
     }
-    if (record.kind === 'forOf' && typeof record.variable === 'string') boundNames.add(record.variable);
+    if ((record.kind === 'forOf' || record.kind === 'forIn') && typeof record.variable === 'string') {
+      boundNames.add(record.variable);
+    }
     if (typeof record.catchName === 'string') boundNames.add(record.catchName);
     Object.values(record).forEach(collectBindings);
   };
@@ -1873,6 +1875,10 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
           if (item.type) type(item.type);
           if (item.initializer) expression(item.initializer);
         });
+        statement(value.body);
+        break;
+      case 'forIn':
+        expression(value.object);
         statement(value.body);
         break;
       case 'if':

@@ -937,6 +937,14 @@ class _Runtime {
     #end
   }
 
+  public static function forInKeys(source:Dynamic):Array<String> {
+    #if js
+    return js.Syntax.code('(function(value) { const keys = []; for (const key in value) keys.push(key); return keys; })({0})', source);
+    #else
+    return source == null ? [] : Reflect.fields(source);
+    #end
+  }
+
   public static inline function jsonParse(value:String):Dynamic {
     return haxe.Json.parse(value);
   }

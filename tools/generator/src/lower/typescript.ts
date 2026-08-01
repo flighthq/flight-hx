@@ -1265,6 +1265,22 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
       variable,
     };
   }
+  if (ts.isForInStatement(node)) {
+    if (!ts.isVariableDeclarationList(node.initializer) || node.initializer.declarations.length !== 1) {
+      return unsupported(node.initializer, context, 'for-in initializer');
+    }
+    const declaration = node.initializer.declarations[0]!;
+    if (!ts.isIdentifier(declaration.name)) {
+      return unsupported(declaration.name, context, 'for-in initializer');
+    }
+    return {
+      body: lowerStatement(node.statement, context),
+      enumeration: isStringIndexedRecord(node.expression, context.checker) ? 'direct-record' : 'runtime',
+      kind: 'forIn',
+      object: lowerExpression(node.expression, context),
+      variable: declaration.name.text,
+    };
+  }
   if (ts.isTypeAliasDeclaration(node)) return { kind: 'block', statements: [] };
   if (ts.isThrowStatement(node)) return { expression: lowerExpression(node.expression, context), kind: 'throw' };
   if (ts.isSwitchStatement(node)) {
@@ -1327,6 +1343,19 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
   }
   if (ts.isEmptyStatement(node)) return { kind: 'block', statements: [] };
   return unsupported(node, context, `statement ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+function isStringIndexedRecord(node: ts.Expression, checker: ts.TypeChecker | undefined): boolean {
+  if (!checker) return false;
+  const seen = new Set<ts.Type>();
+  const visit = (type: ts.Type): boolean => {
+    if (seen.has(type)) return false;
+    seen.add(type);
+    if ((type.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.TypeParameter)) !== 0) return false;
+    if (type.isUnionOrIntersection()) return type.types.length > 0 && type.types.every(visit);
+    return checker.getIndexTypeOfType(type, ts.IndexKind.String) !== undefined;
+  };
+  return visit(checker.getTypeAtLocation(node));
 }
 
 function expressionStaticFacts(node: ts.Expression, context: LoweringContext): IrExpressionStaticFacts | undefined {

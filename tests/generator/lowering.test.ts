@@ -2140,6 +2140,58 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('return Std.int(');
   });
 
+  it('lowers for-in through proven record keys or the runtime enumeration bridge', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/forIn.ts',
+      `
+        export function recordKeys(values: Record<string, number>) {
+          const result: string[] = [];
+          for (const key in values) result.push(key);
+          return result;
+        }
+        export function dynamicKeys(values: any) {
+          const result: string[] = [];
+          for (const key in values) result.push(key);
+          return result;
+        }
+        export async function visitDynamic(values: any, visit: (key: string) => Promise<void>) {
+          for (const key in values) await visit(key);
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ForInFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('for (key in flighthq._internal.DynamicObject.keys(values))');
+    expect(output).toContain('for (key in _Runtime.forInKeys(values))');
+    expect(output).toContain('var __flowKeys');
+    expect(output).toContain(':Array<String> = _Runtime.forInKeys(values);');
+  });
+
+  it('rejects for-in initializers that cannot declare one identifier', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/invalidForIn.ts',
+      `export function invalid(values: any) {
+        let key = '';
+        for (key in values) key = key;
+      }`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+
+    expect(lowered.diagnostics).toEqual([
+      expect.objectContaining({ message: 'Unsupported TypeScript for-in initializer' }),
+    ]);
+  });
+
   it('emits oversized private helpers as direct calls for hxcpp portability', () => {
     const parameters = Array.from({ length: 27 }, (_, index) => `p${index}: number`).join(', ');
     const arguments_ = Array.from({ length: 27 }, (_, index) => String(index)).join(', ');
