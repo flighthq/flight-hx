@@ -4,6 +4,12 @@ import ts from 'typescript';
 
 import { auditStaticFacts } from '../analyze/static-facts.ts';
 import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
+import {
+  hostEndpointBinding,
+  hostEndpointBindingForUse,
+  hostPropertyOperation,
+  webGlComputedConstantDomain,
+} from '../host-endpoints.ts';
 import type {
   IrDeclaration,
   IrDestructuringReadEscape,
@@ -12,6 +18,7 @@ import type {
   IrExpression,
   IrExpressionStaticFacts,
   IrFunctionDeclaration,
+  IrHostEndpointBinding,
   IrIndexedReceiver,
   IrParameter,
   IrStatement,
@@ -242,99 +249,6 @@ const webGpuConstantNamespaces = new Set([
   'GPUMapMode',
   'GPUShaderStage',
   'GPUTextureUsage',
-]);
-
-const canvasElementMembers = new Set([
-  'addEventListener',
-  'convertToBlob',
-  'getBoundingClientRect',
-  'getContext',
-  'height',
-  'removeEventListener',
-  'toDataURL',
-  'width',
-]);
-
-const webGpuDeviceMembers = new Set([
-  'createBindGroup',
-  'createBindGroupLayout',
-  'createBuffer',
-  'createCommandEncoder',
-  'createPipelineLayout',
-  'createRenderPipeline',
-  'createSampler',
-  'createShaderModule',
-  'createTexture',
-  'limits',
-  'queue',
-]);
-
-const webGpuQueueMembers = new Set(['copyExternalImageToTexture', 'submit', 'writeBuffer', 'writeTexture']);
-const webGpuCanvasContextMembers = new Set(['configure', 'getCurrentTexture']);
-const webGpuLimitsMembers = new Set(['maxBindGroups', 'maxTextureDimension2D', 'minUniformBufferOffsetAlignment']);
-const domWindowMembers = new Set([
-  'addEventListener',
-  'alert',
-  'close',
-  'confirm',
-  'devicePixelRatio',
-  'focus',
-  'getScreenDetails',
-  'innerHeight',
-  'innerWidth',
-  'isSecureContext',
-  'localStorage',
-  'matchMedia',
-  'moveTo',
-  'open',
-  'prompt',
-  'removeEventListener',
-  'resizeTo',
-  'screen',
-  'screenX',
-  'screenY',
-  'showDirectoryPicker',
-  'showOpenFilePicker',
-  'showSaveFilePicker',
-  'visualViewport',
-]);
-const domDocumentMembers = new Set([
-  'addEventListener',
-  'body',
-  'createElement',
-  'createTextNode',
-  'documentElement',
-  'exitFullscreen',
-  'exitPointerLock',
-  'fonts',
-  'getElementById',
-  'hasFocus',
-  'head',
-  'hidden',
-  'pointerLockElement',
-  'querySelector',
-  'removeEventListener',
-  'title',
-]);
-const domNavigatorMembers = new Set([
-  'clipboard',
-  'connection',
-  'geolocation',
-  'getBattery',
-  'getGamepads',
-  'gpu',
-  'language',
-  'languages',
-  'maxTouchPoints',
-  'mediaDevices',
-  'mediaSession',
-  'permissions',
-  'platform',
-  'share',
-  'storage',
-  'vibrate',
-  'virtualKeyboard',
-  'wakeLock',
 ]);
 
 export function lowerTypeScriptSource(
@@ -730,6 +644,43 @@ function isBoundPlatformExpression(
   return typeName === 'CanvasRenderingContext2D'
     ? isCanvasValueExpression(node, context.canvasBindingNames)
     : isWebGlValueExpression(node, context.webGlBindingNames);
+}
+
+function boundHostEndpoint(node: ts.Expression, context: LoweringContext): IrHostEndpointBinding | undefined {
+  if (context.checker) {
+    return hostEndpointBinding(context.checker.getTypeAtLocation(node), context.checker);
+  }
+  if (isBoundCanvasElementExpression(node, context)) return 'CanvasElementBackend';
+  if (isBoundNamedPlatformExpression(node, context, 'GPUDevice', context.webGpuDeviceBindingNames, 'device')) {
+    return 'WebGpuDeviceBackend';
+  }
+  if (isBoundNamedPlatformExpression(node, context, 'GPUQueue', context.webGpuQueueBindingNames, 'queue')) {
+    return 'WebGpuQueueBackend';
+  }
+  if (
+    isBoundNamedPlatformExpression(
+      node,
+      context,
+      'GPUCanvasContext',
+      context.webGpuCanvasContextBindingNames,
+      'context',
+    )
+  ) {
+    return 'WebGpuCanvasContextBackend';
+  }
+  if (isBoundNamedPlatformExpression(node, context, 'GPUSupportedLimits', context.webGpuLimitsBindingNames, 'limits')) {
+    return 'WebGpuLimitsBackend';
+  }
+  if (isBoundGlobalRootExpression(node, context, 'window', context.domWindowBindingNames)) return 'DomWindowBackend';
+  if (isBoundGlobalRootExpression(node, context, 'document', context.domDocumentBindingNames)) {
+    return 'DomDocumentBackend';
+  }
+  if (isBoundGlobalRootExpression(node, context, 'navigator', context.domNavigatorBindingNames)) {
+    return 'DomNavigatorBackend';
+  }
+  if (isBoundPlatformExpression(node, context, 'CanvasRenderingContext2D')) return 'Canvas2dBackend';
+  if (isBoundPlatformExpression(node, context, 'WebGL2RenderingContext')) return 'WebGl2Backend';
+  return undefined;
 }
 
 function collectionBinding(
@@ -1654,32 +1605,6 @@ function destructuringSourceFact(
   return { escape, source };
 }
 
-function webGlComputedConstantDomain(node: ts.Expression): 'GlBlendEquation' | 'GlBlendFactor' | undefined {
-  if (
-    ts.isParenthesizedExpression(node) ||
-    ts.isAsExpression(node) ||
-    ts.isTypeAssertionExpression(node) ||
-    ts.isNonNullExpression(node) ||
-    ts.isSatisfiesExpression(node)
-  ) {
-    return webGlComputedConstantDomain(node.expression);
-  }
-  if (ts.isPropertyAccessExpression(node)) {
-    if (node.name.text === 'equation') return 'GlBlendEquation';
-    if (node.name.text === 'src' || node.name.text === 'dst') return 'GlBlendFactor';
-    return undefined;
-  }
-  if (
-    ts.isBinaryExpression(node) &&
-    node.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken &&
-    ts.isStringLiteral(node.right) &&
-    node.right.text === 'FUNC_ADD'
-  ) {
-    return webGlComputedConstantDomain(node.left) === 'GlBlendEquation' ? 'GlBlendEquation' : undefined;
-  }
-  return undefined;
-}
-
 function typedStructPropertyBinding(
   node: ts.PropertyAccessExpression,
   context: LoweringContext,
@@ -1925,41 +1850,10 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       ts.isIdentifier(node.expression) &&
       node.expression.text === 'Object' &&
       !isLexicallyBound(node.expression, context);
-    const objectIsCanvasElement =
-      canvasElementMembers.has(node.name.text) && isBoundCanvasElementExpression(node.expression, context);
-    const objectIsWebGpuDevice =
-      webGpuDeviceMembers.has(node.name.text) &&
-      isBoundNamedPlatformExpression(node.expression, context, 'GPUDevice', context.webGpuDeviceBindingNames, 'device');
-    const objectIsWebGpuQueue =
-      webGpuQueueMembers.has(node.name.text) &&
-      isBoundNamedPlatformExpression(node.expression, context, 'GPUQueue', context.webGpuQueueBindingNames, 'queue');
-    const objectIsWebGpuCanvasContext =
-      webGpuCanvasContextMembers.has(node.name.text) &&
-      isBoundNamedPlatformExpression(
-        node.expression,
-        context,
-        'GPUCanvasContext',
-        context.webGpuCanvasContextBindingNames,
-        'context',
-      );
-    const objectIsWebGpuLimits =
-      webGpuLimitsMembers.has(node.name.text) &&
-      isBoundNamedPlatformExpression(
-        node.expression,
-        context,
-        'GPUSupportedLimits',
-        context.webGpuLimitsBindingNames,
-        'limits',
-      );
-    const objectIsDomWindow =
-      domWindowMembers.has(node.name.text) &&
-      isBoundGlobalRootExpression(node.expression, context, 'window', context.domWindowBindingNames);
-    const objectIsDomDocument =
-      domDocumentMembers.has(node.name.text) &&
-      isBoundGlobalRootExpression(node.expression, context, 'document', context.domDocumentBindingNames);
-    const objectIsDomNavigator =
-      domNavigatorMembers.has(node.name.text) &&
-      isBoundGlobalRootExpression(node.expression, context, 'navigator', context.domNavigatorBindingNames);
+    const hostReceiverBinding = boundHostEndpoint(node.expression, context);
+    const objectHostBinding = hostReceiverBinding
+      ? hostEndpointBindingForUse(hostReceiverBinding, hostPropertyOperation(node), node.name.text)
+      : undefined;
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
     const objectIsTypedArray = typedArrayBinding(node.expression, node.name.text, context);
     const generatedClass = generatedClassBinding(node.expression, context);
@@ -1967,31 +1861,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
-        : objectIsCanvasElement
-          ? 'CanvasElementBackend'
-          : objectIsWebGpuDevice
-            ? 'WebGpuDeviceBackend'
-            : objectIsWebGpuQueue
-              ? 'WebGpuQueueBackend'
-              : objectIsWebGpuCanvasContext
-                ? 'WebGpuCanvasContextBackend'
-                : objectIsWebGpuLimits
-                  ? 'WebGpuLimitsBackend'
-                  : objectIsDomWindow
-                    ? 'DomWindowBackend'
-                    : objectIsDomDocument
-                      ? 'DomDocumentBackend'
-                      : objectIsDomNavigator
-                        ? 'DomNavigatorBackend'
-                        : objectIsCollection
-                          ? objectIsCollection
-                          : objectIsGlobalObject
-                            ? 'DynamicObject'
-                            : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-                              ? 'Canvas2dBackend'
-                              : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-                                ? 'WebGl2Backend'
-                                : objectIsTypedArray,
+        : (objectHostBinding ?? objectIsCollection ?? (objectIsGlobalObject ? 'DynamicObject' : objectIsTypedArray)),
       generatedClass,
       kind: 'property',
       name: node.name.text,
@@ -2003,14 +1873,16 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     };
   }
   if (ts.isElementAccessExpression(node) && node.argumentExpression) {
-    const webGlBinding = isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext');
+    const webGlBinding = boundHostEndpoint(node.expression, context) === 'WebGl2Backend';
     return {
       binding: webGlBinding ? 'WebGl2Backend' : undefined,
       index: lowerExpression(node.argumentExpression, context),
       kind: 'element',
       object: lowerExpression(node.expression, context),
       optional: ts.isOptionalChain(node),
-      webGlComputedDomain: webGlBinding ? webGlComputedConstantDomain(node.argumentExpression) : undefined,
+      webGlComputedDomain: webGlBinding
+        ? webGlComputedConstantDomain(context.checker?.getTypeAtLocation(node.argumentExpression), context.checker)
+        : undefined,
     };
   }
   if (ts.isCallExpression(node)) {

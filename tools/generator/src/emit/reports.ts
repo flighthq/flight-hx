@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
+import type { HostEndpointAudit } from '../analyze/host-endpoints.ts';
 import type { TypedStructClassFeasibilityAudit } from '../analyze/typed-struct-classes.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import type { TypedStructAudit } from '../analyze/typed-structs.ts';
@@ -52,6 +53,53 @@ export function inventorySummary(inventory: UpstreamInventory): string {
     for (const lane of item.exportLanes) {
       lines.push(
         `| \`${lane.specifier}\` | \`${lane.source}\` | ${lane.exports.length} | ${lane.exportConflicts.length} |`,
+      );
+    }
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function hostEndpointSummary(audit: HostEndpointAudit): string {
+  const summary = audit.summary;
+  const lines = [
+    '# Host Endpoint Audit',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    'Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Receiver bindings | ${summary.bindings} |`,
+    `| Canonical endpoints | ${summary.endpoints} |`,
+    `| Property accesses | ${summary.accesses} |`,
+    `| Calls | ${summary.calls} |`,
+    `| Reads | ${summary.reads} |`,
+    `| Writes | ${summary.writes} |`,
+    `| Backend contract endpoints | ${summary.backendContractEndpoints} |`,
+    `| Dynamic-fallback endpoints in use | ${summary.dynamicFallbackEndpoints} |`,
+    `| Coverage issues | ${audit.coverageIssues.length} |`,
+    '',
+    '| Binding | Member | Operation | Runtime endpoint | Contract | Accesses | Runtime implementation |',
+    '| --- | --- | --- | --- | --- | ---: | --- |',
+  ];
+  for (const endpoint of audit.endpoints) {
+    lines.push(
+      `| \`${endpoint.binding}\` | \`${endpoint.member}\` | \`${endpoint.operation}\` | \`${endpoint.runtimeEndpoint}\` | \`${endpoint.contract}\` | ${endpoint.accesses} | \`${endpoint.runtimePath}\` |`,
+    );
+  }
+  if (audit.coverageIssues.length > 0) {
+    lines.push(
+      '',
+      '## Coverage issues',
+      '',
+      '| Binding | Member | Operation | Kind | Runtime implementation |',
+      '| --- | --- | --- | --- | --- |',
+    );
+    for (const issue of audit.coverageIssues) {
+      lines.push(
+        `| \`${issue.binding}\` | \`${issue.member}\` | \`${issue.operation}\` | \`${issue.kind}\` | \`${issue.runtimePath}\` |`,
       );
     }
   }

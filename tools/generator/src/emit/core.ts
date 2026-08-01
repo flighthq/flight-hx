@@ -14,6 +14,7 @@ import {
   sourcePathToImplementationModule,
   sourcePathToModule,
 } from '../analyze/inventory.ts';
+import { validateHostEndpointCoverage, type HostEndpointAudit } from '../analyze/host-endpoints.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import { cppStructInitTypedStructIds, type TypedStructRegistry } from '../analyze/typed-structs.ts';
@@ -38,7 +39,6 @@ import {
   staticLoweringEmissionCounts,
 } from './haxe.ts';
 import { stableJson, writeOrCheck } from './reports.ts';
-import { validateWebGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
 
 export interface CoreGenerationReport {
   excludedPackages: Array<{ packageName: string; reason: string }>;
@@ -69,8 +69,9 @@ export function generateCoreModules(
   check: boolean,
   typedStructs: TypedStructRegistry,
   typedStructProvenance: TypedStructProvenanceAudit,
+  hostEndpoints: HostEndpointAudit,
 ): CoreGenerationReport {
-  validateWebGl2ComputedConstantDomains(workspaceDirectory);
+  validateHostEndpointCoverage(hostEndpoints);
   const inventory = analyzeUpstream(workspaceDirectory);
   const structRegistry = typedStructs;
   const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));

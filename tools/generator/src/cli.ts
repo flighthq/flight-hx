@@ -2,6 +2,7 @@ import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 
 import { portConfig } from '../port.config.ts';
+import { auditHostEndpoints } from './analyze/host-endpoints.ts';
 import { analyzeUpstream } from './analyze/inventory.ts';
 import { auditLowering } from './analyze/lowering.ts';
 import { auditTypedStructClassFeasibility } from './analyze/typed-struct-classes.ts';
@@ -10,6 +11,7 @@ import { typedStructRegistry } from './analyze/typed-structs.ts';
 import { generateCoreModules } from './emit/core.ts';
 import {
   createApiReport,
+  hostEndpointSummary,
   inventorySummary,
   loweringSummary,
   stableJson,
@@ -28,6 +30,7 @@ const reportsDirectory = path.join(workspaceDirectory, portConfig.reportsDirecto
 
 try {
   const inventory = analyzeUpstream(workspaceDirectory);
+  const hostEndpoints = apiOnly ? undefined : auditHostEndpoints(workspaceDirectory, inventory.upstreamCommit);
   const typedStructs = apiOnly
     ? undefined
     : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit, undefined, undefined, inventory);
@@ -49,12 +52,15 @@ try {
     if (!apiOnly) {
       if (!typedStructs) throw new Error('Expected typed-struct audit');
       if (!typedStructProvenance) throw new Error('Expected typed-struct provenance audit');
-      const core = generateCoreModules(workspaceDirectory, check, typedStructs, typedStructProvenance);
+      if (!hostEndpoints) throw new Error('Expected host-endpoint audit');
+      const core = generateCoreModules(workspaceDirectory, check, typedStructs, typedStructProvenance, hostEndpoints);
       for (const excluded of core.excludedPackages) {
         process.stderr.write(`Excluded (not translated): ${excluded.packageName} — ${excluded.reason}\n`);
       }
       writeOrCheck(path.join(reportsDirectory, 'inventory.json'), stableJson(inventory), check);
       writeOrCheck(path.join(reportsDirectory, 'inventory.md'), inventorySummary(inventory), check);
+      writeOrCheck(path.join(reportsDirectory, 'host-endpoints.json'), stableJson(hostEndpoints), check);
+      writeOrCheck(path.join(reportsDirectory, 'host-endpoints.md'), hostEndpointSummary(hostEndpoints), check);
       if (!lowering) throw new Error('Expected lowering audit');
       lowering.summary.staticEmission = core.staticLowering;
       writeOrCheck(path.join(reportsDirectory, 'lowering.json'), stableJson(lowering), check);

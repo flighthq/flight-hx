@@ -3,15 +3,17 @@ import type {
   IrDestructuringReadEscape,
   IrDestructuringReadSource,
   IrExpression,
+  IrHostEndpointBinding,
   IrIndexedReceiver,
   IrModule,
   IrParameter,
   IrStatement,
   IrType,
   IrVariable,
+  IrWebGlComputedConstantDomain,
   StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
-import { type WebGl2ComputedConstantDomain, webGl2ComputedConstantDomains } from './webgl2-endpoints.ts';
+import { requireHostEndpoint } from '../host-endpoints.ts';
 
 type ScalarStaticLoweringEmissionName = Exclude<
   keyof StaticLoweringEmissionCounts,
@@ -68,60 +70,6 @@ const indexedReceiverNames = [
   'Uint8ClampedArray',
 ] as const satisfies readonly IrIndexedReceiver[];
 
-const canvas2dMethodEndpoints = new Set([
-  'arc',
-  'beginPath',
-  'bezierCurveTo',
-  'clearRect',
-  'clip',
-  'closePath',
-  'createLinearGradient',
-  'createPattern',
-  'createRadialGradient',
-  'drawImage',
-  'ellipse',
-  'fill',
-  'fillRect',
-  'fillText',
-  'getContextAttributes',
-  'getImageData',
-  'lineTo',
-  'measureText',
-  'moveTo',
-  'putImageData',
-  'quadraticCurveTo',
-  'rect',
-  'restore',
-  'rotate',
-  'roundRect',
-  'save',
-  'scale',
-  'setTransform',
-  'stroke',
-  'strokeRect',
-  'transform',
-  'translate',
-]);
-
-const canvas2dReadableFieldEndpoints = new Set(['canvas', 'imageSmoothingEnabled']);
-
-const canvas2dWritableFieldEndpoints = new Set([
-  'fillStyle',
-  'filter',
-  'font',
-  'globalAlpha',
-  'globalCompositeOperation',
-  'imageSmoothingEnabled',
-  'imageSmoothingQuality',
-  'lineCap',
-  'lineJoin',
-  'lineWidth',
-  'miterLimit',
-  'strokeStyle',
-  'textAlign',
-  'textBaseline',
-]);
-
 const collectionBindingTypes = {
   MapCollection: 'flighthq._internal._Map',
   SetCollection: 'flighthq._internal._Set',
@@ -140,205 +88,6 @@ const typedArrayBindingTypes = {
   Uint8Array: 'flighthq._internal._UInt8Array',
   Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
 } as const;
-
-const webGl2MethodEndpoints = new Set([
-  'activeTexture',
-  'attachShader',
-  'bindBuffer',
-  'bindFramebuffer',
-  'bindRenderbuffer',
-  'bindTexture',
-  'bindVertexArray',
-  'blendEquation',
-  'blendFunc',
-  'blitFramebuffer',
-  'bufferData',
-  'bufferSubData',
-  'checkFramebufferStatus',
-  'clear',
-  'clearBufferfi',
-  'clearBufferfv',
-  'clearColor',
-  'colorMask',
-  'compileShader',
-  'compressedTexImage2D',
-  'compressedTexSubImage3D',
-  'createBuffer',
-  'createFramebuffer',
-  'createProgram',
-  'createRenderbuffer',
-  'createShader',
-  'createTexture',
-  'createVertexArray',
-  'cullFace',
-  'deleteBuffer',
-  'deleteFramebuffer',
-  'deleteProgram',
-  'deleteRenderbuffer',
-  'deleteShader',
-  'deleteTexture',
-  'deleteVertexArray',
-  'depthFunc',
-  'depthMask',
-  'disable',
-  'disableVertexAttribArray',
-  'drawArrays',
-  'drawBuffers',
-  'drawElements',
-  'drawElementsInstanced',
-  'enable',
-  'enableVertexAttribArray',
-  'flush',
-  'framebufferRenderbuffer',
-  'framebufferTexture2D',
-  'generateMipmap',
-  'getActiveUniform',
-  'getAttribLocation',
-  'getExtension',
-  'getParameter',
-  'getProgramInfoLog',
-  'getProgramParameter',
-  'getShaderInfoLog',
-  'getShaderParameter',
-  'getUniformLocation',
-  'linkProgram',
-  'pixelStorei',
-  'readBuffer',
-  'readPixels',
-  'renderbufferStorage',
-  'renderbufferStorageMultisample',
-  'scissor',
-  'shaderSource',
-  'stencilFunc',
-  'stencilMask',
-  'stencilOp',
-  'stencilOpSeparate',
-  'texImage2D',
-  'texImage2DSource',
-  'texImage3D',
-  'texParameterf',
-  'texParameteri',
-  'texStorage3D',
-  'texSubImage2D',
-  'uniform1f',
-  'uniform1fv',
-  'uniform1i',
-  'uniform2f',
-  'uniform2fv',
-  'uniform3f',
-  'uniform3fv',
-  'uniform4f',
-  'uniform4fv',
-  'uniformMatrix3fv',
-  'uniformMatrix4fv',
-  'useProgram',
-  'vertexAttrib4f',
-  'vertexAttribDivisor',
-  'vertexAttribIPointer',
-  'vertexAttribPointer',
-  'viewport',
-]);
-
-const webGl2ConstantEndpoints = new Set([
-  'ACTIVE_UNIFORMS',
-  'ALWAYS',
-  'ARRAY_BUFFER',
-  'BACK',
-  'BLEND',
-  'CLAMP_TO_EDGE',
-  'COLOR',
-  'COLOR_ATTACHMENT0',
-  'COLOR_BUFFER_BIT',
-  'COMPILE_STATUS',
-  'CULL_FACE',
-  'DECR_WRAP',
-  'DEPTH24_STENCIL8',
-  'DEPTH_BUFFER_BIT',
-  'DEPTH_STENCIL',
-  'DEPTH_STENCIL_ATTACHMENT',
-  'DEPTH_TEST',
-  'DRAW_FRAMEBUFFER',
-  'DST_COLOR',
-  'DYNAMIC_DRAW',
-  'ELEMENT_ARRAY_BUFFER',
-  'EQUAL',
-  'FLOAT',
-  'FLOAT_MAT2',
-  'FLOAT_MAT3',
-  'FLOAT_MAT4',
-  'FLOAT_VEC2',
-  'FLOAT_VEC3',
-  'FLOAT_VEC4',
-  'FRAGMENT_SHADER',
-  'FRAMEBUFFER',
-  'FRAMEBUFFER_BINDING',
-  'FRAMEBUFFER_COMPLETE',
-  'FRONT',
-  'FUNC_ADD',
-  'FUNC_REVERSE_SUBTRACT',
-  'HALF_FLOAT',
-  'INCR_WRAP',
-  'INVERT',
-  'KEEP',
-  'LESS',
-  'LINEAR',
-  'LINEAR_MIPMAP_LINEAR',
-  'LINEAR_MIPMAP_NEAREST',
-  'LINES',
-  'LINE_STRIP',
-  'LINK_STATUS',
-  'MAX',
-  'MAX_SAMPLES',
-  'MIN',
-  'MIRRORED_REPEAT',
-  'NEAREST',
-  'NEAREST_MIPMAP_LINEAR',
-  'NEAREST_MIPMAP_NEAREST',
-  'NONE',
-  'NOTEQUAL',
-  'ONE',
-  'ONE_MINUS_SRC_ALPHA',
-  'ONE_MINUS_SRC_COLOR',
-  'POINTS',
-  'READ_FRAMEBUFFER',
-  'RENDERBUFFER',
-  'REPEAT',
-  'RGBA',
-  'RGBA16F',
-  'RGBA32F',
-  'RGBA8',
-  'SCISSOR_TEST',
-  'SRC_ALPHA',
-  'STATIC_DRAW',
-  'STENCIL_BUFFER_BIT',
-  'STENCIL_TEST',
-  'STREAM_DRAW',
-  'TEXTURE0',
-  'TEXTURE1',
-  'TEXTURE2',
-  'TEXTURE_2D',
-  'TEXTURE_2D_ARRAY',
-  'TEXTURE_3D',
-  'TEXTURE_CUBE_MAP',
-  'TEXTURE_CUBE_MAP_POSITIVE_X',
-  'TEXTURE_MAG_FILTER',
-  'TEXTURE_MAX_LEVEL',
-  'TEXTURE_MIN_FILTER',
-  'TEXTURE_WRAP_R',
-  'TEXTURE_WRAP_S',
-  'TEXTURE_WRAP_T',
-  'TRIANGLES',
-  'TRIANGLE_FAN',
-  'TRIANGLE_STRIP',
-  'UNPACK_PREMULTIPLY_ALPHA_WEBGL',
-  'UNSIGNED_BYTE',
-  'UNSIGNED_INT',
-  'UNSIGNED_INT_24_8',
-  'UNSIGNED_SHORT',
-  'VERTEX_SHADER',
-  'VIEWPORT',
-  'ZERO',
-]);
 
 let temporaryIndex = 0;
 let currentHaxePackage = 'flighthq';
@@ -2069,8 +1818,8 @@ function emitExpression(expression: IrExpression): string {
           expression.left.binding === 'WebGpuDeviceBackend' ||
           expression.left.binding === 'WebGpuQueueBackend'
         ) {
+          requireHostEndpoint(expression.left.binding as IrHostEndpointBinding, 'write', expression.left.name);
           if (expression.left.binding === 'Canvas2dBackend') {
-            canvas2dWritableFieldEndpoint(expression.left.name);
             if (expression.operator !== '=') {
               throw new Error(
                 `Canvas2D compound property assignment has no typed backend endpoint: ${expression.left.name}`,
@@ -2433,7 +2182,7 @@ function emitExpression(expression: IrExpression): string {
         expression.binding === 'WebGpuLimitsBackend' ||
         expression.binding === 'WebGpuQueueBackend'
       ) {
-        if (expression.binding === 'Canvas2dBackend') canvas2dReadableFieldEndpoint(expression.name);
+        requireHostEndpoint(expression.binding as IrHostEndpointBinding, 'read', expression.name);
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
       if (expression.typedStructBinding) return emitTypedStructRead(expression);
@@ -2494,10 +2243,6 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.deleteValue(${emitExpression(expression.operand)})`;
       }
       if (expression.operator === 'typeof') {
-        if (expression.operand.kind === 'property' && expression.operand.binding === 'Canvas2dBackend') {
-          canvas2dMethodEndpoint(expression.operand.name);
-          return quote('function');
-        }
         return `_Runtime.typeofValue(${emitExpression(expression.operand)})`;
       }
       if (expression.operator === 'void') return `_Runtime.voidValue(${emitExpression(expression.operand)})`;
@@ -2735,7 +2480,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         expression.callee.binding === 'WebGpuDeviceBackend' ||
         expression.callee.binding === 'WebGpuQueueBackend'
       ) {
-        if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(expression.callee.name);
+        requireHostEndpoint(expression.callee.binding as IrHostEndpointBinding, 'call', expression.callee.name);
         return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
       if (expression.callee.typedStructBinding) {
@@ -2781,7 +2526,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       expression.callee.binding === 'WebGpuDeviceBackend' ||
       expression.callee.binding === 'WebGpuQueueBackend'
     ) {
-      if (expression.callee.binding === 'Canvas2dBackend') canvas2dMethodEndpoint(name);
+      requireHostEndpoint(expression.callee.binding as IrHostEndpointBinding, 'call', name);
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
@@ -3055,47 +2800,20 @@ function webGl2MethodEndpoint(name: string, argumentCount: number): string {
       throw new Error(`WebGL2 method texImage2D has no typed backend endpoint for ${String(argumentCount)} arguments`);
     }
   } else if (name === 'texImage2DSource') {
-    throw new Error('WebGL2 source method is not in the typed backend inventory: texImage2DSource');
+    throw new Error('WebGL2 source method is not in the host endpoint contract: texImage2DSource');
   }
-  if (!webGl2MethodEndpoints.has(endpoint)) {
-    throw new Error(`WebGL2 method is not in the typed backend inventory: ${name}`);
-  }
-  return endpoint;
-}
-
-function canvas2dMethodEndpoint(name: string): string {
-  if (!canvas2dMethodEndpoints.has(name)) {
-    throw new Error(`Canvas2D method is not in the typed backend inventory: ${name}`);
-  }
-  return name;
-}
-
-function canvas2dReadableFieldEndpoint(name: string): string {
-  if (!canvas2dReadableFieldEndpoints.has(name)) {
-    throw new Error(`Canvas2D field is not in the typed backend inventory: ${name}`);
-  }
-  return name;
-}
-
-function canvas2dWritableFieldEndpoint(name: string): string {
-  if (!canvas2dWritableFieldEndpoints.has(name)) {
-    throw new Error(`Canvas2D property is not in the typed backend inventory: ${name}`);
-  }
-  return name;
+  return requireHostEndpoint('WebGl2Backend', 'call', endpoint);
 }
 
 function webGl2ConstantEndpoint(name: string): string {
-  if (!webGl2ConstantEndpoints.has(name)) {
-    throw new Error(`WebGL2 constant is not in the typed backend inventory: ${name}`);
-  }
-  return name;
+  return requireHostEndpoint('WebGl2Backend', 'read', name);
 }
 
-function emitWebGl2ComputedConstant(index: IrExpression, domain: WebGl2ComputedConstantDomain): string {
-  const cases = webGl2ComputedConstantDomains[domain]
+function emitWebGl2ComputedConstant(index: IrExpression, domain: IrWebGlComputedConstantDomain): string {
+  const cases = domain.values
     .map((name) => `case ${quote(name)}: flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(name)};`)
     .join(' ');
-  return `(switch (${emitExpression(index)}) { ${cases} default: throw ${quote(`WebGL2 computed constant is outside the closed ${domain} domain: ${currentSourceIdentity}`)}; })`;
+  return `(switch (${emitExpression(index)}) { ${cases} default: throw ${quote(`WebGL2 computed constant is outside the closed ${domain.name} domain: ${currentSourceIdentity}`)}; })`;
 }
 
 function indent(lines: string[]): string[] {
