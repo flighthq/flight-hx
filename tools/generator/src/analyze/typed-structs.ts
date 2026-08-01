@@ -3,10 +3,9 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
-import { portConfig } from '../../port.config.ts';
-
 import type { UpstreamInventory } from '../model/inventory.ts';
 
+import { excludedPackageDirectories } from './exclusions.ts';
 import { analyzeUpstream, sourcePathToHaxePackage, sourcePathToImplementationModule } from './inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
 
@@ -215,6 +214,7 @@ export interface TypedStructResolution {
 }
 
 export interface TypedStructRegistry {
+  excludedPackageDirectories: ReadonlySet<string>;
   report: TypedStructAudit;
   resolve(type: ts.Type): TypedStructResolution;
   resolveDirect(type: ts.Type): TypedStructResolution;
@@ -318,7 +318,7 @@ export function discoverTypedStructUniverse(
   const declarations = typedStructDeclarationIdentities(workspaceDirectory, program, inventory).filter(
     (declaration) =>
       declaration.publicPackageName === declaration.definingPackageName &&
-      !isExcludedTypedStructPackage(declaration.publicPackageName),
+      !isExcludedTypedStructPackage(declaration.publicPackageName, inventory),
   );
   const candidatesById = new Map<string, ResolvedTypedStructCandidate>();
   for (const declaration of declarations) {
@@ -514,9 +514,8 @@ function compareResolvedTypedStructCandidates(
   );
 }
 
-function isExcludedTypedStructPackage(packageName: string): boolean {
-  const directoryName = packageName.replace(/^@flighthq\//u, '');
-  return directoryName in portConfig.excludedPackages;
+function isExcludedTypedStructPackage(packageName: string, inventory: UpstreamInventory): boolean {
+  return inventory.packages.some((item) => item.name === packageName && item.exclusion !== null);
 }
 
 function migrationAuditForCustomCandidates(
@@ -797,7 +796,8 @@ export function typedStructRegistry(
   }
   const resolvedCandidates = discovery?.candidates ?? identities?.matched ?? [];
   const migration = discovery?.migration ?? migrationAuditForCustomCandidates(resolvedCandidates, upstreamCommit);
-  const cacheKey = `${upstreamCommit}|${resolvedCandidates
+  const excludedDirectories = excludedPackageDirectories(activeInventory);
+  const cacheKey = `${upstreamCommit}|excluded=${[...excludedDirectories].sort().join(',')}|${resolvedCandidates
     .map(
       (candidate) =>
         `${typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name)}:${candidate.source}:${candidate.emission}:${candidate.migration.status}`,
@@ -814,6 +814,7 @@ export function typedStructRegistry(
     programAndChecker.checker,
     resolvedCandidates,
     migration,
+    excludedDirectories,
   );
   const programCache = registryCache.get(programAndChecker.program) ?? new Map<string, TypedStructRegistry>();
   programCache.set(cacheKey, registry);
@@ -829,6 +830,7 @@ export function createTypedStructRegistry(
   checker: ts.TypeChecker,
   resolvedCandidates?: readonly ResolvedTypedStructCandidate[],
   migration?: TypedStructMigrationAudit,
+  excludedDirectories: ReadonlySet<string> = new Set(),
 ): TypedStructRegistry {
   const analyzableCandidates: readonly AnalyzableTypedStructCandidate[] =
     resolvedCandidates ??
@@ -885,8 +887,14 @@ export function createTypedStructRegistry(
 
   for (const resolverSchemas of [directSchemas, auditOnlySchemas]) {
     const resolver = createResolver(resolverSchemas);
-    auditUses(workspaceDirectory, program, checker, resolverSchemas, resolver, (type, member, property) =>
-      resolveOwnedField(resolverSchemas, resolver, type, member, property),
+    auditUses(
+      workspaceDirectory,
+      program,
+      checker,
+      resolverSchemas,
+      resolver,
+      (type, member, property) => resolveOwnedField(resolverSchemas, resolver, type, member, property),
+      excludedDirectories,
     );
   }
   for (const schema of schemas) {
@@ -939,6 +947,7 @@ export function createTypedStructRegistry(
   };
 
   return {
+    excludedPackageDirectories: excludedDirectories,
     report,
     resolve,
     resolveDirect,
@@ -1132,6 +1141,7 @@ function auditUses(
         schema: InternalSchema;
       }
     | undefined,
+  excludedDirectories: ReadonlySet<string>,
 ): void {
   const byId = new Map(schemas.map((schema) => [schema.audit.id, schema]));
   const visit = (node: ts.Node): void => {
@@ -1213,7 +1223,11 @@ function auditUses(
     ts.forEachChild(node, visit);
   };
 
-  for (const source of program.getSourceFiles().filter(isProductionUpstreamSource)) visit(source);
+  for (const source of program
+    .getSourceFiles()
+    .filter((item) => isProductionUpstreamSource(item, excludedDirectories))) {
+    visit(source);
+  }
 }
 
 function isCandidateFieldDeclaration(property: ts.Symbol, declarations: ReadonlySet<ts.Declaration>): boolean {
@@ -1461,13 +1475,12 @@ function isNullish(type: ts.Type): boolean {
   return (type.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)) !== 0;
 }
 
-function isProductionUpstreamSource(source: ts.SourceFile): boolean {
+function isProductionUpstreamSource(source: ts.SourceFile, excludedDirectories: ReadonlySet<string>): boolean {
   const normalized = source.fileName.split(path.sep).join('/');
   const packageDirectory = /\/upstream\/packages\/([^/]+)\/src\//u.exec(normalized)?.[1];
   return (
     packageDirectory !== undefined &&
-    // Direct-access coverage is measured against the packages that can reach generated IR.
-    !(packageDirectory in portConfig.excludedPackages) &&
+    !excludedDirectories.has(packageDirectory) &&
     !/\.(?:test|spec)\.tsx?$/u.test(normalized) &&
     !normalized.endsWith('.d.ts')
   );

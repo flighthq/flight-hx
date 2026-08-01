@@ -1,8 +1,6 @@
 import path from 'node:path';
 import ts from 'typescript';
 
-import { portConfig } from '../../port.config.ts';
-
 import { upstreamTypeScriptProgram, type UpstreamTypeScriptProgram } from './program.ts';
 import type { TypedStructClassFeasibilityAudit, TypedStructClassFeasibilitySchema } from './typed-struct-classes.ts';
 import type { TypedStructRegistry, TypedStructSchemaAudit } from './typed-structs.ts';
@@ -124,8 +122,16 @@ export function auditTypedStructProvenance(
   const containmentEdges = collectContainmentEdges(schemaTypes, checker, registry, eligibleIds);
   const outgoing = groupEdges(containmentEdges, (edge) => edge.parentSchemaId);
   const incoming = groupEdges(containmentEdges, (edge) => edge.childSchemaId);
-  const jsonSites = collectJsonParseRoots(workspaceDirectory, program, checker, registry, eligibleIds);
-  collectContainerTransfers(workspaceDirectory, program, checker, registry, targetById);
+  const excludedDirectories = registry.excludedPackageDirectories;
+  const jsonSites = collectJsonParseRoots(
+    workspaceDirectory,
+    program,
+    checker,
+    registry,
+    eligibleIds,
+    excludedDirectories,
+  );
+  collectContainerTransfers(workspaceDirectory, program, checker, registry, targetById, excludedDirectories);
 
   const normalizationRoots: Array<{ reasons: string[]; schemaId: string }> = classAudit.schemas
     .filter((schema) => schema.migration.normalizationReasons.length > 0)
@@ -339,6 +345,7 @@ function collectJsonParseRoots(
   checker: ts.TypeChecker,
   registry: TypedStructRegistry,
   eligibleIds: ReadonlySet<string>,
+  excludedDirectories: ReadonlySet<string>,
 ): Map<string, TypedStructProvenanceSite[]> {
   const roots = new Map<string, TypedStructProvenanceSite[]>();
   const keys = new Set<string>();
@@ -358,7 +365,7 @@ function collectJsonParseRoots(
     ts.forEachChild(node, visit);
   };
   for (const source of program.getSourceFiles()) {
-    if (sourceScope(source) === 'production') visit(source);
+    if (sourceScope(source, excludedDirectories) === 'production') visit(source);
   }
   return roots;
 }
@@ -369,10 +376,11 @@ function collectContainerTransfers(
   checker: ts.TypeChecker,
   registry: TypedStructRegistry,
   targets: ReadonlyMap<string, MutableTarget>,
+  excludedDirectories: ReadonlySet<string>,
 ): void {
   const targetIds = new Set(targets.keys());
   const audit = (expression: ts.Expression, targetType: ts.Type | undefined): void => {
-    if (!targetType || sourceScope(expression.getSourceFile()) !== 'production') return;
+    if (!targetType || sourceScope(expression.getSourceFile(), excludedDirectories) !== 'production') return;
     const targetSchemas = schemasWithinType(targetType, checker, registry, targetIds, true);
     if (targetSchemas.length === 0 || canonicalContainerConstruction(expression, targetType, checker)) return;
     const sourceType = checker.getTypeAtLocation(expression);
@@ -416,7 +424,7 @@ function collectContainerTransfers(
     ts.forEachChild(node, visit);
   };
   for (const source of program.getSourceFiles()) {
-    if (sourceScope(source) === 'production') visit(source);
+    if (sourceScope(source, excludedDirectories) === 'production') visit(source);
   }
 }
 
@@ -620,10 +628,13 @@ function isStaticCall(node: ts.CallExpression, owner: string, member: string): b
   );
 }
 
-function sourceScope(source: ts.SourceFile): 'production' | 'test' | undefined {
+function sourceScope(
+  source: ts.SourceFile,
+  excludedDirectories: ReadonlySet<string>,
+): 'production' | 'test' | undefined {
   const normalized = source.fileName.split(path.sep).join('/');
   const packageDirectory = /\/upstream\/packages\/([^/]+)\//u.exec(normalized)?.[1];
-  if (!packageDirectory || packageDirectory in portConfig.excludedPackages || normalized.endsWith('.d.ts')) {
+  if (!packageDirectory || excludedDirectories.has(packageDirectory) || normalized.endsWith('.d.ts')) {
     return undefined;
   }
   return /\.(?:test|spec)\.tsx?$/u.test(normalized) ? 'test' : /\/src\//u.test(normalized) ? 'production' : undefined;

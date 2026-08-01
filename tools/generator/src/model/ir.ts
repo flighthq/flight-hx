@@ -215,6 +215,13 @@ export type IrStatement =
       kind: 'forOf';
       variable: string;
     }
+  | {
+      body: IrStatement;
+      enumeration: 'direct-record' | 'runtime';
+      kind: 'forIn';
+      object: IrExpression;
+      variable: string;
+    }
   | { kind: 'if'; condition: IrExpression; consequent: IrStatement; otherwise?: IrStatement | undefined }
   | { kind: 'return'; expression?: IrExpression | undefined }
   | { kind: 'switch'; expression: IrExpression; cases: IrSwitchCase[] }

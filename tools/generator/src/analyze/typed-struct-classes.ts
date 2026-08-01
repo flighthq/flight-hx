@@ -1,8 +1,6 @@
 import path from 'node:path';
 import ts from 'typescript';
 
-import { portConfig } from '../../port.config.ts';
-
 import { upstreamTypeScriptProgram, type UpstreamTypeScriptProgram } from './program.ts';
 import { typedStructRegistry, type TypedStructRegistry, type TypedStructSchemaAudit } from './typed-structs.ts';
 
@@ -134,6 +132,8 @@ export function auditTypedStructClassFeasibility(
   programAndChecker: UpstreamTypeScriptProgram = upstreamTypeScriptProgram(workspaceDirectory),
 ): TypedStructClassFeasibilityAudit {
   const { checker, program } = programAndChecker;
+  const classifyScope = (source: ts.SourceFile): TypedStructClassFeasibilityScope | undefined =>
+    sourceScope(source, registry.excludedPackageDirectories);
   const schemas = registry.report.candidates.filter((candidate) => candidate.eligible).map(emptySchema);
   const byId = new Map(schemas.map((schema) => [schema.id, schema]));
   const transferKeys = new Set<string>();
@@ -182,7 +182,7 @@ export function auditTypedStructClassFeasibility(
     return true;
   };
   const auditTransfer = (expression: ts.Expression, targetType: ts.Type | undefined): void => {
-    const scope = sourceScope(expression.getSourceFile());
+    const scope = classifyScope(expression.getSourceFile());
     if (scope !== 'production' || !targetType) return;
     const target = matchedSchema(targetType);
     if (!target) return;
@@ -212,7 +212,7 @@ export function auditTypedStructClassFeasibility(
   };
 
   const visit = (node: ts.Node): void => {
-    const scope = sourceScope(node.getSourceFile());
+    const scope = classifyScope(node.getSourceFile());
     if (!scope) return;
     if (ts.isObjectLiteralExpression(node)) {
       const schema = matchedSchema(checker.getContextualType(node) ?? checker.getTypeAtLocation(node));
@@ -279,7 +279,7 @@ export function auditTypedStructClassFeasibility(
   };
 
   for (const source of program.getSourceFiles()) {
-    if (sourceScope(source)) visit(source);
+    if (classifyScope(source)) visit(source);
   }
   for (const schema of schemas) finalizeSchema(schema);
   schemas.sort((left, right) => left.id.localeCompare(right.id));
@@ -614,10 +614,13 @@ function finalizeSchema(schema: MutableSchema): void {
   schema.sites.sort(compareSites);
 }
 
-function sourceScope(source: ts.SourceFile): TypedStructClassFeasibilityScope | undefined {
+function sourceScope(
+  source: ts.SourceFile,
+  excludedDirectories: ReadonlySet<string>,
+): TypedStructClassFeasibilityScope | undefined {
   const normalized = source.fileName.split(path.sep).join('/');
   const packageDirectory = /\/upstream\/packages\/([^/]+)\//u.exec(normalized)?.[1];
-  if (!packageDirectory || packageDirectory in portConfig.excludedPackages || normalized.endsWith('.d.ts')) {
+  if (!packageDirectory || excludedDirectories.has(packageDirectory) || normalized.endsWith('.d.ts')) {
     return undefined;
   }
   return /\.(?:test|spec)\.tsx?$/u.test(normalized) ? 'test' : /\/src\//u.test(normalized) ? 'production' : undefined;

@@ -1,8 +1,8 @@
-import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { derivePackageExclusions } from '../../tools/generator/src/analyze/exclusions.ts';
 import {
   analyzeUpstream,
   packageNameToHaxePackage,
@@ -15,13 +15,7 @@ import {
   sourcePathToModule,
 } from '../../tools/generator/src/analyze/inventory.ts';
 import { auditLowering } from '../../tools/generator/src/analyze/lowering.ts';
-
-const u1CampaignUpstreamCommit = 'c61de179af8a12c2fa3b9b7d5389ee302f577a0d';
-const loweringAuditCampaignSkipReason =
-  'U1 campaign c61de179 retains the ordered item 5 for...in gap and the item 6 excluded tool-capture array-rest diagnostic';
-const skipLoweringAuditForCampaign =
-  execFileSync('git', ['-C', 'upstream', 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() ===
-  u1CampaignUpstreamCommit;
+import type { PackageInventory } from '../../tools/generator/src/model/inventory.ts';
 
 describe('analyzeUpstream', () => {
   it('accounts for every upstream package and representative export', () => {
@@ -37,8 +31,9 @@ describe('analyzeUpstream', () => {
     const rootVector = geometryRoot.exports.find((item) => item.name === 'createVector2');
     const contractVector = geometryContract.exports.find((item) => item.name === 'createVector2');
 
-    expect(inventory.schemaVersion).toBe(2);
+    expect(inventory.schemaVersion).toBe(3);
     expect(inventory.summary).toMatchObject({
+      excludedPackages: 1,
       exportConflicts: 0,
       exportLanes: 291,
       exports: 30_378,
@@ -59,6 +54,18 @@ describe('analyzeUpstream', () => {
     expect(sdk.exportLanes).toHaveLength(15);
     expect(sdk.sdkIncluded).toBe(false);
     expect(hostElectron.sdkIncluded).toBe(false);
+    expect(hostElectron.exclusion).toBeNull();
+    expect(toolCapture.exclusion).toMatchObject({
+      evidence: {
+        nodeImports: expect.arrayContaining(['node:fs']),
+        playwrightDependencies: ['@playwright/test'],
+        playwrightImports: ['@playwright/test'],
+        sdkExposures: [],
+        toolingBins: ['tool-capture -> dist/bin.js'],
+      },
+      reason: expect.stringContaining('absent from SDK barrels'),
+      rule: 'node-playwright-tooling',
+    });
     expect(toolCapture.exportLanes.find((lane) => lane.entry === '.')?.conditions).toContainEqual({
       condition: 'browser',
       source: expect.stringContaining('/tool-capture/src/browser.ts'),
@@ -106,28 +113,78 @@ describe('analyzeUpstream', () => {
       rmSync(directory, { force: true, recursive: true });
     }
   });
+
+  it('derives the exclusion without a package-name configuration entry', () => {
+    const config = readFileSync(path.resolve('tools/generator/port.config.ts'), 'utf8');
+
+    expect(config).not.toContain('tool-capture');
+    expect(config).not.toContain('excludedPackages');
+  });
+
+  it('fails closed for partial or additional tooling exclusion claims', () => {
+    const directory = mkdtempSync(path.join(os.tmpdir(), 'flight-exclusions-'));
+    try {
+      const complete = exclusionFixture(directory, 'complete', {
+        dependencies: { '@playwright/test': '^1.0.0' },
+        imports: ["import 'node:fs';", "import type { Page } from '@playwright/test';"],
+        toolingBin: true,
+      });
+      expect(derivePackageExclusions(directory, [complete]).get(complete.name)).toMatchObject({
+        rule: 'node-playwright-tooling',
+      });
+
+      const partial = exclusionFixture(directory, 'partial', {
+        dependencies: {},
+        imports: ["import 'node:path';"],
+        toolingBin: true,
+      });
+      expect(() => derivePackageExclusions(directory, [complete, partial])).toThrow(
+        /Partial package exclusion matches:[\s\S]*missing Playwright production dependency/u,
+      );
+
+      const newHostReason = exclusionFixture(directory, 'new-host-reason', {
+        dependencies: { '@playwright/test': '^1.0.0', electron: '^1.0.0' },
+        imports: [
+          "import 'node:fs';",
+          "import type { Page } from '@playwright/test';",
+          "import electron from 'electron';",
+        ],
+        toolingBin: true,
+      });
+      expect(() => derivePackageExclusions(directory, [complete, newHostReason])).toThrow(
+        /Partial package exclusion matches:[\s\S]*unsupported host dependencies \(electron\)[\s\S]*unsupported host imports \(electron\)/u,
+      );
+
+      const additional = exclusionFixture(directory, 'additional', {
+        dependencies: { '@playwright/test': '^1.0.0' },
+        imports: ["import 'node:crypto';", "import type { Browser } from '@playwright/test';"],
+        toolingBin: true,
+      });
+      expect(() => derivePackageExclusions(directory, [complete, additional])).toThrow(
+        'Package exclusion derivation changed: expected exactly one node-playwright-tooling exclusion, found 2',
+      );
+    } finally {
+      rmSync(directory, { force: true, recursive: true });
+    }
+  });
 });
 
 describe('auditLowering', () => {
-  it.skipIf(skipLoweringAuditForCampaign)(
-    `accounts for current translator coverage without hiding diagnostics (${loweringAuditCampaignSkipReason})`,
-    () => {
-      const audit = auditLowering(path.resolve('.'));
-      const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
+  it('accounts for current translator coverage without hiding diagnostics', () => {
+    const audit = auditLowering(path.resolve('.'));
+    const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
 
-      expect(audit.summary.packages).toBe(131);
-      expect(audit.summary.declarations).toBeGreaterThan(5_000);
-      expect(audit.summary.lowered).toBe(audit.summary.declarations);
-      expect(audit.summary.diagnostics).toBe(0);
-      expect(audit.summary.staticFacts.booleanExplicitTruthiness).toBeGreaterThan(1_000);
-      expect(audit.summary.staticFacts.numericRelations).toBeGreaterThan(1_000);
-      expect(audit.summary.staticFacts.indexedAccesses.reads).toBeGreaterThan(1_000);
-      expect(audit.summary.staticFacts.indexedReceivers.Float32Array.expressions).toBeGreaterThan(1_000);
-      expect(math?.lowered).toBeGreaterThan(50);
-      expect(math?.staticFacts.numericRelations).toBeGreaterThan(10);
-    },
-    60_000,
-  );
+    expect(audit.summary.packages).toBe(138);
+    expect(audit.summary.declarations).toBeGreaterThan(5_000);
+    expect(audit.summary.lowered).toBe(audit.summary.declarations);
+    expect(audit.summary.diagnostics).toBe(0);
+    expect(audit.summary.staticFacts.booleanExplicitTruthiness).toBeGreaterThan(1_000);
+    expect(audit.summary.staticFacts.numericRelations).toBeGreaterThan(1_000);
+    expect(audit.summary.staticFacts.indexedAccesses.reads).toBeGreaterThan(1_000);
+    expect(audit.summary.staticFacts.indexedReceivers.Float32Array.expressions).toBeGreaterThan(1_000);
+    expect(math?.lowered).toBeGreaterThan(50);
+    expect(math?.staticFacts.numericRelations).toBeGreaterThan(10);
+  }, 60_000);
 });
 
 describe('packageNameToModule', () => {
@@ -159,3 +216,40 @@ describe('packageNameToModule', () => {
     );
   });
 });
+
+function exclusionFixture(
+  workspaceDirectory: string,
+  name: string,
+  options: {
+    dependencies: Record<string, string>;
+    imports: string[];
+    toolingBin: boolean;
+  },
+): PackageInventory {
+  const directory = path.join('packages', name);
+  const absoluteDirectory = path.join(workspaceDirectory, directory);
+  mkdirSync(path.join(absoluteDirectory, 'src'), { recursive: true });
+  writeFileSync(
+    path.join(absoluteDirectory, 'package.json'),
+    JSON.stringify({
+      ...(options.toolingBin ? { bin: { [name]: 'dist/bin.js' } } : {}),
+      dependencies: options.dependencies,
+      name: `@flighthq/${name}`,
+      version: '0.0.0',
+    }),
+  );
+  writeFileSync(path.join(absoluteDirectory, 'src', 'index.ts'), `${options.imports.join('\n')}\n`);
+  return {
+    dependencies: Object.keys(options.dependencies),
+    directory,
+    exclusion: null,
+    exportLanes: [],
+    haxeModule: `flighthq.${name}.${name}`,
+    name: `@flighthq/${name}`,
+    sdkExposures: [],
+    sdkIncluded: false,
+    sourceFiles: 1,
+    testFiles: 0,
+    version: '0.0.0',
+  };
+}
