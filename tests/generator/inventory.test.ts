@@ -1,9 +1,14 @@
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 import {
   analyzeUpstream,
   packageNameToHaxePackage,
   packageNameToModule,
+  packageRootExportLane,
+  readPackageExportManifest,
+  resolvePackageExportLane,
   sourcePathToHaxePackage,
   sourcePathToImplementationModule,
   sourcePathToModule,
@@ -13,17 +18,85 @@ import { auditLowering } from '../../tools/generator/src/analyze/lowering.ts';
 describe('analyzeUpstream', () => {
   it('accounts for every upstream package and representative export', () => {
     const inventory = analyzeUpstream(path.resolve('.'));
+    const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));
     const geometry = inventory.packages.find((item) => item.name === '@flighthq/geometry');
     const sdk = inventory.packages.find((item) => item.name === '@flighthq/sdk');
     const hostElectron = inventory.packages.find((item) => item.name === '@flighthq/host-electron');
+    const toolCapture = inventory.packages.find((item) => item.name === '@flighthq/tool-capture');
+    if (!geometry || !sdk || !hostElectron || !toolCapture) throw new Error('Expected representative packages');
+    const geometryRoot = resolvePackageExportLane(inventoryByName, '@flighthq/geometry');
+    const geometryContract = resolvePackageExportLane(inventoryByName, '@flighthq/geometry/contract');
+    const rootVector = geometryRoot.exports.find((item) => item.name === 'createVector2');
+    const contractVector = geometryContract.exports.find((item) => item.name === 'createVector2');
 
-    expect(inventory.summary.packages).toBe(131);
-    expect(inventory.summary.sourceFiles).toBeGreaterThan(1_000);
-    expect(inventory.summary.testFiles).toBeGreaterThan(1_000);
-    expect(geometry?.exports.some((item) => item.name === 'createVector2')).toBe(true);
-    expect(geometry?.haxeModule).toBe('flighthq.geometry.Geometry');
-    expect(sdk?.sdkIncluded).toBe(false);
-    expect(hostElectron?.sdkIncluded).toBe(false);
+    expect(inventory.schemaVersion).toBe(2);
+    expect(inventory.summary).toMatchObject({
+      exportConflicts: 0,
+      exportLanes: 291,
+      exports: 30_378,
+      packages: 139,
+      rootExports: 11_740,
+      sourceFiles: 2_338,
+      testFiles: 1_266,
+    });
+    expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
+    expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);
+    expect(rootVector).toMatchObject({ kind: 'function', source: expect.stringContaining('/geometry/src/vector2.ts') });
+    expect(contractVector).toEqual(rootVector);
+    expect(() => resolvePackageExportLane(inventoryByName, '@flighthq/geometry/private')).toThrow(
+      'Package import uses an unaccounted export lane: @flighthq/geometry/private',
+    );
+    expect(geometry.haxeModule).toBe('flighthq.geometry.Geometry');
+    expect(packageRootExportLane(geometry)).toBe(geometryRoot);
+    expect(sdk.exportLanes).toHaveLength(15);
+    expect(sdk.sdkIncluded).toBe(false);
+    expect(hostElectron.sdkIncluded).toBe(false);
+    expect(toolCapture.exportLanes.find((lane) => lane.entry === '.')?.conditions).toContainEqual({
+      condition: 'browser',
+      source: expect.stringContaining('/tool-capture/src/browser.ts'),
+      target: './dist/browser.js',
+    });
+  });
+
+  it('derives SDK exposure from every SDK barrel and preserves exact target lanes', () => {
+    const inventory = analyzeUpstream(path.resolve('.'));
+    const sceneResources = inventory.packages.find((item) => item.name === '@flighthq/scene2d-resources');
+    const entity = inventory.packages.find((item) => item.name === '@flighthq/entity');
+    if (!sceneResources || !entity) throw new Error('Expected SDK packages');
+
+    expect(sceneResources.sdkExposures).toContainEqual({
+      sdkLane: '@flighthq/sdk/contract',
+      target: '@flighthq/scene2d-resources/contract',
+    });
+    expect(entity.sdkExposures).toContainEqual({
+      sdkLane: '@flighthq/sdk',
+      target: '@flighthq/entity',
+    });
+  });
+
+  it('rejects manifest lanes whose conditions cannot be traced to source barrels', () => {
+    const directory = mkdtempSync(path.join(os.tmpdir(), 'flight-inventory-'));
+    try {
+      mkdirSync(path.join(directory, 'src'));
+      writeFileSync(path.join(directory, 'src', 'index.ts'), 'export const value = 1;\n');
+      writeFileSync(
+        path.join(directory, 'package.json'),
+        JSON.stringify({
+          exports: {
+            '.': { types: './dist/index.d.ts', default: './dist/index.js' },
+            './missing': { types: './dist/missing.d.ts', default: './dist/missing.js' },
+          },
+          name: '@flighthq/fixture',
+          version: '0.0.0',
+        }),
+      );
+
+      expect(() => readPackageExportManifest(directory)).toThrow(
+        'Package export condition @flighthq/fixture/missing [types] has no source barrel',
+      );
+    } finally {
+      rmSync(directory, { force: true, recursive: true });
+    }
   });
 });
 

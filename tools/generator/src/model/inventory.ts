@@ -21,13 +21,33 @@ export interface ExportConflict {
   sources: string[];
 }
 
+export interface PackageExportCondition {
+  condition: string;
+  source: string;
+  target: string;
+}
+
+export interface PackageExportLane {
+  conditions: PackageExportCondition[];
+  entry: string;
+  exportConflicts: ExportConflict[];
+  exports: ExportRecord[];
+  source: string;
+  specifier: string;
+}
+
+export interface SdkExposure {
+  sdkLane: string;
+  target: string;
+}
+
 export interface PackageInventory {
   dependencies: string[];
   directory: string;
-  exportConflicts: ExportConflict[];
-  exports: ExportRecord[];
+  exportLanes: PackageExportLane[];
   haxeModule: string;
   name: string;
+  sdkExposures: SdkExposure[];
   sdkIncluded: boolean;
   sourceFiles: number;
   testFiles: number;
@@ -36,11 +56,13 @@ export interface PackageInventory {
 
 export interface UpstreamInventory {
   packages: PackageInventory[];
-  schemaVersion: 1;
+  schemaVersion: 2;
   summary: {
     exportConflicts: number;
+    exportLanes: number;
     exports: number;
     packages: number;
+    rootExports: number;
     sourceFiles: number;
     testFiles: number;
   };
@@ -49,11 +71,12 @@ export interface UpstreamInventory {
 
 export interface ApiReport {
   packages: Array<{
-    exports: ExportRecord[];
+    exportLanes: PackageExportLane[];
     haxeModule: string;
     name: string;
+    sdkExposures: SdkExposure[];
     sdkIncluded: boolean;
   }>;
-  schemaVersion: 1;
+  schemaVersion: 2;
   upstreamCommit: string;
 }

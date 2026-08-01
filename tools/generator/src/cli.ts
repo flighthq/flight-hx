@@ -79,7 +79,7 @@ try {
     }
     writeOrCheck(path.join(reportsDirectory, 'api.json'), stableJson(api), check);
     process.stdout.write(
-      `${check ? 'Verified' : 'Generated'} ${inventory.summary.packages} packages, ${inventory.summary.exports} public exports, and ${inventory.summary.testFiles} tests.\n`,
+      `${check ? 'Verified' : 'Generated'} ${inventory.summary.packages} packages, ${inventory.summary.exportLanes} public lanes, ${inventory.summary.exports} export records, and ${inventory.summary.testFiles} tests.\n`,
     );
   }
 } catch (error) {
