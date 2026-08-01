@@ -787,7 +787,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.callProperty(gl, 'bindBuffer'");
   });
 
-  it('fails generation for WebGL2 members absent from the typed endpoint inventory', () => {
+  it('fails generation for WebGL2 members absent from the shared host endpoint contract', () => {
     const emit = (body: string) => {
       const source = ts.createSourceFile(
         '/workspace/upstream/packages/render-gl/src/sample.ts',
@@ -807,9 +807,9 @@ describe('TypeScript lowering and Haxe emission', () => {
         });
     };
 
-    expect(emit('gl.futureMethod();')).toThrow('WebGL2 method is not in the typed backend inventory: futureMethod');
+    expect(emit('gl.futureMethod();')).toThrow('WebGL2 method is not in the host endpoint contract: futureMethod');
     expect(emit('return gl.FUTURE_CONSTANT;')).toThrow(
-      'WebGL2 constant is not in the typed backend inventory: FUTURE_CONSTANT',
+      'WebGL2 constant is not in the host endpoint contract: FUTURE_CONSTANT',
     );
     expect(emit('gl.clear(...[gl.COLOR_BUFFER_BIT]);')).toThrow(
       'WebGL2 spread call has no typed backend endpoint: clear',
@@ -820,22 +820,21 @@ describe('TypeScript lowering and Haxe emission', () => {
   });
 
   it('lowers computed WebGL2 constants to an exhaustive typed constant switch', () => {
-    const source = ts.createSourceFile(
+    const { checker, source } = typedSource(
       '/workspace/upstream/packages/render-gl/src/sample.ts',
       `
+        type GlBlendEquation = 'FUNC_ADD' | 'FUNC_REVERSE_SUBTRACT' | 'MAX' | 'MIN';
+        type GlBlendFactor = 'DST_COLOR' | 'ONE' | 'ONE_MINUS_SRC_ALPHA' | 'ONE_MINUS_SRC_COLOR' | 'ZERO';
         export function read(
           gl: WebGL2RenderingContext,
-          realization: { src: string; equation?: string },
+          realization: { src: GlBlendFactor; equation?: GlBlendEquation },
         ) {
           gl.blendEquation(gl[realization.equation ?? 'FUNC_ADD']);
           return gl[realization.src];
         }
       `,
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TS,
     );
-    const lowered = lowerTypeScriptSource(source, '@flighthq/render-gl', '/workspace');
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-gl', '/workspace', checker);
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -900,13 +899,13 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'closePath'");
     expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect'");
     expect(output).not.toContain("_Runtime.callProperty(ctx, 'quadraticCurveTo'");
-    expect(output).not.toContain("Canvas2dBackend.field(ctx, 'roundRect')");
+    expect(output).toContain("Canvas2dBackend.field(ctx, 'roundRect')");
     expect(output).not.toContain("_Runtime.callProperty(ctx, 'fillRect'");
     expect(output).toContain("_Runtime.field(ctx, 'source')");
     expect(output).not.toContain("Canvas2dBackend.field(ctx, 'source')");
   });
 
-  it('fails generation for Canvas 2D members absent from the typed endpoint inventory', () => {
+  it('fails generation for Canvas 2D members absent from the shared host endpoint contract', () => {
     const emit = (body: string) => {
       const { checker, source } = typedSource(
         '/workspace/upstream/packages/render-canvas/src/sample.ts',
@@ -923,11 +922,9 @@ describe('TypeScript lowering and Haxe emission', () => {
         });
     };
 
-    expect(emit('ctx.arcTo(0, 0, 1, 1, 2);')).toThrow('Canvas2D method is not in the typed backend inventory: arcTo');
-    expect(emit('return ctx.direction;')).toThrow('Canvas2D field is not in the typed backend inventory: direction');
-    expect(emit("ctx.direction = 'rtl';")).toThrow(
-      'Canvas2D property is not in the typed backend inventory: direction',
-    );
+    expect(emit('ctx.arcTo(0, 0, 1, 1, 2);')).toThrow('Canvas2D method is not in the host endpoint contract: arcTo');
+    expect(emit('return ctx.direction;')).toThrow('Canvas2D field is not in the host endpoint contract: direction');
+    expect(emit("ctx.direction = 'rtl';")).toThrow('Canvas2D property is not in the host endpoint contract: direction');
   });
 
   it('lowers typed collection receivers to maintained wrapper calls', () => {
@@ -1042,7 +1039,7 @@ describe('TypeScript lowering and Haxe emission', () => {
           canvas.removeEventListener('click', listener);
           canvas.getBoundingClientRect();
           canvas.toDataURL('image/png');
-          return gl;
+          return [gl, canvas.style];
         }
         export function encode(offscreen: OffscreenCanvas) {
           return offscreen.convertToBlob({ type: 'image/png' });
@@ -1070,6 +1067,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("CanvasElementBackend.call(canvas, 'getBoundingClientRect'");
     expect(output).toContain("CanvasElementBackend.call(canvas, 'toDataURL'");
     expect(output).toContain("CanvasElementBackend.call(offscreen, 'convertToBlob'");
+    expect(output).toContain("_Runtime.field(canvas, 'style')");
+    expect(output).not.toContain("CanvasElementBackend.field(canvas, 'style')");
     expect(output).not.toContain("Canvas2dBackend.call(canvas, 'getContext'");
     expect(output).not.toContain("_Runtime.callProperty(canvas, 'getContext'");
   });
@@ -1258,6 +1257,7 @@ describe('TypeScript lowering and Haxe emission', () => {
           return {
             buffer,
             texture,
+            features: device.features,
             alignment: device.limits.minUniformBufferOffsetAlignment,
             textureSize: device.limits.maxTextureDimension2D,
             groups: adapter.limits.maxBindGroups,
@@ -1286,6 +1286,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'configure'");
     expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'getCurrentTexture'");
     expect(output).toContain("WebGpuDeviceBackend.field(device, 'limits')");
+    expect(output).toContain("_Runtime.field(device, 'features')");
+    expect(output).not.toContain("WebGpuDeviceBackend.field(device, 'features')");
     expect(output).toContain(
       "WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'minUniformBufferOffsetAlignment')",
     );

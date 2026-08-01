@@ -106,6 +106,8 @@ class Canvas2dBackend {
       case 'isContextLost':
         return js.Syntax.code("(typeof {0}.isContextLost === 'function' ? {0}.isContextLost.bind({0}) : function() { return false; })", context);
       case 'imageSmoothingEnabled': return ctx.imageSmoothingEnabled;
+      case 'roundRect':
+        return js.Syntax.code("(typeof {0}.roundRect === 'function' ? {0}.roundRect.bind({0}) : null)", context);
       default:
         throw 'Canvas2dBackend: unmapped 2D field ' + name;
     }
@@ -222,6 +224,7 @@ class Canvas2dBackend {
       case 'canvas': return ctx.canvas;
       case 'isContextLost': return function():Dynamic return false;
       case 'imageSmoothingEnabled': return ctx.imageSmoothingEnabled;
+      case 'roundRect': return Reflect.field(ctx, name);
       default:
         throw 'Canvas2dBackend: unmapped 2D field ' + name;
     }

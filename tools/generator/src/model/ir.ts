@@ -68,6 +68,21 @@ export type IrDestructuringReadEscape = 'regexp-result-array' | 'unproven-receiv
 
 export type IrDomRootBinding = 'DomDocumentBackend' | 'DomNavigatorBackend' | 'DomWindowBackend';
 
+export type IrHostEndpointBinding =
+  | 'Canvas2dBackend'
+  | 'CanvasElementBackend'
+  | IrDomRootBinding
+  | 'WebGl2Backend'
+  | 'WebGpuCanvasContextBackend'
+  | 'WebGpuDeviceBackend'
+  | 'WebGpuLimitsBackend'
+  | 'WebGpuQueueBackend';
+
+export interface IrWebGlComputedConstantDomain {
+  name: string;
+  values: string[];
+}
+
 export interface IrExpressionStaticFacts {
   boolean?: true | undefined;
   booleanLogical?: true | undefined;
@@ -120,7 +135,7 @@ type IrExpressionNode =
       index: IrExpression;
       optional?: boolean | undefined;
       syntheticArrayRead?: 'iterationBinding' | undefined;
-      webGlComputedDomain?: 'GlBlendEquation' | 'GlBlendFactor' | undefined;
+      webGlComputedDomain?: IrWebGlComputedConstantDomain | undefined;
     }
   | {
       async?: boolean | undefined;
@@ -141,17 +156,13 @@ type IrExpressionNode =
     }
   | {
       binding?:
-        | 'Canvas2dBackend'
-        | 'CanvasElementBackend'
+        | IrHostEndpointBinding
         | 'Float32Array'
         | 'Float64Array'
         | 'Int16Array'
         | 'Int32Array'
         | 'Int8Array'
         | 'MapCollection'
-        | 'DomDocumentBackend'
-        | 'DomNavigatorBackend'
-        | 'DomWindowBackend'
         | 'DynamicObject'
         | 'SetCollection'
         | 'Uint16Array'
@@ -160,12 +171,7 @@ type IrExpressionNode =
         | 'Uint8ClampedArray'
         | 'WeakMapCollection'
         | 'WeakSetCollection'
-        | 'WebGl2Backend'
-        | 'WebGpuCanvasContextBackend'
         | 'WebGpuConstantsBackend'
-        | 'WebGpuDeviceBackend'
-        | 'WebGpuLimitsBackend'
-        | 'WebGpuQueueBackend'
         | undefined;
       kind: 'property';
       name: string;
