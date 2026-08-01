@@ -3,12 +3,36 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.DisplacementEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class DisplacementEffect {
   public static function createDisplacementEffect(?options:Dynamic):flighthq.types.DisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DisplacementEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getDisplacementEffectPadding(effect:flighthq.types.DisplacementEffect):RenderEffectPadding {
+    var intensity:Dynamic = cast _Runtime.UNDEFINED;
+    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
+    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    intensity = HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0));
+    horizontal = HxMath.ceil((intensity * 1.5));
+    vertical = HxMath.ceil(intensity);
+    return cast { bottom: vertical, left: horizontal, right: horizontal, top: vertical };
+    return cast null;
+  }
+
+  public static function registerDisplacementEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'DisplacementEffect', DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveDisplacementEffectPadding__displacementEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getDisplacementEffectPadding, cast ([(cast effect : flighthq.types.DisplacementEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

@@ -3,12 +3,35 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.getDirectionalRenderEffectPadding;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.BevelEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class BevelEffect {
   public static function createBevelEffect(?options:Dynamic):flighthq.types.BevelEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BevelEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getBevelEffectPadding(effect:flighthq.types.BevelEffect):RenderEffectPadding {
+    var angle:Dynamic = cast _Runtime.UNDEFINED;
+    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
+    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), (HxMath.cos(angle) * distance), (HxMath.sin(angle) * distance)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BevelEffect', BevelEffect.resolveBevelEffectPadding__bevelEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveBevelEffectPadding__bevelEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getBevelEffectPadding, cast ([(cast effect : flighthq.types.BevelEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

@@ -3,11 +3,11 @@ package flighthq.textureFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.textureFormats._internal._ByteReaderValues.createByteReader;
-import flighthq.textureFormats._internal._ByteReaderValues.hasByteReaderBytes;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU32;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU64;
-import flighthq.textureFormats._internal._ByteReaderValues.skipByteReader;
+import flighthq.textureFormats.ByteReader.createByteReader;
+import flighthq.textureFormats.ByteReader.hasByteReaderBytes;
+import flighthq.textureFormats.ByteReader.readByteReaderU32;
+import flighthq.textureFormats.ByteReader.readByteReaderU64;
+import flighthq.textureFormats.ByteReader.skipByteReader;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
@@ -32,8 +32,9 @@ class ParseKtx2 {
     var layers:Dynamic = cast _Runtime.UNDEFINED;
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var levelCountPresent:Dynamic = cast _Runtime.UNDEFINED;
-    var levels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
+    var fileOrderLevels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
     var imagesPerLevel:Dynamic = cast _Runtime.UNDEFINED;
+    var levels:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.callValue(ParseKtx2.hasKtx2Identifier__parseKtx2, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Float)) : Bool)) { return cast null; }
     reader = _Runtime.callValue(createByteReader, cast ([bytes, 12.0] : Array<Dynamic>));
@@ -58,7 +59,7 @@ class ParseKtx2 {
     levelCountPresent = HxMath.max(1.0, levelCount);
     (reader.offset = cast (ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Dynamic));
     if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, (levelCountPresent * 24.0)] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    levels = cast ([] : Array<Dynamic>);
+    fileOrderLevels = cast ([] : Array<Dynamic>);
     imagesPerLevel = (layers * faces);
     {
       var mip:Dynamic = 0.0;
@@ -71,7 +72,7 @@ class ParseKtx2 {
         var mipHeight:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(mip)));
         var splittable:Dynamic = ((cast ((cast _Runtime.strictEquals(supercompression, 'None') : Bool) && (cast ((cast imagesPerLevel : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.fmod(byteLength, imagesPerLevel), 0.0) : Bool));
         if ((cast !(cast splittable : Bool) : Bool)) {
-          _Runtime.callProperty(levels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: mipHeight, width: mipWidth }] : Array<Dynamic>));
+          _Runtime.callProperty(fileOrderLevels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: mipHeight, width: mipWidth }] : Array<Dynamic>));
           (mip = cast ((mip + 1.0) : Dynamic));
           continue;
         }
@@ -79,11 +80,28 @@ class ParseKtx2 {
         {
           var image:Dynamic = 0.0;
           while ((cast ((cast image : Float) < (cast imagesPerLevel : Float)) : Bool)) {
-            _Runtime.callProperty(levels, 'push', cast ([{ byteLength: imageSize, byteOffset: (byteOffset + (image * imageSize)), height: mipHeight, width: mipWidth }] : Array<Dynamic>));
+            _Runtime.callProperty(fileOrderLevels, 'push', cast ([{ byteLength: imageSize, byteOffset: (byteOffset + (image * imageSize)), height: mipHeight, width: mipWidth }] : Array<Dynamic>));
             (image = cast ((image + 1.0) : Dynamic));
           }
         }
         (mip = cast ((mip + 1.0) : Dynamic));
+      }
+    }
+    levels = fileOrderLevels;
+    if ((cast ((cast ((cast _Runtime.strictEquals(supercompression, 'None') : Bool) && (cast ((cast imagesPerLevel : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(fileOrderLevels, 'length'), (levelCountPresent * imagesPerLevel)) : Bool)) : Bool)) {
+      (levels = cast (cast ([] : Array<Dynamic>) : Dynamic));
+      {
+        var image:Dynamic = 0.0;
+        while ((cast ((cast image : Float) < (cast imagesPerLevel : Float)) : Bool)) {
+          {
+            var mip:Dynamic = 0.0;
+            while ((cast ((cast mip : Float) < (cast levelCountPresent : Float)) : Bool)) {
+              _Runtime.callProperty(levels, 'push', cast ([flighthq._internal._StaticIndex.readArray(fileOrderLevels, ((mip * imagesPerLevel) + image))] : Array<Dynamic>));
+              (mip = cast ((mip + 1.0) : Dynamic));
+            }
+          }
+          (image = cast ((image + 1.0) : Dynamic));
+        }
       }
     }
     return cast { depth: depth, faces: faces, format: format, height: height, layers: layers, levels: levels, mipLevels: levelCountPresent, supercompression: supercompression, width: width };

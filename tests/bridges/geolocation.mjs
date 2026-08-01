@@ -3,13 +3,10 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const clearGeolocationWatch = compiled.flighthq.geolocation.Geolocation.clearGeolocationWatch;
 export const createGeoPosition = compiled.flighthq.geolocation.Geolocation.createGeoPosition;
-export const createWebGeolocationBackend = compiled.flighthq.geolocation.Geolocation.createWebGeolocationBackend;
 export const getCurrentGeoPosition = compiled.flighthq.geolocation.Geolocation.getCurrentGeoPosition;
 export const getCurrentGeoPositionResult = compiled.flighthq.geolocation.Geolocation.getCurrentGeoPositionResult;
-export const getGeolocationBackend = compiled.flighthq.geolocation.Geolocation.getGeolocationBackend;
 export const getGeolocationPermission = compiled.flighthq.geolocation.Geolocation.getGeolocationPermission;
 export const isGeolocationAvailable = compiled.flighthq.geolocation.Geolocation.isGeolocationAvailable;
 export const onGeolocationPermissionChange = compiled.flighthq.geolocation.Geolocation.onGeolocationPermissionChange;
 export const requestGeolocationPermission = compiled.flighthq.geolocation.Geolocation.requestGeolocationPermission;
-export const setGeolocationBackend = compiled.flighthq.geolocation.Geolocation.setGeolocationBackend;
 export const watchGeolocationPosition = compiled.flighthq.geolocation.Geolocation.watchGeolocationPosition;

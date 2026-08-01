@@ -3,6 +3,7 @@ package flighthq.renderGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 
@@ -14,11 +15,12 @@ class GlBackground {
     var rgba:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height'));
+    viewport = _Runtime.field(runtime, 'renderTargetViewport');
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.coalesce(_Runtime.optionalField(viewport, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width')), _Runtime.coalesce(_Runtime.optionalField(viewport, 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')));
     rgba = _Runtime.field(state, 'backgroundColorRgba');
     if ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.clearColor(gl, flighthq._internal._StaticIndex.readArray(rgba, 0.0), flighthq._internal._StaticIndex.readArray(rgba, 1.0), flighthq._internal._StaticIndex.readArray(rgba, 2.0), flighthq._internal._StaticIndex.readArray(rgba, 3.0));
+      var linear:Dynamic = _Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(runtime, 'currentRenderTarget'), 'colorSpace'), 'linear');
+      flighthq._internal.backend.WebGl2Backend.clearColor(gl, ((cast linear : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([flighthq._internal._StaticIndex.readArray(rgba, 0.0)] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 0.0) : Dynamic)), ((cast linear : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([flighthq._internal._StaticIndex.readArray(rgba, 1.0)] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 1.0) : Dynamic)), ((cast linear : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([flighthq._internal._StaticIndex.readArray(rgba, 2.0)] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 2.0) : Dynamic)), flighthq._internal._StaticIndex.readArray(rgba, 3.0));
     } else {
       flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
     }

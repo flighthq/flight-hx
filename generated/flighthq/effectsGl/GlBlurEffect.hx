@@ -5,17 +5,27 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectUniformLocation;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.renderGl.GlRenderStateBracket.withGlRenderState;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
+import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
+import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
 import flighthq.types.BlurEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderTexture;
 
 class GlBlurEffect {
   public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
     _Runtime.callValue(applyGaussianBlurToGl, cast ([state, source, dest, temp, { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }] : Array<Dynamic>));
+  }
+
+  public static function applyBlurEffectToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, effect:BlurEffect):Bool {
+    return cast _Runtime.callValue(applyGaussianBlurToGlRenderTextures, cast ([state, source, dest, temp, effect] : Array<Dynamic>));
+    return cast null;
   }
 
   public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
@@ -31,6 +41,24 @@ class GlBlurEffect {
     _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, temp, dest, sigmaY, radiusY, 0.0, 1.0] : Array<Dynamic>));
   }
 
+  public static function applyGaussianBlurToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Bool {
+    var sourceTarget:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, temp) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, temp) : Bool)) : Bool)) {
+      throw _Runtime.error('applyGaussianBlurToGlRenderTextures: source, destination, and scratch must be distinct');
+    }
+    sourceTarget = _Runtime.callValue(getGlRenderTextureTarget, cast ([state, source] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
+    _Runtime.callValue(withGlRenderState, cast ([state, function() {
+      _Runtime.callValue(writeGlRenderTextureTarget, cast ([state, temp, function(tempTarget:Dynamic) {
+        _Runtime.callValue(writeGlRenderTextureTarget, cast ([state, dest, function(destTarget:Dynamic) {
+          _Runtime.callValue(applyGaussianBlurToGl, cast ([state, sourceTarget, destTarget, tempTarget, options] : Array<Dynamic>));
+        }] : Array<Dynamic>));
+      }] : Array<Dynamic>));
+    }] : Array<Dynamic>));
+    return cast true;
+    return cast null;
+  }
+
   public static final defaultGlBlurEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var temp:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,6 +67,10 @@ class GlBlurEffect {
     _Runtime.callValue(applyBlurEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), temp, (cast effect : BlurEffect)] : Array<Dynamic>));
     _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(ctx, 'pool'), temp] : Array<Dynamic>));
   };
+
+  public static function registerGlBlurEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BlurEffect', defaultGlBlurEffectRunner] : Array<Dynamic>));
+  }
 
   public static function applyGlGaussianBlurPass__glBlurEffect(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;

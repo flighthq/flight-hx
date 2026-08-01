@@ -4,7 +4,9 @@ package flighthq.effectsCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
+import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.VignetteEffect;
 
@@ -61,4 +63,8 @@ class CanvasVignetteEffect {
   public static final defaultCanvasVignetteEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyVignetteEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
   };
+
+  public static function registerCanvasVignetteEffect(state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'VignetteEffect', defaultCanvasVignetteEffectRunner] : Array<Dynamic>));
+  }
 }

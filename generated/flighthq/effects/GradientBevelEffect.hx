@@ -3,11 +3,34 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.getDirectionalRenderEffectPadding;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.GradientBevelEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class GradientBevelEffect {
   public static function createGradientBevelEffect(options:Dynamic):flighthq.types.GradientBevelEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientBevelEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getGradientBevelEffectPadding(effect:flighthq.types.GradientBevelEffect):RenderEffectPadding {
+    var angle:Dynamic = cast _Runtime.UNDEFINED;
+    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
+    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), (HxMath.cos(angle) * distance), (HxMath.sin(angle) * distance)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function registerGradientBevelEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'GradientBevelEffect', GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveGradientBevelEffectPadding__gradientBevelEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getGradientBevelEffectPadding, cast ([(cast effect : flighthq.types.GradientBevelEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

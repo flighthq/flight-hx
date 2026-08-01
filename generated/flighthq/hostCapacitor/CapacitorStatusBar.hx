@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorStatusBarInfoResult;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorStatusBarInfoResult;
 import flighthq.types.StatusBar.StatusBarBackend;
 import flighthq.types.StatusBar.StatusBarInfo;
 import flighthq.types.StatusBar.StatusBarStyle;
@@ -18,7 +18,7 @@ class CapacitorStatusBar {
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(statusBar, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
       (cachedInfo = cast (info : Dynamic));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast { getInfo: function(out:StatusBarInfo) {
       var info:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,25 +31,25 @@ class CapacitorStatusBar {
       return cast out;
     }, setBackgroundColor: function(color:Float) {
       flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setBackgroundColor', cast ([{ color: _Runtime.callValue(CapacitorStatusBar.rgbaToHex__capacitorStatusBar, cast ([color] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
-      
+
       });
     }, setOverlaysContent: function(overlay:Bool) {
       flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setOverlaysWebView', cast ([{ overlay: overlay }] : Array<Dynamic>)), function() {
-      
+
       });
     }, setStyle: function(style:StatusBarStyle) {
       flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setStyle', cast ([{ style: _Runtime.callValue(CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
-      
+
       });
     }, setVisible: function(visible:Bool) {
       if ((cast visible : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'show', cast ([] : Array<Dynamic>)), function() {
-      
+
       }); } else { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'hide', cast ([] : Array<Dynamic>)), function() {
-      
+
       }); }
     }, subscribe: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

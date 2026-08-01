@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyMedianEffectToGl = api.applyMedianEffectToGl;
 export const defaultGlMedianEffectRunner = api.defaultGlMedianEffectRunner;
 export const MAX_MEDIAN_EFFECT_GL_RADIUS = api.MAX_MEDIAN_EFFECT_GL_RADIUS;
+export const registerGlMedianEffect = api.registerGlMedianEffect;

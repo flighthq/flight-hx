@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.GodRaysEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -41,6 +42,10 @@ class WgpuGodRaysEffect {
   public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyGodRaysEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GodRaysEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuGodRaysEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GodRaysEffect', defaultWgpuGodRaysEffectRunner] : Array<Dynamic>));
+  }
 
   public static function buildGodRaysFragment__wgpuGodRaysEffect(samples:Float):String {
     return cast ((WgpuGodRaysEffect.GOD_RAYS_FRAGMENT_HEAD__wgpuGodRaysEffect + _Runtime.callProperty(samples, 'toString', cast ([] : Array<Dynamic>))) + WgpuGodRaysEffect.GOD_RAYS_FRAGMENT_TAIL__wgpuGodRaysEffect);

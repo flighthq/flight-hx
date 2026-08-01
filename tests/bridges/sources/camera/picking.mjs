@@ -5,5 +5,5 @@ const api = compiled.flighthq.camera.Picking;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCameraScreenToWorldRay = api.getCameraScreenToWorldRay;
-export const getCameraWorldToScreen = api.getCameraWorldToScreen;
+export const getCamera3DScreenToWorldRay = api.getCamera3DScreenToWorldRay;
+export const getCamera3DWorldToScreen = api.getCamera3DWorldToScreen;

@@ -3,30 +3,26 @@ package flighthq.bitmaptext;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.adjustments.ColorTransformAdjustment.createColorTransformAdjustment;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
-import flighthq.displayobject.DisplayObject.setDisplayObjectColorAdjustments;
 import flighthq.geometry.Rectangle.createRectangle;
-import flighthq.materials.ColorTransform.createColorTransform;
-import flighthq.node.Hierarchy.addNodeChild;
+import flighthq.geometry.Typedarray.reserveFloat32Array;
+import flighthq.geometry.Typedarray.reserveUint16Array;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
-import flighthq.sprite.QuadBatch.appendQuadBatchInstance;
-import flighthq.sprite.QuadBatch.clearQuadBatch;
-import flighthq.sprite.QuadBatch.createQuadBatch;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
+import flighthq.texture.Texture.createTexture;
+import flighthq.texture.Texture.setTextureSource;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlas.TextureAtlasRegion.addTextureAtlasRegion;
 import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextData;
+import flighthq.types.BitmapText.BitmapTextPage;
 import flighthq.types.BitmapText.BitmapTextRuntime;
 import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.QuadBatch;
 import flighthq.types.Rectangle;
-import flighthq.types.TextureAtlas;
 
 typedef BitmapTextGlyph__updateBitmapText = { var codepoint:Float; var entry:GlyphEntry; var penWithinWord:Float; };
 
-typedef BitmapTextPageBatch__updateBitmapText = { var atlas:TextureAtlas; var quadBatch:QuadBatch; var regionByCodepoint:Dynamic; };
+typedef BitmapTextPageContext__updateBitmapText = { var page:BitmapTextPage; var regionByCodepoint:Dynamic; };
 
 typedef BitmapTextLine__updateBitmapText = { var gaps:Array<Float>; var paragraphEnd:Bool; var width:Float; var words:Array<BitmapTextWord__updateBitmapText>; };
 
@@ -35,7 +31,7 @@ typedef BitmapTextToken__updateBitmapText = { var gap:Float; var word:BitmapText
 typedef BitmapTextWord__updateBitmapText = { var glyphs:Array<BitmapTextGlyph__updateBitmapText>; var width:Float; };
 
 class UpdateBitmapText {
-  public static final BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText:Dynamic = 4294967295.0;
+  public static final BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText:Dynamic = 2.0;
 
   public static final CARRIAGE_RETURN__updateBitmapText:Dynamic = 13.0;
 
@@ -56,12 +52,11 @@ class UpdateBitmapText {
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(bitmapText, 'data');
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([bitmapText] : Array<Dynamic>)) : BitmapTextRuntime);
+    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([bitmapText] : Array<Dynamic>)) : BitmapTextRuntime);
     bounds = _Runtime.callValue(UpdateBitmapText.ensureBoundsRectangle__updateBitmapText, cast ([runtime] : Array<Dynamic>));
-    for (quadBatch in _Runtime.iterable(_Runtime.field(runtime, 'quadBatches'))) {
-      _Runtime.callValue(clearQuadBatch, cast ([quadBatch] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas'), null) : Bool)) { _Runtime.setLength(_Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas').regions, 0.0); }
-      _Runtime.callValue(UpdateBitmapText.applyBitmapTextColor__updateBitmapText, cast ([quadBatch, _Runtime.field(data, 'color')] : Array<Dynamic>));
+    for (page in _Runtime.iterable(_Runtime.field(runtime, 'pages'))) {
+      _Runtime.setField(page, 'instanceCount', 0.0);
+      _Runtime.setLength(_Runtime.field(page, 'atlas').regions, 0.0);
     }
     glyphSource = _Runtime.field(data, 'glyphSource');
     if ((cast ((cast _Runtime.strictEquals(glyphSource, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'text'), 'length'), 0.0) : Bool)) : Bool)) {
@@ -96,17 +91,17 @@ class UpdateBitmapText {
             var word:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(line, 'words'), wi);
             for (glyph in _Runtime.iterable(_Runtime.field(word, 'glyphs'))) {
               var entry:Dynamic = _Runtime.field(glyph, 'entry');
-              var page:Dynamic = _Runtime.callValue(UpdateBitmapText.ensureBitmapTextPageBatch__updateBitmapText, cast ([bitmapText, runtime, glyphSource, _Runtime.field(data, 'color'), pages, entry.page] : Array<Dynamic>));
-              if ((cast _Runtime.strictEquals(page, null) : Bool)) { continue; }
+              var context:Dynamic = _Runtime.callValue(UpdateBitmapText.ensureBitmapTextPage__updateBitmapText, cast ([runtime, glyphSource, pages, entry.page] : Array<Dynamic>));
+              if ((cast _Runtime.strictEquals(context, null) : Bool)) { continue; }
               var quadX:Dynamic = ((penX + _Runtime.field(glyph, 'penWithinWord')) + entry.bearingX);
               var quadY:Dynamic = (baselineY - entry.bearingY);
-              var regionId:Dynamic = ((cast _Runtime.field(page, 'regionByCodepoint') : flighthq._internal._Map).get(_Runtime.field(glyph, 'codepoint')));
+              var regionId:Dynamic = ((cast _Runtime.field(context, 'regionByCodepoint') : flighthq._internal._Map).get(_Runtime.field(glyph, 'codepoint')));
               if ((cast _Runtime.strictEquals(regionId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                _Runtime.callValue(addTextureAtlasRegion, cast ([_Runtime.field(page, 'atlas'), entry.x, entry.y, entry.width, entry.height] : Array<Dynamic>));
-                (regionId = cast ((_Runtime.field(_Runtime.field(page, 'atlas').regions, 'length') - 1.0) : Dynamic));
-                ((cast _Runtime.field(page, 'regionByCodepoint') : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), regionId));
+                _Runtime.callValue(addTextureAtlasRegion, cast ([_Runtime.field(_Runtime.field(context, 'page'), 'atlas'), entry.x, entry.y, entry.width, entry.height] : Array<Dynamic>));
+                (regionId = cast ((_Runtime.field(_Runtime.field(_Runtime.field(context, 'page'), 'atlas').regions, 'length') - 1.0) : Dynamic));
+                ((cast _Runtime.field(context, 'regionByCodepoint') : flighthq._internal._Map).set(_Runtime.field(glyph, 'codepoint'), regionId));
               }
-              _Runtime.callValue(appendQuadBatchInstance, cast ([_Runtime.field(page, 'quadBatch'), regionId, quadX, quadY] : Array<Dynamic>));
+              _Runtime.callValue(UpdateBitmapText.appendBitmapTextPageQuad__updateBitmapText, cast ([_Runtime.field(context, 'page'), regionId, quadX, quadY] : Array<Dynamic>));
               if ((cast ((cast quadX : Float) < (cast minX : Float)) : Bool)) { (minX = cast (quadX : Dynamic)); }
               if ((cast ((cast quadY : Float) < (cast minY : Float)) : Bool)) { (minY = cast (quadY : Dynamic)); }
               if ((cast ((cast (quadX + entry.width) : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast ((quadX + entry.width) : Dynamic)); }
@@ -130,14 +125,22 @@ class UpdateBitmapText {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([bitmapText] : Array<Dynamic>));
   }
 
-  public static function applyBitmapTextColor__updateBitmapText(quadBatch:QuadBatch, color:Float):Void {
-    var colorTransform:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(color, UpdateBitmapText.BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText) : Bool)) {
-      _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, null] : Array<Dynamic>));
-      return;
+  public static function appendBitmapTextPageQuad__updateBitmapText(page:BitmapTextPage, id:Float, x:Float, y:Float):Void {
+    var index:Dynamic = cast _Runtime.UNDEFINED;
+    var capacity:Dynamic = cast _Runtime.UNDEFINED;
+    var o:Dynamic = cast _Runtime.UNDEFINED;
+    index = _Runtime.field(page, 'instanceCount');
+    capacity = HxMath.min(_Runtime.field(_Runtime.field(page, 'ids'), 'length'), (_Runtime.toInt32((_Runtime.field(_Runtime.field(page, 'transforms'), 'length') / UpdateBitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText)) | 0));
+    if ((cast ((cast index : Float) >= (cast capacity : Float)) : Bool)) {
+      var next:Dynamic = HxMath.max(HxMath.max((index + 1.0), (capacity * 2.0)), 8.0);
+      _Runtime.setField(page, 'ids', _Runtime.callValue(reserveUint16Array, cast ([_Runtime.field(page, 'ids'), next] : Array<Dynamic>)));
+      _Runtime.setField(page, 'transforms', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(page, 'transforms'), (next * UpdateBitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText)] : Array<Dynamic>)));
     }
-    colorTransform = _Runtime.callValue(createColorTransform, cast ([{ redMultiplier: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0), greenMultiplier: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0), blueMultiplier: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0), alphaMultiplier: ((_Runtime.toInt32(color) & 255) / 255.0) }] : Array<Dynamic>));
-    _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, cast ([_Runtime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
+    flighthq._internal._StaticIndex.writeUint16Array(_Runtime.field(page, 'ids'), index, id);
+    o = (index * UpdateBitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText);
+    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(page, 'transforms'), o, x);
+    flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(page, 'transforms'), (o + 1.0), y);
+    _Runtime.setField(page, 'instanceCount', (index + 1.0));
   }
 
   public static function buildBitmapTextWords__updateBitmapText(glyphSource:GlyphSource, paragraph:String, letterSpacing:Float):Array<BitmapTextToken__updateBitmapText> {
@@ -185,28 +188,27 @@ class UpdateBitmapText {
     return cast null;
   }
 
-  public static function ensureBitmapTextPageBatch__updateBitmapText(bitmapText:BitmapText, runtime:BitmapTextRuntime, glyphSource:GlyphSource, color:Float, pages:Dynamic, page:Float):Null<BitmapTextPageBatch__updateBitmapText> {
+  public static function ensureBitmapTextPage__updateBitmapText(runtime:BitmapTextRuntime, glyphSource:GlyphSource, pages:Dynamic, page:Float):Null<BitmapTextPageContext__updateBitmapText> {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
-    var quadBatch:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var pageBatch:BitmapTextPageBatch__updateBitmapText = cast _Runtime.UNDEFINED;
+    var pageData:Dynamic = cast _Runtime.UNDEFINED;
+    var context:BitmapTextPageContext__updateBitmapText = cast _Runtime.UNDEFINED;
     cached = ((cast pages : flighthq._internal._Map).get(page));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     image = _Runtime.callProperty(glyphSource, 'getGlyphAtlasImage', cast ([page] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
-    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'quadBatches'), 'length') : Float) <= (cast page : Float)) : Bool)) {
-      var created:Dynamic = _Runtime.callValue(createQuadBatch, cast ([{ data: { atlas: _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)) } }] : Array<Dynamic>));
-      _Runtime.callValue(UpdateBitmapText.applyBitmapTextColor__updateBitmapText, cast ([created, color] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'quadBatches'), 'push', cast ([created] : Array<Dynamic>));
-      _Runtime.callValue(addNodeChild, cast ([bitmapText, created] : Array<Dynamic>));
+    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'pages'), 'length') : Float) <= (cast page : Float)) : Bool)) {
+      _Runtime.callProperty(_Runtime.field(runtime, 'pages'), 'push', cast ([{ atlas: _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() }] : Array<Dynamic>));
     }
-    quadBatch = flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'quadBatches'), page);
-    atlas = _Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas');
-    (atlas.image = cast (image : Dynamic));
-    pageBatch = { atlas: atlas, quadBatch: quadBatch, regionByCodepoint: _Runtime.construct(_Runtime.globalValue('Map'), []) };
-    ((cast pages : flighthq._internal._Map).set(page, pageBatch));
-    return cast pageBatch;
+    pageData = flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'pages'), page);
+    if ((cast _Runtime.strictEquals(_Runtime.field(pageData, 'atlas').texture, null) : Bool)) {
+      (_Runtime.field(pageData, 'atlas').texture = cast (_Runtime.callValue(createTexture, cast ([{ dimension: '2d', source: image }] : Array<Dynamic>)) : Dynamic));
+    } else {
+      _Runtime.callValue(setTextureSource, cast ([_Runtime.field(pageData, 'atlas').texture, image] : Array<Dynamic>));
+    }
+    context = { page: pageData, regionByCodepoint: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    ((cast pages : flighthq._internal._Map).set(page, context));
+    return cast context;
     return cast null;
   }
 

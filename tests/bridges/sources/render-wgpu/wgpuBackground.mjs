@@ -5,5 +5,6 @@ const api = compiled.flighthq.renderWgpu.WgpuBackground;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const beginWgpuFrame = api.beginWgpuFrame;
 export const renderWgpuBackground = api.renderWgpuBackground;
 export const submitWgpuRenderPass = api.submitWgpuRenderPass;

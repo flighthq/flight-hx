@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySmaaEffectToGl = api.applySmaaEffectToGl;
 export const defaultGlSmaaEffectRunner = api.defaultGlSmaaEffectRunner;
+export const registerGlSmaaEffect = api.registerGlSmaaEffect;

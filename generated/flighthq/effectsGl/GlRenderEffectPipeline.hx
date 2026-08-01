@@ -30,9 +30,10 @@ import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 
 class GlRenderEffectPipeline {
-  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
+  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline, colorSpace:RenderTargetColorSpace = 'srgb'):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -46,11 +47,11 @@ class GlRenderEffectPipeline {
     format = _Runtime.field(__destructure0, 'format');
     depth = _Runtime.field(__destructure0, 'depth');
     if ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null) : Bool)) {
-      _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createGlRenderTarget, cast ([state, { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth }] : Array<Dynamic>)));
+      _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createGlRenderTarget, cast ([state, { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth, colorSpace: colorSpace }] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(resizeGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget'), w, h] : Array<Dynamic>));
     }
-    _Runtime.setField(_Runtime.field(pipeline, 'sceneTarget'), 'colorSpace', 'srgb');
+    _Runtime.setField(_Runtime.field(pipeline, 'sceneTarget'), 'colorSpace', colorSpace);
     _Runtime.callValue(beginGlRenderPass, cast ([state, _Runtime.field(pipeline, 'sceneTarget'), { preserveColor: true, preserveDepth: true }] : Array<Dynamic>));
   }
 
@@ -149,7 +150,7 @@ class GlRenderEffectPipeline {
     }
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'effect.present', GlRenderEffectPipeline.PRESENT_FRAGMENT_SRC__glRenderEffectPipeline] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), null, function() {
-    
+
     }] : Array<Dynamic>));
   }
 

@@ -4,26 +4,21 @@ package flighthq.interaction;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.interaction.CursorBackend as Facade_Interaction_flighthq_interaction_CursorBackend;
-import flighthq.interaction.DisplayHitTests as Facade_Interaction_flighthq_interaction_DisplayHitTests;
 import flighthq.interaction.DisplayObjectOverlap as Facade_Interaction_flighthq_interaction_DisplayObjectOverlap;
 import flighthq.interaction.EnableInteractionGuards as Facade_Interaction_flighthq_interaction_EnableInteractionGuards;
-import flighthq.interaction.EnableInteractionGuards.InteractionHitEligibility;
 import flighthq.interaction.FocusManager as Facade_Interaction_flighthq_interaction_FocusManager;
 import flighthq.interaction.HitTests as Facade_Interaction_flighthq_interaction_HitTests;
 import flighthq.interaction.InteractionManager as Facade_Interaction_flighthq_interaction_InteractionManager;
-import flighthq.interaction.InteractionManager.InteractionConnectGuard;
 import flighthq.interaction.InteractionManager.InteractionSignalSlot__interactionManager;
 import flighthq.interaction.InteractionSpatialIndex as Facade_Interaction_flighthq_interaction_InteractionSpatialIndex;
 import flighthq.interaction.NodeInteractionState as Facade_Interaction_flighthq_interaction_NodeInteractionState;
-import flighthq.interaction.RegisterBitmapHitTest as Facade_Interaction_flighthq_interaction_RegisterBitmapHitTest;
 import flighthq.interaction.RegisterDefaultHitTests as Facade_Interaction_flighthq_interaction_RegisterDefaultHitTests;
 import flighthq.interaction.RegisterShapeHitTest as Facade_Interaction_flighthq_interaction_RegisterShapeHitTest;
+import flighthq.interaction.RegisterSpriteHitTest as Facade_Interaction_flighthq_interaction_RegisterSpriteHitTest;
 import flighthq.interaction.RegisterTextHitTest as Facade_Interaction_flighthq_interaction_RegisterTextHitTest;
 import flighthq.interaction.SpatialQuery as Facade_Interaction_flighthq_interaction_SpatialQuery;
-import flighthq.interaction.SpriteHitTests as Facade_Interaction_flighthq_interaction_SpriteHitTests;
 import flighthq.types.Cursor;
 import flighthq.types.Cursor.CursorBackend;
-import flighthq.types.DisplayObject;
 import flighthq.types.Entity.Kind;
 import flighthq.types.FocusManager;
 import flighthq.types.FocusManager.FocusDirection;
@@ -33,6 +28,8 @@ import flighthq.types.FocusManager.FocusNavigationOptions;
 import flighthq.types.HitTestFunction;
 import flighthq.types.HitTestFunction.HitTestPreciseFunction;
 import flighthq.types.HitTestResult;
+import flighthq.types.InteractionConnectGuard;
+import flighthq.types.InteractionHitEligibility;
 import flighthq.types.InteractionManager;
 import flighthq.types.InteractionManager.InteractionInputSource;
 import flighthq.types.InteractionManager.InteractionManagerOptions;
@@ -40,6 +37,7 @@ import flighthq.types.InteractionManager.InteractionPointerOptions;
 import flighthq.types.InteractionSignals;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node2D;
 import flighthq.types.NodeInteraction.HitArea;
 import flighthq.types.NodeInteractionState;
 import flighthq.types.Rectangle;
@@ -68,8 +66,8 @@ class Interaction {
     Facade_Interaction_flighthq_interaction_InteractionManager.connectInteractionSignal(manager, target, name, slot, options);
   }
 
-  public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.containsDisplayObject(outer, inner);
+  public static function containsNode2D(outer:Node2D, inner:Node2D):Bool {
+    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.containsNode2D(outer, inner);
     return cast null;
   }
 
@@ -83,11 +81,6 @@ class Interaction {
     return cast null;
   }
 
-  public static function createInteractionSignals():InteractionSignals {
-    return cast Facade_Interaction_flighthq_interaction_InteractionManager.createInteractionSignals();
-    return cast null;
-  }
-
   public static function createNodeInteractionState():NodeInteractionState {
     return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.createNodeInteractionState();
     return cast null;
@@ -95,71 +88,6 @@ class Interaction {
 
   public static function createWebCursorBackend(element:Dynamic):CursorBackend {
     return cast Facade_Interaction_flighthq_interaction_CursorBackend.createWebCursorBackend(element);
-    return cast null;
-  }
-
-  public static function defaultBitmapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultBitmapHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultDisplayObjectHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultDisplayObjectHitTestHandler(_source, _x, _y);
-    return cast null;
-  }
-
-  public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultHtmlViewHitTestHandler(_source, _x, _y);
-    return cast null;
-  }
-
-  public static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultMovieClipHitTestHandler(_source, _x, _y);
-    return cast null;
-  }
-
-  public static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultQuadBatchHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultRenderViewHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultRenderViewHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultRichTextHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultShapeHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultSpriteHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultTextHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultTextInputHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_SpriteHitTests.defaultTilemapHitTestHandler(source, x, y);
-    return cast null;
-  }
-
-  public static function defaultVideoHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayHitTests.defaultVideoHitTestHandler(source, x, y);
     return cast null;
   }
 
@@ -266,11 +194,6 @@ class Interaction {
     return cast null;
   }
 
-  public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
-    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.getDisplayObjectOverlapRectangle(source, other, out);
-    return cast null;
-  }
-
   public static function getFocusedNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.getFocusedNode(manager);
     return cast null;
@@ -283,6 +206,11 @@ class Interaction {
 
   public static function getInteractionSignals<N>(source:Dynamic):Null<InteractionSignals> {
     return cast Facade_Interaction_flighthq_interaction_InteractionManager.getInteractionSignals(source);
+    return cast null;
+  }
+
+  public static function getNode2DOverlapRectangle(source:Node2D, other:Node2D, out:Rectangle):Rectangle {
+    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.getNode2DOverlapRectangle(source, other, out);
     return cast null;
   }
 
@@ -306,23 +234,13 @@ class Interaction {
     return cast null;
   }
 
-  public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
     return cast Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQuery(root, rect, out);
     return cast null;
   }
 
-  public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQueryCircle(root:Node2D, cx:Float, cy:Float, radius:Float, ?out:Array<Node2D>):Array<Node2D> {
     return cast Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQueryCircle(root, cx, cy, radius, out);
-    return cast null;
-  }
-
-  public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
-    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestDisplayObjects(source, other);
-    return cast null;
-  }
-
-  public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
-    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.hitTestDisplayObjectsShape(source, other);
     return cast null;
   }
 
@@ -338,6 +256,16 @@ class Interaction {
 
   public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
     return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestGraphPointPrecise(source, x, y);
+    return cast null;
+  }
+
+  public static function hitTestNode2Ds(source:Node2D, other:Node2D):Bool {
+    return cast Facade_Interaction_flighthq_interaction_HitTests.hitTestNode2Ds(source, other);
+    return cast null;
+  }
+
+  public static function hitTestNode2DsShape(source:Node2D, other:Node2D):Bool {
+    return cast Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.hitTestNode2DsShape(source, other);
     return cast null;
   }
 
@@ -365,10 +293,6 @@ class Interaction {
     Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.refreshInteractionSpatialIndex(manager);
   }
 
-  public static function registerBitmapHitTest(?alphaThreshold:Float):Void {
-    Facade_Interaction_flighthq_interaction_RegisterBitmapHitTest.registerBitmapHitTest(alphaThreshold);
-  }
-
   public static function registerDefaultHitTests():Void {
     Facade_Interaction_flighthq_interaction_RegisterDefaultHitTests.registerDefaultHitTests();
   }
@@ -383,6 +307,10 @@ class Interaction {
 
   public static function registerShapeHitTest():Void {
     Facade_Interaction_flighthq_interaction_RegisterShapeHitTest.registerShapeHitTest();
+  }
+
+  public static function registerSpriteHitTest(?alphaThreshold:Float):Void {
+    Facade_Interaction_flighthq_interaction_RegisterSpriteHitTest.registerSpriteHitTest(alphaThreshold);
   }
 
   public static function registerTextHitTest():Void {

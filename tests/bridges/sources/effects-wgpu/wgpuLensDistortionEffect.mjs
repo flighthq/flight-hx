@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyLensDistortionEffectToWgpu = api.applyLensDistortionEffectToWgpu;
 export const defaultWgpuLensDistortionEffectRunner = api.defaultWgpuLensDistortionEffectRunner;
+export const registerWgpuLensDistortionEffect = api.registerWgpuLensDistortionEffect;

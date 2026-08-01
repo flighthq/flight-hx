@@ -10,7 +10,7 @@ typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float
 
 typedef VideoPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
 
-typedef VideoResource = { var element:Null<Dynamic>; };
+typedef VideoResource = { var element:Null<HostImageSource>; var objectUrl:Null<String>; };
 
 typedef VideoResourceLoadOptions = { @:optional var crossOrigin:String; @:optional var muted:Bool; @:optional var playsInline:Bool; @:optional var preload:String; @:optional var readiness:String; };
 

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.ChromaticAberrationEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
@@ -27,6 +28,10 @@ class WgpuChromaticAberrationEffect {
   public static final defaultWgpuChromaticAberrationEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyChromaticAberrationEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuChromaticAberrationEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ChromaticAberrationEffect', defaultWgpuChromaticAberrationEffectRunner] : Array<Dynamic>));
+  }
 
   public static final CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radial : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let centered = uv - vec2f(0.5);\n  let scale = mix(1.0, length(centered) * 2.0, uni.u_radial);\n  let dir = mix(vec2f(1.0, 0.0), normalize(centered + vec2f(1e-5)), uni.u_radial);\n  let offset = dir * uni.u_intensity * scale;\n  let r = textureSampleLevel(tex, smp, uv + offset, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - offset, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(r, g, b, a);\n}';
 }

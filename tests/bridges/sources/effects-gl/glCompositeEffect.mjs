@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyCompositeEffectToGl = api.applyCompositeEffectToGl;
 export const defaultGlCompositeEffectRunner = api.defaultGlCompositeEffectRunner;
 export const getCompositeEffectOperatorIndex = api.getCompositeEffectOperatorIndex;
+export const registerGlCompositeEffect = api.registerGlCompositeEffect;

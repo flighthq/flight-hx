@@ -3,19 +3,19 @@ package flighthq.particleemitter;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.node.Transform3d.getNodeLocalMatrix4;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeLocalMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.particleemitter.ParticleEmitter3D.reserveParticleEmitter3D;
 import flighthq.particles.Curve.sampleParticleColorCurve;
 import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleEmitterSignals.getParticleEmitterSignals;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
+import flighthq.types.Node3D;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
-import flighthq.types.SceneNode;
 
 class UpdateParticleEmitter3D {
   public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D:Dynamic = 4.0;
@@ -81,10 +81,10 @@ class UpdateParticleEmitter3D {
     var maxNew:Dynamic = cast _Runtime.UNDEFINED;
     var liveVelocityCount:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
-    worldM = ((cast config.worldSpace : Bool) ? (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)).m : Dynamic) : (cast null : Dynamic));
+    worldM = ((cast config.worldSpace : Bool) ? (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : Node3D)] : Array<Dynamic>)).m : Dynamic) : (cast null : Dynamic));
     (data.worldSpace = cast (!_Runtime.strictEquals(worldM, null) : Dynamic));
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    originM = ((cast !_Runtime.strictEquals(worldM, null) : Bool) ? (cast worldM : Dynamic) : (cast _Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)).m : Dynamic));
+    originM = ((cast !_Runtime.strictEquals(worldM, null) : Bool) ? (cast worldM : Dynamic) : (cast _Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : Node3D)] : Array<Dynamic>)).m : Dynamic));
     trackX = flighthq._internal._StaticIndex.readFloat32Array(originM, 12.0);
     trackY = flighthq._internal._StaticIndex.readFloat32Array(originM, 13.0);
     trackZ = flighthq._internal._StaticIndex.readFloat32Array(originM, 14.0);

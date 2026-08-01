@@ -125,7 +125,7 @@ class Protocol {
       return cast (cast cast ([] : Array<Dynamic>) : Array<String>);
     }, subscribe: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

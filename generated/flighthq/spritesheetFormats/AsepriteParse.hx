@@ -6,18 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetAnimationData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteArrayFrame;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteDocument;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteFrameTag;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteMeta;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument;
+import flighthq.types.AsepriteSchema.AsepriteArrayFrame;
+import flighthq.types.AsepriteSchema.AsepriteDocument;
+import flighthq.types.AsepriteSchema.AsepriteFrameTag;
+import flighthq.types.AsepriteSchema.AsepriteMeta;
+import flighthq.types.AsepriteSchema.AsepriteParsed;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlasRegion;
-
-typedef AsepriteParsed = { var data:SpritesheetData; var document:AsepriteDocument; };
 
 class AsepriteParse {
   public static function frameFromRegion__asepriteParse(region:TextureAtlasRegion):SpritesheetFrameData {
@@ -75,14 +74,31 @@ class AsepriteParse {
   }
 
   public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
-    return cast _Runtime.callValue(AsepriteParse.documentToData__asepriteParse, cast ([(cast _Runtime.jsonParse(json) : AsepriteDocument)] : Array<Dynamic>));
+    var document:AsepriteDocument = cast _Runtime.UNDEFINED;
+    try {
+      (document = cast ((cast _Runtime.jsonParse(json) : AsepriteDocument) : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>));
+    }
+    return cast _Runtime.callValue(AsepriteParse.documentToData__asepriteParse, cast ([document] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseAsepriteSpritesheetDocument(json:String):AsepriteParsed {
-    var document:Dynamic = cast _Runtime.UNDEFINED;
-    document = (cast _Runtime.jsonParse(json) : AsepriteDocument);
+    var document:AsepriteDocument = cast _Runtime.UNDEFINED;
+    try {
+      (document = cast ((cast _Runtime.jsonParse(json) : AsepriteDocument) : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast { data: _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>)), document: _Runtime.callValue(AsepriteParse.createEmptyAsepriteDocument__asepriteParse, cast ([] : Array<Dynamic>)) };
+    }
     return cast { data: _Runtime.callValue(AsepriteParse.documentToData__asepriteParse, cast ([document] : Array<Dynamic>)), document: document };
+    return cast null;
+  }
+
+  public static function createEmptyAsepriteDocument__asepriteParse():AsepriteDocument {
+    var meta:AsepriteMeta = cast _Runtime.UNDEFINED;
+    meta = { app: '', format: '', frameTags: cast ([] : Array<Dynamic>), image: '', scale: 1.0, size: { h: 0.0, w: 0.0 }, version: '' };
+    return cast { frames: cast ([] : Array<Dynamic>), meta: meta };
     return cast null;
   }
 }

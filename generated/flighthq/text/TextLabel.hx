@@ -3,11 +3,11 @@ package flighthq.text;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
-import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
+import flighthq.scene2d.DisplayObject.createNode2D;
+import flighthq.scene2d.DisplayObject.createNode2DRuntime;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.text.TextLabelLayout.ensureTextLayout;
 import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.TextBounds.computeTextBoundsRectangle;
@@ -67,7 +67,7 @@ class TextLabel {
   }
 
   public static function createTextLabel(?obj:PartialNode<flighthq.types.TextLabel>):flighthq.types.TextLabel {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([TextLabelKind, obj, createTextLabelData, createTextLabelRuntime] : Array<Dynamic>)) : flighthq.types.TextLabel);
+    return cast (cast _Runtime.callValue(createNode2D, cast ([TextLabelKind, obj, createTextLabelData, createTextLabelRuntime] : Array<Dynamic>)) : flighthq.types.TextLabel);
     return cast null;
   }
 
@@ -78,7 +78,7 @@ class TextLabel {
 
   public static function createTextLabelRuntime():TextLabelRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([TextLabel.defaultMethods__textLabel] : Array<Dynamic>)) : TextLabelRuntime);
+    out = (cast _Runtime.callValue(createNode2DRuntime, cast ([TextLabel.defaultMethods__textLabel] : Array<Dynamic>)) : TextLabelRuntime);
     _Runtime.setField(out, 'buildTextLayoutParams', TextLabel.buildTextLabelLayoutParams__textLabel);
     _Runtime.setField(out, 'textLayout', null);
     _Runtime.setField(out, 'textLayoutUsingContentId', -1.0);
@@ -92,7 +92,7 @@ class TextLabel {
   }
 
   public static function getTextLabelRuntime(source:flighthq.types.TextLabel):TextLabelRuntime {
-    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
+    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
     return cast null;
   }
 

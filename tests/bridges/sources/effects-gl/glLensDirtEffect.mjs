@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyLensDirtEffectToGl = api.applyLensDirtEffectToGl;
 export const defaultGlLensDirtEffectRunner = api.defaultGlLensDirtEffectRunner;
+export const registerGlLensDirtEffect = api.registerGlLensDirtEffect;

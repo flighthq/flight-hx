@@ -3,7 +3,7 @@ package flighthq.xml;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.xml.XmlParse.XmlElement;
+import flighthq.types.XmlElement;
 
 class XmlQuery {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {

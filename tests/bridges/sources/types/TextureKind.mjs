@@ -5,6 +5,5 @@ const api = compiled.flighthq.types.TextureKind;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const CubeTextureKind = api.CubeTextureKind;
 export const SamplerKind = api.SamplerKind;
 export const TextureKind = api.TextureKind;

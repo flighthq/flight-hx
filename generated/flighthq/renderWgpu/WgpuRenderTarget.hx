@@ -3,6 +3,7 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 import flighthq.geometry.Matrix.copyMatrix;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.renderWgpu.WgpuDraw.buildWgpuRenderTargetBindGroup;
@@ -11,6 +12,7 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
@@ -35,9 +37,10 @@ class WgpuRenderTarget {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'renderPass', null);
     }
-    _Runtime.callProperty(_Runtime.field(runtime, 'renderTargetStack'), 'push', cast ([{ canvasTextureView: _Runtime.field(runtime, 'canvasTextureView'), canvasViewCleared: _Runtime.field(runtime, 'canvasViewCleared'), depthStencilView: _Runtime.field(runtime, 'depthStencilView'), renderTargetViewport: _Runtime.field(runtime, 'renderTargetViewport'), renderTransform2D: _Runtime.field(state, 'renderTransform2D'), colorFormat: _Runtime.field(runtime, 'currentColorFormat') }] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(runtime, 'renderTargetStack'), 'push', cast ([{ canvasTextureView: _Runtime.field(runtime, 'canvasTextureView'), canvasViewCleared: _Runtime.field(runtime, 'canvasViewCleared'), depthStencilView: _Runtime.field(runtime, 'depthStencilView'), renderTargetViewport: _Runtime.field(runtime, 'renderTargetViewport'), renderTransform2D: _Runtime.field(state, 'renderTransform2D'), colorFormat: _Runtime.field(runtime, 'currentColorFormat'), renderTarget: _Runtime.field(runtime, 'currentRenderTarget') }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'renderTargetViewport', { width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height') });
     _Runtime.setField(runtime, 'currentColorFormat', _Runtime.field(target, 'format'));
+    _Runtime.setField(runtime, 'currentRenderTarget', target);
     _Runtime.setField(runtime, 'currentMaskDepth', 0.0);
     _Runtime.setField(runtime, 'maskWriteMode', false);
     _Runtime.setField(runtime, 'currentScissorRect', null);
@@ -47,7 +50,7 @@ class WgpuRenderTarget {
     _Runtime.setField(runtime, 'renderPass', _Runtime.callValue(WgpuRenderTarget.beginWgpuRenderPassEncoder__wgpuRenderTarget, cast ([state, _Runtime.field(target, 'view'), _Runtime.field(target, 'depthStencilView'), _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), colorLoadOp, _Runtime.callValue(WgpuRenderTarget.resolveWgpuClearColor__wgpuRenderTarget, cast ([target] : Array<Dynamic>)), depthLoadOp, _Runtime.field(target, 'clearDepth')] : Array<Dynamic>)));
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic):flighthq.types.WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic, colorSpace:RenderTargetColorSpace = 'srgb'):flighthq.types.WgpuRenderTarget {
     if (format == null) format = cast (_Runtime.field(state, 'format') : Dynamic);
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
@@ -65,7 +68,18 @@ class WgpuRenderTarget {
     bindGroup = _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, view] : Array<Dynamic>));
     depthStencilTexture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
     depthStencilView = _Runtime.callProperty(depthStencilTexture, 'createView', cast ([] : Array<Dynamic>));
-    return cast { bindGroup: bindGroup, texture: texture, view: view, depthStencilTexture: depthStencilTexture, depthStencilView: depthStencilView, format: format, clearColors: cast ([] : Array<Dynamic>), clearDepth: 1.0, width: w, height: h };
+    return cast { bindGroup: bindGroup, colorSpace: colorSpace, texture: texture, view: view, depthStencilTexture: depthStencilTexture, depthStencilView: depthStencilView, format: format, clearColors: cast ([] : Array<Dynamic>), clearDepth: 1.0, width: w, height: h };
+    return cast null;
+  }
+
+  public static function declareWgpuRenderTargetColorSpace(state:WgpuRenderState, colorSpace:RenderTargetColorSpace):Bool {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var target:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    target = _Runtime.field(runtime, 'currentRenderTarget');
+    if ((cast _Runtime.looseEquals(target, null) : Bool)) { return cast false; }
+    _Runtime.setField(target, 'colorSpace', colorSpace);
+    return cast true;
     return cast null;
   }
 
@@ -126,6 +140,7 @@ class WgpuRenderTarget {
     _Runtime.setField(runtime, 'canvasViewCleared', _Runtime.field(saved, 'canvasViewCleared'));
     _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.field(saved, 'renderTargetViewport'));
     _Runtime.setField(runtime, 'currentColorFormat', _Runtime.field(saved, 'colorFormat'));
+    _Runtime.setField(runtime, 'currentRenderTarget', _Runtime.field(saved, 'renderTarget'));
     _Runtime.setField(state, 'renderTransform2D', _Runtime.field(saved, 'renderTransform2D'));
     _Runtime.setField(runtime, 'currentMaskDepth', 0.0);
     _Runtime.setField(runtime, 'maskWriteMode', false);
@@ -147,6 +162,7 @@ class WgpuRenderTarget {
     format = _Runtime.field(target, 'format');
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
+    if ((cast ((cast _Runtime.strictEquals(w, _Runtime.field(target, 'width')) : Bool) && (cast _Runtime.strictEquals(h, _Runtime.field(target, 'height')) : Bool)) : Bool)) { return; }
     _Runtime.setField(target, 'width', w);
     _Runtime.setField(target, 'height', h);
     _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
@@ -168,9 +184,15 @@ class WgpuRenderTarget {
 
   public static function resolveWgpuClearColor__wgpuRenderTarget(target:flighthq.types.WgpuRenderTarget):Dynamic {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Dynamic = cast _Runtime.UNDEFINED;
+    var g:Dynamic = cast _Runtime.UNDEFINED;
+    var b:Dynamic = cast _Runtime.UNDEFINED;
     packed = flighthq._internal._StaticIndex.readArray(_Runtime.field(target, 'clearColors'), 0.0);
     if ((cast _Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
-    return cast { r: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0), g: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0), b: ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0), a: ((_Runtime.toInt32(packed) & 255) / 255.0) };
+    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0);
+    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0);
+    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0);
+    return cast { r: ((cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear') : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([r] : Array<Dynamic>)) : Dynamic) : (cast r : Dynamic)), g: ((cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear') : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([g] : Array<Dynamic>)) : Dynamic) : (cast g : Dynamic)), b: ((cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear') : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([b] : Array<Dynamic>)) : Dynamic) : (cast b : Dynamic)), a: ((_Runtime.toInt32(packed) & 255) / 255.0) };
     return cast null;
   }
 

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySsaoEffectToWgpu = api.applySsaoEffectToWgpu;
 export const defaultWgpuSsaoEffectRunner = api.defaultWgpuSsaoEffectRunner;
+export const registerWgpuSsaoEffect = api.registerWgpuSsaoEffect;

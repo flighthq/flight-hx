@@ -3,20 +3,66 @@ package flighthq.animation;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.animation.AnimationBlend as Facade_Animation_flighthq_animation_AnimationBlend;
+import flighthq.animation.AnimationBlendTree as Facade_Animation_flighthq_animation_AnimationBlendTree;
 import flighthq.animation.AnimationClip as Facade_Animation_flighthq_animation_AnimationClip;
+import flighthq.animation.AnimationCrossfade as Facade_Animation_flighthq_animation_AnimationCrossfade;
+import flighthq.animation.AnimationLayerStack as Facade_Animation_flighthq_animation_AnimationLayerStack;
 import flighthq.animation.AnimationPlayer as Facade_Animation_flighthq_animation_AnimationPlayer;
+import flighthq.animation.AnimationRootMotion as Facade_Animation_flighthq_animation_AnimationRootMotion;
+import flighthq.animation.AnimationStateMachine as Facade_Animation_flighthq_animation_AnimationStateMachine;
 import flighthq.animation.AnimationTrack as Facade_Animation_flighthq_animation_AnimationTrack;
+import flighthq.types.AnimationBlendTree;
+import flighthq.types.AnimationBlendTree.AnimationBlendTreeInput;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationCrossfade;
+import flighthq.types.AnimationCrossfade.AnimationCrossfadeOptions;
 import flighthq.types.AnimationInterpolation;
+import flighthq.types.AnimationLayerStack;
+import flighthq.types.AnimationLayerStack.AnimationLayer;
+import flighthq.types.AnimationLayerStack.AnimationLayerOptions;
 import flighthq.types.AnimationLoopMode;
 import flighthq.types.AnimationPlayer;
+import flighthq.types.AnimationRootMotionExtractor;
+import flighthq.types.AnimationSampleAccumulator;
+import flighthq.types.AnimationStateMachine;
+import flighthq.types.AnimationStateMachine.AnimationStateMachineState;
 import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
+import flighthq.types.EasingFunction;
 
 class Animation {
+  public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, weight:Float):Void {
+    Facade_Animation_flighthq_animation_AnimationBlend.accumulateAnimationSample(accumulator, sample, weight);
+  }
+
+  public static function addAnimationSample(out:Dynamic, base:Dynamic, delta:Dynamic, weight:Float, ?quaternion:Dynamic):Void {
+    Facade_Animation_flighthq_animation_AnimationBlend.addAnimationSample(out, base, delta, weight, quaternion);
+  }
+
+  public static function advanceAnimationBlendTree(tree:AnimationBlendTree, dt:Float):Void {
+    Facade_Animation_flighthq_animation_AnimationBlendTree.advanceAnimationBlendTree(tree, dt);
+  }
+
+  public static function advanceAnimationCrossfade(state:AnimationCrossfade, dt:Float):Void {
+    Facade_Animation_flighthq_animation_AnimationCrossfade.advanceAnimationCrossfade(state, dt);
+  }
+
+  public static function advanceAnimationLayerStack(stack:AnimationLayerStack, dt:Float):Void {
+    Facade_Animation_flighthq_animation_AnimationLayerStack.advanceAnimationLayerStack(stack, dt);
+  }
+
   public static function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
     Facade_Animation_flighthq_animation_AnimationPlayer.advanceAnimationPlayer(player, dt);
+  }
+
+  public static function advanceAnimationStateMachine(machine:AnimationStateMachine, dt:Float):Void {
+    Facade_Animation_flighthq_animation_AnimationStateMachine.advanceAnimationStateMachine(machine, dt);
+  }
+
+  public static function blendAnimationSamples(out:Dynamic, a:Dynamic, b:Dynamic, alpha:Float, ?quaternion:Dynamic):Void {
+    Facade_Animation_flighthq_animation_AnimationBlend.blendAnimationSamples(out, a, b, alpha, quaternion);
   }
 
   public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
@@ -34,13 +80,43 @@ class Animation {
     return cast null;
   }
 
+  public static function createAnimationBlendTree(inputs:Array<AnimationBlendTreeInput>):AnimationBlendTree {
+    return cast Facade_Animation_flighthq_animation_AnimationBlendTree.createAnimationBlendTree(inputs);
+    return cast null;
+  }
+
+  public static function createAnimationBlendTreeInput(player:AnimationPlayer, ?weight:Dynamic, ?additive:Dynamic):AnimationBlendTreeInput {
+    return cast Facade_Animation_flighthq_animation_AnimationBlendTree.createAnimationBlendTreeInput(player, weight, additive);
+    return cast null;
+  }
+
+  public static function createAnimationBlendTreeLayer(blendTree:AnimationBlendTree, ?options:AnimationLayerOptions):AnimationLayer {
+    return cast Facade_Animation_flighthq_animation_AnimationLayerStack.createAnimationBlendTreeLayer(blendTree, options);
+    return cast null;
+  }
+
   public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
     return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationChannel(track, targetRef);
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):AnimationClip {
-    return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationClip(channels, duration);
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<Dynamic>):AnimationClip {
+    return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationClip(channels, duration, events);
+    return cast null;
+  }
+
+  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):Dynamic {
+    return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationClipEvent(time, name, payload);
+    return cast null;
+  }
+
+  public static function createAnimationCrossfade(from:AnimationPlayer, to:AnimationPlayer, duration:Float, ?opts:AnimationCrossfadeOptions):AnimationCrossfade {
+    return cast Facade_Animation_flighthq_animation_AnimationCrossfade.createAnimationCrossfade(from, to, duration, opts);
+    return cast null;
+  }
+
+  public static function createAnimationLayerStack(layers:Array<AnimationLayer>):AnimationLayerStack {
+    return cast Facade_Animation_flighthq_animation_AnimationLayerStack.createAnimationLayerStack(layers);
     return cast null;
   }
 
@@ -49,13 +125,48 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
+  public static function createAnimationRootMotionExtractor(clip:AnimationClip, channelIndex:Float):AnimationRootMotionExtractor {
+    return cast Facade_Animation_flighthq_animation_AnimationRootMotion.createAnimationRootMotionExtractor(clip, channelIndex);
+    return cast null;
+  }
+
+  public static function createAnimationSampleAccumulator(components:Float, ?quaternion:Dynamic):AnimationSampleAccumulator {
+    return cast Facade_Animation_flighthq_animation_AnimationBlend.createAnimationSampleAccumulator(components, quaternion);
+    return cast null;
+  }
+
+  public static function createAnimationStateMachine(states:Array<AnimationStateMachineState>, ?initialState:Dynamic):AnimationStateMachine {
+    return cast Facade_Animation_flighthq_animation_AnimationStateMachine.createAnimationStateMachine(states, initialState);
+    return cast null;
+  }
+
+  public static function createAnimationStateMachineLayer(stateMachine:AnimationStateMachine, ?options:AnimationLayerOptions):AnimationLayer {
+    return cast Facade_Animation_flighthq_animation_AnimationLayerStack.createAnimationStateMachineLayer(stateMachine, options);
+    return cast null;
+  }
+
+  public static function createAnimationStateMachineState(name:String, blendTree:AnimationBlendTree):AnimationStateMachineState {
+    return cast Facade_Animation_flighthq_animation_AnimationStateMachine.createAnimationStateMachineState(name, blendTree);
+    return cast null;
+  }
+
+  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; @:optional var segmentEasings:Dynamic; }):AnimationTrack {
     return cast Facade_Animation_flighthq_animation_AnimationTrack.createAnimationTrack(opts);
     return cast null;
   }
 
   public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
     Facade_Animation_flighthq_animation_AnimationPlayer.enableAnimationPlayerSignals(player);
+  }
+
+  public static function extractAnimationRootMotion(out:Dynamic, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationRootMotion.extractAnimationRootMotion(out, extractor, startTime, endTime);
+    return cast null;
+  }
+
+  public static function finishAnimationSample(out:Dynamic, accumulator:AnimationSampleAccumulator):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationBlend.finishAnimationSample(out, accumulator);
+    return cast null;
   }
 
   public static function getAnimationClipDuration(clip:AnimationClip):Float {
@@ -68,12 +179,62 @@ class Animation {
     return cast null;
   }
 
+  public static function getAnimationStateMachineCurrentState(machine:AnimationStateMachine):AnimationStateMachineState {
+    return cast Facade_Animation_flighthq_animation_AnimationStateMachine.getAnimationStateMachineCurrentState(machine);
+    return cast null;
+  }
+
+  public static function isAnimationCrossfadeComplete(state:AnimationCrossfade):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationCrossfade.isAnimationCrossfadeComplete(state);
+    return cast null;
+  }
+
+  public static function isAnimationStateMachineTransitioning(machine:AnimationStateMachine):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationStateMachine.isAnimationStateMachineTransitioning(machine);
+    return cast null;
+  }
+
   public static function playAnimationPlayer(player:AnimationPlayer):Void {
     Facade_Animation_flighthq_animation_AnimationPlayer.playAnimationPlayer(player);
   }
 
+  public static function resetAnimationSampleAccumulator(accumulator:AnimationSampleAccumulator):Void {
+    Facade_Animation_flighthq_animation_AnimationBlend.resetAnimationSampleAccumulator(accumulator);
+  }
+
+  public static function sampleAnimationBlendTree(out:Dynamic, tree:AnimationBlendTree, visit:Dynamic):Void {
+    Facade_Animation_flighthq_animation_AnimationBlendTree.sampleAnimationBlendTree(out, tree, visit);
+  }
+
+  public static function sampleAnimationBlendTreeChannel(out:Dynamic, tree:AnimationBlendTree, channelIndex:Float):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationBlendTree.sampleAnimationBlendTreeChannel(out, tree, channelIndex);
+    return cast null;
+  }
+
   public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
     Facade_Animation_flighthq_animation_AnimationClip.sampleAnimationClip(out, clip, time, visit);
+  }
+
+  public static function sampleAnimationCrossfade(out:Dynamic, state:AnimationCrossfade, visit:Dynamic):Void {
+    Facade_Animation_flighthq_animation_AnimationCrossfade.sampleAnimationCrossfade(out, state, visit);
+  }
+
+  public static function sampleAnimationLayerStack(out:Dynamic, stack:AnimationLayerStack, visit:Dynamic):Void {
+    Facade_Animation_flighthq_animation_AnimationLayerStack.sampleAnimationLayerStack(out, stack, visit);
+  }
+
+  public static function sampleAnimationLayerStackChannel(out:Dynamic, stack:AnimationLayerStack, channelIndex:Float):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationLayerStack.sampleAnimationLayerStackChannel(out, stack, channelIndex);
+    return cast null;
+  }
+
+  public static function sampleAnimationStateMachine(out:Dynamic, machine:AnimationStateMachine, visit:Dynamic):Void {
+    Facade_Animation_flighthq_animation_AnimationStateMachine.sampleAnimationStateMachine(out, machine, visit);
+  }
+
+  public static function sampleAnimationStateMachineChannel(out:Dynamic, machine:AnimationStateMachine, channelIndex:Float):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationStateMachine.sampleAnimationStateMachineChannel(out, machine, channelIndex);
+    return cast null;
   }
 
   public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
@@ -84,8 +245,23 @@ class Animation {
     Facade_Animation_flighthq_animation_AnimationPlayer.seekAnimationPlayer(player, time);
   }
 
+  public static function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree, inputIndex:Float, weight:Float):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationBlendTree.setAnimationBlendTreeInputWeight(tree, inputIndex, weight);
+    return cast null;
+  }
+
+  public static function setAnimationLayerWeight(stack:AnimationLayerStack, layerIndex:Float, weight:Float):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationLayerStack.setAnimationLayerWeight(stack, layerIndex, weight);
+    return cast null;
+  }
+
   public static function stopAnimationPlayer(player:AnimationPlayer):Void {
     Facade_Animation_flighthq_animation_AnimationPlayer.stopAnimationPlayer(player);
+  }
+
+  public static function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:Dynamic, duration:Float, ?curve:EasingFunction):Bool {
+    return cast Facade_Animation_flighthq_animation_AnimationStateMachine.transitionAnimationStateMachine(machine, toState, duration, curve);
+    return cast null;
   }
 
   public static function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {

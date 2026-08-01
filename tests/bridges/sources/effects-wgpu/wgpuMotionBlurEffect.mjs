@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyMotionBlurEffectToWgpu = api.applyMotionBlurEffectToWgpu;
 export const defaultWgpuMotionBlurEffectRunner = api.defaultWgpuMotionBlurEffectRunner;
+export const registerWgpuMotionBlurEffect = api.registerWgpuMotionBlurEffect;

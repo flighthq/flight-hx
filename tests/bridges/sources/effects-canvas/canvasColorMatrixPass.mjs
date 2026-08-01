@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const applyColorMatrixPassToCanvas = api.applyColorMatrixPassToCanvas;
+export const applyColorMatrixToImageDataBytes = api.applyColorMatrixToImageDataBytes;

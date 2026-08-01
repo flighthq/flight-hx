@@ -5,3 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef StepPosition = String;
+
+typedef EasingStepsGuard = Dynamic;

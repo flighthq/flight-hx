@@ -6,8 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
+import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.FilmGrainEffect;
 
@@ -72,4 +74,8 @@ class CanvasFilmGrainEffect {
   public static final defaultCanvasFilmGrainEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyFilmGrainEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : FilmGrainEffect)] : Array<Dynamic>));
   };
+
+  public static function registerCanvasFilmGrainEffect(state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'FilmGrainEffect', defaultCanvasFilmGrainEffectRunner] : Array<Dynamic>));
+  }
 }

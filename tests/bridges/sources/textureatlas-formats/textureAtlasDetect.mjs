@@ -6,3 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const detectTextureAtlasFormat = api.detectTextureAtlasFormat;
+export const getTextureAtlasFormat = api.getTextureAtlasFormat;
+export const parseTextureAtlas = api.parseTextureAtlas;
+export const registerTextureAtlasFormat = api.registerTextureAtlasFormat;

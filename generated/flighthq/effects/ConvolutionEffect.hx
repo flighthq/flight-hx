@@ -3,11 +3,33 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.ConvolutionEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class ConvolutionEffect {
   public static function createConvolutionEffect(options:Dynamic):flighthq.types.ConvolutionEffect {
     return cast _Runtime.mergeObjects([{ kind: 'ConvolutionEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getConvolutionEffectPadding(effect:flighthq.types.ConvolutionEffect):RenderEffectPadding {
+    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
+    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
+    offsetX = HxMath.floor((HxMath.max(0.0, _Runtime.field(effect, 'matrixX')) * 0.5));
+    offsetY = HxMath.floor((HxMath.max(0.0, _Runtime.field(effect, 'matrixY')) * 0.5));
+    return cast { bottom: offsetY, left: HxMath.max(0.0, ((_Runtime.field(effect, 'matrixX') - 1.0) - offsetX)), right: offsetX, top: HxMath.max(0.0, ((_Runtime.field(effect, 'matrixY') - 1.0) - offsetY)) };
+    return cast null;
+  }
+
+  public static function registerConvolutionEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'ConvolutionEffect', ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveConvolutionEffectPadding__convolutionEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getConvolutionEffectPadding, cast ([(cast effect : flighthq.types.ConvolutionEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

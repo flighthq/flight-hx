@@ -1209,6 +1209,61 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('Reflect.fields');
   });
 
+  it('lowers portable callbacks and guarded platform constructors without capturing locals', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function compact(values: string[]): string[] {
+          return values.filter(Boolean);
+        }
+        export function isFrame(value: unknown): boolean {
+          return typeof VideoFrame !== 'undefined' && value instanceof VideoFrame;
+        }
+        export function local(Boolean: (value: unknown) => boolean, VideoFrame: new () => object) {
+          return [Boolean(1), new VideoFrame()];
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'PlatformValueFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("'filter', cast ([_Runtime.truthy]");
+    expect(output).toContain("_Runtime.isInstanceOf(value, _Runtime.globalValue('VideoFrame'))");
+    expect(output).toContain('_Runtime.callValue(Boolean,');
+    expect(output).toContain('_Runtime.construct(VideoFrame, [])');
+  });
+
+  it('uses runtime construction for constructor values while preserving nominal classes', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export class Service {}
+        export function copy(source: Map<string, number>) {
+          const Registry = source.constructor as new () => Map<string, number>;
+          return [new Registry(), new Service()];
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'RuntimeConstructorFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('_Runtime.construct(Registry, [])');
+    expect(output).toContain('new Service()');
+    expect(output).not.toContain('new Registry()');
+  });
+
   it('routes WebGPU constants through their target-independent backend without capturing locals', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/render-wgpu/src/sample.ts',
@@ -1982,6 +2037,57 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('bytes.subarray(');
   });
 
+  it('lowers typed-array static from calls to maintained wrapper construction', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function arrays(values: number[]) {
+          return [Float32Array.from(values), Uint16Array.from(values)];
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TypedArrayFromFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('new flighthq._internal._Float32Array(values)');
+    expect(output).toContain('new flighthq._internal._UInt16Array(values)');
+    expect(output).not.toContain("callProperty(_Runtime.globalValue('Float32Array'), 'from'");
+    expect(output).not.toContain("callProperty(Uint16Array, 'from'");
+  });
+
+  it('preserves typed Array.from initializers and asserted indexed assignment targets', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function prepare(binding: { values?: number[] }, count: number) {
+          const buckets: number[][] = Array.from({ length: count }, () => []);
+          (binding['values'] as number[] | undefined) = [1, 2, 3];
+          return buckets;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ContextualArrayFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain(
+      '(cast _Runtime.toArray({ length: count }, function() return cast ([] : Array<Dynamic>)) : Array<Array<Float>>)',
+    );
+    expect(output).toContain("_Runtime.setIndex(binding, 'values', cast ([1.0, 2.0, 3.0] : Array<Dynamic>))");
+    expect(output).not.toContain('cast _Runtime.getIndex(binding');
+  });
+
   it('lowers Number constants without nullable global namespace lookups', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',
@@ -2021,6 +2127,12 @@ describe('TypeScript lowering and Haxe emission', () => {
           result >>>= 1;
           return ~Math.imul(result, 4042322175);
         }
+        export class Reader {
+          bitBuffer = 4;
+          shift(amount: number) {
+            this.bitBuffer >>= amount;
+          }
+        }
       `,
       ts.ScriptTarget.Latest,
       true,
@@ -2040,6 +2152,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     // literals so const-enum inline initializers stay compile-time constants.
     expect(output).toContain('(_Runtime.toInt32(value) | 0)');
     expect(output).toContain('_Runtime.unsignedShiftRight(_Runtime.toInt32(result), 1)');
+    expect(output).toContain(
+      '(this.bitBuffer = cast ((_Runtime.toInt32(this.bitBuffer) >> _Runtime.toInt32(amount)) : Dynamic))',
+    );
     expect(output).toContain(
       '~_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(result), _Runtime.toInt32(4042322175.0)))',
     );

@@ -15,6 +15,11 @@ class ImageDecoderRegistry {
     return cast null;
   }
 
+  public static function getImageDecoderMimeTypes():Array<String> {
+    return cast _Runtime.toArray(((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).keys()));
+    return cast null;
+  }
+
   public static function hasImageDecoder(mimeType:String):Bool {
     return cast ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map).has(mimeType));
     return cast null;

@@ -274,17 +274,17 @@ class Window {
       (out.height = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height) : Dynamic));
       return cast out;
     }, minimize: function() {
-    
+
     }, maximize: function() {
-    
+
     }, restore: function() {
-    
+
     }, focus: function() {
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'focus')), 'function') : Bool)) : Bool)) { flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>)); }
     }, show: function() {
-    
+
     }, hide: function() {
-    
+
     }, center: function(win:Dynamic) {
       if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined') : Bool)) : Bool)) { return; }
       try {
@@ -292,13 +292,13 @@ class Window {
       } catch (__error:Dynamic) {
       }
     }, setResizable: function() {
-    
+
     }, setAlwaysOnTop: function() {
-    
+
     }, setMinimumSize: function() {
-    
+
     }, setMaximumSize: function() {
-    
+
     }, setFullscreen: function(_win:Dynamic, fullscreen:Dynamic) {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
       try {
@@ -316,23 +316,23 @@ class Window {
       }
       _Runtime.setField(link, 'href', icon);
     }, setOpacity: function() {
-    
+
     }, setSkipTaskbar: function() {
-    
+
     }, setMenuBarVisible: function() {
-    
+
     }, setParent: function() {
-    
+
     }, setProgress: function() {
-    
+
     }, requestAttention: function() {
-    
+
     }, setContentProtection: function() {
-    
+
     }, flashWindowFrame: function() {
-    
+
     }, setHasShadow: function() {
-    
+
     } };
     return cast null;
   }

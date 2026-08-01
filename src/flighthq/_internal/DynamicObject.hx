@@ -46,6 +46,25 @@ class DynamicObject {
     #end
   }
 
+  public static function defineProperties(target:Dynamic, descriptors:Dynamic):Dynamic {
+    #if js
+    return js.Syntax.code('Object.defineProperties({0}, {1})', target, descriptors);
+    #else
+    if (descriptors != null) {
+      for (name in Reflect.fields(descriptors)) defineProperty(target, name, Reflect.field(descriptors, name));
+    }
+    return target;
+    #end
+  }
+
+  public static inline function isFrozen(source:Dynamic):Bool {
+    #if js
+    return js.Syntax.code('Object.isFrozen({0})', source);
+    #else
+    return false;
+    #end
+  }
+
   public static inline function field(name:String):Dynamic {
     #if js
     return js.Syntax.code('Object[{0}]', name);

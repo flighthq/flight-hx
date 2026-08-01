@@ -305,6 +305,7 @@ class _Runtime {
       case 'Float64Array': _Float64Array.construct;
       case 'Int32Array': _Int32Array.construct;
       case 'Int8Array': _Int8Array.construct;
+      case 'TextDecoder': _TextDecoder;
       case 'Uint32Array': _UInt32Array.construct;
       default: null;
     };

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Entity.EntityRuntimeWriteGuard;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Guards {
@@ -17,7 +18,7 @@ class Guards {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(prop, EntityRuntimeKey) : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
-        _Runtime.console('warn', ['[entity] Direct write to EntityRuntimeKey detected. Use ensureEntityRuntime or attachEntityBinding instead.', entity]);
+        _Runtime.callOptionalValue(Guards._writeGuard__guards, cast (['runtime-slot'] : Array<Dynamic>));
       }
       _Runtime.setIndex((cast (cast target : Dynamic) : Dynamic), prop, value);
       return cast true;
@@ -29,7 +30,7 @@ class Guards {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
     return cast _Runtime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(prop, 'binding') : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
-        _Runtime.console('warn', ['[entity] Direct write to EntityRuntime.binding detected. Use attachEntityBinding or detachEntityBinding instead.', runtime]);
+        _Runtime.callOptionalValue(Guards._writeGuard__guards, cast (['binding-slot'] : Array<Dynamic>));
       }
       _Runtime.setIndex((cast (cast target : Dynamic) : Dynamic), prop, value);
       return cast true;
@@ -37,10 +38,16 @@ class Guards {
     return cast null;
   }
 
-  public static function enableEntityRuntimeGuards():Void {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) { return; }
-    (Guards._guardsEnabled__guards = cast (true : Dynamic));
+  public static function setEntityRuntimeGuardMode(enabled:Bool):Void {
+    if ((cast ((cast enabled : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return; }
+    (Guards._guardsEnabled__guards = cast (enabled : Dynamic));
+  }
+
+  public static function setEntityRuntimeWriteGuard(guard:Null<EntityRuntimeWriteGuard>):Void {
+    (Guards._writeGuard__guards = cast (guard : Dynamic));
   }
 
   public static var _guardsEnabled__guards:Dynamic = false;
+
+  public static var _writeGuard__guards:Null<EntityRuntimeWriteGuard> = _Runtime.explicitNull();
 }

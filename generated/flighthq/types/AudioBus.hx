@@ -11,3 +11,7 @@ typedef AudioBusOptions = { @:optional var gain:Float; @:optional var muted:Bool
 typedef AudioMixer = { var masterGain:Float; var masterMuted:Bool; };
 
 typedef AudioMixerOptions = { @:optional var masterGain:Float; @:optional var masterMuted:Bool; };
+
+typedef AudioBusMixerOperation = String;
+
+typedef AudioBusMixerGuard = Dynamic;

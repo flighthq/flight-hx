@@ -3,13 +3,10 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const computeBitmapTextLocalBoundsRectangle = compiled.flighthq.bitmaptext.Bitmaptext.computeBitmapTextLocalBoundsRectangle;
 export const createBitmapText = compiled.flighthq.bitmaptext.Bitmaptext.createBitmapText;
-export const createBitmapTextData = compiled.flighthq.bitmaptext.Bitmaptext.createBitmapTextData;
-export const createBitmapTextRuntime = compiled.flighthq.bitmaptext.Bitmaptext.createBitmapTextRuntime;
 export const getBitmapTextBounds = compiled.flighthq.bitmaptext.Bitmaptext.getBitmapTextBounds;
-export const getBitmapTextQuadBatches = compiled.flighthq.bitmaptext.Bitmaptext.getBitmapTextQuadBatches;
+export const getBitmapTextPages = compiled.flighthq.bitmaptext.Bitmaptext.getBitmapTextPages;
 export const reserveBitmapText = compiled.flighthq.bitmaptext.Bitmaptext.reserveBitmapText;
 export const setBitmapTextAlign = compiled.flighthq.bitmaptext.Bitmaptext.setBitmapTextAlign;
-export const setBitmapTextColor = compiled.flighthq.bitmaptext.Bitmaptext.setBitmapTextColor;
 export const setBitmapTextGlyphSource = compiled.flighthq.bitmaptext.Bitmaptext.setBitmapTextGlyphSource;
 export const setBitmapTextLetterSpacing = compiled.flighthq.bitmaptext.Bitmaptext.setBitmapTextLetterSpacing;
 export const setBitmapTextLineHeight = compiled.flighthq.bitmaptext.Bitmaptext.setBitmapTextLineHeight;

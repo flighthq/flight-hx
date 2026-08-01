@@ -3,12 +3,32 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.OutlineEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class OutlineEffect {
   public static function createOutlineEffect(?options:Dynamic):flighthq.types.OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OutlineEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getOutlineEffectPadding(effect:flighthq.types.OutlineEffect):RenderEffectPadding {
+    var thickness:Dynamic = cast _Runtime.UNDEFINED;
+    thickness = HxMath.ceil(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)));
+    return cast { bottom: thickness, left: thickness, right: thickness, top: thickness };
+    return cast null;
+  }
+
+  public static function registerOutlineEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'OutlineEffect', OutlineEffect.resolveOutlineEffectPadding__outlineEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveOutlineEffectPadding__outlineEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getOutlineEffectPadding, cast ([(cast effect : flighthq.types.OutlineEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyBlurEffectToWgpu = api.applyBlurEffectToWgpu;
 export const applyGaussianBlurToWgpu = api.applyGaussianBlurToWgpu;
 export const defaultWgpuBlurEffectRunner = api.defaultWgpuBlurEffectRunner;
+export const registerWgpuBlurEffect = api.registerWgpuBlurEffect;

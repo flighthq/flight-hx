@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGradientBevelEffectToWgpu = api.applyGradientBevelEffectToWgpu;
 export const defaultWgpuGradientBevelEffectRunner = api.defaultWgpuGradientBevelEffectRunner;
+export const registerWgpuGradientBevelEffect = api.registerWgpuGradientBevelEffect;

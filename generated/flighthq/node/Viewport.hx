@@ -4,89 +4,17 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.geometry.Rectangle.createRectangle;
-import flighthq.node.Node.getNodeRuntime;
-import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Node.NodeTraits;
-import flighthq.types.Rectangle;
 import flighthq.types.Viewport;
-import flighthq.types.ViewportAlign;
+import flighthq.types.Viewport.ViewportLike;
 
 class Viewport {
-  public static function computeViewportAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
-    if ((cast _Runtime.includes(align, 'left') : Bool)) { return cast 0.0; }
-    if ((cast _Runtime.includes(align, 'right') : Bool)) { return cast (viewWidth - scaledContentWidth); }
-    return cast ((viewWidth - scaledContentWidth) / 2.0);
+  public static function createViewport(?obj:ViewportLike):flighthq.types.Viewport {
+    return cast _Runtime.callValue(createEntity, cast ([{ devicePixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'devicePixelRatio'), function():Dynamic return cast 1.0), height: _Runtime.coalesce(_Runtime.optionalField(obj, 'height'), function():Dynamic return cast 0.0), width: _Runtime.coalesce(_Runtime.optionalField(obj, 'width'), function():Dynamic return cast 0.0), x: _Runtime.coalesce(_Runtime.optionalField(obj, 'x'), function():Dynamic return cast 0.0), y: _Runtime.coalesce(_Runtime.optionalField(obj, 'y'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeViewportAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
-    if ((cast _Runtime.includes(align, 'top') : Bool)) { return cast 0.0; }
-    if ((cast _Runtime.includes(align, 'bottom') : Bool)) { return cast (viewHeight - scaledContentHeight); }
-    return cast ((viewHeight - scaledContentHeight) / 2.0);
+  public static function getViewportAspect(viewport:flighthq.types.Viewport):Float {
+    return cast ((cast !_Runtime.strictEquals(_Runtime.field(viewport, 'height'), 0.0) : Bool) ? (cast (_Runtime.field(viewport, 'width') / _Runtime.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
-
-  public static function computeViewportFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
-    return cast HxMath.max((viewWidth / contentWidth), (viewHeight / contentHeight));
-    return cast null;
-  }
-
-  public static function computeViewportFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
-    return cast HxMath.min((viewWidth / contentWidth), (viewHeight / contentHeight));
-    return cast null;
-  }
-
-  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:flighthq.types.Viewport<Traits>, viewWidth:Float, viewHeight:Float):Void {
-    var contentWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var contentHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Float = cast _Runtime.UNDEFINED;
-    var sy:Float = cast _Runtime.UNDEFINED;
-    contentWidth = 0.0;
-    contentHeight = 0.0;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'root'), null) : Bool)) {
-      var runtime:Dynamic = (cast (cast _Runtime.callValue(getNodeRuntime, cast ([(cast _Runtime.field(scene, 'root') : Dynamic)] : Array<Dynamic>)) : Dynamic) : Null<Dynamic>);
-      if ((cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.setField(Viewport._tempRectangle__viewport, 'width', 0.0);
-        _Runtime.setField(Viewport._tempRectangle__viewport, 'height', 0.0);
-        _Runtime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([Viewport._tempRectangle__viewport, (cast _Runtime.field(scene, 'root') : Dynamic)] : Array<Dynamic>));
-        (contentWidth = cast (_Runtime.field(Viewport._tempRectangle__viewport, 'width') : Dynamic));
-        (contentHeight = cast (_Runtime.field(Viewport._tempRectangle__viewport, 'height') : Dynamic));
-      }
-    }
-    if ((cast ((cast _Runtime.strictEquals(contentWidth, 0.0) : Bool) || (cast _Runtime.strictEquals(contentHeight, 0.0) : Bool)) : Bool)) {
-      (out.a = cast (1.0 : Dynamic));
-      (out.b = cast (0.0 : Dynamic));
-      (out.c = cast (0.0 : Dynamic));
-      (out.d = cast (1.0 : Dynamic));
-      (out.tx = cast (0.0 : Dynamic));
-      (out.ty = cast (0.0 : Dynamic));
-      return;
-    }
-    if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'noscale') : Bool)) {
-      (sx = cast (1.0 : Dynamic));
-      (sy = cast (1.0 : Dynamic));
-    } else { if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'exactfit') : Bool)) {
-      (sx = cast ((viewWidth / contentWidth) : Dynamic));
-      (sy = cast ((viewHeight / contentHeight) : Dynamic));
-    } else { if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'scaleMode'), 'showall') : Bool)) {
-      (sx = cast ((sy = cast (_Runtime.callValue(computeViewportFitScale, cast ([contentWidth, contentHeight, viewWidth, viewHeight] : Array<Dynamic>)) : Dynamic)) : Dynamic));
-    } else {
-      (sx = cast ((sy = cast (_Runtime.callValue(computeViewportFillScale, cast ([contentWidth, contentHeight, viewWidth, viewHeight] : Array<Dynamic>)) : Dynamic)) : Dynamic));
-    } } }
-    (out.a = cast (sx : Dynamic));
-    (out.b = cast (0.0 : Dynamic));
-    (out.c = cast (0.0 : Dynamic));
-    (out.d = cast (sy : Dynamic));
-    (out.tx = cast (_Runtime.callValue(computeViewportAlignX, cast ([(contentWidth * sx), viewWidth, _Runtime.field(scene, 'align')] : Array<Dynamic>)) : Dynamic));
-    (out.ty = cast (_Runtime.callValue(computeViewportAlignY, cast ([(contentHeight * sy), viewHeight, _Runtime.field(scene, 'align')] : Array<Dynamic>)) : Dynamic));
-  }
-
-  public static function createViewport<Traits>(?obj:Dynamic):flighthq.types.Viewport<Traits> {
-    return cast (cast _Runtime.callValue(createEntity, cast ([{ align: _Runtime.coalesce(_Runtime.optionalField(obj, 'align'), function():Dynamic return cast 'topleft'), root: _Runtime.coalesce(_Runtime.optionalField(obj, 'root'), function():Dynamic return cast null), scaleMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleMode'), function():Dynamic return cast 'noscale') }] : Array<Dynamic>)) : flighthq.types.Viewport<Traits>);
-    return cast null;
-  }
-
-  public static final _tempRectangle__viewport:Rectangle = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 }

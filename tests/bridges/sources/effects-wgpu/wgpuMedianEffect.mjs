@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyMedianEffectToWgpu = api.applyMedianEffectToWgpu;
 export const defaultWgpuMedianEffectRunner = api.defaultWgpuMedianEffectRunner;
 export const MAX_MEDIAN_EFFECT_WGPU_RADIUS = api.MAX_MEDIAN_EFFECT_WGPU_RADIUS;
+export const registerWgpuMedianEffect = api.registerWgpuMedianEffect;

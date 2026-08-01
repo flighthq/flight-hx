@@ -19,7 +19,6 @@ class PbrMaterials {
     var specular:Dynamic = cast _Runtime.UNDEFINED;
     var glossiness:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
-    var specularGlossinessMap:Dynamic = cast _Runtime.UNDEFINED;
     var emissive:Dynamic = cast _Runtime.UNDEFINED;
     var emissiveMap:Dynamic = cast _Runtime.UNDEFINED;
     var emissiveStrength:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,7 +46,6 @@ class PbrMaterials {
     specular = _Runtime.field(source, 'specular');
     glossiness = _Runtime.field(source, 'glossiness');
     diffuseMap = _Runtime.field(source, 'diffuseMap');
-    specularGlossinessMap = _Runtime.field(source, 'specularGlossinessMap');
     emissive = _Runtime.field(source, 'emissive');
     emissiveMap = _Runtime.field(source, 'emissiveMap');
     emissiveStrength = _Runtime.field(source, 'emissiveStrength');
@@ -73,13 +71,14 @@ class PbrMaterials {
     baseG = (diffG * (1.0 - (specLuma * (1.0 - metallic))));
     baseB = (diffB * (1.0 - (specLuma * (1.0 - metallic))));
     baseColor = _Runtime.callValue(PbrMaterials.packLinear__pbrMaterials, cast ([baseR, baseG, baseB, diffA] : Array<Dynamic>));
+    _Runtime.setField(out, 'alphaMap', null);
     _Runtime.setField(out, 'baseColor', baseColor);
     _Runtime.setField(out, 'baseColorMap', diffuseMap);
     _Runtime.setField(out, 'emissive', emissive);
     _Runtime.setField(out, 'emissiveMap', emissiveMap);
     _Runtime.setField(out, 'emissiveStrength', emissiveStrength);
     _Runtime.setField(out, 'metallic', metallic);
-    _Runtime.setField(out, 'metallicRoughnessMap', specularGlossinessMap);
+    _Runtime.setField(out, 'metallicRoughnessMap', null);
     _Runtime.setField(out, 'normalMap', normalMap);
     _Runtime.setField(out, 'normalScale', normalScale);
     _Runtime.setField(out, 'occlusionMap', occlusionMap);
@@ -89,7 +88,7 @@ class PbrMaterials {
 
   public static function createSpecularGlossinessPbrMaterial(?opts:Dynamic):SpecularGlossinessPbrMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([SpecularGlossinessPbrMaterialKind] : Array<Dynamic>)) : SpecularGlossinessPbrMaterial);
+    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([SpecularGlossinessPbrMaterialKind, opts] : Array<Dynamic>)) : SpecularGlossinessPbrMaterial);
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuseMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'emissive', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
@@ -108,7 +107,7 @@ class PbrMaterials {
 
   public static function createStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([StandardPbrMaterialKind] : Array<Dynamic>)) : StandardPbrMaterial);
+    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([StandardPbrMaterialKind, opts] : Array<Dynamic>)) : StandardPbrMaterial);
     _Runtime.callValue(PbrMaterials.assignStandardPbrMaterialProperties__pbrMaterials, cast ([material, opts] : Array<Dynamic>));
     return cast material;
     return cast null;
@@ -123,6 +122,7 @@ class PbrMaterials {
   }
 
   public static function assignStandardPbrMaterialProperties__pbrMaterials(target:StandardPbrMaterialProperties, ?opts:Dynamic):Void {
+    _Runtime.setField(target, 'alphaMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMap'), function():Dynamic return cast null));
     _Runtime.setField(target, 'baseColor', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(target, 'baseColorMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
     _Runtime.setField(target, 'emissive', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySketchEffectToWgpu = api.applySketchEffectToWgpu;
 export const defaultWgpuSketchEffectRunner = api.defaultWgpuSketchEffectRunner;
+export const registerWgpuSketchEffect = api.registerWgpuSketchEffect;

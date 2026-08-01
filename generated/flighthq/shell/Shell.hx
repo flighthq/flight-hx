@@ -16,7 +16,7 @@ class Shell {
 
   public static function createWebShellBackend():ShellBackend {
     return cast { beep: function() {
-    
+
     }, moveItemsToTrash: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));

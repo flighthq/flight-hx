@@ -49,8 +49,18 @@ class ImageCodec {
     return cast null;
   }
 
+  public static function getImageDecoderMimeTypes():Array<String> {
+    return cast Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry.getImageDecoderMimeTypes();
+    return cast null;
+  }
+
   public static function getImageEncoder(mimeType:String):Null<ImageEncoder> {
     return cast Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.getImageEncoder(mimeType);
+    return cast null;
+  }
+
+  public static function getImageEncoderMimeTypes():Array<String> {
+    return cast Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.getImageEncoderMimeTypes();
     return cast null;
   }
 

@@ -4,20 +4,31 @@ package flighthq.textureatlasFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse;
-import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
 import flighthq.textureatlasFormats.TextureAtlasDetect as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect;
 import flighthq.textureatlasFormats.TextureAtlasLibgdxParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasLibgdxParse;
 import flighthq.textureatlasFormats.TextureAtlasPackerParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse;
-import flighthq.textureatlasFormats.TextureAtlasPackerParse.TextureAtlasPackerParseOptions;
-import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse;
-import flighthq.textureatlasFormats.TextureAtlasStarlingParse.TextureAtlasStarlingParseOptions;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
 import flighthq.types.TextureAtlasFormatKind;
+import flighthq.types.TextureAtlasPackerParseOptions;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
+import flighthq.types.TextureAtlasParseOptions;
+import flighthq.types.TextureAtlasStarlingParseOptions;
 
 class TextureatlasFormats {
   public static function detectTextureAtlasFormat(content:String):Null<TextureAtlasFormatKind> {
     return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.detectTextureAtlasFormat(content);
+    return cast null;
+  }
+
+  public static function getTextureAtlasFormat(kind:TextureAtlasFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.getTextureAtlasFormat(kind);
+    return cast null;
+  }
+
+  public static function parseTextureAtlas(content:String, atlas:TextureAtlas, ?formatKind:TextureAtlasFormatKind, ?options:TextureAtlasParseOptions):Null<TextureAtlas> {
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.parseTextureAtlas(content, atlas, formatKind, options);
     return cast null;
   }
 
@@ -49,5 +60,9 @@ class TextureatlasFormats {
   public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
     return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse.parseTextureAtlasStarlingXml(xml, atlas, _options);
     return cast null;
+  }
+
+  public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
+    Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.registerTextureAtlasFormat(kind, entry);
   }
 }

@@ -4,34 +4,37 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.lighting.AmbientLight as Facade_Lighting_flighthq_lighting_AmbientLight;
-import flighthq.lighting.AmbientLight.AmbientLightOptions;
 import flighthq.lighting.AreaLight as Facade_Lighting_flighthq_lighting_AreaLight;
-import flighthq.lighting.AreaLight.AreaLightOptions;
 import flighthq.lighting.DirectionalLight as Facade_Lighting_flighthq_lighting_DirectionalLight;
-import flighthq.lighting.DirectionalLight.DirectionalLightOptions;
 import flighthq.lighting.Environment as Facade_Lighting_flighthq_lighting_Environment;
-import flighthq.lighting.Environment.EnvironmentOptions;
 import flighthq.lighting.HemisphereLight as Facade_Lighting_flighthq_lighting_HemisphereLight;
-import flighthq.lighting.HemisphereLight.HemisphereLightOptions;
 import flighthq.lighting.LightAnalysis as Facade_Lighting_flighthq_lighting_LightAnalysis;
 import flighthq.lighting.LightIntensity as Facade_Lighting_flighthq_lighting_LightIntensity;
 import flighthq.lighting.PointLight as Facade_Lighting_flighthq_lighting_PointLight;
-import flighthq.lighting.PointLight.PointLightOptions;
+import flighthq.lighting.SceneForwardLights as Facade_Lighting_flighthq_lighting_SceneForwardLights;
 import flighthq.lighting.SceneLights as Facade_Lighting_flighthq_lighting_SceneLights;
 import flighthq.lighting.SpotLight as Facade_Lighting_flighthq_lighting_SpotLight;
-import flighthq.lighting.SpotLight.SpotLightConeAngles;
-import flighthq.lighting.SpotLight.SpotLightOptions;
 import flighthq.types.AmbientLight;
+import flighthq.types.AmbientLightOptions;
 import flighthq.types.AreaLight;
+import flighthq.types.AreaLightOptions;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.DirectionalLight;
+import flighthq.types.DirectionalLightOptions;
 import flighthq.types.Environment;
+import flighthq.types.EnvironmentOptions;
 import flighthq.types.HemisphereLight;
+import flighthq.types.HemisphereLightOptions;
 import flighthq.types.Light;
 import flighthq.types.LightUnit;
 import flighthq.types.PointLight;
-import flighthq.types.SceneLights;
+import flighthq.types.PointLightOptions;
+import flighthq.types.Scene3DForwardLightSelection;
+import flighthq.types.Scene3DLights;
+import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.SpotLight;
+import flighthq.types.SpotLightConeAngles;
+import flighthq.types.SpotLightOptions;
 import flighthq.types.Vector3.Vector3Like;
 
 class Lighting {
@@ -110,13 +113,18 @@ class Lighting {
     return cast null;
   }
 
-  public static function createSceneLights(?options:Dynamic):SceneLights {
-    return cast Facade_Lighting_flighthq_lighting_SceneLights.createSceneLights(options);
+  public static function createScene3DLights(?options:Dynamic):Scene3DLights {
+    return cast Facade_Lighting_flighthq_lighting_SceneLights.createScene3DLights(options);
     return cast null;
   }
 
   public static function createSpotLight(?options:SpotLightOptions):SpotLight {
     return cast Facade_Lighting_flighthq_lighting_SpotLight.createSpotLight(options);
+    return cast null;
+  }
+
+  public static function getLightContributionAtBoundingSphere(light:Dynamic, bounds:BoundingSphereLike):Float {
+    return cast Facade_Lighting_flighthq_lighting_LightAnalysis.getLightContributionAtBoundingSphere(light, bounds);
     return cast null;
   }
 
@@ -143,9 +151,13 @@ class Lighting {
     return cast null;
   }
 
-  public static function isLightShadowCasting(light:Light):Bool {
-    return cast Facade_Lighting_flighthq_lighting_LightAnalysis.isLightShadowCasting(light);
+  public static function isLightCastingShadow(light:Light):Bool {
+    return cast Facade_Lighting_flighthq_lighting_LightAnalysis.isLightCastingShadow(light);
     return cast null;
+  }
+
+  public static function selectScene3DForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLightsLike, bounds:BoundingSphereLike):Void {
+    Facade_Lighting_flighthq_lighting_SceneForwardLights.selectScene3DForwardLights(out, lights, bounds);
   }
 
   public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {

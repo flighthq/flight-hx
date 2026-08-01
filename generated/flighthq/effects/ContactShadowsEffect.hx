@@ -3,12 +3,30 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.ContactShadowsEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class ContactShadowsEffect {
   public static function createContactShadowsEffect(?options:Dynamic):flighthq.types.ContactShadowsEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ContactShadowsEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getContactShadowsEffectPadding(_effect:flighthq.types.ContactShadowsEffect):RenderEffectPadding {
+    return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 };
+    return cast null;
+  }
+
+  public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'ContactShadowsEffect', ContactShadowsEffect.resolveContactShadowsEffectPadding__contactShadowsEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveContactShadowsEffectPadding__contactShadowsEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getContactShadowsEffectPadding, cast ([(cast effect : flighthq.types.ContactShadowsEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

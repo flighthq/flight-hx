@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyCrtEffectToGl = api.applyCrtEffectToGl;
 export const defaultGlCrtEffectRunner = api.defaultGlCrtEffectRunner;
+export const registerGlCrtEffect = api.registerGlCrtEffect;

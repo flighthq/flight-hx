@@ -25,6 +25,7 @@ export const isClipRegionEmpty = api.isClipRegionEmpty;
 export const isClipRegionRectangular = api.isClipRegionRectangular;
 export const normalizeClipRegion = api.normalizeClipRegion;
 export const releaseClipRegion = api.releaseClipRegion;
+export const setClipRegionReleaseGuard = api.setClipRegionReleaseGuard;
 export const setClipRegionToRectangle = api.setClipRegionToRectangle;
 export const transformClipRegion = api.transformClipRegion;
 export const unionClipRegions = api.unionClipRegions;

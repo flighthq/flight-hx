@@ -3,19 +3,22 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.Curve.particleColorCurveFromKeyframes;
 import flighthq.particles.Curve.particleCurveFromKeyframes;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.SpineSchema.SpineAlphaKeyframe;
-import flighthq.particlesFormats.SpineSchema.SpineParticleDocument;
-import flighthq.particlesFormats.SpineSchema.SpineTintKeyframe;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef SpineParsed = { var config:ParticleEmitterConfig; var document:SpineParticleDocument; var warnings:Array<String>; };
+import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
+import flighthq.types.SpineParticleSchema.SpineParsed;
+import flighthq.types.SpineParticleSchema.SpineParticleDocument;
+import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class SpineParse {
   public static final DEG2RAD__spineParse:Dynamic = (HxMath.PI / 180.0);
@@ -139,10 +142,10 @@ class SpineParse {
     return cast null;
   }
 
-  public static function collectSpineWarnings__spineParse(raw:Dynamic):Array<String> {
-    var warnings:Array<String> = cast _Runtime.UNDEFINED;
+  public static function collectSpineDiagnostics__spineParse(raw:Dynamic):Array<ImportDiagnostic> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var nonZeroRange:Dynamic = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+    diagnostics = cast ([] : Array<Dynamic>);
     nonZeroRange = function(key:String) {
       var o:Dynamic = cast _Runtime.UNDEFINED;
       var r:Dynamic = cast _Runtime.UNDEFINED;
@@ -151,11 +154,16 @@ class SpineParse {
       r = (cast o : Dynamic);
       return cast ((cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'low')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'low'), 0.0)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'high')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'high'), 0.0)) : Bool));
     };
-    if ((cast _Runtime.callValue(nonZeroRange, cast (['lifeOffset'] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['Spine lifeOffset is not supported and was ignored'] : Array<Dynamic>)); }
-    if ((cast ((cast _Runtime.callValue(nonZeroRange, cast (['x'] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(nonZeroRange, cast (['y'] : Array<Dynamic>)) : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Spine emitter x/y position ranges are not supported and were ignored'] : Array<Dynamic>));
+    if ((cast _Runtime.callValue(nonZeroRange, cast (['lifeOffset'] : Array<Dynamic>)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.life-offset-unsupported', 'collectSpineDiagnostics'] : Array<Dynamic>));
     }
-    return cast warnings;
+    if ((cast ((cast _Runtime.callValue(nonZeroRange, cast (['x'] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(nonZeroRange, cast (['y'] : Array<Dynamic>)) : Bool)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.position-range-unsupported', 'collectSpineDiagnostics'] : Array<Dynamic>));
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(raw, 'premultiplied'), true) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.premultiplied-informational', 'collectSpineDiagnostics'] : Array<Dynamic>));
+    }
+    return cast diagnostics;
     return cast null;
   }
 
@@ -229,7 +237,7 @@ class SpineParse {
   public static function parseSpineParticleDocument(json:String):SpineParsed {
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     raw = _Runtime.callValue(SpineParse.parseSpineJson__spineParse, cast ([json] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(SpineParse.rawToConfig__spineParse, cast ([raw] : Array<Dynamic>)), document: _Runtime.callValue(SpineParse.rawToDocument__spineParse, cast ([raw] : Array<Dynamic>)), warnings: _Runtime.callValue(SpineParse.collectSpineWarnings__spineParse, cast ([raw] : Array<Dynamic>)) };
+    return cast { config: _Runtime.callValue(SpineParse.rawToConfig__spineParse, cast ([raw] : Array<Dynamic>)), diagnostics: _Runtime.callValue(SpineParse.collectSpineDiagnostics__spineParse, cast ([raw] : Array<Dynamic>)), document: _Runtime.callValue(SpineParse.rawToDocument__spineParse, cast ([raw] : Array<Dynamic>)) };
     return cast null;
   }
 }

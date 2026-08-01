@@ -8,6 +8,14 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef TextureColorSpace = String;
 
-typedef Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var image:Null<ImageResource>; @:optional var resource:Null<SceneResourceRef>; var sampler:Sampler; };
+typedef TextureSourceCubeFaces = Array<Null<TextureSource>>;
 
-typedef TextureLike = EntityWithoutRuntime<flighthq.types.Texture>;
+typedef TextureCommon__Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; };
+
+typedef Texture2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var dimension:String; var source:Null<TextureSource>; };
+
+typedef Texture = Dynamic;
+
+typedef TextureLikeFrom__Texture<Type> = Dynamic;
+
+typedef TextureLike = TextureLikeFrom__Texture<flighthq.types.Texture>;

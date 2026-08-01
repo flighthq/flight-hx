@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createOutlineEffect = api.createOutlineEffect;
+export const getOutlineEffectPadding = api.getOutlineEffectPadding;
+export const registerOutlineEffectPaddingResolver = api.registerOutlineEffectPaddingResolver;

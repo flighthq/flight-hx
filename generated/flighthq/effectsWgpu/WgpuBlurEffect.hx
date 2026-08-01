@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.BlurEffect;
@@ -38,6 +39,10 @@ class WgpuBlurEffect {
     _Runtime.callValue(applyBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), temp, (cast effect : BlurEffect)] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(ctx, 'pool'), temp] : Array<Dynamic>));
   };
+
+  public static function registerWgpuBlurEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BlurEffect', defaultWgpuBlurEffectRunner] : Array<Dynamic>));
+  }
 
   public static function applyWgpuGaussianBlurPass__wgpuBlurEffect(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;

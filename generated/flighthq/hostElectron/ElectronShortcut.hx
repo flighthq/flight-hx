@@ -3,7 +3,7 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.types.ElectronApi;
 import flighthq.types.Shortcut.ShortcutBackend;
 
 class ElectronShortcut {
@@ -20,7 +20,7 @@ class ElectronShortcut {
       if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set).add(accelerator)); }
       return cast ok;
     }, setAllEnabled: function(_enabled:Dynamic) {
-    
+
     }, setEnabled: function(_accelerator:Dynamic, _enabled:Dynamic) {
       return cast false;
     }, unregister: function(accelerator:Dynamic) {

@@ -3,11 +3,11 @@ package flighthq.text;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
-import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
+import flighthq.scene2d.DisplayObject.createNode2D;
+import flighthq.scene2d.DisplayObject.createNode2DRuntime;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.text.TextLabel.createTextLabelData;
 import flighthq.text.TextLabelLayout.ensureTextLayout;
@@ -65,7 +65,7 @@ class RichText {
     var content:Dynamic = cast _Runtime.UNDEFINED;
     richText = (cast source : flighthq.types.RichText);
     data = _Runtime.field(richText, 'data');
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([richText] : Array<Dynamic>)) : RichTextRuntime);
+    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([richText] : Array<Dynamic>)) : RichTextRuntime);
     content = _Runtime.callValue(getRichTextContent, cast ([runtime] : Array<Dynamic>));
     _Runtime.callValue(computeRichTextContent, cast ([content, data, _Runtime.callValue(getRichTextPasswordCharacter, cast ([richText] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { formatRanges: _Runtime.field(content, 'formatRanges'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), text: _Runtime.field(content, 'text'), verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), width: ((cast _Runtime.field(data, 'wordWrap') : Bool) ? (cast _Runtime.field(data, 'width') : Dynamic) : (cast 10000.0 : Dynamic)), wordWrap: _Runtime.field(data, 'wordWrap') };
@@ -103,7 +103,7 @@ class RichText {
   }
 
   public static function createRichText(?obj:PartialNode<flighthq.types.RichText>):flighthq.types.RichText {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([RichTextKind, obj, createRichTextData, createRichTextRuntime] : Array<Dynamic>)) : flighthq.types.RichText);
+    return cast (cast _Runtime.callValue(createNode2D, cast ([RichTextKind, obj, createRichTextData, createRichTextRuntime] : Array<Dynamic>)) : flighthq.types.RichText);
     return cast null;
   }
 
@@ -133,7 +133,7 @@ class RichText {
 
   public static function createRichTextRuntime():RichTextRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([RichText.defaultMethods__richText] : Array<Dynamic>)) : RichTextRuntime);
+    out = (cast _Runtime.callValue(createNode2DRuntime, cast ([RichText.defaultMethods__richText] : Array<Dynamic>)) : RichTextRuntime);
     _Runtime.setField(out, 'buildTextLayoutParams', buildRichTextLayoutParams);
     _Runtime.setField(out, 'textLayout', null);
     _Runtime.setField(out, 'textLayoutUsingContentId', -1.0);
@@ -159,7 +159,7 @@ class RichText {
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast null; }
     url = _Runtime.callValue(getRichTextLinkAtPoint, cast ([layout, x, y] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(url, null) : Bool)) {
-      var signals:Dynamic = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
+      var signals:Dynamic = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
         var event:Dynamic = { url: url, x: x, y: y };
         _Runtime.callValue(_Runtime.field(signals, 'onTextFieldLink').emit, cast ([event] : Array<Dynamic>));
@@ -175,7 +175,7 @@ class RichText {
 
   public static function enableTextFieldSignals(source:flighthq.types.RichText):TextFieldSignals {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
+    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast _Runtime.setField(runtime, 'textFieldSignals', (_Runtime.field(runtime, 'textFieldSignals') ?? _Runtime.callValue(createTextFieldSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
@@ -286,13 +286,13 @@ class RichText {
 
   public static function getRichTextPasswordCharacter(source:flighthq.types.RichText):Null<String> {
     var input:Dynamic = cast _Runtime.UNDEFINED;
-    input = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'input');
+    input = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'input');
     return cast ((cast ((cast !_Runtime.strictEquals(input, null) : Bool) && (cast _Runtime.field(input, 'displayAsPassword') : Bool)) : Bool) ? (cast _Runtime.field(input, 'passwordCharacter') : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getRichTextRuntime(source:flighthq.types.RichText):RichTextRuntime {
-    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
+    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast null;
   }
 
@@ -320,7 +320,7 @@ class RichText {
   }
 
   public static function getTextFieldSignals(source:flighthq.types.RichText):Null<TextFieldSignals> {
-    return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
+    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     return cast null;
   }
 
@@ -522,9 +522,10 @@ class RichText {
   public static function setRichTextString(source:flighthq.types.RichText, value:String):Void {
     var previousText:Dynamic = cast _Runtime.UNDEFINED;
     previousText = _Runtime.field(_Runtime.field(source, 'data'), 'text');
+    if ((cast _Runtime.strictEquals(previousText, value) : Bool)) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', value);
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(previousText, value) : Bool)) { _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
+    _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>));
   }
 
   public static function setRichTextTextColor(source:flighthq.types.RichText, value:Float):Void {
@@ -589,7 +590,7 @@ class RichText {
   public static function emitTextFieldChange__richText(source:flighthq.types.RichText, previousText:String):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var event:Dynamic = cast _Runtime.UNDEFINED;
-    signals = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
+    signals = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = { previousText: previousText, text: _Runtime.field(_Runtime.field(source, 'data'), 'text') };
     _Runtime.callValue(_Runtime.field(signals, 'onTextFieldChange').emit, cast ([event] : Array<Dynamic>));
@@ -598,7 +599,7 @@ class RichText {
   public static function emitTextFieldScroll__richText(source:flighthq.types.RichText, previousScrollH:Float, previousScrollV:Float):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var event:Dynamic = cast _Runtime.UNDEFINED;
-    signals = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
+    signals = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = { previousScrollH: previousScrollH, previousScrollV: previousScrollV, scrollH: _Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), scrollV: _Runtime.field(_Runtime.field(source, 'data'), 'scrollV') };
     _Runtime.callValue(_Runtime.field(signals, 'onTextFieldScroll').emit, cast ([event] : Array<Dynamic>));

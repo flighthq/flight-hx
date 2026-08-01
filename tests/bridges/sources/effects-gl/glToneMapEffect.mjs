@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyToneMapEffectToGl = api.applyToneMapEffectToGl;
 export const defaultGlToneMapEffectRunner = api.defaultGlToneMapEffectRunner;
+export const registerGlToneMapEffect = api.registerGlToneMapEffect;

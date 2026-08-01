@@ -6,33 +6,43 @@ import flighthq._internal._Runtime;
 import flighthq.types.VideoResource;
 
 class VideoResource {
-  public static function createVideoResource(?element:Dynamic):flighthq.types.VideoResource {
-    return cast { element: _Runtime.coalesce(element, function():Dynamic return cast null) };
+  public static function createVideoResource(?element:Dynamic, ?objectUrl:String):flighthq.types.VideoResource {
+    return cast { element: _Runtime.coalesce(element, function():Dynamic return cast null), objectUrl: _Runtime.coalesce(objectUrl, function():Dynamic return cast null) };
     return cast null;
   }
 
   public static function disposeVideoResource(resource:flighthq.types.VideoResource):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = resource.element;
+    element = (cast resource.element : Null<Dynamic>);
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) {
       _Runtime.callProperty(element, 'removeAttribute', cast (['src'] : Array<Dynamic>));
       _Runtime.callProperty(element, 'load', cast ([] : Array<Dynamic>));
+    }
+    if ((cast !_Runtime.strictEquals(resource.objectUrl, null) : Bool)) {
+      _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([resource.objectUrl] : Array<Dynamic>));
+      (resource.objectUrl = cast (null : Dynamic));
     }
     (resource.element = cast (null : Dynamic));
   }
 
   public static function getVideoResourceDuration(resource:flighthq.types.VideoResource):Float {
-    return cast ((cast !_Runtime.strictEquals(resource.element, null) : Bool) ? (cast _Runtime.field(resource.element, 'duration') : Dynamic) : (cast 0.0 : Dynamic));
+    var element:Dynamic = cast _Runtime.UNDEFINED;
+    element = (cast resource.element : Null<Dynamic>);
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast _Runtime.field(element, 'duration') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoResourceHeight(resource:flighthq.types.VideoResource):Float {
-    return cast ((cast !_Runtime.strictEquals(resource.element, null) : Bool) ? (cast _Runtime.field(resource.element, 'videoHeight') : Dynamic) : (cast 0.0 : Dynamic));
+    var element:Dynamic = cast _Runtime.UNDEFINED;
+    element = (cast resource.element : Null<Dynamic>);
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast _Runtime.field(element, 'videoHeight') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoResourceWidth(resource:flighthq.types.VideoResource):Float {
-    return cast ((cast !_Runtime.strictEquals(resource.element, null) : Bool) ? (cast _Runtime.field(resource.element, 'videoWidth') : Dynamic) : (cast 0.0 : Dynamic));
+    var element:Dynamic = cast _Runtime.UNDEFINED;
+    element = (cast resource.element : Null<Dynamic>);
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast _Runtime.field(element, 'videoWidth') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -43,14 +53,14 @@ class VideoResource {
 
   public static function isVideoResourceEmpty(resource:flighthq.types.VideoResource):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = resource.element;
+    element = (cast resource.element : Null<Dynamic>);
     return cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast _Runtime.field(element, 'videoWidth') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoHeight') : Float) <= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function isVideoResourceReady(resource:flighthq.types.VideoResource):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = resource.element;
+    element = (cast resource.element : Null<Dynamic>);
     return cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'readyState') : Float) >= (cast VideoResource.HAVE_CURRENT_DATA__videoResource : Float)) : Bool));
     return cast null;
   }

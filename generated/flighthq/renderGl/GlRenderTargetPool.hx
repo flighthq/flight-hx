@@ -3,38 +3,41 @@ package flighthq.renderGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.render.RenderTarget.resolveRenderTargetDescriptor;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
+import flighthq.renderGl.GlRenderTarget.resolveGlRenderTargetAxes;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.RenderTarget.RenderTargetAxes;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
 
 class GlRenderTargetPool {
-  public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var sampleCount:Dynamic = cast _Runtime.UNDEFINED;
-    w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'width')));
-    h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'height')));
-    format = _Runtime.coalesce(_Runtime.field(descriptor, 'format'), function():Dynamic return cast 'rgba8');
-    sampleCount = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(descriptor, 'sampleCount'), function():Dynamic return cast 1.0));
+  public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<GlRenderTarget> {
+    var requested:Dynamic = cast _Runtime.UNDEFINED;
+    var effective:Dynamic = cast _Runtime.UNDEFINED;
+    requested = _Runtime.callValue(resolveRenderTargetDescriptor, cast ([descriptor] : Array<Dynamic>));
+    effective = _Runtime.callValue(resolveGlRenderTargetAxes, cast ([state, requested, formatPolicy] : Array<Dynamic>));
+    if ((cast !_Runtime.truthy(effective) : Bool)) { return cast null; }
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pool, 'free'), 'length') : Float)) : Bool)) {
         var candidate:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pool, 'free'), i);
-        if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'width'), w) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'sampleCount'), sampleCount) : Bool)) : Bool)) {
+        if ((cast _Runtime.callValue(GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool, cast ([candidate, effective] : Array<Dynamic>)) : Bool)) {
           _Runtime.splice(_Runtime.field(pool, 'free'), Std.int(i), Std.int(1.0), []);
-          _Runtime.setField(candidate, 'colorSpace', _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
+          _Runtime.setField(candidate, 'requestedAxes', { width: _Runtime.field(requested, 'width'), height: _Runtime.field(requested, 'height'), format: _Runtime.field(requested, 'format'), colorAttachments: _Runtime.field(requested, 'colorAttachments'), colorFormats: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(requested, 'colorFormats'))]), sampleCount: _Runtime.field(requested, 'sampleCount'), depth: _Runtime.field(requested, 'depth'), colorSpace: _Runtime.field(requested, 'colorSpace') });
+          _Runtime.setField(candidate, 'clearColors', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(requested, 'clearColors'))]));
+          _Runtime.setField(candidate, 'clearDepth', _Runtime.field(requested, 'clearDepth'));
           _Runtime.callValue(clearGlRenderTarget, cast ([state, candidate] : Array<Dynamic>));
           return cast candidate;
         }
         i++;
       }
     }
-    return cast _Runtime.callValue(createGlRenderTarget, cast ([state, descriptor] : Array<Dynamic>));
+    return cast _Runtime.callValue(createGlRenderTarget, cast ([state, descriptor, formatPolicy] : Array<Dynamic>));
     return cast null;
   }
 
@@ -52,5 +55,10 @@ class GlRenderTargetPool {
 
   public static function releaseGlRenderTarget(pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, target:GlRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
+  }
+
+  public static function matchesGlRenderTargetAxes__glRenderTargetPool(target:GlRenderTarget, axes:RenderTargetAxes):Bool {
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(target, 'width'), _Runtime.field(axes, 'width')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'height'), _Runtime.field(axes, 'height')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'format'), _Runtime.field(axes, 'format')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'colorAttachments'), _Runtime.field(axes, 'colorAttachments')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(target, 'colorFormats'), 'length'), _Runtime.field(_Runtime.field(axes, 'colorFormats'), 'length')) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.field(target, 'colorFormats'), 'every', cast ([function(format:Dynamic, index:Dynamic) return _Runtime.strictEquals(format, flighthq._internal._StaticIndex.readArray(_Runtime.field(axes, 'colorFormats'), index))] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'sampleCount'), _Runtime.field(axes, 'sampleCount')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'depth'), _Runtime.field(axes, 'depth')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), _Runtime.field(axes, 'colorSpace')));
+    return cast null;
   }
 }

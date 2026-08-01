@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createDisplacementEffect = api.createDisplacementEffect;
+export const getDisplacementEffectPadding = api.getDisplacementEffectPadding;
+export const registerDisplacementEffectPaddingResolver = api.registerDisplacementEffectPaddingResolver;

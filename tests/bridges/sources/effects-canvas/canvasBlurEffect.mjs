@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBlurEffectToCanvas = api.applyBlurEffectToCanvas;
 export const defaultCanvasBlurEffectRunner = api.defaultCanvasBlurEffectRunner;
+export const registerCanvasBlurEffect = api.registerCanvasBlurEffect;

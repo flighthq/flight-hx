@@ -3,12 +3,42 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.DirectionalBlurEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class DirectionalBlurEffect {
   public static function createDirectionalBlurEffect(?options:Dynamic):flighthq.types.DirectionalBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DirectionalBlurEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getDirectionalBlurEffectPadding(effect:flighthq.types.DirectionalBlurEffect):RenderEffectPadding {
+    var angle:Dynamic = cast _Runtime.UNDEFINED;
+    var halfLength:Dynamic = cast _Runtime.UNDEFINED;
+    var projectedX:Dynamic = cast _Runtime.UNDEFINED;
+    var projectedY:Dynamic = cast _Runtime.UNDEFINED;
+    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
+    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.0);
+    halfLength = (HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'length'), function():Dynamic return cast 8.0)) * 0.5);
+    projectedX = HxMath.abs((HxMath.cos(angle) * halfLength));
+    projectedY = HxMath.abs((HxMath.sin(angle) * halfLength));
+    horizontal = ((cast ((cast projectedX : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.ceil(projectedX) : Dynamic));
+    vertical = ((cast ((cast projectedY : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.ceil(projectedY) : Dynamic));
+    return cast { bottom: vertical, left: horizontal, right: horizontal, top: vertical };
+    return cast null;
+  }
+
+  public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'DirectionalBlurEffect', DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveDirectionalBlurEffectPadding__directionalBlurEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getDirectionalBlurEffectPadding, cast ([(cast effect : flighthq.types.DirectionalBlurEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

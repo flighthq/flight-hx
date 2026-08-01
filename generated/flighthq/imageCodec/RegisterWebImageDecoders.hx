@@ -30,9 +30,9 @@ class RegisterWebImageDecoders {
           height = _Runtime.field(bitmap, 'height');
           canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [width, height]);
           context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
+          _Runtime.callProperty(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
           _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
-          data = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
+          data = _Runtime.field(_Runtime.callProperty(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
           var __flowBranch3:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyVignetteEffectToWgpu = api.applyVignetteEffectToWgpu;
 export const defaultWgpuVignetteEffectRunner = api.defaultWgpuVignetteEffectRunner;
+export const registerWgpuVignetteEffect = api.registerWgpuVignetteEffect;

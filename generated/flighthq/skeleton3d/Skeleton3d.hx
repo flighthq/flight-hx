@@ -3,21 +3,27 @@ package flighthq.skeleton3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Matrix4.copyMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Matrix4.multiplyMatrix4;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.Hierarchy.addNodeChild;
+import flighthq.node.Hierarchy.getNodeParent;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.skeleton3d.GetMeshSkinBounds as Facade_Skeleton3d_flighthq_skeleton3d_GetMeshSkinBounds;
+import flighthq.skeleton3d.PrepareScene3DSkinning as Facade_Skeleton3d_flighthq_skeleton3d_PrepareScene3DSkinning;
 import flighthq.skeleton3d.SkinMeshGeometry as Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry;
 import flighthq.skeleton3d.SkinVertices as Facade_Skeleton3d_flighthq_skeleton3d_SkinVertices;
+import flighthq.skeleton3d.UpdateMeshDeformation as Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshDeformation;
 import flighthq.skeleton3d.UpdateMeshSkin as Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshSkin;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshSkinBindPose;
-import flighthq.types.SceneNode;
+import flighthq.types.Node.NodeAny;
+import flighthq.types.Node3D;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
 
@@ -32,10 +38,40 @@ class Skeleton3d {
   }
 
   public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
-    var clone:Skeleton3D = cast _Runtime.UNDEFINED;
-    clone = { inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null) };
-    if ((cast !_Runtime.looseEquals(_Runtime.field(skeleton, 'names'), null) : Bool)) { _Runtime.setField(clone, 'names', _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool)) { _Runtime.setField(clone, 'names', null); } }
+    var clone:Dynamic = cast _Runtime.UNDEFINED;
+    clone = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null), names: ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null) : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
     return cast clone;
+    return cast null;
+  }
+
+  public static function cloneSkeleton3DJointHierarchy(skeleton:Skeleton3D, cloneJoint:Dynamic):Skeleton3D {
+    var sourceJoints:Dynamic = cast _Runtime.UNDEFINED;
+    var joints:Dynamic = cast _Runtime.UNDEFINED;
+    var clonesBySource:Dynamic = cast _Runtime.UNDEFINED;
+    sourceJoints = _Runtime.field(skeleton, 'joints');
+    joints = _Runtime.createArray(_Runtime.field(sourceJoints, 'length'));
+    clonesBySource = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(sourceJoints, 'length') : Float)) : Bool)) {
+        var source:Dynamic = flighthq._internal._StaticIndex.readArray(sourceJoints, i);
+        var clone:Dynamic = _Runtime.callValue(cloneJoint, cast ([source, i] : Array<Dynamic>));
+        flighthq._internal._StaticIndex.writeArray(joints, i, clone);
+        ((cast clonesBySource : flighthq._internal._Map).set(source, clone));
+        i++;
+      }
+    }
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(sourceJoints, 'length') : Float)) : Bool)) {
+        var sourceParent:Dynamic = _Runtime.callValue(getNodeParent, cast ([flighthq._internal._StaticIndex.readArray(sourceJoints, i)] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(sourceParent, null) : Bool)) { i++; continue; }
+        var parentClone:Dynamic = ((cast clonesBySource : flighthq._internal._Map).get(sourceParent));
+        if ((cast !_Runtime.strictEquals(parentClone, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(addNodeChild, cast ([parentClone, flighthq._internal._StaticIndex.readArray(joints, i)] : Array<Dynamic>)); }
+        i++;
+      }
+    }
+    return cast _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: joints, names: ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null) : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -66,11 +102,11 @@ class Skeleton3d {
     }
   }
 
-  public static function createSkeleton3D(joints:Array<SceneNode>, ?inverseBindMatrices:flighthq._internal._Float32Array, ?names:Null<Array<String>>):Skeleton3D {
+  public static function createSkeleton3D(joints:Array<Node3D>, ?inverseBindMatrices:flighthq._internal._Float32Array, ?names:Null<Array<String>>):Skeleton3D {
     var count:Dynamic = cast _Runtime.UNDEFINED;
-    var skeleton:Skeleton3D = cast _Runtime.UNDEFINED;
+    var skeleton:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.field(joints, 'length');
-    skeleton = { inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flighthq._internal._Float32Array((count * 16.0))), jointMatrices: new flighthq._internal._Float32Array((count * 16.0)), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) };
+    skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flighthq._internal._Float32Array((count * 16.0))), jointMatrices: new flighthq._internal._Float32Array((count * 16.0)), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) }] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(setSkeleton3DBindPose, cast ([skeleton] : Array<Dynamic>)); }
     return cast skeleton;
     return cast null;
@@ -143,6 +179,14 @@ class Skeleton3d {
     return cast null;
   }
 
+  public static function prepareMeshSkinning(mesh:Mesh):Void {
+    Facade_Skeleton3d_flighthq_skeleton3d_PrepareScene3DSkinning.prepareMeshSkinning(mesh);
+  }
+
+  public static function prepareScene3DSkinning(scene:NodeAny):Void {
+    Facade_Skeleton3d_flighthq_skeleton3d_PrepareScene3DSkinning.prepareScene3DSkinning(scene);
+  }
+
   public static function setSkeleton3DBindPose(skeleton:Skeleton3D):Void {
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var inverseBindMatrices:Dynamic = cast _Runtime.UNDEFINED;
@@ -168,8 +212,16 @@ class Skeleton3d {
     Facade_Skeleton3d_flighthq_skeleton3d_SkinVertices.skinVertices(outPositions, outNormals, positions, normals, joints, weights, jointMatrices);
   }
 
+  public static function updateMeshDeformation(mesh:Mesh):Void {
+    Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshDeformation.updateMeshDeformation(mesh);
+  }
+
   public static function updateMeshSkin(mesh:Mesh):Void {
     Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshSkin.updateMeshSkin(mesh);
+  }
+
+  public static function updateMeshSkinBindPoseDeformInput(bindPose:MeshSkinBindPose, geometry:MeshGeometry):Void {
+    Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry.updateMeshSkinBindPoseDeformInput(bindPose, geometry);
   }
 
   public static function validateSkeleton3D(skeleton:Skeleton3D):Null<Skeleton3DValidationDiagnostic> {

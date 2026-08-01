@@ -3,11 +3,12 @@ package flighthq.movieclip;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.Bitmap.createBitmap;
 import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
-import flighthq.types.Bitmap;
-import flighthq.types.DisplayObject;
+import flighthq.scene2d.Sprite.createSprite;
+import flighthq.textureatlas.TextureAtlasRegion.getTextureAtlasRegionTexture;
+import flighthq.types.Node2D;
+import flighthq.types.Sprite;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.TimelineSource;
@@ -16,7 +17,7 @@ class SpritesheetTimelineSource {
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
     var bitmaps:Dynamic = cast _Runtime.UNDEFINED;
     bitmaps = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
-    return cast { totalFrames: _Runtime.field(animation.frames, 'length'), labels: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:DisplayObject, frame:Float) {
+    return cast { totalFrames: _Runtime.field(animation.frames, 'length'), labels: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float) {
       var atlas:Dynamic = cast _Runtime.UNDEFINED;
       var bitmap:Dynamic = cast _Runtime.UNDEFINED;
       var sheetFrame:Dynamic = cast _Runtime.UNDEFINED;
@@ -24,14 +25,13 @@ class SpritesheetTimelineSource {
       if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return; }
       bitmap = ((cast bitmaps : flighthq._internal._WeakMap).get(target));
       if ((cast _Runtime.strictEquals(bitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (bitmap = cast (_Runtime.callValue(createBitmap, cast ([] : Array<Dynamic>)) : Dynamic));
-        _Runtime.setField(_Runtime.field(bitmap, 'data'), 'image', atlas.image);
+        (bitmap = cast (_Runtime.callValue(createSprite, cast ([] : Array<Dynamic>)) : Dynamic));
         _Runtime.callValue(addNodeChild, cast ([target, bitmap] : Array<Dynamic>));
         ((cast bitmaps : flighthq._internal._WeakMap).set(target, bitmap));
       }
       sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readArray(animation.frames, (frame - 1.0)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      _Runtime.setField(_Runtime.field(bitmap, 'data'), 'sourceRectangle', flighthq._internal._StaticIndex.readArray(atlas.regions, sheetFrame.id));
+      _Runtime.setField(_Runtime.field(bitmap, 'data'), 'texture', _Runtime.callValue(getTextureAtlasRegionTexture, cast ([atlas, sheetFrame.id] : Array<Dynamic>)));
       _Runtime.setField(bitmap, 'x', (sheetFrame.offsetX - animation.originX));
       _Runtime.setField(bitmap, 'y', (sheetFrame.offsetY - animation.originY));
       _Runtime.callValue(invalidateNodeLocalTransform, cast ([bitmap] : Array<Dynamic>));

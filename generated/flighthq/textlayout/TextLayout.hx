@@ -572,10 +572,13 @@ class TextLayout {
         } else {
           var spaceCount:Dynamic = 0.0;
           for (g in _Runtime.iterable(lineGroups)) {
+            var textIndex:Dynamic = _Runtime.field(g, 'startIndex');
             {
               var ci:Dynamic = 0.0;
-              while ((cast ((cast ci : Float) < (cast _Runtime.field(_Runtime.field(g, 'positions'), 'length') : Float)) : Bool)) {
-                if ((cast _Runtime.strictEquals(_Runtime.charCodeAt(text, (_Runtime.field(g, 'startIndex') + ci)), 32.0) : Bool)) { spaceCount++; }
+              while ((cast ((cast ((cast ci : Float) < (cast _Runtime.field(_Runtime.field(g, 'positions'), 'length') : Float)) : Bool) && (cast ((cast textIndex : Float) < (cast _Runtime.field(g, 'endIndex') : Float)) : Bool)) : Bool)) {
+                var codepoint:Dynamic = _Runtime.coalesce(_Runtime.codePointAt(text, textIndex), function():Dynamic return cast 0.0);
+                if ((cast _Runtime.strictEquals(codepoint, 32.0) : Bool)) { spaceCount++; }
+                (textIndex = cast ((textIndex + ((cast ((cast codepoint : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic))) : Dynamic));
                 ci++;
               }
             }
@@ -586,14 +589,17 @@ class TextLayout {
           for (g in _Runtime.iterable(lineGroups)) {
             _Runtime.setField(g, 'offsetX', (_Runtime.field(g, 'offsetX') + accumulated));
             var groupExtra:Dynamic = 0.0;
+            var textIndex:Dynamic = _Runtime.field(g, 'startIndex');
             {
               var ci:Dynamic = 0.0;
-              while ((cast ((cast ci : Float) < (cast _Runtime.field(_Runtime.field(g, 'positions'), 'length') : Float)) : Bool)) {
-                if ((cast _Runtime.strictEquals(_Runtime.charCodeAt(text, (_Runtime.field(g, 'startIndex') + ci)), 32.0) : Bool)) {
+              while ((cast ((cast ((cast ci : Float) < (cast _Runtime.field(_Runtime.field(g, 'positions'), 'length') : Float)) : Bool) && (cast ((cast textIndex : Float) < (cast _Runtime.field(g, 'endIndex') : Float)) : Bool)) : Bool)) {
+                var codepoint:Dynamic = _Runtime.coalesce(_Runtime.codePointAt(text, textIndex), function():Dynamic return cast 0.0);
+                if ((cast _Runtime.strictEquals(codepoint, 32.0) : Bool)) {
                   ({ var __indexedObject22:Dynamic = _Runtime.field(g, 'positions'); var __indexedKey23:Dynamic = ci; flighthq._internal._StaticIndex.writeArray(__indexedObject22, __indexedKey23, (flighthq._internal._StaticIndex.readArray(__indexedObject22, __indexedKey23) + extraPerSpace)); });
                   (accumulated = cast ((accumulated + extraPerSpace) : Dynamic));
                   (groupExtra = cast ((groupExtra + extraPerSpace) : Dynamic));
                 }
+                (textIndex = cast ((textIndex + ((cast ((cast codepoint : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic))) : Dynamic));
                 ci++;
               }
             }

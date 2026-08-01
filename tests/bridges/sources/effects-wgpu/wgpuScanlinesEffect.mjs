@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyScanlinesEffectToWgpu = api.applyScanlinesEffectToWgpu;
 export const defaultWgpuScanlinesEffectRunner = api.defaultWgpuScanlinesEffectRunner;
+export const registerWgpuScanlinesEffect = api.registerWgpuScanlinesEffect;

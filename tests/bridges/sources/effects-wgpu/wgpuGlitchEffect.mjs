@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGlitchEffectToWgpu = api.applyGlitchEffectToWgpu;
 export const defaultWgpuGlitchEffectRunner = api.defaultWgpuGlitchEffectRunner;
+export const registerWgpuGlitchEffect = api.registerWgpuGlitchEffect;

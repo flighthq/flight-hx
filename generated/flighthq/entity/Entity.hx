@@ -3,74 +3,15 @@ package flighthq.entity;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.entity.Binding as Facade_Entity_flighthq_entity_Binding;
-import flighthq.entity.Clone as Facade_Entity_flighthq_entity_Clone;
-import flighthq.entity.Guards as Facade_Entity_flighthq_entity_Guards;
-import flighthq.entity.Runtime as Facade_Entity_flighthq_entity_Runtime;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Entity {
-  public static function areEntityRuntimeGuardsEnabled():Bool {
-    return cast Facade_Entity_flighthq_entity_Guards.areEntityRuntimeGuardsEnabled();
-    return cast null;
-  }
-
-  public static function attachEntityBinding(entity:flighthq.types.Entity, binding:Dynamic):Void {
-    Facade_Entity_flighthq_entity_Binding.attachEntityBinding(entity, binding);
-  }
-
-  public static function cloneEntity<Type>(source:Type):Type {
-    return cast Facade_Entity_flighthq_entity_Clone.cloneEntity(source);
-    return cast null;
-  }
-
   public static function createEntity<Type>(?obj:Type):Type {
     if (obj == null) obj = cast {};
     final entity:Type = cast obj;
     _Runtime.setIndex(entity, EntityRuntimeKey, _Runtime.UNDEFINED);
     return entity;
-    return cast null;
-  }
-
-  public static function createEntityRuntime():EntityRuntime {
-    return cast Facade_Entity_flighthq_entity_Runtime.createEntityRuntime();
-    return cast null;
-  }
-
-  public static function createGuardedEntity<Type>(entity:Type):Type {
-    return cast Facade_Entity_flighthq_entity_Guards.createGuardedEntity(entity);
-    return cast null;
-  }
-
-  public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
-    return cast Facade_Entity_flighthq_entity_Guards.createGuardedEntityRuntime(runtime);
-    return cast null;
-  }
-
-  public static function enableEntityRuntimeGuards():Void {
-    Facade_Entity_flighthq_entity_Guards.enableEntityRuntimeGuards();
-  }
-
-  public static function getEntityBinding(source:flighthq.types.Entity):Null<Dynamic> {
-    return cast Facade_Entity_flighthq_entity_Binding.getEntityBinding(source);
-    return cast null;
-  }
-
-  public static function getEntityRuntime(source:flighthq.types.Entity):EntityRuntime {
-    return cast Facade_Entity_flighthq_entity_Runtime.getEntityRuntime(source);
-    return cast null;
-  }
-
-  public static function hasEntityRuntime(source:flighthq.types.Entity):Bool {
-    return cast Facade_Entity_flighthq_entity_Runtime.hasEntityRuntime(source);
-    return cast null;
-  }
-
-  public static function stripEntityRuntime<Type>(source:Type):EntityWithoutRuntime<Type> {
-    return cast Facade_Entity_flighthq_entity_Clone.stripEntityRuntime(source);
     return cast null;
   }
 }

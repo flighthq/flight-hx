@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyKuwaharaEffectToWgpu = api.applyKuwaharaEffectToWgpu;
 export const defaultWgpuKuwaharaEffectRunner = api.defaultWgpuKuwaharaEffectRunner;
+export const registerWgpuKuwaharaEffect = api.registerWgpuKuwaharaEffect;

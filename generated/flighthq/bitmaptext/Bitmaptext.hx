@@ -7,11 +7,9 @@ import flighthq.bitmaptext.BitmapText as Facade_Bitmaptext_flighthq_bitmaptext_B
 import flighthq.bitmaptext.UpdateBitmapText as Facade_Bitmaptext_flighthq_bitmaptext_UpdateBitmapText;
 import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextAlign;
-import flighthq.types.BitmapText.BitmapTextData;
 import flighthq.types.BitmapText.BitmapTextOptions;
-import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.BitmapText.BitmapTextPage;
 import flighthq.types.GlyphSource;
-import flighthq.types.QuadBatch;
 import flighthq.types.Rectangle;
 
 class Bitmaptext {
@@ -24,23 +22,13 @@ class Bitmaptext {
     return cast null;
   }
 
-  public static function createBitmapTextData(?data:Dynamic):BitmapTextData {
-    return cast Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.createBitmapTextData(data);
-    return cast null;
-  }
-
-  public static function createBitmapTextRuntime():BitmapTextRuntime {
-    return cast Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.createBitmapTextRuntime();
-    return cast null;
-  }
-
   public static function getBitmapTextBounds(source:BitmapText):Rectangle {
     return cast Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.getBitmapTextBounds(source);
     return cast null;
   }
 
-  public static function getBitmapTextQuadBatches(source:BitmapText):Array<QuadBatch> {
-    return cast Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.getBitmapTextQuadBatches(source);
+  public static function getBitmapTextPages(source:BitmapText):Array<BitmapTextPage> {
+    return cast Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.getBitmapTextPages(source);
     return cast null;
   }
 
@@ -50,10 +38,6 @@ class Bitmaptext {
 
   public static function setBitmapTextAlign(target:BitmapText, align:BitmapTextAlign):Void {
     Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextAlign(target, align);
-  }
-
-  public static function setBitmapTextColor(target:BitmapText, color:Float):Void {
-    Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextColor(target, color);
   }
 
   public static function setBitmapTextGlyphSource(target:BitmapText, glyphSource:Null<GlyphSource>):Void {

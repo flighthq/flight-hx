@@ -5,8 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
-import flighthq.types.SceneNode;
-import flighthq.types.SceneNode.SceneNodeRuntime;
+import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
 
 class _BillboardValues {
   public static final BillboardKind:Dynamic = 'Billboard';

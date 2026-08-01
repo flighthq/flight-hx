@@ -3,9 +3,13 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.Aabb.createAabb;
+import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshGeometry.MeshGeometryRuntime;
+import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class MeshGeometryCompute {
   public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
@@ -351,6 +355,32 @@ class MeshGeometryCompute {
         i++;
       }
     }
+  }
+
+  public static function ensureMeshGeometryBounds(geometry:MeshGeometry):Null<Aabb> {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var bounds:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
+    bounds = geometry.bounds;
+    if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'boundsVersion'), geometry.version) : Bool)) : Bool)) {
+      _Runtime.callValue(refreshMeshGeometryBounds, cast ([geometry] : Array<Dynamic>));
+      (bounds = cast (geometry.bounds : Dynamic));
+    }
+    return cast ((cast ((cast !_Runtime.strictEquals(bounds, null) : Bool) && (cast ((cast bounds.min.x : Float) <= (cast bounds.max.x : Float)) : Bool)) : Bool) ? (cast bounds : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
+
+  public static function refreshMeshGeometryBounds(geometry:MeshGeometry):Void {
+    var bounds:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    bounds = geometry.bounds;
+    if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
+      (bounds = cast (_Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) : Dynamic));
+      (geometry.bounds = cast (bounds : Dynamic));
+    }
+    _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
+    runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
+    if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(runtime, 'boundsVersion', geometry.version); }
   }
 
   public static final NORMAL_OFFSET__meshGeometryCompute:Dynamic = 3.0;

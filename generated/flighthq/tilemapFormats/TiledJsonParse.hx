@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.tilemapFormats.TiledColor.parseTiledColor;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledBase64Layer;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledCsvLayer;
-import flighthq.tilemapFormats.TiledOptions.TiledCompression;
-import flighthq.tilemapFormats.TiledOptions.TiledParseOptions;
 import flighthq.types.TiledLayer;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledMap.TiledOrientation;
 import flighthq.types.TiledMap.TiledRenderOrder;
 import flighthq.types.TiledObject;
+import flighthq.types.TiledParseOptions;
+import flighthq.types.TiledParseOptions.TiledCompression;
 import flighthq.types.TiledProperty;
 import flighthq.types.TiledProperty.TiledPropertyType;
 import flighthq.types.TiledTileset;
@@ -90,7 +90,7 @@ class TiledJsonParse {
     data = _Runtime.field(obj, 'data');
     decoded = null;
     if ((cast _Runtime.isArray(data) : Bool)) {
-      (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([data, function(v:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(v), 'number') : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(v), 0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (new flighthq._internal._UInt32Array(data) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) {
       (decoded = cast (((cast _Runtime.strictEquals(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'encoding'] : Array<Dynamic>)), 'csv') : Bool) ? (cast _Runtime.callValue(decodeTiledCsvLayer, cast ([data] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(decodeTiledBase64Layer, cast ([data, _Runtime.callValue(TiledJsonParse.asCompression__tiledJsonParse, cast ([_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.inflate; })] : Array<Dynamic>)) : Dynamic)) : Dynamic));
     } }

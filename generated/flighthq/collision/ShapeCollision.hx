@@ -3,6 +3,8 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.collision.ConvexVertices.writeAabbVertices;
+import flighthq.collision.ConvexVertices.writeObbVertices;
 import flighthq.collision.Manifold.clearCollisionManifold;
 import flighthq.geometry.Vector2.createVector2;
 import flighthq.geometry.Vector2.normalizeVector2;
@@ -63,15 +65,15 @@ class ShapeCollision {
   }
 
   public static function testAabbObbCollision(a:CollisionAabb, b:CollisionObb, out:CollisionManifold):Bool {
-    _Runtime.callValue(ShapeCollision.writeAabbVertices__shapeCollision, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
-    _Runtime.callValue(ShapeCollision.writeObbVertices__shapeCollision, cast ([b, ShapeCollision.scratchB__shapeCollision] : Array<Dynamic>));
+    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
+    _Runtime.callValue(writeObbVertices, cast ([b, ShapeCollision.scratchB__shapeCollision] : Array<Dynamic>));
     return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, ShapeCollision.scratchB__shapeCollision, 4.0, out] : Array<Dynamic>));
     return cast null;
   }
 
   public static function testAabbPolygonCollision(a:CollisionAabb, b:CollisionPolygon, out:CollisionManifold):Bool {
     var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(ShapeCollision.writeAabbVertices__shapeCollision, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
+    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
     bPoints = _Runtime.field(b, 'points');
     return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
     return cast null;
@@ -164,15 +166,15 @@ class ShapeCollision {
   }
 
   public static function testObbObbCollision(a:CollisionObb, b:CollisionObb, out:CollisionManifold):Bool {
-    _Runtime.callValue(ShapeCollision.writeObbVertices__shapeCollision, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
-    _Runtime.callValue(ShapeCollision.writeObbVertices__shapeCollision, cast ([b, ShapeCollision.scratchB__shapeCollision] : Array<Dynamic>));
+    _Runtime.callValue(writeObbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
+    _Runtime.callValue(writeObbVertices, cast ([b, ShapeCollision.scratchB__shapeCollision] : Array<Dynamic>));
     return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, ShapeCollision.scratchB__shapeCollision, 4.0, out] : Array<Dynamic>));
     return cast null;
   }
 
   public static function testObbPolygonCollision(a:CollisionObb, b:CollisionPolygon, out:CollisionManifold):Bool {
     var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(ShapeCollision.writeObbVertices__shapeCollision, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
+    _Runtime.callValue(writeObbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
     bPoints = _Runtime.field(b, 'points');
     return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
     return cast null;
@@ -499,56 +501,6 @@ class ShapeCollision {
     penHigh = (maxB - minA);
     return cast ((cast ((cast penLow : Float) < (cast penHigh : Float)) : Bool) ? (cast penLow : Dynamic) : (cast penHigh : Dynamic));
     return cast null;
-  }
-
-  public static function writeAabbVertices__shapeCollision(aabb:CollisionAabb, out:flighthq._internal._Float64Array):Void {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    minX = _Runtime.field(aabb, 'minX');
-    minY = _Runtime.field(aabb, 'minY');
-    maxX = _Runtime.field(aabb, 'maxX');
-    maxY = _Runtime.field(aabb, 'maxY');
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 0.0, minX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 1.0, minY);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 2.0, maxX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 3.0, minY);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 4.0, maxX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 5.0, maxY);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 6.0, minX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 7.0, maxY);
-  }
-
-  public static function writeObbVertices__shapeCollision(obb:CollisionObb, out:flighthq._internal._Float64Array):Void {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var halfW:Dynamic = cast _Runtime.UNDEFINED;
-    var halfH:Dynamic = cast _Runtime.UNDEFINED;
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var wx:Dynamic = cast _Runtime.UNDEFINED;
-    var wy:Dynamic = cast _Runtime.UNDEFINED;
-    var hx:Dynamic = cast _Runtime.UNDEFINED;
-    var hy:Dynamic = cast _Runtime.UNDEFINED;
-    cx = _Runtime.field(obb, 'x');
-    cy = _Runtime.field(obb, 'y');
-    halfW = _Runtime.field(obb, 'halfW');
-    halfH = _Runtime.field(obb, 'halfH');
-    cos = HxMath.cos(_Runtime.field(obb, 'rotation'));
-    sin = HxMath.sin(_Runtime.field(obb, 'rotation'));
-    wx = (cos * halfW);
-    wy = (sin * halfW);
-    hx = (-sin * halfH);
-    hy = (cos * halfH);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 0.0, ((cx - wx) - hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 1.0, ((cy - wy) - hy));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 2.0, ((cx + wx) - hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 3.0, ((cy + wy) - hy));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 4.0, ((cx + wx) + hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 5.0, ((cy + wy) + hy));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 6.0, ((cx - wx) + hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 7.0, ((cy - wy) + hy));
   }
 
   public static final scratchA__shapeCollision:Dynamic = new flighthq._internal._Float64Array(8.0);

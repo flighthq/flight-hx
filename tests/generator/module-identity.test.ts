@@ -25,7 +25,7 @@ describe('generated Haxe module identities', () => {
     expect(() => validateHaxeModuleIdentities(modules)).not.toThrow();
   });
 
-  it('reports every namespace and secondary-type collision together', () => {
+  it('accepts a secondary-type collision owned by a namespace module', () => {
     const modules: IrModule[] = [
       {
         declarations: [
@@ -65,8 +65,49 @@ describe('generated Haxe module identities', () => {
       },
     ];
 
+    expect(() => validateHaxeModuleIdentities(modules)).not.toThrow();
+  });
+
+  it('reports unresolved secondary-type collisions', () => {
+    const modules: IrModule[] = [
+      {
+        declarations: [
+          {
+            exported: true,
+            kind: 'type',
+            name: 'ElectronApp',
+            origin,
+            type: { kind: 'dynamic' },
+            typeParameters: [],
+          },
+        ],
+        haxePackage: 'flighthq.hostElectron',
+        imports: [],
+        name: 'ElectronModule',
+        packageName: '@flighthq/host-electron',
+        source: origin.source,
+      },
+      {
+        declarations: [
+          {
+            exported: true,
+            kind: 'type',
+            name: 'ElectronApp',
+            origin: { ...origin, source: 'upstream/packages/host-electron/src/other.ts' },
+            type: { kind: 'dynamic' },
+            typeParameters: [],
+          },
+        ],
+        haxePackage: 'flighthq.hostElectron',
+        imports: [],
+        name: 'Other',
+        packageName: '@flighthq/host-electron',
+        source: 'upstream/packages/host-electron/src/other.ts',
+      },
+    ];
+
     expect(() => validateHaxeModuleIdentities(modules)).toThrowError(
-      /flighthq\.hostElectron\.ElectronApp:.*electronModule\.ts.*electronApp\.ts/isu,
+      /flighthq\.hostElectron\.ElectronApp:.*electronModule\.ts.*other\.ts/isu,
     );
   });
 });

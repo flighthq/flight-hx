@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyPixelateEffectToCanvas = api.applyPixelateEffectToCanvas;
 export const defaultCanvasPixelateEffectRunner = api.defaultCanvasPixelateEffectRunner;
+export const registerCanvasPixelateEffect = api.registerCanvasPixelateEffect;

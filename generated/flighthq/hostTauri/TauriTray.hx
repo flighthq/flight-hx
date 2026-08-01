@@ -3,11 +3,11 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
-import flighthq.hostTauri.TauriModule.TauriMenuItemHandle;
-import flighthq.hostTauri.TauriModule.TauriTrayIcon;
-import flighthq.hostTauri.TauriModule.TauriTrayIconEvent;
 import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriMenuItemHandle;
+import flighthq.types.TauriApi.TauriTrayIcon;
+import flighthq.types.TauriApi.TauriTrayIconEvent;
 import flighthq.types.Tray.TrayBackend;
 import flighthq.types.Tray.TrayEventData;
 import flighthq.types.Tray.TrayEventType;
@@ -43,7 +43,7 @@ class TauriTray {
       } }] : Array<Dynamic>)), 'then', cast ([function(icon:Dynamic) {
         _Runtime.setField(record, 'icon', icon);
       }] : Array<Dynamic>)), function() {
-      
+
       });
       return cast id;
     }, destroy: function(id:Dynamic) {
@@ -51,13 +51,13 @@ class TauriTray {
       record = ((cast trays : flighthq._internal._Map).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
-      
+
       }] : Array<Dynamic>));
       ((cast trays : flighthq._internal._Map).delete_(id));
     }, displayBalloon: function() {
-    
+
     }, removeBalloon: function() {
-    
+
     }, getBounds: function() {
       return cast null;
     }, getCapabilities: function() {
@@ -92,25 +92,25 @@ class TauriTray {
           });
         });
       }, cast ([] : Array<Dynamic>)), function() {
-      
+
       }));
     }, setIcon: function(id:Dynamic, icon:Dynamic) {
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'icon'), 'setIcon', cast ([icon] : Array<Dynamic>)), 'catch', cast ([function() {
-      
+
       }] : Array<Dynamic>));
     }, setIgnoreDoubleClickEvents: function() {
-    
+
     }, setPressedIcon: function() {
-    
+
     }, setTemplate: function() {
-    
+
     }, setTitle: function(id:Dynamic, title:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.setField(record, 'title', title);
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'setTitle', cast ([title] : Array<Dynamic>)), 'catch', cast ([function() {
-      
+
       }] : Array<Dynamic>));
     }, setTooltip: function(id:Dynamic, tooltip:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
@@ -118,7 +118,7 @@ class TauriTray {
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.setField(record, 'tooltip', tooltip);
       _Runtime.callOptionalProperty(_Runtime.callOptionalProperty(_Runtime.field(record, 'icon'), 'setTooltip', cast ([tooltip] : Array<Dynamic>)), 'catch', cast ([function() {
-      
+
       }] : Array<Dynamic>));
     }, subscribe: function(listener:Dynamic) {
       (eventListener = cast (listener : Dynamic));

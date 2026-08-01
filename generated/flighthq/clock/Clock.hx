@@ -3,81 +3,122 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.clock.AddClockChild as Facade_Clock_flighthq_clock_AddClockChild;
-import flighthq.clock.AdvanceClock as Facade_Clock_flighthq_clock_AdvanceClock;
-import flighthq.clock.CreateClock as Facade_Clock_flighthq_clock_CreateClock;
-import flighthq.clock.DisposeClock as Facade_Clock_flighthq_clock_DisposeClock;
-import flighthq.clock.EnableClockSignals as Facade_Clock_flighthq_clock_EnableClockSignals;
-import flighthq.clock.GetClockEffectiveScale as Facade_Clock_flighthq_clock_GetClockEffectiveScale;
-import flighthq.clock.GetClockParent as Facade_Clock_flighthq_clock_GetClockParent;
-import flighthq.clock.IsClockEffectivelyPaused as Facade_Clock_flighthq_clock_IsClockEffectivelyPaused;
-import flighthq.clock.PauseClock as Facade_Clock_flighthq_clock_PauseClock;
-import flighthq.clock.ResetClock as Facade_Clock_flighthq_clock_ResetClock;
-import flighthq.clock.SetClockScale as Facade_Clock_flighthq_clock_SetClockScale;
+import flighthq.clock.ClockSignals as Facade_Clock_flighthq_clock_ClockSignals;
+import flighthq.signals.Emitter.emitSignal;
+import flighthq.signals.Slot.clearSignal;
 import flighthq.types.Clock;
 import flighthq.types.ClockOptions;
 import flighthq.types.Signal;
 
 class Clock {
   public static function addClockChild(parent:flighthq.types.Clock, child:flighthq.types.Clock):Void {
-    Facade_Clock_flighthq_clock_AddClockChild.addClockChild(parent, child);
+    if ((cast _Runtime.strictEquals(_Runtime.field(child, 'parent'), parent) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(child, 'parent'), null) : Bool)) { _Runtime.callValue(removeClockChild, cast ([_Runtime.field(child, 'parent'), child] : Array<Dynamic>)); }
+    _Runtime.setField(child, 'parent', parent);
+    _Runtime.callProperty(_Runtime.field(parent, 'children'), 'push', cast ([child] : Array<Dynamic>));
   }
 
   public static function advanceClock(clock:flighthq.types.Clock, deltaSeconds:Float):Void {
-    Facade_Clock_flighthq_clock_AdvanceClock.advanceClock(clock, deltaSeconds);
+    var scaledDelta:Dynamic = cast _Runtime.UNDEFINED;
+    var children:Dynamic = cast _Runtime.UNDEFINED;
+    scaledDelta = ((cast _Runtime.field(clock, 'paused') : Bool) ? (cast 0.0 : Dynamic) : (cast (deltaSeconds * _Runtime.field(clock, 'scale')) : Dynamic));
+    _Runtime.setField(clock, 'deltaTime', scaledDelta);
+    _Runtime.setField(clock, 'elapsed', (_Runtime.field(clock, 'elapsed') + scaledDelta));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(clock, 'onTick')], [scaledDelta]]), 1); }
+    children = _Runtime.field(clock, 'children');
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
+        _Runtime.callValue(advanceClock, cast ([flighthq._internal._StaticIndex.readArray(children, i), scaledDelta] : Array<Dynamic>));
+        i++;
+      }
+    }
   }
 
   public static function createChildClock(parent:flighthq.types.Clock, ?options:ClockOptions):flighthq.types.Clock {
-    return cast Facade_Clock_flighthq_clock_CreateClock.createChildClock(parent, options);
+    var child:Dynamic = cast _Runtime.UNDEFINED;
+    child = _Runtime.callValue(createClock, cast ([options] : Array<Dynamic>));
+    _Runtime.callValue(addClockChild, cast ([parent, child] : Array<Dynamic>));
+    return cast child;
     return cast null;
   }
 
   public static function createClock(?options:ClockOptions):flighthq.types.Clock {
-    return cast Facade_Clock_flighthq_clock_CreateClock.createClock(options);
+    return cast { scale: _Runtime.coalesce(_Runtime.optionalField(options, 'scale'), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(_Runtime.optionalField(options, 'paused'), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
     return cast null;
   }
 
   public static function disposeClock(clock:flighthq.types.Clock):Void {
-    Facade_Clock_flighthq_clock_DisposeClock.disposeClock(clock);
+    var children:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'parent'), null) : Bool)) { _Runtime.callValue(removeClockChild, cast ([_Runtime.field(clock, 'parent'), clock] : Array<Dynamic>)); }
+    children = _Runtime.field(clock, 'children');
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
+        _Runtime.setField(flighthq._internal._StaticIndex.readArray(children, i), 'parent', null);
+        i++;
+      }
+    }
+    _Runtime.setLength(children, 0.0);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) { _Runtime.callValue(clearSignal, cast ([_Runtime.field(clock, 'onTick')] : Array<Dynamic>)); }
   }
 
   public static function enableClockSignals(clock:flighthq.types.Clock):Signal<Dynamic> {
-    return cast Facade_Clock_flighthq_clock_EnableClockSignals.enableClockSignals(clock);
+    return cast Facade_Clock_flighthq_clock_ClockSignals.enableClockSignals(clock);
     return cast null;
   }
 
   public static function getClockEffectiveScale(clock:flighthq.types.Clock):Float {
-    return cast Facade_Clock_flighthq_clock_GetClockEffectiveScale.getClockEffectiveScale(clock);
+    var scale:Dynamic = cast _Runtime.UNDEFINED;
+    var current:Null<flighthq.types.Clock> = cast _Runtime.UNDEFINED;
+    scale = _Runtime.field(clock, 'scale');
+    current = _Runtime.field(clock, 'parent');
+    while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
+      (scale = cast ((scale * _Runtime.field(current, 'scale')) : Dynamic));
+      (current = cast (_Runtime.field(current, 'parent') : Dynamic));
+    }
+    return cast scale;
     return cast null;
   }
 
   public static function getClockParent(clock:flighthq.types.Clock):Null<flighthq.types.Clock> {
-    return cast Facade_Clock_flighthq_clock_GetClockParent.getClockParent(clock);
+    return cast _Runtime.field(clock, 'parent');
     return cast null;
   }
 
   public static function isClockEffectivelyPaused(clock:flighthq.types.Clock):Bool {
-    return cast Facade_Clock_flighthq_clock_IsClockEffectivelyPaused.isClockEffectivelyPaused(clock);
+    var current:Null<flighthq.types.Clock> = cast _Runtime.UNDEFINED;
+    current = clock;
+    while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
+      if ((cast _Runtime.field(current, 'paused') : Bool)) { return cast true; }
+      (current = cast (_Runtime.field(current, 'parent') : Dynamic));
+    }
+    return cast false;
     return cast null;
   }
 
   public static function pauseClock(clock:flighthq.types.Clock):Void {
-    Facade_Clock_flighthq_clock_PauseClock.pauseClock(clock);
+    _Runtime.setField(clock, 'paused', true);
   }
 
   public static function removeClockChild(parent:flighthq.types.Clock, child:flighthq.types.Clock):Void {
-    Facade_Clock_flighthq_clock_AddClockChild.removeClockChild(parent, child);
+    var index:Dynamic = cast _Runtime.UNDEFINED;
+    index = _Runtime.callProperty(_Runtime.field(parent, 'children'), 'indexOf', cast ([child] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { return; }
+    _Runtime.splice(_Runtime.field(parent, 'children'), Std.int(index), Std.int(1.0), []);
+    _Runtime.setField(child, 'parent', null);
   }
 
   public static function resetClock(clock:flighthq.types.Clock):Void {
-    Facade_Clock_flighthq_clock_ResetClock.resetClock(clock);
+    _Runtime.setField(clock, 'elapsed', 0.0);
+    _Runtime.setField(clock, 'deltaTime', 0.0);
   }
 
   public static function resumeClock(clock:flighthq.types.Clock):Void {
-    Facade_Clock_flighthq_clock_PauseClock.resumeClock(clock);
+    _Runtime.setField(clock, 'paused', false);
   }
 
   public static function setClockScale(clock:flighthq.types.Clock, scale:Float):Void {
-    Facade_Clock_flighthq_clock_SetClockScale.setClockScale(clock, scale);
+    _Runtime.setField(clock, 'scale', scale);
   }
 }

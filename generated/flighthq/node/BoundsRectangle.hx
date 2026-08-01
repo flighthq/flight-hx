@@ -4,24 +4,28 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Runtime.getEntityRuntime;
+import flighthq.geometry.Matrix.copyMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.matrixTransformRectangle;
+import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.geometry.MatrixPool.acquireMatrix;
 import flighthq.geometry.MatrixPool.releaseMatrix;
 import flighthq.geometry.Rectangle.copyRectangle;
 import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.geometry.Rectangle.mergeRectangle;
+import flighthq.geometry.Rectangle.setEmptyRectangle;
 import flighthq.node.Hierarchy.getNodeChildCount;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
+import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeLocalMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
-import flighthq.node.Transform2d.ensureNodeWorldMatrix;
-import flighthq.node.Transform2d.getNodeLocalMatrix;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
 import flighthq.types.HasBoundsRectangle.BoundsNode;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
+import flighthq.types.Matrix;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
@@ -50,10 +54,15 @@ class BoundsRectangle {
     }
   }
 
+  public static function computeNodeRootLocalBoundsRectangle<Traits>(out:RectangleLike, root:Spatial2DNode<Traits>):Void {
+    _Runtime.callValue(setEmptyRectangle, cast ([out] : Array<Dynamic>));
+    _Runtime.callValue(BoundsRectangle.mergeRootLocalBounds__boundsRectangle, cast ([out, root, null] : Array<Dynamic>));
+  }
+
   public static function ensureNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsUsingLocalBoundsId'), _Runtime.field(runtime, 'localBoundsId')) : Bool)) {
+    if ((cast !(cast _Runtime.callValue(BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle, cast ([target, runtime] : Array<Dynamic>)) : Bool) : Bool)) {
       _Runtime.callValue(BoundsRectangle.recomputeLocalBoundsRectangle__boundsRectangle, cast ([target, runtime] : Array<Dynamic>));
     }
   }
@@ -61,7 +70,7 @@ class BoundsRectangle {
   public static function ensureNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'boundsUsingLocalBoundsId'), _Runtime.field(runtime, 'localBoundsId')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'boundsUsingLocalTransformId'), _Runtime.field(runtime, 'localTransformId')) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast _Runtime.callValue(BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle, cast ([target, runtime] : Array<Dynamic>)) : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'boundsUsingLocalBoundsId'), _Runtime.field(runtime, 'localBoundsId')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'boundsUsingLocalTransformId'), _Runtime.field(runtime, 'localTransformId')) : Bool)) : Bool)) {
       _Runtime.callValue(BoundsRectangle.recomputeNodeBoundsRectangle__boundsRectangle, cast ([target, runtime] : Array<Dynamic>));
     }
   }
@@ -72,7 +81,7 @@ class BoundsRectangle {
     var hasChildren:Dynamic = cast _Runtime.UNDEFINED;
     var forceRecompute:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
-    localBoundsInvalid = !_Runtime.strictEquals(_Runtime.field(runtime, 'worldBoundsUsingLocalBoundsId'), _Runtime.field(runtime, 'localBoundsId'));
+    localBoundsInvalid = ((cast !(cast _Runtime.callValue(BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle, cast ([target, runtime] : Array<Dynamic>)) : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldBoundsUsingLocalBoundsId'), _Runtime.field(runtime, 'localBoundsId')) : Bool));
     hasChildren = !_Runtime.strictEquals(_Runtime.callValue(getNodeChildCount, cast ([target] : Array<Dynamic>)), 0.0);
     forceRecompute = false;
     if ((cast ((cast !(cast hasChildren : Bool) : Bool) && (cast !(cast localBoundsInvalid : Bool) : Bool)) : Bool)) {
@@ -134,6 +143,33 @@ class BoundsRectangle {
     _Runtime.setField(runtime, 'boundsUsingLocalTransformId', _Runtime.field(runtime, 'localTransformId'));
   }
 
+  public static function isNodeLocalBoundsRectangleValid__boundsRectangle<Traits>(target:BoundsNode<Traits>, runtime:Dynamic):Bool {
+    return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsUsingLocalBoundsId'), _Runtime.field(runtime, 'localBoundsId')), function():Dynamic return cast _Runtime.coalesce(_Runtime.callOptionalValue(runtime.isLocalBoundsRectangleValid, cast ([target] : Array<Dynamic>)), function():Dynamic return cast true));
+    return cast null;
+  }
+
+  public static function mergeRootLocalBounds__boundsRectangle<Traits>(out:RectangleLike, node:Spatial2DNode<Traits>, transform:Null<Matrix>):Void {
+    var localBounds:Dynamic = cast _Runtime.UNDEFINED;
+    var children:Dynamic = cast _Runtime.UNDEFINED;
+    localBounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([node] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(transform, null) : Bool)) {
+      _Runtime.callValue(copyRectangle, cast ([BoundsRectangle._rootLocalNodeBounds__boundsRectangle, localBounds] : Array<Dynamic>));
+    } else {
+      _Runtime.callValue(matrixTransformRectangle, cast ([BoundsRectangle._rootLocalNodeBounds__boundsRectangle, transform, localBounds] : Array<Dynamic>));
+    }
+    _Runtime.callValue(mergeRectangle, cast ([out, out, BoundsRectangle._rootLocalNodeBounds__boundsRectangle] : Array<Dynamic>));
+    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
+    for (child in _Runtime.iterable(children)) {
+      if ((cast !(cast _Runtime.field(child, 'enabled') : Bool) : Bool)) { continue; }
+      var childTransform:Dynamic = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
+      var childLocal:Dynamic = _Runtime.callValue(getNodeLocalMatrix, cast ([(cast child : Spatial2DNode<Traits>)] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(transform, null) : Bool)) { _Runtime.callValue(copyMatrix, cast ([childTransform, childLocal] : Array<Dynamic>)); } else { _Runtime.callValue(multiplyMatrix, cast ([childTransform, transform, childLocal] : Array<Dynamic>)); }
+      _Runtime.callValue(BoundsRectangle.mergeRootLocalBounds__boundsRectangle, cast ([out, (cast child : Spatial2DNode<Traits>), childTransform] : Array<Dynamic>));
+      _Runtime.callValue(releaseMatrix, cast ([childTransform] : Array<Dynamic>));
+    }
+  }
+
   public static function recomputeLocalBoundsRectangle__boundsRectangle<Traits>(target:BoundsNode<Traits>, runtime:Dynamic):Void {
     if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast (_Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) : Dynamic)); }
     _Runtime.callValue(runtime.computeLocalBoundsRectangle, cast ([runtime.localBoundsRectangle, target] : Array<Dynamic>));
@@ -188,4 +224,6 @@ class BoundsRectangle {
   }
 
   public static final _tempBoundsRectangle__boundsRectangle:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
+
+  public static final _rootLocalNodeBounds__boundsRectangle:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 }

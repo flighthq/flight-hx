@@ -838,7 +838,7 @@ class Filesystem {
       );
     }, watch: function() {
       return cast function() {
-      
+
       };
     }, getPath: function() {
       return cast '';

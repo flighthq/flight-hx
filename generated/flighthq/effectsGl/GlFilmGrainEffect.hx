@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.FilmGrainEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
@@ -30,6 +31,10 @@ class GlFilmGrainEffect {
   public static final defaultGlFilmGrainEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyFilmGrainEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FilmGrainEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlFilmGrainEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'FilmGrainEffect', defaultGlFilmGrainEffectRunner] : Array<Dynamic>));
+  }
 
   public static final FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_size;\nuniform float u_seed;\nout vec4 o_color;\nfloat hash(vec2 p) {\n  p = floor(p / u_size);\n  return fract(sin(dot(p, vec2(127.1, 311.7)) + u_seed) * 43758.5453123);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float n = hash(v_texCoord * 1024.0) - 0.5;\n  o_color = vec4(c.rgb + n * u_intensity, c.a);\n}';
 }

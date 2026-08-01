@@ -3,9 +3,9 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.bitmap.Bitmap.createBitmap;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.surface.Surface.createSurface;
-import flighthq.types.Surface;
+import flighthq.types.Bitmap;
 import flighthq.types.WgpuRenderState;
 
 class WgpuSurface {
@@ -30,7 +30,7 @@ class WgpuSurface {
     return cast null;
   }
 
-  public static function createSurfaceFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Surface> {
+  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Bitmap> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,7 +39,7 @@ class WgpuSurface {
         var height:Dynamic = cast _Runtime.UNDEFINED;
         var bytesPerRow:Dynamic = cast _Runtime.UNDEFINED;
         var mapped:Dynamic = cast _Runtime.UNDEFINED;
-        var surface:Dynamic = cast _Runtime.UNDEFINED;
+        var bitmap:Dynamic = cast _Runtime.UNDEFINED;
         var out:Dynamic = cast _Runtime.UNDEFINED;
         var swizzleBGRA:Dynamic = cast _Runtime.UNDEFINED;
         runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -47,7 +47,7 @@ class WgpuSurface {
         var __flowBranch0:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(buffer, null) : Bool) || (cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
           __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.reject(_Runtime.error('createSurfaceFromWgpuRenderState requires enableWgpuFrameCapture(state) before rendering, then a submitWgpuRenderPass.'));
+            return flighthq._internal._Async.reject(_Runtime.error('createBitmapFromWgpuRenderState requires enableWgpuFrameCapture(state) before rendering, then a submitWgpuRenderPass.'));
           });
         } else {
           __flowBranch0 = flighthq._internal._Async.flowNormal();
@@ -59,8 +59,8 @@ class WgpuSurface {
           return flighthq._internal._Async.flatMap(_Runtime.callProperty(buffer, 'mapAsync', cast ([flighthq._internal.backend.WebGpuConstantsBackend.value('GPUMapMode', 'READ')] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
             __awaitValue1;
             mapped = new flighthq._internal._UInt8Array(_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>)));
-            surface = _Runtime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
-            out = surface.data;
+            bitmap = _Runtime.callValue(createBitmap, cast ([width, height] : Array<Dynamic>));
+            out = bitmap.data;
             swizzleBGRA = ((cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm-srgb') : Bool));
             {
               var y:Dynamic = 0.0;
@@ -83,7 +83,7 @@ class WgpuSurface {
               }
             }
             _Runtime.callProperty(buffer, 'unmap', cast ([] : Array<Dynamic>));
-            return flighthq._internal._Async.flowReturn(surface);
+            return flighthq._internal._Async.flowReturn(bitmap);
           });
         });
       })

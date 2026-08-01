@@ -10,4 +10,3 @@ export const connectSignal = api.connectSignal;
 export const disconnectSignal = api.disconnectSignal;
 export const hasSignalSlots = api.hasSignalSlots;
 export const isSlotConnected = api.isSlotConnected;
-export { SignalConnectOptions } from '@flighthq/types';

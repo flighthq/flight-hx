@@ -8,14 +8,21 @@ import flighthq.types.Snapshot;
 class CaptureSnapshot {
   public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callOptionalValue(CaptureSnapshot._captureGuard__captureSnapshot, cast ([source] : Array<Dynamic>));
     clone = (cast _Runtime.callValue(_Runtime.globalValue('structuredClone'), cast ([source] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([clone] : Array<Dynamic>));
     return cast (cast clone : Snapshot<Dynamic>);
     return cast null;
   }
 
+  public static function setSnapshotCaptureGuard(guard:Null<Dynamic>):Void {
+    (CaptureSnapshot._captureGuard__captureSnapshot = cast (guard : Dynamic));
+  }
+
+  public static var _captureGuard__captureSnapshot:Null<Dynamic> = _Runtime.explicitNull();
+
   public static function freezeSnapshotDeep__captureSnapshot(value:Dynamic):Void {
-    if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool) || (cast flighthq._internal.DynamicObject.isFrozen(value) : Bool)) : Bool)) {
       return;
     }
     flighthq._internal.DynamicObject.freeze(value);

@@ -122,7 +122,7 @@ class Storage {
     }, subscribeChanges: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
-      
+
       }; }
       handler = function(event:Dynamic) {
         _Runtime.callValue(listener, cast ([{ key: _Runtime.field(event, 'key'), oldValue: _Runtime.field(event, 'oldValue'), newValue: _Runtime.field(event, 'newValue') }] : Array<Dynamic>));

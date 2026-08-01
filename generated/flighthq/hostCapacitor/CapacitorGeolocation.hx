@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPosition;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorPosition;
 import flighthq.types.Geolocation.GeoPosition;
 import flighthq.types.Geolocation.GeoPositionResult;
 import flighthq.types.Geolocation.GeolocationBackend;
@@ -79,7 +79,7 @@ class CapacitorGeolocation {
         if ((cast ((cast !_Runtime.strictEquals(position, null) : Bool) && (cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(listener, cast ([_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)); } else { if ((cast ((cast !_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(onError, cast (['unavailable'] : Array<Dynamic>)); } }
       }] : Array<Dynamic>)), 'then', cast ([function(stringId:Dynamic) {
         if ((cast ((cast watchIds : flighthq._internal._Map).has(numericId)) : Bool)) { ((cast watchIds : flighthq._internal._Map).set(numericId, stringId)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
-        
+
         }); }
       }] : Array<Dynamic>)), function() {
         ((cast watchIds : flighthq._internal._Map).delete_(numericId));
@@ -90,7 +90,7 @@ class CapacitorGeolocation {
       stringId = ((cast watchIds : flighthq._internal._Map).get(id));
       ((cast watchIds : flighthq._internal._Map).delete_(id));
       if ((cast ((cast !_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(stringId, null) : Bool)) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
-      
+
       }); }
     }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -111,7 +111,7 @@ class CapacitorGeolocation {
       );
     }, subscribePermission: function() {
       return cast function() {
-      
+
       };
     } };
     return cast null;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const captureSnapshot = api.captureSnapshot;
+export const setSnapshotCaptureGuard = api.setSnapshotCaptureGuard;

@@ -5,11 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.interaction.HitTests.registerHitTestPrecise;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
-import flighthq.types.DisplayObject;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node2D;
 import flighthq.types.Shape;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types.Types.ShapeKind;
@@ -26,7 +26,7 @@ class RegisterShapeHitTest {
     var regions:Dynamic = cast _Runtime.UNDEFINED;
     regions = _Runtime.callValue(getShapeFillRegions, cast ([_Runtime.field(_Runtime.field((cast source : Shape), 'data'), 'commands')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast -1.0; }
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     for (region in _Runtime.iterable(regions)) {
       if ((cast _Runtime.callValue(containsPathPoint, cast ([_Runtime.field(region, 'path'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'x'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'y')] : Array<Dynamic>)) : Bool)) { return cast 0.0; }
     }

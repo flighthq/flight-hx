@@ -3,12 +3,32 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.MedianEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class MedianEffect {
   public static function createMedianEffect(?options:Dynamic):flighthq.types.MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'MedianEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getMedianEffectPadding(effect:flighthq.types.MedianEffect):RenderEffectPadding {
+    var radius:Dynamic = cast _Runtime.UNDEFINED;
+    radius = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0)));
+    return cast { bottom: radius, left: radius, right: radius, top: radius };
+    return cast null;
+  }
+
+  public static function registerMedianEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'MedianEffect', MedianEffect.resolveMedianEffectPadding__medianEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveMedianEffectPadding__medianEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getMedianEffectPadding, cast ([(cast effect : flighthq.types.MedianEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

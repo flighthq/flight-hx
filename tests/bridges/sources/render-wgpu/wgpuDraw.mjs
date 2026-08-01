@@ -6,14 +6,19 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const applyWgpuBlendMode = api.applyWgpuBlendMode;
+export const bindWgpuBitmapTexture = api.bindWgpuBitmapTexture;
+export const bindWgpuCompressedImageTexture = api.bindWgpuCompressedImageTexture;
 export const bindWgpuImageResourceTexture = api.bindWgpuImageResourceTexture;
 export const bindWgpuTexture = api.bindWgpuTexture;
+export const bindWgpuVideoTexture = api.bindWgpuVideoTexture;
 export const buildWgpuRenderTargetBindGroup = api.buildWgpuRenderTargetBindGroup;
 export const createWgpuTextureEntry = api.createWgpuTextureEntry;
+export const destroyWgpuVideoTexture = api.destroyWgpuVideoTexture;
 export const drawWgpuQuad = api.drawWgpuQuad;
 export const drawWgpuQuadWithTransform = api.drawWgpuQuadWithTransform;
 export const enableWgpuBlendModeSupport = api.enableWgpuBlendModeSupport;
-export const getWgpuRenderProxyColorTransform = api.getWgpuRenderProxyColorTransform;
+export const getWgpuRenderProxyColorScaleBias = api.getWgpuRenderProxyColorScaleBias;
+export const resolveWgpuSmoothingBindGroup = api.resolveWgpuSmoothingBindGroup;
 export const submitWgpuQuadDraw = api.submitWgpuQuadDraw;
 export const updateWgpuTextureEntry = api.updateWgpuTextureEntry;
 export const warmWgpuPipelines = api.warmWgpuPipelines;

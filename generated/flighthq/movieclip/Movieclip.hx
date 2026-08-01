@@ -7,8 +7,6 @@ import flighthq.movieclip.MovieClip as Facade_Movieclip_flighthq_movieclip_Movie
 import flighthq.movieclip.SpritesheetTimelineSource as Facade_Movieclip_flighthq_movieclip_SpritesheetTimelineSource;
 import flighthq.types.FrameScript;
 import flighthq.types.MovieClip;
-import flighthq.types.MovieClip.MovieClipData;
-import flighthq.types.MovieClip.MovieClipRuntime;
 import flighthq.types.MovieClipSignals;
 import flighthq.types.PartialNode;
 import flighthq.types.Spritesheet;
@@ -23,16 +21,6 @@ class Movieclip {
 
   public static function createMovieClip(?obj:PartialNode<MovieClip>):MovieClip {
     return cast Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClip(obj);
-    return cast null;
-  }
-
-  public static function createMovieClipData(?data:Dynamic):MovieClipData {
-    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClipData(data);
-    return cast null;
-  }
-
-  public static function createMovieClipRuntime():MovieClipRuntime {
-    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.createMovieClipRuntime();
     return cast null;
   }
 
@@ -62,11 +50,6 @@ class Movieclip {
 
   public static function getMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Null<FrameScript> {
     return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipFrameScript(clip, frame);
-    return cast null;
-  }
-
-  public static function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
-    return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipRuntime(source);
     return cast null;
   }
 

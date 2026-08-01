@@ -6,12 +6,22 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const addTextureAtlasRegion = api.addTextureAtlasRegion;
+export const addTextureAtlasRegionCorners = api.addTextureAtlasRegionCorners;
 export const addTextureAtlasRegionRectangle = api.addTextureAtlasRegionRectangle;
-export const addTextureAtlasRegionRectangleXY = api.addTextureAtlasRegionRectangleXY;
 export const addTextureAtlasRegionVector2 = api.addTextureAtlasRegionVector2;
+export const buildTextureAtlasRegionIndex = api.buildTextureAtlasRegionIndex;
+export const clearTextureAtlasRegions = api.clearTextureAtlasRegions;
 export const createTextureAtlasRegion = api.createTextureAtlasRegion;
+export const explainTextureAtlasRegionTexture = api.explainTextureAtlasRegionTexture;
 export const getTextureAtlasRegionById = api.getTextureAtlasRegionById;
 export const getTextureAtlasRegionByName = api.getTextureAtlasRegionByName;
+export const getTextureAtlasRegionCount = api.getTextureAtlasRegionCount;
+export const getTextureAtlasRegionFrame = api.getTextureAtlasRegionFrame;
 export const getTextureAtlasRegionSequence = api.getTextureAtlasRegionSequence;
+export const getTextureAtlasRegionTexture = api.getTextureAtlasRegionTexture;
 export const getTextureAtlasRegionUv = api.getTextureAtlasRegionUv;
+export const getTextureAtlasRegionUvQuad = api.getTextureAtlasRegionUvQuad;
+export const hasTextureAtlasRegion = api.hasTextureAtlasRegion;
+export const removeTextureAtlasRegion = api.removeTextureAtlasRegion;
 export const setTextureAtlasRegion = api.setTextureAtlasRegion;
+export const setTextureAtlasRegionTextureGuard = api.setTextureAtlasRegionTextureGuard;

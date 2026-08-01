@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 
 class _Internal {
   public static final nullSignalEmit:Dynamic = function() {
-  
+
   };
 }

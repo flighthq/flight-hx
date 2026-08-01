@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyScanlinesEffectToGl = api.applyScanlinesEffectToGl;
 export const defaultGlScanlinesEffectRunner = api.defaultGlScanlinesEffectRunner;
+export const registerGlScanlinesEffect = api.registerGlScanlinesEffect;

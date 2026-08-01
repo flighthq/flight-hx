@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyBokehDepthOfFieldEffectToGl = api.applyBokehDepthOfFieldEffectToGl;
 export const defaultGlBokehDepthOfFieldEffectRunner = api.defaultGlBokehDepthOfFieldEffectRunner;
+export const registerGlBokehDepthOfFieldEffect = api.registerGlBokehDepthOfFieldEffect;

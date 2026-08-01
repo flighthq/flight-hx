@@ -26,12 +26,13 @@ import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.Adjustment;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.WgpuRenderEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuRenderEffectPipeline {
-  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline):Void {
+  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline, colorSpace:RenderTargetColorSpace = 'srgb'):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
@@ -40,10 +41,11 @@ class WgpuRenderEffectPipeline {
     h = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height');
     format = ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'options'), 'format'), 'rgba16f') : Bool) ? (cast 'rgba16float' : Dynamic) : (cast _Runtime.field(state, 'format') : Dynamic));
     if ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null) : Bool)) {
-      _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createWgpuRenderTarget, cast ([state, w, h, format] : Array<Dynamic>)));
+      _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createWgpuRenderTarget, cast ([state, w, h, format, colorSpace] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(resizeWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget'), w, h] : Array<Dynamic>));
     }
+    _Runtime.setField(_Runtime.field(pipeline, 'sceneTarget'), 'colorSpace', colorSpace);
     rgba = _Runtime.field(state, 'backgroundColorRgba');
     _Runtime.setField(_Runtime.field(pipeline, 'sceneTarget'), 'clearColors', ((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([_Runtime.callValue(WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline, cast ([rgba] : Array<Dynamic>))] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)));
     _Runtime.callValue(beginWgpuRenderPass, cast ([state, _Runtime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));
@@ -83,7 +85,7 @@ class WgpuRenderEffectPipeline {
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     _Runtime.callValue(endWgpuRenderPass, cast ([state] : Array<Dynamic>));
     format = _Runtime.field(scene, 'format');
-    descriptor = { width: _Runtime.field(scene, 'width'), height: _Runtime.field(scene, 'height'), format: format };
+    descriptor = { width: _Runtime.field(scene, 'width'), height: _Runtime.field(scene, 'height'), format: format, colorSpace: _Runtime.field(scene, 'colorSpace') };
     source = scene;
     scratchA = null;
     scratchB = null;
@@ -135,12 +137,14 @@ class WgpuRenderEffectPipeline {
 
   public static function presentWgpuRenderEffectResult__wgpuRenderEffectPipeline(state:WgpuRenderState, source:WgpuRenderTarget):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var linear:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'commandEncoder'), null) : Bool)) { return; }
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'effect.present', WgpuRenderEffectPipeline.PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline, 'replace'] : Array<Dynamic>));
+    linear = _Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear');
+    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, ((cast linear : Bool) ? (cast 'effect.present.linear' : Dynamic) : (cast 'effect.present' : Dynamic)), ((cast linear : Bool) ? (cast WgpuRenderEffectPipeline.LINEAR_PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic) : (cast WgpuRenderEffectPipeline.PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic)), 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), null, pipeline, function() {
-    
+
     }] : Array<Dynamic>));
   }
 
@@ -158,4 +162,6 @@ class WgpuRenderEffectPipeline {
   }
 
   public static final PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}';
+
+  public static final LINEAR_PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn linearToSrgb(c0 : vec3f) -> vec3f {\n  let c = max(c0, vec3f(0.0));\n  let low = c * 12.92;\n  let high = 1.055 * pow(c, vec3f(1.0 / 2.4)) - 0.055;\n  return mix(low, high, step(vec3f(0.0031308), c));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let linear = textureSampleLevel(tex, smp, uv, 0.0);\n  return vec4f(linearToSrgb(linear.rgb), linear.a);\n}';
 }

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGodRaysEffectToGl = api.applyGodRaysEffectToGl;
 export const defaultGlGodRaysEffectRunner = api.defaultGlGodRaysEffectRunner;
+export const registerGlGodRaysEffect = api.registerGlGodRaysEffect;

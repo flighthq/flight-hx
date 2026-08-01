@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyOutlineEffectToGl = api.applyOutlineEffectToGl;
 export const defaultGlOutlineEffectRunner = api.defaultGlOutlineEffectRunner;
+export const registerGlOutlineEffect = api.registerGlOutlineEffect;

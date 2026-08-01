@@ -50,11 +50,6 @@ class Velocity {
     return cast null;
   }
 
-  public static function ensureVelocitySample(field:VelocityField, source:Dynamic):VelocitySample {
-    return cast Facade_Velocity_flighthq_velocity_VelocityField.ensureVelocitySample(field, source);
-    return cast null;
-  }
-
   public static function getVelocity(field:VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
     return cast Facade_Velocity_flighthq_velocity_VelocityField.getVelocity(field, source, out);
     return cast null;

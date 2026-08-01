@@ -995,11 +995,11 @@ class Matrix4 {
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, ((right + left) / (right - left)));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 9.0, ((top + bottom) / (top - bottom)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 10.0, (-(zFar + zNear) / (zFar - zNear)));
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 10.0, ((cast _Runtime.strictEquals(zFar, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast (-(zFar + zNear) / (zFar - zNear)) : Dynamic)));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 11.0, -1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 12.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 13.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 14.0, (((-2.0 * zFar) * zNear) / (zFar - zNear)));
+    flighthq._internal._StaticIndex.writeFloat32Array(_out, 14.0, ((cast _Runtime.strictEquals(zFar, HxMath.POSITIVE_INFINITY) : Bool) ? (cast (-2.0 * zNear) : Dynamic) : (cast (((-2.0 * zFar) * zNear) / (zFar - zNear)) : Dynamic)));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 15.0, 0.0);
   }
 

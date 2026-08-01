@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const beginWgpuRenderPass = api.beginWgpuRenderPass;
 export const createWgpuRenderTarget = api.createWgpuRenderTarget;
+export const declareWgpuRenderTargetColorSpace = api.declareWgpuRenderTargetColorSpace;
 export const destroyWgpuRenderTarget = api.destroyWgpuRenderTarget;
 export const drawWgpuRenderTargetResult = api.drawWgpuRenderTargetResult;
 export const endWgpuRenderPass = api.endWgpuRenderPass;

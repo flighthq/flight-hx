@@ -3,24 +3,25 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.particlesFormats.Detect.detectParticleFormat;
-import flighthq.particlesFormats.LibgdxParse.LibgdxParseOptions;
 import flighthq.particlesFormats.LibgdxParse.parseLibgdxParticle;
 import flighthq.particlesFormats.LibgdxParse.parseLibgdxParticleDocument;
-import flighthq.particlesFormats.ParticleDesignerParse.ParticleDesignerParseOptions;
 import flighthq.particlesFormats.ParticleDesignerParse.parseParticleDesignerPlist;
 import flighthq.particlesFormats.ParticleDesignerParse.parseParticleDesignerPlistDocument;
 import flighthq.particlesFormats.PixiParse.parsePixiParticle;
 import flighthq.particlesFormats.PixiParse.parsePixiParticleDocument;
 import flighthq.particlesFormats.SpineParse.parseSpineParticle;
 import flighthq.particlesFormats.SpineParse.parseSpineParticleDocument;
-import flighthq.particlesFormats.StarlingPexParse.StarlingPexParseOptions;
 import flighthq.particlesFormats.StarlingPexParse.parseStarlingPex;
 import flighthq.particlesFormats.StarlingPexParse.parseStarlingPexDocument;
-import flighthq.particlesFormats.UnityParse.UnityParseOptions;
 import flighthq.particlesFormats.UnityParse.parseUnityParticle;
 import flighthq.particlesFormats.UnityParse.parseUnityParticleDocument;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ParticleConfigParse.ParseParticleConfigOptions;
+import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.Types.LibgdxParticleFormatKind;
 import flighthq.types.Types.ParticleDesignerFormatKind;
@@ -28,16 +29,13 @@ import flighthq.types.Types.PixiParticleFormatKind;
 import flighthq.types.Types.SpineParticleFormatKind;
 import flighthq.types.Types.StarlingPexFormatKind;
 import flighthq.types.Types.UnityParticleFormatKind;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._ParticleFormatKindValues.LibgdxParticleFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.ParticleDesignerFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.PixiParticleFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.SpineParticleFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.StarlingPexFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKind;
-
-typedef ParseParticleConfigOptions = Dynamic;
-
-typedef ParticleConfigParseResult = { var config:ParticleEmitterConfig; var format:Null<String>; var warnings:Array<String>; };
 
 class ParseParticleConfig {
   public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
@@ -60,39 +58,46 @@ class ParseParticleConfig {
 
   public static function parseParticleConfigDocument(text:String, ?options:ParseParticleConfigOptions):ParticleConfigParseResult {
     var format:Dynamic = cast _Runtime.UNDEFINED;
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     format = _Runtime.callValue(detectParticleFormat, cast ([text] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(format, null) : Bool)) {
-      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: null, warnings: cast (['unknown-format: input did not match any supported particle format'] : Array<Dynamic>) };
+      var diagnostics:Array<ImportDiagnostic> = cast ([] : Array<Dynamic>);
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.unknown-format', 'parseParticleConfigDocument', { reason: 'no-format-detected' }] : Array<Dynamic>));
+      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: null };
     }
     try {
       if ((cast _Runtime.strictEquals(format, LibgdxParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseLibgdxParticleDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: result.config, format: format, warnings: result.warnings };
+        return cast { config: result.config, diagnostics: result.diagnostics, format: format };
       }
       if ((cast _Runtime.strictEquals(format, ParticleDesignerFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseParticleDesignerPlistDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: result.config, format: format, warnings: result.warnings };
+        return cast { config: result.config, diagnostics: result.diagnostics, format: format };
       }
       if ((cast _Runtime.strictEquals(format, PixiParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parsePixiParticleDocument, cast ([text] : Array<Dynamic>));
-        return cast { config: result.config, format: format, warnings: result.warnings };
+        return cast { config: result.config, diagnostics: result.diagnostics, format: format };
       }
       if ((cast _Runtime.strictEquals(format, SpineParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseSpineParticleDocument, cast ([text] : Array<Dynamic>));
-        return cast { config: result.config, format: format, warnings: result.warnings };
+        return cast { config: result.config, diagnostics: result.diagnostics, format: format };
       }
       if ((cast _Runtime.strictEquals(format, StarlingPexFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseStarlingPexDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: result.config, format: format, warnings: result.warnings };
+        return cast { config: result.config, diagnostics: result.diagnostics, format: format };
       }
       if ((cast _Runtime.strictEquals(format, UnityParticleFormatKind) : Bool)) {
         var result:Dynamic = _Runtime.callValue(parseUnityParticleDocument, cast ([text, options] : Array<Dynamic>));
-        return cast { config: result.config, format: format, warnings: result.warnings };
+        return cast { config: result.config, diagnostics: result.diagnostics, format: format };
       }
     } catch (err:Dynamic) {
-      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: format, warnings: cast (['parse-error: ' + Std.string(_Runtime.field((cast err : haxe.Exception), 'message')) + ''] : Array<Dynamic>) };
+      var diagnostics:Array<ImportDiagnostic> = cast ([] : Array<Dynamic>);
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.parse-error', 'parseParticleConfigDocument', { message: _Runtime.field((cast err : haxe.Exception), 'message') }] : Array<Dynamic>));
+      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: format };
     }
-    return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), format: format, warnings: cast (['unknown-format: format \'' + Std.string(format) + '\' has no registered parser'] : Array<Dynamic>) };
+    diagnostics = cast ([] : Array<Dynamic>);
+    _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.unknown-format', 'parseParticleConfigDocument', { reason: 'no-registered-parser' }] : Array<Dynamic>));
+    return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: format };
     return cast null;
   }
 }

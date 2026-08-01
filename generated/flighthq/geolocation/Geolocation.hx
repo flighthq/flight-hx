@@ -18,7 +18,7 @@ class Geolocation {
   public static final _emptyOptions__geolocation:GeolocationRequestOptions = {  };
 
   public static final _noopUnsubscribe__geolocation:Dynamic = function() {
-  
+
   };
 
   public static function clearGeolocationWatch(id:Float):Void {
@@ -144,7 +144,7 @@ class Geolocation {
         (handler = cast (function() return _Runtime.callValue(listener, cast ([(cast _Runtime.field(s, 'state') : GeolocationPermissionState)] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(s, 'addEventListener', cast (['change', handler] : Array<Dynamic>));
       }] : Array<Dynamic>)), function() {
-      
+
       });
       return cast function() {
         if ((cast ((cast !_Runtime.strictEquals(status, null) : Bool) && (cast !_Runtime.strictEquals(handler, null) : Bool)) : Bool)) {
@@ -159,7 +159,7 @@ class Geolocation {
       if ((cast ((cast _Runtime.strictEquals(geo, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(geo, 'watchPosition')), 'function') : Bool)) : Bool)) { return cast -1.0; }
       try {
         return cast _Runtime.callProperty(geo, 'watchPosition', cast ([function(position:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.callValue(Geolocation.mapWebPosition__geolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)), ((cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function(error:Dynamic) return _Runtime.callValue(onError, cast ([_Runtime.callValue(Geolocation.mapWebPositionError__geolocation, cast ([error] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic) : (cast function() {
-        
+
         } : Dynamic)), _Runtime.callValue(Geolocation.toPositionOptions__geolocation, cast ([options] : Array<Dynamic>))] : Array<Dynamic>));
       } catch (__error:Dynamic) {
         return cast -1.0;

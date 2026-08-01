@@ -3,6 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
 
 typedef SpatialObjectId = Float;
 
@@ -10,7 +11,7 @@ typedef SpatialAabb = { var minX:Float; var minY:Float; var maxX:Float; var maxY
 
 typedef SpatialPair = { var a:SpatialObjectId; var b:SpatialObjectId; };
 
-typedef SpatialIndexBackend = { var insertSpatialObject:Dynamic; var updateSpatialObject:Dynamic; var removeSpatialObject:Dynamic; var clearSpatialIndex:Dynamic; var querySpatialPairs:Dynamic; var querySpatialRegion:Dynamic; var querySpatialPoint:Dynamic; var querySpatialRay:Dynamic; };
+typedef SpatialIndexBackend = { var insertSpatialObject:Dynamic; var updateSpatialObject:Dynamic; var removeSpatialObject:Dynamic; var clearSpatialIndex:Dynamic; var explainSpatialIndexing:Dynamic; var querySpatialPairs:Dynamic; var querySpatialRegion:Dynamic; var querySpatialPoint:Dynamic; var querySpatialRay:Dynamic; };
 
 typedef SpatialIndexRuntime = { var backend:SpatialIndexBackend; };
 

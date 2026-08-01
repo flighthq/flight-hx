@@ -3,8 +3,8 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.TauriApi;
 
 class TauriShortcut {
   public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
@@ -25,19 +25,19 @@ class TauriShortcut {
       });
       return cast true;
     }, setAllEnabled: function() {
-    
+
     }, setEnabled: function() {
       return cast false;
     }, unregister: function(accelerator:Dynamic) {
       ((cast registered : flighthq._internal._Set).delete_(accelerator));
       flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'unregister', cast ([accelerator] : Array<Dynamic>)), function() {
-      
+
       });
       return cast true;
     }, unregisterAll: function() {
       ((cast registered : flighthq._internal._Set).clear());
       flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'unregisterAll', cast ([] : Array<Dynamic>)), function() {
-      
+
       });
     } };
     return cast null;

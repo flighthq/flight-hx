@@ -10,28 +10,29 @@ import flighthq.image.ImageResourceFrom.loadImageResourceFromBase64;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromBlob;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromBytes;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromUrl;
+import flighthq.texture.Texture.createTexture;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
-import flighthq.types.ImageResource;
+import flighthq.types.Image;
 import flighthq.types.TextureAtlas;
 
 class TextureAtlasFrom {
   public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
-    return cast _Runtime.callValue(createTextureAtlas, cast ([{ image: _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTextureAtlas, cast ([{ texture: _Runtime.callValue(createTexture, cast ([{ dimension: '2d', source: _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>)) }] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):TextureAtlas {
-    return cast _Runtime.callValue(createTextureAtlas, cast ([{ image: _Runtime.callValue(createImageResourceFromImageBitmap, cast ([bitmap] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTextureAtlas, cast ([{ texture: _Runtime.callValue(createTexture, cast ([{ dimension: '2d', source: _Runtime.callValue(createImageResourceFromImageBitmap, cast ([bitmap] : Array<Dynamic>)) }] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createTextureAtlasFromImageElement(img:Dynamic):TextureAtlas {
-    return cast _Runtime.callValue(createTextureAtlas, cast ([{ image: _Runtime.callValue(createImageResourceFromImageElement, cast ([img] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTextureAtlas, cast ([{ texture: _Runtime.callValue(createTexture, cast ([{ dimension: '2d', source: _Runtime.callValue(createImageResourceFromImageElement, cast ([img] : Array<Dynamic>)) }] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:ImageResource):TextureAtlas {
-    return cast _Runtime.callValue(createTextureAtlas, cast ([{ image: resource }] : Array<Dynamic>));
+  public static function createTextureAtlasFromImageResource(resource:Dynamic):TextureAtlas {
+    return cast _Runtime.callValue(createTextureAtlas, cast ([{ texture: _Runtime.callValue(createTexture, cast ([{ dimension: '2d', source: resource }] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 

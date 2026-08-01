@@ -3,7 +3,8 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronNotification;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
@@ -74,7 +75,7 @@ class ElectronNotification {
         return flighthq._internal._Async.resolve('');
       });
     }, cancelScheduledNotification: function() {
-    
+
     }, closeNotification: function(id:Dynamic) {
       var n:Dynamic = cast _Runtime.UNDEFINED;
       n = ((cast live : flighthq._internal._Map).get(id));
@@ -107,7 +108,7 @@ class ElectronNotification {
       };
     }, subscribeReply: function() {
       return cast function() {
-      
+
       };
     }, subscribeShow: function(listener:Dynamic) {
       (showListener = cast (listener : Dynamic));

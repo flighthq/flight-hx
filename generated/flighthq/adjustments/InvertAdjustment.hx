@@ -14,7 +14,7 @@ class InvertAdjustment {
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     s = (1.0 - (2.0 * intensity));
-    o = (255.0 * intensity);
+    o = intensity;
     colorMatrix = cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast _Runtime.mergeObjects([{ kind: 'InvertAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;

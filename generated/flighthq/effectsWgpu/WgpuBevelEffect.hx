@@ -6,14 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitPass;
 import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectErasePass;
 import flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
+import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.BevelEffect;
+import flighthq.types.WgpuDualSourceEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -73,6 +74,10 @@ class WgpuBevelEffect {
   public static final defaultWgpuBevelEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyBevelEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect)] : Array<Dynamic>));
   };
+
+  public static function registerWgpuBevelEffect(state:WgpuRenderState):Void {
+    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BevelEffect', defaultWgpuBevelEffectRunner] : Array<Dynamic>));
+  }
 
   public static final BEVEL_COMPOSITE_WGSL__wgpuBevelEffect:Dynamic = '\nstruct Uniforms {\n  highlight : vec4f,\n  shadow : vec4f,\n  offset : vec2f,\n  intensity : f32,\n  clipMode : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var fieldTex : texture_2d<f32>;\n@group(1) @binding(1) var fieldSmp : sampler;\n@group(2) @binding(0) var srcTex : texture_2d<f32>;\n@group(2) @binding(1) var srcSmp : sampler;\n\nfn sampleField(uv : vec2f) -> f32 {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) { return 0.0; }\n  return textureSampleLevel(fieldTex, fieldSmp, uv, 0.0).a;\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let lit = sampleField(uv - uni.offset);\n  let shade = sampleField(uv + uni.offset);\n  let gradient = lit - shade;\n  let srcA = textureSampleLevel(srcTex, srcSmp, uv, 0.0).a;\n  let isHighlight = gradient >= 0.0;\n  let color = select(uni.shadow.xyz, uni.highlight.xyz, isHighlight);\n  let colorAlpha = select(uni.shadow.w, uni.highlight.w, isHighlight);\n  var clip = 1.0;\n  if (uni.clipMode == 1.0) { clip = srcA; }\n  else if (uni.clipMode == 2.0) { clip = 1.0 - srcA; }\n  let edge = min(1.0, abs(gradient) * uni.intensity);\n  let a = edge * colorAlpha * clip;\n  return vec4f(color * a, a);\n}';
 

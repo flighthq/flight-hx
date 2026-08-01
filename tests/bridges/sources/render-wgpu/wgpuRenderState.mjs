@@ -5,6 +5,8 @@ const api = compiled.flighthq.renderWgpu.WgpuRenderState;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const copyWgpuRenderStateRegistrations = api.copyWgpuRenderStateRegistrations;
+export const createWgpuOffscreenRenderState = api.createWgpuOffscreenRenderState;
 export const createWgpuRenderState = api.createWgpuRenderState;
 export const createWgpuRenderStateRuntime = api.createWgpuRenderStateRuntime;
 export const destroyWgpuRenderState = api.destroyWgpuRenderState;

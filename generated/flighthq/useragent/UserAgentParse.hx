@@ -32,6 +32,7 @@ class UserAgentParse {
     if ((cast _Runtime.callProperty(_Runtime.regexp('iphone|ipod|android.*mobile|windows phone|blackberry|bb\\d+|mobile safari', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) {
       return cast DeviceFormFactorPhone;
     }
+    if ((cast ((cast ((cast maxTouchPoints : Float) > (cast 1.0 : Float)) : Bool) && (cast _Runtime.callProperty(_Runtime.regexp('macintosh|mac os x', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) : Bool)) { return cast DeviceFormFactorTablet; }
     if ((cast _Runtime.callProperty(_Runtime.regexp('win(?:dows)?nt|macintosh|mac os x|linux(?!.*android)|x11', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorDesktop; }
     if ((cast _Runtime.strictEquals(maxTouchPoints, 0.0) : Bool)) { return cast DeviceFormFactorDesktop; }
     return cast DeviceFormFactorUnknown;

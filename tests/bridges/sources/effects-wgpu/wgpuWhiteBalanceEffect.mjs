@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyWhiteBalanceEffectToWgpu = api.applyWhiteBalanceEffectToWgpu;
 export const defaultWgpuWhiteBalanceEffectRunner = api.defaultWgpuWhiteBalanceEffectRunner;
+export const registerWgpuWhiteBalanceEffect = api.registerWgpuWhiteBalanceEffect;

@@ -3,10 +3,11 @@ package flighthq.lighting;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.geometry.BoundingSphere.createBoundingSphere;
+import flighthq.color.Luminance.getColorLuminance;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Light;
 import flighthq.types.PointLight;
+import flighthq.types.SpotLight;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Types.DirectionalLightKind;
@@ -23,6 +24,41 @@ import flighthq.types._internal._PointLightValues.PointLightKind;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
 class LightAnalysis {
+  public static function getLightContributionAtBoundingSphere(light:Dynamic, bounds:BoundingSphereLike):Float {
+    var centerDx:Dynamic = cast _Runtime.UNDEFINED;
+    var centerDy:Dynamic = cast _Runtime.UNDEFINED;
+    var centerDz:Dynamic = cast _Runtime.UNDEFINED;
+    var centerDistance:Dynamic = cast _Runtime.UNDEFINED;
+    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    var distanceSquared:Dynamic = cast _Runtime.UNDEFINED;
+    var window:Dynamic = cast _Runtime.UNDEFINED;
+    var contribution:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
+    centerDx = (bounds.center.x - _Runtime.field(light, 'position').x);
+    centerDy = (bounds.center.y - _Runtime.field(light, 'position').y);
+    centerDz = (bounds.center.z - _Runtime.field(light, 'position').z);
+    centerDistance = _Runtime.hypot(centerDx, centerDy, centerDz);
+    distance = HxMath.max((centerDistance - bounds.radius), 0.0);
+    distanceSquared = (distance * distance);
+    window = 1.0;
+    if ((cast ((cast _Runtime.field(light, 'range') : Float) > (cast 0.0 : Float)) : Bool)) {
+      var factor:Dynamic = (distanceSquared / (_Runtime.field(light, 'range') * _Runtime.field(light, 'range')));
+      var windowed:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (1.0 - (factor * factor))));
+      (window = cast ((windowed * windowed) : Dynamic));
+    }
+    contribution = ((_Runtime.callValue(getLightLuminance, cast ([light] : Array<Dynamic>)) * window) / HxMath.max(distanceSquared, 0.0001));
+    if ((cast _Runtime.strictEquals(_Runtime.field(light, 'kind'), SpotLightKind) : Bool)) {
+      var spot:Dynamic = (cast light : SpotLight);
+      var directionLength:Dynamic = _Runtime.hypot(_Runtime.field(spot, 'direction').x, _Runtime.field(spot, 'direction').y, _Runtime.field(spot, 'direction').z);
+      var inverseRayLength:Dynamic = ((cast ((cast centerDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / centerDistance) : Dynamic) : (cast 0.0 : Dynamic));
+      var inverseDirectionLength:Dynamic = ((cast ((cast directionLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / directionLength) : Dynamic) : (cast 0.0 : Dynamic));
+      var cosine:Dynamic = (((((_Runtime.field(spot, 'direction').x * centerDx) + (_Runtime.field(spot, 'direction').y * centerDy)) + (_Runtime.field(spot, 'direction').z * centerDz)) * inverseRayLength) * inverseDirectionLength);
+      (contribution = cast ((contribution * _Runtime.callValue(LightAnalysis.smoothstep__lightAnalysis, cast ([_Runtime.field(spot, 'outerConeCos'), _Runtime.field(spot, 'innerConeCos'), ((cast ((cast centerDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast cosine : Dynamic) : (cast 1.0 : Dynamic))] : Array<Dynamic>))) : Dynamic));
+    }
+    return cast contribution;
+    return cast null;
+  }
+
   public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
@@ -58,42 +94,41 @@ class LightAnalysis {
   public static function getLightLuminance(light:Light):Float {
     var colored:Dynamic = cast _Runtime.UNDEFINED;
     var color:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var luma:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     colored = (cast light : { @:optional var color:Float; @:optional var intensity:Float; });
     color = _Runtime.field(colored, 'color');
     if ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 0.0; }
-    r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
-    g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
-    b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
-    luma = (((0.2126 * r) + (0.7152 * g)) + (0.0722 * b));
     intensity = _Runtime.coalesce(_Runtime.field(colored, 'intensity'), function():Dynamic return cast 1.0);
-    return cast (luma * intensity);
+    return cast (_Runtime.callValue(getColorLuminance, cast ([color] : Array<Dynamic>)) * intensity);
     return cast null;
   }
 
   public static function hasLightInfluenceOnBounds(light:Light, bounds:BoundingSphereLike):Bool {
+    var kind:Dynamic = cast _Runtime.UNDEFINED;
+    var spatial:Dynamic = cast _Runtime.UNDEFINED;
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;
     var distSq:Dynamic = cast _Runtime.UNDEFINED;
     var radSum:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getLightInfluenceBounds, cast ([LightAnalysis.scratchSphere__lightAnalysis, light] : Array<Dynamic>));
-    if ((cast ((cast LightAnalysis.scratchSphere__lightAnalysis.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast true; }
+    kind = _Runtime.field(light, 'kind');
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
+      return cast true;
+    }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(kind, PointLightKind) : Bool) && (cast !_Runtime.strictEquals(kind, SpotLightKind) : Bool)) : Bool) && (cast !_Runtime.strictEquals(kind, AreaLightKind) : Bool)) : Bool)) { return cast true; }
+    spatial = (cast light : PointLight);
+    if ((cast ((cast _Runtime.field(spatial, 'range') : Float) < (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    dx = (LightAnalysis.scratchSphere__lightAnalysis.center.x - bounds.center.x);
-    dy = (LightAnalysis.scratchSphere__lightAnalysis.center.y - bounds.center.y);
-    dz = (LightAnalysis.scratchSphere__lightAnalysis.center.z - bounds.center.z);
+    dx = (_Runtime.field(spatial, 'position').x - bounds.center.x);
+    dy = (_Runtime.field(spatial, 'position').y - bounds.center.y);
+    dz = (_Runtime.field(spatial, 'position').z - bounds.center.z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
-    radSum = (LightAnalysis.scratchSphere__lightAnalysis.radius + bounds.radius);
+    radSum = (_Runtime.field(spatial, 'range') + bounds.radius);
     return cast ((cast distSq : Float) <= (cast (radSum * radSum) : Float));
     return cast null;
   }
 
-  public static function isLightShadowCasting(light:Light):Bool {
+  public static function isLightCastingShadow(light:Light):Bool {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool)) {
@@ -103,5 +138,11 @@ class LightAnalysis {
     return cast null;
   }
 
-  public static final scratchSphere__lightAnalysis:Dynamic = _Runtime.callValue(createBoundingSphere, cast ([0.0, 0.0, 0.0, -1.0] : Array<Dynamic>));
+  public static function smoothstep__lightAnalysis(edge0:Float, edge1:Float, value:Float):Float {
+    var t:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(edge0, edge1) : Bool)) { return cast ((cast ((cast value : Float) < (cast edge0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    t = HxMath.max(0.0, HxMath.min(1.0, ((value - edge0) / (edge1 - edge0))));
+    return cast ((t * t) * (3.0 - (2.0 * t)));
+    return cast null;
+  }
 }

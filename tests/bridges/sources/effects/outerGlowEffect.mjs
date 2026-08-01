@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createOuterGlowEffect = api.createOuterGlowEffect;
+export const getOuterGlowEffectPadding = api.getOuterGlowEffectPadding;
+export const registerOuterGlowEffectPaddingResolver = api.registerOuterGlowEffectPaddingResolver;

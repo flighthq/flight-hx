@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
-import flighthq.types.Texture.TextureColorSpace;
 
-typedef CubeTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var colorSpace:TextureColorSpace; var faces:Array<Null<ImageResource>>; var sampler:Sampler; };
-
-typedef CubeTextureLike = EntityWithoutRuntime<flighthq.types.CubeTexture>;
+typedef CubeTexture = Texture;

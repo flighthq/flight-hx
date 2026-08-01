@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
@@ -41,6 +42,10 @@ class GlGodRaysEffect {
   public static final defaultGlGodRaysEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyGodRaysEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GodRaysEffect)] : Array<Dynamic>));
   };
+
+  public static function registerGlGodRaysEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'GodRaysEffect', defaultGlGodRaysEffectRunner] : Array<Dynamic>));
+  }
 
   public static function buildGodRaysFragment__glGodRaysEffect(samples:Float):String {
     return cast ((GlGodRaysEffect.GOD_RAYS_FRAGMENT_HEAD__glGodRaysEffect + _Runtime.toFixed(samples, 1.0)) + GlGodRaysEffect.GOD_RAYS_FRAGMENT_TAIL__glGodRaysEffect);

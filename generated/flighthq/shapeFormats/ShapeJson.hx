@@ -5,45 +5,44 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.shape.Shape.createShape;
-import flighthq.shape.ShapeCommands.appendShapeBeginBitmapFill;
 import flighthq.shape.ShapeCommands.appendShapeBeginFill;
 import flighthq.shape.ShapeCommands.appendShapeBeginGradientFill;
+import flighthq.shape.ShapeCommands.appendShapeBeginTextureFill;
 import flighthq.shape.ShapeCommands.appendShapeCircle;
 import flighthq.shape.ShapeCommands.appendShapeCubicCurveTo;
 import flighthq.shape.ShapeCommands.appendShapeCurveTo;
 import flighthq.shape.ShapeCommands.appendShapeDrawTriangles;
 import flighthq.shape.ShapeCommands.appendShapeEllipse;
 import flighthq.shape.ShapeCommands.appendShapeEndFill;
-import flighthq.shape.ShapeCommands.appendShapeLineBitmapStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineGradientStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineStyle;
+import flighthq.shape.ShapeCommands.appendShapeLineTextureStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineTo;
 import flighthq.shape.ShapeCommands.appendShapeMoveTo;
 import flighthq.shape.ShapeCommands.appendShapePath;
 import flighthq.shape.ShapeCommands.appendShapeRectangle;
 import flighthq.shape.ShapeCommands.appendShapeRoundRectangle;
-import flighthq.types.ImageResource;
 import flighthq.types.Shape;
-
-typedef ShapeBitmapReference = { var index:Float; };
-
-typedef ShapeJsonFormatOptions = { @:optional var space:Dynamic; };
-
-typedef ShapeJsonParseOptions = { @:optional var resolveBitmap:Dynamic; };
+import flighthq.types.ShapeJson.ShapeJsonFormatOptions;
+import flighthq.types.ShapeJson.ShapeJsonParseOptions;
 
 typedef ShapeCommandAppender__shapeJson = Dynamic;
 
 typedef SerializedShapeCommand__shapeJson = { var key:String; var args:Array<Dynamic>; };
 
+typedef ShapeCommandArgType__shapeJson = String;
+
+typedef ShapeCommandArgSpec__shapeJson = { var required:Float; var types:Array<ShapeCommandArgType__shapeJson>; };
+
 class ShapeJson {
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var entries:Array<SerializedShapeCommand__shapeJson> = cast _Runtime.UNDEFINED;
-    var bitmapOrdinal:Dynamic = cast _Runtime.UNDEFINED;
+    var textureOrdinal:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
     entries = cast ([] : Array<Dynamic>);
-    bitmapOrdinal = 0.0;
+    textureOrdinal = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
@@ -61,7 +60,7 @@ class ShapeJson {
           } else { if ((cast _Runtime.callValue(ShapeJson.isSerializableScalarOrArray__shapeJson, cast ([value] : Array<Dynamic>)) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([value] : Array<Dynamic>));
           } else {
-            _Runtime.callProperty(args, 'push', cast ([{ bitmap: { index: bitmapOrdinal++ } }] : Array<Dynamic>));
+            _Runtime.callProperty(args, 'push', cast ([{ texture: { index: textureOrdinal++ } }] : Array<Dynamic>));
           } } }
           a++;
         }
@@ -76,7 +75,7 @@ class ShapeJson {
   public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
     var root:Dynamic = cast _Runtime.UNDEFINED;
     var rawCommands:Dynamic = cast _Runtime.UNDEFINED;
-    var resolveBitmap:Dynamic = cast _Runtime.UNDEFINED;
+    var resolveTexture:Dynamic = cast _Runtime.UNDEFINED;
     var shape:Dynamic = cast _Runtime.UNDEFINED;
     try {
       (root = cast (_Runtime.jsonParse(text) : Dynamic));
@@ -87,7 +86,7 @@ class ShapeJson {
     if ((cast !_Runtime.strictEquals(_Runtime.field(root, 'shapeFormat'), ShapeJson.SHAPE_JSON_FORMAT__shapeJson) : Bool)) { return cast null; }
     rawCommands = _Runtime.field(root, 'commands');
     if ((cast !(cast _Runtime.isArray(rawCommands) : Bool) : Bool)) { return cast null; }
-    resolveBitmap = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.resolveBitmap; });
+    resolveTexture = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.resolveTexture; });
     shape = _Runtime.callValue(createShape, cast ([] : Array<Dynamic>));
     for (entry in _Runtime.iterable(rawCommands)) {
       if ((cast !(cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([entry] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
@@ -99,7 +98,7 @@ class ShapeJson {
       var args:Array<Dynamic> = cast ([] : Array<Dynamic>);
       var drop:Dynamic = false;
       for (raw in _Runtime.iterable(rawArgs)) {
-        var reconstructed:Dynamic = _Runtime.callValue(ShapeJson.reconstructShapeCommandArg__shapeJson, cast ([raw, resolveBitmap] : Array<Dynamic>));
+        var reconstructed:Dynamic = _Runtime.callValue(ShapeJson.reconstructShapeCommandArg__shapeJson, cast ([raw, resolveTexture] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(reconstructed, ShapeJson.MALFORMED_ARG__shapeJson) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(reconstructed, ShapeJson.DROP_COMMAND__shapeJson) : Bool)) {
           (drop = cast (true : Dynamic));
@@ -108,27 +107,81 @@ class ShapeJson {
         _Runtime.callProperty(args, 'push', cast ([reconstructed] : Array<Dynamic>));
       }
       if ((cast drop : Bool)) { continue; }
+      if ((cast !(cast _Runtime.callValue(ShapeJson.isValidShapeCommandArgs__shapeJson, cast ([key, args] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
       _Runtime.callValue(appender, cast ([shape, _Runtime.toArray((cast args : Array<Dynamic>))] : Array<Dynamic>));
     }
     return cast shape;
     return cast null;
   }
 
-  public static function reconstructShapeCommandArg__shapeJson(value:Dynamic, resolveBitmap:Dynamic):Dynamic {
+  public static function reconstructShapeCommandArg__shapeJson(value:Dynamic, resolveTexture:Dynamic):Dynamic {
     var type:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
     type = _Runtime.typeofValue(value);
     if ((cast ((cast ((cast _Runtime.strictEquals(type, 'number') : Bool) || (cast _Runtime.strictEquals(type, 'string') : Bool)) : Bool) || (cast _Runtime.strictEquals(type, 'boolean') : Bool)) : Bool)) { return cast value; }
     if ((cast _Runtime.isArray(value) : Bool)) { return cast value; }
     if ((cast !(cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { return cast ShapeJson.MALFORMED_ARG__shapeJson; }
-    if ((cast ((cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([_Runtime.field(value, 'bitmap')] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.field(value, 'bitmap'), 'index')), 'number') : Bool)) : Bool)) {
-      var resolved:Dynamic = _Runtime.coalesce(_Runtime.callOptionalValue(resolveBitmap, cast ([{ index: _Runtime.field(_Runtime.field(value, 'bitmap'), 'index') }] : Array<Dynamic>)), function():Dynamic return cast null);
+    if ((cast ((cast _Runtime.callValue(ShapeJson.isPlainObject__shapeJson, cast ([_Runtime.field(value, 'texture')] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.field(value, 'texture'), 'index')), 'number') : Bool)) : Bool)) {
+      var resolved:Dynamic = _Runtime.coalesce(_Runtime.callOptionalValue(resolveTexture, cast ([{ index: _Runtime.field(_Runtime.field(value, 'texture'), 'index') }] : Array<Dynamic>)), function():Dynamic return cast null);
       return cast ((cast _Runtime.strictEquals(resolved, null) : Bool) ? (cast ShapeJson.DROP_COMMAND__shapeJson : Dynamic) : (cast resolved : Dynamic));
     }
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'a')), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'b')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'c')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'd')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'tx')), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(value, 'ty')), 'number') : Bool)) : Bool)) {
       return cast _Runtime.callValue(createMatrix, cast ([_Runtime.field(value, 'a'), _Runtime.field(value, 'b'), _Runtime.field(value, 'c'), _Runtime.field(value, 'd'), _Runtime.field(value, 'tx'), _Runtime.field(value, 'ty')] : Array<Dynamic>));
     }
     return cast ShapeJson.MALFORMED_ARG__shapeJson;
+    return cast null;
+  }
+
+  public static function isValidShapeCommandArgs__shapeJson(key:String, args:Array<Dynamic>):Bool {
+    var spec:Dynamic = cast _Runtime.UNDEFINED;
+    spec = _Runtime.getIndex(ShapeJson.SHAPE_COMMAND_ARG_SPECS__shapeJson, key);
+    if ((cast _Runtime.strictEquals(spec, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast _Runtime.field(args, 'length') : Float) < (cast _Runtime.field(spec, 'required') : Float)) : Bool) || (cast ((cast _Runtime.field(args, 'length') : Float) > (cast _Runtime.field(_Runtime.field(spec, 'types'), 'length') : Float)) : Bool)) : Bool)) { return cast false; }
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(args, 'length') : Float)) : Bool)) {
+        if ((cast !(cast _Runtime.callValue(ShapeJson.isValidShapeCommandArg__shapeJson, cast ([flighthq._internal._StaticIndex.readArray(args, i), flighthq._internal._StaticIndex.readArray(_Runtime.field(spec, 'types'), i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+        i++;
+      }
+    }
+    return cast true;
+    return cast null;
+  }
+
+  public static function isValidShapeCommandArg__shapeJson(value:Dynamic, type:ShapeCommandArgType__shapeJson):Bool {
+    {
+      var __switchValue = type;
+      if (__switchValue == 'number') {
+        return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool));
+      }
+      else if (__switchValue == 'numbers') {
+        return cast _Runtime.callValue(ShapeJson.isFiniteNumberArray__shapeJson, cast ([value] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'numbersOrNull') {
+        return cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.callValue(ShapeJson.isFiniteNumberArray__shapeJson, cast ([value] : Array<Dynamic>)) : Bool));
+      }
+      else if (__switchValue == 'string') {
+        return cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'string');
+      }
+      else if (__switchValue == 'boolean') {
+        return cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'boolean');
+      }
+      else if (__switchValue == 'matrixOrNull') {
+        return cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.callValue(ShapeJson.isMatrixValue__shapeJson, cast ([value] : Array<Dynamic>)) : Bool));
+      }
+      else if (__switchValue == 'texture') {
+        return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool));
+      }
+    }
+    return cast null;
+  }
+
+  public static function isFiniteNumberArray__shapeJson(value:Dynamic):Bool {
+    if ((cast !(cast _Runtime.isArray(value) : Bool) : Bool)) { return cast false; }
+    for (entry in _Runtime.iterable(value)) {
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'number') : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([entry] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    }
+    return cast true;
     return cast null;
   }
 
@@ -153,7 +206,13 @@ class ShapeJson {
 
   public static final DROP_COMMAND__shapeJson:Dynamic = _Runtime.symbol('shapeFormats.dropCommand');
 
-  public static final SHAPE_JSON_FORMAT__shapeJson:Dynamic = 1.0;
+  public static final SHAPE_JSON_FORMAT__shapeJson:Dynamic = 2.0;
 
-  public static final SHAPE_COMMAND_APPENDERS__shapeJson:Dynamic = { beginBitmapFill: appendShapeBeginBitmapFill, beginFill: appendShapeBeginFill, beginGradientFill: appendShapeBeginGradientFill, cubicCurveTo: appendShapeCubicCurveTo, curveTo: appendShapeCurveTo, drawCircle: appendShapeCircle, drawEllipse: appendShapeEllipse, drawPath: appendShapePath, drawRectangle: appendShapeRectangle, drawRoundRectangle: appendShapeRoundRectangle, drawTriangles: appendShapeDrawTriangles, endFill: appendShapeEndFill, lineBitmapStyle: appendShapeLineBitmapStyle, lineGradientStyle: appendShapeLineGradientStyle, lineStyle: appendShapeLineStyle, lineTo: appendShapeLineTo, moveTo: appendShapeMoveTo };
+  public static final GRADIENT_ARG_SPEC__shapeJson:ShapeCommandArgSpec__shapeJson = { required: 4.0, types: cast (['string', 'numbers', 'numbers', 'numbers', 'matrixOrNull', 'string', 'string', 'number'] : Array<Dynamic>) };
+
+  public static final TEXTURE_ARG_SPEC__shapeJson:ShapeCommandArgSpec__shapeJson = { required: 1.0, types: cast (['texture', 'matrixOrNull'] : Array<Dynamic>) };
+
+  public static final SHAPE_COMMAND_ARG_SPECS__shapeJson:Dynamic = { beginTextureFill: ShapeJson.TEXTURE_ARG_SPEC__shapeJson, beginFill: { required: 0.0, types: cast (['number', 'number'] : Array<Dynamic>) }, beginGradientFill: ShapeJson.GRADIENT_ARG_SPEC__shapeJson, cubicCurveTo: { required: 6.0, types: cast (['number', 'number', 'number', 'number', 'number', 'number'] : Array<Dynamic>) }, curveTo: { required: 4.0, types: cast (['number', 'number', 'number', 'number'] : Array<Dynamic>) }, drawCircle: { required: 3.0, types: cast (['number', 'number', 'number'] : Array<Dynamic>) }, drawEllipse: { required: 4.0, types: cast (['number', 'number', 'number', 'number'] : Array<Dynamic>) }, drawPath: { required: 2.0, types: cast (['numbers', 'numbers', 'string'] : Array<Dynamic>) }, drawRectangle: { required: 4.0, types: cast (['number', 'number', 'number', 'number'] : Array<Dynamic>) }, drawRoundRectangle: { required: 6.0, types: cast (['number', 'number', 'number', 'number', 'number', 'number'] : Array<Dynamic>) }, drawTriangles: { required: 1.0, types: cast (['numbers', 'numbersOrNull', 'numbersOrNull', 'string'] : Array<Dynamic>) }, endFill: { required: 0.0, types: cast ([] : Array<Dynamic>) }, lineTextureStyle: ShapeJson.TEXTURE_ARG_SPEC__shapeJson, lineGradientStyle: ShapeJson.GRADIENT_ARG_SPEC__shapeJson, lineStyle: { required: 0.0, types: cast (['number', 'number', 'number', 'boolean', 'string', 'string', 'string', 'number'] : Array<Dynamic>) }, lineTo: { required: 2.0, types: cast (['number', 'number'] : Array<Dynamic>) }, moveTo: { required: 2.0, types: cast (['number', 'number'] : Array<Dynamic>) } };
+
+  public static final SHAPE_COMMAND_APPENDERS__shapeJson:Dynamic = { beginTextureFill: appendShapeBeginTextureFill, beginFill: appendShapeBeginFill, beginGradientFill: appendShapeBeginGradientFill, cubicCurveTo: appendShapeCubicCurveTo, curveTo: appendShapeCurveTo, drawCircle: appendShapeCircle, drawEllipse: appendShapeEllipse, drawPath: appendShapePath, drawRectangle: appendShapeRectangle, drawRoundRectangle: appendShapeRoundRectangle, drawTriangles: appendShapeDrawTriangles, endFill: appendShapeEndFill, lineTextureStyle: appendShapeLineTextureStyle, lineGradientStyle: appendShapeLineGradientStyle, lineStyle: appendShapeLineStyle, lineTo: appendShapeLineTo, moveTo: appendShapeMoveTo };
 }

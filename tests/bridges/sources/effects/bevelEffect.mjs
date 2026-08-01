@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createBevelEffect = api.createBevelEffect;
+export const getBevelEffectPadding = api.getBevelEffectPadding;
+export const registerBevelEffectPaddingResolver = api.registerBevelEffectPaddingResolver;

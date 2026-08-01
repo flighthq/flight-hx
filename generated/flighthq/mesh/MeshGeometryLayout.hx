@@ -7,64 +7,140 @@ import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
+typedef AttributeMapping__meshGeometryLayout = { var destination:Dynamic; var source:Dynamic; var sourceByteLength:Float; };
+
 class MeshGeometryLayout {
   public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
     var srcStride:Dynamic = cast _Runtime.UNDEFINED;
     var dstStride:Dynamic = cast _Runtime.UNDEFINED;
-    var srcFloatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var dstFloatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var dstVertices:Dynamic = cast _Runtime.UNDEFINED;
-    var srcVerts:Dynamic = cast _Runtime.UNDEFINED;
-    var mapping:Array<{ var componentCount:Float; var dstFloatOffset:Float; var srcFloatOffset:Float; }> = cast _Runtime.UNDEFINED;
+    var sourceBytes:Dynamic = cast _Runtime.UNDEFINED;
+    var destinationBytes:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceView:Dynamic = cast _Runtime.UNDEFINED;
+    var destinationView:Dynamic = cast _Runtime.UNDEFINED;
+    var mappings:Array<AttributeMapping__meshGeometryLayout> = cast _Runtime.UNDEFINED;
     srcStride = source.layout.stride;
     dstStride = targetLayout.stride;
-    srcFloatsPerVertex = (srcStride / 4.0);
-    dstFloatsPerVertex = (dstStride / 4.0);
-    vertexCount = ((cast ((cast srcFloatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(source.vertices, 'length') / srcFloatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    dstVertices = new flighthq._internal._Float32Array((vertexCount * dstFloatsPerVertex));
-    srcVerts = source.vertices;
-    mapping = cast ([] : Array<Dynamic>);
+    vertexCount = ((cast ((cast srcStride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(source.vertices, 'byteLength') / srcStride)) : Dynamic) : (cast 0.0 : Dynamic));
+    dstVertices = new flighthq._internal._Float32Array(((vertexCount * dstStride) / 4.0));
+    sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(source.vertices, 'buffer'), _Runtime.field(source.vertices, 'byteOffset'), _Runtime.field(source.vertices, 'byteLength'));
+    destinationBytes = new flighthq._internal._UInt8Array(_Runtime.field(dstVertices, 'buffer'));
+    sourceView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
+    destinationView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(destinationBytes, 'buffer')]);
+    mappings = cast ([] : Array<Dynamic>);
     for (dstAttr in _Runtime.iterable(targetLayout.attributes)) {
-      if ((cast !(cast StringTools.startsWith(dstAttr.format, 'float32') : Bool) : Bool)) { continue; }
-      var dstFloatOffset:Dynamic = (dstAttr.byteOffset / 4.0);
-      var componentCount:Dynamic = _Runtime.callValue(MeshGeometryLayout.getFloat32ComponentCount__meshGeometryLayout, cast ([dstAttr.format] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(componentCount, 0.0) : Bool)) { continue; }
-      var srcAttr:Dynamic = _Runtime.find(source.layout.attributes, function(a:Dynamic) return ((cast _Runtime.strictEquals(a.semantic, dstAttr.semantic) : Bool) && (cast StringTools.startsWith(a.format, 'float32') : Bool)));
+      var srcAttr:Dynamic = _Runtime.find(source.layout.attributes, function(attribute:Dynamic) return _Runtime.strictEquals(attribute.semantic, dstAttr.semantic));
       if ((cast !_Runtime.truthy(srcAttr) : Bool)) { continue; }
-      _Runtime.callProperty(mapping, 'push', cast ([{ componentCount: componentCount, dstFloatOffset: dstFloatOffset, srcFloatOffset: (srcAttr.byteOffset / 4.0) }] : Array<Dynamic>));
+      var sourceByteLength:Dynamic = _Runtime.callValue(MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout, cast ([srcAttr.format] : Array<Dynamic>));
+      var destinationByteLength:Dynamic = _Runtime.callValue(MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout, cast ([dstAttr.format] : Array<Dynamic>));
+      if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(sourceByteLength, 0.0) : Bool) || (cast _Runtime.strictEquals(destinationByteLength, 0.0) : Bool)) : Bool) || (cast ((cast srcAttr.byteOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dstAttr.byteOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (srcAttr.byteOffset + sourceByteLength) : Float) > (cast srcStride : Float)) : Bool)) : Bool) || (cast ((cast (dstAttr.byteOffset + destinationByteLength) : Float) > (cast dstStride : Float)) : Bool)) : Bool)) {
+        continue;
+      }
+      _Runtime.callProperty(mappings, 'push', cast ([{ destination: dstAttr, source: srcAttr, sourceByteLength: sourceByteLength }] : Array<Dynamic>));
     }
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
-        var srcBase:Dynamic = (i * srcFloatsPerVertex);
-        var dstBase:Dynamic = (i * dstFloatsPerVertex);
-        for (__iteration0 in _Runtime.iterable(mapping)) {
-          var dstFloatOffset:Dynamic = _Runtime.field(__iteration0, 'dstFloatOffset');
-          var srcFloatOffset:Dynamic = _Runtime.field(__iteration0, 'srcFloatOffset');
-          var componentCount:Dynamic = _Runtime.field(__iteration0, 'componentCount');
+      var vertex:Dynamic = 0.0;
+      while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
+        for (mapping in _Runtime.iterable(mappings)) {
+          var sourceOffset:Dynamic = ((vertex * srcStride) + _Runtime.field(mapping, 'source').byteOffset);
+          var destinationOffset:Dynamic = ((vertex * dstStride) + _Runtime.field(mapping, 'destination').byteOffset);
+          if ((cast _Runtime.strictEquals(_Runtime.field(mapping, 'source').format, _Runtime.field(mapping, 'destination').format) : Bool)) {
+            _Runtime.callProperty(destinationBytes, 'set', cast ([(cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + _Runtime.field(mapping, 'sourceByteLength')))), destinationOffset] : Array<Dynamic>));
+            continue;
+          }
+          var componentCount:Dynamic = HxMath.min(_Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(mapping, 'source').format] : Array<Dynamic>)), _Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(mapping, 'destination').format] : Array<Dynamic>)));
           {
-            var c:Dynamic = 0.0;
-            while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
-              flighthq._internal._StaticIndex.writeFloat32Array(dstVertices, ((dstBase + dstFloatOffset) + c), flighthq._internal._StaticIndex.readFloat32Array(srcVerts, ((srcBase + srcFloatOffset) + c)));
-              c++;
+            var component:Dynamic = 0.0;
+            while ((cast ((cast component : Float) < (cast componentCount : Float)) : Bool)) {
+              _Runtime.callValue(MeshGeometryLayout.writeVertexFormatComponent__meshGeometryLayout, cast ([destinationView, destinationOffset, _Runtime.field(mapping, 'destination').format, component, _Runtime.callValue(MeshGeometryLayout.readVertexFormatComponent__meshGeometryLayout, cast ([sourceView, sourceOffset, _Runtime.field(mapping, 'source').format, component] : Array<Dynamic>))] : Array<Dynamic>));
+              component++;
             }
           }
         }
-        i++;
+        vertex++;
       }
     }
     return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFloat32ComponentCount__meshGeometryLayout(format:String):Float {
-    if ((cast _Runtime.strictEquals(format, 'float32') : Bool)) { return cast 1.0; }
-    if ((cast _Runtime.strictEquals(format, 'float32x2') : Bool)) { return cast 2.0; }
-    if ((cast _Runtime.strictEquals(format, 'float32x3') : Bool)) { return cast 3.0; }
-    if ((cast _Runtime.strictEquals(format, 'float32x4') : Bool)) { return cast 4.0; }
-    return cast 0.0;
+  public static function getVertexFormatByteLength__meshGeometryLayout(format:Dynamic):Float {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2') {
+        return cast 8.0;
+      }
+      else if (__switchValue == 'float32x3') {
+        return cast 12.0;
+      }
+      else if (__switchValue == 'float32x4') {
+        return cast 16.0;
+      }
+      else if (__switchValue == 'uint16x4') {
+        return cast 8.0;
+      }
+      else if (__switchValue == 'uint8x4' || __switchValue == 'unorm8x4') {
+        return cast 4.0;
+      }
+    }
     return cast null;
+  }
+
+  public static function getVertexFormatComponentCount__meshGeometryLayout(format:Dynamic):Float {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2') {
+        return cast 2.0;
+      }
+      else if (__switchValue == 'float32x3') {
+        return cast 3.0;
+      }
+      else if (__switchValue == 'float32x4' || __switchValue == 'uint16x4' || __switchValue == 'uint8x4' || __switchValue == 'unorm8x4') {
+        return cast 4.0;
+      }
+    }
+    return cast null;
+  }
+
+  public static function readVertexFormatComponent__meshGeometryLayout(view:Dynamic, byteOffset:Float, format:Dynamic, component:Float):Float {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2' || __switchValue == 'float32x3' || __switchValue == 'float32x4') {
+        return cast _Runtime.callProperty(view, 'getFloat32', cast ([(byteOffset + (component * 4.0)), true] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'uint16x4') {
+        return cast _Runtime.callProperty(view, 'getUint16', cast ([(byteOffset + (component * 2.0)), true] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'uint8x4') {
+        return cast _Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'unorm8x4') {
+        return cast (_Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>)) / 255.0);
+      }
+    }
+    return cast null;
+  }
+
+  public static function writeVertexFormatComponent__meshGeometryLayout(view:Dynamic, byteOffset:Float, format:Dynamic, component:Float, value:Float):Void {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2' || __switchValue == 'float32x3' || __switchValue == 'float32x4') {
+        _Runtime.callProperty(view, 'setFloat32', cast ([(byteOffset + (component * 4.0)), value, true] : Array<Dynamic>));
+        return;
+      }
+      else if (__switchValue == 'uint16x4') {
+        _Runtime.callProperty(view, 'setUint16', cast ([(byteOffset + (component * 2.0)), HxMath.round(HxMath.min(65535.0, HxMath.max(0.0, value))), true] : Array<Dynamic>));
+        return;
+      }
+      else if (__switchValue == 'uint8x4') {
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round(HxMath.min(255.0, HxMath.max(0.0, value)))] : Array<Dynamic>));
+        return;
+      }
+      else if (__switchValue == 'unorm8x4') {
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round((HxMath.min(1.0, HxMath.max(0.0, value)) * 255.0))] : Array<Dynamic>));
+      }
+    }
   }
 
   public static final CANONICAL_MESH_GEOMETRY_LAYOUT:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };

@@ -3,12 +3,31 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.getGaussianRenderEffectPadding;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.OuterGlowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class OuterGlowEffect {
   public static function createOuterGlowEffect(?options:Dynamic):flighthq.types.OuterGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OuterGlowEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getOuterGlowEffectPadding(effect:flighthq.types.OuterGlowEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function registerOuterGlowEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'OuterGlowEffect', OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveOuterGlowEffectPadding__outerGlowEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getOuterGlowEffectPadding, cast ([(cast effect : flighthq.types.OuterGlowEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

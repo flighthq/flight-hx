@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyFilmGrainEffectToGl = api.applyFilmGrainEffectToGl;
 export const defaultGlFilmGrainEffectRunner = api.defaultGlFilmGrainEffectRunner;
+export const registerGlFilmGrainEffect = api.registerGlFilmGrainEffect;

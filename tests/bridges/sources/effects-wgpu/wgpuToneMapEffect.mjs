@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyToneMapEffectToWgpu = api.applyToneMapEffectToWgpu;
 export const defaultWgpuToneMapEffectRunner = api.defaultWgpuToneMapEffectRunner;
+export const registerWgpuToneMapEffect = api.registerWgpuToneMapEffect;

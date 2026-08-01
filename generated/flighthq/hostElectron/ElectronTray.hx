@@ -3,14 +3,16 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronMenuItemOptions;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronMenu;
+import flighthq.types.ElectronApi.ElectronMenuItemOptions;
+import flighthq.types.ElectronApi.ElectronTray;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.Tray.TrayBackend;
 import flighthq.types.Tray.TrayEventData;
 import flighthq.types.Tray.TrayEventType;
 
-typedef TrayRecord__electronTray = { var tray:Dynamic; var title:String; var tooltip:String; var menu:Null<Dynamic>; };
+typedef TrayRecord__electronTray = { var tray:flighthq.types.ElectronApi.ElectronTray; var title:String; var tooltip:String; var menu:Null<ElectronMenu>; };
 
 class ElectronTray {
   public static function createElectronTrayBackend(electron:ElectronApi):TrayBackend {
@@ -92,7 +94,7 @@ class ElectronTray {
     }, setPressedIcon: function(id:Dynamic, icon:Dynamic) {
       _Runtime.callOptionalProperty(_Runtime.optionalField(((cast trays : flighthq._internal._Map).get(id)), 'tray'), 'setPressedImage', cast ([icon] : Array<Dynamic>));
     }, setTemplate: function() {
-    
+
     }, setTitle: function(id:Dynamic, title:Dynamic) {
       var record:Dynamic = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map).get(id));
@@ -114,7 +116,7 @@ class ElectronTray {
     return cast null;
   }
 
-  public static function toBounds__electronTray(tray:Dynamic):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
+  public static function toBounds__electronTray(tray:flighthq.types.ElectronApi.ElectronTray):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
     try {
       var bounds:Dynamic = _Runtime.callProperty(tray, 'getBounds', cast ([] : Array<Dynamic>));
       return cast { x: _Runtime.field(bounds, 'x'), y: _Runtime.field(bounds, 'y'), width: _Runtime.field(bounds, 'width'), height: _Runtime.field(bounds, 'height') };

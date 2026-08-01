@@ -4,39 +4,41 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.ColorFromKelvin as Facade_Color_flighthq_color_ColorFromKelvin;
+import flighthq.color.HslColor as Facade_Color_flighthq_color_HslColor;
+import flighthq.color.HsvColor as Facade_Color_flighthq_color_HsvColor;
 import flighthq.color.LerpColor as Facade_Color_flighthq_color_LerpColor;
 import flighthq.color.Luminance as Facade_Color_flighthq_color_Luminance;
 import flighthq.color.Oklab as Facade_Color_flighthq_color_Oklab;
 import flighthq.color.PackColor as Facade_Color_flighthq_color_PackColor;
 import flighthq.color.PremultiplyColorAlpha as Facade_Color_flighthq_color_PremultiplyColorAlpha;
 import flighthq.color.SrgbTransfer as Facade_Color_flighthq_color_SrgbTransfer;
-import flighthq.color._internal._HslColorValues as Facade_Color_flighthq_color__internal__HslColorValues;
-import flighthq.color._internal._HsvColorValues as Facade_Color_flighthq_color__internal__HsvColorValues;
+import flighthq.types.HslColor;
+import flighthq.types.HsvColor;
 import flighthq.types.LinearColor;
 
 class Color {
+  public static function allocateHslColor():HslColor {
+    return cast Facade_Color_flighthq_color_HslColor.allocateHslColor();
+    return cast null;
+  }
+
+  public static function allocateHsvColor():HsvColor {
+    return cast Facade_Color_flighthq_color_HsvColor.allocateHsvColor();
+    return cast null;
+  }
+
+  public static function allocateLinearColor():LinearColor {
+    return cast Facade_Color_flighthq_color_PackColor.allocateLinearColor();
+    return cast null;
+  }
+
+  public static function colorFromKelvin(kelvin:Float):Float {
+    return cast Facade_Color_flighthq_color_ColorFromKelvin.colorFromKelvin(kelvin);
+    return cast null;
+  }
+
   public static function computeRgbHexString(color:Float):String {
     return cast Facade_Color_flighthq_color_PackColor.computeRgbHexString(color);
-    return cast null;
-  }
-
-  public static function createColorFromKelvin(kelvin:Float):Float {
-    return cast Facade_Color_flighthq_color_ColorFromKelvin.createColorFromKelvin(kelvin);
-    return cast null;
-  }
-
-  public static function createHslColor():HslColor {
-    return cast Facade_Color_flighthq_color__internal__HslColorValues.createHslColor();
-    return cast null;
-  }
-
-  public static function createHsvColor():HsvColor {
-    return cast Facade_Color_flighthq_color__internal__HsvColorValues.createHsvColor();
-    return cast null;
-  }
-
-  public static function createLinearColor():LinearColor {
-    return cast Facade_Color_flighthq_color_PackColor.createLinearColor();
     return cast null;
   }
 
@@ -69,11 +71,11 @@ class Color {
   }
 
   public static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
-    Facade_Color_flighthq_color__internal__HslColorValues.hslToRgb(out, h, s, l);
+    Facade_Color_flighthq_color_HslColor.hslToRgb(out, h, s, l);
   }
 
   public static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
-    Facade_Color_flighthq_color__internal__HsvColorValues.hsvToRgb(out, h, s, v);
+    Facade_Color_flighthq_color_HsvColor.hsvToRgb(out, h, s, v);
   }
 
   public static function lerpColor(start:Float, end:Float, t:Float):Float {
@@ -120,12 +122,12 @@ class Color {
   }
 
   public static function rgbToHsl(out:HslColor, color:Float):HslColor {
-    return cast Facade_Color_flighthq_color__internal__HslColorValues.rgbToHsl(out, color);
+    return cast Facade_Color_flighthq_color_HslColor.rgbToHsl(out, color);
     return cast null;
   }
 
   public static function rgbToHsv(out:HsvColor, color:Float):HsvColor {
-    return cast Facade_Color_flighthq_color__internal__HsvColorValues.rgbToHsv(out, color);
+    return cast Facade_Color_flighthq_color_HsvColor.rgbToHsv(out, color);
     return cast null;
   }
 

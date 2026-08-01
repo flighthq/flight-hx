@@ -230,7 +230,7 @@ class Screen {
       var orientation:Dynamic = cast _Runtime.UNDEFINED;
       var detailsRef:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
-      
+
       }; }
       if ((cast _Runtime.strictEquals(_cachedScreens, null) : Bool)) {
         var scratch:Dynamic = _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>));
@@ -688,7 +688,7 @@ class Screen {
     var cancelled:Dynamic = cast _Runtime.UNDEFINED;
     var handleChange:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool) : Bool)) : Bool)) { return cast function() {
-    
+
     }; }
     status = null;
     cancelled = false;
@@ -700,7 +700,7 @@ class Screen {
       (status = cast (s : Dynamic));
       _Runtime.callProperty(s, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>));
     }] : Array<Dynamic>)), function() {
-    
+
     });
     return cast function() {
       (cancelled = cast (true : Dynamic));

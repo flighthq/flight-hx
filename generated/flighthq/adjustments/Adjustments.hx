@@ -13,7 +13,7 @@ import flighthq.adjustments.ColorLutAdjustment as Facade_Adjustments_flighthq_ad
 import flighthq.adjustments.ColorLutCache as Facade_Adjustments_flighthq_adjustments_ColorLutCache;
 import flighthq.adjustments.ColorMatrixAdjustment as Facade_Adjustments_flighthq_adjustments_ColorMatrixAdjustment;
 import flighthq.adjustments.ColorMatrixMath as Facade_Adjustments_flighthq_adjustments_ColorMatrixMath;
-import flighthq.adjustments.ColorTransformAdjustment as Facade_Adjustments_flighthq_adjustments_ColorTransformAdjustment;
+import flighthq.adjustments.ColorScaleBiasAdjustment as Facade_Adjustments_flighthq_adjustments_ColorScaleBiasAdjustment;
 import flighthq.adjustments.ExposureAdjustment as Facade_Adjustments_flighthq_adjustments_ExposureAdjustment;
 import flighthq.adjustments.GrayscaleAdjustment as Facade_Adjustments_flighthq_adjustments_GrayscaleAdjustment;
 import flighthq.adjustments.HueSaturationAdjustment as Facade_Adjustments_flighthq_adjustments_HueSaturationAdjustment;
@@ -21,6 +21,7 @@ import flighthq.adjustments.InvertAdjustment as Facade_Adjustments_flighthq_adju
 import flighthq.adjustments.LiftGammaGainAdjustment as Facade_Adjustments_flighthq_adjustments_LiftGammaGainAdjustment;
 import flighthq.adjustments.LookupTableGradeAdjustment as Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment;
 import flighthq.adjustments.SepiaAdjustment as Facade_Adjustments_flighthq_adjustments_SepiaAdjustment;
+import flighthq.adjustments.TintAdjustment as Facade_Adjustments_flighthq_adjustments_TintAdjustment;
 import flighthq.types.Adjustment;
 import flighthq.types.BrightnessContrastAdjustment;
 import flighthq.types.ChannelMixerAdjustment;
@@ -28,8 +29,10 @@ import flighthq.types.ColorBlindSimulationAdjustment;
 import flighthq.types.ColorGradeAdjustment;
 import flighthq.types.ColorLut;
 import flighthq.types.ColorLutCache;
-import flighthq.types.ColorTransform;
-import flighthq.types.ColorTransformAdjustment;
+import flighthq.types.ColorMatrixAdjustment;
+import flighthq.types.ColorScaleBias;
+import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
+import flighthq.types.ColorScaleBiasAdjustment;
 import flighthq.types.ColorTransformFunction;
 import flighthq.types.ExposureAdjustment;
 import flighthq.types.GrayscaleAdjustment;
@@ -38,6 +41,7 @@ import flighthq.types.InvertAdjustment;
 import flighthq.types.LiftGammaGainAdjustment;
 import flighthq.types.LookupTableGradeAdjustment;
 import flighthq.types.SepiaAdjustment;
+import flighthq.types.TintAdjustment;
 
 class Adjustments {
   public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
@@ -61,10 +65,6 @@ class Adjustments {
 
   public static final COLOR_ADJUSTMENT_NONE:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_NONE;
 
-  public static final COLOR_LUT_DEFAULT_SIZE:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorLut.COLOR_LUT_DEFAULT_SIZE;
-
-  public static final COLOR_MATRIX_LENGTH:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.COLOR_MATRIX_LENGTH;
-
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
     Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.concatColorMatrix(target, source);
   }
@@ -84,16 +84,6 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
-    return cast null;
-  }
-
-  public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createColorBalanceColorMatrix(shadows, midtones, highlights);
-    return cast null;
-  }
-
   public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_ColorBlindSimulationAdjustment.createColorBlindSimulationAdjustment(options);
     return cast null;
@@ -109,23 +99,23 @@ class Adjustments {
     return cast null;
   }
 
+  public static function createColorMatrixAdjustment(colorMatrix:Array<Float>):ColorMatrixAdjustment {
+    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixAdjustment.createColorMatrixAdjustment(colorMatrix);
+    return cast null;
+  }
+
   public static function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
     return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createColorMatrixFromTint(packedRgba, amount);
     return cast null;
   }
 
-  public static function createColorTransformAdjustment(colorTransform:ColorTransform):ColorTransformAdjustment {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorTransformAdjustment.createColorTransformAdjustment(colorTransform);
+  public static function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBiasLike):ColorScaleBiasAdjustment {
+    return cast Facade_Adjustments_flighthq_adjustments_ColorScaleBiasAdjustment.createColorScaleBiasAdjustment(colorScaleBias);
     return cast null;
   }
 
   public static function createContrastColorMatrix(amount:Float):Array<Float> {
     return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createContrastColorMatrix(amount);
-    return cast null;
-  }
-
-  public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createDesaturateColorMatrix(amount);
     return cast null;
   }
 
@@ -136,11 +126,6 @@ class Adjustments {
 
   public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_GrayscaleAdjustment.createGrayscaleAdjustment(options);
-    return cast null;
-  }
-
-  public static function createGrayscaleColorMatrix():Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createGrayscaleColorMatrix();
     return cast null;
   }
 
@@ -164,16 +149,6 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createInvertColorMatrix():Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createInvertColorMatrix();
-    return cast null;
-  }
-
-  public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, ?gamma:Dynamic):Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
-    return cast null;
-  }
-
   public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_LiftGammaGainAdjustment.createLiftGammaGainAdjustment(options);
     return cast null;
@@ -181,16 +156,6 @@ class Adjustments {
 
   public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment.createLookupTableGradeAdjustment(options);
-    return cast null;
-  }
-
-  public static function createOpacityColorMatrix(alpha:Float):Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createOpacityColorMatrix(alpha);
-    return cast null;
-  }
-
-  public static function createPolaroidColorMatrix():Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createPolaroidColorMatrix();
     return cast null;
   }
 
@@ -204,23 +169,8 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createSepiaColorMatrix():Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createSepiaColorMatrix();
-    return cast null;
-  }
-
-  public static function createTechnicolorColorMatrix():Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createTechnicolorColorMatrix();
-    return cast null;
-  }
-
-  public static function createVintageColorMatrix():Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createVintageColorMatrix();
-    return cast null;
-  }
-
-  public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.createWhiteBalanceColorMatrix(temperature, tint);
+  public static function createTintAdjustment(rgba:Float):TintAdjustment {
+    return cast Facade_Adjustments_flighthq_adjustments_TintAdjustment.createTintAdjustment(rgba);
     return cast null;
   }
 
@@ -259,8 +209,13 @@ class Adjustments {
     return cast null;
   }
 
-  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
-    return cast Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorTransform(adjustments, out);
+  public static function resolveColorAdjustmentsColorMatrix(adjustments:Null<Array<Adjustment>>):Null<Array<Float>> {
+    return cast Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorMatrix(adjustments);
+    return cast null;
+  }
+
+  public static function resolveColorAdjustmentsColorScaleBias(adjustments:Null<Array<Adjustment>>, out:ColorScaleBias):Float {
+    return cast Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorScaleBias(adjustments, out);
     return cast null;
   }
 

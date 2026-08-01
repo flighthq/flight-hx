@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyDitherEffectToGl = api.applyDitherEffectToGl;
 export const defaultGlDitherEffectRunner = api.defaultGlDitherEffectRunner;
+export const registerGlDitherEffect = api.registerGlDitherEffect;

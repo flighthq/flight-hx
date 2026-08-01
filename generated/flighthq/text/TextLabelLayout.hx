@@ -3,8 +3,8 @@ package flighthq.text;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.getNodeLocalContentRevision;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutMeasure.getTextLayoutMeasureProvider;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
@@ -21,7 +21,7 @@ class TextLabelLayout {
     var measure:Dynamic = cast _Runtime.UNDEFINED;
     var params:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
+    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
     contentId = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'textLayoutUsingContentId'), contentId) : Bool)) : Bool)) { return; }
     measure = _Runtime.callValue(getTextLayoutMeasureProvider, cast ([] : Array<Dynamic>));
@@ -34,7 +34,7 @@ class TextLabelLayout {
 
   public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime), 'textLayout');
+    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime), 'textLayout');
     return cast null;
   }
 

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyDitherEffectToWgpu = api.applyDitherEffectToWgpu;
 export const defaultWgpuDitherEffectRunner = api.defaultWgpuDitherEffectRunner;
+export const registerWgpuDitherEffect = api.registerWgpuDitherEffect;

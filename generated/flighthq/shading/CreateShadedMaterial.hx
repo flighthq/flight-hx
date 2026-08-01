@@ -5,25 +5,23 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.BlendMode;
-import flighthq.types.Modifier;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.ShadedMaterialOptions;
 import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
-
-typedef ShadedMaterialOptions = { @:optional var diffuse:Float; @:optional var diffuseMap:Dynamic; @:optional var modifiers:Array<Modifier>; @:optional var normalMap:Dynamic; @:optional var normalScale:Float; @:optional var shininess:Float; @:optional var specular:Float; @:optional var specularMap:Dynamic; };
 
 class CreateShadedMaterial {
   public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
     material = (cast _Runtime.callValue(createEntity, cast ([{ kind: ShadedMaterialKind }] : Array<Dynamic>)) : ShadedMaterial);
-    _Runtime.setField(material, 'alphaCutoff', 0.5);
-    _Runtime.setField(material, 'alphaMode', 'opaque');
-    _Runtime.setField(material, 'alphaType', 'straight');
-    _Runtime.setField(material, 'blendMode', BlendModeValue.Normal);
+    _Runtime.setField(material, 'alphaCutoff', _Runtime.coalesce(_Runtime.optionalField(options, 'alphaCutoff'), function():Dynamic return cast 0.5));
+    _Runtime.setField(material, 'alphaMode', _Runtime.coalesce(_Runtime.optionalField(options, 'alphaMode'), function():Dynamic return cast 'opaque'));
+    _Runtime.setField(material, 'alphaType', _Runtime.coalesce(_Runtime.optionalField(options, 'alphaType'), function():Dynamic return cast 'straight'));
+    _Runtime.setField(material, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(options, 'blendMode'), function():Dynamic return cast BlendModeValue.Normal));
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(options, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(options, 'diffuseMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'doubleSided', false);
+    _Runtime.setField(material, 'doubleSided', _Runtime.coalesce(_Runtime.optionalField(options, 'doubleSided'), function():Dynamic return cast false));
     _Runtime.setField(material, 'modifiers', _Runtime.coalesce(_Runtime.optionalField(options, 'modifiers'), function():Dynamic return cast cast ([] : Array<Dynamic>)));
     _Runtime.setField(material, 'normalMap', _Runtime.coalesce(_Runtime.optionalField(options, 'normalMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'normalScale', _Runtime.coalesce(_Runtime.optionalField(options, 'normalScale'), function():Dynamic return cast 1.0));

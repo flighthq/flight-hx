@@ -73,7 +73,7 @@ class Lifecycle {
       var onFocus:Dynamic = cast _Runtime.UNDEFINED;
       var onBlur:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) : Bool)) { return cast function() {
-      
+
       }; }
       (_windowFocused = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
       onFocus = function() {
@@ -106,7 +106,7 @@ class Lifecycle {
       var onPressure:Dynamic = cast _Runtime.UNDEFINED;
       var onPressureRelieved:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
-      
+
       }; }
       onPressure = function(e:Dynamic) {
         var detail:Dynamic = cast _Runtime.UNDEFINED;

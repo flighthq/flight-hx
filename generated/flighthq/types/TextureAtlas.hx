@@ -4,5 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Texture.Texture2D;
 
-typedef TextureAtlas = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var image:Null<ImageResource>; var regions:Array<TextureAtlasRegion>; };
+typedef TextureAtlas = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var texture:Null<Texture2D>; var regions:Array<TextureAtlasRegion>; };

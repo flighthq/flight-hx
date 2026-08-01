@@ -5,4 +5,4 @@ const api = compiled.flighthq.lighting.SceneLights;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createSceneLights = api.createSceneLights;
+export const createScene3DLights = api.createScene3DLights;

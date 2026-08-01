@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyVignetteEffectToGl = api.applyVignetteEffectToGl;
 export const defaultGlVignetteEffectRunner = api.defaultGlVignetteEffectRunner;
+export const registerGlVignetteEffect = api.registerGlVignetteEffect;

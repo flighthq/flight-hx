@@ -3,12 +3,31 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.getGaussianRenderEffectPadding;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.BlurEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class BlurEffect {
   public static function createBlurEffect(?options:Dynamic):flighthq.types.BlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BlurEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getBlurEffectPadding(effect:flighthq.types.BlurEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function registerBlurEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BlurEffect', BlurEffect.resolveBlurEffectPadding__blurEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveBlurEffectPadding__blurEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getBlurEffectPadding, cast ([(cast effect : flighthq.types.BlurEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

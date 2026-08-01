@@ -5,13 +5,10 @@ const api = compiled.flighthq.interaction.DisplayHitTests;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const defaultBitmapHitTestHandler = api.defaultBitmapHitTestHandler;
-export const defaultDisplayObjectHitTestHandler = api.defaultDisplayObjectHitTestHandler;
 export const defaultHtmlViewHitTestHandler = api.defaultHtmlViewHitTestHandler;
 export const defaultMovieClipHitTestHandler = api.defaultMovieClipHitTestHandler;
-export const defaultRenderViewHitTestHandler = api.defaultRenderViewHitTestHandler;
+export const defaultNode2DHitTestHandler = api.defaultNode2DHitTestHandler;
 export const defaultRichTextHitTestHandler = api.defaultRichTextHitTestHandler;
 export const defaultShapeHitTestHandler = api.defaultShapeHitTestHandler;
 export const defaultTextHitTestHandler = api.defaultTextHitTestHandler;
 export const defaultTextInputHitTestHandler = api.defaultTextInputHitTestHandler;
-export const defaultVideoHitTestHandler = api.defaultVideoHitTestHandler;

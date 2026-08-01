@@ -3,24 +3,24 @@ package flighthq.shape;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
-import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateContent;
+import flighthq.scene2d.DisplayObject.createNode2D;
+import flighthq.scene2d.DisplayObject.createNode2DRuntime;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.shape.Scale9Shape as Facade_Shape_flighthq_shape_Scale9Shape;
 import flighthq.shape.ShapeCommands as Facade_Shape_flighthq_shape_ShapeCommands;
 import flighthq.shape.ShapeFill as Facade_Shape_flighthq_shape_ShapeFill;
 import flighthq.shape.ShapeHitTestBuiltins as Facade_Shape_flighthq_shape_ShapeHitTestBuiltins;
 import flighthq.shape.ShapeHitTestRegistry as Facade_Shape_flighthq_shape_ShapeHitTestRegistry;
+import flighthq.shape.ShapeStroke as Facade_Shape_flighthq_shape_ShapeStroke;
+import flighthq.shape.ShapeStrokeOutline as Facade_Shape_flighthq_shape_ShapeStrokeOutline;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.ImageResource;
 import flighthq.types.Matrix;
 import flighthq.types.PartialNode;
+import flighthq.types.Path;
 import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Shape;
-import flighthq.types.Scale9Shape.Scale9ShapeData;
-import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
 import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
@@ -34,6 +34,8 @@ import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeCommand.ShapeHitTestCommand;
 import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.ShapeFillRegion;
+import flighthq.types.ShapeStrokeRegion;
+import flighthq.types.Texture;
 import flighthq.types.TriangleCulling;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
@@ -47,16 +49,16 @@ class Shape {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeArcTo(shape, x1, y1, x2, y2, radius);
   }
 
-  public static function appendShapeBeginBitmapFill(shape:flighthq.types.Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
-    Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginBitmapFill(shape, bitmap, matrix, repeat, smooth);
-  }
-
   public static function appendShapeBeginFill(shape:flighthq.types.Shape, ?color:Dynamic, ?alpha:Dynamic):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginFill(shape, color, alpha);
   }
 
   public static function appendShapeBeginGradientFill(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginGradientFill(shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio);
+  }
+
+  public static function appendShapeBeginTextureFill(shape:flighthq.types.Shape, texture:Texture, ?matrix:Null<Matrix>):Void {
+    Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginTextureFill(shape, texture, matrix);
   }
 
   public static function appendShapeCircle(shape:flighthq.types.Shape, x:Float, y:Float, radius:Float):Void {
@@ -83,8 +85,8 @@ class Shape {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeEndFill(shape);
   }
 
-  public static function appendShapeLineBitmapStyle(shape:flighthq.types.Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
-    Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineBitmapStyle(shape, bitmap, matrix, repeat, smooth);
+  public static function appendShapeGeometryCommand(path:Path, name:String, commands:Array<ShapeCommandToken>, a:Float):Void {
+    Facade_Shape_flighthq_shape_ShapeFill.appendShapeGeometryCommand(path, name, commands, a);
   }
 
   public static function appendShapeLineGradientStyle(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
@@ -93,6 +95,10 @@ class Shape {
 
   public static function appendShapeLineStyle(shape:flighthq.types.Shape, ?thickness:Dynamic, ?color:Dynamic, ?alpha:Dynamic, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineStyle(shape, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit);
+  }
+
+  public static function appendShapeLineTextureStyle(shape:flighthq.types.Shape, texture:Texture, ?matrix:Null<Matrix>):Void {
+    Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineTextureStyle(shape, texture, matrix);
   }
 
   public static function appendShapeLineTo(shape:flighthq.types.Shape, x:Float, y:Float):Void {
@@ -415,18 +421,8 @@ class Shape {
     return cast null;
   }
 
-  public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:Dynamic):Scale9ShapeData {
-    return cast Facade_Shape_flighthq_shape_Scale9Shape.createScale9ShapeData(scale9Grid, data);
-    return cast null;
-  }
-
-  public static function createScale9ShapeRuntime():Scale9ShapeRuntime {
-    return cast Facade_Shape_flighthq_shape_Scale9Shape.createScale9ShapeRuntime();
-    return cast null;
-  }
-
   public static function createShape(?obj:PartialNode<flighthq.types.Shape>):flighthq.types.Shape {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ShapeKind, obj, createShapeData, createShapeRuntime] : Array<Dynamic>)) : flighthq.types.Shape);
+    return cast (cast _Runtime.callValue(createNode2D, cast ([ShapeKind, obj, createShapeData, createShapeRuntime] : Array<Dynamic>)) : flighthq.types.Shape);
     return cast null;
   }
 
@@ -436,7 +432,7 @@ class Shape {
   }
 
   public static function createShapeRuntime():ShapeRuntime {
-    return cast (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([{ computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle }] : Array<Dynamic>)) : ShapeRuntime);
+    return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([{ computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle }] : Array<Dynamic>)) : ShapeRuntime);
     return cast null;
   }
 
@@ -444,8 +440,8 @@ class Shape {
     Facade_Shape_flighthq_shape_ShapeHitTestBuiltins.enableShapeHitTesting();
   }
 
-  public static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
-    return cast Facade_Shape_flighthq_shape_Scale9Shape.getScale9ShapeRuntime(source);
+  public static function getPathCommandOperandCount(verb:Float):Float {
+    return cast Facade_Shape_flighthq_shape_ShapeFill.getPathCommandOperandCount(verb);
     return cast null;
   }
 
@@ -475,12 +471,32 @@ class Shape {
   }
 
   public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
-    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : ShapeRuntime);
+    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : ShapeRuntime);
+    return cast null;
+  }
+
+  public static function getShapeStrokeOutlineRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
+    return cast Facade_Shape_flighthq_shape_ShapeStrokeOutline.getShapeStrokeOutlineRegions(commands);
+    return cast null;
+  }
+
+  public static function getShapeStrokeRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeStrokeRegion>> {
+    return cast Facade_Shape_flighthq_shape_ShapeStroke.getShapeStrokeRegions(commands);
     return cast null;
   }
 
   public static function hasNonSolidShapeFill(commands:Array<ShapeCommandToken>):Bool {
     return cast Facade_Shape_flighthq_shape_ShapeFill.hasNonSolidShapeFill(commands);
+    return cast null;
+  }
+
+  public static function hasNonSolidShapeStroke(commands:Array<ShapeCommandToken>):Bool {
+    return cast Facade_Shape_flighthq_shape_ShapeStroke.hasNonSolidShapeStroke(commands);
+    return cast null;
+  }
+
+  public static function hasShapeFill(commands:Array<ShapeCommandToken>):Bool {
+    return cast Facade_Shape_flighthq_shape_ShapeFill.hasShapeFill(commands);
     return cast null;
   }
 

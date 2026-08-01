@@ -11,5 +11,4 @@ export const parseUserAgentName = compiled.flighthq.useragent.Useragent.parseUse
 export const parseUserAgentOsName = compiled.flighthq.useragent.Useragent.parseUserAgentOsName;
 export const parseUserAgentOsVersion = compiled.flighthq.useragent.Useragent.parseUserAgentOsVersion;
 export const parseUserAgentPointerWidth = compiled.flighthq.useragent.Useragent.parseUserAgentPointerWidth;
-export const parseUserAgentRuntime = compiled.flighthq.useragent.Useragent.parseUserAgentRuntime;
 export const parseUserAgentVersion = compiled.flighthq.useragent.Useragent.parseUserAgentVersion;

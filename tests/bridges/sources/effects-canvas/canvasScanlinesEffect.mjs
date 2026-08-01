@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyScanlinesEffectToCanvas = api.applyScanlinesEffectToCanvas;
 export const defaultCanvasScanlinesEffectRunner = api.defaultCanvasScanlinesEffectRunner;
+export const registerCanvasScanlinesEffect = api.registerCanvasScanlinesEffect;

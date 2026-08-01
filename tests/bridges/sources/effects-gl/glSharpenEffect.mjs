@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applySharpenEffectToGl = api.applySharpenEffectToGl;
 export const defaultGlSharpenEffectRunner = api.defaultGlSharpenEffectRunner;
+export const registerGlSharpenEffect = api.registerGlSharpenEffect;

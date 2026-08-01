@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyPixelateEffectToWgpu = api.applyPixelateEffectToWgpu;
 export const defaultWgpuPixelateEffectRunner = api.defaultWgpuPixelateEffectRunner;
+export const registerWgpuPixelateEffect = api.registerWgpuPixelateEffect;

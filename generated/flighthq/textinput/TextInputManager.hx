@@ -58,9 +58,11 @@ class TextInputManager {
 
   public static function dispatchTextInputKeyDown(manager:flighthq.types.TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
+    var layout:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.callValue(TextInputManager.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return cast false; }
-    return cast _Runtime.callValue(handleTextInputKeyboard, cast ([target, data, { clipboardText: clipboardText, onCopy: onCopy }] : Array<Dynamic>));
+    layout = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([target] : Array<Dynamic>)), 'textLayout'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    return cast _Runtime.callValue(handleTextInputKeyboard, cast ([target, data, { clipboardText: clipboardText, layout: layout, onCopy: onCopy }] : Array<Dynamic>));
     return cast null;
   }
 

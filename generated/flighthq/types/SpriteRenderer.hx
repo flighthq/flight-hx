@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpriteRenderer = { @:optional var format:BatchFormat; var createData:Dynamic; @:optional var destroyData:Dynamic; var submit:Dynamic; };
+typedef SpriteRenderer = { @:optional var format:BatchFormat; var createData:Dynamic; @:optional var destroyData:Dynamic; @:optional var isDirty:Dynamic; var submit:Dynamic; };

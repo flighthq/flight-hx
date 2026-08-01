@@ -3,9 +3,9 @@ package flighthq.movieclip;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
-import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
-import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
+import flighthq.scene2d.DisplayObject.createNode2D;
+import flighthq.scene2d.DisplayObject.createNode2DRuntime;
+import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.timeline.Timeline.addTimelineFrameScript;
 import flighthq.timeline.Timeline.createTimeline;
 import flighthq.timeline.Timeline.disposeTimelineSignals;
@@ -39,7 +39,7 @@ class MovieClip {
   }
 
   public static function createMovieClip(?obj:PartialNode<flighthq.types.MovieClip>):flighthq.types.MovieClip {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([MovieClipKind, obj, createMovieClipData, createMovieClipRuntime] : Array<Dynamic>)) : flighthq.types.MovieClip);
+    return cast (cast _Runtime.callValue(createNode2D, cast ([MovieClipKind, obj, createMovieClipData, createMovieClipRuntime] : Array<Dynamic>)) : flighthq.types.MovieClip);
     return cast null;
   }
 
@@ -50,7 +50,7 @@ class MovieClip {
 
   public static function createMovieClipRuntime():MovieClipRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([] : Array<Dynamic>)) : MovieClipRuntime);
+    out = (cast _Runtime.callValue(createNode2DRuntime, cast ([] : Array<Dynamic>)) : MovieClipRuntime);
     _Runtime.setField(out, 'movieClipSignals', null);
     return cast out;
     return cast null;
@@ -93,7 +93,7 @@ class MovieClip {
   }
 
   public static function getMovieClipRuntime(source:flighthq.types.MovieClip):MovieClipRuntime {
-    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : MovieClipRuntime);
+    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : MovieClipRuntime);
     return cast null;
   }
 

@@ -3,8 +3,8 @@ package flighthq.capture;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.surface.SurfaceFingerprint.compareSurfaceFingerprints;
-import flighthq.surface.SurfaceFingerprint.parseSurfaceFingerprint;
+import flighthq.bitmap.BitmapFingerprint.compareBitmapFingerprints;
+import flighthq.bitmap.BitmapFingerprint.parseBitmapFingerprint;
 import flighthq.types.CaptureCheckResult;
 
 class CaptureComparison {
@@ -15,10 +15,10 @@ class CaptureComparison {
   public static function compareCaptureFingerprints(a:String, b:String):Float {
     var fa:Dynamic = cast _Runtime.UNDEFINED;
     var fb:Dynamic = cast _Runtime.UNDEFINED;
-    fa = _Runtime.callValue(parseSurfaceFingerprint, cast ([a] : Array<Dynamic>));
-    fb = _Runtime.callValue(parseSurfaceFingerprint, cast ([b] : Array<Dynamic>));
+    fa = _Runtime.callValue(parseBitmapFingerprint, cast ([a] : Array<Dynamic>));
+    fb = _Runtime.callValue(parseBitmapFingerprint, cast ([b] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(fa, 'gridSize'), _Runtime.field(fb, 'gridSize')) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
-    return cast _Runtime.callValue(compareSurfaceFingerprints, cast ([fa, fb] : Array<Dynamic>));
+    return cast _Runtime.callValue(compareBitmapFingerprints, cast ([fa, fb] : Array<Dynamic>));
     return cast null;
   }
 

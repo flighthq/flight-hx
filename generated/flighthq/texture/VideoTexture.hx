@@ -5,114 +5,116 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Matrix3.inverseMatrix3;
-import flighthq.geometry.Vector2.cloneVector2;
-import flighthq.geometry.Vector2.copyVector2;
-import flighthq.geometry.Vector2.createVector2;
-import flighthq.texture.Sampler.cloneSampler;
-import flighthq.texture.Sampler.copySampler;
-import flighthq.texture.Sampler.createSampler;
+import flighthq.texture.Texture.cloneTexture;
+import flighthq.texture.Texture.copyTexture;
+import flighthq.texture.Texture.createTexture;
+import flighthq.texture.Texture.getTextureUvMatrix;
+import flighthq.types.Image;
 import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
+import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types.VideoResource;
-import flighthq.types.VideoTexture;
-import flighthq.types.VideoTexture.VideoTextureLike;
+import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class VideoTexture {
-  public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
-    (videoTexture.frameId += 1.0);
-    return cast videoTexture.frameId;
+  public static function advanceVideoTexture(texture:TextureLike):Float {
+    var image:Dynamic = cast _Runtime.UNDEFINED;
+    image = _Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>));
+    if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast _Runtime.field(texture, 'version'); }
+    _Runtime.callValue(VideoTexture.updateVideoImageSize__videoTexture, cast ([image] : Array<Dynamic>));
+    _Runtime.setField(image, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(image, 'version') + 1.0)), 0));
+    _Runtime.setField(texture, 'version', _Runtime.field(image, 'version'));
+    return cast _Runtime.field(texture, 'version');
     return cast null;
   }
 
-  public static function cloneVideoTexture(source:VideoTextureLike):flighthq.types.VideoTexture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: source.colorSpace, frameId: -1.0, sampler: _Runtime.callValue(cloneSampler, cast ([source.sampler] : Array<Dynamic>)), source: source.source, uvOffset: _Runtime.callValue(cloneVector2, cast ([source.uvOffset] : Array<Dynamic>)), uvRotation: source.uvRotation, uvScale: _Runtime.callValue(cloneVector2, cast ([source.uvScale] : Array<Dynamic>)) }] : Array<Dynamic>));
+  public static function cloneVideoTexture(source:TextureLike):Texture {
+    return cast _Runtime.callValue(cloneTexture, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function copyVideoTexture(out:VideoTextureLike, source:VideoTextureLike):Void {
-    var colorSpace:Dynamic = cast _Runtime.UNDEFINED;
-    var frameId:Dynamic = cast _Runtime.UNDEFINED;
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var uvRotation:Dynamic = cast _Runtime.UNDEFINED;
-    colorSpace = source.colorSpace;
-    frameId = source.frameId;
-    src = source.source;
-    uvRotation = source.uvRotation;
-    _Runtime.callValue(copySampler, cast ([out.sampler, source.sampler] : Array<Dynamic>));
-    _Runtime.callValue(copyVector2, cast ([out.uvOffset, source.uvOffset] : Array<Dynamic>));
-    _Runtime.callValue(copyVector2, cast ([out.uvScale, source.uvScale] : Array<Dynamic>));
-    (out.colorSpace = cast (colorSpace : Dynamic));
-    (out.frameId = cast (frameId : Dynamic));
-    (out.source = cast (src : Dynamic));
-    (out.uvRotation = cast (uvRotation : Dynamic));
+  public static function copyVideoTexture(out:TextureLike, source:TextureLike):Void {
+    _Runtime.callValue(copyTexture, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):flighthq.types.VideoTexture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), frameId: _Runtime.coalesce(_Runtime.optionalField(opts, 'frameId'), function():Dynamic return cast -1.0), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))), source: _Runtime.coalesce(_Runtime.optionalField(opts, 'source'), function():Dynamic return cast source), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
+  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):Texture {
+    var image:Dynamic = cast _Runtime.UNDEFINED;
+    image = _Runtime.callValue(VideoTexture.createVideoImageResource__videoTexture, cast ([source] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTexture, cast ([_Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(_Runtime.optionalField(image, 'version'), function():Dynamic return cast VideoTexture.INITIAL_VIDEO_VERSION__videoTexture) }])] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
+  public static function getVideoTextureHeight(texture:TextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = videoTexture.source.element;
+    element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'videoHeight') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(element, 'videoHeight') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
-  public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
-    _Runtime.callValue(getVideoTextureUvMatrix, cast ([out, videoTexture] : Array<Dynamic>));
+  public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
+    _Runtime.callValue(getVideoTextureUvMatrix, cast ([out, texture] : Array<Dynamic>));
     _Runtime.callValue(inverseMatrix3, cast ([out, out] : Array<Dynamic>));
   }
 
-  public static function getVideoTextureUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var cosR:Dynamic = cast _Runtime.UNDEFINED;
-    var sinR:Dynamic = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    r = videoTexture.uvRotation;
-    sx = videoTexture.uvScale.x;
-    sy = videoTexture.uvScale.y;
-    tx = videoTexture.uvOffset.x;
-    ty = videoTexture.uvOffset.y;
-    cosR = HxMath.cos(r);
-    sinR = HxMath.sin(r);
-    m = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (sx * cosR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (sx * sinR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (-sy * sinR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (sy * cosR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, tx);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ty);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
+  public static function getVideoTextureUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
+    _Runtime.callValue(getTextureUvMatrix, cast ([out, texture] : Array<Dynamic>));
   }
 
-  public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
+  public static function getVideoTextureWidth(texture:TextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = videoTexture.source.element;
+    element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'videoWidth') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(element, 'videoWidth') : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
-  public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
+  public static function isVideoTextureFrameReady(texture:TextureLike):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = videoTexture.source.element;
+    element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
     return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast _Runtime.field(element, 'readyState') : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(element, 'videoWidth') : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.field(element, 'videoHeight') : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 
-  public static function resetVideoTextureFrame(videoTexture:VideoTextureLike):Void {
-    (videoTexture.frameId = cast (-1.0 : Dynamic));
+  public static function resetVideoTextureFrame(texture:TextureLike):Void {
+    var image:Dynamic = cast _Runtime.UNDEFINED;
+    image = _Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>));
+    if ((cast !_Runtime.looseEquals(image, null) : Bool)) { _Runtime.setField(image, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture); }
+    _Runtime.setField(texture, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
-  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
-    (videoTexture.source = cast (source : Dynamic));
-    (videoTexture.frameId = cast (-1.0 : Dynamic));
+  public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { throw _Runtime.error('setVideoTextureSource requires a Texture2D'); }
+    _Runtime.setField(texture, 'source', _Runtime.callValue(VideoTexture.createVideoImageResource__videoTexture, cast ([source] : Array<Dynamic>)));
+    _Runtime.setField(texture, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
+  }
+
+  public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Dynamic> {
+    var image:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
+    image = (cast _Runtime.callValue(createEntity, cast ([{ height: 0.0, kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }] : Array<Dynamic>)) : Dynamic);
+    _Runtime.callValue(VideoTexture.updateVideoImageSize__videoTexture, cast ([image] : Array<Dynamic>));
+    return cast image;
+    return cast null;
+  }
+
+  public static function getVideoElement__videoTexture(texture:TextureLike):Null<Dynamic> {
+    return cast _Runtime.coalesce((cast _Runtime.optionalField(_Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>)), 'source') : Null<Dynamic>), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  public static function getVideoImage__videoTexture(texture:TextureLike):Null<Dynamic> {
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool) ? (cast (cast _Runtime.field(texture, 'source') : Null<Dynamic>) : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
+
+  public static function updateVideoImageSize__videoTexture(image:Dynamic):Void {
+    var element:Dynamic = cast _Runtime.UNDEFINED;
+    element = (cast _Runtime.field(image, 'source') : Dynamic);
+    _Runtime.setField(image, 'width', _Runtime.orValue(_Runtime.field(element, 'videoWidth'), function():Dynamic return cast 0.0));
+    _Runtime.setField(image, 'height', _Runtime.orValue(_Runtime.field(element, 'videoHeight'), function():Dynamic return cast 0.0));
   }
 
   public static final HAVE_CURRENT_DATA__videoTexture:Dynamic = 2.0;
+
+  public static final INITIAL_VIDEO_VERSION__videoTexture:Dynamic = 4294967295.0;
 }

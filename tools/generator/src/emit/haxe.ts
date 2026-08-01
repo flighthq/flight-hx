@@ -1358,7 +1358,7 @@ function emitFunctionBody(
     for (const statement of statements) {
       if (statement.kind === 'variable') {
         for (const variable of statement.declarations) {
-          if (variable.initializer) lines.push(`${safeName(variable.name)} = ${emitExpression(variable.initializer)};`);
+          if (variable.initializer) lines.push(`${safeName(variable.name)} = ${emitVariableInitializer(variable)};`);
         }
       } else {
         lines.push(...emitStatement(statement));
@@ -1555,11 +1555,25 @@ function isPromiseNothingType(type: IrType): boolean {
 
 function emitVariable(variable: IrVariable, includeSemicolon: boolean): string {
   const type = variable.type ? `:${emitType(variable.type)}` : ':Dynamic';
-  const initializer = variable.initializer
-    ? ` = ${emitExpression(variable.initializer)}`
-    : ' = cast _Runtime.UNDEFINED';
+  const initializer = variable.initializer ? ` = ${emitVariableInitializer(variable)}` : ' = cast _Runtime.UNDEFINED';
   const output = `var ${safeName(variable.name)}${type}${initializer}`;
   return includeSemicolon ? output : output;
+}
+
+function emitVariableInitializer(variable: IrVariable): string {
+  const initializer = variable.initializer!;
+  const emitted = emitExpression(initializer);
+  if (
+    variable.type?.kind === 'array' &&
+    initializer.kind === 'call' &&
+    initializer.callee.kind === 'property' &&
+    initializer.callee.name === 'from' &&
+    initializer.callee.object.kind === 'identifier' &&
+    initializer.callee.object.name === 'Array'
+  ) {
+    return `(cast ${emitted} : ${emitType(variable.type)})`;
+  }
+  return emitted;
 }
 
 function emitEmbedded(statement: IrStatement): string {
@@ -1595,6 +1609,16 @@ function emitInt32Operand(expression: IrExpression): string {
 
 function emitArithmeticOperation(left: string, operator: string, right: string): string {
   return operator === '%' ? `_Runtime.fmod(${left}, ${right})` : `(${left} ${operator} ${right})`;
+}
+
+function emitCompoundOperation(current: string, operator: string, right: IrExpression): string {
+  if (operator === '>>>') {
+    return `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32Operand(right)})`;
+  }
+  if (['&', '|', '^', '<<', '>>'].includes(operator)) {
+    return `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(right)})`;
+  }
+  return emitArithmeticOperation(current, operator, emitExpression(right));
 }
 
 function emitTruthiness(expression: IrExpression): string {
@@ -1791,6 +1815,9 @@ function emitExpression(expression: IrExpression): string {
       return `flighthq._internal._Async.awaitValue(${emitExpression(expression.expression)})`;
     case 'assignment':
     case 'binary': {
+      if (expression.kind === 'assignment' && expression.left.kind === 'cast') {
+        return emitExpression({ ...expression, left: expression.left.expression });
+      }
       if (expression.kind === 'assignment' && expression.operator === '=' && expression.left.kind === 'array') {
         const temporary = `__destructure${String(temporaryIndex++)}`;
         return `({ var ${temporary}:Dynamic = ${emitExpression(expression.right)}; ${expression.left.elements
@@ -1838,12 +1865,7 @@ function emitExpression(expression: IrExpression): string {
         const indexedKey = directCompound ? `__indexedKey${String(temporaryIndex++)}` : index;
         const current =
           emitStaticIndexedRead(expression.left, indexedObject, indexedKey) ?? `_Runtime.getIndex(${object}, ${index})`;
-        const value =
-          operator === '>>>'
-            ? `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32Operand(expression.right)})`
-            : ['&', '|', '^', '<<', '>>'].includes(operator)
-              ? `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(expression.right)})`
-              : emitArithmeticOperation(current, operator, emitExpression(expression.right));
+        const value = emitCompoundOperation(current, operator, expression.right);
         const directWrite = directCompound
           ? emitStaticIndexedWrite(expression.left, value, indexedObject, indexedKey)
           : undefined;
@@ -1880,7 +1902,7 @@ function emitExpression(expression: IrExpression): string {
           const value =
             expression.operator === '='
               ? emitExpression(expression.right)
-              : emitArithmeticOperation(current, expression.operator.slice(0, -1), emitExpression(expression.right));
+              : emitCompoundOperation(current, expression.operator.slice(0, -1), expression.right);
           return `${binding}.setField(${object}, ${quote(expression.left.name)}, ${value})`;
         }
         if (expression.left.typedStructBinding) {
@@ -1894,6 +1916,9 @@ function emitExpression(expression: IrExpression): string {
           if (expression.operator === '%=') {
             return `(${field} = cast (${emitArithmeticOperation(field, '%', emitExpression(expression.right))} : Dynamic))`;
           }
+          if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
+            return `(${field} = cast (${emitCompoundOperation(field, expression.operator.slice(0, -1), expression.right)} : Dynamic))`;
+          }
           return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
         }
         if (expression.left.object.kind === 'identifier' && expression.left.object.name === 'this') {
@@ -1904,6 +1929,10 @@ function emitExpression(expression: IrExpression): string {
             const field = `this.${safeName(expression.left.name)}`;
             return `(${field} = cast (${emitArithmeticOperation(field, '%', emitExpression(expression.right))} : Dynamic))`;
           }
+          if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
+            const field = `this.${safeName(expression.left.name)}`;
+            return `(${field} = cast (${emitCompoundOperation(field, expression.operator.slice(0, -1), expression.right)} : Dynamic))`;
+          }
           return `(this.${safeName(expression.left.name)} ${expression.operator} ${emitExpression(expression.right)})`;
         }
         if (expression.operator === '=') {
@@ -1911,7 +1940,7 @@ function emitExpression(expression: IrExpression): string {
         }
         const operation = expression.operator.slice(0, -1);
         const current = `_Runtime.field(${object}, ${quote(expression.left.name)})`;
-        return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitArithmeticOperation(current, operation, emitExpression(expression.right))})`;
+        return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperation(current, operation, expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '**') {
         return `HxMath.pow(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
@@ -2119,6 +2148,9 @@ function emitExpression(expression: IrExpression): string {
       }
       if (emitExpression(expression.callee) === 'Proxy') {
         return `_Runtime.createProxy(${expression.arguments.map(emitExpression).join(', ')})`;
+      }
+      if (expression.runtime) {
+        return `_Runtime.construct(${emitExpression(expression.callee)}, [${expression.arguments.map(emitExpression).join(', ')}])`;
       }
       if (expression.callee.kind === 'identifier' && expression.callee.name === 'Map') {
         return `_Runtime.createMap(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : 'null'})`;
@@ -2545,6 +2577,12 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'property') {
     const owner = emitExpression(expression.callee.object);
     const name = expression.callee.name;
+    if (name === 'from') {
+      const typedArray = typedArrayConstructor(expression.callee.object);
+      if (typedArray) {
+        return `new ${typedArray}(${expression.arguments[0] ? emitExpression(expression.arguments[0]) : 'cast ([] : Array<Dynamic>)'})`;
+      }
+    }
     if (expression.callee.binding === 'DynamicObject') {
       return `flighthq._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
     }
@@ -2866,7 +2904,7 @@ function emitWebGl2ComputedConstant(index: IrExpression, domain: IrWebGlComputed
 }
 
 function indent(lines: string[]): string[] {
-  return lines.flatMap((line) => splitLines(line).map((physicalLine) => `  ${physicalLine}`));
+  return lines.flatMap((line) => splitLines(line).map((physicalLine) => (physicalLine ? `  ${physicalLine}` : '')));
 }
 
 function splitLines(value: string): string[] {

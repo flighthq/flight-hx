@@ -8,5 +8,6 @@ __syncDependencies();
 export const cloneAnimationClip = api.cloneAnimationClip;
 export const createAnimationChannel = api.createAnimationChannel;
 export const createAnimationClip = api.createAnimationClip;
+export const createAnimationClipEvent = api.createAnimationClipEvent;
 export const getAnimationClipDuration = api.getAnimationClipDuration;
 export const sampleAnimationClip = api.sampleAnimationClip;

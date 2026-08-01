@@ -3,10 +3,10 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
-import flighthq.hostTauri.TauriModule.TauriMenuItemHandle;
 import flighthq.types.Menu.MenuBackend;
 import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriMenuItemHandle;
 
 class TauriMenu {
   public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
@@ -31,7 +31,7 @@ class TauriMenu {
           });
         });
       }, cast ([] : Array<Dynamic>)), function() {
-      
+
       }));
       return cast true;
     }, popupContextMenu: function(items:Dynamic, x:Dynamic, y:Dynamic) {

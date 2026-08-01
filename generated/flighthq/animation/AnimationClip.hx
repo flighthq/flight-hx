@@ -5,28 +5,47 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.animation.AnimationTrack.cloneAnimationTrack;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
+import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationClipEvent;
 import flighthq.types.AnimationTrack;
 
 class AnimationClip {
   public static function cloneAnimationClip(clip:flighthq.types.AnimationClip):flighthq.types.AnimationClip {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
+    var events:Dynamic = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     for (channel in _Runtime.iterable(clip.channels)) {
       _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(cloneAnimationTrack, cast ([_Runtime.field(channel, 'track')] : Array<Dynamic>)), _Runtime.field(channel, 'targetRef')] : Array<Dynamic>))] : Array<Dynamic>));
     }
-    return cast { channels: channels, duration: clip.duration };
+    events = _Runtime.callProperty(clip.events, 'map', cast ([function(event:Dynamic) return _Runtime.callValue(createAnimationClipEvent, cast ([_Runtime.field(event, 'time'), _Runtime.field(event, 'name'), _Runtime.field(event, 'payload')] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, duration: clip.duration, events: events }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
-    return cast { targetRef: targetRef, track: track };
+    return cast _Runtime.callValue(createEntity, cast ([{ targetRef: targetRef, track: track }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):flighthq.types.AnimationClip {
-    return cast { channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast _Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>))) };
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<Dynamic>):flighthq.types.AnimationClip {
+    if (events == null) events = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    var copiedEvents:Dynamic = cast _Runtime.UNDEFINED;
+    var computedDuration:Dynamic = cast _Runtime.UNDEFINED;
+    copiedEvents = _Runtime.sortAndReturn(_Runtime.slice(events, 0, null), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'time') - _Runtime.field(b, 'time')));
+    _Runtime.callValue(AnimationClip.validateAnimationClipEvents__animationClip, cast ([copiedEvents] : Array<Dynamic>));
+    computedDuration = HxMath.max(_Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>)), _Runtime.callValue(AnimationClip.computeAnimationClipEventsDuration__animationClip, cast ([copiedEvents] : Array<Dynamic>)));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(duration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(copiedEvents, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(copiedEvents, (_Runtime.field(copiedEvents, 'length') - 1.0)), 'time') : Float) > (cast duration : Float)) : Bool)) : Bool)) {
+      throw _Runtime.rangeError('AnimationClip event time exceeds the explicit clip duration.');
+    }
+    return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast computedDuration), events: copiedEvents }] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):Dynamic {
+    if (payload == null) payload = cast (null : Dynamic);
+    return cast _Runtime.callValue(createEntity, cast ([{ name: name, payload: payload, time: time }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -59,5 +78,18 @@ class AnimationClip {
     }
     return cast max;
     return cast null;
+  }
+
+  public static function computeAnimationClipEventsDuration__animationClip(events:Array<Dynamic>):Float {
+    return cast ((cast ((cast _Runtime.field(events, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(events, (_Runtime.field(events, 'length') - 1.0)), 'time') : Dynamic) : (cast 0.0 : Dynamic));
+    return cast null;
+  }
+
+  public static function validateAnimationClipEvents__animationClip(events:Array<Dynamic>):Void {
+    for (event in _Runtime.iterable(events)) {
+      if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(event, 'time')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(event, 'time') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+        throw _Runtime.rangeError('AnimationClip event "' + Std.string(_Runtime.field(event, 'name')) + '" time must be a finite non-negative number.');
+      }
+    }
   }
 }

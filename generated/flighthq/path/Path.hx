@@ -8,6 +8,7 @@ import flighthq.path.ContainsPathPoint as Facade_Path_flighthq_path_ContainsPath
 import flighthq.path.CopyPath as Facade_Path_flighthq_path_CopyPath;
 import flighthq.path.DashPath as Facade_Path_flighthq_path_DashPath;
 import flighthq.path.DecimatePath as Facade_Path_flighthq_path_DecimatePath;
+import flighthq.path.ExplainStrokePathTessellation as Facade_Path_flighthq_path_ExplainStrokePathTessellation;
 import flighthq.path.FitPathCurves as Facade_Path_flighthq_path_FitPathCurves;
 import flighthq.path.FlattenPath as Facade_Path_flighthq_path_FlattenPath;
 import flighthq.path.ForEachPathSegment as Facade_Path_flighthq_path_ForEachPathSegment;
@@ -23,6 +24,7 @@ import flighthq.path.ReversePath as Facade_Path_flighthq_path_ReversePath;
 import flighthq.path.StrokePath as Facade_Path_flighthq_path_StrokePath;
 import flighthq.path.TessellatePath as Facade_Path_flighthq_path_TessellatePath;
 import flighthq.path.TessellatePathTyped as Facade_Path_flighthq_path_TessellatePathTyped;
+import flighthq.path.TessellateStrokePath as Facade_Path_flighthq_path_TessellateStrokePath;
 import flighthq.path.TransformPath as Facade_Path_flighthq_path_TransformPath;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Path;
@@ -31,6 +33,7 @@ import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.StrokePathTessellationExplanation;
 import flighthq.types.StrokeStyle;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._PathValues.PathCommandValue;
@@ -338,6 +341,11 @@ class Path {
     Facade_Path_flighthq_path_DecimatePath.decimatePath(source, tolerance, out, flattenTolerance);
   }
 
+  public static function explainStrokePathTessellation(path:flighthq.types.Path, style:StrokeStyle, ?tolerance:Dynamic):StrokePathTessellationExplanation {
+    return cast Facade_Path_flighthq_path_ExplainStrokePathTessellation.explainStrokePathTessellation(path, style, tolerance);
+    return cast null;
+  }
+
   public static function fitPathCurves(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Dynamic):Void {
     Facade_Path_flighthq_path_FitPathCurves.fitPathCurves(source, tolerance, out, flattenTolerance);
   }
@@ -487,6 +495,11 @@ class Path {
 
   public static function tessellatePathTyped(path:flighthq.types.Path, ?tolerance:Dynamic):PathMeshTyped {
     return cast Facade_Path_flighthq_path_TessellatePathTyped.tessellatePathTyped(path, tolerance);
+    return cast null;
+  }
+
+  public static function tessellateStrokePath(path:flighthq.types.Path, style:StrokeStyle, ?tolerance:Dynamic):Null<PathMesh> {
+    return cast Facade_Path_flighthq_path_TessellateStrokePath.tessellateStrokePath(path, style, tolerance);
     return cast null;
   }
 

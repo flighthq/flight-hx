@@ -13,8 +13,33 @@ class DetectImageMimeType {
     if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 255.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 216.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 255.0) : Bool)) : Bool)) { return cast 'image/jpeg'; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 71.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 56.0) : Bool)) : Bool)) { return cast 'image/gif'; }
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 12.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 82.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 8.0), 87.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 9.0), 69.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 10.0), 66.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 11.0), 80.0) : Bool)) : Bool)) { return cast 'image/webp'; }
+    if ((cast _Runtime.callValue(DetectImageMimeType.isAvifFileTypeBox__detectImageMimeType, cast ([b] : Array<Dynamic>)) : Bool)) { return cast 'image/avif'; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 1.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 0.0) : Bool)) : Bool)) { return cast 'image/x-icon'; }
+    if ((cast ((cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 73.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 42.0) : Bool)), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 0.0)) : Bool) || (cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 77.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 77.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 0.0) : Bool)), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 42.0)) : Bool)) : Bool)) { return cast 'image/tiff'; }
     if ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 66.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 77.0) : Bool)) : Bool)) { return cast 'image/bmp'; }
     return cast null;
+    return cast null;
+  }
+
+  public static function isAvifFileTypeBox__detectImageMimeType(bytes:flighthq._internal._UInt8Array):Bool {
+    var boxSize:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast 16.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 4.0), 102.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 5.0), 116.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 6.0), 121.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 7.0), 112.0) : Bool)) : Bool)) { return cast false; }
+    boxSize = ((((flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0) * 16777216.0) + (flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0) * 65536.0)) + (flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0) * 256.0)) + flighthq._internal._StaticIndex.readUint8Array(bytes, 3.0));
+    if ((cast ((cast ((cast ((cast boxSize : Float) < (cast 16.0 : Float)) : Bool) || (cast ((cast boxSize : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod((boxSize - 16.0), 4.0), 0.0) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.callValue(DetectImageMimeType.isAvifBrand__detectImageMimeType, cast ([bytes, 8.0] : Array<Dynamic>)) : Bool)) { return cast true; }
+    {
+      var offset:Dynamic = 16.0;
+      while ((cast ((cast offset : Float) < (cast boxSize : Float)) : Bool)) {
+        if ((cast _Runtime.callValue(DetectImageMimeType.isAvifBrand__detectImageMimeType, cast ([bytes, offset] : Array<Dynamic>)) : Bool)) { return cast true; }
+        (offset = cast ((offset + 4.0) : Dynamic));
+      }
+    }
+    return cast false;
+    return cast null;
+  }
+
+  public static function isAvifBrand__detectImageMimeType(bytes:flighthq._internal._UInt8Array, offset:Float):Bool {
+    return cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, offset), 97.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, (offset + 1.0)), 118.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, (offset + 2.0)), 105.0) : Bool)), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, (offset + 3.0)), 102.0), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, (offset + 3.0)), 115.0)));
     return cast null;
   }
 }

@@ -5,10 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.DisplayObject;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
 
 class GlShaderBinding {
@@ -49,7 +49,7 @@ class GlShaderBinding {
     return cast null;
   }
 
-  public static function setGlShader(state:GlRenderState, node:DisplayObject, shader:Null<GlBitmapShader>):Void {
+  public static function setGlShader(state:GlRenderState, node:Node2D, shader:Null<GlBitmapShader>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(shader, null) : Bool)) {

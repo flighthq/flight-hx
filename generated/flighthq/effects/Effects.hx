@@ -58,6 +58,7 @@ import flighthq.effects.RadialBlurEffect as Facade_Effects_flighthq_effects_Radi
 import flighthq.effects.RenderEffectDefaults as Facade_Effects_flighthq_effects_RenderEffectDefaults;
 import flighthq.effects.RenderEffectInputs as Facade_Effects_flighthq_effects_RenderEffectInputs;
 import flighthq.effects.RenderEffectInterpolation as Facade_Effects_flighthq_effects_RenderEffectInterpolation;
+import flighthq.effects.RenderEffectPadding as Facade_Effects_flighthq_effects_RenderEffectPadding;
 import flighthq.effects.RenderEffectValidation as Facade_Effects_flighthq_effects_RenderEffectValidation;
 import flighthq.effects.ScanlinesEffect as Facade_Effects_flighthq_effects_ScanlinesEffect;
 import flighthq.effects.ScreenSpaceFogEffect as Facade_Effects_flighthq_effects_ScreenSpaceFogEffect;
@@ -95,6 +96,7 @@ import flighthq.types.DirectionalBlurEffect;
 import flighthq.types.DisplacementEffect;
 import flighthq.types.DitherEffect;
 import flighthq.types.DropShadowEffect;
+import flighthq.types.Entity.Kind;
 import flighthq.types.FilmEmulationEffect;
 import flighthq.types.FilmGrainEffect;
 import flighthq.types.FilmicToneMapOptions;
@@ -120,6 +122,10 @@ import flighthq.types.PosterizeEffect;
 import flighthq.types.RadialBlurEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectInput;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderEffectPadding.RenderEffectPaddingExplanation;
+import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderState;
 import flighthq.types.ScanlinesEffect;
 import flighthq.types.ScreenSpaceFogEffect;
 import flighthq.types.SharpenEffect;
@@ -289,6 +295,11 @@ class Effects {
 
   public static function computeReinhardToneMap(x:Float):Float {
     return cast Facade_Effects_flighthq_effects_ToneMapMath.computeReinhardToneMap(x);
+    return cast null;
+  }
+
+  public static function computeRenderEffectPadding(state:RenderState, effects:Dynamic):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_RenderEffectPadding.computeRenderEffectPadding(state, effects);
     return cast null;
   }
 
@@ -594,6 +605,11 @@ class Effects {
     return cast null;
   }
 
+  public static function explainRenderEffectPadding(state:RenderState, effects:Dynamic):RenderEffectPaddingExplanation {
+    return cast Facade_Effects_flighthq_effects_RenderEffectPadding.explainRenderEffectPadding(state, effects);
+    return cast null;
+  }
+
   public static function getAcesInputMatrix(out:flighthq._internal._Float32Array):Void {
     Facade_Effects_flighthq_effects_ToneMapMath.getAcesInputMatrix(out);
   }
@@ -606,8 +622,23 @@ class Effects {
     Facade_Effects_flighthq_effects_BlendModeMath.getAdvancedBlendRgb(mode, cbR, cbG, cbB, csR, csG, csB, out);
   }
 
+  public static function getBevelEffectPadding(effect:BevelEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_BevelEffect.getBevelEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getBloomEffectPadding(effect:BloomEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_BloomEffect.getBloomEffectPadding(effect);
+    return cast null;
+  }
+
   public static function getBlurDownsampleLevel(sigma:Float):Float {
     return cast Facade_Effects_flighthq_effects_BlurDownsample.getBlurDownsampleLevel(sigma);
+    return cast null;
+  }
+
+  public static function getBlurEffectPadding(effect:BlurEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_BlurEffect.getBlurEffectPadding(effect);
     return cast null;
   }
 
@@ -616,8 +647,43 @@ class Effects {
     return cast null;
   }
 
+  public static function getBokehDepthOfFieldEffectPadding(effect:BokehDepthOfFieldEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_BokehDepthOfFieldEffect.getBokehDepthOfFieldEffectPadding(effect);
+    return cast null;
+  }
+
   public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:Dynamic):Void {
     Facade_Effects_flighthq_effects_CompositeOperatorMath.getCompositeOperatorFactors(operator_, sourceAlpha, backdropAlpha, out);
+  }
+
+  public static function getContactShadowsEffectPadding(_effect:ContactShadowsEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_ContactShadowsEffect.getContactShadowsEffectPadding(_effect);
+    return cast null;
+  }
+
+  public static function getConvolutionEffectPadding(effect:ConvolutionEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_ConvolutionEffect.getConvolutionEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getDirectionalBlurEffectPadding(effect:DirectionalBlurEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_DirectionalBlurEffect.getDirectionalBlurEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getDirectionalRenderEffectPadding(blurX:Float, blurY:Float, offsetX:Float, offsetY:Float):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_RenderEffectPadding.getDirectionalRenderEffectPadding(blurX, blurY, offsetX, offsetY);
+    return cast null;
+  }
+
+  public static function getDisplacementEffectPadding(effect:DisplacementEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_DisplacementEffect.getDisplacementEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getDropShadowEffectPadding(effect:DropShadowEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_DropShadowEffect.getDropShadowEffectPadding(effect);
+    return cast null;
   }
 
   public static function getGaussianKernelSize(sigma:Float):Float {
@@ -625,8 +691,53 @@ class Effects {
     return cast null;
   }
 
+  public static function getGaussianRenderEffectPadding(blurX:Float, blurY:Float):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_RenderEffectPadding.getGaussianRenderEffectPadding(blurX, blurY);
+    return cast null;
+  }
+
+  public static function getGlitchEffectPadding(effect:GlitchEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_GlitchEffect.getGlitchEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getGradientBevelEffectPadding(effect:GradientBevelEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_GradientBevelEffect.getGradientBevelEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getGradientGlowEffectPadding(effect:GradientGlowEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_GradientGlowEffect.getGradientGlowEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getInnerGlowEffectPadding(effect:InnerGlowEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_InnerGlowEffect.getInnerGlowEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getInnerShadowEffectPadding(effect:InnerShadowEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_InnerShadowEffect.getInnerShadowEffectPadding(effect);
+    return cast null;
+  }
+
   public static function getLinearSampledGaussianTapCount(sigma:Float):Float {
     return cast Facade_Effects_flighthq_effects_LinearSampledGaussian.getLinearSampledGaussianTapCount(sigma);
+    return cast null;
+  }
+
+  public static function getMedianEffectPadding(effect:MedianEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_MedianEffect.getMedianEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getOuterGlowEffectPadding(effect:OuterGlowEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_OuterGlowEffect.getOuterGlowEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getOutlineEffectPadding(effect:OutlineEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_OutlineEffect.getOutlineEffectPadding(effect);
     return cast null;
   }
 
@@ -654,6 +765,11 @@ class Effects {
     Facade_Effects_flighthq_effects_EdgeDetectMath.getSobelKernelCoefficients(out);
   }
 
+  public static function getTiltShiftEffectPadding(effect:TiltShiftEffect):RenderEffectPadding {
+    return cast Facade_Effects_flighthq_effects_TiltShiftEffect.getTiltShiftEffectPadding(effect);
+    return cast null;
+  }
+
   public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
     return cast Facade_Effects_flighthq_effects_BlendModeMath.isNonSeparableBlendMode(mode);
     return cast null;
@@ -669,7 +785,81 @@ class Effects {
     return cast null;
   }
 
-  public static final RENDER_EFFECT_KINDS:Array<String> = Facade_Effects_flighthq_effects_RenderEffectInputs.RENDER_EFFECT_KINDS;
+  public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_BevelEffect.registerBevelEffectPaddingResolver(state);
+  }
+
+  public static function registerBloomEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_BloomEffect.registerBloomEffectPaddingResolver(state);
+  }
+
+  public static function registerBlurEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_BlurEffect.registerBlurEffectPaddingResolver(state);
+  }
+
+  public static function registerBokehDepthOfFieldEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_BokehDepthOfFieldEffect.registerBokehDepthOfFieldEffectPaddingResolver(state);
+  }
+
+  public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_ContactShadowsEffect.registerContactShadowsEffectPaddingResolver(state);
+  }
+
+  public static function registerConvolutionEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_ConvolutionEffect.registerConvolutionEffectPaddingResolver(state);
+  }
+
+  public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_DirectionalBlurEffect.registerDirectionalBlurEffectPaddingResolver(state);
+  }
+
+  public static function registerDisplacementEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_DisplacementEffect.registerDisplacementEffectPaddingResolver(state);
+  }
+
+  public static function registerDropShadowEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_DropShadowEffect.registerDropShadowEffectPaddingResolver(state);
+  }
+
+  public static function registerGlitchEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_GlitchEffect.registerGlitchEffectPaddingResolver(state);
+  }
+
+  public static function registerGradientBevelEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_GradientBevelEffect.registerGradientBevelEffectPaddingResolver(state);
+  }
+
+  public static function registerGradientGlowEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_GradientGlowEffect.registerGradientGlowEffectPaddingResolver(state);
+  }
+
+  public static function registerInnerGlowEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_InnerGlowEffect.registerInnerGlowEffectPaddingResolver(state);
+  }
+
+  public static function registerInnerShadowEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_InnerShadowEffect.registerInnerShadowEffectPaddingResolver(state);
+  }
+
+  public static function registerMedianEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_MedianEffect.registerMedianEffectPaddingResolver(state);
+  }
+
+  public static function registerOuterGlowEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_OuterGlowEffect.registerOuterGlowEffectPaddingResolver(state);
+  }
+
+  public static function registerOutlineEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_OutlineEffect.registerOutlineEffectPaddingResolver(state);
+  }
+
+  public static function registerRenderEffectPaddingResolver(state:RenderState, kind:Kind, resolver:Null<RenderEffectPaddingResolver>):Void {
+    Facade_Effects_flighthq_effects_RenderEffectPadding.registerRenderEffectPaddingResolver(state, kind, resolver);
+  }
+
+  public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flighthq_effects_TiltShiftEffect.registerTiltShiftEffectPaddingResolver(state);
+  }
 
   public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
     return cast Facade_Effects_flighthq_effects_RenderEffectValidation.validateRenderEffectList(effects, available);

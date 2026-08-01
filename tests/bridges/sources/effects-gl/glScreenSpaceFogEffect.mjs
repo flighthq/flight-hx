@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyScreenSpaceFogEffectToGl = api.applyScreenSpaceFogEffectToGl;
 export const defaultGlScreenSpaceFogEffectRunner = api.defaultGlScreenSpaceFogEffectRunner;
+export const registerGlScreenSpaceFogEffect = api.registerGlScreenSpaceFogEffect;

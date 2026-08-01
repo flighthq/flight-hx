@@ -3,16 +3,16 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.LibgdxSchema.LibgdxParticleDocument;
-import flighthq.particlesFormats.LibgdxSchema.LibgdxRangeValue;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.LibgdxParticleSchema.LibgdxParseOptions;
+import flighthq.types.LibgdxParticleSchema.LibgdxParseResult;
+import flighthq.types.LibgdxParticleSchema.LibgdxParticleDocument;
+import flighthq.types.LibgdxParticleSchema.LibgdxRangeValue;
 import flighthq.types.ParticleEmitterConfig;
-
-typedef LibgdxParseOptions = { @:optional var textureSize:Float; };
-
-typedef LibgdxParseResult = { var config:ParticleEmitterConfig; var document:LibgdxParticleDocument; var warnings:Array<String>; };
-
-typedef LibgdxParsed = LibgdxParseResult;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef LibgdxSection__libgdxParse = Dynamic;
 
@@ -43,7 +43,7 @@ class LibgdxParse {
     sections = _Runtime.field(__destructure1, 'sections');
     doc = _Runtime.callValue(LibgdxParse.sectionsToDocument__libgdxParse, cast ([sections] : Array<Dynamic>));
     textureSize = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0);
-    return cast { config: _Runtime.callValue(LibgdxParse.documentToConfig__libgdxParse, cast ([doc, textureSize] : Array<Dynamic>)), document: doc, warnings: _Runtime.callValue(LibgdxParse.collectLibgdxWarnings__libgdxParse, cast ([doc] : Array<Dynamic>)) };
+    return cast { config: _Runtime.callValue(LibgdxParse.documentToConfig__libgdxParse, cast ([doc, textureSize] : Array<Dynamic>)), diagnostics: _Runtime.callValue(LibgdxParse.collectLibgdxDiagnostics__libgdxParse, cast ([doc] : Array<Dynamic>)), document: doc };
     return cast null;
   }
 
@@ -57,21 +57,35 @@ class LibgdxParse {
     return cast null;
   }
 
-  public static function collectLibgdxWarnings__libgdxParse(doc:LibgdxParticleDocument):Array<String> {
-    var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.field(doc.delay, 'active') : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['libGDX emission delay is not supported and was ignored'] : Array<Dynamic>)); }
-    if ((cast _Runtime.field(doc.lifeOffset, 'active') : Bool)) { _Runtime.callProperty(warnings, 'push', cast (['libGDX lifeOffset is not supported and was ignored'] : Array<Dynamic>)); }
+  public static function collectLibgdxDiagnostics__libgdxParse(doc:LibgdxParticleDocument):Array<ImportDiagnostic> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
+    diagnostics = cast ([] : Array<Dynamic>);
+    if ((cast _Runtime.field(doc.delay, 'active') : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'libgdx.delay-unsupported', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
+    }
+    if ((cast _Runtime.field(doc.lifeOffset, 'active') : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'libgdx.life-offset-unsupported', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
+    }
     if ((cast ((cast _Runtime.field(doc.xOffset, 'active') : Bool) || (cast _Runtime.field(doc.yOffset, 'active') : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['libGDX emitter x/y position offsets are not supported and were ignored'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'libgdx.position-offset-unsupported', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
     }
     if ((cast doc.premultipliedAlpha : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['libGDX premultipliedAlpha flag is informational only; blending behavior may differ'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'libgdx.premultiplied-alpha-informational', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(doc.spawnShape, 'shape'), 'line') : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['libGDX line spawn shape has no equivalent and was mapped to point emitter'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'libgdx.line-shape-mapped-to-point', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
     }
-    return cast warnings;
+    _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'libgdx.emission-unsupported', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(_Runtime.field(doc.tint, 'colors'), 'length') : Float) > (cast 2.0 : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'libgdx.tint-reduced', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
+    }
+    if ((cast ((cast _Runtime.field(doc.transparency.scaling, 'length') : Float) > (cast 2.0 : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'libgdx.transparency-reduced', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
+    }
+    if ((cast ((cast _Runtime.field(doc.spawnShape, 'edges') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(doc.spawnShape, 'side'), 'both') : Bool)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'libgdx.spawn-edges-unsupported', 'collectLibgdxDiagnostics'] : Array<Dynamic>));
+    }
+    return cast diagnostics;
     return cast null;
   }
 

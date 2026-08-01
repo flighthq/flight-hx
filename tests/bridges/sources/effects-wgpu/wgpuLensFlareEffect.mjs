@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyLensFlareEffectToWgpu = api.applyLensFlareEffectToWgpu;
 export const defaultWgpuLensFlareEffectRunner = api.defaultWgpuLensFlareEffectRunner;
+export const registerWgpuLensFlareEffect = api.registerWgpuLensFlareEffect;

@@ -3,6 +3,7 @@ package;
 import flighthq.math.Math.*;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq._internal._Async;
+import flighthq._internal._Runtime;
 
 class CoreSmoke {
   static function main():Void {
@@ -50,6 +51,10 @@ class CoreSmoke {
     if (emittedValue != 4.5) throw 'signal arguments failed';
 
     #if !js
+    final decoder = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
+    final decoded = _Runtime.callProperty(decoder, 'decode', [new flighthq._internal._UInt8Array([104, 105])]);
+    if (decoded != 'hi') throw 'portable TextDecoder failed';
+
     var asyncValue = 0;
     _Async.flatMap(_Async.resolve(4), function(value:Int) {
       asyncValue = value + 1;

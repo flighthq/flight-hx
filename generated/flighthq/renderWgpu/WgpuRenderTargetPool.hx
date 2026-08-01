@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTarget.destroyWgpuRenderTarget;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 class WgpuRenderTargetPool {
-  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):WgpuRenderTarget {
+  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; @:optional var colorSpace:RenderTargetColorSpace; }):WgpuRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
@@ -23,12 +24,13 @@ class WgpuRenderTargetPool {
         var candidate:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pool, 'free'), i);
         if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'width'), w) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'height'), h) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(candidate, 'format'), format) : Bool)) : Bool)) {
           _Runtime.splice(_Runtime.field(pool, 'free'), Std.int(i), Std.int(1.0), []);
+          _Runtime.setField(candidate, 'colorSpace', _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
           return cast candidate;
         }
         i++;
       }
     }
-    return cast _Runtime.callValue(createWgpuRenderTarget, cast ([state, w, h, format] : Array<Dynamic>));
+    return cast _Runtime.callValue(createWgpuRenderTarget, cast ([state, w, h, format, _Runtime.field(descriptor, 'colorSpace')] : Array<Dynamic>));
     return cast null;
   }
 

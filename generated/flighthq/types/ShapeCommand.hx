@@ -18,7 +18,7 @@ typedef LineScaleMode = String;
 
 typedef SpreadMethod = String;
 
-typedef ShapeCommandRegistry = { var beginBitmapFill:Array<Dynamic>; var beginFill:Array<Float>; var beginGradientFill:Array<Dynamic>; var cubicCurveTo:Array<Float>; var curveTo:Array<Float>; var drawCircle:Array<Float>; var drawEllipse:Array<Float>; var drawPath:Array<Dynamic>; var drawRectangle:Array<Float>; var drawRoundRectangle:Array<Float>; var endFill:Array<Dynamic>; var lineBitmapStyle:Array<Dynamic>; var lineGradientStyle:Array<Dynamic>; var lineStyle:Array<Dynamic>; var lineTo:Array<Float>; var moveTo:Array<Float>; };
+typedef ShapeCommandRegistry = { var beginTextureFill:Array<Dynamic>; var beginFill:Array<Float>; var beginGradientFill:Array<Dynamic>; var cubicCurveTo:Array<Float>; var curveTo:Array<Float>; var drawCircle:Array<Float>; var drawEllipse:Array<Float>; var drawPath:Array<Dynamic>; var drawRectangle:Array<Float>; var drawRoundRectangle:Array<Float>; var endFill:Array<Dynamic>; var lineTextureStyle:Array<Dynamic>; var lineGradientStyle:Array<Dynamic>; var lineStyle:Array<Dynamic>; var lineTo:Array<Float>; var moveTo:Array<Float>; };
 
 typedef ShapeCommandKey = ShapeCommandRegistry;
 

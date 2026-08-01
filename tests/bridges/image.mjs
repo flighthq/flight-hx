@@ -2,22 +2,15 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const cloneImageResource = compiled.flighthq.image.Image.cloneImageResource;
-export const createCanvasFromImageResource = compiled.flighthq.image.Image.createCanvasFromImageResource;
-export const createCompressedImageResource = compiled.flighthq.image.Image.createCompressedImageResource;
+export const createCompressedImage = compiled.flighthq.image.Image.createCompressedImage;
 export const createImageResource = compiled.flighthq.image.Image.createImageResource;
+export const createImageResourceFromBitmap = compiled.flighthq.image.Image.createImageResourceFromBitmap;
 export const createImageResourceFromCanvas = compiled.flighthq.image.Image.createImageResourceFromCanvas;
 export const createImageResourceFromImageBitmap = compiled.flighthq.image.Image.createImageResourceFromImageBitmap;
 export const createImageResourceFromImageElement = compiled.flighthq.image.Image.createImageResourceFromImageElement;
-export const disposeImageResource = compiled.flighthq.image.Image.disposeImageResource;
-export const getImageResourceByteSize = compiled.flighthq.image.Image.getImageResourceByteSize;
-export const hasImageResourceData = compiled.flighthq.image.Image.hasImageResourceData;
-export const hasImageResourcePixels = compiled.flighthq.image.Image.hasImageResourcePixels;
-export const hasImageResourceSource = compiled.flighthq.image.Image.hasImageResourceSource;
-export const invalidateImageResource = compiled.flighthq.image.Image.invalidateImageResource;
 export const isImageResourceEmpty = compiled.flighthq.image.Image.isImageResourceEmpty;
-export const isImageResourceSameOrigin = compiled.flighthq.image.Image.isImageResourceSameOrigin;
+export const isImageUrlSameOrigin = compiled.flighthq.image.Image.isImageUrlSameOrigin;
 export const loadImageResourceFromBase64 = compiled.flighthq.image.Image.loadImageResourceFromBase64;
 export const loadImageResourceFromBlob = compiled.flighthq.image.Image.loadImageResourceFromBlob;
 export const loadImageResourceFromBytes = compiled.flighthq.image.Image.loadImageResourceFromBytes;
 export const loadImageResourceFromUrl = compiled.flighthq.image.Image.loadImageResourceFromUrl;
-export const setImageResourceSource = compiled.flighthq.image.Image.setImageResourceSource;

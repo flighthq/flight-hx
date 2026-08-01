@@ -4,10 +4,12 @@ package flighthq.bitmapfont;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont;
-import flighthq.bitmapfont.GlyphSource as Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource;
+import flighthq.bitmapfont.BitmapFontFromGlyphAtlas as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontFromGlyphAtlas;
+import flighthq.bitmapfont.BitmapFontGlyphSource as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontGlyphSource;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.GlyphSource;
+import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.TextureAtlas;
@@ -18,8 +20,13 @@ class Bitmapfont {
     return cast null;
   }
 
+  public static function createBitmapFontFromGlyphAtlas(atlas:GlyphAtlas):BitmapFont {
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontFromGlyphAtlas.createBitmapFontFromGlyphAtlas(atlas);
+    return cast null;
+  }
+
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
-    return cast Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource.createGlyphSourceFromBitmapFont(font);
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontGlyphSource.createGlyphSourceFromBitmapFont(font);
     return cast null;
   }
 

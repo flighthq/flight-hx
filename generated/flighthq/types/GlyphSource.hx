@@ -14,12 +14,12 @@ typedef GlyphRasterizedBitmap = { var advance:Float; var bearingX:Float; var bea
 
 typedef GlyphRasterizeOptions = { var fontFamily:String; var fontSize:Float; @:optional var fontStyle:String; @:optional var fontWeight:Dynamic; };
 
-typedef GlyphRasterizerBackend = { var rasterize:Dynamic; };
+typedef GlyphRasterizerBackend = { var rasterize:Dynamic; @:optional var measureMetrics:Dynamic; };
 
-typedef GlyphAtlasOptions = { var fontFamily:String; var fontSize:Float; var height:Float; @:optional var maxGlyphs:Float; @:optional var padding:Float; var width:Float; };
+typedef GlyphAtlasOptions = { var fontFamily:String; var fontSize:Float; @:optional var fontStyle:String; @:optional var fontWeight:String; var height:Float; @:optional var maxArea:Float; @:optional var maxBytes:Float; @:optional var maxGlyphs:Float; @:optional var padding:Float; var width:Float; };
 
 typedef GlyphAtlasShelf = { var cursorX:Float; var height:Float; var y:Float; };
 
-typedef GlyphAtlasRuntime = { var bitmaps:Dynamic; var dirty:Bool; var dirtyMaxX:Float; var dirtyMaxY:Float; var dirtyMinX:Float; var dirtyMinY:Float; var entries:Dynamic; var lru:Array<Float>; var maxGlyphs:Float; var metrics:GlyphMetrics; var packBottom:Float; var padding:Float; var rasterizeOptions:GlyphRasterizeOptions; var shelves:Array<GlyphAtlasShelf>; var surface:Surface; };
+typedef GlyphAtlasRuntime = { var bitmaps:Dynamic; var dirty:Bool; var dirtyMaxX:Float; var dirtyMaxY:Float; var dirtyMinX:Float; var dirtyMinY:Float; var entries:Dynamic; var lru:Dynamic; var maxArea:Float; var maxBytes:Float; var maxGlyphs:Float; var occupiedArea:Float; var retainedBytes:Float; var metrics:GlyphMetrics; var packBottom:Float; var padding:Float; var rasterizeOptions:GlyphRasterizeOptions; var shelves:Array<GlyphAtlasShelf>; var bitmap:Bitmap; };
 
 typedef GlyphAtlas = { var runtime:GlyphAtlasRuntime; };

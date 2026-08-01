@@ -6,6 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const acquireWgpuFrameCaptureTexture = api.acquireWgpuFrameCaptureTexture;
-export const createSurfaceFromWgpuRenderState = api.createSurfaceFromWgpuRenderState;
+export const createBitmapFromWgpuRenderState = api.createBitmapFromWgpuRenderState;
 export const enableWgpuFrameCapture = api.enableWgpuFrameCapture;
 export const encodeWgpuFrameCapture = api.encodeWgpuFrameCapture;

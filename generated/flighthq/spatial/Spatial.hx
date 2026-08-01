@@ -3,6 +3,8 @@ package flighthq.spatial;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.spatial.ExplainSpatialIndexing as Facade_Spatial_flighthq_spatial_ExplainSpatialIndexing;
+import flighthq.spatial.FormatSpatialIndexingNotice as Facade_Spatial_flighthq_spatial_FormatSpatialIndexingNotice;
 import flighthq.spatial.SpatialIndex as Facade_Spatial_flighthq_spatial_SpatialIndex;
 import flighthq.spatial.UniformGrid as Facade_Spatial_flighthq_spatial_UniformGrid;
 import flighthq.types.Spatial.SpatialAabb;
@@ -10,6 +12,9 @@ import flighthq.types.Spatial.SpatialIndex;
 import flighthq.types.Spatial.SpatialIndexBackend;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
+import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
+import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 
 class Spatial {
   public static function clearSpatialIndex(index:SpatialIndex):Void {
@@ -26,9 +31,22 @@ class Spatial {
     return cast null;
   }
 
-  public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.insertSpatialObject(index, id, bounds);
+  public static function explainSpatialIndexing(index:SpatialIndex, id:SpatialObjectId):SpatialIndexingExplanation {
+    return cast Facade_Spatial_flighthq_spatial_ExplainSpatialIndexing.explainSpatialIndexing(index, id);
+    return cast null;
   }
+
+  public static function formatSpatialIndexingNotice(notice:SpatialIndexingNotice):String {
+    return cast Facade_Spatial_flighthq_spatial_FormatSpatialIndexingNotice.formatSpatialIndexingNotice(notice);
+    return cast null;
+  }
+
+  public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
+    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.insertSpatialObject(index, id, bounds);
+    return cast null;
+  }
+
+  public static final MAX_INDEXED_CELLS_PER_OBJECT:Dynamic = Facade_Spatial_flighthq_spatial_UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
 
   public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
     Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPairs(index, out);
@@ -50,7 +68,12 @@ class Spatial {
     Facade_Spatial_flighthq_spatial_SpatialIndex.removeSpatialObject(index, id);
   }
 
-  public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.updateSpatialObject(index, id, bounds);
+  public static function setSpatialIndexingGuard(guard:Null<SpatialIndexingGuard>):Void {
+    Facade_Spatial_flighthq_spatial_UniformGrid.setSpatialIndexingGuard(guard);
+  }
+
+  public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
+    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.updateSpatialObject(index, id, bounds);
+    return cast null;
   }
 }

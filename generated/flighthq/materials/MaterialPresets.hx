@@ -3,10 +3,13 @@ package flighthq.materials;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.materials.PbrExtensionMaterials.createTransmissionVolumePbrMaterial;
+import flighthq.materials.ExtendedPbrMaterial.createExtendedPbrMaterial;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterial;
+import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
+import flighthq.materials.TransmissionVolumePbrExtension.createTransmissionVolumePbrExtension;
+import flighthq.types.ExtendedPbrMaterial;
+import flighthq.types.GlassExtendedPbrMaterialOptions;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.TransmissionVolumePbrMaterial;
 
 class MaterialPresets {
   public static function createAluminumStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
@@ -19,8 +22,8 @@ class MaterialPresets {
     return cast null;
   }
 
-  public static function createGlassTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
-    return cast _Runtime.callValue(createTransmissionVolumePbrMaterial, cast ([_Runtime.mergeObjects([{ ior: 1.5 }, { transmission: 1.0 }, opts])] : Array<Dynamic>));
+  public static function createGlassExtendedPbrMaterial(?opts:GlassExtendedPbrMaterialOptions):ExtendedPbrMaterial {
+    return cast _Runtime.callValue(createExtendedPbrMaterial, cast ([_Runtime.mergeObjects([opts, { extensions: cast ([_Runtime.callValue(createTransmissionVolumePbrExtension, cast ([_Runtime.mergeObjects([{ ior: 1.5 }, { transmission: 1.0 }, _Runtime.optionalField(opts, 'transmissionVolume')])] : Array<Dynamic>))] : Array<Dynamic>) }, { standard: _Runtime.callValue(createStandardPbrMaterialProperties, cast ([_Runtime.mergeObjects([{ baseColor: 4294967295.0 }, { metallic: 0.0 }, { roughness: 0.0 }, _Runtime.optionalField(opts, 'standard')])] : Array<Dynamic>)) }])] : Array<Dynamic>));
     return cast null;
   }
 

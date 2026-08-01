@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyMotionBlurEffectToGl = api.applyMotionBlurEffectToGl;
 export const defaultGlMotionBlurEffectRunner = api.defaultGlMotionBlurEffectRunner;
+export const registerGlMotionBlurEffect = api.registerGlMotionBlurEffect;

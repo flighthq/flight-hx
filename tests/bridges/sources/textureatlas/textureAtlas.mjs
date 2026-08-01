@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTextureAtlas = api.createTextureAtlas;
+export const disposeTextureAtlas = api.disposeTextureAtlas;
 export const getTextureAtlasByteSize = api.getTextureAtlasByteSize;

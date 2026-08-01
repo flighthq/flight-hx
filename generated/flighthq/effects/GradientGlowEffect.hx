@@ -3,11 +3,30 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.getGaussianRenderEffectPadding;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.GradientGlowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class GradientGlowEffect {
   public static function createGradientGlowEffect(options:Dynamic):flighthq.types.GradientGlowEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientGlowEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getGradientGlowEffectPadding(effect:flighthq.types.GradientGlowEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function registerGradientGlowEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'GradientGlowEffect', GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveGradientGlowEffectPadding__gradientGlowEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getGradientGlowEffectPadding, cast ([(cast effect : flighthq.types.GradientGlowEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

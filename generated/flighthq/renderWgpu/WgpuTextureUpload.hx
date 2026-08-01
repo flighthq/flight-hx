@@ -3,22 +3,20 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ImageResource;
+import flighthq.renderWgpu.WgpuExternalImageSource.isWgpuExternalImageSourceReady;
+import flighthq.types.Image;
 
 class WgpuTextureUpload {
   public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : flighthq._internal._UInt8ClampedArray), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : flighthq._internal._UInt8ClampedArray), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
   public static function uploadWgpuTextureElement(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, source:Dynamic):Void {
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: source }, { texture: texture, origin: origin }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callValue(isWgpuExternalImageSourceReady, cast ([source, width, height] : Array<Dynamic>)) : Bool) : Bool)) { return; }
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: source }, { texture: texture, origin: origin }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:ImageResource):Void {
-    if ((cast !_Runtime.strictEquals(image.source, null) : Bool)) {
-      _Runtime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, image.width, image.height, (cast image.source : Dynamic)] : Array<Dynamic>));
-    } else {
-      _Runtime.callValue(uploadWgpuTextureData, cast ([device, texture, origin, image.width, image.height, image.data] : Array<Dynamic>));
-    }
+  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:Dynamic):Void {
+    _Runtime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
   }
 }

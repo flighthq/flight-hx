@@ -3,13 +3,17 @@ package flighthq.textureatlas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.textureatlas.EnableTextureAtlasGuards as Facade_Textureatlas_flighthq_textureatlas_EnableTextureAtlasGuards;
 import flighthq.textureatlas.TextureAtlas as Facade_Textureatlas_flighthq_textureatlas_TextureAtlas;
 import flighthq.textureatlas.TextureAtlasFrom as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom;
+import flighthq.textureatlas.TextureAtlasGrid as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasGrid;
 import flighthq.textureatlas.TextureAtlasRegion as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion;
-import flighthq.types.ImageResource;
+import flighthq.types.GridSliceOptions;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureAtlasRegionTextureExplanation;
 import flighthq.types.Vector2.Vector2Like;
 
 class Textureatlas {
@@ -17,16 +21,30 @@ class Textureatlas {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegion(target, x, y, width, height, pivotX, pivotY, name);
   }
 
+  public static function addTextureAtlasRegionCorners(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
+    Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionCorners(target, ax, ay, bx, by, pivotX, pivotY, name);
+  }
+
   public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionRectangle(target, rect, pivot, name);
   }
 
-  public static function addTextureAtlasRegionRectangleXY(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
-    Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionRectangleXY(target, ax, ay, bx, by, pivotX, pivotY, name);
-  }
-
   public static function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionVector2(target, a, b, pivot, name);
+  }
+
+  public static function areTextureAtlasGuardsEnabled():Bool {
+    return cast Facade_Textureatlas_flighthq_textureatlas_EnableTextureAtlasGuards.areTextureAtlasGuardsEnabled();
+    return cast null;
+  }
+
+  public static function buildTextureAtlasRegionIndex(atlas:TextureAtlas):Dynamic {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.buildTextureAtlasRegionIndex(atlas);
+    return cast null;
+  }
+
+  public static function clearTextureAtlasRegions(target:TextureAtlas):Void {
+    Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.clearTextureAtlasRegions(target);
   }
 
   public static function createTextureAtlas(?obj:Dynamic):TextureAtlas {
@@ -36,6 +54,11 @@ class Textureatlas {
 
   public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromCanvas(canvas);
+    return cast null;
+  }
+
+  public static function createTextureAtlasFromGrid(options:GridSliceOptions, ?texture:Null<Texture2D>):TextureAtlas {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasGrid.createTextureAtlasFromGrid(options, texture);
     return cast null;
   }
 
@@ -49,13 +72,30 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:ImageResource):TextureAtlas {
+  public static function createTextureAtlasFromImageResource(resource:Dynamic):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageResource(resource);
     return cast null;
   }
 
   public static function createTextureAtlasRegion(?obj:Dynamic):TextureAtlasRegion {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.createTextureAtlasRegion(obj);
+    return cast null;
+  }
+
+  public static function disableTextureAtlasGuards():Void {
+    Facade_Textureatlas_flighthq_textureatlas_EnableTextureAtlasGuards.disableTextureAtlasGuards();
+  }
+
+  public static function disposeTextureAtlas(atlas:TextureAtlas):Void {
+    Facade_Textureatlas_flighthq_textureatlas_TextureAtlas.disposeTextureAtlas(atlas);
+  }
+
+  public static function enableTextureAtlasGuards():Void {
+    Facade_Textureatlas_flighthq_textureatlas_EnableTextureAtlasGuards.enableTextureAtlasGuards();
+  }
+
+  public static function explainTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:Float):TextureAtlasRegionTextureExplanation {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.explainTextureAtlasRegionTexture(atlas, regionId);
     return cast null;
   }
 
@@ -74,13 +114,38 @@ class Textureatlas {
     return cast null;
   }
 
+  public static function getTextureAtlasRegionCount(atlas:TextureAtlas):Float {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionCount(atlas);
+    return cast null;
+  }
+
+  public static function getTextureAtlasRegionFrame(region:TextureAtlasRegion, out:RectangleLike):RectangleLike {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionFrame(region, out);
+    return cast null;
+  }
+
   public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<TextureAtlasRegion> {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence(atlas, prefix);
     return cast null;
   }
 
+  public static function getTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:Float):Null<Texture2D> {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionTexture(atlas, regionId);
+    return cast null;
+  }
+
   public static function getTextureAtlasRegionUv(region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float, out:RectangleLike):RectangleLike {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionUv(region, imageWidth, imageHeight, out);
+    return cast null;
+  }
+
+  public static function getTextureAtlasRegionUvQuad(region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float, out:Array<Float>):Array<Float> {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionUvQuad(region, imageWidth, imageHeight, out);
+    return cast null;
+  }
+
+  public static function hasTextureAtlasRegion(atlas:TextureAtlas, name:String):Bool {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.hasTextureAtlasRegion(atlas, name);
     return cast null;
   }
 
@@ -104,7 +169,12 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function setTextureAtlasRegion(out:TextureAtlasRegion, x:Float, ?y:Float, ?width:Float, ?height:Float, ?pivotX:Float, ?pivotY:Float):Void {
-    Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.setTextureAtlasRegion(out, x, y, width, height, pivotX, pivotY);
+  public static function removeTextureAtlasRegion(target:TextureAtlas, id:Float):Bool {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.removeTextureAtlasRegion(target, id);
+    return cast null;
+  }
+
+  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:Dynamic):Void {
+    Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.setTextureAtlasRegion(out, source);
   }
 }

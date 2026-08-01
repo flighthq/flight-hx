@@ -3,20 +3,39 @@ package flighthq.shortcut;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.shortcut.EnableShortcutGuards as Facade_Shortcut_flighthq_shortcut_EnableShortcutGuards;
+import flighthq.shortcut.ExplainGlobalShortcutRegistration as Facade_Shortcut_flighthq_shortcut_ExplainGlobalShortcutRegistration;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.signals.Slot.clearSignal;
 import flighthq.types.Accelerator;
 import flighthq.types.AcceleratorParseError;
+import flighthq.types.GlobalShortcutExplanation;
 import flighthq.types.ParsedAccelerator;
 import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.ShortcutDrop.ShortcutDropGuard;
+import flighthq.types.ShortcutDrop.ShortcutOperation;
 import flighthq.types.ShortcutEvent;
+import flighthq.types.ShortcutKeyName;
 import flighthq.types.ShortcutModifier;
 import flighthq.types.ShortcutSignals;
 
-typedef _Parsed__shortcut = { var key:String; var modifiers:Array<ShortcutModifier>; };
+typedef _Parsed__shortcut = { var key:ShortcutKeyName; var modifiers:Array<ShortcutModifier>; };
 
 class Shortcut {
   public static var _backend__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
+
+  public static function _copyParsed__shortcut(source:_Parsed__shortcut, out:ParsedAccelerator):ParsedAccelerator {
+    _Runtime.setField(out, 'key', _Runtime.field(source, 'key'));
+    _Runtime.setLength(_Runtime.field(out, 'modifiers'), 0.0);
+    for (modifier in _Runtime.iterable(_Runtime.field(source, 'modifiers'))) {
+      _Runtime.callProperty(_Runtime.field(out, 'modifiers'), 'push', cast ([modifier] : Array<Dynamic>));
+    }
+    return cast out;
+    return cast null;
+  }
+
+  public static var _dropGuard__shortcut:Null<ShortcutDropGuard> = _Runtime.explicitNull();
 
   public static final _emptyList__shortcut:Array<String> = cast ([] : Array<Dynamic>);
 
@@ -60,13 +79,26 @@ class Shortcut {
     return cast null;
   }
 
-  public static final _keyAliases__shortcut:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['a', 'A'] : Array<Dynamic>), cast (['b', 'B'] : Array<Dynamic>), cast (['c', 'C'] : Array<Dynamic>), cast (['d', 'D'] : Array<Dynamic>), cast (['e', 'E'] : Array<Dynamic>), cast (['f', 'F'] : Array<Dynamic>), cast (['g', 'G'] : Array<Dynamic>), cast (['h', 'H'] : Array<Dynamic>), cast (['i', 'I'] : Array<Dynamic>), cast (['j', 'J'] : Array<Dynamic>), cast (['k', 'K'] : Array<Dynamic>), cast (['l', 'L'] : Array<Dynamic>), cast (['m', 'M'] : Array<Dynamic>), cast (['n', 'N'] : Array<Dynamic>), cast (['o', 'O'] : Array<Dynamic>), cast (['p', 'P'] : Array<Dynamic>), cast (['q', 'Q'] : Array<Dynamic>), cast (['r', 'R'] : Array<Dynamic>), cast (['s', 'S'] : Array<Dynamic>), cast (['t', 'T'] : Array<Dynamic>), cast (['u', 'U'] : Array<Dynamic>), cast (['v', 'V'] : Array<Dynamic>), cast (['w', 'W'] : Array<Dynamic>), cast (['x', 'X'] : Array<Dynamic>), cast (['y', 'Y'] : Array<Dynamic>), cast (['z', 'Z'] : Array<Dynamic>), cast (['0', '0'] : Array<Dynamic>), cast (['1', '1'] : Array<Dynamic>), cast (['2', '2'] : Array<Dynamic>), cast (['3', '3'] : Array<Dynamic>), cast (['4', '4'] : Array<Dynamic>), cast (['5', '5'] : Array<Dynamic>), cast (['6', '6'] : Array<Dynamic>), cast (['7', '7'] : Array<Dynamic>), cast (['8', '8'] : Array<Dynamic>), cast (['9', '9'] : Array<Dynamic>), cast (['f1', 'F1'] : Array<Dynamic>), cast (['f2', 'F2'] : Array<Dynamic>), cast (['f3', 'F3'] : Array<Dynamic>), cast (['f4', 'F4'] : Array<Dynamic>), cast (['f5', 'F5'] : Array<Dynamic>), cast (['f6', 'F6'] : Array<Dynamic>), cast (['f7', 'F7'] : Array<Dynamic>), cast (['f8', 'F8'] : Array<Dynamic>), cast (['f9', 'F9'] : Array<Dynamic>), cast (['f10', 'F10'] : Array<Dynamic>), cast (['f11', 'F11'] : Array<Dynamic>), cast (['f12', 'F12'] : Array<Dynamic>), cast (['f13', 'F13'] : Array<Dynamic>), cast (['f14', 'F14'] : Array<Dynamic>), cast (['f15', 'F15'] : Array<Dynamic>), cast (['f16', 'F16'] : Array<Dynamic>), cast (['f17', 'F17'] : Array<Dynamic>), cast (['f18', 'F18'] : Array<Dynamic>), cast (['f19', 'F19'] : Array<Dynamic>), cast (['f20', 'F20'] : Array<Dynamic>), cast (['f21', 'F21'] : Array<Dynamic>), cast (['f22', 'F22'] : Array<Dynamic>), cast (['f23', 'F23'] : Array<Dynamic>), cast (['f24', 'F24'] : Array<Dynamic>), cast (['arrowdown', 'ArrowDown'] : Array<Dynamic>), cast (['arrowleft', 'ArrowLeft'] : Array<Dynamic>), cast (['arrowright', 'ArrowRight'] : Array<Dynamic>), cast (['arrowup', 'ArrowUp'] : Array<Dynamic>), cast (['down', 'ArrowDown'] : Array<Dynamic>), cast (['left', 'ArrowLeft'] : Array<Dynamic>), cast (['right', 'ArrowRight'] : Array<Dynamic>), cast (['up', 'ArrowUp'] : Array<Dynamic>), cast (['end', 'End'] : Array<Dynamic>), cast (['home', 'Home'] : Array<Dynamic>), cast (['pagedown', 'PageDown'] : Array<Dynamic>), cast (['pageup', 'PageUp'] : Array<Dynamic>), cast (['pgdn', 'PageDown'] : Array<Dynamic>), cast (['pgup', 'PageUp'] : Array<Dynamic>), cast (['backspace', 'Backspace'] : Array<Dynamic>), cast (['delete', 'Delete'] : Array<Dynamic>), cast (['del', 'Delete'] : Array<Dynamic>), cast (['escape', 'Escape'] : Array<Dynamic>), cast (['esc', 'Escape'] : Array<Dynamic>), cast (['enter', 'Return'] : Array<Dynamic>), cast (['return', 'Return'] : Array<Dynamic>), cast (['insert', 'Insert'] : Array<Dynamic>), cast (['ins', 'Insert'] : Array<Dynamic>), cast (['space', 'Space'] : Array<Dynamic>), cast (['spacebar', 'Space'] : Array<Dynamic>), cast ([' ', 'Space'] : Array<Dynamic>), cast (['tab', 'Tab'] : Array<Dynamic>), cast (['num0', 'Numpad0'] : Array<Dynamic>), cast (['num1', 'Numpad1'] : Array<Dynamic>), cast (['num2', 'Numpad2'] : Array<Dynamic>), cast (['num3', 'Numpad3'] : Array<Dynamic>), cast (['num4', 'Numpad4'] : Array<Dynamic>), cast (['num5', 'Numpad5'] : Array<Dynamic>), cast (['num6', 'Numpad6'] : Array<Dynamic>), cast (['num7', 'Numpad7'] : Array<Dynamic>), cast (['num8', 'Numpad8'] : Array<Dynamic>), cast (['num9', 'Numpad9'] : Array<Dynamic>), cast (['numpad0', 'Numpad0'] : Array<Dynamic>), cast (['numpad1', 'Numpad1'] : Array<Dynamic>), cast (['numpad2', 'Numpad2'] : Array<Dynamic>), cast (['numpad3', 'Numpad3'] : Array<Dynamic>), cast (['numpad4', 'Numpad4'] : Array<Dynamic>), cast (['numpad5', 'Numpad5'] : Array<Dynamic>), cast (['numpad6', 'Numpad6'] : Array<Dynamic>), cast (['numpad7', 'Numpad7'] : Array<Dynamic>), cast (['numpad8', 'Numpad8'] : Array<Dynamic>), cast (['numpad9', 'Numpad9'] : Array<Dynamic>), cast (['numpadadd', 'NumpadAdd'] : Array<Dynamic>), cast (['numpaddecimal', 'NumpadDecimal'] : Array<Dynamic>), cast (['numpaddivide', 'NumpadDivide'] : Array<Dynamic>), cast (['numpadenter', 'NumpadEnter'] : Array<Dynamic>), cast (['numpadmultiply', 'NumpadMultiply'] : Array<Dynamic>), cast (['numpadsubtract', 'NumpadSubtract'] : Array<Dynamic>), cast (['\'', 'Quote'] : Array<Dynamic>), cast ([',', 'Comma'] : Array<Dynamic>), cast (['-', 'Minus'] : Array<Dynamic>), cast (['.', 'Period'] : Array<Dynamic>), cast (['/', 'Slash'] : Array<Dynamic>), cast ([';', 'Semicolon'] : Array<Dynamic>), cast (['=', 'Equal'] : Array<Dynamic>), cast (['[', 'BracketLeft'] : Array<Dynamic>), cast (['\\', 'Backslash'] : Array<Dynamic>), cast ([']', 'BracketRight'] : Array<Dynamic>), cast (['`', 'Backquote'] : Array<Dynamic>), cast (['backquote', 'Backquote'] : Array<Dynamic>), cast (['backslash', 'Backslash'] : Array<Dynamic>), cast (['bracketleft', 'BracketLeft'] : Array<Dynamic>), cast (['bracketright', 'BracketRight'] : Array<Dynamic>), cast (['comma', 'Comma'] : Array<Dynamic>), cast (['equal', 'Equal'] : Array<Dynamic>), cast (['minus', 'Minus'] : Array<Dynamic>), cast (['period', 'Period'] : Array<Dynamic>), cast (['plus', 'Plus'] : Array<Dynamic>), cast (['quote', 'Quote'] : Array<Dynamic>), cast (['semicolon', 'Semicolon'] : Array<Dynamic>), cast (['slash', 'Slash'] : Array<Dynamic>), cast (['medianexttrack', 'MediaNextTrack'] : Array<Dynamic>), cast (['mediaplaypause', 'MediaPlayPause'] : Array<Dynamic>), cast (['mediaprevioustrack', 'MediaPreviousTrack'] : Array<Dynamic>), cast (['mediastop', 'MediaStop'] : Array<Dynamic>), cast (['volumedown', 'VolumeDown'] : Array<Dynamic>), cast (['volumemute', 'VolumeMute'] : Array<Dynamic>), cast (['volumeup', 'VolumeUp'] : Array<Dynamic>), cast (['capslock', 'CapsLock'] : Array<Dynamic>), cast (['numlock', 'NumLock'] : Array<Dynamic>), cast (['print', 'PrintScreen'] : Array<Dynamic>), cast (['printscreen', 'PrintScreen'] : Array<Dynamic>), cast (['scrolllock', 'ScrollLock'] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final _keyAliases__shortcut:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['a', 'A'] : Array<Dynamic>), cast (['b', 'B'] : Array<Dynamic>), cast (['c', 'C'] : Array<Dynamic>), cast (['d', 'D'] : Array<Dynamic>), cast (['e', 'E'] : Array<Dynamic>), cast (['f', 'F'] : Array<Dynamic>), cast (['g', 'G'] : Array<Dynamic>), cast (['h', 'H'] : Array<Dynamic>), cast (['i', 'I'] : Array<Dynamic>), cast (['j', 'J'] : Array<Dynamic>), cast (['k', 'K'] : Array<Dynamic>), cast (['l', 'L'] : Array<Dynamic>), cast (['m', 'M'] : Array<Dynamic>), cast (['n', 'N'] : Array<Dynamic>), cast (['o', 'O'] : Array<Dynamic>), cast (['p', 'P'] : Array<Dynamic>), cast (['q', 'Q'] : Array<Dynamic>), cast (['r', 'R'] : Array<Dynamic>), cast (['s', 'S'] : Array<Dynamic>), cast (['t', 'T'] : Array<Dynamic>), cast (['u', 'U'] : Array<Dynamic>), cast (['v', 'V'] : Array<Dynamic>), cast (['w', 'W'] : Array<Dynamic>), cast (['x', 'X'] : Array<Dynamic>), cast (['y', 'Y'] : Array<Dynamic>), cast (['z', 'Z'] : Array<Dynamic>), cast (['0', '0'] : Array<Dynamic>), cast (['1', '1'] : Array<Dynamic>), cast (['2', '2'] : Array<Dynamic>), cast (['3', '3'] : Array<Dynamic>), cast (['4', '4'] : Array<Dynamic>), cast (['5', '5'] : Array<Dynamic>), cast (['6', '6'] : Array<Dynamic>), cast (['7', '7'] : Array<Dynamic>), cast (['8', '8'] : Array<Dynamic>), cast (['9', '9'] : Array<Dynamic>), cast (['f1', 'F1'] : Array<Dynamic>), cast (['f2', 'F2'] : Array<Dynamic>), cast (['f3', 'F3'] : Array<Dynamic>), cast (['f4', 'F4'] : Array<Dynamic>), cast (['f5', 'F5'] : Array<Dynamic>), cast (['f6', 'F6'] : Array<Dynamic>), cast (['f7', 'F7'] : Array<Dynamic>), cast (['f8', 'F8'] : Array<Dynamic>), cast (['f9', 'F9'] : Array<Dynamic>), cast (['f10', 'F10'] : Array<Dynamic>), cast (['f11', 'F11'] : Array<Dynamic>), cast (['f12', 'F12'] : Array<Dynamic>), cast (['f13', 'F13'] : Array<Dynamic>), cast (['f14', 'F14'] : Array<Dynamic>), cast (['f15', 'F15'] : Array<Dynamic>), cast (['f16', 'F16'] : Array<Dynamic>), cast (['f17', 'F17'] : Array<Dynamic>), cast (['f18', 'F18'] : Array<Dynamic>), cast (['f19', 'F19'] : Array<Dynamic>), cast (['f20', 'F20'] : Array<Dynamic>), cast (['f21', 'F21'] : Array<Dynamic>), cast (['f22', 'F22'] : Array<Dynamic>), cast (['f23', 'F23'] : Array<Dynamic>), cast (['f24', 'F24'] : Array<Dynamic>), cast (['arrowdown', 'ArrowDown'] : Array<Dynamic>), cast (['arrowleft', 'ArrowLeft'] : Array<Dynamic>), cast (['arrowright', 'ArrowRight'] : Array<Dynamic>), cast (['arrowup', 'ArrowUp'] : Array<Dynamic>), cast (['down', 'ArrowDown'] : Array<Dynamic>), cast (['left', 'ArrowLeft'] : Array<Dynamic>), cast (['right', 'ArrowRight'] : Array<Dynamic>), cast (['up', 'ArrowUp'] : Array<Dynamic>), cast (['end', 'End'] : Array<Dynamic>), cast (['home', 'Home'] : Array<Dynamic>), cast (['pagedown', 'PageDown'] : Array<Dynamic>), cast (['pageup', 'PageUp'] : Array<Dynamic>), cast (['pgdn', 'PageDown'] : Array<Dynamic>), cast (['pgup', 'PageUp'] : Array<Dynamic>), cast (['backspace', 'Backspace'] : Array<Dynamic>), cast (['delete', 'Delete'] : Array<Dynamic>), cast (['del', 'Delete'] : Array<Dynamic>), cast (['escape', 'Escape'] : Array<Dynamic>), cast (['esc', 'Escape'] : Array<Dynamic>), cast (['enter', 'Return'] : Array<Dynamic>), cast (['return', 'Return'] : Array<Dynamic>), cast (['insert', 'Insert'] : Array<Dynamic>), cast (['ins', 'Insert'] : Array<Dynamic>), cast (['space', 'Space'] : Array<Dynamic>), cast (['spacebar', 'Space'] : Array<Dynamic>), cast ([' ', 'Space'] : Array<Dynamic>), cast (['tab', 'Tab'] : Array<Dynamic>), cast (['numadd', 'NumpadAdd'] : Array<Dynamic>), cast (['numdec', 'NumpadDecimal'] : Array<Dynamic>), cast (['numdiv', 'NumpadDivide'] : Array<Dynamic>), cast (['nummult', 'NumpadMultiply'] : Array<Dynamic>), cast (['numsub', 'NumpadSubtract'] : Array<Dynamic>), cast (['num0', 'Numpad0'] : Array<Dynamic>), cast (['num1', 'Numpad1'] : Array<Dynamic>), cast (['num2', 'Numpad2'] : Array<Dynamic>), cast (['num3', 'Numpad3'] : Array<Dynamic>), cast (['num4', 'Numpad4'] : Array<Dynamic>), cast (['num5', 'Numpad5'] : Array<Dynamic>), cast (['num6', 'Numpad6'] : Array<Dynamic>), cast (['num7', 'Numpad7'] : Array<Dynamic>), cast (['num8', 'Numpad8'] : Array<Dynamic>), cast (['num9', 'Numpad9'] : Array<Dynamic>), cast (['numpad0', 'Numpad0'] : Array<Dynamic>), cast (['numpad1', 'Numpad1'] : Array<Dynamic>), cast (['numpad2', 'Numpad2'] : Array<Dynamic>), cast (['numpad3', 'Numpad3'] : Array<Dynamic>), cast (['numpad4', 'Numpad4'] : Array<Dynamic>), cast (['numpad5', 'Numpad5'] : Array<Dynamic>), cast (['numpad6', 'Numpad6'] : Array<Dynamic>), cast (['numpad7', 'Numpad7'] : Array<Dynamic>), cast (['numpad8', 'Numpad8'] : Array<Dynamic>), cast (['numpad9', 'Numpad9'] : Array<Dynamic>), cast (['numpadadd', 'NumpadAdd'] : Array<Dynamic>), cast (['numpaddecimal', 'NumpadDecimal'] : Array<Dynamic>), cast (['numpaddivide', 'NumpadDivide'] : Array<Dynamic>), cast (['numpadenter', 'NumpadEnter'] : Array<Dynamic>), cast (['numpadmultiply', 'NumpadMultiply'] : Array<Dynamic>), cast (['numpadsubtract', 'NumpadSubtract'] : Array<Dynamic>), cast (['\'', 'Quote'] : Array<Dynamic>), cast (['+', 'Plus'] : Array<Dynamic>), cast ([',', 'Comma'] : Array<Dynamic>), cast (['-', 'Minus'] : Array<Dynamic>), cast (['.', 'Period'] : Array<Dynamic>), cast (['/', 'Slash'] : Array<Dynamic>), cast ([';', 'Semicolon'] : Array<Dynamic>), cast (['=', 'Equal'] : Array<Dynamic>), cast (['[', 'BracketLeft'] : Array<Dynamic>), cast (['\\', 'Backslash'] : Array<Dynamic>), cast ([']', 'BracketRight'] : Array<Dynamic>), cast (['`', 'Backquote'] : Array<Dynamic>), cast (['backquote', 'Backquote'] : Array<Dynamic>), cast (['backslash', 'Backslash'] : Array<Dynamic>), cast (['bracketleft', 'BracketLeft'] : Array<Dynamic>), cast (['bracketright', 'BracketRight'] : Array<Dynamic>), cast (['comma', 'Comma'] : Array<Dynamic>), cast (['equal', 'Equal'] : Array<Dynamic>), cast (['minus', 'Minus'] : Array<Dynamic>), cast (['period', 'Period'] : Array<Dynamic>), cast (['plus', 'Plus'] : Array<Dynamic>), cast (['quote', 'Quote'] : Array<Dynamic>), cast (['semicolon', 'Semicolon'] : Array<Dynamic>), cast (['slash', 'Slash'] : Array<Dynamic>), cast (['medianexttrack', 'MediaNextTrack'] : Array<Dynamic>), cast (['mediaplaypause', 'MediaPlayPause'] : Array<Dynamic>), cast (['mediaprevioustrack', 'MediaPreviousTrack'] : Array<Dynamic>), cast (['mediastop', 'MediaStop'] : Array<Dynamic>), cast (['volumedown', 'VolumeDown'] : Array<Dynamic>), cast (['volumemute', 'VolumeMute'] : Array<Dynamic>), cast (['volumeup', 'VolumeUp'] : Array<Dynamic>), cast (['capslock', 'CapsLock'] : Array<Dynamic>), cast (['numlock', 'NumLock'] : Array<Dynamic>), cast (['print', 'PrintScreen'] : Array<Dynamic>), cast (['printscreen', 'PrintScreen'] : Array<Dynamic>), cast (['scrolllock', 'ScrollLock'] : Array<Dynamic>)] : Array<Dynamic>)]);
 
   public static final _keyDisplayNames__shortcut:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['ArrowDown', '↓'] : Array<Dynamic>), cast (['ArrowLeft', '←'] : Array<Dynamic>), cast (['ArrowRight', '→'] : Array<Dynamic>), cast (['ArrowUp', '↑'] : Array<Dynamic>), cast (['Backspace', '⌫'] : Array<Dynamic>), cast (['CapsLock', '⇪'] : Array<Dynamic>), cast (['Delete', '⌦'] : Array<Dynamic>), cast (['End', 'End'] : Array<Dynamic>), cast (['Escape', 'Esc'] : Array<Dynamic>), cast (['Home', 'Home'] : Array<Dynamic>), cast (['Insert', 'Ins'] : Array<Dynamic>), cast (['MediaNextTrack', '⏭'] : Array<Dynamic>), cast (['MediaPlayPause', '⏯'] : Array<Dynamic>), cast (['MediaPreviousTrack', '⏮'] : Array<Dynamic>), cast (['MediaStop', '⏹'] : Array<Dynamic>), cast (['NumLock', 'NumLk'] : Array<Dynamic>), cast (['PageDown', 'PgDn'] : Array<Dynamic>), cast (['PageUp', 'PgUp'] : Array<Dynamic>), cast (['PrintScreen', 'PrtSc'] : Array<Dynamic>), cast (['Return', '↵'] : Array<Dynamic>), cast (['ScrollLock', 'ScrLk'] : Array<Dynamic>), cast (['Space', 'Space'] : Array<Dynamic>), cast (['Tab', '⇥'] : Array<Dynamic>), cast (['VolumeDown', '🔉'] : Array<Dynamic>), cast (['VolumeMute', '🔇'] : Array<Dynamic>), cast (['VolumeUp', '🔊'] : Array<Dynamic>)] : Array<Dynamic>)]);
 
   public static final _modifierAliases__shortcut:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['alt', 'Alt'] : Array<Dynamic>), cast (['cmd', 'Meta'] : Array<Dynamic>), cast (['command', 'Meta'] : Array<Dynamic>), cast (['commandorcontrol', 'CommandOrControl'] : Array<Dynamic>), cast (['control', 'Control'] : Array<Dynamic>), cast (['ctrl', 'Control'] : Array<Dynamic>), cast (['meta', 'Meta'] : Array<Dynamic>), cast (['option', 'Alt'] : Array<Dynamic>), cast (['shift', 'Shift'] : Array<Dynamic>), cast (['super', 'Super'] : Array<Dynamic>), cast (['win', 'Super'] : Array<Dynamic>)] : Array<Dynamic>)]);
 
   public static final _modifierOrder__shortcut:Array<ShortcutModifier> = cast (['Control', 'Alt', 'Shift', 'Meta', 'Super', 'CommandOrControl'] : Array<Dynamic>);
+
+  public static function _normalizeForCommand__shortcut(accelerator:String, operation:ShortcutOperation):Null<Accelerator> {
+    var result:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(Shortcut._dropGuard__shortcut, null) : Bool)) { return cast _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>)); }
+    result = _Runtime.callValue(Shortcut._parseDetailed__shortcut, cast ([accelerator] : Array<Dynamic>));
+    if ((cast _Runtime.hasField(result, 'reason') : Bool)) {
+      _Runtime.callValue(Shortcut._dropGuard__shortcut, cast ([{ accelerator: accelerator, operation: operation, parseError: result, reason: 'unparseable' }] : Array<Dynamic>));
+      return cast null;
+    }
+    _Runtime.callValue(Shortcut._reportNoNativeBackend__shortcut, cast ([operation, accelerator] : Array<Dynamic>));
+    return cast _Runtime.callValue(Shortcut._formatNormalized__shortcut, cast ([result] : Array<Dynamic>));
+    return cast null;
+  }
 
   public static function _parse__shortcut(input:String):Null<_Parsed__shortcut> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
@@ -79,27 +111,21 @@ class Shortcut {
   public static function _parseDetailed__shortcut(input:String):Dynamic {
     var tokens:Dynamic = cast _Runtime.UNDEFINED;
     var modifiers:Array<ShortcutModifier> = cast _Runtime.UNDEFINED;
-    var seenModifiers:Dynamic = cast _Runtime.UNDEFINED;
     var key:Null<String> = cast _Runtime.UNDEFINED;
     var canonicalKey:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.truthy(input) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(StringTools.trim(Std.string(input)), 'length'), 0.0) : Bool)) : Bool)) {
-      return cast { reason: 'empty', token: '' };
-    }
-    tokens = _Runtime.callValue(Shortcut._splitTokens__shortcut, cast ([StringTools.trim(Std.string(input))] : Array<Dynamic>));
+    tokens = _Runtime.callValue(Shortcut._splitTokens__shortcut, cast ([StringTools.trim(Std.string(input)), Shortcut._tokenScratch__shortcut] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(tokens, 'length'), 0.0) : Bool)) {
       return cast { reason: 'empty', token: '' };
     }
     modifiers = cast ([] : Array<Dynamic>);
-    seenModifiers = _Runtime.construct(_Runtime.globalValue('Set'), []);
     key = null;
     for (token in _Runtime.iterable(tokens)) {
       var lower:Dynamic = _Runtime.callProperty(token, 'toLowerCase', cast ([] : Array<Dynamic>));
       var mod:Dynamic = ((cast Shortcut._modifierAliases__shortcut : flighthq._internal._Map).get(lower));
       if ((cast !_Runtime.strictEquals(mod, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        if ((cast ((cast seenModifiers : flighthq._internal._Set).has(mod)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.callProperty(modifiers, 'indexOf', cast ([mod] : Array<Dynamic>)), -1.0) : Bool)) {
           return cast { reason: 'duplicate-modifier', token: token };
         }
-        ((cast seenModifiers : flighthq._internal._Set).add(mod));
         _Runtime.callProperty(modifiers, 'push', cast ([mod] : Array<Dynamic>));
       } else {
         if ((cast !_Runtime.strictEquals(key, null) : Bool)) {
@@ -120,12 +146,36 @@ class Shortcut {
     return cast null;
   }
 
+  public static function _reportNoNativeBackend__shortcut(operation:ShortcutOperation, accelerator:String):Void {
+    if ((cast ((cast _Runtime.strictEquals(Shortcut._dropGuard__shortcut, null) : Bool) || (cast !_Runtime.strictEquals(Shortcut._backend__shortcut, null) : Bool)) : Bool)) { return; }
+    _Runtime.callValue(Shortcut._dropGuard__shortcut, cast ([{ accelerator: accelerator, operation: operation, parseError: null, reason: 'no-native-backend' }] : Array<Dynamic>));
+  }
+
   public static var _signals__shortcut:Null<ShortcutSignals> = _Runtime.explicitNull();
 
-  public static function _splitTokens__shortcut(input:String):Array<String> {
-    return cast _Runtime.callProperty(_Runtime.callProperty(input, 'split', cast ([_Runtime.regexp('[+-]', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+  public static function _splitTokens__shortcut(input:String, out:Array<String>):Array<String> {
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(out, 0.0);
+    start = 0.0;
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(input, 'length') : Float)) : Bool)) {
+        var ch:Dynamic = _Runtime.charAt(input, i);
+        if ((cast ((cast _Runtime.orValue(_Runtime.strictEquals(ch, '+'), function():Dynamic return cast _Runtime.strictEquals(ch, '-')) : Bool) && (cast ((cast i : Float) > (cast start : Float)) : Bool)) : Bool)) {
+          _Runtime.callProperty(out, 'push', cast ([_Runtime.slice(input, start, i)] : Array<Dynamic>));
+          (start = cast ((i + 1.0) : Dynamic));
+        }
+        i++;
+      }
+    }
+    if ((cast ((cast start : Float) < (cast _Runtime.field(input, 'length') : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.slice(input, start, null)] : Array<Dynamic>)); }
+    return cast out;
     return cast null;
   }
+
+  public static final _tokenScratch__shortcut:Array<String> = cast ([] : Array<Dynamic>);
+
+  public static var _webBackend__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
 
   public static function createParsedAccelerator():ParsedAccelerator {
     return cast { key: '', modifiers: cast ([] : Array<Dynamic>) };
@@ -140,28 +190,38 @@ class Shortcut {
     }, register: function() {
       return cast false;
     }, setAllEnabled: function() {
-    
+
     }, setEnabled: function() {
       return cast false;
     }, unregister: function() {
       return cast false;
     }, unregisterAll: function() {
-    
+
     } };
     return cast null;
   }
 
   public static function disableGlobalShortcut(accelerator:String):Bool {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
-    normalized = _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
+    normalized = _Runtime.callValue(Shortcut._normalizeForCommand__shortcut, cast ([accelerator, 'disableGlobalShortcut'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setEnabled', cast ([normalized, false] : Array<Dynamic>));
     return cast null;
   }
 
+  public static function disableShortcutGuards():Void {
+    Facade_Shortcut_flighthq_shortcut_EnableShortcutGuards.disableShortcutGuards();
+  }
+
+  public static function disposeGlobalShortcutSignals():Void {
+    if ((cast _Runtime.strictEquals(Shortcut._signals__shortcut, null) : Bool)) { return; }
+    _Runtime.callValue(clearSignal, cast ([Shortcut._signals__shortcut.onTrigger] : Array<Dynamic>));
+    (Shortcut._signals__shortcut = cast (null : Dynamic));
+  }
+
   public static function enableGlobalShortcut(accelerator:String):Bool {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
-    normalized = _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
+    normalized = _Runtime.callValue(Shortcut._normalizeForCommand__shortcut, cast ([accelerator, 'enableGlobalShortcut'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setEnabled', cast ([normalized, true] : Array<Dynamic>));
     return cast null;
@@ -174,6 +234,10 @@ class Shortcut {
     return cast null;
   }
 
+  public static function enableShortcutGuards():Void {
+    Facade_Shortcut_flighthq_shortcut_EnableShortcutGuards.enableShortcutGuards();
+  }
+
   public static function equalsAccelerator(a:String, b:String):Bool {
     var na:Dynamic = cast _Runtime.UNDEFINED;
     var nb:Dynamic = cast _Runtime.UNDEFINED;
@@ -181,6 +245,22 @@ class Shortcut {
     nb = _Runtime.callValue(normalizeAccelerator, cast ([b] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(na, null) : Bool) || (cast _Runtime.strictEquals(nb, null) : Bool)) : Bool)) { return cast false; }
     return cast _Runtime.strictEquals(na, nb);
+    return cast null;
+  }
+
+  public static function explainGlobalShortcutRegistration(accelerator:String):GlobalShortcutExplanation {
+    return cast Facade_Shortcut_flighthq_shortcut_ExplainGlobalShortcutRegistration.explainGlobalShortcutRegistration(accelerator);
+    return cast null;
+  }
+
+  public static function findAcceleratorConflict(accelerator:String, candidates:Array<String>):Null<String> {
+    var normalized:Dynamic = cast _Runtime.UNDEFINED;
+    normalized = _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast null; }
+    for (candidate in _Runtime.iterable(candidates)) {
+      if ((cast _Runtime.strictEquals(_Runtime.callValue(normalizeAccelerator, cast ([candidate] : Array<Dynamic>)), normalized) : Bool)) { return cast candidate; }
+    }
+    return cast null;
     return cast null;
   }
 
@@ -201,14 +281,14 @@ class Shortcut {
     return cast null;
   }
 
-  public static function getAcceleratorKey(accelerator:String):Null<String> {
+  public static function getAcceleratorKey(accelerator:String):Null<ShortcutKeyName> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     result = _Runtime.callValue(Shortcut._parse__shortcut, cast ([accelerator] : Array<Dynamic>));
     return cast ((cast _Runtime.strictEquals(result, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(result, 'key') : Dynamic));
     return cast null;
   }
 
-  public static function getAcceleratorKeyLabel(key:String):String {
+  public static function getAcceleratorKeyLabel(key:ShortcutKeyName):String {
     return cast _Runtime.coalesce(((cast Shortcut._keyDisplayNames__shortcut : flighthq._internal._Map).get(key)), function():Dynamic return cast key);
     return cast null;
   }
@@ -246,8 +326,9 @@ class Shortcut {
   }
 
   public static function getShortcutBackend():ShortcutBackend {
-    if ((cast _Runtime.strictEquals(Shortcut._backend__shortcut, null) : Bool)) { (Shortcut._backend__shortcut = cast (_Runtime.callValue(createWebShortcutBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
-    return cast Shortcut._backend__shortcut;
+    if ((cast !_Runtime.strictEquals(Shortcut._backend__shortcut, null) : Bool)) { return cast Shortcut._backend__shortcut; }
+    if ((cast _Runtime.strictEquals(Shortcut._webBackend__shortcut, null) : Bool)) { (Shortcut._webBackend__shortcut = cast (_Runtime.callValue(createWebShortcutBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    return cast Shortcut._webBackend__shortcut;
     return cast null;
   }
 
@@ -256,6 +337,11 @@ class Shortcut {
     normalized = _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast _Runtime.callValue(isGlobalShortcutRegistered, cast ([normalized] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function hasNativeShortcutBackend():Bool {
+    return cast !_Runtime.strictEquals(Shortcut._backend__shortcut, null);
     return cast null;
   }
 
@@ -284,9 +370,7 @@ class Shortcut {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     result = _Runtime.callValue(Shortcut._parse__shortcut, cast ([input] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    _Runtime.setField((cast out : { var key:String; var modifiers:Array<ShortcutModifier>; }), 'key', _Runtime.field(result, 'key'));
-    _Runtime.setField((cast out : { var key:String; var modifiers:Array<ShortcutModifier>; }), 'modifiers', _Runtime.slice(_Runtime.field(result, 'modifiers'), 0, null));
-    return cast out;
+    return cast _Runtime.callValue(Shortcut._copyParsed__shortcut, cast ([result, out] : Array<Dynamic>));
     return cast null;
   }
 
@@ -294,16 +378,14 @@ class Shortcut {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     result = _Runtime.callValue(Shortcut._parseDetailed__shortcut, cast ([input] : Array<Dynamic>));
     if ((cast _Runtime.hasField(result, 'reason') : Bool)) { return cast result; }
-    _Runtime.setField((cast out : { var key:String; var modifiers:Array<ShortcutModifier>; }), 'key', _Runtime.field(result, 'key'));
-    _Runtime.setField((cast out : { var key:String; var modifiers:Array<ShortcutModifier>; }), 'modifiers', _Runtime.slice(_Runtime.field(result, 'modifiers'), 0, null));
-    return cast out;
+    return cast _Runtime.callValue(Shortcut._copyParsed__shortcut, cast ([result, out] : Array<Dynamic>));
     return cast null;
   }
 
   public static function registerGlobalShortcut(accelerator:String, handler:Dynamic):Bool {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
     var wrappedHandler:Dynamic = cast _Runtime.UNDEFINED;
-    normalized = _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
+    normalized = _Runtime.callValue(Shortcut._normalizeForCommand__shortcut, cast ([accelerator, 'registerGlobalShortcut'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     wrappedHandler = function(event:Dynamic) {
       _Runtime.callValue(handler, cast ([event] : Array<Dynamic>));
@@ -319,6 +401,7 @@ class Shortcut {
   }
 
   public static function resumeAllGlobalShortcuts():Void {
+    _Runtime.callValue(Shortcut._reportNoNativeBackend__shortcut, cast (['resumeAllGlobalShortcuts', ''] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setAllEnabled', cast ([true] : Array<Dynamic>));
   }
 
@@ -326,17 +409,23 @@ class Shortcut {
     (Shortcut._backend__shortcut = cast (backend : Dynamic));
   }
 
+  public static function setShortcutDropGuard(guard:Null<ShortcutDropGuard>):Void {
+    (Shortcut._dropGuard__shortcut = cast (guard : Dynamic));
+  }
+
   public static function suspendAllGlobalShortcuts():Void {
+    _Runtime.callValue(Shortcut._reportNoNativeBackend__shortcut, cast (['suspendAllGlobalShortcuts', ''] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setAllEnabled', cast ([false] : Array<Dynamic>));
   }
 
   public static function unregisterAllGlobalShortcuts():Void {
+    _Runtime.callValue(Shortcut._reportNoNativeBackend__shortcut, cast (['unregisterAllGlobalShortcuts', ''] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'unregisterAll', cast ([] : Array<Dynamic>));
   }
 
   public static function unregisterGlobalShortcut(accelerator:String):Bool {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
-    normalized = _Runtime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
+    normalized = _Runtime.callValue(Shortcut._normalizeForCommand__shortcut, cast ([accelerator, 'unregisterGlobalShortcut'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'unregister', cast ([normalized] : Array<Dynamic>));
     return cast null;

@@ -3,15 +3,12 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const addMovieClipFrameScript = compiled.flighthq.movieclip.Movieclip.addMovieClipFrameScript;
 export const createMovieClip = compiled.flighthq.movieclip.Movieclip.createMovieClip;
-export const createMovieClipData = compiled.flighthq.movieclip.Movieclip.createMovieClipData;
-export const createMovieClipRuntime = compiled.flighthq.movieclip.Movieclip.createMovieClipRuntime;
 export const createSpritesheetTimelineSource = compiled.flighthq.movieclip.Movieclip.createSpritesheetTimelineSource;
 export const disposeMovieClipSignals = compiled.flighthq.movieclip.Movieclip.disposeMovieClipSignals;
 export const enableMovieClipSignals = compiled.flighthq.movieclip.Movieclip.enableMovieClipSignals;
 export const getMovieClipCurrentFrame = compiled.flighthq.movieclip.Movieclip.getMovieClipCurrentFrame;
 export const getMovieClipCurrentLabel = compiled.flighthq.movieclip.Movieclip.getMovieClipCurrentLabel;
 export const getMovieClipFrameScript = compiled.flighthq.movieclip.Movieclip.getMovieClipFrameScript;
-export const getMovieClipRuntime = compiled.flighthq.movieclip.Movieclip.getMovieClipRuntime;
 export const getMovieClipSignals = compiled.flighthq.movieclip.Movieclip.getMovieClipSignals;
 export const getMovieClipTotalFrames = compiled.flighthq.movieclip.Movieclip.getMovieClipTotalFrames;
 export const gotoAndPlayMovieClip = compiled.flighthq.movieclip.Movieclip.gotoAndPlayMovieClip;

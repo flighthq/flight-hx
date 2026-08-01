@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyGradientBevelEffectToGl = api.applyGradientBevelEffectToGl;
 export const defaultGlGradientBevelEffectRunner = api.defaultGlGradientBevelEffectRunner;
+export const registerGlGradientBevelEffect = api.registerGlGradientBevelEffect;

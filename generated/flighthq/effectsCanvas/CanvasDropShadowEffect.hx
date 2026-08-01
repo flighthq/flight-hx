@@ -8,12 +8,14 @@ import flighthq.effectsCanvas.CanvasEffectDropShadowCss.computeDropShadowEffectC
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.createCanvasRenderTargetPool;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
+import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceMode;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DropShadowEffect;
 
@@ -35,6 +37,10 @@ class CanvasDropShadowEffect {
   public static final defaultCanvasDropShadowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyDropShadowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect)] : Array<Dynamic>));
   };
+
+  public static function registerCanvasDropShadowEffect(state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'DropShadowEffect', defaultCanvasDropShadowEffectRunner] : Array<Dynamic>));
+  }
 
   public static function applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:DropShadowEffect):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;

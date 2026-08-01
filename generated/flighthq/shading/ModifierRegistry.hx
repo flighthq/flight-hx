@@ -3,10 +3,22 @@ package flighthq.shading;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Modifier;
+import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierKind;
-import flighthq.types.ModifierSlot;
+import flighthq.types.ModifierRegistry;
 
-typedef ModifierDefinition = { var kind:ModifierKind; var slot:ModifierSlot; @:optional var getDefineSignature:Dynamic; };
+class ModifierRegistry {
+  public static function createModifierRegistry():flighthq.types.ModifierRegistry {
+    return cast { definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    return cast null;
+  }
 
-typedef ModifierRegistry = { var definitions:Dynamic; };
+  public static function registerModifier(registry:flighthq.types.ModifierRegistry, definition:ModifierDefinition):Void {
+    ((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map).set(_Runtime.field(definition, 'kind'), definition));
+  }
+
+  public static function resolveModifier(registry:flighthq.types.ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
+    return cast _Runtime.coalesce(((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast null;
+  }
+}

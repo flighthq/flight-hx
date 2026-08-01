@@ -3,18 +3,17 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometry.getMeshGeometryVertexCount;
-import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryNormals;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
+import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_MESH_GEOMETRY_LAYOUT;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
-
-typedef MeshGeometryFromAttributesOptions = { @:optional var indices:Null<Dynamic>; @:optional var normals:Null<Array<Float>>; var positions:Array<Float>; @:optional var uvs:Null<Array<Float>>; };
+import flighthq.types.MeshGeometryFromAttributesOptions;
+import flighthq.types.MeshTriangleVertexIndices;
 
 class MeshGeometryOperations {
   public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
@@ -26,7 +25,6 @@ class MeshGeometryOperations {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var indexArray:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = options;
     positions = _Runtime.field(__destructure0, 'positions');
     vertexCount = (_Runtime.field(positions, 'length') / 3.0);
@@ -82,9 +80,7 @@ class MeshGeometryOperations {
       _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
     }
     _Runtime.callValue(computeMeshGeometryTangents, cast ([geometry, geometry] : Array<Dynamic>));
-    bounds = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
-    (geometry.bounds = cast (bounds : Dynamic));
+    _Runtime.callValue(refreshMeshGeometryBounds, cast ([geometry] : Array<Dynamic>));
     return cast geometry;
     return cast null;
   }
@@ -99,6 +95,36 @@ class MeshGeometryOperations {
       return cast ((cast ((cast indexCount : Float) >= (cast 3.0 : Float)) : Bool) ? (cast (indexCount - 2.0) : Dynamic) : (cast 0.0 : Dynamic));
     }
     return cast 0.0;
+    return cast null;
+  }
+
+  public static function getMeshGeometryTriangleVertexIndices(out:MeshTriangleVertexIndices, geometry:MeshGeometry, triangleIndex:Float):Bool {
+    var element0:Float = cast _Runtime.UNDEFINED;
+    var element1:Float = cast _Runtime.UNDEFINED;
+    var element2:Float = cast _Runtime.UNDEFINED;
+    var indices:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast triangleIndex : Float) >= (cast _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>)) : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
+      (element0 = cast ((triangleIndex * 3.0) : Dynamic));
+      (element1 = cast ((element0 + 1.0) : Dynamic));
+      (element2 = cast ((element0 + 2.0) : Dynamic));
+    } else { if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) {
+      (element0 = cast (triangleIndex : Dynamic));
+      (element1 = cast ((triangleIndex + 1.0) : Dynamic));
+      (element2 = cast ((triangleIndex + 2.0) : Dynamic));
+      if ((cast !_Runtime.strictEquals((_Runtime.toInt32(triangleIndex) & 1), 0.0) : Bool)) {
+        var swap:Dynamic = element0;
+        (element0 = cast (element1 : Dynamic));
+        (element1 = cast (swap : Dynamic));
+      }
+    } else {
+      return cast false;
+    } }
+    indices = geometry.indices;
+    _Runtime.setField(out, 'i0', _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, element0), function():Dynamic return cast element0));
+    _Runtime.setField(out, 'i1', _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, element1), function():Dynamic return cast element1));
+    _Runtime.setField(out, 'i2', _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, element2), function():Dynamic return cast element2));
+    return cast true;
     return cast null;
   }
 
@@ -117,7 +143,6 @@ class MeshGeometryOperations {
     var indexOffset:Dynamic = cast _Runtime.UNDEFINED;
     var vertexFloatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var merged:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 0.0) : Bool)) { return cast null; }
     reference = flighthq._internal._StaticIndex.readArray(geometries, 0.0);
     layout = reference.layout;
@@ -174,9 +199,7 @@ class MeshGeometryOperations {
       _Runtime.callProperty(mergedSubsets, 'push', cast ([{ indexCount: _Runtime.select(mergedIndices, function():Dynamic return cast _Runtime.field(mergedIndices, 'length'), function():Dynamic return cast (totalVertexFloats / floatsPerVertex)), indexOffset: 0.0 }] : Array<Dynamic>));
     }
     merged = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(mergedIndices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: layout, subsets: mergedSubsets, topology: reference.topology, vertices: mergedVertices }] : Array<Dynamic>));
-    bounds = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, merged] : Array<Dynamic>));
-    (merged.bounds = cast (bounds : Dynamic));
+    _Runtime.callValue(refreshMeshGeometryBounds, cast ([merged] : Array<Dynamic>));
     return cast merged;
     return cast null;
   }

@@ -3,6 +3,8 @@ package flighthq.skeleton3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.mesh.MeshGeometryAttributes.getMeshGeometryVertexJoints0;
+import flighthq.mesh.MeshGeometryAttributes.getMeshGeometryVertexWeights0;
 import flighthq.skeleton3d.SkinVertices.skinVertices;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
@@ -18,12 +20,12 @@ class SkinMeshGeometry {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var positionOffset:Dynamic = cast _Runtime.UNDEFINED;
     var normalOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var jointsOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var weightsOffset:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Dynamic = cast _Runtime.UNDEFINED;
     var normals:Dynamic = cast _Runtime.UNDEFINED;
     var joints:Dynamic = cast _Runtime.UNDEFINED;
     var weights:Dynamic = cast _Runtime.UNDEFINED;
+    var joint:Dynamic = cast _Runtime.UNDEFINED;
+    var weight:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = geometry;
     layout = _Runtime.field(__destructure0, 'layout');
     vertices = _Runtime.field(__destructure0, 'vertices');
@@ -31,12 +33,12 @@ class SkinMeshGeometry {
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
-    jointsOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'joints0'] : Array<Dynamic>));
-    weightsOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'weights0'] : Array<Dynamic>));
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
     normals = new flighthq._internal._Float32Array((vertexCount * 3.0));
     joints = new flighthq._internal._Float32Array((vertexCount * 4.0));
     weights = new flighthq._internal._Float32Array((vertexCount * 4.0));
+    joint = { w: 0.0, x: 0.0, y: 0.0, z: 0.0 };
+    weight = { w: 0.0, x: 0.0, y: 0.0, z: 0.0 };
     {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -53,17 +55,17 @@ class SkinMeshGeometry {
           flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 1.0)));
           flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 2.0)));
         }
-        if ((cast ((cast jointsOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(joints, w, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + jointsOffset)));
-          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + jointsOffset) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + jointsOffset) + 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 3.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + jointsOffset) + 3.0)));
+        if ((cast _Runtime.callValue(getMeshGeometryVertexJoints0, cast ([joint, geometry, v] : Array<Dynamic>)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, w, _Runtime.field(joint, 'x'));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 1.0), _Runtime.field(joint, 'y'));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 2.0), _Runtime.field(joint, 'z'));
+          flighthq._internal._StaticIndex.writeFloat32Array(joints, (w + 3.0), _Runtime.field(joint, 'w'));
         }
-        if ((cast ((cast weightsOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(weights, w, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + weightsOffset)));
-          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + weightsOffset) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + weightsOffset) + 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 3.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + weightsOffset) + 3.0)));
+        if ((cast _Runtime.callValue(getMeshGeometryVertexWeights0, cast ([weight, geometry, v] : Array<Dynamic>)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, w, _Runtime.field(weight, 'x'));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 1.0), _Runtime.field(weight, 'y'));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 2.0), _Runtime.field(weight, 'z'));
+          flighthq._internal._StaticIndex.writeFloat32Array(weights, (w + 3.0), _Runtime.field(weight, 'w'));
         }
         v++;
       }
@@ -113,6 +115,41 @@ class SkinMeshGeometry {
       }
     }
     geometry.version++;
+  }
+
+  public static function updateMeshSkinBindPoseDeformInput(bindPose:MeshSkinBindPose, geometry:MeshGeometry):Void {
+    var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
+    var layout:Dynamic = cast _Runtime.UNDEFINED;
+    var vertices:Dynamic = cast _Runtime.UNDEFINED;
+    var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
+    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
+    var positionOffset:Dynamic = cast _Runtime.UNDEFINED;
+    var normalOffset:Dynamic = cast _Runtime.UNDEFINED;
+    __destructure3 = geometry;
+    layout = _Runtime.field(__destructure3, 'layout');
+    vertices = _Runtime.field(__destructure3, 'vertices');
+    floatsPerVertex = (layout.stride / 4.0);
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.min((_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0), (_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length') / 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
+    normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
+    {
+      var v:Dynamic = 0.0;
+      while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
+        var source:Dynamic = (v * floatsPerVertex);
+        var target:Dynamic = (v * 3.0);
+        if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(bindPose, 'positions'), target, flighthq._internal._StaticIndex.readFloat32Array(vertices, (source + positionOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(bindPose, 'positions'), (target + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((source + positionOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(bindPose, 'positions'), (target + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((source + positionOffset) + 2.0)));
+        }
+        if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(bindPose, 'normals'), target, flighthq._internal._StaticIndex.readFloat32Array(vertices, (source + normalOffset)));
+          flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(bindPose, 'normals'), (target + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((source + normalOffset) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(bindPose, 'normals'), (target + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((source + normalOffset) + 2.0)));
+        }
+        v++;
+      }
+    }
   }
 
   public static function floatOffsetForSemantic__skinMeshGeometry(layout:VertexAttributeLayout, semantic:String):Float {

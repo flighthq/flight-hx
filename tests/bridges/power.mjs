@@ -3,13 +3,9 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachPower = compiled.flighthq.power.Power.attachPower;
 export const createPower = compiled.flighthq.power.Power.createPower;
-export const createPowerBatteryHealth = compiled.flighthq.power.Power.createPowerBatteryHealth;
-export const createPowerStatus = compiled.flighthq.power.Power.createPowerStatus;
-export const createWebPowerBackend = compiled.flighthq.power.Power.createWebPowerBackend;
 export const detachPower = compiled.flighthq.power.Power.detachPower;
 export const disposePower = compiled.flighthq.power.Power.disposePower;
 export const enablePowerSignals = compiled.flighthq.power.Power.enablePowerSignals;
-export const getPowerBackend = compiled.flighthq.power.Power.getPowerBackend;
 export const getPowerBatteryHealth = compiled.flighthq.power.Power.getPowerBatteryHealth;
 export const getPowerIdlePollingIntervalMs = compiled.flighthq.power.Power.getPowerIdlePollingIntervalMs;
 export const getPowerStatus = compiled.flighthq.power.Power.getPowerStatus;
@@ -17,6 +13,5 @@ export const getPowerSystemIdleState = compiled.flighthq.power.Power.getPowerSys
 export const getPowerSystemIdleTime = compiled.flighthq.power.Power.getPowerSystemIdleTime;
 export const getPowerThermalState = compiled.flighthq.power.Power.getPowerThermalState;
 export const hasPowerKeepAwake = compiled.flighthq.power.Power.hasPowerKeepAwake;
-export const setPowerBackend = compiled.flighthq.power.Power.setPowerBackend;
 export const setPowerIdlePollingIntervalMs = compiled.flighthq.power.Power.setPowerIdlePollingIntervalMs;
 export const setPowerKeepAwake = compiled.flighthq.power.Power.setPowerKeepAwake;

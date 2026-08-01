@@ -3,12 +3,13 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.RenderState.SceneGraphSyncPolicy;
+import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
-typedef CanvasRenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<DisplayObjectClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:SceneGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<Dynamic>; var canvasCssFilterResolver:Null<Dynamic>; var canvas:Dynamic; var context:Dynamic; var contextAttributes:Dynamic; };
+typedef CanvasRenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<Dynamic>; var canvasCssFilterResolver:Null<Dynamic>; var canvas:Dynamic; var context:Dynamic; var contextAttributes:Dynamic; };
 
-typedef CanvasRenderStateRuntime = { var binding:Null<Dynamic>; var colorAdjustmentChannelMixingGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; var currentBlendMode:Null<BlendMode>; var imageSmoothingEnabled:Bool; var imageSmoothingQuality:Dynamic; @:optional var imageResourceElementCache:Dynamic; @:optional var materialRendererMap:Dynamic; };
+typedef CanvasRenderStateRuntime = { var binding:Null<Dynamic>; var colorAdjustmentUnsupportedGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var renderProxySources:Dynamic; var registryMiss:Null<{ var clear:Dynamic; var signals:RenderRegistrySignals; }>; @:optional var renderEffectPaddingResolverRegistry:Null<Dynamic>; var renderRootGuard:Null<Dynamic>; var strokeTessellator:Null<Dynamic>; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; var currentBlendMode:Null<BlendMode>; @:optional var canvasTextureResolverRegistry:Null<Dynamic>; var imageSmoothingEnabled:Bool; var imageSmoothingQuality:Dynamic; @:optional var bitmapElementCache:Dynamic; @:optional var textureWindowElementCache:Dynamic; @:optional var materialRendererMap:Dynamic; @:optional var canvasRenderEffectRegistry:Dynamic; @:optional var canvasBlendEffectBackdrops:Dynamic; };

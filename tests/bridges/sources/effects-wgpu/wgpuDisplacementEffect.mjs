@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyDisplacementEffectToWgpu = api.applyDisplacementEffectToWgpu;
 export const defaultWgpuDisplacementEffectRunner = api.defaultWgpuDisplacementEffectRunner;
+export const registerWgpuDisplacementEffect = api.registerWgpuDisplacementEffect;

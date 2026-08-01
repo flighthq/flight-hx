@@ -3,6 +3,7 @@ package flighthq.application;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.application.ApplicationRenderView as Facade_Application_flighthq_application_ApplicationRenderView;
 import flighthq.application.Window as Facade_Application_flighthq_application_Window;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
@@ -10,8 +11,9 @@ import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.Application;
 import flighthq.types.ApplicationLoopOptions;
+import flighthq.types.ApplicationRenderView;
+import flighthq.types.ApplicationRenderView.ApplicationRenderViewResize;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.ApplicationWindow.WindowBounds;
 import flighthq.types.ApplicationWindow.WindowOptions;
 import flighthq.types.LoopBackend;
@@ -74,6 +76,10 @@ class Application {
     }));
   }
 
+  public static function attachApplicationRenderView(view:ApplicationRenderView<Dynamic, Dynamic>):Void {
+    Facade_Application_flighthq_application_ApplicationRenderView.attachApplicationRenderView(view);
+  }
+
   public static function attachWindowClose(win:ApplicationWindow):Void {
     Facade_Application_flighthq_application_Window.attachWindowClose(win);
   }
@@ -133,6 +139,11 @@ class Application {
     return cast null;
   }
 
+  public static function createApplicationRenderView<State, Target>(window:Dynamic, renderState:State, renderTarget:Target, viewport:Dynamic, resize:ApplicationRenderViewResize<State, Target>):ApplicationRenderView<State, Target> {
+    return cast Facade_Application_flighthq_application_ApplicationRenderView.createApplicationRenderView(window, renderState, renderTarget, viewport, resize);
+    return cast null;
+  }
+
   public static function createApplicationWindow():ApplicationWindow {
     return cast Facade_Application_flighthq_application_Window.createApplicationWindow();
     return cast null;
@@ -149,11 +160,6 @@ class Application {
     return cast null;
   }
 
-  public static function createWebWindowBackend():WindowBackend {
-    return cast Facade_Application_flighthq_application_Window.createWebWindowBackend();
-    return cast null;
-  }
-
   public static final DEFAULT_BACKGROUND_FRAME_RATE__application:Dynamic = 0.0;
 
   public static final DEFAULT_FIXED_TIMESTEP__application:Dynamic = 0.0;
@@ -167,6 +173,10 @@ class Application {
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map).delete_(Application.kExit__application));
+  }
+
+  public static function detachApplicationRenderView(view:ApplicationRenderView<Dynamic, Dynamic>):Void {
+    Facade_Application_flighthq_application_ApplicationRenderView.detachApplicationRenderView(view);
   }
 
   public static function detachWindowClose(win:ApplicationWindow):Void {
@@ -310,11 +320,6 @@ class Application {
     return cast null;
   }
 
-  public static function getWindowBackend():WindowBackend {
-    return cast Facade_Application_flighthq_application_Window.getWindowBackend();
-    return cast null;
-  }
-
   public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
     return cast Facade_Application_flighthq_application_Window.getWindowBounds(win, out);
     return cast null;
@@ -364,7 +369,7 @@ class Application {
     if ((cast ((cast !(cast app.isRunning : Bool) : Bool) || (cast ((cast observers : flighthq._internal._Map).has(Application.kPaused__application)) : Bool)) : Bool)) { return; }
     (app.isRunning = cast (false : Dynamic));
     ((cast observers : flighthq._internal._Map).set(Application.kPaused__application, function() {
-    
+
     }));
   }
 
@@ -432,10 +437,6 @@ class Application {
 
   public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
     Facade_Application_flighthq_application_Window.setWindowAlwaysOnTop(win, alwaysOnTop);
-  }
-
-  public static function setWindowBackend(backend:Null<WindowBackend>):Void {
-    Facade_Application_flighthq_application_Window.setWindowBackend(backend);
   }
 
   public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
@@ -639,6 +640,10 @@ class Application {
     ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
     ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).delete_(app));
     (app.isRunning = cast (false : Dynamic));
+  }
+
+  public static function synchronizeApplicationRenderView(view:ApplicationRenderView<Dynamic, Dynamic>):Void {
+    Facade_Application_flighthq_application_ApplicationRenderView.synchronizeApplicationRenderView(view);
   }
 
   public static function unregisterApplicationWindow(app:flighthq.types.Application, win:ApplicationWindow):Void {

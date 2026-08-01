@@ -7,6 +7,7 @@ import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitPass;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectErasePass;
 import flighthq.effectsGl.GlEffectBoxBlur.applyGlEffectBoxBlur;
 import flighthq.effectsGl.GlEffectTintShader.applyGlEffectTintPass;
+import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
@@ -84,6 +85,10 @@ class GlBevelEffect {
     _Runtime.callValue(applyBevelEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect)] : Array<Dynamic>));
   };
 
+  public static function registerGlBevelEffect(state:GlRenderState):Void {
+    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BevelEffect', defaultGlBevelEffectRunner] : Array<Dynamic>));
+  }
+
   public static final BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec4 u_highlight;\nuniform vec4 u_shadow;\nuniform vec2 u_offset;\nuniform float u_intensity;\nuniform float u_clipMode;\nout vec4 fragColor;\n\nfloat sampleField(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;\n  return texture(u_texture0, uv).a;\n}\n\nvoid main() {\n  float lit = sampleField(v_texCoord - u_offset);\n  float shade = sampleField(v_texCoord + u_offset);\n  float gradient = lit - shade;\n  float srcA = texture(u_texture1, v_texCoord).a;\n  bool isHighlight = gradient >= 0.0;\n  vec3 color = isHighlight ? u_highlight.rgb : u_shadow.rgb;\n  float colorAlpha = isHighlight ? u_highlight.a : u_shadow.a;\n  float clip = 1.0;\n  if (u_clipMode == 1.0) { clip = srcA; }\n  else if (u_clipMode == 2.0) { clip = 1.0 - srcA; }\n  float edge = min(1.0, abs(gradient) * u_intensity);\n  float a = edge * colorAlpha * clip;\n  fragColor = vec4(color * a, a);\n}';
 
   public static final bevelCompositeShaders__glBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
@@ -102,12 +107,12 @@ class GlBevelEffect {
 
   public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).get(state));
+    loc = ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlBevelEffect.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect] : Array<Dynamic>));
       (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_highlight') }, { locShadow: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_shadow') }, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_offset') }, { locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_intensity') }, { locClipMode: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_clipMode') }]) : Dynamic));
-      ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).set(state, loc));
+      ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), loc));
     }
     return cast loc;
     return cast null;

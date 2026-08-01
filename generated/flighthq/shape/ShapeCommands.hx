@@ -4,7 +4,6 @@ package flighthq.shape;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Revision.invalidateContent;
-import flighthq.types.ImageResource;
 import flighthq.types.Matrix;
 import flighthq.types.Shape;
 import flighthq.types.ShapeCommand.CapsStyle;
@@ -15,6 +14,7 @@ import flighthq.types.ShapeCommand.LineScaleMode;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.Texture;
 import flighthq.types.TriangleCulling;
 
 class ShapeCommands {
@@ -143,12 +143,6 @@ class ShapeCommands {
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginBitmapFill(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
-    if (matrix == null) matrix = cast (null : Dynamic);
-    _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginBitmapFill', 4.0, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
-    _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
-  }
-
   public static function appendShapeBeginFill(shape:Shape, color:Dynamic = 0.0, alpha:Dynamic = 1.0):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginFill', 2.0, color, alpha] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
@@ -157,6 +151,12 @@ class ShapeCommands {
   public static function appendShapeBeginGradientFill(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginGradientFill', 8.0, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
+    _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
+  }
+
+  public static function appendShapeBeginTextureFill(shape:Shape, texture:Texture, ?matrix:Null<Matrix>):Void {
+    if (matrix == null) matrix = cast (null : Dynamic);
+    _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginTextureFill', 2.0, texture, matrix] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
@@ -192,12 +192,6 @@ class ShapeCommands {
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineBitmapStyle(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
-    if (matrix == null) matrix = cast (null : Dynamic);
-    _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineBitmapStyle', 4.0, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
-    _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
-  }
-
   public static function appendShapeLineGradientStyle(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineGradientStyle', 8.0, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
@@ -206,6 +200,12 @@ class ShapeCommands {
 
   public static function appendShapeLineStyle(shape:Shape, thickness:Dynamic = 1.0, color:Dynamic = 0.0, alpha:Dynamic = 1.0, pixelHinting:Dynamic = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Dynamic = 3.0):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineStyle', 8.0, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit] : Array<Dynamic>));
+    _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
+  }
+
+  public static function appendShapeLineTextureStyle(shape:Shape, texture:Texture, ?matrix:Null<Matrix>):Void {
+    if (matrix == null) matrix = cast (null : Dynamic);
+    _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineTextureStyle', 2.0, texture, matrix] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 

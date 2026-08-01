@@ -6,13 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const cloneImageResource = api.cloneImageResource;
-export const createCompressedImageResource = api.createCompressedImageResource;
+export const createCompressedImage = api.createCompressedImage;
 export const createImageResource = api.createImageResource;
-export const disposeImageResource = api.disposeImageResource;
-export const getImageResourceByteSize = api.getImageResourceByteSize;
-export const hasImageResourceData = api.hasImageResourceData;
-export const hasImageResourcePixels = api.hasImageResourcePixels;
-export const hasImageResourceSource = api.hasImageResourceSource;
 export const invalidateImageResource = api.invalidateImageResource;
 export const isImageResourceEmpty = api.isImageResourceEmpty;
-export const setImageResourceSource = api.setImageResourceSource;

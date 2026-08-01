@@ -4,28 +4,32 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry as Facade_Mesh_flighthq_mesh_MeshGeometry;
-import flighthq.mesh.MeshGeometry.MeshGeometryOptions;
 import flighthq.mesh.MeshGeometryAttributes as Facade_Mesh_flighthq_mesh_MeshGeometryAttributes;
 import flighthq.mesh.MeshGeometryBuilders as Facade_Mesh_flighthq_mesh_MeshGeometryBuilders;
 import flighthq.mesh.MeshGeometryCompute as Facade_Mesh_flighthq_mesh_MeshGeometryCompute;
+import flighthq.mesh.MeshGeometryDeformationClone as Facade_Mesh_flighthq_mesh_MeshGeometryDeformationClone;
 import flighthq.mesh.MeshGeometryIndex as Facade_Mesh_flighthq_mesh_MeshGeometryIndex;
 import flighthq.mesh.MeshGeometryLayout as Facade_Mesh_flighthq_mesh_MeshGeometryLayout;
 import flighthq.mesh.MeshGeometryOperations as Facade_Mesh_flighthq_mesh_MeshGeometryOperations;
-import flighthq.mesh.MeshGeometryOperations.MeshGeometryFromAttributesOptions;
 import flighthq.mesh.MeshGeometrySubset as Facade_Mesh_flighthq_mesh_MeshGeometrySubset;
 import flighthq.mesh.MeshGeometryTransforms as Facade_Mesh_flighthq_mesh_MeshGeometryTransforms;
 import flighthq.mesh.MeshGeometryUvs as Facade_Mesh_flighthq_mesh_MeshGeometryUvs;
 import flighthq.mesh.MorphMeshGeometry as Facade_Mesh_flighthq_mesh_MorphMeshGeometry;
+import flighthq.mesh.UpdateMeshMorph as Facade_Mesh_flighthq_mesh_UpdateMeshMorph;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.VertexAttribute;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.MeshGeometryFromAttributesOptions;
+import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
+import flighthq.types.MeshTriangleVertexIndices;
 import flighthq.types.MorphTarget.MeshMorph;
 
 class Mesh {
@@ -52,6 +56,16 @@ class Mesh {
 
   public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometry.cloneMeshGeometry(source);
+    return cast null;
+  }
+
+  public static function cloneMeshGeometryForDeformation(source:MeshGeometry):MeshGeometry {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryDeformationClone.cloneMeshGeometryForDeformation(source);
+    return cast null;
+  }
+
+  public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.compactMeshGeometryVertices(geometry);
     return cast null;
   }
 
@@ -218,8 +232,28 @@ class Mesh {
     return cast null;
   }
 
+  public static function getMeshGeometryTriangleSubsetIndex(geometry:MeshGeometry, triangleIndex:Float):Float {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometrySubset.getMeshGeometryTriangleSubsetIndex(geometry, triangleIndex);
+    return cast null;
+  }
+
+  public static function getMeshGeometryTriangleVertexIndices(out:MeshTriangleVertexIndices, geometry:MeshGeometry, triangleIndex:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.getMeshGeometryTriangleVertexIndices(out, geometry, triangleIndex);
+    return cast null;
+  }
+
+  public static function getMeshGeometryVertexColor0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexColor0(out, geometry, vertexIndex);
+    return cast null;
+  }
+
   public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryVertexCount(geometry);
+    return cast null;
+  }
+
+  public static function getMeshGeometryVertexJoints0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexJoints0(out, geometry, vertexIndex);
     return cast null;
   }
 
@@ -243,6 +277,16 @@ class Mesh {
     return cast null;
   }
 
+  public static function getMeshGeometryVertexUv1(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexUv1(out, geometry, vertexIndex);
+    return cast null;
+  }
+
+  public static function getMeshGeometryVertexWeights0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexWeights0(out, geometry, vertexIndex);
+    return cast null;
+  }
+
   public static function getVertexAttribute(layout:VertexAttributeLayout, semantic:VertexSemantic):Null<VertexAttribute> {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getVertexAttribute(layout, semantic);
     return cast null;
@@ -258,6 +302,15 @@ class Mesh {
     return cast null;
   }
 
+  public static function indexMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.indexMeshGeometryVertices(geometry);
+    return cast null;
+  }
+
+  public static function invalidateMeshGeometry(geometry:MeshGeometry):Void {
+    Facade_Mesh_flighthq_mesh_MeshGeometry.invalidateMeshGeometry(geometry);
+  }
+
   public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.mergeMeshGeometries(geometries);
     return cast null;
@@ -265,6 +318,10 @@ class Mesh {
 
   public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
     Facade_Mesh_flighthq_mesh_MeshGeometryUvs.offsetMeshGeometryUvs(geometry, du, dv);
+  }
+
+  public static function refreshMeshGeometryBounds(geometry:MeshGeometry):Void {
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.refreshMeshGeometryBounds(geometry);
   }
 
   public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
@@ -287,6 +344,16 @@ class Mesh {
     Facade_Mesh_flighthq_mesh_MeshGeometrySubset.setMeshGeometrySubsets(geometry, subsets);
   }
 
+  public static function setMeshGeometryVertexColor0(geometry:MeshGeometry, vertexIndex:Float, r:Float, g:Float, b:Float, a:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexColor0(geometry, vertexIndex, r, g, b, a);
+    return cast null;
+  }
+
+  public static function setMeshGeometryVertexJoints0(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexJoints0(geometry, vertexIndex, x, y, z, w);
+    return cast null;
+  }
+
   public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexNormal(geometry, vertexIndex, x, y, z);
     return cast null;
@@ -307,6 +374,16 @@ class Mesh {
     return cast null;
   }
 
+  public static function setMeshGeometryVertexUv1(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexUv1(geometry, vertexIndex, u, v);
+    return cast null;
+  }
+
+  public static function setMeshGeometryVertexWeights0(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexWeights0(geometry, vertexIndex, x, y, z, w);
+    return cast null;
+  }
+
   public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometry(geometry, matrix);
     return cast null;
@@ -321,8 +398,17 @@ class Mesh {
     Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.translateMeshGeometry(geometry, x, y, z);
   }
 
+  public static function updateMeshMorph(mesh:flighthq.types.Mesh):Void {
+    Facade_Mesh_flighthq_mesh_UpdateMeshMorph.updateMeshMorph(mesh);
+  }
+
   public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryOperations.validateMeshGeometry(geometry);
+    return cast null;
+  }
+
+  public static function weldMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.weldMeshGeometryVertices(geometry);
     return cast null;
   }
 

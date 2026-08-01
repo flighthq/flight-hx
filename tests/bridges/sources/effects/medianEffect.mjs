@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createMedianEffect = api.createMedianEffect;
+export const getMedianEffectPadding = api.getMedianEffectPadding;
+export const registerMedianEffectPaddingResolver = api.registerMedianEffectPaddingResolver;

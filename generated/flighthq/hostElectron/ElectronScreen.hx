@@ -3,8 +3,8 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronDisplay;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronDisplay;
 import flighthq.types.Screen.ScreenBackend;
 import flighthq.types.Screen.ScreenInfo;
 import flighthq.types.ScreenChangeEvent;

@@ -3,17 +3,17 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject.DisplayObjectData;
-import flighthq.types.DisplayObject.DisplayObjectRuntime;
-import flighthq.types.DisplayObject.DisplayObjectTraits;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraitsKey;
+import flighthq.types.Node2D.Node2DData;
+import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2D.Node2DTraits;
 
 typedef MovieClipData = { var timeline:Null<Timeline>; };
 
-typedef MovieClipRuntime = { var binding:Null<Dynamic>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Dynamic; var children:Null<Array<Node<DisplayObjectTraits>>>; var colorAdjustments:Null<Array<Adjustment>>; var resolvedColorTransform:Null<ColorTransform>; var colorAdjustmentsChannelMixing:Bool; @:optional var traits:NodeTraitsKey<DisplayObjectTraits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<Node<DisplayObjectTraits>>; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; var localMatrix:Null<Matrix>; var rotationAngle:Float; var rotationCosine:Float; var rotationSine:Float; var worldMatrix:Null<Matrix>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Dynamic; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; var stage:Null<Stage>; var movieClipSignals:Null<MovieClipSignals>; };
+typedef MovieClipRuntime = { var binding:Null<Dynamic>; var colorAdjustments:Null<Array<Adjustment>>; var colorAdjustmentsUnsupported:Bool; var resolvedColorMatrix:Null<Array<Float>>; var resolvedColorScaleBias:Null<ColorScaleBias>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Dynamic; var children:Null<Array<Node<Node2DTraits>>>; @:optional var traits:NodeTraitsKey<Node2DTraits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<Node<Node2DTraits>>; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; var localMatrix:Null<Matrix>; var rotationAngle:Float; var rotationCosine:Float; var rotationSine:Float; var worldMatrix:Null<Matrix>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Dynamic; var isLocalBoundsRectangleValid:Null<Dynamic>; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; var scene2d:Null<Scene2D>; var movieClipSignals:Null<MovieClipSignals>; };
 
-typedef MovieClip = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<DisplayObjectTraits>>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+typedef MovieClip = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node2DTraits>>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };

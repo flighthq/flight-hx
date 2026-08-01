@@ -13,26 +13,30 @@ import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.multiplyMatrix4;
 import flighthq.geometry.Matrix4.setOrthographicMatrix4;
 import flighthq.geometry.Matrix4.setPerspectiveMatrix4;
+import flighthq.mesh.MeshGeometryCompute.ensureMeshGeometryBounds;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
-import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.isNodeLocalMatrix4Detached;
+import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.Aabb;
 import flighthq.types.AmbientLight;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.DirectionalLight;
 import flighthq.types.Frustum;
 import flighthq.types.HasAppearance;
+import flighthq.types.HasTransform3D.Transform3DNode;
 import flighthq.types.HemisphereLight;
 import flighthq.types.LinearColor;
 import flighthq.types.Matrix4;
 import flighthq.types.Mesh;
+import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node3D;
 import flighthq.types.PointLight;
 import flighthq.types.RenderState;
-import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
-import flighthq.types.SceneRenderList;
+import flighthq.types.Scene3DLightBlock;
+import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DRenderList;
 import flighthq.types.SpotLight;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types.Types.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
@@ -45,22 +49,22 @@ import flighthq.types.Types.SCENE_LIGHT_POINT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
-import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_BLOCK_FLOATS;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_POINT_OFFSET;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
-import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
+import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_BLOCK_FLOATS;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_POINT_OFFSET;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
+import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
-typedef PreparedScene__sceneRender = { var frustum:Frustum; var list:SceneRenderList; var meshes:Array<Mesh>; var viewProjection:Matrix4; var worldBounds:Aabb; };
+typedef PreparedScene3D__sceneRender = { var frustum:Frustum; var list:Scene3DRenderList; var meshes:Array<Mesh>; var viewProjection:Matrix4; var worldBounds:Aabb; };
 
 class SceneRender {
-  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
+  public static function packScene3DLightBlock(out:Scene3DLightBlock, lights:Scene3DLightsLike):Void {
     var directionalCount:Dynamic = cast _Runtime.UNDEFINED;
     var directional:Dynamic = cast _Runtime.UNDEFINED;
     var ambientCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -132,34 +136,31 @@ class SceneRender {
     _Runtime.incrementField(out, 'version', 1, true);
   }
 
-  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
+  public static function prepareScene3DRender(state:RenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?viewportAspect:Float):Scene3DRenderList {
     var prepared:Dynamic = cast _Runtime.UNDEFINED;
     var list:Dynamic = cast _Runtime.UNDEFINED;
-    prepared = _Runtime.callValue(SceneRender.ensurePreparedScene__sceneRender, cast ([state] : Array<Dynamic>));
+    var refreshTransforms:Dynamic = cast _Runtime.UNDEFINED;
+    prepared = _Runtime.callValue(SceneRender.ensurePreparedScene3D__sceneRender, cast ([state] : Array<Dynamic>));
     list = _Runtime.field(prepared, 'list');
-    _Runtime.callValue(SceneRender.setSceneViewProjectionMatrix4__sceneRender, cast ([_Runtime.field(prepared, 'viewProjection'), camera, SceneRender.DEFAULT_VIEWPORT_ASPECT__sceneRender] : Array<Dynamic>));
+    _Runtime.callValue(SceneRender.setScene3DViewProjectionMatrix4__sceneRender, cast ([_Runtime.field(prepared, 'viewProjection'), camera, _Runtime.callValue(SceneRender.resolveScene3DViewportAspect__sceneRender, cast ([camera, viewportAspect] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callValue(setFrustumFromMatrix4, cast ([_Runtime.field(prepared, 'frustum'), _Runtime.field(prepared, 'viewProjection')] : Array<Dynamic>));
-    _Runtime.callValue(packSceneLightBlock, cast ([_Runtime.field(list, 'lights'), lights] : Array<Dynamic>));
+    _Runtime.callValue(packScene3DLightBlock, cast ([_Runtime.field(list, 'lights'), lights] : Array<Dynamic>));
     _Runtime.setLength(_Runtime.field(prepared, 'meshes'), 0.0);
-    _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([scene, _Runtime.field(prepared, 'frustum'), _Runtime.field(prepared, 'worldBounds'), _Runtime.field(prepared, 'meshes')] : Array<Dynamic>));
+    refreshTransforms = _Runtime.strictEquals(_Runtime.field(state, 'sceneGraphSyncPolicy'), 'refreshDerivedState');
+    _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([scene, _Runtime.field(prepared, 'frustum'), _Runtime.field(prepared, 'worldBounds'), _Runtime.field(prepared, 'meshes'), refreshTransforms] : Array<Dynamic>));
     _Runtime.setField(list, 'meshCount', _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length'));
-    {
-      var m:Dynamic = 0.0;
-      while ((cast ((cast m : Float) < (cast _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length') : Float)) : Bool)) {
-        var skin:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'meshes'), m).skin;
-        if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>)); }
-        m++;
-      }
-    }
     return cast list;
     return cast null;
   }
 
-  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>):Void {
+  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>, refreshTransforms:Bool):Void {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool) || (cast !(cast _Runtime.field((cast (cast node : Dynamic) : HasAppearance), 'visible') : Bool) : Bool)) : Bool)) {
       return;
+    }
+    if ((cast ((cast refreshTransforms : Bool) && (cast !(cast _Runtime.callValue(isNodeLocalMatrix4Detached, cast ([(cast node : Transform3DNode<Dynamic>)] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      _Runtime.callValue(invalidateNodeLocalTransform, cast ([(cast node : NodeAny)] : Array<Dynamic>));
     }
     mesh = (cast (cast node : Dynamic) : Mesh);
     if ((cast ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool) && (cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>)) : Bool)) : Bool)) {
@@ -170,22 +171,22 @@ class SceneRender {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([flighthq._internal._StaticIndex.readArray(children, i), frustum, worldBounds, out] : Array<Dynamic>));
+          _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([flighthq._internal._StaticIndex.readArray(children, i), frustum, worldBounds, out, refreshTransforms] : Array<Dynamic>));
           i++;
         }
       }
     }
   }
 
-  public static function ensurePreparedScene__sceneRender(state:RenderState):PreparedScene__sceneRender {
+  public static function ensurePreparedScene3D__sceneRender(state:RenderState):PreparedScene3D__sceneRender {
     var prepared:Dynamic = cast _Runtime.UNDEFINED;
-    prepared = ((cast SceneRender.preparedScenes__sceneRender : flighthq._internal._WeakMap).get(state));
+    prepared = ((cast SceneRender.preparedScene3Ds__sceneRender : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var viewProjection:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
       var meshes:Array<Mesh> = cast ([] : Array<Dynamic>);
-      var list:SceneRenderList = { lights: { ambientCount: 0.0, data: new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
+      var list:Scene3DRenderList = { lights: { ambientCount: 0.0, data: new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
       (prepared = cast ({ frustum: _Runtime.callValue(createFrustum, cast ([] : Array<Dynamic>)), list: list, meshes: meshes, viewProjection: viewProjection, worldBounds: _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) } : Dynamic));
-      ((cast SceneRender.preparedScenes__sceneRender : flighthq._internal._WeakMap).set(state, prepared));
+      ((cast SceneRender.preparedScene3Ds__sceneRender : flighthq._internal._WeakMap).set(state, prepared));
     }
     return cast prepared;
     return cast null;
@@ -205,8 +206,13 @@ class SceneRender {
   }
 
   public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    bounds = mesh.geometry.bounds;
+    runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([(cast mesh : NodeAny)] : Array<Dynamic>)) : MeshRuntime);
+    if ((cast ((cast ((cast !_Runtime.strictEquals(mesh.skin, null) : Bool) && (cast !_Runtime.strictEquals(mesh.skin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.looseEquals(_Runtime.field(runtime, 'deformedLocalBounds'), null) : Bool)) : Bool)) {
+      _Runtime.callOptionalValue(SceneRender._skinnedBoundsGuard__sceneRender, cast ([mesh] : Array<Dynamic>));
+    }
+    bounds = _Runtime.coalesce(_Runtime.field(runtime, 'deformedLocalBounds'), function():Dynamic return cast _Runtime.callValue(ensureMeshGeometryBounds, cast ([mesh.geometry] : Array<Dynamic>)));
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       return cast true;
     }
@@ -289,24 +295,43 @@ class SceneRender {
     flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 13.0), _Runtime.field(spot, 'outerConeCos'));
   }
 
-  public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
+  public static function setScene3DViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera3D, aspect:Float):Void {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
     projection = camera.projection;
     if ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool)) {
-      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((projection.fovY * 0.5)), ((cast !_Runtime.strictEquals(projection.aspect, 0.0) : Bool) ? (cast projection.aspect : Dynamic) : (cast aspect : Dynamic)), camera.near, camera.far] : Array<Dynamic>));
+      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((projection.fovY * 0.5)), aspect, camera.near, camera.far] : Array<Dynamic>));
     } else {
       _Runtime.callValue(setOrthographicMatrix4, cast ([SceneRender.scratchProjection__sceneRender, -projection.halfWidth, projection.halfWidth, -projection.halfHeight, projection.halfHeight, camera.near, camera.far] : Array<Dynamic>));
     }
     _Runtime.callValue(multiplyMatrix4, cast ([out, SceneRender.scratchProjection__sceneRender, camera.view] : Array<Dynamic>));
   }
 
+  public static function resolveScene3DViewportAspect__sceneRender(camera:Camera3D, viewportAspect:Null<Float>):Float {
+    var projection:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast !_Runtime.strictEquals(viewportAspect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([viewportAspect] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast viewportAspect : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      return cast viewportAspect;
+    }
+    projection = camera.projection;
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([projection.aspect] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast projection.aspect : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      return cast projection.aspect;
+    }
+    return cast SceneRender.DEFAULT_VIEWPORT_ASPECT__sceneRender;
+    return cast null;
+  }
+
   public static final DEFAULT_VIEWPORT_ASPECT__sceneRender:Dynamic = 1.0;
 
-  public static final preparedScenes__sceneRender:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final preparedScene3Ds__sceneRender:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final scratchColor__sceneRender:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
   public static final scratchProjection__sceneRender:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
   public static final scratchLightData__sceneRender:Dynamic = new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS);
+
+  public static function setSkinnedMeshBoundsGuard(guard:Null<Dynamic>):Void {
+    (SceneRender._skinnedBoundsGuard__sceneRender = cast (guard : Dynamic));
+  }
+
+  public static var _skinnedBoundsGuard__sceneRender:Null<Dynamic> = _Runtime.explicitNull();
 }

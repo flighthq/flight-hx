@@ -4,14 +4,11 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectBlendMode;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-
-typedef WgpuEffectBlendMode = String;
-
-typedef WgpuEffectPipeline = { var pipeline:Dynamic; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:Dynamic; @:optional var variants:Dynamic; };
-
-typedef WgpuDualSourceEffectPipeline = WgpuEffectPipeline;
 
 typedef WgpuEffectPassState__wgpuEffectPass = { var uniformBuffer:Dynamic; var uniformData:flighthq._internal._Float32Array; var uniformDataI32:flighthq._internal._Int32Array; var uniformOffset:Float; var uniformStride:Float; var uniformSlots:Float; var uniformBGLayout:Dynamic; var uniformBG:Dynamic; var textureBGLayout:Dynamic; var textureBGs:Dynamic; var sampler:Dynamic; var format:Dynamic; };
 
@@ -87,7 +84,7 @@ class WgpuEffectPass {
     slotF32 = (cast _Runtime.field(fs, 'uniformData') : flighthq._internal._Float32Array).subarray(Std.int(f32Start), Std.int((f32Start + (_Runtime.field(fs, 'uniformStride') / 4.0))));
     slotI32 = (cast _Runtime.field(fs, 'uniformDataI32') : flighthq._internal._Int32Array).subarray(Std.int(f32Start), Std.int((f32Start + (_Runtime.field(fs, 'uniformStride') / 4.0))));
     _Runtime.callValue(setUniforms, cast ([slotF32, slotI32] : Array<Dynamic>));
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(fs, 'uniformBuffer'), slotOffset, _Runtime.field(_Runtime.field(fs, 'uniformData'), 'buffer'), slotOffset, _Runtime.field(fs, 'uniformStride')] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(fs, 'uniformBuffer'), slotOffset, _Runtime.field(_Runtime.field(fs, 'uniformData'), 'buffer'), slotOffset, _Runtime.field(fs, 'uniformStride')] : Array<Dynamic>));
   }
 
   public static function beginEffectPass__wgpuEffectPass(state:WgpuRenderState, dest:Null<WgpuRenderTarget>, loadOp:Dynamic):Dynamic {

@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGradientGlowEffect = api.createGradientGlowEffect;
+export const getGradientGlowEffectPadding = api.getGradientGlowEffectPadding;
+export const registerGradientGlowEffectPaddingResolver = api.registerGradientGlowEffectPaddingResolver;

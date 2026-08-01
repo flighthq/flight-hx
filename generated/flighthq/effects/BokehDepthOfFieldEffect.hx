@@ -3,12 +3,32 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.BokehDepthOfFieldEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPadding;
+import flighthq.types.RenderState;
 
 class BokehDepthOfFieldEffect {
   public static function createBokehDepthOfFieldEffect(?options:Dynamic):flighthq.types.BokehDepthOfFieldEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BokehDepthOfFieldEffect' }, options]);
+    return cast null;
+  }
+
+  public static function getBokehDepthOfFieldEffectPadding(effect:flighthq.types.BokehDepthOfFieldEffect):RenderEffectPadding {
+    var radius:Dynamic = cast _Runtime.UNDEFINED;
+    radius = HxMath.ceil(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'maxBlur'), function():Dynamic return cast 4.0)));
+    return cast { bottom: radius, left: radius, right: radius, top: radius };
+    return cast null;
+  }
+
+  public static function registerBokehDepthOfFieldEffectPaddingResolver(state:RenderState):Void {
+    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BokehDepthOfFieldEffect', BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect] : Array<Dynamic>));
+  }
+
+  public static function resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect(effect:RenderEffect):RenderEffectPadding {
+    return cast _Runtime.callValue(getBokehDepthOfFieldEffectPadding, cast ([(cast effect : flighthq.types.BokehDepthOfFieldEffect)] : Array<Dynamic>));
     return cast null;
   }
 }

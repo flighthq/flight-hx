@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyRadialBlurEffectToGl = api.applyRadialBlurEffectToGl;
 export const defaultGlRadialBlurEffectRunner = api.defaultGlRadialBlurEffectRunner;
+export const registerGlRadialBlurEffect = api.registerGlRadialBlurEffect;

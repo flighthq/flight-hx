@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyTiltShiftEffectToGl = api.applyTiltShiftEffectToGl;
 export const defaultGlTiltShiftEffectRunner = api.defaultGlTiltShiftEffectRunner;
+export const registerGlTiltShiftEffect = api.registerGlTiltShiftEffect;

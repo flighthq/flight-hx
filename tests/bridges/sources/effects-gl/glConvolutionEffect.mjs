@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyConvolutionEffectToGl = api.applyConvolutionEffectToGl;
 export const defaultGlConvolutionEffectRunner = api.defaultGlConvolutionEffectRunner;
 export const MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE = api.MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE;
+export const registerGlConvolutionEffect = api.registerGlConvolutionEffect;

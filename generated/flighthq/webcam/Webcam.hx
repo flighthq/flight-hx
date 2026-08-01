@@ -11,7 +11,6 @@ import flighthq.types.Webcam.WebcamVideo;
 import flighthq.types.WebcamFacingMode;
 import flighthq.types.WebcamStream;
 import flighthq.webcam.WebcamStream as Facade_Webcam_flighthq_webcam_WebcamStream;
-import flighthq.webcam.WebcamStream.WebcamStreamRuntime;
 
 class Webcam {
   public static var _backend__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
@@ -132,11 +131,6 @@ class Webcam {
   public static function getWebcamBackend():WebcamBackend {
     if ((cast _Runtime.strictEquals(Webcam._backend__webcam, null) : Bool)) { (Webcam._backend__webcam = cast (_Runtime.callValue(createWebWebcamBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Webcam._backend__webcam;
-    return cast null;
-  }
-
-  public static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
-    return cast Facade_Webcam_flighthq_webcam_WebcamStream.getWebcamStreamRuntime(stream);
     return cast null;
   }
 

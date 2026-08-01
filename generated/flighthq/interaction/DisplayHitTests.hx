@@ -7,16 +7,6 @@ import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
 import flighthq.types.Node.NodeAny;
 
 class DisplayHitTests {
-  public static function defaultBitmapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function defaultDisplayObjectHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
-    return cast false;
-    return cast null;
-  }
-
   public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
@@ -27,8 +17,8 @@ class DisplayHitTests {
     return cast null;
   }
 
-  public static function defaultRenderViewHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
+  public static function defaultNode2DHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+    return cast false;
     return cast null;
   }
 
@@ -48,11 +38,6 @@ class DisplayHitTests {
   }
 
   public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function defaultVideoHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }

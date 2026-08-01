@@ -4,513 +4,65 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.Path.appendPathClose;
+import flighthq.path.Path.appendPathLineTo;
+import flighthq.path.Path.appendPathMoveTo;
+import flighthq.path.Path.createPath;
+import flighthq.path.StrokePathGeometry.buildStrokePathGeometry;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
 import flighthq.types.StrokeStyle;
-import flighthq.types._internal._PathValues.PathCommandValue;
-
-typedef DashSegment__strokePath = { var closed:Bool; var points:Array<Float>; };
-
-typedef StrokeSubpath__strokePath = { var closed:Bool; var points:Array<Float>; };
 
 class StrokePath {
   public static function strokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Path {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var join:Dynamic = cast _Runtime.UNDEFINED;
-    var cap:Dynamic = cast _Runtime.UNDEFINED;
-    var miterLimit:Dynamic = cast _Runtime.UNDEFINED;
-    var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Path = cast _Runtime.UNDEFINED;
-    var subpaths:Dynamic = cast _Runtime.UNDEFINED;
-    var dash:Dynamic = cast _Runtime.UNDEFINED;
-    var dashOffset:Dynamic = cast _Runtime.UNDEFINED;
-    width = _Runtime.coalesce(_Runtime.field(style, 'width'), function():Dynamic return cast 1.0);
-    join = _Runtime.coalesce(_Runtime.field(style, 'join'), function():Dynamic return cast 'miter');
-    cap = _Runtime.coalesce(_Runtime.field(style, 'cap'), function():Dynamic return cast 'butt');
-    miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
-    halfWidth = (width / 2.0);
-    result = { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' };
-    subpaths = _Runtime.callValue(StrokePath.decodeSubpaths__strokePath, cast ([path, tolerance] : Array<Dynamic>));
-    dash = _Runtime.select(_Runtime.andValue(_Runtime.field(style, 'dash'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(style, 'dash'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.field(style, 'dash'), function():Dynamic return cast null);
-    dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
-    for (subpath in _Runtime.iterable(subpaths)) {
-      if ((cast ((cast _Runtime.field(_Runtime.field(subpath, 'points'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var segments:Dynamic = _Runtime.select(dash, function():Dynamic return cast _Runtime.callValue(StrokePath.applyDash__strokePath, cast ([_Runtime.field(subpath, 'points'), _Runtime.field(subpath, 'closed'), dash, dashOffset] : Array<Dynamic>)), function():Dynamic return cast cast ([{ points: _Runtime.field(subpath, 'points'), closed: _Runtime.field(subpath, 'closed') }] : Array<Dynamic>));
-      for (seg in _Runtime.iterable(segments)) {
-        if ((cast ((cast _Runtime.field(_Runtime.field(seg, 'points'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-        _Runtime.callValue(StrokePath.strokeSubpath__strokePath, cast ([_Runtime.field(seg, 'points'), _Runtime.field(seg, 'closed'), halfWidth, join, cap, miterLimit, result, tolerance] : Array<Dynamic>));
+    var result:Dynamic = cast _Runtime.UNDEFINED;
+    var geometry:Dynamic = cast _Runtime.UNDEFINED;
+    result = _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
+    geometry = _Runtime.callValue(buildStrokePathGeometry, cast ([path, style, tolerance] : Array<Dynamic>));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(geometry, 'pieces'), 'length') : Float)) : Bool)) {
+        _Runtime.callValue(StrokePath.appendPieceOutline__strokePath, cast ([result, flighthq._internal._StaticIndex.readArray(_Runtime.field(geometry, 'pieces'), i)] : Array<Dynamic>));
+        i++;
       }
     }
     return cast result;
     return cast null;
   }
 
-  public static function addArcPoints__strokePath(cx:Float, cy:Float, r:Float, startAngle:Float, endAngle:Float, ccw:Bool, tolerance:Float, out:Array<Float>):Void {
-    var ratio:Dynamic = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var delta:Dynamic = cast _Runtime.UNDEFINED;
-    var steps:Dynamic = cast _Runtime.UNDEFINED;
-    var stepAngle:Dynamic = cast _Runtime.UNDEFINED;
-    ratio = HxMath.max(0.0, HxMath.min(1.0, (tolerance / r)));
-    n = HxMath.max(4.0, HxMath.ceil((HxMath.PI / HxMath.acos((1.0 - ratio)))));
-    delta = (endAngle - startAngle);
-    if ((cast ccw : Bool)) {
-      if ((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool)) { (delta = cast ((delta - (HxMath.PI * 2.0)) : Dynamic)); }
-    } else {
-      if ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool)) { (delta = cast ((delta + (HxMath.PI * 2.0)) : Dynamic)); }
-    }
-    steps = HxMath.ceil((HxMath.abs(delta) / ((HxMath.PI * 2.0) / n)));
-    if ((cast ((cast steps : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
-    stepAngle = (delta / steps);
-    {
-      var i:Dynamic = 1.0;
-      while ((cast ((cast i : Float) < (cast steps : Float)) : Bool)) {
-        var angle:Dynamic = (startAngle + (i * stepAngle));
-        _Runtime.pushMany(out, cast ([(cx + (HxMath.cos(angle) * r)), (cy + (HxMath.sin(angle) * r))] : Array<Dynamic>));
-        i++;
-      }
-    }
+  public static function appendPieceOutline__strokePath(path:Path, piece:{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }):Void {
+    if ((cast ((cast ((cast _Runtime.field(_Runtime.field(piece, 'left'), 'length') : Float) < (cast 4.0 : Float)) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(piece, 'right'), 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return; }
+    _Runtime.callValue(StrokePath.appendContour__strokePath, cast ([path, _Runtime.field(piece, 'left'), false, ((cast _Runtime.field(piece, 'closed') : Bool) ? (cast StrokePath.EMPTY_POINTS__strokePath : Dynamic) : (cast _Runtime.field(piece, 'endCap') : Dynamic)), ((cast _Runtime.field(piece, 'closed') : Bool) ? (cast StrokePath.EMPTY_POINTS__strokePath : Dynamic) : (cast _Runtime.field(piece, 'startCap') : Dynamic)), _Runtime.field(piece, 'right')] : Array<Dynamic>));
+    if ((cast _Runtime.field(piece, 'closed') : Bool)) { _Runtime.callValue(StrokePath.appendContour__strokePath, cast ([path, _Runtime.field(piece, 'right'), true, StrokePath.EMPTY_POINTS__strokePath, StrokePath.EMPTY_POINTS__strokePath, StrokePath.EMPTY_POINTS__strokePath] : Array<Dynamic>)); }
   }
 
-  public static function addCap__strokePath(px:Float, py:Float, nx:Float, ny:Float, edx:Float, edy:Float, halfWidth:Float, cap:String, left:Array<Float>, right:Array<Float>, tolerance:Float, isStart:Bool):Void {
-    var lx:Dynamic = cast _Runtime.UNDEFINED;
-    var ly:Dynamic = cast _Runtime.UNDEFINED;
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    lx = (px + (nx * halfWidth));
-    ly = (py + (ny * halfWidth));
-    rx = (px - (nx * halfWidth));
-    ry = (py - (ny * halfWidth));
-    if ((cast _Runtime.strictEquals(cap, 'butt') : Bool)) {
-      _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-      _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
-    } else { if ((cast _Runtime.strictEquals(cap, 'square') : Bool)) {
-      _Runtime.pushMany(left, cast ([(lx + (edx * halfWidth)), (ly + (edy * halfWidth))] : Array<Dynamic>));
-      _Runtime.pushMany(right, cast ([(rx + (edx * halfWidth)), (ry + (edy * halfWidth))] : Array<Dynamic>));
-    } else {
-      if ((cast isStart : Bool)) {
-        _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-        _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
-        var startAngle:Dynamic = HxMath.atan2(-ny, -nx);
-        var endAngle:Dynamic = HxMath.atan2(ny, nx);
-        _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, startAngle, endAngle, false, tolerance, right] : Array<Dynamic>));
-      } else {
-        _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-        _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(ny, nx), HxMath.atan2(-ny, -nx), true, tolerance, left] : Array<Dynamic>));
-        _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
-      }
-    } }
-  }
-
-  public static function addJoin__strokePath(px:Float, py:Float, nx0:Float, ny0:Float, nx1:Float, ny1:Float, halfWidth:Float, join:String, miterLimit:Float, left:Array<Float>, right:Array<Float>, tolerance:Float):Void {
-    var lx0:Dynamic = cast _Runtime.UNDEFINED;
-    var ly0:Dynamic = cast _Runtime.UNDEFINED;
-    var rx0:Dynamic = cast _Runtime.UNDEFINED;
-    var ry0:Dynamic = cast _Runtime.UNDEFINED;
-    var lx1:Dynamic = cast _Runtime.UNDEFINED;
-    var ly1:Dynamic = cast _Runtime.UNDEFINED;
-    var rx1:Dynamic = cast _Runtime.UNDEFINED;
-    var ry1:Dynamic = cast _Runtime.UNDEFINED;
-    lx0 = (px + (nx0 * halfWidth));
-    ly0 = (py + (ny0 * halfWidth));
-    rx0 = (px - (nx0 * halfWidth));
-    ry0 = (py - (ny0 * halfWidth));
-    lx1 = (px + (nx1 * halfWidth));
-    ly1 = (py + (ny1 * halfWidth));
-    rx1 = (px - (nx1 * halfWidth));
-    ry1 = (py - (ny1 * halfWidth));
-    if ((cast _Runtime.strictEquals(join, 'miter') : Bool)) {
-      var cross:Dynamic = ((nx0 * ny1) - (ny0 * nx1));
-      if ((cast ((cast HxMath.abs(cross) : Float) < (cast 1e-8 : Float)) : Bool)) {
-        _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
-        _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
-      } else {
-        var dx:Dynamic = (lx1 - lx0);
-        var dy:Dynamic = (ly1 - ly0);
-        var t:Dynamic = (((dx * ny1) - (dy * nx1)) / cross);
-        var mx:Dynamic = (lx0 + (t * nx0));
-        var my:Dynamic = (ly0 + (t * ny0));
-        var miterLen:Dynamic = HxMath.sqrt((((mx - px) * (mx - px)) + ((my - py) * (my - py))));
-        if ((cast ((cast miterLen : Float) <= (cast (halfWidth * miterLimit) : Float)) : Bool)) {
-          _Runtime.pushMany(left, cast ([mx, my] : Array<Dynamic>));
-          var rmx:Dynamic = ((px * 2.0) - mx);
-          var rmy:Dynamic = ((py * 2.0) - my);
-          _Runtime.pushMany(right, cast ([rmx, rmy] : Array<Dynamic>));
-        } else {
-          _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
-          _Runtime.pushMany(right, cast ([rx0, ry0, rx1, ry1] : Array<Dynamic>));
-        }
-      }
-    } else { if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
-      _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
-      _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(ny0, nx0), HxMath.atan2(ny1, nx1), true, tolerance, left] : Array<Dynamic>));
-      _Runtime.pushMany(left, cast ([lx1, ly1] : Array<Dynamic>));
-      _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
-      _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(-ny0, -nx0), HxMath.atan2(-ny1, -nx1), false, tolerance, right] : Array<Dynamic>));
-      _Runtime.pushMany(right, cast ([rx1, ry1] : Array<Dynamic>));
-    } else {
-      _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
-      _Runtime.pushMany(right, cast ([rx0, ry0, rx1, ry1] : Array<Dynamic>));
-    } }
-  }
-
-  public static function applyDash__strokePath(pts:Array<Float>, closed:Bool, dash:Array<Float>, dashOffset:Float):Array<DashSegment__strokePath> {
-    var result:Array<DashSegment__strokePath> = cast _Runtime.UNDEFINED;
-    var totalDashLength:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var dashIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var remaining:Dynamic = cast _Runtime.UNDEFINED;
-    var isOn:Dynamic = cast _Runtime.UNDEFINED;
-    var current:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    result = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.strictEquals(_Runtime.field(dash, 'length'), 0.0) : Bool)) {
-      _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
-      return cast result;
-    }
-    totalDashLength = _Runtime.reduce(dash, function(s:Dynamic, d:Dynamic) return (s + d), 0.0);
-    if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
-      return cast result;
-    }
-    offset = _Runtime.fmod((_Runtime.fmod(dashOffset, totalDashLength) + totalDashLength), totalDashLength);
-    dashIndex = 0.0;
-    remaining = 0.0;
-    isOn = true;
-    {
-      var acc:Dynamic = 0.0;
+  public static function appendContour__strokePath(path:Path, primary:Array<Float>, reversePrimary:Bool, afterPrimary:Array<Float>, afterSecondary:Array<Float>, secondary:Array<Float>):Void {
+    if ((cast reversePrimary : Bool)) {
+      _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(primary, (_Runtime.field(primary, 'length') - 2.0)), flighthq._internal._StaticIndex.readArray(primary, (_Runtime.field(primary, 'length') - 1.0))] : Array<Dynamic>));
       {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-          if ((cast ((cast (acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
-            (dashIndex = cast (i : Dynamic));
-            (remaining = cast ((flighthq._internal._StaticIndex.readArray(dash, i) - (offset - acc)) : Dynamic));
-            (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
-            break;
-          }
-          (acc = cast ((acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Dynamic));
-          i++;
-        }
-      }
-    }
-    current = null;
-    n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
-    {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
-        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
-        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
-        var dx:Dynamic = (x1 - x0);
-        var dy:Dynamic = (y1 - y0);
-        var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-        if ((cast ((cast isOn : Bool) && (cast _Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-          (current = cast (cast ([x0, y0] : Array<Dynamic>) : Dynamic));
-        }
-        var consumed:Dynamic = 0.0;
-        while ((cast ((cast consumed : Float) < (cast segLen : Float)) : Bool)) {
-          var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
-          var t:Dynamic = ((consumed + step) / segLen);
-          var ix:Dynamic = (x0 + (t * dx));
-          var iy:Dynamic = (y0 + (t * dy));
-          if ((cast isOn : Bool)) {
-            if ((cast _Runtime.strictEquals(current, null) : Bool)) { (current = cast (cast ([(x0 + ((consumed / segLen) * dx)), (y0 + ((consumed / segLen) * dy))] : Array<Dynamic>) : Dynamic)); }
-            _Runtime.pushMany(current, cast ([ix, iy] : Array<Dynamic>));
-          } else {
-            if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-              if ((cast ((cast _Runtime.field(current, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>)); }
-              (current = cast (null : Dynamic));
-            }
-            if ((cast ((cast step : Float) >= (cast remaining : Float)) : Bool)) {
-              (current = cast (cast ([ix, iy] : Array<Dynamic>) : Dynamic));
-            }
-          }
-          (consumed = cast ((consumed + step) : Dynamic));
-          (remaining = cast ((remaining - step) : Dynamic));
-          if ((cast ((cast remaining : Float) <= (cast 1e-10 : Float)) : Bool)) {
-            (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
-            (remaining = cast (flighthq._internal._StaticIndex.readArray(dash, dashIndex) : Dynamic));
-            (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
-            if ((cast ((cast isOn : Bool) && (cast _Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-              (current = cast (cast ([ix, iy] : Array<Dynamic>) : Dynamic));
-            } else { if ((cast ((cast !(cast isOn : Bool) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-              if ((cast ((cast _Runtime.field(current, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>)); }
-              (current = cast (null : Dynamic));
-            } }
-          }
-        }
-        i++;
-      }
-    }
-    if ((cast ((cast !_Runtime.strictEquals(current, null) : Bool) && (cast ((cast _Runtime.field(current, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callProperty(result, 'push', cast ([{ points: current, closed: false }] : Array<Dynamic>));
-    }
-    return cast result;
-    return cast null;
-  }
-
-  public static function decodeSubpaths__strokePath(path:Path, tolerance:Float):Array<StrokeSubpath__strokePath> {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;
-    var subpaths:Array<StrokeSubpath__strokePath> = cast _Runtime.UNDEFINED;
-    var current:Null<StrokeSubpath__strokePath> = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var contourStartX:Dynamic = cast _Runtime.UNDEFINED;
-    var contourStartY:Dynamic = cast _Runtime.UNDEFINED;
-    var di:Dynamic = cast _Runtime.UNDEFINED;
-    var ensureCurrent:Dynamic = cast _Runtime.UNDEFINED;
-    commands = _Runtime.field(path, 'commands');
-    data = _Runtime.field(path, 'data');
-    toleranceSq = (tolerance * tolerance);
-    subpaths = cast ([] : Array<Dynamic>);
-    current = null;
-    x = 0.0;
-    y = 0.0;
-    contourStartX = 0.0;
-    contourStartY = 0.0;
-    di = 0.0;
-    ensureCurrent = function() {
-      if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-        (current = cast ({ points: cast ([0.0, 0.0] : Array<Dynamic>), closed: false } : Dynamic));
-        _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        (x = cast (0.0 : Dynamic));
-        (y = cast (0.0 : Dynamic));
-      }
-      return cast current;
-    };
-    {
-      var ci:Dynamic = 0.0;
-      while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
-        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
-          (di = cast ((di + 2.0) : Dynamic));
-          (contourStartX = cast (x : Dynamic));
-          (contourStartY = cast (y : Dynamic));
-          (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
-          _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
-          (di = cast ((di + 4.0) : Dynamic));
-          (contourStartX = cast (x : Dynamic));
-          (contourStartY = cast (y : Dynamic));
-          (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
-          _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
-          (di = cast ((di + 2.0) : Dynamic));
-          _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
-          (di = cast ((di + 4.0) : Dynamic));
-          _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
-          (di = cast ((di + 4.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Dynamic));
-          (di = cast ((di + 6.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
-          if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-            _Runtime.setField(current, 'closed', true);
-            (x = cast (contourStartX : Dynamic));
-            (y = cast (contourStartY : Dynamic));
-            (current = cast (null : Dynamic));
-          }
-        } } } } } } }
-        ci++;
-      }
-    }
-    return cast subpaths;
-    return cast null;
-  }
-
-  public static function distChordSq__strokePath(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var cross:Dynamic = cast _Runtime.UNDEFINED;
-    dx = (x1 - x0);
-    dy = (y1 - y0);
-    lenSq = ((dx * dx) + (dy * dy));
-    if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
-      var ax:Dynamic = (px - x0);
-      var ay:Dynamic = (py - y0);
-      return cast ((ax * ax) + (ay * ay));
-    }
-    cross = ((dx * (y0 - py)) - (dy * (x0 - px)));
-    return cast ((cross * cross) / lenSq);
-    return cast null;
-  }
-
-  public static function flattenCubic__strokePath(out:Array<Float>, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
-    var dxc1:Dynamic = cast _Runtime.UNDEFINED;
-    var dxc2:Dynamic = cast _Runtime.UNDEFINED;
-    var x01:Dynamic = cast _Runtime.UNDEFINED;
-    var y01:Dynamic = cast _Runtime.UNDEFINED;
-    var x12:Dynamic = cast _Runtime.UNDEFINED;
-    var y12:Dynamic = cast _Runtime.UNDEFINED;
-    var x23:Dynamic = cast _Runtime.UNDEFINED;
-    var y23:Dynamic = cast _Runtime.UNDEFINED;
-    var x012:Dynamic = cast _Runtime.UNDEFINED;
-    var y012:Dynamic = cast _Runtime.UNDEFINED;
-    var x123:Dynamic = cast _Runtime.UNDEFINED;
-    var y123:Dynamic = cast _Runtime.UNDEFINED;
-    var xm:Dynamic = cast _Runtime.UNDEFINED;
-    var ym:Dynamic = cast _Runtime.UNDEFINED;
-    dxc1 = _Runtime.callValue(StrokePath.distChordSq__strokePath, cast ([c1x, c1y, x0, y0, x1, y1] : Array<Dynamic>));
-    dxc2 = _Runtime.callValue(StrokePath.distChordSq__strokePath, cast ([c2x, c2y, x0, y0, x1, y1] : Array<Dynamic>));
-    if ((cast ((cast ((cast depth : Float) >= (cast StrokePath.MAX_SUBDIVISION_DEPTH__strokePath : Float)) : Bool) || (cast _Runtime.andValue(((cast dxc1 : Float) <= (cast toleranceSq : Float)), function():Dynamic return cast ((cast dxc2 : Float) <= (cast toleranceSq : Float))) : Bool)) : Bool)) {
-      _Runtime.pushMany(out, cast ([x1, y1] : Array<Dynamic>));
-      return;
-    }
-    x01 = ((x0 + c1x) / 2.0);
-    y01 = ((y0 + c1y) / 2.0);
-    x12 = ((c1x + c2x) / 2.0);
-    y12 = ((c1y + c2y) / 2.0);
-    x23 = ((c2x + x1) / 2.0);
-    y23 = ((c2y + y1) / 2.0);
-    x012 = ((x01 + x12) / 2.0);
-    y012 = ((y01 + y12) / 2.0);
-    x123 = ((x12 + x23) / 2.0);
-    y123 = ((y12 + y23) / 2.0);
-    xm = ((x012 + x123) / 2.0);
-    ym = ((y012 + y123) / 2.0);
-    _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([out, x0, y0, x01, y01, x012, y012, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
-    _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([out, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
-  }
-
-  public static function flattenQuadratic__strokePath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lengthSq:Dynamic = cast _Runtime.UNDEFINED;
-    var distSq:Dynamic = cast _Runtime.UNDEFINED;
-    var x01:Dynamic = cast _Runtime.UNDEFINED;
-    var y01:Dynamic = cast _Runtime.UNDEFINED;
-    var x12:Dynamic = cast _Runtime.UNDEFINED;
-    var y12:Dynamic = cast _Runtime.UNDEFINED;
-    var xm:Dynamic = cast _Runtime.UNDEFINED;
-    var ym:Dynamic = cast _Runtime.UNDEFINED;
-    dx = (x1 - x0);
-    dy = (y1 - y0);
-    lengthSq = ((dx * dx) + (dy * dy));
-    if ((cast _Runtime.strictEquals(lengthSq, 0.0) : Bool)) {
-      var ax:Dynamic = (cx - x0);
-      var ay:Dynamic = (cy - y0);
-      (distSq = cast (((ax * ax) + (ay * ay)) : Dynamic));
-    } else {
-      var cross:Dynamic = ((dx * (y0 - cy)) - (dy * (x0 - cx)));
-      (distSq = cast (((cross * cross) / lengthSq) : Dynamic));
-    }
-    if ((cast ((cast ((cast depth : Float) >= (cast StrokePath.MAX_SUBDIVISION_DEPTH__strokePath : Float)) : Bool) || (cast ((cast distSq : Float) <= (cast toleranceSq : Float)) : Bool)) : Bool)) {
-      _Runtime.pushMany(out, cast ([x1, y1] : Array<Dynamic>));
-      return;
-    }
-    x01 = ((x0 + cx) / 2.0);
-    y01 = ((y0 + cy) / 2.0);
-    x12 = ((cx + x1) / 2.0);
-    y12 = ((cy + y1) / 2.0);
-    xm = ((x01 + x12) / 2.0);
-    ym = ((y01 + y12) / 2.0);
-    _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([out, x0, y0, x01, y01, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
-    _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([out, xm, ym, x12, y12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
-  }
-
-  public static function strokeSubpath__strokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var left:Array<Float> = cast _Runtime.UNDEFINED;
-    var right:Array<Float> = cast _Runtime.UNDEFINED;
-    var normals:Dynamic = cast _Runtime.UNDEFINED;
-    n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
-    if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { return; }
-    left = cast ([] : Array<Dynamic>);
-    right = cast ([] : Array<Dynamic>);
-    normals = _Runtime.createArray(((n - 1.0) * 2.0));
-    {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)) - flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
-        var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)) - flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
-        var len:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
-        if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArray(normals, (i * 2.0), (-dy / len));
-          flighthq._internal._StaticIndex.writeArray(normals, ((i * 2.0) + 1.0), (dx / len));
-        } else {
-          flighthq._internal._StaticIndex.writeArray(normals, (i * 2.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(normals, ((i - 1.0) * 2.0)) : Dynamic) : (cast 0.0 : Dynamic)));
-          flighthq._internal._StaticIndex.writeArray(normals, ((i * 2.0) + 1.0), ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0)) : Dynamic) : (cast 1.0 : Dynamic)));
-        }
-        i++;
-      }
-    }
-    if ((cast closed : Bool)) {
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-          var prev:Dynamic = _Runtime.fmod(((i + n) - 2.0), (n - 1.0));
-          var curr:Dynamic = i;
-          var nx0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (prev * 2.0));
-          var ny0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((prev * 2.0) + 1.0));
-          var nx1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (curr * 2.0));
-          var ny1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((curr * 2.0) + 1.0));
-          _Runtime.callValue(StrokePath.addJoin__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
-          i++;
+        var i:Dynamic = (_Runtime.field(primary, 'length') - 4.0);
+        while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+          _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(primary, i), flighthq._internal._StaticIndex.readArray(primary, (i + 1.0))] : Array<Dynamic>));
+          (i = cast ((i - 2.0) : Dynamic));
         }
       }
     } else {
-      var sn0x:Dynamic = flighthq._internal._StaticIndex.readArray(normals, 0.0);
-      var sn0y:Dynamic = flighthq._internal._StaticIndex.readArray(normals, 1.0);
-      _Runtime.callValue(StrokePath.addCap__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0), sn0x, sn0y, -sn0y, sn0x, halfWidth, cap, left, right, tolerance, true] : Array<Dynamic>));
-      {
-        var i:Dynamic = 1.0;
-        while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-          var nx0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((i - 1.0) * 2.0));
-          var ny0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0));
-          var nx1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (i * 2.0));
-          var ny1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((i * 2.0) + 1.0));
-          _Runtime.callValue(StrokePath.addJoin__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
-          i++;
-        }
-      }
-      var snLx:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((n - 2.0) * 2.0));
-      var snLy:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (((n - 2.0) * 2.0) + 1.0));
-      _Runtime.callValue(StrokePath.addCap__strokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, ((n - 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (((n - 1.0) * 2.0) + 1.0)), snLx, snLy, snLy, -snLx, halfWidth, cap, left, right, tolerance, false] : Array<Dynamic>));
+      _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(primary, 0.0), flighthq._internal._StaticIndex.readArray(primary, 1.0)] : Array<Dynamic>));
+      _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, primary, 2.0, 2.0] : Array<Dynamic>));
     }
-    if ((cast ((cast _Runtime.field(left, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(left, 0.0), flighthq._internal._StaticIndex.readArray(left, 1.0)] : Array<Dynamic>));
-    {
-      var i:Dynamic = 2.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(left, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(left, i), flighthq._internal._StaticIndex.readArray(left, (i + 1.0))] : Array<Dynamic>));
-        (i = cast ((i + 2.0) : Dynamic));
-      }
-    }
-    {
-      var i:Dynamic = (_Runtime.field(right, 'length') - 2.0);
-      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(right, i), flighthq._internal._StaticIndex.readArray(right, (i + 1.0))] : Array<Dynamic>));
-        (i = cast ((i - 2.0) : Dynamic));
-      }
-    }
-    _Runtime.callValue(appendPathClose, cast ([out] : Array<Dynamic>));
+    _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, afterPrimary, 0.0, 2.0] : Array<Dynamic>));
+    _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, secondary, (_Runtime.field(secondary, 'length') - 2.0), -2.0] : Array<Dynamic>));
+    _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, afterSecondary, 0.0, 2.0] : Array<Dynamic>));
+    _Runtime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
   }
 
-  public static final MAX_SUBDIVISION_DEPTH__strokePath:Dynamic = 16.0;
+  public static function appendPoints__strokePath(path:Path, points:Array<Float>, start:Float, step:Float):Void {
+    {
+      var i:Dynamic = start;
+      while ((cast ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) : Bool)) {
+        _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(points, i), flighthq._internal._StaticIndex.readArray(points, (i + 1.0))] : Array<Dynamic>));
+        (i = cast ((i + step) : Dynamic));
+      }
+    }
+  }
+
+  public static final EMPTY_POINTS__strokePath:Array<Float> = cast ([] : Array<Dynamic>);
 }

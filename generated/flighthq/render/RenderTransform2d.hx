@@ -5,8 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.copyMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
+import flighthq.node.NodeTransform2d.getNodeLocalMatrix;
 import flighthq.node.Revision.getNodeLocalTransformRevision;
-import flighthq.node.Transform2d.getNodeLocalMatrix;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasTransform2D;
 import flighthq.types.Node;
@@ -20,7 +20,7 @@ class RenderTransform2d {
     var localDirty:Dynamic = cast _Runtime.UNDEFINED;
     localTransformId = _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
     parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId')) : Bool));
-    localDirty = !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), localTransformId);
+    localDirty = ((cast _Runtime.strictEquals(_Runtime.field(state, 'sceneGraphSyncPolicy'), 'refreshDerivedState') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), localTransformId) : Bool));
     if ((cast ((cast parentDirty : Bool) || (cast localDirty : Bool)) : Bool)) {
       _Runtime.callValue(RenderTransform2d.recalculateRenderTransform2D__renderTransform2d, cast ([state, data, parentData] : Array<Dynamic>));
       _Runtime.setField(data, 'lastLocalTransformId', localTransformId);

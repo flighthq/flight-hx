@@ -6,4 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const strokePath = api.strokePath;
-export { StrokeStyle } from '@flighthq/types';
+export { StrokeStyle } from '@flighthq/types/contract';

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyCrtEffectToWgpu = api.applyCrtEffectToWgpu;
 export const defaultWgpuCrtEffectRunner = api.defaultWgpuCrtEffectRunner;
+export const registerWgpuCrtEffect = api.registerWgpuCrtEffect;

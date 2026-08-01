@@ -15,8 +15,7 @@ import flighthq.types.SpritesheetFormat.SpritesheetFormatKindCocosPlist as COCOS
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindLibgdxAtlas as LIBGDX_ATLAS;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindStarling as STARLING;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindTexturePacker as TEXTURE_PACKER;
-
-typedef SpritesheetParseOptions = { @:optional var frameDuration:Float; @:optional var imageHeight:Float; @:optional var imageWidth:Float; };
+import flighthq.types.SpritesheetParseOptions;
 
 typedef FormatEntry__spritesheetDetect = { var detect:Dynamic; var parse:Dynamic; };
 

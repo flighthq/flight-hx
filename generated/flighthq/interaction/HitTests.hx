@@ -11,15 +11,15 @@ import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
-import flighthq.types.DisplayObject;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HitTestFunction;
 import flighthq.types.HitTestFunction.HitTestPreciseFunction;
 import flighthq.types.HitTestResult;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node2D;
 import flighthq.types.NodeInteraction.HitArea;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
@@ -28,7 +28,7 @@ class HitTests {
   public static function describeGraphHit(node:NodeAny, x:Float, y:Float, out:HitTestResult):Void {
     var exact:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(out, 'node', node);
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     _Runtime.setField(out, 'localX', _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x'));
     _Runtime.setField(out, 'localY', _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y'));
     exact = ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(node, 'kind')));
@@ -61,17 +61,9 @@ class HitTests {
     return cast null;
   }
 
-  public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([other] : Array<Dynamic>)), null) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(intersectsRectangle, cast ([_Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
-    }
-    return cast false;
-    return cast null;
-  }
-
   public static function hitTestGraphLocalBounds<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
-    return cast _Runtime.callValue(containsRectanglePointXY, cast ([_Runtime.callValue(getNodeLocalBoundsRectangle, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x'), _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y')] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    return cast _Runtime.callValue(containsRectanglePointXY, cast ([_Runtime.callValue(getNodeLocalBoundsRectangle, cast ([(cast source : Node2D)] : Array<Dynamic>)), _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x'), _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
@@ -82,6 +74,14 @@ class HitTests {
 
   public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(HitTests.anyHit__hitTests, cast ([(cast source : NodeAny), x, y, true] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function hitTestNode2Ds(source:Node2D, other:Node2D):Bool {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([other] : Array<Dynamic>)), null) : Bool)) : Bool)) {
+      return cast _Runtime.callValue(intersectsRectangle, cast ([_Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
+    }
+    return cast false;
     return cast null;
   }
 
@@ -196,7 +196,7 @@ class HitTests {
       var proxyHit:Dynamic = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map).get(_Runtime.field(proxy, 'kind')));
       return cast _Runtime.select(proxyHit, function():Dynamic return cast _Runtime.callValue(proxyHit, cast ([proxy, x, y] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([proxy, x, y] : Array<Dynamic>)));
     }
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast node : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     lx = _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x');
     ly = _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y');
     if ((cast _Runtime.hasField(hitArea, 'commands') : Bool)) { return cast _Runtime.callValue(containsPathPoint, cast ([(cast hitArea : Path), lx, ly] : Array<Dynamic>)); }

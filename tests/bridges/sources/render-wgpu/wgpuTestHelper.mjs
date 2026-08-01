@@ -5,5 +5,6 @@ const api = compiled.flighthq.renderWgpu._internal._WgpuTestHelper;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const createReadyImageElementForTest = api.createReadyImageElementForTest;
 export const createWgpuRenderStateForTest = api.createWgpuRenderStateForTest;
 export const installWgpuMock = api.installWgpuMock;

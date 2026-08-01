@@ -3,15 +3,17 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerDocument;
-import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerRawDict;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerDocument;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerParseOptions;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerParsed;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerRawDict;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef ParticleDesignerParseOptions = { @:optional var textureSize:Float; };
-
-typedef ParticleDesignerParsed = { var config:ParticleEmitterConfig; var document:ParticleDesignerDocument; var warnings:Array<String>; };
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class ParticleDesignerParse {
   public static final DEG2RAD__particleDesignerParse:Dynamic = (HxMath.PI / 180.0);
@@ -136,19 +138,25 @@ class ParticleDesignerParse {
     return cast null;
   }
 
-  public static function collectParticleDesignerWarnings__particleDesignerParse(d:ParticleDesignerRawDict):Array<String> {
-    var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+  public static function collectParticleDesignerDiagnostics__particleDesignerParse(d:ParticleDesignerRawDict):Array<ImportDiagnostic> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
+    diagnostics = cast ([] : Array<Dynamic>);
     if ((cast _Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'emitterType', 0.0] : Array<Dynamic>)), 1.0) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['Radial (emitterType=1) emitter was approximated as a gravity emitter; radial motion is not simulated'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'particledesigner.radial-approximated', 'collectParticleDesignerDiagnostics'] : Array<Dynamic>));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'radialAcceleration', 0.0] : Array<Dynamic>)), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'radialAccelVariance', 0.0] : Array<Dynamic>)), 0.0) : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['radialAcceleration is not supported and was ignored'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'particledesigner.radial-acceleration-unsupported', 'collectParticleDesignerDiagnostics'] : Array<Dynamic>));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'tangentialAcceleration', 0.0] : Array<Dynamic>)), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'tangentialAccelVariance', 0.0] : Array<Dynamic>)), 0.0) : Bool)) : Bool)) {
-      _Runtime.callProperty(warnings, 'push', cast (['tangentialAcceleration is not supported and was ignored'] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'particledesigner.tangential-acceleration-unsupported', 'collectParticleDesignerDiagnostics'] : Array<Dynamic>));
     }
-    return cast warnings;
+    if ((cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishParticleSizeVariance', 0.0] : Array<Dynamic>)), 0.0) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'particledesigner.finish-size-variance-unsupported', 'collectParticleDesignerDiagnostics'] : Array<Dynamic>));
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorVarianceAlpha', 0.0] : Array<Dynamic>)), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorVarianceAlpha', 0.0] : Array<Dynamic>)), 0.0) : Bool)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'particledesigner.alpha-variance-unsupported', 'collectParticleDesignerDiagnostics'] : Array<Dynamic>));
+    }
+    return cast diagnostics;
     return cast null;
   }
 
@@ -159,7 +167,7 @@ class ParticleDesignerParse {
     textureSize = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0);
     d = _Runtime.callValue(ParticleDesignerParse.parsePlistRawDict__particleDesignerParse, cast ([plistXml] : Array<Dynamic>));
     document = { maxParticles: (_Runtime.toInt32(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'maxParticles', 200.0] : Array<Dynamic>))) | 0), emitterType: (cast ((cast _Runtime.strictEquals(_Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'emitterType', 0.0] : Array<Dynamic>)), 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float), duration: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'duration', -1.0] : Array<Dynamic>)), particleLifespan: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'particleLifespan', 1.0] : Array<Dynamic>)), particleLifespanVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'particleLifespanVariance', 0.0] : Array<Dynamic>)), speed: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'speed', 100.0] : Array<Dynamic>)), speedVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'speedVariance', 0.0] : Array<Dynamic>)), angle: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'angle', 90.0] : Array<Dynamic>)), angleVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'angleVariance', 0.0] : Array<Dynamic>)), gravityx: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'gravityx', 0.0] : Array<Dynamic>)), gravityy: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'gravityy', 0.0] : Array<Dynamic>)), sourcePositionVariancex: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'sourcePositionVariancex', 0.0] : Array<Dynamic>)), sourcePositionVariancey: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'sourcePositionVariancey', 0.0] : Array<Dynamic>)), startParticleSize: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startParticleSize', 32.0] : Array<Dynamic>)), startParticleSizeVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startParticleSizeVariance', 0.0] : Array<Dynamic>)), finishParticleSize: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishParticleSize', 16.0] : Array<Dynamic>)), finishParticleSizeVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishParticleSizeVariance', 0.0] : Array<Dynamic>)), startColorRed: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorRed', 1.0] : Array<Dynamic>)), startColorGreen: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorGreen', 1.0] : Array<Dynamic>)), startColorBlue: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorBlue', 1.0] : Array<Dynamic>)), startColorAlpha: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorAlpha', 1.0] : Array<Dynamic>)), startColorVarianceRed: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorVarianceRed', 0.0] : Array<Dynamic>)), startColorVarianceGreen: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorVarianceGreen', 0.0] : Array<Dynamic>)), startColorVarianceBlue: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorVarianceBlue', 0.0] : Array<Dynamic>)), startColorVarianceAlpha: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'startColorVarianceAlpha', 0.0] : Array<Dynamic>)), finishColorRed: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorRed', 1.0] : Array<Dynamic>)), finishColorGreen: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorGreen', 1.0] : Array<Dynamic>)), finishColorBlue: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorBlue', 1.0] : Array<Dynamic>)), finishColorAlpha: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorAlpha', 0.0] : Array<Dynamic>)), finishColorVarianceRed: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorVarianceRed', 0.0] : Array<Dynamic>)), finishColorVarianceGreen: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorVarianceGreen', 0.0] : Array<Dynamic>)), finishColorVarianceBlue: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorVarianceBlue', 0.0] : Array<Dynamic>)), finishColorVarianceAlpha: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'finishColorVarianceAlpha', 0.0] : Array<Dynamic>)), rotationStart: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'rotationStart', 0.0] : Array<Dynamic>)), rotationStartVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'rotationStartVariance', 0.0] : Array<Dynamic>)), rotationEnd: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'rotationEnd', 0.0] : Array<Dynamic>)), rotationEndVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'rotationEndVariance', 0.0] : Array<Dynamic>)), maxRadius: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'maxRadius', 0.0] : Array<Dynamic>)), maxRadiusVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'maxRadiusVariance', 0.0] : Array<Dynamic>)), minRadius: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'minRadius', 0.0] : Array<Dynamic>)), minRadiusVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'minRadiusVariance', 0.0] : Array<Dynamic>)), rotatePerSecond: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'rotatePerSecond', 0.0] : Array<Dynamic>)), rotatePerSecondVariance: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'rotatePerSecondVariance', 0.0] : Array<Dynamic>)), blendFuncSource: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'blendFuncSource', 770.0] : Array<Dynamic>)), blendFuncDestination: _Runtime.callValue(ParticleDesignerParse.num__particleDesignerParse, cast ([d, 'blendFuncDestination', 771.0] : Array<Dynamic>)), textureFileName: _Runtime.callValue(ParticleDesignerParse.str__particleDesignerParse, cast ([d, 'textureFileName', ''] : Array<Dynamic>)) };
-    return cast { config: _Runtime.callValue(ParticleDesignerParse.rawDictToConfig__particleDesignerParse, cast ([d, textureSize] : Array<Dynamic>)), document: document, warnings: _Runtime.callValue(ParticleDesignerParse.collectParticleDesignerWarnings__particleDesignerParse, cast ([d] : Array<Dynamic>)) };
+    return cast { config: _Runtime.callValue(ParticleDesignerParse.rawDictToConfig__particleDesignerParse, cast ([d, textureSize] : Array<Dynamic>)), diagnostics: _Runtime.callValue(ParticleDesignerParse.collectParticleDesignerDiagnostics__particleDesignerParse, cast ([d] : Array<Dynamic>)), document: document };
     return cast null;
   }
 }

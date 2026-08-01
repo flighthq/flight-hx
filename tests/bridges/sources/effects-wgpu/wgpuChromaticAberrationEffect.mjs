@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyChromaticAberrationEffectToWgpu = api.applyChromaticAberrationEffectToWgpu;
 export const defaultWgpuChromaticAberrationEffectRunner = api.defaultWgpuChromaticAberrationEffectRunner;
+export const registerWgpuChromaticAberrationEffect = api.registerWgpuChromaticAberrationEffect;

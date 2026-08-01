@@ -29,6 +29,7 @@ typedef MediaSession = Dynamic;
 #end
 
 // Renderer-internal data shapes with no portable/DOM equivalent.
+typedef GLenum = Float;
 typedef WgpuRichTextData = Dynamic;
 typedef WgpuScale9ShapeData = Dynamic;
 typedef WgpuShapeData = Dynamic;

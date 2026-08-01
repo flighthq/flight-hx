@@ -8,13 +8,11 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
-
-typedef MeshGeometryOptions = { @:optional var indices:Null<Dynamic>; var layout:VertexAttributeLayout; @:optional var subsets:Array<MeshSubset>; @:optional var topology:PrimitiveTopology; var vertices:flighthq._internal._Float32Array; };
 
 class MeshGeometry {
   public static function cloneMeshGeometry(source:flighthq.types.MeshGeometry):flighthq.types.MeshGeometry {
@@ -120,6 +118,10 @@ class MeshGeometry {
     return cast null;
   }
 
+  public static function invalidateMeshGeometry(geometry:flighthq.types.MeshGeometry):Void {
+    (geometry.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((geometry.version + 1.0)), 0) : Dynamic));
+  }
+
   public static function setMeshGeometryMorphBindPose(geometry:flighthq.types.MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
@@ -136,7 +138,7 @@ class MeshGeometry {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:MeshGeometryRuntime = cast _Runtime.UNDEFINED;
     geometry = (cast _Runtime.callValue(createEntity, cast ([{ bounds: _Runtime.field(fields, 'bounds'), indices: _Runtime.field(fields, 'indices'), layout: _Runtime.field(fields, 'layout'), subsets: _Runtime.field(fields, 'subsets'), topology: _Runtime.field(fields, 'topology'), version: _Runtime.field(fields, 'version'), vertices: _Runtime.field(fields, 'vertices') }] : Array<Dynamic>)) : flighthq.types.MeshGeometry);
-    runtime = { binding: null, morphBindPose: null, skinBindPose: null, webglData: null, webgpuData: null };
+    runtime = { binding: null, boundsVersion: ((cast !_Runtime.strictEquals(_Runtime.field(fields, 'bounds'), null) : Bool) ? (cast _Runtime.field(fields, 'version') : Dynamic) : (cast -1.0 : Dynamic)), morphBindPose: null, morphBlendedWeights: null, skinBindPose: null, webglData: null, webgpuData: null };
     _Runtime.setIndex(geometry, EntityRuntimeKey, runtime);
     return cast geometry;
     return cast null;

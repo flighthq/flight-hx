@@ -9,5 +9,6 @@ export const applyBlendEffectToGl = api.applyBlendEffectToGl;
 export const defaultGlBlendEffectRunner = api.defaultGlBlendEffectRunner;
 export const getBlendEffectModeIndex = api.getBlendEffectModeIndex;
 export const getGlBlendEffectBackdrop = api.getGlBlendEffectBackdrop;
+export const registerGlBlendEffect = api.registerGlBlendEffect;
 export const registerGlBlendEffectBackdrop = api.registerGlBlendEffectBackdrop;
 export const unregisterGlBlendEffectBackdrop = api.unregisterGlBlendEffectBackdrop;

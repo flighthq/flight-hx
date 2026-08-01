@@ -2,17 +2,15 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachStatusBar = compiled.flighthq.statusbar.Statusbar.attachStatusBar;
+export const clearStatusBarStyleStack = compiled.flighthq.statusbar.Statusbar.clearStatusBarStyleStack;
 export const createStatusBar = compiled.flighthq.statusbar.Statusbar.createStatusBar;
-export const createStatusBarInfo = compiled.flighthq.statusbar.Statusbar.createStatusBarInfo;
-export const createWebStatusBarBackend = compiled.flighthq.statusbar.Statusbar.createWebStatusBarBackend;
 export const detachStatusBar = compiled.flighthq.statusbar.Statusbar.detachStatusBar;
 export const disposeStatusBar = compiled.flighthq.statusbar.Statusbar.disposeStatusBar;
-export const getStatusBarBackend = compiled.flighthq.statusbar.Statusbar.getStatusBarBackend;
 export const getStatusBarHeight = compiled.flighthq.statusbar.Statusbar.getStatusBarHeight;
 export const getStatusBarInfo = compiled.flighthq.statusbar.Statusbar.getStatusBarInfo;
+export const hasStatusBarStyleEntry = compiled.flighthq.statusbar.Statusbar.hasStatusBarStyleEntry;
 export const popStatusBarStyleEntry = compiled.flighthq.statusbar.Statusbar.popStatusBarStyleEntry;
 export const pushStatusBarStyleEntry = compiled.flighthq.statusbar.Statusbar.pushStatusBarStyleEntry;
-export const setStatusBarBackend = compiled.flighthq.statusbar.Statusbar.setStatusBarBackend;
 export const setStatusBarColor = compiled.flighthq.statusbar.Statusbar.setStatusBarColor;
 export const setStatusBarOverlaysContent = compiled.flighthq.statusbar.Statusbar.setStatusBarOverlaysContent;
 export const setStatusBarStyle = compiled.flighthq.statusbar.Statusbar.setStatusBarStyle;

@@ -3,7 +3,7 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.types.ElectronApi;
 import flighthq.types.Ipc.IpcBackend;
 
 class ElectronIpc {
@@ -11,7 +11,7 @@ class ElectronIpc {
     var ipcMain:Dynamic = cast _Runtime.UNDEFINED;
     ipcMain = _Runtime.field(electron, 'ipcMain');
     return cast { send: function() {
-    
+
     }, invoke: function() {
       return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
     }, subscribe: function(channel:Dynamic, listener:Dynamic) {

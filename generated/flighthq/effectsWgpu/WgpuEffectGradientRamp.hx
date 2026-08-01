@@ -89,7 +89,7 @@ class WgpuEffectGradientRamp {
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([256.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, 0.0, 0.0] : Array<Dynamic>) }, (cast _Runtime.field(data, 'buffer') : haxe.io.Bytes), { offset: 0.0, bytesPerRow: (256.0 * 4.0) }, cast ([256.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, 0.0, 0.0] : Array<Dynamic>) }, (cast _Runtime.field(data, 'buffer') : haxe.io.Bytes), { offset: 0.0, bytesPerRow: (256.0 * 4.0) }, cast ([256.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     return cast texture;
     return cast null;
   }

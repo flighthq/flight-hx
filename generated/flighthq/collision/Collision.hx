@@ -3,13 +3,17 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.collision.CollideContactManifold as Facade_Collision_flighthq_collision_CollideContactManifold;
+import flighthq.collision.ContactManifold as Facade_Collision_flighthq_collision_ContactManifold;
 import flighthq.collision.Manifold as Facade_Collision_flighthq_collision_Manifold;
 import flighthq.collision.PointContainment as Facade_Collision_flighthq_collision_PointContainment;
 import flighthq.collision.SegmentCollision as Facade_Collision_flighthq_collision_SegmentCollision;
 import flighthq.collision.ShapeCollision as Facade_Collision_flighthq_collision_ShapeCollision;
+import flighthq.collision.ShapeContact as Facade_Collision_flighthq_collision_ShapeContact;
 import flighthq.collision.TestCollision as Facade_Collision_flighthq_collision_TestCollision;
 import flighthq.types.Collision.CollisionAabb;
 import flighthq.types.Collision.CollisionCircle;
+import flighthq.types.Collision.CollisionContactManifold;
 import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
@@ -17,8 +21,72 @@ import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 
 class Collision {
+  public static function clearCollisionContactManifold(out:CollisionContactManifold):Void {
+    Facade_Collision_flighthq_collision_ContactManifold.clearCollisionContactManifold(out);
+  }
+
   public static function clearCollisionManifold(out:CollisionManifold):Void {
     Facade_Collision_flighthq_collision_Manifold.clearCollisionManifold(out);
+  }
+
+  public static function collideAabbAabbContactManifold(a:CollisionAabb, b:CollisionAabb, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideAabbAabbContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideAabbObbContactManifold(a:CollisionAabb, b:CollisionObb, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideAabbObbContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideAabbPolygonContactManifold(a:CollisionAabb, b:CollisionPolygon, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideAabbPolygonContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideCircleAabbContactManifold(a:CollisionCircle, b:CollisionAabb, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCircleAabbContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideCircleCircleContactManifold(a:CollisionCircle, b:CollisionCircle, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCircleCircleContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideCircleObbContactManifold(a:CollisionCircle, b:CollisionObb, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCircleObbContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideCirclePolygonContactManifold(a:CollisionCircle, b:CollisionPolygon, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCirclePolygonContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideContactManifold(a:CollisionShape, b:CollisionShape, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_CollideContactManifold.collideContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideObbObbContactManifold(a:CollisionObb, b:CollisionObb, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideObbObbContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collideObbPolygonContactManifold(a:CollisionObb, b:CollisionPolygon, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collideObbPolygonContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function collidePolygonPolygonContactManifold(a:CollisionPolygon, b:CollisionPolygon, out:CollisionContactManifold):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact.collidePolygonPolygonContactManifold(a, b, out);
+    return cast null;
+  }
+
+  public static function createCollisionContactManifold():CollisionContactManifold {
+    return cast Facade_Collision_flighthq_collision_ContactManifold.createCollisionContactManifold();
+    return cast null;
   }
 
   public static function createCollisionManifold():CollisionManifold {

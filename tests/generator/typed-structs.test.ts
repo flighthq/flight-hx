@@ -453,8 +453,8 @@ describe('typed struct analysis', () => {
     expect(() => validateCppStructInitProvenance([particleEmitterDataId], provenance)).toThrow(
       `cpp @:structInit schemas are not provenance-closed: ${particleEmitterDataId}`,
     );
-    expect(readFileSync('generated/flighthq/types/ParticleEmitter.hx', 'utf8')).toContain(
-      'typedef ParticleEmitter = { var data:Null<NodeData>;',
+    expect(readFileSync('generated/flighthq/types/ParticleEmitter2D.hx', 'utf8')).toContain(
+      'typedef ParticleEmitter2D = { var data:Null<NodeData>;',
     );
     expect(readFileSync('generated/flighthq/types/ParticleEmitter3D.hx', 'utf8')).toContain(
       'typedef ParticleEmitter3D = { var data:Null<NodeData>;',

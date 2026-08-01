@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyTiltShiftEffectToWgpu = api.applyTiltShiftEffectToWgpu;
 export const defaultWgpuTiltShiftEffectRunner = api.defaultWgpuTiltShiftEffectRunner;
+export const registerWgpuTiltShiftEffect = api.registerWgpuTiltShiftEffect;

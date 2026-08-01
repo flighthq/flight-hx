@@ -6,4 +6,3 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSignal = api.createSignal;
-export { Signal } from '@flighthq/types';

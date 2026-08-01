@@ -6,18 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.debug.DebugTiming as Facade_Debug_flighthq_debug_DebugTiming;
 import flighthq.log.Log.addLogSink;
 import flighthq.log.Log.clearLogChannelLevels;
-import flighthq.log.Log.createTextLogFormatter;
+import flighthq.log.Log.createConsoleLogSink;
 import flighthq.log.Log.getLogLevel;
 import flighthq.log.Log.removeLogSink;
 import flighthq.log.Log.setLogChannelLevel;
 import flighthq.log.Log.setLogLevel;
+import flighthq.render.EnableColorAdjustmentGuards.enableColorAdjustmentGuards;
+import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.Debug.DebugOptions;
 import flighthq.types.Debug.DebugSubsystemHooks;
 import flighthq.types.Debug.DebugSubsystemName;
-import flighthq.types.Log.LogEntry;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.Log.LogSink;
 import flighthq.types.Log.LogTimer;
+import flighthq.types.RenderState;
 
 class Debug {
   public static function _applyDebugLevels__debug(level:LogLevel, channels:Array<String>):Void {
@@ -35,20 +37,6 @@ class Debug {
     }
     if ((cast !_Runtime.strictEquals(extra, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(channels, 'push', _Runtime.concatArrays([_Runtime.toArray(extra)])); }
     return cast channels;
-    return cast null;
-  }
-
-  public static final _consoleMethods__debug:Dynamic = _Runtime.objectFromPairs([{ key: LogLevel.None, value: 'log' }, { key: LogLevel.Error, value: 'error' }, { key: LogLevel.Warn, value: 'warn' }, { key: LogLevel.Info, value: 'info' }, { key: LogLevel.Debug, value: 'debug' }, { key: LogLevel.Verbose, value: 'log' }]);
-
-  public static function _createDefaultDebugSink__debug():LogSink {
-    var formatter:Dynamic = cast _Runtime.UNDEFINED;
-    formatter = _Runtime.callValue(createTextLogFormatter, cast ([{ levelPrefix: true }] : Array<Dynamic>));
-    return cast function(entry:LogEntry) {
-      var method:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined') : Bool)) { return; }
-      method = _Runtime.coalesce(_Runtime.getIndex(Debug._consoleMethods__debug, _Runtime.field(entry, 'level')), function():Dynamic return cast 'log');
-      _Runtime.console(Std.string(method), [_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))]);
-    };
     return cast null;
   }
 
@@ -117,12 +105,18 @@ class Debug {
     channels = _Runtime.callValue(Debug._collectDebugChannels__debug, cast ([subsystems, _Runtime.field(options, 'channels')] : Array<Dynamic>));
     (Debug._savedGlobalLevel__debug = cast (_Runtime.callValue(getLogLevel, cast ([] : Array<Dynamic>)) : Dynamic));
     _Runtime.callValue(Debug._applyDebugLevels__debug, cast ([level, channels] : Array<Dynamic>));
-    _Runtime.callValue(Debug._installDebugSink__debug, cast ([_Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast _Runtime.callValue(Debug._createDefaultDebugSink__debug, cast ([] : Array<Dynamic>)))] : Array<Dynamic>));
+    _Runtime.callValue(Debug._installDebugSink__debug, cast ([_Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast _Runtime.callValue(createConsoleLogSink, cast ([] : Array<Dynamic>)))] : Array<Dynamic>));
     for (hooks in _Runtime.iterable(subsystems)) {
       _Runtime.callOptionalProperty(hooks, 'enableGuards', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(Debug._enabledSubsystems__debug, 'push', cast ([hooks] : Array<Dynamic>));
     }
     (Debug._enabled__debug = cast (true : Dynamic));
+  }
+
+  public static function enableFlightDiagnostics(state:RenderState):Void {
+    _Runtime.callValue(enableDebug, cast ([] : Array<Dynamic>));
+    _Runtime.callValue(enableColorAdjustmentGuards, cast ([state] : Array<Dynamic>));
+    _Runtime.callValue(enableRenderRegistryGuards, cast ([state] : Array<Dynamic>));
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {

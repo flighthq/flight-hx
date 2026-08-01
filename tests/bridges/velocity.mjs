@@ -9,7 +9,6 @@ export const contributeVelocity = compiled.flighthq.velocity.Velocity.contribute
 export const copyVelocity = compiled.flighthq.velocity.Velocity.copyVelocity;
 export const createVelocityField = compiled.flighthq.velocity.Velocity.createVelocityField;
 export const dampVelocity = compiled.flighthq.velocity.Velocity.dampVelocity;
-export const ensureVelocitySample = compiled.flighthq.velocity.Velocity.ensureVelocitySample;
 export const getVelocity = compiled.flighthq.velocity.Velocity.getVelocity;
 export const getVelocitySampleAt = compiled.flighthq.velocity.Velocity.getVelocitySampleAt;
 export const hasVelocity = compiled.flighthq.velocity.Velocity.hasVelocity;

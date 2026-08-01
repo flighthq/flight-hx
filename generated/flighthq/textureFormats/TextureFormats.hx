@@ -9,12 +9,24 @@ import flighthq.textureFormats.ParseBasis as Facade_TextureFormats_flighthq_text
 import flighthq.textureFormats.ParseDds as Facade_TextureFormats_flighthq_textureFormats_ParseDds;
 import flighthq.textureFormats.ParseKtx2 as Facade_TextureFormats_flighthq_textureFormats_ParseKtx2;
 import flighthq.textureFormats.SelectTextureContainer as Facade_TextureFormats_flighthq_textureFormats_SelectTextureContainer;
+import flighthq.textureFormats.TextureLevelLayout as Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.TextureContainerLevel;
 
 class TextureFormats {
+  public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
+    return cast Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout.computeTextureContainerLevels(format, baseWidth, baseHeight, mipLevels, layers, faces, startOffset);
+    return cast null;
+  }
+
   public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
     return cast Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer(bytes);
+    return cast null;
+  }
+
+  public static function getTextureContainerLevelByteLength(format:TextureContainerFormat, width:Float, height:Float):Float {
+    return cast Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout.getTextureContainerLevelByteLength(format, width, height);
     return cast null;
   }
 

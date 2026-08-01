@@ -31,6 +31,26 @@ class MeshGeometrySubset {
     return cast null;
   }
 
+  public static function getMeshGeometryTriangleSubsetIndex(geometry:MeshGeometry, triangleIndex:Float):Float {
+    var firstElement:Float = cast _Runtime.UNDEFINED;
+    var subsets:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) { (firstElement = cast ((triangleIndex * 3.0) : Dynamic)); } else { if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) { (firstElement = cast (triangleIndex : Dynamic)); } else { return cast -1.0; } }
+    subsets = geometry.subsets;
+    {
+      var subsetIndex:Dynamic = 0.0;
+      while ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
+        var subset:Dynamic = flighthq._internal._StaticIndex.readArray(subsets, subsetIndex);
+        if ((cast ((cast ((cast firstElement : Float) >= (cast subset.indexOffset : Float)) : Bool) && (cast ((cast (firstElement + 3.0) : Float) <= (cast (subset.indexOffset + subset.indexCount) : Float)) : Bool)) : Bool)) {
+          return cast subsetIndex;
+        }
+        subsetIndex++;
+      }
+    }
+    return cast -1.0;
+    return cast null;
+  }
+
   public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);

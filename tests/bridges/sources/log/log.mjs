@@ -16,6 +16,7 @@ export const clearMemoryLogSink = api.clearMemoryLogSink;
 export const createBufferedLogSink = api.createBufferedLogSink;
 export const createChildLogContext = api.createChildLogContext;
 export const createConsoleCaptureSink = api.createConsoleCaptureSink;
+export const createConsoleLogSink = api.createConsoleLogSink;
 export const createFanoutLogSink = api.createFanoutLogSink;
 export const createFileLogSink = api.createFileLogSink;
 export const createFilterLogSink = api.createFilterLogSink;

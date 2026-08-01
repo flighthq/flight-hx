@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyConvolutionEffectToWgpu = api.applyConvolutionEffectToWgpu;
 export const defaultWgpuConvolutionEffectRunner = api.defaultWgpuConvolutionEffectRunner;
 export const MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE = api.MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE;
+export const registerWgpuConvolutionEffect = api.registerWgpuConvolutionEffect;
