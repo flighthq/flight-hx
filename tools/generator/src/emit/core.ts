@@ -14,6 +14,7 @@ import {
   sourcePathToImplementationModule,
   sourcePathToModule,
 } from '../analyze/inventory.ts';
+import { excludedPackageDirectories } from '../analyze/exclusions.ts';
 import { validateHostEndpointCoverage, type HostEndpointAudit } from '../analyze/host-endpoints.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
@@ -75,11 +76,11 @@ export function generateCoreModules(
   const inventory = analyzeUpstream(workspaceDirectory);
   const structRegistry = typedStructs;
   const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));
+  const excludedDirectories = excludedPackageDirectories(inventory);
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
   const loweredPackages = readdirSync(packagesDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    // Skip deliberately excluded packages (recorded, with reasons, in port.config.ts).
-    .filter((entry) => !(entry.name in portConfig.excludedPackages))
+    .filter((entry) => !excludedDirectories.has(entry.name))
     .map((entry) => {
       const packageName = `@flighthq/${entry.name}`;
       const publicSourceNames = new Set(
@@ -260,8 +261,9 @@ export function generateCoreModules(
     }
   }
   const report: CoreGenerationReport = {
-    excludedPackages: Object.entries(portConfig.excludedPackages)
-      .map(([directoryName, reason]) => ({ packageName: `@flighthq/${directoryName}`, reason }))
+    excludedPackages: inventory.packages
+      .filter((item) => item.exclusion !== null)
+      .map((item) => ({ packageName: item.name, reason: item.exclusion!.reason }))
       .sort((left, right) => left.packageName.localeCompare(right.packageName)),
     modules: modules
       .map((module) => ({
@@ -942,10 +944,9 @@ function buildPublicFacades(
   };
 
   // Match granular package barrels before building the broad SDK facade.
-  const excludedPackageNames = new Set(Object.keys(portConfig.excludedPackages).map((dir) => `@flighthq/${dir}`));
   for (const packageInventory of inventoryByName.values()) {
     if (packageInventory.name === '@flighthq/sdk') continue;
-    if (excludedPackageNames.has(packageInventory.name)) continue;
+    if (packageInventory.exclusion) continue;
     const target = facadeForPackage(packageInventory.name);
     if (!target) throw new Error(`Expected facade module for ${packageInventory.name}`);
     for (const record of packageRootExportLane(packageInventory).exports) {

@@ -14,6 +14,7 @@ import type {
   SdkExposure,
   UpstreamInventory,
 } from '../model/inventory.ts';
+import { derivePackageExclusions } from './exclusions.ts';
 
 interface PackageDescriptor {
   directory: string;
@@ -127,6 +128,7 @@ export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
     return {
       dependencies: collectDependencies(packageJson),
       directory: path.relative(workspaceDirectory, descriptor.directory),
+      exclusion: null,
       exportLanes,
       haxeModule: `${packageNameToHaxePackage(descriptor.name)}.${packageNameToModule(descriptor.name)}`,
       name: descriptor.name,
@@ -150,11 +152,14 @@ export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
     item.sdkExposures = sdkExposures.get(item.name) ?? [];
     item.sdkIncluded = item.sdkExposures.length > 0;
   }
+  const exclusions = derivePackageExclusions(workspaceDirectory, packageInventories);
+  for (const item of packageInventories) item.exclusion = exclusions.get(item.name) ?? null;
 
   return {
     packages: packageInventories,
-    schemaVersion: 2,
+    schemaVersion: 3,
     summary: {
+      excludedPackages: exclusions.size,
       exportConflicts: sum(packageInventories, (item) => sum(item.exportLanes, (lane) => lane.exportConflicts.length)),
       exportLanes: sum(packageInventories, (item) => item.exportLanes.length),
       exports: sum(packageInventories, (item) => sum(item.exportLanes, (lane) => lane.exports.length)),

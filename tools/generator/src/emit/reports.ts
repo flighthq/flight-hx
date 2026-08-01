@@ -31,6 +31,7 @@ export function inventorySummary(inventory: UpstreamInventory): string {
     '| Metric | Count |',
     '| --- | ---: |',
     `| Packages | ${inventory.summary.packages} |`,
+    `| Derived package exclusions | ${inventory.summary.excludedPackages} |`,
     `| Source files | ${inventory.summary.sourceFiles} |`,
     `| Test files | ${inventory.summary.testFiles} |`,
     `| Public export lanes | ${inventory.summary.exportLanes} |`,
@@ -47,6 +48,10 @@ export function inventorySummary(inventory: UpstreamInventory): string {
     lines.push(
       `| \`${item.name}\` | \`${item.haxeModule}\` | ${item.sourceFiles} | ${item.testFiles} | ${item.exportLanes.length} | ${exports} | ${item.sdkIncluded ? 'yes' : 'no'} | ${conflicts} |`,
     );
+  }
+  lines.push('', '## Derived exclusions', '', '| Package | Rule | Reason |', '| --- | --- | --- |');
+  for (const item of inventory.packages.filter((candidate) => candidate.exclusion !== null)) {
+    lines.push(`| \`${item.name}\` | \`${item.exclusion!.rule}\` | ${item.exclusion!.reason} |`);
   }
   lines.push('', '| Public specifier | Source barrel | Exports | Conflicts |', '| --- | --- | ---: | ---: |');
   for (const item of inventory.packages) {

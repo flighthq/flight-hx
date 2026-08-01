@@ -2,8 +2,6 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
-import { portConfig } from '../../port.config.ts';
-
 import {
   hostEndpointContract,
   hostEndpointBinding,
@@ -15,7 +13,10 @@ import {
   type HostEndpointOperation,
 } from '../host-endpoints.ts';
 import type { IrHostEndpointBinding } from '../model/ir.ts';
+import type { UpstreamInventory } from '../model/inventory.ts';
 
+import { excludedPackageDirectories } from './exclusions.ts';
+import { analyzeUpstream } from './inventory.ts';
 import { upstreamTypeScriptProgram, type UpstreamTypeScriptProgram } from './program.ts';
 
 export interface HostEndpointSite {
@@ -74,7 +75,9 @@ export function auditHostEndpoints(
   upstreamCommit: string,
   { checker, program }: UpstreamTypeScriptProgram = upstreamTypeScriptProgram(workspaceDirectory),
   runtimeSources?: HostRuntimeSources,
+  inventory: UpstreamInventory = analyzeUpstream(workspaceDirectory),
 ): HostEndpointAudit {
+  const excludedDirectories = excludedPackageDirectories(inventory);
   const endpointsByKey = new Map<string, MutableHostEndpointAuditEntry>();
   const record = (
     binding: IrHostEndpointBinding,
@@ -139,7 +142,11 @@ export function auditHostEndpoints(
     }
     ts.forEachChild(node, visit);
   };
-  for (const source of program.getSourceFiles().filter(isProductionUpstreamSource)) visit(source);
+  for (const source of program
+    .getSourceFiles()
+    .filter((item) => isProductionUpstreamSource(item, excludedDirectories))) {
+    visit(source);
+  }
 
   const endpoints = [...endpointsByKey.values()]
     .map(({ siteKeys: _siteKeys, ...entry }) => ({
@@ -310,12 +317,12 @@ function hostContractEndpointCount(): number {
   );
 }
 
-function isProductionUpstreamSource(source: ts.SourceFile): boolean {
+function isProductionUpstreamSource(source: ts.SourceFile, excludedDirectories: ReadonlySet<string>): boolean {
   const normalized = source.fileName.split(path.sep).join('/');
   const packageDirectory = /\/upstream\/packages\/([^/]+)\/src\//u.exec(normalized)?.[1];
   return (
     packageDirectory !== undefined &&
-    !(packageDirectory in portConfig.excludedPackages) &&
+    !excludedDirectories.has(packageDirectory) &&
     !/\.(?:test|spec)\.tsx?$/u.test(normalized) &&
     !normalized.endsWith('.d.ts')
   );

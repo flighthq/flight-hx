@@ -2,7 +2,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+import type { UpstreamInventory } from '../model/inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
+import { excludedPackageDirectories } from './exclusions.ts';
+import { analyzeUpstream } from './inventory.ts';
 import { indexedReceiverNames, staticFactCounts, sumStaticFactAudits } from './static-facts.ts';
 import { typedStructRegistry, type TypedStructRegistry } from './typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
@@ -36,13 +39,19 @@ export interface LoweringAudit {
   };
 }
 
-export function auditLowering(workspaceDirectory: string, typedStructs?: TypedStructRegistry): LoweringAudit {
+export function auditLowering(
+  workspaceDirectory: string,
+  typedStructs?: TypedStructRegistry,
+  inventory: UpstreamInventory = analyzeUpstream(workspaceDirectory),
+): LoweringAudit {
   const { checker, program } = upstreamTypeScriptProgram(workspaceDirectory);
   const structRegistry =
     typedStructs ?? typedStructRegistry(workspaceDirectory, 'not-recorded', undefined, { checker, program });
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
+  const excludedDirectories = excludedPackageDirectories(inventory);
   const results = readdirSync(packagesDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
+    .filter((entry) => !excludedDirectories.has(entry.name))
     .map((entry) => path.join(packagesDirectory, entry.name))
     .map((directory) => ({ directory, metadata: readPackageMetadata(directory) }))
     .sort((left, right) => left.metadata.name.localeCompare(right.metadata.name))

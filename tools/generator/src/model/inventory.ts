@@ -41,9 +41,24 @@ export interface SdkExposure {
   target: string;
 }
 
+export interface PackageExclusion {
+  evidence: {
+    hostDependencies: string[];
+    hostImports: string[];
+    nodeImports: string[];
+    playwrightDependencies: string[];
+    playwrightImports: string[];
+    sdkExposures: string[];
+    toolingBins: string[];
+  };
+  reason: string;
+  rule: 'node-playwright-tooling';
+}
+
 export interface PackageInventory {
   dependencies: string[];
   directory: string;
+  exclusion: PackageExclusion | null;
   exportLanes: PackageExportLane[];
   haxeModule: string;
   name: string;
@@ -56,8 +71,9 @@ export interface PackageInventory {
 
 export interface UpstreamInventory {
   packages: PackageInventory[];
-  schemaVersion: 2;
+  schemaVersion: 3;
   summary: {
+    excludedPackages: number;
     exportConflicts: number;
     exportLanes: number;
     exports: number;

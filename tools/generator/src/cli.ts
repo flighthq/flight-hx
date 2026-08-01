@@ -30,7 +30,9 @@ const reportsDirectory = path.join(workspaceDirectory, portConfig.reportsDirecto
 
 try {
   const inventory = analyzeUpstream(workspaceDirectory);
-  const hostEndpoints = apiOnly ? undefined : auditHostEndpoints(workspaceDirectory, inventory.upstreamCommit);
+  const hostEndpoints = apiOnly
+    ? undefined
+    : auditHostEndpoints(workspaceDirectory, inventory.upstreamCommit, undefined, undefined, inventory);
   const typedStructs = apiOnly
     ? undefined
     : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit, undefined, undefined, inventory);
@@ -42,7 +44,7 @@ try {
     apiOnly || !typedStructs || !typedStructClasses
       ? undefined
       : auditTypedStructProvenance(workspaceDirectory, inventory.upstreamCommit, typedStructs, typedStructClasses);
-  const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory, typedStructs);
+  const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory, typedStructs, inventory);
   const api = createApiReport(inventory);
 
   if (jsonOnly) {
