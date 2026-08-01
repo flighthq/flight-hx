@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
@@ -29,12 +30,45 @@ export interface TypedStructCandidate {
 
 export type TypedStructDeclarationKind = 'interface' | 'type';
 
+export type TypedStructMigrationStatus = 'kind-changed' | 'new' | 'preserved' | 'relocated' | 'renamed';
+
+export interface TypedStructMigrationIdentity {
+  baselineId: string | null;
+  status: TypedStructMigrationStatus;
+}
+
 export interface ResolvedTypedStructCandidate extends TypedStructCandidate {
+  configuredDeclarationKind: TypedStructDeclarationKind;
+  configuredName: string;
   configuredPackageName: string;
   configuredSource: string;
   declarationKind: TypedStructDeclarationKind;
   definingPackageName: string;
+  migration: TypedStructMigrationIdentity;
   sourceResolution: 'exact' | 'relocated';
+}
+
+export interface TypedStructMigrationAudit {
+  baselineUpstreamCommit: string;
+  removed: Array<{
+    baselineId: string;
+    successorIds: string[];
+  }>;
+  sourceReportSha256: string;
+  summary: {
+    baseline: number;
+    kindChanged: number;
+    newAuditOnly: number;
+    preserved: number;
+    relocated: number;
+    removed: number;
+    renamed: number;
+  };
+}
+
+export interface TypedStructDiscoveryAudit {
+  candidates: ResolvedTypedStructCandidate[];
+  migration: TypedStructMigrationAudit;
 }
 
 export interface TypedStructIdentityIssue {
@@ -97,7 +131,8 @@ export interface TypedStructEscape {
     | 'instanceof'
     | 'presence-sensitive'
     | 'receiver-sensitive-method'
-    | 'unknown-member';
+    | 'unknown-member'
+    | 'width-sensitive';
   source: string;
   line: number;
 }
@@ -131,6 +166,7 @@ export interface TypedStructSchemaAudit {
   fields: TypedStructField[];
   id: string;
   memberEscapes: TypedStructMemberEscape[];
+  migration: TypedStructMigrationIdentity;
   name: string;
   packageName: string;
   purpose: string;
@@ -145,6 +181,8 @@ export interface TypedStructSchemaAudit {
   >;
   source: string;
   sourceProvenance: {
+    configuredDeclarationKind: TypedStructDeclarationKind;
+    configuredName: string;
     configuredPackageName: string;
     configuredSource: string;
     resolution: 'exact' | 'relocated';
@@ -153,7 +191,8 @@ export interface TypedStructSchemaAudit {
 
 export interface TypedStructAudit {
   candidates: TypedStructSchemaAudit[];
-  schemaVersion: 4;
+  migration: TypedStructMigrationAudit;
+  schemaVersion: 5;
   summary: {
     auditOnlySchemas: number;
     bindableAccesses: number;
@@ -178,6 +217,7 @@ export interface TypedStructResolution {
 export interface TypedStructRegistry {
   report: TypedStructAudit;
   resolve(type: ts.Type): TypedStructResolution;
+  resolveDirect(type: ts.Type): TypedStructResolution;
   resolveCppStructInitConstruction(type: ts.Type): TypedStructConstructionBinding | undefined;
   resolveField(type: ts.Type, member: string, property?: ts.Symbol): TypedStructFieldBinding | undefined;
 }
@@ -190,1519 +230,321 @@ export function typedStructStableId(
   return `${packageName}:${declarationKind}#${name}`;
 }
 
-// Existing candidates default to interface. Keeping the eight type identities
-// explicit makes declaration-kind drift fail even when no prior report exists.
-const configuredTypeTypedStructNames = new Set([
-  '@flighthq/particles-formats#LibgdxParsed',
-  '@flighthq/particles-formats#PixiParsed',
-  '@flighthq/particles-formats#StarlingPexParsed',
-  '@flighthq/spritesheet-formats#AsepriteHashFrame',
-  '@flighthq/textureatlas-formats#TextureAtlasAsepriteHashFrame',
-  '@flighthq/types#AabbLike',
-  '@flighthq/types#RenderCacheRefreshOptions',
-  '@flighthq/types#SceneRuntime',
-]);
-
-const directTypedStructCandidates: readonly TypedStructCandidate[] = [
-  {
-    emission: 'direct',
-    name: 'Vector2',
-    packageName: '@flighthq/types',
-    purpose: 'two-component numeric geometry leaf',
-    source: 'upstream/packages/types/src/Vector2.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Vector3',
-    packageName: '@flighthq/types',
-    purpose: 'three-component numeric geometry leaf',
-    source: 'upstream/packages/types/src/Vector3.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Quaternion',
-    packageName: '@flighthq/types',
-    purpose: 'four-component rotation leaf',
-    source: 'upstream/packages/types/src/Quaternion.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Matrix3',
-    packageName: '@flighthq/types',
-    purpose: '3x3 matrix holder',
-    source: 'upstream/packages/types/src/Matrix3.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Matrix4',
-    packageName: '@flighthq/types',
-    purpose: '4x4 matrix holder',
-    source: 'upstream/packages/types/src/Matrix4.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Rectangle',
-    packageName: '@flighthq/types',
-    purpose: 'four-component rectangle leaf',
-    source: 'upstream/packages/types/src/Rectangle.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'ColorTransform',
-    packageName: '@flighthq/types',
-    purpose: 'render-hot RGBA multiplier and offset record',
-    source: 'upstream/packages/types/src/ColorTransform.ts',
-  },
-];
-
-export const tranche4TypedStructCandidates: readonly TypedStructCandidate[] = [
-  {
-    emission: 'direct',
-    name: 'ApplicationLoopOptions',
-    packageName: '@flighthq/types',
-    purpose: 'application-loop option record',
-    source: 'upstream/packages/types/src/ApplicationLoopOptions.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'AudioBusOptions',
-    packageName: '@flighthq/types',
-    purpose: 'audio-bus option record',
-    source: 'upstream/packages/types/src/AudioBus.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'AudioPlayOptions',
-    packageName: '@flighthq/types',
-    purpose: 'audio-playback option record',
-    source: 'upstream/packages/types/src/AudioResource.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'BinPackOptions',
-    packageName: '@flighthq/types',
-    purpose: 'bin-packing option record',
-    source: 'upstream/packages/types/src/BinPack.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'BitmapTextOptions',
-    packageName: '@flighthq/types',
-    purpose: 'bitmap-text option record',
-    source: 'upstream/packages/types/src/BitmapText.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'DeviceCapabilities',
-    packageName: '@flighthq/types',
-    purpose: 'device capability result record',
-    source: 'upstream/packages/types/src/DeviceCapabilities.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'DeviceDisplayMetrics',
-    packageName: '@flighthq/types',
-    purpose: 'device display-metrics result record',
-    source: 'upstream/packages/types/src/DeviceDisplayMetrics.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'FileDialogHandle',
-    packageName: '@flighthq/types',
-    purpose: 'file-dialog result handle',
-    source: 'upstream/packages/types/src/Dialog.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'FilmicToneMapOptions',
-    packageName: '@flighthq/types',
-    purpose: 'filmic tone-map option record',
-    source: 'upstream/packages/types/src/FilmicToneMapOptions.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'FontMetrics',
-    packageName: '@flighthq/types',
-    purpose: 'font-metrics result record',
-    source: 'upstream/packages/types/src/FontMetrics.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'GlyphAtlasOptions',
-    packageName: '@flighthq/types',
-    purpose: 'glyph-atlas option record',
-    source: 'upstream/packages/types/src/GlyphSource.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'GlyphMetrics',
-    packageName: '@flighthq/types',
-    purpose: 'glyph-metrics result record',
-    source: 'upstream/packages/types/src/GlyphSource.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'GlyphRasterizeOptions',
-    packageName: '@flighthq/types',
-    purpose: 'glyph-rasterization option record',
-    source: 'upstream/packages/types/src/GlyphSource.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'HapticsCapabilities',
-    packageName: '@flighthq/types',
-    purpose: 'haptics capability result record',
-    source: 'upstream/packages/types/src/Haptics.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'InputGamepadAxisData',
-    packageName: '@flighthq/types',
-    purpose: 'gamepad-axis input result record',
-    source: 'upstream/packages/types/src/InputGamepadData.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'InputGamepadButtonData',
-    packageName: '@flighthq/types',
-    purpose: 'gamepad-button input result record',
-    source: 'upstream/packages/types/src/InputGamepadData.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'InputGamepadConnectData',
-    packageName: '@flighthq/types',
-    purpose: 'gamepad-connection input result record',
-    source: 'upstream/packages/types/src/InputGamepadData.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'InputTextData',
-    packageName: '@flighthq/types',
-    purpose: 'text-input result record',
-    source: 'upstream/packages/types/src/InputTextData.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'InteractionPointerOptions',
-    packageName: '@flighthq/types',
-    purpose: 'interaction-pointer option record',
-    source: 'upstream/packages/types/src/InteractionManager.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'PathBooleanOptions',
-    packageName: '@flighthq/types',
-    purpose: 'path-boolean option record',
-    source: 'upstream/packages/types/src/PathBooleanOptions.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'PathOffsetOptions',
-    packageName: '@flighthq/types',
-    purpose: 'path-offset option record',
-    source: 'upstream/packages/types/src/PathOffsetOptions.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'RenderCacheRefreshOptions',
-    packageName: '@flighthq/types',
-    purpose: 'render-cache refresh option record',
-    source: 'upstream/packages/types/src/RenderCacheRefreshOptions.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'StatusBarInfo',
-    packageName: '@flighthq/types',
-    purpose: 'status-bar result record',
-    source: 'upstream/packages/types/src/StatusBar.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'TextMetrics',
-    packageName: '@flighthq/types',
-    purpose: 'text-metrics result record',
-    source: 'upstream/packages/types/src/TextMetrics.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'TrayBalloonOptions',
-    packageName: '@flighthq/types',
-    purpose: 'tray-balloon option record',
-    source: 'upstream/packages/types/src/Tray.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'VideoPlayOptions',
-    packageName: '@flighthq/types',
-    purpose: 'video-playback option record',
-    source: 'upstream/packages/types/src/VideoResource.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'VideoResourceLoadOptions',
-    packageName: '@flighthq/types',
-    purpose: 'video-resource load option record',
-    source: 'upstream/packages/types/src/VideoResource.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'SignalThrottleOptions',
-    packageName: '@flighthq/signals',
-    purpose: 'signal-throttle option record',
-    source: 'upstream/packages/signals/src/throttle.ts',
-  },
-];
-
-export const tranche5TypedStructCandidates: readonly TypedStructCandidate[] = [
-  {
-    emission: 'direct',
-    name: 'Aabb',
-    packageName: '@flighthq/types',
-    purpose: '3D axis-aligned bounds entity',
-    source: 'upstream/packages/types/src/Aabb.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'AabbLike',
-    packageName: '@flighthq/types',
-    purpose: 'structural 3D axis-aligned bounds carrier',
-    source: 'upstream/packages/types/src/Aabb.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'HasTransform3D',
-    packageName: '@flighthq/types',
-    purpose: 'authored node 3D transform aggregate',
-    source: 'upstream/packages/types/src/HasTransform3D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'HasTransform3DRuntime',
-    packageName: '@flighthq/types',
-    purpose: 'cached node 3D transform aggregate',
-    source: 'upstream/packages/types/src/HasTransform3D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'HasTransform2D',
-    packageName: '@flighthq/types',
-    purpose: 'authored node 2D transform aggregate',
-    source: 'upstream/packages/types/src/HasTransform2D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'HasTransform2DRuntime',
-    packageName: '@flighthq/types',
-    purpose: 'cached node 2D transform aggregate',
-    source: 'upstream/packages/types/src/HasTransform2D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'HasBoundsRectangleRuntime',
-    packageName: '@flighthq/types',
-    purpose: 'cached node rectangle-bounds aggregate',
-    source: 'upstream/packages/types/src/HasBoundsRectangle.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'BoundingSphere',
-    packageName: '@flighthq/types',
-    purpose: '3D bounding-sphere aggregate',
-    source: 'upstream/packages/types/src/BoundingSphere.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Camera',
-    packageName: '@flighthq/types',
-    purpose: '3D camera aggregate',
-    source: 'upstream/packages/types/src/Camera.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'PerspectiveProjection',
-    packageName: '@flighthq/types',
-    purpose: 'perspective-camera projection aggregate',
-    source: 'upstream/packages/types/src/Camera.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'OrthographicProjection',
-    packageName: '@flighthq/types',
-    purpose: 'orthographic-camera projection aggregate',
-    source: 'upstream/packages/types/src/Camera.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Camera2D',
-    packageName: '@flighthq/types',
-    purpose: '2D camera hot-state aggregate',
-    source: 'upstream/packages/types/src/Camera2D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Camera2DFollowOptions',
-    packageName: '@flighthq/types',
-    purpose: '2D camera follow aggregate',
-    source: 'upstream/packages/types/src/Camera2D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Camera2DOptions',
-    packageName: '@flighthq/types',
-    purpose: '2D camera construction aggregate',
-    source: 'upstream/packages/types/src/Camera2D.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Capsule',
-    packageName: '@flighthq/types',
-    purpose: '3D capsule-bounds aggregate',
-    source: 'upstream/packages/types/src/Capsule.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Plane',
-    packageName: '@flighthq/types',
-    purpose: '3D plane aggregate',
-    source: 'upstream/packages/types/src/Plane.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Frustum',
-    packageName: '@flighthq/types',
-    purpose: '3D frustum aggregate',
-    source: 'upstream/packages/types/src/Frustum.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'SpatialAabb',
-    packageName: '@flighthq/types',
-    purpose: '2D spatial-index bounds aggregate',
-    source: 'upstream/packages/types/src/Spatial.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Obb',
-    packageName: '@flighthq/types',
-    purpose: '3D oriented-bounds aggregate',
-    source: 'upstream/packages/types/src/Obb.ts',
-  },
-  {
-    emission: 'direct',
-    name: 'Ray3D',
-    packageName: '@flighthq/types',
-    purpose: '3D ray aggregate',
-    source: 'upstream/packages/types/src/Ray3D.ts',
-  },
-];
-
-interface TypedStructCandidateGroup {
-  names: readonly string[];
+interface TypedStructMigrationBaselineCandidate {
+  declarationKind: TypedStructDeclarationKind;
+  emission: 'audit-only' | 'direct';
+  name: string;
   packageName: string;
   purpose: string;
   source: string;
 }
 
-export const tranche6aDirectTypedStructIds: readonly string[] = [
-  '@flighthq/types:interface#ParticleEmitterConfig',
-  '@flighthq/types:interface#Matrix',
-  '@flighthq/types:interface#Surface',
-  '@flighthq/types:interface#ParticleEmitterData',
-  '@flighthq/types:interface#TextureAtlasRegion',
-  '@flighthq/types:interface#ParticleEmitterState',
-  '@flighthq/types:interface#ScreenInfo',
-  '@flighthq/types:interface#MeshGeometry',
-];
+interface TypedStructMigrationBaseline {
+  baselineUpstreamCommit: string;
+  candidates: TypedStructMigrationBaselineCandidate[];
+  schemaVersion: 1;
+  sourceReportSha256: string;
+}
 
-export const tranche6bDirectTypedStructIds: readonly string[] = [
-  '@flighthq/types:interface#Texture',
-  '@flighthq/types:interface#ImageResource',
-  '@flighthq/types:interface#ApplicationWindow',
-  '@flighthq/types:interface#TextureAtlas',
-  '@flighthq/types:interface#SpritesheetFrameData',
-  '@flighthq/types:interface#MenuItemTemplate',
-  '@flighthq/types:interface#StarlingPexDocument',
-  '@flighthq/types:interface#LibgdxParticleDocument',
-  '@flighthq/types:interface#WindowOptions',
-  '@flighthq/types:interface#GlyphAtlasRuntime',
-  '@flighthq/types:interface#SpritesheetPlayer',
-  '@flighthq/types:interface#Mesh',
-];
+const typedStructMigrationBaselinePath = 'tools/generator/baselines/typed-structs-v3.json';
 
-function directTypedStructCandidatesFromGroups(
-  groups: readonly TypedStructCandidateGroup[],
-): readonly TypedStructCandidate[] {
-  return groups.flatMap((group) =>
-    group.names.map((name) => ({
-      emission: 'direct' as const,
-      name,
-      packageName: group.packageName,
-      purpose: group.purpose,
-      source: group.source,
-    })),
+const approvedTypedStructRenames = new Map<string, string>([
+  ['@flighthq/scene-formats:interface#GltfScene', '@flighthq/types:interface#GltfScene3D'],
+  ['@flighthq/scene-resources:interface#LoadSceneOptions', '@flighthq/types:interface#LoadScene3DResourcesOptions'],
+  [
+    '@flighthq/scene-resources:interface#ResolveSceneResourcesOptions',
+    '@flighthq/types:interface#UpdateScene3DResourceStreamingOptions',
+  ],
+  [
+    '@flighthq/scene-resources:interface#SceneMaterialTextureRegistry',
+    '@flighthq/types:interface#Scene3DMaterialTextureRegistry',
+  ],
+  ['@flighthq/scene-resources:interface#SceneResourceEvent', '@flighthq/types:interface#Scene3DResourceEvent'],
+  ['@flighthq/scene-resources:interface#SceneResourceInFlight', '@flighthq/types:interface#Scene3DResourceInFlight'],
+  ['@flighthq/scene-resources:interface#SceneResourceResolver', '@flighthq/types:interface#Scene3DResourceResolver'],
+  [
+    '@flighthq/scene-resources:interface#SceneResourceResolverOptions',
+    '@flighthq/types:interface#Scene3DResourceResolverOptions',
+  ],
+  [
+    '@flighthq/scene-resources:interface#SceneResourceRevealOptions',
+    '@flighthq/types:interface#Scene3DResourceRevealOptions',
+  ],
+  ['@flighthq/scene-resources:interface#SceneResourceSignals', '@flighthq/types:interface#Scene3DResourceSignals'],
+  ['@flighthq/shape-formats:interface#ShapeBitmapReference', '@flighthq/types:interface#ShapeTextureReference'],
+  ['@flighthq/types:interface#Camera', '@flighthq/types:interface#Camera3D'],
+  ['@flighthq/types:interface#ColorTransform', '@flighthq/types:interface#ColorScaleBias'],
+  ['@flighthq/types:interface#EmbeddedSceneResourceRef', '@flighthq/types:interface#EmbeddedImageResourceReference'],
+  ['@flighthq/types:interface#ExternalSceneResourceRef', '@flighthq/types:interface#ExternalImageResourceReference'],
+  ['@flighthq/types:interface#ImageResourceCompressed', '@flighthq/types:interface#CompressedImageData'],
+  ['@flighthq/types:interface#ParticleEmitter', '@flighthq/types:interface#ParticleEmitter2D'],
+  ['@flighthq/types:interface#ParticleEmitterRuntime', '@flighthq/types:interface#ParticleEmitter2DRuntime'],
+  ['@flighthq/types:interface#Scene', '@flighthq/types:interface#Scene3D'],
+  ['@flighthq/types:interface#SceneAnimationTarget', '@flighthq/types:interface#Scene3DAnimationTarget'],
+  ['@flighthq/types:interface#SceneNodeTraits', '@flighthq/types:interface#Node3DTraits'],
+  ['@flighthq/types:interface#Surface', '@flighthq/types:interface#Bitmap'],
+  ['@flighthq/types:type#SceneRuntime', '@flighthq/types:type#Scene3DRuntime'],
+]);
+
+const approvedTypedStructKindChanges = new Map<string, string>([
+  ['@flighthq/types:interface#CubeTexture', '@flighthq/types:type#CubeTexture'],
+  ['@flighthq/types:interface#Texture', '@flighthq/types:type#Texture'],
+]);
+
+const approvedTypedStructReplacementRemovals = new Map<string, string[]>([
+  [
+    '@flighthq/types:interface#ImageResource',
+    [
+      '@flighthq/types:interface#Bitmap',
+      '@flighthq/types:interface#CompressedImage',
+      '@flighthq/types:interface#Image',
+    ],
+  ],
+  [
+    '@flighthq/types:interface#Tileset',
+    ['@flighthq/types:interface#TiledTileset', '@flighthq/types:interface#TilemapData'],
+  ],
+  [
+    '@flighthq/types:interface#VideoTexture',
+    ['@flighthq/types:interface#Image', '@flighthq/types:interface#VideoResource', '@flighthq/types:type#Texture'],
+  ],
+]);
+
+export function discoverTypedStructUniverse(
+  workspaceDirectory: string,
+  program: ts.Program,
+  inventory: UpstreamInventory = analyzeUpstream(workspaceDirectory),
+): TypedStructDiscoveryAudit {
+  const declarations = typedStructDeclarationIdentities(workspaceDirectory, program, inventory).filter(
+    (declaration) =>
+      declaration.publicPackageName === declaration.definingPackageName &&
+      !isExcludedTypedStructPackage(declaration.publicPackageName),
+  );
+  const candidatesById = new Map<string, ResolvedTypedStructCandidate>();
+  for (const declaration of declarations) {
+    const id = typedStructStableId(declaration.publicPackageName, declaration.declarationKind, declaration.name);
+    const existing = candidatesById.get(id);
+    if (existing && existing.source !== declaration.source) {
+      throw new Error(
+        `Ambiguous checker-derived typed-struct identity ${id}: ${existing.source}, ${declaration.source}`,
+      );
+    }
+    candidatesById.set(id, {
+      configuredDeclarationKind: declaration.declarationKind,
+      configuredName: declaration.name,
+      configuredPackageName: declaration.publicPackageName,
+      configuredSource: declaration.source,
+      declarationKind: declaration.declarationKind,
+      definingPackageName: declaration.definingPackageName,
+      emission: 'audit-only',
+      migration: { baselineId: null, status: 'new' },
+      name: declaration.name,
+      packageName: declaration.publicPackageName,
+      purpose: 'checker-discovered public declaration',
+      source: declaration.source,
+      sourceResolution: 'exact',
+    });
+  }
+
+  const baseline = readTypedStructMigrationBaseline(workspaceDirectory);
+  const claimedCurrentIds = new Map<string, string>();
+  const consumedExceptionalBaselineIds = new Set<string>();
+  for (const entry of baseline.candidates) {
+    const baselineId = typedStructStableId(entry.packageName, entry.declarationKind, entry.name);
+    const removalSuccessors = approvedTypedStructReplacementRemovals.get(baselineId);
+    if (removalSuccessors) {
+      consumedExceptionalBaselineIds.add(baselineId);
+      continue;
+    }
+    const renamedId = approvedTypedStructRenames.get(baselineId);
+    const kindChangedId = approvedTypedStructKindChanges.get(baselineId);
+    const approvedId = renamedId ?? kindChangedId;
+    if (approvedId) consumedExceptionalBaselineIds.add(baselineId);
+    const current = approvedId
+      ? candidatesById.get(approvedId)
+      : resolveMigratedTypedStructCandidate(entry, candidatesById);
+    if (!current) {
+      throw new Error(
+        `Approved typed-struct migration target is missing: ${baselineId} -> ${approvedId ?? '(same-name public owner)'}`,
+      );
+    }
+    const currentId = typedStructStableId(current.packageName, current.declarationKind, current.name);
+    const previouslyClaimed = claimedCurrentIds.get(currentId);
+    if (previouslyClaimed) {
+      throw new Error(
+        `Typed-struct migration target ${currentId} is claimed by both ${previouslyClaimed} and ${baselineId}`,
+      );
+    }
+    claimedCurrentIds.set(currentId, baselineId);
+    const status: TypedStructMigrationStatus = kindChangedId
+      ? 'kind-changed'
+      : renamedId
+        ? 'renamed'
+        : current.packageName === entry.packageName && current.source === entry.source
+          ? 'preserved'
+          : 'relocated';
+    candidatesById.set(currentId, {
+      ...current,
+      configuredDeclarationKind: entry.declarationKind,
+      configuredName: entry.name,
+      configuredPackageName: entry.packageName,
+      configuredSource: entry.source,
+      emission: entry.emission,
+      migration: { baselineId, status },
+      purpose: entry.purpose,
+      sourceResolution: status === 'preserved' ? 'exact' : 'relocated',
+    });
+  }
+
+  validateTypedStructMigrationApprovals(baseline, consumedExceptionalBaselineIds, candidatesById);
+  const candidates = [...candidatesById.values()].sort(compareResolvedTypedStructCandidates);
+  const removed = [...approvedTypedStructReplacementRemovals]
+    .map(([baselineId, successorIds]) => {
+      for (const successorId of successorIds) {
+        if (!candidatesById.has(successorId)) {
+          throw new Error(`Approved typed-struct replacement successor is missing: ${baselineId} -> ${successorId}`);
+        }
+      }
+      return { baselineId, successorIds: successorIds.slice().sort() };
+    })
+    .sort((left, right) => left.baselineId.localeCompare(right.baselineId));
+  const countStatus = (status: TypedStructMigrationStatus): number =>
+    candidates.filter((candidate) => candidate.migration.status === status).length;
+  const newCandidates = candidates.filter((candidate) => candidate.migration.status === 'new');
+  if (newCandidates.some((candidate) => candidate.emission !== 'audit-only')) {
+    throw new Error('Checker-discovered typed-struct rows must enter audit-only');
+  }
+
+  return {
+    candidates,
+    migration: {
+      baselineUpstreamCommit: baseline.baselineUpstreamCommit,
+      removed,
+      sourceReportSha256: baseline.sourceReportSha256,
+      summary: {
+        baseline: baseline.candidates.length,
+        kindChanged: countStatus('kind-changed'),
+        newAuditOnly: newCandidates.length,
+        preserved: countStatus('preserved'),
+        relocated: countStatus('relocated'),
+        removed: removed.length,
+        renamed: countStatus('renamed'),
+      },
+    },
+  };
+}
+
+function resolveMigratedTypedStructCandidate(
+  baseline: TypedStructMigrationBaselineCandidate,
+  candidatesById: ReadonlyMap<string, ResolvedTypedStructCandidate>,
+): ResolvedTypedStructCandidate | undefined {
+  const stableId = typedStructStableId(baseline.packageName, baseline.declarationKind, baseline.name);
+  const exact = candidatesById.get(stableId);
+  if (exact) return exact;
+  const alternatives = [...candidatesById.values()].filter(
+    (candidate) => candidate.name === baseline.name && candidate.declarationKind === baseline.declarationKind,
+  );
+  if (alternatives.length === 1) return alternatives[0];
+  if (alternatives.length === 0) return undefined;
+  throw new Error(
+    `Ambiguous typed-struct migration for ${stableId}: ${alternatives
+      .map((candidate) => typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name))
+      .sort()
+      .join(', ')}`,
   );
 }
 
-// Checker-derived tranche-six identities are kept literal so upstream declarations cannot
-// silently enter the allowlist. Backend-owned host contracts, renderer/material records,
-// open or presence-sensitive shapes, declaration merges, and aliases of existing direct
-// identities remain outside this tranche.
-export const tranche6TypedStructCandidates: readonly TypedStructCandidate[] = directTypedStructCandidatesFromGroups([
-  {
-    names: ['MeshGeometryOptions'],
-    packageName: '@flighthq/mesh',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/mesh/src/meshGeometry.ts',
-  },
-  {
-    names: ['LoadSceneOptions'],
-    packageName: '@flighthq/scene-resources',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/scene-resources/src/loadSceneOptions.ts',
-  },
-  {
-    names: ['ResolveSceneResourcesOptions'],
-    packageName: '@flighthq/scene-resources',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/scene-resources/src/resolveSceneResources.ts',
-  },
-  {
-    names: ['SceneResourceRevealOptions'],
-    packageName: '@flighthq/scene-resources',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/scene-resources/src/revealSceneResourcesOnResolve.ts',
-  },
-  {
-    names: ['SceneMaterialTextureRegistry'],
-    packageName: '@flighthq/scene-resources',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/scene-resources/src/sceneMaterialTextureRegistry.ts',
-  },
-  {
-    names: ['SceneResourceInFlight', 'SceneResourceResolver', 'SceneResourceResolverOptions'],
-    packageName: '@flighthq/scene-resources',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/scene-resources/src/sceneResourceResolver.ts',
-  },
-  {
-    names: ['SceneResourceEvent', 'SceneResourceSignals'],
-    packageName: '@flighthq/scene-resources',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/scene-resources/src/sceneResourceSignals.ts',
-  },
-  {
-    names: ['AnimationClip'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/AnimationClip.ts',
-  },
-  {
-    names: ['Billboard'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/Billboard.ts',
-  },
-  {
-    names: ['Mesh'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/Mesh.ts',
-  },
-  {
-    names: ['MeshGeometry', 'MeshSubset', 'VertexAttribute', 'VertexAttributeLayout'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/MeshGeometry.ts',
-  },
-  {
-    names: ['NodeSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/NodeSignals.ts',
-  },
-  {
-    names: ['Scene', 'SceneRuntime'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/Scene.ts',
-  },
-  {
-    names: ['SceneAnimationTarget'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/SceneAnimationTarget.ts',
-  },
-  {
-    names: ['SceneNodeTraits'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/SceneNode.ts',
-  },
-  {
-    names: ['EmbeddedSceneResourceRef', 'ExternalSceneResourceRef'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/SceneResourceRef.ts',
-  },
-  {
-    names: ['Signal', 'SignalData'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/Signal.ts',
-  },
-  {
-    names: ['TweenManager'],
-    packageName: '@flighthq/types',
-    purpose: 'broad scene document',
-    source: 'upstream/packages/types/src/TweenManager.ts',
-  },
-  {
-    names: [
-      'AssetDescriptor',
-      'AssetEntry',
-      'AssetGroupLoadOptions',
-      'AssetLibrary',
-      'AssetLibraryRuntime',
-      'AssetLoadProgress',
-      'AssetLoaderAdapter',
-    ],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Assets.ts',
-  },
-  {
-    names: ['AttractorForce'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/AttractorForce.ts',
-  },
-  {
-    names: ['AudioBus', 'AudioMixer', 'AudioMixerOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/AudioBus.ts',
-  },
-  {
-    names: ['AudioChannel', 'AudioResource', 'AudioResourceUrl'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/AudioResource.ts',
-  },
-  {
-    names: ['BitmapFont', 'BitmapFontData', 'BitmapFontGlyphData', 'BitmapFontKerningData', 'BitmapFontParseOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/BitmapFont.ts',
-  },
-  {
-    names: ['CircleCollider'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/CircleCollider.ts',
-  },
-  {
-    names: ['CubeTexture'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/CubeTexture.ts',
-  },
-  {
-    names: ['DragForce'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/DragForce.ts',
-  },
-  {
-    names: ['Font', 'FontUrl'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Font.ts',
-  },
-  {
-    names: ['FontResource'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/FontResource.ts',
-  },
-  {
-    names: ['GlyphAtlas', 'GlyphAtlasRuntime', 'GlyphAtlasShelf', 'GlyphEntry', 'GlyphRasterizedBitmap', 'GlyphSource'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/GlyphSource.ts',
-  },
-  {
-    names: ['GridSliceOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/GridSliceOptions.ts',
-  },
-  {
-    names: ['ImageResource'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ImageResource.ts',
-  },
-  {
-    names: ['ImageResourceCompressed'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ImageResourceCompressed.ts',
-  },
-  {
-    names: ['ParticleConfigIssue'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleConfigIssue.ts',
-  },
-  {
-    names: ['ColorKeyframe', 'CurveKeyframe'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleCurve.ts',
-  },
-  {
-    names: ['ParticleEmitter', 'ParticleEmitterData', 'ParticleEmitterRuntime'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleEmitter.ts',
-  },
-  {
-    names: ['ParticleEmitterConfig'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleEmitterConfig.ts',
-  },
-  {
-    names: ['ParticleEmitterSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleEmitterSignals.ts',
-  },
-  {
-    names: ['ParticleEmitterState'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleEmitterState.ts',
-  },
-  {
-    names: ['ParticleObjectsState'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleObjectsState.ts',
-  },
-  {
-    names: ['ParticleObjectsUpdateOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ParticleObjectsUpdateOptions.ts',
-  },
-  {
-    names: ['PlaneCollider'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/PlaneCollider.ts',
-  },
-  {
-    names: ['RectangleCollider'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/RectangleCollider.ts',
-  },
-  {
-    names: ['ResourceLoader'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ResourceLoader.ts',
-  },
-  {
-    names: ['ResourceLoaderItemSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ResourceLoaderItemSignals.ts',
-  },
-  {
-    names: ['ResourceLoaderOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ResourceLoaderOptions.ts',
-  },
-  {
-    names: ['ResourceLoadHandle'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ResourceLoadHandle.ts',
-  },
-  {
-    names: ['ResourceLoadItem'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ResourceLoadItem.ts',
-  },
-  {
-    names: ['ResourceLoadReport'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/ResourceLoadReport.ts',
-  },
-  {
-    names: ['Sampler'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Sampler.ts',
-  },
-  {
-    names: ['SphereCollider'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SphereCollider.ts',
-  },
-  {
-    names: ['Spritesheet'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Spritesheet.ts',
-  },
-  {
-    names: ['SpritesheetAnimation'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetAnimation.ts',
-  },
-  {
-    names: ['SpritesheetAnimationData'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetAnimationData.ts',
-  },
-  {
-    names: ['SpritesheetData'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetData.ts',
-  },
-  {
-    names: ['SpritesheetFrame'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetFrame.ts',
-  },
-  {
-    names: ['SpritesheetFrameData'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetFrameData.ts',
-  },
-  {
-    names: ['SpritesheetPlayer'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetPlayer.ts',
-  },
-  {
-    names: ['SpritesheetValidationDiagnostic'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/SpritesheetValidationDiagnostic.ts',
-  },
-  {
-    names: ['Surface'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Surface.ts',
-  },
-  {
-    names: ['Texture'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Texture.ts',
-  },
-  {
-    names: ['TextureAtlas'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/TextureAtlas.ts',
-  },
-  {
-    names: ['TextureAtlasRegion'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/TextureAtlasRegion.ts',
-  },
-  {
-    names: ['TextureUvTransform'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/TextureUvTransform.ts',
-  },
-  {
-    names: ['Tileset'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/Tileset.ts',
-  },
-  {
-    names: ['TurbulenceForce'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/TurbulenceForce.ts',
-  },
-  {
-    names: ['VideoChannel', 'VideoResource', 'VideoResourceUrl'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/VideoResource.ts',
-  },
-  {
-    names: ['VideoTexture'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/VideoTexture.ts',
-  },
-  {
-    names: ['VortexForce'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/VortexForce.ts',
-  },
-  {
-    names: ['WindForce'],
-    packageName: '@flighthq/types',
-    purpose: 'broad asset document',
-    source: 'upstream/packages/types/src/WindForce.ts',
-  },
-  {
-    names: ['App', 'AppLoginItem', 'AppLoginItemLike'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/App.ts',
-  },
-  {
-    names: ['Application'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Application.ts',
-  },
-  {
-    names: ['ApplicationWindow', 'WindowBounds', 'WindowOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ApplicationWindow.ts',
-  },
-  {
-    names: ['ClipboardBookmark', 'ClipboardWriteItem'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Clipboard.ts',
-  },
-  {
-    names: ['ClipboardWatch'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ClipboardWatch.ts',
-  },
-  {
-    names: ['Connectivity', 'ConnectivityReachability', 'ConnectivityReachabilityOptions', 'ConnectivityStatus'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Connectivity.ts',
-  },
-  {
-    names: ['DeviceInfo', 'SafeAreaInsets'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Device.ts',
-  },
-  {
-    names: [
-      'FileDialogFilter',
-      'MessageDialogOptions',
-      'MessageDialogResult',
-      'OpenDirectoryDialogOptions',
-      'OpenFileDialogOptions',
-      'PromptDialogOptions',
-      'SaveFileDialogOptions',
-    ],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Dialog.ts',
-  },
-  {
-    names: ['FileEntry', 'FilePermissions', 'FileStat', 'FileSystemUsage', 'FileWalkOptions', 'FileWatchEvent'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/FileSystem.ts',
-  },
-  {
-    names: ['GeoPosition', 'GeoPositionResult', 'GeolocationRequestOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Geolocation.ts',
-  },
-  {
-    names: ['IpcBackendCapabilities', 'IpcChannel', 'IpcMessageEvent', 'IpcTarget'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Ipc.ts',
-  },
-  {
-    names: ['IpcSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/IpcSignals.ts',
-  },
-  {
-    names: ['AppLifecycle'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Lifecycle.ts',
-  },
-  {
-    names: ['Matrix'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Matrix.ts',
-  },
-  {
-    names: ['MediaSessionActionDetails', 'MediaSessionArtwork', 'MediaSessionMetadata', 'MediaSessionPositionState'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/MediaSession.ts',
-  },
-  {
-    names: ['MenuItemTemplate'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Menu.ts',
-  },
-  {
-    names: ['MenuSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/MenuSignals.ts',
-  },
-  {
-    names: [
-      'NotificationAction',
-      'NotificationCapabilities',
-      'NotificationChannel',
-      'NotificationRequest',
-      'NotificationSchedule',
-      'ScheduledNotification',
-    ],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Notification.ts',
-  },
-  {
-    names: ['ParsedAccelerator'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ParsedAccelerator.ts',
-  },
-  {
-    names: ['PlatformInfo'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Platform.ts',
-  },
-  {
-    names: ['Power', 'PowerStatus'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Power.ts',
-  },
-  {
-    names: ['PowerBatteryHealth'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/PowerBatteryHealth.ts',
-  },
-  {
-    names: ['ParsedProtocolUrl', 'ProtocolHandler'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Protocol.ts',
-  },
-  {
-    names: ['ScreenInfo'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Screen.ts',
-  },
-  {
-    names: ['ScreenChangeEvent', 'ScreenChangedMetrics'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ScreenChangeEvent.ts',
-  },
-  {
-    names: ['ScreenMode'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ScreenMode.ts',
-  },
-  {
-    names: ['ScreenSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ScreenSignals.ts',
-  },
-  {
-    names: [
-      'AmbientLightReading',
-      'MotionReading',
-      'OrientationReading',
-      'PressureReading',
-      'ProximityReading',
-      'QuaternionReading',
-      'RotationRateReading',
-      'SensorReading',
-      'SensorSubscribeOptions',
-      'Sensors',
-    ],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Sensors.ts',
-  },
-  {
-    names: ['ShareContent', 'ShareOptions', 'ShareResult'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Share.ts',
-  },
-  {
-    names: ['ShareSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ShareSignals.ts',
-  },
-  {
-    names: ['ShellOpenExternalOptions', 'ShellOpenPathOptions', 'ShellShortcutLink'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Shell.ts',
-  },
-  {
-    names: ['ShortcutEvent'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ShortcutEvent.ts',
-  },
-  {
-    names: ['ShortcutSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/ShortcutSignals.ts',
-  },
-  {
-    names: ['StatusBar', 'StatusBarStyleEntry'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/StatusBar.ts',
-  },
-  {
-    names: ['StorageChange', 'StorageMigration', 'StorageNamespace', 'StorageQuota', 'StorageSignals'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Storage.ts',
-  },
-  {
-    names: ['TrayCapabilities', 'TrayEventData', 'TrayIcon', 'TrayIconOptions'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Tray.ts',
-  },
-  {
-    names: [
-      'AppUpdater',
-      'UpdateInfo',
-      'UpdateProgress',
-      'UpdaterConfig',
-      'UpdaterError',
-      'UpdaterSignatureConfig',
-      'UpdaterState',
-    ],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Updater.ts',
-  },
-  {
-    names: ['WebcamCaptureOptions', 'WebcamPhoto', 'WebcamVideo'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/Webcam.ts',
-  },
-  {
-    names: ['WebcamStream'],
-    packageName: '@flighthq/types',
-    purpose: 'broad host document',
-    source: 'upstream/packages/types/src/WebcamStream.ts',
-  },
-  {
-    names: ['BitmapFontCharRecord', 'BitmapFontKerningRecord', 'BitmapFontPageRecord', 'BitmapFontRecord'],
-    packageName: '@flighthq/bitmapfont-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/bitmapfont-formats/src/bitmapFontRecord.ts',
-  },
-  {
-    names: ['ParticleFormatCodec'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/formatRegistry.ts',
-  },
-  {
-    names: ['LibgdxParseOptions', 'LibgdxParseResult', 'LibgdxParsed'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/libgdxParse.ts',
-  },
-  {
-    names: ['LibgdxParticleDocument', 'LibgdxRangeValue'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/libgdxSchema.ts',
-  },
-  {
-    names: ['LibgdxSerializeOptions'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/libgdxSerialize.ts',
-  },
-  {
-    names: ['ParseParticleConfigOptions', 'ParticleConfigParseResult'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/parseParticleConfig.ts',
-  },
-  {
-    names: ['ParticleDesignerParseOptions', 'ParticleDesignerParsed'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/particleDesignerParse.ts',
-  },
-  {
-    names: ['ParticleDesignerDocument'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/particleDesignerSchema.ts',
-  },
-  {
-    names: ['ParticleDesignerSerializeOptions'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/particleDesignerSerialize.ts',
-  },
-  {
-    names: ['PixiParseResult', 'PixiParsed'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/pixiParse.ts',
-  },
-  {
-    names: ['ParticleSerializeResult'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/serializeResult.ts',
-  },
-  {
-    names: ['SpineParsed'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/spineParse.ts',
-  },
-  {
-    names: ['SpineAlphaKeyframe', 'SpineParticleDocument', 'SpineRangeValue', 'SpineTintKeyframe'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/spineSchema.ts',
-  },
-  {
-    names: ['StarlingPexParseOptions', 'StarlingPexParseResult', 'StarlingPexParsed'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/starlingPexParse.ts',
-  },
-  {
-    names: ['StarlingPexColor', 'StarlingPexDocument'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/starlingPexSchema.ts',
-  },
-  {
-    names: ['StarlingPexSerializeOptions'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/starlingPexSerialize.ts',
-  },
-  {
-    names: ['UnityParseOptions', 'UnityParsed'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/unityParse.ts',
-  },
-  {
-    names: [
-      'UnityAnimationCurve',
-      'UnityBurst',
-      'UnityColor',
-      'UnityColorOverLifetime',
-      'UnityCurveKey',
-      'UnityEmission',
-      'UnityGradient',
-      'UnityGradientAlphaKey',
-      'UnityGradientColorKey',
-      'UnityMinMaxValue',
-      'UnityParticleDocument',
-      'UnityRotationOverLifetime',
-      'UnityShape',
-      'UnitySizeOverLifetime',
-    ],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/unitySchema.ts',
-  },
-  {
-    names: ['UnitySerializeOptions'],
-    packageName: '@flighthq/particles-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/particles-formats/src/unitySerialize.ts',
-  },
-  {
-    names: [
-      'GltfAccessor',
-      'GltfAccessorSparse',
-      'GltfAnimation',
-      'GltfAnimationChannel',
-      'GltfAnimationSampler',
-      'GltfBuffer',
-      'GltfBufferView',
-      'GltfDocument',
-      'GltfImage',
-      'GltfImportOptions',
-      'GltfMaterial',
-      'GltfMesh',
-      'GltfMorphTarget',
-      'GltfNode',
-      'GltfNormalTextureInfo',
-      'GltfOcclusionTextureInfo',
-      'GltfPbrMetallicRoughness',
-      'GltfPrimitive',
-      'GltfSampler',
-      'GltfScene',
-      'GltfSkin',
-      'GltfTexture',
-      'GltfTextureInfo',
-      'GltfTextureTransform',
-    ],
-    packageName: '@flighthq/scene-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/scene-formats/src/gltfSchema.ts',
-  },
-  {
-    names: ['Md5Joint', 'Md5Mesh', 'Md5Vertex', 'Md5Weight'],
-    packageName: '@flighthq/scene-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/scene-formats/src/md5Schema.ts',
-  },
-  {
-    names: ['ObjMaterial', 'ObjMaterialLibrary'],
-    packageName: '@flighthq/scene-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/scene-formats/src/objSchema.ts',
-  },
-  {
-    names: ['SkinInfluence'],
-    packageName: '@flighthq/scene-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/scene-formats/src/shared.ts',
-  },
-  {
-    names: ['ThreeDsMaterial', 'ThreeDsMesh'],
-    packageName: '@flighthq/scene-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/scene-formats/src/threeDsSchema.ts',
-  },
-  {
-    names: ['ShapeBitmapReference', 'ShapeJsonFormatOptions', 'ShapeJsonParseOptions'],
-    packageName: '@flighthq/shape-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/shape-formats/src/shapeJson.ts',
-  },
-  {
-    names: ['AsepriteParsed'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/asepriteParse.ts',
-  },
-  {
-    names: [
-      'AsepriteArrayDocument',
-      'AsepriteArrayFrame',
-      'AsepriteBaseFrame',
-      'AsepriteFrameTag',
-      'AsepriteHashDocument',
-      'AsepriteHashFrame',
-      'AsepriteLayer',
-      'AsepriteMeta',
-      'AsepriteRect',
-      'AsepriteSize',
-    ],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/asepriteSchema.ts',
-  },
-  {
-    names: ['AsepriteSerializeOptions'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/asepriteSerialize.ts',
-  },
-  {
-    names: ['CocosPlistParsed'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/cocosPlistParse.ts',
-  },
-  {
-    names: ['CocosPlistDocument', 'CocosPlistFrame', 'CocosPlistMetadata'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/cocosPlistSchema.ts',
-  },
-  {
-    names: ['LibgdxAtlasParseOptions'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/libgdxAtlasParse.ts',
-  },
-  {
-    names: ['LibgdxAtlasDocument', 'LibgdxAtlasPage', 'LibgdxAtlasRegion'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/libgdxAtlasSchema.ts',
-  },
-  {
-    names: ['SpritesheetParseOptions'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/spritesheetDetect.ts',
-  },
-  {
-    names: ['StarlingParseOptions', 'StarlingParsed'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/starlingParse.ts',
-  },
-  {
-    names: ['StarlingDocument', 'StarlingSubTexture'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/starlingSchema.ts',
-  },
-  {
-    names: ['TexturePackerParsed'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/texturePackerParse.ts',
-  },
-  {
-    names: [
-      'TexturePackerArrayDocument',
-      'TexturePackerArrayFrame',
-      'TexturePackerFrameTag',
-      'TexturePackerHashDocument',
-      'TexturePackerHashFrame',
-      'TexturePackerMeta',
-      'TexturePackerPivot',
-      'TexturePackerRect',
-      'TexturePackerSize',
-    ],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/texturePackerSchema.ts',
-  },
-  {
-    names: ['TexturePackerSerializeOptions'],
-    packageName: '@flighthq/spritesheet-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts',
-  },
-  {
-    names: ['ByteReader'],
-    packageName: '@flighthq/texture-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/texture-formats/src/byteReader.ts',
-  },
-  {
-    names: [
-      'TextureAtlasAsepriteArrayDocument',
-      'TextureAtlasAsepriteArrayFrame',
-      'TextureAtlasAsepriteBaseFrame',
-      'TextureAtlasAsepriteFrameTag',
-      'TextureAtlasAsepriteHashDocument',
-      'TextureAtlasAsepriteHashFrame',
-      'TextureAtlasAsepriteMeta',
-      'TextureAtlasAsepriteRect',
-      'TextureAtlasAsepriteSize',
-    ],
-    packageName: '@flighthq/textureatlas-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts',
-  },
-  {
-    names: ['TextureAtlasPackerParseOptions'],
-    packageName: '@flighthq/textureatlas-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts',
-  },
-  {
-    names: [
-      'TextureAtlasPackerArrayDocument',
-      'TextureAtlasPackerArrayFrame',
-      'TextureAtlasPackerFrameTag',
-      'TextureAtlasPackerHashDocument',
-      'TextureAtlasPackerHashFrame',
-      'TextureAtlasPackerMeta',
-      'TextureAtlasPackerPivot',
-      'TextureAtlasPackerRect',
-      'TextureAtlasPackerSize',
-    ],
-    packageName: '@flighthq/textureatlas-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts',
-  },
-  {
-    names: ['TextureAtlasStarlingParseOptions'],
-    packageName: '@flighthq/textureatlas-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/textureatlas-formats/src/textureAtlasStarlingParse.ts',
-  },
-  {
-    names: ['TiledParseOptions'],
-    packageName: '@flighthq/tilemap-formats',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/tilemap-formats/src/tiledOptions.ts',
-  },
-  {
-    names: ['XmlElement'],
-    packageName: '@flighthq/xml',
-    purpose: 'broad serialization document',
-    source: 'upstream/packages/xml/src/xmlParse.ts',
-  },
-]);
+function readTypedStructMigrationBaseline(workspaceDirectory: string): TypedStructMigrationBaseline {
+  const file = path.join(workspaceDirectory, typedStructMigrationBaselinePath);
+  const baseline = JSON.parse(readFileSync(file, 'utf8')) as Partial<TypedStructMigrationBaseline>;
+  if (
+    baseline.schemaVersion !== 1 ||
+    typeof baseline.baselineUpstreamCommit !== 'string' ||
+    typeof baseline.sourceReportSha256 !== 'string' ||
+    !Array.isArray(baseline.candidates)
+  ) {
+    throw new Error(`Invalid typed-struct migration baseline: ${typedStructMigrationBaselinePath}`);
+  }
+  const candidates = baseline.candidates as TypedStructMigrationBaselineCandidate[];
+  const ids = candidates.map((candidate) =>
+    typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name),
+  );
+  if (new Set(ids).size !== candidates.length) {
+    throw new Error('Typed-struct migration baseline contains duplicate stable identities');
+  }
+  return { ...baseline, candidates } as TypedStructMigrationBaseline;
+}
 
-export const initialTypedStructCandidates: readonly TypedStructCandidate[] = [
-  ...directTypedStructCandidates,
-  ...tranche4TypedStructCandidates,
-  ...tranche5TypedStructCandidates,
-  ...tranche6TypedStructCandidates,
-];
+function validateTypedStructMigrationApprovals(
+  baseline: TypedStructMigrationBaseline,
+  consumedExceptionalBaselineIds: ReadonlySet<string>,
+  candidatesById: ReadonlyMap<string, ResolvedTypedStructCandidate>,
+): void {
+  const baselineIds = new Set(
+    baseline.candidates.map((candidate) =>
+      typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name),
+    ),
+  );
+  const exceptionalIds = [
+    ...approvedTypedStructRenames.keys(),
+    ...approvedTypedStructKindChanges.keys(),
+    ...approvedTypedStructReplacementRemovals.keys(),
+  ];
+  const staleApprovals = exceptionalIds.filter((id) => !baselineIds.has(id) || !consumedExceptionalBaselineIds.has(id));
+  if (staleApprovals.length > 0) {
+    throw new Error(`Stale typed-struct migration approvals: ${staleApprovals.sort().join(', ')}`);
+  }
+  const missingTargets = [...approvedTypedStructRenames.values(), ...approvedTypedStructKindChanges.values()].filter(
+    (id) => !candidatesById.has(id),
+  );
+  if (missingTargets.length > 0) {
+    throw new Error(`Missing typed-struct migration targets: ${missingTargets.sort().join(', ')}`);
+  }
+}
+
+function compareResolvedTypedStructCandidates(
+  left: ResolvedTypedStructCandidate,
+  right: ResolvedTypedStructCandidate,
+): number {
+  return (
+    left.packageName.localeCompare(right.packageName) ||
+    left.name.localeCompare(right.name) ||
+    left.declarationKind.localeCompare(right.declarationKind) ||
+    left.source.localeCompare(right.source)
+  );
+}
+
+function isExcludedTypedStructPackage(packageName: string): boolean {
+  const directoryName = packageName.replace(/^@flighthq\//u, '');
+  return directoryName in portConfig.excludedPackages;
+}
+
+function migrationAuditForCustomCandidates(
+  candidates: readonly { migration: TypedStructMigrationIdentity }[],
+  upstreamCommit: string,
+): TypedStructMigrationAudit {
+  const countStatus = (status: TypedStructMigrationStatus): number =>
+    candidates.filter((candidate) => candidate.migration.status === status).length;
+  return {
+    baselineUpstreamCommit: upstreamCommit,
+    removed: [],
+    sourceReportSha256: 'custom-candidates',
+    summary: {
+      baseline: candidates.filter((candidate) => candidate.migration.baselineId !== null).length,
+      kindChanged: countStatus('kind-changed'),
+      newAuditOnly: countStatus('new'),
+      preserved: countStatus('preserved'),
+      relocated: countStatus('relocated'),
+      removed: 0,
+      renamed: countStatus('renamed'),
+    },
+  };
+}
 
 export function resolveTypedStructCandidateIdentities(
   workspaceDirectory: string,
   program: ts.Program,
-  candidates: readonly TypedStructCandidate[] = initialTypedStructCandidates,
+  candidates: readonly TypedStructCandidate[],
   inventory?: UpstreamInventory,
 ): TypedStructIdentityResolutionAudit {
   const declarations = typedStructDeclarationIdentities(workspaceDirectory, program, inventory);
@@ -1766,12 +608,21 @@ export function resolveTypedStructCandidateIdentities(
     }
     matched.push({
       ...candidate,
+      configuredDeclarationKind: declarationKind,
+      configuredName: candidate.name,
       configuredPackageName: candidate.packageName,
       configuredSource: candidate.source,
       declarationKind,
       definingPackageName: resolved.definingPackageName,
       packageName: resolved.publicPackageName,
       source: resolved.source,
+      migration: {
+        baselineId: typedStructStableId(candidate.packageName, declarationKind, candidate.name),
+        status:
+          resolved.publicPackageName === candidate.packageName && resolved.source === candidate.source
+            ? 'preserved'
+            : 'relocated',
+      },
       sourceResolution:
         resolved.publicPackageName === candidate.packageName && resolved.source === candidate.source
           ? 'exact'
@@ -1847,8 +698,7 @@ function typedStructDeclarationIdentities(
 }
 
 function configuredTypedStructDeclarationKind(candidate: TypedStructCandidate): TypedStructDeclarationKind {
-  if (candidate.declarationKind) return candidate.declarationKind;
-  return configuredTypeTypedStructNames.has(`${candidate.packageName}#${candidate.name}`) ? 'type' : 'interface';
+  return candidate.declarationKind ?? 'interface';
 }
 
 function typedStructIdentityAlternatives(
@@ -1911,9 +761,12 @@ interface InternalSchema {
 }
 
 interface AnalyzableTypedStructCandidate extends TypedStructCandidate {
+  configuredDeclarationKind: TypedStructDeclarationKind;
+  configuredName: string;
   configuredPackageName: string;
   configuredSource: string;
   definingPackageName: string;
+  migration: TypedStructMigrationIdentity;
   sourceResolution: 'exact' | 'relocated';
 }
 
@@ -1928,21 +781,26 @@ const fingerprintPrinter = ts.createPrinter({ removeComments: true });
 export function typedStructRegistry(
   workspaceDirectory: string,
   upstreamCommit: string,
-  candidates: readonly TypedStructCandidate[] = initialTypedStructCandidates,
+  candidates?: readonly TypedStructCandidate[],
   programAndChecker = upstreamTypeScriptProgram(workspaceDirectory),
   inventory?: UpstreamInventory,
 ): TypedStructRegistry {
-  const identities = resolveTypedStructCandidateIdentities(
-    workspaceDirectory,
-    programAndChecker.program,
-    candidates,
-    inventory,
-  );
-  if (identities.issues.length > 0) throw new Error(formatTypedStructIdentityIssues(identities.issues));
-  const cacheKey = `${upstreamCommit}|${identities.matched
+  const activeInventory = inventory ?? analyzeUpstream(workspaceDirectory);
+  const discovery = candidates
+    ? undefined
+    : discoverTypedStructUniverse(workspaceDirectory, programAndChecker.program, activeInventory);
+  const identities = candidates
+    ? resolveTypedStructCandidateIdentities(workspaceDirectory, programAndChecker.program, candidates, activeInventory)
+    : undefined;
+  if (identities && identities.issues.length > 0) {
+    throw new Error(formatTypedStructIdentityIssues(identities.issues));
+  }
+  const resolvedCandidates = discovery?.candidates ?? identities?.matched ?? [];
+  const migration = discovery?.migration ?? migrationAuditForCustomCandidates(resolvedCandidates, upstreamCommit);
+  const cacheKey = `${upstreamCommit}|${resolvedCandidates
     .map(
       (candidate) =>
-        `${typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name)}:${candidate.source}:${candidate.emission}`,
+        `${typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name)}:${candidate.source}:${candidate.emission}:${candidate.migration.status}`,
     )
     .join('|')}`;
   const cached = registryCache.get(programAndChecker.program)?.get(cacheKey);
@@ -1951,10 +809,11 @@ export function typedStructRegistry(
   const registry = createTypedStructRegistry(
     workspaceDirectory,
     upstreamCommit,
-    candidates,
+    candidates ?? resolvedCandidates,
     programAndChecker.program,
     programAndChecker.checker,
-    identities.matched,
+    resolvedCandidates,
+    migration,
   );
   const programCache = registryCache.get(programAndChecker.program) ?? new Map<string, TypedStructRegistry>();
   programCache.set(cacheKey, registry);
@@ -1969,23 +828,42 @@ export function createTypedStructRegistry(
   program: ts.Program,
   checker: ts.TypeChecker,
   resolvedCandidates?: readonly ResolvedTypedStructCandidate[],
+  migration?: TypedStructMigrationAudit,
 ): TypedStructRegistry {
   const analyzableCandidates: readonly AnalyzableTypedStructCandidate[] =
     resolvedCandidates ??
     candidates.map((candidate) => ({
       ...candidate,
+      configuredDeclarationKind: configuredTypedStructDeclarationKind(candidate),
+      configuredName: candidate.name,
       configuredPackageName: candidate.packageName,
       configuredSource: candidate.source,
       definingPackageName: packageNameFromSource(candidate.source),
+      migration: {
+        baselineId: typedStructStableId(
+          candidate.packageName,
+          configuredTypedStructDeclarationKind(candidate),
+          candidate.name,
+        ),
+        status: 'preserved' as const,
+      },
       sourceResolution: 'exact',
     }));
   const schemas = analyzableCandidates.map((candidate) =>
     analyzeCandidate(candidate, workspaceDirectory, program, checker),
   );
-  const bySymbol = new Map(schemas.map((schema) => [canonicalSymbol(schema.symbol, checker), schema]));
-  const resolve = (type: ts.Type): TypedStructResolution =>
-    resolveType(type, checker, bySymbol, new Set<ts.Type>(), new Set<ts.Symbol>());
+  const createResolver = (resolverSchemas: readonly InternalSchema[]) => {
+    const bySymbol = new Map(resolverSchemas.map((schema) => [canonicalSymbol(schema.symbol, checker), schema]));
+    return (type: ts.Type): TypedStructResolution =>
+      resolveType(type, checker, bySymbol, new Set<ts.Type>(), new Set<ts.Symbol>());
+  };
+  const directSchemas = schemas.filter((schema) => schema.audit.emission.mode === 'direct');
+  const auditOnlySchemas = schemas.filter((schema) => schema.audit.emission.mode === 'audit-only');
+  const resolve = createResolver(schemas);
+  const resolveDirect = createResolver(directSchemas);
   const resolveOwnedField = (
+    resolverSchemas: readonly InternalSchema[],
+    resolver: (type: ts.Type) => TypedStructResolution,
     type: ts.Type,
     member: string,
     property = checker.getPropertyOfType(type, member),
@@ -1995,9 +873,9 @@ export function createTypedStructRegistry(
         schema: InternalSchema;
       }
     | undefined => {
-    const resolution = resolve(type);
+    const resolution = resolver(type);
     if (resolution.kind !== 'matched') return undefined;
-    const schema = schemas.find((candidate) => candidate.audit.id === resolution.schemas[0]?.id);
+    const schema = resolverSchemas.find((candidate) => candidate.audit.id === resolution.schemas[0]?.id);
     const field = schema?.fields.get(member);
     if (!schema || !field || !property || !isCandidateFieldDeclaration(property, field.declarations)) {
       return undefined;
@@ -2005,7 +883,12 @@ export function createTypedStructRegistry(
     return { field: field.audit, schema };
   };
 
-  auditUses(workspaceDirectory, program, checker, schemas, resolve, resolveOwnedField);
+  for (const resolverSchemas of [directSchemas, auditOnlySchemas]) {
+    const resolver = createResolver(resolverSchemas);
+    auditUses(workspaceDirectory, program, checker, resolverSchemas, resolver, (type, member, property) =>
+      resolveOwnedField(resolverSchemas, resolver, type, member, property),
+    );
+  }
   for (const schema of schemas) {
     if (schema.audit.escapes.some((escape) => escape.reason === 'presence-sensitive')) {
       addReason(schema.audit, 'presence-sensitive-use');
@@ -2032,7 +915,8 @@ export function createTypedStructRegistry(
 
   const report: TypedStructAudit = {
     candidates: schemas.map((schema) => schema.audit),
-    schemaVersion: 4,
+    migration: migration ?? migrationAuditForCustomCandidates(analyzableCandidates, upstreamCommit),
+    schemaVersion: 5,
     summary: {
       auditOnlySchemas: schemas.filter((schema) => schema.audit.emission.mode === 'audit-only').length,
       bindableAccesses: sum(schemas, (schema) =>
@@ -2057,8 +941,9 @@ export function createTypedStructRegistry(
   return {
     report,
     resolve,
+    resolveDirect,
     resolveCppStructInitConstruction(type) {
-      const resolution = resolve(type);
+      const resolution = resolveDirect(type);
       const schema = resolution.kind === 'matched' ? resolution.schemas[0] : undefined;
       if (
         resolution.schemas.length !== 1 ||
@@ -2077,7 +962,7 @@ export function createTypedStructRegistry(
       };
     },
     resolveField(type, member, property) {
-      const owned = resolveOwnedField(type, member, property);
+      const owned = resolveOwnedField(directSchemas, resolveDirect, type, member, property);
       if (
         !owned ||
         !owned.schema.audit.eligible ||
@@ -2214,12 +1099,15 @@ function analyzeCandidate(
     fields,
     id: typedStructStableId(candidate.packageName, declarationKind, candidate.name),
     memberEscapes,
+    migration: candidate.migration,
     name: candidate.name,
     packageName: candidate.packageName,
     purpose: candidate.purpose,
     reasons,
     source: candidate.source,
     sourceProvenance: {
+      configuredDeclarationKind: candidate.configuredDeclarationKind,
+      configuredName: candidate.configuredName,
       configuredPackageName: candidate.configuredPackageName,
       configuredSource: candidate.configuredSource,
       resolution: candidate.sourceResolution,
@@ -2248,10 +1136,17 @@ function auditUses(
   const byId = new Map(schemas.map((schema) => [schema.audit.id, schema]));
   const visit = (node: ts.Node): void => {
     if (ts.isPropertyAccessExpression(node)) {
-      const resolution = resolve(checker.getTypeAtLocation(node.expression));
+      const receiverType = checker.getTypeAtLocation(node.expression);
+      const resolution = resolve(receiverType);
       if (resolution.kind === 'incompatible') {
         for (const audit of resolution.schemas) {
-          addEscape(audit, node, workspaceDirectory, 'incompatible-union', node.name.text);
+          addEscape(
+            audit,
+            node,
+            workspaceDirectory,
+            receiverType.isUnion() ? 'incompatible-union' : 'width-sensitive',
+            node.name.text,
+          );
         }
       } else if (resolution.kind === 'matched') {
         const audit = resolution.schemas[0]!;
