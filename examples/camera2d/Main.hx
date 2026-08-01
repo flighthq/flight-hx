@@ -8,7 +8,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Camera2D;
-import flighthq.types.DisplayContainer;
+
 import flighthq.types.DisplayObject;
 import flighthq.types.Rectangle;
 import flighthq.types.Shape;
@@ -86,12 +86,12 @@ class Main extends Application {
 
   var parallaxOffset:Vector2;
 
-  var root:DisplayContainer;
-  var starsContainer:DisplayContainer;
-  var mountainsContainer:DisplayContainer;
-  var cloudsContainer:DisplayContainer;
-  var worldContainer:DisplayContainer;
-  var hudContainer:DisplayContainer;
+  var root:DisplayObject;
+  var starsContainer:DisplayObject;
+  var mountainsContainer:DisplayObject;
+  var cloudsContainer:DisplayObject;
+  var worldContainer:DisplayObject;
+  var hudContainer:DisplayObject;
 
   var starsShape:Shape;
   var mountainsShape:Shape;
@@ -147,7 +147,8 @@ class Main extends Application {
         contextAttributes: {alpha: false, preserveDrawingBuffer: true},
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerDefaultGlMaterial(renderState);
+      registerGlStandardMaterial(renderState);
+      registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
       registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
@@ -217,23 +218,23 @@ class Main extends Application {
 
     parallaxOffset = createVector2();
 
-    root = createDisplayContainer();
+    root = createDisplayObject();
     root.scaleX = scale;
     root.scaleY = scale;
 
-    starsContainer = createDisplayContainer();
+    starsContainer = createDisplayObject();
     addNodeChild(root, starsContainer);
 
-    mountainsContainer = createDisplayContainer();
+    mountainsContainer = createDisplayObject();
     addNodeChild(root, mountainsContainer);
 
-    cloudsContainer = createDisplayContainer();
+    cloudsContainer = createDisplayObject();
     addNodeChild(root, cloudsContainer);
 
-    worldContainer = createDisplayContainer();
+    worldContainer = createDisplayObject();
     addNodeChild(root, worldContainer);
 
-    hudContainer = createDisplayContainer();
+    hudContainer = createDisplayObject();
     addNodeChild(root, hudContainer);
 
     starsShape = createShape();
@@ -583,7 +584,7 @@ class Main extends Application {
       }
     }
     #end
-    if (!prepareDisplayObjectRender(renderState, root)) return;
+    if (!prepareScene2DRender(renderState, root)) return;
     #if sys
     // Script-only bench mode: full update/prepare cost without backend draws,
     // so tranche measurements are not flattened by the rasterizer floor.
@@ -591,10 +592,10 @@ class Main extends Application {
     #end
     if (usingCairo) {
       renderCanvasBackground(renderState);
-      renderCanvasDisplayObject(renderState, root);
+      renderCanvasScene2D(renderState, root);
     } else {
       renderGlBackground(renderState);
-      renderGlDisplayObject(renderState, root);
+      renderGlScene2D(renderState, root);
     }
   }
 
