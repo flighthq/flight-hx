@@ -8,11 +8,7 @@ import { auditTypedStructProvenance } from '../../tools/generator/src/analyze/ty
 import {
   cppStructInitTypedStructIds,
   createTypedStructRegistry,
-  initialTypedStructCandidates,
-  resolveTypedStructCandidateIdentities,
-  tranche6aDirectTypedStructIds,
-  tranche6bDirectTypedStructIds,
-  tranche6TypedStructCandidates,
+  discoverTypedStructUniverse,
   typedStructRegistry,
   typedStructStableId,
   type TypedStructCandidate,
@@ -37,22 +33,28 @@ const fixtureCandidate: TypedStructCandidate = {
 };
 
 describe('typed struct stable declaration identity', () => {
-  it('re-resolves unique moves without editing configured source paths', () => {
+  it('locks the previous report through the approved migration dispositions', () => {
     const workspace = path.resolve('.');
     const { program } = upstreamTypeScriptProgram(workspace);
-    const audit = resolveTypedStructCandidateIdentities(workspace, program, initialTypedStructCandidates);
-    const particleEmitterData = audit.matched.find((candidate) => candidate.name === 'ParticleEmitterData');
+    const discovery = discoverTypedStructUniverse(workspace, program);
+    const particleEmitterData = discovery.candidates.find((candidate) => candidate.name === 'ParticleEmitterData');
 
-    expect(audit.summary).toEqual({
-      ambiguous: 0,
-      exact: 231,
+    expect(discovery.migration.summary).toEqual({
+      baseline: 405,
       kindChanged: 2,
-      matched: 377,
-      missing: 26,
+      newAuditOnly: 1_373,
+      preserved: 231,
       relocated: 146,
-      requested: 405,
+      removed: 3,
+      renamed: 23,
     });
-    const relocated = audit.matched.filter((candidate) => candidate.sourceResolution === 'relocated');
+    expect(discovery.migration).toMatchObject({
+      baselineUpstreamCommit: '5d24729f7360475e28a105ae0caeeaa2e1328260',
+      sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
+    });
+    expect(discovery.candidates).toHaveLength(1_775);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(402);
+    const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
       relocated.every(
@@ -62,11 +64,11 @@ describe('typed struct stable declaration identity', () => {
     ).toBe(true);
     expect(
       new Set(
-        audit.matched.map((candidate) =>
+        discovery.candidates.map((candidate) =>
           typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name),
         ),
       ).size,
-    ).toBe(audit.summary.matched);
+    ).toBe(discovery.candidates.length);
     expect(particleEmitterData).toMatchObject({
       configuredPackageName: '@flighthq/types',
       configuredSource: 'upstream/packages/types/src/ParticleEmitter.ts',
@@ -75,6 +77,10 @@ describe('typed struct stable declaration identity', () => {
       packageName: '@flighthq/types',
       source: 'upstream/packages/types/src/ParticleEmitter2D.ts',
       sourceResolution: 'relocated',
+      migration: {
+        baselineId: '@flighthq/types:interface#ParticleEmitterData',
+        status: 'relocated',
+      },
     });
     expect(
       particleEmitterData &&
@@ -86,39 +92,57 @@ describe('typed struct stable declaration identity', () => {
     ).toBe('@flighthq/types:interface#ParticleEmitterData');
   });
 
-  it('keeps missing names and declaration-kind drift loud and separate', () => {
+  it('admits only new rows as audit-only and records reviewed replacements separately', () => {
     const workspace = path.resolve('.');
-    const programAndChecker = upstreamTypeScriptProgram(workspace);
-    const audit = resolveTypedStructCandidateIdentities(
-      workspace,
-      programAndChecker.program,
-      initialTypedStructCandidates,
+    const { program } = upstreamTypeScriptProgram(workspace);
+    const discovery = discoverTypedStructUniverse(workspace, program);
+    const byId = new Map(
+      discovery.candidates.map((candidate) => [
+        typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name),
+        candidate,
+      ]),
     );
-    const missing = audit.issues.filter((issue) => issue.kind === 'missing').map((issue) => issue.candidate.name);
-    const kindChanged = audit.issues
-      .filter((issue) => issue.kind === 'kind-changed')
-      .map((issue) => issue.candidate.name)
-      .sort();
 
-    expect(missing).toHaveLength(26);
-    expect(missing).toEqual(
-      expect.arrayContaining(['ColorTransform', 'ImageResource', 'ParticleEmitter', 'ShapeBitmapReference', 'Surface']),
-    );
-    expect(kindChanged).toEqual(['CubeTexture', 'Texture']);
-    let message = '';
-    try {
-      typedStructRegistry(workspace, 'fixture', undefined, programAndChecker);
-    } catch (error) {
-      message = error instanceof Error ? error.message : String(error);
-    }
-    expect(message).toContain('Typed-struct stable declaration identities need review:');
-    expect(message).toContain(
-      '- @flighthq/types:interface#ColorTransform (configured upstream/packages/types/src/ColorTransform.ts): missing; no public export with that name',
-    );
-    expect(message).toContain(
-      '- @flighthq/types:interface#CubeTexture (configured upstream/packages/types/src/CubeTexture.ts): kind-changed;',
-    );
-    expect(message).toContain('@flighthq/types:type#CubeTexture at upstream/packages/types/src/CubeTexture.ts');
+    const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
+    expect(newlyDiscovered).toHaveLength(1_373);
+    expect(newlyDiscovered.every((candidate) => candidate.emission === 'audit-only')).toBe(true);
+    expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
+      baselineId: '@flighthq/types:interface#ColorTransform',
+      status: 'renamed',
+    });
+    expect(byId.get('@flighthq/types:interface#Bitmap')?.migration).toEqual({
+      baselineId: '@flighthq/types:interface#Surface',
+      status: 'renamed',
+    });
+    expect(byId.get('@flighthq/types:type#Texture')?.migration).toEqual({
+      baselineId: '@flighthq/types:interface#Texture',
+      status: 'kind-changed',
+    });
+    expect(discovery.migration.removed).toEqual([
+      {
+        baselineId: '@flighthq/types:interface#ImageResource',
+        successorIds: [
+          '@flighthq/types:interface#Bitmap',
+          '@flighthq/types:interface#CompressedImage',
+          '@flighthq/types:interface#Image',
+        ],
+      },
+      {
+        baselineId: '@flighthq/types:interface#Tileset',
+        successorIds: ['@flighthq/types:interface#TiledTileset', '@flighthq/types:interface#TilemapData'],
+      },
+      {
+        baselineId: '@flighthq/types:interface#VideoTexture',
+        successorIds: [
+          '@flighthq/types:interface#Image',
+          '@flighthq/types:interface#VideoResource',
+          '@flighthq/types:type#Texture',
+        ],
+      },
+    ]);
+    expect(byId.has('@flighthq/types:interface#ImageResource')).toBe(false);
+    expect(byId.has('@flighthq/types:interface#Tileset')).toBe(false);
+    expect(byId.has('@flighthq/types:interface#VideoTexture')).toBe(false);
   });
 });
 
@@ -399,34 +423,27 @@ describe('typed struct analysis', () => {
     expect(typedStructProvenanceSummary(audit)).toContain('| Clean required-field candidates | 2 |');
   });
 
-  it('keeps the reviewed class allowlist provenance-closed while leaving parked schemas direct', () => {
+  it('re-proves the reviewed cpp controls against the complete checker-derived universe', () => {
     const workspace = path.resolve('.');
     const programAndChecker = upstreamTypeScriptProgram(workspace);
-    const report = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker).report;
+    const registry = typedStructRegistry(workspace, 'fixture', undefined, programAndChecker);
+    const report = registry.report;
+    const classAudit = auditTypedStructClassFeasibility(workspace, 'fixture', registry, programAndChecker);
+    const provenance = auditTypedStructProvenance(workspace, 'fixture', registry, classAudit, programAndChecker);
+    const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
-    const color = report.candidates.find((candidate) => candidate.name === 'ColorTransform');
+    const color = report.candidates.find((candidate) => candidate.name === 'ColorScaleBias');
     const camera2D = report.candidates.find((candidate) => candidate.name === 'Camera2D');
     const particleEmitterData = report.candidates.find((candidate) => candidate.name === 'ParticleEmitterData');
     const particleEmitterState = report.candidates.find((candidate) => candidate.name === 'ParticleEmitterState');
-    const transform2DRuntime = report.candidates.find((candidate) => candidate.name === 'HasTransform2DRuntime');
-    const perspective = report.candidates.find((candidate) => candidate.name === 'PerspectiveProjection');
-    const scene = report.candidates.find((candidate) => candidate.name === 'Scene');
-    const asset = report.candidates.find((candidate) => candidate.name === 'AssetDescriptor');
-    const host = report.candidates.find((candidate) => candidate.name === 'DeviceInfo');
-    const serialization = report.candidates.find((candidate) => candidate.name === 'GltfDocument');
     const codec = report.candidates.find((candidate) => candidate.name === 'ParticleFormatCodec');
     const menuItemTemplate = report.candidates.find((candidate) => candidate.name === 'MenuItemTemplate');
-    const surface = report.candidates.find((candidate) => candidate.name === 'Surface');
-    const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
+    const bitmap = report.candidates.find((candidate) => candidate.name === 'Bitmap');
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
       '@flighthq/types:interface#ParticleEmitterState',
     ]);
-    const provenance = JSON.parse(readFileSync('reports/typed-struct-provenance.json', 'utf8')) as {
-      schemas: Array<{ id: string; nominalIdentity: { closed: boolean } }>;
-    };
-    const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
     expect(cppStructInitTypedStructIds.every((id) => provenanceById.get(id)?.nominalIdentity.closed === true)).toBe(
       true,
     );
@@ -445,17 +462,32 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flighthq/types/Node.hx', 'utf8')).toContain('typedef NodeData = Dynamic;');
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 0,
-      bindableAccesses: 10_257,
-      candidates: 405,
-      directAccesses: 10_257,
-      directSchemas: 404,
-      eligible: 404,
-      escapes: 348,
-      fields: 2_028,
-      ineligible: 1,
-      pendingAccesses: 0,
-      reflectiveSurvivors: 346,
+      auditOnlySchemas: 1_373,
+      bindableAccesses: 24_872,
+      candidates: 1_775,
+      directAccesses: 10_448,
+      directSchemas: 397,
+      eligible: 1_344,
+      escapes: 10_567,
+      fields: 21_033,
+      ineligible: 431,
+      pendingAccesses: 14_424,
+      reflectiveSurvivors: 393,
+    });
+    expect(report.migration.summary).toEqual({
+      baseline: 405,
+      kindChanged: 2,
+      newAuditOnly: 1_373,
+      preserved: 231,
+      relocated: 146,
+      removed: 3,
+      renamed: 23,
+    });
+    expect(classAudit.summary.schemas).toBe(1_344);
+    expect(provenance.summary).toMatchObject({
+      candidateSchemas: 633,
+      closedSchemas: 481,
+      containmentEdges: 1_593,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -467,9 +499,13 @@ describe('typed struct analysis', () => {
         }),
       ]),
     );
-    expect(color?.eligible).toBe(true);
-    expect(color?.purpose).toContain('RGBA');
-    expect(report.summary.directAccesses).toBe(10_257);
+    expect(color?.eligible).toBe(false);
+    expect(color?.reasons).toContain('presence-sensitive-use');
+    expect(color?.migration).toEqual({
+      baselineId: '@flighthq/types:interface#ColorTransform',
+      status: 'renamed',
+    });
+    expect(report.summary.directAccesses).toBe(10_448);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
       mode: 'direct',
@@ -484,7 +520,7 @@ describe('typed struct analysis', () => {
     });
     expect(particleEmitterData).toMatchObject({
       eligible: true,
-      emission: { directAccesses: 405, mode: 'direct', pendingAccesses: 0 },
+      emission: { directAccesses: 411, mode: 'direct', pendingAccesses: 0 },
       escapes: [],
       fields: expect.arrayContaining([
         expect.objectContaining({ name: 'particleCount', optional: false, type: 'number' }),
@@ -502,93 +538,24 @@ describe('typed struct analysis', () => {
       ]),
       reasons: [],
     });
-    expect(transform2DRuntime?.emission).toEqual({
-      directAccesses: 27,
-      mode: 'direct',
-      pendingAccesses: 0,
-      reflectiveSurvivors: [
-        { accesses: 41, reason: 'incompatible-union' },
-        { accesses: 9, reason: 'unknown-member' },
-      ],
-    });
-    expect(transform2DRuntime?.escapes).toHaveLength(50);
-    expect(perspective?.emission).toEqual({
-      directAccesses: 7,
-      mode: 'direct',
-      pendingAccesses: 0,
-      reflectiveSurvivors: [{ accesses: 7, reason: 'incompatible-union' }],
-    });
-    expect(perspective?.escapes).toHaveLength(7);
-    expect(perspective?.escapes.every((escape) => escape.reason === 'incompatible-union')).toBe(true);
-    expect(tranche6TypedStructCandidates).toHaveLength(350);
-    expect(new Set(tranche6TypedStructCandidates.map((candidate) => candidate.purpose))).toEqual(
-      new Set(['broad asset document', 'broad host document', 'broad scene document', 'broad serialization document']),
-    );
-    expect(
-      Object.fromEntries(
-        ['scene', 'asset', 'host', 'serialization'].map((family) => [
-          family,
-          tranche6TypedStructCandidates.filter((candidate) => candidate.purpose === `broad ${family} document`).length,
-        ]),
-      ),
-    ).toEqual({ asset: 76, host: 104, scene: 27, serialization: 143 });
-    expect(trancheSix.every((candidate) => candidate.eligible && candidate.reasons.length === 0)).toBe(true);
-    expect(trancheSix.every((candidate) => candidate.emission.mode === 'direct')).toBe(true);
-    expect(
-      trancheSix
-        .filter((candidate) => tranche6aDirectTypedStructIds.includes(candidate.id))
-        .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
-    ).toBe(3_187);
-    expect(
-      trancheSix
-        .filter((candidate) => tranche6bDirectTypedStructIds.includes(candidate.id))
-        .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
-    ).toBe(1_200);
-    expect(
-      trancheSix
-        .filter(
-          (candidate) =>
-            !tranche6aDirectTypedStructIds.includes(candidate.id) &&
-            !tranche6bDirectTypedStructIds.includes(candidate.id),
-        )
-        .reduce((total, candidate) => total + candidate.emission.directAccesses, 0),
-    ).toBe(2_599);
     expect(menuItemTemplate?.emission.reflectiveSurvivors).toEqual([{ accesses: 1, reason: 'dynamic-enumeration' }]);
-    expect(surface?.emission.directAccesses).toBe(433);
-    expect(new Set(tranche6TypedStructCandidates.map(candidateId)).size).toBe(tranche6TypedStructCandidates.length);
-    expect(scene?.emission.directAccesses).toBe(14);
-    expect(asset?.emission.directAccesses).toBe(10);
-    expect(host?.emission.directAccesses).toBe(50);
-    expect(serialization?.emission.directAccesses).toBe(25);
+    expect(bitmap).toMatchObject({
+      emission: { mode: 'direct' },
+      migration: { baselineId: '@flighthq/types:interface#Surface', status: 'renamed' },
+    });
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           member: 'parseToDocument',
           reason: 'receiver-sensitive-method',
-          source: 'upstream/packages/particles-formats/src/formatRegistry.ts:23',
+          source: 'upstream/packages/types/src/ParticleFormatCodec.ts:12',
         }),
       ]),
     );
     expect(typedStructSummary(report)).toContain(
-      '| `@flighthq/particles-formats:interface#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/particles-formats/src/formatRegistry.ts:23` |',
+      '| `@flighthq/types:interface#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/ParticleFormatCodec.ts:12` |',
     );
-    expect(
-      tranche6TypedStructCandidates.some(
-        (candidate) => candidate.name.endsWith('Backend') || candidate.source.includes('/host-'),
-      ),
-    ).toBe(false);
-    expect(tranche6TypedStructCandidates.map((candidate) => candidate.name)).not.toEqual(
-      expect.arrayContaining([
-        'AcceleratorParseError',
-        'CubeTextureLike',
-        'EntityWithoutRuntime',
-        'MeshGeometryGlData',
-        'MeshGeometryRuntime',
-        'MeshGeometryWgpuData',
-        'ParticleDesignerRawDict',
-      ]),
-    );
-  });
+  }, 90_000);
 
   it('keeps eligible audit-only schemas reflective until review enables them', () => {
     const result = lowerFixture(
@@ -871,6 +838,44 @@ describe('typed struct analysis', () => {
     expect(output).toContain("_Runtime.field(value, 'x')");
     expect(output).toContain("_Runtime.hasField(value, 'x')");
   });
+
+  it('audits structurally wider intersections as width-sensitive', () => {
+    const fixture = typedStructFixture(`
+      export interface A { x: number; }
+      export interface B { y: number; }
+      export function read(value: A & B): number { return value.x + value.y; }
+    `);
+    const registry = createTypedStructRegistry(
+      fixture.workspace,
+      'fixture',
+      [
+        {
+          emission: 'direct',
+          name: 'A',
+          packageName: '@flighthq/types',
+          purpose: 'fixture width rule',
+          source: fixture.source,
+        },
+        {
+          emission: 'direct',
+          name: 'B',
+          packageName: '@flighthq/types',
+          purpose: 'fixture width rule',
+          source: fixture.source,
+        },
+      ],
+      fixture.program,
+      fixture.checker,
+    );
+
+    expect(registry.report.candidates).toHaveLength(2);
+    expect(
+      registry.report.candidates.every((candidate) =>
+        candidate.escapes.every((escape) => escape.reason === 'width-sensitive'),
+      ),
+    ).toBe(true);
+    expect(registry.report.candidates.map((candidate) => candidate.escapes.length)).toEqual([2, 2]);
+  });
 });
 
 function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCandidate) {
@@ -896,6 +901,37 @@ function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCan
     lowered: lowerTypeScriptSource(source, '@flighthq/types', workspace, checker, registry),
     registry,
   };
+}
+
+function typedStructFixture(text: string) {
+  const workspace = '/workspace';
+  const source = 'upstream/packages/types/src/Vector2.ts';
+  const fileName = `${workspace}/${source}`;
+  const options: ts.CompilerOptions = {
+    lib: ['lib.es2022.d.ts'],
+    skipLibCheck: true,
+    strict: true,
+    target: ts.ScriptTarget.ESNext,
+  };
+  const fixture = ts.createSourceFile(fileName, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const host = ts.createCompilerHost(options);
+  const directoryExists = host.directoryExists?.bind(host);
+  const fileExists = host.fileExists.bind(host);
+  const getSourceFile = host.getSourceFile.bind(host);
+  const readFile = host.readFile.bind(host);
+  host.fileExists = (requested) => requested === fileName || fileExists(requested);
+  host.directoryExists = (requested) => requested.startsWith(`${workspace}/`) || directoryExists?.(requested) === true;
+  host.readFile = (requested) => (requested === fileName ? fixture.text : readFile(requested));
+  host.getSourceFile = (requested, languageVersion, onError, shouldCreateNewSourceFile) =>
+    requested === fileName ? fixture : getSourceFile(requested, languageVersion, onError, shouldCreateNewSourceFile);
+  const program = ts.createProgram([fileName], options, host);
+  const diagnostics = program.getSemanticDiagnostics();
+  if (diagnostics.length > 0) {
+    throw new Error(
+      diagnostics.map((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')).join('\n'),
+    );
+  }
+  return { checker: program.getTypeChecker(), program, source, workspace };
 }
 
 function classAuditFixture(productionText: string, testText: string) {

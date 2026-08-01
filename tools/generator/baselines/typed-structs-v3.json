@@ -1,0 +1,3247 @@
+{
+  "baselineUpstreamCommit": "5d24729f7360475e28a105ae0caeeaa2e1328260",
+  "candidates": [
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontCharRecord",
+      "packageName": "@flighthq/bitmapfont-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/bitmapfont-formats/src/bitmapFontRecord.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontKerningRecord",
+      "packageName": "@flighthq/bitmapfont-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/bitmapfont-formats/src/bitmapFontRecord.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontPageRecord",
+      "packageName": "@flighthq/bitmapfont-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/bitmapfont-formats/src/bitmapFontRecord.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontRecord",
+      "packageName": "@flighthq/bitmapfont-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/bitmapfont-formats/src/bitmapFontRecord.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MeshGeometryOptions",
+      "packageName": "@flighthq/mesh",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/mesh/src/meshGeometry.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "LibgdxParsed",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/libgdxParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxParseOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/libgdxParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxParseResult",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/libgdxParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxParticleDocument",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/libgdxSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxRangeValue",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/libgdxSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxSerializeOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/libgdxSerialize.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParseParticleConfigOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/parseParticleConfig.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleConfigParseResult",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/parseParticleConfig.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleDesignerDocument",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/particleDesignerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleDesignerParsed",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/particleDesignerParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleDesignerParseOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/particleDesignerParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleDesignerSerializeOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/particleDesignerSerialize.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleFormatCodec",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/formatRegistry.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleSerializeResult",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/serializeResult.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "PixiParsed",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/pixiParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PixiParseResult",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/pixiParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpineAlphaKeyframe",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/spineSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpineParsed",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/spineParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpineParticleDocument",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/spineSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpineRangeValue",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/spineSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpineTintKeyframe",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/spineSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingPexColor",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/starlingPexSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingPexDocument",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/starlingPexSchema.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "StarlingPexParsed",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/starlingPexParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingPexParseOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/starlingPexParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingPexParseResult",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/starlingPexParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingPexSerializeOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/starlingPexSerialize.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityAnimationCurve",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityBurst",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityColor",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityColorOverLifetime",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityCurveKey",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityEmission",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityGradient",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityGradientAlphaKey",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityGradientColorKey",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityMinMaxValue",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityParsed",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unityParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityParseOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unityParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityParticleDocument",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityRotationOverLifetime",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnitySerializeOptions",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySerialize.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnityShape",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UnitySizeOverLifetime",
+      "packageName": "@flighthq/particles-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/particles-formats/src/unitySchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfAccessor",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfAccessorSparse",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfAnimation",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfAnimationChannel",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfAnimationSampler",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfBuffer",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfBufferView",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfDocument",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfImage",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfImportOptions",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfMaterial",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfMesh",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfMorphTarget",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfNode",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfNormalTextureInfo",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfOcclusionTextureInfo",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfPbrMetallicRoughness",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfPrimitive",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfSampler",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfScene",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfSkin",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfTexture",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfTextureInfo",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GltfTextureTransform",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/gltfSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Md5Joint",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/md5Schema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Md5Mesh",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/md5Schema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Md5Vertex",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/md5Schema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Md5Weight",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/md5Schema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ObjMaterial",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/objSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ObjMaterialLibrary",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/objSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SkinInfluence",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/shared.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ThreeDsMaterial",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/threeDsSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ThreeDsMesh",
+      "packageName": "@flighthq/scene-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/scene-formats/src/threeDsSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LoadSceneOptions",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/loadSceneOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResolveSceneResourcesOptions",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/resolveSceneResources.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneMaterialTextureRegistry",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/sceneMaterialTextureRegistry.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneResourceEvent",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/sceneResourceSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneResourceInFlight",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/sceneResourceResolver.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneResourceResolver",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/sceneResourceResolver.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneResourceResolverOptions",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/sceneResourceResolver.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneResourceRevealOptions",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/revealSceneResourcesOnResolve.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneResourceSignals",
+      "packageName": "@flighthq/scene-resources",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/scene-resources/src/sceneResourceSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShapeBitmapReference",
+      "packageName": "@flighthq/shape-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/shape-formats/src/shapeJson.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShapeJsonFormatOptions",
+      "packageName": "@flighthq/shape-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/shape-formats/src/shapeJson.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShapeJsonParseOptions",
+      "packageName": "@flighthq/shape-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/shape-formats/src/shapeJson.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SignalThrottleOptions",
+      "packageName": "@flighthq/signals",
+      "purpose": "signal-throttle option record",
+      "source": "upstream/packages/signals/src/throttle.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteArrayDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteArrayFrame",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteBaseFrame",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteFrameTag",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteHashDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "AsepriteHashFrame",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteLayer",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteMeta",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteParsed",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteRect",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteSerializeOptions",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AsepriteSize",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/asepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CocosPlistDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/cocosPlistSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CocosPlistFrame",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/cocosPlistSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CocosPlistMetadata",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/cocosPlistSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CocosPlistParsed",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/cocosPlistParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxAtlasDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/libgdxAtlasSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxAtlasPage",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/libgdxAtlasSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxAtlasParseOptions",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/libgdxAtlasParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "LibgdxAtlasRegion",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/libgdxAtlasSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetParseOptions",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/spritesheetDetect.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/starlingSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingParsed",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/starlingParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingParseOptions",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/starlingParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StarlingSubTexture",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/starlingSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerArrayDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerArrayFrame",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerFrameTag",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerHashDocument",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerHashFrame",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerMeta",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerParsed",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerPivot",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerRect",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerSerializeOptions",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TexturePackerSize",
+      "packageName": "@flighthq/spritesheet-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ByteReader",
+      "packageName": "@flighthq/texture-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/texture-formats/src/byteReader.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteArrayDocument",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteArrayFrame",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteBaseFrame",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteFrameTag",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteHashDocument",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteHashFrame",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteMeta",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteRect",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasAsepriteSize",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerArrayDocument",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerArrayFrame",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerFrameTag",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerHashDocument",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerHashFrame",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerMeta",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerParseOptions",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerPivot",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerRect",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasPackerSize",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasStarlingParseOptions",
+      "packageName": "@flighthq/textureatlas-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasStarlingParse.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TiledParseOptions",
+      "packageName": "@flighthq/tilemap-formats",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/tilemap-formats/src/tiledOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Aabb",
+      "packageName": "@flighthq/types",
+      "purpose": "3D axis-aligned bounds entity",
+      "source": "upstream/packages/types/src/Aabb.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "AabbLike",
+      "packageName": "@flighthq/types",
+      "purpose": "structural 3D axis-aligned bounds carrier",
+      "source": "upstream/packages/types/src/Aabb.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AmbientLightReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AnimationClip",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/AnimationClip.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "App",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/App.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Application",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Application.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ApplicationLoopOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "application-loop option record",
+      "source": "upstream/packages/types/src/ApplicationLoopOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ApplicationWindow",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ApplicationWindow.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AppLifecycle",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Lifecycle.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AppLoginItem",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/App.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AppLoginItemLike",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/App.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AppUpdater",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetDescriptor",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetEntry",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetGroupLoadOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetLibrary",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetLibraryRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetLoaderAdapter",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AssetLoadProgress",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Assets.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AttractorForce",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AttractorForce.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioBus",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AudioBus.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioBusOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "audio-bus option record",
+      "source": "upstream/packages/types/src/AudioBus.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioChannel",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AudioResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioMixer",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AudioBus.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioMixerOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AudioBus.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioPlayOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "audio-playback option record",
+      "source": "upstream/packages/types/src/AudioResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioResource",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AudioResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "AudioResourceUrl",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/AudioResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Billboard",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/Billboard.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BinPackOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "bin-packing option record",
+      "source": "upstream/packages/types/src/BinPack.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFont",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/BitmapFont.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/BitmapFont.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontGlyphData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/BitmapFont.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontKerningData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/BitmapFont.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapFontParseOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/BitmapFont.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BitmapTextOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "bitmap-text option record",
+      "source": "upstream/packages/types/src/BitmapText.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "BoundingSphere",
+      "packageName": "@flighthq/types",
+      "purpose": "3D bounding-sphere aggregate",
+      "source": "upstream/packages/types/src/BoundingSphere.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Camera",
+      "packageName": "@flighthq/types",
+      "purpose": "3D camera aggregate",
+      "source": "upstream/packages/types/src/Camera.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Camera2D",
+      "packageName": "@flighthq/types",
+      "purpose": "2D camera hot-state aggregate",
+      "source": "upstream/packages/types/src/Camera2D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Camera2DFollowOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "2D camera follow aggregate",
+      "source": "upstream/packages/types/src/Camera2D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Camera2DOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "2D camera construction aggregate",
+      "source": "upstream/packages/types/src/Camera2D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Capsule",
+      "packageName": "@flighthq/types",
+      "purpose": "3D capsule-bounds aggregate",
+      "source": "upstream/packages/types/src/Capsule.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CircleCollider",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/CircleCollider.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ClipboardBookmark",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Clipboard.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ClipboardWatch",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ClipboardWatch.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ClipboardWriteItem",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Clipboard.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ColorKeyframe",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleCurve.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ColorTransform",
+      "packageName": "@flighthq/types",
+      "purpose": "render-hot RGBA multiplier and offset record",
+      "source": "upstream/packages/types/src/ColorTransform.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Connectivity",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Connectivity.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ConnectivityReachability",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Connectivity.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ConnectivityReachabilityOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Connectivity.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ConnectivityStatus",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Connectivity.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CubeTexture",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/CubeTexture.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "CurveKeyframe",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleCurve.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "DeviceCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "device capability result record",
+      "source": "upstream/packages/types/src/DeviceCapabilities.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "DeviceDisplayMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "device display-metrics result record",
+      "source": "upstream/packages/types/src/DeviceDisplayMetrics.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "DeviceInfo",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Device.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "DragForce",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/DragForce.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "EmbeddedSceneResourceRef",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/SceneResourceRef.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ExternalSceneResourceRef",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/SceneResourceRef.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileDialogFilter",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileDialogHandle",
+      "packageName": "@flighthq/types",
+      "purpose": "file-dialog result handle",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileEntry",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/FileSystem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FilePermissions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/FileSystem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileStat",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/FileSystem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileSystemUsage",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/FileSystem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileWalkOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/FileSystem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FileWatchEvent",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/FileSystem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FilmicToneMapOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "filmic tone-map option record",
+      "source": "upstream/packages/types/src/FilmicToneMapOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Font",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Font.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FontMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "font-metrics result record",
+      "source": "upstream/packages/types/src/FontMetrics.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FontResource",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/FontResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "FontUrl",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Font.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Frustum",
+      "packageName": "@flighthq/types",
+      "purpose": "3D frustum aggregate",
+      "source": "upstream/packages/types/src/Frustum.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GeolocationRequestOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Geolocation.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GeoPosition",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Geolocation.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GeoPositionResult",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Geolocation.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphAtlas",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphAtlasOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "glyph-atlas option record",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphAtlasRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphAtlasShelf",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphEntry",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "glyph-metrics result record",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphRasterizedBitmap",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphRasterizeOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "glyph-rasterization option record",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GlyphSource",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GlyphSource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "GridSliceOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/GridSliceOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "HapticsCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "haptics capability result record",
+      "source": "upstream/packages/types/src/Haptics.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "HasBoundsRectangleRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "cached node rectangle-bounds aggregate",
+      "source": "upstream/packages/types/src/HasBoundsRectangle.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "HasTransform2D",
+      "packageName": "@flighthq/types",
+      "purpose": "authored node 2D transform aggregate",
+      "source": "upstream/packages/types/src/HasTransform2D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "HasTransform2DRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "cached node 2D transform aggregate",
+      "source": "upstream/packages/types/src/HasTransform2D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "HasTransform3D",
+      "packageName": "@flighthq/types",
+      "purpose": "authored node 3D transform aggregate",
+      "source": "upstream/packages/types/src/HasTransform3D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "HasTransform3DRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "cached node 3D transform aggregate",
+      "source": "upstream/packages/types/src/HasTransform3D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ImageResource",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ImageResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ImageResourceCompressed",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ImageResourceCompressed.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "InputGamepadAxisData",
+      "packageName": "@flighthq/types",
+      "purpose": "gamepad-axis input result record",
+      "source": "upstream/packages/types/src/InputGamepadData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "InputGamepadButtonData",
+      "packageName": "@flighthq/types",
+      "purpose": "gamepad-button input result record",
+      "source": "upstream/packages/types/src/InputGamepadData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "InputGamepadConnectData",
+      "packageName": "@flighthq/types",
+      "purpose": "gamepad-connection input result record",
+      "source": "upstream/packages/types/src/InputGamepadData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "InputTextData",
+      "packageName": "@flighthq/types",
+      "purpose": "text-input result record",
+      "source": "upstream/packages/types/src/InputTextData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "InteractionPointerOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "interaction-pointer option record",
+      "source": "upstream/packages/types/src/InteractionManager.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "IpcBackendCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Ipc.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "IpcChannel",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Ipc.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "IpcMessageEvent",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Ipc.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "IpcSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/IpcSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "IpcTarget",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Ipc.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Matrix",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Matrix.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Matrix3",
+      "packageName": "@flighthq/types",
+      "purpose": "3x3 matrix holder",
+      "source": "upstream/packages/types/src/Matrix3.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Matrix4",
+      "packageName": "@flighthq/types",
+      "purpose": "4x4 matrix holder",
+      "source": "upstream/packages/types/src/Matrix4.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MediaSessionActionDetails",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/MediaSession.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MediaSessionArtwork",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/MediaSession.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MediaSessionMetadata",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/MediaSession.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MediaSessionPositionState",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/MediaSession.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MenuItemTemplate",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Menu.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MenuSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/MenuSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Mesh",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/Mesh.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MeshGeometry",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/MeshGeometry.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MeshSubset",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/MeshGeometry.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MessageDialogOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MessageDialogResult",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "MotionReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "NodeSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/NodeSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "NotificationAction",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Notification.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "NotificationCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Notification.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "NotificationChannel",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Notification.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "NotificationRequest",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Notification.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "NotificationSchedule",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Notification.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Obb",
+      "packageName": "@flighthq/types",
+      "purpose": "3D oriented-bounds aggregate",
+      "source": "upstream/packages/types/src/Obb.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "OpenDirectoryDialogOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "OpenFileDialogOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "OrientationReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "OrthographicProjection",
+      "packageName": "@flighthq/types",
+      "purpose": "orthographic-camera projection aggregate",
+      "source": "upstream/packages/types/src/Camera.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParsedAccelerator",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ParsedAccelerator.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParsedProtocolUrl",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Protocol.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleConfigIssue",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleConfigIssue.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleEmitter",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleEmitter.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleEmitterConfig",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleEmitterConfig.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleEmitterData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleEmitter.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleEmitterRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleEmitter.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleEmitterSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleEmitterSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleEmitterState",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleEmitterState.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleObjectsState",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleObjectsState.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ParticleObjectsUpdateOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ParticleObjectsUpdateOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PathBooleanOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "path-boolean option record",
+      "source": "upstream/packages/types/src/PathBooleanOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PathOffsetOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "path-offset option record",
+      "source": "upstream/packages/types/src/PathOffsetOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PerspectiveProjection",
+      "packageName": "@flighthq/types",
+      "purpose": "perspective-camera projection aggregate",
+      "source": "upstream/packages/types/src/Camera.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Plane",
+      "packageName": "@flighthq/types",
+      "purpose": "3D plane aggregate",
+      "source": "upstream/packages/types/src/Plane.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PlaneCollider",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/PlaneCollider.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PlatformInfo",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Platform.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Power",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Power.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PowerBatteryHealth",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/PowerBatteryHealth.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PowerStatus",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Power.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PressureReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "PromptDialogOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ProtocolHandler",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Protocol.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ProximityReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Quaternion",
+      "packageName": "@flighthq/types",
+      "purpose": "four-component rotation leaf",
+      "source": "upstream/packages/types/src/Quaternion.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "QuaternionReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Ray3D",
+      "packageName": "@flighthq/types",
+      "purpose": "3D ray aggregate",
+      "source": "upstream/packages/types/src/Ray3D.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Rectangle",
+      "packageName": "@flighthq/types",
+      "purpose": "four-component rectangle leaf",
+      "source": "upstream/packages/types/src/Rectangle.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "RectangleCollider",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/RectangleCollider.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "RenderCacheRefreshOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "render-cache refresh option record",
+      "source": "upstream/packages/types/src/RenderCacheRefreshOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResourceLoader",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ResourceLoader.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResourceLoaderItemSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ResourceLoaderItemSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResourceLoaderOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ResourceLoaderOptions.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResourceLoadHandle",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ResourceLoadHandle.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResourceLoadItem",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ResourceLoadItem.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ResourceLoadReport",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/ResourceLoadReport.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "RotationRateReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SafeAreaInsets",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Device.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Sampler",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Sampler.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SaveFileDialogOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Scene",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/Scene.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneAnimationTarget",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/SceneAnimationTarget.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SceneNodeTraits",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/SceneNode.ts"
+    },
+    {
+      "declarationKind": "type",
+      "emission": "direct",
+      "name": "SceneRuntime",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/Scene.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ScheduledNotification",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Notification.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ScreenChangedMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ScreenChangeEvent.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ScreenChangeEvent",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ScreenChangeEvent.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ScreenInfo",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Screen.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ScreenMode",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ScreenMode.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ScreenSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ScreenSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SensorReading",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Sensors",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SensorSubscribeOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShareContent",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Share.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShareOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Share.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShareResult",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Share.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShareSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ShareSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShellOpenExternalOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShellOpenPathOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShellShortcutLink",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShortcutEvent",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ShortcutEvent.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "ShortcutSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ShortcutSignals.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Signal",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/Signal.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SignalData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/Signal.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpatialAabb",
+      "packageName": "@flighthq/types",
+      "purpose": "2D spatial-index bounds aggregate",
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SphereCollider",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SphereCollider.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Spritesheet",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Spritesheet.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetAnimation",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetAnimation.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetAnimationData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetAnimationData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetFrame",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetFrame.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetFrameData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetFrameData.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetPlayer",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetPlayer.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "SpritesheetValidationDiagnostic",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/SpritesheetValidationDiagnostic.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StatusBar",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/StatusBar.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StatusBarInfo",
+      "packageName": "@flighthq/types",
+      "purpose": "status-bar result record",
+      "source": "upstream/packages/types/src/StatusBar.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StatusBarStyleEntry",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/StatusBar.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StorageChange",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Storage.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StorageMigration",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Storage.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StorageNamespace",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Storage.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StorageQuota",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Storage.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "StorageSignals",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Storage.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Surface",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Surface.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextMetrics",
+      "packageName": "@flighthq/types",
+      "purpose": "text-metrics result record",
+      "source": "upstream/packages/types/src/TextMetrics.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Texture",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Texture.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlas",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/TextureAtlas.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureAtlasRegion",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/TextureAtlasRegion.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TextureUvTransform",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/TextureUvTransform.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Tileset",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/Tileset.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TrayBalloonOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "tray-balloon option record",
+      "source": "upstream/packages/types/src/Tray.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TrayCapabilities",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Tray.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TrayEventData",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Tray.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TrayIcon",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Tray.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TrayIconOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Tray.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TurbulenceForce",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/TurbulenceForce.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "TweenManager",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/TweenManager.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UpdateInfo",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UpdateProgress",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UpdaterConfig",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UpdaterError",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UpdaterSignatureConfig",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "UpdaterState",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Updater.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Vector2",
+      "packageName": "@flighthq/types",
+      "purpose": "two-component numeric geometry leaf",
+      "source": "upstream/packages/types/src/Vector2.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "Vector3",
+      "packageName": "@flighthq/types",
+      "purpose": "three-component numeric geometry leaf",
+      "source": "upstream/packages/types/src/Vector3.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VertexAttribute",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/MeshGeometry.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VertexAttributeLayout",
+      "packageName": "@flighthq/types",
+      "purpose": "broad scene document",
+      "source": "upstream/packages/types/src/MeshGeometry.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VideoChannel",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VideoPlayOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "video-playback option record",
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VideoResource",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VideoResourceLoadOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "video-resource load option record",
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VideoResourceUrl",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/VideoResource.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VideoTexture",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/VideoTexture.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "VortexForce",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/VortexForce.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WebcamCaptureOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Webcam.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WebcamPhoto",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Webcam.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WebcamStream",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/WebcamStream.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WebcamVideo",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/Webcam.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WindForce",
+      "packageName": "@flighthq/types",
+      "purpose": "broad asset document",
+      "source": "upstream/packages/types/src/WindForce.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WindowBounds",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ApplicationWindow.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "WindowOptions",
+      "packageName": "@flighthq/types",
+      "purpose": "broad host document",
+      "source": "upstream/packages/types/src/ApplicationWindow.ts"
+    },
+    {
+      "declarationKind": "interface",
+      "emission": "direct",
+      "name": "XmlElement",
+      "packageName": "@flighthq/xml",
+      "purpose": "broad serialization document",
+      "source": "upstream/packages/xml/src/xmlParse.ts"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceReportSha256": "01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3"
+}

@@ -1688,7 +1688,7 @@ function typedStructPropertyBinding(
   const registry = context.typedStructs;
   if (!checker || !registry) return undefined;
   const receiverType = checker.getTypeAtLocation(node.expression);
-  const resolution = registry.resolve(receiverType);
+  const resolution = registry.resolveDirect(receiverType);
   if (resolution.kind !== 'matched') return undefined;
   if (node.name.text === 'hasOwnProperty' && ts.isCallExpression(node.parent) && node.parent.expression === node) {
     return undefined;
@@ -1738,7 +1738,7 @@ function typedStructReceiverCast(
   const declaredType = context.checker.getTypeFromTypeNode(declaredTypeNode);
   // Union aliases already lower to Dynamic, so their narrowed fields do not need a Haxe cast.
   if (declaredType.isUnion()) return undefined;
-  const declaredResolution = context.typedStructs.resolve(declaredType);
+  const declaredResolution = context.typedStructs.resolveDirect(declaredType);
   if (declaredResolution.kind === 'matched' && declaredResolution.schemas[0]?.id === schemaId) return undefined;
   try {
     const storageType = lowerType(declaredTypeNode, context);

@@ -182,7 +182,7 @@ export function typedStructSummary(audit: TypedStructAudit): string {
     '',
     `Upstream commit: \`${audit.upstreamCommit}\``,
     '',
-    'Eligibility is audited independently from emission. Audit-only schemas remain reflective until their audit diff is approved.',
+    'The candidate universe is checker-derived. Member escapes, presence and width sensitivity, class feasibility, containment, and provenance are applied as rules. Eligibility is audited independently from emission; newly discovered schemas remain reflective until their audit diff is approved.',
     '',
     '| Metric | Count |',
     '| --- | ---: |',
@@ -198,12 +198,36 @@ export function typedStructSummary(audit: TypedStructAudit): string {
     `| Reflective survivors | ${audit.summary.reflectiveSurvivors} |`,
     `| Dynamic escapes | ${audit.summary.escapes} |`,
     '',
-    '| Candidate | Mode | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |',
-    '| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
+    '## Migration lock',
+    '',
+    `Baseline upstream commit: \`${audit.migration.baselineUpstreamCommit}\``,
+    '',
+    `Baseline report SHA-256: \`${audit.migration.sourceReportSha256}\``,
+    '',
+    '| Disposition | Count |',
+    '| --- | ---: |',
+    `| Baseline candidates | ${audit.migration.summary.baseline} |`,
+    `| Preserved | ${audit.migration.summary.preserved} |`,
+    `| Relocated | ${audit.migration.summary.relocated} |`,
+    `| Renamed | ${audit.migration.summary.renamed} |`,
+    `| Declaration-kind changes | ${audit.migration.summary.kindChanged} |`,
+    `| Replacement removals | ${audit.migration.summary.removed} |`,
+    `| Newly discovered, audit-only | ${audit.migration.summary.newAuditOnly} |`,
+    '',
+    '| Removed baseline identity | Checker-discovered successors |',
+    '| --- | --- |',
+    ...audit.migration.removed.map(
+      (removed) => `| \`${removed.baselineId}\` | ${removed.successorIds.map((id) => `\`${id}\``).join(', ')} |`,
+    ),
+    '',
+    '## Rule-derived candidate audit',
+    '',
+    '| Candidate identity | Mode | Migration | Baseline identity | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |',
+    '| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |',
   ];
   for (const candidate of audit.candidates) {
     lines.push(
-      `| \`${candidate.name}\` | \`${candidate.emission.mode}\` | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.emission.pendingAccesses} | ${candidate.emission.directAccesses} | ${candidate.emission.reflectiveSurvivors.reduce((total, survivor) => total + survivor.accesses, 0)} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
+      `| \`${candidate.id}\` | \`${candidate.emission.mode}\` | \`${candidate.migration.status}\` | ${candidate.migration.baselineId ? `\`${candidate.migration.baselineId}\`` : '—'} | ${candidate.purpose} | ${candidate.fields.length} | ${candidate.accesses.reads} | ${candidate.accesses.writes} | ${candidate.accesses.calls} | ${candidate.emission.pendingAccesses} | ${candidate.emission.directAccesses} | ${candidate.emission.reflectiveSurvivors.reduce((total, survivor) => total + survivor.accesses, 0)} | ${candidate.escapes.length} | ${candidate.eligible ? 'yes' : 'no'} | ${candidate.reasons.length > 0 ? candidate.reasons.map((reason) => `\`${reason}\``).join(', ') : '—'} |`,
     );
   }
   const memberEscapes = audit.candidates.flatMap((candidate) =>
