@@ -8,10 +8,13 @@ import { auditTypedStructProvenance } from '../../tools/generator/src/analyze/ty
 import {
   cppStructInitTypedStructIds,
   createTypedStructRegistry,
+  initialTypedStructCandidates,
+  resolveTypedStructCandidateIdentities,
   tranche6aDirectTypedStructIds,
   tranche6bDirectTypedStructIds,
   tranche6TypedStructCandidates,
   typedStructRegistry,
+  typedStructStableId,
   type TypedStructCandidate,
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
@@ -32,6 +35,92 @@ const fixtureCandidate: TypedStructCandidate = {
   purpose: 'fixture numeric leaf',
   source: 'upstream/packages/types/src/Vector2.ts',
 };
+
+describe('typed struct stable declaration identity', () => {
+  it('re-resolves unique moves without editing configured source paths', () => {
+    const workspace = path.resolve('.');
+    const { program } = upstreamTypeScriptProgram(workspace);
+    const audit = resolveTypedStructCandidateIdentities(workspace, program, initialTypedStructCandidates);
+    const particleEmitterData = audit.matched.find((candidate) => candidate.name === 'ParticleEmitterData');
+
+    expect(audit.summary).toEqual({
+      ambiguous: 0,
+      exact: 231,
+      kindChanged: 2,
+      matched: 377,
+      missing: 26,
+      relocated: 146,
+      requested: 405,
+    });
+    const relocated = audit.matched.filter((candidate) => candidate.sourceResolution === 'relocated');
+    expect(relocated).toHaveLength(146);
+    expect(
+      relocated.every(
+        (candidate) =>
+          candidate.packageName === '@flighthq/types' && candidate.definingPackageName === '@flighthq/types',
+      ),
+    ).toBe(true);
+    expect(
+      new Set(
+        audit.matched.map((candidate) =>
+          typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name),
+        ),
+      ).size,
+    ).toBe(audit.summary.matched);
+    expect(particleEmitterData).toMatchObject({
+      configuredPackageName: '@flighthq/types',
+      configuredSource: 'upstream/packages/types/src/ParticleEmitter.ts',
+      declarationKind: 'interface',
+      definingPackageName: '@flighthq/types',
+      packageName: '@flighthq/types',
+      source: 'upstream/packages/types/src/ParticleEmitter2D.ts',
+      sourceResolution: 'relocated',
+    });
+    expect(
+      particleEmitterData &&
+        typedStructStableId(
+          particleEmitterData.packageName,
+          particleEmitterData.declarationKind,
+          particleEmitterData.name,
+        ),
+    ).toBe('@flighthq/types:interface#ParticleEmitterData');
+  });
+
+  it('keeps missing names and declaration-kind drift loud and separate', () => {
+    const workspace = path.resolve('.');
+    const programAndChecker = upstreamTypeScriptProgram(workspace);
+    const audit = resolveTypedStructCandidateIdentities(
+      workspace,
+      programAndChecker.program,
+      initialTypedStructCandidates,
+    );
+    const missing = audit.issues.filter((issue) => issue.kind === 'missing').map((issue) => issue.candidate.name);
+    const kindChanged = audit.issues
+      .filter((issue) => issue.kind === 'kind-changed')
+      .map((issue) => issue.candidate.name)
+      .sort();
+
+    expect(missing).toHaveLength(26);
+    expect(missing).toEqual(
+      expect.arrayContaining(['ColorTransform', 'ImageResource', 'ParticleEmitter', 'ShapeBitmapReference', 'Surface']),
+    );
+    expect(kindChanged).toEqual(['CubeTexture', 'Texture']);
+    let message = '';
+    try {
+      typedStructRegistry(workspace, 'fixture', undefined, programAndChecker);
+    } catch (error) {
+      message = error instanceof Error ? error.message : String(error);
+    }
+    expect(message).toContain('Typed-struct stable declaration identities need review:');
+    expect(message).toContain(
+      '- @flighthq/types:interface#ColorTransform (configured upstream/packages/types/src/ColorTransform.ts): missing; no public export with that name',
+    );
+    expect(message).toContain(
+      '- @flighthq/types:interface#CubeTexture (configured upstream/packages/types/src/CubeTexture.ts): kind-changed;',
+    );
+    expect(message).toContain('@flighthq/types:type#CubeTexture at upstream/packages/types/src/CubeTexture.ts');
+  });
+});
 
 describe('typed struct analysis', () => {
   it('emits and constructs an allowlisted struct-init class only on the cpp branch', () => {
@@ -331,8 +420,8 @@ describe('typed struct analysis', () => {
     const trancheSix = report.candidates.slice(-tranche6TypedStructCandidates.length);
 
     expect(cppStructInitTypedStructIds).toEqual([
-      '@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D',
-      '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
+      '@flighthq/types:interface#Camera2D',
+      '@flighthq/types:interface#ParticleEmitterState',
     ]);
     const provenance = JSON.parse(readFileSync('reports/typed-struct-provenance.json', 'utf8')) as {
       schemas: Array<{ id: string; nominalIdentity: { closed: boolean } }>;
@@ -341,7 +430,7 @@ describe('typed struct analysis', () => {
     expect(cppStructInitTypedStructIds.every((id) => provenanceById.get(id)?.nominalIdentity.closed === true)).toBe(
       true,
     );
-    const particleEmitterDataId = '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData';
+    const particleEmitterDataId = '@flighthq/types:interface#ParticleEmitterData';
     expect(provenanceById.get(particleEmitterDataId)?.nominalIdentity.closed).toBe(false);
     expect(() => validateCppStructInitProvenance(cppStructInitTypedStructIds, provenance)).not.toThrow();
     expect(() => validateCppStructInitProvenance([particleEmitterDataId], provenance)).toThrow(
@@ -481,7 +570,7 @@ describe('typed struct analysis', () => {
       ]),
     );
     expect(typedStructSummary(report)).toContain(
-      '| `@flighthq/particles-formats:upstream/packages/particles-formats/src/formatRegistry.ts#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/particles-formats/src/formatRegistry.ts:23` |',
+      '| `@flighthq/particles-formats:interface#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/particles-formats/src/formatRegistry.ts:23` |',
     );
     expect(
       tranche6TypedStructCandidates.some(
@@ -669,7 +758,7 @@ describe('typed struct analysis', () => {
     expect(result.lowered.diagnostics).toEqual([]);
     expect(bindings.map((binding) => binding.field.name)).toEqual(['x', 'y']);
     expect(new Set(bindings.map((binding) => binding.schemaId))).toEqual(
-      new Set(['@flighthq/types:upstream/packages/types/src/Vector2.ts#Vector2']),
+      new Set(['@flighthq/types:interface#Vector2']),
     );
   });
 
@@ -905,7 +994,7 @@ function provenanceAuditFixture(productionText: string) {
 }
 
 function candidateId(candidate: TypedStructCandidate): string {
-  return `${candidate.packageName}:${candidate.source}#${candidate.name}`;
+  return typedStructStableId(candidate.packageName, 'interface', candidate.name);
 }
 
 function collectTypedStructBindings(value: unknown): IrTypedStructBinding[] {

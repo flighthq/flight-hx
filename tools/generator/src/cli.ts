@@ -28,7 +28,9 @@ const reportsDirectory = path.join(workspaceDirectory, portConfig.reportsDirecto
 
 try {
   const inventory = analyzeUpstream(workspaceDirectory);
-  const typedStructs = apiOnly ? undefined : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit);
+  const typedStructs = apiOnly
+    ? undefined
+    : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit, undefined, undefined, inventory);
   const typedStructClasses =
     apiOnly || !typedStructs
       ? undefined

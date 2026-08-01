@@ -4,24 +4,64 @@ import ts from 'typescript';
 
 import { portConfig } from '../../port.config.ts';
 
-import { sourcePathToHaxePackage, sourcePathToImplementationModule } from './inventory.ts';
+import type { UpstreamInventory } from '../model/inventory.ts';
+
+import { analyzeUpstream, sourcePathToHaxePackage, sourcePathToImplementationModule } from './inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
 
 // Target-conditional class emission is default-off. Every enabled schema is an
 // explicit canonical identity so an upstream declaration cannot enter silently.
 export const cppStructInitTypedStructIds: readonly string[] = [
-  '@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D',
-  '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
+  '@flighthq/types:interface#Camera2D',
+  '@flighthq/types:interface#ParticleEmitterState',
 ];
 
 const cppStructInitTypedStructIdSet = new Set(cppStructInitTypedStructIds);
 
 export interface TypedStructCandidate {
+  declarationKind?: TypedStructDeclarationKind;
   emission: 'audit-only' | 'direct';
   name: string;
   packageName: string;
   purpose: string;
   source: string;
+}
+
+export type TypedStructDeclarationKind = 'interface' | 'type';
+
+export interface ResolvedTypedStructCandidate extends TypedStructCandidate {
+  configuredPackageName: string;
+  configuredSource: string;
+  declarationKind: TypedStructDeclarationKind;
+  definingPackageName: string;
+  sourceResolution: 'exact' | 'relocated';
+}
+
+export interface TypedStructIdentityIssue {
+  actualKinds: TypedStructDeclarationKind[];
+  alternatives: Array<{
+    declarationKind: TypedStructDeclarationKind;
+    publicPackageName: string;
+    source: string;
+  }>;
+  candidate: TypedStructCandidate;
+  declarationKind: TypedStructDeclarationKind;
+  kind: 'ambiguous' | 'kind-changed' | 'missing';
+  sources: string[];
+}
+
+export interface TypedStructIdentityResolutionAudit {
+  issues: TypedStructIdentityIssue[];
+  matched: ResolvedTypedStructCandidate[];
+  summary: {
+    ambiguous: number;
+    exact: number;
+    kindChanged: number;
+    matched: number;
+    missing: number;
+    relocated: number;
+    requested: number;
+  };
 }
 
 export interface TypedStructField {
@@ -76,6 +116,7 @@ export interface TypedStructSchemaAudit {
   };
   declarationFingerprint: string;
   declarationKind: 'interface' | 'type';
+  definingPackageName: string;
   eligible: boolean;
   emission: {
     directAccesses: number;
@@ -103,11 +144,16 @@ export interface TypedStructSchemaAudit {
     | 'unsupported-shape'
   >;
   source: string;
+  sourceProvenance: {
+    configuredPackageName: string;
+    configuredSource: string;
+    resolution: 'exact' | 'relocated';
+  };
 }
 
 export interface TypedStructAudit {
   candidates: TypedStructSchemaAudit[];
-  schemaVersion: 3;
+  schemaVersion: 4;
   summary: {
     auditOnlySchemas: number;
     bindableAccesses: number;
@@ -135,6 +181,27 @@ export interface TypedStructRegistry {
   resolveCppStructInitConstruction(type: ts.Type): TypedStructConstructionBinding | undefined;
   resolveField(type: ts.Type, member: string, property?: ts.Symbol): TypedStructFieldBinding | undefined;
 }
+
+export function typedStructStableId(
+  packageName: string,
+  declarationKind: TypedStructDeclarationKind,
+  name: string,
+): string {
+  return `${packageName}:${declarationKind}#${name}`;
+}
+
+// Existing candidates default to interface. Keeping the eight type identities
+// explicit makes declaration-kind drift fail even when no prior report exists.
+const configuredTypeTypedStructNames = new Set([
+  '@flighthq/particles-formats#LibgdxParsed',
+  '@flighthq/particles-formats#PixiParsed',
+  '@flighthq/particles-formats#StarlingPexParsed',
+  '@flighthq/spritesheet-formats#AsepriteHashFrame',
+  '@flighthq/textureatlas-formats#TextureAtlasAsepriteHashFrame',
+  '@flighthq/types#AabbLike',
+  '@flighthq/types#RenderCacheRefreshOptions',
+  '@flighthq/types#SceneRuntime',
+]);
 
 const directTypedStructCandidates: readonly TypedStructCandidate[] = [
   {
@@ -538,29 +605,29 @@ interface TypedStructCandidateGroup {
 }
 
 export const tranche6aDirectTypedStructIds: readonly string[] = [
-  '@flighthq/types:upstream/packages/types/src/ParticleEmitterConfig.ts#ParticleEmitterConfig',
-  '@flighthq/types:upstream/packages/types/src/Matrix.ts#Matrix',
-  '@flighthq/types:upstream/packages/types/src/Surface.ts#Surface',
-  '@flighthq/types:upstream/packages/types/src/ParticleEmitter.ts#ParticleEmitterData',
-  '@flighthq/types:upstream/packages/types/src/TextureAtlasRegion.ts#TextureAtlasRegion',
-  '@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState',
-  '@flighthq/types:upstream/packages/types/src/Screen.ts#ScreenInfo',
-  '@flighthq/types:upstream/packages/types/src/MeshGeometry.ts#MeshGeometry',
+  '@flighthq/types:interface#ParticleEmitterConfig',
+  '@flighthq/types:interface#Matrix',
+  '@flighthq/types:interface#Surface',
+  '@flighthq/types:interface#ParticleEmitterData',
+  '@flighthq/types:interface#TextureAtlasRegion',
+  '@flighthq/types:interface#ParticleEmitterState',
+  '@flighthq/types:interface#ScreenInfo',
+  '@flighthq/types:interface#MeshGeometry',
 ];
 
 export const tranche6bDirectTypedStructIds: readonly string[] = [
-  '@flighthq/types:upstream/packages/types/src/Texture.ts#Texture',
-  '@flighthq/types:upstream/packages/types/src/ImageResource.ts#ImageResource',
-  '@flighthq/types:upstream/packages/types/src/ApplicationWindow.ts#ApplicationWindow',
-  '@flighthq/types:upstream/packages/types/src/TextureAtlas.ts#TextureAtlas',
-  '@flighthq/types:upstream/packages/types/src/SpritesheetFrameData.ts#SpritesheetFrameData',
-  '@flighthq/types:upstream/packages/types/src/Menu.ts#MenuItemTemplate',
-  '@flighthq/particles-formats:upstream/packages/particles-formats/src/starlingPexSchema.ts#StarlingPexDocument',
-  '@flighthq/particles-formats:upstream/packages/particles-formats/src/libgdxSchema.ts#LibgdxParticleDocument',
-  '@flighthq/types:upstream/packages/types/src/ApplicationWindow.ts#WindowOptions',
-  '@flighthq/types:upstream/packages/types/src/GlyphSource.ts#GlyphAtlasRuntime',
-  '@flighthq/types:upstream/packages/types/src/SpritesheetPlayer.ts#SpritesheetPlayer',
-  '@flighthq/types:upstream/packages/types/src/Mesh.ts#Mesh',
+  '@flighthq/types:interface#Texture',
+  '@flighthq/types:interface#ImageResource',
+  '@flighthq/types:interface#ApplicationWindow',
+  '@flighthq/types:interface#TextureAtlas',
+  '@flighthq/types:interface#SpritesheetFrameData',
+  '@flighthq/types:interface#MenuItemTemplate',
+  '@flighthq/types:interface#StarlingPexDocument',
+  '@flighthq/types:interface#LibgdxParticleDocument',
+  '@flighthq/types:interface#WindowOptions',
+  '@flighthq/types:interface#GlyphAtlasRuntime',
+  '@flighthq/types:interface#SpritesheetPlayer',
+  '@flighthq/types:interface#Mesh',
 ];
 
 function directTypedStructCandidatesFromGroups(
@@ -1632,6 +1699,205 @@ export const initialTypedStructCandidates: readonly TypedStructCandidate[] = [
   ...tranche6TypedStructCandidates,
 ];
 
+export function resolveTypedStructCandidateIdentities(
+  workspaceDirectory: string,
+  program: ts.Program,
+  candidates: readonly TypedStructCandidate[] = initialTypedStructCandidates,
+  inventory?: UpstreamInventory,
+): TypedStructIdentityResolutionAudit {
+  const declarations = typedStructDeclarationIdentities(workspaceDirectory, program, inventory);
+  const matched: ResolvedTypedStructCandidate[] = [];
+  const issues: TypedStructIdentityIssue[] = [];
+
+  for (const candidate of candidates) {
+    const namedDeclarations = declarations.filter((declaration) => declaration.name === candidate.name);
+    const declarationKind = configuredTypedStructDeclarationKind(candidate);
+    const availableKinds = new Set(namedDeclarations.map((declaration) => declaration.declarationKind));
+    const compatibleDeclarations = namedDeclarations.filter(
+      (declaration) => declaration.declarationKind === declarationKind,
+    );
+    const packageDeclarations = compatibleDeclarations.filter(
+      (declaration) => declaration.publicPackageName === candidate.packageName,
+    );
+    const exactPackageDeclarations = packageDeclarations.filter(
+      (declaration) => declaration.source === candidate.source,
+    );
+    const exactSourceDeclarations = compatibleDeclarations.filter(
+      (declaration) => declaration.source === candidate.source,
+    );
+    const owningPackageDeclarations = compatibleDeclarations.filter(
+      (declaration) => declaration.publicPackageName === declaration.definingPackageName,
+    );
+    const resolved =
+      packageDeclarations.length === 1
+        ? packageDeclarations[0]
+        : exactPackageDeclarations.length === 1
+          ? exactPackageDeclarations[0]
+          : owningPackageDeclarations.length === 1
+            ? owningPackageDeclarations[0]
+            : exactSourceDeclarations.length === 1
+              ? exactSourceDeclarations[0]
+              : compatibleDeclarations.length === 1
+                ? compatibleDeclarations[0]
+                : undefined;
+    if (!resolved) {
+      issues.push({
+        actualKinds: [...availableKinds].sort(),
+        alternatives: typedStructIdentityAlternatives(
+          compatibleDeclarations.length === 0 ? namedDeclarations : compatibleDeclarations,
+        ),
+        candidate,
+        declarationKind,
+        kind:
+          compatibleDeclarations.length === 0
+            ? namedDeclarations.length === 0
+              ? 'missing'
+              : 'kind-changed'
+            : 'ambiguous',
+        sources: [
+          ...new Set(
+            (compatibleDeclarations.length === 0 ? namedDeclarations : compatibleDeclarations).map(
+              (declaration) => declaration.source,
+            ),
+          ),
+        ].sort(),
+      });
+      continue;
+    }
+    matched.push({
+      ...candidate,
+      configuredPackageName: candidate.packageName,
+      configuredSource: candidate.source,
+      declarationKind,
+      definingPackageName: resolved.definingPackageName,
+      packageName: resolved.publicPackageName,
+      source: resolved.source,
+      sourceResolution:
+        resolved.publicPackageName === candidate.packageName && resolved.source === candidate.source
+          ? 'exact'
+          : 'relocated',
+    });
+  }
+
+  issues.sort(
+    (left, right) =>
+      left.candidate.packageName.localeCompare(right.candidate.packageName) ||
+      left.candidate.name.localeCompare(right.candidate.name) ||
+      left.declarationKind.localeCompare(right.declarationKind) ||
+      left.candidate.source.localeCompare(right.candidate.source),
+  );
+  return {
+    issues,
+    matched,
+    summary: {
+      ambiguous: issues.filter((issue) => issue.kind === 'ambiguous').length,
+      exact: matched.filter((candidate) => candidate.sourceResolution === 'exact').length,
+      kindChanged: issues.filter((issue) => issue.kind === 'kind-changed').length,
+      matched: matched.length,
+      missing: issues.filter((issue) => issue.kind === 'missing').length,
+      relocated: matched.filter((candidate) => candidate.sourceResolution === 'relocated').length,
+      requested: candidates.length,
+    },
+  };
+}
+
+interface TypedStructDeclarationIdentity {
+  declarationKind: TypedStructDeclarationKind;
+  definingPackageName: string;
+  name: string;
+  publicPackageName: string;
+  source: string;
+}
+
+const typedStructDeclarationIdentityCache = new WeakMap<ts.Program, TypedStructDeclarationIdentity[]>();
+
+function typedStructDeclarationIdentities(
+  workspaceDirectory: string,
+  program: ts.Program,
+  inventory?: UpstreamInventory,
+): TypedStructDeclarationIdentity[] {
+  const cached = typedStructDeclarationIdentityCache.get(program);
+  if (cached) return cached;
+  const declarationsByIdentity = new Map<string, TypedStructDeclarationIdentity>();
+  for (const packageInventory of (inventory ?? analyzeUpstream(workspaceDirectory)).packages) {
+    for (const lane of packageInventory.exportLanes) {
+      for (const record of lane.exports) {
+        if (record.kind !== 'interface' && record.kind !== 'type') continue;
+        const identity = `${packageInventory.name}:${record.kind}#${record.name}:${record.source}`;
+        declarationsByIdentity.set(identity, {
+          declarationKind: record.kind,
+          definingPackageName: packageNameFromSource(record.source),
+          name: record.name,
+          publicPackageName: packageInventory.name,
+          source: record.source,
+        });
+      }
+    }
+  }
+  const declarations = [...declarationsByIdentity.values()].sort(
+    (left, right) =>
+      left.name.localeCompare(right.name) ||
+      left.declarationKind.localeCompare(right.declarationKind) ||
+      left.publicPackageName.localeCompare(right.publicPackageName) ||
+      left.definingPackageName.localeCompare(right.definingPackageName) ||
+      left.source.localeCompare(right.source),
+  );
+  typedStructDeclarationIdentityCache.set(program, declarations);
+  return declarations;
+}
+
+function configuredTypedStructDeclarationKind(candidate: TypedStructCandidate): TypedStructDeclarationKind {
+  if (candidate.declarationKind) return candidate.declarationKind;
+  return configuredTypeTypedStructNames.has(`${candidate.packageName}#${candidate.name}`) ? 'type' : 'interface';
+}
+
+function typedStructIdentityAlternatives(
+  declarations: readonly TypedStructDeclarationIdentity[],
+): TypedStructIdentityIssue['alternatives'] {
+  const alternatives = new Map<string, TypedStructIdentityIssue['alternatives'][number]>();
+  for (const declaration of declarations) {
+    const alternative = {
+      declarationKind: declaration.declarationKind,
+      publicPackageName: declaration.publicPackageName,
+      source: declaration.source,
+    };
+    alternatives.set(
+      `${alternative.publicPackageName}:${alternative.declarationKind}:${alternative.source}`,
+      alternative,
+    );
+  }
+  return [...alternatives.values()].sort(
+    (left, right) =>
+      left.publicPackageName.localeCompare(right.publicPackageName) ||
+      left.declarationKind.localeCompare(right.declarationKind) ||
+      left.source.localeCompare(right.source),
+  );
+}
+
+function packageNameFromSource(source: string): string {
+  const directoryName = /^upstream\/packages\/([^/]+)\//u.exec(source)?.[1];
+  if (!directoryName) throw new Error(`Cannot derive defining package from typed-struct source: ${source}`);
+  return `@flighthq/${directoryName}`;
+}
+
+function formatTypedStructIdentityIssues(issues: readonly TypedStructIdentityIssue[]): string {
+  return `Typed-struct stable declaration identities need review:\n${issues
+    .map((issue) => {
+      const identity = `${issue.candidate.packageName}:${issue.declarationKind}#${issue.candidate.name}`;
+      const available =
+        issue.alternatives.length === 0
+          ? 'no public export with that name'
+          : `available ${issue.alternatives
+              .map(
+                (alternative) =>
+                  `${alternative.publicPackageName}:${alternative.declarationKind}#${issue.candidate.name} at ${alternative.source}`,
+              )
+              .join(', ')}`;
+      return `- ${identity} (configured ${issue.candidate.source}): ${issue.kind}; ${available}`;
+    })
+    .join('\n')}`;
+}
+
 interface InternalSchema {
   audit: TypedStructSchemaAudit;
   fields: ReadonlyMap<
@@ -1642,6 +1908,13 @@ interface InternalSchema {
     }
   >;
   symbol: ts.Symbol;
+}
+
+interface AnalyzableTypedStructCandidate extends TypedStructCandidate {
+  configuredPackageName: string;
+  configuredSource: string;
+  definingPackageName: string;
+  sourceResolution: 'exact' | 'relocated';
 }
 
 interface ReferencedSchemas {
@@ -1657,9 +1930,20 @@ export function typedStructRegistry(
   upstreamCommit: string,
   candidates: readonly TypedStructCandidate[] = initialTypedStructCandidates,
   programAndChecker = upstreamTypeScriptProgram(workspaceDirectory),
+  inventory?: UpstreamInventory,
 ): TypedStructRegistry {
-  const cacheKey = `${upstreamCommit}|${candidates
-    .map((candidate) => `${candidate.packageName}:${candidate.source}#${candidate.name}:${candidate.emission}`)
+  const identities = resolveTypedStructCandidateIdentities(
+    workspaceDirectory,
+    programAndChecker.program,
+    candidates,
+    inventory,
+  );
+  if (identities.issues.length > 0) throw new Error(formatTypedStructIdentityIssues(identities.issues));
+  const cacheKey = `${upstreamCommit}|${identities.matched
+    .map(
+      (candidate) =>
+        `${typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name)}:${candidate.source}:${candidate.emission}`,
+    )
     .join('|')}`;
   const cached = registryCache.get(programAndChecker.program)?.get(cacheKey);
   if (cached) return cached;
@@ -1670,6 +1954,7 @@ export function typedStructRegistry(
     candidates,
     programAndChecker.program,
     programAndChecker.checker,
+    identities.matched,
   );
   const programCache = registryCache.get(programAndChecker.program) ?? new Map<string, TypedStructRegistry>();
   programCache.set(cacheKey, registry);
@@ -1683,8 +1968,20 @@ export function createTypedStructRegistry(
   candidates: readonly TypedStructCandidate[],
   program: ts.Program,
   checker: ts.TypeChecker,
+  resolvedCandidates?: readonly ResolvedTypedStructCandidate[],
 ): TypedStructRegistry {
-  const schemas = candidates.map((candidate) => analyzeCandidate(candidate, workspaceDirectory, program, checker));
+  const analyzableCandidates: readonly AnalyzableTypedStructCandidate[] =
+    resolvedCandidates ??
+    candidates.map((candidate) => ({
+      ...candidate,
+      configuredPackageName: candidate.packageName,
+      configuredSource: candidate.source,
+      definingPackageName: packageNameFromSource(candidate.source),
+      sourceResolution: 'exact',
+    }));
+  const schemas = analyzableCandidates.map((candidate) =>
+    analyzeCandidate(candidate, workspaceDirectory, program, checker),
+  );
   const bySymbol = new Map(schemas.map((schema) => [canonicalSymbol(schema.symbol, checker), schema]));
   const resolve = (type: ts.Type): TypedStructResolution =>
     resolveType(type, checker, bySymbol, new Set<ts.Type>(), new Set<ts.Symbol>());
@@ -1735,7 +2032,7 @@ export function createTypedStructRegistry(
 
   const report: TypedStructAudit = {
     candidates: schemas.map((schema) => schema.audit),
-    schemaVersion: 3,
+    schemaVersion: 4,
     summary: {
       auditOnlySchemas: schemas.filter((schema) => schema.audit.emission.mode === 'audit-only').length,
       bindableAccesses: sum(schemas, (schema) =>
@@ -1801,12 +2098,12 @@ export function createTypedStructRegistry(
 
 function typedStructHaxeType(schema: TypedStructSchemaAudit): string {
   const moduleName = sourcePathToImplementationModule(schema.source);
-  const modulePath = `${sourcePathToHaxePackage(schema.packageName, schema.source)}.${moduleName}`;
+  const modulePath = `${sourcePathToHaxePackage(schema.definingPackageName, schema.source)}.${moduleName}`;
   return moduleName === schema.name ? modulePath : `${modulePath}.${schema.name}`;
 }
 
 function analyzeCandidate(
-  candidate: TypedStructCandidate,
+  candidate: AnalyzableTypedStructCandidate,
   workspaceDirectory: string,
   program: ts.Program,
   checker: ts.TypeChecker,
@@ -1822,6 +2119,12 @@ function analyzeCandidate(
   );
   if (!declaration || (!ts.isInterfaceDeclaration(declaration) && !ts.isTypeAliasDeclaration(declaration))) {
     throw new Error(`Typed-struct candidate declaration is missing: ${candidate.source}#${candidate.name}`);
+  }
+  const declarationKind = ts.isInterfaceDeclaration(declaration) ? 'interface' : 'type';
+  if (candidate.declarationKind && candidate.declarationKind !== declarationKind) {
+    throw new Error(
+      `Typed-struct declaration kind drift for ${candidate.packageName}#${candidate.name}: expected ${candidate.declarationKind}, received ${declarationKind}`,
+    );
   }
   const symbol = checker.getSymbolAtLocation(declaration.name);
   if (!symbol) throw new Error(`Typed-struct candidate has no symbol: ${candidate.source}#${candidate.name}`);
@@ -1898,7 +2201,8 @@ function analyzeCandidate(
   const audit: TypedStructSchemaAudit = {
     accesses: { calls: 0, reads: 0, writes: 0 },
     declarationFingerprint: fingerprint(declaration, source),
-    declarationKind: ts.isInterfaceDeclaration(declaration) ? 'interface' : 'type',
+    declarationKind,
+    definingPackageName: candidate.definingPackageName,
     eligible: false,
     emission: {
       directAccesses: 0,
@@ -1908,13 +2212,18 @@ function analyzeCandidate(
     },
     escapes: [],
     fields,
-    id: `${candidate.packageName}:${candidate.source}#${candidate.name}`,
+    id: typedStructStableId(candidate.packageName, declarationKind, candidate.name),
     memberEscapes,
     name: candidate.name,
     packageName: candidate.packageName,
     purpose: candidate.purpose,
     reasons,
     source: candidate.source,
+    sourceProvenance: {
+      configuredPackageName: candidate.configuredPackageName,
+      configuredSource: candidate.configuredSource,
+      resolution: candidate.sourceResolution,
+    },
   };
   return { audit, fields: internalFields, symbol };
 }

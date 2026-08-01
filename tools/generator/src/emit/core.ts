@@ -289,16 +289,24 @@ function markCppStructInitTypes(
   provenance: TypedStructProvenanceAudit,
 ): void {
   const allowlist = new Set(cppStructInitTypedStructIds);
-  const candidates = new Map(registry.report.candidates.map((candidate) => [candidate.id, candidate]));
+  const candidatesByDeclaration = new Map(
+    registry.report.candidates.map((candidate) => [
+      `${candidate.definingPackageName}:${candidate.source}#${candidate.name}`,
+      candidate,
+    ]),
+  );
   validateCppStructInitProvenance(cppStructInitTypedStructIds, provenance);
   const seen = new Set<string>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
       if (declaration.kind !== 'type') continue;
-      const id = `${declaration.origin.packageName}:${declaration.origin.source}#${declaration.name}`;
+      const candidate = candidatesByDeclaration.get(
+        `${declaration.origin.packageName}:${declaration.origin.source}#${declaration.name}`,
+      );
+      const id = candidate?.id;
+      if (!id) continue;
       if (!allowlist.has(id)) continue;
-      const candidate = candidates.get(id);
-      if (!candidate?.eligible || candidate.emission.mode !== 'direct') {
+      if (!candidate.eligible || candidate.emission.mode !== 'direct') {
         throw new Error(`cpp @:structInit schema is not direct-eligible: ${id}`);
       }
       if (
