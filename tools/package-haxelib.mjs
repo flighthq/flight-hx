@@ -60,11 +60,19 @@ mkdirSync(isolatedHome, { recursive: true });
 mkdirSync(repository, { recursive: true });
 const environment = {
   ...process.env,
+  HAXELIB_PATH: repository,
   HAXE_STD_PATH: path.join(haxeDirectory, 'std'),
   HOME: isolatedHome,
   PATH: `${haxeDirectory}${path.delimiter}${process.env.PATH ?? ''}`,
 };
 run(haxelib, ['setup', repository], { env: environment });
+if (
+  capture(haxelib, ['list'], { env: environment })
+    .split(/\r?\n/u)
+    .some((line) => line.startsWith(`${metadata.name}:`))
+) {
+  run(haxelib, ['remove', metadata.name, '--always'], { env: environment });
+}
 run(haxelib, ['install', artifact, '--always', '--skip-dependencies'], { env: environment });
 const consumer = path.join(packageRoot, 'consumer');
 mkdirSync(consumer, { recursive: true });
@@ -95,8 +103,8 @@ async function writeZip(directory, output) {
   await finished(stream);
 }
 
-function capture(command, arguments_) {
-  const result = spawnSync(command, arguments_, { cwd: workspace, encoding: 'utf8' });
+function capture(command, arguments_, options = {}) {
+  const result = spawnSync(command, arguments_, { cwd: workspace, encoding: 'utf8', ...options });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(result.stderr || `${command} exited with status ${String(result.status)}`);
   return result.stdout;
