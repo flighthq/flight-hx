@@ -7,6 +7,8 @@ class ArrayBufferView {
   public var type = TypedArrayType.None;
   public var length:Int = 0;
   public var byteLength:Int = 0;
+  public var byteOffset:Int = 0;
+  public var buffer:haxe.io.Bytes = null;
 
   public function new() {}
 }
