@@ -1101,9 +1101,12 @@ class _Runtime {
     #if (lime && !js)
     if (Std.isOfType(value, _LimeTypedArray)) return (cast value : _LimeTypedArray).toArray();
     #end
-    try {
-      return (cast value : Array<Dynamic>).copy();
-    } catch (_:Dynamic) {}
+    // Never blind-cast Dynamic to Array here: hxcpp's unchecked cast does not
+    // throw for a wrong type — it yields a garbage pointer that segfaults on
+    // use. Dispatch the collection wrappers by real type instead.
+    if (Std.isOfType(value, _Set)) return (cast value : _Set).values();
+    if (Std.isOfType(value, _Map)) return [for (entry in (cast value : _Map).entries()) entry];
+    if (Std.isOfType(value, String)) return [for (i in 0...(value : String).length) (value : String).charAt(i)];
     final iteratorFn = Reflect.field(value, 'iterator');
     if (iteratorFn == null) {
       // haxe.Rest exposes toArray() but no reflectable iterator on every target.
