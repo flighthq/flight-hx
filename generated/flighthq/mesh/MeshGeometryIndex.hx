@@ -48,7 +48,7 @@ class MeshGeometryIndex {
         var compactIndex:Dynamic = flighthq._internal._StaticIndex.readUint32Array(sourceToCompact, sourceIndex);
         if ((cast _Runtime.strictEquals(compactIndex, MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex) : Bool)) { sourceIndex++; continue; }
         var sourceOffset:Dynamic = (sourceIndex * stride);
-        _Runtime.callProperty(compactBytes, 'set', cast ([(cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), (compactIndex * stride)] : Array<Dynamic>));
+        (cast compactBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), Std.int((compactIndex * stride)));
         sourceIndex++;
       }
     }
@@ -109,11 +109,11 @@ class MeshGeometryIndex {
     }
     if ((cast useUint32 : Bool)) {
       var out:Dynamic = new flighthq._internal._UInt32Array(_Runtime.field(lines, 'length'));
-      _Runtime.callProperty(out, 'set', cast ([lines] : Array<Dynamic>));
+      (cast out : flighthq._internal._UInt32Array).set(lines);
       return cast out;
     }
     out = new flighthq._internal._UInt16Array(_Runtime.field(lines, 'length'));
-    _Runtime.callProperty(out, 'set', cast ([lines] : Array<Dynamic>));
+    (cast out : flighthq._internal._UInt16Array).set(lines);
     return cast out;
     return cast null;
   }
@@ -215,7 +215,7 @@ class MeshGeometryIndex {
         }
         if ((cast ((cast uniqueIndex : Float) < (cast 0.0 : Float)) : Bool)) {
           (uniqueIndex = cast (uniqueCount++ : Dynamic));
-          _Runtime.callProperty(uniqueBytes, 'set', cast ([(cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), (uniqueIndex * stride)] : Array<Dynamic>));
+          (cast uniqueBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), Std.int((uniqueIndex * stride)));
           if ((cast _Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast candidatesByHash : flighthq._internal._Map).set(hash, cast ([uniqueIndex] : Array<Dynamic>))); } else { _Runtime.callProperty(candidates, 'push', cast ([uniqueIndex] : Array<Dynamic>)); }
         }
         flighthq._internal._StaticIndex.writeUint32Array(sourceToUnique, vertex, uniqueIndex);

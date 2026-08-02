@@ -18,7 +18,7 @@ class BitmapFormat {
     var dstB:Dynamic = cast _Runtime.UNDEFINED;
     var dstA:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(from, to) : Bool)) {
-      if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out, 'set', cast ([(cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out : flighthq._internal._UInt8ClampedArray).set((cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))); }
       return;
     }
     __destructure0 = _Runtime.callValue(BitmapFormat.channelOffsets__bitmapFormat, cast ([from] : Array<Dynamic>));

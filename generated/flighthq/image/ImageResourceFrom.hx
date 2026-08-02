@@ -18,7 +18,7 @@ class ImageResourceFrom {
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', bitmap.width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', bitmap.height);
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [bitmap.width, bitmap.height]);
-    _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([bitmap.data] : Array<Dynamic>));
+    (cast _Runtime.field(domImageData, 'data') : flighthq._internal._UInt8ClampedArray).set(bitmap.data);
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>));
     return cast null;

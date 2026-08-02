@@ -214,7 +214,7 @@ class Share {
       var decoded:Dynamic = _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([body] : Array<Dynamic>));
       var encoded:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextEncoder'), []), 'encode', cast ([decoded] : Array<Dynamic>));
       (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(encoded, 'length')])) : Dynamic));
-      _Runtime.callProperty(bytes, 'set', cast ([encoded] : Array<Dynamic>));
+      (cast bytes : flighthq._internal._UInt8Array).set(encoded);
     }
     return cast _Runtime.construct(_Runtime.globalValue('File'), [cast ([bytes] : Array<Dynamic>), _Runtime.field(file, 'name'), { type: _Runtime.field(file, 'mimeType') }]);
     return cast null;

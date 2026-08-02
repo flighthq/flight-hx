@@ -22,7 +22,7 @@ class Matrix3 {
   }
 
   public static function copyMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
-    _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>));
+    (cast out.m : flighthq._internal._Float32Array).set(source.m);
   }
 
   public static function copyMatrix3ColumnFromVector3(out:Matrix3Like, column:Float, source:Vector3Like):Void {
@@ -361,7 +361,7 @@ class Matrix3 {
   }
 
   public static function setMatrix3Identity(out:Matrix3Like):Void {
-    _Runtime.callProperty(out.m, 'set', cast ([Matrix3.__identity__matrix3] : Array<Dynamic>));
+    (cast out.m : flighthq._internal._Float32Array).set(Matrix3.__identity__matrix3);
   }
 
   public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {

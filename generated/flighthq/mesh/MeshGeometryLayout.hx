@@ -46,7 +46,7 @@ class MeshGeometryLayout {
           var sourceOffset:Dynamic = ((vertex * srcStride) + _Runtime.field(mapping, 'source').byteOffset);
           var destinationOffset:Dynamic = ((vertex * dstStride) + _Runtime.field(mapping, 'destination').byteOffset);
           if ((cast _Runtime.strictEquals(_Runtime.field(mapping, 'source').format, _Runtime.field(mapping, 'destination').format) : Bool)) {
-            _Runtime.callProperty(destinationBytes, 'set', cast ([(cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + _Runtime.field(mapping, 'sourceByteLength')))), destinationOffset] : Array<Dynamic>));
+            (cast destinationBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + _Runtime.field(mapping, 'sourceByteLength')))), Std.int(destinationOffset));
             continue;
           }
           var componentCount:Dynamic = HxMath.min(_Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(mapping, 'source').format] : Array<Dynamic>)), _Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(mapping, 'destination').format] : Array<Dynamic>)));

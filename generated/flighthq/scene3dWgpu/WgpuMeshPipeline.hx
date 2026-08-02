@@ -733,7 +733,7 @@ class WgpuMeshPipeline {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([WgpuMeshPipeline.scratchViewProjection__wgpuMeshPipeline, camera, ((cast !_Runtime.strictEquals(aspect, 0.0) : Bool) ? (cast aspect : Dynamic) : (cast 1.0 : Dynamic))] : Array<Dynamic>));
     sourceVp = WgpuMeshPipeline.scratchViewProjection__wgpuMeshPipeline.m;
     webGpuVp = WgpuMeshPipeline.scratchWebGpuViewProjection__wgpuMeshPipeline.m;
-    _Runtime.callProperty(webGpuVp, 'set', cast ([sourceVp] : Array<Dynamic>));
+    (cast webGpuVp : flighthq._internal._Float32Array).set(sourceVp);
     flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 2.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 2.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 3.0))));
     flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 6.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 6.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 7.0))));
     flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 10.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 10.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 11.0))));

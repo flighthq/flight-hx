@@ -127,7 +127,7 @@ class AnimationRootMotion {
     if ((cast _Runtime.strictEquals(exponent, 0.0) : Bool)) { return; }
     base = _Runtime.field(extractor, 'powerScratch');
     if ((cast ((cast exponent : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty(base, 'set', cast ([_Runtime.field(extractor, 'cycleDelta')] : Array<Dynamic>));
+      (cast base : flighthq._internal._Float32Array).set(_Runtime.field(extractor, 'cycleDelta'));
     } else {
       flighthq._internal._StaticIndex.writeFloat32Array(base, 0.0, -flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), 0.0));
       flighthq._internal._StaticIndex.writeFloat32Array(base, 1.0, -flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), 1.0));

@@ -63,6 +63,8 @@ export type IrIndexedReceiver =
   | 'Uint8Array'
   | 'Uint8ClampedArray';
 
+export type IrTypedArraySetReceiver = Exclude<IrIndexedReceiver, 'Array' | 'ArrayOrFloat32Array'>;
+
 export type IrDestructuringReadSource = 'assignment' | 'declaration' | 'parameter';
 export type IrDestructuringReadEscape = 'regexp-result-array' | 'unproven-receiver';
 
@@ -102,6 +104,11 @@ export interface IrExpressionStaticFacts {
     | undefined;
   indexedAccessEscape?: 'width-sensitive-mixed-write' | undefined;
   numericRelation?: true | undefined;
+  typedArraySet?:
+    | {
+        receiver: IrTypedArraySetReceiver;
+      }
+    | undefined;
   truthinessUse?: 'conditional' | 'explicit' | 'logical' | undefined;
 }
 
@@ -369,6 +376,7 @@ export interface StaticFactCounts {
     widthSensitiveMixedWrites: number;
   };
   numericRelations: number;
+  typedArraySetCalls: number;
 }
 
 export interface StaticFactAudit extends StaticFactCounts {
@@ -380,6 +388,7 @@ export interface StaticFactAudit extends StaticFactCounts {
       writes: number;
     }
   >;
+  typedArraySetReceivers: Record<IrTypedArraySetReceiver, number>;
 }
 
 export interface StaticLoweringEmissionCounts {
@@ -413,4 +422,6 @@ export interface StaticLoweringEmissionCounts {
     highArityArguments: number;
     iterationBindings: number;
   };
+  typedArraySetCalls: number;
+  typedArraySetReceivers: Record<IrTypedArraySetReceiver, number>;
 }

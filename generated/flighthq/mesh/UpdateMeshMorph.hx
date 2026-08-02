@@ -64,6 +64,6 @@ class UpdateMeshMorph {
       (blended = cast (new flighthq._internal._Float32Array(_Runtime.field(weights, 'length')) : Dynamic));
       _Runtime.setField(runtime, 'morphBlendedWeights', blended);
     }
-    _Runtime.callProperty(blended, 'set', cast ([weights] : Array<Dynamic>));
+    (cast blended : flighthq._internal._Float32Array).set(weights);
   }
 }

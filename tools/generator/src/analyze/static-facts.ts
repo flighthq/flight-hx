@@ -2,6 +2,7 @@ import type {
   IrDeclaration,
   IrExpressionStaticFacts,
   IrIndexedReceiver,
+  IrTypedArraySetReceiver,
   StaticFactAudit,
   StaticFactCounts,
 } from '../model/ir.ts';
@@ -21,6 +22,19 @@ export const indexedReceiverNames = [
   'Uint8ClampedArray',
 ] as const satisfies readonly IrIndexedReceiver[];
 
+export const typedArraySetReceiverNames = [
+  'Float32Array',
+  'Float64Array',
+  'Int16Array',
+  'Int32Array',
+  'Int8Array',
+  'Uint16Array',
+  'Uint16ArrayOrUint32Array',
+  'Uint32Array',
+  'Uint8Array',
+  'Uint8ClampedArray',
+] as const satisfies readonly IrTypedArraySetReceiver[];
+
 export function emptyStaticFactAudit(): StaticFactAudit {
   return {
     booleanConditionalTruthiness: 0,
@@ -39,6 +53,10 @@ export function emptyStaticFactAudit(): StaticFactAudit {
       indexedReceiverNames.map((receiver) => [receiver, { expressions: 0, reads: 0, writes: 0 }]),
     ) as StaticFactAudit['indexedReceivers'],
     numericRelations: 0,
+    typedArraySetCalls: 0,
+    typedArraySetReceivers: Object.fromEntries(
+      typedArraySetReceiverNames.map((receiver) => [receiver, 0]),
+    ) as StaticFactAudit['typedArraySetReceivers'],
   };
 }
 
@@ -75,10 +93,14 @@ export function sumStaticFactAudits(audits: StaticFactAudit[]): StaticFactAudit 
     total.indexedAccesses.writes += audit.indexedAccesses.writes;
     total.indexedAccessEscapes.widthSensitiveMixedWrites += audit.indexedAccessEscapes.widthSensitiveMixedWrites;
     total.numericRelations += audit.numericRelations;
+    total.typedArraySetCalls += audit.typedArraySetCalls;
     for (const receiver of indexedReceiverNames) {
       total.indexedReceivers[receiver].expressions += audit.indexedReceivers[receiver].expressions;
       total.indexedReceivers[receiver].reads += audit.indexedReceivers[receiver].reads;
       total.indexedReceivers[receiver].writes += audit.indexedReceivers[receiver].writes;
+    }
+    for (const receiver of typedArraySetReceiverNames) {
+      total.typedArraySetReceivers[receiver] += audit.typedArraySetReceivers[receiver];
     }
   }
   return total;
@@ -93,6 +115,7 @@ export function staticFactCounts(audit: StaticFactAudit): StaticFactCounts {
     indexedAccesses: { ...audit.indexedAccesses },
     indexedAccessEscapes: { ...audit.indexedAccessEscapes },
     numericRelations: audit.numericRelations,
+    typedArraySetCalls: audit.typedArraySetCalls,
   };
 }
 
@@ -102,6 +125,10 @@ function addFacts(audit: StaticFactAudit, facts: IrExpressionStaticFacts): void 
   if (facts.truthinessUse === 'logical') audit.booleanLogicalTruthiness += 1;
   if (facts.booleanLogical) audit.booleanLogicalExpressions += 1;
   if (facts.numericRelation) audit.numericRelations += 1;
+  if (facts.typedArraySet) {
+    audit.typedArraySetCalls += 1;
+    audit.typedArraySetReceivers[facts.typedArraySet.receiver] += 1;
+  }
   if (facts.indexedAccessEscape === 'width-sensitive-mixed-write') {
     audit.indexedAccessEscapes.widthSensitiveMixedWrites += 1;
   }

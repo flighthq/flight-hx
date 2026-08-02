@@ -104,7 +104,7 @@ class BitmapBevel {
         pass++;
       }
     }
-    if ((cast !_Runtime.strictEquals(a, field) : Bool)) { _Runtime.callProperty(field, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(a, field) : Bool)) { (cast field : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))); }
   }
 
   public static function readSourceAlpha__bitmapBevel(source:BitmapRegion, px:Float, py:Float):Float {

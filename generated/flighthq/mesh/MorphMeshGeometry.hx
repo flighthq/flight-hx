@@ -38,9 +38,9 @@ class MorphMeshGeometry {
     tangents = _Runtime.field(__destructure0, 'tangents');
     vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
     floats = (vertexCount * 3.0);
-    _Runtime.callProperty(blendedPositions, 'set', cast ([(cast positions : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(normals, null) : Bool)) : Bool)) { _Runtime.callProperty(blendedNormals, 'set', cast ([(cast normals : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
-    if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals(tangents, null) : Bool)) : Bool)) { _Runtime.callProperty(blendedTangents, 'set', cast ([(cast tangents : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
+    (cast blendedPositions : flighthq._internal._Float32Array).set((cast positions : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats)));
+    if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(normals, null) : Bool)) : Bool)) { (cast blendedNormals : flighthq._internal._Float32Array).set((cast normals : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))); }
+    if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals(tangents, null) : Bool)) : Bool)) { (cast blendedTangents : flighthq._internal._Float32Array).set((cast tangents : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))); }
     targets = _Runtime.field(morph, 'targets');
     weights = _Runtime.field(morph, 'weights');
     targetCount = HxMath.min(_Runtime.field(targets, 'length'), _Runtime.field(weights, 'length'));

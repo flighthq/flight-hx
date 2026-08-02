@@ -174,9 +174,9 @@ class SwfDocument {
     body = _Runtime.callValue(decompress, cast ([(cast source : flighthq._internal._UInt8Array).subarray(Std.int(streamStart)), bodyLength] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(body, null) : Bool) || (cast ((cast _Runtime.field(body, 'length') : Float) < (cast bodyLength : Float)) : Bool)) : Bool)) { return cast null; }
     uncompressed = new flighthq._internal._UInt8Array((SwfDocument.SWF_PREFIX_LENGTH__swfDocument + bodyLength));
-    _Runtime.callProperty(uncompressed, 'set', cast ([(cast source : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(SwfDocument.SWF_PREFIX_LENGTH__swfDocument))] : Array<Dynamic>));
+    (cast uncompressed : flighthq._internal._UInt8Array).set((cast source : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(SwfDocument.SWF_PREFIX_LENGTH__swfDocument)));
     flighthq._internal._StaticIndex.writeUint8Array(uncompressed, 0.0, SwfDocument.FWS_SIGNATURE__swfDocument);
-    _Runtime.callProperty(uncompressed, 'set', cast ([(cast body : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(bodyLength)), SwfDocument.SWF_PREFIX_LENGTH__swfDocument] : Array<Dynamic>));
+    (cast uncompressed : flighthq._internal._UInt8Array).set((cast body : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(bodyLength)), Std.int(SwfDocument.SWF_PREFIX_LENGTH__swfDocument));
     return cast uncompressed;
     return cast null;
   }
@@ -950,8 +950,8 @@ class SwfDocument {
     tablesEnd = ((cast ((cast ((cast ((cast _Runtime.field(tables, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(tables, (_Runtime.field(tables, 'length') - 2.0)), 255.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(tables, (_Runtime.field(tables, 'length') - 1.0)), SwfDocument.JPEG_END_OF_IMAGE__swfDocument) : Bool)) : Bool) ? (cast (_Runtime.field(tables, 'length') - 2.0) : Dynamic) : (cast _Runtime.field(tables, 'length') : Dynamic));
     imageStart = ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(body, 'source'), _Runtime.field(body, 'pos')), 255.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(body, 'source'), (_Runtime.field(body, 'pos') + 1.0)), SwfDocument.JPEG_START_OF_IMAGE__swfDocument) : Bool)) : Bool) ? (cast (_Runtime.field(body, 'pos') + 2.0) : Dynamic) : (cast _Runtime.field(body, 'pos') : Dynamic));
     spliced = new flighthq._internal._UInt8Array((tablesEnd + (_Runtime.field(body, 'end') - imageStart)));
-    _Runtime.callProperty(spliced, 'set', cast ([(cast tables : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(tablesEnd))] : Array<Dynamic>));
-    _Runtime.callProperty(spliced, 'set', cast ([(cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(imageStart), Std.int(_Runtime.field(body, 'end'))), tablesEnd] : Array<Dynamic>));
+    (cast spliced : flighthq._internal._UInt8Array).set((cast tables : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(tablesEnd)));
+    (cast spliced : flighthq._internal._UInt8Array).set((cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(imageStart), Std.int(_Runtime.field(body, 'end'))), Std.int(tablesEnd));
     image = _Runtime.callValue(SwfDocument.readSwfEmbeddedImage__swfDocument, cast ([spliced, 0.0, _Runtime.field(spliced, 'length')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     ((cast _Runtime.field(state, 'definedCharacters') : flighthq._internal._Set).add(characterId));

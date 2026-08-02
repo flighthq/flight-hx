@@ -185,7 +185,7 @@ class WgpuShapeMesh {
     paddedBytes = (_Runtime.toInt32((byteLength + 3.0)) & _Runtime.toInt32(~3));
     wordCount = (_Runtime.toInt32(paddedBytes) >> 1);
     if ((cast ((cast _Runtime.field(WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh, 'length') : Float) < (cast wordCount : Float)) : Bool)) { (WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh = cast (new flighthq._internal._UInt16Array(wordCount) : Dynamic)); }
-    _Runtime.callProperty(WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh, 'set', cast ([indices] : Array<Dynamic>));
+    (cast WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh : flighthq._internal._UInt16Array).set(indices);
     flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeBuffer', cast ([indexBuffer, 0.0, _Runtime.field(WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh, 'buffer'), 0.0, paddedBytes] : Array<Dynamic>));
   }
 

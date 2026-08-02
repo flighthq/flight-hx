@@ -425,7 +425,7 @@ class GlColorAdjustmentMaterialFeature {
       _Runtime.setField(runtime, 'quadBatchWriterColorMatrixData', data);
     } else { if ((cast ((cast (offset + GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature) : Float) > (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var grown:Dynamic = new flighthq._internal._Float32Array(HxMath.max((offset + GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature), (_Runtime.field(data, 'length') * 2.0)));
-      _Runtime.callProperty(grown, 'set', cast ([data] : Array<Dynamic>));
+      (cast grown : flighthq._internal._Float32Array).set(data);
       _Runtime.setField(runtime, 'quadBatchWriterColorMatrixData', grown);
       (data = cast (grown : Dynamic));
     } }
@@ -503,7 +503,7 @@ class GlColorAdjustmentMaterialFeature {
     if ((cast ((cast (offset + GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature) : Float) > (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var newSize:Dynamic = HxMath.max((offset + GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature), (_Runtime.field(data, 'length') * 2.0));
       var grown:Dynamic = new flighthq._internal._Float32Array(newSize);
-      _Runtime.callProperty(grown, 'set', cast ([data] : Array<Dynamic>));
+      (cast grown : flighthq._internal._Float32Array).set(data);
       _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasData', grown);
       (data = cast (grown : Dynamic));
     }
@@ -536,7 +536,7 @@ class GlColorAdjustmentMaterialFeature {
       _Runtime.setField(runtime, 'quadBatchWriterColorTintData', data);
     } else { if ((cast ((cast instanceIndex : Float) >= (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var grown:Dynamic = new flighthq._internal._UInt32Array(HxMath.max((instanceIndex + 1.0), (_Runtime.field(data, 'length') * 2.0)));
-      _Runtime.callProperty(grown, 'set', cast ([data] : Array<Dynamic>));
+      (cast grown : flighthq._internal._UInt32Array).set(data);
       _Runtime.setField(runtime, 'quadBatchWriterColorTintData', grown);
       (data = cast (grown : Dynamic));
     } }

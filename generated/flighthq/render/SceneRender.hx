@@ -127,7 +127,7 @@ class SceneRender {
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(out, 'directionalCount'), directionalCount) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'ambientCount'), ambientCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'pointCount'), pointCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'spotCount'), spotCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(out, 'hemisphereCount'), hemisphereCount) : Bool)) : Bool) && (cast _Runtime.callValue(SceneRender.isFloat32ArrayEqual__sceneRender, cast ([_Runtime.field(out, 'data'), SceneRender.scratchLightData__sceneRender] : Array<Dynamic>)) : Bool)) : Bool)) {
       return;
     }
-    _Runtime.callProperty(_Runtime.field(out, 'data'), 'set', cast ([SceneRender.scratchLightData__sceneRender] : Array<Dynamic>));
+    (cast _Runtime.field(out, 'data') : flighthq._internal._Float32Array).set(SceneRender.scratchLightData__sceneRender);
     _Runtime.setField(out, 'directionalCount', directionalCount);
     _Runtime.setField(out, 'ambientCount', ambientCount);
     _Runtime.setField(out, 'pointCount', pointCount);

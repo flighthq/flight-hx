@@ -22,6 +22,7 @@ import type {
   IrIndexedReceiver,
   IrParameter,
   IrStatement,
+  IrTypedArraySetReceiver,
   IrTypedStructBinding,
   IrType,
   IrVariable,
@@ -1456,7 +1457,99 @@ function expressionStaticFacts(node: ts.Expression, context: LoweringContext): I
       facts.indexedAccess = { ...access, receiver };
     }
   }
+  if (ts.isCallExpression(node)) {
+    const receiver = typedArraySetReceiver(node, checker);
+    if (receiver) facts.typedArraySet = { receiver };
+  }
   return Object.keys(facts).length > 0 ? facts : undefined;
+}
+
+function typedArraySetReceiver(node: ts.CallExpression, checker: ts.TypeChecker): IrTypedArraySetReceiver | undefined {
+  if (
+    !ts.isPropertyAccessExpression(node.expression) ||
+    node.expression.name.text !== 'set' ||
+    ts.isOptionalChain(node.expression) ||
+    node.questionDotToken ||
+    node.arguments.length < 1 ||
+    node.arguments.length > 2 ||
+    node.arguments.some(ts.isSpreadElement)
+  ) {
+    return undefined;
+  }
+  const offset = node.arguments[1];
+  if (offset && !typeOnlyHasFlags(checker.getTypeAtLocation(offset), checker, ts.TypeFlags.NumberLike)) {
+    return undefined;
+  }
+  const receiver = indexedReceiver(checker.getTypeAtLocation(node.expression.expression), checker);
+  if (!receiver || receiver === 'Array' || receiver === 'ArrayOrFloat32Array') return undefined;
+  if (receiver !== 'Uint16ArrayOrUint32Array') return receiver;
+  return mixedUnsignedSetHasCorrelatedWidth(node, checker) ? receiver : undefined;
+}
+
+function mixedUnsignedSetHasCorrelatedWidth(node: ts.CallExpression, checker: ts.TypeChecker): boolean {
+  const callee = node.expression;
+  const source = node.arguments[0];
+  if (!ts.isPropertyAccessExpression(callee) || !ts.isIdentifier(callee.expression) || !source) return false;
+  const statement = node.parent;
+  if (!ts.isExpressionStatement(statement) || statement.expression !== node || !ts.isBlock(statement.parent))
+    return false;
+  const statements = statement.parent.statements;
+  const index = statements.indexOf(statement);
+  const discriminator = index > 0 ? statements[index - 1] : undefined;
+  if (!discriminator || !ts.isIfStatement(discriminator) || !discriminator.elseStatement) return false;
+  if (
+    !ts.isBinaryExpression(discriminator.expression) ||
+    discriminator.expression.operatorToken.kind !== ts.SyntaxKind.InstanceOfKeyword ||
+    normalizedExpression(discriminator.expression.left) !== normalizedExpression(source)
+  ) {
+    return false;
+  }
+  const discriminated = standardLibraryConstructorName(discriminator.expression.right, checker);
+  if (discriminated !== 'Uint32Array') return false;
+  const consequent = assignedTypedArrayFamily(discriminator.thenStatement, callee.expression.text, checker);
+  const alternate = assignedTypedArrayFamily(discriminator.elseStatement, callee.expression.text, checker);
+  return consequent === 'Uint32Array' && alternate === 'Uint16Array';
+}
+
+function assignedTypedArrayFamily(
+  statement: ts.Statement,
+  receiver: string,
+  checker: ts.TypeChecker,
+): 'Uint16Array' | 'Uint32Array' | undefined {
+  const candidate = ts.isBlock(statement) && statement.statements.length === 1 ? statement.statements[0] : statement;
+  if (
+    !candidate ||
+    !ts.isExpressionStatement(candidate) ||
+    !ts.isBinaryExpression(candidate.expression) ||
+    candidate.expression.operatorToken.kind !== ts.SyntaxKind.EqualsToken ||
+    !ts.isIdentifier(candidate.expression.left) ||
+    candidate.expression.left.text !== receiver ||
+    !ts.isNewExpression(candidate.expression.right)
+  ) {
+    return undefined;
+  }
+  const family = indexedReceiver(checker.getTypeAtLocation(candidate.expression.right), checker);
+  return family === 'Uint16Array' || family === 'Uint32Array' ? family : undefined;
+}
+
+function standardLibraryConstructorName(
+  node: ts.Expression,
+  checker: ts.TypeChecker,
+): 'Uint16Array' | 'Uint32Array' | undefined {
+  let symbol = checker.getSymbolAtLocation(node);
+  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+  const name = symbol?.getName();
+  if (name !== 'Uint16Array' && name !== 'Uint32Array') return undefined;
+  return symbol?.declarations?.some((declaration) => {
+    const source = declaration.getSourceFile();
+    return source.isDeclarationFile && /^lib\..*\.d\.ts$/u.test(path.basename(source.fileName));
+  })
+    ? name
+    : undefined;
+}
+
+function normalizedExpression(node: ts.Expression): string {
+  return fingerprintPrinter.printNode(ts.EmitHint.Expression, node, node.getSourceFile());
 }
 
 function booleanTruthinessUse(node: ts.Expression): IrExpressionStaticFacts['truthinessUse'] | undefined {

@@ -58,7 +58,7 @@ class MeshGeometryTransforms {
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = ((cast _Runtime.strictEquals(out, source) : Bool) ? (cast srcVerts : Dynamic) : (cast out.vertices : Dynamic));
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
-      _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
+      (cast dstVerts : flighthq._internal._Float32Array).set(srcVerts);
     }
     {
       var i:Dynamic = 0.0;
@@ -231,7 +231,7 @@ class MeshGeometryTransforms {
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = out.vertices;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
-      _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
+      (cast dstVerts : flighthq._internal._Float32Array).set(srcVerts);
     }
     invSx = ((cast !_Runtime.strictEquals(sx, 0.0) : Bool) ? (cast (1.0 / sx) : Dynamic) : (cast 0.0 : Dynamic));
     invSy = ((cast !_Runtime.strictEquals(sy, 0.0) : Bool) ? (cast (1.0 / sy) : Dynamic) : (cast 0.0 : Dynamic));

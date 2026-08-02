@@ -1739,6 +1739,19 @@ describe('TypeScript lowering and Haxe emission', () => {
         highArityArguments: 0,
         iterationBindings: 0,
       },
+      typedArraySetCalls: 0,
+      typedArraySetReceivers: {
+        Float32Array: 0,
+        Float64Array: 0,
+        Int16Array: 0,
+        Int32Array: 0,
+        Int8Array: 0,
+        Uint16Array: 0,
+        Uint16ArrayOrUint32Array: 0,
+        Uint32Array: 0,
+        Uint8Array: 0,
+        Uint8ClampedArray: 0,
+      },
     });
     expect(lowered.staticFacts.indexedReceivers.Array).toEqual({ expressions: 1, reads: 0, writes: 1 });
     expect(lowered.staticFacts.indexedReceivers.Float32Array).toEqual({
@@ -2066,6 +2079,161 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('(cast bytes : flighthq._internal._UInt8Array).subarray(Std.int(2.0))');
     expect(output).not.toContain('data.subarray(');
     expect(output).not.toContain('bytes.subarray(');
+  });
+
+  it('emits method-specific typed-array set calls without coercing their sources', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/typed-array-set.ts',
+      `export function copy(
+         float32: Float32Array,
+         float64: Float64Array,
+         int16: Int16Array,
+         int32: Int32Array,
+         int8: Int8Array,
+         uint16: Uint16Array,
+         uint32: Uint32Array,
+         uint8: Uint8Array,
+         clamped: Uint8ClampedArray,
+         source: ArrayLike<number>,
+         offset: number,
+       ) {
+         float32.set(source, offset);
+         float64.set(source);
+         int16.set(source);
+         int32.set(source);
+         int8.set(source);
+         uint16.set(source);
+         uint32.set(source);
+         uint8.set(source);
+         clamped.set(source);
+       }`,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TypedArraySetFixture',
+      packageName: '@flighthq/example',
+    });
+    const emission = staticLoweringEmissionCounts();
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(lowered.staticFacts.typedArraySetCalls).toBe(9);
+    expect(emission.typedArraySetCalls).toBe(9);
+    for (const receiver of [
+      'Float32Array',
+      'Float64Array',
+      'Int16Array',
+      'Int32Array',
+      'Int8Array',
+      'Uint16Array',
+      'Uint32Array',
+      'Uint8Array',
+      'Uint8ClampedArray',
+    ] as const) {
+      expect(lowered.staticFacts.typedArraySetReceivers[receiver]).toBe(1);
+      expect(emission.typedArraySetReceivers[receiver]).toBe(1);
+    }
+    expect(output).toContain('(cast float32 : flighthq._internal._Float32Array).set(source, Std.int(offset))');
+    expect(output).toContain('(cast clamped : flighthq._internal._UInt8ClampedArray).set(source)');
+    expect(output).not.toContain('Std.int(source)');
+    expect(output).not.toContain("_Runtime.callProperty(float32, 'set'");
+    expect(output).not.toContain('__flight_direct_typed_array_set');
+  });
+
+  it('keeps unproven and ambiguous typed-array-shaped set calls dynamic', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/typed-array-set-negative.ts',
+      `interface Float32Array {
+         set(source: ArrayLike<number>, offset?: number): void;
+       }
+       export function copy(
+         shadowed: Float32Array,
+         structural: { set(source: ArrayLike<number>, offset?: number): void },
+         mixed: globalThis.Float32Array | Uint8Array,
+         unsigned: Uint16Array | Uint32Array,
+         nullable: globalThis.Float32Array | null,
+         floats: globalThis.Float32Array,
+         source: ArrayLike<number>,
+         textOffset: string,
+       ) {
+         shadowed.set(source);
+         structural.set(source);
+         mixed.set(source);
+         unsigned.set(source);
+         nullable?.set(source);
+         floats.set(source, textOffset as any);
+         floats.set(...[source]);
+       }`,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TypedArraySetNegativeFixture',
+      packageName: '@flighthq/example',
+    });
+    const emission = staticLoweringEmissionCounts();
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(lowered.staticFacts.typedArraySetCalls).toBe(0);
+    expect(emission.typedArraySetCalls).toBe(0);
+    expect(output).toContain("_Runtime.callProperty(shadowed, 'set'");
+    expect(output).toContain("_Runtime.callProperty(structural, 'set'");
+    expect(output).toContain("_Runtime.callProperty(mixed, 'set'");
+    expect(output).toContain("_Runtime.callProperty(unsigned, 'set'");
+    expect(output).toContain("_Runtime.callOptionalProperty(nullable, 'set'");
+    expect(output).not.toContain('flighthq._internal._Float32Array).set(source');
+  });
+
+  it('uses both maintained widths only for a discriminator-correlated unsigned set', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/typed-array-set-union.ts',
+      `export function clone(source: Uint16Array | Uint32Array) {
+         let target: Uint16Array | Uint32Array;
+         if (source instanceof Uint32Array) {
+           target = new Uint32Array(source.length);
+         } else {
+           target = new Uint16Array(source.length);
+         }
+         target.set(source);
+         return target;
+       }
+       export function unrelated(target: Uint16Array | Uint32Array, source: Uint16Array | Uint32Array) {
+         target.set(source);
+       }
+       export function inverse(source: Uint16Array | Uint32Array) {
+         let target: Uint16Array | Uint32Array;
+         if (source instanceof Uint16Array) {
+           target = new Uint16Array(source.length);
+         } else {
+           target = new Uint32Array(source.length);
+         }
+         target.set(source);
+       }`,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TypedArraySetUnionFixture',
+      packageName: '@flighthq/example',
+    });
+    const emission = staticLoweringEmissionCounts();
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(lowered.staticFacts.typedArraySetCalls).toBe(1);
+    expect(lowered.staticFacts.typedArraySetReceivers.Uint16ArrayOrUint32Array).toBe(1);
+    expect(emission.typedArraySetCalls).toBe(1);
+    expect(emission.typedArraySetReceivers.Uint16ArrayOrUint32Array).toBe(1);
+    expect(output).toMatch(
+      /_Runtime\.isInstanceOf\((__typedArraySetTarget\d+), _Runtime\.globalValue\('Uint32Array'\)\).*\(cast \1 : flighthq\._internal\._UInt32Array\)\.set\((__typedArraySetSource\d+)\).*\(cast \1 : flighthq\._internal\._UInt16Array\)\.set\(\2\)/u,
+    );
+    expect(output.match(/_Runtime\.callProperty\(target, 'set'/gu)).toHaveLength(2);
+    expect(output).not.toContain('__flight_direct_typed_array_set');
   });
 
   it('lowers typed-array static from calls to maintained wrapper construction', () => {

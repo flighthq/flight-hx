@@ -231,7 +231,7 @@ class BitmapBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
-      _Runtime.callProperty(out, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0)))] : Array<Dynamic>));
+      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0))));
     }
   }
 
@@ -303,7 +303,7 @@ class BitmapBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
-      _Runtime.callProperty(out, 'set', cast ([(cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0)))] : Array<Dynamic>));
+      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0))));
     }
   }
 }

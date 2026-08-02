@@ -21,7 +21,7 @@ class MeshGeometry {
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     vertices = new flighthq._internal._Float32Array(_Runtime.field(source.vertices, 'length'));
-    _Runtime.callProperty(vertices, 'set', cast ([source.vertices] : Array<Dynamic>));
+    (cast vertices : flighthq._internal._Float32Array).set(source.vertices);
     indices = null;
     if (_Runtime.truthy(source.indices)) {
       if ((cast _Runtime.isInstanceOf(source.indices, _Runtime.globalValue('Uint32Array')) : Bool)) {
@@ -29,7 +29,7 @@ class MeshGeometry {
       } else {
         (indices = cast (new flighthq._internal._UInt16Array(_Runtime.field(source.indices, 'length')) : Dynamic));
       }
-      _Runtime.callProperty(indices, 'set', cast ([source.indices] : Array<Dynamic>));
+      ({ final __typedArraySetTarget0:Dynamic = indices; final __typedArraySetSource1:Dynamic = source.indices; if (_Runtime.isInstanceOf(__typedArraySetTarget0, _Runtime.globalValue('Uint32Array'))) { (cast __typedArraySetTarget0 : flighthq._internal._UInt32Array).set(__typedArraySetSource1); } else { (cast __typedArraySetTarget0 : flighthq._internal._UInt16Array).set(__typedArraySetSource1); } });
     }
     subsets = cast ([] : Array<Dynamic>);
     {
@@ -156,11 +156,11 @@ class MeshGeometry {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast vertexCount : Float) > (cast MeshGeometry.UINT16_INDEX_CEILING__meshGeometry : Float)) : Bool) || (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('Uint32Array')) : Bool)) : Bool)) {
       var out:Dynamic = new flighthq._internal._UInt32Array(_Runtime.field(source, 'length'));
-      _Runtime.callProperty(out, 'set', cast ([source] : Array<Dynamic>));
+      (cast out : flighthq._internal._UInt32Array).set(source);
       return cast out;
     }
     out = new flighthq._internal._UInt16Array(_Runtime.field(source, 'length'));
-    _Runtime.callProperty(out, 'set', cast ([source] : Array<Dynamic>));
+    (cast out : flighthq._internal._UInt16Array).set(source);
     return cast out;
     return cast null;
   }

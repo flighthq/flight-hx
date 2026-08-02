@@ -19,7 +19,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 37
+        "numericRelations": 37,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -41,7 +42,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -63,7 +65,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 27
+        "numericRelations": 27,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -85,7 +88,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 120
+        "numericRelations": 120,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -107,7 +111,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -129,7 +134,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 17
+        "numericRelations": 17,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -151,7 +157,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -173,7 +180,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 6
+        "numericRelations": 6,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -195,7 +203,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 8
+        "numericRelations": 8,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -217,7 +226,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 36
+        "numericRelations": 36,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -239,7 +249,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 633
+        "numericRelations": 633,
+        "typedArraySetCalls": 8
       }
     },
     {
@@ -261,7 +272,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 7
+        "numericRelations": 7,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -283,7 +295,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 6
+        "numericRelations": 6,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -305,7 +318,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 18
+        "numericRelations": 18,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -327,7 +341,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 13
+        "numericRelations": 13,
+        "typedArraySetCalls": 2
       }
     },
     {
@@ -349,7 +364,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 13
+        "numericRelations": 13,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -371,7 +387,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -393,7 +410,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 34
+        "numericRelations": 34,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -415,7 +433,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -437,7 +456,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -459,7 +479,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 173
+        "numericRelations": 173,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -481,7 +502,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 13
+        "numericRelations": 13,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -503,7 +525,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 31
+        "numericRelations": 31,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -525,7 +548,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -547,7 +571,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -569,7 +594,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 7
+        "numericRelations": 7,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -591,7 +617,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 5
+        "numericRelations": 5,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -613,7 +640,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 45
+        "numericRelations": 45,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -635,7 +663,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 48
+        "numericRelations": 48,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -657,7 +686,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 30
+        "numericRelations": 30,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -679,7 +709,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 26
+        "numericRelations": 26,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -701,7 +732,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 25
+        "numericRelations": 25,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -723,7 +755,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -745,7 +778,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 7
+        "numericRelations": 7,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -767,7 +801,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 10
+        "numericRelations": 10,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -789,7 +824,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 17
+        "numericRelations": 17,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -811,7 +847,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -833,7 +870,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 262
+        "numericRelations": 262,
+        "typedArraySetCalls": 12
       }
     },
     {
@@ -855,7 +893,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 17
+        "numericRelations": 17,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -877,7 +916,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -899,7 +939,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3
+        "numericRelations": 3,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -921,7 +962,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 6
+        "numericRelations": 6,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -943,7 +985,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3
+        "numericRelations": 3,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -965,7 +1008,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -987,7 +1031,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 7
+        "numericRelations": 7,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1009,7 +1054,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1031,7 +1077,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 13
+        "numericRelations": 13,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1053,7 +1100,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 24
+        "numericRelations": 24,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1075,7 +1123,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1097,7 +1146,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1119,7 +1169,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 4
+        "numericRelations": 4,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1141,7 +1192,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1163,7 +1215,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 27
+        "numericRelations": 27,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1185,7 +1238,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 14
+        "numericRelations": 14,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1207,7 +1261,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 14
+        "numericRelations": 14,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1229,7 +1284,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 15
+        "numericRelations": 15,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1251,7 +1307,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 52
+        "numericRelations": 52,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1273,7 +1330,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1295,7 +1353,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1317,7 +1376,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 6
+        "numericRelations": 6,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1339,7 +1399,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 4
         },
-        "numericRelations": 216
+        "numericRelations": 216,
+        "typedArraySetCalls": 17
       }
     },
     {
@@ -1361,7 +1422,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 13
+        "numericRelations": 13,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1383,7 +1445,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1405,7 +1468,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 4
+        "numericRelations": 4,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -1427,7 +1491,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 30
+        "numericRelations": 30,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1449,7 +1514,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1471,7 +1537,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 190
+        "numericRelations": 190,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1493,7 +1560,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 96
+        "numericRelations": 96,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1515,7 +1583,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 49
+        "numericRelations": 49,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1537,7 +1606,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 250
+        "numericRelations": 250,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1559,7 +1629,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 102
+        "numericRelations": 102,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1581,7 +1652,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 12
+        "numericRelations": 12,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1603,7 +1675,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1625,7 +1698,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 59
+        "numericRelations": 59,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1647,7 +1721,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 11
+        "numericRelations": 11,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1669,7 +1744,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 7
+        "numericRelations": 7,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1691,7 +1767,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3
+        "numericRelations": 3,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1713,7 +1790,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 14
+        "numericRelations": 14,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1735,7 +1813,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 74
+        "numericRelations": 74,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1757,7 +1836,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 25
+        "numericRelations": 25,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -1779,7 +1859,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 40
+        "numericRelations": 40,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1801,7 +1882,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 52
+        "numericRelations": 52,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1823,7 +1905,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1845,7 +1928,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 72
+        "numericRelations": 72,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1867,7 +1951,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 38
+        "numericRelations": 38,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1889,7 +1974,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 56
+        "numericRelations": 56,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1911,7 +1997,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 113
+        "numericRelations": 113,
+        "typedArraySetCalls": 3
       }
     },
     {
@@ -1933,7 +2020,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3
+        "numericRelations": 3,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -1955,7 +2043,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 131
+        "numericRelations": 131,
+        "typedArraySetCalls": 4
       }
     },
     {
@@ -1977,7 +2066,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 28
+        "numericRelations": 28,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -1999,7 +2089,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 424
+        "numericRelations": 424,
+        "typedArraySetCalls": 3
       }
     },
     {
@@ -2021,7 +2112,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 6
         },
-        "numericRelations": 65
+        "numericRelations": 65,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2043,7 +2135,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 18
+        "numericRelations": 18,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2065,7 +2158,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 6
         },
-        "numericRelations": 89
+        "numericRelations": 89,
+        "typedArraySetCalls": 3
       }
     },
     {
@@ -2087,7 +2181,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 18
+        "numericRelations": 18,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2109,7 +2204,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2131,7 +2227,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2153,7 +2250,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2175,7 +2273,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 106
+        "numericRelations": 106,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2197,7 +2296,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 5
+        "numericRelations": 5,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2219,7 +2319,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3
+        "numericRelations": 3,
+        "typedArraySetCalls": 1
       }
     },
     {
@@ -2241,7 +2342,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2263,7 +2365,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3
+        "numericRelations": 3,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2285,7 +2388,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 8
+        "numericRelations": 8,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2307,7 +2411,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 29
+        "numericRelations": 29,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2329,7 +2434,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 160
+        "numericRelations": 160,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2351,7 +2457,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 48
+        "numericRelations": 48,
+        "typedArraySetCalls": 2
       }
     },
     {
@@ -2373,7 +2480,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 4
+        "numericRelations": 4,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2395,7 +2503,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2417,7 +2526,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 54
+        "numericRelations": 54,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2439,7 +2549,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 5
+        "numericRelations": 5,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2461,7 +2572,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 21
+        "numericRelations": 21,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2483,7 +2595,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 15
+        "numericRelations": 15,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2505,7 +2618,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2527,7 +2641,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 5
+        "numericRelations": 5,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2549,7 +2664,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 112
+        "numericRelations": 112,
+        "typedArraySetCalls": 4
       }
     },
     {
@@ -2571,7 +2687,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 22
+        "numericRelations": 22,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2593,7 +2710,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 9
+        "numericRelations": 9,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2615,7 +2733,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 60
+        "numericRelations": 60,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2637,7 +2756,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 84
+        "numericRelations": 84,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2659,7 +2779,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 115
+        "numericRelations": 115,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2681,7 +2802,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 9
+        "numericRelations": 9,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2703,7 +2825,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 71
+        "numericRelations": 71,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2725,7 +2848,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2747,7 +2871,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 8
+        "numericRelations": 8,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2769,7 +2894,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 41
+        "numericRelations": 41,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2791,7 +2917,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 20
+        "numericRelations": 20,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2813,7 +2940,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 10
+        "numericRelations": 10,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2835,7 +2963,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 34
+        "numericRelations": 34,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2857,7 +2986,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 15
+        "numericRelations": 15,
+        "typedArraySetCalls": 2
       }
     },
     {
@@ -2879,7 +3009,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 5
+        "numericRelations": 5,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2901,7 +3032,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 2
+        "numericRelations": 2,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2923,7 +3055,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 13
+        "numericRelations": 13,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2945,7 +3078,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2967,7 +3101,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -2989,7 +3124,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 1
+        "numericRelations": 1,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -3011,7 +3147,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 6
+        "numericRelations": 6,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -3033,7 +3170,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 5
+        "numericRelations": 5,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -3055,7 +3193,8 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 0
+        "numericRelations": 0,
+        "typedArraySetCalls": 0
       }
     },
     {
@@ -3077,11 +3216,12 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 20
+        "numericRelations": 20,
+        "typedArraySetCalls": 0
       }
     }
   ],
-  "schemaVersion": 8,
+  "schemaVersion": 9,
   "summary": {
     "declarations": 11421,
     "diagnostics": 0,
@@ -3242,6 +3382,19 @@
       "syntheticArrayReads": {
         "highArityArguments": 27,
         "iterationBindings": 112
+      },
+      "typedArraySetCalls": 68,
+      "typedArraySetReceivers": {
+        "Float32Array": 34,
+        "Float64Array": 0,
+        "Int16Array": 1,
+        "Int32Array": 0,
+        "Int8Array": 0,
+        "Uint16Array": 4,
+        "Uint16ArrayOrUint32Array": 1,
+        "Uint32Array": 7,
+        "Uint8Array": 12,
+        "Uint8ClampedArray": 9
       }
     },
     "staticFacts": {
@@ -3319,7 +3472,20 @@
           "writes": 375
         }
       },
-      "numericRelations": 5328
+      "numericRelations": 5328,
+      "typedArraySetCalls": 68,
+      "typedArraySetReceivers": {
+        "Float32Array": 34,
+        "Float64Array": 0,
+        "Int16Array": 1,
+        "Int32Array": 0,
+        "Int8Array": 0,
+        "Uint16Array": 4,
+        "Uint16ArrayOrUint32Array": 1,
+        "Uint32Array": 7,
+        "Uint8Array": 12,
+        "Uint8ClampedArray": 9
+      }
     }
   }
 }
