@@ -10,9 +10,9 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.Camera;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
+import flighthq.types.Camera3D;
+import flighthq.types.Scene3DLights;
+import flighthq.types.Node3D;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -28,9 +28,9 @@ class Main extends Application {
   // The HDR/depth effect pipeline the upstream `render.webgl` module allocates.
   var pipeline:Dynamic;
 
-  var scene:SceneNode;
-  var camera:Camera;
-  var lights:SceneLights;
+  var scene:Node3D;
+  var camera:Camera3D;
+  var lights:Scene3DLights;
 
   public function new() {
     super();
@@ -51,7 +51,7 @@ class Main extends Application {
       backgroundColor: 0x0a0c10ff,
       contextAttributes: {alpha: false, preserveDrawingBuffer: true},
     });
-    registerStandardPbrGlMaterial(renderState);
+    registerGlStandardPbrMaterial(renderState);
     pipeline = createGlRenderEffectPipeline(renderState, {
       sampleCount: 4,
       format: 'rgba16f',
@@ -85,7 +85,7 @@ class Main extends Application {
       roughness: 0.5,
     });
 
-    scene = createSceneNode(SceneNodeKind);
+    scene = createNode3D(Node3DKind);
 
     final boxMesh = createMesh(boxGeometry, [redMaterial]);
     // A node's transform is authored via its `position`/`rotation`/`scale` fields; invalidate after editing.
@@ -103,12 +103,12 @@ class Main extends Application {
     addNodeChild(scene, coneMesh);
 
     // Perspective camera viewing the scene from a 3/4 angle.
-    camera = createCamera({
+    camera = createCamera3D({
       far: 100,
       near: 0.1,
       projection: createPerspectiveProjection({aspect: logicalWidth / logicalHeight, fovY: Math.PI / 4}),
     });
-    setCameraViewMatrix4FromLookAt(camera, createVector3(4, 3, 5), createVector3(0, 0, 0), createVector3(0, 1, 0));
+    setCamera3DViewMatrix4FromLookAt(camera, createVector3(4, 3, 5), createVector3(0, 0, 0), createVector3(0, 1, 0));
 
     // White directional light from the upper right plus a dim ambient fill.
     final directionalDirection = createVector3(-1, -0.5, -0.7);
@@ -139,8 +139,8 @@ class Main extends Application {
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
-    prepareSceneRender(renderState, scene, camera, lights);
-    drawGlScene(renderState, scene, camera, lights);
+    prepareScene3DRender(renderState, scene, camera, lights);
+    drawGlScene3D(renderState, scene, camera, lights);
     endGlRenderEffectPipeline(renderState, pipeline, ([] : Array<Dynamic>));
   }
 }

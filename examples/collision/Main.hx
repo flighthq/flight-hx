@@ -70,6 +70,8 @@ class Main extends Application {
       });
       registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
       registerCanvasShapeCommands(defaultCanvasShapeCommands);
+      registerCanvasImageTextureResolver(renderState);
+      registerCanvasBitmapTextureResolver(renderState);
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);

@@ -8,13 +8,13 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Quaternion;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
+import flighthq.types.Scene3DLights;
+import flighthq.types.Node3D;
 import flighthq.types.Vector3;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -37,11 +37,11 @@ class Main extends Application {
   final FLOATS_PER_VERTEX = 20;
 
   var geometry:MeshGeometry;
-  var scene:SceneNode;
-  var jointNodes:Array<SceneNode> = [];
+  var scene:Node3D;
+  var jointNodes:Array<Node3D> = [];
   var mesh:Mesh;
-  var camera:Camera;
-  var lights:SceneLights;
+  var camera:Camera3D;
+  var lights:Scene3DLights;
 
   var q:Quaternion;
   var zAxis:Vector3;
@@ -68,7 +68,7 @@ class Main extends Application {
       backgroundColor: 0x1a1c24ff,
       contextAttributes: {alpha: false, preserveDrawingBuffer: true},
     });
-    registerStandardPbrGlMaterial(renderState);
+    registerGlStandardPbrMaterial(renderState);
 
     pipeline = createGlRenderEffectPipeline(renderState, {
       sampleCount: 4,
@@ -155,13 +155,13 @@ class Main extends Application {
       vertices: vertices,
     });
 
-    // Build the joint hierarchy as SceneNodes in a chain along Y. Joint 0 is the root at the bottom of
+    // Build the joint hierarchy as Node3Ds in a chain along Y. Joint 0 is the root at the bottom of
     // the tube; each successive joint is offset upward by the segment span.
-    scene = createSceneNode(SceneNodeKind);
+    scene = createNode3D(Node3DKind);
 
     final jointSpacing = TOTAL_HEIGHT / (JOINT_COUNT - 1);
     for (j in 0...JOINT_COUNT) {
-      final node = createSceneNode();
+      final node = createNode3D();
       if (j == 0) {
         node.position.y = -TOTAL_HEIGHT / 2;
         invalidateNodeLocalTransform(node);
@@ -181,12 +181,12 @@ class Main extends Application {
     mesh.skin = {skeleton: createSkeleton3D(jointNodes)};
     addNodeChild(scene, mesh);
 
-    camera = createCamera({
+    camera = createCamera3D({
       far: 100,
       near: 0.1,
       projection: createPerspectiveProjection({aspect: 800 / 600, fovY: Math.PI / 4}),
     });
-    setCameraViewMatrix4FromLookAt(camera, createVector3(6, 4, 10), createVector3(0, 0, 0), createVector3(0, 1, 0));
+    setCamera3DViewMatrix4FromLookAt(camera, createVector3(6, 4, 10), createVector3(0, 0, 0), createVector3(0, 1, 0));
 
     final directionalDirection = createVector3(-1, -0.5, -0.7);
     normalizeVector3(directionalDirection, directionalDirection);
@@ -227,8 +227,8 @@ class Main extends Application {
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
-    prepareSceneRender(renderState, scene, camera, lights);
-    drawGlScene(renderState, scene, camera, lights);
+    prepareScene3DRender(renderState, scene, camera, lights);
+    drawGlScene3D(renderState, scene, camera, lights);
     endGlRenderEffectPipeline(renderState, pipeline, []);
   }
 }

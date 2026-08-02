@@ -10,7 +10,8 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
+import flighthq.types.Sprite;
+import flighthq.types.Bitmap;
 import flighthq._internal._UInt8ClampedArray;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetPlayer;
@@ -44,9 +45,9 @@ class Main extends Application {
   var spinAnimation:Dynamic;
   var pingpongAnimation:Dynamic;
 
-  var bitmap1:Bitmap;
-  var bitmap2:Bitmap;
-  var bitmap3:Bitmap;
+  var bitmap1:Sprite;
+  var bitmap2:Sprite;
+  var bitmap3:Sprite;
 
   var player1:SpritesheetPlayer;
   var player2:SpritesheetPlayer;
@@ -75,8 +76,10 @@ class Main extends Application {
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, BitmapKind, defaultCanvasBitmapRenderer);
+      registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
       registerCanvasShapeCommands(defaultCanvasShapeCommands);
+      registerCanvasImageTextureResolver(renderState);
+      registerCanvasBitmapTextureResolver(renderState);
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -88,7 +91,7 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, BitmapKind, defaultGlBitmapRenderer);
+      registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
     }
@@ -108,9 +111,7 @@ class Main extends Application {
       imageWidth: STRIP_WIDTH,
       rows: 1,
     });
-
-    // Attach the image resource to the atlas that createSpritesheetFromGrid built internally.
-    spritesheet.atlas.image = imageResource;
+    spritesheet.atlas.texture = createTexture(cast {dimension: '2d', source: imageResource});
 
     // Create two animations over the spritesheet frames.
 
@@ -131,9 +132,8 @@ class Main extends Application {
 
     // Instance 1: spinning star at normal speed (1x).
 
-    bitmap1 = createBitmap();
-    bitmap1.data.image = imageResource;
-    bitmap1.x = 120;
+    bitmap1 = createSprite();
+        bitmap1.x = 120;
     bitmap1.y = 140;
     bitmap1.scaleX = DISPLAY_SCALE;
     bitmap1.scaleY = DISPLAY_SCALE;
@@ -145,9 +145,8 @@ class Main extends Application {
 
     // Instance 2: spinning star at double speed (2x).
 
-    bitmap2 = createBitmap();
-    bitmap2.data.image = imageResource;
-    bitmap2.x = 370;
+    bitmap2 = createSprite();
+        bitmap2.x = 370;
     bitmap2.y = 140;
     bitmap2.scaleX = DISPLAY_SCALE;
     bitmap2.scaleY = DISPLAY_SCALE;
@@ -160,9 +159,8 @@ class Main extends Application {
 
     // Instance 3: pingpong animation.
 
-    bitmap3 = createBitmap();
-    bitmap3.data.image = imageResource;
-    bitmap3.x = 620;
+    bitmap3 = createSprite();
+        bitmap3.x = 620;
     bitmap3.y = 140;
     bitmap3.scaleX = DISPLAY_SCALE;
     bitmap3.scaleY = DISPLAY_SCALE;
@@ -185,7 +183,7 @@ class Main extends Application {
   // middle frames to read as a spinning coin, uploaded as real RGBA bytes through the ImageResource
   // `data` path (a bare `{width, height}` object would become `image.source` and hit the DOM-element
   // `texImage2D` overload, which rejects a plain object).
-  function createSpriteStrip():ImageResource {
+  function createSpriteStrip():Dynamic {
     final pixels = new _UInt8ClampedArray(STRIP_WIDTH * FRAME_SIZE * 4);
     final ry = FRAME_SIZE * 0.42;
     for (f in 0...FRAME_COUNT) {
@@ -212,28 +210,17 @@ class Main extends Application {
     return imageFromPixels(STRIP_WIDTH, FRAME_SIZE, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
+    final bitmap:Bitmap = createBitmap(width, height);
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
-  // Applies the current player frame's atlas region to a Bitmap's sourceRectangle.
-  function applyFrameToBitmap(player:SpritesheetPlayer, sheet:Spritesheet, bitmap:Bitmap):Void {
+  // Applies the current player frame's atlas region to a Sprite's texture.
+  function applyFrameToBitmap(player:SpritesheetPlayer, sheet:Spritesheet, bitmap:Sprite):Void {
     final frame = getSpritesheetPlayerFrame(player, sheet);
     if (frame == null || sheet.atlas == null) return;
-    final region = getTextureAtlasRegionById(sheet.atlas, frame.id);
-    if (region == null) return;
-    if (bitmap.data.sourceRectangle == null) {
-      bitmap.data.sourceRectangle = createRectangle(region.x, region.y, region.width, region.height);
-    } else {
-      bitmap.data.sourceRectangle.x = region.x;
-      bitmap.data.sourceRectangle.y = region.y;
-      bitmap.data.sourceRectangle.width = region.width;
-      bitmap.data.sourceRectangle.height = region.height;
-    }
+    bitmap.data.texture = getTextureAtlasRegionTexture(sheet.atlas, frame.id);
     invalidateNodeAppearance(bitmap);
   }
 

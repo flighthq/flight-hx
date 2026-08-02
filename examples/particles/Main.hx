@@ -9,8 +9,8 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.Bitmap;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleForce;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -32,12 +32,12 @@ class Main extends Application {
   // Root container holds both emitters and the HUD label.
   var root:DisplayObject;
 
-  var fireEmitter:ParticleEmitter;
+  var fireEmitter:ParticleEmitter2D;
   var fireConfig:Dynamic;
   var fireForces:Array<ParticleForce>;
   var fireSimState:Dynamic;
 
-  var snowEmitter:ParticleEmitter;
+  var snowEmitter:ParticleEmitter2D;
   var snowConfig:Dynamic;
   var snowForces:Array<ParticleForce>;
   var snowSimState:Dynamic;
@@ -76,8 +76,10 @@ class Main extends Application {
         backgroundColor: 0x0a0a14ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, ParticleEmitterKind, defaultCanvasParticleEmitterRenderer);
+      registerRenderer(renderState, ParticleEmitter2DKind, defaultCanvasParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
+      registerCanvasImageTextureResolver(renderState);
+      registerCanvasBitmapTextureResolver(renderState);
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -89,7 +91,7 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, ParticleEmitterKind, defaultGlParticleEmitterRenderer);
+      registerRenderer(renderState, ParticleEmitter2DKind, defaultGlParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
       enableGlBlendModeSupport(renderState);
     }
@@ -123,7 +125,7 @@ class Main extends Application {
     addTextureAtlasRegion(snowAtlas, 0, 0, 12, 12);
 
     // Fire emitter: additive glow, follows mouse, world-space trail.
-    fireEmitter = createParticleEmitter();
+    fireEmitter = createParticleEmitter2D();
     fireEmitter.data.atlas = fireAtlas;
     // BlendMode.Add -- `BlendMode` is a string typedef in the port, so its member is the literal.
     fireEmitter.blendMode = 'Add';
@@ -174,7 +176,7 @@ class Main extends Application {
     fireSimState = createParticleEmitterState();
 
     // Snow emitter: normal blend, fixed position at top-right, gentle downward drift.
-    snowEmitter = createParticleEmitter();
+    snowEmitter = createParticleEmitter2D();
     snowEmitter.data.atlas = snowAtlas;
     snowEmitter.scaleX = 1;
     snowEmitter.scaleY = 1;
@@ -279,12 +281,12 @@ class Main extends Application {
 
     // World-space emitter: it bakes spawns through its own node world transform (set above), so nothing to pass.
     applyParticleForces(fireEmitter, fireSimState, fireForces, dt);
-    updateParticleEmitter(fireEmitter, fireSimState, fireConfig, dt);
+    updateParticleEmitter2D(fireEmitter, fireSimState, fireConfig, dt);
     invalidateNodeAppearance(fireEmitter);
 
     // Snow emitter stays fixed at its node position.
     applyParticleForces(snowEmitter, snowSimState, snowForces, dt);
-    updateParticleEmitter(snowEmitter, snowSimState, snowConfig, dt);
+    updateParticleEmitter2D(snowEmitter, snowSimState, snowConfig, dt);
     invalidateNodeAppearance(snowEmitter);
 
     // Update the particle count label.
@@ -357,7 +359,7 @@ class Main extends Application {
   // uploaded as real RGBA bytes through the ImageResource `data` path. This replaces the upstream Canvas-2D
   // `createRadialGradient` painting; a bare `{width, height}` object would instead become `image.source`
   // and hit the DOM-element `texImage2D` overload, which rejects a plain object.
-  function radialGlow(size:Int, stops:Array<Array<Float>>):ImageResource {
+  function radialGlow(size:Int, stops:Array<Array<Float>>):Dynamic {
     final pixels = new _UInt8ClampedArray(size * size * 4);
     final c = (size - 1) / 2;
     for (y in 0...size) {
@@ -395,12 +397,10 @@ class Main extends Application {
     ];
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
+    final bitmap:Bitmap = createBitmap(width, width);
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
   // Portable stand-in for JavaScript's `Number.prototype.toFixed`.

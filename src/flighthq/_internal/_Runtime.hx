@@ -154,6 +154,42 @@ class _Runtime {
     if (Std.isOfType(owner, Array)) {
       final values:Array<Dynamic> = cast owner;
       switch (name) {
+        case 'at':
+          // JS `Array.prototype.at`: negative indices count from the end;
+          // out-of-range reads yield undefined.
+          return function(index:Dynamic):Dynamic {
+            var at = Std.int(index);
+            if (at < 0) at += values.length;
+            return at < 0 || at >= values.length ? UNDEFINED : values[at];
+          };
+        // JS iteration methods absent from Haxe's Array: callbacks receive
+        // (value, index, array) and results follow JS truthiness.
+        case 'every':
+          return function(predicate:Dynamic):Bool {
+            for (index in 0...values.length) {
+              if (!truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, values])))) return false;
+            }
+            return true;
+          };
+        case 'some':
+          return function(predicate:Dynamic):Bool {
+            for (index in 0...values.length) {
+              if (truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, values])))) return true;
+            }
+            return false;
+          };
+        case 'find':
+          return function(predicate:Dynamic):Dynamic {
+            for (index in 0...values.length) {
+              if (truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, values])))) return values[index];
+            }
+            return UNDEFINED;
+          };
+        case 'includes':
+          return function(item:Dynamic):Bool {
+            for (value in values) if (strictEquals(value, item)) return true;
+            return false;
+          };
         case 'set':
           return function(source:Dynamic, ?offset:Dynamic):Dynamic {
             final at = offset == null ? 0 : Std.int(offset);
@@ -389,6 +425,7 @@ class _Runtime {
       case 'Int8Array': _Int8Array.construct;
       case 'TextDecoder': _TextDecoder;
       case 'Uint32Array': _UInt32Array.construct;
+      case 'DataView': _DataView;
       case 'Number': numberNamespace();
       case 'parseFloat': jsParseFloat;
       case 'parseInt': jsParseInt;
@@ -425,10 +462,27 @@ class _Runtime {
     #end
   }
 
+  #if (lime && !js)
+  /** JS typed-array data properties live on the wrapper's abstract getters,
+   * which reflection cannot reach; dispatch them from the storage class. The
+   * lime view properties are getter-backed, so access goes through the static
+   * type rather than a Dynamic read (null on neko otherwise). */
+  static function limeTypedArrayField(view:_LimeTypedArray, name:String):Dynamic {
+    final native:lime.utils.ArrayBufferView = view.nativeView;
+    return switch (name) {
+      case 'length': view.length;
+      case 'byteLength': native.byteLength;
+      case 'byteOffset': native.byteOffset;
+      case 'buffer': native.buffer;
+      default: Reflect.field(view, name);
+    };
+  }
+  #end
+
   public static inline function field(source:Dynamic, name:String):Dynamic {
     #if (lime && !js)
-    if (source != null && name == 'length' && Std.isOfType(source, _LimeTypedArray)) {
-      return (cast source : _LimeTypedArray).length;
+    if (source != null && Std.isOfType(source, _LimeTypedArray)) {
+      return limeTypedArrayField(cast source, name);
     }
     #end
     return source == null ? null : Reflect.field(source, name);
@@ -1065,9 +1119,12 @@ class _Runtime {
     #if (lime && !js)
     if (Std.isOfType(value, _LimeTypedArray)) return (cast value : _LimeTypedArray).toArray();
     #end
-    try {
-      return (cast value : Array<Dynamic>).copy();
-    } catch (_:Dynamic) {}
+    // Never blind-cast Dynamic to Array here: hxcpp's unchecked cast does not
+    // throw for a wrong type — it yields a garbage pointer that segfaults on
+    // use. Dispatch the collection wrappers by real type instead.
+    if (Std.isOfType(value, _Set)) return (cast value : _Set).values();
+    if (Std.isOfType(value, _Map)) return [for (entry in (cast value : _Map).entries()) entry];
+    if (Std.isOfType(value, String)) return [for (i in 0...(value : String).length) (value : String).charAt(i)];
     final iteratorFn = Reflect.field(value, 'iterator');
     if (iteratorFn == null) {
       // haxe.Rest exposes toArray() but no reflectable iterator on every target.
