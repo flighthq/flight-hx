@@ -10,7 +10,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
+import flighthq.types.Bitmap;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleForce;
@@ -264,11 +264,9 @@ class Main extends Application {
   }
 
   function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+    final bitmap:Bitmap = createBitmap(width, width);
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
   function rebuildConfig():ParticleEmitterConfig {

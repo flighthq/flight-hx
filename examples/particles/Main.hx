@@ -9,7 +9,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
+import flighthq.types.Bitmap;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleForce;
 import lime.app.Application;
@@ -359,7 +359,7 @@ class Main extends Application {
   // uploaded as real RGBA bytes through the ImageResource `data` path. This replaces the upstream Canvas-2D
   // `createRadialGradient` painting; a bare `{width, height}` object would instead become `image.source`
   // and hit the DOM-element `texImage2D` overload, which rejects a plain object.
-  function radialGlow(size:Int, stops:Array<Array<Float>>):ImageResource {
+  function radialGlow(size:Int, stops:Array<Array<Float>>):Dynamic {
     final pixels = new _UInt8ClampedArray(size * size * 4);
     final c = (size - 1) / 2;
     for (y in 0...size) {
@@ -398,11 +398,9 @@ class Main extends Application {
   }
 
   function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+    final bitmap:Bitmap = createBitmap(width, width);
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
   // Portable stand-in for JavaScript's `Number.prototype.toFixed`.

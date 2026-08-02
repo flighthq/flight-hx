@@ -10,7 +10,7 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Scene3DLights;
 import flighthq.types.Node3D;
 import lime.app.Application;
@@ -29,7 +29,7 @@ class Main extends Application {
   var pipeline:Dynamic;
 
   var scene:Node3D;
-  var camera:Camera;
+  var camera:Camera3D;
   var lights:Scene3DLights;
 
   public function new() {
@@ -103,7 +103,7 @@ class Main extends Application {
     addNodeChild(scene, coneMesh);
 
     // Perspective camera viewing the scene from a 3/4 angle.
-    camera = createCamera({
+    camera = createCamera3D({
       far: 100,
       near: 0.1,
       projection: createPerspectiveProjection({aspect: logicalWidth / logicalHeight, fovY: Math.PI / 4}),

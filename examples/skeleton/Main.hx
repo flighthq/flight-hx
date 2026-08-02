@@ -8,7 +8,7 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
@@ -40,7 +40,7 @@ class Main extends Application {
   var scene:Node3D;
   var jointNodes:Array<Node3D> = [];
   var mesh:Mesh;
-  var camera:Camera;
+  var camera:Camera3D;
   var lights:Scene3DLights;
 
   var q:Quaternion;
@@ -181,7 +181,7 @@ class Main extends Application {
     mesh.skin = {skeleton: createSkeleton3D(jointNodes)};
     addNodeChild(scene, mesh);
 
-    camera = createCamera({
+    camera = createCamera3D({
       far: 100,
       near: 0.1,
       projection: createPerspectiveProjection({aspect: 800 / 600, fovY: Math.PI / 4}),
