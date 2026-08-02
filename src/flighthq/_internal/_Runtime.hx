@@ -145,8 +145,73 @@ class _Runtime {
   #end
 
   static function resolveMethod(owner:Dynamic, name:String):Dynamic {
+    #if !js
+    // Typed-array methods on the pure-eval representation (plain Array): JS
+    // code only calls these on real typed arrays, so an Array receiver here is
+    // a typed wrapper's storage. `subarray` copies where JS aliases — accepted
+    // for the eval harness only; lime targets dispatch to _LimeTypedArray and
+    // proven receivers should lower to direct calls instead.
+    if (Std.isOfType(owner, Array)) {
+      final values:Array<Dynamic> = cast owner;
+      switch (name) {
+        case 'set':
+          return function(source:Dynamic, ?offset:Dynamic):Dynamic {
+            final at = offset == null ? 0 : Std.int(offset);
+            final items:Array<Dynamic> = iterable(source);
+            for (index in 0...items.length) values[at + index] = items[index];
+            return null;
+          };
+        case 'subarray':
+          return function(?begin:Dynamic, ?end:Dynamic):Dynamic {
+            final from = begin == null ? 0 : Std.int(begin);
+            final until = end == null ? values.length : Std.int(end);
+            return values.slice(from, until);
+          };
+        case 'fill':
+          return function(item:Dynamic, ?start:Dynamic, ?end:Dynamic):Dynamic
+            return fill(values, item, start == null ? 0 : start, end, end == null ? (start == null ? 1 : 2) : 3);
+        default:
+      }
+    }
+    // JS RegExp methods on a Haxe EReg: `test` and `exec` have no same-name
+    // EReg member, so map them here (JS `search` lives on String, not RegExp).
+    if (Std.isOfType(owner, EReg)) {
+      final expression:EReg = cast owner;
+      switch (name) {
+        case 'test':
+          return function(value:Dynamic):Bool return value != null && expression.match(Std.string(value));
+        case 'exec':
+          return function(value:Dynamic):Dynamic return regExpExec(expression, value);
+        default:
+      }
+    }
+    #end
     return Reflect.field(owner, name);
   }
+
+  #if !js
+  /** JS `RegExp.prototype.exec`: null on no match, else a match array with
+   * the full match and capture groups plus `index`/`input` fields. */
+  static function regExpExec(expression:EReg, value:Dynamic):Dynamic {
+    if (value == null) return null;
+    final text = Std.string(value);
+    if (!expression.match(text)) return null;
+    final result:Array<Dynamic> = [expression.matched(0)];
+    var group = 1;
+    while (true) {
+      try {
+        result.push(expression.matched(group));
+        group++;
+      } catch (_:Dynamic) {
+        break;
+      }
+    }
+    final position = expression.matchedPos();
+    setField(result, 'index', position.pos);
+    setField(result, 'input', text);
+    return result;
+  }
+  #end
 
   public static inline function callOptionalValue(callable:Dynamic, arguments:Array<Dynamic>):Dynamic {
     return callable == null ? UNDEFINED : Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
