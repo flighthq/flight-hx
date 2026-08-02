@@ -1,18 +1,19 @@
 {
-  "completedAt": "2026-07-22T11:55:14.719Z",
+  "completedAt": "2026-08-02T14:45:47.672Z",
   "failedPackages": 0,
+  "jobs": 12,
   "packages": [
     {
-      "durationMs": 11365,
+      "durationMs": 122598,
       "exitCode": 0,
       "package": "effects-wgpu",
       "signal": null,
       "status": "passed",
-      "summary": "144 passed (144)",
-      "testFiles": 55
+      "summary": "239 passed (239)",
+      "testFiles": 56
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "effects-wgpu",
-  "startedAt": "2026-07-22T11:55:03.351Z"
+  "startedAt": "2026-08-02T14:43:45.073Z"
 }

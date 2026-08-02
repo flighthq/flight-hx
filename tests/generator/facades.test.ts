@@ -42,4 +42,64 @@ describe('public Haxe facades', () => {
     );
     expect(packageBridge('@flighthq/compression')).toBe(path.join(workspace, 'tests', 'bridges', 'compression.mjs'));
   });
+
+  it('routes mocked contract imports to their canonical compiled owners', () => {
+    const workspace = process.cwd();
+    const applicationGl = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'application-gl', 'glApplicationRenderView.mjs'),
+      'utf8',
+    );
+    const gltfLoad = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'scene3d-resources', 'gltfLoad.mjs'),
+      'utf8',
+    );
+    const ambientLight = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'lighting', 'ambientLight.mjs'),
+      'utf8',
+    );
+    const glDropShadow = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'effects-gl', 'glDropShadowEffect.mjs'),
+      'utf8',
+    );
+
+    expect(applicationGl).toContain("import * as __dependency0 from '@flighthq/node/contract';");
+    expect(applicationGl).toContain("import * as __dependency1 from '@flighthq/render-gl/contract';");
+    expect(applicationGl).toContain('compiled.flighthq.node.Viewport.createViewport = __dependency0.createViewport;');
+    expect(applicationGl).toContain(
+      'compiled.flighthq.renderGl.GlRenderState.createGlRenderState = __dependency1.createGlRenderState;',
+    );
+    expect(applicationGl).toContain(
+      'compiled.flighthq.renderGl.GlRenderTarget.createGlRenderTarget = __dependency1.createGlRenderTarget;',
+    );
+    expect(gltfLoad).toContain("import * as __dependency0 from '@flighthq/scene3d-formats/contract';");
+    expect(gltfLoad).toContain("import * as __dependency1 from '@flighthq/net/contract';");
+    expect(gltfLoad).toContain('compiled.flighthq.net.Net.sendNetRequest = __dependency1.sendNetRequest;');
+    expect(ambientLight).not.toContain('__dependency');
+    expect(glDropShadow).toContain(
+      'compiled.flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;',
+    );
+    expect(glDropShadow).not.toContain('getGlRenderStateRuntime = __dependency0.getGlRenderStateRuntime;');
+  });
+
+  it('keeps callable contract, backend-registration, and test-helper exports live', () => {
+    const workspace = process.cwd();
+    const entityContract = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'entity', 'contract.mjs'),
+      'utf8',
+    );
+    const dialog = readFileSync(path.join(workspace, 'tests', 'bridges', 'sources', 'dialog', 'dialog.mjs'), 'utf8');
+    const renderWgpuContract = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'render-wgpu', 'contract.mjs'),
+      'utf8',
+    );
+    const renderWgpuTestHelper = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'render-wgpu', 'wgpuTestHelper.mjs'),
+      'utf8',
+    );
+
+    expect(entityContract).toContain("export * from './entity.mjs';");
+    expect(dialog).toContain('export const setDialogBackend = api.setDialogBackend;');
+    expect(renderWgpuContract).toContain("export { installWgpuMock } from './wgpuTestHelper.mjs';");
+    expect(renderWgpuTestHelper).toContain('export const installWgpuMock = api.installWgpuMock;');
+  });
 });

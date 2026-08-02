@@ -20,7 +20,7 @@ import { upstreamTypeScriptProgram } from '../analyze/program.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import { cppStructInitTypedStructIds, type TypedStructRegistry } from '../analyze/typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
-import type { ExportRecord } from '../model/inventory.ts';
+import type { ExportRecord, PackageInventory } from '../model/inventory.ts';
 import type {
   IrDeclaration,
   IrExpression,
@@ -63,6 +63,11 @@ interface LoweredPackageEntry {
   lowered: ReturnType<typeof lowerPackage>;
   moduleName: string;
   packageName: string;
+}
+
+interface MockedSpecifier {
+  allExports: boolean;
+  exports: Set<string>;
 }
 
 export function generateCoreModules(
@@ -255,6 +260,7 @@ export function generateCoreModules(
           item.lowered.declarations,
           file,
           canonicalValueAliases,
+          inventoryByName,
         ),
         check,
       );
@@ -1419,6 +1425,7 @@ function emitJavaScriptSourceBridge(
   declarations: IrDeclaration[],
   file: string,
   canonicalValueAliases: ReadonlyMap<string, string>,
+  inventoryByName: ReadonlyMap<string, PackageInventory>,
 ): string {
   const source = ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const relativeSource = path.relative(workspaceDirectory, file).split(path.sep).join('/');
@@ -1431,6 +1438,7 @@ function emitJavaScriptSourceBridge(
     specifier: string;
   }> = [];
   const dependencySpecifiers = new Map<string, string>();
+  const synchronizedPackageImports = new Set<string>();
   const reexports: string[] = [];
   const importedBindings = new Map<string, { importedName: string; specifier: string }>();
   const dependencyAlias = (specifier: string): string => {
@@ -1450,8 +1458,8 @@ function emitJavaScriptSourceBridge(
       continue;
     const sourceSpecifier = statement.moduleSpecifier.text;
     let bridgeSpecifier: string;
-    let dependencyModuleName: string | undefined;
     let dependencySource: string | undefined;
+    let dependencyExports: ExportRecord[] | undefined;
     if (sourceSpecifier.startsWith('.')) {
       const target = path.resolve(path.dirname(file), sourceSpecifier.replace(/\.m?js$/u, ''));
       bridgeSpecifier = `./${path.basename(target)}.mjs`;
@@ -1461,41 +1469,94 @@ function emitJavaScriptSourceBridge(
       dependencySource = targetFile
         ? path.relative(workspaceDirectory, targetFile).split(path.sep).join('/')
         : undefined;
-      if (targetFile && path.basename(targetFile) === 'index.ts') {
-        dependencyModuleName = `${packageNameToHaxePackage(packageName)}.${packageNameToModule(packageName)}`;
-      }
     } else {
-      const packageMatch = /^@flighthq\/([^/]+)$/u.exec(sourceSpecifier);
-      if (!packageMatch) continue;
+      if (!/^@flighthq\/[^/]+(?:\/.*)?$/u.test(sourceSpecifier)) continue;
       bridgeSpecifier = sourceSpecifier;
-      dependencyModuleName = `${packageNameToHaxePackage(sourceSpecifier)}.${packageNameToModule(sourceSpecifier)}`;
+      dependencyExports = resolvePackageExportLane(inventoryByName, sourceSpecifier).exports;
     }
     const bindings = statement.importClause.namedBindings;
+    if (
+      mockedSpecifiers.has(sourceSpecifier) &&
+      (statement.importClause.name || (bindings && !ts.isNamedImports(bindings)))
+    ) {
+      throw new Error(`Cannot synchronize mocked bridge default or namespace import: ${sourceSpecifier}`);
+    }
     if (bindings && ts.isNamedImports(bindings)) {
       for (const element of bindings.elements) {
         if (element.isTypeOnly) continue;
         const importedName = element.propertyName?.text ?? element.name.text;
         importedBindings.set(element.name.text, { importedName, specifier: bridgeSpecifier });
-        if (!mockedSpecifiers.has(sourceSpecifier)) continue;
+        if (!mockProvidesExport(mockedSpecifiers, sourceSpecifier, importedName)) continue;
         const alias = dependencyAlias(bridgeSpecifier);
+        const dependencyExport = dependencyExports?.find((record) => record.name === importedName);
+        if (dependencyExports && !dependencyExport) {
+          throw new Error(`Mocked package import is not exported by ${sourceSpecifier}: ${importedName}`);
+        }
         const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
-        const dependencyModule = dependencySource
-          ? modules.find(
-              (module) =>
-                module.source === dependencySource &&
-                module.declarations.some(
-                  (declaration) => declaration.name === generatedName || declaration.name === importedName,
-                ),
-            )
-          : undefined;
+        const dependencyModule = modules.find(
+          (module) =>
+            (dependencySource ? module.source === dependencySource : module.source === dependencyExport!.source) &&
+            module.declarations.some(
+              (declaration) =>
+                (dependencyExport
+                  ? declaration.origin.source === dependencyExport.source &&
+                    declaration.origin.fingerprint === dependencyExport.fingerprint
+                  : true) &&
+                (declaration.name === generatedName || declaration.name === importedName),
+            ),
+        );
+        const dependencyDeclaration = dependencyModule?.declarations.find(
+          (declaration) =>
+            (dependencyExport
+              ? declaration.origin.source === dependencyExport.source &&
+                declaration.origin.fingerprint === dependencyExport.fingerprint
+              : true) &&
+            (declaration.name === generatedName || declaration.name === importedName),
+        );
+        if (!dependencyModule || !dependencyDeclaration) {
+          throw new Error(`Cannot synchronize mocked bridge import ${sourceSpecifier}.${importedName}`);
+        }
         dependencies.push({
-          generatedName: dependencySource ? generatedName : importedName,
+          generatedName: dependencyDeclaration.name,
           importedName,
-          moduleName: dependencyModule ? modulePath(dependencyModule) : dependencyModuleName!,
+          moduleName: modulePath(dependencyModule),
           specifier: alias,
         });
+        if (dependencyExport) synchronizedPackageImports.add(`${sourceSpecifier}\0${importedName}`);
       }
     }
+  }
+  for (const { importedName, specifier } of collectTransitiveMockedPackageImports(file, mockedSpecifiers)) {
+    if (synchronizedPackageImports.has(`${specifier}\0${importedName}`)) continue;
+    const dependencyExport = resolvePackageExportLane(inventoryByName, specifier).exports.find(
+      (record) => record.name === importedName,
+    );
+    if (!dependencyExport) throw new Error(`Mocked package import is not exported by ${specifier}: ${importedName}`);
+    const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
+    const dependencyModule = modules.find(
+      (module) =>
+        module.source === dependencyExport.source &&
+        module.declarations.some(
+          (declaration) =>
+            declaration.origin.fingerprint === dependencyExport.fingerprint &&
+            (declaration.name === generatedName || declaration.name === importedName),
+        ),
+    );
+    const dependencyDeclaration = dependencyModule?.declarations.find(
+      (declaration) =>
+        declaration.origin.fingerprint === dependencyExport.fingerprint &&
+        (declaration.name === generatedName || declaration.name === importedName),
+    );
+    if (!dependencyModule || !dependencyDeclaration) {
+      throw new Error(`Cannot synchronize mocked bridge import ${specifier}.${importedName}`);
+    }
+    dependencies.push({
+      generatedName: dependencyDeclaration.name,
+      importedName,
+      moduleName: modulePath(dependencyModule),
+      specifier: dependencyAlias(specifier),
+    });
+    synchronizedPackageImports.add(`${specifier}\0${importedName}`);
   }
   for (const statement of source.statements) {
     if (!ts.isExportDeclaration(statement) || statement.isTypeOnly) continue;
@@ -1608,9 +1669,9 @@ function emitJavaScriptSourceBridge(
     .replace(/\n+$/u, '\n');
 }
 
-function collectAdjacentTestMocks(sourceFile: string): Set<string> {
+function collectAdjacentTestMocks(sourceFile: string): Map<string, MockedSpecifier> {
   const testFile = sourceFile.replace(/\.tsx?$/u, '.test.ts');
-  if (!existsSync(testFile)) return new Set();
+  if (!existsSync(testFile)) return new Map();
   const source = ts.createSourceFile(
     testFile,
     readFileSync(testFile, 'utf8'),
@@ -1618,7 +1679,7 @@ function collectAdjacentTestMocks(sourceFile: string): Set<string> {
     true,
     ts.ScriptKind.TS,
   );
-  const specifiers = new Set<string>();
+  const specifiers = new Map<string, MockedSpecifier>();
   const visit = (node: ts.Node): void => {
     if (
       ts.isCallExpression(node) &&
@@ -1629,12 +1690,149 @@ function collectAdjacentTestMocks(sourceFile: string): Set<string> {
       node.arguments[0] &&
       ts.isStringLiteral(node.arguments[0])
     ) {
-      specifiers.add(node.arguments[0].text);
+      const specifier = node.arguments[0].text;
+      const policy = specifiers.get(specifier) ?? { allExports: false, exports: new Set<string>() };
+      const factory = node.arguments[1];
+      const returnedObjects = collectMockFactoryObjects(factory);
+      if (!factory) {
+        policy.allExports = true;
+      } else if (returnedObjects.length === 0) {
+        throw new Error(`Unsupported Vitest mock factory in ${testFile}: ${specifier}`);
+      } else {
+        for (const object of returnedObjects) {
+          for (const property of object.properties) {
+            if (ts.isSpreadAssignment(property)) {
+              policy.allExports = true;
+              continue;
+            }
+            if (
+              (ts.isPropertyAssignment(property) ||
+                ts.isShorthandPropertyAssignment(property) ||
+                ts.isMethodDeclaration(property)) &&
+              property.name
+            ) {
+              const name = propertyNameText(property.name);
+              if (!name) {
+                throw new Error(`Unsupported computed Vitest mock export in ${testFile}: ${specifier}`);
+              }
+              policy.exports.add(name);
+              continue;
+            }
+            throw new Error(`Unsupported Vitest mock export in ${testFile}: ${specifier}`);
+          }
+        }
+      }
+      specifiers.set(specifier, policy);
     }
     ts.forEachChild(node, visit);
   };
   visit(source);
   return specifiers;
+}
+
+function collectTransitiveMockedPackageImports(
+  sourceFile: string,
+  mockedSpecifiers: ReadonlyMap<string, MockedSpecifier>,
+): Array<{ importedName: string; specifier: string }> {
+  const bindings = new Map<string, { importedName: string; specifier: string }>();
+  const visited = new Set<string>();
+  const visit = (file: string): void => {
+    if (visited.has(file)) return;
+    visited.add(file);
+    const source = ts.createSourceFile(
+      file,
+      readFileSync(file, 'utf8'),
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    for (const statement of source.statements) {
+      if (ts.isImportDeclaration(statement) && ts.isStringLiteral(statement.moduleSpecifier)) {
+        const specifier = statement.moduleSpecifier.text;
+        if (mockedSpecifiers.has(specifier) && /^@flighthq\/[^/]+(?:\/.*)?$/u.test(specifier)) {
+          const importClause = statement.importClause;
+          const bindingsClause = importClause?.namedBindings;
+          if (importClause?.name || (bindingsClause && !ts.isNamedImports(bindingsClause))) {
+            throw new Error(`Cannot synchronize mocked bridge default or namespace import: ${specifier}`);
+          }
+          if (bindingsClause && ts.isNamedImports(bindingsClause)) {
+            for (const element of bindingsClause.elements) {
+              if (element.isTypeOnly || statement.importClause?.isTypeOnly) continue;
+              const importedName = element.propertyName?.text ?? element.name.text;
+              if (!mockProvidesExport(mockedSpecifiers, specifier, importedName)) continue;
+              bindings.set(`${specifier}\0${importedName}`, { importedName, specifier });
+            }
+          }
+        }
+        if (!specifier.startsWith('.') || statement.importClause?.isTypeOnly || mockedSpecifiers.has(specifier))
+          continue;
+        const target = resolveRelativeTypeScriptSource(file, specifier);
+        if (target) visit(target);
+        continue;
+      }
+      if (
+        ts.isExportDeclaration(statement) &&
+        !statement.isTypeOnly &&
+        statement.moduleSpecifier &&
+        ts.isStringLiteral(statement.moduleSpecifier) &&
+        statement.moduleSpecifier.text.startsWith('.') &&
+        !mockedSpecifiers.has(statement.moduleSpecifier.text)
+      ) {
+        const target = resolveRelativeTypeScriptSource(file, statement.moduleSpecifier.text);
+        if (target) visit(target);
+      }
+    }
+  };
+  visit(sourceFile);
+  return [...bindings.values()].sort(
+    (left, right) =>
+      left.specifier.localeCompare(right.specifier) || left.importedName.localeCompare(right.importedName),
+  );
+}
+
+function collectMockFactoryObjects(factory: ts.Expression | undefined): ts.ObjectLiteralExpression[] {
+  if (!factory) return [];
+  if (ts.isArrowFunction(factory) && !ts.isBlock(factory.body)) {
+    let expression: ts.Expression = factory.body;
+    while (ts.isParenthesizedExpression(expression)) expression = expression.expression;
+    return ts.isObjectLiteralExpression(expression) ? [expression] : [];
+  }
+  if (!(ts.isArrowFunction(factory) || ts.isFunctionExpression(factory)) || !ts.isBlock(factory.body)) return [];
+  const objects: ts.ObjectLiteralExpression[] = [];
+  const visit = (node: ts.Node): void => {
+    if (node !== factory.body && ts.isFunctionLike(node)) return;
+    if (ts.isReturnStatement(node) && node.expression) {
+      let expression = node.expression;
+      while (ts.isParenthesizedExpression(expression)) expression = expression.expression;
+      if (!ts.isObjectLiteralExpression(expression)) return;
+      objects.push(expression);
+      return;
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(factory.body);
+  return objects;
+}
+
+function mockProvidesExport(
+  mockedSpecifiers: ReadonlyMap<string, MockedSpecifier>,
+  specifier: string,
+  name: string,
+): boolean {
+  const policy = mockedSpecifiers.get(specifier);
+  return policy !== undefined && (policy.allExports || policy.exports.has(name));
+}
+
+function propertyNameText(name: ts.PropertyName): string | undefined {
+  if (ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name)) return name.text;
+  return undefined;
+}
+
+function resolveRelativeTypeScriptSource(importer: string, specifier: string): string | undefined {
+  const target = path.resolve(path.dirname(importer), specifier.replace(/\.m?js$/u, ''));
+  return [target, `${target}.ts`, `${target}.tsx`, path.join(target, 'index.ts')].find((candidate) =>
+    existsSync(candidate),
+  );
 }
 
 function mutatesAnyName(value: unknown, names: ReadonlySet<string>): boolean {

@@ -13,3 +13,4 @@ export const isRenderCache = api.isRenderCache;
 export const isRenderCacheAdapter = api.isRenderCacheAdapter;
 export const registerRenderCacheRenderer = api.registerRenderCacheRenderer;
 export const useRenderCache = api.useRenderCache;
+export { RenderCacheKind } from '@flighthq/types/contract';
