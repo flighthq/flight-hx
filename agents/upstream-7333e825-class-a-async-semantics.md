@@ -1,6 +1,6 @@
 # Upstream `7333e825` Class A Async Semantics
 
-Status: baseline design on review's landed Class D tree. This tranche covers the three authorized Class A suites: `clipboard`, `geolocation`, and `loader`. It preserves JavaScript dynamic receiver and async scheduling semantics mechanically; it does not add Flight package allowlists, edit upstream source, absorb Class P or T, or repair the separately recorded C++ indexed-read and Haxelib packaging seams.
+Status: implemented and verified on review's landed Class D tree. This tranche covers the three authorized Class A suites: `clipboard`, `geolocation`, and `loader`. It preserves JavaScript dynamic receiver and async scheduling semantics mechanically; it does not add Flight package allowlists, edit upstream source, absorb Class P or T, or repair the separately recorded C++ indexed-read and Haxelib packaging seams.
 
 ## Fresh Class D candidate baseline
 
@@ -49,3 +49,26 @@ Focused generator/runtime coverage must lock:
 - Run `npm run check`, the complete generator suite, Haxe compilation, the supported portable matrix, and the JavaScript bundle build.
 - Run all three Class A suites, record exact results, and classify every remainder.
 - Record baseline/candidate generated-tree and `flight.cjs` hashes and hand Class A to review independently before verifying Class P and recording Class T.
+
+## Implementation
+
+Class A is implemented as two general lowering/runtime policies:
+
+- The TypeScript lowerer assigns a collision-safe receiver capture to an object method or ordinary function only when its lexical body uses dynamic `this`. Arrow functions inherit that owner, nested ordinary functions and object methods acquire their own capture, class methods retain nominal Haxe `this`, and functions without receiver use emit no capture. The emitter initializes the capture before any async protection or Promise continuation.
+- `_Async` flow outcomes and protected synchronous actions remain immediate until composition encounters a real Promise. Flow continuation, iteration, and repetition inspect that boundary rather than scheduling every already-resolved outcome. The public async boundary still normalizes success and failure to a Promise, and the non-JavaScript repeat path retains its queued trampoline to avoid recursive stack growth.
+
+The lowering fixture covers receiver use before and after an await, arrow inheritance, the no-receiver negative case, nested ordinary-function ownership, and a source-name collision with `__thisValue0`. `CoreSmoke` covers immediate flow continuation/repetition, JavaScript deferral after a real await, and the existing async rejection/finally/control-flow contract. The complete generator suite now passes all 117 tests.
+
+## Candidate evidence
+
+Two consecutive complete generator/build passes produced the byte-identical generated-tree digest `e2d9e9cea8b9c97c40f2a48a270eb329e61804e6a66ad5e13e689cafa5a64b79` and `build/haxe-js/flight.cjs` digest `49f94013d8b6d2baa16d11335e45541b04356d2acb6293c6407cb1f6453527ce`.
+
+| Package | Candidate result | Disposition |
+| --- | --: | --- |
+| `clipboard` | 56 passed (56) | Receiver capture preserves all sibling format/image method calls before protected async continuation. |
+| `geolocation` | 25 passed (25) | The permission fallback retains the web backend receiver and resolves the capability-absent path. |
+| `loader` | 88 passed (88) | Queue state and factory effects run before the first real await; no cancellation rejection is unhandled. |
+
+Candidate gates pass for `npm run check`, all 117 generator tests, the complete Haxe interpreter smoke, portable Eval, portable JavaScript, portable Python, and the Haxe JavaScript bundle build. The cold C++ gate compiles and links the complete candidate, then reaches the separately classified pre-Class-A assertion `array out-of-bounds read was not nullish`. No Class A package remainder survives.
+
+The Haxelib consumer gate independently reproduced the previously recorded relative-classpath defect. It was repaired outside this tranche by packaging maintained and generated sources into one artifact-local `src` classpath; `npm run package` then built, installed, compiled, and executed the isolated consumer successfully.
