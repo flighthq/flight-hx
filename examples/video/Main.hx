@@ -2,18 +2,29 @@
 // the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
-// The browser MediaRecorder/blob pipeline (`generateVideoBlob` + `loadVideoResourceFromBlob`) is
-// unavailable headless, so it becomes a minimal stub that hands each node a `{width, height}` video
-// source while keeping the `createVideo`/`setVideoSource`/`invalidateNodeAppearance` call sites intact.
-import flighthq.types.DisplayObject;
+//
+// Upstream has two source paths. The MediaRecorder/blob pipeline (`generateVideoBlob` +
+// `loadVideoResourceFromBlob` + audio `playVideoResource` channels) needs browser media APIs that no
+// Lime target provides, so this port takes upstream's other path — the `__flightCapture` branch —
+// on every target: a canvas stands in for the HTMLVideoElement (`videoWidth`/`videoHeight`/
+// `readyState` fields plus painted frames from the same `drawVideoFrame` routine). Unlike the
+// static capture render, the frames keep animating: each source advances at the playback rate its
+// upstream audio channel would have used (0.75/1.0/1.25), so the visible result matches the live
+// browser demo — three copies of the clip drifting apart in time.
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-
-import flighthq.types.Video;
+import flighthq.types.DisplayObject;
+import flighthq.types.Sprite;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
+
+#if js
+private typedef CaptureContext = Dynamic;
+#else
+private typedef CaptureContext = flighthq._internal.backend.NativeCanvas2dContext;
+#end
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -23,18 +34,21 @@ class Main extends Application {
   var usingCairo = false;
 
   var root:DisplayObject;
-  var videoNode:Video;
-  var secondVideoNode:Video;
-  var thirdVideoNode:Video;
+  var videoNode:Sprite;
+  var secondVideoNode:Sprite;
+  var thirdVideoNode:Sprite;
+
+  // One entry per video source: the canvas standing in for the video element, its 2D context, the
+  // Flight texture, and the fractional frame clock advancing at that source's playback rate.
+  var sources:Array<{element:Dynamic, ctx:Dynamic, texture:Dynamic, frame:Float, rate:Float}> = [];
 
   public function new() {
     super();
   }
 
-  // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
+  // Lime: window/GL are ready. Wire the Flight Lime backend, set up the renderer, build the scene.
   override public function onWindowCreate():Void {
     App.setAppBackend(LimeApp.createLimeAppBackend(this));
-    trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:
         usingCairo = true;
@@ -50,11 +64,8 @@ class Main extends Application {
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, VideoKind, defaultCanvasVideoRenderer);
-      registerCanvasShapeCommands(defaultCanvasShapeCommands);
       registerCanvasImageTextureResolver(renderState);
-      registerCanvasBitmapTextureResolver(renderState);
-      enableCanvasBlendMode(renderState);
+      registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
     } else {
       final canvas = new _GlCanvas(window);
       renderState = createGlRenderState(canvas, {
@@ -65,21 +76,19 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, VideoKind, defaultGlVideoRenderer);
-      registerGlShapeCommands(defaultGlShapeCommands);
-      enableGlBlendModeSupport(renderState);
+      registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);
     }
 
     root = createDisplayObject();
     root.scaleX = scale;
     root.scaleY = scale;
 
-    videoNode = createVideo();
+    videoNode = createSprite();
     videoNode.x = 40;
     videoNode.y = 40;
     addNodeChild(root, videoNode);
 
-    secondVideoNode = createVideo();
+    secondVideoNode = createSprite();
     secondVideoNode.x = 400;
     secondVideoNode.y = 40;
     secondVideoNode.scaleX = 1.5;
@@ -87,38 +96,100 @@ class Main extends Application {
     secondVideoNode.alpha = 0.8;
     addNodeChild(root, secondVideoNode);
 
-    thirdVideoNode = createVideo();
+    thirdVideoNode = createSprite();
     thirdVideoNode.x = 200;
     thirdVideoNode.y = 280;
     thirdVideoNode.rotation = 10;
     addNodeChild(root, thirdVideoNode);
 
-    // Upstream `generateVideoBlob().then(async (blob) => { ... })`, flattened to a synchronous headless
-    // path: the MediaRecorder/blob capture and browser video loading are unavailable, so stubbed video
-    // resources feed the same `setVideoSource` call sites.
-    final blob = generateVideoBlob();
-    final opts = {muted: true, playsInline: true};
-    final resource1 = loadVideoResourceFromBlob(blob, opts);
-    final resource2 = loadVideoResourceFromBlob(blob, opts);
-    final resource3 = loadVideoResourceFromBlob(blob, opts);
-
-    setVideoSource(videoNode, resource1);
-    setVideoSource(secondVideoNode, resource2);
-    setVideoSource(thirdVideoNode, resource3);
-
-    for (r in [resource1, resource2, resource3]) {
-      if (r.element != null) {
-        r.element.loop = true;
-        r.element.play();
-      }
+    // Upstream `setVideoSources(createCaptureVideoResource(), ...)`: three independent capture
+    // sources, each with the playback rate its `startVideoChannels` counterpart would set.
+    final nodes:Array<Sprite> = [videoNode, secondVideoNode, thirdVideoNode];
+    for (i in 0...3) {
+      final entry = createCaptureVideoSource(0.75 + i * 0.25);
+      sources.push(entry);
+      nodes[i].data.texture = entry.texture;
     }
 
     ready = true;
   }
 
-  // Upstream `enterFrame`, driven by Lime's per-frame `update` (deltaTime is milliseconds).
+  // Upstream `createCaptureVideoResource`: a canvas masquerading as an HTMLVideoElement.
+  function createCaptureVideoSource(rate:Float):{element:Dynamic, ctx:Dynamic, texture:Dynamic, frame:Float, rate:Float} {
+    final width = 320;
+    final height = 240;
+    #if js
+    final frame:Dynamic = js.Browser.document.createElement('canvas');
+    frame.width = width;
+    frame.height = height;
+    frame.videoWidth = width;
+    frame.videoHeight = height;
+    frame.readyState = 2;
+    final ctx:Dynamic = frame.getContext('2d');
+    #else
+    // Typed construction: neko's Dynamic dispatch cannot call class methods reliably, so resolve
+    // getContext statically and only hand the frame onward as Dynamic.
+    final frameCanvas = new _CaptureVideoFrame();
+    frameCanvas.width = width;
+    frameCanvas.height = height;
+    frameCanvas.videoWidth = width;
+    frameCanvas.videoHeight = height;
+    final frame:Dynamic = frameCanvas;
+    final ctx:CaptureContext = frameCanvas.nativeContext();
+    #end
+    drawVideoFrame(ctx, width, height, 5);
+    final resource = createVideoResource(frame);
+    final texture = createVideoTexture(resource);
+    return {element: frame, ctx: ctx, texture: texture, frame: 5, rate: rate};
+  }
+
+  // Upstream `drawVideoFrame`, with `hsl()` fills converted to `rgb()` (the native canvas backend
+  // parses hex and rgb()/rgba() forms only).
+  static function drawVideoFrame(ctx:CaptureContext, width:Int, height:Int, frame:Float):Void {
+    final hue = (frame * 4) % 360;
+    ctx.fillStyle = hslToRgbString(hue, 0.7, 0.3);
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = '#ffffff';
+    final barX = (frame * 3) % width;
+    ctx.fillRect(barX, 60, 30, 120);
+
+    ctx.fillStyle = hslToRgbString((hue + 180) % 360, 0.8, 0.6);
+    final circleX = width / 2 + Math.cos(frame * 0.1) * 80;
+    final circleY = height / 2 + Math.sin(frame * 0.1) * 40;
+    ctx.beginPath();
+    ctx.arc(circleX, circleY, 25, 0, Math.PI * 2, false);
+    ctx.fill();
+  }
+
+  // CSS hsl() equivalent producing an `rgb(r, g, b)` string.
+  static function hslToRgbString(hue:Float, saturation:Float, lightness:Float):String {
+    final chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
+    final huePrime = hue / 60;
+    final x = chroma * (1 - Math.abs(huePrime % 2 - 1));
+    var r = 0.0, g = 0.0, b = 0.0;
+    if (huePrime < 1) { r = chroma; g = x; }
+    else if (huePrime < 2) { r = x; g = chroma; }
+    else if (huePrime < 3) { g = chroma; b = x; }
+    else if (huePrime < 4) { g = x; b = chroma; }
+    else if (huePrime < 5) { r = x; b = chroma; }
+    else { r = chroma; b = x; }
+    final m = lightness - chroma / 2;
+    final red = Math.round((r + m) * 255);
+    final green = Math.round((g + m) * 255);
+    final blue = Math.round((b + m) * 255);
+    return 'rgb($red, $green, $blue)';
+  }
+
+  // Upstream `renderFrame`'s advance step, driven by Lime's per-frame `update`: paint the next
+  // frame of each capture clip at its playback rate, then bump the video texture version.
   override public function update(deltaTime:Int):Void {
     if (!ready) return;
+    for (entry in sources) {
+      entry.frame += entry.rate;
+      drawVideoFrame(cast entry.ctx, 320, 240, entry.frame);
+      advanceVideoTexture(entry.texture);
+    }
     invalidateNodeAppearance(videoNode);
     invalidateNodeAppearance(secondVideoNode);
     invalidateNodeAppearance(thirdVideoNode);
@@ -136,35 +207,24 @@ class Main extends Application {
       renderGlScene2D(renderState, root);
     }
   }
+}
 
-  // Browser MediaRecorder/canvas capture becomes a headless stub: return a plain descriptor standing in
-  // for the recorded `Blob`. The stubbed `loadVideoResourceFromBlob` below never dereferences it.
-  function generateVideoBlob():Dynamic {
-    return {};
-  }
+#if !js
+// Native stand-in for upstream's capture-path canvas-as-video-element: a scratch canvas (which both
+// the GL image uploader and the cairo drawImage path accept) carrying the HTMLVideoElement fields
+// (`videoWidth`/`videoHeight`/`readyState`) the video texture runtime reads reflectively. They must
+// be real fields — hxcpp Reflect.field cannot find expando properties on class instances.
+@:keep
+private class _CaptureVideoFrame extends flighthq._internal.backend.NativeScratchCanvas {
+  public var videoWidth:Int = 0;
+  public var videoHeight:Int = 0;
+  public var readyState:Int = 2;
 
-  // Headless stand-in for the browser blob loader: returns a `{width, height}` sized video source with a
-  // null `element`, so the `r.element != null` play guard cleanly no-ops without a platform media source.
-  function loadVideoResourceFromBlob(blob:Dynamic, opts:Dynamic):Dynamic {
-    return {width: 320, height: 240, element: null};
-  }
-
-  // Portable stand-in for JavaScript's `Number.prototype.toFixed`.
-  static function toFixed(value:Float, digits:Int):String {
-    final factor = Math.pow(10, digits);
-    final rounded = Math.round(value * factor) / factor;
-    var s = Std.string(rounded);
-    final dot = s.indexOf('.');
-    if (digits == 0) return dot == -1 ? s : s.substr(0, dot);
-    if (dot == -1) s += '.';
-    var decimals = s.length - s.indexOf('.') - 1;
-    while (decimals < digits) {
-      s += '0';
-      decimals++;
-    }
-    return s;
+  public function new() {
+    super();
   }
 }
+#end
 
 // Minimal GL canvas adapter over the Lime window, matching the shape `createGlRenderState` expects.
 // @:keep — Flight reaches this adapter only reflectively (getContext/width/height via Reflect),
