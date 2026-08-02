@@ -425,6 +425,7 @@ class _Runtime {
       case 'Int8Array': _Int8Array.construct;
       case 'TextDecoder': _TextDecoder;
       case 'Uint32Array': _UInt32Array.construct;
+      case 'DataView': _DataView;
       case 'Number': numberNamespace();
       case 'parseFloat': jsParseFloat;
       case 'parseInt': jsParseInt;
@@ -461,10 +462,27 @@ class _Runtime {
     #end
   }
 
+  #if (lime && !js)
+  /** JS typed-array data properties live on the wrapper's abstract getters,
+   * which reflection cannot reach; dispatch them from the storage class. The
+   * lime view properties are getter-backed, so access goes through the static
+   * type rather than a Dynamic read (null on neko otherwise). */
+  static function limeTypedArrayField(view:_LimeTypedArray, name:String):Dynamic {
+    final native:lime.utils.ArrayBufferView = view.nativeView;
+    return switch (name) {
+      case 'length': view.length;
+      case 'byteLength': native.byteLength;
+      case 'byteOffset': native.byteOffset;
+      case 'buffer': native.buffer;
+      default: Reflect.field(view, name);
+    };
+  }
+  #end
+
   public static inline function field(source:Dynamic, name:String):Dynamic {
     #if (lime && !js)
-    if (source != null && name == 'length' && Std.isOfType(source, _LimeTypedArray)) {
-      return (cast source : _LimeTypedArray).length;
+    if (source != null && Std.isOfType(source, _LimeTypedArray)) {
+      return limeTypedArrayField(cast source, name);
     }
     #end
     return source == null ? null : Reflect.field(source, name);
