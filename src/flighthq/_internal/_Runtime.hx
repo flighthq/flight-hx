@@ -154,6 +154,42 @@ class _Runtime {
     if (Std.isOfType(owner, Array)) {
       final values:Array<Dynamic> = cast owner;
       switch (name) {
+        case 'at':
+          // JS `Array.prototype.at`: negative indices count from the end;
+          // out-of-range reads yield undefined.
+          return function(index:Dynamic):Dynamic {
+            var at = Std.int(index);
+            if (at < 0) at += values.length;
+            return at < 0 || at >= values.length ? UNDEFINED : values[at];
+          };
+        // JS iteration methods absent from Haxe's Array: callbacks receive
+        // (value, index, array) and results follow JS truthiness.
+        case 'every':
+          return function(predicate:Dynamic):Bool {
+            for (index in 0...values.length) {
+              if (!truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, values])))) return false;
+            }
+            return true;
+          };
+        case 'some':
+          return function(predicate:Dynamic):Bool {
+            for (index in 0...values.length) {
+              if (truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, values])))) return true;
+            }
+            return false;
+          };
+        case 'find':
+          return function(predicate:Dynamic):Dynamic {
+            for (index in 0...values.length) {
+              if (truthy(Reflect.callMethod(null, predicate, adjustArguments(predicate, [values[index], index, values])))) return values[index];
+            }
+            return UNDEFINED;
+          };
+        case 'includes':
+          return function(item:Dynamic):Bool {
+            for (value in values) if (strictEquals(value, item)) return true;
+            return false;
+          };
         case 'set':
           return function(source:Dynamic, ?offset:Dynamic):Dynamic {
             final at = offset == null ? 0 : Std.int(offset);
