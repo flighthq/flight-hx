@@ -142,6 +142,7 @@ class WebGl2Backend {
   public static inline final MAX:Int = 32776;
   public static inline final MAX_SAMPLES:Int = 36183;
   public static inline final MAX_TEXTURE_IMAGE_UNITS:Int = 34930;
+  public static inline final MAX_VIEWPORT_DIMS:Int = 3386;
   public static inline final MIN:Int = 32775;
   public static inline final MIRRORED_REPEAT:Int = 33648;
   public static inline final NEAREST:Int = 9728;
@@ -545,8 +546,30 @@ class WebGl2Backend {
   }
 
   public static inline function getParameter(gl:GlContext, pname:Float):Dynamic {
+    #if (neko || cpp)
+    return nativeParameter(gl, Std.int(pname));
+    #else
     return gl.getParameter(Std.int(pname));
+    #end
   }
+
+  #if (neko || cpp)
+  // Lime's native vector queries return lime.utils typed arrays whose abstract
+  // identity is lost through Dynamic, so the generated portable typed-array
+  // readers cannot index them. Copy those snapshots into the portable classes
+  // (a fresh snapshot per call matches browser getParameter semantics).
+  static function nativeParameter(gl:GlContext, pname:Int):Dynamic {
+    final result:Dynamic = gl.getParameter(pname);
+    return switch (pname) {
+      case VIEWPORT | SCISSOR_BOX | MAX_VIEWPORT_DIMS if (result != null):
+        final view:lime.utils.Int32Array = result;
+        final portable = new flighthq._internal._Int32Array(view.length);
+        for (index in 0...view.length) portable[index] = view[index];
+        portable;
+      default: result;
+    };
+  }
+  #end
 
   public static inline function getProgramInfoLog(gl:GlContext, program:GlProgram):String {
     final result = gl.getProgramInfoLog(program);
@@ -782,6 +805,9 @@ class WebGl2Backend {
 
   public static inline function uniform1f(gl:GlContext, location:Null<GlUniformLocation>, x:Float):Void {
     gl.uniform1f(location, x);
+    #if flight_gl_trace
+    glTrace('uniform1f(' + Std.string(location) + ', ' + x + ') getError -> 0x' + StringTools.hex(Std.int(gl.getError()), 4));
+    #end
   }
 
   public static inline function uniform1fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList):Void {
@@ -827,6 +853,10 @@ class WebGl2Backend {
   public static inline function uniform4f(gl:GlContext, location:Null<GlUniformLocation>, x:Float, y:Float, z:Float,
       w:Float):Void {
     gl.uniform4f(location, x, y, z, w);
+    #if flight_gl_trace
+    glTrace('uniform4f(' + Std.string(location) + ', ' + x + ', ' + y + ', ' + z + ', ' + w + ') getError -> 0x'
+      + StringTools.hex(Std.int(gl.getError()), 4));
+    #end
   }
 
   public static inline function uniform4fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList):Void {
@@ -840,7 +870,13 @@ class WebGl2Backend {
   public static inline function uniformMatrix3fv(gl:GlContext, location:Null<GlUniformLocation>, transpose:Bool,
       values:GlFloatList):Void {
     #if (lime && !js)
-    gl.uniformMatrix3fv(location, transpose, nativeFloats(values));
+    final native = nativeFloats(values);
+    gl.uniformMatrix3fv(location, transpose, native);
+    #if flight_gl_trace
+    final f32:lime.utils.Float32Array = cast native;
+    glTrace('uniformMatrix3fv(' + Std.string(location) + ', len=' + f32.length + ', m0..2=' + f32[0] + ',' + f32[1]
+      + ',' + f32[2] + ') getError -> 0x' + StringTools.hex(Std.int(gl.getError()), 4));
+    #end
     #else
     gl.uniformMatrix3fv(location, transpose, cast values);
     #end
@@ -876,6 +912,10 @@ class WebGl2Backend {
   public static inline function vertexAttribPointer(gl:GlContext, index:Float, size:Float, type:Float, normalized:Bool,
       stride:Float, offset:Float):Void {
     gl.vertexAttribPointer(Std.int(index), Std.int(size), Std.int(type), normalized, Std.int(stride), Std.int(offset));
+    #if flight_gl_trace
+    glTrace('vertexAttribPointer(index=' + Std.int(index) + ', size=' + Std.int(size) + ', stride=' + Std.int(stride)
+      + ', offset=' + Std.int(offset) + ')');
+    #end
   }
 
   public static inline function viewport(gl:GlContext, x:Float, y:Float, width:Float, height:Float):Void {
