@@ -78,7 +78,7 @@ class Dialog {
 
   public static function createWebDialogBackend():DialogBackend {
     return cast { confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'confirm')), 'function') : Bool)) : Bool)) { return cast false; }
         try {
           return cast _Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'confirm', cast ([options.message] : Array<Dynamic>)), true);
@@ -86,9 +86,9 @@ class Dialog {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var checkboxChecked:Dynamic = cast _Runtime.UNDEFINED;
         checkboxChecked = _Runtime.coalesce(options.checkboxChecked, function():Dynamic return cast false);
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'alert')), 'function') : Bool)) : Bool)) {
@@ -101,13 +101,13 @@ class Dialog {
         }
         return cast { buttonIndex: 0.0, cancelled: false, checkboxChecked: checkboxChecked };
         return cast null;
-      });
+      }));
     }, openDirectory: function(options:Dynamic) {
       return cast _Runtime.callValue(Dialog.openWebDirectoryDialog__dialog, cast ([options] : Array<Dynamic>));
     }, openFile: function(options:Dynamic) {
       return cast _Runtime.callValue(Dialog.openWebFileDialog__dialog, cast ([options] : Array<Dynamic>));
     }, prompt: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'prompt')), 'function') : Bool)) : Bool)) { return cast null; }
         try {
           return cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'prompt', cast ([options.message, _Runtime.coalesce(options.defaultValue, function():Dynamic return cast '')] : Array<Dynamic>));
@@ -115,11 +115,11 @@ class Dialog {
           return cast null;
         }
         return cast null;
-      });
+      }));
     }, saveFile: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(_Runtime.callValue(Dialog.saveWebFile__dialog, cast ([options] : Array<Dynamic>)));
-      });
+      }));
     } };
     return cast null;
   }

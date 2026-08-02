@@ -174,7 +174,7 @@ class Connectivity {
   }
 
   public static function detectConnectivityReachability(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flighthq._internal._Promise<ConnectivityReachability> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var backend:Dynamic = cast _Runtime.UNDEFINED;
       var webBackend:Dynamic = cast _Runtime.UNDEFINED;
       backend = _Runtime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>));
@@ -190,7 +190,7 @@ class Connectivity {
       (out.latency = cast (-1.0 : Dynamic));
       return cast out;
       return cast null;
-    });
+    }));
   }
 
   public static function disposeConnectivity(net:flighthq.types.Connectivity):Void {

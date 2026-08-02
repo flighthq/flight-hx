@@ -83,21 +83,21 @@ class TauriShell {
         })
       );
     }, moveToTrash: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, moveItemsToTrash: function(paths:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(_Runtime.callProperty(paths, 'map', cast ([function() return false] : Array<Dynamic>)));
-      });
+      }));
     }, readShortcutLink: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, writeShortcutLink: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, beep: function() {
 
     } };

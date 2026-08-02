@@ -282,17 +282,25 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
 
   if (declaration.async) {
     if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
-      return [`${signature} {`, ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters)), '}'];
+      return [
+        `${signature} {`,
+        ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters, declaration.thisCapture)),
+        '}',
+      ];
     }
     if (!declaration.haxeBody && statementsContainAwait(declaration.body) && canFlowStatements(declaration.body)) {
-      return [`${signature} {`, ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters)), '}'];
+      return [
+        `${signature} {`,
+        ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters, declaration.thisCapture)),
+        '}',
+      ];
     }
     if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
-      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines)), '}'];
+      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines, declaration.thisCapture)), '}'];
     }
     throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
-  return [`${signature} {`, ...indent(bodyLines), '}'];
+  return [`${signature} {`, ...indent([...emitThisCapture(declaration.thisCapture), ...bodyLines]), '}'];
 }
 
 /**
@@ -554,17 +562,25 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   }
   if (declaration.async) {
     if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
-      return [`${signature} {`, ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters)), '}'];
+      return [
+        `${signature} {`,
+        ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters, declaration.thisCapture)),
+        '}',
+      ];
     }
     if (!declaration.haxeBody && statementsContainAwait(declaration.body) && canFlowStatements(declaration.body)) {
-      return [`${signature} {`, ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters)), '}'];
+      return [
+        `${signature} {`,
+        ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters, declaration.thisCapture)),
+        '}',
+      ];
     }
     if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
-      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines)), '}'];
+      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines, declaration.thisCapture)), '}'];
     }
     throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
-  return [`${signature} {`, ...indent(bodyLines), '}'];
+  return [`${signature} {`, ...indent([...emitThisCapture(declaration.thisCapture), ...bodyLines]), '}'];
 }
 
 function isSuperCall(statement: IrStatement): boolean {
@@ -595,11 +611,20 @@ function emitParameters(parameters: IrParameter[], packedRest = false): string {
     .join(', ');
 }
 
-function emitPromiseProtectedBody(bodyLines: string[]): string[] {
-  return ['return cast flighthq._internal._Async.protect(function():Dynamic {', ...indent(bodyLines), '});'];
+function emitThisCapture(name?: string): string[] {
+  return name ? [`var ${safeName(name)}:Dynamic = _Runtime.thisValue();`] : [];
 }
 
-function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParameter[]): string[] {
+function emitPromiseProtectedBody(bodyLines: string[], thisCapture?: string): string[] {
+  return [
+    ...emitThisCapture(thisCapture),
+    'return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {',
+    ...indent(bodyLines),
+    '}));',
+  ];
+}
+
+function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParameter[], thisCapture?: string): string[] {
   const previousReturnRequiresValue = currentReturnRequiresValue;
   const previousContinueIncrement = currentContinueIncrement;
   const previousSwitchContinue = currentSwitchContinue;
@@ -621,7 +646,7 @@ function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParame
       );
     }
     body.push(...emitFlatMapStatements(statements));
-    return emitPromiseProtectedBody(body);
+    return emitPromiseProtectedBody(body, thisCapture);
   } finally {
     currentReturnRequiresValue = previousReturnRequiresValue;
     currentContinueIncrement = previousContinueIncrement;
@@ -632,7 +657,7 @@ function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParame
   }
 }
 
-function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter[]): string[] {
+function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter[], thisCapture?: string): string[] {
   const previousReturnRequiresValue = currentReturnRequiresValue;
   const previousContinueIncrement = currentContinueIncrement;
   const previousSwitchContinue = currentSwitchContinue;
@@ -648,6 +673,7 @@ function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter
   try {
     const body = [...emitParameterInitializers(parameters), ...emitFlowScopedStatements(statements)];
     return [
+      ...emitThisCapture(thisCapture),
       'return cast flighthq._internal._Async.finishFlow(',
       '  flighthq._internal._Async.protect(function():Dynamic {',
       ...indent(indent(body)),
@@ -2212,17 +2238,21 @@ function emitExpression(expression: IrExpression): string {
           ? [{ expression: expression.expression, kind: 'return' }]
           : expression.body;
         if (canFlatMapStatements(statements)) {
-          const body = indent(emitFlatMapFunctionBody(statements, expression.parameters)).join('\n');
+          const body = indent(emitFlatMapFunctionBody(statements, expression.parameters, expression.thisCapture)).join(
+            '\n',
+          );
           return `function${name}(${parameters})${returns} {\n${body}\n}`;
         }
         if (statementsContainAwait(statements) && canFlowStatements(statements)) {
-          const body = indent(emitFlowFunctionBody(statements, expression.parameters)).join('\n');
+          const body = indent(emitFlowFunctionBody(statements, expression.parameters, expression.thisCapture)).join(
+            '\n',
+          );
           return `function${name}(${parameters})${returns} {\n${body}\n}`;
         }
         if (!statementsContainAwait(statements)) {
           const bodyLines = emitFunctionBody(statements, expression.parameters, expression.returns, false);
           if (expression.returns && !isVoidType(expression.returns)) bodyLines.push('return cast null;');
-          const body = indent(emitPromiseProtectedBody(bodyLines)).join('\n');
+          const body = indent(emitPromiseProtectedBody(bodyLines, expression.thisCapture)).join('\n');
           return `function${name}(${parameters})${returns} {\n${body}\n}`;
         }
         throw new Error('Generator async lowering does not support a nested async function');
@@ -2232,7 +2262,7 @@ function emitExpression(expression: IrExpression): string {
         return output;
       }
       const bodyLines = emitFunctionBody(expression.body, expression.parameters, expression.returns, expression.async);
-      const body = indent(bodyLines).join('\n');
+      const body = indent([...emitThisCapture(expression.thisCapture), ...bodyLines]).join('\n');
       const output = `function${name}(${parameters})${returns} {\n${body}\n}`;
       return output;
     }

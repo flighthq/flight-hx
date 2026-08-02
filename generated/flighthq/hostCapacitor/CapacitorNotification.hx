@@ -75,13 +75,13 @@ class CapacitorNotification {
     }, getCapabilities: function() {
       return cast { actions: true, channels: true, coldStart: true, image: false, listActive: false, scheduling: true, textReply: false };
     }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -138,9 +138,9 @@ class CapacitorNotification {
     }, closeAllNotifications: function() {
 
     }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, subscribeClick: function(listener:Dynamic) {
       return cast _Runtime.callValue(CapacitorNotification.toUnsubscribe__capacitorNotification, cast ([_Runtime.callProperty(notifications, 'addListener', cast (['localNotificationActionPerformed', function(action:Dynamic) {
         if ((cast _Runtime.strictEquals(_Runtime.field(action, 'actionId'), 'tap') : Bool)) { _Runtime.callValue(listener, cast ([_Runtime.coalesce(((cast idByNumber : flighthq._internal._Map).get(_Runtime.field(_Runtime.field(action, 'notification'), 'id'))), function():Dynamic return cast Std.string(_Runtime.field(_Runtime.field(action, 'notification'), 'id')))] : Array<Dynamic>)); }

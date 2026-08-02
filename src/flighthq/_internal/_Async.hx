@@ -44,66 +44,69 @@ class _Async {
     #end
   }
 
-  public static function continueFlow(value:Dynamic, continuation:Void->Dynamic):_Promise<Dynamic> {
-    return flatMap(value, function(outcome:Dynamic) {
-      return outcome == null ? continuation() : resolve(outcome);
+  public static function continueFlow(value:Dynamic, continuation:Void->Dynamic):Dynamic {
+    return mapImmediate(value, function(outcome:Dynamic) {
+      return outcome == null ? continuation() : outcome;
     });
   }
 
-  public static function continueIteration(value:Dynamic, continuation:Void->Dynamic):_Promise<Dynamic> {
-    return flatMap(value, function(outcome:Dynamic) {
+  public static function continueIteration(value:Dynamic, continuation:Void->Dynamic):Dynamic {
+    return mapImmediate(value, function(outcome:Dynamic) {
       final kind = outcome == null ? null : Reflect.field(outcome, 'kind');
-      return outcome == null || kind == 'continue' ? continuation() : resolve(outcome);
+      return outcome == null || kind == 'continue' ? continuation() : outcome;
     });
   }
 
   public static function finishFlow<T>(value:Dynamic):_Promise<T> {
-    return flatMap(value, function(outcome:Dynamic) {
-      return resolve(outcome == null ? null : Reflect.field(outcome, 'value'));
-    });
+    return cast resolve(mapImmediate(value, function(outcome:Dynamic) {
+      return outcome == null ? null : Reflect.field(outcome, 'value');
+    }));
   }
 
-  public static function finalizeFlow(value:Dynamic, cleanup:Void->Dynamic):_Promise<Dynamic> {
-    final settled = recover(flatMap(value, function(outcome:Dynamic) {
-      return resolve({fulfilled: true, outcome: outcome});
-    }), function(error) {
-      return resolve({error: error, fulfilled: false});
-    });
-    return flatMap(settled, function(result:Dynamic) {
-      return flatMap(protect(cleanup), function(cleanupOutcome:Dynamic) {
-        if (cleanupOutcome != null) return resolve(cleanupOutcome);
+  public static function finalizeFlow(value:Dynamic, cleanup:Void->Dynamic):Dynamic {
+    final settled:Dynamic = isPromise(value)
+      ? recover(flatMap(value, function(outcome:Dynamic) {
+          return {fulfilled: true, outcome: outcome};
+        }), function(error) {
+          return {error: error, fulfilled: false};
+        })
+      : {fulfilled: true, outcome: value};
+    return mapImmediate(settled, function(result:Dynamic) {
+      return mapImmediate(protect(cleanup), function(cleanupOutcome:Dynamic) {
+        if (cleanupOutcome != null) return cleanupOutcome;
         return Reflect.field(result, 'fulfilled')
-          ? resolve(Reflect.field(result, 'outcome'))
+          ? Reflect.field(result, 'outcome')
           : reject(Reflect.field(result, 'error'));
       });
     });
   }
 
-  public static function flowBreak():_Promise<Dynamic> {
-    return resolve({kind: 'break'});
+  public static function flowBreak():Dynamic {
+    return {kind: 'break'};
   }
 
-  public static function flowContinue():_Promise<Dynamic> {
-    return resolve({kind: 'continue'});
+  public static function flowContinue():Dynamic {
+    return {kind: 'continue'};
   }
 
-  public static function flowNormal():_Promise<Dynamic> {
-    return resolve(null);
+  public static function flowNormal():Dynamic {
+    return null;
   }
 
-  public static function flowReturn(value:Dynamic):_Promise<Dynamic> {
-    return resolve({kind: 'return', value: value});
+  public static function flowReturn(value:Dynamic):Dynamic {
+    return {kind: 'return', value: value};
   }
 
-  public static function protect<T>(action:Void->Dynamic):_Promise<T> {
+  public static function protect<T>(action:Void->Dynamic):Dynamic {
     try {
-      return resolve(action());
+      return action();
     } catch (error:Dynamic) {
       return reject(error);
     }
   }
 
-  public static function recover<T>(value:Dynamic, rejection:Dynamic):_Promise<T> {
+  public static function recover<T>(value:Dynamic, rejection:Dynamic):Dynamic {
+    if (!isPromise(value)) return value;
     #if js
     return cast js.lib.Promise.resolve(value).catchError(function(error) return rejection(error));
     #else
@@ -120,20 +123,32 @@ class _Async {
     #end
   }
 
-  public static function repeatFlow(iteration:Void->Dynamic):_Promise<Dynamic> {
+  public static function repeatFlow(iteration:Void->Dynamic):Dynamic {
     #if js
-    return flatMap(protect(iteration), function(outcome:Dynamic) {
-      if (outcome == null || Reflect.field(outcome, 'kind') == 'continue') {
-        return repeatFlow(iteration);
+    while (true) {
+      final outcome = protect(iteration);
+      if (isPromise(outcome)) {
+        return flatMap(outcome, function(result:Dynamic) return continueRepeatFlow(result, iteration));
       }
-      if (Reflect.field(outcome, 'kind') == 'break') return flowNormal();
-      return resolve(outcome);
-    });
+      final kind = outcome == null ? null : Reflect.field(outcome, 'kind');
+      if (outcome == null || kind == 'continue') continue;
+      return kind == 'break' ? flowNormal() : outcome;
+    }
     #else
     return create(function(resolve, reject) {
       var advancing = false;
       var queued = false;
       var advance:Void->Void = null;
+      final handleOutcome = function(outcome:Dynamic) {
+        final kind = outcome == null ? null : Reflect.field(outcome, 'kind');
+        if (outcome == null || kind == 'continue') {
+          if (advancing) queued = true; else advance();
+        } else if (kind == 'break') {
+          resolve(null);
+        } else {
+          resolve(outcome);
+        }
+      };
       advance = function() {
         if (advancing) {
           queued = true;
@@ -142,26 +157,35 @@ class _Async {
         advancing = true;
         do {
           queued = false;
-          protect(iteration).then(function(outcome) {
-            final kind = outcome == null ? null : Reflect.field(outcome, 'kind');
-            if (outcome == null || kind == 'continue') {
-              if (advancing) queued = true; else advance();
-            } else if (kind == 'break') {
-              resolve(null);
-            } else {
-              resolve(outcome);
-            }
-            return outcome;
-          }, function(error) {
-            reject(error);
-            return cast null;
-          });
+          final outcome = protect(iteration);
+          if (isPromise(outcome)) {
+            final promise:_Promise<Dynamic> = cast outcome;
+            promise.then(function(result) {
+              handleOutcome(result);
+              return result;
+            }, function(error) {
+              reject(error);
+              return cast null;
+            });
+          } else {
+            handleOutcome(outcome);
+          }
         } while (queued);
         advancing = false;
       };
       advance();
     });
     #end
+  }
+
+  static function continueRepeatFlow(outcome:Dynamic, iteration:Void->Dynamic):Dynamic {
+    final kind = outcome == null ? null : Reflect.field(outcome, 'kind');
+    if (outcome == null || kind == 'continue') return repeatFlow(iteration);
+    return kind == 'break' ? flowNormal() : outcome;
+  }
+
+  static function mapImmediate(value:Dynamic, continuation:Dynamic->Dynamic):Dynamic {
+    return isPromise(value) ? flatMap(value, continuation) : continuation(value);
   }
 
   public static function reject<T>(error:Dynamic):_Promise<T> {

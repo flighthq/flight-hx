@@ -1,20 +1,19 @@
 {
-  "completedAt": "2026-08-02T22:21:20.110Z",
-  "failedPackages": 1,
+  "completedAt": "2026-08-02T22:39:40.376Z",
+  "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 84712,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n····x··················x···············x··············x·\n\n Test Files  1 failed (1)\n      Tests  4 failed | 52 passed (56)\n   Start at  15:19:56\n   Duration  82.96s (transform 23.20s, setup 664ms, import 76.00s, tests 1.69s, environment 3.80s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/clipboard/src/clipboard.test.ts > createWebClipboardBackend > returns a backend whose reads yield strings without throwing\nTypeError: Cannot read properties of undefined (reading 'readFormat')\n ❯ build/haxe-js/flight.cjs?import:26016:52\n ❯ Function.protect build/haxe-js/flight.cjs?import:455:47\n ❯ Object.readHtml build/haxe-js/flight.cjs?import:26015:39\n ❯ upstream/packages/clipboard/src/clipboard.test.ts:237:34\n    235|     const backend = createWebClipboardBackend();\n    236|     expect(typeof (await backend.readText())).toBe('string');\n    237|     expect(typeof (await backend.readHtml())).toBe('string');\n       |                                  ^\n    238|     expect(typeof (await backend.readFormat(ClipboardFormatText))).toB…\n    239|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯\n\n FAIL  upstream/packages/clipboard/src/clipboard.test.ts > hasClipboardImage > returns false from the web backend without throwing\nTypeError: Cannot read properties of undefined (reading 'readImage')\n ❯ build/haxe-js/flight.cjs?import:26129:52\n ❯ Function.protect build/haxe-js/flight.cjs?import:455:47\n ❯ Object.hasImage build/haxe-js/flight.cjs?import:26128:39\n ❯ upstream/packages/clipboard/src/clipboard.test.ts:398:46\n    396|\n    397|   it('returns false from the web backend without throwing', async () =…\n    398|     expect(await createWebClipboardBackend().hasImage()).toBe(false);\n       |                                              ^\n    399|   });\n    400| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯\n\n FAIL  upstream/packages/clipboard/src/clipboard.test.ts > readClipboardRTF > returns the empty-string sentinel from the web backend without throwing\nTypeError: Cannot read properties of undefined (reading 'readFormat')\n ❯ build/haxe-js/flight.cjs?import:26135:52\n ❯ Function.protect build/haxe-js/flight.cjs?import:455:47\n ❯ Object.readRTF build/haxe-js/flight.cjs?import:26134:39\n ❯ upstream/packages/clipboard/src/clipboard.test.ts:516:46\n    514|\n    515|   it('returns the empty-string sentinel from the web backend without t…\n    516|     expect(await createWebClipboardBackend().readRTF()).toBe('');\n       |                                              ^\n    517|   });\n    518| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯\n\n FAIL  upstream/packages/clipboard/src/clipboard.test.ts > writeClipboardRTF > returns false from the web backend without throwing\nTypeError: Cannot read properties of undefined (reading 'writeFormat')\n ❯ build/haxe-js/flight.cjs?import:26139:52\n ❯ Function.protect build/haxe-js/flight.cjs?import:455:47\n ❯ Object.writeRTF build/haxe-js/flight.cjs?import:26138:39\n ❯ upstream/packages/clipboard/src/clipboard.test.ts:625:46\n    623|\n    624|   it('returns false from the web backend without throwing', async () =…\n    625|     expect(await createWebClipboardBackend().writeRTF('{\\\\rtf1 z}')).t…\n       |                                              ^\n    626|   });\n    627| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯",
+      "durationMs": 35978,
+      "exitCode": 0,
       "package": "clipboard",
       "signal": null,
-      "status": "failed",
-      "summary": "4 failed | 52 passed (56)",
+      "status": "passed",
+      "summary": "56 passed (56)",
       "testFiles": 1
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "clipboard",
-  "startedAt": "2026-08-02T22:19:55.396Z"
+  "startedAt": "2026-08-02T22:39:04.396Z"
 }

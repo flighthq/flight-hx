@@ -50,9 +50,9 @@ class ImageResourceFrom {
   }
 
   public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       return flighthq._internal._Async.resolve(_Runtime.callValue(loadImageResourceFromUrl, cast (['data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '', _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)));
-    });
+    }));
   }
 
   public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
@@ -75,7 +75,7 @@ class ImageResourceFrom {
   }
 
   public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var type:Dynamic = cast _Runtime.UNDEFINED;
       var buf:Dynamic = cast _Runtime.UNDEFINED;
       type = _Runtime.coalesce(mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
@@ -85,7 +85,7 @@ class ImageResourceFrom {
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
       return cast _Runtime.callValue(loadImageResourceFromBlob, cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), signal] : Array<Dynamic>));
       return cast null;
-    });
+    }));
   }
 
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {

@@ -18,15 +18,15 @@ class Shell {
     return cast { beep: function() {
 
     }, moveItemsToTrash: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, moveToTrash: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, openExternal: function(url:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'open')), 'function') : Bool)) : Bool)) { return cast false; }
         try {
           return cast !_Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
@@ -34,27 +34,27 @@ class Shell {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, openPath: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, openPathResult: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('unavailable on web');
-      });
+      }));
     }, readShortcutLink: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, showItemInFolder: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, writeShortcutLink: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     } };
     return cast null;
   }

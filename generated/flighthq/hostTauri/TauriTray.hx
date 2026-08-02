@@ -77,7 +77,7 @@ class TauriTray {
       record = ((cast trays : flighthq._internal._Map).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<Dynamic> {
-        return cast flighthq._internal._Async.protect(function():Dynamic {
+        return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
           var built:Dynamic = cast _Runtime.UNDEFINED;
           var menu:Dynamic = cast _Runtime.UNDEFINED;
           return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriTray.buildTrayItems__tauriTray, cast ([menuModule, items] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
@@ -90,7 +90,7 @@ class TauriTray {
               });
             });
           });
-        });
+        }));
       }, cast ([] : Array<Dynamic>)), function() {
 
       }));

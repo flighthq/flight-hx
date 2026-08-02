@@ -151,6 +151,7 @@ type IrExpressionNode =
       body: IrStatement[];
       expression?: IrExpression | undefined;
       returns?: IrType | undefined;
+      thisCapture?: string | undefined;
     }
   | { domRootBinding?: IrDomRootBinding | undefined; kind: 'identifier'; name: string }
   | { kind: 'literal'; value: boolean | null | number | string }
@@ -264,6 +265,7 @@ export interface IrFunctionDeclaration {
   origin: SourceOrigin;
   parameters: IrParameter[];
   returns: IrType;
+  thisCapture?: string | undefined;
   typeParameters: string[];
 }
 

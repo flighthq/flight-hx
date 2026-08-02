@@ -14,7 +14,28 @@ class CoreSmoke {
     if (_Runtime.isError('not an error')) throw 'non-Error identity failed';
     if (!_Runtime.isError(_Runtime.error('expected'))) throw 'Error identity failed';
 
+    var synchronousFlowPrefix = 0;
+    final synchronousFlow = _Async.continueFlow(_Async.flowNormal(), function() {
+      synchronousFlowPrefix = 1;
+      return _Async.flowNormal();
+    });
+    if (synchronousFlowPrefix != 1 || synchronousFlow != null) throw 'async synchronous prefix was deferred';
+    var synchronousIterations = 0;
+    final synchronousLoop = _Async.repeatFlow(function() {
+      synchronousIterations++;
+      return synchronousIterations < 3 ? _Async.flowContinue() : _Async.flowBreak();
+    });
+    if (synchronousIterations != 3) throw 'synchronous async flow loop was deferred';
+
     #if js
+    if (synchronousLoop != null) throw 'JavaScript synchronous flow returned a pending outcome';
+    var awaitedContinuationRan = false;
+    _Async.flatMap(_Async.resolve(null), function(_) {
+      awaitedContinuationRan = true;
+      return null;
+    });
+    if (awaitedContinuationRan) throw 'real await continuation ran synchronously';
+
     final thrownMarkers:Array<Dynamic> = [{}, 'primitive', _Runtime.error('identity')];
     for (thrownMarker in thrownMarkers) {
       final caughtMarker:Dynamic = js.Syntax.code(

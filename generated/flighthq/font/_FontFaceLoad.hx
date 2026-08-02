@@ -9,11 +9,11 @@ import flighthq.types.Font.FontUrl;
 
 class _FontFaceLoad {
   public static function _loadFontFaceFromBytes(family:String, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var source:Dynamic = cast _Runtime.UNDEFINED;
       source = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
       return flighthq._internal._Async.resolve(_Runtime.callValue(_FontFaceLoad.loadAndRegisterFontFace___fontFaceLoad, cast ([family, source] : Array<Dynamic>)));
-    });
+    }));
   }
 
   public static function _loadFontFaceFromUrl(family:String, url:String):flighthq._internal._Promise<Dynamic> {
@@ -42,7 +42,7 @@ class _FontFaceLoad {
   }
 
   public static function loadAndRegisterFontFace___fontFaceLoad(family:String, source:Dynamic):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var face:Dynamic = cast _Runtime.UNDEFINED;
       face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, source]);
       return flighthq._internal._Async.flatMap(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
@@ -50,6 +50,6 @@ class _FontFaceLoad {
         _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
         return flighthq._internal._Async.resolve(face);
       });
-    });
+    }));
   }
 }

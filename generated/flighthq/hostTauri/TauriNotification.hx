@@ -22,7 +22,7 @@ class TauriNotification {
 
     });
     return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         try {
@@ -32,7 +32,7 @@ class TauriNotification {
           return cast '';
         }
         return cast null;
-      });
+      }));
     }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -60,21 +60,21 @@ class TauriNotification {
     }, getCapabilities: function() {
       return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
     }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, scheduleNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
-      });
+      }));
     }, cancelScheduledNotification: function() {
 
     }, closeNotification: function() {
@@ -82,9 +82,9 @@ class TauriNotification {
     }, closeAllNotifications: function() {
 
     }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, subscribeClick: function() {
       return cast function() {
 

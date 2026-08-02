@@ -166,8 +166,9 @@ class Ipc {
       var event:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onChannelMessage], [name]]), 1); }
       event = { channel: name, senderId: -1.0, args: args, reply: function(...replyArgs:Dynamic) {
-        if ((cast _Runtime.strictEquals(_Runtime.thisValue().senderId, -1.0) : Bool)) { return; }
-        _Runtime.callOptionalProperty(backend, 'sendTo', cast ([{ windowId: _Runtime.thisValue().senderId }, name, replyArgs] : Array<Dynamic>));
+        var __thisValue0:Dynamic = _Runtime.thisValue();
+        if ((cast _Runtime.strictEquals(__thisValue0.senderId, -1.0) : Bool)) { return; }
+        _Runtime.callOptionalProperty(backend, 'sendTo', cast ([{ windowId: __thisValue0.senderId }, name, replyArgs] : Array<Dynamic>));
       } };
       _Runtime.callValue(listener, cast ([event] : Array<Dynamic>));
     }] : Array<Dynamic>));
@@ -190,8 +191,8 @@ class Ipc {
         }
       }
     } else {
-      for (__iteration0 in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(Ipc._listeners__ipc)]))) {
-        var set:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      for (__iteration1 in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(Ipc._listeners__ipc)]))) {
+        var set:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
         for (unsubscribe in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(set)]))) {
           _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
         }

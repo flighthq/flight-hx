@@ -13,16 +13,16 @@ class ElectronClipboard {
     var cb:Dynamic = cast _Runtime.UNDEFINED;
     cb = _Runtime.field(electron, 'clipboard');
     return cast { readText: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast _Runtime.callProperty(cb, 'readText', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
-      });
+      }));
     }, writeText: function(text:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(cb, 'writeText', cast ([text] : Array<Dynamic>));
           return cast true;
@@ -30,18 +30,18 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, readHtml: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast _Runtime.callProperty(cb, 'readHtml', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
-      });
+      }));
     }, writeHtml: function(html:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(cb, 'writeHtml', cast ([html] : Array<Dynamic>));
           return cast true;
@@ -49,18 +49,18 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, hasText: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast ((cast _Runtime.field(_Runtime.callProperty(cb, 'readText', cast ([] : Array<Dynamic>)), 'length') : Float) > (cast 0.0 : Float));
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, readImage: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var image:Dynamic = _Runtime.callProperty(cb, 'readImage', cast ([] : Array<Dynamic>));
           return cast ((cast _Runtime.callProperty(image, 'isEmpty', cast ([] : Array<Dynamic>)) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.callProperty(image, 'toDataUrl', cast ([] : Array<Dynamic>)) : Dynamic));
@@ -68,9 +68,9 @@ class ElectronClipboard {
           return cast '';
         }
         return cast null;
-      });
+      }));
     }, writeImage: function(dataUrl:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(cb, 'writeImage', cast ([_Runtime.callProperty(_Runtime.field(electron, 'nativeImage'), 'createFromDataUrl', cast ([dataUrl] : Array<Dynamic>))] : Array<Dynamic>));
           return cast true;
@@ -78,27 +78,27 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, hasImage: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast !(cast _Runtime.callProperty(_Runtime.callProperty(cb, 'readImage', cast ([] : Array<Dynamic>)), 'isEmpty', cast ([] : Array<Dynamic>)) : Bool);
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, readRTF: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast _Runtime.callProperty(cb, 'readRTF', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
-      });
+      }));
     }, writeRTF: function(rtf:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(cb, 'writeRTF', cast ([rtf] : Array<Dynamic>));
           return cast true;
@@ -106,9 +106,9 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, readBookmark: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var bookmark:Dynamic = _Runtime.callProperty(cb, 'readBookmark', cast ([] : Array<Dynamic>));
           if ((cast ((cast _Runtime.strictEquals(_Runtime.field(bookmark, 'title'), '') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(bookmark, 'url'), '') : Bool)) : Bool)) { return cast null; }
@@ -118,9 +118,9 @@ class ElectronClipboard {
           return cast null;
         }
         return cast null;
-      });
+      }));
     }, writeBookmark: function(title:Dynamic, url:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(cb, 'writeBookmark', cast ([title, url] : Array<Dynamic>));
           return cast true;
@@ -128,18 +128,18 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, readFormat: function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast _Runtime.callProperty(cb, 'read', cast ([format] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
-      });
+      }));
     }, writeFormat: function(format:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var payload:ElectronClipboardData = {  };
           _Runtime.setIndex(payload, _Runtime.callValue(ElectronClipboard.formatKey__electronClipboard, cast ([format] : Array<Dynamic>)), data);
@@ -149,27 +149,27 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, hasFormat: function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast _Runtime.callProperty(cb, 'has', cast ([format] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, getFormats: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           return cast _Runtime.callProperty(cb, 'availableFormats', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
           return cast cast ([] : Array<Dynamic>);
         }
         return cast null;
-      });
+      }));
     }, readItems: function(formats:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var out:Dynamic = cast _Runtime.UNDEFINED;
         out = {  };
         for (format in _Runtime.iterable(formats)) {
@@ -180,9 +180,9 @@ class ElectronClipboard {
         }
         return cast out;
         return cast null;
-      });
+      }));
     }, writeItems: function(items:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var data:ElectronClipboardData = {  };
           for (item in _Runtime.iterable(items)) {
@@ -194,15 +194,15 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, readFiles: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, writeFiles: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, getChangeCount: function() {
       return cast -1.0;
     }, subscribeClipboardChange: function() {
@@ -210,7 +210,7 @@ class ElectronClipboard {
 
       };
     }, clear: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(cb, 'clear', cast ([] : Array<Dynamic>));
           return cast true;
@@ -218,7 +218,7 @@ class ElectronClipboard {
           return cast false;
         }
         return cast null;
-      });
+      }));
     } };
     return cast null;
   }

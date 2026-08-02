@@ -67,7 +67,7 @@ class ElectronShell {
         })
       );
     }, showItemInFolder: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           _Runtime.callProperty(shell, 'showItemInFolder', cast ([path] : Array<Dynamic>));
           return cast true;
@@ -75,7 +75,7 @@ class ElectronShell {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, moveToTrash: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -95,7 +95,7 @@ class ElectronShell {
         })
       );
     }, moveItemsToTrash: function(paths:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(flighthq._internal._Async.all(_Runtime.callProperty(paths, 'map', cast ([function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
           return cast flighthq._internal._Async.finishFlow(
             flighthq._internal._Async.protect(function():Dynamic {
@@ -115,9 +115,9 @@ class ElectronShell {
             })
           );
         }] : Array<Dynamic>))));
-      });
+      }));
     }, readShortcutLink: function(shortcutPath:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var details:Dynamic = _Runtime.callProperty(shell, 'readShortcutLink', cast ([shortcutPath] : Array<Dynamic>));
           var link:ShellShortcutLink = { target: _Runtime.field(details, 'target'), appUserModelId: _Runtime.field(details, 'appUserModelId'), args: _Runtime.field(details, 'args'), description: _Runtime.field(details, 'description'), icon: _Runtime.field(details, 'icon'), iconIndex: _Runtime.field(details, 'iconIndex'), workingDirectory: _Runtime.field(details, 'cwd') };
@@ -126,9 +126,9 @@ class ElectronShell {
           return cast null;
         }
         return cast null;
-      });
+      }));
     }, writeShortcutLink: function(shortcutPath:Dynamic, link:Dynamic, operation:Dynamic = 'create'):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var details:ElectronShortcutDetails = { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory };
           return cast _Runtime.callProperty(shell, 'writeShortcutLink', cast ([shortcutPath, operation, details] : Array<Dynamic>));
@@ -136,7 +136,7 @@ class ElectronShell {
           return cast false;
         }
         return cast null;
-      });
+      }));
     }, beep: function() {
       _Runtime.callProperty(shell, 'beep', cast ([] : Array<Dynamic>));
     } };

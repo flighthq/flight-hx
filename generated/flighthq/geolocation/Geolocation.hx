@@ -99,6 +99,7 @@ class Geolocation {
         })
       );
     }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+      var __thisValue0:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var permissions:Dynamic = cast _Runtime.UNDEFINED;
@@ -125,7 +126,7 @@ class Geolocation {
             __flowBranch2 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.thisValue(), 'getCurrentPosition', cast ([{  }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(__thisValue0, 'getCurrentPosition', cast ([{  }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
               return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue4, null));
             });
           });

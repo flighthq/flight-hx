@@ -24,7 +24,7 @@ class ElectronNotification {
     live = _Runtime.construct(_Runtime.globalValue('Map'), []);
     nextId = 0.0;
     return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         var actions:Dynamic = cast _Runtime.UNDEFINED;
         var n:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,11 +47,11 @@ class ElectronNotification {
         _Runtime.callProperty(n, 'show', cast ([] : Array<Dynamic>));
         return cast id;
         return cast null;
-      });
+      }));
     }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
-      });
+      }));
     }, getPermission: function() {
       return cast ((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
     }, isSupported: function() {
@@ -59,21 +59,21 @@ class ElectronNotification {
     }, getCapabilities: function() {
       return cast { actions: true, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
     }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, scheduleNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
-      });
+      }));
     }, cancelScheduledNotification: function() {
 
     }, closeNotification: function(id:Dynamic) {
@@ -88,9 +88,9 @@ class ElectronNotification {
       }
       ((cast live : flighthq._internal._Map).clear());
     }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
-      });
+      }));
     }, subscribeClick: function(listener:Dynamic) {
       (clickListener = cast (listener : Dynamic));
       return cast function() {

@@ -184,9 +184,9 @@ class Notification {
     }, getCapabilities: function() {
       return cast { actions: true, channels: false, coldStart: false, image: true, listActive: true, scheduling: true, textReply: false };
     }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -207,9 +207,9 @@ class Notification {
         })
       );
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(((cast _scheduled : flighthq._internal._Map).values())), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
-      });
+      }));
     }, getPermission: function() {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast 'denied'; }
       return cast (cast _Runtime.field(_Runtime.globalValue('Notification'), 'permission') : Dynamic);
@@ -243,7 +243,7 @@ class Notification {
         })
       );
     }, scheduleNotification: function(request:Dynamic, schedule:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         var delay:Dynamic = cast _Runtime.UNDEFINED;
         var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
@@ -264,7 +264,7 @@ class Notification {
         timeout = _Runtime.setTimeout(fireAndReschedule, delay);
         ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: entry }));
         return flighthq._internal._Async.resolve(id);
-      });
+      }));
     }, subscribeAction: function(listener:Dynamic) {
       ((cast _actionListeners : flighthq._internal._Set).add(listener));
       return cast function() {
@@ -371,7 +371,7 @@ class Notification {
       }
     };
     _notify = function(request:NotificationRequest):flighthq._internal._Promise<String> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast ''; }
         try {
           if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('Notification'), 'permission'), 'granted') : Bool)) { return cast ''; }
@@ -399,7 +399,7 @@ class Notification {
           return cast '';
         }
         return cast null;
-      });
+      }));
     };
     return cast { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
@@ -433,17 +433,17 @@ class Notification {
     }, getCapabilities: function() {
       return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: true, textReply: false };
     }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
-      });
+      }));
     }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      });
+      }));
     }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(_Runtime.callProperty(_Runtime.toArray(((cast _scheduled : flighthq._internal._Map).values())), 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'entry')] : Array<Dynamic>)));
-      });
+      }));
     }, getPermission: function() {
       var p:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined') : Bool)) { return cast 'denied'; }
@@ -481,7 +481,7 @@ class Notification {
         })
       );
     }, scheduleNotification: function(request:Dynamic, schedule:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var id:Dynamic = cast _Runtime.UNDEFINED;
         var delay:Dynamic = cast _Runtime.UNDEFINED;
         var entry:ScheduledNotification = cast _Runtime.UNDEFINED;
@@ -502,7 +502,7 @@ class Notification {
         timeout = _Runtime.setTimeout(fireAndReschedule, delay);
         ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: entry }));
         return flighthq._internal._Async.resolve(id);
-      });
+      }));
     }, subscribeAction: function(listener:Dynamic) {
       ((cast _actionListeners : flighthq._internal._Set).add(listener));
       return cast function() {

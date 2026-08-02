@@ -423,7 +423,55 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(output).not.toContain('_Async.make');
     expect(output).toContain('_Async.protect(function():Dynamic');
+    expect(output).toContain('_Async.resolve(flighthq._internal._Async.protect');
     expect(output).toContain('_Async.resolve(7.0)');
+  });
+
+  it('captures dynamic method receivers across async and arrow continuations', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function createBackend() {
+          return {
+            value: 'outer',
+            async beforeAwait() {
+              const __thisValue0 = 'local';
+              const read = () => this.value + __thisValue0;
+              return read();
+            },
+            async afterAwait(pending: Promise<void>) {
+              await pending;
+              return this.value;
+            },
+            noReceiver() {
+              return 1;
+            },
+            nestedOwner() {
+              return function (this: { value: string }) {
+                return this.value;
+              };
+            },
+          };
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ReceiverFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('var __thisValue1:Dynamic = _Runtime.thisValue();');
+    expect(output).toContain("_Runtime.field(__thisValue1, 'value')");
+    expect(output).toMatch(/var __thisValue\d+:Dynamic = _Runtime\.thisValue\(\);[\s\S]*_Async\.flatMap/u);
+    expect(output.match(/_Runtime\.thisValue\(\)/gu)).toHaveLength(3);
+    expect(output).toContain('noReceiver: function() {\n      return cast 1.0;\n    }');
   });
 
   it('propagates returns through awaited conditional branches', () => {

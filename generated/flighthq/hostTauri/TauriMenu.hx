@@ -16,7 +16,7 @@ class TauriMenu {
     selectListener = null;
     return cast { setApplicationMenu: function(items:Dynamic) {
       _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<Dynamic> {
-        return cast flighthq._internal._Async.protect(function():Dynamic {
+        return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
           var built:Dynamic = cast _Runtime.UNDEFINED;
           var menu:Dynamic = cast _Runtime.UNDEFINED;
           return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriMenu.buildItems__tauriMenu, cast ([menuModule, items, function(id:Dynamic) return _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
@@ -29,7 +29,7 @@ class TauriMenu {
               });
             });
           });
-        });
+        }));
       }, cast ([] : Array<Dynamic>)), function() {
 
       }));
@@ -37,7 +37,7 @@ class TauriMenu {
     }, popupContextMenu: function(items:Dynamic, x:Dynamic, y:Dynamic) {
       return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
         _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<Dynamic> {
-          return cast flighthq._internal._Async.protect(function():Dynamic {
+          return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
             var built:Dynamic = cast _Runtime.UNDEFINED;
             var menu:Dynamic = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap(_Runtime.callValue(TauriMenu.buildItems__tauriMenu, cast ([menuModule, items, function(id:Dynamic) return _Runtime.callValue(resolve, cast ([id] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue9:Dynamic):Dynamic {
@@ -50,7 +50,7 @@ class TauriMenu {
                 });
               });
             });
-          });
+          }));
         }, cast ([] : Array<Dynamic>)), function() return _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>))));
       });
     }, subscribeSelect: function(listener:Dynamic) {

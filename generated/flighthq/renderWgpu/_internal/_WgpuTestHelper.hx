@@ -124,13 +124,13 @@ class _WgpuTestHelper {
   }
 
   public static function createWgpuRenderStateForTest():flighthq._internal._Promise<WgpuRenderState> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var canvas:Dynamic = cast _Runtime.UNDEFINED;
       canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 800.0);
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 600.0);
       return flighthq._internal._Async.resolve(_Runtime.callValue(createWgpuRenderState, cast ([canvas] : Array<Dynamic>)));
-    });
+    }));
   }
 
   public static function installWgpuMock():Void {
@@ -144,12 +144,13 @@ class _WgpuTestHelper {
     flighthq._internal.DynamicObject.defineProperty(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), 'gpu', { value: gpu, configurable: true, writable: true });
     origGetContext = _Runtime.field(_Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype'), 'getContext');
     _Runtime.setField((cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : { var getContext:Dynamic; }), 'getContext', function(contextId:String, ?options:Dynamic) {
+      var __thisValue0:Dynamic = _Runtime.thisValue();
       if ((cast _Runtime.strictEquals(contextId, 'webgpu') : Bool)) {
         return cast (cast (cast { configure: function() {
 
         }, getCurrentTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)) } : Dynamic) : Dynamic);
       }
-      return cast _Runtime.callProperty((cast origGetContext : Dynamic), 'call', cast ([_Runtime.thisValue(), contextId, options] : Array<Dynamic>));
+      return cast _Runtime.callProperty((cast origGetContext : Dynamic), 'call', cast ([__thisValue0, contextId, options] : Array<Dynamic>));
     });
   }
 }

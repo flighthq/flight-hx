@@ -330,6 +330,7 @@ export function lowerTypeScriptSource(
     domDocumentBindingNames,
     domNavigatorBindingNames,
     domWindowBindingNames,
+    dynamicThisCapture: undefined,
     externalTypes,
     externalValues,
     erasedLocalTypes,
@@ -809,6 +810,7 @@ interface LoweringContext {
   domDocumentBindingNames: ReadonlySet<string>;
   domNavigatorBindingNames: ReadonlySet<string>;
   domWindowBindingNames: ReadonlySet<string>;
+  dynamicThisCapture?: string | undefined;
   externalTypes: ReadonlySet<string>;
   externalValues: ReadonlyMap<string, { imported: string; specifier: string }>;
   erasedLocalTypes: ReadonlySet<string>;
@@ -964,24 +966,62 @@ function enumMemberHasReverseMapping(member: ts.EnumMember, checker: ts.TypeChec
 
 function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): IrFunctionDeclaration {
   if (!node.name || !node.body) throw new Error('Expected named function with a body');
-  const loweredParameters = lowerParameterList(node.parameters, context);
-  return {
-    async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
-    body: [...loweredParameters.prefix, ...node.body.statements.map((statement) => lowerStatement(statement, context))],
-    exported: hasModifier(node, ts.SyntaxKind.ExportKeyword),
-    kind: 'function',
-    name: node.name.text,
-    origin: origin(node, context),
-    parameters: loweredParameters.parameters,
-    returns: node.type
-      ? lowerType(node.type, context)
-      : hasModifier(node, ts.SyntaxKind.AsyncKeyword)
-        ? promiseOfDynamic()
-        : hasReturnValue(node.body)
-          ? { kind: 'dynamic' }
-          : { kind: 'primitive', name: 'Void' },
-    typeParameters: node.typeParameters?.map((parameter) => parameter.name.text) ?? [],
+  const previousClassThis = context.classThis;
+  const previousDynamicThisCapture = context.dynamicThisCapture;
+  const thisCapture = dynamicThisCapture(node, context);
+  context.classThis = false;
+  context.dynamicThisCapture = thisCapture;
+  try {
+    const loweredParameters = lowerParameterList(node.parameters, context);
+    return {
+      async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
+      body: [
+        ...loweredParameters.prefix,
+        ...node.body.statements.map((statement) => lowerStatement(statement, context)),
+      ],
+      exported: hasModifier(node, ts.SyntaxKind.ExportKeyword),
+      kind: 'function',
+      name: node.name.text,
+      origin: origin(node, context),
+      parameters: loweredParameters.parameters,
+      returns: node.type
+        ? lowerType(node.type, context)
+        : hasModifier(node, ts.SyntaxKind.AsyncKeyword)
+          ? promiseOfDynamic()
+          : hasReturnValue(node.body)
+            ? { kind: 'dynamic' }
+            : { kind: 'primitive', name: 'Void' },
+      ...(thisCapture ? { thisCapture } : {}),
+      typeParameters: node.typeParameters?.map((parameter) => parameter.name.text) ?? [],
+    };
+  } finally {
+    context.classThis = previousClassThis;
+    context.dynamicThisCapture = previousDynamicThisCapture;
+  }
+}
+
+function dynamicThisCapture(node: ts.Node, context: LoweringContext): string | undefined {
+  if (!containsLexicallyOwnedThis(node)) return undefined;
+  let name: string;
+  do name = `__thisValue${String(context.temporaryIndex++)}`;
+  while (context.sourceFile.text.includes(name));
+  return name;
+}
+
+function containsLexicallyOwnedThis(root: ts.Node): boolean {
+  let found = false;
+  const visit = (node: ts.Node): void => {
+    if (found) return;
+    if (node.kind === ts.SyntaxKind.ThisKeyword) {
+      found = true;
+      return;
+    }
+    if (node !== root && ts.isFunctionLike(node) && !ts.isArrowFunction(node)) return;
+    if (node !== root && (ts.isClassDeclaration(node) || ts.isClassExpression(node))) return;
+    ts.forEachChild(node, visit);
   };
+  visit(root);
+  return found;
 }
 
 function lowerParameter(node: ts.ParameterDeclaration, context: LoweringContext): IrParameter {
@@ -1364,39 +1404,50 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
     };
   }
   if (ts.isFunctionDeclaration(node) && node.name && node.body) {
-    const loweredParameters = lowerParameterList(node.parameters, context);
-    const parameters = loweredParameters.parameters;
-    return {
-      declarations: [
-        {
-          initializer: {
-            async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
-            body: [
-              ...loweredParameters.prefix,
-              ...node.body.statements.map((statement) => lowerStatement(statement, context)),
-            ],
-            kind: 'function',
+    const previousClassThis = context.classThis;
+    const previousDynamicThisCapture = context.dynamicThisCapture;
+    const thisCapture = dynamicThisCapture(node, context);
+    context.classThis = false;
+    context.dynamicThisCapture = thisCapture;
+    try {
+      const loweredParameters = lowerParameterList(node.parameters, context);
+      const parameters = loweredParameters.parameters;
+      return {
+        declarations: [
+          {
+            initializer: {
+              async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
+              body: [
+                ...loweredParameters.prefix,
+                ...node.body.statements.map((statement) => lowerStatement(statement, context)),
+              ],
+              kind: 'function',
+              name: node.name.text,
+              parameters,
+              returns: node.type
+                ? lowerType(node.type, context)
+                : hasModifier(node, ts.SyntaxKind.AsyncKeyword)
+                  ? promiseOfDynamic()
+                  : hasReturnValue(node.body)
+                    ? { kind: 'dynamic' }
+                    : { kind: 'primitive', name: 'Void' },
+              ...(thisCapture ? { thisCapture } : {}),
+            },
+            mutable: false,
             name: node.name.text,
-            parameters,
-            returns: node.type
-              ? lowerType(node.type, context)
-              : hasModifier(node, ts.SyntaxKind.AsyncKeyword)
-                ? promiseOfDynamic()
-                : hasReturnValue(node.body)
-                  ? { kind: 'dynamic' }
-                  : { kind: 'primitive', name: 'Void' },
+            type: {
+              kind: 'function',
+              parameters: parameters.map((parameter) => parameter.type),
+              returns: node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
+            },
           },
-          mutable: false,
-          name: node.name.text,
-          type: {
-            kind: 'function',
-            parameters: parameters.map((parameter) => parameter.type),
-            returns: node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
-          },
-        },
-      ],
-      kind: 'variable',
-    };
+        ],
+        kind: 'variable',
+      };
+    } finally {
+      context.classThis = previousClassThis;
+      context.dynamicThisCapture = previousDynamicThisCapture;
+    }
   }
   if (ts.isEmptyStatement(node)) return { kind: 'block', statements: [] };
   return unsupported(node, context, `statement ${ts.SyntaxKind[node.kind] ?? node.kind}`);
@@ -1908,16 +1959,18 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
   if (node.kind === ts.SyntaxKind.ThisKeyword) {
     return context.classThis
       ? { kind: 'identifier', name: 'this' }
-      : {
-          arguments: [],
-          callee: {
-            kind: 'property',
-            name: 'thisValue',
-            object: { kind: 'identifier', name: '_Runtime' },
-          },
-          kind: 'call',
-          typeArguments: [],
-        };
+      : context.dynamicThisCapture
+        ? { kind: 'identifier', name: context.dynamicThisCapture }
+        : {
+            arguments: [],
+            callee: {
+              kind: 'property',
+              name: 'thisValue',
+              object: { kind: 'identifier', name: '_Runtime' },
+            },
+            kind: 'call',
+            typeArguments: [],
+          };
   }
   if (node.kind === ts.SyntaxKind.SuperKeyword) return { kind: 'identifier', name: 'super' };
   if (ts.isIdentifier(node)) return lowerIdentifier(node.text, context, isLexicallyBound(node, context));
@@ -1973,9 +2026,13 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         }
         if (ts.isMethodDeclaration(property) && property.body) {
           const previousClassThis = context.classThis;
+          const previousDynamicThisCapture = context.dynamicThisCapture;
+          const thisCapture = dynamicThisCapture(property, context);
           context.classThis = false;
+          context.dynamicThisCapture = thisCapture;
+          let value: Extract<IrExpression, { kind: 'function' }>;
           try {
-            const value = {
+            value = {
               async: hasModifier(property, ts.SyntaxKind.AsyncKeyword),
               body: property.body.statements.map((statement) => lowerStatement(statement, context)),
               kind: 'function' as const,
@@ -1987,22 +2044,24 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
                   ? lowerType(property.type, context)
                   : promiseOfDynamic()
                 : undefined,
-            };
-            if (ts.isComputedPropertyName(property.name)) {
-              return {
-                key: lowerExpression(property.name.expression, context),
-                kind: 'computedProperty' as const,
-                value,
-              };
-            }
-            return {
-              kind: 'property' as const,
-              name: propertyName(property.name, context),
-              value,
+              ...(thisCapture ? { thisCapture } : {}),
             };
           } finally {
             context.classThis = previousClassThis;
+            context.dynamicThisCapture = previousDynamicThisCapture;
           }
+          if (ts.isComputedPropertyName(property.name)) {
+            return {
+              key: lowerExpression(property.name.expression, context),
+              kind: 'computedProperty' as const,
+              value,
+            };
+          }
+          return {
+            kind: 'property' as const,
+            name: propertyName(property.name, context),
+            value,
+          };
         }
         return unsupported(property, context, 'object literal member');
       }),
@@ -2139,7 +2198,12 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
   }
   if (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
     const previousClassThis = context.classThis;
-    if (ts.isFunctionExpression(node)) context.classThis = false;
+    const previousDynamicThisCapture = context.dynamicThisCapture;
+    const thisCapture = ts.isFunctionExpression(node) ? dynamicThisCapture(node, context) : undefined;
+    if (ts.isFunctionExpression(node)) {
+      context.classThis = false;
+      context.dynamicThisCapture = thisCapture;
+    }
     try {
       const loweredParameters = lowerParameterList(node.parameters, context);
       const expression = ts.isBlock(node.body) ? undefined : lowerExpression(node.body, context);
@@ -2162,9 +2226,11 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
             ? lowerType(node.type, context)
             : promiseOfDynamic()
           : undefined,
+        ...(thisCapture ? { thisCapture } : {}),
       };
     } finally {
       context.classThis = previousClassThis;
+      context.dynamicThisCapture = previousDynamicThisCapture;
     }
   }
   return unsupported(node, context, `expression ${ts.SyntaxKind[node.kind] ?? node.kind}`);

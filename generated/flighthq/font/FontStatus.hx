@@ -12,11 +12,11 @@ class FontStatus {
   }
 
   public static function whenFontsReady():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast flighthq._internal._Async.protect(function():Dynamic {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       return flighthq._internal._Async.flatMap(_Runtime.field(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts'), 'ready'), function(__awaitValue0:Dynamic):Dynamic {
         __awaitValue0;
         return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
       });
-    });
+    }));
   }
 }

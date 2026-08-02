@@ -1,20 +1,19 @@
 {
-  "completedAt": "2026-08-02T22:21:48.472Z",
-  "failedPackages": 1,
+  "completedAt": "2026-08-02T22:39:54.010Z",
+  "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 21546,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n···x················x····\n\n Test Files  1 failed (1)\n      Tests  2 failed | 23 passed (25)\n   Start at  15:21:28\n   Duration  19.68s (transform 9.46s, setup 765ms, import 12.22s, tests 2.16s, environment 3.49s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/geolocation/src/geolocation.test.ts > createWebGeolocationBackend > resolves null and does not throw when geolocation is absent\nTypeError: Cannot read properties of undefined (reading 'getCurrentPosition')\n ❯ build/haxe-js/flight.cjs?import:49475:53\n ❯ build/haxe-js/flight.cjs?import:401:12\n ❯ build/haxe-js/flight.cjs?import:392:11\n ❯ upstream/packages/geolocation/src/geolocation.test.ts:98:20\n     96|     expect(typeof backend.watchPosition(() => {}, {})).toBe('number');\n     97|     expect(() => backend.clearWatch(-1)).not.toThrow();\n     98|     expect(typeof (await backend.requestPermission())).toBe('boolean');\n       |                    ^\n     99|   });\n    100|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/geolocation/src/geolocation.test.ts > requestGeolocationPermission > returns a boolean from the web backend without throwing\nTypeError: Cannot read properties of undefined (reading 'getCurrentPosition')\n ❯ build/haxe-js/flight.cjs?import:49475:53\n ❯ build/haxe-js/flight.cjs?import:401:12\n ❯ build/haxe-js/flight.cjs?import:392:11\n ❯ upstream/packages/geolocation/src/geolocation.test.ts:252:20\n    250|\n    251|   it('returns a boolean from the web backend without throwing', async …\n    252|     expect(typeof (await requestGeolocationPermission())).toBe('boolea…\n       |                    ^\n    253|   });\n    254| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "durationMs": 8847,
+      "exitCode": 0,
       "package": "geolocation",
       "signal": null,
-      "status": "failed",
-      "summary": "2 failed | 23 passed (25)",
+      "status": "passed",
+      "summary": "25 passed (25)",
       "testFiles": 1
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "geolocation",
-  "startedAt": "2026-08-02T22:21:26.922Z"
+  "startedAt": "2026-08-02T22:39:45.162Z"
 }

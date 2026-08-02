@@ -17,7 +17,7 @@ class RegisterWebImageEncoders {
 
   public static function createCanvasImageEncoder__registerWebImageEncoders(mimeType:String):ImageEncoder {
     return cast function(image:DecodedImage, ?options:ImageEncodeOptions):flighthq._internal._Promise<flighthq._internal._UInt8Array> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var canvas:Dynamic = cast _Runtime.UNDEFINED;
         var context:Dynamic = cast _Runtime.UNDEFINED;
         var pixels:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,7 +32,7 @@ class RegisterWebImageEncoders {
             return flighthq._internal._Async.resolve(new flighthq._internal._UInt8Array(__awaitValue3));
           });
         });
-      });
+      }));
     };
     return cast null;
   }

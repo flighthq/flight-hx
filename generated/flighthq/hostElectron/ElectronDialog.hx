@@ -71,29 +71,29 @@ class ElectronDialog {
         })
       );
     }, saveFile: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var r:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showSaveDialog', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { title: options.title, defaultPath: options.defaultPath, filters: options.filters }] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
           r = __awaitValue5;
           return flighthq._internal._Async.resolve(((cast ((cast _Runtime.field(r, 'canceled') : Bool) || (cast !_Runtime.truthy(_Runtime.field(r, 'filePath')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(ElectronDialog.toFileHandle__electronDialog, cast ([_Runtime.field(r, 'filePath'), 'File'] : Array<Dynamic>)) : Dynamic)));
         });
-      });
+      }));
     }, message: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var r:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showMessageBox', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { type: options.kind, title: options.title, message: options.message, detail: options.detail, buttons: options.buttons, defaultId: options.defaultId, cancelId: options.cancelId, checkboxLabel: options.checkboxLabel, checkboxChecked: options.checkboxChecked }] : Array<Dynamic>)), function(__awaitValue6:Dynamic):Dynamic {
           r = __awaitValue6;
           return flighthq._internal._Async.resolve({ buttonIndex: _Runtime.field(r, 'response'), cancelled: ((cast !_Runtime.strictEquals(options.cancelId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(r, 'response'), options.cancelId) : Bool)), checkboxChecked: _Runtime.field(r, 'checkboxChecked') });
         });
-      });
+      }));
     }, confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast flighthq._internal._Async.protect(function():Dynamic {
+      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var r:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(dialog, 'showMessageBox', cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { type: options.kind, title: options.title, message: options.message, detail: options.detail, buttons: cast (['OK', 'Cancel'] : Array<Dynamic>), defaultId: 0.0, cancelId: 1.0 }] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
           r = __awaitValue7;
           return flighthq._internal._Async.resolve(_Runtime.strictEquals(_Runtime.field(r, 'response'), 0.0));
         });
-      });
+      }));
     }, prompt: function() {
       return cast flighthq._internal._Async.resolve(null);
     } };
