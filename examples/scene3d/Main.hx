@@ -51,7 +51,7 @@ class Main extends Application {
       backgroundColor: 0x0a0c10ff,
       contextAttributes: {alpha: false, preserveDrawingBuffer: true},
     });
-    registerStandardPbrGlMaterial(renderState);
+    registerGlStandardPbrMaterial(renderState);
     pipeline = createGlRenderEffectPipeline(renderState, {
       sampleCount: 4,
       format: 'rgba16f',
@@ -108,7 +108,7 @@ class Main extends Application {
       near: 0.1,
       projection: createPerspectiveProjection({aspect: logicalWidth / logicalHeight, fovY: Math.PI / 4}),
     });
-    setCameraViewMatrix4FromLookAt(camera, createVector3(4, 3, 5), createVector3(0, 0, 0), createVector3(0, 1, 0));
+    setCamera3DViewMatrix4FromLookAt(camera, createVector3(4, 3, 5), createVector3(0, 0, 0), createVector3(0, 1, 0));
 
     // White directional light from the upper right plus a dim ambient fill.
     final directionalDirection = createVector3(-1, -0.5, -0.7);
@@ -139,8 +139,8 @@ class Main extends Application {
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
-    prepareSceneRender(renderState, scene, camera, lights);
-    drawGlScene(renderState, scene, camera, lights);
+    prepareScene3DRender(renderState, scene, camera, lights);
+    drawGlScene3D(renderState, scene, camera, lights);
     endGlRenderEffectPipeline(renderState, pipeline, ([] : Array<Dynamic>));
   }
 }

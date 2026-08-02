@@ -125,7 +125,7 @@ class Main extends Application {
     addTextureAtlasRegion(snowAtlas, 0, 0, 12, 12);
 
     // Fire emitter: additive glow, follows mouse, world-space trail.
-    fireEmitter = createParticleEmitter();
+    fireEmitter = createParticleEmitter2D();
     fireEmitter.data.atlas = fireAtlas;
     // BlendMode.Add -- `BlendMode` is a string typedef in the port, so its member is the literal.
     fireEmitter.blendMode = 'Add';
@@ -176,7 +176,7 @@ class Main extends Application {
     fireSimState = createParticleEmitterState();
 
     // Snow emitter: normal blend, fixed position at top-right, gentle downward drift.
-    snowEmitter = createParticleEmitter();
+    snowEmitter = createParticleEmitter2D();
     snowEmitter.data.atlas = snowAtlas;
     snowEmitter.scaleX = 1;
     snowEmitter.scaleY = 1;
@@ -281,12 +281,12 @@ class Main extends Application {
 
     // World-space emitter: it bakes spawns through its own node world transform (set above), so nothing to pass.
     applyParticleForces(fireEmitter, fireSimState, fireForces, dt);
-    updateParticleEmitter(fireEmitter, fireSimState, fireConfig, dt);
+    updateParticleEmitter2D(fireEmitter, fireSimState, fireConfig, dt);
     invalidateNodeAppearance(fireEmitter);
 
     // Snow emitter stays fixed at its node position.
     applyParticleForces(snowEmitter, snowSimState, snowForces, dt);
-    updateParticleEmitter(snowEmitter, snowSimState, snowConfig, dt);
+    updateParticleEmitter2D(snowEmitter, snowSimState, snowConfig, dt);
     invalidateNodeAppearance(snowEmitter);
 
     // Update the particle count label.
@@ -397,7 +397,7 @@ class Main extends Application {
     ];
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
     final bitmap:Bitmap = createBitmap(width, width);
     for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
     return createImageResourceFromBitmap(bitmap);

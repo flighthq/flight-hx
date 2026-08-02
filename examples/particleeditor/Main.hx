@@ -200,7 +200,7 @@ class Main extends Application {
     atlas = createTextureAtlas({image: createParticleTexture()});
     addTextureAtlasRegion(atlas, 0, 0, 16, 16);
 
-    emitter = createParticleEmitter();
+    emitter = createParticleEmitter2D();
     emitter.data.atlas = atlas;
     emitter.blendMode = BlendMode.Add;
     emitter.scaleX = 1;
@@ -245,7 +245,7 @@ class Main extends Application {
   // Portable procedural glow sprite: a soft white radial falloff, uploaded as real RGBA bytes through
   // the ImageResource `data` path (a bare `{width, height}` object would become `image.source` and hit
   // the DOM-element `texImage2D` overload, which rejects a plain object).
-  function createParticleTexture():ImageResource {
+  function createParticleTexture():Dynamic {
     final size = 16;
     final pixels = new _UInt8ClampedArray(size * size * 4);
     final c = (size - 1) / 2;
@@ -263,7 +263,7 @@ class Main extends Application {
     return imageFromPixels(size, size, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
     final bitmap:Bitmap = createBitmap(width, width);
     for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
     return createImageResourceFromBitmap(bitmap);
@@ -364,7 +364,7 @@ class Main extends Application {
 
     // World-space emitter bakes spawns through its own node world transform (set above), so nothing to pass.
     applyParticleForces(emitter, simState, forces, dt);
-    updateParticleEmitter(emitter, simState, config, dt);
+    updateParticleEmitter2D(emitter, simState, config, dt);
     invalidateNodeAppearance(emitter);
 
     countLabel.data.text = emitter.data.particleCount + ' particles';
