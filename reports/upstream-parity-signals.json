@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-02T20:26:24.312Z",
+  "completedAt": "2026-08-02T23:51:03.765Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 26759,
+      "durationMs": 10985,
       "exitCode": 0,
       "package": "signals",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "signals",
-  "startedAt": "2026-08-02T20:25:57.550Z"
+  "startedAt": "2026-08-02T23:50:52.778Z"
 }

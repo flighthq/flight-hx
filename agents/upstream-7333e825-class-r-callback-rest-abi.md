@@ -142,3 +142,20 @@ Twelve suites are completely green. Class R clears the host-electron payload fam
 - `npm run test:haxe:all`, `npm run build:haxe:js`, and the portable Eval, JavaScript, and Python smokes pass. The portable smoke now locks the exact three-argument signal vector `1,2,4`.
 - C++ portability could not start because this workspace has neither `g++` nor `clang++`; this is an unavailable host prerequisite rather than a test failure.
 - `npm run check` is the final post-commit repository gate; its attested result accompanies the handoff.
+
+## Native regression follow-up
+
+Final review found that upstream `signals/emitter.ts` calls `(signal.emit as (...a: any[]) => void)(...args)`. The asserted function type is not a declaration-backed rest convention: it changes only the checker view of a fixed-arity property. Assertions, `satisfies`, non-null, and parenthesized wrappers are now removed before the generator asks the checker for a rest signature. Consequently, only the underlying declaration can prove Haxe-rest dispatch, and `Emitter` once again emits an ordinary dynamic spread call.
+
+The lowering suite includes the exact negative shape above and requires ordinary `_Runtime.apply`; its positive fixture still requires declaration-backed rest and `_Runtime.callHaxeRestValue`. Because generated anonymous rest declarations remain real Haxe-rest closures, emission now marks those closures with `_Runtime.haxeRest`. Native runtime adjustment uses that provenance only when ordinary/untyped reflection later reaches the closure. The registry uses `Reflect.compareMethods` identity arrays because Neko function values cannot be `ObjectMap` keys.
+
+| Artifact                   | Corrected candidate                                                |
+| -------------------------- | ------------------------------------------------------------------ |
+| Generated `.hx` tree       | `64b8d1db8946c75d5d58c9c761288d93ffad3afcca8086a7606e9817fc7bfa44` |
+| `build/haxe-js/flight.cjs` | `7c0f4773708686aee9cc1ee148d3cf5609c592b79242e3a820d9a167f41a49bb` |
+
+Two consecutive generator passes produced the corrected generated-tree digest. The complete generator suite passes 117/117, all Haxe checks pass, and portable Eval, JavaScript, and Python pass. An explicit Neko `CoreSmoke` run passes the zero-, one-, and three-argument signal cases. C++ compiles and links the corrected runtime and then reaches the independently known `array out-of-bounds read was not nullish` assertion with status 255.
+
+The focused upstream `signals` suite passes 39/39. The packaged Lime 8.3.2 sound example builds for Neko and advances beyond the former `Emitter` `Invalid call`; without a display server it stops at Lime's unrelated first-render Cairo-context guard. Exact pixel smoke remains unavailable in this workspace because Xvfb, X11 utilities, and ImageMagick are absent, and system package installation is not permitted by the host.
+
+Packaging also removes an installed same-name artifact before archive installation and forces `HAXELIB_PATH` to its isolated repository, preventing a stale same-version Haxelib from shadowing the candidate. Two consecutive package runs and the final isolated consumer pass.
