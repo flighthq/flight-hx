@@ -64,7 +64,7 @@ class StylizeMath {
           y++;
         }
       }
-      _Runtime.callProperty(raw, 'set', cast ([tmp] : Array<Dynamic>));
+      (cast raw : flighthq._internal._Float32Array).set(tmp);
       (currentSize = cast (next : Dynamic));
     }
     invSizeSq = (1.0 / sizeSq);

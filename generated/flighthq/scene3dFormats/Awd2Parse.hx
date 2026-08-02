@@ -1645,8 +1645,8 @@ class Awd2Parse {
       return cast null;
     }
     rehydrated = new flighthq._internal._UInt8Array((AWD2_HEADER_BYTES + _Runtime.field(inflated, 'byteLength')));
-    _Runtime.callProperty(rehydrated, 'set', cast ([(cast input : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(AWD2_HEADER_BYTES)), 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(rehydrated, 'set', cast ([inflated, AWD2_HEADER_BYTES] : Array<Dynamic>));
+    (cast rehydrated : flighthq._internal._UInt8Array).set((cast input : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(AWD2_HEADER_BYTES)), Std.int(0.0));
+    (cast rehydrated : flighthq._internal._UInt8Array).set(inflated, Std.int(AWD2_HEADER_BYTES));
     rehydratedView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(rehydrated, 'buffer')]);
     flighthq._internal._StaticIndex.writeUint8Array(rehydrated, 7.0, AWD2_COMPRESSION_NONE);
     _Runtime.callProperty(rehydratedView, 'setUint32', cast ([8.0, _Runtime.field(inflated, 'byteLength'), true] : Array<Dynamic>));

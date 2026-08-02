@@ -155,6 +155,8 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Direct indexed writes | ${emission.indexedAccesses.writes} |`,
     `| Direct synthetic iteration-binding Array reads | ${emission.syntheticArrayReads.iterationBindings} |`,
     `| Direct synthetic high-arity-argument Array reads | ${emission.syntheticArrayReads.highArityArguments} |`,
+    `| Proven typed-array \`set\` calls | ${facts.typedArraySetCalls} |`,
+    `| Direct typed-array \`set\` calls | ${emission.typedArraySetCalls} |`,
     `| Audited ordinary destructuring indexed reads | ${destructuringProven + destructuringParked} |`,
     `| Destructuring reads with retained receiver facts | ${destructuringProven} |`,
     `| Direct destructuring Array reads | ${destructuringDirect} |`,
@@ -168,6 +170,12 @@ export function loweringSummary(audit: LoweringAudit): string {
     const direct = emission.indexedReceivers[receiver as keyof typeof emission.indexedReceivers];
     lines.push(
       `| \`${receiver}\` | ${counts.expressions} | ${counts.reads} | ${counts.writes} | ${direct.reads} | ${direct.writes} |`,
+    );
+  }
+  lines.push('', '| Typed-array set receiver | Proven calls | Direct calls |', '| --- | ---: | ---: |');
+  for (const [receiver, count] of Object.entries(facts.typedArraySetReceivers)) {
+    lines.push(
+      `| \`${receiver}\` | ${count} | ${emission.typedArraySetReceivers[receiver as keyof typeof emission.typedArraySetReceivers]} |`,
     );
   }
   const reads = emission.destructuringReads;
@@ -214,15 +222,15 @@ export function loweringSummary(audit: LoweringAudit): string {
   }
   lines.push(
     '',
-    '| Package | Declarations | Lowered | Diagnostics | Boolean truthiness | Numeric relations | Indexed calls |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | ---: |',
+    '| Package | Declarations | Lowered | Diagnostics | Boolean truthiness | Numeric relations | Indexed calls | Typed-array set calls |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |',
   );
   for (const item of audit.packages) {
     const itemFacts = item.staticFacts;
     const booleanTruthiness =
       itemFacts.booleanExplicitTruthiness + itemFacts.booleanConditionalTruthiness + itemFacts.booleanLogicalTruthiness;
     lines.push(
-      `| \`${item.packageName}\` | ${item.declarations} | ${item.lowered} | ${item.diagnostics.length} | ${booleanTruthiness} | ${itemFacts.numericRelations} | ${itemFacts.indexedAccesses.reads + itemFacts.indexedAccesses.writes} |`,
+      `| \`${item.packageName}\` | ${item.declarations} | ${item.lowered} | ${item.diagnostics.length} | ${booleanTruthiness} | ${itemFacts.numericRelations} | ${itemFacts.indexedAccesses.reads + itemFacts.indexedAccesses.writes} | ${itemFacts.typedArraySetCalls} |`,
     );
   }
   lines.push('');

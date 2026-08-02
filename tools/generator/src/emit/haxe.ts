@@ -8,6 +8,7 @@ import type {
   IrModule,
   IrParameter,
   IrStatement,
+  IrTypedArraySetReceiver,
   IrType,
   IrVariable,
   IrWebGlComputedConstantDomain,
@@ -23,6 +24,8 @@ type ScalarStaticLoweringEmissionName = Exclude<
   | 'indexedAccesses'
   | 'indexedReceivers'
   | 'syntheticArrayReads'
+  | 'typedArraySetCalls'
+  | 'typedArraySetReceivers'
 >;
 
 const binaryOperatorMap: Readonly<Record<string, string>> = {
@@ -69,6 +72,19 @@ const indexedReceiverNames = [
   'Uint8Array',
   'Uint8ClampedArray',
 ] as const satisfies readonly IrIndexedReceiver[];
+
+const typedArraySetReceiverNames = [
+  'Float32Array',
+  'Float64Array',
+  'Int16Array',
+  'Int32Array',
+  'Int8Array',
+  'Uint16Array',
+  'Uint16ArrayOrUint32Array',
+  'Uint32Array',
+  'Uint8Array',
+  'Uint8ClampedArray',
+] as const satisfies readonly IrTypedArraySetReceiver[];
 
 const collectionBindingTypes = {
   MapCollection: 'flighthq._internal._Map',
@@ -132,6 +148,7 @@ export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
       indexedReceiverNames.map((receiver) => [receiver, { ...staticLoweringEmission.indexedReceivers[receiver] }]),
     ) as StaticLoweringEmissionCounts['indexedReceivers'],
     syntheticArrayReads: { ...staticLoweringEmission.syntheticArrayReads },
+    typedArraySetReceivers: { ...staticLoweringEmission.typedArraySetReceivers },
   };
 }
 
@@ -1673,6 +1690,10 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
       highArityArguments: 0,
       iterationBindings: 0,
     },
+    typedArraySetCalls: 0,
+    typedArraySetReceivers: Object.fromEntries(
+      typedArraySetReceiverNames.map((receiver) => [receiver, 0]),
+    ) as StaticLoweringEmissionCounts['typedArraySetReceivers'],
   };
 }
 
@@ -1697,6 +1718,13 @@ function finalizeStaticLoweringEmission(output: string): string {
     [keyof StaticLoweringEmissionCounts['syntheticArrayReads'], string]
   >) {
     staticLoweringEmission.syntheticArrayReads[name] += finalized.split(marker).length - 1;
+    finalized = finalized.replaceAll(marker, '');
+  }
+  for (const receiver of typedArraySetReceiverNames) {
+    const marker = typedArraySetMarker(receiver);
+    const count = finalized.split(marker).length - 1;
+    staticLoweringEmission.typedArraySetCalls += count;
+    staticLoweringEmission.typedArraySetReceivers[receiver] += count;
     finalized = finalized.replaceAll(marker, '');
   }
   for (const source of destructuringReadSources) {
@@ -1752,6 +1780,29 @@ function staticIndexedLoweringMarker(receiver: IrIndexedReceiver, operation: 're
 
 function markStaticIndexedLowering(receiver: IrIndexedReceiver, operation: 'reads' | 'writes', value: string): string {
   return `${staticIndexedLoweringMarker(receiver, operation)}${value}`;
+}
+
+function typedArraySetMarker(receiver: IrTypedArraySetReceiver): string {
+  return `/*__flight_direct_typed_array_set_${receiver}__*/`;
+}
+
+function emitTypedArraySet(expression: Extract<IrExpression, { kind: 'call' }>, owner: string): string | undefined {
+  const fact = expression.staticFacts?.typedArraySet;
+  const source = expression.arguments[0];
+  if (!fact || !source) return undefined;
+  const marker = typedArraySetMarker(fact.receiver);
+  if (fact.receiver !== 'Uint16ArrayOrUint32Array') {
+    const targetType = typedArrayBindingTypes[fact.receiver];
+    const offset = expression.arguments[1] ? `, Std.int(${emitExpression(expression.arguments[1])})` : '';
+    return `${marker}(cast ${owner} : ${targetType}).set(${emitExpression(source)}${offset})`;
+  }
+  const targetTemporary = `__typedArraySetTarget${String(temporaryIndex++)}`;
+  const sourceTemporary = `__typedArraySetSource${String(temporaryIndex++)}`;
+  const offset = expression.arguments[1];
+  const offsetTemporary = offset ? `__typedArraySetOffset${String(temporaryIndex++)}` : undefined;
+  const offsetDeclaration = offsetTemporary ? ` final ${offsetTemporary}:Dynamic = ${emitExpression(offset!)};` : '';
+  const offsetArgument = offsetTemporary ? `, Std.int(${offsetTemporary})` : '';
+  return `${marker}({ final ${targetTemporary}:Dynamic = ${owner}; final ${sourceTemporary}:Dynamic = ${emitExpression(source)};${offsetDeclaration} if (_Runtime.isInstanceOf(${targetTemporary}, _Runtime.globalValue('Uint32Array'))) { (cast ${targetTemporary} : flighthq._internal._UInt32Array).set(${sourceTemporary}${offsetArgument}); } else { (cast ${targetTemporary} : flighthq._internal._UInt16Array).set(${sourceTemporary}${offsetArgument}); } })`;
 }
 
 function emitSyntheticArrayRead(
@@ -2583,6 +2634,8 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'property') {
     const owner = emitExpression(expression.callee.object);
     const name = expression.callee.name;
+    const typedArraySet = emitTypedArraySet(expression, owner);
+    if (typedArraySet) return typedArraySet;
     if (name === 'from') {
       const typedArray = typedArrayConstructor(expression.callee.object);
       if (typedArray) {

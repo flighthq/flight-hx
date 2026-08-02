@@ -96,7 +96,7 @@ class Skeleton3d {
           }
         }
         _Runtime.callValue(multiplyMatrix4, cast ([Skeleton3d._result__skeleton3d, _Runtime.callValue(getNodeWorldMatrix4, cast ([flighthq._internal._StaticIndex.readArray(joints, j)] : Array<Dynamic>)), Skeleton3d._invBind__skeleton3d] : Array<Dynamic>));
-        _Runtime.callProperty(jointMatrices, 'set', cast ([Skeleton3d._result__skeleton3d.m, base] : Array<Dynamic>));
+        (cast jointMatrices : flighthq._internal._Float32Array).set(Skeleton3d._result__skeleton3d.m, Std.int(base));
         j++;
       }
     }
@@ -198,7 +198,7 @@ class Skeleton3d {
       var j:Dynamic = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         _Runtime.callValue(inverseMatrix4, cast ([Skeleton3d._result__skeleton3d, _Runtime.callValue(getNodeWorldMatrix4, cast ([flighthq._internal._StaticIndex.readArray(joints, j)] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callProperty(inverseBindMatrices, 'set', cast ([Skeleton3d._result__skeleton3d.m, (j * 16.0)] : Array<Dynamic>));
+        (cast inverseBindMatrices : flighthq._internal._Float32Array).set(Skeleton3d._result__skeleton3d.m, Std.int((j * 16.0)));
         j++;
       }
     }

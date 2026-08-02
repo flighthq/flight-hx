@@ -176,7 +176,7 @@ class MeshGeometryOperations {
     vertexFloatOffset = 0.0;
     for (geo in _Runtime.iterable(geometries)) {
       var vc:Dynamic = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geo.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-      _Runtime.callProperty(mergedVertices, 'set', cast ([(cast geo.vertices : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((vc * floatsPerVertex))), vertexFloatOffset] : Array<Dynamic>));
+      (cast mergedVertices : flighthq._internal._Float32Array).set((cast geo.vertices : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((vc * floatsPerVertex))), Std.int(vertexFloatOffset));
       if (_Runtime.truthy(mergedIndices)) {
         var srcCount:Dynamic = _Runtime.select(geo.indices, function():Dynamic return cast _Runtime.field(geo.indices, 'length'), function():Dynamic return cast vc);
         {

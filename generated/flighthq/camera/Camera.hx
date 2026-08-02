@@ -220,7 +220,7 @@ class Camera {
   }
 
   public static function setCamera3DViewMatrix4FromMatrix4(camera:Camera3D, view:Matrix4Like):Void {
-    _Runtime.callProperty(camera.view.m, 'set', cast ([view.m] : Array<Dynamic>));
+    (cast camera.view.m : flighthq._internal._Float32Array).set(view.m);
   }
 
   public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
@@ -234,7 +234,7 @@ class Camera {
   public static function updateCamera3DInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
     var ok:Dynamic = cast _Runtime.UNDEFINED;
     ok = _Runtime.callValue(getCamera3DInverseViewProjectionMatrix4, cast ([Camera.__scratchInverse__camera, camera, aspect] : Array<Dynamic>));
-    if ((cast ok : Bool)) { _Runtime.callProperty(camera.inverseViewProjection.m, 'set', cast ([Camera.__scratchInverse__camera.m] : Array<Dynamic>)); }
+    if ((cast ok : Bool)) { (cast camera.inverseViewProjection.m : flighthq._internal._Float32Array).set(Camera.__scratchInverse__camera.m); }
     return cast ok;
     return cast null;
   }

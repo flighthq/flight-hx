@@ -140,7 +140,7 @@ class BitmapTransform {
     if ((cast ((cast _Runtime.strictEquals(BitmapTransform._scrollScratch__bitmapTransform, null) : Bool) || (cast ((cast _Runtime.field(BitmapTransform._scrollScratch__bitmapTransform, 'length') : Float) < (cast needed : Float)) : Bool)) : Bool)) {
       (BitmapTransform._scrollScratch__bitmapTransform = cast (new flighthq._internal._UInt8ClampedArray(needed) : Dynamic));
     }
-    _Runtime.callProperty(BitmapTransform._scrollScratch__bitmapTransform, 'set', cast ([out.data, 0.0] : Array<Dynamic>));
+    (cast BitmapTransform._scrollScratch__bitmapTransform : flighthq._internal._UInt8ClampedArray).set(out.data, Std.int(0.0));
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast out.height : Float)) : Bool)) {

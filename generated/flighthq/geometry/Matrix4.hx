@@ -52,7 +52,7 @@ class Matrix4 {
     var _source:Dynamic = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 12.0, (flighthq._internal._StaticIndex.readFloat32Array(_source, 12.0) + x));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 13.0, (flighthq._internal._StaticIndex.readFloat32Array(_source, 13.0) + y));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 14.0, (flighthq._internal._StaticIndex.readFloat32Array(_source, 14.0) + z));
@@ -126,7 +126,7 @@ class Matrix4 {
   }
 
   public static function copyMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
-    _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>));
+    (cast out.m : flighthq._internal._Float32Array).set(source.m);
   }
 
   public static function copyMatrix4ColumnFromVector4(out:Matrix4Like, column:Float, source:Vector4Like):Void {
@@ -729,7 +729,7 @@ class Matrix4 {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
     if ((cast !_Runtime.strictEquals(sx, 1.0) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(o, 0.0, (flighthq._internal._StaticIndex.readFloat32Array(a, 0.0) * sx));
       flighthq._internal._StaticIndex.writeFloat32Array(o, 4.0, (flighthq._internal._StaticIndex.readFloat32Array(a, 4.0) * sx));
@@ -796,7 +796,7 @@ class Matrix4 {
   }
 
   public static function setMatrix4FromFloat32Array(out:Matrix4Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    _Runtime.callProperty(out.m, 'set', cast ([(cast source : flighthq._internal._Float32Array).subarray(Std.int(offset), Std.int((offset + 16.0)))] : Array<Dynamic>));
+    (cast out.m : flighthq._internal._Float32Array).set((cast source : flighthq._internal._Float32Array).subarray(Std.int(offset), Std.int((offset + 16.0))));
   }
 
   public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
@@ -1008,14 +1008,14 @@ class Matrix4 {
     var o:Dynamic = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
     flighthq._internal._StaticIndex.writeFloat32Array(o, 12.0, ((((flighthq._internal._StaticIndex.readFloat32Array(a, 0.0) * tx) + (flighthq._internal._StaticIndex.readFloat32Array(a, 4.0) * ty)) + (flighthq._internal._StaticIndex.readFloat32Array(a, 8.0) * tz)) + flighthq._internal._StaticIndex.readFloat32Array(a, 12.0)));
     flighthq._internal._StaticIndex.writeFloat32Array(o, 13.0, ((((flighthq._internal._StaticIndex.readFloat32Array(a, 1.0) * tx) + (flighthq._internal._StaticIndex.readFloat32Array(a, 5.0) * ty)) + (flighthq._internal._StaticIndex.readFloat32Array(a, 9.0) * tz)) + flighthq._internal._StaticIndex.readFloat32Array(a, 13.0)));
     flighthq._internal._StaticIndex.writeFloat32Array(o, 14.0, ((((flighthq._internal._StaticIndex.readFloat32Array(a, 2.0) * tx) + (flighthq._internal._StaticIndex.readFloat32Array(a, 6.0) * ty)) + (flighthq._internal._StaticIndex.readFloat32Array(a, 10.0) * tz)) + flighthq._internal._StaticIndex.readFloat32Array(a, 14.0)));
   }
 
   public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
-    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { _Runtime.callProperty(out.m, 'set', cast ([source.m] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
     _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 1.0, 4.0] : Array<Dynamic>));
     _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 2.0, 8.0] : Array<Dynamic>));
     _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 3.0, 12.0] : Array<Dynamic>));
@@ -1025,7 +1025,7 @@ class Matrix4 {
   }
 
   public static function writeMatrix4ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Matrix4Like):Void {
-    _Runtime.callProperty(out, 'set', cast ([source.m, offset] : Array<Dynamic>));
+    (cast out : flighthq._internal._Float32Array).set(source.m, Std.int(offset));
   }
 
   public static function __getAxisRotation__matrix4(out:Matrix4Like, x:Float, y:Float, z:Float, radians:Float):Void {

@@ -112,7 +112,7 @@ class SceneDocument {
       {
         var j:Dynamic = 0.0;
         while ((cast ((cast ((cast j : Float) < (cast _Runtime.field(_Runtime.field(skin, 'inverseBind'), 'length') : Float)) : Bool) && (cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
-          _Runtime.callProperty(inverseBindMatrices, 'set', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(skin, 'inverseBind'), j).m, (j * 16.0)] : Array<Dynamic>));
+          (cast inverseBindMatrices : flighthq._internal._Float32Array).set(flighthq._internal._StaticIndex.readArray(_Runtime.field(skin, 'inverseBind'), j).m, Std.int((j * 16.0)));
           j++;
         }
       }

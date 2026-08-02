@@ -52,7 +52,7 @@ class InflateState__deflate {
     if ((cast ((cast _Runtime.field(this, 'outputLength') : Float) >= (cast _Runtime.field(_Runtime.field(this, 'output'), 'length') : Float)) : Bool)) {
       if ((cast ((cast (_Runtime.field(_Runtime.field(this, 'output'), 'length') * 2.0) : Float) > (cast Deflate.MAX_INFLATE_BYTES__deflate : Float)) : Bool)) { throw _Runtime.error('deflate: output exceeds the inflate limit'); }
       var grown:Dynamic = new flighthq._internal._UInt8Array((_Runtime.field(_Runtime.field(this, 'output'), 'length') * 2.0));
-      _Runtime.callProperty(grown, 'set', cast ([_Runtime.field(this, 'output')] : Array<Dynamic>));
+      (cast grown : flighthq._internal._UInt8Array).set(_Runtime.field(this, 'output'));
       (this.output = cast (grown : Dynamic));
     }
     flighthq._internal._StaticIndex.writeUint8Array(_Runtime.field(this, 'output'), _Runtime.incrementField(this, 'outputLength', 1, true), byte);

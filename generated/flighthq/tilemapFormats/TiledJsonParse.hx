@@ -95,7 +95,7 @@ class TiledJsonParse {
       (decoded = cast (((cast _Runtime.strictEquals(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'encoding'] : Array<Dynamic>)), 'csv') : Bool) ? (cast _Runtime.callValue(decodeTiledCsvLayer, cast ([data] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(decodeTiledBase64Layer, cast ([data, _Runtime.callValue(TiledJsonParse.asCompression__tiledJsonParse, cast ([_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.inflate; })] : Array<Dynamic>)) : Dynamic)) : Dynamic));
     } }
     if ((cast _Runtime.strictEquals(decoded, null) : Bool)) { return cast grid; }
-    _Runtime.callProperty(grid, 'set', cast ([(cast decoded : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));
+    (cast grid : flighthq._internal._UInt32Array).set((cast decoded : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length'))));
     return cast grid;
     return cast null;
   }

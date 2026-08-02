@@ -421,7 +421,7 @@ class GltfParse {
             if ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool)) {
               _Runtime.callValue(multiplyMatrix4, cast ([flighthq._internal._StaticIndex.readArray(worldMatrices, node), flighthq._internal._StaticIndex.readArray(worldMatrices, parent), flighthq._internal._StaticIndex.readArray(localMatrices, node)] : Array<Dynamic>));
             } else {
-              _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(worldMatrices, node).m, 'set', cast ([flighthq._internal._StaticIndex.readArray(localMatrices, node).m] : Array<Dynamic>));
+              (cast flighthq._internal._StaticIndex.readArray(worldMatrices, node).m : flighthq._internal._Float32Array).set(flighthq._internal._StaticIndex.readArray(localMatrices, node).m);
             }
             flighthq._internal._StaticIndex.writeUint8Array(state, node, 2.0);
           }

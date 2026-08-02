@@ -208,7 +208,7 @@ class Net {
             out = new flighthq._internal._UInt8Array(loaded);
             offset = 0.0;
             for (chunk in _Runtime.iterable(chunks)) {
-              _Runtime.callProperty(out, 'set', cast ([chunk, offset] : Array<Dynamic>));
+              (cast out : flighthq._internal._UInt8Array).set(chunk, Std.int(offset));
               (offset = cast ((offset + _Runtime.field(chunk, 'byteLength')) : Dynamic));
             }
             return flighthq._internal._Async.flowReturn(_Runtime.field(out, 'buffer'));

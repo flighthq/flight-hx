@@ -1,6 +1,6 @@
 # Static Lowering Next Levers
 
-Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, the storage-compatible part of the mixed-union follow-up, and the proven Array destructuring tranche are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
+Status: the shared static-facts mechanism, primitive Boolean/numeric emission, checker-proven indexed access, emitter-known synthetic Array reads, storage-compatible mixed unions, proven Array destructuring, and method-specific typed-array `set` lowering are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
 
 ## Typed method-call census at upstream 7333e825
 
@@ -27,7 +27,7 @@ All 68 dynamic survivors are typed-array `set` calls; there are no collection su
 | `Uint16Array` or `Uint32Array` |                   1 |
 | **Total**                      |              **68** |
 
-The next approved general lever is a method-specific checker-proven typed-array `set` lowering. It must preserve the source-array argument exactly, coerce only the optional numeric offset, and use a union-aware endpoint for the single `Uint16Array | Uint32Array` receiver. Merely adding `set` to the current generic typed-array binding is unsound: that emitter applies `Std.int` to every argument and would corrupt the source array. Focused mesh parity already passes with the dynamic route, so this is a portability/performance lever rather than an emergency correctness patch.
+The method-specific checker-proven typed-array `set` lowering is now enabled for all 68 sites. It preserves the source-array argument exactly, coerces only the optional numeric offset, and admits the single `Uint16Array | Uint32Array` receiver only when an adjacent standard-library `instanceof Uint32Array` branch proves the freshly constructed receiver width follows the source width. Independent mixed-width unions remain dynamic. The current generic typed-array binding remains restricted to `subarray`; adding `set` there would integer-coerce the source array. Schema-v9 final-output counters record the proven and emitted receiver distribution deterministically.
 
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 

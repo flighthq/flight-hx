@@ -128,8 +128,8 @@ class WgpuShadedPrelude {
     }
     data = _Runtime.field(binding, 'data');
     _Runtime.fill(data, 0.0, 0, null, 1);
-    _Runtime.callProperty(data, 'set', cast ([diffuse, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(data, 'set', cast ([specular, 4.0] : Array<Dynamic>));
+    (cast data : flighthq._internal._Float32Array).set(diffuse, Std.int(0.0));
+    (cast data : flighthq._internal._Float32Array).set(specular, Std.int(4.0));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 8.0, _Runtime.field(material, 'shininess'));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 9.0, _Runtime.field(material, 'alphaCutoff'));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 10.0, _Runtime.callValue(getWgpuScene3DTime, cast ([state] : Array<Dynamic>)));
