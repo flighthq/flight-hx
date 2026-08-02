@@ -208,7 +208,7 @@ class Timeline {
     var label:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(frame), 'number') : Bool)) { return cast frame; }
     label = _Runtime.callValue(findTimelineLabel, cast ([timeline, frame] : Array<Dynamic>));
-    if ((cast !_Runtime.truthy(label) : Bool)) { throw _Runtime.error('Frame label "' + Std.string(frame) + '" not found'); }
+    if ((cast !_Runtime.truthy(label) : Bool)) { _Runtime.throwValue(_Runtime.error('Frame label "' + Std.string(frame) + '" not found')); }
     return cast _Runtime.field(label, 'frame');
     return cast null;
   }

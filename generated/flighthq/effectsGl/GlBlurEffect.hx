@@ -44,7 +44,7 @@ class GlBlurEffect {
   public static function applyGaussianBlurToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Bool {
     var sourceTarget:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, temp) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, temp) : Bool)) : Bool)) {
-      throw _Runtime.error('applyGaussianBlurToGlRenderTextures: source, destination, and scratch must be distinct');
+      _Runtime.throwValue(_Runtime.error('applyGaussianBlurToGlRenderTextures: source, destination, and scratch must be distinct'));
     }
     sourceTarget = _Runtime.callValue(getGlRenderTextureTarget, cast ([state, source] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }

@@ -57,7 +57,7 @@ class Statistics {
     var sumWeights:Dynamic = cast _Runtime.UNDEFINED;
     var sumProduct:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.field(weights, 'length')) : Bool)) {
-      throw _Runtime.rangeError('weightedAverage: values and weights must have the same length');
+      _Runtime.throwValue(_Runtime.rangeError('weightedAverage: values and weights must have the same length'));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sumWeights = 0.0;

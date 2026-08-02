@@ -22,7 +22,7 @@ class LibgdxParse {
     var sections:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(text), 'string') : Bool) || (cast !_Runtime.truthy(StringTools.trim(Std.string(text))) : Bool)) : Bool)) {
-      throw _Runtime.error('Invalid libGDX particle: input is empty or not a string');
+      _Runtime.throwValue(_Runtime.error('Invalid libGDX particle: input is empty or not a string'));
     }
     __destructure0 = _Runtime.callValue(LibgdxParse.parseLibgdxText__libgdxParse, cast ([text] : Array<Dynamic>));
     sections = _Runtime.field(__destructure0, 'sections');
@@ -37,7 +37,7 @@ class LibgdxParse {
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(text), 'string') : Bool) || (cast !_Runtime.truthy(StringTools.trim(Std.string(text))) : Bool)) : Bool)) {
-      throw _Runtime.error('Invalid libGDX particle: input is empty or not a string');
+      _Runtime.throwValue(_Runtime.error('Invalid libGDX particle: input is empty or not a string'));
     }
     __destructure1 = _Runtime.callValue(LibgdxParse.parseLibgdxText__libgdxParse, cast ([text] : Array<Dynamic>));
     sections = _Runtime.field(__destructure1, 'sections');

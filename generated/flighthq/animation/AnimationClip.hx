@@ -37,7 +37,7 @@ class AnimationClip {
     _Runtime.callValue(AnimationClip.validateAnimationClipEvents__animationClip, cast ([copiedEvents] : Array<Dynamic>));
     computedDuration = HxMath.max(_Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>)), _Runtime.callValue(AnimationClip.computeAnimationClipEventsDuration__animationClip, cast ([copiedEvents] : Array<Dynamic>)));
     if ((cast ((cast ((cast !_Runtime.strictEquals(duration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(copiedEvents, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(copiedEvents, (_Runtime.field(copiedEvents, 'length') - 1.0)), 'time') : Float) > (cast duration : Float)) : Bool)) : Bool)) {
-      throw _Runtime.rangeError('AnimationClip event time exceeds the explicit clip duration.');
+      _Runtime.throwValue(_Runtime.rangeError('AnimationClip event time exceeds the explicit clip duration.'));
     }
     return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast computedDuration), events: copiedEvents }] : Array<Dynamic>));
     return cast null;
@@ -88,7 +88,7 @@ class AnimationClip {
   public static function validateAnimationClipEvents__animationClip(events:Array<Dynamic>):Void {
     for (event in _Runtime.iterable(events)) {
       if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(event, 'time')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(event, 'time') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-        throw _Runtime.rangeError('AnimationClip event "' + Std.string(_Runtime.field(event, 'name')) + '" time must be a finite non-negative number.');
+        _Runtime.throwValue(_Runtime.rangeError('AnimationClip event "' + Std.string(_Runtime.field(event, 'name')) + '" time must be a finite non-negative number.'));
       }
     }
   }

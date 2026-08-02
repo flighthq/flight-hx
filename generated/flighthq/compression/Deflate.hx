@@ -25,7 +25,7 @@ class InflateState__deflate {
   public function readBit():Float {
     var bit:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(this, 'bitCount'), 0.0) : Bool)) {
-      if ((cast ((cast _Runtime.field(this, 'position') : Float) >= (cast _Runtime.field(_Runtime.field(this, 'input'), 'length') : Float)) : Bool)) { throw _Runtime.error('deflate: read past end of stream'); }
+      if ((cast ((cast _Runtime.field(this, 'position') : Float) >= (cast _Runtime.field(_Runtime.field(this, 'input'), 'length') : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: read past end of stream')); }
       (this.bitBuffer = cast (flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(this, 'input'), _Runtime.incrementField(this, 'position', 1, true)) : Dynamic));
       (this.bitCount = cast (8.0 : Dynamic));
     }
@@ -50,7 +50,7 @@ class InflateState__deflate {
   }
   public function writeByte(byte:Float):Void {
     if ((cast ((cast _Runtime.field(this, 'outputLength') : Float) >= (cast _Runtime.field(_Runtime.field(this, 'output'), 'length') : Float)) : Bool)) {
-      if ((cast ((cast (_Runtime.field(_Runtime.field(this, 'output'), 'length') * 2.0) : Float) > (cast Deflate.MAX_INFLATE_BYTES__deflate : Float)) : Bool)) { throw _Runtime.error('deflate: output exceeds the inflate limit'); }
+      if ((cast ((cast (_Runtime.field(_Runtime.field(this, 'output'), 'length') * 2.0) : Float) > (cast Deflate.MAX_INFLATE_BYTES__deflate : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: output exceeds the inflate limit')); }
       var grown:Dynamic = new flighthq._internal._UInt8Array((_Runtime.field(_Runtime.field(this, 'output'), 'length') * 2.0));
       (cast grown : flighthq._internal._UInt8Array).set(_Runtime.field(this, 'output'));
       (this.output = cast (grown : Dynamic));
@@ -98,7 +98,7 @@ class Deflate {
     do {
       (final_ = cast ((cast state : InflateState__deflate).readBit() : Dynamic));
       var type:Dynamic = (cast state : InflateState__deflate).readBits(2.0, 0.0);
-      if ((cast _Runtime.strictEquals(type, 0.0) : Bool)) { _Runtime.callValue(Deflate.inflateStoredBlock__deflate, cast ([state] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(type, 1.0) : Bool)) { _Runtime.callValue(Deflate.inflateHuffmanBlock__deflate, cast ([state, Deflate.FIXED_LITERAL_TREE__deflate, Deflate.FIXED_DISTANCE_TREE__deflate] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(type, 2.0) : Bool)) { _Runtime.callValue(Deflate.inflateDynamicBlock__deflate, cast ([state] : Array<Dynamic>)); } else { throw _Runtime.error('deflate: invalid block type'); } } }
+      if ((cast _Runtime.strictEquals(type, 0.0) : Bool)) { _Runtime.callValue(Deflate.inflateStoredBlock__deflate, cast ([state] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(type, 1.0) : Bool)) { _Runtime.callValue(Deflate.inflateHuffmanBlock__deflate, cast ([state, Deflate.FIXED_LITERAL_TREE__deflate, Deflate.FIXED_DISTANCE_TREE__deflate] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(type, 2.0) : Bool)) { _Runtime.callValue(Deflate.inflateDynamicBlock__deflate, cast ([state] : Array<Dynamic>)); } else { _Runtime.throwValue(_Runtime.error('deflate: invalid block type')); } } }
     } while ((cast _Runtime.strictEquals(final_, 0.0) : Bool));
     return cast _Runtime.slice(_Runtime.field(state, 'output'), 0.0, _Runtime.field(state, 'outputLength'));
     return cast null;
@@ -109,12 +109,12 @@ class Deflate {
     var nlen:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(state, 'bitBuffer', 0.0);
     _Runtime.setField(state, 'bitCount', 0.0);
-    if ((cast ((cast (_Runtime.field(state, 'position') + 4.0) : Float) > (cast _Runtime.field(_Runtime.field(state, 'input'), 'length') : Float)) : Bool)) { throw _Runtime.error('deflate: truncated stored block header'); }
+    if ((cast ((cast (_Runtime.field(state, 'position') + 4.0) : Float) > (cast _Runtime.field(_Runtime.field(state, 'input'), 'length') : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: truncated stored block header')); }
     len = (_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(state, 'input'), _Runtime.field(state, 'position'))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(state, 'input'), (_Runtime.field(state, 'position') + 1.0))) << 8)));
     nlen = (_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(state, 'input'), (_Runtime.field(state, 'position') + 2.0))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(state, 'input'), (_Runtime.field(state, 'position') + 3.0))) << 8)));
     _Runtime.setField(state, 'position', (_Runtime.field(state, 'position') + 4.0));
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(len) ^ 65535), nlen) : Bool)) { throw _Runtime.error('deflate: stored block length mismatch'); }
-    if ((cast ((cast (_Runtime.field(state, 'position') + len) : Float) > (cast _Runtime.field(_Runtime.field(state, 'input'), 'length') : Float)) : Bool)) { throw _Runtime.error('deflate: truncated stored block data'); }
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(len) ^ 65535), nlen) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: stored block length mismatch')); }
+    if ((cast ((cast (_Runtime.field(state, 'position') + len) : Float) > (cast _Runtime.field(_Runtime.field(state, 'input'), 'length') : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: truncated stored block data')); }
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
@@ -134,13 +134,13 @@ class Deflate {
           continue;
         }
         var lengthIndex:Dynamic = (symbol - 257.0);
-        if ((cast ((cast lengthIndex : Float) >= (cast Deflate.LENGTH_BASE__deflate.length : Float)) : Bool)) { throw _Runtime.error('deflate: invalid length symbol'); }
+        if ((cast ((cast lengthIndex : Float) >= (cast Deflate.LENGTH_BASE__deflate.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid length symbol')); }
         var length:Dynamic = (cast state : InflateState__deflate).readBits(flighthq._internal._StaticIndex.readArray(Deflate.LENGTH_EXTRA__deflate, lengthIndex), flighthq._internal._StaticIndex.readArray(Deflate.LENGTH_BASE__deflate, lengthIndex));
         var distanceSymbol:Dynamic = _Runtime.callValue(Deflate.decodeSymbol__deflate, cast ([state, distanceTree] : Array<Dynamic>));
-        if ((cast ((cast distanceSymbol : Float) >= (cast Deflate.DISTANCE_BASE__deflate.length : Float)) : Bool)) { throw _Runtime.error('deflate: invalid distance symbol'); }
+        if ((cast ((cast distanceSymbol : Float) >= (cast Deflate.DISTANCE_BASE__deflate.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid distance symbol')); }
         var distance:Dynamic = (cast state : InflateState__deflate).readBits(flighthq._internal._StaticIndex.readArray(Deflate.DISTANCE_EXTRA__deflate, distanceSymbol), flighthq._internal._StaticIndex.readArray(Deflate.DISTANCE_BASE__deflate, distanceSymbol));
         var source:Dynamic = (_Runtime.field(state, 'outputLength') - distance);
-        if ((cast ((cast source : Float) < (cast 0.0 : Float)) : Bool)) { throw _Runtime.error('deflate: back-reference before start of output'); }
+        if ((cast ((cast source : Float) < (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: back-reference before start of output')); }
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
@@ -181,7 +181,7 @@ class Deflate {
       if ((cast ((cast symbol : Float) < (cast 16.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(lengths, i++, symbol);
       } else { if ((cast _Runtime.strictEquals(symbol, 16.0) : Bool)) {
-        if ((cast _Runtime.strictEquals(i, 0.0) : Bool)) { throw _Runtime.error('deflate: repeat with no previous length'); }
+        if ((cast _Runtime.strictEquals(i, 0.0) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: repeat with no previous length')); }
         var repeat:Dynamic = (cast state : InflateState__deflate).readBits(2.0, 3.0);
         var previous:Dynamic = flighthq._internal._StaticIndex.readArray(lengths, (i - 1.0));
         {
@@ -210,7 +210,7 @@ class Deflate {
           }
         }
       } else {
-        throw _Runtime.error('deflate: invalid code-length symbol');
+        _Runtime.throwValue(_Runtime.error('deflate: invalid code-length symbol'));
       } } } }
     }
     literalTree = _Runtime.callValue(Deflate.buildHuffmanTree__deflate, cast ([_Runtime.slice(lengths, 0.0, literalCount), literalCount] : Array<Dynamic>));
@@ -271,7 +271,7 @@ class Deflate {
         len++;
       }
     }
-    throw _Runtime.error('deflate: invalid Huffman code');
+    _Runtime.throwValue(_Runtime.error('deflate: invalid Huffman code'));
     return cast null;
   }
 

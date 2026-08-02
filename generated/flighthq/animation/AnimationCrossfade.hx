@@ -100,10 +100,10 @@ class AnimationCrossfade {
         }
         var toChannel:Dynamic = flighthq._internal._StaticIndex.readArray(toChannels, toIndex);
         if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'components'), _Runtime.field(_Runtime.field(toChannel, 'track'), 'components')) : Bool)) {
-          throw _Runtime.rangeError('AnimationCrossfade target has different component widths (' + Std.string(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'components')) + ' and ' + Std.string(_Runtime.field(_Runtime.field(toChannel, 'track'), 'components')) + ').');
+          _Runtime.throwValue(_Runtime.rangeError('AnimationCrossfade target has different component widths (' + Std.string(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'components')) + ' and ' + Std.string(_Runtime.field(_Runtime.field(toChannel, 'track'), 'components')) + ').'));
         }
         if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'quaternion'), _Runtime.field(_Runtime.field(toChannel, 'track'), 'quaternion')) : Bool)) {
-          throw _Runtime.typeError('AnimationCrossfade target has incompatible quaternion flags.');
+          _Runtime.throwValue(_Runtime.typeError('AnimationCrossfade target has incompatible quaternion flags.'));
         }
         _Runtime.callProperty(channels, 'push', cast ([{ channel: toChannel, fromIndex: fromIndex, toIndex: toIndex }] : Array<Dynamic>));
         ((cast matchedTo : flighthq._internal._Set).add(toIndex));
@@ -128,7 +128,7 @@ class AnimationCrossfade {
     targets = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (channel in _Runtime.iterable(channels)) {
       if ((cast ((cast targets : flighthq._internal._Set).has(_Runtime.field(channel, 'targetRef'))) : Bool)) {
-        throw _Runtime.typeError('AnimationCrossfade ' + Std.string(clipLabel) + ' clip contains a duplicate targetRef.');
+        _Runtime.throwValue(_Runtime.typeError('AnimationCrossfade ' + Std.string(clipLabel) + ' clip contains a duplicate targetRef.'));
       }
       ((cast targets : flighthq._internal._Set).add(_Runtime.field(channel, 'targetRef')));
     }

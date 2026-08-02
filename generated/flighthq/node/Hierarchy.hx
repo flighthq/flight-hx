@@ -34,14 +34,14 @@ class Hierarchy {
     targetRuntime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     children = _Runtime.field(targetRuntime, 'children');
     if ((cast !_Runtime.truthy(child) : Bool)) {
-      throw _Runtime.typeError('Parameter child must be non-null');
+      _Runtime.throwValue(_Runtime.typeError('Parameter child must be non-null'));
     } else { if ((cast _Runtime.strictEquals(child, target) : Bool)) {
-      throw _Runtime.typeError('An object cannot be added as a child of itself');
+      _Runtime.throwValue(_Runtime.typeError('An object cannot be added as a child of itself'));
     } else { if ((cast ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(children, null), function():Dynamic return cast ((cast index : Float) > (cast _Runtime.field(children, 'length') : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(children, null), function():Dynamic return cast ((cast index : Float) > (cast 0.0 : Float))) : Bool)) : Bool)) {
       _Runtime.callValue(Hierarchy.throwOutOfBoundsError__hierarchy, cast ([] : Array<Dynamic>));
     } } }
     if ((cast !(cast _Runtime.callProperty(targetRuntime, 'canAddChild', cast ([target, child] : Array<Dynamic>)) : Bool) : Bool)) {
-      throw _Runtime.typeError('The specified parent object cannot add this child');
+      _Runtime.throwValue(_Runtime.typeError('The specified parent object cannot add this child'));
     }
     if ((cast _Runtime.strictEquals(children, null) : Bool)) {
       (children = cast (_Runtime.setField(targetRuntime, 'children', (cast cast ([] : Array<Dynamic>) : Array<Node<Traits>>)) : Dynamic));
@@ -299,13 +299,13 @@ class Hierarchy {
         (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
         (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
         _Runtime.callValue(invalidateNodeLocalTransform, cast ([child] : Array<Dynamic>));
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError0:Dynamic) {
       {
         _Runtime.callValue(releaseMatrix, cast ([oldWorld] : Array<Dynamic>));
         _Runtime.callValue(releaseMatrix, cast ([localM] : Array<Dynamic>));
       }
-      throw __finallyError0;
+      _Runtime.throwValue(__finallyError0);
     }
     {
       _Runtime.callValue(releaseMatrix, cast ([oldWorld] : Array<Dynamic>));
@@ -376,7 +376,7 @@ class Hierarchy {
   }
 
   public static function throwOutOfBoundsError__hierarchy():Void {
-    throw _Runtime.rangeError('The supplied index is out of bounds.');
+    _Runtime.throwValue(_Runtime.rangeError('The supplied index is out of bounds.'));
   }
 
   public static final DEG_TO_RAD__hierarchy:Dynamic = (HxMath.PI / 180.0);

@@ -103,7 +103,7 @@ class Texture {
     var flipY:Dynamic = cast _Runtime.UNDEFINED;
     var uvRotation:Dynamic = cast _Runtime.UNDEFINED;
     var version:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(out, 'dimension'), _Runtime.field(source, 'dimension')) : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(out, 'dimension'), _Runtime.field(source, 'dimension')) : Bool)) { _Runtime.throwValue(_Runtime.error('copyTexture requires matching dimensions')); }
     colorSpace = _Runtime.field(source, 'colorSpace');
     flipX = _Runtime.field(source, 'flipX');
     flipY = _Runtime.field(source, 'flipY');
@@ -118,19 +118,19 @@ class Texture {
     {
       var __switchValue = _Runtime.field(out, 'dimension');
       if (__switchValue == '2d') {
-        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '2d') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('copyTexture requires matching dimensions')); }
         _Runtime.setField(out, 'source', _Runtime.field(source, 'source'));
       }
       else if (__switchValue == '2d-array') {
-        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '2d-array') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '2d-array') : Bool)) { _Runtime.throwValue(_Runtime.error('copyTexture requires matching dimensions')); }
         _Runtime.setField(out, 'sources', _Runtime.slice(_Runtime.field(source, 'sources'), 0, null));
       }
       else if (__switchValue == '3d') {
-        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '3d') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), '3d') : Bool)) { _Runtime.throwValue(_Runtime.error('copyTexture requires matching dimensions')); }
         _Runtime.setField(out, 'source', _Runtime.field(source, 'source'));
       }
       else if (__switchValue == 'cube') {
-        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), 'cube') : Bool)) { throw _Runtime.error('copyTexture requires matching dimensions'); }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'dimension'), 'cube') : Bool)) { _Runtime.throwValue(_Runtime.error('copyTexture requires matching dimensions')); }
         _Runtime.setField(out, 'sources', (cast (cast _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) : Dynamic) : TextureSourceCubeFaces));
       }
     }
@@ -399,7 +399,7 @@ class Texture {
   }
 
   public static function setTextureSource(texture:TextureLike, source:Null<TextureSource>):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { throw _Runtime.error('setTextureSource requires a Texture2D'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setTextureSource requires a Texture2D')); }
     if ((cast _Runtime.strictEquals(_Runtime.field(texture, 'source'), source) : Bool)) { return; }
     _Runtime.setField(texture, 'source', source);
     _Runtime.setField(texture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(texture, 'version') + 1.0)), 0));

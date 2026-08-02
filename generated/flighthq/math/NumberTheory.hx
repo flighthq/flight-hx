@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class NumberTheory {
   public static function factorial(n:Float):Float {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([n] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast n : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { throw _Runtime.rangeError('factorial: n must be a non-negative integer'); }
+    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([n] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast n : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('factorial: n must be a non-negative integer')); }
     if ((cast ((cast _Runtime.strictEquals(n, 0.0) : Bool) || (cast _Runtime.strictEquals(n, 1.0) : Bool)) : Bool)) { return cast 1.0; }
     result = 1.0;
     {
@@ -24,7 +24,7 @@ class NumberTheory {
   public static function gcd(a:Float, b:Float):Float {
     (a = cast (HxMath.abs(_Runtime.trunc(a)) : Dynamic));
     (b = cast (HxMath.abs(_Runtime.trunc(b)) : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) && (cast _Runtime.strictEquals(b, 0.0) : Bool)) : Bool)) { throw _Runtime.rangeError('gcd: both arguments must not be 0'); }
+    if ((cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) && (cast _Runtime.strictEquals(b, 0.0) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('gcd: both arguments must not be 0')); }
     while ((cast !_Runtime.strictEquals(b, 0.0) : Bool)) {
       var t:Dynamic = b;
       (b = cast (_Runtime.fmod(a, b) : Dynamic));

@@ -168,7 +168,7 @@ class GlRenderTarget {
             i++;
           }
         }
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError8:Dynamic) {
       {
         flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER, _Runtime.field(runtime, 'currentFramebuffer'));
@@ -179,7 +179,7 @@ class GlRenderTarget {
         }
         _Runtime.setField(runtime, 'currentTexture', null);
       }
-      throw __finallyError8;
+      _Runtime.throwValue(__finallyError8);
     }
     {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER, _Runtime.field(runtime, 'currentFramebuffer'));

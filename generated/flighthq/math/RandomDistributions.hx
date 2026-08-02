@@ -16,7 +16,7 @@ class RandomDistributions {
 
   public static function randomExponential(random:RandomSource, rate:Float = 1.0):Float {
     var u:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast rate : Float) <= (cast 0.0 : Float)) : Bool)) { throw _Runtime.rangeError('randomExponential: rate must be > 0'); }
+    if ((cast ((cast rate : Float) <= (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomExponential: rate must be > 0')); }
     u = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     return cast (-HxMath.log(((cast _Runtime.strictEquals(u, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u : Dynamic))) / rate);
     return cast null;
@@ -112,7 +112,7 @@ class RandomDistributions {
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     var k:Dynamic = cast _Runtime.UNDEFINED;
     var product:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast lambda : Float) <= (cast 0.0 : Float)) : Bool)) { throw _Runtime.rangeError('randomPoisson: lambda must be > 0'); }
+    if ((cast ((cast lambda : Float) <= (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomPoisson: lambda must be > 0')); }
     limit = HxMath.exp(-lambda);
     k = 0.0;
     product = _Runtime.callValue(random, cast ([] : Array<Dynamic>));

@@ -40,7 +40,7 @@ class GlRenderPass {
     previousState = _Runtime.callValue(GlRenderPass.captureGlPassState__glRenderPass, cast ([previousOwner] : Array<Dynamic>));
     currentMaskDepth = _Runtime.field(previousState, 'currentMaskDepth');
     if ((cast ((cast ((cast currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previousState, 'framebuffer'), _Runtime.field(target, 'framebuffer')) : Bool)) : Bool)) {
-      throw _Runtime.error('beginGlRenderPass: cannot nest the active framebuffer while a contour clip is live');
+      _Runtime.throwValue(_Runtime.error('beginGlRenderPass: cannot nest the active framebuffer while a contour clip is live'));
     }
     if ((cast _Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (stack = cast (cast ([] : Array<Dynamic>) : Dynamic));
@@ -77,11 +77,11 @@ class GlRenderPass {
     gl = _Runtime.field(state, 'gl');
     stack = ((cast GlRenderPass._passStack__glRenderPass : flighthq._internal._WeakMap).get(gl));
     if ((cast _Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      throw _Runtime.error('endGlRenderPass called without a matching beginGlRenderPass');
+      _Runtime.throwValue(_Runtime.error('endGlRenderPass called without a matching beginGlRenderPass'));
     }
     saved = _Runtime.callProperty(stack, 'at', cast ([-1.0] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(saved, 'owner'), state) : Bool)) : Bool)) {
-      throw _Runtime.error('endGlRenderPass called without a matching beginGlRenderPass');
+      _Runtime.throwValue(_Runtime.error('endGlRenderPass called without a matching beginGlRenderPass'));
     }
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(stack, 'length'), 0.0) : Bool)) { ((cast GlRenderPass._passStack__glRenderPass : flighthq._internal._WeakMap).delete_(gl)); }

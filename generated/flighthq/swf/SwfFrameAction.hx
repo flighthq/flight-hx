@@ -55,12 +55,12 @@ class SwfFrameAction {
           for (command in _Runtime.iterable(commands)) {
             if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'stop') : Bool)) { _Runtime.callValue(stopMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'play') : Bool)) { _Runtime.callValue(playMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'next') : Bool)) { _Runtime.callValue(nextFrameMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'previous') : Bool)) { _Runtime.callValue(prevFrameMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast !_Runtime.strictEquals(_Runtime.field(command, 'label'), null) : Bool)) { _Runtime.callValue(gotoAndPlayMovieClip, cast ([clip, _Runtime.field(command, 'label')] : Array<Dynamic>)); } else { _Runtime.callValue(gotoAndPlayMovieClip, cast ([clip, _Runtime.field(command, 'frame')] : Array<Dynamic>)); } } } } }
           }
-        } catch (__error:Dynamic) { throw __error; }
+        } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
       } catch (__finallyError2:Dynamic) {
         {
           SwfFrameAction._gotoDepth__swfFrameAction--;
         }
-        throw __finallyError2;
+        _Runtime.throwValue(__finallyError2);
       }
       {
         SwfFrameAction._gotoDepth__swfFrameAction--;

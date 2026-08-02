@@ -26,8 +26,8 @@ class BitmapConvolution {
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
     matrixY = _Runtime.field(__destructure0, 'matrixY');
-    if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { throw _Runtime.error('Convolution filter matrix dimensions must be positive'); }
-    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { throw _Runtime.error('Convolution filter matrix does not match its dimensions'); }
+    if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix dimensions must be positive')); }
+    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix does not match its dimensions')); }
     rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast _Runtime.callValue(BitmapConvolution.getConvolutionDivisor__bitmapConvolution, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
     divisor = ((cast _Runtime.strictEquals(rawDivisor, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast rawDivisor : Dynamic));
     bias = _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0);

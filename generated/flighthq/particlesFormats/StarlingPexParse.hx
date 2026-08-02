@@ -22,7 +22,7 @@ class StarlingPexParse {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(xml), 'string') : Bool) || (cast !(cast StringTools.startsWith(StringTools.trim(Std.string(xml)), '<') : Bool) : Bool)) : Bool)) {
-      throw _Runtime.error('Invalid Starling PEX: input must be an XML string beginning with <');
+      _Runtime.throwValue(_Runtime.error('Invalid Starling PEX: input must be an XML string beginning with <'));
     }
     d = _Runtime.callValue(StarlingPexParse.parsePexXml__starlingPexParse, cast ([xml] : Array<Dynamic>));
     doc = _Runtime.callValue(StarlingPexParse.dictToDocument__starlingPexParse, cast ([d] : Array<Dynamic>));
@@ -34,7 +34,7 @@ class StarlingPexParse {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(xml), 'string') : Bool) || (cast !(cast StringTools.startsWith(StringTools.trim(Std.string(xml)), '<') : Bool) : Bool)) : Bool)) {
-      throw _Runtime.error('Invalid Starling PEX: input must be an XML string beginning with <');
+      _Runtime.throwValue(_Runtime.error('Invalid Starling PEX: input must be an XML string beginning with <'));
     }
     d = _Runtime.callValue(StarlingPexParse.parsePexXml__starlingPexParse, cast ([xml] : Array<Dynamic>));
     doc = _Runtime.callValue(StarlingPexParse.dictToDocument__starlingPexParse, cast ([d] : Array<Dynamic>));

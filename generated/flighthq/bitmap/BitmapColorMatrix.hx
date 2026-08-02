@@ -51,7 +51,7 @@ class BitmapColorMatrix {
   }
 
   public static function colorMatrixBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, matrix:Array<Float>):Void {
-    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast 20.0 : Float)) : Bool)) { throw _Runtime.error('Color matrix filter requires 20 values'); }
+    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast 20.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Color matrix filter requires 20 values')); }
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {

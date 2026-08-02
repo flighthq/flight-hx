@@ -12,11 +12,11 @@ class EasePiecewise {
     var breakpoints:Array<{ var ease:EasingFunction; var end:Float; var start:Float; }> = cast _Runtime.UNDEFINED;
     var accumulated:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
-      throw _Runtime.error('easePiecewise: segments array must not be empty');
+      _Runtime.throwValue(_Runtime.error('easePiecewise: segments array must not be empty'));
     }
     totalWeight = _Runtime.reduce(segments, function(sum:Dynamic, seg:Dynamic) return (sum + _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0)), 0.0);
     if ((cast ((cast totalWeight : Float) <= (cast 0.0 : Float)) : Bool)) {
-      throw _Runtime.error('easePiecewise: total segment weight must be greater than zero');
+      _Runtime.throwValue(_Runtime.error('easePiecewise: total segment weight must be greater than zero'));
     }
     breakpoints = cast ([] : Array<Dynamic>);
     accumulated = 0.0;

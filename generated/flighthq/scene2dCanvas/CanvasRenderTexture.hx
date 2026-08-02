@@ -64,12 +64,12 @@ class CanvasRenderTexture {
       try {
         try {
           _Runtime.callValue(callback, cast ([state] : Array<Dynamic>));
-        } catch (__error:Dynamic) { throw __error; }
+        } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
       } catch (__finallyError0:Dynamic) {
         {
           _Runtime.callValue(endCanvasRenderPass, cast ([state] : Array<Dynamic>));
         }
-        throw __finallyError0;
+        _Runtime.throwValue(__finallyError0);
       }
       {
         _Runtime.callValue(endCanvasRenderPass, cast ([state] : Array<Dynamic>));
@@ -95,13 +95,13 @@ class CanvasRenderTexture {
           if ((cast rendered : Bool)) { _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(renderTexture, 'version') + 1.0)), 0)); }
         }
         return cast __returnValue1;
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError2:Dynamic) {
       {
         _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
         if ((cast rendered : Bool)) { _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(renderTexture, 'version') + 1.0)), 0)); }
       }
-      throw __finallyError2;
+      _Runtime.throwValue(__finallyError2);
     }
     {
       _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));

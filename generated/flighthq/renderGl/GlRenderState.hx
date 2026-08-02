@@ -76,7 +76,7 @@ class GlRenderState {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     contextAttribs = _Runtime.mergeObjects([{ alpha: true }, { antialias: _Runtime.coalesce(_Runtime.field(options, 'antialias'), function():Dynamic return cast true) }, { powerPreference: _Runtime.coalesce(_Runtime.field(options, 'powerPreference'), function():Dynamic return cast 'default') }, { stencil: true }, _Runtime.field(options, 'contextAttributes')]);
     gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
-    if ((cast !_Runtime.truthy(gl) : Bool)) { throw _Runtime.error('Failed to get WebGL2 context.'); }
+    if ((cast !_Runtime.truthy(gl) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to get WebGL2 context.')); }
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
     matrixArray = new flighthq._internal._Float32Array(9.0);
     defaultBitmapShader = _Runtime.callValue(createDefaultGlBitmapShader, cast ([shaderLoc, matrixArray] : Array<Dynamic>));
@@ -256,7 +256,7 @@ class GlRenderState {
   public static function getGlContextRuntime__glRenderState(runtime:GlRenderStateRuntime):GlContextRuntime__glRenderState {
     var contextRuntime:Dynamic = cast _Runtime.UNDEFINED;
     contextRuntime = ((cast GlRenderState._contextRuntimeByStateRuntime__glRenderState : flighthq._internal._WeakMap).get(runtime));
-    if ((cast _Runtime.strictEquals(contextRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { throw _Runtime.error('GlRenderState runtime has no context tier'); }
+    if ((cast _Runtime.strictEquals(contextRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.throwValue(_Runtime.error('GlRenderState runtime has no context tier')); }
     return cast contextRuntime;
     return cast null;
   }

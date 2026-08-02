@@ -196,7 +196,7 @@ class Share {
     var isBase64:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     comma = _Runtime.callProperty(_Runtime.field(file, 'dataUrl'), 'indexOf', cast ([','] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(comma, -1.0) : Bool)) { throw _Runtime.error('share: dataUrl is not a data URL (no comma)'); }
+    if ((cast _Runtime.strictEquals(comma, -1.0) : Bool)) { _Runtime.throwValue(_Runtime.error('share: dataUrl is not a data URL (no comma)')); }
     header = _Runtime.substring(_Runtime.field(file, 'dataUrl'), 0.0, comma);
     body = _Runtime.substring(_Runtime.field(file, 'dataUrl'), (comma + 1.0), null);
     isBase64 = _Runtime.includes(header, ';base64');

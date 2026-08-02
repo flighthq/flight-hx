@@ -9,7 +9,7 @@ import flighthq.types.ColorMatrixAdjustment;
 class ColorMatrixAdjustment {
   public static function createColorMatrixAdjustment(colorMatrix:Array<Float>):flighthq.types.ColorMatrixAdjustment {
     if ((cast !_Runtime.strictEquals(_Runtime.field(colorMatrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) {
-      throw _Runtime.error('Color matrix must contain ' + Std.string(COLOR_MATRIX_LENGTH) + ' values.');
+      _Runtime.throwValue(_Runtime.error('Color matrix must contain ' + Std.string(COLOR_MATRIX_LENGTH) + ' values.'));
     }
     return cast { kind: 'ColorMatrixAdjustment', colorMatrix: _Runtime.concatArrays([_Runtime.toArray(colorMatrix)]) };
     return cast null;

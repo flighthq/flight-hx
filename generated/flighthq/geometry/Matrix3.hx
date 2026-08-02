@@ -28,7 +28,7 @@ class Matrix3 {
   public static function copyMatrix3ColumnFromVector3(out:Matrix3Like, column:Float, source:Vector3Like):Void {
     var base:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     }
     base = (column * 3.0);
     flighthq._internal._StaticIndex.writeFloat32Array(out.m, base, source.x);
@@ -39,7 +39,7 @@ class Matrix3 {
   public static function copyMatrix3ColumnToVector3(out:Vector3Like, column:Float, source:Matrix3Like):Void {
     var base:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     }
     base = (column * 3.0);
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, base) : Dynamic));
@@ -49,7 +49,7 @@ class Matrix3 {
 
   public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     }
     flighthq._internal._StaticIndex.writeFloat32Array(out.m, row, source.x);
     flighthq._internal._StaticIndex.writeFloat32Array(out.m, (row + 3.0), source.y);
@@ -58,7 +58,7 @@ class Matrix3 {
 
   public static function copyMatrix3RowToVector3(out:Vector3Like, row:Float, source:Matrix3Like):Void {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     }
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, row) : Dynamic));
     (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, (row + 3.0)) : Dynamic));

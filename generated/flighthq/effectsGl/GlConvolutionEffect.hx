@@ -30,9 +30,9 @@ class GlConvolutionEffect {
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
     matrixY = _Runtime.field(__destructure0, 'matrixY');
-    if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { throw _Runtime.error('Convolution matrix dimensions must be positive'); }
-    if ((cast ((cast (matrixX * matrixY) : Float) > (cast MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE : Float)) : Bool)) { throw _Runtime.error('Convolution kernel exceeds the WebGL maximum of 7×7 (' + Std.string(matrixX) + '×' + Std.string(matrixY) + ' given)'); }
-    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { throw _Runtime.error('Convolution matrix does not match its declared dimensions'); }
+    if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution matrix dimensions must be positive')); }
+    if ((cast ((cast (matrixX * matrixY) : Float) > (cast MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution kernel exceeds the WebGL maximum of 7×7 (' + Std.string(matrixX) + '×' + Std.string(matrixY) + ' given)')); }
+    if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution matrix does not match its declared dimensions')); }
     bias = _Runtime.coalesce(_Runtime.field(effect, 'bias'), function():Dynamic return cast 0.0);
     clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);

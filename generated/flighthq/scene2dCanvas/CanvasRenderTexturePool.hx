@@ -56,7 +56,7 @@ class CanvasRenderTexturePool {
   public static function releaseCanvasRenderTexture(state:Dynamic, pool:Dynamic, renderTexture:RenderTexture):Void {
     _Runtime.callValue(CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
     if ((cast !(cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).delete_(renderTexture)) : Bool) : Bool)) {
-      throw _Runtime.error('releaseCanvasRenderTexture: texture is not leased from this pool');
+      _Runtime.throwValue(_Runtime.error('releaseCanvasRenderTexture: texture is not leased from this pool'));
     }
     _Runtime.callValue(invalidateCanvasRenderTexture, cast ([state, renderTexture, 'released'] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([renderTexture] : Array<Dynamic>));
@@ -82,7 +82,7 @@ class CanvasRenderTexturePool {
           }
         }
         return cast __returnValue6;
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError7:Dynamic) {
       {
         {
@@ -94,7 +94,7 @@ class CanvasRenderTexturePool {
           }
         }
       }
-      throw __finallyError7;
+      _Runtime.throwValue(__finallyError7);
     }
     {
       {
@@ -124,7 +124,7 @@ class CanvasRenderTexturePool {
   }
 
   public static function assertUsablePool__canvasRenderTexturePool(state:Dynamic, pool:Dynamic):Void {
-    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { throw _Runtime.error('CanvasRenderTexturePool has been destroyed'); }
+    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { _Runtime.throwValue(_Runtime.error('CanvasRenderTexturePool has been destroyed')); }
     _Runtime.callValue(CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
   }
 
@@ -134,7 +134,7 @@ class CanvasRenderTexturePool {
     if ((cast _Runtime.strictEquals(_Runtime.field(pool, 'owner'), null) : Bool)) {
       _Runtime.setField(pool, 'owner', owner);
     } else { if ((cast !_Runtime.strictEquals(_Runtime.field(pool, 'owner'), owner) : Bool)) {
-      throw _Runtime.error('CanvasRenderTexturePool cannot cross screen render states');
+      _Runtime.throwValue(_Runtime.error('CanvasRenderTexturePool cannot cross screen render states'));
     } }
   }
 }

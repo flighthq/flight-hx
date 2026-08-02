@@ -59,7 +59,7 @@ class AssetLibrary {
       return cast value;
     }, function(error:Dynamic) {
       if ((cast _Runtime.strictEquals(((cast runtime.entries : flighthq._internal._Map).get(id)), entry) : Bool)) { ((cast runtime.entries : flighthq._internal._Map).delete_(id)); }
-      throw error;
+      _Runtime.throwValue(error);
     }] : Array<Dynamic>));
     (entry.loadPromise = cast (loadPromise : Dynamic));
     return cast (cast loadPromise : flighthq._internal._Promise<Dynamic>);
@@ -201,7 +201,7 @@ class AssetLibrary {
     previous = ((cast runtime.descriptors : flighthq._internal._Map).get(descriptor.id));
     if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast runtime.entries : flighthq._internal._Map).has(descriptor.id)) : Bool)) : Bool)) {
       if ((cast _Runtime.callValue(AssetLibrary.isEquivalentAssetDescriptor__assetLibrary, cast ([previous, descriptor] : Array<Dynamic>)) : Bool)) { return; }
-      throw _Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)');
+      _Runtime.throwValue(_Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)'));
     }
     if ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(AssetLibrary.removeAssetDescriptorGroups__assetLibrary, cast ([runtime, previous] : Array<Dynamic>)); }
     if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callValue(AssetLibrary.isEquivalentAssetDescriptor__assetLibrary, cast ([previous, descriptor] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { ((cast runtime.freedIds : flighthq._internal._Set).delete_(descriptor.id)); }
@@ -237,7 +237,7 @@ class AssetLibrary {
     for (descriptor in _Runtime.iterable(((cast descriptors : flighthq._internal._Map).values()))) {
       var previous:Dynamic = ((cast library.runtime.descriptors : flighthq._internal._Map).get(descriptor.id));
       if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast library.runtime.entries : flighthq._internal._Map).has(descriptor.id)) : Bool)) : Bool) && (cast !(cast _Runtime.callValue(AssetLibrary.isEquivalentAssetDescriptor__assetLibrary, cast ([previous, descriptor] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        throw _Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)');
+        _Runtime.throwValue(_Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)'));
       }
     }
     for (descriptor in _Runtime.iterable(((cast descriptors : flighthq._internal._Map).values()))) {

@@ -12,7 +12,7 @@ class BitmapFingerprint {
   public static function compareBitmapFingerprints(a:flighthq.types.BitmapFingerprint, b:flighthq.types.BitmapFingerprint):Float {
     var sum:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'gridSize'), _Runtime.field(b, 'gridSize')) : Bool)) {
-      throw _Runtime.error('compareBitmapFingerprints: gridSize mismatch (' + Std.string(_Runtime.field(a, 'gridSize')) + ' vs ' + Std.string(_Runtime.field(b, 'gridSize')) + ')');
+      _Runtime.throwValue(_Runtime.error('compareBitmapFingerprints: gridSize mismatch (' + Std.string(_Runtime.field(a, 'gridSize')) + ' vs ' + Std.string(_Runtime.field(b, 'gridSize')) + ')'));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'cells'), 'length'), 0.0) : Bool)) { return cast 0.0; }
     sum = 0.0;
@@ -33,7 +33,7 @@ class BitmapFingerprint {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast gridSize : Float) < (cast 1.0 : Float)) : Bool)) { throw _Runtime.error('createBitmapFingerprint: gridSize must be >= 1 (got ' + Std.string(gridSize) + ')'); }
+    if ((cast ((cast gridSize : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('createBitmapFingerprint: gridSize must be >= 1 (got ' + Std.string(gridSize) + ')')); }
     cells = new flighthq._internal._UInt8Array(((gridSize * gridSize) * 3.0));
     __destructure0 = source;
     width = _Runtime.field(__destructure0, 'width');

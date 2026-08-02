@@ -51,7 +51,7 @@ class WgpuRenderTexturePool {
   public static function releaseWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, renderTexture:RenderTexture):Void {
     _Runtime.callValue(WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
     if ((cast !(cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).delete_(renderTexture)) : Bool) : Bool)) {
-      throw _Runtime.error('releaseWgpuRenderTexture: texture is not leased from this pool');
+      _Runtime.throwValue(_Runtime.error('releaseWgpuRenderTexture: texture is not leased from this pool'));
     }
     _Runtime.callValue(invalidateWgpuRenderTexture, cast ([state, renderTexture, 'released'] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([renderTexture] : Array<Dynamic>));
@@ -77,7 +77,7 @@ class WgpuRenderTexturePool {
           }
         }
         return cast __returnValue4;
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError5:Dynamic) {
       {
         {
@@ -89,7 +89,7 @@ class WgpuRenderTexturePool {
           }
         }
       }
-      throw __finallyError5;
+      _Runtime.throwValue(__finallyError5);
     }
     {
       {
@@ -119,7 +119,7 @@ class WgpuRenderTexturePool {
   }
 
   public static function assertUsablePool__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
-    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { throw _Runtime.error('WgpuRenderTexturePool has been destroyed'); }
+    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool has been destroyed')); }
     _Runtime.callValue(WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
   }
 
@@ -127,7 +127,7 @@ class WgpuRenderTexturePool {
     if ((cast _Runtime.strictEquals(_Runtime.field(pool, 'device'), null) : Bool)) {
       _Runtime.setField(pool, 'device', _Runtime.field(state, 'device'));
     } else { if ((cast !_Runtime.strictEquals(_Runtime.field(pool, 'device'), _Runtime.field(state, 'device')) : Bool)) {
-      throw _Runtime.error('WgpuRenderTexturePool cannot cross GPU devices');
+      _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool cannot cross GPU devices'));
     } }
   }
 }

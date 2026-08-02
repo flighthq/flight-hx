@@ -12,7 +12,7 @@ class Rounding {
   }
 
   public static function euclideanMod(value:Float, divisor:Float):Float {
-    if ((cast _Runtime.strictEquals(divisor, 0.0) : Bool)) { throw _Runtime.rangeError('euclideanMod: divisor must not be 0'); }
+    if ((cast _Runtime.strictEquals(divisor, 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('euclideanMod: divisor must not be 0')); }
     return cast _Runtime.fmod((_Runtime.fmod(value, divisor) + divisor), divisor);
     return cast null;
   }

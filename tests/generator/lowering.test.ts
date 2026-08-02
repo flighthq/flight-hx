@@ -147,6 +147,40 @@ describe('TypeScript lowering and Haxe emission', () => {
         export function withCleanup(fn: () => number, cleanup: () => void): number {
           try { return fn(); } finally { cleanup(); }
         }
+        export function switchControl(): number {
+          let total = 0;
+          for (let i = 0; i < 3; i++) {
+            switch (i) {
+              case 0:
+                if (i === 0) { total += 1; break; }
+              case 1:
+                continue;
+              default:
+                total += 10;
+                break;
+            }
+            total += 100;
+          }
+          return total;
+        }
+        export function nestedLoopBreak(): number {
+          let total = 0;
+          for (let outer = 0; outer < 2; outer++) {
+            switch (outer) {
+              case 0:
+                for (let inner = 0; inner < 3; inner++) {
+                  total += 1;
+                  if (inner === 0) break;
+                }
+                break;
+              default:
+                total += 10;
+                break;
+            }
+            total += 100;
+          }
+          return total;
+        }
       `,
       ts.ScriptTarget.Latest,
       true,
@@ -157,15 +191,13 @@ describe('TypeScript lowering and Haxe emission', () => {
     const packageDirectory = path.join(fixtureDirectory, 'flighthq');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
-    writeFileSync(
-      path.join(packageDirectory, 'MathFixture.hx'),
-      emitHaxeModule({
-        declarations: lowered.declarations,
-        imports: [],
-        name: 'MathFixture',
-        packageName: '@flighthq/math',
-      }),
-    );
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'MathFixture',
+      packageName: '@flighthq/math',
+    });
+    writeFileSync(path.join(packageDirectory, 'MathFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
@@ -175,6 +207,8 @@ describe('TypeScript lowering and Haxe emission', () => {
             if (clamp(12, 0, 10) != 10) throw 'clamp failed';
             if (quarter(8) != 2) throw 'quarter failed';
             if (sumOdd(6) != 9) throw 'for continue failed';
+            if (switchControl() != 211) throw 'switch control ownership failed';
+            if (nestedLoopBreak() != 211) throw 'nested loop break ownership failed';
             var cleaned = 0;
             if (withCleanup(function() return 7, function() cleaned++) != 7 || cleaned != 1) {
               throw 'finally return failed';
@@ -187,6 +221,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     );
 
     expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('do {');
+    expect(output).toContain('__switchContinue');
+    expect(output).toContain('_Runtime.throwValue(__finallyError');
     expect(() =>
       execFileSync(
         'node',
@@ -909,11 +946,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     );
     expect(output).toContain("case 'MIN': flighthq._internal.backend.WebGl2Backend.MIN;");
     expect(output).toContain(
-      "default: throw 'WebGL2 computed constant is outside the closed GlBlendEquation domain: upstream/packages/render-gl/src/sample.ts';",
+      "default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendEquation domain: upstream/packages/render-gl/src/sample.ts');",
     );
     expect(output).toContain("(switch (_Runtime.field(realization, 'src')) { case 'DST_COLOR':");
     expect(output).toContain(
-      "default: throw 'WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/sample.ts';",
+      "default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/sample.ts');",
     );
     expect(output).not.toContain("case 'ACTIVE_UNIFORMS':");
     expect(output).not.toContain('_Runtime.getIndex(gl,');

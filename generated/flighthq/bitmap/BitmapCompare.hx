@@ -12,7 +12,7 @@ class BitmapCompare {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var hasDiff:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(source.width, other.width) : Bool) || (cast !_Runtime.strictEquals(source.height, other.height) : Bool)) : Bool)) {
-      throw _Runtime.error('compareBitmap: bitmap dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')');
+      _Runtime.throwValue(_Runtime.error('compareBitmap: bitmap dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')'));
     }
     result = _Runtime.callValue(createBitmap, cast ([source.width, source.height] : Array<Dynamic>));
     hasDiff = false;
@@ -44,7 +44,7 @@ class BitmapCompare {
     var mismatchedPixels:Dynamic = cast _Runtime.UNDEFINED;
     var maxChannelDelta:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(source.width, other.width) : Bool) || (cast !_Runtime.strictEquals(source.height, other.height) : Bool)) : Bool)) {
-      throw _Runtime.error('getBitmapMismatch: bitmap dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')');
+      _Runtime.throwValue(_Runtime.error('getBitmapMismatch: bitmap dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')'));
     }
     a = source.data;
     b = other.data;

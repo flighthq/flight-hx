@@ -45,120 +45,122 @@ class MtlParse {
         var args:Dynamic = StringTools.trim(Std.string(_Runtime.slice(raw, (spaceIndex + 1.0), null)));
         {
           var __switchValue = directive;
-          if (__switchValue == 'newmtl') {
-            {
-              (current = cast (_Runtime.callValue(MtlParse.createDefaultObjMaterial__mtlParse, cast ([args] : Array<Dynamic>)) : Dynamic));
-              ((cast materials : flighthq._internal._Map).set(args, current));
-            }
-          }
-          else if (__switchValue == 'Ka') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+          do {
+            if (__switchValue == 'newmtl') {
+              {
+                (current = cast (_Runtime.callValue(MtlParse.createDefaultObjMaterial__mtlParse, cast ([args] : Array<Dynamic>)) : Dynamic));
+                ((cast materials : flighthq._internal._Map).set(args, current));
               }
-              var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.ambient = cast (c : Dynamic)); }
             }
-          }
-          else if (__switchValue == 'Kd') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'Ka') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.ambient = cast (c : Dynamic)); }
               }
-              var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.diffuse = cast (c : Dynamic)); }
             }
-          }
-          else if (__switchValue == 'Ks') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'Kd') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.diffuse = cast (c : Dynamic)); }
               }
-              var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-              if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.specular = cast (c : Dynamic)); }
             }
-          }
-          else if (__switchValue == 'Ns') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'Ks') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.specular = cast (c : Dynamic)); }
               }
-              var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.specularExponent = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
             }
-          }
-          else if (__switchValue == 'd') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'Ns') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.specularExponent = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
               }
-              var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
             }
-          }
-          else if (__switchValue == 'Tr') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'd') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
               }
-              var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast ((1.0 - v) : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
             }
-          }
-          else if (__switchValue == 'illum') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'Tr') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast ((1.0 - v) : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
               }
-              var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
-              if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.illumination = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
             }
-          }
-          else if (__switchValue == 'map_Kd') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'illum') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.illumination = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
               }
-              (current.mapDiffuse = cast (args : Dynamic));
             }
-          }
-          else if (__switchValue == 'map_Ka') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'map_Kd') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapDiffuse = cast (args : Dynamic));
               }
-              (current.mapAmbient = cast (args : Dynamic));
             }
-          }
-          else if (__switchValue == 'map_Ks') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'map_Ka') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapAmbient = cast (args : Dynamic));
               }
-              (current.mapSpecular = cast (args : Dynamic));
             }
-          }
-          else if (__switchValue == 'map_Bump' || __switchValue == 'bump') {
-            {
-              if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
-                break;
+            else if (__switchValue == 'map_Ks') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapSpecular = cast (args : Dynamic));
               }
-              (current.mapBump = cast (args : Dynamic));
             }
-          }
-          else  {
-          }
+            else if (__switchValue == 'map_Bump' || __switchValue == 'bump') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapBump = cast (args : Dynamic));
+              }
+            }
+            else  {
+            }
+          } while (false);
         }
         i++;
       }

@@ -11,7 +11,7 @@ class CreateEasingSamples {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var step:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
-      throw _Runtime.error('createEasingSamples: count must be a finite integer >= 1');
+      _Runtime.throwValue(_Runtime.error('createEasingSamples: count must be a finite integer >= 1'));
     }
     n = HxMath.floor(count);
     result = _Runtime.coalesce(out, function():Dynamic return cast new flighthq._internal._Float32Array(n));

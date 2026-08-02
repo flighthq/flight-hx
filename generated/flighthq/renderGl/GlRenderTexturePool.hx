@@ -51,7 +51,7 @@ class GlRenderTexturePool {
   public static function releaseGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, renderTexture:RenderTexture):Void {
     _Runtime.callValue(GlRenderTexturePool.assertUsablePool__glRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
     if ((cast !(cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).delete_(renderTexture)) : Bool) : Bool)) {
-      throw _Runtime.error('releaseGlRenderTexture: texture is not leased from this pool');
+      _Runtime.throwValue(_Runtime.error('releaseGlRenderTexture: texture is not leased from this pool'));
     }
     _Runtime.callValue(invalidateGlRenderTexture, cast ([state, renderTexture, 'released'] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([renderTexture] : Array<Dynamic>));
@@ -77,7 +77,7 @@ class GlRenderTexturePool {
           }
         }
         return cast __returnValue4;
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError5:Dynamic) {
       {
         {
@@ -89,7 +89,7 @@ class GlRenderTexturePool {
           }
         }
       }
-      throw __finallyError5;
+      _Runtime.throwValue(__finallyError5);
     }
     {
       {
@@ -119,7 +119,7 @@ class GlRenderTexturePool {
   }
 
   public static function assertUsablePool__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {
-    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { throw _Runtime.error('GlRenderTexturePool has been destroyed'); }
+    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { _Runtime.throwValue(_Runtime.error('GlRenderTexturePool has been destroyed')); }
     _Runtime.callValue(GlRenderTexturePool.assertPoolContext__glRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
   }
 
@@ -127,7 +127,7 @@ class GlRenderTexturePool {
     if ((cast _Runtime.strictEquals(_Runtime.field(pool, 'context'), null) : Bool)) {
       _Runtime.setField(pool, 'context', _Runtime.field(state, 'gl'));
     } else { if ((cast !_Runtime.strictEquals(_Runtime.field(pool, 'context'), _Runtime.field(state, 'gl')) : Bool)) {
-      throw _Runtime.error('GlRenderTexturePool cannot cross WebGL contexts');
+      _Runtime.throwValue(_Runtime.error('GlRenderTexturePool cannot cross WebGL contexts'));
     } }
   }
 }

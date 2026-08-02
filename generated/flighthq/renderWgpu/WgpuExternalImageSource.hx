@@ -36,7 +36,7 @@ class WgpuExternalImageSource {
       return cast true;
     } catch (error:Dynamic) {
       if ((cast _Runtime.callValue(WgpuExternalImageSource.isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource, cast ([error] : Array<Dynamic>)) : Bool)) { return cast false; }
-      throw error;
+      _Runtime.throwValue(error);
     }
     return cast null;
   }

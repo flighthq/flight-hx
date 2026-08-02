@@ -28,21 +28,21 @@ class AnimationStateMachine {
     var initialStateIndex:Dynamic = cast _Runtime.UNDEFINED;
     var channels:Dynamic = cast _Runtime.UNDEFINED;
     var sampleWidth:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0) : Bool)) { throw _Runtime.rangeError('AnimationStateMachine requires at least one state.'); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine requires at least one state.')); }
     copiedStates = _Runtime.slice(states, 0, null);
     stateByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) {
         var name:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(copiedStates, index), 'name');
-        if ((cast ((cast stateByName : flighthq._internal._Map).has(name)) : Bool)) { throw _Runtime.typeError('AnimationStateMachine contains duplicate state "' + Std.string(name) + '".'); }
+        if ((cast ((cast stateByName : flighthq._internal._Map).has(name)) : Bool)) { _Runtime.throwValue(_Runtime.typeError('AnimationStateMachine contains duplicate state "' + Std.string(name) + '".')); }
         ((cast stateByName : flighthq._internal._Map).set(name, index));
         index++;
       }
     }
     initialStateIndex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(initialState), 'number') : Bool) ? (cast initialState : Dynamic) : (cast _Runtime.coalesce(((cast stateByName : flighthq._internal._Map).get(initialState)), function():Dynamic return cast _Runtime.field(copiedStates, 'length')) : Dynamic));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([initialStateIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast initialStateIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast initialStateIndex : Float) >= (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) : Bool)) {
-      throw _Runtime.rangeError('AnimationStateMachine initial state "' + Std.string(Std.string(initialState)) + '" does not exist.');
+      _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine initial state "' + Std.string(Std.string(initialState)) + '" does not exist.'));
     }
     channels = _Runtime.callValue(AnimationStateMachine.createAnimationStateMachineChannels__animationStateMachine, cast ([copiedStates] : Array<Dynamic>));
     sampleWidth = 0.0;
@@ -139,7 +139,7 @@ class AnimationStateMachine {
 
   public static function assertCompatibleAnimationStateMachineChannels__animationStateMachine(existing:AnimationChannel, channel:AnimationChannel):Void {
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'components'), _Runtime.field(_Runtime.field(channel, 'track'), 'components')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'quaternion'), _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion')) : Bool)) : Bool)) {
-      throw _Runtime.typeError('AnimationStateMachine target has incompatible tracks across states.');
+      _Runtime.throwValue(_Runtime.typeError('AnimationStateMachine target has incompatible tracks across states.'));
     }
   }
 

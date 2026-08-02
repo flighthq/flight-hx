@@ -21,7 +21,7 @@ class ApplyAnimationClipToSkeleton2D {
     var setupBones:Dynamic = cast _Runtime.UNDEFINED;
     var poseBones:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(setup, pose) : Bool)) {
-      throw _Runtime.error('applyAnimationClipToSkeleton2D: setup and pose must be distinct skeletons — pass a cloneSkeleton2D(setup) as pose');
+      _Runtime.throwValue(_Runtime.error('applyAnimationClipToSkeleton2D: setup and pose must be distinct skeletons — pass a cloneSkeleton2D(setup) as pose'));
     }
     channels = clip.channels;
     setupBones = _Runtime.field(setup, 'bones');

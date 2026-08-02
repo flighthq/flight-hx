@@ -38,10 +38,10 @@ class UnityParse {
     try {
       (raw = cast (_Runtime.jsonParse(json) : Dynamic));
     } catch (e:Dynamic) {
-      throw _Runtime.error('Invalid Unity particle JSON: ' + Std.string(_Runtime.field((cast e : haxe.Exception), 'message')) + '');
+      _Runtime.throwValue(_Runtime.error('Invalid Unity particle JSON: ' + Std.string(_Runtime.field((cast e : haxe.Exception), 'message')) + ''));
     }
     if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) {
-      throw _Runtime.error('Invalid Unity particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + '');
+      _Runtime.throwValue(_Runtime.error('Invalid Unity particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + ''));
     }
     return cast (cast raw : Dynamic);
     return cast null;

@@ -133,7 +133,7 @@ class AnimationLayerStack {
 
   public static function assertCompatibleAnimationLayerChannels__animationLayerStack(existing:AnimationChannel, channel:AnimationChannel):Void {
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'components'), _Runtime.field(_Runtime.field(channel, 'track'), 'components')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'quaternion'), _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion')) : Bool)) : Bool)) {
-      throw _Runtime.typeError('AnimationLayerStack target has incompatible tracks across layers.');
+      _Runtime.throwValue(_Runtime.typeError('AnimationLayerStack target has incompatible tracks across layers.'));
     }
   }
 
@@ -163,10 +163,10 @@ class AnimationLayerStack {
       while ((cast ((cast index : Float) < (cast _Runtime.field(copied, 'length') : Float)) : Bool)) {
         var channelIndex:Dynamic = flighthq._internal._StaticIndex.readArray(copied, index);
         if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast channelCount : Float)) : Bool)) : Bool)) {
-          throw _Runtime.rangeError('AnimationLayer channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.');
+          _Runtime.throwValue(_Runtime.rangeError('AnimationLayer channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
         }
         if ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(copied, (index - 1.0)), channelIndex) : Bool)) : Bool)) {
-          throw _Runtime.typeError('AnimationLayer channel index ' + Std.string(channelIndex) + ' is duplicated.');
+          _Runtime.throwValue(_Runtime.typeError('AnimationLayer channel index ' + Std.string(channelIndex) + ' is duplicated.'));
         }
         index++;
       }

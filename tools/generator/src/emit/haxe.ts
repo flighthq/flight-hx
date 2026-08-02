@@ -113,6 +113,7 @@ let currentModuleValues = new Set<string>();
 let currentDirectFunctions = new Set<string>();
 let currentReturnRequiresValue = false;
 let currentContinueIncrement: IrExpression | undefined;
+let currentSwitchContinue: string | undefined;
 let currentAsyncFunction = false;
 let currentAsyncReturnsNothing = false;
 let currentFinallyStack: IrStatement[] = [];
@@ -601,11 +602,13 @@ function emitPromiseProtectedBody(bodyLines: string[]): string[] {
 function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParameter[]): string[] {
   const previousReturnRequiresValue = currentReturnRequiresValue;
   const previousContinueIncrement = currentContinueIncrement;
+  const previousSwitchContinue = currentSwitchContinue;
   const previousAsyncFunction = currentAsyncFunction;
   const previousAsyncReturnsNothing = currentAsyncReturnsNothing;
   const previousFinallyStack = currentFinallyStack;
   currentReturnRequiresValue = true;
   currentContinueIncrement = undefined;
+  currentSwitchContinue = undefined;
   currentAsyncFunction = true;
   currentAsyncReturnsNothing = false;
   currentFinallyStack = [];
@@ -622,6 +625,7 @@ function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParame
   } finally {
     currentReturnRequiresValue = previousReturnRequiresValue;
     currentContinueIncrement = previousContinueIncrement;
+    currentSwitchContinue = previousSwitchContinue;
     currentAsyncFunction = previousAsyncFunction;
     currentAsyncReturnsNothing = previousAsyncReturnsNothing;
     currentFinallyStack = previousFinallyStack;
@@ -631,11 +635,13 @@ function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParame
 function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter[]): string[] {
   const previousReturnRequiresValue = currentReturnRequiresValue;
   const previousContinueIncrement = currentContinueIncrement;
+  const previousSwitchContinue = currentSwitchContinue;
   const previousAsyncFunction = currentAsyncFunction;
   const previousAsyncReturnsNothing = currentAsyncReturnsNothing;
   const previousFinallyStack = currentFinallyStack;
   currentReturnRequiresValue = true;
   currentContinueIncrement = undefined;
+  currentSwitchContinue = undefined;
   currentAsyncFunction = true;
   currentAsyncReturnsNothing = false;
   currentFinallyStack = [];
@@ -651,6 +657,7 @@ function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter
   } finally {
     currentReturnRequiresValue = previousReturnRequiresValue;
     currentContinueIncrement = previousContinueIncrement;
+    currentSwitchContinue = previousSwitchContinue;
     currentAsyncFunction = previousAsyncFunction;
     currentAsyncReturnsNothing = previousAsyncReturnsNothing;
     currentFinallyStack = previousFinallyStack;
@@ -1374,11 +1381,13 @@ function emitFunctionBody(
 ): string[] {
   const previousReturnRequiresValue = currentReturnRequiresValue;
   const previousContinueIncrement = currentContinueIncrement;
+  const previousSwitchContinue = currentSwitchContinue;
   const previousAsyncFunction = currentAsyncFunction;
   const previousAsyncReturnsNothing = currentAsyncReturnsNothing;
   const previousFinallyStack = currentFinallyStack;
   currentReturnRequiresValue = returns ? !isVoidType(returns) : false;
   currentContinueIncrement = undefined;
+  currentSwitchContinue = undefined;
   currentAsyncFunction = async;
   currentAsyncReturnsNothing = async && returns !== undefined && isPromiseNothingType(returns);
   currentFinallyStack = [];
@@ -1403,6 +1412,7 @@ function emitFunctionBody(
   } finally {
     currentReturnRequiresValue = previousReturnRequiresValue;
     currentContinueIncrement = previousContinueIncrement;
+    currentSwitchContinue = previousSwitchContinue;
     currentAsyncFunction = previousAsyncFunction;
     currentAsyncReturnsNothing = previousAsyncReturnsNothing;
     currentFinallyStack = previousFinallyStack;
@@ -1442,7 +1452,10 @@ function emitStatement(statement: IrStatement): string[] {
     case 'break':
       return ['break;'];
     case 'continue':
-      return currentContinueIncrement ? [`${emitExpression(currentContinueIncrement)};`, 'continue;'] : ['continue;'];
+      return [
+        ...(currentContinueIncrement ? [`${emitExpression(currentContinueIncrement)};`] : []),
+        ...(currentSwitchContinue ? [`${currentSwitchContinue} = true;`, 'break;'] : ['continue;']),
+      ];
     case 'do':
       return [`do ${emitLoopEmbedded(statement.body)} while (${emitTruthiness(statement.condition)});`];
     case 'expression':
@@ -1457,11 +1470,14 @@ function emitStatement(statement: IrStatement): string[] {
       lines.push(...indent([`while (${statement.condition ? emitTruthiness(statement.condition) : 'true'}) {`]));
       const bodyStatements = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
       const previousContinueIncrement = currentContinueIncrement;
+      const previousSwitchContinue = currentSwitchContinue;
       currentContinueIncrement = statement.increment;
+      currentSwitchContinue = undefined;
       try {
         for (const item of bodyStatements) lines.push(...indent(indent(emitStatement(item))));
       } finally {
         currentContinueIncrement = previousContinueIncrement;
+        currentSwitchContinue = previousSwitchContinue;
       }
       if (statement.increment) lines.push(...indent(indent([`${emitExpression(statement.increment)};`])));
       lines.push('  }', '}');
@@ -1490,7 +1506,9 @@ function emitStatement(statement: IrStatement): string[] {
       }
       const body = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
       const previousContinueIncrement = currentContinueIncrement;
+      const previousSwitchContinue = currentSwitchContinue;
       currentContinueIncrement = undefined;
+      currentSwitchContinue = undefined;
       try {
         for (const item of body) {
           const bodyLines = indent(emitStatement(item));
@@ -1498,6 +1516,7 @@ function emitStatement(statement: IrStatement): string[] {
         }
       } finally {
         currentContinueIncrement = previousContinueIncrement;
+        currentSwitchContinue = previousSwitchContinue;
       }
       lines.push(...(statement.async ? ['  }', '}'] : ['}']));
       return lines;
@@ -1508,11 +1527,14 @@ function emitStatement(statement: IrStatement): string[] {
       ];
       const body = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
       const previousContinueIncrement = currentContinueIncrement;
+      const previousSwitchContinue = currentSwitchContinue;
       currentContinueIncrement = undefined;
+      currentSwitchContinue = undefined;
       try {
         for (const item of body) lines.push(...indent(emitStatement(item)));
       } finally {
         currentContinueIncrement = previousContinueIncrement;
+        currentSwitchContinue = previousSwitchContinue;
       }
       lines.push('}');
       return lines;
@@ -1541,7 +1563,6 @@ function emitStatement(statement: IrStatement): string[] {
       ];
     }
     case 'switch': {
-      const lines = ['{', ...indent([`var __switchValue = ${emitExpression(statement.expression)};`])];
       const grouped: Array<{ expressions: IrExpression[]; statements: IrStatement[] }> = [];
       let pending: IrExpression[] = [];
       for (const case_ of statement.cases) {
@@ -1551,21 +1572,49 @@ function emitStatement(statement: IrStatement): string[] {
         grouped.push({ expressions: pending, statements });
         pending = [];
       }
-      grouped.forEach((case_, index) => {
-        const prefix = index === 0 ? '' : 'else ';
-        const condition =
-          case_.expressions.length > 0
-            ? `if (${case_.expressions.map((expression) => `__switchValue == ${emitExpression(expression)}`).join(' || ')})`
-            : '';
-        lines.push(...indent([`${prefix}${condition} {`]));
-        for (const item of case_.statements) lines.push(...indent(indent(emitStatement(item))));
-        lines.push('  }');
-      });
+      const wrapsBreak = grouped.some((case_) => case_.statements.some(statementContainsSwitchBreak));
+      const hasContinue = wrapsBreak && grouped.some((case_) => case_.statements.some(statementContainsSwitchContinue));
+      const continueFlag = hasContinue ? `__switchContinue${String(temporaryIndex++)}` : undefined;
+      const previousSwitchContinue = currentSwitchContinue;
+      const dispatch: string[] = [];
+      currentSwitchContinue = continueFlag ?? previousSwitchContinue;
+      try {
+        grouped.forEach((case_, index) => {
+          const prefix = index === 0 ? '' : 'else ';
+          const condition =
+            case_.expressions.length > 0
+              ? `if (${case_.expressions.map((expression) => `__switchValue == ${emitExpression(expression)}`).join(' || ')})`
+              : '';
+          dispatch.push(`${prefix}${condition} {`);
+          for (const item of case_.statements) dispatch.push(...indent(emitStatement(item)));
+          dispatch.push('}');
+        });
+      } finally {
+        currentSwitchContinue = previousSwitchContinue;
+      }
+      const body = wrapsBreak ? ['do {', ...indent(dispatch), '} while (false);'] : dispatch;
+      const lines = [
+        '{',
+        ...indent([
+          `var __switchValue = ${emitExpression(statement.expression)};`,
+          ...(continueFlag ? [`var ${continueFlag} = false;`] : []),
+          ...body,
+        ]),
+      ];
+      if (continueFlag) {
+        lines.push(
+          ...indent(
+            previousSwitchContinue
+              ? [`if (${continueFlag}) {`, `  ${previousSwitchContinue} = true;`, '  break;', '}']
+              : [`if (${continueFlag}) continue;`],
+          ),
+        );
+      }
       lines.push('}');
       return lines;
     }
     case 'throw':
-      return [`throw ${emitExpression(statement.expression)};`];
+      return [`_Runtime.throwValue(${emitExpression(statement.expression)});`];
     case 'try':
       return emitTryStatement(statement);
     case 'variable':
@@ -1618,11 +1667,14 @@ function emitEmbedded(statement: IrStatement): string {
 
 function emitLoopEmbedded(statement: IrStatement): string {
   const previousContinueIncrement = currentContinueIncrement;
+  const previousSwitchContinue = currentSwitchContinue;
   currentContinueIncrement = undefined;
+  currentSwitchContinue = undefined;
   try {
     return emitEmbedded(statement);
   } finally {
     currentContinueIncrement = previousContinueIncrement;
+    currentSwitchContinue = previousSwitchContinue;
   }
 }
 
@@ -2457,7 +2509,7 @@ function emitTryStatement(statement: Extract<IrStatement, { kind: 'try' }>): str
       ...indent(protectedLines),
       `} catch (${error}:Dynamic) {`,
       ...indent(exceptionalCleanup),
-      `  throw ${error};`,
+      `  _Runtime.throwValue(${error});`,
       '}',
       ...normalCleanup,
     ];
@@ -2470,7 +2522,7 @@ function emitTryWithoutFinally(statement: Extract<IrStatement, { kind: 'try' }>)
   if (statement.catchBody) {
     lines[0] += ` catch (${safeName(statement.catchName ?? '__error')}:Dynamic) ${emitEmbedded(statement.catchBody)}`;
   } else {
-    lines[0] += ' catch (__error:Dynamic) { throw __error; }';
+    lines[0] += ' catch (__error:Dynamic) { _Runtime.throwValue(__error); }';
   }
   return lines;
 }
@@ -2862,6 +2914,71 @@ function stripTrailingSwitchBreak(statements: IrStatement[]): IrStatement[] {
   return [...statements.slice(0, -1), { ...last, statements: stripTrailingSwitchBreak(last.statements) }];
 }
 
+function statementContainsSwitchBreak(statement: IrStatement): boolean {
+  switch (statement.kind) {
+    case 'break':
+      return true;
+    case 'block':
+      return statement.statements.some(statementContainsSwitchBreak);
+    case 'if':
+      return (
+        statementContainsSwitchBreak(statement.consequent) ||
+        Boolean(statement.otherwise && statementContainsSwitchBreak(statement.otherwise))
+      );
+    case 'try':
+      return (
+        statementContainsSwitchBreak(statement.tryBody) ||
+        Boolean(statement.catchBody && statementContainsSwitchBreak(statement.catchBody)) ||
+        Boolean(statement.finallyBody && statementContainsSwitchBreak(statement.finallyBody))
+      );
+    case 'continue':
+    case 'do':
+    case 'expression':
+    case 'for':
+    case 'forIn':
+    case 'forOf':
+    case 'return':
+    case 'switch':
+    case 'throw':
+    case 'variable':
+    case 'while':
+      return false;
+  }
+}
+
+function statementContainsSwitchContinue(statement: IrStatement): boolean {
+  switch (statement.kind) {
+    case 'continue':
+      return true;
+    case 'block':
+      return statement.statements.some(statementContainsSwitchContinue);
+    case 'if':
+      return (
+        statementContainsSwitchContinue(statement.consequent) ||
+        Boolean(statement.otherwise && statementContainsSwitchContinue(statement.otherwise))
+      );
+    case 'switch':
+      return statement.cases.some((case_) => case_.statements.some(statementContainsSwitchContinue));
+    case 'try':
+      return (
+        statementContainsSwitchContinue(statement.tryBody) ||
+        Boolean(statement.catchBody && statementContainsSwitchContinue(statement.catchBody)) ||
+        Boolean(statement.finallyBody && statementContainsSwitchContinue(statement.finallyBody))
+      );
+    case 'break':
+    case 'do':
+    case 'expression':
+    case 'for':
+    case 'forIn':
+    case 'forOf':
+    case 'return':
+    case 'throw':
+    case 'variable':
+    case 'while':
+      return false;
+  }
+}
+
 function typedArrayConstructor(expression: IrExpression): string | undefined {
   const name =
     expression.kind === 'identifier'
@@ -2947,7 +3064,7 @@ function emitWebGl2ComputedConstant(index: IrExpression, domain: IrWebGlComputed
   const cases = domain.values
     .map((name) => `case ${quote(name)}: flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(name)};`)
     .join(' ');
-  return `(switch (${emitExpression(index)}) { ${cases} default: throw ${quote(`WebGL2 computed constant is outside the closed ${domain.name} domain: ${currentSourceIdentity}`)}; })`;
+  return `(switch (${emitExpression(index)}) { ${cases} default: _Runtime.throwValue(${quote(`WebGL2 computed constant is outside the closed ${domain.name} domain: ${currentSourceIdentity}`)}); })`;
 }
 
 function indent(lines: string[]): string[] {

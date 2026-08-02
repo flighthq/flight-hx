@@ -106,12 +106,12 @@ class GlCache {
           flighthq._internal.backend.WebGl2Backend.clear(_Runtime.field(cacheState, 'gl'), flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT);
           _Runtime.callValue(renderGlScene2D, cast ([cacheState, source] : Array<Dynamic>));
         }
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError3:Dynamic) {
       {
         _Runtime.callValue(endGlRenderPass, cast ([cacheState] : Array<Dynamic>));
       }
-      throw __finallyError3;
+      _Runtime.throwValue(__finallyError3);
     }
     {
       _Runtime.callValue(endGlRenderPass, cast ([cacheState] : Array<Dynamic>));

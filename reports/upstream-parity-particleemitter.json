@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-02T20:53:04.012Z",
+  "completedAt": "2026-08-02T21:41:59.743Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 140029,
+      "durationMs": 169536,
       "exitCode": 0,
       "package": "particleemitter",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "particleemitter",
-  "startedAt": "2026-08-02T20:50:43.981Z"
+  "startedAt": "2026-08-02T21:39:10.205Z"
 }

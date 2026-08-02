@@ -409,7 +409,7 @@ class WgpuRenderState {
   public static function getWgpuDeviceRuntime__wgpuRenderState(runtime:WgpuRenderStateRuntime):WgpuDeviceRuntime__wgpuRenderState {
     var deviceRuntime:Dynamic = cast _Runtime.UNDEFINED;
     deviceRuntime = ((cast WgpuRenderState._deviceRuntimeByStateRuntime__wgpuRenderState : flighthq._internal._WeakMap).get(runtime));
-    if ((cast _Runtime.strictEquals(deviceRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { throw _Runtime.error('WgpuRenderState runtime has no device tier'); }
+    if ((cast _Runtime.strictEquals(deviceRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.throwValue(_Runtime.error('WgpuRenderState runtime has no device tier')); }
     return cast deviceRuntime;
     return cast null;
   }

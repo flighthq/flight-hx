@@ -578,9 +578,17 @@ class _Runtime {
 
   public static inline function isError(value:Dynamic):Bool {
     #if js
-    return js.Syntax.code('{0} instanceof Error', value);
+    return js.Syntax.code('({0} instanceof Error)', value);
     #else
     return Std.isOfType(value, haxe.Exception);
+    #end
+  }
+
+  public static function throwValue(value:Dynamic):Dynamic {
+    #if js
+    return js.Syntax.code('(function(value) { throw value; })({0})', value);
+    #else
+    throw value;
     #end
   }
 

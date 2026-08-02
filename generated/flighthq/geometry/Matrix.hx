@@ -27,7 +27,7 @@ class Matrix {
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
       (out.a = cast (source.x : Dynamic));
       (out.b = cast (source.y : Dynamic));
@@ -42,7 +42,7 @@ class Matrix {
 
   public static function copyMatrixColumnToVector3(out:Vector3Like, column:Float, source:MatrixLike):Void {
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Column ' + column) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
       (out.x = cast (source.a : Dynamic));
       (out.y = cast (source.b : Dynamic));
@@ -60,7 +60,7 @@ class Matrix {
 
   public static function copyMatrixRowFromVector3(out:MatrixLike, row:Float, source:Vector3Like):Void {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
       (out.a = cast (source.x : Dynamic));
       (out.c = cast (source.y : Dynamic));
@@ -74,7 +74,7 @@ class Matrix {
 
   public static function copyMatrixRowToVector3(out:Vector3Like, row:Float, source:MatrixLike):Void {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
-      throw _Runtime.rangeError((('Row ' + row) + ' out of bounds (2)'));
+      _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
       (out.x = cast (source.a : Dynamic));
       (out.y = cast (source.c : Dynamic));

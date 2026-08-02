@@ -11,7 +11,7 @@ class GlProgram {
     flighthq._internal.backend.WebGl2Backend.shaderSource(gl, shader, source);
     flighthq._internal.backend.WebGl2Backend.compileShader(gl, shader);
     if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getShaderParameter(gl, shader, flighthq._internal.backend.WebGl2Backend.COMPILE_STATUS)) : Bool)) {
-      throw _Runtime.error('' + Std.string(label) + ' shader compile error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getShaderInfoLog(gl, shader)) + '');
+      _Runtime.throwValue(_Runtime.error('' + Std.string(label) + ' shader compile error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getShaderInfoLog(gl, shader)) + ''));
     }
     return cast shader;
     return cast null;
@@ -36,7 +36,7 @@ class GlProgram {
   public static function linkGlProgram(gl:Dynamic, program:Dynamic, label:Dynamic = 'GL'):Void {
     flighthq._internal.backend.WebGl2Backend.linkProgram(gl, program);
     if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.LINK_STATUS)) : Bool)) {
-      throw _Runtime.error('' + Std.string(label) + ' program link error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getProgramInfoLog(gl, program)) + '');
+      _Runtime.throwValue(_Runtime.error('' + Std.string(label) + ' program link error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getProgramInfoLog(gl, program)) + ''));
     }
   }
 }

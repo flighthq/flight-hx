@@ -52,12 +52,12 @@ class GlRenderTexture {
       try {
         try {
           _Runtime.callValue(clearGlRenderTarget, cast ([state, target] : Array<Dynamic>));
-        } catch (__error:Dynamic) { throw __error; }
+        } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
       } catch (__finallyError0:Dynamic) {
         {
           _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
         }
-        throw __finallyError0;
+        _Runtime.throwValue(__finallyError0);
       }
       {
         _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
@@ -121,22 +121,22 @@ class GlRenderTexture {
           try {
             try {
               _Runtime.callValue(callback, cast ([state] : Array<Dynamic>));
-            } catch (__error:Dynamic) { throw __error; }
+            } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
           } catch (__finallyError2:Dynamic) {
             {
               _Runtime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));
             }
-            throw __finallyError2;
+            _Runtime.throwValue(__finallyError2);
           }
           {
             _Runtime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));
           }
-        } catch (__error:Dynamic) { throw __error; }
+        } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
       } catch (__finallyError3:Dynamic) {
         {
           _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
         }
-        throw __finallyError3;
+        _Runtime.throwValue(__finallyError3);
       }
       {
         _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
@@ -169,7 +169,7 @@ class GlRenderTexture {
           }
         }
         return cast __returnValue4;
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError5:Dynamic) {
       {
         _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
@@ -178,7 +178,7 @@ class GlRenderTexture {
           _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(renderTexture, 'version') + 1.0)), 0));
         }
       }
-      throw __finallyError5;
+      _Runtime.throwValue(__finallyError5);
     }
     {
       _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));

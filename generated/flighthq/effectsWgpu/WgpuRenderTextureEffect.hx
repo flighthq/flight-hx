@@ -17,7 +17,7 @@ class WgpuRenderTextureEffect {
     var operations:Dynamic = cast _Runtime.UNDEFINED;
     var current:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
-      throw _Runtime.error('applyWgpuRenderEffectsToRenderTexture: source, destination, and scratch must be distinct');
+      _Runtime.throwValue(_Runtime.error('applyWgpuRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
     sourceTarget = _Runtime.callValue(getWgpuRenderTextureTarget, cast ([state, source] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }

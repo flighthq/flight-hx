@@ -38,12 +38,12 @@ class DebugTiming {
           _Runtime.callValue(endDebugSpan, cast ([timer] : Array<Dynamic>));
         }
         return cast __returnValue0;
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError1:Dynamic) {
       {
         _Runtime.callValue(endDebugSpan, cast ([timer] : Array<Dynamic>));
       }
-      throw __finallyError1;
+      _Runtime.throwValue(__finallyError1);
     }
     {
       _Runtime.callValue(endDebugSpan, cast ([timer] : Array<Dynamic>));

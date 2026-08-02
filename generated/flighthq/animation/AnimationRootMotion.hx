@@ -14,12 +14,12 @@ class AnimationRootMotion {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var extractor:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast _Runtime.field(clip.channels, 'length') : Float)) : Bool)) : Bool)) {
-      throw _Runtime.rangeError('AnimationRootMotionExtractor channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.');
+      _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
     }
     channel = flighthq._internal._StaticIndex.readArray(clip.channels, channelIndex);
     width = _Runtime.field(_Runtime.field(channel, 'track'), 'components');
     if ((cast ((cast _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion') : Bool) && (cast !_Runtime.strictEquals(width, 4.0) : Bool)) : Bool)) {
-      throw _Runtime.typeError('AnimationRootMotionExtractor quaternion channel must have four components.');
+      _Runtime.throwValue(_Runtime.typeError('AnimationRootMotionExtractor quaternion channel must have four components.'));
     }
     extractor = _Runtime.callValue(createEntity, cast ([{ channel: channel, channelIndex: channelIndex, clip: clip, cycleDelta: new flighthq._internal._Float32Array(width), fromMotion: new flighthq._internal._Float32Array(width), fromSample: new flighthq._internal._Float32Array(width), powerScratch: new flighthq._internal._Float32Array(width), startSample: new flighthq._internal._Float32Array(width), toMotion: new flighthq._internal._Float32Array(width), toSample: new flighthq._internal._Float32Array(width) }] : Array<Dynamic>));
     _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(extractor, 'startSample'), _Runtime.field(channel, 'track'), 0.0] : Array<Dynamic>));
@@ -32,7 +32,7 @@ class AnimationRootMotion {
   public static function extractAnimationRootMotion(out:Dynamic, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
     var components:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startTime] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([endTime] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      throw _Runtime.rangeError('AnimationRootMotionExtractor time range must contain only finite numbers.');
+      _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor time range must contain only finite numbers.'));
     }
     components = _Runtime.field(_Runtime.field(_Runtime.field(extractor, 'channel'), 'track'), 'components');
     if ((cast ((cast _Runtime.field(out, 'length') : Float) < (cast components : Float)) : Bool)) { return cast false; }

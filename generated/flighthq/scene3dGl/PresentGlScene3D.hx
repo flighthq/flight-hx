@@ -19,12 +19,12 @@ class PresentGlScene3D {
     try {
       try {
         _Runtime.callValue(drawGlScene3D, cast ([state, scene, camera, lights] : Array<Dynamic>));
-      } catch (__error:Dynamic) { throw __error; }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError0:Dynamic) {
       {
         _Runtime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));
       }
-      throw __finallyError0;
+      _Runtime.throwValue(__finallyError0);
     }
     {
       _Runtime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));

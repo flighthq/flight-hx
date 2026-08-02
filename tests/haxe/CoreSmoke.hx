@@ -11,6 +11,20 @@ class CoreSmoke {
     StaticLoweringSmoke.run();
     StaticIndexSmoke.run();
     if (quarterForSmoke(8) != 2) throw 'loop lowering failed';
+    if (_Runtime.isError('not an error')) throw 'non-Error identity failed';
+    if (!_Runtime.isError(_Runtime.error('expected'))) throw 'Error identity failed';
+
+    #if js
+    final thrownMarkers:Array<Dynamic> = [{}, 'primitive', _Runtime.error('identity')];
+    for (thrownMarker in thrownMarkers) {
+      final caughtMarker:Dynamic = js.Syntax.code(
+        '(function(throwValue, marker) { try { throwValue(marker); } catch (error) { return error; } })({0}, {1})',
+        _Runtime.throwValue,
+        thrownMarker,
+      );
+      if (caughtMarker != thrownMarker) throw 'raw thrown value lost identity';
+    }
+    #end
 
     final point:Vector2Like = {x: 0.0, y: 0.0};
     final random = createRandomSource(0x1234);

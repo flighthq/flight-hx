@@ -128,10 +128,10 @@ class AnimationBlendTree {
 
   public static function assertCompatibleAnimationBlendTreeChannels__animationBlendTree(existing:AnimationChannel, channel:AnimationChannel):Void {
     if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'components'), _Runtime.field(_Runtime.field(channel, 'track'), 'components')) : Bool)) {
-      throw _Runtime.rangeError('AnimationBlendTree target has different component widths (' + Std.string(_Runtime.field(_Runtime.field(existing, 'track'), 'components')) + ' and ' + Std.string(_Runtime.field(_Runtime.field(channel, 'track'), 'components')) + ').');
+      _Runtime.throwValue(_Runtime.rangeError('AnimationBlendTree target has different component widths (' + Std.string(_Runtime.field(_Runtime.field(existing, 'track'), 'components')) + ' and ' + Std.string(_Runtime.field(_Runtime.field(channel, 'track'), 'components')) + ').'));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'quaternion'), _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion')) : Bool)) {
-      throw _Runtime.typeError('AnimationBlendTree target has incompatible quaternion flags.');
+      _Runtime.throwValue(_Runtime.typeError('AnimationBlendTree target has incompatible quaternion flags.'));
     }
   }
 
@@ -140,7 +140,7 @@ class AnimationBlendTree {
     targets = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (channel in _Runtime.iterable(channels)) {
       if ((cast ((cast targets : flighthq._internal._Set).has(_Runtime.field(channel, 'targetRef'))) : Bool)) {
-        throw _Runtime.typeError('AnimationBlendTree input ' + Std.string(inputIndex) + ' clip contains a duplicate targetRef.');
+        _Runtime.throwValue(_Runtime.typeError('AnimationBlendTree input ' + Std.string(inputIndex) + ' clip contains a duplicate targetRef.'));
       }
       ((cast targets : flighthq._internal._Set).add(_Runtime.field(channel, 'targetRef')));
     }

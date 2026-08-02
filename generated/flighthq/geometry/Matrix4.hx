@@ -159,7 +159,7 @@ class Matrix4 {
         flighthq._internal._StaticIndex.writeFloat32Array(_out, 15.0, _Runtime.field(source, 'w'));
       }
       else  {
-        throw _Runtime.rangeError((('Column ' + column) + ' out of bounds [0, ..., 3]'));
+        _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds [0, ..., 3]')));
       }
     }
   }
@@ -194,7 +194,7 @@ class Matrix4 {
         _Runtime.setField(out, 'w', flighthq._internal._StaticIndex.readFloat32Array(_source, 15.0));
       }
       else  {
-        throw _Runtime.rangeError((('Column ' + column) + ' out of bounds [0, ..., 3]'));
+        _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds [0, ..., 3]')));
       }
     }
   }
@@ -229,7 +229,7 @@ class Matrix4 {
         flighthq._internal._StaticIndex.writeFloat32Array(_out, 15.0, _Runtime.field(source, 'w'));
       }
       else  {
-        throw _Runtime.rangeError((('Row ' + row) + ' out of bounds [0, ..., 3]'));
+        _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds [0, ..., 3]')));
       }
     }
   }
@@ -264,7 +264,7 @@ class Matrix4 {
         _Runtime.setField(out, 'w', flighthq._internal._StaticIndex.readFloat32Array(_source, 15.0));
       }
       else  {
-        throw _Runtime.rangeError((('Row ' + row) + ' out of bounds [0, ..., 3]'));
+        _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds [0, ..., 3]')));
       }
     }
   }
@@ -978,7 +978,7 @@ class Matrix4 {
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var left:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast aspect : Float) > (cast -1e-7 : Float)) : Bool) && (cast ((cast aspect : Float) < (cast 1e-7 : Float)) : Bool)) : Bool)) {
-      throw _Runtime.error('Aspect ratio may not be 0');
+      _Runtime.throwValue(_Runtime.error('Aspect ratio may not be 0'));
     }
     _out = out.m;
     top = (fov * zNear);

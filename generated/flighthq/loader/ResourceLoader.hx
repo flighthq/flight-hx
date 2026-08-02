@@ -254,7 +254,7 @@ class ResourceLoader {
     var handle:ResourceLoadHandle<Dynamic> = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
     if ((cast ((cast _Runtime.field(internal, 'started') : Bool) && (cast !(cast _Runtime.field(internal, 'streaming') : Bool) : Bool)) : Bool)) {
-      throw _Runtime.error('Cannot queue resources after loading has started');
+      _Runtime.throwValue(_Runtime.error('Cannot queue resources after loading has started'));
     }
     descriptor = ((cast _Runtime.strictEquals(_Runtime.typeofValue(item), 'function') : Bool) ? (cast { load: function(_signal:Dynamic) return _Runtime.callValue((cast item : Dynamic), cast ([] : Array<Dynamic>)) } : Dynamic) : (cast item : Dynamic));
     key = _Runtime.coalesce(descriptor.key, function():Dynamic return cast '' + Std.string(ResourceLoader.AUTO_KEY_PREFIX__resourceLoader) + '' + Std.string(_Runtime.incrementField(internal, 'itemCounter', 1, true)) + '');

@@ -653,7 +653,7 @@ class TextInputEditing {
   public static function getInputState__textInputEditing(source:RichText):TextInputState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(state, null) : Bool)) { throw _Runtime.error('text input is not enabled on this RichText; call enableTextInput first'); }
+    if ((cast _Runtime.strictEquals(state, null) : Bool)) { _Runtime.throwValue(_Runtime.error('text input is not enabled on this RichText; call enableTextInput first')); }
     return cast state;
     return cast null;
   }

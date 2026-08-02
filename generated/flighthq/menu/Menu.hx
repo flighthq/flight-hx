@@ -17,7 +17,7 @@ class Menu {
 
   public static function _validateItem__menu(item:MenuItemTemplate, seen:Dynamic):Null<String> {
     if ((cast ((cast seen : flighthq._internal._Set).has(item)) : Bool)) {
-      throw _Runtime.error('validateMenuItemTemplate: cyclic submenu reference detected');
+      _Runtime.throwValue(_Runtime.error('validateMenuItemTemplate: cyclic submenu reference detected'));
     }
     if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
       if ((cast ((cast !_Runtime.strictEquals(item.label, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(item.label, '') : Bool)) : Bool)) {

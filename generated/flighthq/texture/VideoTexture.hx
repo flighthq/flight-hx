@@ -83,7 +83,7 @@ class VideoTexture {
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { throw _Runtime.error('setVideoTextureSource requires a Texture2D'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
     _Runtime.setField(texture, 'source', _Runtime.callValue(VideoTexture.createVideoImageResource__videoTexture, cast ([source] : Array<Dynamic>)));
     _Runtime.setField(texture, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }

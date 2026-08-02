@@ -16,7 +16,7 @@ class RandomRange {
     var hi:Dynamic = cast _Runtime.UNDEFINED;
     lo = HxMath.floor(min);
     hi = HxMath.floor(max);
-    if ((cast ((cast lo : Float) > (cast hi : Float)) : Bool)) { throw _Runtime.rangeError('randomInt: min must be <= max'); }
+    if ((cast ((cast lo : Float) > (cast hi : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomInt: min must be <= max')); }
     return cast (lo + HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * ((hi - lo) + 1.0))));
     return cast null;
   }

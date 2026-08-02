@@ -20,7 +20,7 @@ class GlRenderTextureEffect {
     var sourceTarget:Dynamic = cast _Runtime.UNDEFINED;
     var operations:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
-      throw _Runtime.error('applyGlRenderEffectsToRenderTexture: source, destination, and scratch must be distinct');
+      _Runtime.throwValue(_Runtime.error('applyGlRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
     sourceTarget = _Runtime.callValue(getGlRenderTextureTarget, cast ([state, source] : Array<Dynamic>));
     operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:Dynamic) {
