@@ -4,8 +4,10 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Scene2DDocument.Scene2DAssetReference;
 import flighthq.types.Scene2DDocument.Scene2DContentReference;
 import flighthq.types.Scene2DDocument.Scene2DContentReferenceKind;
+import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 
 typedef Scene2DAssetContentLoader = Dynamic;
 

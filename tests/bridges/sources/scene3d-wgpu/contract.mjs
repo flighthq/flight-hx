@@ -2,3 +2,47 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './blinnPhongWgpuMeshMaterialRenderer.mjs';
+export * from './customShaderWgpuMeshMaterialRenderer.mjs';
+export * from './depthWgpuMeshMaterialRenderer.mjs';
+export * from './drawWgpuScene3D.mjs';
+export * from './emissiveWgpuMeshMaterialRenderer.mjs';
+export * from './enableWgpuScene3DCustomShaderGuards.mjs';
+export * from './enableWgpuScene3DForwardLightSelectionGuards.mjs';
+export * from './explainWgpuScene3DForwardLightSelection.mjs';
+export * from './lambertWgpuMeshMaterialRenderer.mjs';
+export * from './matcapWgpuMeshMaterialRenderer.mjs';
+export * from './normalWgpuMeshMaterialRenderer.mjs';
+export * from './phongWgpuMeshMaterialRenderer.mjs';
+export * from './prepareWgpuScene3DForwardLights.mjs';
+export * from './registerWgpuStandardPbrMaterial.mjs';
+export * from './shadedWgpuMeshMaterialRenderer.mjs';
+export * from './specularGlossinessPbrWgpuMeshMaterialRenderer.mjs';
+export * from './standardPbrWgpuMeshMaterialRenderer.mjs';
+export * from './toonWgpuMeshMaterialRenderer.mjs';
+export * from './unlitWgpuMeshMaterialRenderer.mjs';
+export * from './vertexColorWgpuMeshMaterialRenderer.mjs';
+export * from './wgpuClassicPrelude.mjs';
+export * from './wgpuDebugPrelude.mjs';
+export * from './wgpuEnvironmentCube.mjs';
+export * from './wgpuEnvironmentIblBake.mjs';
+export * from './wgpuEnvironmentSkybox.mjs';
+export * from './wgpuMatcapPrelude.mjs';
+export * from './wgpuMeshMaterialRegistry.mjs';
+export * from './wgpuMeshPipeline.mjs';
+export * from './wgpuMeshUpload.mjs';
+export * from './wgpuParticleEmitter3D.mjs';
+export * from './wgpuPbrPipelineCache.mjs';
+export * from './wgpuPbrPrelude.mjs';
+export * from './wgpuScene3DRuntime.mjs';
+export * from './wgpuScene3DTime.mjs';
+export * from './wgpuShadedModifierSnippet.mjs';
+export * from './wgpuShadedPrelude.mjs';
+export * from './wgpuShadowMap.mjs';
+export * from './wgpuSkinPalette.mjs';
+export * from './wgpuToonPrelude.mjs';
+export * from './wgpuUnlitPrelude.mjs';
+export * from './wgpuWireframePrelude.mjs';
+export * from './wgpuWireframeUpload.mjs';
+export * from './wireframeWgpuMeshMaterialRenderer.mjs';

@@ -379,7 +379,7 @@ function verifyTypedStructEmissionCoverage(modules: IrModule[], registry: TypedS
   }
 }
 
-function buildSourceModules(packageName: string, source: LoweredSource, workspaceDirectory: string): IrModule[] {
+export function buildSourceModules(packageName: string, source: LoweredSource, workspaceDirectory: string): IrModule[] {
   const relativeSource = path.relative(workspaceDirectory, source.file).split(path.sep).join('/');
   const haxePackage = sourcePathToHaxePackage(packageName, relativeSource);
   const name = sourcePathToImplementationModule(relativeSource);
@@ -396,16 +396,24 @@ function buildSourceModules(packageName: string, source: LoweredSource, workspac
   if (!sourcePathToModule(relativeSource)) {
     throw new Error(`Hidden implementation module has a conflicting main type: ${relativeSource}`);
   }
+  const valuesModule: IrModule = {
+    declarations: valueDeclarations,
+    haxePackage: `${packageNameToHaxePackage(packageName)}._internal`,
+    imports: [],
+    name: `_${name}Values`,
+    packageName,
+    source: relativeSource,
+  };
   return [
-    { declarations: typeDeclarations, haxePackage, imports: [], name, packageName, source: relativeSource },
     {
-      declarations: valueDeclarations,
-      haxePackage: `${packageNameToHaxePackage(packageName)}._internal`,
-      imports: [],
-      name: `_${name}Values`,
+      declarations: typeDeclarations,
+      haxePackage,
+      imports: valueDeclarations.map((declaration) => `${modulePath(valuesModule)}.${declaration.name}`),
+      name,
       packageName,
       source: relativeSource,
     },
+    valuesModule,
   ];
 }
 
@@ -1490,8 +1498,7 @@ function emitJavaScriptSourceBridge(
     }
   }
   for (const statement of source.statements) {
-    if (!ts.isExportDeclaration(statement) || !statement.exportClause || !ts.isNamedExports(statement.exportClause))
-      continue;
+    if (!ts.isExportDeclaration(statement) || statement.isTypeOnly) continue;
     const sourceSpecifier =
       statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)
         ? statement.moduleSpecifier.text
@@ -1501,6 +1508,11 @@ function emitJavaScriptSourceBridge(
         ? `./${path.basename(sourceSpecifier.replace(/\.m?js$/u, ''))}.mjs`
         : sourceSpecifier
       : undefined;
+    if (!statement.exportClause) {
+      if (bridgeSpecifier) reexports.push(`export * from '${bridgeSpecifier}';`);
+      continue;
+    }
+    if (!ts.isNamedExports(statement.exportClause)) continue;
     for (const element of statement.exportClause.elements) {
       if (element.isTypeOnly) continue;
       const localName = element.propertyName?.text ?? element.name.text;

@@ -5,4 +5,5 @@ const api = compiled.flighthq.textureFormats.ParseKtx2;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getKtx2ParseFailureReason = api.getKtx2ParseFailureReason;
 export const parseKtx2 = api.parseKtx2;

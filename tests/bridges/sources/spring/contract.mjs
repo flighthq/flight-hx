@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './spring.mjs';
+export * from './spring2D.mjs';
+export * from './spring3D.mjs';
+export * from './springConfig.mjs';

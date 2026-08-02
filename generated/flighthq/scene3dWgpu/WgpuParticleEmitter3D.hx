@@ -8,10 +8,12 @@ import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareScene3DRender;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuSampler;
+import flighthq.renderWgpu.WgpuShader.getWgpuBlendState;
 import flighthq.renderWgpu.WgpuTextureResolver.resolveWgpuTexture;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
+import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
 import flighthq.types.Node.NodeAny;
@@ -22,6 +24,7 @@ import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types.WgpuRenderState;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
 typedef WgpuParticle3DInstanceBuffer__wgpuParticleEmitter3D = { var buffer:Dynamic; var capacity:Float; };
@@ -42,30 +45,21 @@ class WgpuParticleEmitter3D {
   public static final PARTICLE_3D_WGSL__wgpuParticleEmitter3D:Dynamic = '\noverride HAS_TEXTURE : f32 = 0.0;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraRight : vec4f,\n  cameraUp : vec4f,\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var particleTexture : texture_2d<f32>;\n@group(1) @binding(1) var particleSampler : sampler;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) color : vec4f,\n};\n\n@vertex fn vs_main(\n  @location(0) corner : vec2f,\n  @location(1) pos : vec3f,\n  @location(2) cosScale : f32,\n  @location(3) sinScale : f32,\n  @location(4) color : vec4f,\n  @location(5) uvRect : vec4f,\n  @location(6) size : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  let lx = (corner.x - 0.5) * size.x;\n  let ly = (corner.y - 0.5) * size.y;\n  let rx = cosScale * lx - sinScale * ly;\n  let ry = sinScale * lx + cosScale * ly;\n  let worldPos = pos + frame.cameraRight.xyz * rx + frame.cameraUp.xyz * ry;\n  out.clipPosition = frame.viewProjection * vec4f(worldPos, 1.0);\n  out.uv = mix(uvRect.xy, uvRect.zw, corner);\n  out.color = color;\n  return out;\n}\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  var rgba : vec4f;\n  if (HAS_TEXTURE > 0.5) {\n    let tex = textureSample(particleTexture, particleSampler, in.uv);\n    rgba = vec4f(tex.rgb * in.color.rgb, tex.a) * in.color.a;\n  } else {\n    rgba = vec4f(in.color.rgb * in.color.a, in.color.a);\n  }\n  if (rgba.a <= 0.0) { discard; }\n  return rgba;\n}\n';
 
   public static function wgpuParticleBlendState__wgpuParticleEmitter3D(mode:ParticleBlendMode):Dynamic {
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var component:Dynamic = cast _Runtime.UNDEFINED;
     {
       var __switchValue = mode;
       if (__switchValue == 'add') {
-        (src = cast ('one' : Dynamic));
-        (dst = cast ('one' : Dynamic));
+        return cast _Runtime.callValue(getWgpuBlendState, cast ([BlendModeValue.Add] : Array<Dynamic>));
       }
       else if (__switchValue == 'multiply') {
-        (src = cast ('dst' : Dynamic));
-        (dst = cast ('one-minus-src-alpha' : Dynamic));
+        return cast _Runtime.callValue(getWgpuBlendState, cast ([BlendModeValue.Multiply] : Array<Dynamic>));
       }
       else if (__switchValue == 'screen') {
-        (src = cast ('one' : Dynamic));
-        (dst = cast ('one-minus-src' : Dynamic));
+        return cast _Runtime.callValue(getWgpuBlendState, cast ([BlendModeValue.Screen] : Array<Dynamic>));
       }
       else  {
-        (src = cast ('one' : Dynamic));
-        (dst = cast ('one-minus-src-alpha' : Dynamic));
+        return cast _Runtime.callValue(getWgpuBlendState, cast ([BlendModeValue.Normal] : Array<Dynamic>));
       }
     }
-    component = { operation: 'add', srcFactor: src, dstFactor: dst };
-    return cast { color: component, alpha: component };
     return cast null;
   }
 
@@ -263,7 +257,7 @@ class WgpuParticleEmitter3D {
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([instanceBuffer, 0.0, instanceData, 0.0, (drawCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D)] : Array<Dynamic>));
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     textureView = _Runtime.coalesce(_Runtime.optionalField(textureEntry, 'view'), function():Dynamic return cast _Runtime.callValue(WgpuParticleEmitter3D.ensureDummyTextureView__wgpuParticleEmitter3D, cast ([state] : Array<Dynamic>)));
-    textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'textureLayout'), entries: cast ([{ binding: 0.0, resource: textureView }, { binding: 1.0, resource: ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) ? (cast _Runtime.callValue(getWgpuSampler, cast ([state, ((cast StringTools.startsWith(_Runtime.field(atlasTexture, 'sampler').magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)), _Runtime.field(atlasTexture, 'sampler').wrapU, _Runtime.field(atlasTexture, 'sampler').wrapV, ((cast _Runtime.field(atlasTexture, 'sampler').mipmaps : Bool) ? (cast ((cast StringTools.endsWith(Std.string(_Runtime.field(atlasTexture, 'sampler').minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), _Runtime.field(atlasTexture, 'sampler').anisotropy] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(runtime, 'linearSampler') : Dynamic)) }] : Array<Dynamic>) }] : Array<Dynamic>));
+    textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'textureLayout'), entries: cast ([{ binding: 0.0, resource: textureView }, { binding: 1.0, resource: ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) ? (cast _Runtime.callValue(getWgpuSampler, cast ([state, ((cast StringTools.startsWith(_Runtime.field(atlasTexture, 'sampler').minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)), ((cast StringTools.startsWith(_Runtime.field(atlasTexture, 'sampler').magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)), _Runtime.field(atlasTexture, 'sampler').wrapU, _Runtime.field(atlasTexture, 'sampler').wrapV, ((cast ((cast _Runtime.field(atlasTexture, 'sampler').mipmaps : Bool) && (cast _Runtime.includes(_Runtime.field(atlasTexture, 'sampler').minFilter, 'mipmap') : Bool)) : Bool) ? (cast ((cast StringTools.endsWith(Std.string(_Runtime.field(atlasTexture, 'sampler').minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), _Runtime.field(atlasTexture, 'sampler').anisotropy] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(runtime, 'linearSampler') : Dynamic)) }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = _Runtime.callValue(WgpuParticleEmitter3D.ensureParticle3DPipeline__wgpuParticleEmitter3D, cast ([state, resources, _Runtime.field(emitter, 'blendMode'), hasAtlas] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(resources, 'frameBindGroup')] : Array<Dynamic>));

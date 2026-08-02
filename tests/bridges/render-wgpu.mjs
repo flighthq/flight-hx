@@ -37,5 +37,6 @@ export const renderIntoWgpuRenderTexture = compiled.flighthq.renderWgpu.RenderWg
 export const renderWgpuBackground = compiled.flighthq.renderWgpu.RenderWgpu.renderWgpuBackground;
 export const resolveWgpuSmoothingBindGroup = compiled.flighthq.renderWgpu.RenderWgpu.resolveWgpuSmoothingBindGroup;
 export const resolveWgpuTexture = compiled.flighthq.renderWgpu.RenderWgpu.resolveWgpuTexture;
+export const setWgpuRenderTransform2D = compiled.flighthq.renderWgpu.RenderWgpu.setWgpuRenderTransform2D;
 export const submitWgpuRenderPass = compiled.flighthq.renderWgpu.RenderWgpu.submitWgpuRenderPass;
 export const withWgpuRenderTextures = compiled.flighthq.renderWgpu.RenderWgpu.withWgpuRenderTextures;

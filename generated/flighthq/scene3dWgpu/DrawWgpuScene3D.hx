@@ -15,6 +15,7 @@ import flighthq.scene3d.SceneNodeAppearance.getNode3DWorldAlpha;
 import flighthq.scene3dWgpu.WgpuMeshMaterialRegistry.resolveWgpuMeshMaterialRenderer;
 import flighthq.scene3dWgpu.WgpuParticleEmitter3D.drawWgpuScene3DParticleEmitter3Ds;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
+import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
@@ -34,6 +35,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DForwardLightList;
 import flighthq.types.WgpuScene3DRuntime.WgpuScene3DDrawEntry;
 import flighthq.types.WgpuSkinningAdapter;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
@@ -107,6 +109,7 @@ class DrawWgpuScene3D {
       _Runtime.callValue(DrawWgpuScene3D.drawEntries__drawWgpuScene3D, cast ([state, blendedDrawList, camera, true] : Array<Dynamic>));
     }
     _Runtime.callValue(drawWgpuScene3DParticleEmitter3Ds, cast ([state, scene, camera, lights] : Array<Dynamic>));
+    _Runtime.setField(runtime, 'activeBlendMode', null);
     _Runtime.setField(runtime, 'activeBlendedRun', false);
     _Runtime.setField(runtime, 'activeColorAdjustmentRun', false);
     _Runtime.setField(runtime, 'activeColorMatrixRun', false);
@@ -138,6 +141,7 @@ class DrawWgpuScene3D {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(entries, 'length') : Float)) : Bool)) {
         var entry:Dynamic = (cast flighthq._internal._StaticIndex.readArray(entries, i) : DrawEntry__drawWgpuScene3D);
+        _Runtime.setField(runtime, 'activeBlendMode', ((cast blended : Bool) ? (cast _Runtime.callValue(DrawWgpuScene3D.getMaterialBlendMode__drawWgpuScene3D, cast ([_Runtime.field(entry, 'material')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)));
         var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawWgpuScene3D.scratchNormalMatrix__drawWgpuScene3D, worldMatrix] : Array<Dynamic>));
         var skinned:Dynamic = _Runtime.callValue(isWgpuMeshGpuSkinned, cast ([state, _Runtime.field(entry, 'mesh')] : Array<Dynamic>));
@@ -171,6 +175,13 @@ class DrawWgpuScene3D {
 
   public static function isBlendedMaterial__drawWgpuScene3D(material:Material):Bool {
     return cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend');
+    return cast null;
+  }
+
+  public static function getMaterialBlendMode__drawWgpuScene3D(material:Material):BlendMode {
+    var surface:Dynamic = cast _Runtime.UNDEFINED;
+    surface = (cast material : SurfaceMaterial);
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'blend') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(surface, 'blendMode')), 'string') : Bool)) : Bool) ? (cast _Runtime.field(surface, 'blendMode') : Dynamic) : (cast BlendModeValue.Normal : Dynamic));
     return cast null;
   }
 

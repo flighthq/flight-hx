@@ -17,7 +17,6 @@ class CreateShadedMaterial {
     material = (cast _Runtime.callValue(createEntity, cast ([{ kind: ShadedMaterialKind }] : Array<Dynamic>)) : ShadedMaterial);
     _Runtime.setField(material, 'alphaCutoff', _Runtime.coalesce(_Runtime.optionalField(options, 'alphaCutoff'), function():Dynamic return cast 0.5));
     _Runtime.setField(material, 'alphaMode', _Runtime.coalesce(_Runtime.optionalField(options, 'alphaMode'), function():Dynamic return cast 'opaque'));
-    _Runtime.setField(material, 'alphaType', _Runtime.coalesce(_Runtime.optionalField(options, 'alphaType'), function():Dynamic return cast 'straight'));
     _Runtime.setField(material, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(options, 'blendMode'), function():Dynamic return cast BlendModeValue.Normal));
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(options, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(options, 'diffuseMap'), function():Dynamic return cast null));

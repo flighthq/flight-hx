@@ -8,4 +8,5 @@ __syncDependencies();
 export const clearCanvasTarget = api.clearCanvasTarget;
 export const compositeCanvasImage = api.compositeCanvasImage;
 export const compositeCanvasSourceMode = api.compositeCanvasSourceMode;
+export const drawCanvasInvertedTintedAlphaMask = api.drawCanvasInvertedTintedAlphaMask;
 export const drawCanvasTintedAlphaMask = api.drawCanvasTintedAlphaMask;

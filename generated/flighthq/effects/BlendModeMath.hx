@@ -69,6 +69,9 @@ class BlendModeMath {
           return cast ((cast ((cast cs : Float) <= (cast 0.5 : Float)) : Bool) ? (cast (cb - (((1.0 - (2.0 * cs)) * cb) * (1.0 - cb))) : Dynamic) : (cast (cb + (((2.0 * cs) - 1.0) * (d - cb))) : Dynamic));
         }
       }
+      else if (__switchValue == AdvancedBlendModeValue.Darken) {
+        return cast HxMath.min(cb, cs);
+      }
       else if (__switchValue == AdvancedBlendModeValue.Difference) {
         return cast HxMath.abs((cb - cs));
       }
@@ -79,6 +82,9 @@ class BlendModeMath {
         if ((cast ((cast cb : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
         if ((cast ((cast cs : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
         return cast HxMath.min(1.0, (cb / (1.0 - cs)));
+      }
+      else if (__switchValue == AdvancedBlendModeValue.Lighten) {
+        return cast HxMath.max(cb, cs);
       }
       else if (__switchValue == AdvancedBlendModeValue.ColorBurn) {
         if ((cast ((cast cb : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }

@@ -3,5 +3,10 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindAseprite;
+import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindCocosPlist;
+import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindLibgdxAtlas;
+import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindStarling;
+import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindTexturePacker;
 
 typedef TextureAtlasFormatKind = String;

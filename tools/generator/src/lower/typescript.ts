@@ -829,6 +829,8 @@ class UnsupportedSyntaxError extends Error {}
 function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
   if (!node.name) throw new Error('Expected named class');
   const constructor = node.members.find(ts.isConstructorDeclaration);
+  const parameterProperties =
+    constructor?.parameters.filter((parameter) => ts.isParameterPropertyDeclaration(parameter, constructor)) ?? [];
   const fields = node.members.filter(ts.isPropertyDeclaration).map((field) => {
     return {
       initializer: field.initializer ? lowerExpression(field.initializer, context) : undefined,
@@ -839,6 +841,19 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
       type: field.type ? lowerType(field.type, context) : { kind: 'dynamic' as const },
     };
   });
+  for (const parameter of parameterProperties) {
+    if (!ts.isIdentifier(parameter.name)) unsupported(parameter.name, context, 'binding pattern parameter property');
+    fields.push({
+      initializer: undefined,
+      mutable: !hasModifier(parameter, ts.SyntaxKind.ReadonlyKeyword),
+      name: parameter.name.text,
+      public:
+        !hasModifier(parameter, ts.SyntaxKind.PrivateKeyword) &&
+        !hasModifier(parameter, ts.SyntaxKind.ProtectedKeyword),
+      static: false,
+      type: parameter.type ? lowerType(parameter.type, context) : { kind: 'dynamic' as const },
+    });
+  }
   const heritage = node.heritageClauses?.find((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)?.types.at(0);
   const extendsType = heritage ? lowerExpressionWithTypeArguments(heritage, context) : undefined;
   if (extendsType?.kind === 'named' && extendsType.name === 'Error') {
@@ -853,11 +868,41 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
     });
   }
   const loweredConstructor = constructor ? lowerParameterList(constructor.parameters, context) : undefined;
+  const parameterPropertyInitializers: IrStatement[] = parameterProperties.map((parameter) => {
+    if (!ts.isIdentifier(parameter.name)) unsupported(parameter.name, context, 'binding pattern parameter property');
+    return {
+      expression: {
+        kind: 'assignment',
+        left: {
+          kind: 'property',
+          name: parameter.name.text,
+          object: { kind: 'identifier', name: 'this' },
+        },
+        operator: '=',
+        right: { kind: 'identifier', name: parameter.name.text },
+      },
+      kind: 'expression',
+    };
+  });
+  const constructorStatements =
+    constructor?.body?.statements.map((statement) => lowerStatement(statement, context)) ?? [];
+  const superIndex = constructor?.body?.statements.findIndex(
+    (statement) =>
+      ts.isExpressionStatement(statement) &&
+      ts.isCallExpression(statement.expression) &&
+      statement.expression.expression.kind === ts.SyntaxKind.SuperKeyword,
+  );
+  const constructorBody =
+    extendsType && superIndex !== undefined && superIndex >= 0
+      ? [
+          ...(loweredConstructor?.prefix ?? []),
+          ...constructorStatements.slice(0, superIndex + 1),
+          ...parameterPropertyInitializers,
+          ...constructorStatements.slice(superIndex + 1),
+        ]
+      : [...(loweredConstructor?.prefix ?? []), ...parameterPropertyInitializers, ...constructorStatements];
   return {
-    constructorBody: [
-      ...(loweredConstructor?.prefix ?? []),
-      ...(constructor?.body?.statements.map((statement) => lowerStatement(statement, context)) ?? []),
-    ],
+    constructorBody,
     constructorParameters: loweredConstructor?.parameters ?? [],
     exported: hasModifier(node, ts.SyntaxKind.ExportKeyword),
     extends: extendsType,

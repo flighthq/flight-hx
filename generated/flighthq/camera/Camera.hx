@@ -51,6 +51,19 @@ class Camera {
 
   public static final __scratchViewProjection__camera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
+  public static function applyCamera3DProjectionJitter__camera(out:Matrix4Like, x:Float, y:Float):Void {
+    var m:Dynamic = cast _Runtime.UNDEFINED;
+    m = out.m;
+    ({ var __indexedObject0:Dynamic = m; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 3.0)))); });
+    ({ var __indexedObject2:Dynamic = m; var __indexedKey3:Dynamic = 4.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 7.0)))); });
+    ({ var __indexedObject4:Dynamic = m; var __indexedKey5:Dynamic = 8.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 11.0)))); });
+    ({ var __indexedObject6:Dynamic = m; var __indexedKey7:Dynamic = 12.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 15.0)))); });
+    ({ var __indexedObject8:Dynamic = m; var __indexedKey9:Dynamic = 1.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 3.0)))); });
+    ({ var __indexedObject10:Dynamic = m; var __indexedKey11:Dynamic = 5.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject10, __indexedKey11, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject10, __indexedKey11) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 7.0)))); });
+    ({ var __indexedObject12:Dynamic = m; var __indexedKey13:Dynamic = 9.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject12, __indexedKey13, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject12, __indexedKey13) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 11.0)))); });
+    ({ var __indexedObject14:Dynamic = m; var __indexedKey15:Dynamic = 13.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject14, __indexedKey15, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject14, __indexedKey15) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 15.0)))); });
+  }
+
   public static function configureDirectionalShadowCamera3D(camera:Camera3D, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     Facade_Camera_flighthq_camera_ShadowCamera.configureDirectionalShadowCamera3D(camera, lightDirection, sceneBounds);
   }
@@ -139,6 +152,7 @@ class Camera {
 
   public static function getCamera3DViewProjectionMatrix4(out:Matrix4Like, camera:Camera3D, aspect:Float):Void {
     _Runtime.callValue(setProjectionMatrix4, cast ([Camera.__scratchProjection__camera, camera.projection, aspect, camera.near, camera.far] : Array<Dynamic>));
+    _Runtime.callValue(Camera.applyCamera3DProjectionJitter__camera, cast ([Camera.__scratchProjection__camera, camera.jitter.x, camera.jitter.y] : Array<Dynamic>));
     _Runtime.callValue(multiplyMatrix4, cast ([out, Camera.__scratchProjection__camera, camera.view] : Array<Dynamic>));
   }
 
@@ -220,9 +234,7 @@ class Camera {
   public static function updateCamera3DInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
     var ok:Dynamic = cast _Runtime.UNDEFINED;
     ok = _Runtime.callValue(getCamera3DInverseViewProjectionMatrix4, cast ([Camera.__scratchInverse__camera, camera, aspect] : Array<Dynamic>));
-    if ((cast ok : Bool)) {
-      _Runtime.callProperty(camera.inverseViewProjection.m, 'set', cast ([Camera.__scratchInverse__camera.m] : Array<Dynamic>));
-    }
+    if ((cast ok : Bool)) { _Runtime.callProperty(camera.inverseViewProjection.m, 'set', cast ([Camera.__scratchInverse__camera.m] : Array<Dynamic>)); }
     return cast ok;
     return cast null;
   }

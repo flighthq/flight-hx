@@ -2,3 +2,11 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './colorTween.mjs';
+export * from './timer.mjs';
+export * from './tween.mjs';
+export * from './tweenManager.mjs';
+export * from './tweenProgress.mjs';
+export * from './tweenStagger.mjs';
+export * from './updateTweens.mjs';

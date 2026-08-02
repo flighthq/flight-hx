@@ -17,8 +17,13 @@ import flighthq.collision.ShapeCollision.testPolygonPolygonCollision;
 import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Collision.CollisionShapeKind;
+import flighthq.types.Collision.CollisionTestGuard;
 
 class TestCollision {
+  public static function setCollisionTestGuard(guard:Null<CollisionTestGuard>):Void {
+    (TestCollision.collisionTestGuard__testCollision = cast (guard : Dynamic));
+  }
+
   public static function testCollision(a:CollisionShape, b:CollisionShape, out:CollisionManifold):Bool {
     var rankA:Dynamic = cast _Runtime.UNDEFINED;
     var rankB:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,6 +31,7 @@ class TestCollision {
     var lo:Dynamic = cast _Runtime.UNDEFINED;
     var hi:Dynamic = cast _Runtime.UNDEFINED;
     var overlapping:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { _Runtime.callValue(TestCollision.collisionTestGuard__testCollision, cast ([a, b] : Array<Dynamic>)); }
     rankA = _Runtime.callValue(TestCollision.shapeKindRank__testCollision, cast ([_Runtime.field(a, 'kind')] : Array<Dynamic>));
     rankB = _Runtime.callValue(TestCollision.shapeKindRank__testCollision, cast ([_Runtime.field(b, 'kind')] : Array<Dynamic>));
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
@@ -115,4 +121,6 @@ class TestCollision {
     }
     return cast null;
   }
+
+  public static var collisionTestGuard__testCollision:Null<CollisionTestGuard> = _Runtime.explicitNull();
 }

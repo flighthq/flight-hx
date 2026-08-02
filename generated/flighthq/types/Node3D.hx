@@ -9,6 +9,8 @@ import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraitsKey;
+import flighthq.types._internal._Node3DValues.Node3DKind;
+import flighthq.types._internal._Node3DValues.Node3DTraitsKey;
 
 typedef Node3DTraits = { var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
 

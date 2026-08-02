@@ -4,6 +4,7 @@ package flighthq.binpack;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.intersectsRectangle;
+import flighthq.types.BinPack.BinPackHeuristic;
 import flighthq.types.BinPack.BinPackOptions;
 import flighthq.types.BinPack.PackResult;
 import flighthq.types.BinPack.PackableRectangle;
@@ -15,15 +16,31 @@ typedef FreeRectangle__packRectangles = { var x:Float; var y:Float; var width:Fl
 typedef Placement__packRectangles = { var x:Float; var y:Float; var footprintWidth:Float; var footprintHeight:Float; var rotated:Bool; };
 
 class PackRectangles {
+  public static function getPackResultOccupancy(result:PackResult):Float {
+    var area:Dynamic = cast _Runtime.UNDEFINED;
+    var placed:Dynamic = cast _Runtime.UNDEFINED;
+    area = (_Runtime.field(result, 'width') * _Runtime.field(result, 'height'));
+    if ((cast ((cast area : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
+    placed = 0.0;
+    for (placement in _Runtime.iterable(_Runtime.field(result, 'placements'))) {
+      (placed = cast ((placed + (_Runtime.field(placement, 'width') * _Runtime.field(placement, 'height'))) : Dynamic));
+    }
+    return cast (placed / area);
+    return cast null;
+  }
+
   public static function packRectangles(rects:Array<PackableRectangle>, ?options:BinPackOptions):PackResult {
     var padding:Dynamic = cast _Runtime.UNDEFINED;
     var border:Dynamic = cast _Runtime.UNDEFINED;
     var allowRotation:Dynamic = cast _Runtime.UNDEFINED;
+    var heuristic:Dynamic = cast _Runtime.UNDEFINED;
     var growable:Dynamic = cast _Runtime.UNDEFINED;
     var powerOfTwo:Dynamic = cast _Runtime.UNDEFINED;
     var square:Dynamic = cast _Runtime.UNDEFINED;
     var maxWidth:Dynamic = cast _Runtime.UNDEFINED;
     var maxHeight:Dynamic = cast _Runtime.UNDEFINED;
+    var degenerate:Array<RectangleId> = cast _Runtime.UNDEFINED;
+    var placeable:Array<PackableRectangle> = cast _Runtime.UNDEFINED;
     var sorted:Dynamic = cast _Runtime.UNDEFINED;
     var needWidth:Dynamic = cast _Runtime.UNDEFINED;
     var needHeight:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,18 +49,27 @@ class PackRectangles {
     var binWidth:Dynamic = cast _Runtime.UNDEFINED;
     var binHeight:Dynamic = cast _Runtime.UNDEFINED;
     var attempt:Dynamic = cast _Runtime.UNDEFINED;
-    padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
-    border = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.border; }), function():Dynamic return cast 0.0);
-    allowRotation = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.allowRotation; }), function():Dynamic return cast false);
-    growable = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.growable; }), function():Dynamic return cast true);
-    powerOfTwo = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.powerOfTwo; }), function():Dynamic return cast false);
-    square = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.square; }), function():Dynamic return cast false);
-    maxWidth = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.maxWidth; }), function():Dynamic return cast PackRectangles.DEFAULT_MAX_EXTENT__packRectangles);
-    maxHeight = _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.maxHeight; }), function():Dynamic return cast PackRectangles.DEFAULT_MAX_EXTENT__packRectangles);
+    padding = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.padding; }), function():Dynamic return cast 0.0);
+    border = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.border; }), function():Dynamic return cast 0.0);
+    allowRotation = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.allowRotation; }), function():Dynamic return cast false);
+    heuristic = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.heuristic; }), function():Dynamic return cast 'bestShortSideFit');
+    growable = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.growable; }), function():Dynamic return cast true);
+    powerOfTwo = _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.powerOfTwo; }), function():Dynamic return cast false);
+    square = _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.square; }), function():Dynamic return cast false);
+    maxWidth = _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.maxWidth; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT);
+    maxHeight = _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.maxHeight; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT);
     if ((cast _Runtime.strictEquals(_Runtime.field(rects, 'length'), 0.0) : Bool)) {
       return cast { placements: cast ([] : Array<Dynamic>), width: _Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([0.0, powerOfTwo] : Array<Dynamic>)), height: _Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([0.0, powerOfTwo] : Array<Dynamic>)), unpacked: cast ([] : Array<Dynamic>) };
     }
-    sorted = _Runtime.callValue(PackRectangles.sortRectanglesForPacking__packRectangles, cast ([rects] : Array<Dynamic>));
+    degenerate = cast ([] : Array<Dynamic>);
+    placeable = cast ([] : Array<Dynamic>);
+    for (rect in _Runtime.iterable(rects)) {
+      if ((cast ((cast ((cast _Runtime.field(rect, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(rect, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(placeable, 'push', cast ([rect] : Array<Dynamic>)); } else { _Runtime.callProperty(degenerate, 'push', cast ([_Runtime.field(rect, 'id')] : Array<Dynamic>)); }
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(placeable, 'length'), 0.0) : Bool)) {
+      return cast { placements: cast ([] : Array<Dynamic>), width: _Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([0.0, powerOfTwo] : Array<Dynamic>)), height: _Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([0.0, powerOfTwo] : Array<Dynamic>)), unpacked: degenerate };
+    }
+    sorted = _Runtime.callValue(PackRectangles.sortRectanglesForPacking__packRectangles, cast ([placeable] : Array<Dynamic>));
     needWidth = (2.0 * border);
     needHeight = (2.0 * border);
     totalArea = 0.0;
@@ -58,7 +84,7 @@ class PackRectangles {
     seed = (HxMath.ceil(HxMath.sqrt(totalArea)) + (2.0 * border));
     binWidth = ((cast growable : Bool) ? (cast HxMath.min(HxMath.max(seed, needWidth), maxWidth) : Dynamic) : (cast maxWidth : Dynamic));
     binHeight = ((cast growable : Bool) ? (cast HxMath.min(HxMath.max(seed, needHeight), maxHeight) : Dynamic) : (cast maxHeight : Dynamic));
-    attempt = _Runtime.callValue(PackRectangles.packIntoBin__packRectangles, cast ([sorted, binWidth, binHeight, padding, border, allowRotation] : Array<Dynamic>));
+    attempt = _Runtime.callValue(PackRectangles.packIntoBin__packRectangles, cast ([sorted, binWidth, binHeight, padding, border, allowRotation, heuristic] : Array<Dynamic>));
     while ((cast ((cast ((cast ((cast _Runtime.field(_Runtime.field(attempt, 'unpacked'), 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast growable : Bool)) : Bool) && (cast _Runtime.orValue(((cast binWidth : Float) < (cast maxWidth : Float)), function():Dynamic return cast ((cast binHeight : Float) < (cast maxHeight : Float))) : Bool)) : Bool)) {
       if ((cast ((cast ((cast binWidth : Float) <= (cast binHeight : Float)) : Bool) && (cast ((cast binWidth : Float) < (cast maxWidth : Float)) : Bool)) : Bool)) {
         (binWidth = cast (HxMath.min((binWidth * 2.0), maxWidth) : Dynamic));
@@ -67,9 +93,9 @@ class PackRectangles {
       } else {
         (binWidth = cast (HxMath.min((binWidth * 2.0), maxWidth) : Dynamic));
       } }
-      (attempt = cast (_Runtime.callValue(PackRectangles.packIntoBin__packRectangles, cast ([sorted, binWidth, binHeight, padding, border, allowRotation] : Array<Dynamic>)) : Dynamic));
+      (attempt = cast (_Runtime.callValue(PackRectangles.packIntoBin__packRectangles, cast ([sorted, binWidth, binHeight, padding, border, allowRotation, heuristic] : Array<Dynamic>)) : Dynamic));
     }
-    return cast _Runtime.callValue(PackRectangles.finalizeResult__packRectangles, cast ([attempt, border, powerOfTwo, square] : Array<Dynamic>));
+    return cast _Runtime.callValue(PackRectangles.finalizeResult__packRectangles, cast ([{ placements: _Runtime.field(attempt, 'placements'), unpacked: _Runtime.concatArrays([_Runtime.toArray(degenerate), _Runtime.toArray(_Runtime.field(attempt, 'unpacked'))]) }, border, powerOfTwo, square] : Array<Dynamic>));
     return cast null;
   }
 
@@ -105,7 +131,7 @@ class PackRectangles {
       (width = cast (HxMath.max(width, height) : Dynamic));
       (height = cast (width : Dynamic));
     }
-    return cast { placements: _Runtime.callProperty(_Runtime.field(packed, 'placements'), 'map', cast ([function(placement:Dynamic) return _Runtime.mergeObjects([placement])] : Array<Dynamic>)), width: width, height: height, unpacked: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(packed, 'unpacked'))]) };
+    return cast { placements: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(packed, 'placements'))]), width: width, height: height, unpacked: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(packed, 'unpacked'))]) };
     return cast null;
   }
 
@@ -114,13 +140,13 @@ class PackRectangles {
     return cast null;
   }
 
-  public static function findBestPlacement__packRectangles(free:Array<FreeRectangle__packRectangles>, pieceWidth:Float, pieceHeight:Float, allowRotation:Bool):Null<Placement__packRectangles> {
+  public static function findBestPlacement__packRectangles(free:Array<FreeRectangle__packRectangles>, pieceWidth:Float, pieceHeight:Float, allowRotation:Bool, heuristic:BinPackHeuristic):Null<Placement__packRectangles> {
     var best:Null<Placement__packRectangles> = cast _Runtime.UNDEFINED;
-    var bestShort:Dynamic = cast _Runtime.UNDEFINED;
-    var bestLong:Dynamic = cast _Runtime.UNDEFINED;
+    var bestPrimary:Dynamic = cast _Runtime.UNDEFINED;
+    var bestSecondary:Dynamic = cast _Runtime.UNDEFINED;
     best = null;
-    bestShort = HxMath.POSITIVE_INFINITY;
-    bestLong = HxMath.POSITIVE_INFINITY;
+    bestPrimary = HxMath.POSITIVE_INFINITY;
+    bestSecondary = HxMath.POSITIVE_INFINITY;
     for (node in _Runtime.iterable(free)) {
       {
         var rotated:Dynamic = 0.0;
@@ -132,10 +158,12 @@ class PackRectangles {
           var leftoverVertical:Dynamic = (_Runtime.field(node, 'height') - height);
           var shortSide:Dynamic = HxMath.min(leftoverHorizontal, leftoverVertical);
           var longSide:Dynamic = HxMath.max(leftoverHorizontal, leftoverVertical);
-          if ((cast ((cast ((cast _Runtime.strictEquals(best, null) : Bool) || (cast ((cast shortSide : Float) < (cast bestShort : Float)) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(shortSide, bestShort), function():Dynamic return cast ((cast longSide : Float) < (cast bestLong : Float))) : Bool)) : Bool)) {
+          var primary:Dynamic = ((cast _Runtime.strictEquals(heuristic, 'bestAreaFit') : Bool) ? (cast ((_Runtime.field(node, 'width') * _Runtime.field(node, 'height')) - (width * height)) : Dynamic) : (cast shortSide : Dynamic));
+          var secondary:Dynamic = ((cast _Runtime.strictEquals(heuristic, 'bestAreaFit') : Bool) ? (cast shortSide : Dynamic) : (cast longSide : Dynamic));
+          if ((cast ((cast ((cast _Runtime.strictEquals(best, null) : Bool) || (cast ((cast primary : Float) < (cast bestPrimary : Float)) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(primary, bestPrimary), function():Dynamic return cast ((cast secondary : Float) < (cast bestSecondary : Float))) : Bool)) : Bool)) {
             (best = cast ({ x: _Runtime.field(node, 'x'), y: _Runtime.field(node, 'y'), footprintWidth: width, footprintHeight: height, rotated: _Runtime.strictEquals(rotated, 1.0) } : Dynamic));
-            (bestShort = cast (shortSide : Dynamic));
-            (bestLong = cast (longSide : Dynamic));
+            (bestPrimary = cast (primary : Dynamic));
+            (bestSecondary = cast (secondary : Dynamic));
           }
           rotated++;
         }
@@ -150,7 +178,7 @@ class PackRectangles {
     return cast null;
   }
 
-  public static function packIntoBin__packRectangles(sorted:Array<PackableRectangle>, binWidth:Float, binHeight:Float, padding:Float, border:Float, allowRotation:Bool):{ var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; } {
+  public static function packIntoBin__packRectangles(sorted:Array<PackableRectangle>, binWidth:Float, binHeight:Float, padding:Float, border:Float, allowRotation:Bool, heuristic:BinPackHeuristic):{ var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; } {
     var usableWidth:Dynamic = cast _Runtime.UNDEFINED;
     var usableHeight:Dynamic = cast _Runtime.UNDEFINED;
     var placements:Array<PackedRectangle> = cast _Runtime.UNDEFINED;
@@ -170,7 +198,7 @@ class PackRectangles {
     for (rect in _Runtime.iterable(sorted)) {
       var pieceWidth:Dynamic = (_Runtime.field(rect, 'width') + padding);
       var pieceHeight:Dynamic = (_Runtime.field(rect, 'height') + padding);
-      var placement:Dynamic = _Runtime.callValue(PackRectangles.findBestPlacement__packRectangles, cast ([free, pieceWidth, pieceHeight, allowRotation] : Array<Dynamic>));
+      var placement:Dynamic = _Runtime.callValue(PackRectangles.findBestPlacement__packRectangles, cast ([free, pieceWidth, pieceHeight, allowRotation, heuristic] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(placement, null) : Bool)) {
         _Runtime.callProperty(unpacked, 'push', cast ([_Runtime.field(rect, 'id')] : Array<Dynamic>));
         continue;
@@ -262,5 +290,5 @@ class PackRectangles {
     return cast null;
   }
 
-  public static final DEFAULT_MAX_EXTENT__packRectangles:Dynamic = 16384.0;
+  public static final BIN_PACK_DEFAULT_MAX_EXTENT:Dynamic = 16384.0;
 }

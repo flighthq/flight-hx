@@ -3,5 +3,12 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._ParticleFormatKindValues.LibgdxParticleFormatKind;
+import flighthq.types._internal._ParticleFormatKindValues.ParticleDesignerFormatKind;
+import flighthq.types._internal._ParticleFormatKindValues.PhaserParticleFormatKind;
+import flighthq.types._internal._ParticleFormatKindValues.PixiParticleFormatKind;
+import flighthq.types._internal._ParticleFormatKindValues.SpineParticleFormatKind;
+import flighthq.types._internal._ParticleFormatKindValues.StarlingPexFormatKind;
+import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKind;
 
 typedef ParticleFormatKind = Dynamic;

@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createFont = compiled.flighthq.font.Font.createFont;
 export const createFontResource = compiled.flighthq.font.Font.createFontResource;
+export const createGlyphRasterizerBackendFromGlyphOutlineSource = compiled.flighthq.font.Font.createGlyphRasterizerBackendFromGlyphOutlineSource;
 export const detectFontFormat = compiled.flighthq.font.Font.detectFontFormat;
 export const getFontShorthand = compiled.flighthq.font.Font.getFontShorthand;
 export const inferFontFormatFromUrl = compiled.flighthq.font.Font.inferFontFormatFromUrl;

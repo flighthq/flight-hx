@@ -12,16 +12,19 @@ import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types._internal._Scene2DDocumentValues.Scene2DContentReferenceKindValue;
 
 class Scene2DDocument {
-  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, required:Dynamic = true):Scene2DAssetReference {
+  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, required:Dynamic = true, ?bytes:Null<flighthq._internal._UInt8Array>, ?mimeType:Null<String>):Scene2DAssetReference {
+    if (bytes == null) bytes = cast (null : Dynamic);
+    if (mimeType == null) mimeType = cast (null : Dynamic);
     _Runtime.setField(target, 'name', name);
-    return cast { content: null, kind: Scene2DContentReferenceKindValue.Asset, name: name, required: required, target: target, uri: uri };
+    return cast { bytes: bytes, content: null, kind: Scene2DContentReferenceKindValue.Asset, mimeType: mimeType, name: name, required: required, target: target, uri: uri };
     return cast null;
   }
 
-  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>):flighthq.types.Scene2DDocument {
+  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>):flighthq.types.Scene2DDocument {
     if (references == null) references = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (sourceKind == null) sourceKind = cast (null : Dynamic);
-    return cast { references: references, root: root, sourceKind: sourceKind };
+    if (backgroundColor == null) backgroundColor = cast (null : Dynamic);
+    return cast { backgroundColor: backgroundColor, references: references, root: root, sourceKind: sourceKind };
     return cast null;
   }
 

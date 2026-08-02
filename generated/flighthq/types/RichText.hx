@@ -12,6 +12,7 @@ import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types._internal._RichTextValues.RichTextKind;
 
 typedef RichTextData = { var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; var background:Bool; var backgroundColor:Float; var border:Bool; var borderColor:Float; var condenseWhite:Bool; var defaultTextFormat:TextFormat; var maxChars:Float; var mouseWheelEnabled:Bool; var multiline:Bool; var scrollH:Float; var scrollV:Float; var selectable:Bool; var textColor:Float; var textFormatRanges:Array<TextFormatRange>; var wordWrap:Bool; };
 

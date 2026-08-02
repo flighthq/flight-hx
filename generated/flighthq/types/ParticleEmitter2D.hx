@@ -11,6 +11,7 @@ import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types._internal._ParticleEmitter2DValues.ParticleEmitter2DKind;
 
 typedef ParticleEmitterData = { var alphas:flighthq._internal._Float32Array; var atlas:Null<TextureAtlas>; var colors:flighthq._internal._Float32Array; var ids:flighthq._internal._UInt16Array; var particleCount:Float; var positionsZ:flighthq._internal._Float32Array; var transforms:flighthq._internal._Float32Array; var velocities:flighthq._internal._Float32Array; var worldSpace:Bool; };
 

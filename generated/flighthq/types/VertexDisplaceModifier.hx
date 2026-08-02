@@ -4,6 +4,8 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Vector3.Vector3Like;
+import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
+import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
 typedef VertexDisplaceModifierSource = Dynamic;
 

@@ -5,5 +5,6 @@ const api = compiled.flighthq.color.Oklab;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const clampLinearRgb = api.clampLinearRgb;
 export const linearRgbToOklab = api.linearRgbToOklab;
 export const oklabToLinearRgb = api.oklabToLinearRgb;

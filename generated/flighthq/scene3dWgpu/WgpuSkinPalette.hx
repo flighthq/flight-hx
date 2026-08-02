@@ -44,7 +44,7 @@ class WgpuSkinPalette {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'skinDrawBindGroupLayout'), null) : Bool)) {
-      _Runtime.setField(scene, 'skinDrawBindGroupLayout', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'uniform', hasDynamicOffset: true } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'skinDrawBindGroupLayout', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
     }
     return cast _Runtime.field(scene, 'skinDrawBindGroupLayout');
     return cast null;

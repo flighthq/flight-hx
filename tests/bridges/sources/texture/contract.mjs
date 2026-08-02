@@ -2,3 +2,13 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './cubeTexture.mjs';
+export * from './renderTexture.mjs';
+export * from './sampler.mjs';
+export * from './texture.mjs';
+export * from './videoTexture.mjs';
+export * from './voxelGrid.mjs';
+export { getTextureSampleColorSpace } from './textureColorSpace.mjs';
+export { shouldDecodeTextureOnSample } from './textureColorSpace.mjs';
+export { shouldPremultiplyTextureOnUpload } from './textureColorSpace.mjs';

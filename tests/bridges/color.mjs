@@ -4,6 +4,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 export const allocateHslColor = compiled.flighthq.color.Color.allocateHslColor;
 export const allocateHsvColor = compiled.flighthq.color.Color.allocateHsvColor;
 export const allocateLinearColor = compiled.flighthq.color.Color.allocateLinearColor;
+export const clampLinearRgb = compiled.flighthq.color.Color.clampLinearRgb;
 export const colorFromKelvin = compiled.flighthq.color.Color.colorFromKelvin;
 export const computeRgbHexString = compiled.flighthq.color.Color.computeRgbHexString;
 export const getColorAlpha = compiled.flighthq.color.Color.getColorAlpha;

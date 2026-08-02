@@ -14,9 +14,13 @@ typedef AssetLoaderAdapter<T> = { var load:Dynamic; var dispose:Dynamic; };
 
 typedef AssetEntry = { var value:Dynamic; var refcount:Float; var loadPromise:Null<flighthq._internal._Promise<Dynamic>>; var resident:Bool; };
 
-typedef AssetLibraryRuntime = { var adapters:Dynamic; var descriptors:Dynamic; var entries:Dynamic; var groups:Dynamic; };
+typedef AssetLibraryRuntime = { var acquireGuard:Null<AssetAcquireGuard>; var adapters:Dynamic; var descriptors:Dynamic; var entries:Dynamic; var freedIds:Dynamic; var groups:Dynamic; };
 
 typedef AssetLibrary = { var runtime:AssetLibraryRuntime; };
+
+typedef AssetLoadExplanation = { var id:String; var refCount:Float; var status:String; var type:Null<AssetType>; };
+
+typedef AssetAcquireGuard = Dynamic;
 
 typedef AssetLoadProgress = { var loaded:Float; var total:Float; };
 

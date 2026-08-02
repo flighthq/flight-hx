@@ -4,7 +4,6 @@ package flighthq.materials;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.Material.createMaterial;
-import flighthq.types.AlphaType;
 import flighthq.types.BlendMode;
 import flighthq.types.Entity.Kind;
 import flighthq.types.SurfaceMaterial;
@@ -18,7 +17,6 @@ class SurfaceMaterial {
     material = (cast _Runtime.callValue(createMaterial, cast ([kind] : Array<Dynamic>)) : flighthq.types.SurfaceMaterial);
     _Runtime.setField(material, 'alphaCutoff', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaCutoff'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial));
     _Runtime.setField(material, 'alphaMode', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMode'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial));
-    _Runtime.setField(material, 'alphaType', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaType'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_TYPE__surfaceMaterial));
     _Runtime.setField(material, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(opts, 'blendMode'), function():Dynamic return cast BlendModeValue.Normal));
     _Runtime.setField(material, 'doubleSided', _Runtime.coalesce(_Runtime.optionalField(opts, 'doubleSided'), function():Dynamic return cast SurfaceMaterial.DEFAULT_DOUBLE_SIDED__surfaceMaterial));
     return cast material;
@@ -48,8 +46,6 @@ class SurfaceMaterial {
   public static final DEFAULT_ALPHA_CUTOFF__surfaceMaterial:Dynamic = 0.5;
 
   public static final DEFAULT_ALPHA_MODE__surfaceMaterial:MaterialAlphaMode = 'opaque';
-
-  public static final DEFAULT_ALPHA_TYPE__surfaceMaterial:AlphaType = 'straight';
 
   public static final DEFAULT_DOUBLE_SIDED__surfaceMaterial:Dynamic = false;
 }

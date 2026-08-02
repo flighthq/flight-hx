@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._GamepadButtonKindValues.GamepadButtonKindValue;
 
 typedef GamepadButtonKind = Dynamic;

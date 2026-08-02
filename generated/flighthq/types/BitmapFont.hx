@@ -16,4 +16,6 @@ typedef BitmapFontGlyphData = { var advance:Float; var bearingX:Float; var beari
 
 typedef BitmapFontKerningData = { var amount:Float; var left:Float; var right:Float; };
 
+typedef BitmapFontKerningPair = { var left:Float; var right:Float; };
+
 typedef BitmapFontParseOptions = { @:optional var resolvePage:Dynamic; };

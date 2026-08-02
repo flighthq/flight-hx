@@ -12,6 +12,7 @@ class WgpuMipmap {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var cached:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var encoder:Dynamic = cast _Runtime.UNDEFINED;
@@ -20,8 +21,9 @@ class WgpuMipmap {
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pipeline = _Runtime.callValue(WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap, cast ([state, format] : Array<Dynamic>));
-    layout = (cast _Runtime.field(runtime, 'mipmapBindGroupLayout') : Dynamic);
+    cached = _Runtime.callValue(WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap, cast ([state, format] : Array<Dynamic>));
+    pipeline = _Runtime.field(cached, 'pipeline');
+    layout = _Runtime.field(cached, 'bindGroupLayout');
     encoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
     {
       var level:Dynamic = 1.0;
@@ -45,23 +47,26 @@ class WgpuMipmap {
     return cast null;
   }
 
-  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:Dynamic):Dynamic {
+  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:Dynamic):{ var bindGroupLayout:Dynamic; var pipeline:Dynamic; } {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var cached:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var bindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast !_Runtime.looseEquals(_Runtime.field(runtime, 'mipmapPipeline'), null) : Bool)) { return cast _Runtime.field(runtime, 'mipmapPipeline'); }
+    cached = ((cast _Runtime.field(runtime, 'mipmapPipelineCache') : flighthq._internal._Map).get(format));
+    if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure1 = state;
     device = _Runtime.field(__destructure1, 'device');
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuMipmap.MIPMAP_WGSL__wgpuMipmap }] : Array<Dynamic>));
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'mipmapBindGroupLayout', bindGroupLayout);
-    _Runtime.setField(runtime, 'mipmapPipeline', pipeline);
-    return cast pipeline;
+    result = { bindGroupLayout: bindGroupLayout, pipeline: pipeline };
+    ((cast _Runtime.field(runtime, 'mipmapPipelineCache') : flighthq._internal._Map).set(format, result));
+    return cast result;
     return cast null;
   }
 

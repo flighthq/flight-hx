@@ -3,6 +3,11 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingDefaultKindValue;
+import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseInKindValue;
+import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseOutKindValue;
+import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingKeyboardDefaultKindValue;
+import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingLinearKindValue;
 
 typedef SoftKeyboardEasingDefaultKind = Dynamic;
 

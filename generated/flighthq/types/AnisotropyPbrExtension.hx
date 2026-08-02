@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types._internal._AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
 
 typedef AnisotropyPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var anisotropyMap:Null<Texture>; var anisotropyMapUvSet:PbrUvSet; var anisotropyRotation:Float; var anisotropyStrength:Float; };

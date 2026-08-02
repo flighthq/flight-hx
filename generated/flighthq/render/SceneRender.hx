@@ -303,7 +303,21 @@ class SceneRender {
     } else {
       _Runtime.callValue(setOrthographicMatrix4, cast ([SceneRender.scratchProjection__sceneRender, -projection.halfWidth, projection.halfWidth, -projection.halfHeight, projection.halfHeight, camera.near, camera.far] : Array<Dynamic>));
     }
+    _Runtime.callValue(SceneRender.applyScene3DProjectionJitter__sceneRender, cast ([SceneRender.scratchProjection__sceneRender, camera.jitter.x, camera.jitter.y] : Array<Dynamic>));
     _Runtime.callValue(multiplyMatrix4, cast ([out, SceneRender.scratchProjection__sceneRender, camera.view] : Array<Dynamic>));
+  }
+
+  public static function applyScene3DProjectionJitter__sceneRender(out:Matrix4, x:Float, y:Float):Void {
+    var m:Dynamic = cast _Runtime.UNDEFINED;
+    m = out.m;
+    ({ var __indexedObject0:Dynamic = m; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 3.0)))); });
+    ({ var __indexedObject2:Dynamic = m; var __indexedKey3:Dynamic = 4.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 7.0)))); });
+    ({ var __indexedObject4:Dynamic = m; var __indexedKey5:Dynamic = 8.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 11.0)))); });
+    ({ var __indexedObject6:Dynamic = m; var __indexedKey7:Dynamic = 12.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7) + (x * flighthq._internal._StaticIndex.readFloat32Array(m, 15.0)))); });
+    ({ var __indexedObject8:Dynamic = m; var __indexedKey9:Dynamic = 1.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 3.0)))); });
+    ({ var __indexedObject10:Dynamic = m; var __indexedKey11:Dynamic = 5.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject10, __indexedKey11, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject10, __indexedKey11) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 7.0)))); });
+    ({ var __indexedObject12:Dynamic = m; var __indexedKey13:Dynamic = 9.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject12, __indexedKey13, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject12, __indexedKey13) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 11.0)))); });
+    ({ var __indexedObject14:Dynamic = m; var __indexedKey15:Dynamic = 13.0; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject14, __indexedKey15, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject14, __indexedKey15) + (y * flighthq._internal._StaticIndex.readFloat32Array(m, 15.0)))); });
   }
 
   public static function resolveScene3DViewportAspect__sceneRender(camera:Camera3D, viewportAspect:Null<Float>):Float {

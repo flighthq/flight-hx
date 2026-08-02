@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.BitmapComposite.writeBitmapPixels;
 import flighthq.bitmap.BitmapRegion.createBitmapRegion;
-import flighthq.glyphatlas.GlyphRasterizerBackend.getGlyphRasterizerBackend;
 import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasRuntime;
 import flighthq.types.GlyphSource.GlyphEntry;
@@ -30,7 +29,7 @@ class GlyphAtlasEntry {
       _Runtime.callValue(GlyphAtlasEntry._touchGlyphLru__glyphAtlasEntry, cast ([runtime, codepoint] : Array<Dynamic>));
       return cast existing;
     }
-    bitmap = _Runtime.callProperty(_Runtime.callValue(getGlyphRasterizerBackend, cast ([] : Array<Dynamic>)), 'rasterize', cast ([codepoint, runtime.rasterizeOptions] : Array<Dynamic>));
+    bitmap = _Runtime.callProperty(runtime.rasterizerBackend, 'rasterize', cast ([codepoint, runtime.rasterizeOptions] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) {
       _Runtime.callOptionalValue(GlyphAtlasEntry._entryGuard__glyphAtlasEntry, cast (['rasterizer-returned-null', codepoint] : Array<Dynamic>));
       return cast null;

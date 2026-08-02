@@ -11,6 +11,10 @@ typedef SpatialIndexingMode = String;
 
 typedef SpatialDeclineReason = String;
 
-typedef SpatialIndexingNotice = { var id:SpatialObjectId; var mode:SpatialIndexingMode; var wouldOccupyBucketCount:Float; var reason:Null<SpatialDeclineReason>; };
+typedef SpatialIndexingOperation = String;
+
+typedef SpatialIndexingReason = Dynamic;
+
+typedef SpatialIndexingNotice = { var cellSize:Float; var id:SpatialObjectId; var mode:SpatialIndexingMode; var operation:SpatialIndexingOperation; var wouldOccupyBucketCount:Float; var reason:Null<SpatialIndexingReason>; };
 
 typedef SpatialIndexingGuard = Dynamic;

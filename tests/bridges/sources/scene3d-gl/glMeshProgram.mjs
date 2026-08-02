@@ -17,3 +17,4 @@ export const hasGlUvTransform = api.hasGlUvTransform;
 export const setGlMeshCameraPosition = api.setGlMeshCameraPosition;
 export const setGlMeshViewProjection = api.setGlMeshViewProjection;
 export const SKIN_PALETTE_TEXTURE_UNIT = api.SKIN_PALETTE_TEXTURE_UNIT;
+export const uploadGlMeshDrawAlpha = api.uploadGlMeshDrawAlpha;

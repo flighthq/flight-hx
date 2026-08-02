@@ -2,3 +2,12 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './enableTextShaperGuards.mjs';
+export * from './textShaper.mjs';
+export * from './textShaperCache.mjs';
+export * from './textShaperCluster.mjs';
+export * from './textShaperItemize.mjs';
+export * from './textShaperPool.mjs';
+export * from './textShaperRun.mjs';
+export * from './textShaperSignals.mjs';

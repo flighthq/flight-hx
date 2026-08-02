@@ -15,6 +15,7 @@ import flighthq.texture.Sampler.cloneSampler;
 import flighthq.texture.Sampler.copySampler;
 import flighthq.texture.Sampler.createSampler;
 import flighthq.texture.Sampler.equalsSampler;
+import flighthq.texture.TextureColorSpace as Facade_Texture_flighthq_texture_TextureColorSpace;
 import flighthq.texture.VideoTexture as Facade_Texture_flighthq_texture_VideoTexture;
 import flighthq.texture.VoxelGrid as Facade_Texture_flighthq_texture_VoxelGrid;
 import flighthq.types.CreateCubeTextureOptions;
@@ -22,11 +23,13 @@ import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.CreateTextureOptions;
 import flighthq.types.CubeTexture;
 import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.Texture.TextureSourceCubeFaces;
 import flighthq.types.TextureSource;
@@ -269,6 +272,11 @@ class Texture {
     _Runtime.callValue(inverseMatrix3, cast ([out, out] : Array<Dynamic>));
   }
 
+  public static function getTextureSampleColorSpace(source:TextureColorSpace, working:RenderTargetColorSpace):TextureColorSpace {
+    return cast Facade_Texture_flighthq_texture_TextureColorSpace.getTextureSampleColorSpace(source, working);
+    return cast null;
+  }
+
   public static function getTextureSource(texture:TextureLike):Null<TextureSource> {
     return cast _Runtime.callValue(Texture.getFirstTextureSource__texture, cast ([texture] : Array<Dynamic>));
     return cast null;
@@ -431,6 +439,16 @@ class Texture {
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
     Facade_Texture_flighthq_texture_VideoTexture.setVideoTextureSource(texture, source);
+  }
+
+  public static function shouldDecodeTextureOnSample(source:TextureColorSpace, working:RenderTargetColorSpace):Bool {
+    return cast Facade_Texture_flighthq_texture_TextureColorSpace.shouldDecodeTextureOnSample(source, working);
+    return cast null;
+  }
+
+  public static function shouldPremultiplyTextureOnUpload(source:TextureColorSpace, working:RenderTargetColorSpace):Bool {
+    return cast Facade_Texture_flighthq_texture_TextureColorSpace.shouldPremultiplyTextureOnUpload(source, working);
+    return cast null;
   }
 
   public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {

@@ -7,5 +7,6 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
-typedef ExtendedPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var extensions:Array<PbrExtension>; var standard:StandardPbrMaterialProperties; };
+typedef ExtendedPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var extensions:Array<PbrExtension>; var standard:StandardPbrMaterialProperties; };

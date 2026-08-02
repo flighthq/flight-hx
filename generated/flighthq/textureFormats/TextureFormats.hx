@@ -4,6 +4,7 @@ package flighthq.textureFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureFormats.DetectTextureContainer as Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer;
+import flighthq.textureFormats.ExplainTextureContainerParse as Facade_TextureFormats_flighthq_textureFormats_ExplainTextureContainerParse;
 import flighthq.textureFormats.ParseAtf as Facade_TextureFormats_flighthq_textureFormats_ParseAtf;
 import flighthq.textureFormats.ParseBasis as Facade_TextureFormats_flighthq_textureFormats_ParseBasis;
 import flighthq.textureFormats.ParseDds as Facade_TextureFormats_flighthq_textureFormats_ParseDds;
@@ -12,7 +13,9 @@ import flighthq.textureFormats.SelectTextureContainer as Facade_TextureFormats_f
 import flighthq.textureFormats.TextureLevelLayout as Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.TextureContainerKind;
 import flighthq.types.TextureContainerLevel;
+import flighthq.types.TextureContainerParseExplanation;
 
 class TextureFormats {
   public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
@@ -20,8 +23,13 @@ class TextureFormats {
     return cast null;
   }
 
-  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
+  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<TextureContainerKind> {
     return cast Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer(bytes);
+    return cast null;
+  }
+
+  public static function explainTextureContainerParse(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseExplanation> {
+    return cast Facade_TextureFormats_flighthq_textureFormats_ExplainTextureContainerParse.explainTextureContainerParse(bytes);
     return cast null;
   }
 

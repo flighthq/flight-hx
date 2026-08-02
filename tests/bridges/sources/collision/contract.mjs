@@ -2,3 +2,14 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './collideContactManifold.mjs';
+export * from './contactManifold.mjs';
+export * from './enableCollisionGuards.mjs';
+export * from './explainCollisionTest.mjs';
+export * from './manifold.mjs';
+export * from './pointContainment.mjs';
+export * from './segmentCollision.mjs';
+export * from './shapeCollision.mjs';
+export * from './shapeContact.mjs';
+export * from './testCollision.mjs';

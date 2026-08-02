@@ -113,11 +113,4 @@ The maintained TypeScript coverage baseline measured on 2026-07-22 is 77.03% sta
 
 ## Example fleet smoke gate
 
-`npm run test:examples` (or `test:examples:neko` / `test:examples:html5` / `test:examples:linux`)
-runs `tools/examples-smoke.mjs`: every example must build, run without a runtime error, and — on
-native windowed targets — present a not-blank frame (ImageMagick standard-deviation check under
-Xvfb). html5 is build-only; the capture harness covers web pixels. Results are written to
-`build/examples-smoke-<target>.json`; `--resume` skips previously-OK entries, `--filter <name>`
-narrows the fleet, and any non-OK entry fails the run. The not-blank check exists because
-runtime-error-only sweeps let silently-blank renders (the hxcpp `bufferSubData` defect) pass for
-weeks — a smoke gate asserts pixels, not just exit codes.
+`npm run test:examples` (or `test:examples:neko` / `test:examples:html5` / `test:examples:linux`) runs `tools/examples-smoke.mjs`: every example must build, run without a runtime error, and — on native windowed targets — present a not-blank frame (ImageMagick standard-deviation check under Xvfb). html5 is build-only; the capture harness covers web pixels. Results are written to `build/examples-smoke-<target>.json`; `--resume` skips previously-OK entries, `--filter <name>` narrows the fleet, and any non-OK entry fails the run. The not-blank check exists because runtime-error-only sweeps let silently-blank renders (the hxcpp `bufferSubData` defect) pass for weeks — a smoke gate asserts pixels, not just exit codes.

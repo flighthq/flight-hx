@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './bidiClassBackend.mjs';
+export * from './getBidiRuns.mjs';
+export * from './reorderBidiLine.mjs';
+export * from './resolveBidiLevels.mjs';

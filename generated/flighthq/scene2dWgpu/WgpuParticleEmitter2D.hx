@@ -4,6 +4,7 @@ package flighthq.scene2dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuSampler;
 import flighthq.renderWgpu.WgpuTextureResolver.resolveWgpuTexture;
@@ -134,9 +135,9 @@ class WgpuParticleEmitter2D {
     resources = _Runtime.callValue(WgpuParticleEmitter2D.ensureParticleResources__wgpuParticleEmitter2D, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(WgpuParticleEmitter2D.ensureParticleInstanceBuffer__wgpuParticleEmitter2D, cast ([state, particleCount] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, atlas.texture, true] : Array<Dynamic>));
+    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, atlas.texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
-    textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(runtime, 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(textureEntry, 'view') }, { binding: 1.0, resource: _Runtime.callValue(getWgpuSampler, cast ([state, ((cast StringTools.startsWith(_Runtime.field(atlas.texture, 'sampler').magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)), _Runtime.field(atlas.texture, 'sampler').wrapU, _Runtime.field(atlas.texture, 'sampler').wrapV, ((cast _Runtime.field(atlas.texture, 'sampler').mipmaps : Bool) ? (cast ((cast StringTools.endsWith(Std.string(_Runtime.field(atlas.texture, 'sampler').minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), _Runtime.field(atlas.texture, 'sampler').anisotropy] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
+    textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(runtime, 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(textureEntry, 'view') }, { binding: 1.0, resource: _Runtime.callValue(getWgpuSampler, cast ([state, ((cast StringTools.startsWith(_Runtime.field(atlas.texture, 'sampler').minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)), ((cast StringTools.startsWith(_Runtime.field(atlas.texture, 'sampler').magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)), _Runtime.field(atlas.texture, 'sampler').wrapU, _Runtime.field(atlas.texture, 'sampler').wrapV, ((cast ((cast _Runtime.field(atlas.texture, 'sampler').mipmaps : Bool) && (cast _Runtime.includes(_Runtime.field(atlas.texture, 'sampler').minFilter, 'mipmap') : Bool)) : Bool) ? (cast ((cast StringTools.endsWith(Std.string(_Runtime.field(atlas.texture, 'sampler').minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), _Runtime.field(atlas.texture, 'sampler').anisotropy] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');

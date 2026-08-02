@@ -11,6 +11,7 @@ import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types._internal._TilemapValues.TilemapKind;
 
 typedef TilemapData = { var atlas:Null<TextureAtlas>; var columns:Float; var rows:Float; var tileHeight:Float; var tileWidth:Float; var tiles:flighthq._internal._Int16Array; var materialData:Null<Array<Null<MaterialData>>>; };
 

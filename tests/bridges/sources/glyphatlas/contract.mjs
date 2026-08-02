@@ -2,3 +2,12 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './enableGlyphAtlasGuards.mjs';
+export * from './explainGlyphAtlasEntry.mjs';
+export * from './glyphAtlas.mjs';
+export * from './glyphAtlasDirty.mjs';
+export * from './glyphAtlasEntry.mjs';
+export * from './glyphAtlasMetrics.mjs';
+export * from './glyphRasterizerBackend.mjs';
+export * from './glyphSource.mjs';

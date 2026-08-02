@@ -4,9 +4,12 @@ package flighthq.assets;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary as Facade_Assets_flighthq_assets_AssetLibrary;
+import flighthq.assets.EnableAssetGuards as Facade_Assets_flighthq_assets_EnableAssetGuards;
+import flighthq.assets.ExplainAssetLoad as Facade_Assets_flighthq_assets_ExplainAssetLoad;
 import flighthq.types.Assets.AssetDescriptor;
 import flighthq.types.Assets.AssetGroupLoadOptions;
 import flighthq.types.Assets.AssetLibrary;
+import flighthq.types.Assets.AssetLoadExplanation;
 import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
@@ -17,17 +20,45 @@ class Assets {
     return cast null;
   }
 
+  public static function areAssetGuardsEnabled(library:AssetLibrary):Bool {
+    return cast Facade_Assets_flighthq_assets_EnableAssetGuards.areAssetGuardsEnabled(library);
+    return cast null;
+  }
+
   public static function createAssetLibrary():AssetLibrary {
     return cast Facade_Assets_flighthq_assets_AssetLibrary.createAssetLibrary();
     return cast null;
+  }
+
+  public static function disableAssetGuards(library:AssetLibrary):Void {
+    Facade_Assets_flighthq_assets_EnableAssetGuards.disableAssetGuards(library);
   }
 
   public static function disposeAssetLibrary(library:AssetLibrary):Void {
     Facade_Assets_flighthq_assets_AssetLibrary.disposeAssetLibrary(library);
   }
 
+  public static function enableAssetGuards(library:AssetLibrary):Void {
+    Facade_Assets_flighthq_assets_EnableAssetGuards.enableAssetGuards(library);
+  }
+
+  public static function explainAssetLoad(library:AssetLibrary, id:String):AssetLoadExplanation {
+    return cast Facade_Assets_flighthq_assets_ExplainAssetLoad.explainAssetLoad(library, id);
+    return cast null;
+  }
+
   public static function getAsset<T>(library:AssetLibrary, id:String):Null<Dynamic> {
     return cast Facade_Assets_flighthq_assets_AssetLibrary.getAsset(library, id);
+    return cast null;
+  }
+
+  public static function getAssetGroupIds(library:AssetLibrary, name:String):Array<String> {
+    return cast Facade_Assets_flighthq_assets_AssetLibrary.getAssetGroupIds(library, name);
+    return cast null;
+  }
+
+  public static function getAssetIds(library:AssetLibrary):Array<String> {
+    return cast Facade_Assets_flighthq_assets_AssetLibrary.getAssetIds(library);
     return cast null;
   }
 

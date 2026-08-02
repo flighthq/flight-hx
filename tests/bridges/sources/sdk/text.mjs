@@ -2,3 +2,14 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from '@flighthq/bitmapfont';
+export * from '@flighthq/bitmaptext';
+export * from '@flighthq/glyphatlas';
+export * from '@flighthq/text-markup';
+export * from '@flighthq/textbidi';
+export * from '@flighthq/textinput';
+export * from '@flighthq/textlayout';
+export * from '@flighthq/textsegment';
+export * from '@flighthq/textshaper';
+export * from '@flighthq/textshaper-canvas';

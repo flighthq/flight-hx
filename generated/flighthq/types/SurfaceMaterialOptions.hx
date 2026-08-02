@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef SurfaceMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var alphaType:AlphaType; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; };
+typedef SurfaceMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; };

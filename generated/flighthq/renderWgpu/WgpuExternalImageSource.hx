@@ -8,9 +8,7 @@ class WgpuExternalImageSource {
   public static function isWgpuExternalImageSourceReady(source:Dynamic, width:Float, height:Float):Bool {
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([height] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('HTMLCanvasElement'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLCanvasElement')) : Bool)) : Bool)) {
-      if ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'width') : Float) < (cast width : Float)) : Bool) || (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'height') : Float) < (cast height : Float)) : Bool)) : Bool)) { return cast false; }
-      var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(source, 'getContext', cast (['2d'] : Array<Dynamic>));
-      return cast ((cast ((cast _Runtime.strictEquals(context, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.Canvas2dBackend.field(context, 'isContextLost')), 'function') : Bool)) : Bool) || (cast !(cast flighthq._internal.backend.Canvas2dBackend.call(context, 'isContextLost', cast ([] : Array<Dynamic>)) : Bool) : Bool));
+      return cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'width') : Float) >= (cast width : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'height') : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('HTMLImageElement'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLImageElement')) : Bool)) : Bool)) {
       return cast ((cast ((cast _Runtime.field(source, 'complete') : Bool) && (cast ((cast _Runtime.field(source, 'naturalWidth') : Float) >= (cast width : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(source, 'naturalHeight') : Float) >= (cast height : Float)) : Bool));
@@ -22,14 +20,32 @@ class WgpuExternalImageSource {
       return cast ((cast ((cast _Runtime.field(source, 'width') : Float) >= (cast width : Float)) : Bool) && (cast ((cast _Runtime.field(source, 'height') : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('OffscreenCanvas')) : Bool)) : Bool)) {
-      if ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'width') : Float) < (cast width : Float)) : Bool) || (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'height') : Float) < (cast height : Float)) : Bool)) : Bool)) { return cast false; }
-      var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(source, 'getContext', cast (['2d'] : Array<Dynamic>));
-      return cast ((cast ((cast _Runtime.strictEquals(context, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(context, 'isContextLost')), 'function') : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(context, 'isContextLost', cast ([] : Array<Dynamic>)) : Bool) : Bool));
+      return cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'width') : Float) >= (cast width : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'height') : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('VideoFrame'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('VideoFrame')) : Bool)) : Bool)) {
       return cast ((cast ((cast _Runtime.field(source, 'displayWidth') : Float) >= (cast width : Float)) : Bool) && (cast ((cast _Runtime.field(source, 'displayHeight') : Float) >= (cast height : Float)) : Bool));
     }
-    return cast true;
+    return cast false;
+    return cast null;
+  }
+
+  public static function tryCopyWgpuExternalImageToTexture(queue:Dynamic, source:Dynamic, destination:Dynamic, width:Float, height:Float):Bool {
+    if ((cast !(cast _Runtime.callValue(isWgpuExternalImageSourceReady, cast ([_Runtime.field(source, 'source'), width, height] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    try {
+      flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'copyExternalImageToTexture', cast ([source, destination, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+      return cast true;
+    } catch (error:Dynamic) {
+      if ((cast _Runtime.callValue(WgpuExternalImageSource.isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource, cast ([error] : Array<Dynamic>)) : Bool)) { return cast false; }
+      throw error;
+    }
+    return cast null;
+  }
+
+  public static function isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource(error:Dynamic):Bool {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('DOMException'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(error, _Runtime.globalValue('DOMException')) : Bool)) : Bool)) {
+      return cast ((cast _Runtime.strictEquals(_Runtime.field(error, 'name'), 'InvalidStateError') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(error, 'name'), 'OperationError') : Bool));
+    }
+    return cast ((cast _Runtime.isInstanceOfName(error, 'TypeError') : Bool) && (cast StringTools.endsWith(Std.string(_Runtime.field(error, 'message')), 'Failed to copy content from external image.') : Bool));
     return cast null;
   }
 }

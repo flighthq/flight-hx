@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types._internal._TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
 
 typedef TransmissionVolumePbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var attenuationColor:Float; var attenuationDistance:Float; var ior:Float; var thickness:Float; var thicknessMap:Null<Texture>; var thicknessMapUvSet:PbrUvSet; var transmission:Float; var transmissionMap:Null<Texture>; var transmissionMapUvSet:PbrUvSet; };

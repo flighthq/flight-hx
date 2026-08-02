@@ -3,7 +3,7 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.renderWgpu.WgpuExternalImageSource.isWgpuExternalImageSourceReady;
+import flighthq.renderWgpu.WgpuExternalImageSource.tryCopyWgpuExternalImageToTexture;
 import flighthq.types.Image;
 
 class WgpuTextureUpload {
@@ -12,8 +12,7 @@ class WgpuTextureUpload {
   }
 
   public static function uploadWgpuTextureElement(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, source:Dynamic):Void {
-    if ((cast !(cast _Runtime.callValue(isWgpuExternalImageSourceReady, cast ([source, width, height] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: source }, { texture: texture, origin: origin }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callValue(tryCopyWgpuExternalImageToTexture, cast ([flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), { source: source }, { texture: texture, origin: origin }, width, height] : Array<Dynamic>));
   }
 
   public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:Dynamic):Void {

@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './clipRegion.mjs';
+export * from './enableClipGuards.mjs';

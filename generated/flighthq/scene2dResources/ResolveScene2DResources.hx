@@ -40,9 +40,9 @@ class ResolveScene2DResources {
 
   public static function resolveScene2DContentReference__resolveScene2DResources(reference:Scene2DContentReference, options:Null<ResolveScene2DResourcesOptions>):Null<Node2D> {
     if ((cast _Runtime.strictEquals(_Runtime.field(reference, 'kind'), Scene2DContentReferenceKindValue.Asset) : Bool)) {
-      return cast _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveAssetContent', cast ([_Runtime.field(reference, 'name'), _Runtime.field(reference, 'uri')] : Array<Dynamic>)), function():Dynamic return cast null);
+      return cast _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveAssetContent', cast ([reference] : Array<Dynamic>)), function():Dynamic return cast null);
     }
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveSlotContent', cast ([_Runtime.field(reference, 'name'), _Runtime.field(reference, 'linkage')] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveSlotContent', cast ([reference] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 }

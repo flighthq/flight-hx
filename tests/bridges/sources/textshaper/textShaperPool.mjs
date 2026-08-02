@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const acquireShapedRun = api.acquireShapedRun;
 export const releaseShapedRun = api.releaseShapedRun;
+export const setShapedRunReleaseGuard = api.setShapedRunReleaseGuard;

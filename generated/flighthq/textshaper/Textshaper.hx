@@ -3,6 +3,7 @@ package flighthq.textshaper;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.textshaper.EnableTextShaperGuards as Facade_Textshaper_flighthq_textshaper_EnableTextShaperGuards;
 import flighthq.textshaper.TextShaper as Facade_Textshaper_flighthq_textshaper_TextShaper;
 import flighthq.textshaper.TextShaperCache as Facade_Textshaper_flighthq_textshaper_TextShaperCache;
 import flighthq.textshaper.TextShaperCluster as Facade_Textshaper_flighthq_textshaper_TextShaperCluster;
@@ -45,12 +46,20 @@ class Textshaper {
     return cast null;
   }
 
+  public static function disableTextShaperGuards():Void {
+    Facade_Textshaper_flighthq_textshaper_EnableTextShaperGuards.disableTextShaperGuards();
+  }
+
   public static function disposeTextShaperCache(cache:TextShaperCache):Void {
     Facade_Textshaper_flighthq_textshaper_TextShaperCache.disposeTextShaperCache(cache);
   }
 
   public static function disposeTextShaperSignals():Void {
     Facade_Textshaper_flighthq_textshaper_TextShaperSignals.disposeTextShaperSignals();
+  }
+
+  public static function enableTextShaperGuards():Void {
+    Facade_Textshaper_flighthq_textshaper_EnableTextShaperGuards.enableTextShaperGuards();
   }
 
   public static function enableTextShaperSignals():TextShaperSignals {

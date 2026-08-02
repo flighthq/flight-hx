@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
-typedef Bitmap = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var height:Float; var kind:TextureSourceKind; var version:Float; var width:Float; var alphaType:AlphaType; var colorSpace:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; };
+typedef Bitmap = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:TextureSourceKind; var version:Float; var width:Float; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; };

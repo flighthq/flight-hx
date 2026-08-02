@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types._internal._WrappedDiffusePbrExtensionValues.WrappedDiffusePbrExtensionKind;
 
 typedef WrappedDiffusePbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var thickness:Float; var thicknessMap:Null<Texture>; var thicknessMapUvSet:PbrUvSet; var wrappedDiffuseColor:Float; var wrappedDiffuseMap:Null<Texture>; var wrappedDiffuseMapUvSet:PbrUvSet; var wrappedDiffuseStrength:Float; };

@@ -45,12 +45,14 @@ class WgpuExternalTexture {
 
   public static function getExternalWgpuSampler__wgpuExternalTexture(state:WgpuRenderState, texture:Texture):Dynamic {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
-    var filter:Dynamic = cast _Runtime.UNDEFINED;
+    var minFilter:Dynamic = cast _Runtime.UNDEFINED;
+    var magFilter:Dynamic = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<Dynamic> = cast _Runtime.UNDEFINED;
     sampler = _Runtime.field(texture, 'sampler');
-    filter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
     mipmapFilter = ((cast sampler.mipmaps : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'mipmap-nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'mipmap-linear') : Bool) ? (cast 'linear' : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    return cast _Runtime.callValue(getWgpuSampler, cast ([state, filter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>));
+    return cast _Runtime.callValue(getWgpuSampler, cast ([state, minFilter, magFilter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>));
     return cast null;
   }
 

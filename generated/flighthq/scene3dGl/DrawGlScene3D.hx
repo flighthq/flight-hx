@@ -9,6 +9,7 @@ import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.mesh.MeshGeometry.hasMeshGeometrySkin;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareScene3DRender;
+import flighthq.renderGl.GlDraw.enableGlBlendModeSupport;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
 import flighthq.renderGl.GlRenderTarget.declareGlRenderTargetColorSpace;
@@ -18,6 +19,7 @@ import flighthq.scene3dGl.GlMeshMaterialRegistry.resolveGlMeshMaterialRenderer;
 import flighthq.scene3dGl.GlParticleEmitter3D.drawGlScene3DParticleEmitter3Ds;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.scene3dGl.GlViewportAspect.getGlScene3DViewportAspect;
+import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMeshMaterialRenderer;
@@ -36,6 +38,7 @@ import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
@@ -165,7 +168,6 @@ class DrawGlScene3D {
       _Runtime.callProperty(blendedDrawList, 'sort', cast ([DrawGlScene3D.compareBlendedEntriesDescending__drawGlScene3D] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.field(state, 'gl');
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
-      flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.SRC_ALPHA, flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA);
       (boundMaterial = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       (boundLightBlock = cast (null : Dynamic));
       (boundRenderer = cast (null : Dynamic));
@@ -182,6 +184,7 @@ class DrawGlScene3D {
           var colorAdjusted:Dynamic = ((cast colorAdjustmentFeatureEnabled : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(entry, 'colorMatrix'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'colorScaleBias'), null)) : Bool));
           var colorMatrix:Dynamic = ((cast colorAdjusted : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(entry, 'colorMatrix'), null) : Bool));
           if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'lightBlock'), boundLightBlock) : Bool)) : Bool) || (cast !_Runtime.strictEquals(skinned, boundSkinned) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorAdjusted, boundColorAdjustment) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorMatrix, boundColorMatrix) : Bool)) : Bool)) {
+            _Runtime.callValue(DrawGlScene3D.applyGlSurfaceBlendMode__drawGlScene3D, cast ([state, _Runtime.field(entry, 'material')] : Array<Dynamic>));
             _Runtime.setField(runtime, 'activeColorAdjustmentRun', colorAdjusted);
             _Runtime.setField(runtime, 'activeColorMatrixRun', colorMatrix);
             _Runtime.setField(runtime, 'activeSkinnedRun', skinned);
@@ -214,6 +217,15 @@ class DrawGlScene3D {
   public static function isBlendedMaterial__drawGlScene3D(material:Material):Bool {
     return cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend');
     return cast null;
+  }
+
+  public static function applyGlSurfaceBlendMode__drawGlScene3D(state:GlRenderState, material:Material):Void {
+    var surface:Dynamic = cast _Runtime.UNDEFINED;
+    var blendMode:Dynamic = cast _Runtime.UNDEFINED;
+    surface = (cast material : SurfaceMaterial);
+    blendMode = ((cast ((cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'blend') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(surface, 'blendMode')), 'string') : Bool)) : Bool) ? (cast _Runtime.field(surface, 'blendMode') : Dynamic) : (cast BlendModeValue.Normal : Dynamic));
+    if ((cast _Runtime.strictEquals(_Runtime.field(state, 'applyBlendMode'), null) : Bool)) { _Runtime.callValue(enableGlBlendModeSupport, cast ([state] : Array<Dynamic>)); }
+    _Runtime.callProperty(state, 'applyBlendMode', cast ([state, blendMode] : Array<Dynamic>));
   }
 
   public static function hasExcessForwardLights__drawGlScene3D(lights:Scene3DLightsLike):Bool {

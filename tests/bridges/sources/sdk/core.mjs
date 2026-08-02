@@ -2,3 +2,13 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from '@flighthq/abc';
+export * from '@flighthq/color';
+export * from '@flighthq/compression';
+export * from '@flighthq/entity';
+export * from '@flighthq/geometry';
+export * from '@flighthq/math';
+export * from '@flighthq/node';
+export * from '@flighthq/signals';
+export * from '@flighthq/types';

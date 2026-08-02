@@ -193,8 +193,8 @@ class EffectsGl {
     Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.endGlRenderEffectPipeline(state, pipeline, operations);
   }
 
-  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool):GlRenderEffectApplicationExplanation {
-    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderTextureEffect.explainGlRenderEffectApplication(state, effects, sourceAvailable);
+  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, ?destinationAvailable:Dynamic):GlRenderEffectApplicationExplanation {
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderTextureEffect.explainGlRenderEffectApplication(state, effects, sourceAvailable, destinationAvailable);
     return cast null;
   }
 

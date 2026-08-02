@@ -2,3 +2,27 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './canvasBevelEffect.mjs';
+export * from './canvasBlendEffect.mjs';
+export * from './canvasBloomEffect.mjs';
+export * from './canvasBlurEffect.mjs';
+export * from './canvasColorLutPass.mjs';
+export * from './canvasColorMatrixPass.mjs';
+export * from './canvasCompositeEffect.mjs';
+export * from './canvasDropShadowEffect.mjs';
+export * from './canvasEffectCompositing.mjs';
+export * from './canvasEffectDropShadowCss.mjs';
+export * from './canvasFilmGrainEffect.mjs';
+export * from './canvasGradientBevelEffect.mjs';
+export * from './canvasGradientGlowEffect.mjs';
+export * from './canvasGradientRamp.mjs';
+export * from './canvasInnerGlowEffect.mjs';
+export * from './canvasInnerShadowEffect.mjs';
+export * from './canvasOuterGlowEffect.mjs';
+export * from './canvasPixelateEffect.mjs';
+export * from './canvasRenderEffectPipeline.mjs';
+export * from './canvasRenderEffectRegistry.mjs';
+export * from './canvasRenderTextureEffect.mjs';
+export * from './canvasScanlinesEffect.mjs';
+export * from './canvasVignetteEffect.mjs';

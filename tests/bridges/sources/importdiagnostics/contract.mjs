@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './importDiagnosticCollector.mjs';
+export * from './importDiagnosticText.mjs';

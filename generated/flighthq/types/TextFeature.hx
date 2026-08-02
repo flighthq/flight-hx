@@ -3,5 +3,17 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._TextFeatureValues.TextFeatureCapitals;
+import flighthq.types._internal._TextFeatureValues.TextFeatureContextualAlternates;
+import flighthq.types._internal._TextFeatureValues.TextFeatureDiscretionaryLigatures;
+import flighthq.types._internal._TextFeatureValues.TextFeatureFractions;
+import flighthq.types._internal._TextFeatureValues.TextFeatureKerning;
+import flighthq.types._internal._TextFeatureValues.TextFeatureLigatures;
+import flighthq.types._internal._TextFeatureValues.TextFeatureOldStyleFigures;
+import flighthq.types._internal._TextFeatureValues.TextFeatureSmallCaps;
+import flighthq.types._internal._TextFeatureValues.TextFeatureStylisticAlternates;
+import flighthq.types._internal._TextFeatureValues.TextFeatureSubscript;
+import flighthq.types._internal._TextFeatureValues.TextFeatureSuperscript;
+import flighthq.types._internal._TextFeatureValues.TextFeatureTabularFigures;
 
 typedef TextFeature = { @:optional var end:Float; @:optional var start:Float; var tag:String; var value:Float; };

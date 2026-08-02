@@ -4,6 +4,7 @@ package flighthq.scene2dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderWgpu.WgpuMaterialRegistry.resolveWgpuMaterialRenderer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuTextureResolver.resolveWgpuTexture;
@@ -76,7 +77,7 @@ class WgpuTilemap {
     materialRenderer = _Runtime.callValue(resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true] : Array<Dynamic>));
+    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     nodeMaterialData = _Runtime.field(tilemapNode, 'materialData');
     perTileColorScaleBias = _Runtime.field(_Runtime.field(source, 'data'), 'materialData');

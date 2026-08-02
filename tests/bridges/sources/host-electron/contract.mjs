@@ -2,3 +2,21 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './electronApp.mjs';
+export * from './electronClipboard.mjs';
+export * from './electronDialog.mjs';
+export * from './electronIpc.mjs';
+export * from './electronMenu.mjs';
+export * from './electronNotification.mjs';
+export * from './electronPlatform.mjs';
+export * from './electronPower.mjs';
+export * from './electronProtocol.mjs';
+export * from './electronRegister.mjs';
+export * from './electronScreen.mjs';
+export * from './electronShell.mjs';
+export * from './electronShortcut.mjs';
+export * from './electronStorage.mjs';
+export * from './electronTray.mjs';
+export * from './electronUpdater.mjs';
+export * from './electronWindow.mjs';

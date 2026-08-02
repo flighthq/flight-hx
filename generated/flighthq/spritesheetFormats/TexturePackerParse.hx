@@ -24,7 +24,7 @@ class TexturePackerParse {
   }
 
   public static function animationsFromFrameTags__texturePackerParse(tags:Array<TexturePackerFrameTag>, frameNames:Array<String>):Array<SpritesheetAnimationData> {
-    return cast _Runtime.callProperty(tags, 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: _Runtime.slice(frameNames, tag.from, (tag.to + 1.0)), loop: true, name: tag.name }] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(tags, 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: _Runtime.slice(frameNames, tag.from, (tag.to + 1.0)), name: tag.name, repeatCount: -1.0 }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 

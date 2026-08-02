@@ -3,6 +3,7 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.scene3dWgpu.WgpuMeshFragmentTail.WGPU_MESH_FRAGMENT_TAIL;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.WGPU_MESH_PRELUDE_WGSL;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.ensureWgpuScene3DPipeline;
@@ -14,7 +15,7 @@ import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuWireframePipeline;
 
 class WgpuWireframePrelude {
-  public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor):Dynamic {
+  public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor, alphaCutoff:Dynamic = 0.5):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -29,36 +30,40 @@ class WgpuWireframePrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 1.0, flighthq._internal._StaticIndex.readArray(color, 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 2.0, flighthq._internal._StaticIndex.readArray(color, 2.0));
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 3.0, flighthq._internal._StaticIndex.readArray(color, 3.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 4.0, alphaCutoff);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 5.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 6.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 7.0, 0.0);
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 'buffer'), 0.0, WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
   }
 
-  public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, blended:Dynamic = false):WgpuWireframePipeline {
+  public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, blended:Dynamic = false, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     device = _Runtime.field(state, 'device');
-    module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: _Runtime.callValue(getWgpuWireframeModuleSource, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: _Runtime.callValue(getWgpuWireframeModuleSource, cast ([alphaMaskEnabled] : Array<Dynamic>)) }] : Array<Dynamic>));
     materialBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast _Runtime.callValue(createWgpuMeshPipeline, cast ([state, { blended: blended, doubleSided: true, format: format, materialBindGroupLayout: materialBindGroupLayout, module: module, topology: 'line-list' }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic):WgpuWireframePipeline {
-    return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'wireframe:' + Std.string(format) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuWireframePipeline, cast ([state, format, blended] : Array<Dynamic>))] : Array<Dynamic>));
+  public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
+    return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'wireframe:' + Std.string(format) + '|' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuWireframePipeline, cast ([state, format, blended, alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuWireframeModuleSource():String {
-    return cast (WGPU_MESH_PRELUDE_WGSL + WgpuWireframePrelude.WIREFRAME_WGSL_BODY__wgpuWireframePrelude);
+  public static function getWgpuWireframeModuleSource(alphaMaskEnabled:Dynamic = false):String {
+    return cast (('const ALPHA_MASK : bool = ' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + WGPU_MESH_PRELUDE_WGSL) + WgpuWireframePrelude.WIREFRAME_WGSL_BODY__wgpuWireframePrelude);
     return cast null;
   }
 
-  public static final WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude:Dynamic = 16.0;
+  public static final WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude:Dynamic = 32.0;
 
-  public static final WIREFRAME_WGSL_BODY__wgpuWireframePrelude:Dynamic = '\nstruct WireframeMaterial {\n  color : vec4f,  // linear rgba\n};\n\n@group(2) @binding(0) var<uniform> material : WireframeMaterial;\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  return vec4f(material.color.rgb, material.color.a * in.objectAlpha);\n}\n';
+  public static final WIREFRAME_WGSL_BODY__wgpuWireframePrelude:Dynamic = '' + Std.string(WGPU_MESH_FRAGMENT_TAIL) + '\nstruct WireframeMaterial {\n  color : vec4f,  // linear rgba\n  params : vec4f, // x = alphaCutoff\n};\n\n@group(2) @binding(0) var<uniform> material : WireframeMaterial;\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  if (ALPHA_MASK && material.color.a < material.params.x) {\n    discard;\n  }\n  return flightPremultipliedOutput(vec4f(material.color.rgb, flightMeshCoverage(material.color.a, in.objectAlpha, draw.params.y)));\n}\n';
 
   public static final _scratch__wgpuWireframePrelude:Dynamic = new flighthq._internal._Float32Array((WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude / 4.0));
 }

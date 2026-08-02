@@ -5,5 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
+import flighthq.types._internal._AreaLightValues.AreaLightKind;
 
 typedef AreaLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; };

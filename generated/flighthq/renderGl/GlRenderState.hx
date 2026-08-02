@@ -118,7 +118,9 @@ class GlRenderState {
     _Runtime.setField(runtime, 'quadBatchWriterSmoothing', null);
     _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'textureSourcePremultipliedTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureSourcePremultipliedSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'textureSourceStraightTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureSourceStraightSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'quadVertexBuffer', quadVertexBuffer);
     _Runtime.setField(runtime, 'quadIndexBuffer', quadIndexBuffer);
     _Runtime.setField(runtime, 'quadVertexData', new flighthq._internal._Float32Array(16.0));
@@ -258,7 +260,7 @@ class GlRenderState {
     return cast null;
   }
 
-  public static final GL_CONTEXT_RUNTIME_KEYS__glRenderState:Dynamic = cast (['currentBlendMode', 'currentProgram', 'currentTexture', 'currentTextureStraightAlpha', 'particleShader', 'particleCornerBuffer', 'particleInstanceBuffer', 'quadBatchShader', 'quadBatchCornerBuffer', 'colorScaleBiasInstancedShader', 'colorMatrixInstancedShader', 'colorTintInstancedShader', 'uniformColorScaleBiasShader', 'shapeMeshColorScaleBiasShader', 'shapeMeshColorMatrixShader', 'sceneMeshUploadCache', 'shaderLoc', 'textureCache', 'textureSourcePremultipliedTextureCache', 'textureSourceStraightTextureCache', 'glExternalTextureCache', 'glRenderTextureCache', 'videoTextureCache', 'mipmappedTextures', 'anisotropyExt', 'maxAnisotropy', 'quadVertexBuffer', 'quadIndexBuffer', 'quadBatchWriterInstanceBuffer', 'quadBatchWriterMaterialBuffer', 'quadBatchWriterColorScaleBiasBuffer'] : Array<Dynamic>);
+  public static final GL_CONTEXT_RUNTIME_KEYS__glRenderState:Dynamic = cast (['currentBlendMode', 'currentProgram', 'currentTexture', 'currentTextureStraightAlpha', 'particleShader', 'particleCornerBuffer', 'particleInstanceBuffer', 'quadBatchShader', 'quadBatchCornerBuffer', 'colorScaleBiasInstancedShader', 'colorMatrixInstancedShader', 'colorTintInstancedShader', 'uniformColorScaleBiasShader', 'shapeMeshColorScaleBiasShader', 'shapeMeshColorMatrixShader', 'sceneMeshUploadCache', 'shaderLoc', 'textureCache', 'textureSourcePremultipliedTextureCache', 'textureSourcePremultipliedSrgbTextureCache', 'textureSourceStraightTextureCache', 'textureSourceStraightSrgbTextureCache', 'glExternalTextureCache', 'glRenderTextureCache', 'videoTextureCache', 'videoSrgbTextureCache', 'mipmappedTextures', 'anisotropyExt', 'maxAnisotropy', 'quadVertexBuffer', 'quadIndexBuffer', 'quadBatchWriterInstanceBuffer', 'quadBatchWriterMaterialBuffer', 'quadBatchWriterColorScaleBiasBuffer'] : Array<Dynamic>);
 
   public static final _contextRuntimeByStateRuntime__glRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 

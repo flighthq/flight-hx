@@ -2,3 +2,30 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './aabb.mjs';
+export * from './boundingSphere.mjs';
+export * from './capsule.mjs';
+export * from './frustum.mjs';
+export * from './matrix.mjs';
+export * from './matrix3.mjs';
+export * from './matrix3Pool.mjs';
+export * from './matrix4.mjs';
+export * from './matrix4Pool.mjs';
+export * from './matrixPool.mjs';
+export * from './obb.mjs';
+export * from './plane.mjs';
+export * from './quaternion.mjs';
+export * from './quaternionPool.mjs';
+export * from './ray3d.mjs';
+export * from './rectangle.mjs';
+export * from './rectanglePool.mjs';
+export * from './transform2d.mjs';
+export * from './transform3d.mjs';
+export * from './typedarray.mjs';
+export * from './vector2.mjs';
+export * from './vector2Pool.mjs';
+export * from './vector3.mjs';
+export * from './vector3Pool.mjs';
+export * from './vector4.mjs';
+export * from './vector4Pool.mjs';

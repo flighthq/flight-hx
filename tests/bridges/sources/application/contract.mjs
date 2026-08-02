@@ -2,3 +2,7 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './application.mjs';
+export * from './applicationRenderView.mjs';
+export * from './window.mjs';

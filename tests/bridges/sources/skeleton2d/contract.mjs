@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './applyAnimationClipToSkeleton2D.mjs';
+export * from './deformMeshAttachment2D.mjs';
+export * from './regionAttachment2D.mjs';
+export * from './skeleton2d.mjs';

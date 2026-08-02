@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const computeTextureContainerLevels = compiled.flighthq.textureFormats.TextureFormats.computeTextureContainerLevels;
 export const detectTextureContainer = compiled.flighthq.textureFormats.TextureFormats.detectTextureContainer;
+export const explainTextureContainerParse = compiled.flighthq.textureFormats.TextureFormats.explainTextureContainerParse;
 export const getTextureContainerLevelByteLength = compiled.flighthq.textureFormats.TextureFormats.getTextureContainerLevelByteLength;
 export const parseAtf = compiled.flighthq.textureFormats.TextureFormats.parseAtf;
 export const parseBasis = compiled.flighthq.textureFormats.TextureFormats.parseBasis;

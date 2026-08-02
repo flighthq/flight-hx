@@ -11,6 +11,7 @@ import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
 
 typedef QuadBatchData = { var atlas:Null<TextureAtlas>; var ids:flighthq._internal._UInt16Array; var instanceCount:Float; var materialData:Null<Array<Null<MaterialData>>>; var transforms:flighthq._internal._Float32Array; var transformType:QuadTransformType; };
 

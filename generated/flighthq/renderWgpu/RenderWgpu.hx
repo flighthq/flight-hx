@@ -18,6 +18,7 @@ import flighthq.renderWgpu.WgpuSurface as Facade_RenderWgpu_flighthq_renderWgpu_
 import flighthq.renderWgpu.WgpuTextureResolver as Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureResolver;
 import flighthq.types.Bitmap;
 import flighthq.types.CreateExternalTextureOptions;
+import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
@@ -58,8 +59,8 @@ class RenderWgpu {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderState.copyWgpuRenderStateRegistrations(target, source);
   }
 
-  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Bitmap> {
-    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuSurface.createBitmapFromWgpuRenderState(state);
+  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState, ?timeoutMs:Dynamic):flighthq._internal._Promise<Bitmap> {
+    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuSurface.createBitmapFromWgpuRenderState(state, timeoutMs);
     return cast null;
   }
 
@@ -190,9 +191,13 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, ?premultiply:Dynamic):Null<WgpuTextureEntry> {
-    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureResolver.resolveWgpuTexture(state, texture, premultiply);
+  public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<WgpuTextureEntry> {
+    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureResolver.resolveWgpuTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
+  }
+
+  public static function setWgpuRenderTransform2D(state:WgpuRenderState, transform:Matrix):Void {
+    Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTarget.setWgpuRenderTransform2D(state, transform);
   }
 
   public static function submitWgpuRenderPass(state:WgpuRenderState):Void {

@@ -105,7 +105,7 @@ class BitmapChannel {
   }
 
   public static function makeBitmap__bitmapChannel(data:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, source:Bitmap):Bitmap {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, data: data, format: source.format, height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
     return cast null;
   }
 }

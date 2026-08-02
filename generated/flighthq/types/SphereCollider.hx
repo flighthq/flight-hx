@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._SphereColliderValues.SphereColliderKind;
 
 typedef SphereCollider = { @:optional var restitution:Float; @:optional var friction:Float; var kind:String; var x:Float; var y:Float; var z:Float; var radius:Float; var mode:String; };

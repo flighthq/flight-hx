@@ -2,3 +2,13 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './decodeImage.mjs';
+export * from './detectImageMimeType.mjs';
+export * from './encodeImage.mjs';
+export * from './explainImageDecodeFailure.mjs';
+export * from './explainImageEncodeFailure.mjs';
+export * from './imageDecoderRegistry.mjs';
+export * from './imageEncoderRegistry.mjs';
+export * from './registerWebImageDecoders.mjs';
+export * from './registerWebImageEncoders.mjs';

@@ -3,7 +3,6 @@ package flighthq.scene3dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.scene3dFormats.Awd2Inflate as Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Inflate;
 import flighthq.scene3dFormats.Awd2Parse as Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Parse;
 import flighthq.scene3dFormats.GltfParse as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfParse;
 import flighthq.scene3dFormats.GltfPunctualLights as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfPunctualLights;
@@ -15,7 +14,6 @@ import flighthq.scene3dFormats.ObjParse as Facade_Scene3dFormats_flighthq_scene3
 import flighthq.scene3dFormats.SceneSkeleton as Facade_Scene3dFormats_flighthq_scene3dFormats_SceneSkeleton;
 import flighthq.scene3dFormats.ThreeDsParse as Facade_Scene3dFormats_flighthq_scene3dFormats_ThreeDsParse;
 import flighthq.types.AnimationClip;
-import flighthq.types.AwdDecompressor;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfExtension.GltfImportOptions;
 import flighthq.types.ImportDiagnostic;
@@ -82,8 +80,6 @@ class Scene3dFormats {
     return cast null;
   }
 
-  public static final inflateAwdDeflate:AwdDecompressor = Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Inflate.inflateAwdDeflate;
-
   public static function parse3ds(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3DDocument {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_ThreeDsParse.parse3ds(bytes, diagnostics);
     return cast null;
@@ -132,13 +128,5 @@ class Scene3dFormats {
   public static function parseObjMaterialLibrary(source:String, ?diagnostics:Array<ImportDiagnostic>):ObjMaterialLibrary {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_MtlParse.parseObjMaterialLibrary(source, diagnostics);
     return cast null;
-  }
-
-  public static function registerAwd2Decompressor(compression:Float, decompressor:Null<AwdDecompressor>):Void {
-    Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Parse.registerAwd2Decompressor(compression, decompressor);
-  }
-
-  public static function registerAwd2DeflateDecompressor():Void {
-    Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Inflate.registerAwd2DeflateDecompressor();
   }
 }

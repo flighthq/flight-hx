@@ -3,5 +3,29 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './domBackground.mjs';
+export * from './domBitmapTextureResolver.mjs';
+export * from './domCSSFilterBinding.mjs';
+export * from './domCache.mjs';
+export * from './domClip.mjs';
+export * from './domClipRectangle.mjs';
+export * from './domHtmlView.mjs';
+export * from './domImageSource.mjs';
+export * from './domImageTextureResolver.mjs';
+export * from './domMaterials.mjs';
+export * from './domNativeText.mjs';
+export * from './domNode2D.mjs';
+export * from './domRenderState.mjs';
+export * from './domRichText.mjs';
+export * from './domScale9Shape.mjs';
+export * from './domShape.mjs';
+export * from './domSprite.mjs';
+export * from './domStyle.mjs';
+export * from './domTextInput.mjs';
+export * from './domTextLabel.mjs';
+export * from './domTextureResolver.mjs';
+export * from './domTransform.mjs';
+export * from './enableDomTextureResolverGuards.mjs';
+export * from './explainDomTextureResolution.mjs';
 export { escapeDomHtmlString } from './domTextHelpers.mjs';
 export { invalidateDomFontResource } from './domFontSource.mjs';

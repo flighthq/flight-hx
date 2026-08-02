@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from '@flighthq/media';
+export * from '@flighthq/mediasession';

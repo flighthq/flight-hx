@@ -2,3 +2,10 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './collator.mjs';
+export * from './datetime.mjs';
+export * from './list.mjs';
+export * from './number.mjs';
+export * from './plural.mjs';
+export * from './relativeTime.mjs';

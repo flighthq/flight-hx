@@ -2,3 +2,13 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './colorFromKelvin.mjs';
+export * from './hslColor.mjs';
+export * from './hsvColor.mjs';
+export * from './lerpColor.mjs';
+export * from './luminance.mjs';
+export * from './oklab.mjs';
+export * from './packColor.mjs';
+export * from './premultiplyColorAlpha.mjs';
+export * from './srgbTransfer.mjs';

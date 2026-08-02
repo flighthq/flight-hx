@@ -9,7 +9,7 @@ import flighthq.types.SpritesheetAnimation;
 
 class SpritesheetAnimation {
   public static function createSpritesheetAnimation(?obj:Dynamic):flighthq.types.SpritesheetAnimation {
-    return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), loop: _Runtime.coalesce(_Runtime.optionalField(obj, 'loop'), function():Dynamic return cast false), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0), repeatCount: _Runtime.coalesce(_Runtime.optionalField(obj, 'repeatCount'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -39,7 +39,7 @@ class SpritesheetAnimation {
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(matchedIndices, 'length'), 0.0) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: _Runtime.optionalField(options, 'direction'), frameDuration: _Runtime.optionalField(options, 'frameDuration'), frameDurations: _Runtime.optionalField(options, 'frameDurations'), frames: matchedIndices, loop: _Runtime.optionalField(options, 'loop'), originX: _Runtime.optionalField(options, 'originX'), originY: _Runtime.optionalField(options, 'originY') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: _Runtime.optionalField(options, 'direction'), frameDuration: _Runtime.optionalField(options, 'frameDuration'), frameDurations: _Runtime.optionalField(options, 'frameDurations'), frames: matchedIndices, originX: _Runtime.optionalField(options, 'originX'), originY: _Runtime.optionalField(options, 'originY'), repeatCount: _Runtime.optionalField(options, 'repeatCount') }] : Array<Dynamic>));
     return cast null;
   }
 }

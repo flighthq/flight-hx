@@ -2,3 +2,28 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './cleanPath.mjs';
+export * from './containsPathPoint.mjs';
+export * from './copyPath.mjs';
+export * from './dashPath.mjs';
+export * from './decimatePath.mjs';
+export * from './explainStrokePathTessellation.mjs';
+export * from './fitPathCurves.mjs';
+export * from './flattenPath.mjs';
+export * from './forEachPathSegment.mjs';
+export * from './getPathBounds.mjs';
+export * from './getPathContourLengths.mjs';
+export * from './getPathLength.mjs';
+export * from './getPathNearestPoint.mjs';
+export * from './getPathPointAtDistance.mjs';
+export * from './getPathSegmentAtParameter.mjs';
+export * from './getPathSignedArea.mjs';
+export * from './path.mjs';
+export * from './pathMeshPool.mjs';
+export * from './reversePath.mjs';
+export * from './strokePath.mjs';
+export * from './tessellatePath.mjs';
+export * from './tessellatePathTyped.mjs';
+export * from './tessellateStrokePath.mjs';
+export * from './transformPath.mjs';

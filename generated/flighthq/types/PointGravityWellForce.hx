@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._PointGravityWellForceValues.PointGravityWellForceKind;
 
 typedef PointGravityWellForce = { var kind:String; var x:Float; var y:Float; var strength:Float; @:optional var radius:Float; @:optional var minRadius:Float; @:optional var falloff:ForceFalloff; @:optional var repulse:Bool; };

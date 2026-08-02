@@ -32,6 +32,10 @@ class Color {
     return cast null;
   }
 
+  public static function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+    Facade_Color_flighthq_color_Oklab.clampLinearRgb(out, r, g, b);
+  }
+
   public static function colorFromKelvin(kelvin:Float):Float {
     return cast Facade_Color_flighthq_color_ColorFromKelvin.colorFromKelvin(kelvin);
     return cast null;

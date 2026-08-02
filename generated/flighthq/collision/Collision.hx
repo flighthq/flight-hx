@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollideContactManifold as Facade_Collision_flighthq_collision_CollideContactManifold;
 import flighthq.collision.ContactManifold as Facade_Collision_flighthq_collision_ContactManifold;
+import flighthq.collision.EnableCollisionGuards as Facade_Collision_flighthq_collision_EnableCollisionGuards;
+import flighthq.collision.ExplainCollisionTest as Facade_Collision_flighthq_collision_ExplainCollisionTest;
 import flighthq.collision.Manifold as Facade_Collision_flighthq_collision_Manifold;
 import flighthq.collision.PointContainment as Facade_Collision_flighthq_collision_PointContainment;
 import flighthq.collision.SegmentCollision as Facade_Collision_flighthq_collision_SegmentCollision;
@@ -19,8 +21,14 @@ import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Collision.CollisionTestExplanation;
 
 class Collision {
+  public static function areCollisionGuardsEnabled():Bool {
+    return cast Facade_Collision_flighthq_collision_EnableCollisionGuards.areCollisionGuardsEnabled();
+    return cast null;
+  }
+
   public static function clearCollisionContactManifold(out:CollisionContactManifold):Void {
     Facade_Collision_flighthq_collision_ContactManifold.clearCollisionContactManifold(out);
   }
@@ -91,6 +99,19 @@ class Collision {
 
   public static function createCollisionManifold():CollisionManifold {
     return cast Facade_Collision_flighthq_collision_Manifold.createCollisionManifold();
+    return cast null;
+  }
+
+  public static function disableCollisionGuards():Void {
+    Facade_Collision_flighthq_collision_EnableCollisionGuards.disableCollisionGuards();
+  }
+
+  public static function enableCollisionGuards():Void {
+    Facade_Collision_flighthq_collision_EnableCollisionGuards.enableCollisionGuards();
+  }
+
+  public static function explainCollisionTest(a:CollisionShape, b:CollisionShape):CollisionTestExplanation {
+    return cast Facade_Collision_flighthq_collision_ExplainCollisionTest.explainCollisionTest(a, b);
     return cast null;
   }
 

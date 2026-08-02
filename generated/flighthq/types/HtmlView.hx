@@ -11,6 +11,7 @@ import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
 typedef HtmlViewData = { var element:Null<Dynamic>; var height:Float; var width:Float; };
 

@@ -4,6 +4,7 @@ package flighthq.scene2dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
@@ -75,7 +76,7 @@ class GlQuadBatch {
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    glTexture = _Runtime.callValue(resolveGlTexture, cast ([state, texture, true] : Array<Dynamic>));
+    glTexture = _Runtime.callValue(resolveGlTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = _Runtime.field(runtime, 'currentTextureStraightAlpha');
     nodeMaterialData = _Runtime.field(quadBatch, 'materialData');

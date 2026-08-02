@@ -6,8 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont;
 import flighthq.bitmapfont.BitmapFontFromGlyphAtlas as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontFromGlyphAtlas;
 import flighthq.bitmapfont.BitmapFontGlyphSource as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontGlyphSource;
+import flighthq.bitmapfont.EnableBitmapFontGuards as Facade_Bitmapfont_flighthq_bitmapfont_EnableBitmapFontGuards;
+import flighthq.bitmapfont.ExplainBitmapFontGlyph as Facade_Bitmapfont_flighthq_bitmapfont_ExplainBitmapFontGlyph;
+import flighthq.bitmapfont.SummarizeBitmapFont as Facade_Bitmapfont_flighthq_bitmapfont_SummarizeBitmapFont;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
+import flighthq.types.BitmapFontGlyphExplanation;
+import flighthq.types.BitmapFontSummary;
 import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphEntry;
@@ -27,6 +32,19 @@ class Bitmapfont {
 
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
     return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFontGlyphSource.createGlyphSourceFromBitmapFont(font);
+    return cast null;
+  }
+
+  public static function disableBitmapFontGuards():Void {
+    Facade_Bitmapfont_flighthq_bitmapfont_EnableBitmapFontGuards.disableBitmapFontGuards();
+  }
+
+  public static function enableBitmapFontGuards():Void {
+    Facade_Bitmapfont_flighthq_bitmapfont_EnableBitmapFontGuards.enableBitmapFontGuards();
+  }
+
+  public static function explainBitmapFontGlyph(font:BitmapFont, codepoint:Float):BitmapFontGlyphExplanation {
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_ExplainBitmapFontGlyph.explainBitmapFontGlyph(font, codepoint);
     return cast null;
   }
 
@@ -52,6 +70,16 @@ class Bitmapfont {
 
   public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
     return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPages(font);
+    return cast null;
+  }
+
+  public static function hasBitmapFontGlyph(font:BitmapFont, codepoint:Float):Bool {
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.hasBitmapFontGlyph(font, codepoint);
+    return cast null;
+  }
+
+  public static function summarizeBitmapFont(font:BitmapFont):BitmapFontSummary {
+    return cast Facade_Bitmapfont_flighthq_bitmapfont_SummarizeBitmapFont.summarizeBitmapFont(font);
     return cast null;
   }
 }

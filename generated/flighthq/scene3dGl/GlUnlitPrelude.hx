@@ -4,6 +4,8 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
+import flighthq.scene3dGl.GlMeshFragmentTail.GL_MESH_FRAGMENT_TAIL;
+import flighthq.scene3dGl.GlMeshFragmentTail.GL_MESH_FRAGMENT_TAIL_UNIFORMS;
 import flighthq.scene3dGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.compileGlProgram;
@@ -29,7 +31,7 @@ class GlUnlitPrelude {
   }
 
   public static function buildGlUnlitDefineKey(key:GlUnlitDefineKey):String {
-    return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'colorMapLinear'), function():Dynamic return cast 'l', function():Dynamic return cast '-')) + '' + Std.string(((cast _Runtime.field(key, 'vertexColor') : Bool) ? (cast 'v' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
+    return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'vertexColor') : Bool) ? (cast 'v' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
@@ -62,7 +64,6 @@ class GlUnlitPrelude {
     defines = '#version 300 es\n';
     if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
     if ((cast _Runtime.field(key, 'hasColorMap') : Bool)) { (defines = cast ((defines + '#define HAS_COLOR_MAP\n') : Dynamic)); }
-    if (_Runtime.truthy(_Runtime.field(key, 'colorMapLinear'))) { (defines = cast ((defines + '#define COLOR_MAP_LINEAR\n') : Dynamic)); }
     if ((cast _Runtime.field(key, 'hasUvTransform') : Bool)) { (defines = cast ((defines + '#define HAS_UV_TRANSFORM\n') : Dynamic)); }
     if ((cast _Runtime.field(key, 'vertexColor') : Bool)) { (defines = cast ((defines + '#define VERTEX_COLOR\n') : Dynamic)); }
     if (_Runtime.truthy(_Runtime.field(key, 'hasSkin'))) { (defines = cast ((defines + '#define HAS_SKIN\n') : Dynamic)); }
@@ -72,5 +73,5 @@ class GlUnlitPrelude {
 
   public static final UNLIT_VERTEX_BODY__glUnlitPrelude:Dynamic = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 3) in vec2 a_uv0;\n#ifdef VERTEX_COLOR\nlayout(location = 4) in vec4 a_color0;\nout vec4 v_color0;\n#endif\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\n' + Std.string(GL_UV_TRANSFORM_VERTEX_GLSL) + '\nout vec2 v_uv0;\n\nvoid main() {\n  v_uv0 = applyUvTransform(a_uv0);\n#ifdef VERTEX_COLOR\n  v_color0 = a_color0;\n#endif\n#ifdef HAS_SKIN\n  gl_Position = u_viewProjection * u_model * skinMatrix() * vec4(a_position, 1.0);\n#else\n  gl_Position = u_viewProjection * u_model * vec4(a_position, 1.0);\n#endif\n}\n';
 
-  public static final UNLIT_FRAGMENT_BODY__glUnlitPrelude:Dynamic = '\nprecision highp float;\n\nin vec2 v_uv0;\n#ifdef VERTEX_COLOR\nin vec4 v_color0;\n#endif\n\nuniform vec4 u_color;\nuniform float u_intensity;\n#ifdef HAS_COLOR_MAP\nuniform sampler2D u_colorMap;\n#endif\n#ifdef ALPHA_MASK\nuniform float u_alphaCutoff;\n#endif\n\nuniform float u_objectAlpha;\n\nout vec4 fragColor;\n\n// sRgb texels are gamma-encoded; decode to linear before use. u_color is already linear (decoded on\n// the CPU at bind), so only the sampled color-map needs decoding.\nvec3 srgbToLinear(vec3 c) {\n  vec3 lo = c / 12.92;\n  vec3 hi = pow((c + 0.055) / 1.055, vec3(2.4));\n  return mix(lo, hi, step(0.04045, c));\n}\n\nvoid main() {\n  vec4 color = u_color;\n#ifdef VERTEX_COLOR\n  color *= v_color0;\n#endif\n#ifdef HAS_COLOR_MAP\n  vec4 sampled = texture(u_colorMap, v_uv0);\n#ifdef COLOR_MAP_LINEAR\n  color.rgb *= sampled.rgb;\n#else\n  color.rgb *= srgbToLinear(sampled.rgb);\n#endif\n  color.a *= sampled.a;\n#endif\n#ifdef ALPHA_MASK\n  if (color.a < u_alphaCutoff) discard;\n#endif\n  fragColor = vec4(color.rgb * u_intensity, color.a);\n  fragColor.a *= u_objectAlpha;\n}\n';
+  public static final UNLIT_FRAGMENT_BODY__glUnlitPrelude:Dynamic = '\nprecision highp float;\n\nin vec2 v_uv0;\n#ifdef VERTEX_COLOR\nin vec4 v_color0;\n#endif\n\nuniform vec4 u_color;\nuniform float u_intensity;\n#ifdef HAS_COLOR_MAP\nuniform sampler2D u_colorMap;\n#endif\n#ifdef ALPHA_MASK\nuniform float u_alphaCutoff;\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\n// Texture.colorSpace selects the GPU format, so sampled color is already linear here.\nvoid main() {\n  vec4 color = u_color;\n#ifdef VERTEX_COLOR\n  color *= v_color0;\n#endif\n#ifdef HAS_COLOR_MAP\n  vec4 sampled = texture(u_colorMap, v_uv0);\n  color.rgb *= sampled.rgb;\n  color.a *= sampled.a;\n#endif\n#ifdef ALPHA_MASK\n  if (color.a < u_alphaCutoff) discard;\n  color.a = 1.0;\n#endif\n  fragColor = vec4(color.rgb * u_intensity, color.a);\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
 }

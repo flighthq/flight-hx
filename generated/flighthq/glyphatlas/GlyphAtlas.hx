@@ -10,14 +10,17 @@ import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.GlyphSource.GlyphRasterizeOptions;
+import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class GlyphAtlas {
   public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphSource.GlyphAtlas {
     var padding:Dynamic = cast _Runtime.UNDEFINED;
+    var rasterizerBackend:Dynamic = cast _Runtime.UNDEFINED;
     var rasterizeOptions:GlyphRasterizeOptions = cast _Runtime.UNDEFINED;
     padding = _Runtime.coalesce(options.padding, function():Dynamic return cast 1.0);
+    rasterizerBackend = _Runtime.coalesce(options.rasterizerBackend, function():Dynamic return cast _Runtime.callValue(getGlyphRasterizerBackend, cast ([] : Array<Dynamic>)));
     rasterizeOptions = _Runtime.mergeObjects([{ fontFamily: options.fontFamily }, { fontSize: options.fontSize }, ((cast !_Runtime.strictEquals(options.fontStyle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontStyle: options.fontStyle } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(options.fontWeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontWeight: options.fontWeight } : Dynamic) : (cast {  } : Dynamic))]);
-    return cast { runtime: { bitmaps: _Runtime.construct(_Runtime.globalValue('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(_Runtime.globalValue('Map'), []), lru: _Runtime.construct(_Runtime.globalValue('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: _Runtime.callValue(GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas, cast ([rasterizeOptions] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: _Runtime.callValue(createBitmap, cast ([options.width, options.height] : Array<Dynamic>)) } };
+    return cast { runtime: { bitmaps: _Runtime.construct(_Runtime.globalValue('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(_Runtime.globalValue('Map'), []), lru: _Runtime.construct(_Runtime.globalValue('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: _Runtime.callValue(GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas, cast ([rasterizerBackend, rasterizeOptions] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: _Runtime.callValue(createBitmap, cast ([options.width, options.height] : Array<Dynamic>)) } };
     return cast null;
   }
 
@@ -44,10 +47,8 @@ class GlyphAtlas {
     return cast null;
   }
 
-  public static function _resolveGlyphAtlasMetrics__glyphAtlas(rasterizeOptions:GlyphRasterizeOptions):GlyphMetrics {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
+  public static function _resolveGlyphAtlasMetrics__glyphAtlas(backend:GlyphRasterizerBackend, rasterizeOptions:GlyphRasterizeOptions):GlyphMetrics {
     var measured:Dynamic = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     measured = _Runtime.coalesce(_Runtime.callOptionalProperty(backend, 'measureMetrics', cast ([rasterizeOptions] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast _Runtime.coalesce(measured, function():Dynamic return cast _Runtime.callValue(deriveGlyphMetricsFromFontSize, cast ([rasterizeOptions.fontSize] : Array<Dynamic>)));
     return cast null;

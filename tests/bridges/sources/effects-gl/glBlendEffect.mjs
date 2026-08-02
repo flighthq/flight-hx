@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const applyBlendEffectToGl = api.applyBlendEffectToGl;
+export const BLEND_FRAGMENT_SRC = api.BLEND_FRAGMENT_SRC;
 export const defaultGlBlendEffectRunner = api.defaultGlBlendEffectRunner;
 export const getBlendEffectModeIndex = api.getBlendEffectModeIndex;
 export const getGlBlendEffectBackdrop = api.getGlBlendEffectBackdrop;

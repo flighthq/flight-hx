@@ -2,3 +2,9 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './enableTextureAtlasGuards.mjs';
+export * from './textureAtlas.mjs';
+export * from './textureAtlasFrom.mjs';
+export * from './textureAtlasGrid.mjs';
+export * from './textureAtlasRegion.mjs';

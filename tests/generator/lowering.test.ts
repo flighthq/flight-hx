@@ -97,6 +97,33 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('@:expose');
   });
 
+  it('materializes constructor parameter properties as initialized class fields', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/reader.ts',
+      `
+        export class Reader {
+          constructor(readonly source: Uint8Array, private end: number) {}
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+
+    expect(lowered.diagnostics).toEqual([]);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Reader',
+      packageName: '@flighthq/example',
+    });
+    expect(output).toContain('public final source:flighthq._internal._UInt8Array;');
+    expect(output).toContain('private var end:Float;');
+    expect(output).toContain('(this.source = cast (source : Dynamic));');
+    expect(output).toContain('(this.end = cast (end : Dynamic));');
+  });
+
   it('compiles and runs the generated module through Haxe', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/math/src/sample.ts',
@@ -1219,6 +1246,9 @@ describe('TypeScript lowering and Haxe emission', () => {
         export function isFrame(value: unknown): boolean {
           return typeof VideoFrame !== 'undefined' && value instanceof VideoFrame;
         }
+        export function isTypeError(value: unknown): boolean {
+          return value instanceof TypeError;
+        }
         export function local(Boolean: (value: unknown) => boolean, VideoFrame: new () => object) {
           return [Boolean(1), new VideoFrame()];
         }
@@ -1235,6 +1265,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain("'filter', cast ([_Runtime.truthy]");
     expect(output).toContain("_Runtime.isInstanceOf(value, _Runtime.globalValue('VideoFrame'))");
+    expect(output).toContain("_Runtime.isInstanceOfName(value, 'TypeError')");
     expect(output).toContain('_Runtime.callValue(Boolean,');
     expect(output).toContain('_Runtime.construct(VideoFrame, [])');
   });

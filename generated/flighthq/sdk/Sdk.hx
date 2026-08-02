@@ -3,6 +3,7 @@ package flighthq.sdk;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.abc.AbcFile as Facade_Sdk_flighthq_abc_AbcFile;
 import flighthq.accessibility.Accessibility as Facade_Sdk_flighthq_accessibility_Accessibility;
 import flighthq.adjustments.BrightnessContrastAdjustment as Facade_Sdk_flighthq_adjustments_BrightnessContrastAdjustment;
 import flighthq.adjustments.ChannelMixerAdjustment as Facade_Sdk_flighthq_adjustments_ChannelMixerAdjustment;
@@ -36,14 +37,20 @@ import flighthq.app.App as Facade_Sdk_flighthq_app_App;
 import flighthq.application.Application as Facade_Sdk_flighthq_application_Application;
 import flighthq.applicationGl.GlApplicationRenderView as Facade_Sdk_flighthq_applicationGl_GlApplicationRenderView;
 import flighthq.assets.AssetLibrary as Facade_Sdk_flighthq_assets_AssetLibrary;
+import flighthq.assets.EnableAssetGuards as Facade_Sdk_flighthq_assets_EnableAssetGuards;
+import flighthq.assets.ExplainAssetLoad as Facade_Sdk_flighthq_assets_ExplainAssetLoad;
 import flighthq.audio.AudioFormat as Facade_Sdk_flighthq_audio_AudioFormat;
 import flighthq.audio.AudioResource as Facade_Sdk_flighthq_audio_AudioResource;
 import flighthq.audio.AudioResourceFrom as Facade_Sdk_flighthq_audio_AudioResourceFrom;
+import flighthq.binpack.ExplainUnpackedRectangles as Facade_Sdk_flighthq_binpack_ExplainUnpackedRectangles;
 import flighthq.binpack.PackRectangles as Facade_Sdk_flighthq_binpack_PackRectangles;
 import flighthq.bitmap.Bitmap as Facade_Sdk_flighthq_bitmap_Bitmap;
 import flighthq.bitmapfont.BitmapFont as Facade_Sdk_flighthq_bitmapfont_BitmapFont;
 import flighthq.bitmapfont.BitmapFontFromGlyphAtlas as Facade_Sdk_flighthq_bitmapfont_BitmapFontFromGlyphAtlas;
 import flighthq.bitmapfont.BitmapFontGlyphSource as Facade_Sdk_flighthq_bitmapfont_BitmapFontGlyphSource;
+import flighthq.bitmapfont.EnableBitmapFontGuards as Facade_Sdk_flighthq_bitmapfont_EnableBitmapFontGuards;
+import flighthq.bitmapfont.ExplainBitmapFontGlyph as Facade_Sdk_flighthq_bitmapfont_ExplainBitmapFontGlyph;
+import flighthq.bitmapfont.SummarizeBitmapFont as Facade_Sdk_flighthq_bitmapfont_SummarizeBitmapFont;
 import flighthq.bitmapfontFormats.BitmapFontFnt as Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontFnt;
 import flighthq.bitmapfontFormats.BitmapFontJson as Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontJson;
 import flighthq.bitmapfontFormats.BitmapFontXml as Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontXml;
@@ -62,6 +69,8 @@ import flighthq.clipboard.Clipboard as Facade_Sdk_flighthq_clipboard_Clipboard;
 import flighthq.clock.Clock as Facade_Sdk_flighthq_clock_Clock;
 import flighthq.collision.CollideContactManifold as Facade_Sdk_flighthq_collision_CollideContactManifold;
 import flighthq.collision.ContactManifold as Facade_Sdk_flighthq_collision_ContactManifold;
+import flighthq.collision.EnableCollisionGuards as Facade_Sdk_flighthq_collision_EnableCollisionGuards;
+import flighthq.collision.ExplainCollisionTest as Facade_Sdk_flighthq_collision_ExplainCollisionTest;
 import flighthq.collision.Manifold as Facade_Sdk_flighthq_collision_Manifold;
 import flighthq.collision.PointContainment as Facade_Sdk_flighthq_collision_PointContainment;
 import flighthq.collision.SegmentCollision as Facade_Sdk_flighthq_collision_SegmentCollision;
@@ -77,6 +86,8 @@ import flighthq.color.Oklab as Facade_Sdk_flighthq_color_Oklab;
 import flighthq.color.PackColor as Facade_Sdk_flighthq_color_PackColor;
 import flighthq.color.PremultiplyColorAlpha as Facade_Sdk_flighthq_color_PremultiplyColorAlpha;
 import flighthq.color.SrgbTransfer as Facade_Sdk_flighthq_color_SrgbTransfer;
+import flighthq.compression.Decompressor as Facade_Sdk_flighthq_compression_Decompressor;
+import flighthq.compression.Deflate as Facade_Sdk_flighthq_compression_Deflate;
 import flighthq.connectivity.Connectivity as Facade_Sdk_flighthq_connectivity_Connectivity;
 import flighthq.debug.Debug as Facade_Sdk_flighthq_debug_Debug;
 import flighthq.device.Device as Facade_Sdk_flighthq_device_Device;
@@ -172,11 +183,18 @@ import flighthq.effects.ToneMapMath as Facade_Sdk_flighthq_effects_ToneMapMath;
 import flighthq.effects.VignetteEffect as Facade_Sdk_flighthq_effects_VignetteEffect;
 import flighthq.effects.VolumetricLightEffect as Facade_Sdk_flighthq_effects_VolumetricLightEffect;
 import flighthq.effects.WhiteBalanceEffect as Facade_Sdk_flighthq_effects_WhiteBalanceEffect;
+import flighthq.effectsCanvas.CanvasBevelEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect;
 import flighthq.effectsCanvas.CanvasBlendEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect;
 import flighthq.effectsCanvas.CanvasBloomEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasBloomEffect;
 import flighthq.effectsCanvas.CanvasBlurEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect;
+import flighthq.effectsCanvas.CanvasCompositeEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect;
 import flighthq.effectsCanvas.CanvasDropShadowEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasDropShadowEffect;
 import flighthq.effectsCanvas.CanvasFilmGrainEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect;
+import flighthq.effectsCanvas.CanvasGradientBevelEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasGradientBevelEffect;
+import flighthq.effectsCanvas.CanvasGradientGlowEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasGradientGlowEffect;
+import flighthq.effectsCanvas.CanvasGradientRamp as Facade_Sdk_flighthq_effectsCanvas_CanvasGradientRamp;
+import flighthq.effectsCanvas.CanvasInnerGlowEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasInnerGlowEffect;
+import flighthq.effectsCanvas.CanvasInnerShadowEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasInnerShadowEffect;
 import flighthq.effectsCanvas.CanvasOuterGlowEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasOuterGlowEffect;
 import flighthq.effectsCanvas.CanvasPixelateEffect as Facade_Sdk_flighthq_effectsCanvas_CanvasPixelateEffect;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline as Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectPipeline;
@@ -325,6 +343,8 @@ import flighthq.image.ImageResourceFrom as Facade_Sdk_flighthq_image_ImageResour
 import flighthq.imageCodec.DecodeImage as Facade_Sdk_flighthq_imageCodec_DecodeImage;
 import flighthq.imageCodec.DetectImageMimeType as Facade_Sdk_flighthq_imageCodec_DetectImageMimeType;
 import flighthq.imageCodec.EncodeImage as Facade_Sdk_flighthq_imageCodec_EncodeImage;
+import flighthq.imageCodec.ExplainImageDecodeFailure as Facade_Sdk_flighthq_imageCodec_ExplainImageDecodeFailure;
+import flighthq.imageCodec.ExplainImageEncodeFailure as Facade_Sdk_flighthq_imageCodec_ExplainImageEncodeFailure;
 import flighthq.imageCodec.ImageDecoderRegistry as Facade_Sdk_flighthq_imageCodec_ImageDecoderRegistry;
 import flighthq.imageCodec.ImageEncoderRegistry as Facade_Sdk_flighthq_imageCodec_ImageEncoderRegistry;
 import flighthq.imageCodec.RegisterWebImageDecoders as Facade_Sdk_flighthq_imageCodec_RegisterWebImageDecoders;
@@ -486,6 +506,7 @@ import flighthq.pathBoolean.OffsetPath as Facade_Sdk_flighthq_pathBoolean_Offset
 import flighthq.pathBoolean.SimplifyPath as Facade_Sdk_flighthq_pathBoolean_SimplifyPath;
 import flighthq.pathBoolean.UnionAllPaths as Facade_Sdk_flighthq_pathBoolean_UnionAllPaths;
 import flighthq.pathFormats.SvgPathData as Facade_Sdk_flighthq_pathFormats_SvgPathData;
+import flighthq.permissions.EnablePermissionGuards as Facade_Sdk_flighthq_permissions_EnablePermissionGuards;
 import flighthq.permissions.Permission as Facade_Sdk_flighthq_permissions_Permission;
 import flighthq.physics2d.ColliderTransform as Facade_Sdk_flighthq_physics2d_ColliderTransform;
 import flighthq.physics2d.Islands as Facade_Sdk_flighthq_physics2d_Islands;
@@ -508,6 +529,7 @@ import flighthq.render.RenderRegistryGuards as Facade_Sdk_flighthq_render_Render
 import flighthq.render.RenderRegistrySignals as Facade_Sdk_flighthq_render_RenderRegistrySignals;
 import flighthq.render.RenderState as Facade_Sdk_flighthq_render_RenderState;
 import flighthq.render.Renderer as Facade_Sdk_flighthq_render_Renderer;
+import flighthq.render.Scene2dWorkingColorSpace as Facade_Sdk_flighthq_render_Scene2dWorkingColorSpace;
 import flighthq.render.SceneRender as Facade_Sdk_flighthq_render_SceneRender;
 import flighthq.renderGl.EnableGlRenderStateGuards as Facade_Sdk_flighthq_renderGl_EnableGlRenderStateGuards;
 import flighthq.renderGl.EnableGlRenderTextureGuards as Facade_Sdk_flighthq_renderGl_EnableGlRenderTextureGuards;
@@ -554,6 +576,7 @@ import flighthq.scene2dCanvas.CanvasNode2D as Facade_Sdk_flighthq_scene2dCanvas_
 import flighthq.scene2dCanvas.CanvasParticleEmitter2D as Facade_Sdk_flighthq_scene2dCanvas_CanvasParticleEmitter2D;
 import flighthq.scene2dCanvas.CanvasQuadBatch as Facade_Sdk_flighthq_scene2dCanvas_CanvasQuadBatch;
 import flighthq.scene2dCanvas.CanvasRenderState as Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderState;
+import flighthq.scene2dCanvas.CanvasRenderTarget as Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTarget;
 import flighthq.scene2dCanvas.CanvasRenderTexture as Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexture;
 import flighthq.scene2dCanvas.CanvasRenderTexturePool as Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexturePool;
 import flighthq.scene2dCanvas.CanvasRenderTextureResolver as Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTextureResolver;
@@ -637,6 +660,7 @@ import flighthq.scene3d.PrepareScene3DMorph as Facade_Sdk_flighthq_scene3d_Prepa
 import flighthq.scene3d.Scene as Facade_Sdk_flighthq_scene3d_Scene;
 import flighthq.scene3d.SceneAnimation as Facade_Sdk_flighthq_scene3d_SceneAnimation;
 import flighthq.scene3d.SceneDocument as Facade_Sdk_flighthq_scene3d_SceneDocument;
+import flighthq.scene3d.SceneDocumentLights as Facade_Sdk_flighthq_scene3d_SceneDocumentLights;
 import flighthq.scene3d.SceneMaterial as Facade_Sdk_flighthq_scene3d_SceneMaterial;
 import flighthq.scene3d.SceneNode as Facade_Sdk_flighthq_scene3d_SceneNode;
 import flighthq.scene3d.SceneNodeAppearance as Facade_Sdk_flighthq_scene3d_SceneNodeAppearance;
@@ -644,7 +668,6 @@ import flighthq.scene3d.SceneNodeBounds as Facade_Sdk_flighthq_scene3d_SceneNode
 import flighthq.scene3d.SceneNodeCulling as Facade_Sdk_flighthq_scene3d_SceneNodeCulling;
 import flighthq.scene3d.SceneNodeDispose as Facade_Sdk_flighthq_scene3d_SceneNodeDispose;
 import flighthq.scene3d.SceneNodeTransform as Facade_Sdk_flighthq_scene3d_SceneNodeTransform;
-import flighthq.scene3dFormats.Awd2Inflate as Facade_Sdk_flighthq_scene3dFormats_Awd2Inflate;
 import flighthq.scene3dFormats.Awd2Parse as Facade_Sdk_flighthq_scene3dFormats_Awd2Parse;
 import flighthq.scene3dFormats.GltfParse as Facade_Sdk_flighthq_scene3dFormats_GltfParse;
 import flighthq.scene3dFormats.GltfPunctualLights as Facade_Sdk_flighthq_scene3dFormats_GltfPunctualLights;
@@ -784,6 +807,8 @@ import flighthq.snapshot.EnableSnapshotGuards as Facade_Sdk_flighthq_snapshot_En
 import flighthq.snapshot.EqualsSnapshot as Facade_Sdk_flighthq_snapshot_EqualsSnapshot;
 import flighthq.snapshot.InterpolateSnapshots as Facade_Sdk_flighthq_snapshot_InterpolateSnapshots;
 import flighthq.snapshot.RestoreSnapshot as Facade_Sdk_flighthq_snapshot_RestoreSnapshot;
+import flighthq.socket.EnableSocketGuards as Facade_Sdk_flighthq_socket_EnableSocketGuards;
+import flighthq.socket.ExplainSocketSendFailure as Facade_Sdk_flighthq_socket_ExplainSocketSendFailure;
 import flighthq.socket.Socket as Facade_Sdk_flighthq_socket_Socket;
 import flighthq.spatial.ExplainSpatialIndexing as Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing;
 import flighthq.spatial.FormatSpatialIndexingNotice as Facade_Sdk_flighthq_spatial_FormatSpatialIndexingNotice;
@@ -834,6 +859,7 @@ import flighthq.textlayout.TextLineBreaks as Facade_Sdk_flighthq_textlayout_Text
 import flighthq.textlayout.TextMetrics as Facade_Sdk_flighthq_textlayout_TextMetrics;
 import flighthq.textsegment.TextSegment as Facade_Sdk_flighthq_textsegment_TextSegment;
 import flighthq.textsegment.TextSegmentBoundary as Facade_Sdk_flighthq_textsegment_TextSegmentBoundary;
+import flighthq.textshaper.EnableTextShaperGuards as Facade_Sdk_flighthq_textshaper_EnableTextShaperGuards;
 import flighthq.textshaper.TextShaper as Facade_Sdk_flighthq_textshaper_TextShaper;
 import flighthq.textshaper.TextShaperCache as Facade_Sdk_flighthq_textshaper_TextShaperCache;
 import flighthq.textshaper.TextShaperCluster as Facade_Sdk_flighthq_textshaper_TextShaperCluster;
@@ -846,6 +872,7 @@ import flighthq.texture.RenderTexture as Facade_Sdk_flighthq_texture_RenderTextu
 import flighthq.texture.Sampler as Facade_Sdk_flighthq_texture_Sampler;
 import flighthq.texture.Texture as Facade_Sdk_flighthq_texture_Texture;
 import flighthq.textureFormats.DetectTextureContainer as Facade_Sdk_flighthq_textureFormats_DetectTextureContainer;
+import flighthq.textureFormats.ExplainTextureContainerParse as Facade_Sdk_flighthq_textureFormats_ExplainTextureContainerParse;
 import flighthq.textureFormats.ParseAtf as Facade_Sdk_flighthq_textureFormats_ParseAtf;
 import flighthq.textureFormats.ParseBasis as Facade_Sdk_flighthq_textureFormats_ParseBasis;
 import flighthq.textureFormats.ParseDds as Facade_Sdk_flighthq_textureFormats_ParseDds;
@@ -879,6 +906,7 @@ import flighthq.tween.Timer as Facade_Sdk_flighthq_tween_Timer;
 import flighthq.tween.Tween as Facade_Sdk_flighthq_tween_Tween;
 import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
+import flighthq.types.Abc.AbcFile;
 import flighthq.types.Accelerator;
 import flighthq.types.Accessibility.AccessibilityLiveness;
 import flighthq.types.Accessibility.AccessibilityNode;
@@ -930,6 +958,7 @@ import flighthq.types.AsepriteSchema.AsepriteSerializeOptions;
 import flighthq.types.Assets.AssetDescriptor;
 import flighthq.types.Assets.AssetGroupLoadOptions;
 import flighthq.types.Assets.AssetLibrary;
+import flighthq.types.Assets.AssetLoadExplanation;
 import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
@@ -942,7 +971,6 @@ import flighthq.types.AudioResource.AudioChannel;
 import flighthq.types.AudioResource.AudioPlayOptions;
 import flighthq.types.AudioResource.AudioResourceUrl;
 import flighthq.types.AutoExposureEffect;
-import flighthq.types.AwdDecompressor;
 import flighthq.types.BarrelDistortionEffect;
 import flighthq.types.BatchBarrier as Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier;
 import flighthq.types.BatchFormat as Facade_Sdk_flighthq_types_BatchFormat_BatchFormat;
@@ -954,6 +982,7 @@ import flighthq.types.Billboard.BillboardMode;
 import flighthq.types.BinPack.BinPackOptions;
 import flighthq.types.BinPack.PackResult;
 import flighthq.types.BinPack.PackableRectangle;
+import flighthq.types.BinPack.UnpackedRectangleExplanation;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapBevelOptions;
 import flighthq.types.BitmapBoxBlurOptions;
@@ -966,6 +995,8 @@ import flighthq.types.BitmapFingerprint;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontGlyphExplanation;
+import flighthq.types.BitmapFontSummary;
 import flighthq.types.BitmapGlowOptions;
 import flighthq.types.BitmapGradientBevelOptions;
 import flighthq.types.BitmapGradientGlowOptions;
@@ -1024,6 +1055,7 @@ import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Collision.CollisionTestExplanation;
 import flighthq.types.ColorBlindSimulationAdjustment;
 import flighthq.types.ColorGradeAdjustment;
 import flighthq.types.ColorLut;
@@ -1037,6 +1069,8 @@ import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.Compression;
+import flighthq.types.Compression.Decompressor;
 import flighthq.types.Connectivity;
 import flighthq.types.Connectivity.ConnectivityReachability;
 import flighthq.types.Connectivity.ConnectivityReachabilityOptions;
@@ -1154,6 +1188,7 @@ import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfExtension.GltfImportOptions;
 import flighthq.types.GlyphAtlasEntryExplanation;
 import flighthq.types.GlyphExtents;
+import flighthq.types.GlyphOutlineSource;
 import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
@@ -1185,7 +1220,9 @@ import flighthq.types.HsvColor;
 import flighthq.types.HtmlView;
 import flighthq.types.HueSaturationAdjustment;
 import flighthq.types.ImageChannel;
+import flighthq.types.ImageDecodeFailureExplanation;
 import flighthq.types.ImageDecoder;
+import flighthq.types.ImageEncodeFailureExplanation;
 import flighthq.types.ImageEncodeOptions;
 import flighthq.types.ImageEncoder;
 import flighthq.types.ImageFormat;
@@ -1359,6 +1396,7 @@ import flighthq.types.PathOffsetOptions;
 import flighthq.types.PbrExtension;
 import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
+import flighthq.types.Permission.PermissionStateExplanation;
 import flighthq.types.PerspectiveProjectionOptions;
 import flighthq.types.PhongMaterial;
 import flighthq.types.Physics2D.Physics2DCollider;
@@ -1541,6 +1579,7 @@ import flighthq.types.Snapshot.SnapshotSchema;
 import flighthq.types.Socket;
 import flighthq.types.Socket.SocketOptions;
 import flighthq.types.Socket.SocketReadyState;
+import flighthq.types.Socket.SocketSendFailureExplanation;
 import flighthq.types.Socket.SocketSignals;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialIndex;
@@ -1632,6 +1671,7 @@ import flighthq.types.TextShaperSignals;
 import flighthq.types.TextVerticalAlign;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
@@ -1644,7 +1684,9 @@ import flighthq.types.TextureAtlasRegionTextureExplanation;
 import flighthq.types.TextureAtlasStarlingParseOptions;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.TextureContainerKind;
 import flighthq.types.TextureContainerLevel;
+import flighthq.types.TextureContainerParseExplanation;
 import flighthq.types.TextureCubeFace as Facade_Sdk_flighthq_types_TextureCubeFace;
 import flighthq.types.TextureKind as Facade_Sdk_flighthq_types_TextureKind;
 import flighthq.types.TexturePackerSchema.TexturePackerParsed;
@@ -2389,6 +2431,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function applyCanvasGradientRampLookup(dest:Dynamic, source:Dynamic, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Dynamic, ?scale:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasGradientRamp.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale);
+  }
+
   public static function applyCanvasRenderEffectsToRenderTexture(state:Dynamic, pool:Dynamic, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasRenderTextureEffect.applyCanvasRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
     return cast null;
@@ -2474,6 +2520,16 @@ class Sdk {
 
   public static final AreaLightKind:Dynamic = Facade_Sdk_flighthq_types__internal__AreaLightValues.AreaLightKind;
 
+  public static function areAssetGuardsEnabled(library:AssetLibrary):Bool {
+    return cast Facade_Sdk_flighthq_assets_EnableAssetGuards.areAssetGuardsEnabled(library);
+    return cast null;
+  }
+
+  public static function areCollisionGuardsEnabled():Bool {
+    return cast Facade_Sdk_flighthq_collision_EnableCollisionGuards.areCollisionGuardsEnabled();
+    return cast null;
+  }
+
   public static function areGlPbrExtensionGuardsEnabled(state:GlRenderState):Bool {
     return cast Facade_Sdk_flighthq_scene3dGl_EnableGlPbrExtensionGuards.areGlPbrExtensionGuardsEnabled(state);
     return cast null;
@@ -2481,6 +2537,11 @@ class Sdk {
 
   public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {
     return cast Facade_Sdk_flighthq_scene3dResources_EnableScene3DResourceFailureGuards.areScene3DResourceFailureGuardsEnabled(resolver);
+    return cast null;
+  }
+
+  public static function areSocketGuardsEnabled():Bool {
+    return cast Facade_Sdk_flighthq_socket_EnableSocketGuards.areSocketGuardsEnabled();
     return cast null;
   }
 
@@ -2689,8 +2750,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic):Dynamic {
-    return cast Facade_Sdk_flighthq_renderGl_GlDraw.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply);
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic, ?colorSpace:TextureColorSpace):Dynamic {
+    return cast Facade_Sdk_flighthq_renderGl_GlDraw.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply, colorSpace);
     return cast null;
   }
 
@@ -2805,6 +2866,11 @@ class Sdk {
 
   public static function buildBitmapSepiaColorMatrix(out:Array<Float>):Void {
     Facade_Sdk_flighthq_bitmap_Bitmap.buildBitmapSepiaColorMatrix(out);
+  }
+
+  public static function buildCanvasGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray {
+    return cast Facade_Sdk_flighthq_effectsCanvas_CanvasGradientRamp.buildCanvasGradientRamp(colors, alphas, ratios);
+    return cast null;
   }
 
   public static function buildParticleColorCurve(f:Dynamic, ?samples:Dynamic):Array<Float> {
@@ -2967,6 +3033,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+    Facade_Sdk_flighthq_color_Oklab.clampLinearRgb(out, r, g, b);
+  }
+
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
     return cast Facade_Sdk_flighthq_materials_MaterialValidation.clampStandardPbrMaterialProperties(out);
     return cast null;
@@ -3028,6 +3098,10 @@ class Sdk {
 
   public static function clearGeolocationWatch(id:Float):Void {
     Facade_Sdk_flighthq_geolocation_Geolocation.clearGeolocationWatch(id);
+  }
+
+  public static function clearGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Void {
+    Facade_Sdk_flighthq_renderGl_GlRenderTexture.clearGlRenderTexture(state, renderTexture);
   }
 
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
@@ -3196,6 +3270,10 @@ class Sdk {
   public static final ClipboardFormatText:Dynamic = Facade_Sdk_flighthq_types_ClipboardFormat.ClipboardFormatText;
 
   public static final ClipboardFormatUriList:Dynamic = Facade_Sdk_flighthq_types_ClipboardFormat.ClipboardFormatUriList;
+
+  public static function clipCanvasBevelBand(band:Dynamic, source:Dynamic, bevelType:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.clipCanvasBevelBand(band, source, bevelType);
+  }
 
   public static function clipRegionContainsPoint(clip:ClipRegion, x:Float, y:Float):Bool {
     return cast Facade_Sdk_flighthq_clip_ClipRegion.clipRegionContainsPoint(clip, x, y);
@@ -4589,8 +4667,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Bitmap> {
-    return cast Facade_Sdk_flighthq_renderWgpu_WgpuSurface.createBitmapFromWgpuRenderState(state);
+  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState, ?timeoutMs:Dynamic):flighthq._internal._Promise<Bitmap> {
+    return cast Facade_Sdk_flighthq_renderWgpu_WgpuSurface.createBitmapFromWgpuRenderState(state, timeoutMs);
     return cast null;
   }
 
@@ -5181,6 +5259,16 @@ class Sdk {
 
   public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
     return cast Facade_Sdk_flighthq_glyphatlas_GlyphAtlas.createGlyphAtlas(options);
+    return cast null;
+  }
+
+  public static function createGlyphOutlineSourcesFromSwf(source:flighthq._internal._UInt8Array):Null<Dynamic> {
+    return cast Facade_Sdk_flighthq_swf_SwfDocument.createGlyphOutlineSourcesFromSwf(source);
+    return cast null;
+  }
+
+  public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):GlyphRasterizerBackend {
+    return cast Facade_Sdk_flighthq_font_Font.createGlyphRasterizerBackendFromGlyphOutlineSource(source);
     return cast null;
   }
 
@@ -5798,13 +5886,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, ?required:Dynamic):Scene2DAssetReference {
-    return cast Facade_Sdk_flighthq_scene2dResources_Scene2DDocument.createScene2DAssetReference(name, uri, target, required);
+  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, ?required:Dynamic, ?bytes:Null<flighthq._internal._UInt8Array>, ?mimeType:Null<String>):Scene2DAssetReference {
+    return cast Facade_Sdk_flighthq_scene2dResources_Scene2DDocument.createScene2DAssetReference(name, uri, target, required, bytes, mimeType);
     return cast null;
   }
 
-  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>):Scene2DDocument {
-    return cast Facade_Sdk_flighthq_scene2dResources_Scene2DDocument.createScene2DDocument(root, references, sourceKind);
+  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>):Scene2DDocument {
+    return cast Facade_Sdk_flighthq_scene2dResources_Scene2DDocument.createScene2DDocument(root, references, sourceKind, backgroundColor);
     return cast null;
   }
 
@@ -5890,6 +5978,11 @@ class Sdk {
 
   public static function createScene3DLights(?options:Dynamic):Scene3DLights {
     return cast Facade_Sdk_flighthq_lighting_SceneLights.createScene3DLights(options);
+    return cast null;
+  }
+
+  public static function createScene3DLightsFromDocument(document:Scene3DDocument):Scene3DLights {
+    return cast Facade_Sdk_flighthq_scene3d_SceneDocumentLights.createScene3DLightsFromDocument(document);
     return cast null;
   }
 
@@ -6612,6 +6705,8 @@ class Sdk {
 
   public static final defaultCanvasBeginGradientFill:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasBeginGradientFill;
 
+  public static final defaultCanvasBevelEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.defaultCanvasBevelEffectRunner;
+
   public static final defaultCanvasBitmapTextRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasBitmapText.defaultCanvasBitmapTextRenderer;
 
   public static final defaultCanvasBlendEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.defaultCanvasBlendEffectRunner;
@@ -6619,6 +6714,8 @@ class Sdk {
   public static final defaultCanvasBloomEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBloomEffect.defaultCanvasBloomEffectRunner;
 
   public static final defaultCanvasBlurEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect.defaultCanvasBlurEffectRunner;
+
+  public static final defaultCanvasCompositeEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.defaultCanvasCompositeEffectRunner;
 
   public static final defaultCanvasCubicCurveTo:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasCubicCurveTo;
 
@@ -6639,6 +6736,14 @@ class Sdk {
   public static final defaultCanvasEndFill:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasEndFill;
 
   public static final defaultCanvasFilmGrainEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect.defaultCanvasFilmGrainEffectRunner;
+
+  public static final defaultCanvasGradientBevelEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasGradientBevelEffect.defaultCanvasGradientBevelEffectRunner;
+
+  public static final defaultCanvasGradientGlowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasGradientGlowEffect.defaultCanvasGradientGlowEffectRunner;
+
+  public static final defaultCanvasInnerGlowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasInnerGlowEffect.defaultCanvasInnerGlowEffectRunner;
+
+  public static final defaultCanvasInnerShadowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasInnerShadowEffect.defaultCanvasInnerShadowEffectRunner;
 
   public static final defaultCanvasLineGradientStyle:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineGradientStyle;
 
@@ -7200,7 +7305,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
+  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<TextureContainerKind> {
     return cast Facade_Sdk_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer(bytes);
     return cast null;
   }
@@ -7250,6 +7355,18 @@ class Sdk {
     return cast null;
   }
 
+  public static function disableAssetGuards(library:AssetLibrary):Void {
+    Facade_Sdk_flighthq_assets_EnableAssetGuards.disableAssetGuards(library);
+  }
+
+  public static function disableBitmapFontGuards():Void {
+    Facade_Sdk_flighthq_bitmapfont_EnableBitmapFontGuards.disableBitmapFontGuards();
+  }
+
+  public static function disableCollisionGuards():Void {
+    Facade_Sdk_flighthq_collision_EnableCollisionGuards.disableCollisionGuards();
+  }
+
   public static function disableDebug():Void {
     Facade_Sdk_flighthq_debug_Debug.disableDebug();
   }
@@ -7271,6 +7388,10 @@ class Sdk {
     Facade_Sdk_flighthq_interaction_EnableInteractionGuards.disableInteractionGuards();
   }
 
+  public static function disablePermissionGuards():Void {
+    Facade_Sdk_flighthq_permissions_EnablePermissionGuards.disablePermissionGuards();
+  }
+
   public static function disableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void {
     Facade_Sdk_flighthq_scene3dResources_EnableScene3DResourceFailureGuards.disableScene3DResourceFailureGuards(resolver);
   }
@@ -7287,12 +7408,20 @@ class Sdk {
     Facade_Sdk_flighthq_snapshot_EnableSnapshotGuards.disableSnapshotGuards();
   }
 
+  public static function disableSocketGuards():Void {
+    Facade_Sdk_flighthq_socket_EnableSocketGuards.disableSocketGuards();
+  }
+
   public static function disableStorageSignals():Void {
     Facade_Sdk_flighthq_storage_Storage.disableStorageSignals();
   }
 
   public static function disableTextInput(node:RichText):Void {
     Facade_Sdk_flighthq_textinput_TextInput.disableTextInput(node);
+  }
+
+  public static function disableTextShaperGuards():Void {
+    Facade_Sdk_flighthq_textshaper_EnableTextShaperGuards.disableTextShaperGuards();
   }
 
   public static function disableTextureAtlasGuards():Void {
@@ -7785,9 +7914,17 @@ class Sdk {
     Facade_Sdk_flighthq_application_Application.enableApplicationLifecycleSignals(app);
   }
 
+  public static function enableAssetGuards(library:AssetLibrary):Void {
+    Facade_Sdk_flighthq_assets_EnableAssetGuards.enableAssetGuards(library);
+  }
+
   public static function enableBillboardSignals(source:Billboard):NodeSignals {
     return cast Facade_Sdk_flighthq_scene3d_Billboard.enableBillboardSignals(source);
     return cast null;
+  }
+
+  public static function enableBitmapFontGuards():Void {
+    Facade_Sdk_flighthq_bitmapfont_EnableBitmapFontGuards.enableBitmapFontGuards();
   }
 
   public static function enableCanvasBlendMode(state:Dynamic):Void {
@@ -7813,6 +7950,10 @@ class Sdk {
   public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
     return cast Facade_Sdk_flighthq_clock_Clock.enableClockSignals(clock);
     return cast null;
+  }
+
+  public static function enableCollisionGuards():Void {
+    Facade_Sdk_flighthq_collision_EnableCollisionGuards.enableCollisionGuards();
   }
 
   public static function enableDebug(?options:DebugOptions):Void {
@@ -7951,6 +8092,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function enablePermissionGuards():Void {
+    Facade_Sdk_flighthq_permissions_EnablePermissionGuards.enablePermissionGuards();
+  }
+
   public static function enablePowerSignals(power:Power):Void {
     Facade_Sdk_flighthq_power_Power.enablePowerSignals(power);
   }
@@ -8015,6 +8160,10 @@ class Sdk {
     Facade_Sdk_flighthq_snapshot_EnableSnapshotGuards.enableSnapshotGuards();
   }
 
+  public static function enableSocketGuards():Void {
+    Facade_Sdk_flighthq_socket_EnableSocketGuards.enableSocketGuards();
+  }
+
   public static function enableSocketSignals(socket:Socket):SocketSignals {
     return cast Facade_Sdk_flighthq_socket_Socket.enableSocketSignals(socket);
     return cast null;
@@ -8033,6 +8182,10 @@ class Sdk {
   public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
     return cast Facade_Sdk_flighthq_textinput_TextInput.enableTextInput(node, options);
     return cast null;
+  }
+
+  public static function enableTextShaperGuards():Void {
+    Facade_Sdk_flighthq_textshaper_EnableTextShaperGuards.enableTextShaperGuards();
   }
 
   public static function enableTextShaperSignals():TextShaperSignals {
@@ -8326,6 +8479,16 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Rectangle.expandRectangleToPoint(out, sourceRect, sourceVec2);
   }
 
+  public static function explainAssetLoad(library:AssetLibrary, id:String):AssetLoadExplanation {
+    return cast Facade_Sdk_flighthq_assets_ExplainAssetLoad.explainAssetLoad(library, id);
+    return cast null;
+  }
+
+  public static function explainBitmapFontGlyph(font:BitmapFont, codepoint:Float):BitmapFontGlyphExplanation {
+    return cast Facade_Sdk_flighthq_bitmapfont_ExplainBitmapFontGlyph.explainBitmapFontGlyph(font, codepoint);
+    return cast null;
+  }
+
   public static function explainBitmapReadback(source:Dynamic, width:Float, height:Float):BitmapReadbackExplanation {
     return cast Facade_Sdk_flighthq_bitmap_Bitmap.explainBitmapReadback(source, width, height);
     return cast null;
@@ -8338,6 +8501,11 @@ class Sdk {
 
   public static function explainCanvasTextureResolution(state:Dynamic, texture:Texture):TextureResolutionExplanation {
     return cast Facade_Sdk_flighthq_scene2dCanvas_ExplainCanvasTextureResolution.explainCanvasTextureResolution(state, texture);
+    return cast null;
+  }
+
+  public static function explainCollisionTest(a:CollisionShape, b:CollisionShape):CollisionTestExplanation {
+    return cast Facade_Sdk_flighthq_collision_ExplainCollisionTest.explainCollisionTest(a, b);
     return cast null;
   }
 
@@ -8356,8 +8524,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool):GlRenderEffectApplicationExplanation {
-    return cast Facade_Sdk_flighthq_effectsGl_GlRenderTextureEffect.explainGlRenderEffectApplication(state, effects, sourceAvailable);
+  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, ?destinationAvailable:Dynamic):GlRenderEffectApplicationExplanation {
+    return cast Facade_Sdk_flighthq_effectsGl_GlRenderTextureEffect.explainGlRenderEffectApplication(state, effects, sourceAvailable, destinationAvailable);
     return cast null;
   }
 
@@ -8381,6 +8549,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
+    return cast Facade_Sdk_flighthq_imageCodec_ExplainImageDecodeFailure.explainImageDecodeFailure(bytes, mimeType);
+    return cast null;
+  }
+
+  public static function explainImageEncodeFailure(mimeType:String):Null<ImageEncodeFailureExplanation> {
+    return cast Facade_Sdk_flighthq_imageCodec_ExplainImageEncodeFailure.explainImageEncodeFailure(mimeType);
+    return cast null;
+  }
+
   public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
     return cast Facade_Sdk_flighthq_scene3dResources_SceneResourceRecovery.explainImageResourceReferenceResolution(ref);
     return cast null;
@@ -8391,6 +8569,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionStateExplanation> {
+    return cast Facade_Sdk_flighthq_permissions_Permission.explainPermissionState(name);
+    return cast null;
+  }
+
   public static function explainRenderEffectPadding(state:RenderState, effects:Dynamic):RenderEffectPaddingExplanation {
     return cast Facade_Sdk_flighthq_effects_RenderEffectPadding.explainRenderEffectPadding(state, effects);
     return cast null;
@@ -8398,6 +8581,11 @@ class Sdk {
 
   public static function explainRenderRegistryMisses(state:RenderState):RenderRegistryMissExplanation {
     return cast Facade_Sdk_flighthq_render_RenderRegistryGuards.explainRenderRegistryMisses(state);
+    return cast null;
+  }
+
+  public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
+    return cast Facade_Sdk_flighthq_socket_ExplainSocketSendFailure.explainSocketSendFailure(socket);
     return cast null;
   }
 
@@ -8413,6 +8601,16 @@ class Sdk {
 
   public static function explainTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:Float):TextureAtlasRegionTextureExplanation {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.explainTextureAtlasRegionTexture(atlas, regionId);
+    return cast null;
+  }
+
+  public static function explainTextureContainerParse(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseExplanation> {
+    return cast Facade_Sdk_flighthq_textureFormats_ExplainTextureContainerParse.explainTextureContainerParse(bytes);
+    return cast null;
+  }
+
+  public static function explainUnpackedRectangles(rectangles:Array<PackableRectangle>, ?options:BinPackOptions):Array<UnpackedRectangleExplanation> {
+    return cast Facade_Sdk_flighthq_binpack_ExplainUnpackedRectangles.explainUnpackedRectangles(rectangles, options);
     return cast null;
   }
 
@@ -8978,6 +9176,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function getAssetGroupIds(library:AssetLibrary, name:String):Array<String> {
+    return cast Facade_Sdk_flighthq_assets_AssetLibrary.getAssetGroupIds(library, name);
+    return cast null;
+  }
+
+  public static function getAssetIds(library:AssetLibrary):Array<String> {
+    return cast Facade_Sdk_flighthq_assets_AssetLibrary.getAssetIds(library);
+    return cast null;
+  }
+
   public static function getAssetRefCount(library:AssetLibrary, id:String):Float {
     return cast Facade_Sdk_flighthq_assets_AssetLibrary.getAssetRefCount(library, id);
     return cast null;
@@ -9229,6 +9437,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):Dynamic {
+    return cast Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.getCanvasCompositeEffectOperation(operator_);
+    return cast null;
+  }
+
   public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
     return cast Facade_Sdk_flighthq_capture_CaptureBaseline.getCaptureBaselineField(baseline, column, field);
     return cast null;
@@ -9381,6 +9594,11 @@ class Sdk {
 
   public static function getCurrentGeoPositionResult(?options:GeolocationRequestOptions):flighthq._internal._Promise<GeoPositionResult> {
     return cast Facade_Sdk_flighthq_geolocation_Geolocation.getCurrentGeoPositionResult(options);
+    return cast null;
+  }
+
+  public static function getDecompressor(compression:Compression):Null<Decompressor> {
+    return cast Facade_Sdk_flighthq_compression_Decompressor.getDecompressor(compression);
     return cast null;
   }
 
@@ -10175,6 +10393,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getPackResultOccupancy(result:PackResult):Float {
+    return cast Facade_Sdk_flighthq_binpack_PackRectangles.getPackResultOccupancy(result);
+    return cast null;
+  }
+
   public static function getParticleEmitter2DCapacity(source:ParticleEmitter2D):Float {
     return cast Facade_Sdk_flighthq_particleemitter_ParticleEmitter.getParticleEmitter2DCapacity(source);
     return cast null;
@@ -10307,6 +10530,11 @@ class Sdk {
 
   public static function getPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionState> {
     return cast Facade_Sdk_flighthq_permissions_Permission.getPermissionState(name);
+    return cast null;
+  }
+
+  public static function getPermissionStates(names:Array<PermissionName>):flighthq._internal._Promise<Array<PermissionState>> {
+    return cast Facade_Sdk_flighthq_permissions_Permission.getPermissionStates(names);
     return cast null;
   }
 
@@ -11171,6 +11399,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String, ordinal:Float):Null<TextureAtlasRegion> {
+    return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionByOrdinal(atlas, prefix, ordinal);
+    return cast null;
+  }
+
   public static function getTextureAtlasRegionCount(atlas:TextureAtlas):Float {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionCount(atlas);
     return cast null;
@@ -11181,8 +11414,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<TextureAtlasRegion> {
-    return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence(atlas, prefix);
+  public static function getTextureAtlasRegionOrdinal(region:TextureAtlasRegion):Float {
+    return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionOrdinal(region);
+    return cast null;
+  }
+
+  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String, out:Array<TextureAtlasRegion>):Array<TextureAtlasRegion> {
+    return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence(atlas, prefix, out);
     return cast null;
   }
 
@@ -11213,6 +11451,11 @@ class Sdk {
 
   public static function getTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
     Facade_Sdk_flighthq_texture_Texture.getTextureInverseUvMatrix(out, texture);
+  }
+
+  public static function getTextureSampleColorSpace(source:TextureColorSpace, working:RenderTargetColorSpace):TextureColorSpace {
+    return cast Facade_Sdk_flighthq_texture_Texture.getTextureSampleColorSpace(source, working);
+    return cast null;
   }
 
   public static function getTextureSource(texture:TextureLike):Null<TextureSource> {
@@ -11640,6 +11883,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function hasBitmapFontGlyph(font:BitmapFont, codepoint:Float):Bool {
+    return cast Facade_Sdk_flighthq_bitmapfont_BitmapFont.hasBitmapFontGlyph(font, codepoint);
+    return cast null;
+  }
+
   public static function hasClipboardBookmark():flighthq._internal._Promise<Bool> {
     return cast Facade_Sdk_flighthq_clipboard_Clipboard.hasClipboardBookmark();
     return cast null;
@@ -11672,6 +11920,11 @@ class Sdk {
 
   public static function hasConnectivityStatusChanged(a:ConnectivityStatus, b:ConnectivityStatus):Bool {
     return cast Facade_Sdk_flighthq_connectivity_Connectivity.hasConnectivityStatusChanged(a, b);
+    return cast null;
+  }
+
+  public static function hasDecompressor(compression:Compression):Bool {
+    return cast Facade_Sdk_flighthq_compression_Decompressor.hasDecompressor(compression);
     return cast null;
   }
 
@@ -11962,7 +12215,7 @@ class Sdk {
     return cast null;
   }
 
-  public static final inflateAwdDeflate:AwdDecompressor = Facade_Sdk_flighthq_scene3dFormats_Awd2Inflate.inflateAwdDeflate;
+  public static final inflateDeflate:Decompressor = Facade_Sdk_flighthq_compression_Deflate.inflateDeflate;
 
   public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
     Facade_Sdk_flighthq_geometry_Rectangle.inflateRectangle(out, source, dx, dy);
@@ -14448,6 +14701,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<AbcFile> {
+    return cast Facade_Sdk_flighthq_abc_AbcFile.readAbcFile(source);
+    return cast null;
+  }
+
   public static function readBinaryFile(path:String):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.readBinaryFile(path);
     return cast null;
@@ -14609,14 +14867,6 @@ class Sdk {
     Facade_Sdk_flighthq_assets_AssetLibrary.registerAssetManifest(library, manifest);
   }
 
-  public static function registerAwd2Decompressor(compression:Float, decompressor:Null<AwdDecompressor>):Void {
-    Facade_Sdk_flighthq_scene3dFormats_Awd2Parse.registerAwd2Decompressor(compression, decompressor);
-  }
-
-  public static function registerAwd2DeflateDecompressor():Void {
-    Facade_Sdk_flighthq_scene3dFormats_Awd2Inflate.registerAwd2DeflateDecompressor();
-  }
-
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
     Facade_Sdk_flighthq_effects_BevelEffect.registerBevelEffectPaddingResolver(state);
   }
@@ -14649,6 +14899,10 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dWgpu_WgpuShadedPrelude.registerBuiltInWgpuModifierSnippets(state);
   }
 
+  public static function registerCanvasBevelEffect(state:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.registerCanvasBevelEffect(state);
+  }
+
   public static function registerCanvasBitmapTextureResolver(state:Dynamic):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasBitmapTextureResolver.registerCanvasBitmapTextureResolver(state);
   }
@@ -14669,6 +14923,10 @@ class Sdk {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect.registerCanvasBlurEffect(state);
   }
 
+  public static function registerCanvasCompositeEffect(state:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.registerCanvasCompositeEffect(state);
+  }
+
   public static function registerCanvasDropShadowEffect(state:Dynamic):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasDropShadowEffect.registerCanvasDropShadowEffect(state);
   }
@@ -14677,8 +14935,24 @@ class Sdk {
     Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect.registerCanvasFilmGrainEffect(state);
   }
 
+  public static function registerCanvasGradientBevelEffect(state:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasGradientBevelEffect.registerCanvasGradientBevelEffect(state);
+  }
+
+  public static function registerCanvasGradientGlowEffect(state:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasGradientGlowEffect.registerCanvasGradientGlowEffect(state);
+  }
+
   public static function registerCanvasImageTextureResolver(state:Dynamic):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasImageTextureResolver.registerCanvasImageTextureResolver(state);
+  }
+
+  public static function registerCanvasInnerGlowEffect(state:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasInnerGlowEffect.registerCanvasInnerGlowEffect(state);
+  }
+
+  public static function registerCanvasInnerShadowEffect(state:Dynamic):Void {
+    Facade_Sdk_flighthq_effectsCanvas_CanvasInnerShadowEffect.registerCanvasInnerShadowEffect(state);
   }
 
   public static function registerCanvasOuterGlowEffect(state:Dynamic):Void {
@@ -14729,8 +15003,16 @@ class Sdk {
     Facade_Sdk_flighthq_debug_Debug.registerDebugSubsystem(name, hooks);
   }
 
+  public static function registerDecompressor(compression:Compression, decompress:Decompressor):Void {
+    Facade_Sdk_flighthq_compression_Decompressor.registerDecompressor(compression, decompress);
+  }
+
   public static function registerDefaultHitTests():Void {
     Facade_Sdk_flighthq_interaction_RegisterDefaultHitTests.registerDefaultHitTests();
+  }
+
+  public static function registerDeflateDecompressor():Void {
+    Facade_Sdk_flighthq_compression_Deflate.registerDeflateDecompressor();
   }
 
   public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
@@ -16064,8 +16346,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic):Null<Dynamic> {
-    return cast Facade_Sdk_flighthq_renderGl_GlTextureResolver.resolveGlTexture(state, texture, premultiply);
+  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<Dynamic> {
+    return cast Facade_Sdk_flighthq_renderGl_GlTextureResolver.resolveGlTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
   }
 
@@ -16104,8 +16386,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, ?premultiply:Dynamic):Null<WgpuTextureEntry> {
-    return cast Facade_Sdk_flighthq_renderWgpu_WgpuTextureResolver.resolveWgpuTexture(state, texture, premultiply);
+  public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<WgpuTextureEntry> {
+    return cast Facade_Sdk_flighthq_renderWgpu_WgpuTextureResolver.resolveWgpuTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
   }
 
@@ -16367,6 +16649,8 @@ class Sdk {
   public static final SCENE_LIGHT_SPOT_OFFSET:Dynamic = Facade_Sdk_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 
   public static final SCENE_LIGHT_SPOT_STRIDE:Dynamic = Facade_Sdk_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
+
+  public static final SCENE2D_WORKING_COLOR_SPACE:RenderTargetColorSpace = Facade_Sdk_flighthq_render_Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 
   public static final Scene3DAnimationPathRotation:Dynamic = Facade_Sdk_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathRotation;
 
@@ -16752,6 +17036,10 @@ class Sdk {
     Facade_Sdk_flighthq_camera_Camera.setCamera3DViewMatrix4FromMatrix4(camera, view);
   }
 
+  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+    Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTarget.setCanvasRenderTransform2D(state, transform);
+  }
+
   public static function setCapsule(out:CapsuleLike, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
     Facade_Sdk_flighthq_geometry_Capsule.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
   }
@@ -16825,6 +17113,10 @@ class Sdk {
 
   public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
     Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture(pipeline, texture);
+  }
+
+  public static function setGlRenderTransform2D(state:GlRenderState, transform:Matrix):Void {
+    Facade_Sdk_flighthq_renderGl_GlRenderPass.setGlRenderTransform2D(state, transform);
   }
 
   public static function setGlScene3DTime(state:GlRenderState, timeSeconds:Float):Void {
@@ -17682,6 +17974,10 @@ class Sdk {
     Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture(pipeline, texture);
   }
 
+  public static function setWgpuRenderTransform2D(state:WgpuRenderState, transform:Matrix):Void {
+    Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.setWgpuRenderTransform2D(state, transform);
+  }
+
   public static function setWgpuScene3DTime(state:WgpuRenderState, seconds:Float):Void {
     Facade_Sdk_flighthq_scene3dWgpu_WgpuScene3DTime.setWgpuScene3DTime(state, seconds);
   }
@@ -17809,6 +18105,16 @@ class Sdk {
 
   public static function shellBeep():Void {
     Facade_Sdk_flighthq_shell_Shell.shellBeep();
+  }
+
+  public static function shouldDecodeTextureOnSample(source:TextureColorSpace, working:RenderTargetColorSpace):Bool {
+    return cast Facade_Sdk_flighthq_texture_Texture.shouldDecodeTextureOnSample(source, working);
+    return cast null;
+  }
+
+  public static function shouldPremultiplyTextureOnUpload(source:TextureColorSpace, working:RenderTargetColorSpace):Bool {
+    return cast Facade_Sdk_flighthq_texture_Texture.shouldPremultiplyTextureOnUpload(source, working);
+    return cast null;
   }
 
   public static function showApp():Bool {
@@ -18128,6 +18434,11 @@ class Sdk {
 
   public static function subtractVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
     return cast Facade_Sdk_flighthq_velocity_VelocityField.subtractVelocity(out, a, b);
+    return cast null;
+  }
+
+  public static function summarizeBitmapFont(font:BitmapFont):BitmapFontSummary {
+    return cast Facade_Sdk_flighthq_bitmapfont_SummarizeBitmapFont.summarizeBitmapFont(font);
     return cast null;
   }
 
@@ -18545,6 +18856,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function unregisterDecompressor(compression:Compression):Void {
+    Facade_Sdk_flighthq_compression_Decompressor.unregisterDecompressor(compression);
+  }
+
   public static function unregisterGlobalShortcut(accelerator:String):Bool {
     return cast Facade_Sdk_flighthq_shortcut_Shortcut.unregisterGlobalShortcut(accelerator);
     return cast null;
@@ -18696,8 +19011,8 @@ class Sdk {
     Facade_Sdk_flighthq_tween_Tween.updateTweens(manager, deltaTime);
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
-    return cast Facade_Sdk_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer(gl, container, payload, decode);
+  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
+    return cast Facade_Sdk_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);
     return cast null;
   }
 

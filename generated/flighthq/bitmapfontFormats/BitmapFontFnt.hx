@@ -4,8 +4,10 @@ package flighthq.bitmapfontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
+import flighthq.bitmapfont.BitmapFont.unpackBitmapFontKerningKey;
 import flighthq.bitmapfontFormats.BitmapFontRecord.buildBitmapFontFromRecord;
 import flighthq.types.BitmapFont;
+import flighthq.types.BitmapFont.BitmapFontKerningPair;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
 import flighthq.types.BitmapFontRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
@@ -54,9 +56,8 @@ class BitmapFontFnt {
     _Runtime.callProperty(lines, 'push', cast (['kernings count=' + Std.string(_Runtime.field(kernKeys, 'length')) + ''] : Array<Dynamic>));
     for (key in _Runtime.iterable(kernKeys)) {
       var amount:Dynamic = (cast ((cast font.kerning : flighthq._internal._Map).get(key)) : Float);
-      var first:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32(key), 16);
-      var second:Dynamic = (_Runtime.toInt32(key) & 65535);
-      _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string(first) + ' second=' + Std.string(second) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));
+      _Runtime.callValue(unpackBitmapFontKerningKey, cast ([key, BitmapFontFnt._kerningPair__bitmapFontFnt] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string(_Runtime.field(BitmapFontFnt._kerningPair__bitmapFontFnt, 'left')) + ' second=' + Std.string(_Runtime.field(BitmapFontFnt._kerningPair__bitmapFontFnt, 'right')) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));
     }
     return cast (_Runtime.join(lines, '\n') + '\n');
     return cast null;
@@ -162,4 +163,6 @@ class BitmapFontFnt {
     return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
+
+  public static final _kerningPair__bitmapFontFnt:BitmapFontKerningPair = { left: 0.0, right: 0.0 };
 }

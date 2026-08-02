@@ -2,3 +2,15 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './ambientLight.mjs';
+export * from './areaLight.mjs';
+export * from './directionalLight.mjs';
+export * from './environment.mjs';
+export * from './hemisphereLight.mjs';
+export * from './lightAnalysis.mjs';
+export * from './lightIntensity.mjs';
+export * from './pointLight.mjs';
+export * from './sceneForwardLights.mjs';
+export * from './sceneLights.mjs';
+export * from './spotLight.mjs';

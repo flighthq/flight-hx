@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types._internal._SheenPbrExtensionValues.SheenPbrExtensionKind;
 
 typedef SheenPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var sheenColor:Float; var sheenColorMap:Null<Texture>; var sheenColorMapUvSet:PbrUvSet; var sheenRoughness:Float; var sheenRoughnessMap:Null<Texture>; var sheenRoughnessMapUvSet:PbrUvSet; };

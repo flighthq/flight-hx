@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './dragonBonesParse.mjs';
+export * from './skeletonDetect.mjs';
+export * from './spineBinaryParse.mjs';
+export * from './spineParse.mjs';

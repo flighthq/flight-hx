@@ -11,6 +11,7 @@ import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types._internal._MovieClipValues.MovieClipKind;
 
 typedef MovieClipData = { var timeline:Null<Timeline>; };
 

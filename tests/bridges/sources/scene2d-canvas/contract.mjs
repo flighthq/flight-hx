@@ -2,3 +2,41 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './canvasBackground.mjs';
+export * from './canvasBitmapText.mjs';
+export * from './canvasBitmapTextureResolver.mjs';
+export * from './canvasCSSFilterBinding.mjs';
+export * from './canvasCache.mjs';
+export * from './canvasClip.mjs';
+export * from './canvasClipRectangle.mjs';
+export * from './canvasElement.mjs';
+export * from './canvasFillPattern.mjs';
+export * from './canvasImageSource.mjs';
+export * from './canvasImageTextureResolver.mjs';
+export * from './canvasMaterialRegistry.mjs';
+export * from './canvasMaterials.mjs';
+export * from './canvasNode2D.mjs';
+export * from './canvasParticleEmitter2D.mjs';
+export * from './canvasQuadBatch.mjs';
+export * from './canvasRenderState.mjs';
+export * from './canvasRenderTarget.mjs';
+export * from './canvasRenderTexture.mjs';
+export * from './canvasRenderTexturePool.mjs';
+export * from './canvasRenderTextureResolver.mjs';
+export * from './canvasRichText.mjs';
+export * from './canvasScale9Mapper.mjs';
+export * from './canvasScale9Shape.mjs';
+export * from './canvasShape.mjs';
+export * from './canvasShapeCommands.mjs';
+export * from './canvasShapeRegistry.mjs';
+export * from './canvasSprite.mjs';
+export * from './canvasTextInput.mjs';
+export * from './canvasTextLabel.mjs';
+export * from './canvasTextMeasure.mjs';
+export * from './canvasTextureResolver.mjs';
+export * from './canvasTextureWindowSource.mjs';
+export * from './canvasTilemap.mjs';
+export * from './canvasTransform.mjs';
+export * from './enableCanvasTextureResolverGuards.mjs';
+export * from './explainCanvasTextureResolution.mjs';

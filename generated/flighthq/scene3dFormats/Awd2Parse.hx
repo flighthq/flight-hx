@@ -6,14 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.animation.AnimationClip.createAnimationChannel;
 import flighthq.animation.AnimationClip.createAnimationClip;
 import flighthq.animation.AnimationTrack.createAnimationTrack;
+import flighthq.compression.Decompressor.getDecompressor;
 import flighthq.geometry.Matrix4.copyMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Matrix4.multiplyMatrix4;
+import flighthq.geometry.Quaternion.setQuaternionFromUnitVectors;
 import flighthq.geometry.Transform3d.createTransform3D;
 import flighthq.geometry.Transform3d.decomposeMatrix4ToTransform3D;
+import flighthq.geometry.Vector3.createVector3;
+import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.imageCodec.DetectImageMimeType.detectImageMimeType;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
+import flighthq.lighting.AmbientLight.createAmbientLight;
+import flighthq.lighting.DirectionalLight.createDirectionalLight;
+import flighthq.lighting.PointLight.createPointLight;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryNormals;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
@@ -21,6 +28,8 @@ import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 import flighthq.scene3d.SceneDocument.createScene3DFromDocument;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_CONTAINER;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_HEADER_BYTES;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_LIGHT;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_LIGHT_PICKER;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_MATERIAL;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_MESH_INSTANCE;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_SKELETON;
@@ -28,6 +37,8 @@ import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_SKELETON_ANIMATION;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_SKELETON_POSE;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_TEXTURE;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_BLOCK_TRIANGLE_GEOMETRY;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_COMPRESSION_DEFLATE;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_COMPRESSION_LZMA;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_COMPRESSION_NONE;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_DATA_FLOAT32;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_DATA_FLOAT64;
@@ -39,6 +50,25 @@ import flighthq.scene3dFormats.Awd2Schema.AWD2_DATA_UINT32;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_DATA_UINT8;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_FORMAT_VERSION;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_HEADER_BYTES;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_DEFAULT_AMBIENT;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_DEFAULT_DIFFUSE;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_DEFAULT_FALLOFF;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_DEFAULT_RADIUS;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_DEFAULT_RGB;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_DEFAULT_SPECULAR;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_AMBIENT;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_AMBIENT_COLOR;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_COLOR;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_DIFFUSE;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_DIRECTION_X;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_DIRECTION_Y;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_DIRECTION_Z;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_FALLOFF;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_RADIUS;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_SHADOW_MAPPER;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_PROP_SPECULAR;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_TYPE_DIRECTIONAL;
+import flighthq.scene3dFormats.Awd2Schema.AWD2_LIGHT_TYPE_POINT;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_MAGIC_0;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_MAGIC_1;
 import flighthq.scene3dFormats.Awd2Schema.AWD2_MAGIC_2;
@@ -68,9 +98,11 @@ import flighthq.scene3dFormats.Shared.reverseTriangleWinding;
 import flighthq.shading.CreateShadedMaterial.createShadedMaterial;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationTrack;
-import flighthq.types.AwdDecompressor;
+import flighthq.types.Compression;
+import flighthq.types.Compression.Decompressor;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.Light;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialLike;
 import flighthq.types.Matrix4;
@@ -91,6 +123,7 @@ import flighthq.types.Types.Node3DKind;
 import flighthq.types.Types.Scene3DAnimationPathRotation;
 import flighthq.types.Types.Scene3DAnimationPathScale;
 import flighthq.types.Types.Scene3DAnimationPathTranslation;
+import flighthq.types._internal._CompressionValues.CompressionValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
 import flighthq.types._internal._Node3DValues.Node3DKind;
@@ -104,6 +137,10 @@ typedef ParsedContainer__awd2Parse = { var name:String; var parentId:Float; var 
 
 typedef ParsedMeshInstance__awd2Parse = { var geometryId:Float; var materialIds:Array<Float>; var name:String; var parentId:Float; var transform:flighthq._internal._Float64Array; };
 
+typedef ParsedLight__awd2Parse = { var ambient:Float; var ambientRgb:Float; var castsShadow:Bool; var diffuse:Float; var directionX:Float; var directionY:Float; var directionZ:Float; var fallOff:Float; var hasRadius:Bool; var lightType:Float; var name:String; var parentId:Float; var radius:Float; var rgb:Float; var specular:Float; var transform:flighthq._internal._Float64Array; };
+
+typedef ParsedLightPicker__awd2Parse = { var lightIds:Array<Float>; var name:String; };
+
 typedef ParsedMaterial__awd2Parse = { var alpha:Null<Float>; var color:Null<Float>; var diffuseTextureId:Float; var name:String; var normalTextureId:Float; var numMethods:Float; };
 
 typedef ParsedTexture__awd2Parse = { var bytes:Null<flighthq._internal._UInt8Array>; var mimeType:Null<String>; var name:String; var url:Null<String>; };
@@ -115,6 +152,8 @@ typedef ParsedSkeleton__awd2Parse = { var joints:Array<ParsedJoint__awd2Parse>; 
 typedef ParsedSkeletonAnimation__awd2Parse = { var name:String; var poses:Array<{ var duration:Float; var poseBlockId:Float; }>; };
 
 typedef ParsedSkeletonPose__awd2Parse = { var jointTransforms:Array<Null<flighthq._internal._Float64Array>>; var name:String; };
+
+typedef AwdLightDropTally__awd2Parse = { var count:Float; var detail:Dynamic; var kind:String; var severity:ImportDiagnosticSeverity; };
 
 class Awd2Parse {
   public static function createScene3DFromAwd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
@@ -135,6 +174,9 @@ class Awd2Parse {
     var materialBlocks:Dynamic = cast _Runtime.UNDEFINED;
     var textureBlocks:Dynamic = cast _Runtime.UNDEFINED;
     var skeletonBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var lightBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var lightPickerBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var unhandledBlocks:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var document:Dynamic = cast _Runtime.UNDEFINED;
     var nodeIndexForBlock:Dynamic = cast _Runtime.UNDEFINED;
@@ -143,6 +185,7 @@ class Awd2Parse {
     var resolvedMaterials:Dynamic = cast _Runtime.UNDEFINED;
     var materialForSubset:Dynamic = cast _Runtime.UNDEFINED;
     var parented:Dynamic = cast _Runtime.UNDEFINED;
+    var lightDrops:Dynamic = cast _Runtime.UNDEFINED;
     input = (cast bytes : flighthq._internal._UInt8Array);
     if ((cast ((cast _Runtime.field(input, 'byteLength') : Float) < (cast AWD2_HEADER_BYTES : Float)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.header-too-short', 'parseAwd2'] : Array<Dynamic>));
@@ -165,6 +208,9 @@ class Awd2Parse {
     materialBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
     textureBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
     skeletonBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    lightBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    lightPickerBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    unhandledBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
       var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
@@ -189,6 +235,12 @@ class Awd2Parse {
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_MESH_INSTANCE) : Bool)) {
           var meshInst:Dynamic = _Runtime.callValue(Awd2Parse.parseMeshInstanceBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
           if ((cast !_Runtime.strictEquals(meshInst, null) : Bool)) { ((cast meshInstanceBlocks : flighthq._internal._Map).set(blockId, meshInst)); }
+        } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_LIGHT) : Bool)) {
+          var light:Dynamic = _Runtime.callValue(Awd2Parse.parseLightBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
+          if ((cast !_Runtime.strictEquals(light, null) : Bool)) { ((cast lightBlocks : flighthq._internal._Map).set(blockId, light)); }
+        } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_LIGHT_PICKER) : Bool)) {
+          var picker:Dynamic = _Runtime.callValue(Awd2Parse.parseLightPickerBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
+          if ((cast !_Runtime.strictEquals(picker, null) : Bool)) { ((cast lightPickerBlocks : flighthq._internal._Map).set(blockId, picker)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_MATERIAL) : Bool)) {
           var material:Dynamic = _Runtime.callValue(Awd2Parse.parseMaterialBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
           if ((cast !_Runtime.strictEquals(material, null) : Bool)) { ((cast materialBlocks : flighthq._internal._Map).set(blockId, material)); }
@@ -198,9 +250,16 @@ class Awd2Parse {
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
           var skeleton:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
           if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map).set(blockId, skeleton)); }
-        } } } } } }
+        } else { if ((cast !(cast _Runtime.callValue(Awd2Parse.isAwdBlockHandledLater__awd2Parse, cast ([blockType] : Array<Dynamic>)) : Bool) : Bool)) {
+          _Runtime.callValue(Awd2Parse.tallyUnhandledAwdBlock__awd2Parse, cast ([unhandledBlocks, namespace, blockType, blockId] : Array<Dynamic>));
+        } } } } } } } } }
+      } else {
+        _Runtime.callValue(Awd2Parse.tallyUnhandledAwdBlock__awd2Parse, cast ([unhandledBlocks, namespace, blockType, blockId] : Array<Dynamic>));
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
+    }
+    for (entry in _Runtime.iterable(((cast unhandledBlocks : flighthq._internal._Map).values()))) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.block-unhandled', 'parseAwd2', { blockType: _Runtime.field(entry, 'blockType'), count: _Runtime.field(entry, 'count'), firstBlockId: _Runtime.field(entry, 'firstBlockId'), namespace: _Runtime.field(entry, 'namespace') }] : Array<Dynamic>));
     }
     document = _Runtime.callValue(Awd2Parse.emptyAwdDocument__awd2Parse, cast ([] : Array<Dynamic>));
     nodeIndexForBlock = _Runtime.construct(_Runtime.globalValue('Map'), []);
@@ -297,6 +356,23 @@ class Awd2Parse {
     for (blockId in _Runtime.iterable(((cast nodeIndexForBlock : flighthq._internal._Map).keys()))) {
       if ((cast !(cast ((cast parented : flighthq._internal._Set).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map).get(blockId))] : Array<Dynamic>)); }
     }
+    lightDrops = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    for (light in _Runtime.iterable(((cast lightBlocks : flighthq._internal._Map).values()))) {
+      _Runtime.callValue(Awd2Parse.buildAwdDocumentLights__awd2Parse, cast ([light, ((cast nodeIndexForBlock : flighthq._internal._Map).get(_Runtime.field(light, 'parentId'))), document, lightDrops] : Array<Dynamic>));
+    }
+    _Runtime.callValue(Awd2Parse.flushAwdLightDrops__awd2Parse, cast ([lightDrops, diagnostics] : Array<Dynamic>));
+    for (__iteration4 in _Runtime.iterable(lightPickerBlocks)) {
+      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var picker:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
+      for (lightId in _Runtime.iterable(_Runtime.field(picker, 'lightIds'))) {
+        if ((cast !(cast ((cast lightBlocks : flighthq._internal._Map).has(lightId)) : Bool) : Bool)) {
+          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-missing-light', 'parseAwd2', { block: blockId, light: lightId }] : Array<Dynamic>));
+        }
+      }
+    }
+    if ((cast _Runtime.callValue(Awd2Parse.isAwdLightScopeDropped__awd2Parse, cast ([_Runtime.construct(_Runtime.globalValue('Set'), [((cast lightBlocks : flighthq._internal._Map).keys())]), lightPickerBlocks] : Array<Dynamic>)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.light-scope-dropped', 'parseAwd2', { lights: (cast lightBlocks : flighthq._internal._Map).size, pickers: (cast lightPickerBlocks : flighthq._internal._Map).size }] : Array<Dynamic>));
+    }
     if ((cast ((cast _Runtime.field(skeletonJointNodeIndices, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(_Runtime.field(document, 'animations'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(Awd2Parse.buildAwdDocumentAnimations__awd2Parse, cast ([source, skeletonJointNodeIndices, diagnostics] : Array<Dynamic>)))]));
     }
@@ -388,10 +464,6 @@ class Awd2Parse {
     return cast null;
   }
 
-  public static function registerAwd2Decompressor(compression:Float, decompressor:Null<AwdDecompressor>):Void {
-    if ((cast _Runtime.strictEquals(decompressor, null) : Bool)) { ((cast Awd2Parse.awdDecompressors__awd2Parse : flighthq._internal._Map).delete_(compression)); } else { ((cast Awd2Parse.awdDecompressors__awd2Parse : flighthq._internal._Map).set(compression, decompressor)); }
-  }
-
   public static function buildAwdSkeletonAnimationClip__awd2Parse(parsedAnimation:ParsedSkeletonAnimation__awd2Parse, jointCount:Float, poseBlocks:Dynamic, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Null<AnimationClip> {
     var poseCount:Dynamic = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
@@ -432,7 +504,7 @@ class Awd2Parse {
             var poseBlockId:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'poseBlockId');
             var pose:Dynamic = ((cast poseBlocks : flighthq._internal._Map).get(poseBlockId));
             if ((cast _Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ({ final __collection12:Dynamic = missingPoseBlocks; __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Set).add(poseBlockId)); });
+              ({ final __collection20:Dynamic = missingPoseBlocks; __collection20 == null ? _Runtime.UNDEFINED : ((cast __collection20 : flighthq._internal._Set).add(poseBlockId)); });
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
@@ -572,7 +644,7 @@ class Awd2Parse {
             var poseBlockId:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'poseBlockId');
             var pose:Dynamic = ((cast poseBlocks : flighthq._internal._Map).get(poseBlockId));
             if ((cast _Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ({ final __collection15:Dynamic = missingPoseBlocks; __collection15 == null ? _Runtime.UNDEFINED : ((cast __collection15 : flighthq._internal._Set).add(poseBlockId)); });
+              ({ final __collection23:Dynamic = missingPoseBlocks; __collection23 == null ? _Runtime.UNDEFINED : ((cast __collection23 : flighthq._internal._Set).add(poseBlockId)); });
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
@@ -1124,6 +1196,88 @@ class Awd2Parse {
     return cast null;
   }
 
+  public static function parseLightBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedLight__awd2Parse> {
+    var dv:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var parentId:Dynamic = cast _Runtime.UNDEFINED;
+    var floatSize:Dynamic = cast _Runtime.UNDEFINED;
+    var transformResult:Dynamic = cast _Runtime.UNDEFINED;
+    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
+    var lightType:Dynamic = cast _Runtime.UNDEFINED;
+    var props:Dynamic = cast _Runtime.UNDEFINED;
+    var values:Dynamic = cast _Runtime.UNDEFINED;
+    var hasRadius:Dynamic = cast _Runtime.UNDEFINED;
+    dv = (cast view : Dynamic);
+    offset = start;
+    if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'parentId' }] : Array<Dynamic>));
+      return cast null;
+    }
+    parentId = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+    (offset = cast ((offset + 4.0) : Dynamic));
+    floatSize = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
+    if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'transform' }] : Array<Dynamic>));
+      return cast null;
+    }
+    transformResult = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
+    (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
+    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast ((offset + 2.0) + _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'name' }] : Array<Dynamic>));
+      return cast null;
+    }
+    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
+    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    if ((cast ((cast (offset + 1.0) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'lightType' }] : Array<Dynamic>));
+      return cast null;
+    }
+    lightType = flighthq._internal._StaticIndex.readUint8Array((cast source : flighthq._internal._UInt8Array), offset);
+    (offset = cast ((offset + 1.0) : Dynamic));
+    props = _Runtime.callValue(Awd2Parse.readAwdProperties__awd2Parse, cast ([view, offset, end] : Array<Dynamic>));
+    values = _Runtime.field(props, 'values');
+    hasRadius = ((cast values : flighthq._internal._Map).has(AWD2_LIGHT_PROP_RADIUS));
+    return cast { ambient: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_AMBIENT] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_AMBIENT), ambientRgb: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_AMBIENT_COLOR] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), castsShadow: ((cast _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint8__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_SHADOW_MAPPER] : Array<Dynamic>)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)), diffuse: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIFFUSE] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_DIFFUSE), directionX: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIRECTION_X] : Array<Dynamic>)), function():Dynamic return cast 0.0), directionY: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIRECTION_Y] : Array<Dynamic>)), function():Dynamic return cast -1.0), directionZ: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIRECTION_Z] : Array<Dynamic>)), function():Dynamic return cast 1.0), fallOff: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_FALLOFF] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_FALLOFF), hasRadius: hasRadius, lightType: lightType, name: _Runtime.field(nameResult, 'value'), parentId: parentId, radius: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_RADIUS] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RADIUS), rgb: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_COLOR] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), specular: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_SPECULAR] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_SPECULAR), transform: _Runtime.field(transformResult, 'transform') };
+    return cast null;
+  }
+
+  public static function parseLightPickerBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedLightPicker__awd2Parse> {
+    var dv:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
+    var numLights:Dynamic = cast _Runtime.UNDEFINED;
+    var lightIds:Array<Float> = cast _Runtime.UNDEFINED;
+    dv = (cast view : Dynamic);
+    offset = start;
+    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast ((offset + 2.0) + _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'name' }] : Array<Dynamic>));
+      return cast null;
+    }
+    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
+    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'numLights' }] : Array<Dynamic>));
+      return cast null;
+    }
+    numLights = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
+    (offset = cast ((offset + 2.0) : Dynamic));
+    if ((cast ((cast (offset + (numLights * 4.0)) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'lightIds', lights: numLights }] : Array<Dynamic>));
+      return cast null;
+    }
+    lightIds = cast ([] : Array<Dynamic>);
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast numLights : Float)) : Bool)) {
+        _Runtime.callProperty(lightIds, 'push', cast ([_Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>))] : Array<Dynamic>));
+        (offset = cast ((offset + 4.0) : Dynamic));
+        i++;
+      }
+    }
+    return cast { lightIds: lightIds, name: _Runtime.field(nameResult, 'value') };
+    return cast null;
+  }
+
   public static function parseTextureBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedTexture__awd2Parse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
@@ -1197,6 +1351,24 @@ class Awd2Parse {
     return cast null;
   }
 
+  public static function readAwdPropertyNumber__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
+    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:Dynamic = cast _Runtime.UNDEFINED;
+    entry = ((cast values : flighthq._internal._Map).get(key));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(entry, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    dv = (cast view : Dynamic);
+    return cast ((cast ((cast _Runtime.field(entry, 'length') : Float) >= (cast 8.0 : Float)) : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>)) : Dynamic));
+    return cast null;
+  }
+
+  public static function readAwdPropertyUint8__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
+    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    entry = ((cast values : flighthq._internal._Map).get(key));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(entry, 'length') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    return cast _Runtime.callProperty((cast view : Dynamic), 'getUint8', cast ([_Runtime.field(entry, 'offset')] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function readAwdPropertyUint32__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast values : flighthq._internal._Map).get(key));
@@ -1224,6 +1396,7 @@ class Awd2Parse {
     }
     diffuseTexture = ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'diffuseTextureId'), 0.0) : Bool) ? (cast _Runtime.callValue(Awd2Parse.resolveAwdTexture__awd2Parse, cast ([_Runtime.field(parsed, 'diffuseTextureId'), textureBlocks, document, diagnostics] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     normalTexture = ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'normalTextureId'), 0.0) : Bool) ? (cast _Runtime.callValue(Awd2Parse.resolveAwdTexture__awd2Parse, cast ([_Runtime.field(parsed, 'normalTextureId'), textureBlocks, document, diagnostics] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    if ((cast !_Runtime.strictEquals(normalTexture, null) : Bool)) { _Runtime.setField(normalTexture, 'colorSpace', 'linear'); }
     if ((cast ((cast _Runtime.field(parsed, 'numMethods') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.material-methods-unsupported', 'resolveAwdMaterial', { methods: _Runtime.field(parsed, 'numMethods') }] : Array<Dynamic>));
     }
@@ -1252,6 +1425,41 @@ class Awd2Parse {
       return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(parsed, 'url'), null, _Runtime.field(document, 'resources')] : Array<Dynamic>));
     }
     return cast null;
+    return cast null;
+  }
+
+  public static function buildAwdDocumentLights__awd2Parse(light:ParsedLight__awd2Parse, nodeIndex:Null<Float>, document:Scene3DDocument, drops:Dynamic):Void {
+    var descriptor:Light = cast _Runtime.UNDEFINED;
+    var transform:Transform3D = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(light, 'lightType'), AWD2_LIGHT_TYPE_DIRECTIONAL) : Bool)) {
+      var aim:Dynamic = _Runtime.callValue(createVector3, cast ([_Runtime.field(light, 'directionX'), _Runtime.field(light, 'directionY'), -_Runtime.field(light, 'directionZ')] : Array<Dynamic>));
+      _Runtime.callValue(normalizeVector3, cast ([aim, aim] : Array<Dynamic>));
+      (transform = cast (_Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) : Dynamic));
+      _Runtime.callValue(setQuaternionFromUnitVectors, cast ([_Runtime.field(transform, 'rotation'), Awd2Parse.DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse, aim] : Array<Dynamic>));
+      (descriptor = cast (_Runtime.callValue(createDirectionalLight, cast ([{ castsShadow: _Runtime.field(light, 'castsShadow'), color: _Runtime.callValue(Awd2Parse.getAwdLightRgba__awd2Parse, cast ([_Runtime.field(light, 'rgb')] : Array<Dynamic>)), direction: Awd2Parse.DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse, intensity: _Runtime.field(light, 'diffuse') }] : Array<Dynamic>)) : Dynamic));
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(light, 'lightType'), AWD2_LIGHT_TYPE_POINT) : Bool)) {
+      (transform = cast (_Runtime.callValue(Awd2Parse.awdTransformToTransform3D__awd2Parse, cast ([_Runtime.field(light, 'transform')] : Array<Dynamic>)) : Dynamic));
+      (descriptor = cast (_Runtime.callValue(createPointLight, cast ([{ castsShadow: _Runtime.field(light, 'castsShadow'), color: _Runtime.callValue(Awd2Parse.getAwdLightRgba__awd2Parse, cast ([_Runtime.field(light, 'rgb')] : Array<Dynamic>)), intensity: _Runtime.field(light, 'diffuse'), range: _Runtime.field(light, 'fallOff') }] : Array<Dynamic>)) : Dynamic));
+      if ((cast _Runtime.field(light, 'hasRadius') : Bool)) {
+        _Runtime.callValue(Awd2Parse.tallyAwdLightDrop__awd2Parse, cast ([drops, ImportDiagnosticSeverityValue.Skip, 'awd2.light-radius-dropped', { firstLight: _Runtime.field(light, 'name') }] : Array<Dynamic>));
+      }
+    } else {
+      _Runtime.callValue(Awd2Parse.tallyAwdLightDrop__awd2Parse, cast ([drops, ImportDiagnosticSeverityValue.Skip, 'awd2.light-unsupported-type', { firstLight: _Runtime.field(light, 'name'), firstType: _Runtime.field(light, 'lightType') }] : Array<Dynamic>));
+      return;
+    } }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'specular'), AWD2_LIGHT_DEFAULT_SPECULAR) : Bool)) {
+      _Runtime.callValue(Awd2Parse.tallyAwdLightDrop__awd2Parse, cast ([drops, ImportDiagnosticSeverityValue.Skip, 'awd2.light-specular-dropped', { firstLight: _Runtime.field(light, 'name'), firstSpecular: _Runtime.field(light, 'specular') }] : Array<Dynamic>));
+    }
+    _Runtime.callProperty(_Runtime.field(document, 'lights'), 'push', cast ([{ descriptor: descriptor, name: _Runtime.orValue(_Runtime.field(light, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: transform }] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'ambient'), 0.0) : Bool)) {
+      _Runtime.callProperty(_Runtime.field(document, 'lights'), 'push', cast ([{ descriptor: _Runtime.callValue(createAmbientLight, cast ([{ color: _Runtime.callValue(Awd2Parse.getAwdLightRgba__awd2Parse, cast ([_Runtime.field(light, 'ambientRgb')] : Array<Dynamic>)), intensity: _Runtime.field(light, 'ambient') }] : Array<Dynamic>)), name: _Runtime.select(_Runtime.field(light, 'name'), function():Dynamic return cast '' + Std.string(_Runtime.field(light, 'name')) + ' Ambient', function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    }
+  }
+
+  public static final DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse:Dynamic = _Runtime.callValue(createVector3, cast ([0.0, 0.0, -1.0] : Array<Dynamic>));
+
+  public static function getAwdLightRgba__awd2Parse(rgb:Float):Float {
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)), 0)) | 255)), 0);
     return cast null;
   }
 
@@ -1425,13 +1633,13 @@ class Awd2Parse {
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(input, 'buffer'), _Runtime.field(input, 'byteOffset'), _Runtime.field(input, 'byteLength')]);
     compression = flighthq._internal._StaticIndex.readUint8Array(input, 7.0);
     if ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_NONE) : Bool)) { return cast { source: input, view: view }; }
-    decompressor = ((cast Awd2Parse.awdDecompressors__awd2Parse : flighthq._internal._Map).get(compression));
-    if ((cast _Runtime.strictEquals(decompressor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+    decompressor = _Runtime.callValue(Awd2Parse.resolveAwdDecompressor__awd2Parse, cast ([compression] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(decompressor, null) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.compression-no-decompressor', 'rehydrateAwdBody', { compression: compression }] : Array<Dynamic>));
       return cast null;
     }
     compressedEnd = HxMath.min((AWD2_HEADER_BYTES + _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>))), _Runtime.field(input, 'byteLength'));
-    inflated = _Runtime.callValue(decompressor, cast ([(cast input : flighthq._internal._UInt8Array).subarray(Std.int(AWD2_HEADER_BYTES), Std.int(compressedEnd))] : Array<Dynamic>));
+    inflated = _Runtime.callValue(decompressor, cast ([(cast input : flighthq._internal._UInt8Array).subarray(Std.int(AWD2_HEADER_BYTES), Std.int(compressedEnd)), 0.0] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(inflated, null) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.decompression-failed', 'rehydrateAwdBody', { compression: compression }] : Array<Dynamic>));
       return cast null;
@@ -1448,10 +1656,56 @@ class Awd2Parse {
 
   public static final AWD2_TANGENT_HANDEDNESS__awd2Parse:Dynamic = -1.0;
 
-  public static final awdDecompressors__awd2Parse:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static function resolveAwdDecompressor__awd2Parse(compression:Float):Null<Decompressor> {
+    if ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_DEFLATE) : Bool)) { return cast _Runtime.callValue(getDecompressor, cast ([CompressionValue.Deflate] : Array<Dynamic>)); }
+    return cast ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_LZMA) : Bool) ? (cast _Runtime.callValue(getDecompressor, cast ([CompressionValue.Lzma] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
 
   public static function hasNonUnitScale__awd2Parse(sx:Float, sy:Float, sz:Float):Bool {
     return cast ((cast ((cast ((cast HxMath.abs((sx - 1.0)) : Float) > (cast 0.0001 : Float)) : Bool) || (cast ((cast HxMath.abs((sy - 1.0)) : Float) > (cast 0.0001 : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs((sz - 1.0)) : Float) > (cast 0.0001 : Float)) : Bool));
     return cast null;
+  }
+
+  public static function isAwdBlockHandledLater__awd2Parse(blockType:Float):Bool {
+    return cast ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_POSE) : Bool) || (cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_ANIMATION) : Bool));
+    return cast null;
+  }
+
+  public static function tallyAwdLightDrop__awd2Parse(tallies:Dynamic, severity:ImportDiagnosticSeverity, kind:String, firstDetail:Dynamic):Void {
+    var existing:Dynamic = cast _Runtime.UNDEFINED;
+    existing = ((cast tallies : flighthq._internal._Map).get(kind));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map).set(kind, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { _Runtime.incrementField(existing, 'count', 1, true); }
+  }
+
+  public static function flushAwdLightDrops__awd2Parse(tallies:Dynamic, ?diagnostics:Array<ImportDiagnostic>):Void {
+    for (tally in _Runtime.iterable(((cast tallies : flighthq._internal._Map).values()))) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, _Runtime.field(tally, 'severity'), _Runtime.field(tally, 'kind'), 'buildAwdDocumentLights', _Runtime.mergeObjects([_Runtime.field(tally, 'detail'), { count: _Runtime.field(tally, 'count') }])] : Array<Dynamic>));
+    }
+  }
+
+  public static function isAwdLightScopeDropped__awd2Parse(lightBlockIds:Dynamic, pickers:Dynamic):Bool {
+    if ((cast _Runtime.strictEquals((cast lightBlockIds : flighthq._internal._Set).size, 0.0) : Bool)) { return cast false; }
+    for (picker in _Runtime.iterable(((cast pickers : flighthq._internal._Map).values()))) {
+      var picked:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.field(picker, 'lightIds')]);
+      if ((cast !_Runtime.strictEquals((cast picked : flighthq._internal._Set).size, (cast lightBlockIds : flighthq._internal._Set).size) : Bool)) { return cast true; }
+      for (id in _Runtime.iterable(lightBlockIds)) {
+        if ((cast !(cast ((cast picked : flighthq._internal._Set).has(id)) : Bool) : Bool)) { return cast true; }
+      }
+    }
+    return cast false;
+    return cast null;
+  }
+
+  public static function tallyUnhandledAwdBlock__awd2Parse(tally:Dynamic, namespace:Float, blockType:Float, blockId:Float):Void {
+    var key:Dynamic = cast _Runtime.UNDEFINED;
+    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    key = '' + Std.string(namespace) + ':' + Std.string(blockType) + '';
+    entry = ((cast tally : flighthq._internal._Map).get(key));
+    if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast tally : flighthq._internal._Map).set(key, { blockType: blockType, count: 1.0, firstBlockId: blockId, namespace: namespace }));
+      return;
+    }
+    _Runtime.incrementField(entry, 'count', 1, true);
   }
 }

@@ -10,6 +10,7 @@ import flighthq.scene3d.PrepareScene3DMorph as Facade_Scene3d_flighthq_scene3d_P
 import flighthq.scene3d.Scene as Facade_Scene3d_flighthq_scene3d_Scene;
 import flighthq.scene3d.SceneAnimation as Facade_Scene3d_flighthq_scene3d_SceneAnimation;
 import flighthq.scene3d.SceneDocument as Facade_Scene3d_flighthq_scene3d_SceneDocument;
+import flighthq.scene3d.SceneDocumentLights as Facade_Scene3d_flighthq_scene3d_SceneDocumentLights;
 import flighthq.scene3d.SceneMaterial as Facade_Scene3d_flighthq_scene3d_SceneMaterial;
 import flighthq.scene3d.SceneNode as Facade_Scene3d_flighthq_scene3d_SceneNode;
 import flighthq.scene3d.SceneNodeAppearance as Facade_Scene3d_flighthq_scene3d_SceneNodeAppearance;
@@ -34,6 +35,7 @@ import flighthq.types.Node3D;
 import flighthq.types.NodeSignals;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
+import flighthq.types.Scene3DLights;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._BillboardValues as Facade_Scene3d_flighthq_types__internal__BillboardValues;
 import flighthq.types._internal._MeshValues as Facade_Scene3d_flighthq_types__internal__MeshValues;
@@ -77,6 +79,11 @@ class Scene3d {
 
   public static function createScene3DFromDocument(document:Scene3DDocument, ?sceneIndex:Dynamic):Scene3D {
     return cast Facade_Scene3d_flighthq_scene3d_SceneDocument.createScene3DFromDocument(document, sceneIndex);
+    return cast null;
+  }
+
+  public static function createScene3DLightsFromDocument(document:Scene3DDocument):Scene3DLights {
+    return cast Facade_Scene3d_flighthq_scene3d_SceneDocumentLights.createScene3DLightsFromDocument(document);
     return cast null;
   }
 

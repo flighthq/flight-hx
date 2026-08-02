@@ -6,12 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.imageCodec.DecodeImage as Facade_ImageCodec_flighthq_imageCodec_DecodeImage;
 import flighthq.imageCodec.DetectImageMimeType as Facade_ImageCodec_flighthq_imageCodec_DetectImageMimeType;
 import flighthq.imageCodec.EncodeImage as Facade_ImageCodec_flighthq_imageCodec_EncodeImage;
+import flighthq.imageCodec.ExplainImageDecodeFailure as Facade_ImageCodec_flighthq_imageCodec_ExplainImageDecodeFailure;
+import flighthq.imageCodec.ExplainImageEncodeFailure as Facade_ImageCodec_flighthq_imageCodec_ExplainImageEncodeFailure;
 import flighthq.imageCodec.ImageDecoderRegistry as Facade_ImageCodec_flighthq_imageCodec_ImageDecoderRegistry;
 import flighthq.imageCodec.ImageEncoderRegistry as Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry;
 import flighthq.imageCodec.RegisterWebImageDecoders as Facade_ImageCodec_flighthq_imageCodec_RegisterWebImageDecoders;
 import flighthq.imageCodec.RegisterWebImageEncoders as Facade_ImageCodec_flighthq_imageCodec_RegisterWebImageEncoders;
 import flighthq.types.DecodedImage;
+import flighthq.types.ImageDecodeFailureExplanation;
 import flighthq.types.ImageDecoder;
+import flighthq.types.ImageEncodeFailureExplanation;
 import flighthq.types.ImageEncodeOptions;
 import flighthq.types.ImageEncoder;
 
@@ -41,6 +45,16 @@ class ImageCodec {
 
   public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast Facade_ImageCodec_flighthq_imageCodec_EncodeImage.encodeImage(image, mimeType, options);
+    return cast null;
+  }
+
+  public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
+    return cast Facade_ImageCodec_flighthq_imageCodec_ExplainImageDecodeFailure.explainImageDecodeFailure(bytes, mimeType);
+    return cast null;
+  }
+
+  public static function explainImageEncodeFailure(mimeType:String):Null<ImageEncodeFailureExplanation> {
+    return cast Facade_ImageCodec_flighthq_imageCodec_ExplainImageEncodeFailure.explainImageEncodeFailure(mimeType);
     return cast null;
   }
 

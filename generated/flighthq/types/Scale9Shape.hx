@@ -13,6 +13,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 typedef Scale9ShapeData = { var commands:Array<ShapeCommandToken>; var scale9Grid:RectangleLike; };
 

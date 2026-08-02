@@ -167,7 +167,7 @@ class Bitmap {
   }
 
   public static function cloneBitmap(source:flighthq.types.Bitmap):flighthq.types.Bitmap {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, kind: source.kind, version: 0.0, width: source.width }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, kind: source.kind, version: 0.0, width: source.width }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -280,7 +280,7 @@ class Bitmap {
         }
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', colorSpace: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
     return cast null;
   }
 

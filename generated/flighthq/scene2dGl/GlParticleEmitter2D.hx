@@ -4,6 +4,7 @@ package flighthq.scene2dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
@@ -106,7 +107,7 @@ class GlParticleEmitter2D {
     shader = _Runtime.callValue(GlParticleEmitter2D.ensureParticleShader__glParticleEmitter2D, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(GlParticleEmitter2D.ensureInstanceCapacity__glParticleEmitter2D, cast ([state, particleCount] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, atlas.texture, true] : Array<Dynamic>)), null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, atlas.texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>)), null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');

@@ -5,4 +5,5 @@ const api = compiled.flighthq.textureFormats.ParseAtf;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getAtfParseFailureReason = api.getAtfParseFailureReason;
 export const parseAtf = api.parseAtf;

@@ -24,6 +24,7 @@ class WgpuEnvironmentCube {
     var sources:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -33,7 +34,8 @@ class WgpuEnvironmentCube {
     sources = _Runtime.field(cube, 'sources');
     size = _Runtime.field(flighthq._internal._StaticIndex.readArray(sources, 0.0), 'width');
     device = _Runtime.field(state, 'device');
-    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: WgpuEnvironmentCube.ENVIRONMENT_CUBE_FORMAT__wgpuEnvironmentCube, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    format = ((cast _Runtime.strictEquals(_Runtime.field(cube, 'colorSpace'), 'srgb') : Bool) ? (cast 'rgba8unorm-srgb' : Dynamic) : (cast 'rgba8unorm' : Dynamic));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: format, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
@@ -81,6 +83,4 @@ class WgpuEnvironmentCube {
       _Runtime.callValue(uploadWgpuTextureImageResource, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), (cast image : Dynamic)] : Array<Dynamic>));
     }
   }
-
-  public static final ENVIRONMENT_CUBE_FORMAT__wgpuEnvironmentCube:Dynamic = 'rgba8unorm';
 }

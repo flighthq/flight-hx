@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './bitmapText.mjs';
+export * from './updateBitmapText.mjs';

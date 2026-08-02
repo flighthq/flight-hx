@@ -2,3 +2,23 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './brightnessContrastAdjustment.mjs';
+export * from './channelMixerAdjustment.mjs';
+export * from './colorAdjustmentResolution.mjs';
+export * from './colorBlindSimulationAdjustment.mjs';
+export * from './colorGradeAdjustment.mjs';
+export * from './colorLut.mjs';
+export * from './colorLutAdjustment.mjs';
+export * from './colorLutCache.mjs';
+export * from './colorMatrixAdjustment.mjs';
+export * from './colorMatrixMath.mjs';
+export * from './colorScaleBiasAdjustment.mjs';
+export * from './exposureAdjustment.mjs';
+export * from './grayscaleAdjustment.mjs';
+export * from './hueSaturationAdjustment.mjs';
+export * from './invertAdjustment.mjs';
+export * from './liftGammaGainAdjustment.mjs';
+export * from './lookupTableGradeAdjustment.mjs';
+export * from './sepiaAdjustment.mjs';
+export * from './tintAdjustment.mjs';

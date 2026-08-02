@@ -3,12 +3,24 @@ package flighthq.binpack;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.binpack.ExplainUnpackedRectangles as Facade_Binpack_flighthq_binpack_ExplainUnpackedRectangles;
 import flighthq.binpack.PackRectangles as Facade_Binpack_flighthq_binpack_PackRectangles;
 import flighthq.types.BinPack.BinPackOptions;
 import flighthq.types.BinPack.PackResult;
 import flighthq.types.BinPack.PackableRectangle;
+import flighthq.types.BinPack.UnpackedRectangleExplanation;
 
 class Binpack {
+  public static function explainUnpackedRectangles(rectangles:Array<PackableRectangle>, ?options:BinPackOptions):Array<UnpackedRectangleExplanation> {
+    return cast Facade_Binpack_flighthq_binpack_ExplainUnpackedRectangles.explainUnpackedRectangles(rectangles, options);
+    return cast null;
+  }
+
+  public static function getPackResultOccupancy(result:PackResult):Float {
+    return cast Facade_Binpack_flighthq_binpack_PackRectangles.getPackResultOccupancy(result);
+    return cast null;
+  }
+
   public static function packRectangles(rects:Array<PackableRectangle>, ?options:BinPackOptions):PackResult {
     return cast Facade_Binpack_flighthq_binpack_PackRectangles.packRectangles(rects, options);
     return cast null;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareScene3DRender;
+import flighthq.renderGl.GlDraw.enableGlBlendModeSupport;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
@@ -13,6 +14,7 @@ import flighthq.scene3dGl.GlViewportAspect.getGlScene3DViewportAspect;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
+import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.GlRenderState;
 import flighthq.types.Matrix4;
@@ -23,6 +25,7 @@ import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Types.ParticleEmitter3DKind;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
 typedef GlParticle3DShader__glParticleEmitter3D = { var cornerBuffer:Dynamic; var indexBuffer:Dynamic; var instanceBuffer:Dynamic; var instanceData:flighthq._internal._Float32Array; var locCameraRight:Dynamic; var locCameraUp:Dynamic; var locColor:Float; var locCorner:Float; var locCosScale:Float; var locHasTexture:Dynamic; var locPos:Float; var locSinScale:Float; var locSize:Float; var locTexture:Dynamic; var locUvRect:Float; var locViewProjection:Dynamic; var program:Dynamic; var vao:Dynamic; };
@@ -102,20 +105,24 @@ class GlParticleEmitter3D {
     }
   }
 
-  public static function applyGlParticleBlendMode__glParticleEmitter3D(gl:Dynamic, mode:ParticleBlendMode):Void {
+  public static function applyGlParticleBlendMode__glParticleEmitter3D(state:GlRenderState, mode:ParticleBlendMode):Void {
+    if ((cast _Runtime.strictEquals(_Runtime.field(state, 'applyBlendMode'), null) : Bool)) { _Runtime.callValue(enableGlBlendModeSupport, cast ([state] : Array<Dynamic>)); }
     {
       var __switchValue = mode;
       if (__switchValue == 'add') {
-        flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ONE);
+        _Runtime.callProperty(state, 'applyBlendMode', cast ([state, BlendModeValue.Add] : Array<Dynamic>));
+        return;
       }
       else if (__switchValue == 'multiply') {
-        flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.DST_COLOR, flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA);
+        _Runtime.callProperty(state, 'applyBlendMode', cast ([state, BlendModeValue.Multiply] : Array<Dynamic>));
+        return;
       }
       else if (__switchValue == 'screen') {
-        flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_COLOR);
+        _Runtime.callProperty(state, 'applyBlendMode', cast ([state, BlendModeValue.Screen] : Array<Dynamic>));
+        return;
       }
       else  {
-        flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA);
+        _Runtime.callProperty(state, 'applyBlendMode', cast ([state, BlendModeValue.Normal] : Array<Dynamic>));
       }
     }
   }
@@ -302,7 +309,7 @@ class GlParticleEmitter3D {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length') : Float)) : Bool)) {
         var emitter:Dynamic = flighthq._internal._StaticIndex.readArray(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, i);
-        _Runtime.callValue(GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D, cast ([gl, _Runtime.field(emitter, 'blendMode')] : Array<Dynamic>));
+        _Runtime.callValue(GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D, cast ([state, _Runtime.field(emitter, 'blendMode')] : Array<Dynamic>));
         _Runtime.callValue(GlParticleEmitter3D.drawParticleEmitter3DNode__glParticleEmitter3D, cast ([state, shader, emitter] : Array<Dynamic>));
         i++;
       }

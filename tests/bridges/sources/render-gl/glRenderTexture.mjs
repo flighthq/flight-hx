@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const bindGlRenderTexture = api.bindGlRenderTexture;
+export const clearGlRenderTexture = api.clearGlRenderTexture;
 export const destroyGlRenderTexture = api.destroyGlRenderTexture;
 export const explainGlRenderTexture = api.explainGlRenderTexture;
 export const getGlRenderTextureColorSpace = api.getGlRenderTextureColorSpace;

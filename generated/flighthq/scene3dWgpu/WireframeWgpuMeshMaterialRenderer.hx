@@ -38,13 +38,13 @@ class WireframeWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     wireframe = (cast material : Null<WireframeMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuWireframePipeline, cast ([state, format] : Array<Dynamic>));
+    pipeline = _Runtime.callValue(ensureWgpuWireframePipeline, cast ([state, format, _Runtime.strictEquals(_Runtime.optionalField(wireframe, 'alphaMode'), 'mask')] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer, WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>)) : Dynamic));
     } else {
       _Runtime.callValue(unpackColorToLinear, cast ([WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
-      (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, wireframe, WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>)) : Dynamic));
+      (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, wireframe, WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer, _Runtime.field(wireframe, 'alphaCutoff')] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));

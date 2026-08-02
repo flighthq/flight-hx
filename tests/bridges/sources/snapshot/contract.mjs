@@ -2,3 +2,9 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './captureSnapshot.mjs';
+export * from './enableSnapshotGuards.mjs';
+export * from './equalsSnapshot.mjs';
+export * from './interpolateSnapshots.mjs';
+export * from './restoreSnapshot.mjs';

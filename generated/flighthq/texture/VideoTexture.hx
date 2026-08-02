@@ -91,7 +91,7 @@ class VideoTexture {
   public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Dynamic> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
-    image = (cast _Runtime.callValue(createEntity, cast ([{ height: 0.0, kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }] : Array<Dynamic>)) : Dynamic);
+    image = (cast _Runtime.callValue(createEntity, cast ([{ height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(VideoTexture.updateVideoImageSize__videoTexture, cast ([image] : Array<Dynamic>));
     return cast image;
     return cast null;

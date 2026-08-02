@@ -21,6 +21,7 @@ import flighthq.types.Image;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Sampler.TextureWrap;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureSource;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
@@ -75,29 +76,29 @@ class GlDraw {
     }
   }
 
-  public static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false):Dynamic {
-    return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, bitmap, sampler, smoothingOverride, premultiply, false, GlDraw.uploadGlBitmap__glDraw] : Array<Dynamic>));
+  public static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false, colorSpace:TextureColorSpace = 'linear'):Dynamic {
+    return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, bitmap, sampler, smoothingOverride, premultiply, false, colorSpace, GlDraw.uploadGlBitmap__glDraw] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>):Dynamic {
-    return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, image, sampler, smoothingOverride, false, true, GlDraw.uploadGlCompressedImage__glDraw] : Array<Dynamic>));
+  public static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, colorSpace:TextureColorSpace = 'linear'):Dynamic {
+    return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, image, sampler, smoothingOverride, false, true, colorSpace, GlDraw.uploadGlCompressedImage__glDraw] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false):Dynamic {
-    return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, image, sampler, smoothingOverride, premultiply, false, GlDraw.uploadGlImageResource__glDraw] : Array<Dynamic>));
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false, colorSpace:TextureColorSpace = 'linear'):Dynamic {
+    return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, image, sampler, smoothingOverride, premultiply, false, colorSpace, GlDraw.uploadGlImageResource__glDraw] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlTextureSourceTexture__glDraw(state:GlRenderState, image:TextureSource, sampler:Null<SamplerLike>, smoothingOverride:Null<Bool>, premultiply:Bool, straightAlpha:Bool, upload:GlTextureSourceUpload__glDraw):Dynamic {
+  public static function bindGlTextureSourceTexture__glDraw(state:GlRenderState, image:TextureSource, sampler:Null<SamplerLike>, smoothingOverride:Null<Bool>, premultiply:Bool, straightAlpha:Bool, colorSpace:TextureColorSpace, upload:GlTextureSourceUpload__glDraw):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    cache = ((cast premultiply : Bool) ? (cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : Dynamic) : (cast _Runtime.field(runtime, 'textureSourceStraightTextureCache') : Dynamic));
+    cache = ((cast premultiply : Bool) ? (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast _Runtime.field(runtime, 'textureSourcePremultipliedSrgbTextureCache') : Dynamic) : (cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : Dynamic)) : Dynamic) : (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast _Runtime.field(runtime, 'textureSourceStraightSrgbTextureCache') : Dynamic) : (cast _Runtime.field(runtime, 'textureSourceStraightTextureCache') : Dynamic)) : Dynamic));
     entry = ((cast cache : flighthq._internal._WeakMap).get(image));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ texture: flighthq._internal.backend.WebGl2Backend.createTexture(gl), version: -1.0 } : Dynamic));
@@ -107,7 +108,7 @@ class GlDraw {
     _Runtime.setField(runtime, 'currentTexture', _Runtime.field(entry, 'texture'));
     _Runtime.setField(runtime, 'currentTextureStraightAlpha', straightAlpha);
     if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version')) : Bool)) {
-      _Runtime.callValue(upload, cast ([state, image, premultiply] : Array<Dynamic>));
+      _Runtime.callValue(upload, cast ([state, image, premultiply, colorSpace] : Array<Dynamic>));
       _Runtime.setField(entry, 'version', _Runtime.field(image, 'version'));
     }
     _Runtime.callValue(applyGlSamplerState, cast ([state, runtime, _Runtime.field(entry, 'texture'), _Runtime.coalesce(sampler, function():Dynamic return cast null), _Runtime.coalesce(smoothingOverride, function():Dynamic return cast null)] : Array<Dynamic>));
@@ -151,7 +152,7 @@ class GlDraw {
     image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Dynamic);
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    cache = _Runtime.setField(runtime, 'videoTextureCache', (_Runtime.field(runtime, 'videoTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), [])));
+    cache = ((cast _Runtime.strictEquals(_Runtime.field(texture, 'colorSpace'), 'srgb') : Bool) ? (cast _Runtime.setField(runtime, 'videoSrgbTextureCache', (_Runtime.field(runtime, 'videoSrgbTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), []))) : Dynamic) : (cast _Runtime.setField(runtime, 'videoTextureCache', (_Runtime.field(runtime, 'videoTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), []))) : Dynamic));
     entry = ((cast cache : flighthq._internal._WeakMap).get(image));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ texture: flighthq._internal.backend.WebGl2Backend.createTexture(gl), uploadedVersion: -1.0 } : Dynamic));
@@ -161,7 +162,7 @@ class GlDraw {
     _Runtime.setField(runtime, 'currentTexture', _Runtime.field(entry, 'texture'));
     _Runtime.setField(runtime, 'currentTextureStraightAlpha', false);
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-    _Runtime.setField(entry, 'uploadedVersion', _Runtime.callValue(uploadGlTextureVideoFrame, cast ([gl, image, _Runtime.field(entry, 'uploadedVersion')] : Array<Dynamic>)));
+    _Runtime.setField(entry, 'uploadedVersion', _Runtime.callValue(uploadGlTextureVideoFrame, cast ([gl, image, _Runtime.field(entry, 'uploadedVersion'), ((cast _Runtime.strictEquals(_Runtime.field(texture, 'colorSpace'), 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic))] : Array<Dynamic>)));
     _Runtime.callValue(applyGlSamplerState, cast ([state, runtime, _Runtime.field(entry, 'texture'), _Runtime.coalesce(sampler, function():Dynamic return cast _Runtime.field(texture, 'sampler'))] : Array<Dynamic>));
     return cast _Runtime.field(entry, 'texture');
     return cast null;
@@ -270,29 +271,46 @@ class GlDraw {
     if (_Runtime.truthy(({ final __collection4:Dynamic = _Runtime.field(runtime, 'mipmappedTextures'); __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._WeakSet).has(texture)); }))) { flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D); }
   }
 
-  public static function uploadGlBitmap__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool):Void {
+  public static function uploadGlBitmap__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool, colorSpace:TextureColorSpace):Void {
     var bitmap:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     bitmap = (cast image : Bitmap);
     gl = _Runtime.field(state, 'gl');
-    transform = ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool));
-    data = ((cast transform : Bool) ? (cast _Runtime.callValue(GlDraw.premultiplyStraightRgba8__glDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast bitmap.data : Dynamic));
-    _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, bitmap.width, bitmap.height, data] : Array<Dynamic>));
+    data = ((cast ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(GlDraw.premultiplyStraightRgba8__glDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast ((cast ((cast !(cast premultiply : Bool) : Bool) && (cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(GlDraw.unpremultiplyToStraightRgba8__glDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast bitmap.data : Dynamic)) : Dynamic));
+    _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, bitmap.width, bitmap.height, data, ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic))] : Array<Dynamic>));
   }
 
-  public static function uploadGlCompressedImage__glDraw(state:GlRenderState, image:TextureSource):Void {
+  public static function uploadGlCompressedImage__glDraw(state:GlRenderState, image:TextureSource, _premultiply:Bool, colorSpace:TextureColorSpace):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callOptionalProperty(runtime, 'compressedTextureUpload', cast ([_Runtime.field(state, 'gl'), (cast image : CompressedImage), _Runtime.coalesce(_Runtime.field(runtime, 'compressedTextureDecoder'), function():Dynamic return cast null)] : Array<Dynamic>));
+    _Runtime.callOptionalProperty(runtime, 'compressedTextureUpload', cast ([_Runtime.field(state, 'gl'), (cast image : CompressedImage), _Runtime.coalesce(_Runtime.field(runtime, 'compressedTextureDecoder'), function():Dynamic return cast null), colorSpace] : Array<Dynamic>));
   }
 
-  public static function uploadGlImageResource__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool):Void {
+  public static function uploadGlImageResource__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool, colorSpace:TextureColorSpace):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL, premultiply);
-    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast _Runtime.field((cast image : Dynamic), 'source') : Dynamic)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL, ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'premultiplied') : Bool)));
+    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast _Runtime.field((cast image : Dynamic), 'source') : Dynamic), ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic))] : Array<Dynamic>));
+  }
+
+  public static function unpremultiplyToStraightRgba8__glDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
+    var out:Dynamic = cast _Runtime.UNDEFINED;
+    out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
+        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+        var scale:Dynamic = ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * scale));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * scale));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * scale));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
+        (i = cast ((i + 4.0) : Dynamic));
+      }
+    }
+    return cast out;
+    return cast null;
   }
 
   public static function premultiplyStraightRgba8__glDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {

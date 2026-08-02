@@ -2,3 +2,5 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './share.mjs';

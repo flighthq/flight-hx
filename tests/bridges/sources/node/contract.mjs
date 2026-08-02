@@ -2,3 +2,21 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './boundsRectangle.mjs';
+export * from './hasAppearance.mjs';
+export * from './hasBlendMode.mjs';
+export * from './hasBoundsRectangle.mjs';
+export * from './hasClip.mjs';
+export * from './hasMaterial.mjs';
+export * from './hasTransform2d.mjs';
+export * from './hasTransform3d.mjs';
+export * from './hierarchy.mjs';
+export * from './node.mjs';
+export * from './nodeColorAdjustment.mjs';
+export * from './nodeTransform2d.mjs';
+export * from './nodeTransform3d.mjs';
+export * from './revision.mjs';
+export * from './stageFit.mjs';
+export * from './traversal.mjs';
+export * from './viewport.mjs';

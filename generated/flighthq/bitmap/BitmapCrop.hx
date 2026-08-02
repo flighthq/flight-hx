@@ -50,7 +50,7 @@ class BitmapCrop {
         py++;
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, data: data, format: source.format, height: rh, kind: BitmapTextureSourceKind, version: 0.0, width: rw }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: rh, kind: BitmapTextureSourceKind, version: 0.0, width: rw }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -112,7 +112,7 @@ class BitmapCrop {
         py++;
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, data: data, format: source.format, height: dh, kind: BitmapTextureSourceKind, version: 0.0, width: dw }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: dh, kind: BitmapTextureSourceKind, version: 0.0, width: dw }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -151,7 +151,7 @@ class BitmapCrop {
       }
     }
     if ((cast ((cast maxX : Float) < (cast 0.0 : Float)) : Bool)) {
-      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, colorSpace: source.colorSpace, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 }] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(cropBitmap, cast ([source, { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }] : Array<Dynamic>));
     return cast null;

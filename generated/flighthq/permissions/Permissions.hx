@@ -3,13 +3,33 @@ package flighthq.permissions;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.permissions.EnablePermissionGuards as Facade_Permissions_flighthq_permissions_EnablePermissionGuards;
 import flighthq.permissions.Permission as Facade_Permissions_flighthq_permissions_Permission;
 import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
+import flighthq.types.Permission.PermissionStateExplanation;
 
 class Permissions {
+  public static function disablePermissionGuards():Void {
+    Facade_Permissions_flighthq_permissions_EnablePermissionGuards.disablePermissionGuards();
+  }
+
+  public static function enablePermissionGuards():Void {
+    Facade_Permissions_flighthq_permissions_EnablePermissionGuards.enablePermissionGuards();
+  }
+
+  public static function explainPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionStateExplanation> {
+    return cast Facade_Permissions_flighthq_permissions_Permission.explainPermissionState(name);
+    return cast null;
+  }
+
   public static function getPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionState> {
     return cast Facade_Permissions_flighthq_permissions_Permission.getPermissionState(name);
+    return cast null;
+  }
+
+  public static function getPermissionStates(names:Array<PermissionName>):flighthq._internal._Promise<Array<PermissionState>> {
+    return cast Facade_Permissions_flighthq_permissions_Permission.getPermissionStates(names);
     return cast null;
   }
 

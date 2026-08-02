@@ -1,4 +1,4 @@
-import { validateHaxeModuleIdentities } from '../../tools/generator/src/emit/core.ts';
+import { buildSourceModules, validateHaxeModuleIdentities } from '../../tools/generator/src/emit/core.ts';
 import type { IrModule } from '../../tools/generator/src/model/ir.ts';
 
 const origin = {
@@ -10,6 +10,46 @@ const origin = {
 };
 
 describe('generated Haxe module identities', () => {
+  it('imports module-local values when a same-named class owns the public module', () => {
+    const source = 'upstream/packages/example/src/reader.ts';
+    const modules = buildSourceModules(
+      '@flighthq/example',
+      {
+        declarations: [
+          {
+            constructorBody: [],
+            constructorParameters: [],
+            exported: true,
+            fields: [],
+            kind: 'class',
+            methods: [],
+            name: 'Reader',
+            origin: { ...origin, source },
+            typeParameters: [],
+          },
+          {
+            exported: false,
+            initializer: { kind: 'literal', value: 5 },
+            kind: 'variable',
+            mutable: false,
+            name: 'LIMIT__reader',
+            origin: { ...origin, source },
+          },
+        ],
+        diagnostics: [],
+        file: `/workspace/${source}`,
+      },
+      '/workspace',
+    );
+
+    expect(modules).toHaveLength(2);
+    expect(modules[0]?.imports).toEqual(['flighthq.example._internal._ReaderValues.LIMIT__reader']);
+    expect(modules[1]).toMatchObject({
+      haxePackage: 'flighthq.example._internal',
+      name: '_ReaderValues',
+    });
+  });
+
   it('accepts distinct source-derived modules', () => {
     const modules: IrModule[] = [
       {

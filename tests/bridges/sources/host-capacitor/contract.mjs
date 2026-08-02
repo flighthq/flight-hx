@@ -2,3 +2,17 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './capacitorApp.mjs';
+export * from './capacitorClipboard.mjs';
+export * from './capacitorConnectivity.mjs';
+export * from './capacitorDevice.mjs';
+export * from './capacitorDialog.mjs';
+export * from './capacitorFileSystem.mjs';
+export * from './capacitorGeolocation.mjs';
+export * from './capacitorHaptics.mjs';
+export * from './capacitorKeyboard.mjs';
+export * from './capacitorNotification.mjs';
+export * from './capacitorRegister.mjs';
+export * from './capacitorShare.mjs';
+export * from './capacitorStatusBar.mjs';

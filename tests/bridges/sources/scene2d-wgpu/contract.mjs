@@ -3,6 +3,32 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableWgpuColorAdjustmentGuards.mjs';
+export * from './enableWgpuStrokePathTessellation.mjs';
+export * from './wgpuBitmapText.mjs';
+export * from './wgpuCache.mjs';
+export * from './wgpuClip.mjs';
+export * from './wgpuClipContours.mjs';
+export * from './wgpuClipRectangle.mjs';
+export * from './wgpuColorAdjustmentMaterialFeature.mjs';
+export * from './wgpuNode2D.mjs';
+export * from './wgpuParticleEmitter2D.mjs';
+export * from './wgpuQuadBatch.mjs';
+export * from './wgpuQuadBatchWriter.mjs';
+export * from './wgpuRenderStats.mjs';
+export * from './wgpuRendererData.mjs';
+export * from './wgpuRichText.mjs';
+export * from './wgpuScale9Mapper.mjs';
+export * from './wgpuScale9Shape.mjs';
+export * from './wgpuShape.mjs';
+export * from './wgpuShapeMesh.mjs';
+export * from './wgpuSprite.mjs';
+export * from './wgpuSprite.mjs';
+export * from './wgpuStandardMaterial.mjs';
+export * from './wgpuTextInput.mjs';
+export * from './wgpuTextLabel.mjs';
+export * from './wgpuTilemap.mjs';
+export * from './wgpuVelocity.mjs';
 export { defaultCanvasBeginFill as defaultWgpuBeginFill } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasBeginGradientFill as defaultWgpuBeginGradientFill } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasBeginTextureFill as defaultWgpuBeginTextureFill } from '@flighthq/scene2d-canvas/contract';

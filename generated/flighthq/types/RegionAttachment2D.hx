@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._RegionAttachment2DValues.RegionAttachment2DKind;
 
 typedef RegionAttachment2D = { var kind:String; @:optional var name:Null<String>; var height:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var width:Float; var x:Float; var y:Float; };

@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types._internal._ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
 
 typedef ClearcoatPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var clearcoat:Float; var clearcoatMap:Null<Texture>; var clearcoatMapUvSet:PbrUvSet; var clearcoatNormalMap:Null<Texture>; var clearcoatNormalMapUvSet:PbrUvSet; var clearcoatNormalScale:Float; var clearcoatRoughness:Float; var clearcoatRoughnessMap:Null<Texture>; var clearcoatRoughnessMapUvSet:PbrUvSet; };

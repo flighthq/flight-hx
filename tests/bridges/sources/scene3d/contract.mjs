@@ -2,3 +2,19 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './billboard.mjs';
+export * from './billboardCamera.mjs';
+export * from './mesh.mjs';
+export * from './prepareScene3DMorph.mjs';
+export * from './scene.mjs';
+export * from './sceneAnimation.mjs';
+export * from './sceneDocument.mjs';
+export * from './sceneDocumentLights.mjs';
+export * from './sceneMaterial.mjs';
+export * from './sceneNode.mjs';
+export * from './sceneNodeAppearance.mjs';
+export * from './sceneNodeBounds.mjs';
+export * from './sceneNodeCulling.mjs';
+export * from './sceneNodeDispose.mjs';
+export * from './sceneNodeTransform.mjs';

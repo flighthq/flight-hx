@@ -16,3 +16,4 @@ export const getSocketBackend = api.getSocketBackend;
 export const getSocketReadyState = api.getSocketReadyState;
 export const sendSocketMessage = api.sendSocketMessage;
 export const setSocketBackend = api.setSocketBackend;
+export const setSocketGuard = api.setSocketGuard;

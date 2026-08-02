@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './menu-templates.mjs';
+export * from './menu.mjs';

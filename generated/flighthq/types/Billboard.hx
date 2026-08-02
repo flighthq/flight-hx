@@ -8,6 +8,7 @@ import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types._internal._BillboardValues.BillboardKind;
 
 typedef BillboardMode = String;
 

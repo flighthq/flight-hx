@@ -3,6 +3,7 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.scene3dWgpu.WgpuMeshFragmentTail.WGPU_MESH_FRAGMENT_TAIL;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.ensureWgpuScene3DPipeline;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.getWgpuMaterialSampler;
@@ -104,7 +105,7 @@ class WgpuUnlitPrelude {
 
   public static final UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude:Dynamic = 32.0;
 
-  public static final UNLIT_WGSL_BODY__wgpuUnlitPrelude:Dynamic = '\nstruct UnlitMaterial {\n  color : vec4f,   // linear rgba\n  params : vec4f,  // x = intensity, y = alphaCutoff\n};\n\n@group(2) @binding(0) var<uniform> material : UnlitMaterial;\n@group(2) @binding(1) var materialSampler : sampler;\n@group(2) @binding(2) var colorTexture : texture_2d<f32>;\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  var color = material.color;\n  if (HAS_COLOR_MAP) {\n    let sampled = textureSample(colorTexture, materialSampler, in.uv);\n    color = vec4f(color.rgb * srgbToLinear(sampled.rgb), color.a * sampled.a);\n  }\n  if (ALPHA_MASK && color.a < material.params.y) {\n    discard;\n  }\n  return vec4f(color.rgb * material.params.x, color.a * in.objectAlpha);\n}\n';
+  public static final UNLIT_WGSL_BODY__wgpuUnlitPrelude:Dynamic = '' + Std.string(WGPU_MESH_FRAGMENT_TAIL) + '\nstruct UnlitMaterial {\n  color : vec4f,   // linear rgba\n  params : vec4f,  // x = intensity, y = alphaCutoff\n};\n\n@group(2) @binding(0) var<uniform> material : UnlitMaterial;\n@group(2) @binding(1) var materialSampler : sampler;\n@group(2) @binding(2) var colorTexture : texture_2d<f32>;\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  var color = material.color;\n  if (HAS_COLOR_MAP) {\n    let sampled = textureSample(colorTexture, materialSampler, in.uv);\n    color = vec4f(color.rgb * sampled.rgb, color.a * sampled.a);\n  }\n  if (ALPHA_MASK && color.a < material.params.y) {\n    discard;\n  }\n  if (ALPHA_MASK) {\n    color.a = 1.0;\n  }\n  return flightPremultipliedOutput(vec4f(color.rgb * material.params.x, flightMeshCoverage(color.a, in.objectAlpha, draw.params.y)));\n}\n';
 
   public static final _scratch__wgpuUnlitPrelude:Dynamic = new flighthq._internal._Float32Array((WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude / 4.0));
 }

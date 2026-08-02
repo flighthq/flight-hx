@@ -5,5 +5,6 @@ const api = compiled.flighthq.swf.SwfDocument;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const createGlyphOutlineSourcesFromSwf = api.createGlyphOutlineSourcesFromSwf;
 export const createScene2DFromSwf = api.createScene2DFromSwf;
 export const registerSwfScene2DDocumentImporter = api.registerSwfScene2DDocumentImporter;

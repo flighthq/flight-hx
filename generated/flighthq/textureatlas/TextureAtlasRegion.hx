@@ -77,6 +77,15 @@ class TextureAtlasRegion {
     return cast null;
   }
 
+  public static function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String, ordinal:Float):Null<flighthq.types.TextureAtlasRegion> {
+    for (region in _Runtime.iterable(atlas.regions)) {
+      if ((cast ((cast _Runtime.strictEquals(region.name, null) : Bool) || (cast !(cast StringTools.startsWith(region.name, prefix) : Bool) : Bool)) : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals(_Runtime.callValue(getTextureAtlasRegionOrdinal, cast ([region] : Array<Dynamic>)), ordinal) : Bool)) { return cast region; }
+    }
+    return cast null;
+    return cast null;
+  }
+
   public static function getTextureAtlasRegionCount(atlas:TextureAtlas):Float {
     return cast _Runtime.field(atlas.regions, 'length');
     return cast null;
@@ -99,13 +108,63 @@ class TextureAtlasRegion {
     return cast null;
   }
 
-  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<flighthq.types.TextureAtlasRegion> {
-    var result:Array<flighthq.types.TextureAtlasRegion> = cast _Runtime.UNDEFINED;
-    result = cast ([] : Array<Dynamic>);
-    for (region in _Runtime.iterable(atlas.regions)) {
-      if ((cast ((cast !_Runtime.strictEquals(region.name, null) : Bool) && (cast StringTools.startsWith(region.name, prefix) : Bool)) : Bool)) { _Runtime.callProperty(result, 'push', cast ([region] : Array<Dynamic>)); }
+  public static function getTextureAtlasRegionOrdinal(region:flighthq.types.TextureAtlasRegion):Float {
+    var name:Dynamic = cast _Runtime.UNDEFINED;
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    var ordinal:Dynamic = cast _Runtime.UNDEFINED;
+    name = region.name;
+    if ((cast _Runtime.strictEquals(name, null) : Bool)) { return cast -1.0; }
+    start = _Runtime.field(name, 'length');
+    while ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool)) {
+      var code:Dynamic = _Runtime.charCodeAt(name, (start - 1.0));
+      if ((cast ((cast ((cast code : Float) < (cast 48.0 : Float)) : Bool) || (cast ((cast code : Float) > (cast 57.0 : Float)) : Bool)) : Bool)) { break; }
+      start--;
     }
-    return cast result;
+    if ((cast _Runtime.strictEquals(start, _Runtime.field(name, 'length')) : Bool)) { return cast -1.0; }
+    ordinal = 0.0;
+    {
+      var i:Dynamic = start;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(name, 'length') : Float)) : Bool)) {
+        (ordinal = cast (((ordinal * 10.0) + (_Runtime.charCodeAt(name, i) - 48.0)) : Dynamic));
+        i++;
+      }
+    }
+    return cast ordinal;
+    return cast null;
+  }
+
+  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String, out:Array<flighthq.types.TextureAtlasRegion>):Array<flighthq.types.TextureAtlasRegion> {
+    var keys:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(out, 0.0);
+    for (region in _Runtime.iterable(atlas.regions)) {
+      if ((cast ((cast !_Runtime.strictEquals(region.name, null) : Bool) && (cast StringTools.startsWith(region.name, prefix) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([region] : Array<Dynamic>)); }
+    }
+    keys = TextureAtlasRegion.sequenceSortKeys__textureAtlasRegion;
+    _Runtime.setLength(keys, _Runtime.field(out, 'length'));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray(keys, i, _Runtime.callValue(TextureAtlasRegion._textureAtlasRegionSequenceKey__textureAtlasRegion, cast ([flighthq._internal._StaticIndex.readArray(out, i)] : Array<Dynamic>)));
+        i++;
+      }
+    }
+    {
+      var i:Dynamic = 1.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
+        var region:Dynamic = flighthq._internal._StaticIndex.readArray(out, i);
+        var key:Dynamic = flighthq._internal._StaticIndex.readArray(keys, i);
+        var j:Dynamic = (i - 1.0);
+        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(keys, j) : Float) > (cast key : Float)) : Bool)) : Bool)) {
+          flighthq._internal._StaticIndex.writeArray(out, (j + 1.0), flighthq._internal._StaticIndex.readArray(out, j));
+          flighthq._internal._StaticIndex.writeArray(keys, (j + 1.0), flighthq._internal._StaticIndex.readArray(keys, j));
+          j--;
+        }
+        flighthq._internal._StaticIndex.writeArray(out, (j + 1.0), region);
+        flighthq._internal._StaticIndex.writeArray(keys, (j + 1.0), key);
+        i++;
+      }
+    }
+    return cast out;
     return cast null;
   }
 
@@ -286,6 +345,13 @@ class TextureAtlasRegion {
     return cast null;
   }
 
+  public static function _textureAtlasRegionSequenceKey__textureAtlasRegion(region:flighthq.types.TextureAtlasRegion):Float {
+    var ordinal:Dynamic = cast _Runtime.UNDEFINED;
+    ordinal = _Runtime.callValue(getTextureAtlasRegionOrdinal, cast ([region] : Array<Dynamic>));
+    return cast ((cast ((cast ordinal : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.MAX_SAFE_INTEGER : Dynamic) : (cast ordinal : Dynamic));
+    return cast null;
+  }
+
   public static function setTextureAtlasRegionTextureWindow__textureAtlasRegion(texture:Texture2D, page:Texture2D, region:flighthq.types.TextureAtlasRegion):Void {
     var sourceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var sourceHeight:Dynamic = cast _Runtime.UNDEFINED;
@@ -334,6 +400,8 @@ class TextureAtlasRegion {
   public static final regionTextureCache__textureAtlasRegion:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static var textureAtlasRegionTextureGuard__textureAtlasRegion:Null<TextureAtlasRegionTextureGuard> = _Runtime.explicitNull();
+
+  public static final sequenceSortKeys__textureAtlasRegion:Array<Float> = cast ([] : Array<Dynamic>);
 
   public static final nextRegionIdMark__textureAtlasRegion:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

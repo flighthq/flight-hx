@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
+import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
 typedef ImageResourceFetch = Dynamic;
 

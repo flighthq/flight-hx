@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Texture.TextureColorSpace;
 
 typedef GlScene3DShadow = { var matrix:Matrix4; var texture:Dynamic; };
 
@@ -12,6 +13,6 @@ typedef GlScene3DIbl = { var brdfLut:Dynamic; var intensity:Float; var irradianc
 
 typedef GlScene3DDrawEntry = { var alpha:Float; var clipW:Float; var colorMatrix:Null<Dynamic>; var colorScaleBias:Null<Dynamic>; var lightBlock:Scene3DLightBlock; var material:Dynamic; var mesh:Dynamic; var renderer:Dynamic; var subset:Dynamic; var worldMatrix:Dynamic; };
 
-typedef GlScene3DRuntime = { var activeColorAdjustmentRun:Bool; var activeColorMatrixRun:Bool; var activeMeshProgram:Null<GlMeshProgram>; var activeSkinnedRun:Bool; var blendedDrawList:Array<GlScene3DDrawEntry>; var blendedPool:Array<GlScene3DDrawEntry>; @:optional var colorSpaceGuard:Null<Dynamic>; @:optional var customShaderGuard:Null<Dynamic>; @:optional var deformGuard:Null<Dynamic>; var environmentSourceCube:Null<Dynamic>; var ibl:Null<GlScene3DIbl>; var iblBakeFramebuffer:Null<Dynamic>; var materialRegistry:Dynamic; var modifierSnippetRegistry:Null<ModifierRegistry>; @:optional var forwardLightSelectionGuard:Null<Dynamic>; var opaqueDrawList:Array<GlScene3DDrawEntry>; var opaquePool:Array<GlScene3DDrawEntry>; @:optional var pbrExtensionGuard:Null<Dynamic>; var pbrExtensionRegistry:Dynamic; var pbrExtensionRegistryVersion:Float; var pbrTransmissionSceneColor:Null<GlPbrTransmissionSceneColor>; var programCache:Dynamic; var shadow:Null<GlScene3DShadow>; var shadowTarget:Null<GlRenderTarget>; var skinPalette:Null<GlSkinPaletteTexture>; var time:Float; var uploadCache:Dynamic; };
+typedef GlScene3DRuntime = { var activeColorAdjustmentRun:Bool; var activeColorMatrixRun:Bool; var activeMeshProgram:Null<GlMeshProgram>; var activeSkinnedRun:Bool; var blendedDrawList:Array<GlScene3DDrawEntry>; var blendedPool:Array<GlScene3DDrawEntry>; @:optional var colorSpaceGuard:Null<Dynamic>; @:optional var customShaderGuard:Null<Dynamic>; @:optional var deformGuard:Null<Dynamic>; var environmentSourceCube:Null<Dynamic>; var environmentSourceCubeColorSpace:TextureColorSpace; var ibl:Null<GlScene3DIbl>; var iblBakeFramebuffer:Null<Dynamic>; var materialRegistry:Dynamic; var modifierSnippetRegistry:Null<ModifierRegistry>; @:optional var forwardLightSelectionGuard:Null<Dynamic>; var opaqueDrawList:Array<GlScene3DDrawEntry>; var opaquePool:Array<GlScene3DDrawEntry>; @:optional var pbrExtensionGuard:Null<Dynamic>; var pbrExtensionRegistry:Dynamic; var pbrExtensionRegistryVersion:Float; var pbrTransmissionSceneColor:Null<GlPbrTransmissionSceneColor>; var programCache:Dynamic; var shadow:Null<GlScene3DShadow>; var shadowTarget:Null<GlRenderTarget>; var skinPalette:Null<GlSkinPaletteTexture>; var time:Float; var uploadCache:Dynamic; };
 
 typedef GlMeshUpload = { var indexBuffer:Null<Dynamic>; var indexCount:Float; var indexType:Float; var primitiveMode:Float; @:optional var skinBindUploaded:Bool; var vao:Dynamic; var version:Float; var vertexBuffer:Dynamic; };

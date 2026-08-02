@@ -6,6 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
+import flighthq.types._internal._NodeValues.NodeKind;
+import flighthq.types._internal._NodeValues.NodeTraitsKey__Node;
+import flighthq.types._internal._NodeValues.NullScene3D;
 
 typedef NodeTraitsKey<T> = { @:optional var __NodeTraitsKey:Dynamic; };
 

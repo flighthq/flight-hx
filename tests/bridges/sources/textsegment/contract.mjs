@@ -2,3 +2,7 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './textSegment.mjs';
+export * from './textSegmentBoundary.mjs';
+export * from './textSegmenterBackend.mjs';

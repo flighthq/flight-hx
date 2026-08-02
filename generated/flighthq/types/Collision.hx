@@ -22,6 +22,12 @@ typedef CollisionShape = Dynamic;
 
 typedef CollisionManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; };
 
+typedef CollisionTestExplanation = { var kind:Null<CollisionShapeKind>; var overlapping:Bool; var shapeIndex:Null<Float>; var status:CollisionTestStatus; };
+
+typedef CollisionTestStatus = String;
+
+typedef CollisionTestGuard = Dynamic;
+
 typedef CollisionContactPoint = { var x:Float; var y:Float; var depth:Float; var featureId:Float; };
 
 typedef CollisionContactManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; var pointCount:Float; var points:Array<CollisionContactPoint>; };

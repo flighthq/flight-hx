@@ -3,5 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathRotation;
+import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathScale;
+import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathTranslation;
+import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathWeights;
 
 typedef Scene3DAnimationPath = String;

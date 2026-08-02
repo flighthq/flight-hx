@@ -26,8 +26,10 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTexture.GlRenderTextureExplanation;
 import flighthq.types.GlRenderTexture.GlRenderTexturePool;
 import flighthq.types.GlTextureResolver;
+import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
 import flighthq.types.RenderTarget.RenderTargetAxes;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetExplanation;
 import flighthq.types.RenderTarget.RenderTargetFormat;
@@ -35,6 +37,7 @@ import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
 import flighthq.types.RenderTexture;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureResolutionExplanation;
@@ -51,8 +54,8 @@ class RenderGl {
     Facade_RenderGl_flighthq_renderGl_GlRenderPass.beginGlRenderPass(state, target, preserve, viewport);
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic):Dynamic {
-    return cast Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply);
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic, ?colorSpace:TextureColorSpace):Dynamic {
+    return cast Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply, colorSpace);
     return cast null;
   }
 
@@ -64,6 +67,10 @@ class RenderGl {
   public static function bindGlTexture(state:GlRenderState, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     return cast Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlTexture(state, imageSource, sampler);
     return cast null;
+  }
+
+  public static function clearGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Void {
+    Facade_RenderGl_flighthq_renderGl_GlRenderTexture.clearGlRenderTexture(state, renderTexture);
   }
 
   public static function copyGlRenderStateRegistrations(target:GlRenderState, source:GlRenderState):Void {
@@ -206,13 +213,17 @@ class RenderGl {
     return cast null;
   }
 
-  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic):Null<Dynamic> {
-    return cast Facade_RenderGl_flighthq_renderGl_GlTextureResolver.resolveGlTexture(state, texture, premultiply);
+  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<Dynamic> {
+    return cast Facade_RenderGl_flighthq_renderGl_GlTextureResolver.resolveGlTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
-    return cast Facade_RenderGl_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer(gl, container, payload, decode);
+  public static function setGlRenderTransform2D(state:GlRenderState, transform:Matrix):Void {
+    Facade_RenderGl_flighthq_renderGl_GlRenderPass.setGlRenderTransform2D(state, transform);
+  }
+
+  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
+    return cast Facade_RenderGl_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);
     return cast null;
   }
 

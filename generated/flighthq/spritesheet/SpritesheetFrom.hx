@@ -44,7 +44,7 @@ class SpritesheetFrom {
     animations = {  };
     for (ad in _Runtime.iterable(data.animations)) {
       var resolvedFrames:Dynamic = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Runtime.callProperty(ad.frameNames, 'map', cast ([function(n:Dynamic) return ((cast frameNameToIndex : flighthq._internal._Map).get(n))] : Array<Dynamic>)), 'filter', cast ([function(i:Dynamic) return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:Dynamic, i:Dynamic) return i) : Dynamic));
-      _Runtime.setIndex(animations, ad.name, _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, loop: ad.loop, originX: ad.originX, originY: ad.originY }] : Array<Dynamic>)));
+      _Runtime.setIndex(animations, ad.name, _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, originX: ad.originX, originY: ad.originY, repeatCount: ad.repeatCount }] : Array<Dynamic>)));
     }
     return cast _Runtime.callValue(createSpritesheet, cast ([{ animations: animations, atlas: atlas, frames: frames }] : Array<Dynamic>));
     return cast null;
