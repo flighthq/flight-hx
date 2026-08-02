@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T23:05:10.382Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 59502,
+      "exitCode": 0,
+      "package": "swf",
+      "signal": null,
+      "status": "passed",
+      "summary": "76 passed (76)",
+      "testFiles": 5
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "swf",
+  "startedAt": "2026-08-02T23:04:10.878Z"
+}
