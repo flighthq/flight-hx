@@ -733,13 +733,16 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.callProperty(target, 'push', _Runtime.concatArrays");
   });
 
-  it('uses packed arrays for dynamically called variadic function values', () => {
+  it('keeps variadic function values positional across declarations, values, and properties', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/signals/src/sample.ts',
       `
         type Emitter = { emit: (...args: any[]) => void };
         export function makeDispatch(slot: (value: number) => void) {
           return (...args: any[]) => slot(...args);
+        }
+        export function makeHostHandler(listener: (value: string) => void) {
+          return (event: unknown, ...args: any[]) => listener(args[1] ?? args[0] ?? event);
         }
         export function emit(emitter: Emitter, ...args: any[]) {
           emitter.emit(...args);
@@ -758,15 +761,46 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('function(args:Array<Dynamic>)');
-    expect(output).not.toContain('function(...args:Dynamic)');
+    expect(output).toContain('function(...args:Dynamic)');
+    expect(output).toContain('function(event:Dynamic, ...args:Dynamic)');
+    expect(output).not.toContain('function(args:Array<Dynamic>)');
     expect(output).toContain('_Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]))');
     expect(output).toContain(
-      "_Runtime.callProperty(emitter, 'emit', cast ([_Runtime.toArray(args)] : Array<Dynamic>))",
+      "_Runtime.callHaxeRestProperty(emitter, 'emit', _Runtime.concatArrays([_Runtime.toArray(args)]), 0)",
     );
     expect(output).toContain(
       '_Runtime.callHaxeRestValue(emit, _Runtime.concatArrays([[emitter], _Runtime.toArray(args)]), 1)',
     );
+    expect(output).not.toContain('packedVariadicRestIndex');
+    expect(output).not.toContain('cast ([_Runtime.toArray(args)] : Array<Dynamic>)');
+  });
+
+  it('does not guess a rest convention for fixed, declaration-file, generic, or ambiguous calls', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        type Ambiguous = ((value: number) => void) & ((value: number, ...rest: number[]) => void);
+        export function forwardArray(values: number[]) { values.push(...values); }
+        export function forwardGeneric<T extends (...args: any[]) => void>(fn: T, args: any[]) { fn(...args); }
+        export function forwardAmbiguous(fn: Ambiguous, values: number[]) { fn(...values); }
+        export const fixed = (value: number) => value;
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'RestBoundaryFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function(value:Float)');
+    expect(output).not.toContain('function(...value:Float)');
+    expect(output).toContain("_Runtime.callProperty(values, 'push', _Runtime.concatArrays");
+    expect(output).toContain('_Runtime.apply(fn, _Runtime.concatArrays');
+    expect(output).not.toContain('_Runtime.callHaxeRestProperty(values');
+    expect(output).not.toContain('_Runtime.callHaxeRestValue(fn');
   });
 
   it('routes WebGL2 context access through its maintained internal binding', () => {

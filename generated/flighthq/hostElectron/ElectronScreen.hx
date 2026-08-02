@@ -44,7 +44,7 @@ class ElectronScreen {
       var onRemoved:Dynamic = cast _Runtime.UNDEFINED;
       var onMetrics:Dynamic = cast _Runtime.UNDEFINED;
       primaryId = function() return _Runtime.field(_Runtime.callProperty(screen, 'getPrimaryDisplay', cast ([] : Array<Dynamic>)), 'id');
-      makeHandler = function(kind:ScreenChangeKind) return function(args:Array<Dynamic>) {
+      makeHandler = function(kind:ScreenChangeKind) return function(...args:Dynamic) {
         var display:Dynamic = cast _Runtime.UNDEFINED;
         var event:Dynamic = cast _Runtime.UNDEFINED;
         display = (cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);

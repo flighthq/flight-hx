@@ -46,12 +46,64 @@ class _Runtime {
     arguments:Array<Dynamic>,
     restIndex:Int
   ):Dynamic {
-    #if js
+    #if (js || python)
     return Reflect.callMethod(null, callable, arguments);
     #else
     final packed = arguments.slice(0, restIndex);
     packed.push(arguments.slice(restIndex));
     return Reflect.callMethod(null, callable, packed);
+    #end
+  }
+
+  public static inline function callOptionalHaxeRestValue(
+    callable:Dynamic,
+    arguments:Array<Dynamic>,
+    restIndex:Int
+  ):Dynamic {
+    return callable == null ? UNDEFINED : callHaxeRestValue(callable, arguments, restIndex);
+  }
+
+  public static inline function callHaxeRestProperty(
+    owner:Dynamic,
+    name:String,
+    arguments:Array<Dynamic>,
+    restIndex:Int
+  ):Dynamic {
+    #if js
+    return js.Syntax.code('{0}[{1}](...{2})', owner, name, arguments);
+    #else
+    if (owner == null) return null;
+    final callable = resolveMethod(owner, name);
+    if (callable == null) throw '_Runtime.callHaxeRestProperty: ' + Std.string(owner) + ' has no method ' + name;
+    #if python
+    return Reflect.callMethod(owner, callable, arguments);
+    #else
+    final packed = arguments.slice(0, restIndex);
+    packed.push(arguments.slice(restIndex));
+    return Reflect.callMethod(owner, callable, packed);
+    #end
+    #end
+  }
+
+  public static inline function callOptionalHaxeRestProperty(
+    owner:Dynamic,
+    name:String,
+    arguments:Array<Dynamic>,
+    restIndex:Int
+  ):Dynamic {
+    if (owner == null) return UNDEFINED;
+    #if js
+    return js.Syntax.code('{0}[{1}] == null ? undefined : {0}[{1}](...{2})', owner, name, arguments);
+    #else
+    final callable = resolveMethod(owner, name);
+    if (callable == null) return UNDEFINED;
+    #if python
+    return Reflect.callMethod(owner, callable, arguments);
+    #else
+    final packed = arguments.slice(0, restIndex);
+    packed.push(arguments.slice(restIndex));
+    return Reflect.callMethod(owner, callable, packed);
+    #end
     #end
   }
 
@@ -1116,6 +1168,11 @@ class _Runtime {
     #else
     if (value == null) return [];
     if (Std.isOfType(value, Array)) return cast value;
+    #if python
+    // Python emits haxe.Rest as a native tuple. Its toArray() is inline and
+    // therefore cannot be discovered through Reflect.field below.
+    if (Std.isOfType(value, python.Tuple)) return (cast value : python.Tuple<Dynamic>).toArray();
+    #end
     #if (lime && !js)
     if (Std.isOfType(value, _LimeTypedArray)) return (cast value : _LimeTypedArray).toArray();
     #end

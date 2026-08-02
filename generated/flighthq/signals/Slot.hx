@@ -77,7 +77,7 @@ class Slot {
   }
 
   public static function makeDispatch__slot<T>(data:SignalData<Dynamic>):Dynamic {
-    return cast (cast (cast function(args:Array<Dynamic>) {
+    return cast (cast (cast function(...args:Dynamic) {
       var i:Dynamic = cast _Runtime.UNDEFINED;
       (data.cancelled = cast (false : Dynamic));
       i = 0.0;

@@ -49,6 +49,13 @@ class CoreSmoke {
     flighthq.signals.Signals.connectSignal(valueSignal, function(value:Float) emittedValue = value);
     flighthq.signals.Signals.emitSignal(valueSignal, 4.5);
     if (emittedValue != 4.5) throw 'signal arguments failed';
+    final tupleSignal:flighthq.types.Signal<Float->Float->Float->Void> = flighthq.signals.Signals.createSignal();
+    var emittedTuple = '';
+    flighthq.signals.Signals.connectSignal(tupleSignal, function(a:Float, b:Float, c:Float) {
+      emittedTuple = '$a,$b,$c';
+    });
+    flighthq.signals.Signals.emitSignal(tupleSignal, 1, 2, 4);
+    if (emittedTuple != '1,2,4') throw 'signal rest arguments failed';
 
     #if !js
     final decoder = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);

@@ -108,7 +108,7 @@ class ShapeJson {
       }
       if ((cast drop : Bool)) { continue; }
       if ((cast !(cast _Runtime.callValue(ShapeJson.isValidShapeCommandArgs__shapeJson, cast ([key, args] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-      _Runtime.callValue(appender, cast ([shape, _Runtime.toArray((cast args : Array<Dynamic>))] : Array<Dynamic>));
+      _Runtime.callHaxeRestValue(appender, _Runtime.concatArrays([[shape], _Runtime.toArray((cast args : Array<Dynamic>))]), 1);
     }
     return cast shape;
     return cast null;

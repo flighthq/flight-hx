@@ -11,6 +11,6 @@ class Emitter {
   }
 
   public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
-    _Runtime.callValue((cast signal.emit : Dynamic), cast ([_Runtime.toArray(args)] : Array<Dynamic>));
+    _Runtime.callHaxeRestValue((cast signal.emit : Dynamic), _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
   }
 }

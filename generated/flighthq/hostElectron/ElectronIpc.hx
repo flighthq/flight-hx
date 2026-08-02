@@ -16,7 +16,7 @@ class ElectronIpc {
       return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
     }, subscribe: function(channel:Dynamic, listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = function(_event:Dynamic, args:Array<Dynamic>) return _Runtime.callValue(listener, cast ([args] : Array<Dynamic>));
+      handler = function(_event:Dynamic, ...args:Dynamic) return _Runtime.callValue(listener, cast ([args] : Array<Dynamic>));
       _Runtime.callProperty(ipcMain, 'on', cast ([channel, handler] : Array<Dynamic>));
       return cast function() return _Runtime.callProperty(ipcMain, 'removeListener', cast ([channel, handler] : Array<Dynamic>));
     } };

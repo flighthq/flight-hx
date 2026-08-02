@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:21:07.928Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 19511,
+      "exitCode": 0,
+      "package": "host-electron",
+      "signal": null,
+      "status": "passed",
+      "summary": "68 passed (68)",
+      "testFiles": 17
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "host-electron",
+  "startedAt": "2026-08-02T20:20:48.415Z"
+}

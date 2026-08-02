@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:23:05.325Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 62861,
+      "exitCode": 0,
+      "package": "movieclip",
+      "signal": null,
+      "status": "passed",
+      "summary": "52 passed (52)",
+      "testFiles": 2
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "movieclip",
+  "startedAt": "2026-08-02T20:22:02.463Z"
+}

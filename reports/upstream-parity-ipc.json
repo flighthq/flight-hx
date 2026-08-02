@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:22:02.272Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 35914,
+      "exitCode": 0,
+      "package": "ipc",
+      "signal": null,
+      "status": "passed",
+      "summary": "43 passed (43)",
+      "testFiles": 1
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "ipc",
+  "startedAt": "2026-08-02T20:21:26.357Z"
+}

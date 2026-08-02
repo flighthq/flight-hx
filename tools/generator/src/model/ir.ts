@@ -130,7 +130,6 @@ type IrExpressionNode =
       direct?: boolean;
       haxeRestIndex?: number;
       optional?: boolean;
-      packedVariadicRestIndex?: number;
       typeArguments: IrType[];
     }
   | { kind: 'cast'; expression: IrExpression; type: IrType }

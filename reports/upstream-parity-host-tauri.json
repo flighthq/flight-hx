@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-08-02T20:21:26.086Z",
+  "failedPackages": 1,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 17967,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n······x·······x···························\n\n Test Files  2 failed | 9 passed (11)\n      Tests  2 failed | 40 passed (42)\n   Start at  13:21:08\n   Duration  17.12s (transform 5.76s, setup 287ms, import 15.10s, tests 47ms, environment 1.18s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriMenu.test.ts > createTauriMenuBackend > installs an application menu and routes item clicks to the select listener\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/host-tauri/src/tauriMenu.test.ts:73:30\n     71|     // Let the async build + setAsAppMenu settle.\n     72|     await flush();\n     73|     expect(state.appMenuSet).toBe(1);\n       |                              ^\n     74|     expect(state.predefined).toBe(1);\n     75|     state.actions.get('open')!('open');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > applies title/icon changes and a context menu to the resolved handle\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:108:28\n    106|     expect(state.lastTitle).toBe('New');\n    107|     expect(state.lastIcon).toBe('/icon.png');\n    108|     expect(state.menusSet).toBe(1);\n       |                            ^\n    109|     expect(backend.getTitle(id)).toBe('New');\n    110|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "package": "host-tauri",
+      "signal": null,
+      "status": "failed",
+      "summary": "2 failed | 40 passed (42)",
+      "testFiles": 11
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "host-tauri",
+  "startedAt": "2026-08-02T20:21:08.118Z"
+}

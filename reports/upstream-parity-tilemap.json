@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:28:34.143Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 82473,
+      "exitCode": 0,
+      "package": "tilemap",
+      "signal": null,
+      "status": "passed",
+      "summary": "54 passed (54)",
+      "testFiles": 1
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "tilemap",
+  "startedAt": "2026-08-02T20:27:11.667Z"
+}

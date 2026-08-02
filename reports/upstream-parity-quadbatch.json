@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:24:57.640Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 91048,
+      "exitCode": 0,
+      "package": "quadbatch",
+      "signal": null,
+      "status": "passed",
+      "summary": "84 passed (84)",
+      "testFiles": 1
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "quadbatch",
+  "startedAt": "2026-08-02T20:23:26.589Z"
+}

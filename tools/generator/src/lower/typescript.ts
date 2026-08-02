@@ -749,21 +749,20 @@ function generatedClassBinding(node: ts.Expression, context: LoweringContext): s
 function variadicCallConvention(
   node: ts.CallExpression,
   context: LoweringContext,
-): { haxeRestIndex: number } | { packedVariadicRestIndex: number } | undefined {
+): { haxeRestIndex: number } | undefined {
   const checker = context.checker;
   if (!checker) return undefined;
   const type = checker.getTypeAtLocation(node.expression);
   if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) return undefined;
+  let restIndex: number | undefined;
   for (const signature of checker.getSignaturesOfType(type, ts.SignatureKind.Call)) {
     const declaration = signature.getDeclaration();
     if (!declaration || declaration.getSourceFile().isDeclarationFile) continue;
     const index = declaration.parameters.findIndex((parameter) => parameter.dotDotDotToken !== undefined);
-    if (index < 0) continue;
-    return ts.isFunctionDeclaration(declaration) || ts.isMethodDeclaration(declaration)
-      ? { haxeRestIndex: index }
-      : { packedVariadicRestIndex: index };
+    if (index < 0 || (restIndex !== undefined && restIndex !== index)) return undefined;
+    restIndex = index;
   }
-  return undefined;
+  return restIndex === undefined ? undefined : { haxeRestIndex: restIndex };
 }
 
 function typeIncludesNamed(

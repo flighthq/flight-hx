@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-08-02T20:20:48.211Z",
+  "failedPackages": 1,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 11803,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n············x···················\n\n Test Files  1 failed | 2 passed (3)\n      Tests  1 failed | 31 passed (32)\n   Start at  13:20:37\n   Duration  10.78s (transform 4.71s, setup 282ms, import 8.66s, tests 51ms, environment 1.34s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/assets/src/assetLibrary.test.ts > loadAssetGroup > preloads a group through the loader with bounded concurrency and aggregate progress\nAssertionError: expected +0 to be 6 // Object.is equality\n\n- Expected\n+ Received\n\n- 6\n+ 0\n\n ❯ upstream/packages/assets/src/assetLibrary.test.ts:274:23\n    272|     const done = loadAssetGroup(library, 'level', { progress });\n    273|     // The loader dispatches at most its default concurrency (6) at on…\n    274|     expect(mock.peak).toBe(6);\n       |                       ^\n    275|\n    276|     let settled = false;\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "package": "assets",
+      "signal": null,
+      "status": "failed",
+      "summary": "1 failed | 31 passed (32)",
+      "testFiles": 3
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "assets",
+  "startedAt": "2026-08-02T20:20:36.406Z"
+}

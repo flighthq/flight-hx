@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:25:06.946Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 9058,
+      "exitCode": 0,
+      "package": "screen",
+      "signal": null,
+      "status": "passed",
+      "summary": "63 passed (63)",
+      "testFiles": 1
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "screen",
+  "startedAt": "2026-08-02T20:24:57.884Z"
+}
