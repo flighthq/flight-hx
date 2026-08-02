@@ -87,7 +87,8 @@ class Main extends Application {
         contextAttributes: {alpha: false, preserveDrawingBuffer: true},
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerDefaultGlMaterial(renderState);
+      registerGlStandardMaterial(renderState);
+      registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ParticleEmitterKind, defaultGlParticleEmitterRenderer);
       registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
       enableGlBlendModeSupport(renderState);
@@ -337,7 +338,7 @@ class Main extends Application {
       }
     }
     #end
-    if (!prepareDisplayObjectRender(renderState, root)) return;
+    if (!prepareScene2DRender(renderState, root)) return;
     #if sys
     // Script-only bench mode: full update/prepare cost without backend draws,
     // so tranche measurements are not flattened by the rasterizer floor.
@@ -345,10 +346,10 @@ class Main extends Application {
     #end
     if (usingCairo) {
       renderCanvasBackground(renderState);
-      renderCanvasDisplayObject(renderState, root);
+      renderCanvasScene2D(renderState, root);
     } else {
       renderGlBackground(renderState);
-      renderGlDisplayObject(renderState, root);
+      renderGlScene2D(renderState, root);
     }
   }
 

@@ -79,7 +79,8 @@ class Main extends Application {
         contextAttributes: {alpha: false, preserveDrawingBuffer: true},
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerDefaultGlMaterial(renderState);
+      registerGlStandardMaterial(renderState);
+      registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
@@ -384,13 +385,13 @@ class Main extends Application {
   // Upstream `render(main)`, driven by Lime's per-frame `render`.
   override public function render(context:RenderContext):Void {
     if (!ready || main == null) return;
-    if (!prepareDisplayObjectRender(renderState, main)) return;
+    if (!prepareScene2DRender(renderState, main)) return;
     if (usingCairo) {
       renderCanvasBackground(renderState);
-      renderCanvasDisplayObject(renderState, main);
+      renderCanvasScene2D(renderState, main);
     } else {
       renderGlBackground(renderState);
-      renderGlDisplayObject(renderState, main);
+      renderGlScene2D(renderState, main);
     }
   }
 }

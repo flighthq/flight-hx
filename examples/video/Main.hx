@@ -8,7 +8,7 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.DisplayContainer;
+
 import flighthq.types.Video;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -21,7 +21,7 @@ class Main extends Application {
   var ready = false;
   var usingCairo = false;
 
-  var root:DisplayContainer;
+  var root:DisplayObject;
   var videoNode:Video;
   var secondVideoNode:Video;
   var thirdVideoNode:Video;
@@ -60,13 +60,14 @@ class Main extends Application {
         contextAttributes: {alpha: false, preserveDrawingBuffer: true},
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerDefaultGlMaterial(renderState);
+      registerGlStandardMaterial(renderState);
+      registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, VideoKind, defaultGlVideoRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
     }
 
-    root = createDisplayContainer();
+    root = createDisplayObject();
     root.scaleX = scale;
     root.scaleY = scale;
 
@@ -123,13 +124,13 @@ class Main extends Application {
   // Upstream `render(root)`, driven by Lime's per-frame `render`.
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
-    if (!prepareDisplayObjectRender(renderState, root)) return;
+    if (!prepareScene2DRender(renderState, root)) return;
     if (usingCairo) {
       renderCanvasBackground(renderState);
-      renderCanvasDisplayObject(renderState, root);
+      renderCanvasScene2D(renderState, root);
     } else {
       renderGlBackground(renderState);
-      renderGlDisplayObject(renderState, root);
+      renderGlScene2D(renderState, root);
     }
   }
 

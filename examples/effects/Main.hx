@@ -6,7 +6,7 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.DisplayContainer;
+
 import flighthq.types.RenderEffect;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -21,7 +21,7 @@ class Main extends Application {
   var ready = false;
   var usingCairo = false;
 
-  var root:DisplayContainer;
+  var root:DisplayObject;
   // Effect chain: bloom -> vignette -> tone map, plus the GL effect pipeline that applies it.
   var effects:Array<RenderEffect>;
   var pipeline:Dynamic;
@@ -59,7 +59,8 @@ class Main extends Application {
         backgroundColor: 0x0a0c14ff,
         contextAttributes: {alpha: false, preserveDrawingBuffer: true},
       });
-      registerDefaultGlMaterial(renderState);
+      registerGlStandardMaterial(renderState);
+      registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
       registerStandardGlRenderEffects(renderState);
@@ -67,7 +68,7 @@ class Main extends Application {
     }
     pipeline = usingCairo ? createCanvasRenderEffectPipeline(renderState) : createGlRenderEffectPipeline(renderState);
 
-    root = createDisplayContainer();
+    root = createDisplayObject();
     root.scaleX = scale;
     root.scaleY = scale;
 
@@ -116,16 +117,16 @@ class Main extends Application {
   // Upstream `render(root, effects)`, driven by Lime's per-frame `render`.
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
-    if (!prepareDisplayObjectRender(renderState, root)) return;
+    if (!prepareScene2DRender(renderState, root)) return;
     if (usingCairo) {
       beginCanvasRenderEffectPipeline(renderState, pipeline);
       renderCanvasBackground(renderState);
-      renderCanvasDisplayObject(renderState, root);
+      renderCanvasScene2D(renderState, root);
       endCanvasRenderEffectPipeline(renderState, pipeline, cast effects);
     } else {
       beginGlRenderEffectPipeline(renderState, pipeline);
       renderGlBackground(renderState);
-      renderGlDisplayObject(renderState, root);
+      renderGlScene2D(renderState, root);
       endGlRenderEffectPipeline(renderState, pipeline, cast effects);
     }
   }
