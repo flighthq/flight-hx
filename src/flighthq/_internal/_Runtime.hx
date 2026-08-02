@@ -79,7 +79,9 @@ class _Runtime {
     #if !js
     if (owner == null) return null;
     final callable = resolveMethod(owner, name);
-    if (callable == null) return null;
+    // JavaScript throws TypeError for a missing method; a silent null here
+    // masks real dispatch gaps (use callOptionalProperty for lenient calls).
+    if (callable == null) throw '_Runtime.callProperty: ' + Std.string(owner) + ' has no method ' + name;
     return Reflect.callMethod(owner, callable, adjustArguments(callable, arguments));
     #else
     // Property lookup with JavaScript member semantics: Reflect.field misses
@@ -307,6 +309,11 @@ class _Runtime {
       case 'Int8Array': _Int8Array.construct;
       case 'TextDecoder': _TextDecoder;
       case 'Uint32Array': _UInt32Array.construct;
+      case 'Number': numberNamespace();
+      case 'parseFloat': jsParseFloat;
+      case 'parseInt': jsParseInt;
+      case 'isNaN': jsCoercingIsNaN;
+      case 'isFinite': jsCoercingIsFinite;
       default: null;
     };
     #end
@@ -524,6 +531,67 @@ class _Runtime {
     return (cast source : Array<Dynamic>).copy();
     #end
   }
+
+  #if !js
+  /** Portable `Number` namespace: the non-coercing static predicates and the
+   * coercing parse functions, matching JavaScript semantics closely enough for
+   * the generated guard patterns (`Number.isFinite(x)` after a typeof check). */
+  static var numberNamespaceValue:Dynamic = null;
+
+  static function numberNamespace():Dynamic {
+    if (numberNamespaceValue == null) {
+      numberNamespaceValue = {
+        isFinite: function(value:Dynamic):Bool {
+          return Std.isOfType(value, Float) && HxMath.isFinite(cast value) && !HxMath.isNaN(cast value);
+        },
+        isInteger: function(value:Dynamic):Bool {
+          if (!Std.isOfType(value, Float)) return false;
+          final number:Float = cast value;
+          return HxMath.isFinite(number) && !HxMath.isNaN(number) && number == HxMath.ffloor(number);
+        },
+        isNaN: function(value:Dynamic):Bool {
+          return Std.isOfType(value, Float) && HxMath.isNaN(cast value);
+        },
+        parseFloat: jsParseFloat,
+        parseInt: jsParseInt,
+      };
+    }
+    return numberNamespaceValue;
+  }
+
+  static function jsParseFloat(value:Dynamic):Float {
+    if (value == null) return HxMath.NaN;
+    final parsed = Std.parseFloat(StringTools.ltrim(Std.string(value)));
+    return parsed;
+  }
+
+  static function jsParseInt(value:Dynamic, ?radix:Dynamic):Float {
+    if (value == null) return HxMath.NaN;
+    var text = StringTools.ltrim(Std.string(value));
+    final radixValue = radix == null ? 10 : Std.int(radix);
+    if (radixValue == 16 && !StringTools.startsWith(text.toLowerCase(), '0x')) text = '0x' + text;
+    final parsed = Std.parseInt(text);
+    return parsed == null ? HxMath.NaN : parsed;
+  }
+
+  static function jsCoercingIsNaN(value:Dynamic):Bool {
+    if (value == null) return false; // Number(null) is 0.
+    if (Std.isOfType(value, Float)) return HxMath.isNaN(cast value);
+    if (Std.isOfType(value, Bool)) return false;
+    return HxMath.isNaN(jsParseFloat(value));
+  }
+
+  static function jsCoercingIsFinite(value:Dynamic):Bool {
+    if (value == null) return true; // Number(null) is 0.
+    if (Std.isOfType(value, Float)) {
+      final number:Float = cast value;
+      return HxMath.isFinite(number) && !HxMath.isNaN(number);
+    }
+    if (Std.isOfType(value, Bool)) return true;
+    final number = jsParseFloat(value);
+    return HxMath.isFinite(number) && !HxMath.isNaN(number);
+  }
+  #end
 
   public static function typeofGlobal(name:String):String {
     #if js

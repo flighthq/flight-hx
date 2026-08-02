@@ -7,8 +7,10 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
+import flighthq.tilemapFormats.TilemapFormats.buildTilemapLayersFromTiled;
+import flighthq.tilemapFormats.TilemapFormats.parseTiledTmj;
+import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
 import flighthq._internal._UInt8ClampedArray;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -51,7 +53,7 @@ class Main extends Application {
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, BitmapKind, defaultCanvasBitmapRenderer);
+      registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
       registerRenderer(renderState, TilemapKind, defaultCanvasTilemapRenderer);
       registerCanvasShapeCommands(defaultCanvasShapeCommands);
       enableCanvasBlendMode(renderState);
@@ -65,7 +67,7 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, BitmapKind, defaultGlBitmapRenderer);
+      registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);
       registerRenderer(renderState, TilemapKind, defaultGlTilemapRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
@@ -76,13 +78,19 @@ class Main extends Application {
     root.scaleY = scale;
 
     final imageResource = createTilesetImage();
-    final tileset = createTilesetFromImageResource(imageResource, TILE_SIZE, TILE_SIZE);
+    final atlas = createTextureAtlasFromGrid({
+      columns: TILE_COUNT,
+      frameHeight: TILE_SIZE,
+      frameWidth: TILE_SIZE,
+      imageFile: '',
+      imageHeight: TILE_SIZE,
+      imageWidth: TILE_SIZE * TILE_COUNT,
+      rows: 1,
+    }, createTexture(cast {dimension: '2d', source: imageResource}));
 
-    final tilemap = createTilemap();
-    resizeTilemap(tilemap, MAP_COLUMNS, MAP_ROWS);
-    tilemap.data.tileset = tileset;
-
-    // Procedural landscape: snow peaks at top, stone mountains, grass plains, sand shore, water.
+    // Author the terrain as Tiled's one-based global tile IDs, then consume it through the same TMJ
+    // parser and projection API used for a map loaded from disk.
+    final tiledGids:Array<Int> = [];
     for (row in 0...MAP_ROWS) {
       for (col in 0...MAP_COLUMNS) {
         var id:Int;
@@ -108,10 +116,43 @@ class Main extends Application {
         final dist = Math.sqrt(Math.pow(col - cx, 2) + Math.pow(row - cy, 2));
         if (dist < 2.5) id = 6;
 
-        setTilemapTile(tilemap, col, row, id);
+        tiledGids.push(id + 1);
       }
     }
 
+    final tiledMap = parseTiledTmj(haxe.Json.stringify({
+      height: MAP_ROWS,
+      infinite: false,
+      layers: [{
+        data: tiledGids,
+        height: MAP_ROWS,
+        id: 1,
+        name: 'terrain',
+        type: 'tilelayer',
+        width: MAP_COLUMNS,
+      }],
+      orientation: 'orthogonal',
+      renderorder: 'right-down',
+      tiledversion: '1.10.2',
+      tileheight: TILE_SIZE,
+      tilesets: [{firstgid: 1, source: 'terrain.tsj'}],
+      tilewidth: TILE_SIZE,
+      type: 'map',
+      version: '1.10',
+      width: MAP_COLUMNS,
+    }));
+    if (tiledMap == null) throw 'Unable to parse bundled terrain.tmj';
+
+    final tilemapLayers = buildTilemapLayersFromTiled(tiledMap, 0, () -> ({
+      atlas: atlas,
+      tileHeight: TILE_SIZE,
+      tileWidth: TILE_SIZE,
+    } : Dynamic));
+    if (tilemapLayers == null || tilemapLayers.length != 1) {
+      throw 'Unable to project terrain.tmj into a Flight tilemap';
+    }
+
+    final tilemap = createTilemap(cast {data: tilemapLayers[0]});
     invalidateNodeAppearance(tilemap);
     addNodeChild(root, tilemap);
 
@@ -119,9 +160,9 @@ class Main extends Application {
   }
 
   // Portable procedural tileset: TILE_COUNT solid terrain tiles laid out horizontally, uploaded as real
-  // RGBA bytes through the ImageResource `data` path. A bare `{width, height}` object would instead become
-  // `image.source` and hit the DOM-element `texImage2D` overload, which rejects a plain object.
-  function createTilesetImage():ImageResource {
+  // RGBA bytes through the Bitmap texture-source path (the upstream example paints a browser canvas;
+  // a Bitmap with explicit pixel data is the portable equivalent under the TextureSource split).
+  function createTilesetImage():Dynamic {
     final width = TILE_SIZE * TILE_COUNT;
     // Indices match the tile ids placed below: 0 grass, 1 water, 2 sand, 3 stone, 4 dirt, 5 snow, 6 lava, 7 void.
     final colors = [
@@ -144,12 +185,11 @@ class Main extends Application {
     return imageFromPixels(width, TILE_SIZE, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
+    final bitmap:Bitmap = createBitmap(width, height);
+    // createBitmap allocates zeroed pixels; overwrite them with the painted tiles.
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
   // Upstream `render(root)`, driven by Lime's per-frame `render`.

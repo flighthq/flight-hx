@@ -6,6 +6,10 @@ package flighthq._internal;
  * Keeps JavaScript-shaped typed-array behavior while owning storage that Lime
  * can pass to native graphics APIs as an `ArrayBufferView`.
  */
+// Reached reflectively through _Runtime.callProperty when generated code calls
+// typed-array members on Dynamic-typed receivers, so full DCE must not strip
+// any member (the established pattern for reflectively-reached runtime classes).
+@:keep
 class _LimeTypedArray {
   #if neko
   // Generated modules allocate typed-array scratch values during static initialization. Make
