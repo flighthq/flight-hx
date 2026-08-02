@@ -2,6 +2,9 @@
 package flighthq._internal;
 
 /** Portable subset of TextDecoder used by document importers. */
+// Reached only reflectively through _Runtime.globalValue, so full DCE must not
+// strip the constructor or members.
+@:keep
 class _TextDecoder {
   public function new(?_label:Dynamic, ?_options:Dynamic) {}
 
