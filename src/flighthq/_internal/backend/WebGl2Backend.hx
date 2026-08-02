@@ -546,14 +546,14 @@ class WebGl2Backend {
   }
 
   public static inline function getParameter(gl:GlContext, pname:Float):Dynamic {
-    #if (neko || cpp)
+    #if ((neko || cpp) && lime)
     return nativeParameter(gl, Std.int(pname));
     #else
     return gl.getParameter(Std.int(pname));
     #end
   }
 
-  #if (neko || cpp)
+  #if ((neko || cpp) && lime)
   // Lime's native vector queries return lime.utils typed arrays whose abstract
   // identity is lost through Dynamic, so the generated portable typed-array
   // readers cannot index them. Copy those snapshots into the portable classes
