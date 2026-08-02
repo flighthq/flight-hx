@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-02T21:39:09.993Z",
+  "completedAt": "2026-08-02T22:42:25.907Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 371335,
+      "durationMs": 351014,
       "exitCode": 0,
       "package": "render-wgpu",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "render-wgpu",
-  "startedAt": "2026-08-02T21:32:58.653Z"
+  "startedAt": "2026-08-02T22:36:34.891Z"
 }
