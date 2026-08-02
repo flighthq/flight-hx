@@ -562,6 +562,10 @@ class NativeCanvas2dContext {
   }
 
   public function putImageData(imageData:Dynamic, x:Float, y:Float):Void {
+    // The scratch-canvas surface is created lazily; `putImageData` can be the
+    // very first operation after sizing (createImageResourceFromBitmap does
+    // exactly that), so sync here instead of silently skipping the write.
+    syncWithOwner();
     if (surface == null) return;
     surface.flush();
     final sourceWidth = Std.int(_Runtime.field(imageData, 'width'));
