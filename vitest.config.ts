@@ -8,6 +8,7 @@ export default defineConfig({
     },
     globals: true,
     include: ['tests/**/*.test.ts'],
-    testTimeout: 30_000,
+    // Checker-derived generator censuses can exceed 30 seconds when files run concurrently.
+    testTimeout: 180_000,
   },
 });

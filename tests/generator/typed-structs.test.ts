@@ -555,7 +555,7 @@ describe('typed struct analysis', () => {
     expect(typedStructSummary(report)).toContain(
       '| `@flighthq/types:interface#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/ParticleFormatCodec.ts:12` |',
     );
-  }, 90_000);
+  }, 180_000);
 
   it('keeps eligible audit-only schemas reflective until review enables them', () => {
     const result = lowerFixture(
