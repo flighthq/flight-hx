@@ -8,8 +8,10 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
+import flighthq.types.Sprite;
 import flighthq.types.DisplayObject;
 import flighthq.types.Bitmap;
+import flighthq.types.Sprite;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
@@ -24,11 +26,11 @@ class Main extends Application {
 
   var root:DisplayObject;
 
-  var gradientBitmap:Bitmap;
-  var checkerBitmap:Bitmap;
-  var circleBitmap:Bitmap;
-  var rotatedBitmap:Bitmap;
-  var combinedBitmap:Bitmap;
+  var gradientBitmap:Sprite;
+  var checkerBitmap:Sprite;
+  var circleBitmap:Sprite;
+  var rotatedBitmap:Sprite;
+  var combinedBitmap:Sprite;
 
   public function new() {
     super();
@@ -53,7 +55,7 @@ class Main extends Application {
         backgroundColor: 0xf0f0f0ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, BitmapKind, defaultCanvasBitmapRenderer);
+      registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
       registerCanvasShapeCommands(defaultCanvasShapeCommands);
       enableCanvasBlendMode(renderState);
     } else {
@@ -66,7 +68,7 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, BitmapKind, defaultGlBitmapRenderer);
+      registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
     }
@@ -77,16 +79,16 @@ class Main extends Application {
 
     // Gradient square: a colorful linear gradient from top-left to bottom-right.
 
-    gradientBitmap = createBitmap();
-    gradientBitmap.data.image = createGradientImage(128, 128);
+    gradientBitmap = createSprite();
+    gradientBitmap.data.texture = createTexture(cast {dimension: '2d', source: createGradientImage(128, 128)});
     gradientBitmap.x = 60;
     gradientBitmap.y = 60;
     addNodeChild(root, gradientBitmap);
 
     // Checkerboard pattern: demonstrates procedural pattern generation.
 
-    checkerBitmap = createBitmap();
-    checkerBitmap.data.image = createCheckerboardImage(128, 128);
+    checkerBitmap = createSprite();
+    checkerBitmap.data.texture = createTexture(cast {dimension: '2d', source: createCheckerboardImage(128, 128)});
     checkerBitmap.x = 340;
     checkerBitmap.y = 60;
     checkerBitmap.alpha = 0.5;
@@ -94,8 +96,8 @@ class Main extends Application {
 
     // Circle with radial gradient: scaled to 2x.
 
-    circleBitmap = createBitmap();
-    circleBitmap.data.image = createRadialGradientImage(128, 128);
+    circleBitmap = createSprite();
+    circleBitmap.data.texture = createTexture(cast {dimension: '2d', source: createRadialGradientImage(128, 128)});
     circleBitmap.x = 620;
     circleBitmap.y = 60;
     circleBitmap.scaleX = 2;
@@ -104,8 +106,8 @@ class Main extends Application {
 
     // Rotated gradient square: the same gradient image rotated 30 degrees.
 
-    rotatedBitmap = createBitmap();
-    rotatedBitmap.data.image = createGradientImage(96, 96);
+    rotatedBitmap = createSprite();
+    rotatedBitmap.data.texture = createTexture(cast {dimension: '2d', source: createGradientImage(96, 96)});
     rotatedBitmap.x = 200;
     rotatedBitmap.y = 340;
     rotatedBitmap.rotation = 30;
@@ -113,8 +115,8 @@ class Main extends Application {
 
     // Combined properties: scaled, semi-transparent, and rotated checkerboard.
 
-    combinedBitmap = createBitmap();
-    combinedBitmap.data.image = createCheckerboardImage(80, 80);
+    combinedBitmap = createSprite();
+    combinedBitmap.data.texture = createTexture(cast {dimension: '2d', source: createCheckerboardImage(80, 80)});
     combinedBitmap.x = 500;
     combinedBitmap.y = 340;
     combinedBitmap.scaleX = 1.5;

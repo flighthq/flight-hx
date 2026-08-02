@@ -10,7 +10,7 @@ import flighthq.sdk.Sdk.*;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResource;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleForce;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -32,12 +32,12 @@ class Main extends Application {
   // Root container holds both emitters and the HUD label.
   var root:DisplayObject;
 
-  var fireEmitter:ParticleEmitter;
+  var fireEmitter:ParticleEmitter2D;
   var fireConfig:Dynamic;
   var fireForces:Array<ParticleForce>;
   var fireSimState:Dynamic;
 
-  var snowEmitter:ParticleEmitter;
+  var snowEmitter:ParticleEmitter2D;
   var snowConfig:Dynamic;
   var snowForces:Array<ParticleForce>;
   var snowSimState:Dynamic;
@@ -76,7 +76,7 @@ class Main extends Application {
         backgroundColor: 0x0a0a14ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, ParticleEmitterKind, defaultCanvasParticleEmitterRenderer);
+      registerRenderer(renderState, ParticleEmitter2DKind, defaultCanvasParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
       enableCanvasBlendMode(renderState);
     } else {
@@ -89,7 +89,7 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, ParticleEmitterKind, defaultGlParticleEmitterRenderer);
+      registerRenderer(renderState, ParticleEmitter2DKind, defaultGlParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
       enableGlBlendModeSupport(renderState);
     }

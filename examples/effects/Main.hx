@@ -51,7 +51,8 @@ class Main extends Application {
       });
       registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
       registerCanvasShapeCommands(defaultCanvasShapeCommands);
-      registerAllCanvasRenderEffects(renderState);
+      registerCanvasBloomEffect(renderState);
+      registerCanvasVignetteEffect(renderState);
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -64,7 +65,9 @@ class Main extends Application {
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
       registerGlShapeCommands(defaultGlShapeCommands);
-      registerStandardGlRenderEffects(renderState);
+      registerGlBloomEffect(renderState);
+      registerGlVignetteEffect(renderState);
+      registerGlToneMapEffect(renderState);
       enableGlBlendModeSupport(renderState);
     }
     pipeline = usingCairo ? createCanvasRenderEffectPipeline(renderState) : createGlRenderEffectPipeline(renderState);

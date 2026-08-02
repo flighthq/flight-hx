@@ -11,8 +11,8 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Camera;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
+import flighthq.types.Scene3DLights;
+import flighthq.types.Node3D;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -28,9 +28,9 @@ class Main extends Application {
   // The HDR/depth effect pipeline the upstream `render.webgl` module allocates.
   var pipeline:Dynamic;
 
-  var scene:SceneNode;
+  var scene:Node3D;
   var camera:Camera;
-  var lights:SceneLights;
+  var lights:Scene3DLights;
 
   public function new() {
     super();
@@ -85,7 +85,7 @@ class Main extends Application {
       roughness: 0.5,
     });
 
-    scene = createSceneNode(SceneNodeKind);
+    scene = createNode3D(Node3DKind);
 
     final boxMesh = createMesh(boxGeometry, [redMaterial]);
     // A node's transform is authored via its `position`/`rotation`/`scale` fields; invalidate after editing.

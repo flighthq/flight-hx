@@ -13,8 +13,8 @@ import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Quaternion;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
+import flighthq.types.Scene3DLights;
+import flighthq.types.Node3D;
 import flighthq.types.Vector3;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -37,11 +37,11 @@ class Main extends Application {
   final FLOATS_PER_VERTEX = 20;
 
   var geometry:MeshGeometry;
-  var scene:SceneNode;
-  var jointNodes:Array<SceneNode> = [];
+  var scene:Node3D;
+  var jointNodes:Array<Node3D> = [];
   var mesh:Mesh;
   var camera:Camera;
-  var lights:SceneLights;
+  var lights:Scene3DLights;
 
   var q:Quaternion;
   var zAxis:Vector3;
@@ -155,13 +155,13 @@ class Main extends Application {
       vertices: vertices,
     });
 
-    // Build the joint hierarchy as SceneNodes in a chain along Y. Joint 0 is the root at the bottom of
+    // Build the joint hierarchy as Node3Ds in a chain along Y. Joint 0 is the root at the bottom of
     // the tube; each successive joint is offset upward by the segment span.
-    scene = createSceneNode(SceneNodeKind);
+    scene = createNode3D(Node3DKind);
 
     final jointSpacing = TOTAL_HEIGHT / (JOINT_COUNT - 1);
     for (j in 0...JOINT_COUNT) {
-      final node = createSceneNode();
+      final node = createNode3D();
       if (j == 0) {
         node.position.y = -TOTAL_HEIGHT / 2;
         invalidateNodeLocalTransform(node);

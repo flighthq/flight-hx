@@ -11,7 +11,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResource;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleForce;
 import flighthq.types.TextureAtlas;
@@ -40,7 +40,7 @@ class Main extends Application {
   var root:DisplayObject;
 
   var atlas:TextureAtlas;
-  var emitter:ParticleEmitter;
+  var emitter:ParticleEmitter2D;
   var countLabel:DisplayObject;
 
   // Editable config values — these drive `createParticleEmitterConfig` each time a slider changes.
@@ -174,7 +174,7 @@ class Main extends Application {
         backgroundColor: 0x0a0a14ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerRenderer(renderState, ParticleEmitterKind, defaultCanvasParticleEmitterRenderer);
+      registerRenderer(renderState, ParticleEmitter2DKind, defaultCanvasParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
       enableCanvasBlendMode(renderState);
     } else {
@@ -187,7 +187,7 @@ class Main extends Application {
       });
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
-      registerRenderer(renderState, ParticleEmitterKind, defaultGlParticleEmitterRenderer);
+      registerRenderer(renderState, ParticleEmitter2DKind, defaultGlParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);
       enableGlBlendModeSupport(renderState);
     }

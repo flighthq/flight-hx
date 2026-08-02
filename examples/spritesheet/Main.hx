@@ -10,7 +10,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
+import flighthq.types.Bitmap;
 import flighthq._internal._UInt8ClampedArray;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetPlayer;
@@ -185,7 +185,7 @@ class Main extends Application {
   // middle frames to read as a spinning coin, uploaded as real RGBA bytes through the ImageResource
   // `data` path (a bare `{width, height}` object would become `image.source` and hit the DOM-element
   // `texImage2D` overload, which rejects a plain object).
-  function createSpriteStrip():ImageResource {
+  function createSpriteStrip():Dynamic {
     final pixels = new _UInt8ClampedArray(STRIP_WIDTH * FRAME_SIZE * 4);
     final ry = FRAME_SIZE * 0.42;
     for (f in 0...FRAME_COUNT) {
@@ -212,12 +212,10 @@ class Main extends Application {
     return imageFromPixels(STRIP_WIDTH, FRAME_SIZE, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
+    final bitmap:Bitmap = createBitmap(width, height);
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
   // Applies the current player frame's atlas region to a Bitmap's sourceRectangle.
