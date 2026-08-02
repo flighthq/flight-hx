@@ -16,16 +16,16 @@ A checker census over the 140 translated production packages (tests and the deri
 
 All 68 dynamic survivors are typed-array `set` calls; there are no collection survivors and no optional-call or spread-argument cases.
 
-| Proven receiver                   | Dynamic `set` calls |
-| --------------------------------- | ------------------: |
-| `Float32Array`                    |                  34 |
-| `Uint8Array`                      |                  12 |
-| `Uint8ClampedArray`               |                   9 |
-| `Uint32Array`                     |                   7 |
-| `Uint16Array`                     |                   4 |
-| `Int16Array`                      |                   1 |
-| `Uint16Array` or `Uint32Array`    |                   1 |
-| **Total**                         |              **68** |
+| Proven receiver                | Dynamic `set` calls |
+| ------------------------------ | ------------------: |
+| `Float32Array`                 |                  34 |
+| `Uint8Array`                   |                  12 |
+| `Uint8ClampedArray`            |                   9 |
+| `Uint32Array`                  |                   7 |
+| `Uint16Array`                  |                   4 |
+| `Int16Array`                   |                   1 |
+| `Uint16Array` or `Uint32Array` |                   1 |
+| **Total**                      |              **68** |
 
 The next approved general lever is a method-specific checker-proven typed-array `set` lowering. It must preserve the source-array argument exactly, coerce only the optional numeric offset, and use a union-aware endpoint for the single `Uint16Array | Uint32Array` receiver. Merely adding `set` to the current generic typed-array binding is unsound: that emitter applies `Std.int` to every argument and would corrupt the source array. Focused mesh parity already passes with the dynamic route, so this is a portability/performance lever rather than an emergency correctness patch.
 
