@@ -51,7 +51,7 @@ flight-hx/
 ├── haxe_libraries/              # committed Lix dependency specifications
 ├── .haxerc                      # exact Haxe compiler selection
 ├── haxelib.json                 # Haxelib name flight; classPath src
-├── extraParams.hxml             # adds the generated classpath
+├── extraParams.hxml             # adds the flight compiler define
 ├── package.json
 ├── package-lock.json
 └── tsconfig.json
@@ -67,14 +67,14 @@ Every generated file begins with a banner naming its source of truth and the com
 
 ## Publishing Shape
 
-The Haxelib artifact uses `src` as its conventional primary classpath and adds `generated` through `extraParams.hxml`. Repository commands pass both classpaths explicitly.
+The Haxelib artifact uses `src` as its conventional primary classpath. Packaging merges the maintained and generated source trees into that artifact classpath and fails if a file would collide; relative classpaths in `extraParams.hxml` would otherwise resolve from the consumer's working directory. Repository commands keep the source trees separate and pass both classpaths explicitly.
 
 The current `haxelib.json` values are:
 
 ```text
 name: flight
 classPath: src
-extraParams.hxml: -cp generated
+extraParams.hxml: -D flight
 ```
 
 The package archive includes generated API, inventory, lowering, patch, parity, and provenance records under `generation/`, including the exact upstream revision. The current version remains the pre-release `0.0.0` until a release policy is chosen.

@@ -30,7 +30,11 @@ mkdirSync(stage, { recursive: true });
 for (const file of ['haxelib.json', 'extraParams.hxml', 'README.md', 'LICENSE.md'])
   cpSync(path.join(workspace, file), path.join(stage, file));
 cpSync(path.join(workspace, 'src'), path.join(stage, 'src'), { recursive: true });
-cpSync(path.join(workspace, 'generated'), path.join(stage, 'generated'), { recursive: true });
+cpSync(path.join(workspace, 'generated'), path.join(stage, 'src'), {
+  errorOnExist: true,
+  force: false,
+  recursive: true,
+});
 mkdirSync(path.join(stage, 'generation'), { recursive: true });
 for (const file of [
   'api.json',

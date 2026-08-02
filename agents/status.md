@@ -63,7 +63,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - SDK: `flighthq.sdk.Sdk` is a generated facade over the actual upstream SDK export graph, including renamed cross-package re-exports.
 - Types: canonical declarations live in their defining modules under `flighthq.types`; additional declarations use Haxe secondary-type imports such as `flighthq.types.Vector2.Vector2Like`.
 - Distribution: Haxelib name `flight`, currently at pre-release version `0.0.0`.
-- Sources: maintained Haxe lives under `src/`, generated Haxe under `generated/`, and Haxelib adds the latter through `extraParams.hxml`.
+- Sources: maintained Haxe lives under `src/` and generated Haxe under `generated/`; the Haxelib artifact merges both into its single `src` classpath while repository commands pass both source trees explicitly.
 - Internals: maintained runtime types live under `flighthq._internal` and use underscore-prefixed names such as `_Runtime` and `_Promise`.
 - Hosts: optional maintained adapters live in the main source tree; `flighthq.hostLime.LimeApp.createLimeAppBackend(application)` returns a Lime-specific App backend without owning or registering the application and is conditional on Lime's `lime` define.
 - Tools: generator code, semantic patches, and operational scripts share the `tools/` hierarchy.
