@@ -9,7 +9,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
+import flighthq.types.Bitmap;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
@@ -144,16 +144,15 @@ class Main extends Application {
   // the GL bitmap renderer uploads with the 9-argument `texImage2D(width, height, ..., data)` overload.
   // Handing a bare `{width, height}` object instead becomes `image.source` and hits the DOM-element
   // `texImage2D` overload, which rejects a plain object ("Overload resolution failed").
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
+    final bitmap:Bitmap = createBitmap(width, height);
+    // createBitmap allocates zeroed pixels; overwrite them with the painted content.
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 
   // Colorful linear gradient from top-left to bottom-right.
-  function createGradientImage(width:Int, height:Int):ImageResource {
+  function createGradientImage(width:Int, height:Int):Dynamic {
     final pixels = new _UInt8ClampedArray(width * height * 4);
     for (y in 0...height) {
       for (x in 0...width) {
@@ -170,7 +169,7 @@ class Main extends Application {
   }
 
   // Two-tone checkerboard pattern.
-  function createCheckerboardImage(width:Int, height:Int):ImageResource {
+  function createCheckerboardImage(width:Int, height:Int):Dynamic {
     final pixels = new _UInt8ClampedArray(width * height * 4);
     final cell = 16;
     for (y in 0...height) {
@@ -188,7 +187,7 @@ class Main extends Application {
   }
 
   // Radial gradient: bright center fading to the edges.
-  function createRadialGradientImage(width:Int, height:Int):ImageResource {
+  function createRadialGradientImage(width:Int, height:Int):Dynamic {
     final pixels = new _UInt8ClampedArray(width * height * 4);
     final cx = (width - 1) / 2;
     final cy = (height - 1) / 2;

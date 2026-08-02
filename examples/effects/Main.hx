@@ -3,6 +3,7 @@
 // browser `./render` module and its one-shot `render(root, effects)` call are replaced by Lime's
 // window/render lifecycle, and the Flight app backend is wired with
 // `App.setAppBackend(createLimeAppBackend(this))`. Every statement is otherwise translated faithfully.
+import flighthq.types.DisplayObject;
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;

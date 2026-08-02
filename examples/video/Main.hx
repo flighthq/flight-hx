@@ -5,6 +5,7 @@
 // The browser MediaRecorder/blob pipeline (`generateVideoBlob` + `loadVideoResourceFromBlob`) is
 // unavailable headless, so it becomes a minimal stub that hands each node a `{width, height}` video
 // source while keeping the `createVideo`/`setVideoSource`/`invalidateNodeAppearance` call sites intact.
+import flighthq.types.DisplayObject;
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;

@@ -8,7 +8,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
-import flighthq.types.ImageResource;
+import flighthq.types.Bitmap;
 import flighthq.types.QuadBatch;
 import flighthq.types.TextLabel;
 import flighthq.types.TextureAtlas;
@@ -241,7 +241,7 @@ class Main extends Application {
   // Portable procedural shape sprite: a filled #44aaee disc, uploaded as real RGBA bytes through the
   // ImageResource `data` path. A bare `{width, height}` object would instead become `image.source` and
   // hit the DOM-element `texImage2D` overload, which rejects a plain object.
-  function createShapeImage():ImageResource {
+  function createShapeImage():Dynamic {
     final size = SHAPE_SIZE;
     final pixels = new _UInt8ClampedArray(size * size * 4);
     final c = (size - 1) / 2;
@@ -261,12 +261,11 @@ class Main extends Application {
     return imageFromPixels(size, size, pixels);
   }
 
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):ImageResource {
-    final image = createImageResource();
-    image.width = width;
-    image.height = height;
-    image.data = pixels;
-    return image;
+  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
+    final bitmap:Bitmap = createBitmap(width, height);
+    // createBitmap allocates zeroed pixels; overwrite them with the painted content.
+    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
+    return createImageResourceFromBitmap(bitmap);
   }
 }
 
