@@ -221,13 +221,13 @@ class Main extends Application {
   // Upstream `render(scene, camera, lights)` from `render.webgl.ts`, driven by Lime's per-frame `render`.
   override public function render(context:RenderContext):Void {
     if (!ready || scene == null) return;
-    beginGlRenderEffectPipeline(renderState, pipeline);
+    prepareScene3DRender(renderState, scene, camera, lights);
+    beginGlRenderEffectPipeline(renderState, pipeline, 'linear');
     renderGlBackground(renderState);
     final gl:Dynamic = renderState.gl;
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
-    prepareScene3DRender(renderState, scene, camera, lights);
     drawGlScene3D(renderState, scene, camera, lights);
     endGlRenderEffectPipeline(renderState, pipeline, []);
   }
