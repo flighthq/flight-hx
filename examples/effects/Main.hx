@@ -53,6 +53,8 @@ class Main extends Application {
       registerCanvasShapeCommands(defaultCanvasShapeCommands);
       registerCanvasBloomEffect(renderState);
       registerCanvasVignetteEffect(renderState);
+      registerCanvasImageTextureResolver(renderState);
+      registerCanvasBitmapTextureResolver(renderState);
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);

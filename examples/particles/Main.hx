@@ -78,6 +78,8 @@ class Main extends Application {
       });
       registerRenderer(renderState, ParticleEmitter2DKind, defaultCanvasParticleEmitter2DRenderer);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
+      registerCanvasImageTextureResolver(renderState);
+      registerCanvasBitmapTextureResolver(renderState);
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);

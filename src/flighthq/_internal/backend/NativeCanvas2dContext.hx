@@ -605,6 +605,9 @@ class NativeCanvas2dContext {
     if (source == null) return null;
     if (Std.isOfType(source, NativeScratchCanvas)) {
       final ctx = (cast source : NativeScratchCanvas).nativeContext();
+      // The scratch surface is lazily created; sync so a canvas whose only
+      // writes came through sized-but-unsynced paths still resolves.
+      ctx.syncWithOwner();
       if (ctx.surface != null) ctx.surface.flush();
       return ctx.surface;
     }
