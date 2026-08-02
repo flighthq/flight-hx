@@ -1,6 +1,6 @@
 # Upstream `7333e825` Class D Data Semantics
 
-Status: binding design for the authorized Class D implementation on review's landed Class R tree plus the native Lime guard. This document and the focused baseline reports are committed before implementation. Class D preserves TypeScript/JavaScript value, control-flow, and thrown-value semantics; it does not add Flight package allowlists, change upstream source, absorb Class A scheduling, or repair the separately recorded packaging layout.
+Status: implemented and verified on review's landed Class R tree plus the native Lime guard, then rebased onto `origin/main` at `77722651`. The binding design and focused baseline reports were committed before implementation. Class D preserves TypeScript/JavaScript value, control-flow, and thrown-value semantics; it does not add Flight package allowlists, change upstream source, absorb Class A scheduling, or repair the separately recorded packaging layout.
 
 ## Fresh landed-tree census
 
@@ -55,4 +55,25 @@ Focused generator/runtime coverage must lock:
 - Run all three live Class D suites plus green `particleemitter` as stale-census evidence; record exact results and classify every remainder.
 - Record baseline/candidate generated-tree and `flight.cjs` hashes and hand off Class D independently before Class A begins.
 
-Implementation and final evidence will be appended without weakening the policy above.
+## Implementation
+
+Class D is implemented mechanically in the generator and maintained runtime:
+
+- `_Runtime.isError` now injects a grouped JavaScript `instanceof` expression, so source negation composes with it correctly.
+- A switch whose cases retain a switch-owned break runs its generated if/else dispatch inside a one-iteration wrapper. The emitter derives break and continue ownership from IR: nested loops retain their own controls, while a source continue escapes one or more switch wrappers and reaches its source loop exactly once.
+- Synchronous source throws and generator-synthesized finally rethrows use `_Runtime.throwValue`. JavaScript throws the raw supplied value; portable targets use the native Haxe throw. Async-flow rejection remains unchanged.
+
+The lowering fixture covers residual conditional breaks, a continue that crosses the wrapper, a nested-loop break, ordinary trailing case breaks, and synthetic finally rethrow output. `CoreSmoke` covers Error/non-Error classification plus raw object, primitive, and Error throw identity on JavaScript. The complete generator suite originally exposed only resource-sensitive checker-census timeouts: legitimate concurrent checks measured 129–131 seconds against 30-, 90-, and 120-second bounds. The maintained bound and two explicit census bounds are now 180 seconds; the unchanged default command passes all 116 tests.
+
+## Candidate evidence
+
+Two consecutive complete generator passes produced the byte-identical generated-tree digest `c6255d0a18800ab6ff6cc43536e837d5aca36a77b7c5ffe834242bb472513714`. The candidate `build/haxe-js/flight.cjs` digest is `bd114c53cc8d8023f0d74aa32fbbee6c49f11a0bc0bb67b42b8e7ac0ba2fd4a1`. After rebasing onto `origin/main` at `77722651`, both digests remained identical, so the focused package results below cover the rebased artifacts byte-for-byte.
+
+| Package           | Candidate result | Disposition                                                          |
+| ----------------- | ---------------: | -------------------------------------------------------------------- |
+| `log`             | 115 passed (115) | Grouped host identity expression resolves the only baseline failure. |
+| `scene3d-formats` | 554 passed (554) | Switch-owned conditional break no longer exits the OBJ line loop.    |
+| `render-wgpu`     | 205 passed (205) | DOMException is rethrown as the identical host object.               |
+| `particleemitter` | 194 passed (194) | Remains green as stale-census/collateral evidence.                   |
+
+Post-rebase gates pass for `npm run check`, all 116 generator tests, the complete Haxe interpreter smoke, portable Eval, portable JavaScript, portable Python, and the Haxe JavaScript bundle build. The cold C++ gate compiles and links the complete generated corpus, including `_Runtime.throwValue`, then reaches the separately classified pre-Class-D runtime assertion `array out-of-bounds read was not nullish`. No Class D package remainder survives.
