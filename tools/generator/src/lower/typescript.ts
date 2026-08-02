@@ -753,7 +753,7 @@ function variadicCallConvention(
 ): { haxeRestIndex: number } | undefined {
   const checker = context.checker;
   if (!checker) return undefined;
-  const type = checker.getTypeAtLocation(node.expression);
+  const type = checker.getTypeAtLocation(unwrapCallTargetAssertions(node.expression));
   if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) return undefined;
   let restIndex: number | undefined;
   for (const signature of checker.getSignaturesOfType(type, ts.SignatureKind.Call)) {
@@ -764,6 +764,19 @@ function variadicCallConvention(
     restIndex = index;
   }
   return restIndex === undefined ? undefined : { haxeRestIndex: restIndex };
+}
+
+function unwrapCallTargetAssertions(expression: ts.Expression): ts.Expression {
+  if (
+    ts.isAsExpression(expression) ||
+    ts.isTypeAssertionExpression(expression) ||
+    ts.isSatisfiesExpression(expression) ||
+    ts.isParenthesizedExpression(expression) ||
+    ts.isNonNullExpression(expression)
+  ) {
+    return unwrapCallTargetAssertions(expression.expression);
+  }
+  return expression;
 }
 
 function typeIncludesNamed(

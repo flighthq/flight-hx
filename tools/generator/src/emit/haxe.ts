@@ -2233,6 +2233,9 @@ function emitExpression(expression: IrExpression): string {
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';
       const parameters = emitParameters(expression.parameters);
       const returns = expression.returns ? `:${emitType(expression.returns)}` : '';
+      const restIndex = expression.parameters.findIndex((parameter) => parameter.rest);
+      const markHaxeRest = (output: string): string =>
+        restIndex < 0 ? output : `_Runtime.haxeRest(${output}, ${restIndex})`;
       if (expression.async) {
         const statements: IrStatement[] = expression.expression
           ? [{ expression: expression.expression, kind: 'return' }]
@@ -2241,30 +2244,30 @@ function emitExpression(expression: IrExpression): string {
           const body = indent(emitFlatMapFunctionBody(statements, expression.parameters, expression.thisCapture)).join(
             '\n',
           );
-          return `function${name}(${parameters})${returns} {\n${body}\n}`;
+          return markHaxeRest(`function${name}(${parameters})${returns} {\n${body}\n}`);
         }
         if (statementsContainAwait(statements) && canFlowStatements(statements)) {
           const body = indent(emitFlowFunctionBody(statements, expression.parameters, expression.thisCapture)).join(
             '\n',
           );
-          return `function${name}(${parameters})${returns} {\n${body}\n}`;
+          return markHaxeRest(`function${name}(${parameters})${returns} {\n${body}\n}`);
         }
         if (!statementsContainAwait(statements)) {
           const bodyLines = emitFunctionBody(statements, expression.parameters, expression.returns, false);
           if (expression.returns && !isVoidType(expression.returns)) bodyLines.push('return cast null;');
           const body = indent(emitPromiseProtectedBody(bodyLines, expression.thisCapture)).join('\n');
-          return `function${name}(${parameters})${returns} {\n${body}\n}`;
+          return markHaxeRest(`function${name}(${parameters})${returns} {\n${body}\n}`);
         }
         throw new Error('Generator async lowering does not support a nested async function');
       }
       if (expression.expression) {
         const output = `function${name}(${parameters})${returns} return ${emitExpression(expression.expression)}`;
-        return output;
+        return markHaxeRest(output);
       }
       const bodyLines = emitFunctionBody(expression.body, expression.parameters, expression.returns, expression.async);
       const body = indent([...emitThisCapture(expression.thisCapture), ...bodyLines]).join('\n');
       const output = `function${name}(${parameters})${returns} {\n${body}\n}`;
-      return output;
+      return markHaxeRest(output);
     }
     case 'identifier':
       if (expression.domRootBinding) {

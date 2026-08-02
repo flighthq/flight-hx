@@ -113,10 +113,10 @@ class Ipc {
   public static function onceIpcMessage(channel:Dynamic, listener:Dynamic):Dynamic {
     var unsubscribe:Null<Dynamic> = cast _Runtime.UNDEFINED;
     unsubscribe = null;
-    (unsubscribe = cast (_Runtime.callValue(onIpcMessage, cast ([channel, function(...args:Dynamic) {
+    (unsubscribe = cast (_Runtime.callValue(onIpcMessage, cast ([channel, _Runtime.haxeRest(function(...args:Dynamic) {
       _Runtime.callOptionalValue(unsubscribe, cast ([] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
-    }] : Array<Dynamic>)) : Dynamic));
+    }, 0)] : Array<Dynamic>)) : Dynamic));
     return cast unsubscribe;
     return cast null;
   }
@@ -165,11 +165,11 @@ class Ipc {
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([name, function(args:Dynamic) {
       var event:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onChannelMessage], [name]]), 1); }
-      event = { channel: name, senderId: -1.0, args: args, reply: function(...replyArgs:Dynamic) {
+      event = { channel: name, senderId: -1.0, args: args, reply: _Runtime.haxeRest(function(...replyArgs:Dynamic) {
         var __thisValue0:Dynamic = _Runtime.thisValue();
         if ((cast _Runtime.strictEquals(__thisValue0.senderId, -1.0) : Bool)) { return; }
         _Runtime.callOptionalProperty(backend, 'sendTo', cast ([{ windowId: __thisValue0.senderId }, name, replyArgs] : Array<Dynamic>));
-      } };
+      }, 0) };
       _Runtime.callValue(listener, cast ([event] : Array<Dynamic>));
     }] : Array<Dynamic>));
     tracked = function() {

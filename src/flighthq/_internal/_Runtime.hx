@@ -7,6 +7,14 @@ class _Runtime {
   public static inline final MAX_SAFE_INTEGER:Float = 9007199254740991.0;
   public static inline final NUMBER_EPSILON:Float = 2.220446049250313e-16;
 
+  #if !(js || python)
+  // Neko function values cannot key ObjectMap. Preserve source-declared rest
+  // provenance by closure identity so untyped calls pack only genuine Haxe-rest
+  // values, not a fixed callable hidden behind a variadic type assertion.
+  static final haxeRestCallables:Array<Dynamic> = [];
+  static final haxeRestIndices:Array<Int> = [];
+  #end
+
   #if js
   public static final UNDEFINED:Dynamic = js.Syntax.code('undefined');
   #else
@@ -39,6 +47,24 @@ class _Runtime {
     if (callable == null) return null;
     #end
     return Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
+  }
+
+  public static function haxeRest(callable:Dynamic, restIndex:Int):Dynamic {
+    #if !(js || python)
+    if (callable != null) {
+      var index = haxeRestCallables.length;
+      while (index > 0) {
+        index--;
+        if (Reflect.compareMethods(haxeRestCallables[index], callable)) {
+          haxeRestIndices[index] = restIndex;
+          return callable;
+        }
+      }
+      haxeRestCallables.push(callable);
+      haxeRestIndices.push(restIndex);
+    }
+    #end
+    return callable;
   }
 
   public static inline function callHaxeRestValue(
@@ -114,6 +140,20 @@ class _Runtime {
    * arity here. Other targets keep the arguments untouched.
    */
   static function adjustArguments(callable:Dynamic, arguments:Array<Dynamic>):Array<Dynamic> {
+    #if !(js || python)
+    if (callable != null) {
+      var index = haxeRestCallables.length;
+      while (index > 0) {
+        index--;
+        if (Reflect.compareMethods(haxeRestCallables[index], callable)) {
+          final restIndex = haxeRestIndices[index];
+          final packed = arguments.slice(0, restIndex);
+          packed.push(arguments.slice(restIndex));
+          return packed;
+        }
+      }
+    }
+    #end
     #if neko
     if (callable == null || !Reflect.isFunction(callable)) return arguments;
     final arity:Int = untyped __dollar__nargs(callable);

@@ -77,7 +77,7 @@ class Slot {
   }
 
   public static function makeDispatch__slot<T>(data:SignalData<Dynamic>):Dynamic {
-    return cast (cast (cast function(...args:Dynamic) {
+    return cast (cast (cast _Runtime.haxeRest(function(...args:Dynamic) {
       var i:Dynamic = cast _Runtime.UNDEFINED;
       (data.cancelled = cast (false : Dynamic));
       i = 0.0;
@@ -92,7 +92,7 @@ class Slot {
           i++;
         }
       }
-    } : Dynamic) : Dynamic);
+    }, 0) : Dynamic) : Dynamic);
     return cast null;
   }
 }

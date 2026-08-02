@@ -46,7 +46,7 @@ class Throttle {
         (timer = cast (null : Dynamic));
       }
     };
-    handler = (cast function(...args:Dynamic) {
+    handler = (cast _Runtime.haxeRest(function(...args:Dynamic) {
       (lastArgs = cast (args : Dynamic));
       if ((cast ((cast ((cast leading : Bool) && (cast _Runtime.strictEquals(timer, null) : Bool)) : Bool) && (cast !(cast leadingFired : Bool) : Bool)) : Bool)) {
         (leadingFired = cast (true : Dynamic));
@@ -61,7 +61,7 @@ class Throttle {
           (lastArgs = cast (null : Dynamic));
         }
       }, delayMs) : Dynamic));
-    } : Dynamic);
+    }, 0) : Dynamic);
     _Runtime.callValue(connectSignal, cast ([source, handler] : Array<Dynamic>));
     return cast function() {
       _Runtime.callValue(disconnectSignal, cast ([source, handler] : Array<Dynamic>));
@@ -89,7 +89,7 @@ class Throttle {
         (trailingTimer = cast (null : Dynamic));
       }
     };
-    handler = (cast function(...args:Dynamic) {
+    handler = (cast _Runtime.haxeRest(function(...args:Dynamic) {
       var now:Dynamic = cast _Runtime.UNDEFINED;
       var remaining:Dynamic = cast _Runtime.UNDEFINED;
       now = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
@@ -114,7 +114,7 @@ class Throttle {
           }
         }, remaining) : Dynamic));
       } }
-    } : Dynamic);
+    }, 0) : Dynamic);
     _Runtime.callValue(connectSignal, cast ([source, handler] : Array<Dynamic>));
     return cast function() {
       _Runtime.callValue(disconnectSignal, cast ([source, handler] : Array<Dynamic>));

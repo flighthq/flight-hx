@@ -34,11 +34,11 @@ class ElectronNotification {
         n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: a.title }] : Array<Dynamic>)) }]);
         _Runtime.callProperty(n, 'on', cast (['show', function() return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callProperty(n, 'on', cast (['action', function(...args:Dynamic) {
+        _Runtime.callProperty(n, 'on', cast (['action', _Runtime.haxeRest(function(...args:Dynamic) {
           var index:Dynamic = cast _Runtime.UNDEFINED;
           index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
           _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
-        }] : Array<Dynamic>));
+        }, 0)] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['close', function() {
           ((cast live : flighthq._internal._Map).delete_(id));
           _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));

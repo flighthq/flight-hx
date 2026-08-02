@@ -44,13 +44,13 @@ class ElectronScreen {
       var onRemoved:Dynamic = cast _Runtime.UNDEFINED;
       var onMetrics:Dynamic = cast _Runtime.UNDEFINED;
       primaryId = function() return _Runtime.field(_Runtime.callProperty(screen, 'getPrimaryDisplay', cast ([] : Array<Dynamic>)), 'id');
-      makeHandler = function(kind:ScreenChangeKind) return function(...args:Dynamic) {
+      makeHandler = function(kind:ScreenChangeKind) return _Runtime.haxeRest(function(...args:Dynamic) {
         var display:Dynamic = cast _Runtime.UNDEFINED;
         var event:Dynamic = cast _Runtime.UNDEFINED;
         display = (cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);
         event = { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([(cast {  } : ScreenInfo), display, _Runtime.strictEquals(_Runtime.field(display, 'id'), _Runtime.callValue(primaryId, cast ([] : Array<Dynamic>)))] : Array<Dynamic>)), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) };
         _Runtime.callValue(listener, cast ([event] : Array<Dynamic>));
-      };
+      }, 0);
       onAdded = _Runtime.callValue(makeHandler, cast (['ScreenAdded'] : Array<Dynamic>));
       onRemoved = _Runtime.callValue(makeHandler, cast (['ScreenRemoved'] : Array<Dynamic>));
       onMetrics = _Runtime.callValue(makeHandler, cast (['ScreenMetricsChanged'] : Array<Dynamic>));
