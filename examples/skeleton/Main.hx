@@ -221,10 +221,16 @@ class Main extends Application {
   // Upstream `render(scene, camera, lights)` from `render.webgl.ts`, driven by Lime's per-frame `render`.
   override public function render(context:RenderContext):Void {
     if (!ready || scene == null) return;
+    final gl:Dynamic = renderState.gl;
+    // Browser WebGL clears the default framebuffer's depth/stencil before every frame regardless of
+    // preserveDrawingBuffer; Lime does not, so without this host-parity clear the present quad fails
+    // the scene pass's leftover LESS depth test from frame 2 on and the window stays black.
+    flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
+    flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
+    flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
     prepareScene3DRender(renderState, scene, camera, lights);
     beginGlRenderEffectPipeline(renderState, pipeline, 'linear');
     renderGlBackground(renderState);
-    final gl:Dynamic = renderState.gl;
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
