@@ -38,7 +38,11 @@
     "test:unit": "vitest run",
     "test:upstream": "npm run build:haxe:js && node tools/test-upstream.mjs",
     "test:upstream:math": "npm run build:haxe:js && node tools/test-upstream.mjs --package math",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:examples": "node tools/examples-smoke.mjs --target all",
+    "test:examples:neko": "node tools/examples-smoke.mjs --target neko",
+    "test:examples:html5": "node tools/examples-smoke.mjs --target html5",
+    "test:examples:linux": "node tools/examples-smoke.mjs --target linux"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

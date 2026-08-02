@@ -110,3 +110,14 @@ Coverage reports classify every upstream package, source file, export, and test.
 The standard is meaningful behavior coverage, not line-count theater. For an `out`-parameter function, test a distinct output and an aliased output. For a sentinel-returning function, test success and expected failure. For a portability primitive, test more than the JavaScript target.
 
 The maintained TypeScript coverage baseline measured on 2026-07-22 is 77.03% statements, 70.79% branches, 86.69% functions, and 78.23% lines. This is reported separately from the 100% upstream export, lowering, test-file, and package-suite accounting; the two measures must not be conflated.
+
+## Example fleet smoke gate
+
+`npm run test:examples` (or `test:examples:neko` / `test:examples:html5` / `test:examples:linux`)
+runs `tools/examples-smoke.mjs`: every example must build, run without a runtime error, and — on
+native windowed targets — present a not-blank frame (ImageMagick standard-deviation check under
+Xvfb). html5 is build-only; the capture harness covers web pixels. Results are written to
+`build/examples-smoke-<target>.json`; `--resume` skips previously-OK entries, `--filter <name>`
+narrows the fleet, and any non-OK entry fails the run. The not-blank check exists because
+runtime-error-only sweeps let silently-blank renders (the hxcpp `bufferSubData` defect) pass for
+weeks — a smoke gate asserts pixels, not just exit codes.
