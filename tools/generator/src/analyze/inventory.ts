@@ -15,6 +15,8 @@ import type {
   UpstreamInventory,
 } from '../model/inventory.ts';
 import { derivePackageExclusions } from './exclusions.ts';
+import { upstreamTypeScriptProgram } from './program.ts';
+import { runtimeExportsForSource, type RuntimeExportDecision } from './runtime-values.ts';
 
 interface PackageDescriptor {
   directory: string;
@@ -92,6 +94,7 @@ export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
   const upstreamDirectory = path.join(workspaceDirectory, 'upstream');
   const packagesDirectory = path.join(upstreamDirectory, 'packages');
   const packages = discoverPackages(packagesDirectory);
+  const { checker, program } = upstreamTypeScriptProgram(workspaceDirectory);
   const packageByName = new Map(packages.map((item) => [item.name, item]));
   const parsedSources = new Map<string, ParsedSource>();
   const resolvedExports = new Map<string, Map<string, ExportRecord>>();
@@ -105,9 +108,13 @@ export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
     const testFiles = walkFiles(sourceDirectory, (file) => isTestFile(file));
     const packageJson = readJson(path.join(descriptor.directory, 'package.json'));
     const exportLanes = (exportDescriptors.get(descriptor.name) ?? []).map((entry) => {
-      const exports = [
+      const resolved = [
         ...resolveExports(entry.source, packageByName, parsedSources, resolvedExports, new Set()).values(),
       ];
+      const source = program.getSourceFile(entry.source);
+      if (!source) throw new Error(`Cannot resolve upstream TypeScript source: ${entry.source}`);
+      const runtimeExports = runtimeExportsForSource(source, checker, program.getCompilerOptions());
+      const exports = resolved.map((record) => applyRuntimeExportDecision(record, runtimeExports.get(record.name)));
       const { conflicts, uniqueExports } = deduplicateExports(exports);
       const unresolved = uniqueExports.filter((record) => record.kind === 'unknown');
       if (unresolved.length > 0) {
@@ -157,7 +164,7 @@ export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
 
   return {
     packages: packageInventories,
-    schemaVersion: 3,
+    schemaVersion: 4,
     summary: {
       excludedPackages: exclusions.size,
       exportConflicts: sum(packageInventories, (item) => sum(item.exportLanes, (lane) => lane.exportConflicts.length)),
@@ -364,8 +371,8 @@ function parseSource(file: string, cache: Map<string, ParsedSource>): ParsedSour
       ts.isIdentifier(statement.name)
     ) {
       const record = makeRecord(statement.name.text, kind, statement, sourceFile);
-      localDeclarations.set(statement.name.text, record);
-      directExports.set(statement.name.text, record);
+      setDeclarationRecord(localDeclarations, statement.name.text, record);
+      setDeclarationRecord(directExports, statement.name.text, record);
       continue;
     }
   }
@@ -389,7 +396,11 @@ function parseSource(file: string, cache: Map<string, ParsedSource>): ParsedSour
       statement.name &&
       ts.isIdentifier(statement.name)
     ) {
-      localDeclarations.set(statement.name.text, makeRecord(statement.name.text, kind, statement, sourceFile));
+      setDeclarationRecord(
+        localDeclarations,
+        statement.name.text,
+        makeRecord(statement.name.text, kind, statement, sourceFile),
+      );
     }
   }
 
@@ -403,8 +414,51 @@ function makeRecord(name: string, kind: ExportKind, node: ts.Node, sourceFile: t
     fingerprint: fingerprint(node, sourceFile),
     kind,
     name,
+    runtime: false,
     source: path.relative(process.cwd(), sourceFile.fileName),
   };
+}
+
+function setDeclarationRecord(target: Map<string, ExportRecord>, name: string, record: ExportRecord): void {
+  const existing = target.get(name);
+  if (
+    record.kind === 'namespace' &&
+    (existing?.kind === 'class' || existing?.kind === 'enum' || existing?.kind === 'function')
+  )
+    return;
+  target.set(name, record);
+}
+
+function applyRuntimeExportDecision(record: ExportRecord, decision: RuntimeExportDecision | undefined): ExportRecord {
+  if (!decision) throw new Error(`Cannot classify runtime export ${record.name} from ${record.source}`);
+  if (!decision.runtime || !decision.declaration) {
+    const erased = { ...record };
+    delete erased.runtimeBinding;
+    return { ...erased, runtime: false };
+  }
+  const binding = runtimeBindingRecord(record.name, decision.declaration);
+  if (binding.fingerprint === record.fingerprint && binding.kind === record.kind && binding.source === record.source) {
+    return { ...record, runtime: true };
+  }
+  return {
+    ...record,
+    runtime: true,
+    runtimeBinding: {
+      fingerprint: binding.fingerprint,
+      kind: binding.kind,
+      source: binding.source,
+    },
+  };
+}
+
+function runtimeBindingRecord(name: string, declaration: ts.Declaration | ts.SourceFile): ExportRecord {
+  if (ts.isSourceFile(declaration)) return makeRecord(name, 'namespace', declaration, declaration);
+  let node: ts.Node = declaration;
+  if (ts.isVariableDeclaration(declaration)) {
+    const statement = declaration.parent.parent;
+    if (ts.isVariableStatement(statement)) node = statement;
+  }
+  return makeRecord(name, declarationKind(node), node, declaration.getSourceFile());
 }
 
 function readJson(file: string): Record<string, unknown> {

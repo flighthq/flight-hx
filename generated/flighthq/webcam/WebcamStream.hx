@@ -4,6 +4,7 @@ package flighthq.webcam;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.WebcamFacingMode;
 import flighthq.types.WebcamStream;
 import flighthq.types.WebcamStreamRuntime;

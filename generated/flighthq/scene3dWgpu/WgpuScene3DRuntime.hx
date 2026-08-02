@@ -3,6 +3,7 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;

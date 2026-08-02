@@ -11,6 +11,7 @@ import flighthq.types.Scene3D;
 import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
+import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 

@@ -203,10 +203,19 @@ export function emitHaxeModule(module: IrModule): string {
   lines.push(`class ${module.name} {`);
   for (const declaration of typeDeclarations) {
     if (declaration.kind !== 'enum') continue;
+    const pairs = declaration.members.flatMap((member) => [
+      `{ key: ${quote(member.name)}, value: ${safeName(declaration.name)}.${safeName(member.name)} }`,
+      ...(member.reverseMapping
+        ? [`{ key: ${safeName(declaration.name)}.${safeName(member.name)}, value: ${quote(member.name)} }`]
+        : []),
+    ]);
+    pairs.push(
+      ...declaration.methods.map(
+        (method) => `{ key: ${quote(method.name)}, value: ${safeName(declaration.name)}.${safeName(method.name)} }`,
+      ),
+    );
     lines.push(
-      `  public static final __enum_${safeName(declaration.name)}:Dynamic = { ${declaration.members
-        .map((member) => `${safeName(member.name)}: ${safeName(declaration.name)}.${safeName(member.name)}`)
-        .join(', ')} };`,
+      `  public static final __enum_${safeName(declaration.name)}:Dynamic = _Runtime.objectFromPairs([${pairs.join(', ')}]);`,
       '',
     );
   }
@@ -438,8 +447,17 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   }
   if (declaration.kind === 'enum') {
     let nextValue = 0;
+    const hasStringMember = declaration.members.some(
+      (member) => member.initializer?.kind === 'literal' && typeof member.initializer.value === 'string',
+    );
+    const hasNumericMember = declaration.members.some(
+      (member) =>
+        member.reverseMapping ||
+        (member.initializer?.kind === 'literal' && typeof member.initializer.value === 'number'),
+    );
+    const underlying = hasStringMember ? (hasNumericMember ? 'Dynamic' : 'String') : 'Int';
     const lines = [
-      `${declaration.packagePrivate ? 'private ' : ''}enum abstract ${safeName(declaration.name)}(Int) from Int to Int {`,
+      `${declaration.packagePrivate ? 'private ' : ''}enum abstract ${safeName(declaration.name)}(${underlying}) from ${underlying} to ${underlying} {`,
     ];
     for (const member of declaration.members) {
       const initializer =

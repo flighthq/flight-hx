@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:14:57.730Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 57718,
+      "exitCode": 0,
+      "package": "scene2d-resources",
+      "signal": null,
+      "status": "passed",
+      "summary": "23 passed (23)",
+      "testFiles": 7
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene2d-resources",
+  "startedAt": "2026-08-02T18:14:00.011Z"
+}

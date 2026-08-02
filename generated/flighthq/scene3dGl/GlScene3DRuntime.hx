@@ -11,6 +11,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlSkinPaletteTexture;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class GlScene3DRuntime {

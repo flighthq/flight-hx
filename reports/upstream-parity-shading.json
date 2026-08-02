@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:20:39.249Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 341299,
+      "exitCode": 0,
+      "package": "shading",
+      "signal": null,
+      "status": "passed",
+      "summary": "75 passed (75)",
+      "testFiles": 16
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "shading",
+  "startedAt": "2026-08-02T18:14:57.947Z"
+}

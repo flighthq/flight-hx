@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Entity.EntityWithoutRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Clone {

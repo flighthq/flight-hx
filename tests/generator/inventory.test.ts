@@ -37,7 +37,7 @@ describe('analyzeUpstream', () => {
     const rootVector = geometryRoot.exports.find((item) => item.name === 'createVector2');
     const contractVector = geometryContract.exports.find((item) => item.name === 'createVector2');
 
-    expect(inventory.schemaVersion).toBe(3);
+    expect(inventory.schemaVersion).toBe(4);
     expect(inventory.summary).toMatchObject({
       excludedPackages: 1,
       exportConflicts: 0,
@@ -56,6 +56,22 @@ describe('analyzeUpstream', () => {
     expect(compressionRoot.exports).toContainEqual(
       expect.objectContaining({ kind: 'variable', name: 'inflateDeflate' }),
     );
+    const pathContract = resolvePackageExportLane(inventoryByName, '@flighthq/path/contract');
+    expect(pathContract.exports.find((item) => item.name === 'StrokeStyle')).toMatchObject({
+      kind: 'interface',
+      runtime: false,
+    });
+    const typesContract = resolvePackageExportLane(inventoryByName, '@flighthq/types/contract');
+    expect(typesContract.exports.find((item) => item.name === 'BlendMode')).toMatchObject({
+      kind: 'type',
+      runtime: true,
+      runtimeBinding: { kind: 'variable', source: expect.stringContaining('/types/src/BlendMode.ts') },
+    });
+    expect(typesContract.exports.find((item) => item.name === 'AppearanceFlags')).toMatchObject({
+      kind: 'enum',
+      runtime: true,
+      source: expect.stringContaining('/types/src/AppearanceFlags.ts'),
+    });
     expect(() => resolvePackageExportLane(inventoryByName, '@flighthq/geometry/private')).toThrow(
       'Package import uses an unaccounted export lane: @flighthq/geometry/private',
     );

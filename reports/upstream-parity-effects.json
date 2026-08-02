@@ -1,18 +1,19 @@
 {
-  "completedAt": "2026-07-22T11:28:12.607Z",
+  "completedAt": "2026-08-02T17:11:13.083Z",
   "failedPackages": 0,
+  "jobs": 12,
   "packages": [
     {
-      "durationMs": 6206,
+      "durationMs": 674851,
       "exitCode": 0,
       "package": "effects",
       "signal": null,
       "status": "passed",
-      "summary": "318 passed (318)",
-      "testFiles": 71
+      "summary": "364 passed (364)",
+      "testFiles": 72
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "effects",
-  "startedAt": "2026-07-22T11:28:06.400Z"
+  "startedAt": "2026-08-02T16:59:58.230Z"
 }

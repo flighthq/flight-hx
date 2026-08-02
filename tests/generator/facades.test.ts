@@ -102,4 +102,31 @@ describe('public Haxe facades', () => {
     expect(renderWgpuContract).toContain("export { installWgpuMock } from './wgpuTestHelper.mjs';");
     expect(renderWgpuTestHelper).toContain('export const installWgpuMock = api.installWgpuMock;');
   });
+
+  it('emits checker-proven runtime values and TypeScript-shaped enums', () => {
+    const workspace = process.cwd();
+    const typesBridge = readFileSync(path.join(workspace, 'tests', 'bridges', 'types.mjs'), 'utf8');
+    const typesFacade = readFileSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Types.hx'), 'utf8');
+
+    for (const name of [
+      'AdvancedBlendMode',
+      'BlendMode',
+      'ImageChannel',
+      'ImageResourceReferenceKind',
+      'ImportDiagnosticSeverity',
+      'KeyCode',
+      'PathCommand',
+      'ResourceResolutionState',
+      'Skeleton2DAnimationPath',
+    ]) {
+      expect(typesBridge).toContain(`export const ${name} = `);
+    }
+    expect(typesFacade).toContain('public static final __enum_BatchFormat:Dynamic = _Runtime.objectFromPairs(');
+    expect(typesFacade).toContain("{ key: 'Quad', value: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad }");
+    expect(typesFacade).toContain("{ key: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad, value: 'Quad' }");
+    expect(typesFacade).toContain('public static final __enum_AppearanceFlags:Dynamic = _Runtime.objectFromPairs(');
+    expect(typesFacade).toContain(
+      "{ key: 'any', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.any }",
+    );
+  });
 });

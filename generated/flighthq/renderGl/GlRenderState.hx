@@ -15,6 +15,7 @@ import flighthq.renderGl.GlShader.createDefaultGlBitmapShader;
 import flighthq.types.GlRenderOptions;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 typedef GlContextRuntimeKey__glRenderState = Dynamic;

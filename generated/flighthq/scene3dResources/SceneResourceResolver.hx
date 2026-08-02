@@ -14,6 +14,7 @@ import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerBuiltInSce
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
+import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
 class SceneResourceResolver {

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.entity.Runtime.getEntityRuntime;
 import flighthq.types.Entity;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Binding {

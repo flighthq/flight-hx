@@ -9,6 +9,7 @@ import flighthq.types.BlendMode;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 

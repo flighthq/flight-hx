@@ -397,6 +397,7 @@ export function lowerTypeScriptSource(
           members: statement.members.map((member) => ({
             initializer: member.initializer ? lowerExpression(member.initializer, context) : undefined,
             name: propertyName(member.name, context),
+            reverseMapping: enumMemberHasReverseMapping(member, context.checker),
           })),
           methods: [],
           name: statement.name.text,
@@ -950,6 +951,16 @@ function mergeNamespace(node: ts.ModuleDeclaration, declarations: IrDeclaration[
     target.methods.push(lowerFunction(statement, context));
   }
   return true;
+}
+
+function enumMemberHasReverseMapping(member: ts.EnumMember, checker: ts.TypeChecker | undefined): boolean {
+  const constant = checker?.getConstantValue(member);
+  if (typeof constant === 'string') return false;
+  if (typeof constant === 'number') return true;
+  return !(
+    member.initializer &&
+    (ts.isStringLiteral(member.initializer) || ts.isNoSubstitutionTemplateLiteral(member.initializer))
+  );
 }
 
 function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): IrFunctionDeclaration {

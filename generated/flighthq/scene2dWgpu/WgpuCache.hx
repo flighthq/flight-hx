@@ -35,6 +35,7 @@ import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;

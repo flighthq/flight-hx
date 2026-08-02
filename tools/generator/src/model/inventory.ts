@@ -13,6 +13,12 @@ export interface ExportRecord {
   fingerprint: string;
   kind: ExportKind;
   name: string;
+  runtime: boolean;
+  runtimeBinding?: {
+    fingerprint: string;
+    kind: ExportKind;
+    source: string;
+  };
   source: string;
 }
 
@@ -71,7 +77,7 @@ export interface PackageInventory {
 
 export interface UpstreamInventory {
   packages: PackageInventory[];
-  schemaVersion: 3;
+  schemaVersion: 4;
   summary: {
     excludedPackages: number;
     exportConflicts: number;
@@ -93,6 +99,6 @@ export interface ApiReport {
     sdkExposures: SdkExposure[];
     sdkIncluded: boolean;
   }>;
-  schemaVersion: 2;
+  schemaVersion: 3;
   upstreamCommit: string;
 }

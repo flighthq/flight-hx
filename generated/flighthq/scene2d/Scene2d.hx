@@ -31,6 +31,7 @@ import flighthq.types.Scene2D;
 import flighthq.types.Scene2D.Scene2DRuntime;
 import flighthq.types.Scene2DSignals;
 import flighthq.types.Sprite;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Scene2d {

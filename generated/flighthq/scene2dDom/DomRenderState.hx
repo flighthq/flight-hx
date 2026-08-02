@@ -10,6 +10,7 @@ import flighthq.render.RenderState.createRenderStateRuntime;
 import flighthq.types.DomRenderOptions;
 import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class DomRenderState {

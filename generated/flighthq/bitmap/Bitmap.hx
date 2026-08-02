@@ -73,6 +73,7 @@ import flighthq.types.PixelOrder;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ThresholdOperation;
 import flighthq.types.Types.BitmapTextureSourceKind;
+import flighthq.types._internal._ImageChannelValues as Facade_Bitmap_flighthq_types__internal__ImageChannelValues;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
 class Bitmap {
@@ -457,6 +458,8 @@ class Bitmap {
   public static function gradientGlowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ramp:flighthq._internal._UInt8ClampedArray, ?options:BitmapGradientGlowOptions):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapGradient.gradientGlowBitmap(out, scratch, source, ramp, options);
   }
+
+  public static final ImageChannel:Dynamic = Facade_Bitmap_flighthq_types__internal__ImageChannelValues.ImageChannelValue;
 
   public static function innerGlowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerGlowOptions):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapShadow.innerGlowBitmap(out, scratch, source, options);

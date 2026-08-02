@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:09:47.316Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 254114,
+      "exitCode": 0,
+      "package": "particles-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "255 passed (255)",
+      "testFiles": 14
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "particles-formats",
+  "startedAt": "2026-08-02T18:05:33.199Z"
+}

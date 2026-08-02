@@ -317,7 +317,7 @@
       "module": "flighthq.binpack.PackRectangles"
     },
     {
-      "declarations": 108,
+      "declarations": 109,
       "diagnostics": [],
       "module": "flighthq.bitmap.Bitmap"
     },
@@ -6112,7 +6112,7 @@
       "module": "flighthq.sdk.Scene3d"
     },
     {
-      "declarations": 4081,
+      "declarations": 4114,
       "diagnostics": [],
       "module": "flighthq.sdk.Sdk"
     },
@@ -6237,7 +6237,7 @@
       "module": "flighthq.shape.Scale9Shape"
     },
     {
-      "declarations": 44,
+      "declarations": 45,
       "diagnostics": [],
       "module": "flighthq.shape.Shape"
     },
@@ -11592,7 +11592,7 @@
       "module": "flighthq.types.TweenStaggerOptions"
     },
     {
-      "declarations": 220,
+      "declarations": 253,
       "diagnostics": [],
       "module": "flighthq.types.Types"
     },

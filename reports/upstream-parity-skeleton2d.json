@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:26:01.009Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 118047,
+      "exitCode": 0,
+      "package": "skeleton2d",
+      "signal": null,
+      "status": "passed",
+      "summary": "45 passed (45)",
+      "testFiles": 4
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "skeleton2d",
+  "startedAt": "2026-08-02T18:24:02.960Z"
+}

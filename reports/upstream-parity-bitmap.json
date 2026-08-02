@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:04:01.186Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 129271,
+      "exitCode": 0,
+      "package": "bitmap",
+      "signal": null,
+      "status": "passed",
+      "summary": "372 passed (372)",
+      "testFiles": 42
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "bitmap",
+  "startedAt": "2026-08-02T18:01:51.913Z"
+}

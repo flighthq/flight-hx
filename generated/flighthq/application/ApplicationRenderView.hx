@@ -13,6 +13,7 @@ import flighthq.types.ApplicationRenderView.ApplicationRenderViewResize;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.RenderState;
 import flighthq.types.RenderTarget.RenderTargetDimensions;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 typedef ApplicationRenderViewRuntime__applicationRenderView<State, Target> = Dynamic;

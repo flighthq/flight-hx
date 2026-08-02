@@ -70,6 +70,28 @@ interface MockedSpecifier {
   exports: Set<string>;
 }
 
+function runtimeExportBinding(record: ExportRecord): NonNullable<ExportRecord['runtimeBinding']> {
+  if (!record.runtime) {
+    throw new Error(`Public export has no runtime binding: ${record.name} from ${record.source}`);
+  }
+  return record.runtimeBinding ?? { fingerprint: record.fingerprint, kind: record.kind, source: record.source };
+}
+
+export function runtimeValueAliasName(
+  publicName: string,
+  originSource: string,
+  declarations: ReadonlyArray<Pick<IrDeclaration, 'name' | 'origin'>>,
+): string {
+  const generatedName = `${publicName}Value`;
+  const collision = declarations.find((candidate) => candidate.name === generatedName);
+  if (collision) {
+    throw new Error(
+      `Runtime value alias collision for ${publicName}: ${originSource} and ${collision.origin.source} both generate ${generatedName}`,
+    );
+  }
+  return generatedName;
+}
+
 export function generateCoreModules(
   workspaceDirectory: string,
   check: boolean,
@@ -103,6 +125,8 @@ export function generateCoreModules(
     .sort((a, b) => a.packageName.localeCompare(b.packageName));
   const types = loweredPackages.find((item) => item.packageName === '@flighthq/types');
   if (!types) throw new Error('Expected @flighthq/types');
+  const typesInventory = inventoryByName.get('@flighthq/types');
+  if (!typesInventory) throw new Error('Expected @flighthq/types inventory');
   const canonicalTypeNames = new Set(
     types.lowered.declarations
       .filter(
@@ -112,17 +136,26 @@ export function generateCoreModules(
   );
   const canonicalValueAliases = new Map<string, string>();
   for (const declaration of types.lowered.declarations) {
-    if (
-      declaration.exported &&
-      declaration.kind === 'variable' &&
-      !declaration.name.endsWith('RuntimeKey') &&
-      !declaration.name.endsWith('TraitsKey')
-    ) {
-      canonicalValueAliases.set(
-        declaration.name,
-        canonicalTypeNames.has(declaration.name) ? `${declaration.name}Value` : declaration.name,
-      );
-    }
+    if (!declaration.exported || declaration.kind !== 'variable') continue;
+    const runtimeExport = typesInventory.exportLanes
+      .flatMap((lane) => lane.exports)
+      .find((record) => {
+        const binding = record.runtime ? runtimeExportBinding(record) : undefined;
+        return (
+          record.runtime &&
+          binding?.source === declaration.origin.source &&
+          binding.fingerprint === declaration.origin.fingerprint
+        );
+      });
+    if (!runtimeExport) continue;
+    const generatedName = canonicalTypeNames.has(declaration.name)
+      ? runtimeValueAliasName(
+          declaration.name,
+          declaration.origin.source,
+          types.lowered.declarations.filter((candidate) => candidate !== declaration),
+        )
+      : declaration.name;
+    canonicalValueAliases.set(declaration.name, generatedName);
   }
   // Rewrite value references to renamed canonical values (`PathCommand` -> `PathCommandValue`)
   // across every package, not just `types`: consumers in other packages reference these const
@@ -216,19 +249,20 @@ export function generateCoreModules(
     );
     if (!facade) throw new Error(`Expected generated facade for ${item.packageName}`);
     const externalExports = rootExports.flatMap((record) => {
-      const sourcePackage = /^upstream\/packages\/([^/]+)\//u.exec(record.source)?.[1];
+      if (!record.runtime) return [];
+      const binding = runtimeExportBinding(record);
+      const sourcePackage = /^upstream\/packages\/([^/]+)\//u.exec(binding.source)?.[1];
       if (!sourcePackage || sourcePackage === item.directoryName) return [];
-      if (
-        (record.kind === 'interface' || record.kind === 'type') &&
-        !(sourcePackage === 'types' && canonicalValueAliases.has(record.name))
-      )
-        return [];
       const originInventory = inventoryByName.get(`@flighthq/${sourcePackage}`);
       const originName =
         originInventory?.exportLanes
           .flatMap((lane) => lane.exports)
-          .find((candidate) => candidate.fingerprint === record.fingerprint && candidate.source === record.source)
-          ?.name ?? record.name;
+          .find(
+            (candidate) =>
+              candidate.runtime &&
+              runtimeExportBinding(candidate).fingerprint === binding.fingerprint &&
+              runtimeExportBinding(candidate).source === binding.source,
+          )?.name ?? record.name;
       return [{ originDirectory: sourcePackage, originName, publicName: record.name }];
     });
     writeOrCheck(
@@ -859,9 +893,16 @@ function buildPublicFacades(
   }
 
   const resolveDeclaration = (record: ExportRecord): { declaration: IrDeclaration; module: IrModule } | undefined => {
-    for (const module of modules) {
+    if (!record.runtime) return undefined;
+    const binding = runtimeExportBinding(record);
+    const orderedModules = [
+      ...modules.filter((module) => module.source === binding.source),
+      ...modules.filter((module) => module.source !== binding.source),
+    ];
+    for (const module of orderedModules) {
       const declaration = module.declarations.find(
-        (candidate) => candidate.origin.fingerprint === record.fingerprint && candidate.origin.source === record.source,
+        (candidate) =>
+          candidate.origin.fingerprint === binding.fingerprint && candidate.origin.source === binding.source,
       );
       if (declaration) return { declaration, module };
     }
@@ -939,15 +980,32 @@ function buildPublicFacades(
     if (target.declarations.some((declaration) => declaration.name === `__enum_${publicName}`)) return;
     const ownerAlias = `Facade_${target.name}_${modulePath(originModule).replace(/[^A-Za-z0-9]/gu, '_')}_${origin.name}`;
     target.imports.push(`${declarationImportPath(originModule, origin)} as ${ownerAlias}`);
+    const pair = (key: IrExpression, value: IrExpression): IrExpression => ({
+      kind: 'object',
+      properties: [
+        { kind: 'property', name: 'key', value: key },
+        { kind: 'property', name: 'value', value },
+      ],
+    });
+    const pairs: IrExpression[] = [];
+    for (const member of origin.members) {
+      const value: IrExpression = { kind: 'identifier', name: `${ownerAlias}.${member.name}` };
+      pairs.push(pair({ kind: 'literal', value: member.name }, value));
+      if (member.reverseMapping) pairs.push(pair(value, { kind: 'literal', value: member.name }));
+    }
+    for (const method of origin.methods) {
+      pairs.push(
+        pair({ kind: 'literal', value: method.name }, { kind: 'identifier', name: `${ownerAlias}.${method.name}` }),
+      );
+    }
     target.declarations.push({
       exported: false,
       initializer: {
-        kind: 'object',
-        properties: origin.members.map((member) => ({
-          kind: 'property',
-          name: member.name,
-          value: { kind: 'identifier', name: `${ownerAlias}.${member.name}` },
-        })),
+        arguments: [{ elements: pairs, kind: 'array' }],
+        callee: { kind: 'identifier', name: '_Runtime.objectFromPairs' },
+        direct: true,
+        kind: 'call',
+        typeArguments: [],
       },
       kind: 'variable',
       mutable: false,
@@ -964,7 +1022,7 @@ function buildPublicFacades(
     const target = facadeForPackage(packageInventory.name);
     if (!target) throw new Error(`Expected facade module for ${packageInventory.name}`);
     for (const record of packageRootExportLane(packageInventory).exports) {
-      if (!sourcePathToModule(record.source)) continue;
+      if (!record.runtime || !sourcePathToModule(runtimeExportBinding(record).source)) continue;
       const resolvedDeclaration = resolveDeclaration(record);
       if (resolvedDeclaration?.declaration.kind === 'enum') {
         const resolved = resolvedDeclaration as {
@@ -974,7 +1032,8 @@ function buildPublicFacades(
         addEnumFacade(target, record.name, resolved.module, resolved.declaration);
         continue;
       }
-      if (record.kind !== 'function' && record.kind !== 'variable') continue;
+      const runtimeKind = runtimeExportBinding(record).kind;
+      if (runtimeKind !== 'function' && runtimeKind !== 'variable' && runtimeKind !== 'namespace') continue;
       const resolved = resolveDirectDeclaration(record);
       if (!resolved) {
         throw new Error(`Cannot resolve package facade export ${target.packageName}.${record.name}`);
@@ -989,7 +1048,7 @@ function buildPublicFacades(
   sdk.declarations = [];
   sdk.imports = [];
   for (const record of sdkRootExports) {
-    if (!sourcePathToModule(record.source)) continue;
+    if (!record.runtime || !sourcePathToModule(runtimeExportBinding(record).source)) continue;
     const resolvedDeclaration = resolveDeclaration(record);
     if (resolvedDeclaration?.declaration.kind === 'enum') {
       const resolved = resolvedDeclaration as {
@@ -999,7 +1058,8 @@ function buildPublicFacades(
       addEnumFacade(sdk, record.name, resolved.module, resolved.declaration);
       continue;
     }
-    if (record.kind !== 'function' && record.kind !== 'variable') continue;
+    const runtimeKind = runtimeExportBinding(record).kind;
+    if (runtimeKind !== 'function' && runtimeKind !== 'variable' && runtimeKind !== 'namespace') continue;
     const resolved = resolveDirectDeclaration(record);
     if (!resolved) throw new Error(`Cannot resolve SDK facade export ${record.name} from ${record.source}`);
     addFacade(sdk, record.name, resolved.module, resolved.declaration);
@@ -1339,7 +1399,7 @@ function fillGenericArguments(declarations: IrDeclaration[]): void {
 function emitJavaScriptBridge(
   apiPath: string,
   declarations: IrDeclaration[],
-  publicExports: Array<{ fingerprint: string; source: string }>,
+  publicExports: ExportRecord[],
   modules: IrModule[],
   publicAliases?: ReadonlyMap<string, string>,
   externalExports: Array<{ originDirectory: string; originName: string; publicName: string }> = [],
@@ -1352,7 +1412,14 @@ function emitJavaScriptBridge(
       .filter((declaration) => declaration.kind === 'variable' && declaration.mutable && declaration.exported)
       .map((declaration) => declaration.name),
   );
-  const publicIdentities = new Set(publicExports.map((record) => `${record.source}\0${record.fingerprint}`));
+  const publicIdentities = new Set(
+    publicExports
+      .filter((record) => record.runtime)
+      .map((record) => {
+        const binding = runtimeExportBinding(record);
+        return `${binding.source}\0${binding.fingerprint}`;
+      }),
+  );
   const exports = declarations
     .filter(
       (declaration) =>
@@ -1492,24 +1559,28 @@ function emitJavaScriptSourceBridge(
         if (dependencyExports && !dependencyExport) {
           throw new Error(`Mocked package import is not exported by ${sourceSpecifier}: ${importedName}`);
         }
+        if (dependencyExport && !dependencyExport.runtime) {
+          throw new Error(`Mocked package import has no runtime binding in ${sourceSpecifier}: ${importedName}`);
+        }
+        const dependencyBinding = dependencyExport ? runtimeExportBinding(dependencyExport) : undefined;
         const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
         const dependencyModule = modules.find(
           (module) =>
-            (dependencySource ? module.source === dependencySource : module.source === dependencyExport!.source) &&
+            (dependencySource ? module.source === dependencySource : module.source === dependencyBinding!.source) &&
             module.declarations.some(
               (declaration) =>
-                (dependencyExport
-                  ? declaration.origin.source === dependencyExport.source &&
-                    declaration.origin.fingerprint === dependencyExport.fingerprint
+                (dependencyBinding
+                  ? declaration.origin.source === dependencyBinding.source &&
+                    declaration.origin.fingerprint === dependencyBinding.fingerprint
                   : true) &&
                 (declaration.name === generatedName || declaration.name === importedName),
             ),
         );
         const dependencyDeclaration = dependencyModule?.declarations.find(
           (declaration) =>
-            (dependencyExport
-              ? declaration.origin.source === dependencyExport.source &&
-                declaration.origin.fingerprint === dependencyExport.fingerprint
+            (dependencyBinding
+              ? declaration.origin.source === dependencyBinding.source &&
+                declaration.origin.fingerprint === dependencyBinding.fingerprint
               : true) &&
             (declaration.name === generatedName || declaration.name === importedName),
         );
@@ -1532,19 +1603,23 @@ function emitJavaScriptSourceBridge(
       (record) => record.name === importedName,
     );
     if (!dependencyExport) throw new Error(`Mocked package import is not exported by ${specifier}: ${importedName}`);
+    if (!dependencyExport.runtime) {
+      throw new Error(`Mocked package import has no runtime binding in ${specifier}: ${importedName}`);
+    }
+    const dependencyBinding = runtimeExportBinding(dependencyExport);
     const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
     const dependencyModule = modules.find(
       (module) =>
-        module.source === dependencyExport.source &&
+        module.source === dependencyBinding.source &&
         module.declarations.some(
           (declaration) =>
-            declaration.origin.fingerprint === dependencyExport.fingerprint &&
+            declaration.origin.fingerprint === dependencyBinding.fingerprint &&
             (declaration.name === generatedName || declaration.name === importedName),
         ),
     );
     const dependencyDeclaration = dependencyModule?.declarations.find(
       (declaration) =>
-        declaration.origin.fingerprint === dependencyExport.fingerprint &&
+        declaration.origin.fingerprint === dependencyBinding.fingerprint &&
         (declaration.name === generatedName || declaration.name === importedName),
     );
     if (!dependencyModule || !dependencyDeclaration) {

@@ -8,6 +8,7 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
 import flighthq.types.Scene3DResources.Scene3DResourceSignals;
+import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
 class SceneResourceSignals {

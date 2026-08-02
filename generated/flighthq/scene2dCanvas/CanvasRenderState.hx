@@ -12,6 +12,7 @@ import flighthq.render.Renderer.copyRenderStateRegistrations;
 import flighthq.types.CanvasRenderOptions;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class CanvasRenderState {

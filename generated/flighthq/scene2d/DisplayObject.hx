@@ -25,6 +25,7 @@ import flighthq.types.Node2D.Node2DDataFactory;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DRuntimeFactory;
 import flighthq.types.PartialNode;
+import flighthq.types.Types.Node2DTraitsKey;
 import flighthq.types._internal._Node2DValues.Node2DTraitsKey;
 
 class DisplayObject {

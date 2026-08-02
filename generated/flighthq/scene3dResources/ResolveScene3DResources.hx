@@ -24,6 +24,7 @@ import flighthq.types.Scene3DResources.Scene3DResourceWorkingSet;
 import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
 import flighthq.types.Texture;
 import flighthq.types.Types.ImageTextureSourceKind;
+import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceFailureKindValue;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;

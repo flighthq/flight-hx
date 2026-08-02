@@ -11,6 +11,7 @@ import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class UpdateMeshMorph {

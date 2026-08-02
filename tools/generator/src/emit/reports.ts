@@ -17,7 +17,7 @@ export function createApiReport(inventory: UpstreamInventory): ApiReport {
       sdkExposures: item.sdkExposures,
       sdkIncluded: item.sdkIncluded,
     })),
-    schemaVersion: 2,
+    schemaVersion: 3,
     upstreamCommit: inventory.upstreamCommit,
   };
 }

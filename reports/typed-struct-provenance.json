@@ -932,7 +932,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
     },
     {
@@ -1522,7 +1522,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
     },
     {
@@ -2582,7 +2582,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
     },
     {
@@ -3537,7 +3537,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
     },
     {
@@ -3617,7 +3617,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
     },
     {
@@ -3832,7 +3832,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
     },
     {
@@ -4177,7 +4177,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
     },
     {
@@ -4512,7 +4512,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
     },
     {
@@ -4627,7 +4627,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
     },
     {
@@ -5407,7 +5407,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
     },
     {
@@ -5907,7 +5907,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
     },
     {
@@ -6362,7 +6362,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
     },
     {
@@ -6847,7 +6847,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@6251",
+      "fieldPath": "traits.__@NodeTraitsKey@14563",
       "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
     },
     {
@@ -25788,7 +25788,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
           },
           {
@@ -25808,7 +25808,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
           },
           {
@@ -25828,7 +25828,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
           },
           {
@@ -25848,7 +25848,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
           },
           {
@@ -25868,7 +25868,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
           },
           {
@@ -25893,7 +25893,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
@@ -25913,7 +25913,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
           },
           {
@@ -25933,7 +25933,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
           {
@@ -25953,7 +25953,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
           },
           {
@@ -26013,7 +26013,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
           },
           {
@@ -26033,7 +26033,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
           },
           {
@@ -26053,7 +26053,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
           {
@@ -26073,7 +26073,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@6251",
+            "fieldPath": "traits.__@NodeTraitsKey@14563",
             "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
           },
           {

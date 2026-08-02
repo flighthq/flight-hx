@@ -9,6 +9,7 @@ import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class MeshGeometryCompute {

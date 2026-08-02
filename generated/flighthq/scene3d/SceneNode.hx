@@ -17,6 +17,7 @@ import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types.NodeSignals;
 import flighthq.types.Types.Node3DKind;
+import flighthq.types.Types.Node3DTraitsKey;
 import flighthq.types._internal._Node3DValues.Node3DKind;
 import flighthq.types._internal._Node3DValues.Node3DTraitsKey;
 

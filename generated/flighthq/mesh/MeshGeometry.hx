@@ -12,6 +12,7 @@ import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class MeshGeometry {

@@ -291,7 +291,7 @@ export interface IrTypeDeclaration {
 export interface IrEnumDeclaration {
   exported: boolean;
   kind: 'enum';
-  members: Array<{ initializer?: IrExpression | undefined; name: string }>;
+  members: Array<{ initializer?: IrExpression | undefined; name: string; reverseMapping: boolean }>;
   methods: IrFunctionDeclaration[];
   name: string;
   origin: SourceOrigin;

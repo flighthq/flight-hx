@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:27:42.901Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 101650,
+      "exitCode": 0,
+      "package": "textinput",
+      "signal": null,
+      "status": "passed",
+      "summary": "148 passed (148)",
+      "testFiles": 4
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "textinput",
+  "startedAt": "2026-08-02T18:26:01.250Z"
+}

@@ -3,6 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Abc as Facade_Types_flighthq_types_Abc;
+import flighthq.types.AppearanceFlags as Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags;
 import flighthq.types.BatchBarrier as Facade_Types_flighthq_types_BatchBarrier_BatchBarrier;
 import flighthq.types.BatchFormat as Facade_Types_flighthq_types_BatchFormat_BatchFormat;
 import flighthq.types.ClipboardFormat as Facade_Types_flighthq_types_ClipboardFormat;
@@ -15,6 +17,7 @@ import flighthq.types.TextureKind as Facade_Types_flighthq_types_TextureKind;
 import flighthq.types.ThreeDsSchema as Facade_Types_flighthq_types_ThreeDsSchema;
 import flighthq.types.TransformMode2D as Facade_Types_flighthq_types_TransformMode2D;
 import flighthq.types.WellKnownMenuItemRole as Facade_Types_flighthq_types_WellKnownMenuItemRole;
+import flighthq.types._internal._AdvancedBlendModeValues as Facade_Types_flighthq_types__internal__AdvancedBlendModeValues;
 import flighthq.types._internal._AmbientLightValues as Facade_Types_flighthq_types__internal__AmbientLightValues;
 import flighthq.types._internal._AnimatedNormalModifierValues as Facade_Types_flighthq_types__internal__AnimatedNormalModifierValues;
 import flighthq.types._internal._AnimationInterpolationValues as Facade_Types_flighthq_types__internal__AnimationInterpolationValues;
@@ -23,10 +26,14 @@ import flighthq.types._internal._AnisotropyPbrExtensionValues as Facade_Types_fl
 import flighthq.types._internal._AreaLightValues as Facade_Types_flighthq_types__internal__AreaLightValues;
 import flighthq.types._internal._AttractorForceValues as Facade_Types_flighthq_types__internal__AttractorForceValues;
 import flighthq.types._internal._BillboardValues as Facade_Types_flighthq_types__internal__BillboardValues;
+import flighthq.types._internal._BitmapCompositeModeValues as Facade_Types_flighthq_types__internal__BitmapCompositeModeValues;
 import flighthq.types._internal._BitmapTextValues as Facade_Types_flighthq_types__internal__BitmapTextValues;
+import flighthq.types._internal._BlendModeValues as Facade_Types_flighthq_types__internal__BlendModeValues;
 import flighthq.types._internal._BlinnPhongMaterialValues as Facade_Types_flighthq_types__internal__BlinnPhongMaterialValues;
 import flighthq.types._internal._CircleColliderValues as Facade_Types_flighthq_types__internal__CircleColliderValues;
 import flighthq.types._internal._ClearcoatPbrExtensionValues as Facade_Types_flighthq_types__internal__ClearcoatPbrExtensionValues;
+import flighthq.types._internal._CompositeOperatorValues as Facade_Types_flighthq_types__internal__CompositeOperatorValues;
+import flighthq.types._internal._CompressionValues as Facade_Types_flighthq_types__internal__CompressionValues;
 import flighthq.types._internal._CurlNoiseForceValues as Facade_Types_flighthq_types__internal__CurlNoiseForceValues;
 import flighthq.types._internal._CustomShaderMaterialValues as Facade_Types_flighthq_types__internal__CustomShaderMaterialValues;
 import flighthq.types._internal._DepthMaterialValues as Facade_Types_flighthq_types__internal__DepthMaterialValues;
@@ -42,11 +49,18 @@ import flighthq.types._internal._EnvironmentValues as Facade_Types_flighthq_type
 import flighthq.types._internal._ExtendedPbrMaterialValues as Facade_Types_flighthq_types__internal__ExtendedPbrMaterialValues;
 import flighthq.types._internal._FogModifierValues as Facade_Types_flighthq_types__internal__FogModifierValues;
 import flighthq.types._internal._FontVariationValues as Facade_Types_flighthq_types__internal__FontVariationValues;
+import flighthq.types._internal._GamepadAxisKindValues as Facade_Types_flighthq_types__internal__GamepadAxisKindValues;
+import flighthq.types._internal._GamepadButtonKindValues as Facade_Types_flighthq_types__internal__GamepadButtonKindValues;
 import flighthq.types._internal._GroupValues as Facade_Types_flighthq_types__internal__GroupValues;
 import flighthq.types._internal._HemisphereLightValues as Facade_Types_flighthq_types__internal__HemisphereLightValues;
 import flighthq.types._internal._HtmlViewValues as Facade_Types_flighthq_types__internal__HtmlViewValues;
+import flighthq.types._internal._ImageChannelValues as Facade_Types_flighthq_types__internal__ImageChannelValues;
+import flighthq.types._internal._ImageResourceReferenceValues as Facade_Types_flighthq_types__internal__ImageResourceReferenceValues;
+import flighthq.types._internal._ImportDiagnosticValues as Facade_Types_flighthq_types__internal__ImportDiagnosticValues;
 import flighthq.types._internal._InstancedMeshValues as Facade_Types_flighthq_types__internal__InstancedMeshValues;
 import flighthq.types._internal._IridescencePbrExtensionValues as Facade_Types_flighthq_types__internal__IridescencePbrExtensionValues;
+import flighthq.types._internal._KeyCodeValues as Facade_Types_flighthq_types__internal__KeyCodeValues;
+import flighthq.types._internal._KeyModifierValues as Facade_Types_flighthq_types__internal__KeyModifierValues;
 import flighthq.types._internal._LambertMaterialValues as Facade_Types_flighthq_types__internal__LambertMaterialValues;
 import flighthq.types._internal._LightUnitValues as Facade_Types_flighthq_types__internal__LightUnitValues;
 import flighthq.types._internal._LodMeshValues as Facade_Types_flighthq_types__internal__LodMeshValues;
@@ -54,6 +68,8 @@ import flighthq.types._internal._MatcapMaterialValues as Facade_Types_flighthq_t
 import flighthq.types._internal._MeshAttachment2DValues as Facade_Types_flighthq_types__internal__MeshAttachment2DValues;
 import flighthq.types._internal._MeshDeformerValues as Facade_Types_flighthq_types__internal__MeshDeformerValues;
 import flighthq.types._internal._MeshValues as Facade_Types_flighthq_types__internal__MeshValues;
+import flighthq.types._internal._ModifierSlotValues as Facade_Types_flighthq_types__internal__ModifierSlotValues;
+import flighthq.types._internal._MouseButtonValues as Facade_Types_flighthq_types__internal__MouseButtonValues;
 import flighthq.types._internal._MovieClipValues as Facade_Types_flighthq_types__internal__MovieClipValues;
 import flighthq.types._internal._NativeTextValues as Facade_Types_flighthq_types__internal__NativeTextValues;
 import flighthq.types._internal._Node2DAnimationPathValues as Facade_Types_flighthq_types__internal__Node2DAnimationPathValues;
@@ -64,6 +80,7 @@ import flighthq.types._internal._NormalMaterialValues as Facade_Types_flighthq_t
 import flighthq.types._internal._ParticleEmitter2DValues as Facade_Types_flighthq_types__internal__ParticleEmitter2DValues;
 import flighthq.types._internal._ParticleEmitter3DValues as Facade_Types_flighthq_types__internal__ParticleEmitter3DValues;
 import flighthq.types._internal._ParticleFormatKindValues as Facade_Types_flighthq_types__internal__ParticleFormatKindValues;
+import flighthq.types._internal._PathValues as Facade_Types_flighthq_types__internal__PathValues;
 import flighthq.types._internal._PhongMaterialValues as Facade_Types_flighthq_types__internal__PhongMaterialValues;
 import flighthq.types._internal._PlaneColliderValues as Facade_Types_flighthq_types__internal__PlaneColliderValues;
 import flighthq.types._internal._PointGravityWellForceValues as Facade_Types_flighthq_types__internal__PointGravityWellForceValues;
@@ -71,20 +88,27 @@ import flighthq.types._internal._PointLightValues as Facade_Types_flighthq_types
 import flighthq.types._internal._QuadBatchValues as Facade_Types_flighthq_types__internal__QuadBatchValues;
 import flighthq.types._internal._RectangleColliderValues as Facade_Types_flighthq_types__internal__RectangleColliderValues;
 import flighthq.types._internal._RegionAttachment2DValues as Facade_Types_flighthq_types__internal__RegionAttachment2DValues;
+import flighthq.types._internal._RenderCacheValues as Facade_Types_flighthq_types__internal__RenderCacheValues;
+import flighthq.types._internal._ResourceResolutionStateValues as Facade_Types_flighthq_types__internal__ResourceResolutionStateValues;
 import flighthq.types._internal._RichTextValues as Facade_Types_flighthq_types__internal__RichTextValues;
 import flighthq.types._internal._RimModifierValues as Facade_Types_flighthq_types__internal__RimModifierValues;
 import flighthq.types._internal._Scale9ShapeValues as Facade_Types_flighthq_types__internal__Scale9ShapeValues;
+import flighthq.types._internal._Scene2DDocumentValues as Facade_Types_flighthq_types__internal__Scene2DDocumentValues;
 import flighthq.types._internal._Scene3DAnimationPathValues as Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues;
 import flighthq.types._internal._Scene3DLightBlockValues as Facade_Types_flighthq_types__internal__Scene3DLightBlockValues;
 import flighthq.types._internal._Scene3DResourcesValues as Facade_Types_flighthq_types__internal__Scene3DResourcesValues;
 import flighthq.types._internal._ShadedMaterialValues as Facade_Types_flighthq_types__internal__ShadedMaterialValues;
 import flighthq.types._internal._ShapeValues as Facade_Types_flighthq_types__internal__ShapeValues;
 import flighthq.types._internal._SheenPbrExtensionValues as Facade_Types_flighthq_types__internal__SheenPbrExtensionValues;
+import flighthq.types._internal._Skeleton2DAnimationPathValues as Facade_Types_flighthq_types__internal__Skeleton2DAnimationPathValues;
+import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues as Facade_Types_flighthq_types__internal__Skeleton2DSlotAnimationTargetValues;
+import flighthq.types._internal._SoftKeyboardEasingKindValues as Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues as Facade_Types_flighthq_types__internal__SpecularGlossinessPbrMaterialValues;
 import flighthq.types._internal._SpecularPbrExtensionValues as Facade_Types_flighthq_types__internal__SpecularPbrExtensionValues;
 import flighthq.types._internal._SphereColliderValues as Facade_Types_flighthq_types__internal__SphereColliderValues;
 import flighthq.types._internal._SpotLightValues as Facade_Types_flighthq_types__internal__SpotLightValues;
 import flighthq.types._internal._SpriteValues as Facade_Types_flighthq_types__internal__SpriteValues;
+import flighthq.types._internal._StandardMaterialValues as Facade_Types_flighthq_types__internal__StandardMaterialValues;
 import flighthq.types._internal._StandardPbrMaterialValues as Facade_Types_flighthq_types__internal__StandardPbrMaterialValues;
 import flighthq.types._internal._TextDirectionValues as Facade_Types_flighthq_types__internal__TextDirectionValues;
 import flighthq.types._internal._TextFeatureValues as Facade_Types_flighthq_types__internal__TextFeatureValues;
@@ -105,13 +129,21 @@ import flighthq.types._internal._WireframeMaterialValues as Facade_Types_flighth
 import flighthq.types._internal._WrappedDiffusePbrExtensionValues as Facade_Types_flighthq_types__internal__WrappedDiffusePbrExtensionValues;
 
 class Types {
-  public static final __enum_BatchBarrier:Dynamic = { Capacity: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Capacity, Clip: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Clip, Filter: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Filter, RenderTarget: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.RenderTarget };
+  public static final __enum_AppearanceFlags:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'None', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.None }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.None, value: 'None' }, { key: 'Visible', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Visible }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Visible, value: 'Visible' }, { key: 'Alpha', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Alpha }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Alpha, value: 'Alpha' }, { key: 'BlendMode', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.BlendMode }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.BlendMode, value: 'BlendMode' }, { key: 'Clip', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Clip }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Clip, value: 'Clip' }, { key: 'Scale9Grid', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Scale9Grid }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Scale9Grid, value: 'Scale9Grid' }, { key: 'Any', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Any }, { key: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.Any, value: 'Any' }, { key: 'any', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.any }, { key: 'has', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.has }, { key: 'add', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.add }, { key: 'remove', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.remove }, { key: 'clear', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.clear }] : Array<Dynamic>));
 
-  public static final __enum_BatchFormat:Dynamic = { Quad: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad, VertexStream: Facade_Types_flighthq_types_BatchFormat_BatchFormat.VertexStream };
+  public static final __enum_BatchBarrier:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'Capacity', value: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Capacity }, { key: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Capacity, value: 'Capacity' }, { key: 'Clip', value: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Clip }, { key: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Clip, value: 'Clip' }, { key: 'Filter', value: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Filter }, { key: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.Filter, value: 'Filter' }, { key: 'RenderTarget', value: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.RenderTarget }, { key: Facade_Types_flighthq_types_BatchBarrier_BatchBarrier.RenderTarget, value: 'RenderTarget' }] : Array<Dynamic>));
 
-  public static final __enum_LogLevel:Dynamic = { None: Facade_Types_flighthq_types_Log_LogLevel.None, Error: Facade_Types_flighthq_types_Log_LogLevel.Error, Warn: Facade_Types_flighthq_types_Log_LogLevel.Warn, Info: Facade_Types_flighthq_types_Log_LogLevel.Info, Debug: Facade_Types_flighthq_types_Log_LogLevel.Debug, Verbose: Facade_Types_flighthq_types_Log_LogLevel.Verbose };
+  public static final __enum_BatchFormat:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'Quad', value: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad }, { key: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad, value: 'Quad' }, { key: 'VertexStream', value: Facade_Types_flighthq_types_BatchFormat_BatchFormat.VertexStream }, { key: Facade_Types_flighthq_types_BatchFormat_BatchFormat.VertexStream, value: 'VertexStream' }] : Array<Dynamic>));
 
-  public static final __enum_RenderRegistry:Dynamic = { EffectPaddingResolver: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver, NodeRenderer: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer, ShapeCommandHandler: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler, TextureResolver: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver };
+  public static final __enum_LogLevel:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'None', value: Facade_Types_flighthq_types_Log_LogLevel.None }, { key: Facade_Types_flighthq_types_Log_LogLevel.None, value: 'None' }, { key: 'Error', value: Facade_Types_flighthq_types_Log_LogLevel.Error }, { key: Facade_Types_flighthq_types_Log_LogLevel.Error, value: 'Error' }, { key: 'Warn', value: Facade_Types_flighthq_types_Log_LogLevel.Warn }, { key: Facade_Types_flighthq_types_Log_LogLevel.Warn, value: 'Warn' }, { key: 'Info', value: Facade_Types_flighthq_types_Log_LogLevel.Info }, { key: Facade_Types_flighthq_types_Log_LogLevel.Info, value: 'Info' }, { key: 'Debug', value: Facade_Types_flighthq_types_Log_LogLevel.Debug }, { key: Facade_Types_flighthq_types_Log_LogLevel.Debug, value: 'Debug' }, { key: 'Verbose', value: Facade_Types_flighthq_types_Log_LogLevel.Verbose }, { key: Facade_Types_flighthq_types_Log_LogLevel.Verbose, value: 'Verbose' }] : Array<Dynamic>));
+
+  public static final __enum_RenderRegistry:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'EffectPaddingResolver', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver, value: 'EffectPaddingResolver' }, { key: 'NodeRenderer', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer, value: 'NodeRenderer' }, { key: 'ShapeCommandHandler', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler, value: 'ShapeCommandHandler' }, { key: 'TextureResolver', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver, value: 'TextureResolver' }] : Array<Dynamic>));
+
+  public static final AbcMultinameKind:Dynamic = Facade_Types_flighthq_types_Abc.AbcMultinameKindValue;
+
+  public static final AbcTraitKind:Dynamic = Facade_Types_flighthq_types_Abc.AbcTraitKindValue;
+
+  public static final AdvancedBlendMode:Dynamic = Facade_Types_flighthq_types__internal__AdvancedBlendModeValues.AdvancedBlendModeValue;
 
   public static final AmbientLightKind:Dynamic = Facade_Types_flighthq_types__internal__AmbientLightValues.AmbientLightKind;
 
@@ -135,9 +167,13 @@ class Types {
 
   public static final BillboardKind:Dynamic = Facade_Types_flighthq_types__internal__BillboardValues.BillboardKind;
 
+  public static final BitmapCompositeMode:Dynamic = Facade_Types_flighthq_types__internal__BitmapCompositeModeValues.BitmapCompositeModeValue;
+
   public static final BitmapTextKind:Dynamic = Facade_Types_flighthq_types__internal__BitmapTextValues.BitmapTextKind;
 
   public static final BitmapTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.BitmapTextureSourceKind;
+
+  public static final BlendMode:Dynamic = Facade_Types_flighthq_types__internal__BlendModeValues.BlendModeValue;
 
   public static final BlinnPhongMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__BlinnPhongMaterialValues.BlinnPhongMaterialKind;
 
@@ -159,7 +195,11 @@ class Types {
 
   public static final ClipboardFormatUriList:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatUriList;
 
+  public static final CompositeOperator:Dynamic = Facade_Types_flighthq_types__internal__CompositeOperatorValues.CompositeOperatorValue;
+
   public static final CompressedImageTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.CompressedImageTextureSourceKind;
+
+  public static final Compression:Dynamic = Facade_Types_flighthq_types__internal__CompressionValues.CompressionValue;
 
   public static final CubeFaceNegativeX:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeX;
 
@@ -203,6 +243,8 @@ class Types {
 
   public static final EmissiveMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__EmissiveMaterialValues.EmissiveMaterialKind;
 
+  public static final EmissiveModifierFacing:Dynamic = Facade_Types_flighthq_types__internal__EmissiveModifierValues.EmissiveModifierFacingValue;
+
   public static final EmissiveModifierKind:Dynamic = Facade_Types_flighthq_types__internal__EmissiveModifierValues.EmissiveModifierKind;
 
   public static final EntityRuntimeKey:Dynamic = Facade_Types_flighthq_types__internal__EntityValues.EntityRuntimeKey;
@@ -217,6 +259,8 @@ class Types {
 
   public static final FogModifierKind:Dynamic = Facade_Types_flighthq_types__internal__FogModifierValues.FogModifierKind;
 
+  public static final FogModifierMode:Dynamic = Facade_Types_flighthq_types__internal__FogModifierValues.FogModifierModeValue;
+
   public static final FontVariationItalic:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationItalic;
 
   public static final FontVariationOpticalSize:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationOpticalSize;
@@ -227,17 +271,33 @@ class Types {
 
   public static final FontVariationWidth:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationWidth;
 
+  public static final GamepadAxisKind:Dynamic = Facade_Types_flighthq_types__internal__GamepadAxisKindValues.GamepadAxisKindValue;
+
+  public static final GamepadButtonKind:Dynamic = Facade_Types_flighthq_types__internal__GamepadButtonKindValues.GamepadButtonKindValue;
+
   public static final GroupKind:Dynamic = Facade_Types_flighthq_types__internal__GroupValues.GroupKind;
 
   public static final HemisphereLightKind:Dynamic = Facade_Types_flighthq_types__internal__HemisphereLightValues.HemisphereLightKind;
 
   public static final HtmlViewKind:Dynamic = Facade_Types_flighthq_types__internal__HtmlViewValues.HtmlViewKind;
 
+  public static final ImageChannel:Dynamic = Facade_Types_flighthq_types__internal__ImageChannelValues.ImageChannelValue;
+
+  public static final ImageResourceFailureKind:Dynamic = Facade_Types_flighthq_types__internal__ImageResourceReferenceValues.ImageResourceFailureKindValue;
+
+  public static final ImageResourceReferenceKind:Dynamic = Facade_Types_flighthq_types__internal__ImageResourceReferenceValues.ImageResourceReferenceKindValue;
+
   public static final ImageTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.ImageTextureSourceKind;
+
+  public static final ImportDiagnosticSeverity:Dynamic = Facade_Types_flighthq_types__internal__ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
   public static final InstancedMeshKind:Dynamic = Facade_Types_flighthq_types__internal__InstancedMeshValues.InstancedMeshKind;
 
   public static final IridescencePbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__IridescencePbrExtensionValues.IridescencePbrExtensionKind;
+
+  public static final KeyCode:Dynamic = Facade_Types_flighthq_types__internal__KeyCodeValues.KeyCodeValue;
+
+  public static final KeyModifier:Dynamic = Facade_Types_flighthq_types__internal__KeyModifierValues.KeyModifierValue;
 
   public static final LambertMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__LambertMaterialValues.LambertMaterialKind;
 
@@ -262,6 +322,10 @@ class Types {
   public static final MeshDeformerSkeletal:Dynamic = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerSkeletal;
 
   public static final MeshKind:Dynamic = Facade_Types_flighthq_types__internal__MeshValues.MeshKind;
+
+  public static final ModifierSlot:Dynamic = Facade_Types_flighthq_types__internal__ModifierSlotValues.ModifierSlotValue;
+
+  public static final MouseButton:Dynamic = Facade_Types_flighthq_types__internal__MouseButtonValues.MouseButtonValue;
 
   public static final MovieClipKind:Dynamic = Facade_Types_flighthq_types__internal__MovieClipValues.MovieClipKind;
 
@@ -315,6 +379,8 @@ class Types {
 
   public static final ParticleEmitter3DKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitter3DValues.ParticleEmitter3DKind;
 
+  public static final PathCommand:Dynamic = Facade_Types_flighthq_types__internal__PathValues.PathCommandValue;
+
   public static final PhaserParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.PhaserParticleFormatKind;
 
   public static final PhongMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__PhongMaterialValues.PhongMaterialKind;
@@ -333,7 +399,11 @@ class Types {
 
   public static final RegionAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__RegionAttachment2DValues.RegionAttachment2DKind;
 
+  public static final RenderCacheKind:Dynamic = Facade_Types_flighthq_types__internal__RenderCacheValues.RenderCacheKindValue;
+
   public static final RenderTargetTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.RenderTargetTextureSourceKind;
+
+  public static final ResourceResolutionState:Dynamic = Facade_Types_flighthq_types__internal__ResourceResolutionStateValues.ResourceResolutionStateValue;
 
   public static final RichTextKind:Dynamic = Facade_Types_flighthq_types__internal__RichTextValues.RichTextKind;
 
@@ -365,6 +435,8 @@ class Types {
 
   public static final SCENE_LIGHT_SPOT_STRIDE:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
+  public static final Scene2DContentReferenceKind:Dynamic = Facade_Types_flighthq_types__internal__Scene2DDocumentValues.Scene2DContentReferenceKindValue;
+
   public static final Scene3DAnimationPathRotation:Dynamic = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathRotation;
 
   public static final Scene3DAnimationPathScale:Dynamic = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathScale;
@@ -380,6 +452,20 @@ class Types {
   public static final ShapeKind:Dynamic = Facade_Types_flighthq_types__internal__ShapeValues.ShapeKind;
 
   public static final SheenPbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__SheenPbrExtensionValues.SheenPbrExtensionKind;
+
+  public static final Skeleton2DAnimationPath:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
+
+  public static final Skeleton2DSlotAnimationPath:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
+
+  public static final SoftKeyboardEasingDefaultKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingDefaultKindValue;
+
+  public static final SoftKeyboardEasingEaseInKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseInKindValue;
+
+  public static final SoftKeyboardEasingEaseOutKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseOutKindValue;
+
+  public static final SoftKeyboardEasingKeyboardDefaultKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingKeyboardDefaultKindValue;
+
+  public static final SoftKeyboardEasingLinearKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingLinearKindValue;
 
   public static final SoftKeyboardResizeBodyKind:Dynamic = Facade_Types_flighthq_types_Keyboard.SoftKeyboardResizeBodyKind;
 
@@ -410,6 +496,8 @@ class Types {
   public static final SpritesheetFormatKindStarling:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindStarling;
 
   public static final SpritesheetFormatKindTexturePacker:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindTexturePacker;
+
+  public static final StandardMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__StandardMaterialValues.StandardMaterialKindValue;
 
   public static final StandardPbrMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__StandardPbrMaterialValues.StandardPbrMaterialKind;
 
@@ -532,6 +620,8 @@ class Types {
   public static final VertexColorMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__VertexColorMaterialValues.VertexColorMaterialKind;
 
   public static final VertexDisplaceModifierKind:Dynamic = Facade_Types_flighthq_types__internal__VertexDisplaceModifierValues.VertexDisplaceModifierKind;
+
+  public static final VertexDisplaceModifierSource:Dynamic = Facade_Types_flighthq_types__internal__VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
   public static final VortexForceKind:Dynamic = Facade_Types_flighthq_types__internal__VortexForceValues.VortexForceKind;
 

@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T18:04:58.504Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 57149,
+      "exitCode": 0,
+      "package": "importdiagnostics",
+      "signal": null,
+      "status": "passed",
+      "summary": "7 passed (7)",
+      "testFiles": 2
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "importdiagnostics",
+  "startedAt": "2026-08-02T18:04:01.353Z"
+}

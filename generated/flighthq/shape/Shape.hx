@@ -38,6 +38,7 @@ import flighthq.types.ShapeStrokeRegion;
 import flighthq.types.Texture;
 import flighthq.types.TriangleCulling;
 import flighthq.types.Types.ShapeKind;
+import flighthq.types._internal._PathValues as Facade_Shape_flighthq_types__internal__PathValues;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class Shape {
@@ -509,6 +510,8 @@ class Shape {
     return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'commands'), 'length'), 0.0);
     return cast null;
   }
+
+  public static final PathCommand:Dynamic = Facade_Shape_flighthq_types__internal__PathValues.PathCommandValue;
 
   public static function registerShapeHitTestCommand<K>(command:ShapeHitTestCommand<Dynamic>):Void {
     Facade_Shape_flighthq_shape_ShapeHitTestRegistry.registerShapeHitTestCommand(command);

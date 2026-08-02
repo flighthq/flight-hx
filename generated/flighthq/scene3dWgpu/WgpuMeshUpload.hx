@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload;
 import flighthq.types.WgpuSkinningAdapter;
