@@ -238,9 +238,24 @@ class _Runtime {
     // Abstract-typed globals map to factory functions instead of classes.
     if (Reflect.isFunction(constructor)) return Reflect.callMethod(null, constructor, arguments);
     // `Type.createInstance` passes arguments positionally without filling
-    // optional parameters on every target (neko rejects the arity mismatch),
-    // and each portable global takes one optional source argument.
-    return Type.createInstance(cast constructor, arguments.length == 0 ? [null] : arguments);
+    // optional parameters, and neko rejects the arity mismatch with `$nargs`.
+    // The check happens before the constructor body runs, so retrying with an
+    // extra null argument is side-effect-free and keeps this arity-general
+    // instead of assuming every portable constructor's optional count.
+    #if neko
+    final padded = arguments.copy();
+    for (_ in 0...9) {
+      try {
+        return Type.createInstance(cast constructor, padded);
+      } catch (error:Dynamic) {
+        if (Std.string(error).indexOf('nargs') < 0) throw error;
+        padded.push(null);
+      }
+    }
+    throw 'Runtime: constructor arity above the padding cap for ' + Type.getClassName(cast constructor);
+    #else
+    return Type.createInstance(cast constructor, arguments);
+    #end
     #end
   }
 
