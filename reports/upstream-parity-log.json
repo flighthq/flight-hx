@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-08-02T20:50:43.814Z",
+  "failedPackages": 1,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 40847,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\nstdout | upstream/packages/log/src/log.test.ts > createConsoleCaptureSink > accepts a custom formatter\n[flight] x\n\n·····································································································x·············\n\n Test Files  1 failed (1)\n      Tests  1 failed | 114 passed (115)\n   Start at  13:50:03\n   Duration  39.76s (transform 9.36s, setup 261ms, import 37.16s, tests 100ms, environment 1.69s)\n\n\nstderr | upstream/packages/log/src/log.test.ts > createConsoleCaptureSink > wraps a string payload as { msg } in the envelope\n[flight] boom\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/log/src/log.test.ts > serializeLogError > wraps a non-Error value in { value }\nAssertionError: expected { name: undefined, message: undefined } to deeply equal { value: 'oops' }\n\n- Expected\n+ Received\n\n  {\n-   \"value\": \"oops\",\n+   \"message\": undefined,\n+   \"name\": undefined,\n  }\n\n ❯ upstream/packages/log/src/log.test.ts:1019:39\n    1017|\n    1018|   it('wraps a non-Error value in { value }', () => {\n    1019|     expect(serializeLogError('oops')).toEqual({ value: 'oops' });\n       |                                       ^\n    1020|     expect(serializeLogError(42)).toEqual({ value: '42' });\n    1021|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "package": "log",
+      "signal": null,
+      "status": "failed",
+      "summary": "1 failed | 114 passed (115)",
+      "testFiles": 1
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "log",
+  "startedAt": "2026-08-02T20:50:02.965Z"
+}

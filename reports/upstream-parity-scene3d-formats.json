@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-08-02T21:00:01.245Z",
+  "failedPackages": 1,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 416995,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n······························································································································································································································································································································································································································································x···········································································································\n\n Test Files  1 failed | 11 passed (12)\n      Tests  1 failed | 553 passed (554)\n   Start at  13:53:05\n   Duration  416.05s (transform 15.06s, setup 467ms, import 412.05s, tests 1.32s, environment 1.32s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-formats/src/objParse.test.ts > obj diagnostic crumb coverage > aggregates repeated malformed lines into ONE crumb with the total count and the first line\nAssertionError: expected 1 to be 3 // Object.is equality\n\n- Expected\n+ Received\n\n- 3\n+ 1\n\n ❯ upstream/packages/scene3d-formats/src/objParse.test.ts:552:33\n    550|     expect(crumb.detail?.reason).toBe('non-numeric');\n    551|     expect(crumb.detail?.firstLine).toBe(1);\n    552|     expect(crumb.detail?.count).toBe(3);\n       |                                 ^\n    553|   });\n    554|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "package": "scene3d-formats",
+      "signal": null,
+      "status": "failed",
+      "summary": "1 failed | 553 passed (554)",
+      "testFiles": 12
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene3d-formats",
+  "startedAt": "2026-08-02T20:53:04.247Z"
+}

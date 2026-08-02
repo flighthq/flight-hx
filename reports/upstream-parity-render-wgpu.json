@@ -1,12 +1,12 @@
 {
-  "completedAt": "2026-08-02T16:52:32.158Z",
+  "completedAt": "2026-08-02T21:04:31.301Z",
   "failedPackages": 1,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 297587,
+      "durationMs": 269866,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·················································································································································x···························································\n\n Test Files  1 failed | 23 passed (24)\n      Tests  1 failed | 204 passed (205)\n   Start at  09:47:35\n   Duration  296.77s (transform 12.99s, setup 362ms, import 294.22s, tests 528ms, environment 1.16s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/render-wgpu/src/wgpuExternalImageSource.test.ts > tryCopyWgpuExternalImageToTexture > rethrows security failures\nAssertionError: expected a thrown error to be DOMException{ stack: 'SecurityError:…', …(1) }\n\n- Expected\n+ Received\n\n- DOMException {}\n+ haxe_ValueException {\n+   \"message\": \"SecurityError: tainted canvas\",\n+   \"__previousException\": undefined,\n+   \"__nativeException\": [Circular],\n+   \"value\": DOMException {},\n+ }\n\n ❯ upstream/packages/render-wgpu/src/wgpuExternalImageSource.test.ts:87:7\n     85|     expect(() =>\n     86|       tryCopyWgpuExternalImageToTexture(queue, { source: canvas }, { t…\n     87|     ).toThrow(error);\n       |       ^\n     88|   });\n     89| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·················································································································································x···························································\n\n Test Files  1 failed | 23 passed (24)\n      Tests  1 failed | 204 passed (205)\n   Start at  14:00:02\n   Duration  269.07s (transform 10.41s, setup 328ms, import 266.70s, tests 394ms, environment 994ms)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/render-wgpu/src/wgpuExternalImageSource.test.ts > tryCopyWgpuExternalImageToTexture > rethrows security failures\nAssertionError: expected a thrown error to be DOMException{ stack: 'SecurityError:…', …(1) }\n\n- Expected\n+ Received\n\n- DOMException {}\n+ haxe_ValueException {\n+   \"message\": \"SecurityError: tainted canvas\",\n+   \"__previousException\": undefined,\n+   \"__nativeException\": [Circular],\n+   \"value\": DOMException {},\n+ }\n\n ❯ upstream/packages/render-wgpu/src/wgpuExternalImageSource.test.ts:87:7\n     85|     expect(() =>\n     86|       tryCopyWgpuExternalImageToTexture(queue, { source: canvas }, { t…\n     87|     ).toThrow(error);\n       |       ^\n     88|   });\n     89| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "render-wgpu",
       "signal": null,
       "status": "failed",
@@ -16,5 +16,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "render-wgpu",
-  "startedAt": "2026-08-02T16:47:34.569Z"
+  "startedAt": "2026-08-02T21:00:01.433Z"
 }

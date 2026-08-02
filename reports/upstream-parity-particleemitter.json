@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-02T20:53:04.012Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 140029,
+      "exitCode": 0,
+      "package": "particleemitter",
+      "signal": null,
+      "status": "passed",
+      "summary": "194 passed (194)",
+      "testFiles": 12
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "particleemitter",
+  "startedAt": "2026-08-02T20:50:43.981Z"
+}
