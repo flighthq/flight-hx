@@ -54,4 +54,5 @@ export const releaseCanvasRenderTexture = compiled.flighthq.scene2dCanvas.Scene2
 export const renderCanvasBackground = compiled.flighthq.scene2dCanvas.Scene2dCanvas.renderCanvasBackground;
 export const renderCanvasScene2D = compiled.flighthq.scene2dCanvas.Scene2dCanvas.renderCanvasScene2D;
 export const renderIntoCanvasRenderTexture = compiled.flighthq.scene2dCanvas.Scene2dCanvas.renderIntoCanvasRenderTexture;
+export const setCanvasRenderTransform2D = compiled.flighthq.scene2dCanvas.Scene2dCanvas.setCanvasRenderTransform2D;
 export const withCanvasRenderTextures = compiled.flighthq.scene2dCanvas.Scene2dCanvas.withCanvasRenderTextures;

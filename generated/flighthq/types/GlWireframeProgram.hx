@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlWireframeProgram = { @:optional var locColorScale:Null<Dynamic>; @:optional var locColorBias:Null<Dynamic>; @:optional var locColorMatrix0:Null<Dynamic>; @:optional var locColorMatrix1:Null<Dynamic>; @:optional var locColorMatrix2:Null<Dynamic>; @:optional var locColorMatrix3:Null<Dynamic>; @:optional var locColorMatrixOffset:Null<Dynamic>; @:optional var locObjectAlpha:Null<Dynamic>; @:optional var locJointTexture:Null<Dynamic>; var locModel:Null<Dynamic>; var locNormalMatrix:Null<Dynamic>; @:optional var locUvTransform:Null<Dynamic>; var locViewProjection:Null<Dynamic>; var program:Dynamic; var locColor:Null<Dynamic>; };
+typedef GlWireframeProgram = { @:optional var locColorScale:Null<Dynamic>; @:optional var locColorBias:Null<Dynamic>; @:optional var locColorMatrix0:Null<Dynamic>; @:optional var locColorMatrix1:Null<Dynamic>; @:optional var locColorMatrix2:Null<Dynamic>; @:optional var locColorMatrix3:Null<Dynamic>; @:optional var locColorMatrixOffset:Null<Dynamic>; @:optional var locObjectAlpha:Null<Dynamic>; @:optional var locAlphaIsCoverage:Null<Dynamic>; @:optional var locJointTexture:Null<Dynamic>; var locModel:Null<Dynamic>; var locNormalMatrix:Null<Dynamic>; @:optional var locUvTransform:Null<Dynamic>; var locViewProjection:Null<Dynamic>; var program:Dynamic; var locAlphaCutoff:Null<Dynamic>; var locColor:Null<Dynamic>; };
 
 typedef GlWireframeUpload = { var indexType:Float; var lineIndexBuffer:Dynamic; var vao:Dynamic; var version:Float; };

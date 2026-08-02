@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './pickScene3D.mjs';
+export * from './sceneHitAttributes.mjs';

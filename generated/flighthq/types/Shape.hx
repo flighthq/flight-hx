@@ -12,6 +12,7 @@ import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types._internal._ShapeValues.ShapeKind;
 
 typedef ShapeData = { var commands:Array<ShapeCommandToken>; };
 

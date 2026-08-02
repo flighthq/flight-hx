@@ -3,14 +3,12 @@ package flighthq.scene3dGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCamera3DInverseViewProjectionMatrix4;
-import flighthq.geometry.Matrix4.createMatrix4;
+import flighthq.camera.Camera.updateCamera3DInverseViewProjection;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.scene3dGl.GlEnvironmentCube.ensureGlEnvironmentSourceCube;
 import flighthq.types.Camera3D;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
-import flighthq.types.Matrix4;
 
 typedef GlSkybox__glEnvironmentSkybox = { var locEnvCube:Null<Dynamic>; var locInverseViewProjection:Null<Dynamic>; var locIntensity:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
 
@@ -24,13 +22,13 @@ class GlEnvironmentSkybox {
     if ((cast _Runtime.strictEquals(cube, null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
     sky = _Runtime.callValue(GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(getCamera3DInverseViewProjectionMatrix4, cast ([GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callValue(updateCamera3DInverseViewProjection, cast ([camera, aspect] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     prevDepthTest = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST) : Bool);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, false);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(sky, 'program'));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(sky, 'locInverseViewProjection'), false, GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox.m);
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(sky, 'locInverseViewProjection'), false, camera.inverseViewProjection.m);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(sky, 'locIntensity'), _Runtime.field(environment, 'intensity'));
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, cube);
@@ -71,13 +69,11 @@ class GlEnvironmentSkybox {
     return cast null;
   }
 
-  public static final _inverseViewProjection__glEnvironmentSkybox:Matrix4 = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-
   public static final _quad__glEnvironmentSkybox:Dynamic = new flighthq._internal._Float32Array(cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
   public static final _skyboxes__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final SKYBOX_VERTEX__glEnvironmentSkybox:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_ndc;\nvoid main() {\n  v_ndc = a_position;\n  // Emit at the far plane (z = w) so the backdrop sits behind every drawn fragment.\n  gl_Position = vec4(a_position, 1.0, 1.0);\n}\n';
 
-  public static final SKYBOX_FRAGMENT__glEnvironmentSkybox:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_ndc;\nuniform samplerCube u_envCube;\nuniform mat4 u_inverseViewProjection;\nuniform float u_intensity;\nout vec4 fragColor;\n\nvec3 srgbToLinear(vec3 c) {\n  return mix(c / 12.92, pow((c + 0.055) / 1.055, vec3(2.4)), step(0.04045, c));\n}\n\nvoid main() {\n  // Reconstruct the world-space ray through this pixel from the near- and far-plane unprojections.\n  vec4 nearW = u_inverseViewProjection * vec4(v_ndc, -1.0, 1.0);\n  vec4 farW = u_inverseViewProjection * vec4(v_ndc, 1.0, 1.0);\n  vec3 dir = normalize(farW.xyz / farW.w - nearW.xyz / nearW.w);\n  vec3 color = srgbToLinear(texture(u_envCube, dir).rgb) * u_intensity;\n  fragColor = vec4(color, 1.0);\n}\n';
+  public static final SKYBOX_FRAGMENT__glEnvironmentSkybox:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_ndc;\nuniform samplerCube u_envCube;\nuniform mat4 u_inverseViewProjection;\nuniform float u_intensity;\nout vec4 fragColor;\n\nvoid main() {\n  // Reconstruct the world-space ray through this pixel from the near- and far-plane unprojections.\n  vec4 nearW = u_inverseViewProjection * vec4(v_ndc, -1.0, 1.0);\n  vec4 farW = u_inverseViewProjection * vec4(v_ndc, 1.0, 1.0);\n  vec3 dir = normalize(farW.xyz / farW.w - nearW.xyz / nearW.w);\n  vec3 color = texture(u_envCube, dir).rgb * u_intensity;\n  fragColor = vec4(color, 1.0);\n}\n';
 }

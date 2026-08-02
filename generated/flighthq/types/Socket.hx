@@ -20,6 +20,12 @@ typedef SocketConnection = { var sendSocketFrame:Dynamic; var closeSocketConnect
 
 typedef SocketBackend = { var openSocket:Dynamic; };
 
-typedef SocketRuntime = { var connection:Null<SocketConnection>; var signals:Null<SocketSignals>; var readyState:SocketReadyState; var delivering:Bool; };
+typedef SocketRuntime = { var connection:Null<SocketConnection>; var signals:Null<SocketSignals>; var readyState:SocketReadyState; var delivering:Bool; var disposed:Bool; };
 
 typedef Socket = { var url:String; var runtime:SocketRuntime; };
+
+typedef SocketSendFailureExplanation = Dynamic;
+
+typedef SocketGuardNotice = { var operation:String; var reason:String; var socket:flighthq.types.Socket; };
+
+typedef SocketGuard = Dynamic;

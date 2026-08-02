@@ -10,12 +10,15 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTexture.bindGlRenderTexture;
 import flighthq.texture.Texture.getTextureSource;
 import flighthq.texture.Texture.getTextureSourceKind;
+import flighthq.texture.TextureColorSpace.getTextureSampleColorSpace;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlTextureResolver;
 import flighthq.types.Image;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureSourceKind;
 import flighthq.types.Types.BitmapTextureSourceKind;
@@ -58,7 +61,7 @@ class GlTextureResolver {
     _Runtime.callValue(registerGlRenderTextureResolver, cast ([state] : Array<Dynamic>));
   }
 
-  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, premultiply:Dynamic = false):Null<Dynamic> {
+  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, premultiply:Dynamic = false, workingColorSpace:RenderTargetColorSpace = 'linear'):Null<Dynamic> {
     var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
@@ -70,28 +73,28 @@ class GlTextureResolver {
       _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([3.0, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast _Runtime.callValue(resolver, cast ([state, texture, premultiply] : Array<Dynamic>));
+    return cast _Runtime.callValue(resolver, cast ([state, texture, premultiply, _Runtime.callValue(getTextureSampleColorSpace, cast ([_Runtime.field(texture, 'colorSpace'), workingColorSpace] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveGlBitmapTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, premultiply:Bool):Null<Dynamic> {
+  public static function resolveGlBitmapTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, premultiply:Bool, colorSpace:TextureColorSpace):Null<Dynamic> {
     var bitmap:Dynamic = cast _Runtime.UNDEFINED;
     bitmap = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Bitmap>);
-    return cast ((cast _Runtime.strictEquals(bitmap, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindGlBitmapTexture, cast ([state, bitmap, _Runtime.field(texture, 'sampler'), null, premultiply] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(bitmap, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindGlBitmapTexture, cast ([state, bitmap, _Runtime.field(texture, 'sampler'), null, premultiply, colorSpace] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
-  public static function resolveGlCompressedImageTexture__glTextureResolver(state:GlRenderState, texture:TextureLike):Null<Dynamic> {
+  public static function resolveGlCompressedImageTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, _premultiply:Bool, colorSpace:TextureColorSpace):Null<Dynamic> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<CompressedImage>);
-    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindGlCompressedImageTexture, cast ([state, image, _Runtime.field(texture, 'sampler')] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindGlCompressedImageTexture, cast ([state, image, _Runtime.field(texture, 'sampler'), null, colorSpace] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
-  public static function resolveGlImageTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, premultiply:Bool):Null<Dynamic> {
+  public static function resolveGlImageTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, premultiply:Bool, colorSpace:TextureColorSpace):Null<Dynamic> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Dynamic>);
-    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindGlImageResourceTexture, cast ([state, image, _Runtime.field(texture, 'sampler'), null, premultiply] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindGlImageResourceTexture, cast ([state, image, _Runtime.field(texture, 'sampler'), null, premultiply, colorSpace] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 

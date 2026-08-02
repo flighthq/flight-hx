@@ -2,3 +2,7 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './assetLibrary.mjs';
+export * from './enableAssetGuards.mjs';
+export * from './explainAssetLoad.mjs';

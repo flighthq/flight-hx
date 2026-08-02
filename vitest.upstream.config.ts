@@ -7,7 +7,14 @@ const packagesDirectory = path.join(repositoryRoot, 'upstream/packages');
 const bridgesDirectory = path.join(repositoryRoot, 'tests/bridges');
 const selectedPackage = process.env.FLIGHT_UPSTREAM_PACKAGE;
 
-function packageBridge(packageName: string): string | undefined {
+export function packageBridge(specifier: string): string | undefined {
+  const match = /^@flighthq\/([^/]+)(?:\/(.+))?$/u.exec(specifier);
+  if (!match) return undefined;
+  const [, packageName, exportPath] = match;
+  if (exportPath) {
+    const source = path.join(bridgesDirectory, 'sources', packageName!, `${exportPath}.mjs`);
+    if (existsSync(source)) return source;
+  }
   const bridge = path.join(bridgesDirectory, `${packageName}.mjs`);
   return existsSync(bridge) ? bridge : undefined;
 }
@@ -46,12 +53,12 @@ function compiledFlightBridge(): Plugin {
     enforce: 'pre',
     name: 'compiled-flight-haxe-bridge',
     resolveId(source, importer) {
-      const packageImport = /^@flighthq\/([^/]+)(?:\/.*)?$/u.exec(source);
-      if (packageImport) return packageBridge(packageImport[1]);
+      const packageImport = packageBridge(source);
+      if (packageImport) return packageImport;
 
       if (!importer || !source.startsWith('.')) return undefined;
-      const importerFile = importer.split('?', 1)[0];
-      if (!packageFromSourceFile(importerFile)) return undefined;
+      const [importerFile] = importer.split('?', 1);
+      if (!importerFile || !packageFromSourceFile(importerFile)) return undefined;
 
       const target = resolveTypeScriptSource(source, importerFile);
       if (!target || isTypeScriptTestFixture(target)) return undefined;

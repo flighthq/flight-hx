@@ -3,6 +3,29 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableWgpuTextureResolverGuards.mjs';
+export * from './explainWgpuTextureResolution.mjs';
+export * from './wgpuAdapterCapabilities.mjs';
+export * from './wgpuBackground.mjs';
+export * from './wgpuCompressedTexture.mjs';
+export * from './wgpuDraw.mjs';
+export * from './wgpuElement.mjs';
+export * from './wgpuExternalTexture.mjs';
+export * from './wgpuFullscreenPass.mjs';
+export * from './wgpuMaterialRegistry.mjs';
+export * from './wgpuMipmap.mjs';
+export * from './wgpuRenderState.mjs';
+export * from './wgpuRenderTarget.mjs';
+export * from './wgpuRenderTargetPool.mjs';
+export * from './wgpuRenderTexture.mjs';
+export * from './wgpuRenderTexturePool.mjs';
+export * from './wgpuScissor.mjs';
+export * from './wgpuShader.mjs';
+export * from './wgpuShaderBinding.mjs';
+export * from './wgpuShaderRegistry.mjs';
+export * from './wgpuSurface.mjs';
+export * from './wgpuTextureResolver.mjs';
+export * from './wgpuTextureUpload.mjs';
 export { createReadyImageElementForTest } from './wgpuTestHelper.mjs';
 export { createWgpuRenderStateForTest } from './wgpuTestHelper.mjs';
 export { installWgpuMock } from './wgpuTestHelper.mjs';

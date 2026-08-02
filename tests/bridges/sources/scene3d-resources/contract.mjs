@@ -2,3 +2,28 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './anisotropyPbrScene3DMaterialTextures.mjs';
+export * from './awd2Load.mjs';
+export * from './clearcoatPbrScene3DMaterialTextures.mjs';
+export * from './enableScene3DResourceFailureGuards.mjs';
+export * from './getScene3DResourceTextures.mjs';
+export * from './gltfLoad.mjs';
+export * from './imageResourceFetch.mjs';
+export * from './iridescencePbrScene3DMaterialTextures.mjs';
+export * from './loadScene3DResources.mjs';
+export * from './md2Load.mjs';
+export * from './md5Load.mjs';
+export * from './objLoad.mjs';
+export * from './resolveScene3DResources.mjs';
+export * from './revealScene3DResourcesOnResolve.mjs';
+export * from './sceneDocumentSource.mjs';
+export * from './sceneMaterialTextureRegistry.mjs';
+export * from './sceneResourceRecovery.mjs';
+export * from './sceneResourceResolver.mjs';
+export * from './sceneResourceSignals.mjs';
+export * from './sheenPbrScene3DMaterialTextures.mjs';
+export * from './specularPbrScene3DMaterialTextures.mjs';
+export * from './threeDsLoad.mjs';
+export * from './transmissionVolumePbrScene3DMaterialTextures.mjs';
+export * from './wrappedDiffusePbrScene3DMaterialTextures.mjs';

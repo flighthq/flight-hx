@@ -2,3 +2,17 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './meshGeometry.mjs';
+export * from './meshGeometryAttributes.mjs';
+export * from './meshGeometryBuilders.mjs';
+export * from './meshGeometryCompute.mjs';
+export * from './meshGeometryDeformationClone.mjs';
+export * from './meshGeometryIndex.mjs';
+export * from './meshGeometryLayout.mjs';
+export * from './meshGeometryOperations.mjs';
+export * from './meshGeometrySubset.mjs';
+export * from './meshGeometryTransforms.mjs';
+export * from './meshGeometryUvs.mjs';
+export * from './morphMeshGeometry.mjs';
+export * from './updateMeshMorph.mjs';

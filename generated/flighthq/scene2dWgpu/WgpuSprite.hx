@@ -3,6 +3,7 @@ package flighthq.scene2dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderWgpu.WgpuMaterialRegistry.resolveWgpuMaterialRenderer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuShaderBinding.resolveWgpuShader;
@@ -49,7 +50,7 @@ class WgpuSprite {
     if ((cast !_Runtime.strictEquals(shader, null) : Bool)) {
       _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
       _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true] : Array<Dynamic>)), null) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>)), null) : Bool)) { return; }
       _Runtime.callProperty(shader, 'bind', cast ([state, renderProxy] : Array<Dynamic>));
       return;
     }
@@ -59,7 +60,7 @@ class WgpuSprite {
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true] : Array<Dynamic>));
+    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     u0 = _Runtime.field(texture, 'uvOffset').x;

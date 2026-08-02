@@ -2,3 +2,9 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './nativeText.mjs';
+export * from './richText.mjs';
+export * from './textFormatFont.mjs';
+export * from './textLabel.mjs';
+export * from './textLabelLayout.mjs';

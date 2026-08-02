@@ -5,4 +5,5 @@ const api = compiled.flighthq.textureFormats.ParseDds;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getDdsParseFailureReason = api.getDdsParseFailureReason;
 export const parseDds = api.parseDds;

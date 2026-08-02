@@ -2,3 +2,7 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './videoFormat.mjs';
+export * from './videoResource.mjs';
+export * from './videoResourceFrom.mjs';

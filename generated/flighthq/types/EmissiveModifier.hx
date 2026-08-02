@@ -3,6 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingValue;
+import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierKind;
 
 typedef EmissiveModifierFacing = Dynamic;
 

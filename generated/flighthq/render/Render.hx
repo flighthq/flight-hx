@@ -10,6 +10,7 @@ import flighthq.render.RenderRegistryGuards as Facade_Render_flighthq_render_Ren
 import flighthq.render.RenderRegistrySignals as Facade_Render_flighthq_render_RenderRegistrySignals;
 import flighthq.render.RenderState as Facade_Render_flighthq_render_RenderState;
 import flighthq.render.Renderer as Facade_Render_flighthq_render_Renderer;
+import flighthq.render.Scene2dWorkingColorSpace as Facade_Render_flighthq_render_Scene2dWorkingColorSpace;
 import flighthq.render.SceneRender as Facade_Render_flighthq_render_SceneRender;
 import flighthq.types.Camera3D;
 import flighthq.types.Entity.Kind;
@@ -19,6 +20,7 @@ import flighthq.types.RenderCacheAdapter;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistryMissExplanation;
 import flighthq.types.RenderState;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene3DLightBlock;
@@ -78,6 +80,8 @@ class Render {
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:Renderer):Void {
     Facade_Render_flighthq_render_Renderer.registerRenderer(state, kind, renderer);
   }
+
+  public static final SCENE2D_WORKING_COLOR_SPACE:RenderTargetColorSpace = Facade_Render_flighthq_render_Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 
   public static function useRenderCache(state:RenderState, source:Renderable, cache:RenderCache):RenderCacheAdapter {
     return cast Facade_Render_flighthq_render_RenderCache.useRenderCache(state, source, cache);

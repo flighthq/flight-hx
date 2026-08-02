@@ -2,3 +2,11 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './getMeshSkinBounds.mjs';
+export * from './prepareScene3DSkinning.mjs';
+export * from './skeleton3d.mjs';
+export * from './skinMeshGeometry.mjs';
+export * from './skinVertices.mjs';
+export * from './updateMeshDeformation.mjs';
+export * from './updateMeshSkin.mjs';

@@ -5,4 +5,5 @@ const api = compiled.flighthq.collision.TestCollision;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const setCollisionTestGuard = api.setCollisionTestGuard;
 export const testCollision = api.testCollision;

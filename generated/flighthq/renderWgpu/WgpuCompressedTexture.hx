@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.CompressedImage;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.WgpuCompressedTextureDecoder;
@@ -48,14 +49,14 @@ class WgpuCompressedTexture {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture : Dynamic)));
   }
 
-  public static function uploadWgpuCompressedTextureContainer(state:WgpuRenderState, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:WgpuCompressedTextureDecoder):Null<Dynamic> {
+  public static function uploadWgpuCompressedTextureContainer(state:WgpuRenderState, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:WgpuCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Null<Dynamic> {
     var native:Dynamic = cast _Runtime.UNDEFINED;
     var decoded:Array<flighthq._internal._UInt8ClampedArray> = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0), function():Dynamic return cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0)) : Bool)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(container, 'levels'), 'length'), ((_Runtime.field(container, 'mipLevels') * _Runtime.field(container, 'layers')) * _Runtime.field(container, 'faces'))) : Bool)) : Bool)) {
       return cast null;
     }
-    native = _Runtime.callValue(getWgpuCompressedTextureFormat, cast ([_Runtime.field(state, 'device'), _Runtime.field(container, 'format')] : Array<Dynamic>));
+    native = _Runtime.callValue(WgpuCompressedTexture.getWgpuCompressedTextureFormatForColorSpace__wgpuCompressedTexture, cast ([_Runtime.field(state, 'device'), _Runtime.field(container, 'format'), colorSpace] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(native, null) : Bool)) {
       var info:Dynamic = _Runtime.callValue(WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture, cast ([_Runtime.field(container, 'format')] : Array<Dynamic>));
       var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.field(container, 'width'), _Runtime.field(container, 'height'), (_Runtime.field(container, 'layers') * _Runtime.field(container, 'faces'))] : Array<Dynamic>), format: native, mipLevelCount: _Runtime.field(container, 'mipLevels'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
@@ -82,7 +83,7 @@ class WgpuCompressedTexture {
       if ((cast ((cast _Runtime.strictEquals(rgba, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(rgba, 'byteLength'), ((_Runtime.field(level, 'width') * _Runtime.field(level, 'height')) * 4.0)) : Bool)) : Bool)) { return cast null; }
       _Runtime.callProperty(decoded, 'push', cast ([rgba] : Array<Dynamic>));
     }
-    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.field(container, 'width'), _Runtime.field(container, 'height'), 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: _Runtime.field(container, 'mipLevels'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.field(container, 'width'), _Runtime.field(container, 'height'), 1.0] : Array<Dynamic>), format: ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast 'rgba8unorm-srgb' : Dynamic) : (cast 'rgba8unorm' : Dynamic)), mipLevelCount: _Runtime.field(container, 'mipLevels'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
     {
       var mipLevel:Dynamic = 0.0;
       while ((cast ((cast mipLevel : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
@@ -95,7 +96,7 @@ class WgpuCompressedTexture {
     return cast null;
   }
 
-  public static function uploadWgpuCompressedImage__wgpuCompressedTexture(state:WgpuRenderState, image:CompressedImage, decode:Null<WgpuCompressedTextureDecoder>):Null<WgpuTextureEntry> {
+  public static function uploadWgpuCompressedImage__wgpuCompressedTexture(state:WgpuRenderState, image:CompressedImage, decode:Null<WgpuCompressedTextureDecoder>, colorSpace:TextureColorSpace = 'linear'):Null<WgpuTextureEntry> {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
     var container:Dynamic = cast _Runtime.UNDEFINED;
     var native:Dynamic = cast _Runtime.UNDEFINED;
@@ -108,13 +109,13 @@ class WgpuCompressedTexture {
     compressed = _Runtime.field(image, 'compressed');
     container = compressed.container;
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0) : Bool)) : Bool)) { return cast null; }
-    native = !_Runtime.strictEquals(_Runtime.callValue(getWgpuCompressedTextureFormat, cast ([_Runtime.field(state, 'device'), _Runtime.field(container, 'format')] : Array<Dynamic>)), null);
+    native = !_Runtime.strictEquals(_Runtime.callValue(WgpuCompressedTexture.getWgpuCompressedTextureFormatForColorSpace__wgpuCompressedTexture, cast ([_Runtime.field(state, 'device'), _Runtime.field(container, 'format'), colorSpace] : Array<Dynamic>)), null);
     fallback = ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast function(format:TextureContainerFormat, width:Float, height:Float, data:flighthq._internal._UInt8Array) {
       var rgba:Dynamic = cast _Runtime.UNDEFINED;
       rgba = _Runtime.callValue(decode, cast ([format, width, height, data] : Array<Dynamic>));
       return cast ((cast !_Runtime.strictEquals(rgba, null) : Bool) ? (cast _Runtime.callValue(WgpuCompressedTexture.premultiplyRgba8__wgpuCompressedTexture, cast ([rgba] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     } : Dynamic));
-    texture = _Runtime.callValue(uploadWgpuCompressedTextureContainer, cast ([state, container, compressed.payload, fallback] : Array<Dynamic>));
+    texture = _Runtime.callValue(uploadWgpuCompressedTextureContainer, cast ([state, container, compressed.payload, fallback, colorSpace] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast null; }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -154,7 +155,29 @@ class WgpuCompressedTexture {
     return cast null;
   }
 
+  public static function getWgpuCompressedTextureFormatForColorSpace__wgpuCompressedTexture(device:Dynamic, format:TextureContainerFormat, colorSpace:Null<TextureColorSpace>):Null<Dynamic> {
+    var resolved:Dynamic = cast _Runtime.UNDEFINED;
+    var native:Dynamic = cast _Runtime.UNDEFINED;
+    resolved = ((cast _Runtime.strictEquals(colorSpace, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast format : Dynamic) : (cast _Runtime.callValue(WgpuCompressedTexture.getTextureContainerFormatForColorSpace__wgpuCompressedTexture, cast ([format, colorSpace] : Array<Dynamic>)) : Dynamic));
+    native = _Runtime.callValue(getWgpuCompressedTextureFormat, cast ([device, resolved] : Array<Dynamic>));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(native, null) : Bool) && (cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool)) : Bool) && (cast StringTools.startsWith(format, 'astc') : Bool)) : Bool)) {
+      return cast (cast '' + Std.string(native) + '-srgb' : Dynamic);
+    }
+    return cast native;
+    return cast null;
+  }
+
+  public static function getTextureContainerFormatForColorSpace__wgpuCompressedTexture(format:TextureContainerFormat, colorSpace:TextureColorSpace):TextureContainerFormat {
+    var pair:Dynamic = cast _Runtime.UNDEFINED;
+    pair = _Runtime.getIndex(WgpuCompressedTexture.SRGB_FORMAT_PAIRS__wgpuCompressedTexture, format);
+    if ((cast _Runtime.strictEquals(pair, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast format; }
+    return cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal._StaticIndex.readArray(pair, 1.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(pair, 0.0) : Dynamic));
+    return cast null;
+  }
+
   public static final fixed__wgpuCompressedTexture:Dynamic = function(format:Dynamic, bytesPerBlock:Float, blockWidth:Dynamic = 4.0, blockHeight:Dynamic = 4.0) return { blockHeight: blockHeight, blockWidth: blockWidth, bytesPerBlock: bytesPerBlock, format: format };
 
   public static final FIXED_FORMATS__wgpuCompressedTexture:Dynamic = { bc1: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc1-rgba-unorm', 8.0] : Array<Dynamic>)), bc1Srgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc1-rgba-unorm-srgb', 8.0] : Array<Dynamic>)), bc2: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc2-rgba-unorm', 16.0] : Array<Dynamic>)), bc2Srgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc2-rgba-unorm-srgb', 16.0] : Array<Dynamic>)), bc3: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc3-rgba-unorm', 16.0] : Array<Dynamic>)), bc3Srgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc3-rgba-unorm-srgb', 16.0] : Array<Dynamic>)), bc4: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc4-r-unorm', 8.0] : Array<Dynamic>)), bc4Snorm: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc4-r-snorm', 8.0] : Array<Dynamic>)), bc5: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc5-rg-unorm', 16.0] : Array<Dynamic>)), bc5Snorm: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc5-rg-snorm', 16.0] : Array<Dynamic>)), bc6hUfloat: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc6h-rgb-ufloat', 16.0] : Array<Dynamic>)), bc6hSfloat: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc6h-rgb-float', 16.0] : Array<Dynamic>)), bc7: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc7-rgba-unorm', 16.0] : Array<Dynamic>)), bc7Srgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['bc7-rgba-unorm-srgb', 16.0] : Array<Dynamic>)), etc1: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgb8unorm', 8.0] : Array<Dynamic>)), etc2Rgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgb8unorm', 8.0] : Array<Dynamic>)), etc2RgbSrgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgb8unorm-srgb', 8.0] : Array<Dynamic>)), etc2Rgba: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgba8unorm', 16.0] : Array<Dynamic>)), etc2RgbaSrgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgba8unorm-srgb', 16.0] : Array<Dynamic>)), etc2RgbA1: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgb8a1unorm', 8.0] : Array<Dynamic>)), etc2RgbA1Srgb: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['etc2-rgb8a1unorm-srgb', 8.0] : Array<Dynamic>)), eacR11: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['eac-r11unorm', 8.0] : Array<Dynamic>)), eacR11Snorm: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['eac-r11snorm', 8.0] : Array<Dynamic>)), eacRg11: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['eac-rg11unorm', 16.0] : Array<Dynamic>)), eacRg11Snorm: _Runtime.callValue(WgpuCompressedTexture.fixed__wgpuCompressedTexture, cast (['eac-rg11snorm', 16.0] : Array<Dynamic>)) };
+
+  public static final SRGB_FORMAT_PAIRS__wgpuCompressedTexture:Dynamic = { bc1: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc1Srgb: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc2: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc2Srgb: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc3: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc3Srgb: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc7: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), bc7Srgb: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), etc1: cast (['etc1', 'etc2RgbSrgb'] : Array<Dynamic>), etc2Rgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbSrgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbA1: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2RgbA1Srgb: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2Rgba: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>), etc2RgbaSrgb: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>) };
 }

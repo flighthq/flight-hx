@@ -114,6 +114,11 @@ class Textureatlas {
     return cast null;
   }
 
+  public static function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String, ordinal:Float):Null<TextureAtlasRegion> {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionByOrdinal(atlas, prefix, ordinal);
+    return cast null;
+  }
+
   public static function getTextureAtlasRegionCount(atlas:TextureAtlas):Float {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionCount(atlas);
     return cast null;
@@ -124,8 +129,13 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<TextureAtlasRegion> {
-    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence(atlas, prefix);
+  public static function getTextureAtlasRegionOrdinal(region:TextureAtlasRegion):Float {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionOrdinal(region);
+    return cast null;
+  }
+
+  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String, out:Array<TextureAtlasRegion>):Array<TextureAtlasRegion> {
+    return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence(atlas, prefix, out);
     return cast null;
   }
 

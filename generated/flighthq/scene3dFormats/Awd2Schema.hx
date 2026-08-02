@@ -27,6 +27,10 @@ class Awd2Schema {
 
   public static final AWD2_BLOCK_MESH_INSTANCE:Dynamic = 23.0;
 
+  public static final AWD2_BLOCK_LIGHT:Dynamic = 41.0;
+
+  public static final AWD2_BLOCK_LIGHT_PICKER:Dynamic = 51.0;
+
   public static final AWD2_BLOCK_MATERIAL:Dynamic = 81.0;
 
   public static final AWD2_BLOCK_TEXTURE:Dynamic = 82.0;
@@ -52,6 +56,44 @@ class Awd2Schema {
   public static final AWD2_MATERIAL_PROP_NORMAL_TEXTURE:Dynamic = 3.0;
 
   public static final AWD2_MATERIAL_PROP_ALPHA:Dynamic = 10.0;
+
+  public static final AWD2_LIGHT_TYPE_POINT:Dynamic = 1.0;
+
+  public static final AWD2_LIGHT_TYPE_DIRECTIONAL:Dynamic = 2.0;
+
+  public static final AWD2_LIGHT_PROP_RADIUS:Dynamic = 1.0;
+
+  public static final AWD2_LIGHT_PROP_FALLOFF:Dynamic = 2.0;
+
+  public static final AWD2_LIGHT_PROP_COLOR:Dynamic = 3.0;
+
+  public static final AWD2_LIGHT_PROP_SPECULAR:Dynamic = 4.0;
+
+  public static final AWD2_LIGHT_PROP_DIFFUSE:Dynamic = 5.0;
+
+  public static final AWD2_LIGHT_PROP_AMBIENT_COLOR:Dynamic = 7.0;
+
+  public static final AWD2_LIGHT_PROP_AMBIENT:Dynamic = 8.0;
+
+  public static final AWD2_LIGHT_PROP_SHADOW_MAPPER:Dynamic = 9.0;
+
+  public static final AWD2_LIGHT_PROP_DIRECTION_X:Dynamic = 21.0;
+
+  public static final AWD2_LIGHT_PROP_DIRECTION_Y:Dynamic = 22.0;
+
+  public static final AWD2_LIGHT_PROP_DIRECTION_Z:Dynamic = 23.0;
+
+  public static final AWD2_LIGHT_DEFAULT_RADIUS:Dynamic = 90000.0;
+
+  public static final AWD2_LIGHT_DEFAULT_FALLOFF:Dynamic = 100000.0;
+
+  public static final AWD2_LIGHT_DEFAULT_RGB:Dynamic = 16777215.0;
+
+  public static final AWD2_LIGHT_DEFAULT_SPECULAR:Dynamic = 1.0;
+
+  public static final AWD2_LIGHT_DEFAULT_DIFFUSE:Dynamic = 1.0;
+
+  public static final AWD2_LIGHT_DEFAULT_AMBIENT:Dynamic = 0.0;
 
   public static final AWD2_COMPRESSION_NONE:Dynamic = 0.0;
 

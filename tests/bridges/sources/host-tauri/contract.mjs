@@ -2,3 +2,15 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './tauriApp.mjs';
+export * from './tauriClipboard.mjs';
+export * from './tauriDialog.mjs';
+export * from './tauriMenu.mjs';
+export * from './tauriNotification.mjs';
+export * from './tauriPlatform.mjs';
+export * from './tauriRegister.mjs';
+export * from './tauriShell.mjs';
+export * from './tauriShortcut.mjs';
+export * from './tauriTray.mjs';
+export * from './tauriWindow.mjs';

@@ -4,7 +4,6 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
-import flighthq.renderGl.GlRenderTexture.getGlRenderTextureColorSpace;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
 import flighthq.scene3dGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
 import flighthq.scene3dGl.GlMeshProgram.beginGlMeshDraw;
@@ -15,7 +14,6 @@ import flighthq.scene3dGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.scene3dGl.GlUnlitPrelude.bindGlUnlitSurface;
 import flighthq.scene3dGl.GlUnlitPrelude.ensureGlUnlitProgram;
-import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
@@ -23,13 +21,10 @@ import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
-import flighthq.types.RenderTexture;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.Types.RenderTargetTextureSourceKind;
 import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
-import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 class UnlitGlMeshMaterialRenderer {
@@ -62,14 +57,10 @@ class UnlitGlMeshMaterialRenderer {
 
   public static function defineKeyForMaterial__unlitGlMeshMaterialRenderer(state:GlRenderState, material:Null<UnlitMaterial>):GlUnlitDefineKey {
     var colorMap:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
-    var renderTexture:Dynamic = cast _Runtime.UNDEFINED;
     var colorMapReady:Dynamic = cast _Runtime.UNDEFINED;
     colorMap = _Runtime.coalesce(_Runtime.optionalField(material, 'baseColorMap'), function():Dynamic return cast null);
-    sourceKind = ((cast _Runtime.strictEquals(colorMap, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(getTextureSourceKind, cast ([colorMap] : Array<Dynamic>)) : Dynamic));
-    renderTexture = _Runtime.strictEquals(sourceKind, RenderTargetTextureSourceKind);
     colorMapReady = ((cast !_Runtime.strictEquals(colorMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, colorMap] : Array<Dynamic>)), null) : Bool));
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), colorMapLinear: ((cast ((cast renderTexture : Bool) && (cast colorMapReady : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getGlRenderTextureColorSpace, cast ([state, (cast colorMap : RenderTexture)] : Array<Dynamic>)), 'linear') : Bool)), hasColorMap: colorMapReady, hasUvTransform: ((cast colorMapReady : Bool) && (cast _Runtime.callValue(hasGlUvTransform, cast ([colorMap] : Array<Dynamic>)) : Bool)), vertexColor: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: colorMapReady, hasUvTransform: ((cast colorMapReady : Bool) && (cast _Runtime.callValue(hasGlUvTransform, cast ([colorMap] : Array<Dynamic>)) : Bool)), vertexColor: false };
     return cast null;
   }
 

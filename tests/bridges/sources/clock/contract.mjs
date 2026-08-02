@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './clock.mjs';
+export * from './clockSignals.mjs';

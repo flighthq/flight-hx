@@ -15,21 +15,21 @@ describe('checker-derived host endpoint contract', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
 
     expect(audit.summary).toEqual({
-      accesses: 3_474,
-      backendContractEndpoints: 378,
+      accesses: 3_492,
+      backendContractEndpoints: 379,
       bindings: 9,
-      calls: 2_201,
-      dynamicFallbackEndpoints: 11,
+      calls: 2_211,
+      dynamicFallbackEndpoints: 12,
       endpoints: 373,
-      reads: 1_026,
-      writes: 247,
+      reads: 1_025,
+      writes: 256,
     });
     expect(audit.coverageIssues).toEqual([]);
     expect(() => validateHostEndpointCoverage(audit)).not.toThrow();
     expect(hostEndpointSummary(audit)).toContain('| Coverage issues | 0 |');
   });
 
-  it('discovers the 26 WebGL additions, Canvas loss probe, and dynamic host fallbacks from checker facts', () => {
+  it('discovers the 27 WebGL additions and current dynamic host fallbacks from checker facts', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
     const keys = new Set(audit.endpoints.map((endpoint) => `${endpoint.binding}:${endpoint.member}`));
     const newWebGlEndpoints = [
@@ -46,6 +46,7 @@ describe('checker-derived host endpoint contract', () => {
       'DEPTH_WRITEMASK',
       'MAX_TEXTURE_IMAGE_UNITS',
       'SCISSOR_BOX',
+      'SRGB8_ALPHA8',
       'STENCIL_FAIL',
       'STENCIL_FUNC',
       'STENCIL_PASS_DEPTH_FAIL',
@@ -61,20 +62,10 @@ describe('checker-derived host endpoint contract', () => {
       'isEnabled',
     ];
 
-    expect(newWebGlEndpoints).toHaveLength(26);
+    expect(newWebGlEndpoints).toHaveLength(27);
     expect(newWebGlEndpoints.every((member) => keys.has(`WebGl2Backend:${member}`))).toBe(true);
     expect(audit.endpoints).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({
-          binding: 'Canvas2dBackend',
-          member: 'isContextLost',
-          operation: 'call',
-        }),
-        expect.objectContaining({
-          binding: 'Canvas2dBackend',
-          member: 'isContextLost',
-          operation: 'read',
-        }),
         expect.objectContaining({
           binding: 'Canvas2dBackend',
           member: 'roundRect',

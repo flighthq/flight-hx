@@ -5,4 +5,6 @@ const api = compiled.flighthq.binpack.PackRectangles;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const BIN_PACK_DEFAULT_MAX_EXTENT = api.BIN_PACK_DEFAULT_MAX_EXTENT;
+export const getPackResultOccupancy = api.getPackResultOccupancy;
 export const packRectangles = api.packRectangles;

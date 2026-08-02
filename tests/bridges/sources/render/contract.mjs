@@ -2,3 +2,24 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './enableColorAdjustmentGuards.mjs';
+export * from './enableSceneRenderGuards.mjs';
+export * from './explainScene2DRender.mjs';
+export * from './renderAppearance.mjs';
+export * from './renderCache.mjs';
+export * from './renderColor.mjs';
+export * from './renderColorScaleBias.mjs';
+export * from './renderMaterial.mjs';
+export * from './renderProxy.mjs';
+export * from './renderProxyAdapter.mjs';
+export * from './renderQueue.mjs';
+export * from './renderRegistryGuards.mjs';
+export * from './renderRegistrySignals.mjs';
+export * from './renderState.mjs';
+export * from './renderTarget.mjs';
+export * from './renderTransform2d.mjs';
+export * from './renderViewport.mjs';
+export * from './renderer.mjs';
+export * from './sceneRender.mjs';
+export { SCENE2D_WORKING_COLOR_SPACE } from './scene2dWorkingColorSpace.mjs';

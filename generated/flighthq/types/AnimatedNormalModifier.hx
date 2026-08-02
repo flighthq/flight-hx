@@ -4,5 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Vector2.Vector2Like;
+import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 
 typedef AnimatedNormalModifier = { var kind:ModifierKind; var slot:ModifierSlot; var map:Null<Texture>; var scroll:Vector2Like; @:optional var strength:Float; @:optional var secondaryMap:Texture; @:optional var secondaryScroll:Vector2Like; };

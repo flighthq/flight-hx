@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpritesheetAnimationData = { var direction:SpritesheetAnimationDirection; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var frameNames:Array<String>; var loop:Bool; var name:String; var originX:Float; var originY:Float; };
+typedef SpritesheetAnimationData = { var direction:SpritesheetAnimationDirection; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var frameNames:Array<String>; var repeatCount:Float; var name:String; var originX:Float; var originY:Float; };

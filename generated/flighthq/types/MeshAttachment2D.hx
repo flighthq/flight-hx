@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._MeshAttachment2DValues.MeshAttachment2DKind;
 
 typedef MeshAttachment2D = { var kind:String; @:optional var name:Null<String>; @:optional var skin:Null<Skin2D>; var triangles:flighthq._internal._UInt16Array; var uvs:flighthq._internal._Float32Array; var vertexCount:Float; @:optional var vertices:Null<flighthq._internal._Float32Array>; };

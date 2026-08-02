@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._RectangleColliderValues.RectangleColliderKind;
 
 typedef RectangleCollider = { @:optional var restitution:Float; @:optional var friction:Float; var kind:String; var x:Float; var y:Float; var width:Float; var height:Float; var mode:String; };

@@ -2,3 +2,12 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from '@flighthq/camera-controls';
+export * from '@flighthq/collision';
+export * from '@flighthq/flow';
+export * from '@flighthq/particleemitter';
+export * from '@flighthq/particles';
+export * from '@flighthq/physics2d';
+export * from '@flighthq/snapshot';
+export * from '@flighthq/spatial';

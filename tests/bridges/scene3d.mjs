@@ -9,6 +9,7 @@ export const createMesh = compiled.flighthq.scene3d.Scene3d.createMesh;
 export const createNode3D = compiled.flighthq.scene3d.Scene3d.createNode3D;
 export const createScene3D = compiled.flighthq.scene3d.Scene3d.createScene3D;
 export const createScene3DFromDocument = compiled.flighthq.scene3d.Scene3d.createScene3DFromDocument;
+export const createScene3DLightsFromDocument = compiled.flighthq.scene3d.Scene3d.createScene3DLightsFromDocument;
 export const createScene3DsFromDocument = compiled.flighthq.scene3d.Scene3d.createScene3DsFromDocument;
 export const cullNode3DByFrustum = compiled.flighthq.scene3d.Scene3d.cullNode3DByFrustum;
 export const disposeNode3D = compiled.flighthq.scene3d.Scene3d.disposeNode3D;

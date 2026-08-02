@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef TextureSource = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var height:Float; var kind:TextureSourceKind; var version:Float; var width:Float; };
+typedef TextureSource = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:TextureSourceKind; var version:Float; var width:Float; };

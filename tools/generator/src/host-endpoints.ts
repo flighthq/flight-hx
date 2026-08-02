@@ -312,6 +312,7 @@ const webGl2Reads = [
   'RGBA8',
   'SCISSOR_BOX',
   'SCISSOR_TEST',
+  'SRGB8_ALPHA8',
   'SRC_ALPHA',
   'STATIC_DRAW',
   'STENCIL_BUFFER_BIT',

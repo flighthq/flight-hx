@@ -2,3 +2,19 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './cursorBackend.mjs';
+export * from './displayHitTests.mjs';
+export * from './displayObjectOverlap.mjs';
+export * from './enableInteractionGuards.mjs';
+export * from './focusManager.mjs';
+export * from './hitTests.mjs';
+export * from './interactionManager.mjs';
+export * from './interactionSpatialIndex.mjs';
+export * from './nodeInteractionState.mjs';
+export * from './registerDefaultHitTests.mjs';
+export * from './registerShapeHitTest.mjs';
+export * from './registerSpriteHitTest.mjs';
+export * from './registerTextHitTest.mjs';
+export * from './spatialQuery.mjs';
+export * from './spriteHitTests.mjs';

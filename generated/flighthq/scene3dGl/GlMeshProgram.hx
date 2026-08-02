@@ -20,8 +20,10 @@ import flighthq.texture.Texture.hasTextureUvTransform;
 import flighthq.types.Camera3D;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
+import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture.TextureLike;
 
 class GlMeshProgram {
@@ -64,7 +66,6 @@ class GlMeshProgram {
 
   public static function drawGlMeshSubset(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var locObjectAlpha:Dynamic = cast _Runtime.UNDEFINED;
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
     var colorScaleBias:Dynamic = cast _Runtime.UNDEFINED;
     var jointMatrices:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,12 +75,7 @@ class GlMeshProgram {
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.field(proxy, 'worldMatrix').m);
     if ((cast !_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, _Runtime.field(proxy, 'normalMatrix').m); }
-    locObjectAlpha = _Runtime.field(program, 'locObjectAlpha');
-    if ((cast _Runtime.strictEquals(locObjectAlpha, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (locObjectAlpha = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_objectAlpha') : Dynamic));
-      _Runtime.setField((cast program : flighthq.types.GlMeshProgram), 'locObjectAlpha', locObjectAlpha);
-    }
-    if ((cast !_Runtime.strictEquals(locObjectAlpha, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, locObjectAlpha, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0)); }
+    _Runtime.callValue(uploadGlMeshDrawAlpha, cast ([gl, program, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0), _Runtime.field(proxy, 'material')] : Array<Dynamic>));
     colorMatrix = _Runtime.field(proxy, 'colorMatrix');
     colorScaleBias = _Runtime.field(proxy, 'colorScaleBias');
     if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
@@ -158,6 +154,30 @@ class GlMeshProgram {
   public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<Dynamic>, camera:Camera3D):Void {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([GlMeshProgram.scratchViewProjection__glMeshProgram, camera, _Runtime.callValue(getGlScene3DViewportAspect, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(_Runtime.field(state, 'gl'), locViewProjection, false, GlMeshProgram.scratchViewProjection__glMeshProgram.m);
+  }
+
+  public static function uploadGlMeshDrawAlpha(gl:Dynamic, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
+    var location:Dynamic = cast _Runtime.UNDEFINED;
+    var coverageLocation:Dynamic = cast _Runtime.UNDEFINED;
+    location = _Runtime.field(program, 'locObjectAlpha');
+    if ((cast _Runtime.strictEquals(location, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (location = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_objectAlpha') : Dynamic));
+      _Runtime.setField((cast program : flighthq.types.GlMeshProgram), 'locObjectAlpha', location);
+    }
+    if ((cast !_Runtime.strictEquals(location, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, alpha); }
+    coverageLocation = _Runtime.field(program, 'locAlphaIsCoverage');
+    if ((cast _Runtime.strictEquals(coverageLocation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (coverageLocation = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_alphaIsCoverage') : Dynamic));
+      _Runtime.setField((cast program : flighthq.types.GlMeshProgram), 'locAlphaIsCoverage', coverageLocation);
+    }
+    if ((cast !_Runtime.strictEquals(coverageLocation, null) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, coverageLocation, ((cast _Runtime.callValue(GlMeshProgram.isGlMeshAlphaCoverage__glMeshProgram, cast ([material] : Array<Dynamic>)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    }
+  }
+
+  public static function isGlMeshAlphaCoverage__glMeshProgram(material:Null<Material>):Bool {
+    return cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend') : Bool));
+    return cast null;
   }
 
   public static final GL_UV_TRANSFORM_VERTEX_GLSL:Dynamic = '\n#ifdef HAS_UV_TRANSFORM\nuniform mat3 u_uvTransform;\nvec2 applyUvTransform(vec2 uv) { return (u_uvTransform * vec3(uv, 1.0)).xy; }\n#else\nvec2 applyUvTransform(vec2 uv) { return uv; }\n#endif\n';

@@ -2,3 +2,20 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './createAnimatedNormalModifier.mjs';
+export * from './createDissolveModifier.mjs';
+export * from './createEmissiveModifier.mjs';
+export * from './createEnvReflectModifier.mjs';
+export * from './createFogModifier.mjs';
+export * from './createRimModifier.mjs';
+export * from './createShadedMaterial.mjs';
+export * from './createToonModifier.mjs';
+export * from './createVertexDisplaceModifier.mjs';
+export * from './getModifierDefineKey.mjs';
+export * from './getUnregisteredModifierKinds.mjs';
+export * from './isBuiltInModifierSlot.mjs';
+export * from './isModifierStackValid.mjs';
+export * from './modifierRegistry.mjs';
+export * from './orderModifierStack.mjs';
+export * from './registerBuiltInModifiers.mjs';

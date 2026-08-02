@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._CircleColliderValues.CircleColliderKind;
 
 typedef CircleCollider = { @:optional var restitution:Float; @:optional var friction:Float; var kind:String; var x:Float; var y:Float; var radius:Float; var mode:String; };

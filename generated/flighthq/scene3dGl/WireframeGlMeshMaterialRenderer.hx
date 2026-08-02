@@ -7,6 +7,7 @@ import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.scene3dGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
 import flighthq.scene3dGl.GlMeshProgram.beginGlMeshDraw;
 import flighthq.scene3dGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.scene3dGl.GlMeshProgram.uploadGlMeshDrawAlpha;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.scene3dGl.GlWireframePrelude.ensureGlWireframeProgram;
 import flighthq.scene3dGl.GlWireframeUpload.ensureGlWireframeUpload;
@@ -26,10 +27,12 @@ class WireframeGlMeshMaterialRenderer {
   public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var wireframe:Dynamic = cast _Runtime.UNDEFINED;
+    var alphaMaskEnabled:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     wireframe = (cast material : Null<WireframeMaterial>);
-    program = _Runtime.callValue(ensureGlWireframeProgram, cast ([state] : Array<Dynamic>));
+    alphaMaskEnabled = _Runtime.strictEquals(_Runtime.optionalField(wireframe, 'alphaMode'), 'mask');
+    program = _Runtime.callValue(ensureGlWireframeProgram, cast ([state, alphaMaskEnabled] : Array<Dynamic>));
     _Runtime.callValue(beginGlMeshDraw, cast ([state, program, true] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
@@ -38,6 +41,7 @@ class WireframeGlMeshMaterialRenderer {
     }
     _Runtime.callValue(unpackColorToLinear, cast ([WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0));
+    if ((cast alphaMaskEnabled : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(wireframe, 'alphaCutoff')); }
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,6 +52,7 @@ class WireframeGlMeshMaterialRenderer {
     program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.field(proxy, 'worldMatrix').m);
+    _Runtime.callValue(uploadGlMeshDrawAlpha, cast ([gl, program, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0), _Runtime.field(proxy, 'material')] : Array<Dynamic>));
     upload = _Runtime.callValue(ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
     elementSize = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));

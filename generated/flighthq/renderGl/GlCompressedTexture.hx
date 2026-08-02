@@ -8,6 +8,7 @@ import flighthq.types.CompressedImage;
 import flighthq.types.GlCompressedTextureDecoder;
 import flighthq.types.GlCompressedTextureSupport;
 import flighthq.types.GlRenderState;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
@@ -202,14 +203,16 @@ class GlCompressedTexture {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)));
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
+    var uploadFormat:Dynamic = cast _Runtime.UNDEFINED;
     var nativeFormat:Dynamic = cast _Runtime.UNDEFINED;
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var layers:Dynamic = cast _Runtime.UNDEFINED;
     var mipLevels:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.callValue(GlCompressedTexture.isSupportedGlCompressedTextureContainerShape__glCompressedTexture, cast ([container] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool)) { return cast false; }
-    nativeFormat = _Runtime.callValue(getGlCompressedTextureFormat, cast ([gl, _Runtime.field(container, 'format')] : Array<Dynamic>));
+    uploadFormat = ((cast _Runtime.strictEquals(colorSpace, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(container, 'format') : Dynamic) : (cast _Runtime.callValue(GlCompressedTexture.getTextureContainerFormatForColorSpace__glCompressedTexture, cast ([_Runtime.field(container, 'format'), colorSpace] : Array<Dynamic>)) : Dynamic));
+    nativeFormat = ((cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) && (cast _Runtime.callValue(GlCompressedTexture.isAstcFormat__glCompressedTexture, cast ([_Runtime.field(container, 'format')] : Array<Dynamic>)) : Bool)) : Bool) ? (cast _Runtime.callValue(GlCompressedTexture.getGlAstcSrgbFormat__glCompressedTexture, cast ([gl, _Runtime.field(container, 'format')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(getGlCompressedTextureFormat, cast ([gl, uploadFormat] : Array<Dynamic>)) : Dynamic));
     faces = _Runtime.field(container, 'faces');
     layers = _Runtime.field(container, 'layers');
     mipLevels = _Runtime.field(container, 'mipLevels');
@@ -245,7 +248,7 @@ class GlCompressedTexture {
         var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
         var rgba:Dynamic = _Runtime.callValue(decode, cast ([_Runtime.field(container, 'format'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), view] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(rgba, null) : Bool)) { return cast false; }
-        flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, mip, flighthq._internal.backend.WebGl2Backend.RGBA, _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, rgba);
+        flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, mip, ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic)), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, rgba);
         (mip = cast ((mip + 1.0) : Dynamic));
       }
     }
@@ -258,6 +261,26 @@ class GlCompressedTexture {
     return cast null;
   }
 
+  public static function getGlAstcSrgbFormat__glCompressedTexture(gl:Dynamic, format:TextureContainerFormat):Float {
+    var ext:Dynamic = cast _Runtime.UNDEFINED;
+    var match:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Dynamic = cast _Runtime.UNDEFINED;
+    ext = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_astc') : Null<Dynamic>);
+    match = _Runtime.callProperty(_Runtime.regexp('^astc(\\d+)x(\\d+)$$', ''), 'exec', cast ([format] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(ext, null) : Bool) || (cast _Runtime.strictEquals(match, null) : Bool)) : Bool)) { return cast -1.0; }
+    value = _Runtime.getIndex(ext, 'COMPRESSED_SRGB8_ALPHA8_ASTC_' + Std.string(_Runtime.getIndex(match, 1.0)) + 'x' + Std.string(_Runtime.getIndex(match, 2.0)) + '_KHR');
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) ? (cast value : Dynamic) : (cast -1.0 : Dynamic));
+    return cast null;
+  }
+
+  public static function getTextureContainerFormatForColorSpace__glCompressedTexture(format:TextureContainerFormat, colorSpace:TextureColorSpace = 'linear'):TextureContainerFormat {
+    var pair:Dynamic = cast _Runtime.UNDEFINED;
+    pair = _Runtime.getIndex(GlCompressedTexture.SRGB_FORMAT_PAIRS__glCompressedTexture, format);
+    if ((cast _Runtime.strictEquals(pair, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast format; }
+    return cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal._StaticIndex.readArray(pair, 1.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(pair, 0.0) : Dynamic));
+    return cast null;
+  }
+
   public static function isSupportedGlCompressedTextureContainerShape__glCompressedTexture(container:TextureContainer):Bool {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) { return cast true; }
@@ -265,13 +288,15 @@ class GlCompressedTexture {
     return cast null;
   }
 
-  public static function uploadGlCompressedImage__glCompressedTexture(gl:Dynamic, image:CompressedImage, decode:Null<GlCompressedTextureDecoder>):Bool {
+  public static function uploadGlCompressedImage__glCompressedTexture(gl:Dynamic, image:CompressedImage, decode:Null<GlCompressedTextureDecoder>, colorSpace:TextureColorSpace = 'linear'):Bool {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
     var container:Dynamic = cast _Runtime.UNDEFINED;
     compressed = _Runtime.field(image, 'compressed');
     container = compressed.container;
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, container, compressed.payload, _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, container, compressed.payload, _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), colorSpace] : Array<Dynamic>));
     return cast null;
   }
+
+  public static final SRGB_FORMAT_PAIRS__glCompressedTexture:Dynamic = { bc1: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc1Srgb: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc2: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc2Srgb: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc3: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc3Srgb: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc7: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), bc7Srgb: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), etc1: cast (['etc1', 'etc2RgbSrgb'] : Array<Dynamic>), etc2Rgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbSrgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbA1: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2RgbA1Srgb: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2Rgba: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>), etc2RgbaSrgb: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>) };
 }

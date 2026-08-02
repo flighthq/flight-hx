@@ -20,7 +20,7 @@ class BitmapFrom {
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(resource, 'source'), 0.0, 0.0] : Array<Dynamic>));
     raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, _Runtime.field(resource, 'width'), _Runtime.field(resource, 'height')] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', colorSpace: (cast _Runtime.field(raw, 'colorSpace') : String), data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: (cast _Runtime.field(raw, 'colorSpace') : String), data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -33,7 +33,7 @@ class BitmapFrom {
     h = _Runtime.coalesce(height, function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'));
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([x, y, w, h] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', colorSpace: (cast _Runtime.field(raw, 'colorSpace') : String), data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: _Runtime.field(raw, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(raw, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: (cast _Runtime.field(raw, 'colorSpace') : String), data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: _Runtime.field(raw, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(raw, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -55,7 +55,7 @@ class BitmapFrom {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    bitmap = _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', colorSpace: (cast _Runtime.field(raw, 'colorSpace') : String), data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
+    bitmap = _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: (cast _Runtime.field(raw, 'colorSpace') : String), data: _Runtime.field(raw, 'data'), format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
     return cast bitmap;
     return cast null;
   }

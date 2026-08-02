@@ -8,4 +8,4 @@ import flighthq.types.Entity.Kind;
 
 typedef MaterialAlphaMode = String;
 
-typedef SurfaceMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; };
+typedef SurfaceMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; };

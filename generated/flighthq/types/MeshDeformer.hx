@@ -3,5 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._MeshDeformerValues.MeshDeformerMorph;
+import flighthq.types._internal._MeshDeformerValues.MeshDeformerNone;
+import flighthq.types._internal._MeshDeformerValues.MeshDeformerSkeletal;
 
 typedef MeshDeformer = String;

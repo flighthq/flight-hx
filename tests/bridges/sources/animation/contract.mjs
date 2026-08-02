@@ -2,3 +2,13 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './animationBlend.mjs';
+export * from './animationBlendTree.mjs';
+export * from './animationClip.mjs';
+export * from './animationCrossfade.mjs';
+export * from './animationLayerStack.mjs';
+export * from './animationPlayer.mjs';
+export * from './animationRootMotion.mjs';
+export * from './animationStateMachine.mjs';
+export * from './animationTrack.mjs';

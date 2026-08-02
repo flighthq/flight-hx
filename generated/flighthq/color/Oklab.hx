@@ -5,6 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class Oklab {
+  public static function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, r)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, g)));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, HxMath.min(1.0, b)));
+  }
+
   public static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
     var l:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,8 +42,8 @@ class Oklab {
     l = ((lc * lc) * lc);
     m = ((mc * mc) * mc);
     s = ((sc * sc) * sc);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, (((4.0767416621 * l) - (3.3077115913 * m)) + (0.2309699292 * s))));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, (((-1.2684380046 * l) + (2.6097574011 * m)) - (0.3413193965 * s))));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, (((-0.0041960863 * l) - (0.7034186147 * m)) + (1.707614701 * s))));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, (((4.0767416621 * l) - (3.3077115913 * m)) + (0.2309699292 * s)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, (((-1.2684380046 * l) + (2.6097574011 * m)) - (0.3413193965 * s)));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, (((-0.0041960863 * l) - (0.7034186147 * m)) + (1.707614701 * s)));
   }
 }

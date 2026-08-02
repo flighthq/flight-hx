@@ -5,4 +5,5 @@ const api = compiled.flighthq.textureFormats.ParseBasis;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getBasisParseFailureReason = api.getBasisParseFailureReason;
 export const parseBasis = api.parseBasis;

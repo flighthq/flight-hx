@@ -3,10 +3,11 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus;
 import flighthq.types.Collision.CollisionShape;
 
 class PointContainment {
-  public static final EPS__pointContainment:Dynamic = 1e-9;
+  public static final RELATIVE_EPSILON__pointContainment:Dynamic = 1e-9;
 
   public static function getCollisionShapeContainsPoint(shape:CollisionShape, x:Float, y:Float):Bool {
     {
@@ -33,6 +34,7 @@ class PointContainment {
         }
       }
       else if (__switchValue == 'polygon') {
+        if ((cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([_Runtime.field(shape, 'points')] : Array<Dynamic>)), null) : Bool)) { return cast false; }
         return cast _Runtime.callValue(PointContainment.isPointInConvexPolygon__pointContainment, cast ([x, y, _Runtime.field(shape, 'points'), (_Runtime.toInt32(_Runtime.field(_Runtime.field(shape, 'points'), 'length')) >> 1)] : Array<Dynamic>));
       }
       else if (__switchValue == 'segment') {
@@ -41,7 +43,7 @@ class PointContainment {
           var dy:Dynamic = (_Runtime.field(shape, 'y1') - _Runtime.field(shape, 'y0'));
           var lengthSquared:Dynamic = ((dx * dx) + (dy * dy));
           var t:Dynamic = 0.0;
-          if ((cast ((cast lengthSquared : Float) > (cast PointContainment.EPS__pointContainment : Float)) : Bool)) {
+          if ((cast ((cast lengthSquared : Float) > (cast 0.0 : Float)) : Bool)) {
             (t = cast (((((x - _Runtime.field(shape, 'x0')) * dx) + ((y - _Runtime.field(shape, 'y0')) * dy)) / lengthSquared) : Dynamic));
             (t = cast (((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Dynamic));
           }
@@ -49,14 +51,16 @@ class PointContainment {
           var closestY:Dynamic = (_Runtime.field(shape, 'y0') + (t * dy));
           var ddx:Dynamic = (x - closestX);
           var ddy:Dynamic = (y - closestY);
-          return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast PointContainment.EPS__pointContainment : Float));
+          var epsilon:Dynamic = _Runtime.callValue(PointContainment.relativeEpsilon__pointContainment, cast ([HxMath.sqrt(lengthSquared)] : Array<Dynamic>));
+          return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast (epsilon * epsilon) : Float));
         }
       }
       else if (__switchValue == 'point') {
         {
           var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
           var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
-          return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast PointContainment.EPS__pointContainment : Float));
+          var epsilon:Dynamic = (_Runtime.NUMBER_EPSILON * HxMath.max(HxMath.max(HxMath.max(HxMath.max(1.0, HxMath.abs(x)), HxMath.abs(y)), HxMath.abs(_Runtime.field(shape, 'x'))), HxMath.abs(_Runtime.field(shape, 'y'))));
+          return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (epsilon * epsilon) : Float));
         }
       }
       else  {
@@ -67,8 +71,10 @@ class PointContainment {
   }
 
   public static function isPointInConvexPolygon__pointContainment(x:Float, y:Float, px:Array<Float>, pn:Float):Bool {
+    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
     var positive:Dynamic = cast _Runtime.UNDEFINED;
     var negative:Dynamic = cast _Runtime.UNDEFINED;
+    epsilon = _Runtime.callValue(PointContainment.relativeEpsilon__pointContainment, cast ([_Runtime.callValue(PointContainment.getPolygonExtent__pointContainment, cast ([px, pn] : Array<Dynamic>))] : Array<Dynamic>));
     positive = false;
     negative = false;
     {
@@ -80,12 +86,43 @@ class PointContainment {
         var x1:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
-        if ((cast ((cast cross : Float) > (cast PointContainment.EPS__pointContainment : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -PointContainment.EPS__pointContainment : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
+        var edgeEpsilon:Dynamic = (_Runtime.hypot((x1 - x0), (y1 - y0)) * epsilon);
+        if ((cast ((cast cross : Float) > (cast edgeEpsilon : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -edgeEpsilon : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
         if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }
         i++;
       }
     }
     return cast true;
+    return cast null;
+  }
+
+  public static function getPolygonExtent__pointContainment(points:Array<Float>, count:Float):Float {
+    var minX:Dynamic = cast _Runtime.UNDEFINED;
+    var minY:Dynamic = cast _Runtime.UNDEFINED;
+    var maxX:Dynamic = cast _Runtime.UNDEFINED;
+    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    maxX = -HxMath.POSITIVE_INFINITY;
+    maxY = -HxMath.POSITIVE_INFINITY;
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
+        var x:Dynamic = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
+        var y:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
+        if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
+        if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
+        if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
+        if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
+        i++;
+      }
+    }
+    return cast HxMath.max((maxX - minX), (maxY - minY));
+    return cast null;
+  }
+
+  public static function relativeEpsilon__pointContainment(extent:Float):Float {
+    return cast ((cast ((cast extent : Float) > (cast 0.0 : Float)) : Bool) ? (cast (extent * PointContainment.RELATIVE_EPSILON__pointContainment) : Dynamic) : (cast _Runtime.NUMBER_EPSILON : Dynamic));
     return cast null;
   }
 }

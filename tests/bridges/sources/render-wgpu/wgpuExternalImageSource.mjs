@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const isWgpuExternalImageSourceReady = api.isWgpuExternalImageSourceReady;
+export const tryCopyWgpuExternalImageToTexture = api.tryCopyWgpuExternalImageToTexture;

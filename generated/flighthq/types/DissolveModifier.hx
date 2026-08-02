@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
 
 typedef DissolveModifier = { var kind:ModifierKind; var slot:ModifierSlot; var threshold:Float; var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Texture; @:optional var scale:Float; };

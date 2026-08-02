@@ -36,7 +36,7 @@ class NormalWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     normal = (cast material : Null<NormalMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuDebugPipeline, cast ([state, { hasNormalMap: false, mode: 'normal' }, format] : Array<Dynamic>));
+    pipeline = _Runtime.callValue(ensureWgpuDebugPipeline, cast ([state, { hasNormalMap: false, mode: 'normal' }, format, _Runtime.coalesce(_Runtime.optionalField(normal, 'doubleSided'), function():Dynamic return cast false)] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normal, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuDebugSurface, cast ([state, pipeline, NormalWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__normalWgpuMeshMaterialRenderer, 0.0, 1.0, 1.0] : Array<Dynamic>)) : Dynamic));

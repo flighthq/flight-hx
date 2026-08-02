@@ -24,6 +24,7 @@ import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
 import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Types.MeshKind;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
@@ -317,14 +318,18 @@ class ObjParse {
 
   public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial, document:Scene3DDocument):BlinnPhongMaterial {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([material.diffuse, material.dissolve] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapDiffuse, document] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapBump, document] : Array<Dynamic>)), shininess: material.specularExponent, specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([material.specular, 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapSpecular, document] : Array<Dynamic>)) }] : Array<Dynamic>));
+    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([material.diffuse, material.dissolve] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapDiffuse, document, 'srgb'] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapBump, document, 'linear'] : Array<Dynamic>)), shininess: material.specularExponent, specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([material.specular, 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([material.mapSpecular, document, 'srgb'] : Array<Dynamic>)) }] : Array<Dynamic>));
     if ((cast ((cast material.dissolve : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.setField(result, 'alphaMode', 'blend'); }
     return cast result;
     return cast null;
   }
 
-  public static function externalObjTexture__objParse(uri:Null<String>, document:Scene3DDocument):Null<Texture> {
-    return cast ((cast _Runtime.strictEquals(uri, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(createExternalTextureRef, cast ([uri, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) : Dynamic));
+  public static function externalObjTexture__objParse(uri:Null<String>, document:Scene3DDocument, colorSpace:TextureColorSpace):Null<Texture> {
+    var texture:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(uri, null) : Bool)) { return cast null; }
+    texture = _Runtime.callValue(createExternalTextureRef, cast ([uri, null, _Runtime.field(document, 'resources')] : Array<Dynamic>));
+    _Runtime.setField(texture, 'colorSpace', colorSpace);
+    return cast texture;
     return cast null;
   }
 

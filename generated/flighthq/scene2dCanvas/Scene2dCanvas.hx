@@ -15,6 +15,7 @@ import flighthq.scene2dCanvas.CanvasNode2D as Facade_Scene2dCanvas_flighthq_scen
 import flighthq.scene2dCanvas.CanvasParticleEmitter2D as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasParticleEmitter2D;
 import flighthq.scene2dCanvas.CanvasQuadBatch as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasQuadBatch;
 import flighthq.scene2dCanvas.CanvasRenderState as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderState;
+import flighthq.scene2dCanvas.CanvasRenderTarget as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTarget;
 import flighthq.scene2dCanvas.CanvasRenderTexture as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTexture;
 import flighthq.scene2dCanvas.CanvasRenderTexturePool as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTexturePool;
 import flighthq.scene2dCanvas.CanvasRenderTextureResolver as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTextureResolver;
@@ -30,6 +31,7 @@ import flighthq.scene2dCanvas.CanvasTextureResolver as Facade_Scene2dCanvas_flig
 import flighthq.scene2dCanvas.CanvasTilemap as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap;
 import flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards as Facade_Scene2dCanvas_flighthq_scene2dCanvas_EnableCanvasTextureResolverGuards;
 import flighthq.scene2dCanvas.ExplainCanvasTextureResolution as Facade_Scene2dCanvas_flighthq_scene2dCanvas_ExplainCanvasTextureResolution;
+import flighthq.types.Matrix;
 import flighthq.types.Node2D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
@@ -213,6 +215,10 @@ class Scene2dCanvas {
 
   public static function renderIntoCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture, callback:Dynamic):Void {
     Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTexture.renderIntoCanvasRenderTexture(state, renderTexture, callback);
+  }
+
+  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+    Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTarget.setCanvasRenderTransform2D(state, transform);
   }
 
   public static function withCanvasRenderTextures<T>(state:Dynamic, pool:Dynamic, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {

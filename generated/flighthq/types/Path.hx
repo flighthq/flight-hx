@@ -4,6 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 typedef PathCommand = Dynamic;
 

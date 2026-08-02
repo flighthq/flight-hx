@@ -14,18 +14,18 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class ImageResource {
   public static function cloneImageResource(resource:Dynamic):Dynamic {
-    return cast _Runtime.callValue(createEntity, cast ([{ height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast _Runtime.callValue(createEntity, cast ([{ compressed: compressed, height: _Runtime.field(compressed.container, 'height'), kind: CompressedImageTextureSourceKind, version: 0.0, width: _Runtime.field(compressed.container, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: _Runtime.field(compressed.container, 'height'), kind: CompressedImageTextureSourceKind, version: 0.0, width: _Runtime.field(compressed.container, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createImageResource(image:Dynamic):Dynamic {
     var resource:Dynamic = cast _Runtime.UNDEFINED;
-    resource = _Runtime.callValue(createEntity, cast ([{ height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }] : Array<Dynamic>));
+    resource = _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }] : Array<Dynamic>));
     _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>));
     return cast resource;
     return cast null;
@@ -54,4 +54,8 @@ class ImageResource {
       _Runtime.setField(resource, 'height', flighthq._internal.backend.CanvasElementBackend.field(sized, 'height'));
     }
   }
+
+  public static final DECODED_ALPHA_TYPE__imageResource:Dynamic = 'straight';
+
+  public static final DECODED_GAMUT__imageResource:Dynamic = 'srgb';
 }

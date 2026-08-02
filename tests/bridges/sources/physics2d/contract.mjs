@@ -2,3 +2,12 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './colliderTransform.mjs';
+export * from './islands.mjs';
+export * from './jointRegistry.mjs';
+export * from './joints.mjs';
+export * from './massProperties.mjs';
+export * from './solver.mjs';
+export * from './step.mjs';
+export * from './world.mjs';

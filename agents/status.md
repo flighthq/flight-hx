@@ -1,10 +1,18 @@
 # Project Status
 
-Last updated: 2026-07-31
+Last updated: 2026-08-02
 
 ## Current State
 
-Typed receiver lowering now uses one cached TypeScript `Program` for the pinned upstream tree. This preserves imported, aliased, and contextual receiver types during generation.
+The port is regenerated against upstream `7333e825d9df46d737c5a6557acbed4805e19e57`. The update covers 141 translated packages, 2,390 production source files, 1,304 routed test files, 295 public lanes, and 30,935 export records.
+
+- Update repair work adds the WebGL `SRGB8_ALPHA8` endpoint, exact export-lane bridge resolution, source-level `export *` bridges, same-name public-class/private-value module separation, checker-backed `TypeError`/`RangeError` instance checks, and TypeScript constructor-parameter-property lowering. The latter restores all 76 focused SWF tests; focused ABC (7), compression (15), SDK (21), geometry (997), math (278), mesh (179), and types (96) also pass.
+- The full canonical upstream sweep accounts for all 141 package suites: 78 pass and 63 expose gaps. It ran from `2026-08-02T06:38:32Z` to `2026-08-02T07:29:18Z`. Compression passes its isolated 15-test run but its contended full-sweep worker exited without results. The final `scene3d-gl` worker was terminated after 38 minutes of sustained CPU without assertion output and is truthfully recorded with exit code 143. The committed report preserves the full accounting rather than substituting focused results.
+- Reflective runtime retention is now enforced by `runtime-retention.test.ts`: every bare class returned by `_Runtime.globalValue` must be declared `@:keep`. The closed current set is `_Map`, `_Set`, `_WeakMap`, `_WeakSet`, and `_TextDecoder`; this protects TextDecoder construction under full DCE without changing `_Runtime` construction behavior.
+- A checker census of 1,888 typed Array/collection method calls found 1,722 direct collection calls, 43 direct typed-array `subarray` calls, 55 existing runtime-helper calls, and 68 dynamic `_Runtime.callProperty` survivors. Every survivor is typed-array `set`: 34 `Float32Array`, 12 `Uint8Array`, nine `Uint8ClampedArray`, seven `Uint32Array`, four `Uint16Array`, one `Int16Array`, and one `Uint16Array | Uint32Array`. There are no collection, optional-call, or spread-argument survivors. The next approved general lever is a method-specific checker-proven typed-array `set` endpoint that preserves its source argument and coerces only the optional offset; the mixed unsigned union needs a union-aware endpoint. Expanding the current generic typed-array binding is not sound because it integer-casts every argument and would corrupt the source array.
+- Generation and generation drift verification pass at the new revision. Haxe JavaScript compilation and the complete Haxe target suite pass. The portable Python smoke currently fails in existing signal/rest forwarding because a zero-argument callback receives one argument through `Runtime.adjustArguments`; Neko execution is unavailable in this workspace.
+
+Typed receiver lowering uses one cached TypeScript `Program` for the pinned upstream tree. This preserves imported, aliased, and contextual receiver types during generation.
 
 - Upstream-update U0 pins `c61de179af8a12c2fa3b9b7d5389ee302f577a0d` for analysis. Raw generation fails loudly at the first stale typed-struct path (`ColorTransform.ts`). The complete census in [`upstream-c61de179-u0-census.md`](upstream-c61de179-u0-census.md) records 139 packages, 2,338 source files, 1,266 tests, 11,740 public export records, 172/405 stale typed-struct identities, the new two-lane `./contract` import model, one in-scope `for...in` lowering gap, 26 missing GL endpoints, Canvas `isContextLost`, all 28 changed ported examples, and 13 new examples. No generator/runtime/generated-output or class/direct-struct fix is included in U0; all green counts below remain the last verified `5d24729f` baseline until U1 is agreed and implemented.
 

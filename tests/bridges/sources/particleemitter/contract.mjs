@@ -2,3 +2,14 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './emitParticleBurst2D.mjs';
+export * from './emitParticleBurst3D.mjs';
+export * from './particleEmitter.mjs';
+export * from './particleEmitter3D.mjs';
+export * from './prewarmParticleEmitter2D.mjs';
+export * from './prewarmParticleEmitter3D.mjs';
+export * from './stepParticleEmitter2D.mjs';
+export * from './stepParticleEmitter3D.mjs';
+export * from './updateParticleEmitter2D.mjs';
+export * from './updateParticleEmitter3D.mjs';

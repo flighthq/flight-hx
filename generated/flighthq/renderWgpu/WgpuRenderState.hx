@@ -202,9 +202,12 @@ class WgpuRenderState {
                           _Runtime.setField(runtime, 'linearSampler', linearSampler);
                           _Runtime.setField(runtime, 'nearestSampler', nearestSampler);
                           _Runtime.setField(runtime, 'samplerCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
+                          _Runtime.setField(runtime, 'mipmapPipelineCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
                           _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
                           _Runtime.setField(runtime, 'textureSourcePremultipliedTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+                          _Runtime.setField(runtime, 'textureSourcePremultipliedSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
                           _Runtime.setField(runtime, 'textureSourceStraightTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+                          _Runtime.setField(runtime, 'textureSourceStraightSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
                           _Runtime.setField(runtime, 'defaultBitmapShader', null);
                           _Runtime.setField(runtime, 'particleInstanceBuffer', null);
                           _Runtime.setField(runtime, 'particleInstanceData', null);
@@ -291,21 +294,23 @@ class WgpuRenderState {
     return cast null;
   }
 
-  public static function getWgpuSampler(state:flighthq.types.WgpuRenderState, filter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, maxAnisotropy:Dynamic = 1.0):Dynamic {
+  public static function getWgpuSampler(state:flighthq.types.WgpuRenderState, minFilter:Dynamic, magFilter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, maxAnisotropy:Dynamic = 1.0):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var anisotropy:Dynamic = cast _Runtime.UNDEFINED;
-    var effectiveFilter:Dynamic = cast _Runtime.UNDEFINED;
+    var effectiveMinFilter:Dynamic = cast _Runtime.UNDEFINED;
+    var effectiveMagFilter:Dynamic = cast _Runtime.UNDEFINED;
     var effectiveMipmapFilter:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     anisotropy = HxMath.max(1.0, HxMath.floor(maxAnisotropy));
-    effectiveFilter = ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool) ? (cast 'linear' : Dynamic) : (cast filter : Dynamic));
+    effectiveMinFilter = ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool) ? (cast 'linear' : Dynamic) : (cast minFilter : Dynamic));
+    effectiveMagFilter = ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool) ? (cast 'linear' : Dynamic) : (cast magFilter : Dynamic));
     effectiveMipmapFilter = ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool) ? (cast 'linear' : Dynamic) : (cast mipmapFilter : Dynamic));
-    key = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_FILTER_BITS__wgpuRenderState, effectiveFilter)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_WRAP_BITS__wgpuRenderState, wrapU)) << 1)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_WRAP_BITS__wgpuRenderState, wrapV)) << 3)))) | _Runtime.toInt32((_Runtime.toInt32(((cast _Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.getIndex(WgpuRenderState.SAMPLER_MIPMAP_BITS__wgpuRenderState, effectiveMipmapFilter) : Dynamic))) << 5)))) | _Runtime.toInt32((_Runtime.toInt32(anisotropy) << 7)));
+    key = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_FILTER_BITS__wgpuRenderState, effectiveMinFilter)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_FILTER_BITS__wgpuRenderState, effectiveMagFilter)) << 1)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_WRAP_BITS__wgpuRenderState, wrapU)) << 2)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.getIndex(WgpuRenderState.SAMPLER_WRAP_BITS__wgpuRenderState, wrapV)) << 4)))) | _Runtime.toInt32((_Runtime.toInt32(((cast _Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.getIndex(WgpuRenderState.SAMPLER_MIPMAP_BITS__wgpuRenderState, effectiveMipmapFilter) : Dynamic))) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(anisotropy) << 8)));
     sampler = ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).get(key));
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var descriptor:Dynamic = { minFilter: effectiveFilter, magFilter: effectiveFilter, addressModeU: wrapU, addressModeV: wrapV };
+      var descriptor:Dynamic = { minFilter: effectiveMinFilter, magFilter: effectiveMagFilter, addressModeU: wrapU, addressModeV: wrapV };
       if ((cast !_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(descriptor, 'mipmapFilter', effectiveMipmapFilter); }
       if ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.setField(descriptor, 'maxAnisotropy', anisotropy); }
       (sampler = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createSampler', cast ([descriptor] : Array<Dynamic>)) : Dynamic));
@@ -408,7 +413,7 @@ class WgpuRenderState {
     return cast null;
   }
 
-  public static final WGPU_DEVICE_RUNTIME_KEYS__wgpuRenderState:Dynamic = cast (['uniformBindGroupLayout', 'textureBindGroupLayout', 'pipelineCache', 'linearSampler', 'nearestSampler', 'samplerCache', 'mipmapPipeline', 'mipmapBindGroupLayout', 'textureCache', 'textureSourcePremultipliedTextureCache', 'textureSourceStraightTextureCache', 'videoTextureCache', 'wgpuExternalTextureCache', 'wgpuRenderTextureCache', 'sceneMeshUploadCache'] : Array<Dynamic>);
+  public static final WGPU_DEVICE_RUNTIME_KEYS__wgpuRenderState:Dynamic = cast (['uniformBindGroupLayout', 'textureBindGroupLayout', 'pipelineCache', 'linearSampler', 'nearestSampler', 'samplerCache', 'mipmapPipelineCache', 'textureCache', 'textureSourcePremultipliedTextureCache', 'textureSourcePremultipliedSrgbTextureCache', 'textureSourceStraightTextureCache', 'textureSourceStraightSrgbTextureCache', 'videoTextureCache', 'videoSrgbTextureCache', 'wgpuExternalTextureCache', 'wgpuRenderTextureCache', 'sceneMeshUploadCache'] : Array<Dynamic>);
 
   public static final _deviceRuntimeByStateRuntime__wgpuRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 

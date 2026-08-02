@@ -8,4 +8,3 @@ __syncDependencies();
 export const createScene3DFromAwd2 = api.createScene3DFromAwd2;
 export const parseAwd2 = api.parseAwd2;
 export const parseAwd2SkeletonAnimations = api.parseAwd2SkeletonAnimations;
-export const registerAwd2Decompressor = api.registerAwd2Decompressor;

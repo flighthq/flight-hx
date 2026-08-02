@@ -3,5 +3,12 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorCar;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorDesktop;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorPhone;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorTV;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorTablet;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
+import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorWatch;
 
 typedef DeviceFormFactor = String;

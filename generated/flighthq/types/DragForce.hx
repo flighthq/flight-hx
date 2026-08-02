@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._DragForceValues.DragForceKind;
 
 typedef DragForce = { var kind:String; var strength:Float; };

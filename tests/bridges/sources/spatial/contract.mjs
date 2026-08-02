@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './explainSpatialIndexing.mjs';
+export * from './formatSpatialIndexingNotice.mjs';
+export * from './spatialIndex.mjs';
+export * from './uniformGrid.mjs';

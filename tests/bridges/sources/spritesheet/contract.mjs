@@ -2,3 +2,11 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './spritesheet.mjs';
+export * from './spritesheetAnimation.mjs';
+export * from './spritesheetData.mjs';
+export * from './spritesheetFrame.mjs';
+export * from './spritesheetFrom.mjs';
+export * from './spritesheetPlayer.mjs';
+export * from './spritesheetValidation.mjs';

@@ -273,11 +273,13 @@ class WgpuQuadBatchWriter {
   }
 
   public static function createWgpuTextureSamplerBindGroup__wgpuQuadBatchWriter(state:WgpuRenderState, view:Dynamic, sampler:SamplerLike):Dynamic {
-    var filter:Dynamic = cast _Runtime.UNDEFINED;
+    var minFilter:Dynamic = cast _Runtime.UNDEFINED;
+    var magFilter:Dynamic = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    filter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
     mipmapFilter = ((cast ((cast sampler.mipmaps : Bool) && (cast _Runtime.includes(sampler.minFilter, 'mipmap') : Bool)) : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: _Runtime.callValue(getWgpuSampler, cast ([state, filter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
+    return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: _Runtime.callValue(getWgpuSampler, cast ([state, minFilter, magFilter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast null;
   }
 

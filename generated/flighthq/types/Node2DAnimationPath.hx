@@ -3,5 +3,20 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathAlpha;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathPivot;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathPivotX;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathPivotY;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathPosition;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathRotation;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathScale;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathScaleX;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathScaleY;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathSkew;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathSkewX;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathSkewY;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathVisible;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathX;
+import flighthq.types._internal._Node2DAnimationPathValues.Node2DAnimationPathY;
 
 typedef Node2DAnimationPath = String;

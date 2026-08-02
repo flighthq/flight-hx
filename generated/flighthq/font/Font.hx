@@ -10,9 +10,12 @@ import flighthq.font.FontResource as Facade_Font_flighthq_font_FontResource;
 import flighthq.font.FontResourceFrom as Facade_Font_flighthq_font_FontResourceFrom;
 import flighthq.font.FontShorthand as Facade_Font_flighthq_font_FontShorthand;
 import flighthq.font.FontStatus as Facade_Font_flighthq_font_FontStatus;
+import flighthq.font.GlyphOutlineSource as Facade_Font_flighthq_font_GlyphOutlineSource;
 import flighthq.types.Font;
 import flighthq.types.Font.FontUrl;
 import flighthq.types.FontResource;
+import flighthq.types.GlyphOutlineSource;
+import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class Font {
   public static function createFont(name:String):flighthq.types.Font {
@@ -22,6 +25,11 @@ class Font {
 
   public static function createFontResource(family:String):FontResource {
     return cast Facade_Font_flighthq_font_FontResource.createFontResource(family);
+    return cast null;
+  }
+
+  public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):GlyphRasterizerBackend {
+    return cast Facade_Font_flighthq_font_GlyphOutlineSource.createGlyphRasterizerBackendFromGlyphOutlineSource(source);
     return cast null;
   }
 

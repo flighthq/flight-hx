@@ -36,6 +36,22 @@ class CanvasSourceModeCompositing {
     _Runtime.callValue(compositeCanvasImage, cast ([dest, source, 0.0, 0.0, ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic))] : Array<Dynamic>));
   }
 
+  public static function drawCanvasInvertedTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float, offsetX:Dynamic = 0.0, offsetY:Dynamic = 0.0):Void {
+    var ctx:Dynamic = cast _Runtime.UNDEFINED;
+    ctx = _Runtime.field(dest, 'context');
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', 1.0);
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', _Runtime.callValue(CanvasSourceModeCompositing.cssRgbaFromColor__canvasSourceModeCompositing, cast ([color, HxMath.min(1.0, (alpha * strength))] : Array<Dynamic>)));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'destination-out');
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), offsetX, offsetY] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
+  }
+
   public static function drawCanvasTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');

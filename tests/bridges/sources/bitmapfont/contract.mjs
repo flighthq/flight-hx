@@ -2,3 +2,10 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './bitmapFont.mjs';
+export * from './bitmapFontFromGlyphAtlas.mjs';
+export * from './bitmapFontGlyphSource.mjs';
+export * from './enableBitmapFontGuards.mjs';
+export * from './explainBitmapFontGlyph.mjs';
+export * from './summarizeBitmapFont.mjs';

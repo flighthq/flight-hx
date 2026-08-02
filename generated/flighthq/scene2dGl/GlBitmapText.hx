@@ -4,6 +4,7 @@ package flighthq.scene2dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
@@ -61,7 +62,7 @@ class GlBitmapText {
       var atlas:Dynamic = _Runtime.field(page, 'atlas');
       var texture:Dynamic = atlas.texture;
       if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(page, 'instanceCount'), 0.0) : Bool)) : Bool)) { continue; }
-      var glTexture:Dynamic = _Runtime.callValue(resolveGlTexture, cast ([state, texture, true] : Array<Dynamic>));
+      var glTexture:Dynamic = _Runtime.callValue(resolveGlTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { continue; }
       var straightAlpha:Dynamic = _Runtime.field(runtime, 'currentTextureStraightAlpha');
       _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));

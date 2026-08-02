@@ -2,6 +2,33 @@
 
 Status: the shared static-facts mechanism, primitive Boolean/numeric emission, the checker-proven indexed-access tranche, the emitter-known synthetic Array follow-up, the storage-compatible part of the mixed-union follow-up, and the proven Array destructuring tranche are enabled. Review's Step 3 script benchmark was positive overall: camera2d stayed flat while particles improved 21% by median.
 
+## Typed method-call census at upstream 7333e825
+
+A checker census over the 140 translated production packages (tests and the derived `tool-capture` exclusion omitted) found 1,888 calls on proven Array, typed-array, Map, Set, WeakMap, or WeakSet receivers:
+
+| Emission path                    |     Calls |
+| -------------------------------- | --------: |
+| Direct collection calls          |     1,722 |
+| Direct typed-array `subarray`    |        43 |
+| Existing method-specific helpers |        55 |
+| Dynamic `_Runtime.callProperty`  |        68 |
+| **Total**                        | **1,888** |
+
+All 68 dynamic survivors are typed-array `set` calls; there are no collection survivors and no optional-call or spread-argument cases.
+
+| Proven receiver                   | Dynamic `set` calls |
+| --------------------------------- | ------------------: |
+| `Float32Array`                    |                  34 |
+| `Uint8Array`                      |                  12 |
+| `Uint8ClampedArray`               |                   9 |
+| `Uint32Array`                     |                   7 |
+| `Uint16Array`                     |                   4 |
+| `Int16Array`                      |                   1 |
+| `Uint16Array` or `Uint32Array`    |                   1 |
+| **Total**                         |              **68** |
+
+The next approved general lever is a method-specific checker-proven typed-array `set` lowering. It must preserve the source-array argument exactly, coerce only the optional numeric offset, and use a union-aware endpoint for the single `Uint16Array | Uint32Array` receiver. Merely adding `set` to the current generic typed-array binding is unsound: that emitter applies `Std.int` to every argument and would corrupt the source array. Focused mesh parity already passes with the dynamic route, so this is a portability/performance lever rather than an emergency correctness patch.
+
 This proposal covers two independent generator optimizations after typed-struct tranche 5:
 
 1. checker-proven indexed access for arrays and typed arrays;

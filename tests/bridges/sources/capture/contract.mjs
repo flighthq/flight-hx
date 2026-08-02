@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './captureBaseline.mjs';
+export * from './captureComparison.mjs';

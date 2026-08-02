@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
+import flighthq.types.BitmapFont.BitmapFontKerningPair;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.TextureAtlas;
@@ -18,12 +19,12 @@ class BitmapFont {
     glyphs = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (glyph in _Runtime.iterable(data.glyphs)) {
       var page:Dynamic = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
-      ((cast glyphs : flighthq._internal._Map).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: ((cast ((cast ((cast page : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast page : Float) < (cast pageCount : Float)) : Bool)) : Bool) ? (cast page : Dynamic) : (cast 0.0 : Dynamic)), width: glyph.width, x: glyph.x, y: glyph.y }));
+      ((cast glyphs : flighthq._internal._Map).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: _Runtime.callValue(BitmapFont.resolveBitmapFontGlyphPage__bitmapFont, cast ([glyph.codepoint, page, pageCount] : Array<Dynamic>)), width: glyph.width, x: glyph.x, y: glyph.y }));
     }
     kerning = _Runtime.construct(_Runtime.globalValue('Map'), []);
     if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (pair in _Runtime.iterable(data.kerning)) {
-        ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([pair.left, pair.right] : Array<Dynamic>)), pair.amount));
+        ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(packBitmapFontKerningKey, cast ([pair.left, pair.right] : Array<Dynamic>)), pair.amount));
       }
     }
     return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: data.metrics.ascent, descent: data.metrics.descent, lineGap: data.metrics.lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
@@ -36,7 +37,7 @@ class BitmapFont {
   }
 
   public static function getBitmapFontKerning(font:flighthq.types.BitmapFont, left:Float, right:Float):Float {
-    return cast _Runtime.coalesce(((cast font.kerning : flighthq._internal._Map).get(_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([left, right] : Array<Dynamic>)))), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(((cast font.kerning : flighthq._internal._Map).get(_Runtime.callValue(packBitmapFontKerningKey, cast ([left, right] : Array<Dynamic>)))), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -55,8 +56,35 @@ class BitmapFont {
     return cast null;
   }
 
-  public static function packBitmapFontKerningKey__bitmapFont(left:Float, right:Float):Float {
-    return cast (_Runtime.toInt32((_Runtime.toInt32(left) << 16)) | _Runtime.toInt32(right));
+  public static function hasBitmapFontGlyph(font:flighthq.types.BitmapFont, codepoint:Float):Bool {
+    return cast ((cast font.glyphs : flighthq._internal._Map).has(codepoint));
     return cast null;
   }
+
+  public static function packBitmapFontKerningKey(left:Float, right:Float):Float {
+    return cast ((left * BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont) + right);
+    return cast null;
+  }
+
+  public static function setBitmapFontGuard(guard:Null<Dynamic>):Void {
+    (BitmapFont._guard__bitmapFont = cast (guard : Dynamic));
+  }
+
+  public static function unpackBitmapFontKerningKey(key:Float, out:BitmapFontKerningPair):BitmapFontKerningPair {
+    _Runtime.setField(out, 'left', HxMath.floor((key / BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont)));
+    _Runtime.setField(out, 'right', _Runtime.fmod(key, BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont));
+    return cast out;
+    return cast null;
+  }
+
+  public static function resolveBitmapFontGlyphPage__bitmapFont(codepoint:Float, page:Float, pageCount:Float):Float {
+    if ((cast ((cast ((cast page : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast page : Float) < (cast pageCount : Float)) : Bool)) : Bool)) { return cast page; }
+    _Runtime.callOptionalValue(BitmapFont._guard__bitmapFont, cast (['page-out-of-range', codepoint, page] : Array<Dynamic>));
+    return cast 0.0;
+    return cast null;
+  }
+
+  public static final UNICODE_CODEPOINT_SPACE__bitmapFont:Dynamic = 1114112.0;
+
+  public static var _guard__bitmapFont:Null<Dynamic> = _Runtime.explicitNull();
 }

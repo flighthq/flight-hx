@@ -3,6 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef ImportDiagnostic = { @:optional var detail:Dynamic; var kind:String; var origin:String; var severity:ImportDiagnosticSeverity; };
 

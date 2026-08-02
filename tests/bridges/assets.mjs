@@ -2,9 +2,15 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const acquireAsset = compiled.flighthq.assets.Assets.acquireAsset;
+export const areAssetGuardsEnabled = compiled.flighthq.assets.Assets.areAssetGuardsEnabled;
 export const createAssetLibrary = compiled.flighthq.assets.Assets.createAssetLibrary;
+export const disableAssetGuards = compiled.flighthq.assets.Assets.disableAssetGuards;
 export const disposeAssetLibrary = compiled.flighthq.assets.Assets.disposeAssetLibrary;
+export const enableAssetGuards = compiled.flighthq.assets.Assets.enableAssetGuards;
+export const explainAssetLoad = compiled.flighthq.assets.Assets.explainAssetLoad;
 export const getAsset = compiled.flighthq.assets.Assets.getAsset;
+export const getAssetGroupIds = compiled.flighthq.assets.Assets.getAssetGroupIds;
+export const getAssetIds = compiled.flighthq.assets.Assets.getAssetIds;
 export const getAssetRefCount = compiled.flighthq.assets.Assets.getAssetRefCount;
 export const loadAssetGroup = compiled.flighthq.assets.Assets.loadAssetGroup;
 export const registerAssetDescriptor = compiled.flighthq.assets.Assets.registerAssetDescriptor;

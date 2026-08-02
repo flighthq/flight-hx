@@ -3,6 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuCompressedTextureUploader = Dynamic;

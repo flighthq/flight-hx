@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
-typedef SpecularGlossinessPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var glossiness:Float; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var specular:Float; var specularGlossinessMap:Null<Texture>; };
+typedef SpecularGlossinessPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var glossiness:Float; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var specular:Float; var specularGlossinessMap:Null<Texture>; };

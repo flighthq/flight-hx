@@ -2,3 +2,10 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './booleanPaths.mjs';
+export * from './martinezKernel.mjs';
+export * from './offsetPath.mjs';
+export * from './pathBooleanBackend.mjs';
+export * from './simplifyPath.mjs';
+export * from './unionAllPaths.mjs';

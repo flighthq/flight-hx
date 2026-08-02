@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './markupClassStyles.mjs';
+export * from './markupNamedColors.mjs';
+export * from './markupTagRegistry.mjs';
+export * from './textMarkup.mjs';

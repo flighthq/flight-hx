@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
-typedef CustomShaderMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var shaderKey:String; var textures:Null<Dynamic>; var uniforms:Null<Dynamic>; };
+typedef CustomShaderMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var shaderKey:String; var textures:Null<Dynamic>; var uniforms:Null<Dynamic>; };

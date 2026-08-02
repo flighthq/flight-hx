@@ -2,3 +2,14 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from '@flighthq/camera';
+export * from '@flighthq/lighting';
+export * from '@flighthq/materials';
+export * from '@flighthq/mesh';
+export * from '@flighthq/picking';
+export * from '@flighthq/scene3d';
+export * from '@flighthq/scene3d-resources';
+export * from '@flighthq/skeleton2d';
+export * from '@flighthq/skeleton3d';
+export * from '@flighthq/texture';

@@ -2,3 +2,46 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './bitmap.mjs';
+export * from './bitmapAffine.mjs';
+export * from './bitmapAlpha.mjs';
+export * from './bitmapBevel.mjs';
+export * from './bitmapBlur.mjs';
+export * from './bitmapChannel.mjs';
+export * from './bitmapColorMatrix.mjs';
+export * from './bitmapCompare.mjs';
+export * from './bitmapComposite.mjs';
+export * from './bitmapConvolution.mjs';
+export * from './bitmapCopy.mjs';
+export * from './bitmapCoverage.mjs';
+export * from './bitmapCrop.mjs';
+export * from './bitmapDisplacement.mjs';
+export * from './bitmapDissolve.mjs';
+export * from './bitmapDraw.mjs';
+export * from './bitmapEncode.mjs';
+export * from './bitmapFill.mjs';
+export * from './bitmapFingerprint.mjs';
+export * from './bitmapFlip.mjs';
+export * from './bitmapFormat.mjs';
+export * from './bitmapFrom.mjs';
+export * from './bitmapGradient.mjs';
+export * from './bitmapGradientFill.mjs';
+export * from './bitmapHistogram.mjs';
+export * from './bitmapImageChannel.mjs';
+export * from './bitmapMedian.mjs';
+export * from './bitmapMorphological.mjs';
+export * from './bitmapNoise.mjs';
+export * from './bitmapPaletteMap.mjs';
+export * from './bitmapPixel.mjs';
+export * from './bitmapPixelate.mjs';
+export * from './bitmapQuery.mjs';
+export * from './bitmapRegion.mjs';
+export * from './bitmapResize.mjs';
+export * from './bitmapRotate.mjs';
+export * from './bitmapShadow.mjs';
+export * from './bitmapSharpen.mjs';
+export * from './bitmapTone.mjs';
+export * from './bitmapTransform.mjs';
+export * from './bitmapWarp.mjs';
+export * from './explainBitmapReadback.mjs';

@@ -3,6 +3,30 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableGlColorAdjustmentGuards.mjs';
+export * from './enableGlStrokePathTessellation.mjs';
+export * from './glBitmapText.mjs';
+export * from './glCache.mjs';
+export * from './glClip.mjs';
+export * from './glClipContours.mjs';
+export * from './glClipRectangle.mjs';
+export * from './glColorAdjustmentMaterialFeature.mjs';
+export * from './glNode2D.mjs';
+export * from './glParticleEmitter2D.mjs';
+export * from './glQuadBatch.mjs';
+export * from './glQuadBatchWriter.mjs';
+export * from './glRichText.mjs';
+export * from './glScale9Mapper.mjs';
+export * from './glScale9Shape.mjs';
+export * from './glShape.mjs';
+export * from './glShapeMesh.mjs';
+export * from './glSprite.mjs';
+export * from './glSprite.mjs';
+export * from './glStandardMaterial.mjs';
+export * from './glTextInput.mjs';
+export * from './glTextLabel.mjs';
+export * from './glTilemap.mjs';
+export * from './glVelocity.mjs';
 export { defaultCanvasBeginFill as defaultGlBeginFill } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasBeginGradientFill as defaultGlBeginGradientFill } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasBeginTextureFill as defaultGlBeginTextureFill } from '@flighthq/scene2d-canvas/contract';

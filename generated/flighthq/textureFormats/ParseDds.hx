@@ -10,9 +10,26 @@ import flighthq.textureFormats.ByteReader.skipByteReader;
 import flighthq.textureFormats.TextureLevelLayout.computeTextureContainerLevels;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.TextureContainerParseFailureReason;
+
+typedef ParseFailure__parseDds = { var reason:Null<TextureContainerParseFailureReason>; };
 
 class ParseDds {
+  public static function getDdsParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
+    var failure:ParseFailure__parseDds = cast _Runtime.UNDEFINED;
+    var container:Dynamic = cast _Runtime.UNDEFINED;
+    failure = { reason: null };
+    container = _Runtime.callValue(ParseDds.parseDdsInternal__parseDds, cast ([bytes, failure] : Array<Dynamic>));
+    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast _Runtime.field(failure, 'reason') : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
+
   public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
+    return cast _Runtime.callValue(ParseDds.parseDdsInternal__parseDds, cast ([bytes] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseDdsInternal__parseDds(bytes:flighthq._internal._UInt8Array, ?failure:ParseFailure__parseDds):Null<TextureContainer> {
     var reader:Dynamic = cast _Runtime.UNDEFINED;
     var dwHeight:Dynamic = cast _Runtime.UNDEFINED;
     var dwWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,8 +52,8 @@ class ParseDds {
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var mipLevels:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(ParseDds.hasDdsMagic__parseDds, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(ParseDds.hasDdsMagic__parseDds, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'container-unrecognized'] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'header-truncated'] : Array<Dynamic>)); }
     reader = _Runtime.callValue(createByteReader, cast ([bytes, 4.0] : Array<Dynamic>));
     _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
     _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
@@ -55,12 +72,16 @@ class ParseDds {
     aMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
     (reader.offset = cast (112.0 : Dynamic));
     caps2 = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
+      return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'format-unsupported'] : Array<Dynamic>));
+    }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
     layers = 1.0;
     dataOffset = ParseDds.ddsDataOffset__parseDds;
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool) && (cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds) : Bool)) : Bool)) {
-      if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([_Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>)), 20.0] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+      if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([_Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>)), 20.0] : Array<Dynamic>)) : Bool) : Bool)) {
+        return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'header-truncated'] : Array<Dynamic>));
+      }
       var dx10:Dynamic = _Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>));
       var dxgiFormat:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       _Runtime.callValue(skipByteReader, cast ([dx10, 4.0] : Array<Dynamic>));
@@ -77,14 +98,22 @@ class ParseDds {
     } else {
       (format = cast (null : Dynamic));
     } } }
-    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'format-unsupported'] : Array<Dynamic>)); }
     width = HxMath.max(1.0, dwWidth);
     height = HxMath.max(1.0, dwHeight);
     faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     mipLevels = HxMath.max(1.0, dwMipMapCount);
     layout = _Runtime.callValue(computeTextureContainerLevels, cast ([format, width, height, mipLevels, layers, faces, dataOffset] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast _Runtime.field(layout, 'endOffset') : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast _Runtime.field(layout, 'endOffset') : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) {
+      return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>));
+    }
     return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: _Runtime.field(layout, 'levels'), mipLevels: mipLevels, supercompression: 'None', width: width };
+    return cast null;
+  }
+
+  public static function reject__parseDds(failure:Null<ParseFailure__parseDds>, reason:TextureContainerParseFailureReason):Dynamic {
+    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(failure, 'reason', reason); }
+    return cast null;
     return cast null;
   }
 

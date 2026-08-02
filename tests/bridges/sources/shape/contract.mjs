@@ -2,3 +2,12 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './scale9Shape.mjs';
+export * from './shape.mjs';
+export * from './shapeCommands.mjs';
+export * from './shapeFill.mjs';
+export * from './shapeHitTestBuiltins.mjs';
+export * from './shapeHitTestRegistry.mjs';
+export * from './shapeStroke.mjs';
+export * from './shapeStrokeOutline.mjs';

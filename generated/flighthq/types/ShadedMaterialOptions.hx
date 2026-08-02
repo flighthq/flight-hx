@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef ShadedMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var alphaType:AlphaType; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; @:optional var diffuse:Float; @:optional var diffuseMap:Dynamic; @:optional var modifiers:Array<Modifier>; @:optional var normalMap:Dynamic; @:optional var normalScale:Float; @:optional var shininess:Float; @:optional var specular:Float; @:optional var specularMap:Dynamic; };
+typedef ShadedMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; @:optional var diffuse:Float; @:optional var diffuseMap:Dynamic; @:optional var modifiers:Array<Modifier>; @:optional var normalMap:Dynamic; @:optional var normalScale:Float; @:optional var shininess:Float; @:optional var specular:Float; @:optional var specularMap:Dynamic; };

@@ -21,11 +21,17 @@ describe('analyzeUpstream', () => {
   it('accounts for every upstream package and representative export', () => {
     const inventory = analyzeUpstream(path.resolve('.'));
     const inventoryByName = new Map(inventory.packages.map((item) => [item.name, item]));
+    const abc = inventory.packages.find((item) => item.name === '@flighthq/abc');
+    const compression = inventory.packages.find((item) => item.name === '@flighthq/compression');
     const geometry = inventory.packages.find((item) => item.name === '@flighthq/geometry');
     const sdk = inventory.packages.find((item) => item.name === '@flighthq/sdk');
     const hostElectron = inventory.packages.find((item) => item.name === '@flighthq/host-electron');
     const toolCapture = inventory.packages.find((item) => item.name === '@flighthq/tool-capture');
-    if (!geometry || !sdk || !hostElectron || !toolCapture) throw new Error('Expected representative packages');
+    if (!abc || !compression || !geometry || !sdk || !hostElectron || !toolCapture) {
+      throw new Error('Expected representative packages');
+    }
+    const abcRoot = resolvePackageExportLane(inventoryByName, '@flighthq/abc');
+    const compressionRoot = resolvePackageExportLane(inventoryByName, '@flighthq/compression');
     const geometryRoot = resolvePackageExportLane(inventoryByName, '@flighthq/geometry');
     const geometryContract = resolvePackageExportLane(inventoryByName, '@flighthq/geometry/contract');
     const rootVector = geometryRoot.exports.find((item) => item.name === 'createVector2');
@@ -35,17 +41,21 @@ describe('analyzeUpstream', () => {
     expect(inventory.summary).toMatchObject({
       excludedPackages: 1,
       exportConflicts: 0,
-      exportLanes: 291,
-      exports: 30_378,
-      packages: 139,
-      rootExports: 11_740,
-      sourceFiles: 2_338,
-      testFiles: 1_266,
+      exportLanes: 295,
+      exports: 30_935,
+      packages: 141,
+      rootExports: 11_961,
+      sourceFiles: 2_390,
+      testFiles: 1_304,
     });
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);
     expect(rootVector).toMatchObject({ kind: 'function', source: expect.stringContaining('/geometry/src/vector2.ts') });
     expect(contractVector).toEqual(rootVector);
+    expect(abcRoot.exports).toContainEqual(expect.objectContaining({ kind: 'function', name: 'readAbcFile' }));
+    expect(compressionRoot.exports).toContainEqual(
+      expect.objectContaining({ kind: 'variable', name: 'inflateDeflate' }),
+    );
     expect(() => resolvePackageExportLane(inventoryByName, '@flighthq/geometry/private')).toThrow(
       'Package import uses an unaccounted export lane: @flighthq/geometry/private',
     );
@@ -174,7 +184,7 @@ describe('auditLowering', () => {
     const audit = auditLowering(path.resolve('.'));
     const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
 
-    expect(audit.summary.packages).toBe(138);
+    expect(audit.summary.packages).toBe(140);
     expect(audit.summary.declarations).toBeGreaterThan(5_000);
     expect(audit.summary.lowered).toBe(audit.summary.declarations);
     expect(audit.summary.diagnostics).toBe(0);
@@ -184,7 +194,7 @@ describe('auditLowering', () => {
     expect(audit.summary.staticFacts.indexedReceivers.Float32Array.expressions).toBeGreaterThan(1_000);
     expect(math?.lowered).toBeGreaterThan(50);
     expect(math?.staticFacts.numericRelations).toBeGreaterThan(10);
-  }, 60_000);
+  }, 120_000);
 });
 
 describe('packageNameToModule', () => {

@@ -25,13 +25,13 @@ import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
 
 class Scene2dResources {
-  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, ?required:Dynamic):Scene2DAssetReference {
-    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DAssetReference(name, uri, target, required);
+  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, ?required:Dynamic, ?bytes:Null<flighthq._internal._UInt8Array>, ?mimeType:Null<String>):Scene2DAssetReference {
+    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DAssetReference(name, uri, target, required, bytes, mimeType);
     return cast null;
   }
 
-  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>):Scene2DDocument {
-    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DDocument(root, references, sourceKind);
+  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>):Scene2DDocument {
+    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DDocument(root, references, sourceKind, backgroundColor);
     return cast null;
   }
 

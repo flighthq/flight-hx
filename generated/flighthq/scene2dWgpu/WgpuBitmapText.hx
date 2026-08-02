@@ -4,6 +4,7 @@ package flighthq.scene2dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderWgpu.WgpuMaterialRegistry.resolveWgpuMaterialRenderer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuTextureResolver.resolveWgpuTexture;
@@ -62,7 +63,7 @@ class WgpuBitmapText {
       var atlas:Dynamic = _Runtime.field(page, 'atlas');
       var texture:Dynamic = atlas.texture;
       if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(page, 'instanceCount'), 0.0) : Bool)) : Bool)) { continue; }
-      var textureEntry:Dynamic = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true] : Array<Dynamic>));
+      var textureEntry:Dynamic = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { continue; }
       var base:Dynamic = _Runtime.callValue(prepareWgpuQuadBatchWrite, cast ([state, textureEntry, _Runtime.field(texture, 'sampler'), _Runtime.field(node, 'blendMode'), material, materialRenderer, _Runtime.field(page, 'instanceCount')] : Array<Dynamic>));
       var startCount:Dynamic = _Runtime.field(runtime, 'quadBatchWriterCount');

@@ -2,3 +2,12 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './font.mjs';
+export * from './fontFormat.mjs';
+export * from './fontFrom.mjs';
+export * from './fontResource.mjs';
+export * from './fontResourceFrom.mjs';
+export * from './fontShorthand.mjs';
+export * from './fontStatus.mjs';
+export * from './glyphOutlineSource.mjs';

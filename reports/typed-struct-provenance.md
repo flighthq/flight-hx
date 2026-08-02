@@ -1,32 +1,42 @@
 # Typed Struct Provenance Audit
 
-Upstream commit: `c61de179af8a12c2fa3b9b7d5389ee302f577a0d`
+Upstream commit: `7333e825d9df46d737c5a6557acbed4805e19e57`
 
 This reporting-only audit tests nominal-identity closure for the clean required-field set. It does not enable class emission. Bridge exposure is reported separately and is not itself a closure blocker.
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 632 |
-| Nominally closed candidates | 481 |
-| Blocked candidates | 151 |
-| Normalization-provenance blockers only | 96 |
+| Clean required-field candidates | 651 |
+| Nominally closed candidates | 490 |
+| Blocked candidates | 161 |
+| Normalization-provenance blockers only | 105 |
 | Container-transfer blockers only | 42 |
-| Both blocker classes | 13 |
-| Normalization roots (all eligible schemas) | 358 |
+| Both blocker classes | 14 |
+| Normalization roots (all eligible schemas) | 364 |
 | JSON.parse roots | 10 |
-| Containment edges (all eligible schemas) | 1593 |
-| Candidates blocked by normalization provenance | 109 |
-| Candidates blocked by container transfers | 55 |
-| Candidates with anonymous container transfers | 36 |
+| Containment edges (all eligible schemas) | 1620 |
+| Candidates blocked by normalization provenance | 119 |
+| Candidates blocked by container transfers | 56 |
+| Candidates with anonymous container transfers | 37 |
 | Candidates with cross-schema container transfers | 7 |
 | Candidates with dynamic container transfers | 18 |
-| Candidates exposed through bridge inputs | 409 |
-| Candidates exposed through bridge outputs | 403 |
+| Candidates exposed through bridge inputs | 413 |
+| Candidates exposed through bridge outputs | 421 |
 
 Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.
 
 | Candidate | Direct | Fields | Parents | Children | Normalization roots | Container transfers | Bridge in roots | Bridge out roots | Closed | Blockers |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |
+| `@flighthq/types:interface#AbcClass` | 0 | 2 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcException` | 0 | 5 | 1 | 0 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcInstance` | 0 | 7 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcMetadataItem` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcMethodBody` | 0 | 8 | 1 | 2 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcMultiname` | 0 | 6 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcNamespace` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcOptionalValue` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcScript` | 0 | 2 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcTrait` | 0 | 11 | 4 | 0 | 1 | 2 | 0 | 1 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#AccessibilityBackend` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AmbientLightReading` | 3 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeChannel` | 0 | 3 | 1 | 3 | 5 | 0 | 5 | 5 | no | `normalization-provenance` |
@@ -47,9 +57,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#AsepriteParsed` | 0 | 2 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#AsepriteRect` | 0 | 4 | 6 | 0 | 2 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AsepriteSize` | 2 | 2 | 4 | 0 | 3 | 0 | 2 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AssetEntry` | 19 | 4 | 1 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
-| `@flighthq/types:interface#AssetLibrary` | 11 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#AssetLibraryRuntime` | 33 | 4 | 1 | 3 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#AssetEntry` | 21 | 4 | 1 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
+| `@flighthq/types:interface#AssetLibrary` | 16 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#AssetLibraryRuntime` | 48 | 6 | 1 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AssetLoaderAdapter` | 0 | 2 | 1 | 0 | 0 | 1 | 2 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#AssetLoadProgress` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AttachmentSkin2D` | 0 | 2 | 1 | 1 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
@@ -60,11 +70,13 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#BidiClassBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#BidiRun` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapFingerprint` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#BitmapFont` | 12 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#BitmapFont` | 20 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapFontCharRecord` | 12 | 9 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapFontKerningData` | 3 | 3 | 1 | 0 | 0 | 1 | 1 | 0 | no | `container-transfer` |
+| `@flighthq/types:interface#BitmapFontKerningPair` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapFontKerningRecord` | 3 | 3 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapFontPageRecord` | 5 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapFontSummary` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapHistogram` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapMismatch` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapReadbackExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -135,6 +147,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CollisionPoint` | 0 | 2 | 2 | 0 | 0 | 0 | 4 | 4 | yes | — |
 | `@flighthq/types:interface#CollisionPolygon` | 0 | 1 | 2 | 0 | 0 | 0 | 4 | 4 | yes | — |
 | `@flighthq/types:interface#CollisionSegment` | 0 | 4 | 2 | 0 | 0 | 0 | 4 | 4 | yes | — |
+| `@flighthq/types:interface#CollisionTestExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ColorKeyframe` | 22 | 4 | 0 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ColorLut` | 0 | 2 | 4 | 0 | 1 | 0 | 8 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ColorLutAdjustment` | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | no | `container-transfer` |
@@ -229,9 +242,11 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlWireframeUpload` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlyphAtlas` | 8 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlyphAtlasEntryExplanation` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlyphAtlasRuntime` | 94 | 19 | 1 | 6 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#GlyphAtlasRuntime` | 95 | 20 | 1 | 7 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlyphAtlasShelf` | 6 | 3 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#GlyphEntry` | 48 | 8 | 2 | 0 | 0 | 1 | 2 | 3 | no | `container-transfer` |
+| `@flighthq/types:interface#GlyphEntry` | 53 | 8 | 2 | 0 | 0 | 1 | 2 | 3 | no | `container-transfer` |
+| `@flighthq/types:interface#GlyphOutlineMetrics` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlyphOutlineSource` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlyphRasterizedBitmap` | 27 | 6 | 1 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#GlyphSource` | 0 | 4 | 1 | 0 | 1 | 0 | 3 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#Group` | 0 | 9 | 0 | 3 | 0 | 0 | 0 | 0 | yes | — |
@@ -240,6 +255,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#HasColorScaleBias` | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | no | `container-transfer` |
 | `@flighthq/types:interface#HitTestResult` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#HtmlViewData` | 0 | 3 | 1 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ImageEncodeFailureExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ImageResourceReferenceResolutionExplanation` | 0 | 4 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#InputGamepadAxisData` | 7 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | 8 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -317,7 +333,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#OrthographicProjection` | 12 | 3 | 4 | 0 | 1 | 0 | 4 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#OrthographicProjectionOptions` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#PackableRectangle` | 0 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#PackResult` | 0 | 4 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#PackedRectangle` | 0 | 6 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#PackResult` | 0 | 4 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ParsedProtocolUrl` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ParticleBurstEntry` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ParticleConfigIssue` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -334,6 +351,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#PathMesh` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PathMeshTyped` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PermissionBackend` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#PermissionStateExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjection` | 9 | 3 | 4 | 0 | 1 | 0 | 4 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#Physics2DCollider` | 0 | 4 | 1 | 13 | 0 | 0 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#Physics2DContact` | 0 | 12 | 3 | 1 | 0 | 0 | 1 | 1 | yes | — |
@@ -381,8 +399,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#SafeAreaInsets` | 16 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scale9Mapper` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scale9ShapeData` | 0 | 2 | 1 | 2 | 1 | 1 | 2 | 2 | no | `container-transfer`, `normalization-provenance` |
-| `@flighthq/types:interface#Scene2DAssetReference` | 0 | 6 | 3 | 2 | 0 | 2 | 2 | 3 | no | `container-transfer` |
-| `@flighthq/types:interface#Scene2DDocument` | 0 | 3 | 1 | 3 | 0 | 1 | 1 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#Scene2DAssetReference` | 0 | 8 | 3 | 2 | 0 | 2 | 2 | 3 | no | `container-transfer` |
+| `@flighthq/types:interface#Scene2DDocument` | 0 | 4 | 1 | 3 | 0 | 1 | 1 | 2 | no | `container-transfer` |
 | `@flighthq/types:interface#Scene2DDocumentFetchProgress` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene2DDocumentImportContext` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Scene2DFitContext` | 0 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
@@ -437,7 +455,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#SocketCloseInfo` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SocketConnection` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SocketMessage` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SocketRuntime` | 0 | 4 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#SocketRuntime` | 0 | 5 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SocketSignals` | 0 | 4 | 1 | 4 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#SoftKeyboard` | 0 | 9 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardInfo` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -571,6 +589,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#UnityParsed` | 2 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#UnityRotationOverLifetime` | 0 | 2 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#UnityShape` | 0 | 5 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#UnpackedRectangleExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#UpdateProgress` | 0 | 5 | 1 | 0 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#UpdaterBackend` | 0 | 21 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#UpdaterError` | 0 | 2 | 1 | 0 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
@@ -582,7 +601,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#VertexAttributeLayout` | 66 | 2 | 2 | 1 | 4 | 0 | 8 | 8 | no | `normalization-provenance` |
 | `@flighthq/types:interface#VideoChannel` | 43 | 8 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#VideoResource` | 15 | 2 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#VoxelGrid` | 0 | 7 | 76 | 0 | 31 | 0 | 36 | 35 | no | `normalization-provenance` |
+| `@flighthq/types:interface#VoxelGrid` | 0 | 9 | 76 | 0 | 31 | 0 | 36 | 35 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WebcamBackend` | 0 | 3 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WebcamCapabilities` | 0 | 11 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WebcamCapabilityRange` | 0 | 3 | 6 | 0 | 0 | 0 | 0 | 0 | yes | — |

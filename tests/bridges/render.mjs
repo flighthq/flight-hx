@@ -13,4 +13,5 @@ export const packScene3DLightBlock = compiled.flighthq.render.Render.packScene3D
 export const prepareScene2DRender = compiled.flighthq.render.Render.prepareScene2DRender;
 export const prepareScene3DRender = compiled.flighthq.render.Render.prepareScene3DRender;
 export const registerRenderer = compiled.flighthq.render.Render.registerRenderer;
+export const SCENE2D_WORKING_COLOR_SPACE = compiled.flighthq.render.Render.SCENE2D_WORKING_COLOR_SPACE;
 export const useRenderCache = compiled.flighthq.render.Render.useRenderCache;

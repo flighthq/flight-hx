@@ -6,5 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types._internal._IridescencePbrExtensionValues.IridescencePbrExtensionKind;
 
 typedef IridescencePbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var iridescence:Float; var iridescenceIor:Float; var iridescenceMap:Null<Texture>; var iridescenceMapUvSet:PbrUvSet; var iridescenceThicknessMap:Null<Texture>; var iridescenceThicknessMapUvSet:PbrUvSet; var iridescenceThicknessMax:Float; var iridescenceThicknessMin:Float; };

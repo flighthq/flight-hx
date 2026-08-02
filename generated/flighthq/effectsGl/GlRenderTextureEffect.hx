@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlRenderEffectRegistry.getGlRenderEffectRunner;
 import flighthq.renderGl.GlRenderStateBracket.withGlRenderState;
+import flighthq.renderGl.GlRenderTexture.explainGlRenderTexture;
 import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
 import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
@@ -27,7 +28,7 @@ class GlRenderTextureEffect {
       runner = _Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(effect, 'kind')] : Array<Dynamic>));
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
     }] : Array<Dynamic>));
-    _Runtime.callValue(GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect, cast ([state, _Runtime.callValue(explainGlRenderEffectApplication, cast ([state, effects, !_Runtime.strictEquals(sourceTarget, null)] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect, cast ([state, _Runtime.callValue(explainGlRenderEffectApplication, cast ([state, effects, !_Runtime.strictEquals(sourceTarget, null), _Runtime.strictEquals(_Runtime.field(_Runtime.callValue(explainGlRenderTexture, cast ([state, dest] : Array<Dynamic>)), 'status'), 'ready')] : Array<Dynamic>))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
     _Runtime.callValue(withGlRenderState, cast ([state, function() {
@@ -51,7 +52,7 @@ class GlRenderTextureEffect {
     return cast null;
   }
 
-  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool):GlRenderEffectApplicationExplanation {
+  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, destinationAvailable:Dynamic = false):GlRenderEffectApplicationExplanation {
     var unregisteredKinds:Dynamic = cast _Runtime.UNDEFINED;
     var requestedCount:Dynamic = cast _Runtime.UNDEFINED;
     var registeredCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -62,6 +63,7 @@ class GlRenderTextureEffect {
     return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: _Runtime.callValue(getStatus, cast ([] : Array<Dynamic>)), unregisteredKinds: unregisteredKinds };
     getStatus = function getStatus():Dynamic {
       if ((cast _Runtime.strictEquals(requestedCount, 0.0) : Bool)) { return cast 'no-effects'; }
+      if ((cast ((cast destinationAvailable : Bool) && (cast _Runtime.orValue(!(cast sourceAvailable : Bool), function():Dynamic return cast _Runtime.strictEquals(registeredCount, 0.0)) : Bool)) : Bool)) { return cast 'stale-destination'; }
       if ((cast !(cast sourceAvailable : Bool) : Bool)) { return cast 'source-unavailable'; }
       if ((cast _Runtime.strictEquals(registeredCount, 0.0) : Bool)) { return cast 'unregistered-effects'; }
       return cast ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'partial-registration' : Dynamic) : (cast 'complete' : Dynamic));

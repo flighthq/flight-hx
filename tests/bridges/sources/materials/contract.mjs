@@ -2,3 +2,24 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './anisotropyPbrExtension.mjs';
+export * from './classicMaterials.mjs';
+export * from './clearcoatPbrExtension.mjs';
+export * from './colorScaleBias.mjs';
+export * from './customShaderMaterial.mjs';
+export * from './extendedPbrMaterial.mjs';
+export * from './iridescencePbrExtension.mjs';
+export * from './material.mjs';
+export * from './materialPresets.mjs';
+export * from './materialValidation.mjs';
+export * from './pbrExtension.mjs';
+export * from './pbrMaterials.mjs';
+export * from './phongToPbr.mjs';
+export * from './sheenPbrExtension.mjs';
+export * from './specularPbrExtension.mjs';
+export * from './standardMaterial.mjs';
+export * from './surfaceMaterial.mjs';
+export * from './transmissionVolumePbrExtension.mjs';
+export * from './unlitMaterials.mjs';
+export * from './wrappedDiffusePbrExtension.mjs';

@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './webcam.mjs';
+export * from './webcamStream.mjs';

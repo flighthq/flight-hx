@@ -35,13 +35,13 @@ class LoadScene2DResources {
                 var __flowBranch2:Dynamic;
                 if ((cast _Runtime.strictEquals(_Runtime.field(reference, 'kind'), Scene2DContentReferenceKindValue.Slot) : Bool)) {
                   __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
-                    return flighthq._internal._Async.flowReturn(_Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveSlotContent', cast ([_Runtime.field(reference, 'name'), _Runtime.field(reference, 'linkage')] : Array<Dynamic>)), function():Dynamic return cast null));
+                    return flighthq._internal._Async.flowReturn(_Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveSlotContent', cast ([reference] : Array<Dynamic>)), function():Dynamic return cast null));
                   });
                 } else {
                   __flowBranch2 = flighthq._internal._Async.flowNormal();
                 }
                 return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
-                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(options, 'loadAssetContent', cast ([_Runtime.field(reference, 'name'), _Runtime.field(reference, 'uri'), signal] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flatMap(_Runtime.callProperty(options, 'loadAssetContent', cast ([reference, signal] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
                     return flighthq._internal._Async.flowReturn(__awaitValue3);
                   });
                 });

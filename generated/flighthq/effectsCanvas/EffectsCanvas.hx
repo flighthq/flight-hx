@@ -3,11 +3,18 @@ package flighthq.effectsCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsCanvas.CanvasBevelEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBevelEffect;
 import flighthq.effectsCanvas.CanvasBlendEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBlendEffect;
 import flighthq.effectsCanvas.CanvasBloomEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBloomEffect;
 import flighthq.effectsCanvas.CanvasBlurEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBlurEffect;
+import flighthq.effectsCanvas.CanvasCompositeEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasCompositeEffect;
 import flighthq.effectsCanvas.CanvasDropShadowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasDropShadowEffect;
 import flighthq.effectsCanvas.CanvasFilmGrainEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasFilmGrainEffect;
+import flighthq.effectsCanvas.CanvasGradientBevelEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientBevelEffect;
+import flighthq.effectsCanvas.CanvasGradientGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientGlowEffect;
+import flighthq.effectsCanvas.CanvasGradientRamp as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientRamp;
+import flighthq.effectsCanvas.CanvasInnerGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerGlowEffect;
+import flighthq.effectsCanvas.CanvasInnerShadowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect;
 import flighthq.effectsCanvas.CanvasOuterGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasOuterGlowEffect;
 import flighthq.effectsCanvas.CanvasPixelateEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPixelateEffect;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline;
@@ -16,11 +23,16 @@ import flighthq.effectsCanvas.CanvasRenderTextureEffect as Facade_EffectsCanvas_
 import flighthq.effectsCanvas.CanvasScanlinesEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect;
 import flighthq.effectsCanvas.CanvasVignetteEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect;
 import flighthq.types.AdvancedBlendMode;
+import flighthq.types.CompositeOperator;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
 class EffectsCanvas {
+  public static function applyCanvasGradientRampLookup(dest:Dynamic, source:Dynamic, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Dynamic, ?scale:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientRamp.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale);
+  }
+
   public static function applyCanvasRenderEffectsToRenderTexture(state:Dynamic, pool:Dynamic, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     return cast Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderTextureEffect.applyCanvasRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
     return cast null;
@@ -30,10 +42,21 @@ class EffectsCanvas {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline.beginCanvasRenderEffectPipeline(state, pipeline);
   }
 
+  public static function buildCanvasGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray {
+    return cast Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientRamp.buildCanvasGradientRamp(colors, alphas, ratios);
+    return cast null;
+  }
+
+  public static function clipCanvasBevelBand(band:Dynamic, source:Dynamic, bevelType:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBevelEffect.clipCanvasBevelBand(band, source, bevelType);
+  }
+
   public static function createCanvasRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
     return cast Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline.createCanvasRenderEffectPipeline(_state, options);
     return cast null;
   }
+
+  public static final defaultCanvasBevelEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBevelEffect.defaultCanvasBevelEffectRunner;
 
   public static final defaultCanvasBlendEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBlendEffect.defaultCanvasBlendEffectRunner;
 
@@ -41,9 +64,19 @@ class EffectsCanvas {
 
   public static final defaultCanvasBlurEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBlurEffect.defaultCanvasBlurEffectRunner;
 
+  public static final defaultCanvasCompositeEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasCompositeEffect.defaultCanvasCompositeEffectRunner;
+
   public static final defaultCanvasDropShadowEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasDropShadowEffect.defaultCanvasDropShadowEffectRunner;
 
   public static final defaultCanvasFilmGrainEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasFilmGrainEffect.defaultCanvasFilmGrainEffectRunner;
+
+  public static final defaultCanvasGradientBevelEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientBevelEffect.defaultCanvasGradientBevelEffectRunner;
+
+  public static final defaultCanvasGradientGlowEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientGlowEffect.defaultCanvasGradientGlowEffectRunner;
+
+  public static final defaultCanvasInnerGlowEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerGlowEffect.defaultCanvasInnerGlowEffectRunner;
+
+  public static final defaultCanvasInnerShadowEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect.defaultCanvasInnerShadowEffectRunner;
 
   public static final defaultCanvasOuterGlowEffectRunner:Dynamic = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasOuterGlowEffect.defaultCanvasOuterGlowEffectRunner;
 
@@ -67,6 +100,15 @@ class EffectsCanvas {
     return cast null;
   }
 
+  public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):Dynamic {
+    return cast Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasCompositeEffect.getCanvasCompositeEffectOperation(operator_);
+    return cast null;
+  }
+
+  public static function registerCanvasBevelEffect(state:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBevelEffect.registerCanvasBevelEffect(state);
+  }
+
   public static function registerCanvasBlendEffect(state:Dynamic):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBlendEffect.registerCanvasBlendEffect(state);
   }
@@ -83,12 +125,32 @@ class EffectsCanvas {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBlurEffect.registerCanvasBlurEffect(state);
   }
 
+  public static function registerCanvasCompositeEffect(state:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasCompositeEffect.registerCanvasCompositeEffect(state);
+  }
+
   public static function registerCanvasDropShadowEffect(state:Dynamic):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasDropShadowEffect.registerCanvasDropShadowEffect(state);
   }
 
   public static function registerCanvasFilmGrainEffect(state:Dynamic):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasFilmGrainEffect.registerCanvasFilmGrainEffect(state);
+  }
+
+  public static function registerCanvasGradientBevelEffect(state:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientBevelEffect.registerCanvasGradientBevelEffect(state);
+  }
+
+  public static function registerCanvasGradientGlowEffect(state:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientGlowEffect.registerCanvasGradientGlowEffect(state);
+  }
+
+  public static function registerCanvasInnerGlowEffect(state:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerGlowEffect.registerCanvasInnerGlowEffect(state);
+  }
+
+  public static function registerCanvasInnerShadowEffect(state:Dynamic):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect.registerCanvasInnerShadowEffect(state);
   }
 
   public static function registerCanvasOuterGlowEffect(state:Dynamic):Void {

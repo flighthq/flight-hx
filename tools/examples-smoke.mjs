@@ -24,7 +24,7 @@ const flag = (name) => args.includes(`--${name}`);
 const targetArg = opt('target', 'all');
 const targets = targetArg === 'all' ? ['neko', 'html5', 'linux'] : targetArg.split(',');
 const filter = opt('filter');
-const modes = (opt('modes', 'gl,cairo')).split(',');
+const modes = opt('modes', 'gl,cairo').split(',');
 const resume = flag('resume');
 
 // Examples that only implement the GL path (no cairo branch).
@@ -115,10 +115,12 @@ for (const target of targets) {
       results[key] = outcome;
       writeFileSync(resultsPath, JSON.stringify(results, null, 2));
       const line = `${target} ${key}: ${outcome.status}${outcome.status === 'OK' ? '' : ` — ${outcome.detail}`}`;
+      // eslint-disable-next-line no-console -- CLI progress output is intentional.
       console.log(line);
       if (outcome.status !== 'OK') failures++;
     }
   }
 }
+// eslint-disable-next-line no-console -- CLI summary output is intentional.
 console.log(failures === 0 ? 'SMOKE OK' : `SMOKE FAILED: ${failures} failing entries`);
 process.exit(failures === 0 ? 0 : 1);

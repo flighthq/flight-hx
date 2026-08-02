@@ -10,16 +10,20 @@ import flighthq.geometry.Matrix4.getMatrix4Position;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuSampler;
+import flighthq.renderWgpu.WgpuShader.getWgpuBlendState;
 import flighthq.renderWgpu.WgpuTextureResolver.resolveWgpuTexture;
 import flighthq.scene3dWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.texture.Texture.hasTextureUvTransform;
+import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
+import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
@@ -35,6 +39,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuSkinningAdapter;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
@@ -105,13 +110,17 @@ class WgpuMeshPipeline {
   public static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ @:optional var blended:Bool; var doubleSided:Bool; @:optional var extraBindGroupLayout:Dynamic; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var skinned:Bool; @:optional var topology:Dynamic; }):flighthq.types.WgpuMeshPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var layouts:Dynamic = cast _Runtime.UNDEFINED;
+    var sceneRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var skinning:Dynamic = cast _Runtime.UNDEFINED;
+    var blendMode:Dynamic = cast _Runtime.UNDEFINED;
     var bindGroupLayouts:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     device = _Runtime.field(state, 'device');
     layouts = _Runtime.callValue(ensureWgpuScene3DLayouts, cast ([state] : Array<Dynamic>));
-    skinning = (cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'skinningAdapter') : Null<WgpuSkinningAdapter>);
+    sceneRuntime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
+    skinning = (cast _Runtime.field(sceneRuntime, 'skinningAdapter') : Null<WgpuSkinningAdapter>);
+    blendMode = _Runtime.select(_Runtime.field(options, 'blended'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(sceneRuntime, 'activeBlendMode'), function():Dynamic return cast BlendModeValue.Normal), function():Dynamic return cast null);
     bindGroupLayouts = cast ([_Runtime.field(layouts, 'frameBindGroupLayout'), _Runtime.select(_Runtime.andValue(_Runtime.field(options, 'skinned'), function():Dynamic return cast !_Runtime.strictEquals(skinning, null)), function():Dynamic return cast _Runtime.callProperty(skinning, 'getDrawLayout', cast ([state] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(layouts, 'drawBindGroupLayout')), _Runtime.field(options, 'materialBindGroupLayout')] : Array<Dynamic>);
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'extraBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(bindGroupLayouts, 'push', cast ([_Runtime.field(options, 'extraBindGroupLayout')] : Array<Dynamic>));
@@ -123,8 +132,13 @@ class WgpuMeshPipeline {
       if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'iblBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(bindGroupLayouts, 'push', cast ([_Runtime.field(options, 'iblBindGroupLayout')] : Array<Dynamic>)); }
     } }
     layout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: bindGroupLayouts }] : Array<Dynamic>));
-    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: _Runtime.field(options, 'module'), entryPoint: 'vs_main', buffers: _Runtime.select(_Runtime.andValue(_Runtime.field(options, 'skinned'), function():Dynamic return cast !_Runtime.strictEquals(skinning, null)), function():Dynamic return cast _Runtime.field(skinning, 'vertexBufferLayouts'), function():Dynamic return cast WgpuMeshPipeline.VERTEX_BUFFER_LAYOUTS__wgpuMeshPipeline) }, fragment: { module: _Runtime.field(options, 'module'), entryPoint: 'fs_main', targets: cast ([{ format: _Runtime.field(options, 'format'), blend: _Runtime.select(_Runtime.field(options, 'blended'), function():Dynamic return cast { color: { srcFactor: 'src-alpha', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>) }, primitive: { topology: _Runtime.coalesce(_Runtime.field(options, 'topology'), function():Dynamic return cast 'triangle-list'), frontFace: 'ccw', cullMode: ((cast _Runtime.field(options, 'doubleSided') : Bool) ? (cast 'none' : Dynamic) : (cast 'back' : Dynamic)) }, depthStencil: { format: WgpuMeshPipeline.DEPTH_STENCIL_FORMAT__wgpuMeshPipeline, depthWriteEnabled: !_Runtime.truthy(_Runtime.field(options, 'blended')), depthCompare: 'less' } }] : Array<Dynamic>));
+    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: _Runtime.field(options, 'module'), entryPoint: 'vs_main', buffers: _Runtime.select(_Runtime.andValue(_Runtime.field(options, 'skinned'), function():Dynamic return cast !_Runtime.strictEquals(skinning, null)), function():Dynamic return cast _Runtime.field(skinning, 'vertexBufferLayouts'), function():Dynamic return cast WgpuMeshPipeline.VERTEX_BUFFER_LAYOUTS__wgpuMeshPipeline) }, fragment: { module: _Runtime.field(options, 'module'), entryPoint: 'fs_main', targets: cast ([{ format: _Runtime.field(options, 'format'), blend: ((cast _Runtime.strictEquals(blendMode, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.callValue(getWgpuBlendState, cast ([blendMode] : Array<Dynamic>)) : Dynamic)) }] : Array<Dynamic>) }, primitive: { topology: _Runtime.coalesce(_Runtime.field(options, 'topology'), function():Dynamic return cast 'triangle-list'), frontFace: 'ccw', cullMode: ((cast _Runtime.field(options, 'doubleSided') : Bool) ? (cast 'none' : Dynamic) : (cast 'back' : Dynamic)) }, depthStencil: { format: WgpuMeshPipeline.DEPTH_STENCIL_FORMAT__wgpuMeshPipeline, depthWriteEnabled: !_Runtime.truthy(_Runtime.field(options, 'blended')), depthCompare: 'less' } }] : Array<Dynamic>));
     return cast { hasIblGroup: !_Runtime.strictEquals(_Runtime.field(options, 'iblBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')), hasPbrSampleGroup: !_Runtime.strictEquals(_Runtime.field(options, 'pbrSampleBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')), hasShadowGroup: !_Runtime.strictEquals(_Runtime.field(options, 'shadowBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')), materialBindGroupLayout: _Runtime.field(options, 'materialBindGroupLayout'), pipeline: pipeline, skinned: _Runtime.strictEquals(_Runtime.field(options, 'skinned'), true) };
+    return cast null;
+  }
+
+  public static function isWgpuMeshAlphaCoverage__wgpuMeshPipeline(material:Null<Material>):Bool {
+    return cast ((cast !_Runtime.looseEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend') : Bool));
     return cast null;
   }
 
@@ -406,13 +420,15 @@ class WgpuMeshPipeline {
   public static function ensureWgpuScene3DPipeline<T>(state:WgpuRenderState, key:String, compile:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var blended:Dynamic = cast _Runtime.UNDEFINED;
+    var blendMode:Dynamic = cast _Runtime.UNDEFINED;
     var skinned:Dynamic = cast _Runtime.UNDEFINED;
     var variantKey:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     blended = _Runtime.field(runtime, 'activeBlendedRun');
+    blendMode = ((cast blended : Bool) ? (cast _Runtime.coalesce(_Runtime.field(runtime, 'activeBlendMode'), function():Dynamic return cast BlendModeValue.Normal) : Dynamic) : (cast null : Dynamic));
     skinned = _Runtime.field(runtime, 'activeSkinnedRun');
-    variantKey = '' + Std.string(key) + '|' + Std.string(((cast blended : Bool) ? (cast 'blend' : Dynamic) : (cast 'opaque' : Dynamic))) + '|' + Std.string(((cast skinned : Bool) ? (cast 'skin' : Dynamic) : (cast 'rigid' : Dynamic))) + '';
+    variantKey = '' + Std.string(key) + '|' + Std.string(((cast _Runtime.strictEquals(blendMode, null) : Bool) ? (cast 'opaque' : Dynamic) : (cast 'blend:' + Std.string(blendMode) + '' : Dynamic))) + '|' + Std.string(((cast skinned : Bool) ? (cast 'skin' : Dynamic) : (cast 'rigid' : Dynamic))) + '';
     pipeline = ((cast _Runtime.field(runtime, 'pipelineCache') : flighthq._internal._Map).get(variantKey));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (pipeline = cast (_Runtime.callValue(compile, cast ([blended, skinned] : Array<Dynamic>)) : Dynamic));
@@ -491,15 +507,17 @@ class WgpuMeshPipeline {
 
   public static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
-    var filter:Dynamic = cast _Runtime.UNDEFINED;
+    var minFilter:Dynamic = cast _Runtime.UNDEFINED;
+    var magFilter:Dynamic = cast _Runtime.UNDEFINED;
     var useMips:Dynamic = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<Dynamic> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'linearSampler'); }
     sampler = _Runtime.field(texture, 'sampler');
-    filter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
     useMips = ((cast ((cast sampler.mipmaps : Bool) && (cast !_Runtime.strictEquals(sampler.minFilter, 'linear') : Bool)) : Bool) && (cast !_Runtime.strictEquals(sampler.minFilter, 'nearest') : Bool));
     mipmapFilter = ((cast useMips : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    return cast _Runtime.callValue(getWgpuSampler, cast ([state, filter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>));
+    return cast _Runtime.callValue(getWgpuSampler, cast ([state, minFilter, magFilter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>));
     return cast null;
   }
 
@@ -538,7 +556,7 @@ class WgpuMeshPipeline {
   public static function spliceWgpuColorAdjustmentPrelude(source:String, feature:WgpuColorAdjustmentMaterialFeature, matrix:Dynamic = false):String {
     var fields:Dynamic = cast _Runtime.UNDEFINED;
     fields = ((cast matrix : Bool) ? (cast '  flightColorMatrix0 : vec4f,\n  flightColorMatrix1 : vec4f,\n  flightColorMatrix2 : vec4f,\n  flightColorMatrix3 : vec4f,\n  flightColorMatrixOffset : vec4f,' : Dynamic) : (cast '  flightColorScale : vec4f,\n  flightColorBias : vec4f,' : Dynamic));
-    return cast (((cast matrix : Bool) ? (cast _Runtime.field(feature, 'matrixFragmentShaderChunk') : Dynamic) : (cast _Runtime.field(feature, 'fragmentShaderChunk') : Dynamic)) + _Runtime.replace(source, '  params : vec4f,          // x = resolved object alpha', '  params : vec4f,          // x = resolved object alpha\n' + Std.string(fields) + '', false));
+    return cast (((cast matrix : Bool) ? (cast _Runtime.field(feature, 'matrixFragmentShaderChunk') : Dynamic) : (cast _Runtime.field(feature, 'fragmentShaderChunk') : Dynamic)) + _Runtime.replace(source, '  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag', '  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag\n' + Std.string(fields) + '', false));
     return cast null;
   }
 
@@ -650,7 +668,7 @@ class WgpuMeshPipeline {
     flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 38.0), flighthq._internal._StaticIndex.readFloat32Array(uv, 8.0));
     flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 39.0), 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 40.0), _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 41.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 41.0), ((cast _Runtime.callValue(WgpuMeshPipeline.isWgpuMeshAlphaCoverage__wgpuMeshPipeline, cast ([_Runtime.field(proxy, 'material')] : Array<Dynamic>)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 42.0), 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 43.0), 0.0);
     colorMatrix = _Runtime.field(proxy, 'colorMatrix');
@@ -685,7 +703,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  public static final WGPU_MESH_PRELUDE_WGSL:Dynamic = '\nconst PI : f32 = 3.14159265359;\nconst MAX_FORWARD_LIGHTS : u32 = 4u;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraPosition : vec4f,\n  lightDirection : vec4f,       // xyz = directional light travel direction; w = directionalCount\n  directionalRadiance : vec4f,  // rgb = linear premultiplied radiance\n  ambientRadiance : vec4f,      // rgb = linear premultiplied radiance; w = ambientCount\n  view : mat4x4f,               // camera view matrix; rotates world normals into view space (matcap)\n  // Punctual light arrays — layout mirrors Scene3DLightBlock.data (packScene3DLightBlock).\n  //   point[i]      = pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n  //   spot[i]       = spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n  //   hemisphere[i] = hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\n  pointLights : array<vec4f, 8>,       // MAX_FORWARD_LIGHTS * 2\n  spotLights : array<vec4f, 16>,       // MAX_FORWARD_LIGHTS * 4\n  hemisphereLights : array<vec4f, 12>, // MAX_FORWARD_LIGHTS * 3\n  punctualCounts : vec4f,              // x = pointCount, y = spotCount, z = hemisphereCount\n};\n\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,   // KHR_texture_transform of the material\'s primary map (identity when unused)\n  params : vec4f,          // x = resolved object alpha\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var<uniform> draw : Draw;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) worldPosition : vec3f,\n  @location(1) worldNormal : vec3f,\n  @location(2) worldTangent : vec4f,\n  @location(3) uv : vec2f,\n  @location(4) @interpolate(flat) objectAlpha : f32,\n};\n\n@vertex fn vs_main(\n  @location(0) position : vec3f,\n  @location(1) normal : vec3f,\n  @location(2) tangent : vec4f,\n  @location(3) uv : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  var localPosition = vec4f(position, 1.0);\n  var localNormal = normal;\n  var localTangent = tangent.xyz;\n  let world = draw.world * localPosition;\n  out.worldPosition = world.xyz;\n  out.clipPosition = frame.viewProjection * world;\n  out.worldNormal = draw.normalMatrix * localNormal;\n  out.worldTangent = vec4f(draw.normalMatrix * localTangent, tangent.w);\n  // Apply the material\'s KHR_texture_transform to the uv. draw.uvTransform is identity for an untiled\n  // material (writeWgpuDrawUniform\'s default), so this is a no-op there — applied unconditionally rather\n  // than behind a pipeline const because this vs_main is shared by every family (classic/unlit/toon/\n  // matcap/debug/wireframe) and a const would have to thread through all of them; a per-vertex mat3\n  // multiply is negligible. The scene-gl mirror gates the equivalent branch via its #ifdef variant.\n  out.uv = (draw.uvTransform * vec3f(uv, 1.0)).xy;\n  out.objectAlpha = draw.params.x;\n  return out;\n}\n\n// sRgb albedo texels are gamma-encoded; decode to linear before lighting.\nfn srgbToLinear(c : vec3f) -> vec3f {\n  let lo = c / 12.92;\n  let hi = pow((c + vec3f(0.055)) / 1.055, vec3f(2.4));\n  return select(lo, hi, c > vec3f(0.04045));\n}\n';
+  public static final WGPU_MESH_PRELUDE_WGSL:Dynamic = '\nconst PI : f32 = 3.14159265359;\nconst MAX_FORWARD_LIGHTS : u32 = 4u;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraPosition : vec4f,\n  lightDirection : vec4f,       // xyz = directional light travel direction; w = directionalCount\n  directionalRadiance : vec4f,  // rgb = linear premultiplied radiance\n  ambientRadiance : vec4f,      // rgb = linear premultiplied radiance; w = ambientCount\n  view : mat4x4f,               // camera view matrix; rotates world normals into view space (matcap)\n  // Punctual light arrays — layout mirrors Scene3DLightBlock.data (packScene3DLightBlock).\n  //   point[i]      = pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n  //   spot[i]       = spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n  //   hemisphere[i] = hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\n  pointLights : array<vec4f, 8>,       // MAX_FORWARD_LIGHTS * 2\n  spotLights : array<vec4f, 16>,       // MAX_FORWARD_LIGHTS * 4\n  hemisphereLights : array<vec4f, 12>, // MAX_FORWARD_LIGHTS * 3\n  punctualCounts : vec4f,              // x = pointCount, y = spotCount, z = hemisphereCount\n};\n\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,   // KHR_texture_transform of the material\'s primary map (identity when unused)\n  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var<uniform> draw : Draw;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) worldPosition : vec3f,\n  @location(1) worldNormal : vec3f,\n  @location(2) worldTangent : vec4f,\n  @location(3) uv : vec2f,\n  @location(4) @interpolate(flat) objectAlpha : f32,\n};\n\n@vertex fn vs_main(\n  @location(0) position : vec3f,\n  @location(1) normal : vec3f,\n  @location(2) tangent : vec4f,\n  @location(3) uv : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  var localPosition = vec4f(position, 1.0);\n  var localNormal = normal;\n  var localTangent = tangent.xyz;\n  let world = draw.world * localPosition;\n  out.worldPosition = world.xyz;\n  out.clipPosition = frame.viewProjection * world;\n  out.worldNormal = draw.normalMatrix * localNormal;\n  out.worldTangent = vec4f(draw.normalMatrix * localTangent, tangent.w);\n  // Apply the material\'s KHR_texture_transform to the uv. draw.uvTransform is identity for an untiled\n  // material (writeWgpuDrawUniform\'s default), so this is a no-op there — applied unconditionally rather\n  // than behind a pipeline const because this vs_main is shared by every family (classic/unlit/toon/\n  // matcap/debug/wireframe) and a const would have to thread through all of them; a per-vertex mat3\n  // multiply is negligible. The scene-gl mirror gates the equivalent branch via its #ifdef variant.\n  out.uv = (draw.uvTransform * vec3f(uv, 1.0)).xy;\n  out.objectAlpha = draw.params.x;\n  return out;\n}\n\n';
 
   public static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera3D, lights:Scene3DLightBlock):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;

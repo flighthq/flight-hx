@@ -2,3 +2,8 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './flyCameraController.mjs';
+export * from './follow.mjs';
+export * from './framing.mjs';
+export * from './orbitCameraController.mjs';

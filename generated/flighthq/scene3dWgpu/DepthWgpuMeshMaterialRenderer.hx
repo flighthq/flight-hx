@@ -34,7 +34,7 @@ class DepthWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     depth = (cast material : Null<DepthMaterial>);
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuDebugPipeline, cast ([state, { hasNormalMap: false, mode: 'depth' }, format] : Array<Dynamic>));
+    pipeline = _Runtime.callValue(ensureWgpuDebugPipeline, cast ([state, { hasNormalMap: false, mode: 'depth' }, format, _Runtime.coalesce(_Runtime.optionalField(depth, 'doubleSided'), function():Dynamic return cast false)] : Array<Dynamic>));
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
       (group = cast (_Runtime.callValue(bindWgpuDebugSurface, cast ([state, pipeline, DepthWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer, 0.0, 1.0, 1.0] : Array<Dynamic>)) : Dynamic));

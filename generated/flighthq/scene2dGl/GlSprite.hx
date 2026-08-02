@@ -3,6 +3,7 @@ package flighthq.scene2dGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.render.Scene2dWorkingColorSpace.SCENE2D_WORKING_COLOR_SPACE;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
@@ -51,7 +52,7 @@ class GlSprite {
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    glTexture = _Runtime.callValue(resolveGlTexture, cast ([state, texture, true] : Array<Dynamic>));
+    glTexture = _Runtime.callValue(resolveGlTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = _Runtime.field(runtime, 'currentTextureStraightAlpha');
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));

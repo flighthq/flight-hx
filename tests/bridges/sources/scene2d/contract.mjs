@@ -2,3 +2,10 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './displayContainer.mjs';
+export * from './displayObject.mjs';
+export * from './displayObjectAnimation.mjs';
+export * from './htmlView.mjs';
+export * from './scene2d.mjs';
+export * from './sprite.mjs';

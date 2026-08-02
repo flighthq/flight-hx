@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './enableTrayGuards.mjs';
+export * from './tray.mjs';

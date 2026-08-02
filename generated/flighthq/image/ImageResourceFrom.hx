@@ -25,17 +25,17 @@ class ImageResourceFrom {
   }
 
   public static function createImageResourceFromCanvas(canvas:Dynamic):Dynamic {
-    return cast _Runtime.callValue(createEntity, cast ([{ height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:Dynamic):Dynamic {
-    return cast _Runtime.callValue(createEntity, cast ([{ height: _Runtime.field(bitmap, 'height'), kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: _Runtime.field(bitmap, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: _Runtime.field(bitmap, 'height'), kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: _Runtime.field(bitmap, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:Dynamic):Dynamic {
-    return cast _Runtime.callValue(createEntity, cast ([{ height: _Runtime.field(img, 'height'), kind: ImageTextureSourceKind, source: img, version: 0.0, width: _Runtime.field(img, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: _Runtime.field(img, 'height'), kind: ImageTextureSourceKind, source: img, version: 0.0, width: _Runtime.field(img, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -149,4 +149,8 @@ class ImageResourceFrom {
       })
     );
   }
+
+  public static final DECODED_ALPHA_TYPE__imageResourceFrom:Dynamic = 'straight';
+
+  public static final DECODED_GAMUT__imageResourceFrom:Dynamic = 'srgb';
 }

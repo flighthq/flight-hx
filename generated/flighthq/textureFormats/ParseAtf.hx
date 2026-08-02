@@ -10,9 +10,26 @@ import flighthq.textureFormats.ByteReader.readByteReaderU32BigEndian;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
+import flighthq.types.TextureContainerParseFailureReason;
+
+typedef ParseFailure__parseAtf = { var reason:Null<TextureContainerParseFailureReason>; };
 
 class ParseAtf {
+  public static function getAtfParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
+    var failure:ParseFailure__parseAtf = cast _Runtime.UNDEFINED;
+    var containers:Dynamic = cast _Runtime.UNDEFINED;
+    failure = { reason: null };
+    containers = _Runtime.callValue(ParseAtf.parseAtfInternal__parseAtf, cast ([bytes, failure] : Array<Dynamic>));
+    return cast ((cast _Runtime.strictEquals(containers, null) : Bool) ? (cast _Runtime.field(failure, 'reason') : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
+
   public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
+    return cast _Runtime.callValue(ParseAtf.parseAtfInternal__parseAtf, cast ([bytes] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseAtfInternal__parseAtf(bytes:flighthq._internal._UInt8Array, ?failure:ParseFailure__parseAtf):Null<Array<TextureContainer>> {
     var versioned:Dynamic = cast _Runtime.UNDEFINED;
     var headerOffset:Dynamic = cast _Runtime.UNDEFINED;
     var version:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,23 +51,27 @@ class ParseAtf {
     var reader:Dynamic = cast _Runtime.UNDEFINED;
     var lengthWidth:Dynamic = cast _Runtime.UNDEFINED;
     var containers:Array<TextureContainer> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(ParseAtf.hasAtfSignature__parseAtf, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast _Runtime.callValue(ParseAtf.hasAtfSignature__parseAtf, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'container-unrecognized'] : Array<Dynamic>)); }
     versioned = _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 6.0), ParseAtf.atfNewVersionMarker__parseAtf);
     headerOffset = ((cast versioned : Bool) ? (cast ParseAtf.atfNewHeaderOffset__parseAtf : Dynamic) : (cast ParseAtf.atfLegacyHeaderOffset__parseAtf : Dynamic));
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast (headerOffset + 4.0) : Float)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast (headerOffset + 4.0) : Float)) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'header-truncated'] : Array<Dynamic>)); }
     version = ((cast versioned : Bool) ? (cast flighthq._internal._StaticIndex.readUint8Array(bytes, 7.0) : Dynamic) : (cast 0.0 : Dynamic));
     lengthReader = _Runtime.callValue(createByteReader, cast ([bytes, ((cast versioned : Bool) ? (cast 8.0 : Dynamic) : (cast 3.0 : Dynamic))] : Array<Dynamic>));
     payloadLength = ((cast versioned : Bool) ? (cast _Runtime.callValue(readByteReaderU32BigEndian, cast ([lengthReader] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(readByteReaderU24BigEndian, cast ([lengthReader] : Array<Dynamic>)) : Dynamic));
-    if ((cast ((cast (headerOffset + payloadLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast null; }
+    if ((cast ((cast (headerOffset + payloadLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>)); }
     typeFormatByte = flighthq._internal._StaticIndex.readUint8Array(bytes, headerOffset);
     log2Width = flighthq._internal._StaticIndex.readUint8Array(bytes, (headerOffset + 1.0));
     log2Height = flighthq._internal._StaticIndex.readUint8Array(bytes, (headerOffset + 2.0));
     mipCount = flighthq._internal._StaticIndex.readUint8Array(bytes, (headerOffset + 3.0));
     formatCode = (_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfFormatCodeMask__parseAtf));
     alpha = ((cast ParseAtf.atfAlphaFormatCodes__parseAtf : flighthq._internal._Set).has(formatCode));
-    if ((cast ((cast !(cast alpha : Bool) : Bool) && (cast !(cast ((cast ParseAtf.atfOpaqueFormatCodes__parseAtf : flighthq._internal._Set).has(formatCode)) : Bool) : Bool)) : Bool)) { return cast null; }
-    if ((cast ((cast ((cast log2Width : Float) > (cast ParseAtf.atfMaxLog2Dimension__parseAtf : Float)) : Bool) || (cast ((cast log2Height : Float) > (cast ParseAtf.atfMaxLog2Dimension__parseAtf : Float)) : Bool)) : Bool)) { return cast null; }
-    if ((cast ((cast mipCount : Float) < (cast 1.0 : Float)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast alpha : Bool) : Bool) && (cast !(cast ((cast ParseAtf.atfOpaqueFormatCodes__parseAtf : flighthq._internal._Set).has(formatCode)) : Bool) : Bool)) : Bool)) {
+      return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'format-unsupported'] : Array<Dynamic>));
+    }
+    if ((cast ((cast ((cast log2Width : Float) > (cast ParseAtf.atfMaxLog2Dimension__parseAtf : Float)) : Bool) || (cast ((cast log2Height : Float) > (cast ParseAtf.atfMaxLog2Dimension__parseAtf : Float)) : Bool)) : Bool)) {
+      return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'structure-invalid'] : Array<Dynamic>));
+    }
+    if ((cast ((cast mipCount : Float) < (cast 1.0 : Float)) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'structure-invalid'] : Array<Dynamic>)); }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfCubeFlag__parseAtf)), 0.0);
     faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     width = (1 << _Runtime.toInt32(log2Width));
@@ -76,9 +97,9 @@ class ParseAtf {
             {
               var slot:Dynamic = 0.0;
               while ((cast ((cast slot : Float) < (cast slotCount : Float)) : Bool)) {
-                if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, lengthWidth] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+                if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, lengthWidth] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>)); }
                 var blockLength:Dynamic = ((cast _Runtime.strictEquals(version, 0.0) : Bool) ? (cast _Runtime.callValue(readByteReaderU24BigEndian, cast ([reader] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(readByteReaderU32BigEndian, cast ([reader] : Array<Dynamic>)) : Dynamic));
-                if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, blockLength] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+                if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, blockLength] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>)); }
                 if ((cast _Runtime.strictEquals(blockLength, 0.0) : Bool)) { (slot = cast ((slot + 1.0) : Dynamic)); continue; }
                 var byteOffset:Dynamic = reader.offset;
                 (reader.offset += blockLength);
@@ -102,13 +123,19 @@ class ParseAtf {
         (slot = cast ((slot + 1.0) : Dynamic));
       }
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(containers, 'length'), 0.0) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(containers, 'length'), 0.0) : Bool)) { return cast _Runtime.callValue(ParseAtf.reject__parseAtf, cast ([failure, 'structure-invalid'] : Array<Dynamic>)); }
     return cast containers;
     return cast null;
   }
 
+  public static function reject__parseAtf(failure:Null<ParseFailure__parseAtf>, reason:TextureContainerParseFailureReason):Dynamic {
+    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(failure, 'reason', reason); }
+    return cast null;
+    return cast null;
+  }
+
   public static function hasAtfSignature__parseAtf(bytes:flighthq._internal._UInt8Array):Bool {
-    return cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 7.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 84.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0), 70.0) : Bool));
+    return cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 84.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0), 70.0) : Bool));
     return cast null;
   }
 

@@ -2,3 +2,7 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './enableSocketGuards.mjs';
+export * from './explainSocketSendFailure.mjs';
+export * from './socket.mjs';

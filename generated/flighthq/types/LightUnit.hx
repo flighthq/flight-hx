@@ -3,5 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._LightUnitValues.CandelaLightUnit;
+import flighthq.types._internal._LightUnitValues.LumenLightUnit;
+import flighthq.types._internal._LightUnitValues.LuxLightUnit;
+import flighthq.types._internal._LightUnitValues.UnitlessLightUnit;
 
 typedef LightUnit = String;

@@ -10,6 +10,7 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types._internal._MeshValues.MeshKind;
 
 typedef Mesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var materials:Array<Null<Material>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; };
 

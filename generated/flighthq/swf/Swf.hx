@@ -8,6 +8,11 @@ import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 
 class Swf {
+  public static function createGlyphOutlineSourcesFromSwf(source:flighthq._internal._UInt8Array):Null<Dynamic> {
+    return cast Facade_Swf_flighthq_swf_SwfDocument.createGlyphOutlineSourcesFromSwf(source);
+    return cast null;
+  }
+
   public static function createScene2DFromSwf(source:flighthq._internal._UInt8Array):Null<Scene2DDocument> {
     return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DFromSwf(source);
     return cast null;

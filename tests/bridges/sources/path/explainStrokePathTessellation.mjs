@@ -6,5 +6,3 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const explainStrokePathTessellation = api.explainStrokePathTessellation;
-export { StrokePathTessellationExplanation } from '@flighthq/types/contract';
-export { StrokePathTessellationReason } from '@flighthq/types/contract';

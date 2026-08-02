@@ -3,5 +3,11 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
+import flighthq.types._internal._TextureSourceKindValues.VoxelGridTextureSourceKind;
 
 typedef TextureSourceKind = String;

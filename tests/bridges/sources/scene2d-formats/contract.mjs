@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './lottieDocument.mjs';
+export * from './svgDocument.mjs';

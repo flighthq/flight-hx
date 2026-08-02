@@ -3,6 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
 typedef Skeleton2DSlotAnimationPath = Dynamic;
 

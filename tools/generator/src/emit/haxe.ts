@@ -2006,6 +2006,12 @@ function emitExpression(expression: IrExpression): string {
         if (expression.right.kind === 'identifier' && expression.right.name === 'Error') {
           return `_Runtime.isError(${emitExpression(expression.left)})`;
         }
+        if (
+          expression.right.kind === 'identifier' &&
+          (expression.right.name === 'TypeError' || expression.right.name === 'RangeError')
+        ) {
+          return `_Runtime.isInstanceOfName(${emitExpression(expression.left)}, ${quote(expression.right.name)})`;
+        }
         if (emitExpression(expression.right) === "_Runtime.globalValue('Promise')") {
           return `flighthq._internal._Async.isPromise(${emitExpression(expression.left)})`;
         }

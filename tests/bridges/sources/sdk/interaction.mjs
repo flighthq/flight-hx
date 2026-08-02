@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from '@flighthq/input';
+export * from '@flighthq/interaction';

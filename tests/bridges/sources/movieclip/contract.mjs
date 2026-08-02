@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './movieClip.mjs';
+export * from './spritesheetTimelineSource.mjs';

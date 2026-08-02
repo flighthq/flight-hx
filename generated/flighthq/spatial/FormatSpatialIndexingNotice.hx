@@ -8,13 +8,25 @@ import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 
 class FormatSpatialIndexingNotice {
   public static function formatSpatialIndexingNotice(notice:SpatialIndexingNotice):String {
+    if ((cast _Runtime.strictEquals(_Runtime.field(notice, 'reason'), 'invalid-cell-size') : Bool)) {
+      return cast 'createUniformGridSpatialBackend(' + Std.string(_Runtime.field(notice, 'cellSize')) + '): cellSize must be a positive finite number. ' + Std.string(_Runtime.field(notice, 'operation')) + 'SpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + ') used the bounded overflow path instead, so results remain correct but queries scan this object.';
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(notice, 'reason'), 'inverted-bounds') : Bool)) {
+      return cast '' + Std.string(_Runtime.field(notice, 'operation')) + 'SpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): minX/minY must not exceed maxX/maxY, so the object was not indexed and no query will return it. The operation returns false for this — normalize or correct the bounds upstream.';
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(notice, 'reason'), 'missing-id') : Bool)) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(notice, 'operation'), 'remove') : Bool)) {
+        return cast 'removeSpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): the id was not indexed, so removal was a no-op. Check the object\'s indexing lifecycle if this was unexpected.';
+      }
+      return cast 'updateSpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): the id was not indexed, so update used its documented insert behavior and left the object in \'' + Std.string(_Runtime.field(notice, 'mode')) + '\' mode. Use insertSpatialObject for a new id, or check the object\'s indexing lifecycle.';
+    }
     if ((cast _Runtime.strictEquals(_Runtime.field(notice, 'mode'), 'declined') : Bool)) {
-      return cast 'insertSpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): the bounds are not finite, so the object was not indexed and no query will return it. Insert returns false for this — check the sentinel, and check what produced NaN/Infinity bounds upstream.';
+      return cast '' + Std.string(_Runtime.field(notice, 'operation')) + 'SpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): the bounds are not finite, so the object was not indexed and no query will return it. The operation returns false for this — check the sentinel, and check what produced NaN/Infinity bounds upstream.';
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(notice, 'mode'), 'overflow') : Bool)) {
-      return cast 'insertSpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): the bounds span ' + Std.string(_Runtime.field(notice, 'wouldOccupyBucketCount')) + ' cells, over the ' + Std.string(MAX_INDEXED_CELLS_PER_OBJECT) + ' per-object budget, so the object is held in the flat overflow list instead of the grid. Results are unaffected. If this is not a one-off outlier, the grid\'s cellSize is too small for the objects being indexed — size it to a typical object.';
+      return cast '' + Std.string(_Runtime.field(notice, 'operation')) + 'SpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): the bounds span ' + Std.string(_Runtime.field(notice, 'wouldOccupyBucketCount')) + ' cells, over the ' + Std.string(MAX_INDEXED_CELLS_PER_OBJECT) + ' per-object budget, so the object is held in the flat overflow list instead of the grid. Results are unaffected. If this is not a one-off outlier, the grid\'s cellSize is too small for the objects being indexed — size it to a typical object.';
     }
-    return cast 'insertSpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): indexed as \'' + Std.string(_Runtime.field(notice, 'mode')) + '\', which carries no caller-facing advice.';
+    return cast '' + Std.string(_Runtime.field(notice, 'operation')) + 'SpatialObject(' + Std.string(_Runtime.field(notice, 'id')) + '): indexed as \'' + Std.string(_Runtime.field(notice, 'mode')) + '\', which carries no caller-facing advice.';
     return cast null;
   }
 }

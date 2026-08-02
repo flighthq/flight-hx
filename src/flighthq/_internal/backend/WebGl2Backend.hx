@@ -162,6 +162,7 @@ class WebGl2Backend {
   public static inline final RGBA8:Int = 32856;
   public static inline final SCISSOR_BOX:Int = 3088;
   public static inline final SCISSOR_TEST:Int = 3089;
+  public static inline final SRGB8_ALPHA8:Int = 35907;
   public static inline final SRC_ALPHA:Int = 770;
   public static inline final STATIC_DRAW:Int = 35044;
   public static inline final STENCIL_BUFFER_BIT:Int = 1024;

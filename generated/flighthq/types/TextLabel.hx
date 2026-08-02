@@ -14,6 +14,7 @@ import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
 typedef TextLabelData = { var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; };
 

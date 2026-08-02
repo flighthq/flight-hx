@@ -2,3 +2,6 @@
 
 function __syncDependencies() {}
 __syncDependencies();
+
+export * from './debug.mjs';
+export * from './debugTiming.mjs';
