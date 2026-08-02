@@ -94,12 +94,20 @@ Compile generated Haxe to JavaScript, build ESM bridges matching `@flighthq/*`, 
 
 Behavior that can be checked without a browser should be exercised on multiple targets. JavaScript receives the deepest behavioral coverage through Vitest; other targets provide compile and representative runtime coverage. Platform-only packages are classified separately from portable packages.
 
+### Native cast and exception safety
+
+Do not use `try`/`catch` as a runtime type guard for `Dynamic`. On hxcpp, a mismatched cast from `Dynamic` to a pointer-backed type such as `Array` is unchecked: the cast can produce an invalid pointer and crash when it is used instead of throwing a catchable exception. Test the runtime identity first (`Std.isOfType`, a closed wrapper/tag dispatch, or an equally explicit predicate), then cast only inside the proven branch.
+
+Neko is not evidence for this failure mode because the same mismatch can be catchable there. Any maintained runtime-fallback change that adds or changes dynamic collection/iterator casts must exercise both an accepted value and a rejected value in a focused hxcpp smoke. `test:portable:cpp` or a narrower C++ crash regression is required in addition to Neko or Eval coverage; if the local host lacks a C++ compiler, record the missing verification and hand the change to an environment that can run it before integration.
+
+During generator review, treat a cast inside a protected `try` body as a census signal. Ordinary emitted conversions and argument-array literals are not automatically defects, but reject any lowering or runtime helper whose fallback depends on a cast mismatch reaching `catch`.
+
 ## Checkpoints
 
 - After analyzer or lowering changes: run the focused generator test and `generate:check`.
 - After patch changes: run the target fixture, patch audit, and `generate:check`.
 - After public API changes: run `api:check`, consumer compile fixtures, and the affected upstream package tests.
-- After maintained-runtime changes: run Haxe runtime tests and all supported targets touched by that runtime primitive.
+- After maintained-runtime changes: run Haxe runtime tests and all supported targets touched by that runtime primitive. Dynamic collection, iterator, or fallback changes require the C++ crash coverage described above.
 - After bridge changes: run a focused upstream Vitest file, then `test:upstream`.
 - Before completing a broad phase: run `npm run ci` and record the result in `agents/status.md`.
 
