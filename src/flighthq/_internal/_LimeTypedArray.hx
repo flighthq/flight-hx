@@ -37,7 +37,7 @@ class _LimeTypedArray {
         : sourceArray.length;
     nativeView = createView(kind, length);
     if (sourceArray != null) {
-      for (index in 0...length) setValue(index, sourceArray.get(index));
+      set(sourceArray);
     } else if (!Std.isOfType(source, Int) && !Std.isOfType(source, Float)) {
       final values = _Runtime.iterable(source);
       for (index in 0...values.length) setValue(index, values[index]);
@@ -88,11 +88,82 @@ class _LimeTypedArray {
     final start = Std.int(offset);
     final sourceArray = Std.isOfType(source, _LimeTypedArray) ? (cast source : _LimeTypedArray) : null;
     if (sourceArray != null) {
+      if (blitCompatible(kind, sourceArray.kind) && blitFrom(arrayBufferView(sourceArray.nativeView), start)) return;
       for (index in 0...sourceArray.length) setValue(start + index, sourceArray.get(index));
+      return;
+    }
+    if (Std.isOfType(source, lime.utils.ArrayBufferView)) {
+      final view:lime.utils.ArrayBufferView = cast source;
+      final sourceKind = typeToKind(view.type);
+      if (sourceKind != null && blitCompatible(kind, sourceKind) && blitFrom(view, start)) return;
+      for (index in 0...view.length) setValue(start + index, readRaw(view, index));
       return;
     }
     final values = _Runtime.iterable(source);
     for (index in 0...values.length) setValue(start + index, values[index]);
+  }
+
+  /** Byte-level copy from a Lime view into this array's storage, replacing the
+   * element-by-element loop where the JavaScript `set` conversion is
+   * bit-preserving. On the interpreter targets the per-element path costs
+   * seconds for megapixel copies (the spritesheet strip held its window black
+   * past the smoke gate); `Bytes.blit` is native. Returns false when the
+   * source does not fit, so callers keep the loop's out-of-range behavior. */
+  function blitFrom(view:lime.utils.ArrayBufferView, start:Int):Bool {
+    // The fake-Lime test stand-in erases typed arrays to plain Haxe arrays, so
+    // byte-level storage only exists when the backing really is a Lime view.
+    if (!Std.isOfType(nativeView, lime.utils.ArrayBufferView) || !Std.isOfType((view : Dynamic), lime.utils.ArrayBufferView)) return false;
+    final target = arrayBufferView(nativeView);
+    final bytesPerElement = elementByteSize(kind);
+    final targetByteStart = target.byteOffset + start * bytesPerElement;
+    if (start < 0 || targetByteStart + view.byteLength > target.byteOffset + target.byteLength) return false;
+    final targetBytes:haxe.io.Bytes = target.buffer;
+    final sourceBytes:haxe.io.Bytes = view.buffer;
+    targetBytes.blit(targetByteStart, sourceBytes, view.byteOffset, view.byteLength);
+    return true;
+  }
+
+  /** True when a raw byte copy from `sourceKind` storage into `targetKind`
+   * storage produces the same elements as JavaScript's per-element `set`
+   * conversion. Same-size integer conversions truncate mod 2^n, which is
+   * exactly a bit copy; a clamped destination clamps instead, so it only
+   * accepts sources already confined to 0..255; floats only match their own
+   * width. */
+  static function blitCompatible(targetKind:String, sourceKind:String):Bool {
+    return switch (targetKind) {
+      case 'int8', 'uint8': sourceKind == 'int8' || sourceKind == 'uint8' || sourceKind == 'uint8clamped';
+      case 'uint8clamped': sourceKind == 'uint8' || sourceKind == 'uint8clamped';
+      case 'int16', 'uint16': sourceKind == 'int16' || sourceKind == 'uint16';
+      case 'int32', 'uint32': sourceKind == 'int32' || sourceKind == 'uint32';
+      case 'float32': sourceKind == 'float32';
+      case 'float64': sourceKind == 'float64';
+      default: false;
+    };
+  }
+
+  static function typeToKind(type:lime.utils.ArrayBufferView.TypedArrayType):Null<String> {
+    return switch (type) {
+      case lime.utils.ArrayBufferView.TypedArrayType.Int8: 'int8';
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint8: 'uint8';
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint8Clamped: 'uint8clamped';
+      case lime.utils.ArrayBufferView.TypedArrayType.Int16: 'int16';
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint16: 'uint16';
+      case lime.utils.ArrayBufferView.TypedArrayType.Int32: 'int32';
+      case lime.utils.ArrayBufferView.TypedArrayType.Uint32: 'uint32';
+      case lime.utils.ArrayBufferView.TypedArrayType.Float32: 'float32';
+      case lime.utils.ArrayBufferView.TypedArrayType.Float64: 'float64';
+      default: null;
+    };
+  }
+
+  static function elementByteSize(kind:String):Int {
+    return switch (kind) {
+      case 'int8', 'uint8', 'uint8clamped': 1;
+      case 'int16', 'uint16': 2;
+      case 'int32', 'uint32', 'float32': 4;
+      case 'float64': 8;
+      default: throw 'Unsupported Lime typed-array kind: ' + kind;
+    };
   }
 
   public function setValue(index:Int, value:Dynamic):Dynamic {

@@ -12,7 +12,6 @@ import flighthq.types.Bitmap;
 import flighthq.types.DisplayObject;
 import flighthq.types.Sprite;
 import flighthq.types.Bitmap;
-import flighthq._internal._UInt8ClampedArray;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetPlayer;
 import lime.app.Application;
@@ -182,9 +181,14 @@ class Main extends Application {
   // Portable procedural coin strip: FRAME_COUNT gold discs whose horizontal radius shrinks toward the
   // middle frames to read as a spinning coin, uploaded as real RGBA bytes through the ImageResource
   // `data` path (a bare `{width, height}` object would become `image.source` and hit the DOM-element
-  // `texImage2D` overload, which rejects a plain object).
+  // `texImage2D` overload, which rejects a plain object). The discs are written directly into the
+  // bitmap's pixel store: a staging array plus a full-strip element-by-element copy costs ~20s on
+  // the neko interpreter (two abstract dispatches per element across 1.77M elements), which held the
+  // window black past the smoke gate's capture. Direct writes only touch lit pixels and start in
+  // well under the gate on every target.
   function createSpriteStrip():Dynamic {
-    final pixels = new _UInt8ClampedArray(STRIP_WIDTH * FRAME_SIZE * 4);
+    final bitmap:Bitmap = createBitmap(STRIP_WIDTH, FRAME_SIZE);
+    final data = bitmap.data;
     final ry = FRAME_SIZE * 0.42;
     for (f in 0...FRAME_COUNT) {
       final cx = f * FRAME_SIZE + FRAME_SIZE / 2;
@@ -199,20 +203,14 @@ class Main extends Application {
           if (d <= 1.0) {
             final i = (y * STRIP_WIDTH + px) * 4;
             final shade = 0.6 + 0.4 * (1.0 - d);
-            pixels[i] = Std.int(240 * shade);
-            pixels[i + 1] = Std.int(196 * shade);
-            pixels[i + 2] = Std.int(64 * shade);
-            pixels[i + 3] = 255;
+            data[i] = Std.int(240 * shade);
+            data[i + 1] = Std.int(196 * shade);
+            data[i + 2] = Std.int(64 * shade);
+            data[i + 3] = 255;
           }
         }
       }
     }
-    return imageFromPixels(STRIP_WIDTH, FRAME_SIZE, pixels);
-  }
-
-  function imageFromPixels(width:Int, height:Int, pixels:_UInt8ClampedArray):Dynamic {
-    final bitmap:Bitmap = createBitmap(width, height);
-    for (i in 0...Std.int(pixels.length)) bitmap.data[i] = pixels[i];
     return createImageResourceFromBitmap(bitmap);
   }
 

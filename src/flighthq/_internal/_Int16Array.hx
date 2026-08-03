@@ -56,12 +56,10 @@ abstract _Int16Array(Dynamic) {
   public function set(source:Dynamic, offset:Float = 0):Void {
     final start = Std.int(offset);
     #if (lime && !js)
-    final target:_LimeTypedArray = cast this;
-    final sourceArray = Std.isOfType(source, _LimeTypedArray) ? (cast source : _LimeTypedArray) : null;
-    if (sourceArray != null) {
-      for (index in 0...sourceArray.length) target.setValue(start + index, toInt16(sourceArray.get(index)));
-      return;
-    }
+    // Delegate to the storage class: it blits bit-compatible copies and keeps
+    // the element-conversion loop for everything else.
+    (cast this : _LimeTypedArray).set(source, start);
+    return;
     #end
     final values:Array<Dynamic> = _Runtime.iterable(source);
     for (index in 0...values.length) arrayWrite(start + index, values[index]);
