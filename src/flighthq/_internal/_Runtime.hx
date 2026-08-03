@@ -900,20 +900,24 @@ class _Runtime {
    * frame. hxcpp can otherwise specialize an inline Dynamic expression at its
    * store site as Int and truncate fractional results.
    */
-  public static function addNumbers(left:Float, right:Float):Float {
-    return left + right;
+  public static function addNumbers(left:Float, right:Float):Dynamic {
+    final result:Float = left + right;
+    return result;
   }
 
-  public static function subtractNumbers(left:Float, right:Float):Float {
-    return left - right;
+  public static function subtractNumbers(left:Float, right:Float):Dynamic {
+    final result:Float = left - right;
+    return result;
   }
 
-  public static function multiplyNumbers(left:Float, right:Float):Float {
-    return left * right;
+  public static function multiplyNumbers(left:Float, right:Float):Dynamic {
+    final result:Float = left * right;
+    return result;
   }
 
-  public static function divideNumbers(left:Float, right:Float):Float {
-    return left / right;
+  public static function divideNumbers(left:Float, right:Float):Dynamic {
+    final result:Float = left / right;
+    return result;
   }
 
   public static function setTimeout(callback:Void->Void, delayMs:Float):Dynamic {
