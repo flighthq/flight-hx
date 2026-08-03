@@ -108,7 +108,7 @@ class SceneDocument {
           j++;
         }
       }
-      inverseBindMatrices = new flighthq._internal._Float32Array((_Runtime.field(joints, 'length') * 16.0));
+      inverseBindMatrices = new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0));
       {
         var j:Dynamic = 0.0;
         while ((cast ((cast ((cast j : Float) < (cast _Runtime.field(_Runtime.field(skin, 'inverseBind'), 'length') : Float)) : Bool) && (cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
@@ -116,7 +116,7 @@ class SceneDocument {
           j++;
         }
       }
-      skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: inverseBindMatrices, jointMatrices: new flighthq._internal._Float32Array((_Runtime.field(joints, 'length') * 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:Dynamic) return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)) }] : Array<Dynamic>));
+      skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: inverseBindMatrices, jointMatrices: new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:Dynamic) return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)) }] : Array<Dynamic>));
       return cast { skeleton: skeleton, skeletonRoot: null };
     }] : Array<Dynamic>));
     {

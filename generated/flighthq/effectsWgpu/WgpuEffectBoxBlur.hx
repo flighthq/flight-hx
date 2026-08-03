@@ -55,8 +55,8 @@ class WgpuEffectBoxBlur {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBoxBlur.getBoxBlurPipeline__wgpuEffectBoxBlur, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, dirX);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, dirY);
       if ((cast _Runtime.strictEquals(edgeColor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

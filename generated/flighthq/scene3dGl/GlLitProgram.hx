@@ -86,7 +86,7 @@ class GlLitProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblIntensity'), _Runtime.field(ibl, 'intensity'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), _Runtime.subtractNumbers(_Runtime.field(ibl, 'prefilteredMipCount'), 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
     } else {
       var placeholders:Dynamic = _Runtime.callValue(GlLitProgram.ensureGlIblPlaceholders__glLitProgram, cast ([state] : Array<Dynamic>));

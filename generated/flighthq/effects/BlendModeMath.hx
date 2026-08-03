@@ -89,7 +89,7 @@ class BlendModeMath {
       else if (__switchValue == AdvancedBlendModeValue.ColorBurn) {
         if ((cast ((cast cb : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
         if ((cast ((cast cs : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-        return cast (1.0 - HxMath.min(1.0, ((1.0 - cb) / cs)));
+        return cast _Runtime.subtractNumbers(1.0, HxMath.min(1.0, ((1.0 - cb) / cs)));
       }
       else  {
         return cast cs;
@@ -109,7 +109,7 @@ class BlendModeMath {
   }
 
   public static function blendSaturation__blendModeMath(r:Float, g:Float, b:Float):Float {
-    return cast (HxMath.max(HxMath.max(r, g), b) - HxMath.min(HxMath.min(r, g), b));
+    return cast _Runtime.subtractNumbers(HxMath.max(HxMath.max(r, g), b), HxMath.min(HxMath.min(r, g), b));
     return cast null;
   }
 
@@ -144,7 +144,7 @@ class BlendModeMath {
 
   public static function setBlendLuminosity__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
     var d:Dynamic = cast _Runtime.UNDEFINED;
-    d = (target - _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([r, g, b] : Array<Dynamic>)));
+    d = _Runtime.subtractNumbers(target, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([r, g, b] : Array<Dynamic>)));
     return cast _Runtime.callValue(BlendModeMath.clipBlendColor__blendModeMath, cast ([(r + d), (g + d), (b + d)] : Array<Dynamic>));
     return cast null;
   }
@@ -170,7 +170,7 @@ class BlendModeMath {
     }
     iMid = ((3.0 - iMin) - iMax);
     if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, iMax) : Float) > (cast flighthq._internal._StaticIndex.readArray(out, iMin) : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, iMid, (((flighthq._internal._StaticIndex.readArray(out, iMid) - flighthq._internal._StaticIndex.readArray(out, iMin)) * target) / (flighthq._internal._StaticIndex.readArray(out, iMax) - flighthq._internal._StaticIndex.readArray(out, iMin))));
+      flighthq._internal._StaticIndex.writeArray(out, iMid, ((_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, iMid), flighthq._internal._StaticIndex.readArray(out, iMin)) * target) / _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, iMax), flighthq._internal._StaticIndex.readArray(out, iMin))));
       flighthq._internal._StaticIndex.writeArray(out, iMax, target);
     } else {
       flighthq._internal._StaticIndex.writeArray(out, iMid, 0.0);

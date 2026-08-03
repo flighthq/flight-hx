@@ -213,7 +213,7 @@ class WgpuMeshPipeline {
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(u, 0.0, 1.0);
       flighthq._internal._StaticIndex.writeFloat32Array(u, 1.0, _Runtime.field(ibl, 'intensity'));
-      flighthq._internal._StaticIndex.writeFloat32Array(u, 2.0, (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(u, 2.0, _Runtime.subtractNumbers(_Runtime.field(ibl, 'prefilteredMipCount'), 1.0));
     } else {
       flighthq._internal._StaticIndex.writeFloat32Array(u, 0.0, 0.0);
       flighthq._internal._StaticIndex.writeFloat32Array(u, 1.0, 1.0);
@@ -341,7 +341,7 @@ class WgpuMeshPipeline {
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(u, 0.0, 1.0);
       flighthq._internal._StaticIndex.writeFloat32Array(u, 1.0, _Runtime.field(ibl, 'intensity'));
-      flighthq._internal._StaticIndex.writeFloat32Array(u, 2.0, (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(u, 2.0, _Runtime.subtractNumbers(_Runtime.field(ibl, 'prefilteredMipCount'), 1.0));
     } else {
       flighthq._internal._StaticIndex.writeFloat32Array(u, 0.0, 0.0);
       flighthq._internal._StaticIndex.writeFloat32Array(u, 1.0, 1.0);
@@ -698,7 +698,7 @@ class WgpuMeshPipeline {
       flighthq._internal._StaticIndex.writeFloat32Array(u, (floatOffset + 51.0), _Runtime.field(colorScaleBias, 'alphaBias'));
     } }
     _Runtime.setField(scene, 'pendingDrawOffset', offset);
-    _Runtime.setField(stateRuntime, 'uniformOffset', (_Runtime.field(stateRuntime, 'uniformOffset') + _Runtime.field(stateRuntime, 'uniformStride')));
+    _Runtime.setField(stateRuntime, 'uniformOffset', _Runtime.addNumbers(_Runtime.field(stateRuntime, 'uniformOffset'), _Runtime.field(stateRuntime, 'uniformStride')));
     return cast _Runtime.field(scene, 'drawBindGroup');
     return cast null;
   }
@@ -734,10 +734,10 @@ class WgpuMeshPipeline {
     sourceVp = WgpuMeshPipeline.scratchViewProjection__wgpuMeshPipeline.m;
     webGpuVp = WgpuMeshPipeline.scratchWebGpuViewProjection__wgpuMeshPipeline.m;
     (cast webGpuVp : flighthq._internal._Float32Array).set(sourceVp);
-    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 2.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 2.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 3.0))));
-    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 6.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 6.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 7.0))));
-    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 10.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 10.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 11.0))));
-    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 14.0, (0.5 * (flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 14.0) + flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 15.0))));
+    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 2.0, (0.5 * _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 2.0), flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 3.0))));
+    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 6.0, (0.5 * _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 6.0), flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 7.0))));
+    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 10.0, (0.5 * _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 10.0), flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 11.0))));
+    flighthq._internal._StaticIndex.writeFloat32Array(webGpuVp, 14.0, (0.5 * _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 14.0), flighthq._internal._StaticIndex.readFloat32Array(sourceVp, 15.0))));
     vp = webGpuVp;
     {
       var i:Dynamic = 0.0;

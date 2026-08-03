@@ -160,7 +160,7 @@ class Md5Parse {
                 w++;
               }
             }
-            _Runtime.sortAndReturn(influences, function(a:Dynamic, b:Dynamic) return (_Runtime.field(b, 'weight') - _Runtime.field(a, 'weight')));
+            _Runtime.sortAndReturn(influences, function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(b, 'weight'), _Runtime.field(a, 'weight')));
             var kept:Dynamic = HxMath.min(_Runtime.field(influences, 'length'), MAX_SKIN_INFLUENCES);
             if ((cast ((cast _Runtime.field(influences, 'length') : Float) > (cast MAX_SKIN_INFLUENCES : Float)) : Bool)) {
               truncatedVertexCount++;
@@ -180,10 +180,10 @@ class Md5Parse {
             {
               var i:Dynamic = 0.0;
               while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
-                var normWeight:Dynamic = ((cast ((cast biasSum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'weight') / biasSum) : Dynamic) : (cast 0.0 : Dynamic));
-                (px = cast ((px + (normWeight * _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'mx'))) : Dynamic));
-                (py = cast ((py + (normWeight * _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'my'))) : Dynamic));
-                (pz = cast ((pz + (normWeight * _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'mz'))) : Dynamic));
+                var normWeight:Dynamic = ((cast ((cast biasSum : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'weight'), biasSum) : Dynamic) : (cast 0.0 : Dynamic));
+                (px = cast ((px + _Runtime.multiplyNumbers(normWeight, _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'mx'))) : Dynamic));
+                (py = cast ((py + _Runtime.multiplyNumbers(normWeight, _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'my'))) : Dynamic));
+                (pz = cast ((pz + _Runtime.multiplyNumbers(normWeight, _Runtime.field(flighthq._internal._StaticIndex.readArray(influences, i), 'mz'))) : Dynamic));
                 i++;
               }
             }
@@ -300,7 +300,7 @@ class Md5Parse {
           var ppi:Dynamic = (parentIndex * 3.0);
           var pqi:Dynamic = (parentIndex * 4.0);
           _Runtime.callValue(conjugateQuaternion, cast ([parentConj, { w: flighthq._internal._StaticIndex.readArray(jointOrientations, (pqi + 3.0)), x: flighthq._internal._StaticIndex.readArray(jointOrientations, pqi), y: flighthq._internal._StaticIndex.readArray(jointOrientations, (pqi + 1.0)), z: flighthq._internal._StaticIndex.readArray(jointOrientations, (pqi + 2.0)) }] : Array<Dynamic>));
-          _Runtime.callValue(rotateVector3ByQuaternion, cast ([relPos, { x: (localPx - flighthq._internal._StaticIndex.readArray(jointPositions, ppi)), y: (localPy - flighthq._internal._StaticIndex.readArray(jointPositions, (ppi + 1.0))), z: (localPz - flighthq._internal._StaticIndex.readArray(jointPositions, (ppi + 2.0))) }, parentConj] : Array<Dynamic>));
+          _Runtime.callValue(rotateVector3ByQuaternion, cast ([relPos, { x: _Runtime.subtractNumbers(localPx, flighthq._internal._StaticIndex.readArray(jointPositions, ppi)), y: _Runtime.subtractNumbers(localPy, flighthq._internal._StaticIndex.readArray(jointPositions, (ppi + 1.0))), z: _Runtime.subtractNumbers(localPz, flighthq._internal._StaticIndex.readArray(jointPositions, (ppi + 2.0))) }, parentConj] : Array<Dynamic>));
           _Runtime.callValue(multiplyQuaternion, cast ([relQuat, parentConj, { w: localQw, x: localQx, y: localQy, z: localQz }] : Array<Dynamic>));
           (localPx = cast (_Runtime.field(relPos, 'x') : Dynamic));
           (localPy = cast (_Runtime.field(relPos, 'y') : Dynamic));
@@ -411,7 +411,7 @@ class Md5Parse {
     sumSq = (((orientationX * orientationX) + (orientationY * orientationY)) + (orientationZ * orientationZ));
     if ((cast ((cast sumSq : Float) > (cast (1.0 + Md5Parse.QUATERNION_SUM_TOLERANCE__md5Parse) : Float)) : Bool)) {
       _Runtime.callValue(Md5Parse.tallyMd5Drop__md5Parse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5mesh.joint-orientation-not-unit', '', { firstLine: (lineIndex + 1.0) }] : Array<Dynamic>));
-      var scale:Dynamic = (1.0 / HxMath.sqrt(sumSq));
+      var scale:Dynamic = _Runtime.divideNumbers(1.0, HxMath.sqrt(sumSq));
       (orientationX = cast ((orientationX * scale) : Dynamic));
       (orientationY = cast ((orientationY * scale) : Dynamic));
       (orientationZ = cast ((orientationZ * scale) : Dynamic));

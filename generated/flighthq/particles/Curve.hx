@@ -94,8 +94,8 @@ class Curve {
       seg = _Runtime.callValue(Curve.locateKeyframe__curve, cast ([sorted, t] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast cast ([flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).r, flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).g, flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).b] : Array<Dynamic>); }
       a = flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i'));
-      b = flighthq._internal._StaticIndex.readArray(sorted, (_Runtime.field(seg, 'i') + 1.0));
-      return cast cast ([(a.r + ((b.r - a.r) * _Runtime.field(seg, 'f'))), (a.g + ((b.g - a.g) * _Runtime.field(seg, 'f'))), (a.b + ((b.b - a.b) * _Runtime.field(seg, 'f')))] : Array<Dynamic>);
+      b = flighthq._internal._StaticIndex.readArray(sorted, _Runtime.addNumbers(_Runtime.field(seg, 'i'), 1.0));
+      return cast cast ([(a.r + _Runtime.multiplyNumbers((b.r - a.r), _Runtime.field(seg, 'f'))), (a.g + _Runtime.multiplyNumbers((b.g - a.g), _Runtime.field(seg, 'f'))), (a.b + _Runtime.multiplyNumbers((b.b - a.b), _Runtime.field(seg, 'f')))] : Array<Dynamic>);
     }, samples] : Array<Dynamic>));
     return cast null;
   }
@@ -103,7 +103,7 @@ class Curve {
   public static function particleColorCurveToKeyframes(lut:ParticleCurve):Array<ColorKeyframe> {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
-    n = HxMath.floor((_Runtime.field(lut, 'length') / 3.0));
+    n = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(lut, 'length'), 3.0));
     if ((cast _Runtime.strictEquals(n, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) { return cast cast ([{ time: 0.0, r: flighthq._internal._StaticIndex.readArray(lut, 0.0), g: flighthq._internal._StaticIndex.readArray(lut, 1.0), b: flighthq._internal._StaticIndex.readArray(lut, 2.0) }] : Array<Dynamic>); }
     keys = _Runtime.createArray(n);
@@ -153,7 +153,7 @@ class Curve {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     c = (v * s);
-    x = (c * (1.0 - HxMath.abs((_Runtime.fmod((h * 6.0), 2.0) - 1.0))));
+    x = (c * _Runtime.subtractNumbers(1.0, HxMath.abs((_Runtime.fmod((h * 6.0), 2.0) - 1.0))));
     m = (v - c);
     hi = _Runtime.fmod(HxMath.floor((h * 6.0)), 6.0);
     r = 0.0;
@@ -203,8 +203,8 @@ class Curve {
     seg = _Runtime.callValue(Curve.locateKeyframe__curve, cast ([sorted, t] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(seg, 'f'), 0.0) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).value; }
     a = flighthq._internal._StaticIndex.readArray(sorted, _Runtime.field(seg, 'i')).value;
-    b = flighthq._internal._StaticIndex.readArray(sorted, (_Runtime.field(seg, 'i') + 1.0)).value;
-    return cast (a + ((b - a) * _Runtime.field(seg, 'f')));
+    b = flighthq._internal._StaticIndex.readArray(sorted, _Runtime.addNumbers(_Runtime.field(seg, 'i'), 1.0)).value;
+    return cast (a + _Runtime.multiplyNumbers((b - a), _Runtime.field(seg, 'f')));
     return cast null;
   }
 
@@ -254,7 +254,7 @@ class Curve {
     var f:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    n = (_Runtime.field(lut, 'length') / 3.0);
+    n = _Runtime.divideNumbers(_Runtime.field(lut, 'length'), 3.0);
     if ((cast ((cast n : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.setIndex(out, offset, 0.0);
       _Runtime.setIndex(out, (offset + 1.0), 0.0);
@@ -267,7 +267,7 @@ class Curve {
       _Runtime.setIndex(out, (offset + 2.0), flighthq._internal._StaticIndex.readArray(lut, 2.0));
       return;
     }
-    x = (((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) * (n - 1.0));
+    x = _Runtime.multiplyNumbers(((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)), (n - 1.0));
     i = (_Runtime.toInt32(x) | 0);
     if ((cast ((cast i : Float) >= (cast (n - 1.0) : Float)) : Bool)) {
       var base:Dynamic = ((n - 1.0) * 3.0);
@@ -279,9 +279,9 @@ class Curve {
     f = (x - i);
     a = (i * 3.0);
     b = (a + 3.0);
-    _Runtime.setIndex(out, offset, (flighthq._internal._StaticIndex.readArray(lut, a) + ((flighthq._internal._StaticIndex.readArray(lut, b) - flighthq._internal._StaticIndex.readArray(lut, a)) * f)));
-    _Runtime.setIndex(out, (offset + 1.0), (flighthq._internal._StaticIndex.readArray(lut, (a + 1.0)) + ((flighthq._internal._StaticIndex.readArray(lut, (b + 1.0)) - flighthq._internal._StaticIndex.readArray(lut, (a + 1.0))) * f)));
-    _Runtime.setIndex(out, (offset + 2.0), (flighthq._internal._StaticIndex.readArray(lut, (a + 2.0)) + ((flighthq._internal._StaticIndex.readArray(lut, (b + 2.0)) - flighthq._internal._StaticIndex.readArray(lut, (a + 2.0))) * f)));
+    _Runtime.setIndex(out, offset, _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(lut, a), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(lut, b), flighthq._internal._StaticIndex.readArray(lut, a)) * f)));
+    _Runtime.setIndex(out, (offset + 1.0), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(lut, (a + 1.0)), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(lut, (b + 1.0)), flighthq._internal._StaticIndex.readArray(lut, (a + 1.0))) * f)));
+    _Runtime.setIndex(out, (offset + 2.0), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(lut, (a + 2.0)), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(lut, (b + 2.0)), flighthq._internal._StaticIndex.readArray(lut, (a + 2.0))) * f)));
   }
 
   public static function sampleParticleCurve(lut:ParticleCurve, t:Float):Float {
@@ -291,10 +291,10 @@ class Curve {
     n = _Runtime.field(lut, 'length');
     if ((cast _Runtime.strictEquals(n, 0.0) : Bool)) { return cast 0.0; }
     if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(lut, 0.0); }
-    x = (((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) * (n - 1.0));
+    x = _Runtime.multiplyNumbers(((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)), (n - 1.0));
     i = (_Runtime.toInt32(x) | 0);
     if ((cast ((cast i : Float) >= (cast (n - 1.0) : Float)) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(lut, (n - 1.0)); }
-    return cast (flighthq._internal._StaticIndex.readArray(lut, i) + ((flighthq._internal._StaticIndex.readArray(lut, (i + 1.0)) - flighthq._internal._StaticIndex.readArray(lut, i)) * (x - i)));
+    return cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(lut, i), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(lut, (i + 1.0)), flighthq._internal._StaticIndex.readArray(lut, i)) * (x - i)));
     return cast null;
   }
 }

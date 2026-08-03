@@ -19,10 +19,10 @@ class BitmapCompare {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source.data, 'length') : Float)) : Bool)) {
-        var dr:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, i)));
-        var dg:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 1.0))));
-        var db:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 2.0))));
-        var da:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 3.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 3.0))));
+        var dr:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, i)));
+        var dg:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 1.0))));
+        var db:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 2.0))));
+        var da:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 3.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 3.0))));
         if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(dr, 0.0) : Bool) || (cast !_Runtime.strictEquals(dg, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(db, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(da, 0.0) : Bool)) : Bool)) {
           flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, i, dr);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 1.0), dg);
@@ -54,10 +54,10 @@ class BitmapCompare {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(a, 'length') : Float)) : Bool)) {
-        var dr:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(a, i) - flighthq._internal._StaticIndex.readUint8ClampedArray(b, i)));
-        var dg:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 1.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 1.0))));
-        var db:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 2.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 2.0))));
-        var da:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 3.0)) - flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 3.0))));
+        var dr:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, i), flighthq._internal._StaticIndex.readUint8ClampedArray(b, i)));
+        var dg:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 1.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 1.0))));
+        var db:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 2.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 2.0))));
+        var da:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 3.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 3.0))));
         var pixelDelta:Dynamic = HxMath.max(HxMath.max(HxMath.max(dr, dg), db), da);
         if ((cast ((cast pixelDelta : Float) > (cast maxChannelDelta : Float)) : Bool)) { (maxChannelDelta = cast (pixelDelta : Dynamic)); }
         if ((cast ((cast pixelDelta : Float) > (cast channelTolerance : Float)) : Bool)) { mismatchedPixels++; }

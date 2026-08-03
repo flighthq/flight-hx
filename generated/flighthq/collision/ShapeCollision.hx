@@ -106,7 +106,7 @@ class ShapeCollision {
     ay = _Runtime.field(a, 'y');
     bx = _Runtime.field(b, 'x');
     by = _Runtime.field(b, 'y');
-    radiusSum = (_Runtime.field(a, 'radius') + _Runtime.field(b, 'radius'));
+    radiusSum = _Runtime.addNumbers(_Runtime.field(a, 'radius'), _Runtime.field(b, 'radius'));
     dx = (ax - bx);
     dy = (ay - by);
     distSquared = ((dx * dx) + (dy * dy));
@@ -152,8 +152,8 @@ class ShapeCollision {
     halfH = _Runtime.field(b, 'halfH');
     cos = HxMath.cos(_Runtime.field(b, 'rotation'));
     sin = HxMath.sin(_Runtime.field(b, 'rotation'));
-    dx = (cx - _Runtime.field(b, 'x'));
-    dy = (cy - _Runtime.field(b, 'y'));
+    dx = _Runtime.subtractNumbers(cx, _Runtime.field(b, 'x'));
+    dy = _Runtime.subtractNumbers(cy, _Runtime.field(b, 'y'));
     localX = ((dx * cos) + (dy * sin));
     localY = ((-dx * sin) + (dy * cos));
     if ((cast !(cast _Runtime.callValue(ShapeCollision.circleAabbOverlap__shapeCollision, cast ([localX, localY, radius, -halfW, -halfH, halfW, halfH, out] : Array<Dynamic>)) : Bool) : Bool)) {
@@ -364,8 +364,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        (centroidX = cast ((centroidX + (_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)) - originX)) : Dynamic));
-        (centroidY = cast ((centroidY + (_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)) - originY)) : Dynamic));
+        (centroidX = cast ((centroidX + _Runtime.subtractNumbers(_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)), originX)) : Dynamic));
+        (centroidY = cast ((centroidY + _Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)), originY)) : Dynamic));
         i++;
       }
     }
@@ -400,7 +400,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var d:Dynamic = (((_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)) - originX) * axisX) + ((_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)) - originY) * axisY));
+        var d:Dynamic = ((_Runtime.subtractNumbers(_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
         if ((cast ((cast d : Float) < (cast minP : Float)) : Bool)) { (minP = cast (d : Dynamic)); }
         if ((cast ((cast d : Float) > (cast maxP : Float)) : Bool)) { (maxP = cast (d : Dynamic)); }
         i++;
@@ -442,8 +442,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast an : Float)) : Bool)) {
-        (aCentroidX = cast ((aCentroidX + (_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)) - originX)) : Dynamic));
-        (aCentroidY = cast ((aCentroidY + (_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)) - originY)) : Dynamic));
+        (aCentroidX = cast ((aCentroidX + _Runtime.subtractNumbers(_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)), originX)) : Dynamic));
+        (aCentroidY = cast ((aCentroidY + _Runtime.subtractNumbers(_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)), originY)) : Dynamic));
         i++;
       }
     }
@@ -454,8 +454,8 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast bn : Float)) : Bool)) {
-        (bCentroidX = cast ((bCentroidX + (_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)) - originX)) : Dynamic));
-        (bCentroidY = cast ((bCentroidY + (_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)) - originY)) : Dynamic));
+        (bCentroidX = cast ((bCentroidX + _Runtime.subtractNumbers(_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)), originX)) : Dynamic));
+        (bCentroidY = cast ((bCentroidY + _Runtime.subtractNumbers(_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)), originY)) : Dynamic));
         i++;
       }
     }
@@ -524,7 +524,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast an : Float)) : Bool)) {
-        var d:Dynamic = (((_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)) - originX) * axisX) + ((_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)) - originY) * axisY));
+        var d:Dynamic = ((_Runtime.subtractNumbers(_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
         if ((cast ((cast d : Float) < (cast minA : Float)) : Bool)) { (minA = cast (d : Dynamic)); }
         if ((cast ((cast d : Float) > (cast maxA : Float)) : Bool)) { (maxA = cast (d : Dynamic)); }
         i++;
@@ -535,7 +535,7 @@ class ShapeCollision {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast bn : Float)) : Bool)) {
-        var d:Dynamic = (((_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)) - originX) * axisX) + ((_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)) - originY) * axisY));
+        var d:Dynamic = ((_Runtime.subtractNumbers(_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
         if ((cast ((cast d : Float) < (cast minB : Float)) : Bool)) { (minB = cast (d : Dynamic)); }
         if ((cast ((cast d : Float) > (cast maxB : Float)) : Bool)) { (maxB = cast (d : Dynamic)); }
         i++;

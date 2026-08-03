@@ -81,7 +81,7 @@ class MeshGeometryIndex {
     }
     indices = geometry.indices;
     floatsPerVertex = (geometry.layout.stride / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     lines = cast ([] : Array<Dynamic>);
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
@@ -128,11 +128,11 @@ class MeshGeometryIndex {
     floatsPerVertex = (geometry.layout.stride / 4.0);
     sourceVertices = geometry.vertices;
     if ((cast !_Runtime.truthy(indices) : Bool)) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-    vertices = new flighthq._internal._Float32Array((_Runtime.field(indices, 'length') * floatsPerVertex));
+    vertices = new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(indices, 'length'), floatsPerVertex));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-        var src:Dynamic = (flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, i) * floatsPerVertex);
+        var src:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, i), floatsPerVertex);
         var dst:Dynamic = (i * floatsPerVertex);
         {
           var f:Dynamic = 0.0;

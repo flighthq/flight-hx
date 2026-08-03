@@ -72,7 +72,7 @@ class GlEffectBoxBlur {
 
   public static function applyBoxBlurPass__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(loc, 'locTexelSize'), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(loc, 'locTexelSize'), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locRadius'), radius);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(loc, 'locDirection'), dirX, dirY);
       if ((cast _Runtime.strictEquals(edgeColor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

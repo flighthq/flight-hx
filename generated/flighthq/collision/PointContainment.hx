@@ -14,9 +14,9 @@ class PointContainment {
       var __switchValue = _Runtime.field(shape, 'kind');
       if (__switchValue == 'circle') {
         {
-          var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
-          var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
-          return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (_Runtime.field(shape, 'radius') * _Runtime.field(shape, 'radius')) : Float));
+          var dx:Dynamic = _Runtime.subtractNumbers(x, _Runtime.field(shape, 'x'));
+          var dy:Dynamic = _Runtime.subtractNumbers(y, _Runtime.field(shape, 'y'));
+          return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast _Runtime.multiplyNumbers(_Runtime.field(shape, 'radius'), _Runtime.field(shape, 'radius')) : Float));
         }
       }
       else if (__switchValue == 'aabb') {
@@ -26,8 +26,8 @@ class PointContainment {
         {
           var cos:Dynamic = HxMath.cos(_Runtime.field(shape, 'rotation'));
           var sin:Dynamic = HxMath.sin(_Runtime.field(shape, 'rotation'));
-          var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
-          var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
+          var dx:Dynamic = _Runtime.subtractNumbers(x, _Runtime.field(shape, 'x'));
+          var dy:Dynamic = _Runtime.subtractNumbers(y, _Runtime.field(shape, 'y'));
           var localX:Dynamic = ((dx * cos) + (dy * sin));
           var localY:Dynamic = ((-dx * sin) + (dy * cos));
           return cast ((cast ((cast HxMath.abs(localX) : Float) <= (cast _Runtime.field(shape, 'halfW') : Float)) : Bool) && (cast ((cast HxMath.abs(localY) : Float) <= (cast _Runtime.field(shape, 'halfH') : Float)) : Bool));
@@ -39,16 +39,16 @@ class PointContainment {
       }
       else if (__switchValue == 'segment') {
         {
-          var dx:Dynamic = (_Runtime.field(shape, 'x1') - _Runtime.field(shape, 'x0'));
-          var dy:Dynamic = (_Runtime.field(shape, 'y1') - _Runtime.field(shape, 'y0'));
+          var dx:Dynamic = _Runtime.subtractNumbers(_Runtime.field(shape, 'x1'), _Runtime.field(shape, 'x0'));
+          var dy:Dynamic = _Runtime.subtractNumbers(_Runtime.field(shape, 'y1'), _Runtime.field(shape, 'y0'));
           var lengthSquared:Dynamic = ((dx * dx) + (dy * dy));
           var t:Dynamic = 0.0;
           if ((cast ((cast lengthSquared : Float) > (cast 0.0 : Float)) : Bool)) {
-            (t = cast (((((x - _Runtime.field(shape, 'x0')) * dx) + ((y - _Runtime.field(shape, 'y0')) * dy)) / lengthSquared) : Dynamic));
+            (t = cast ((((_Runtime.subtractNumbers(x, _Runtime.field(shape, 'x0')) * dx) + (_Runtime.subtractNumbers(y, _Runtime.field(shape, 'y0')) * dy)) / lengthSquared) : Dynamic));
             (t = cast (((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Dynamic));
           }
-          var closestX:Dynamic = (_Runtime.field(shape, 'x0') + (t * dx));
-          var closestY:Dynamic = (_Runtime.field(shape, 'y0') + (t * dy));
+          var closestX:Dynamic = _Runtime.addNumbers(_Runtime.field(shape, 'x0'), (t * dx));
+          var closestY:Dynamic = _Runtime.addNumbers(_Runtime.field(shape, 'y0'), (t * dy));
           var ddx:Dynamic = (x - closestX);
           var ddy:Dynamic = (y - closestY);
           var epsilon:Dynamic = _Runtime.callValue(PointContainment.relativeEpsilon__pointContainment, cast ([HxMath.sqrt(lengthSquared)] : Array<Dynamic>));
@@ -57,9 +57,9 @@ class PointContainment {
       }
       else if (__switchValue == 'point') {
         {
-          var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
-          var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
-          var epsilon:Dynamic = (_Runtime.NUMBER_EPSILON * HxMath.max(HxMath.max(HxMath.max(HxMath.max(1.0, HxMath.abs(x)), HxMath.abs(y)), HxMath.abs(_Runtime.field(shape, 'x'))), HxMath.abs(_Runtime.field(shape, 'y'))));
+          var dx:Dynamic = _Runtime.subtractNumbers(x, _Runtime.field(shape, 'x'));
+          var dy:Dynamic = _Runtime.subtractNumbers(y, _Runtime.field(shape, 'y'));
+          var epsilon:Dynamic = _Runtime.multiplyNumbers(_Runtime.NUMBER_EPSILON, HxMath.max(HxMath.max(HxMath.max(HxMath.max(1.0, HxMath.abs(x)), HxMath.abs(y)), HxMath.abs(_Runtime.field(shape, 'x'))), HxMath.abs(_Runtime.field(shape, 'y'))));
           return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (epsilon * epsilon) : Float));
         }
       }
@@ -86,7 +86,7 @@ class PointContainment {
         var x1:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
-        var edgeEpsilon:Dynamic = (_Runtime.hypot((x1 - x0), (y1 - y0)) * epsilon);
+        var edgeEpsilon:Dynamic = _Runtime.multiplyNumbers(_Runtime.hypot((x1 - x0), (y1 - y0)), epsilon);
         if ((cast ((cast cross : Float) > (cast edgeEpsilon : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -edgeEpsilon : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
         if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }
         i++;

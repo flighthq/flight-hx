@@ -179,8 +179,8 @@ class WgpuShape {
     }
     _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     t = _Runtime.field(renderProxy, 'transform2D');
-    tx = ((t.tx + (t.a * _Runtime.field(bounds, 'x'))) + (t.c * _Runtime.field(bounds, 'y')));
-    ty = ((t.ty + (t.b * _Runtime.field(bounds, 'x'))) + (t.d * _Runtime.field(bounds, 'y')));
+    tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
+    ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
     textureEntry = _Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(shapeData, 'image'), false, true] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     startCount = _Runtime.field(runtime, 'quadBatchWriterCount');

@@ -38,17 +38,17 @@ class GlEffectGradientRamp {
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
-          (a = cast (HxMath.round((flighthq._internal._StaticIndex.readArray(alphas, 0.0) * 255.0)) : Dynamic));
-        } else { if ((cast ((cast t : Float) >= (cast flighthq._internal._StaticIndex.readArray(ratios, (_Runtime.field(ratios, 'length') - 1.0)) : Float)) : Bool)) {
-          var c:Dynamic = flighthq._internal._StaticIndex.readArray(colors, (_Runtime.field(colors, 'length') - 1.0));
+          (a = cast (HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(alphas, 0.0), 255.0)) : Dynamic));
+        } else { if ((cast ((cast t : Float) >= (cast flighthq._internal._StaticIndex.readArray(ratios, _Runtime.subtractNumbers(_Runtime.field(ratios, 'length'), 1.0)) : Float)) : Bool)) {
+          var c:Dynamic = flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0));
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
-          (a = cast (HxMath.round((flighthq._internal._StaticIndex.readArray(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)) : Dynamic));
+          (a = cast (HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(alphas, _Runtime.subtractNumbers(_Runtime.field(alphas, 'length'), 1.0)), 255.0)) : Dynamic));
         } else {
           {
             var j:Dynamic = 0.0;
-            while ((cast ((cast j : Float) < (cast (_Runtime.field(ratios, 'length') - 1.0) : Float)) : Bool)) {
+            while ((cast ((cast j : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(ratios, 'length'), 1.0) : Float)) : Bool)) {
               var r0:Dynamic = flighthq._internal._StaticIndex.readArray(ratios, j);
               var r1:Dynamic = flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0));
               if ((cast ((cast ((cast t : Float) >= (cast r0 : Float)) : Bool) && (cast ((cast t : Float) <= (cast r1 : Float)) : Bool)) : Bool)) {
@@ -58,7 +58,7 @@ class GlEffectGradientRamp {
                 (r = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 16)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 16)) & 255) * blend))) : Dynamic));
                 (g = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 8)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 8)) & 255) * blend))) : Dynamic));
                 (b = cast (HxMath.round((((_Runtime.toInt32(c0) & 255) * (1.0 - blend)) + ((_Runtime.toInt32(c1) & 255) * blend))) : Dynamic));
-                (a = cast (HxMath.round((((flighthq._internal._StaticIndex.readArray(alphas, j) * 255.0) * (1.0 - blend)) + ((flighthq._internal._StaticIndex.readArray(alphas, (j + 1.0)) * 255.0) * blend))) : Dynamic));
+                (a = cast (HxMath.round(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(alphas, j), 255.0) * (1.0 - blend)) + (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(alphas, (j + 1.0)), 255.0) * blend))) : Dynamic));
                 break;
               }
               j++;

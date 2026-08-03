@@ -21,8 +21,8 @@ class CanvasPixelateEffect {
     var sctx:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0)));
-    smallW = HxMath.max(1.0, HxMath.floor((_Runtime.field(source, 'width') / size)));
-    smallH = HxMath.max(1.0, HxMath.floor((_Runtime.field(source, 'height') / size)));
+    smallW = HxMath.max(1.0, HxMath.floor(_Runtime.divideNumbers(_Runtime.field(source, 'width'), size)));
+    smallH = HxMath.max(1.0, HxMath.floor(_Runtime.divideNumbers(_Runtime.field(source, 'height'), size)));
     small = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, smallW, smallH] : Array<Dynamic>));
     sctx = _Runtime.field(small, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(sctx, 'save', cast ([] : Array<Dynamic>));

@@ -46,8 +46,8 @@ class GlSprite {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     texture = _Runtime.field(_Runtime.field((cast _Runtime.field(renderProxy, 'source') : Sprite), 'data'), 'texture');
     if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
-    width = (HxMath.max(0.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))) * HxMath.abs(_Runtime.field(texture, 'uvScale').x));
-    height = (HxMath.max(0.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))) * HxMath.abs(_Runtime.field(texture, 'uvScale').y));
+    width = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').x));
+    height = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').y));
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     material = _Runtime.field(renderProxy, 'material');
     materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
@@ -58,8 +58,8 @@ class GlSprite {
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     u0 = _Runtime.field(texture, 'uvOffset').x;
     v0 = _Runtime.field(texture, 'uvOffset').y;
-    u1 = (u0 + _Runtime.field(texture, 'uvScale').x);
-    v1 = (v0 + _Runtime.field(texture, 'uvScale').y);
+    u1 = _Runtime.addNumbers(u0, _Runtime.field(texture, 'uvScale').x);
+    v1 = _Runtime.addNumbers(v0, _Runtime.field(texture, 'uvScale').y);
     if ((cast _Runtime.field(texture, 'flipX') : Bool)) { ({ var __destructure0:Dynamic = cast ([u1, u0] : Array<Dynamic>); u0 = cast flighthq._internal._StaticIndex.readArray(__destructure0, 0); u1 = cast flighthq._internal._StaticIndex.readArray(__destructure0, 1); __destructure0; }); }
     if ((cast _Runtime.field(texture, 'flipY') : Bool)) { ({ var __destructure1:Dynamic = cast ([v1, v0] : Array<Dynamic>); v0 = cast flighthq._internal._StaticIndex.readArray(__destructure1, 0); v1 = cast flighthq._internal._StaticIndex.readArray(__destructure1, 1); __destructure1; }); }
     if ((cast _Runtime.strictEquals(_Runtime.callValue(getTextureSourceKind, cast ([texture] : Array<Dynamic>)), RenderTargetTextureSourceKind) : Bool)) {

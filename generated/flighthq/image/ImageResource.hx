@@ -33,7 +33,7 @@ class ImageResource {
 
   public static function invalidateImageResource(resource:Dynamic):Void {
     _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>));
-    _Runtime.setField(resource, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(resource, 'version') + 1.0)), 0));
+    _Runtime.setField(resource, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(resource, 'version'), 1.0)), 0));
   }
 
   public static function isImageResourceEmpty(resource:Dynamic):Bool {

@@ -13,7 +13,7 @@ class BitmapHistogram {
     var histogram:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;
     histogram = _Runtime.callValue(getBitmapHistogram, cast ([source] : Array<Dynamic>));
-    total = (_Runtime.field(source, 'width') * _Runtime.field(source, 'height'));
+    total = _Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
     _Runtime.callValue(applyBitmapPaletteMap, cast ([dest, source, _Runtime.callValue(BitmapHistogram.buildEqualizeMap__bitmapHistogram, cast ([_Runtime.field(histogram, 'red'), total] : Array<Dynamic>)), _Runtime.callValue(BitmapHistogram.buildEqualizeMap__bitmapHistogram, cast ([_Runtime.field(histogram, 'green'), total] : Array<Dynamic>)), _Runtime.callValue(BitmapHistogram.buildEqualizeMap__bitmapHistogram, cast ([_Runtime.field(histogram, 'blue'), total] : Array<Dynamic>)), null] : Array<Dynamic>));
     _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
   }
@@ -34,12 +34,12 @@ class BitmapHistogram {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(source, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var x:Dynamic = (_Runtime.field(source, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
             _Runtime.incrementIndex(red, flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), 1, true);

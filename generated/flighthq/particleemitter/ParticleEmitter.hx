@@ -160,8 +160,8 @@ class ParticleEmitter {
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
         var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
         var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
-        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
+        var cosR:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinR:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var w:Dynamic = region.width;
         var h:Dynamic = region.height;
         var x0:Dynamic = px;
@@ -218,7 +218,7 @@ class ParticleEmitter {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = source.data;
-    transformCapacity = (_Runtime.toInt32((_Runtime.field(data.transforms, 'length') / ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter)) | 0);
+    transformCapacity = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(data.transforms, 'length'), ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__particleEmitter)) | 0);
     return cast HxMath.min(HxMath.min(_Runtime.field(data.ids, 'length'), _Runtime.field(data.alphas, 'length')), transformCapacity);
     return cast null;
   }

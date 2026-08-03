@@ -32,7 +32,7 @@ class CanvasRenderTextureEffect {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(operations, 'length') : Float)) : Bool)) {
         var operation:Dynamic = flighthq._internal._StaticIndex.readArray(operations, index);
-        var remaining:Dynamic = (_Runtime.field(operations, 'length') - index);
+        var remaining:Dynamic = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:Dynamic = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
         _Runtime.callValue(writeCanvasRenderTextureTarget, cast ([state, output, function(target:Dynamic) {
           _Runtime.callProperty(operation, 'runner', cast ([{ state: state, source: current, dest: target, pool: _Runtime.field(pool, 'effectTargets') }, _Runtime.field(operation, 'effect')] : Array<Dynamic>));

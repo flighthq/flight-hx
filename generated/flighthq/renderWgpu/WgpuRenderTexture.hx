@@ -108,7 +108,7 @@ class WgpuRenderTexture {
           _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
           if ((cast rendered : Bool)) {
             _Runtime.setField(renderTexture, 'colorSpace', _Runtime.field(_Runtime.field(entry, 'target'), 'colorSpace'));
-            _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(renderTexture, 'version') + 1.0)), 0));
+            _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(renderTexture, 'version'), 1.0)), 0));
           }
         }
         return cast __returnValue2;
@@ -118,7 +118,7 @@ class WgpuRenderTexture {
         _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
         if ((cast rendered : Bool)) {
           _Runtime.setField(renderTexture, 'colorSpace', _Runtime.field(_Runtime.field(entry, 'target'), 'colorSpace'));
-          _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(renderTexture, 'version') + 1.0)), 0));
+          _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(renderTexture, 'version'), 1.0)), 0));
         }
       }
       _Runtime.throwValue(__finallyError3);
@@ -127,7 +127,7 @@ class WgpuRenderTexture {
       _Runtime.setField(entry, 'status', ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
       if ((cast rendered : Bool)) {
         _Runtime.setField(renderTexture, 'colorSpace', _Runtime.field(_Runtime.field(entry, 'target'), 'colorSpace'));
-        _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(renderTexture, 'version') + 1.0)), 0));
+        _Runtime.setField(renderTexture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(renderTexture, 'version'), 1.0)), 0));
       }
     }
     return cast null;

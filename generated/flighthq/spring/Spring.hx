@@ -84,7 +84,7 @@ class Spring {
     omega = (TAU * frequency);
     c0 = (value - target);
     if ((cast ((cast dampingRatio : Float) > (cast (1.0 + Spring.CRITICAL_BAND__spring) : Float)) : Bool)) {
-      var zb:Dynamic = (omega * HxMath.sqrt(((dampingRatio * dampingRatio) - 1.0)));
+      var zb:Dynamic = _Runtime.multiplyNumbers(omega, HxMath.sqrt(((dampingRatio * dampingRatio) - 1.0)));
       var za:Dynamic = (-omega * dampingRatio);
       var z1:Dynamic = (za - zb);
       var z2:Dynamic = (za + zb);
@@ -97,7 +97,7 @@ class Spring {
       (velVelCoef = cast ((((z2 * e2) - (z1 * e1)) * invDenominator) : Dynamic));
     } else { if ((cast ((cast dampingRatio : Float) < (cast (1.0 - Spring.CRITICAL_BAND__spring) : Float)) : Bool)) {
       var alpha:Dynamic = (dampingRatio * omega);
-      var beta:Dynamic = (omega * HxMath.sqrt((1.0 - (dampingRatio * dampingRatio))));
+      var beta:Dynamic = _Runtime.multiplyNumbers(omega, HxMath.sqrt((1.0 - (dampingRatio * dampingRatio))));
       var envelope:Dynamic = HxMath.exp((-alpha * deltaTime));
       var cosine:Dynamic = HxMath.cos((beta * deltaTime));
       var sine:Dynamic = HxMath.sin((beta * deltaTime));

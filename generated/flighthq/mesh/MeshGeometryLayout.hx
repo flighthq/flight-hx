@@ -22,7 +22,7 @@ class MeshGeometryLayout {
     var mappings:Array<AttributeMapping__meshGeometryLayout> = cast _Runtime.UNDEFINED;
     srcStride = source.layout.stride;
     dstStride = targetLayout.stride;
-    vertexCount = ((cast ((cast srcStride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(source.vertices, 'byteLength') / srcStride)) : Dynamic) : (cast 0.0 : Dynamic));
+    vertexCount = ((cast ((cast srcStride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(source.vertices, 'byteLength'), srcStride)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVertices = new flighthq._internal._Float32Array(((vertexCount * dstStride) / 4.0));
     sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(source.vertices, 'buffer'), _Runtime.field(source.vertices, 'byteOffset'), _Runtime.field(source.vertices, 'byteLength'));
     destinationBytes = new flighthq._internal._UInt8Array(_Runtime.field(dstVertices, 'buffer'));
@@ -43,10 +43,10 @@ class MeshGeometryLayout {
       var vertex:Dynamic = 0.0;
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
         for (mapping in _Runtime.iterable(mappings)) {
-          var sourceOffset:Dynamic = ((vertex * srcStride) + _Runtime.field(mapping, 'source').byteOffset);
-          var destinationOffset:Dynamic = ((vertex * dstStride) + _Runtime.field(mapping, 'destination').byteOffset);
+          var sourceOffset:Dynamic = _Runtime.addNumbers((vertex * srcStride), _Runtime.field(mapping, 'source').byteOffset);
+          var destinationOffset:Dynamic = _Runtime.addNumbers((vertex * dstStride), _Runtime.field(mapping, 'destination').byteOffset);
           if ((cast _Runtime.strictEquals(_Runtime.field(mapping, 'source').format, _Runtime.field(mapping, 'destination').format) : Bool)) {
-            (cast destinationBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + _Runtime.field(mapping, 'sourceByteLength')))), Std.int(destinationOffset));
+            (cast destinationBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int(_Runtime.addNumbers(sourceOffset, _Runtime.field(mapping, 'sourceByteLength')))), Std.int(destinationOffset));
             continue;
           }
           var componentCount:Dynamic = HxMath.min(_Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(mapping, 'source').format] : Array<Dynamic>)), _Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(mapping, 'destination').format] : Array<Dynamic>)));
@@ -116,7 +116,7 @@ class MeshGeometryLayout {
         return cast _Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>));
       }
       else if (__switchValue == 'unorm8x4') {
-        return cast (_Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>)) / 255.0);
+        return cast _Runtime.divideNumbers(_Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>)), 255.0);
       }
     }
     return cast null;
@@ -138,7 +138,7 @@ class MeshGeometryLayout {
         return;
       }
       else if (__switchValue == 'unorm8x4') {
-        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round((HxMath.min(1.0, HxMath.max(0.0, value)) * 255.0))] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, value)), 255.0))] : Array<Dynamic>));
       }
     }
   }

@@ -26,10 +26,10 @@ class ShapeCommands {
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
     sweep = _Runtime.callValue(ShapeCommands.normalizeArcSweep__shapeCommands, cast ([startAngle, endAngle, anticlockwise] : Array<Dynamic>));
-    segmentCount = HxMath.max(1.0, HxMath.ceil((HxMath.abs(sweep) / (HxMath.PI / 2.0))));
+    segmentCount = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(sweep), (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
-    alpha = ((4.0 / 3.0) * HxMath.tan((segmentAngle / 4.0)));
-    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, (cx + (radius * HxMath.cos(startAngle))), (cy + (radius * HxMath.sin(startAngle)))] : Array<Dynamic>));
+    alpha = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((segmentAngle / 4.0)));
+    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, (cx + _Runtime.multiplyNumbers(radius, HxMath.cos(startAngle))), (cy + _Runtime.multiplyNumbers(radius, HxMath.sin(startAngle)))] : Array<Dynamic>));
     _Runtime.callValue(ShapeCommands.pushArcCubics__shapeCommands, cast ([cmds, cx, cy, radius, startAngle, segmentCount, segmentAngle, alpha] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
@@ -109,13 +109,13 @@ class ShapeCommands {
     }
     cosHalf = (((d1x * d2x) + (d1y * d2y)) / (len1 * len2));
     clampedCos = HxMath.max(-1.0, HxMath.min(1.0, cosHalf));
-    halfAngle = (HxMath.acos(clampedCos) / 2.0);
+    halfAngle = _Runtime.divideNumbers(HxMath.acos(clampedCos), 2.0);
     if ((cast ((cast HxMath.abs(HxMath.sin(halfAngle)) : Float) < (cast 1e-10 : Float)) : Bool)) {
       _Runtime.pushMany(cmds, cast (['lineTo', 2.0, x1, y1] : Array<Dynamic>));
       _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
       return;
     }
-    d = (radius / HxMath.tan(halfAngle));
+    d = _Runtime.divideNumbers(radius, HxMath.tan(halfAngle));
     n1x = (d1x / len1);
     n1y = (d1y / len1);
     tx1 = (x1 + (n1x * d));
@@ -128,7 +128,7 @@ class ShapeCommands {
     bx = ((n1x + n2x) / 2.0);
     by = ((n1y + n2y) / 2.0);
     blen = HxMath.sqrt(((bx * bx) + (by * by)));
-    distToCenter = (radius / HxMath.sin(halfAngle));
+    distToCenter = _Runtime.divideNumbers(radius, HxMath.sin(halfAngle));
     ocx = (x1 + ((bx / blen) * distToCenter));
     ocy = (y1 + ((by / blen) * distToCenter));
     startA = HxMath.atan2((ty1 - ocy), (tx1 - ocx));
@@ -136,9 +136,9 @@ class ShapeCommands {
     cross = ((d1x * d2y) - (d1y * d2x));
     isAnticlockwise = ((cast cross : Float) < (cast 0.0 : Float));
     sweep = _Runtime.callValue(ShapeCommands.normalizeArcSweep__shapeCommands, cast ([startA, endA, isAnticlockwise] : Array<Dynamic>));
-    segmentCount = HxMath.max(1.0, HxMath.ceil((HxMath.abs(sweep) / (HxMath.PI / 2.0))));
+    segmentCount = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(sweep), (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
-    alpha = ((4.0 / 3.0) * HxMath.tan((segmentAngle / 4.0)));
+    alpha = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((segmentAngle / 4.0)));
     _Runtime.callValue(ShapeCommands.pushArcCubics__shapeCommands, cast ([cmds, ocx, ocy, radius, startA, segmentCount, segmentAngle, alpha] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
@@ -231,7 +231,7 @@ class ShapeCommands {
     _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     {
       var k:Dynamic = 2.0;
-      while ((cast ((cast k : Float) < (cast (_Runtime.field(points, 'length') - 1.0) : Float)) : Bool)) {
+      while ((cast ((cast k : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0) : Float)) : Bool)) {
         _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, k), flighthq._internal._StaticIndex.readArray(points, (k + 1.0))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
@@ -247,7 +247,7 @@ class ShapeCommands {
     _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
     {
       var k:Dynamic = 2.0;
-      while ((cast ((cast k : Float) < (cast (_Runtime.field(points, 'length') - 1.0) : Float)) : Bool)) {
+      while ((cast ((cast k : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0) : Float)) : Bool)) {
         _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, k), flighthq._internal._StaticIndex.readArray(points, (k + 1.0))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }

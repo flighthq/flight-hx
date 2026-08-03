@@ -56,8 +56,8 @@ class BitmapDissolve {
       dissolved++;
       var px:Dynamic = _Runtime.fmod(pixelIndex, width);
       var py:Dynamic = (_Runtime.toInt32((pixelIndex / width)) | 0);
-      var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
-      var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
+      var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+      var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
       if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast destStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast destBitmapHeight : Float)) : Bool)) : Bool)) { continue; }
       var di:Dynamic = (((dy * destStride) + dx) * 4.0);
       if ((cast toFill : Bool)) {
@@ -67,8 +67,8 @@ class BitmapDissolve {
         flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 3.0), fillA);
         continue;
       }
-      var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-      var sy:Dynamic = (_Runtime.field(source, 'y') + py);
+      var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+      var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
       if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sourceStride : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast sourceBitmapHeight : Float)) : Bool)) : Bool)) { continue; }
       var si:Dynamic = (((sy * sourceStride) + sx) * 4.0);
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, si));

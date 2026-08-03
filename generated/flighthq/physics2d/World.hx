@@ -64,7 +64,7 @@ class World {
     _Runtime.splice(_Runtime.field(world, 'bodies'), Std.int(at), Std.int(1.0), []);
     _Runtime.callProperty(_Runtime.field(world, 'index'), 'removeSpatialObject', cast ([_Runtime.field(body, 'index')] : Array<Dynamic>));
     {
-      var i:Dynamic = (_Runtime.field(_Runtime.field(world, 'contacts'), 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(world, 'contacts'), 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var contact:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), i);
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(contact, 'bodyA'), _Runtime.field(body, 'index')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(contact, 'bodyB'), _Runtime.field(body, 'index')) : Bool)) : Bool)) { _Runtime.splice(_Runtime.field(world, 'contacts'), Std.int(i), Std.int(1.0), []); }
@@ -72,7 +72,7 @@ class World {
       }
     }
     {
-      var i:Dynamic = (_Runtime.field(_Runtime.field(world, 'joints'), 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(world, 'joints'), 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var joint:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), i);
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(joint, 'bodyA'), _Runtime.field(body, 'index')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(joint, 'bodyB'), _Runtime.field(body, 'index')) : Bool)) : Bool)) { _Runtime.splice(_Runtime.field(world, 'joints'), Std.int(i), Std.int(1.0), []); }

@@ -86,7 +86,7 @@ class CanvasRichText {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'strokeRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
-    firstVisibleLine = (_Runtime.field(data, 'scrollV') - 1.0);
+    firstVisibleLine = _Runtime.subtractNumbers(_Runtime.field(data, 'scrollV'), 1.0);
     scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = _Runtime.field(data, 'scrollH');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
@@ -96,9 +96,9 @@ class CanvasRichText {
     if ((cast ((cast _Runtime.field(_Runtime.field(source, 'data'), 'selectable') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex')) : Bool)) : Bool)) {
       _Runtime.callValue(getRichTextSelectionRectangles, cast ([CanvasRichText._richTextSelectionRectangles__canvasRichText, _Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex'), result] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', CanvasRichText.SELECTION_COLOR__canvasRichText);
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, (_Runtime.field(renderProxy, 'alpha') * CanvasRichText.SELECTION_ALPHA__canvasRichText)));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, _Runtime.multiplyNumbers(_Runtime.field(renderProxy, 'alpha'), CanvasRichText.SELECTION_ALPHA__canvasRichText)));
       for (rectangle in _Runtime.iterable(CanvasRichText._richTextSelectionRectangles__canvasRichText)) {
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([(_Runtime.field(rectangle, 'x') - scrollXOffset), (_Runtime.field(rectangle, 'y') - scrollYOffset), _Runtime.field(rectangle, 'width'), _Runtime.field(rectangle, 'height')] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([_Runtime.subtractNumbers(_Runtime.field(rectangle, 'x'), scrollXOffset), _Runtime.subtractNumbers(_Runtime.field(rectangle, 'y'), scrollYOffset), _Runtime.field(rectangle, 'width'), _Runtime.field(rectangle, 'height')] : Array<Dynamic>));
       }
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
     }
@@ -110,8 +110,8 @@ class CanvasRichText {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([_Runtime.field(group, 'format')] : Array<Dynamic>)));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast _Runtime.field(data, 'textColor'))] : Array<Dynamic>)));
       var slice:Dynamic = _Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'));
-      var x:Dynamic = (_Runtime.field(group, 'offsetX') - scrollXOffset);
-      var y:Dynamic = ((_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'ascent')) - scrollYOffset);
+      var x:Dynamic = _Runtime.subtractNumbers(_Runtime.field(group, 'offsetX'), scrollXOffset);
+      var y:Dynamic = (_Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'ascent')) - scrollYOffset);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(_Runtime.field(group, 'format'), 'bullet'), function():Dynamic return cast !(cast ((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))) : Bool)))) {
         ((cast bulletLines : flighthq._internal._Set).add(_Runtime.field(group, 'lineIndex')));
         var bulletW:Dynamic = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([CanvasRichText.BULLET_CHAR__canvasRichText] : Array<Dynamic>)), 'width');
@@ -119,20 +119,20 @@ class CanvasRichText {
       }
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
       var lineColor:Dynamic = _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast _Runtime.field(data, 'textColor'))] : Array<Dynamic>));
-      var lineWidth:Dynamic = HxMath.max(1.0, (_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'size'), function():Dynamic return cast 12.0) / 16.0));
+      var lineWidth:Dynamic = HxMath.max(1.0, _Runtime.divideNumbers(_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'size'), function():Dynamic return cast 12.0), 16.0));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.field(_Runtime.field(group, 'format'), 'underline'), function():Dynamic return cast _Runtime.field(_Runtime.field(group, 'format'), 'strikethrough')))) {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', lineColor);
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', lineWidth);
         if (_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'underline'))) {
           flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, (y + _Runtime.field(group, 'descent'))] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([(x + _Runtime.field(group, 'width')), (y + _Runtime.field(group, 'descent'))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, _Runtime.addNumbers(y, _Runtime.field(group, 'descent'))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([_Runtime.addNumbers(x, _Runtime.field(group, 'width')), _Runtime.addNumbers(y, _Runtime.field(group, 'descent'))] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'stroke', cast ([] : Array<Dynamic>));
         }
         if (_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'strikethrough'))) {
           flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, (y - (_Runtime.field(group, 'ascent') * 0.35))] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([(x + _Runtime.field(group, 'width')), (y - (_Runtime.field(group, 'ascent') * 0.35))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, (y - _Runtime.multiplyNumbers(_Runtime.field(group, 'ascent'), 0.35))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([_Runtime.addNumbers(x, _Runtime.field(group, 'width')), (y - _Runtime.multiplyNumbers(_Runtime.field(group, 'ascent'), 0.35))] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'stroke', cast ([] : Array<Dynamic>));
         }
       }

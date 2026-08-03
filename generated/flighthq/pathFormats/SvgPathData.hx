@@ -279,7 +279,7 @@ class SvgPathData {
     var factor:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(precision, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast Std.string(value); }
     factor = HxMath.pow(10.0, precision);
-    return cast Std.string((HxMath.round((value * factor)) / factor));
+    return cast Std.string(_Runtime.divideNumbers(HxMath.round((value * factor)), factor));
     return cast null;
   }
 

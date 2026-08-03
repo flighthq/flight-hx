@@ -220,8 +220,8 @@ class GlRenderPass {
     var top:Dynamic = cast _Runtime.UNDEFINED;
     x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
     y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
-    right = HxMath.min((_Runtime.field(a, 'x') + _Runtime.field(a, 'width')), (_Runtime.field(b, 'x') + _Runtime.field(b, 'width')));
-    top = HxMath.min((_Runtime.field(a, 'y') + _Runtime.field(a, 'height')), (_Runtime.field(b, 'y') + _Runtime.field(b, 'height')));
+    right = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.field(a, 'width')), _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width')));
+    top = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.field(a, 'height')), _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height')));
     return cast { height: HxMath.max(0.0, (top - y)), width: HxMath.max(0.0, (right - x)), x: x, y: y };
     return cast null;
   }
@@ -243,16 +243,16 @@ class GlRenderPass {
     passWidth = HxMath.max(0.0, _Runtime.field(viewport, 'width'));
     passHeight = HxMath.max(0.0, _Runtime.field(viewport, 'height'));
     rawLeft = HxMath.floor(_Runtime.field(viewport, 'x'));
-    rawRight = ((cast _Runtime.strictEquals(passWidth, 0.0) : Bool) ? (cast rawLeft : Dynamic) : (cast HxMath.ceil((_Runtime.field(viewport, 'x') + passWidth)) : Dynamic));
+    rawRight = ((cast _Runtime.strictEquals(passWidth, 0.0) : Bool) ? (cast rawLeft : Dynamic) : (cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(viewport, 'x'), passWidth)) : Dynamic));
     rawTop = HxMath.floor(_Runtime.field(viewport, 'y'));
-    rawBottom = ((cast _Runtime.strictEquals(passHeight, 0.0) : Bool) ? (cast rawTop : Dynamic) : (cast HxMath.ceil((_Runtime.field(viewport, 'y') + passHeight)) : Dynamic));
+    rawBottom = ((cast _Runtime.strictEquals(passHeight, 0.0) : Bool) ? (cast rawTop : Dynamic) : (cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(viewport, 'y'), passHeight)) : Dynamic));
     left = _Runtime.callValue(GlRenderPass.clampGlPassEdge__glRenderPass, cast ([rawLeft, _Runtime.field(target, 'width')] : Array<Dynamic>));
     right = _Runtime.callValue(GlRenderPass.clampGlPassEdge__glRenderPass, cast ([rawRight, _Runtime.field(target, 'width')] : Array<Dynamic>));
     top = _Runtime.callValue(GlRenderPass.clampGlPassEdge__glRenderPass, cast ([rawTop, _Runtime.field(target, 'height')] : Array<Dynamic>));
     bottom = _Runtime.callValue(GlRenderPass.clampGlPassEdge__glRenderPass, cast ([rawBottom, _Runtime.field(target, 'height')] : Array<Dynamic>));
     width = HxMath.max(0.0, (right - left));
     height = HxMath.max(0.0, (bottom - top));
-    return cast { height: height, width: width, x: left, y: (_Runtime.field(target, 'height') - bottom) };
+    return cast { height: height, width: width, x: left, y: _Runtime.subtractNumbers(_Runtime.field(target, 'height'), bottom) };
     return cast null;
   }
 

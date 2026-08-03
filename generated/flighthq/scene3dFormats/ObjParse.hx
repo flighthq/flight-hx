@@ -153,7 +153,7 @@ class ObjParse {
                 if ((cast ((cast _Runtime.field(faceIndices, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) {
                   {
                     var t:Dynamic = 1.0;
-                    while ((cast ((cast t : Float) < (cast (_Runtime.field(faceIndices, 'length') - 1.0) : Float)) : Bool)) {
+                    while ((cast ((cast t : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(faceIndices, 'length'), 1.0) : Float)) : Bool)) {
                       _Runtime.pushMany(_Runtime.field(bucket, 'indices'), cast ([flighthq._internal._StaticIndex.readArray(faceIndices, 0.0), flighthq._internal._StaticIndex.readArray(faceIndices, t), flighthq._internal._StaticIndex.readArray(faceIndices, (t + 1.0))] : Array<Dynamic>));
                       t++;
                     }
@@ -221,9 +221,9 @@ class ObjParse {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var vertexIndex:Dynamic = cast _Runtime.UNDEFINED;
     parts = _Runtime.callProperty(token, 'split', cast (['/'] : Array<Dynamic>));
-    posCount = (_Runtime.field(positions, 'length') / 3.0);
-    uvCount = (_Runtime.field(uvs, 'length') / 2.0);
-    normalCount = (_Runtime.field(normals, 'length') / 3.0);
+    posCount = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
+    uvCount = _Runtime.divideNumbers(_Runtime.field(uvs, 'length'), 2.0);
+    normalCount = _Runtime.divideNumbers(_Runtime.field(normals, 'length'), 3.0);
     rawPosIdx = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([rawPosIdx] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(rawPosIdx, 0.0) : Bool)) : Bool)) {
       _Runtime.callValue(ObjParse.tallyObjDrop__objParse, cast ([objDrops, ImportDiagnosticSeverityValue.Drop, 'obj.face-vertex-invalid', '', { firstLine: (lineIndex + 1.0), firstToken: token }] : Array<Dynamic>));
@@ -251,7 +251,7 @@ class ObjParse {
     key = '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/' + Std.string(normalIdx) + '';
     existing = ((cast _Runtime.field(bucket, 'dedup') : flighthq._internal._Map).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    vertexIndex = (_Runtime.field(_Runtime.field(bucket, 'vertices'), 'length') / CANONICAL_FLOATS_PER_VERTEX);
+    vertexIndex = _Runtime.divideNumbers(_Runtime.field(_Runtime.field(bucket, 'vertices'), 'length'), CANONICAL_FLOATS_PER_VERTEX);
     _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([flighthq._internal._StaticIndex.readArray(positions, (posIdx * 3.0)), flighthq._internal._StaticIndex.readArray(positions, ((posIdx * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(positions, ((posIdx * 3.0) + 2.0))] : Array<Dynamic>));
     if ((cast ((cast normalIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
       _Runtime.pushMany(_Runtime.field(bucket, 'vertices'), cast ([flighthq._internal._StaticIndex.readArray(normals, (normalIdx * 3.0)), flighthq._internal._StaticIndex.readArray(normals, ((normalIdx * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(normals, ((normalIdx * 3.0) + 2.0))] : Array<Dynamic>));
@@ -287,12 +287,12 @@ class ObjParse {
       var materialName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var bucket:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), 0.0) : Bool)) { continue; }
-      var vertexBase:Dynamic = (_Runtime.field(vertices, 'length') / CANONICAL_FLOATS_PER_VERTEX);
+      var vertexBase:Dynamic = _Runtime.divideNumbers(_Runtime.field(vertices, 'length'), CANONICAL_FLOATS_PER_VERTEX);
       var indexOffset:Dynamic = _Runtime.field(indices, 'length');
       {
         var k:Dynamic = 0.0;
         while ((cast ((cast k : Float) < (cast _Runtime.field(_Runtime.field(bucket, 'indices'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(indices, 'push', cast ([(flighthq._internal._StaticIndex.readArray(_Runtime.field(bucket, 'indices'), k) + vertexBase)] : Array<Dynamic>));
+          _Runtime.callProperty(indices, 'push', cast ([_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(bucket, 'indices'), k), vertexBase)] : Array<Dynamic>));
           k++;
         }
       }
@@ -349,7 +349,7 @@ class ObjParse {
   }
 
   public static function clampChannel__objParse(value:Float):Float {
-    return cast HxMath.round((HxMath.min(1.0, HxMath.max(0.0, value)) * 255.0));
+    return cast HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, value)), 255.0));
     return cast null;
   }
 

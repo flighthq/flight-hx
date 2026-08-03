@@ -180,7 +180,7 @@ class Md5AnimParse {
         var base:Dynamic = ((cast ((cast j : Float) < (cast _Runtime.field(baseframe, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(baseframe, j) : Dynamic) : (cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse : Dynamic));
         var flags:Dynamic = _Runtime.field(entry, 'flags');
         var width:Dynamic = _Runtime.callValue(Md5AnimParse.countMd5AnimFlagComponents__md5AnimParse, cast ([flags] : Array<Dynamic>));
-        if ((cast ((cast ((cast _Runtime.field(entry, 'startIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(((cast width : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast (_Runtime.field(entry, 'startIndex') + width) : Float) > (cast componentTotal : Float))) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast _Runtime.field(entry, 'startIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(((cast width : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast _Runtime.addNumbers(_Runtime.field(entry, 'startIndex'), width) : Float) > (cast componentTotal : Float))) : Bool)) : Bool)) {
           _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.joint-frame-window-invalid', '', { firstIndex: _Runtime.field(entry, 'startIndex'), firstJoint: j, firstWidth: width }] : Array<Dynamic>));
         }
         var translationValues:Array<Float> = cast ([] : Array<Dynamic>);

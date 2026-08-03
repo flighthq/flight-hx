@@ -119,7 +119,7 @@ class ParseAtf {
       while ((cast ((cast slot : Float) < (cast slotCount : Float)) : Bool)) {
         var levels:Dynamic = flighthq._internal._StaticIndex.readArray(perSlotLevels, slot);
         if ((cast _Runtime.strictEquals(_Runtime.field(levels, 'length'), 0.0) : Bool)) { (slot = cast ((slot + 1.0) : Dynamic)); continue; }
-        _Runtime.callProperty(containers, 'push', cast ([{ depth: 1.0, faces: faces, format: flighthq._internal._StaticIndex.readArray(slotFormats, slot), height: height, layers: 1.0, levels: levels, mipLevels: (_Runtime.field(levels, 'length') / faces), supercompression: 'None', width: width }] : Array<Dynamic>));
+        _Runtime.callProperty(containers, 'push', cast ([{ depth: 1.0, faces: faces, format: flighthq._internal._StaticIndex.readArray(slotFormats, slot), height: height, layers: 1.0, levels: levels, mipLevels: _Runtime.divideNumbers(_Runtime.field(levels, 'length'), faces), supercompression: 'None', width: width }] : Array<Dynamic>));
         (slot = cast ((slot + 1.0) : Dynamic));
       }
     }

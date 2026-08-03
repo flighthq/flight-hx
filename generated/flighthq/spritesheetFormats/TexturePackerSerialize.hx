@@ -18,7 +18,7 @@ class TexturePackerSerialize {
       var firstIdx:Dynamic = cast _Runtime.UNDEFINED;
       var lastIdx:Dynamic = cast _Runtime.UNDEFINED;
       firstIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, 0.0)));
-      lastIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, (_Runtime.field(anim.frameNames, 'length') - 1.0))));
+      lastIdx = _Runtime.findIndex(data.frames, function(f:Dynamic) return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, _Runtime.subtractNumbers(_Runtime.field(anim.frameNames, 'length'), 1.0))));
       return cast { direction: anim.direction, from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)), name: anim.name, to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) };
     }] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), image: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast ''), scale: ((cast !_Runtime.strictEquals(data.scale, 1.0) : Bool) ? (cast data.scale : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast 1.0) : Dynamic)), size: { h: data.imageHeight, w: data.imageWidth }, version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.0') };
     return cast null;

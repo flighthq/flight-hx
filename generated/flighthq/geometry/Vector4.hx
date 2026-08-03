@@ -10,10 +10,10 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Vector4 {
   public static function addVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(a, 'x') + _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(a, 'y') + _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(a, 'z') + _Runtime.field(b, 'z')));
-    _Runtime.setField(out, 'w', (_Runtime.field(a, 'w') + _Runtime.field(b, 'w')));
+    _Runtime.setField(out, 'x', _Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')));
+    _Runtime.setField(out, 'y', _Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')));
+    _Runtime.setField(out, 'z', _Runtime.addNumbers(_Runtime.field(a, 'z'), _Runtime.field(b, 'z')));
+    _Runtime.setField(out, 'w', _Runtime.addNumbers(_Runtime.field(a, 'w'), _Runtime.field(b, 'w')));
   }
 
   public static function clampVector4(out:Vector4Like, value:Vector4Like, min:Vector4Like, max:Vector4Like):Void {
@@ -100,7 +100,7 @@ class Vector4 {
     la = _Runtime.callValue(getVector4Length, cast ([a] : Array<Dynamic>));
     lb = _Runtime.callValue(getVector4Length, cast ([b] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = (_Runtime.callValue(getVector4Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
+    _dot = _Runtime.divideNumbers(_Runtime.callValue(getVector4Dot, cast ([a, b] : Array<Dynamic>)), (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -110,10 +110,10 @@ class Vector4 {
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
-    x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    w = (_Runtime.field(b, 'w') - _Runtime.field(a, 'w'));
+    x = _Runtime.subtractNumbers(_Runtime.field(b, 'x'), _Runtime.field(a, 'x'));
+    y = _Runtime.subtractNumbers(_Runtime.field(b, 'y'), _Runtime.field(a, 'y'));
+    z = _Runtime.subtractNumbers(_Runtime.field(b, 'z'), _Runtime.field(a, 'z'));
+    w = _Runtime.subtractNumbers(_Runtime.field(b, 'w'), _Runtime.field(a, 'w'));
     return cast HxMath.sqrt((((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)) + HxMath.pow(w, 2.0)));
     return cast null;
   }
@@ -123,16 +123,16 @@ class Vector4 {
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
-    x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
-    y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
-    z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    w = (_Runtime.field(b, 'w') - _Runtime.field(a, 'w'));
+    x = _Runtime.subtractNumbers(_Runtime.field(b, 'x'), _Runtime.field(a, 'x'));
+    y = _Runtime.subtractNumbers(_Runtime.field(b, 'y'), _Runtime.field(a, 'y'));
+    z = _Runtime.subtractNumbers(_Runtime.field(b, 'z'), _Runtime.field(a, 'z'));
+    w = _Runtime.subtractNumbers(_Runtime.field(b, 'w'), _Runtime.field(a, 'w'));
     return cast (((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)) + HxMath.pow(w, 2.0));
     return cast null;
   }
 
   public static function getVector4Dot(a:Vector4Like, b:Vector4Like):Float {
-    return cast ((((_Runtime.field(a, 'x') * _Runtime.field(b, 'x')) + (_Runtime.field(a, 'y') * _Runtime.field(b, 'y'))) + (_Runtime.field(a, 'z') * _Runtime.field(b, 'z'))) + (_Runtime.field(a, 'w') * _Runtime.field(b, 'w')));
+    return cast (((_Runtime.multiplyNumbers(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) + _Runtime.multiplyNumbers(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))) + _Runtime.multiplyNumbers(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'))) + _Runtime.multiplyNumbers(_Runtime.field(a, 'w'), _Runtime.field(b, 'w')));
     return cast null;
   }
 
@@ -155,10 +155,10 @@ class Vector4 {
     ay = _Runtime.field(a, 'y');
     az = _Runtime.field(a, 'z');
     aw = _Runtime.field(a, 'w');
-    _Runtime.setField(out, 'x', (ax + (t * (_Runtime.field(b, 'x') - ax))));
-    _Runtime.setField(out, 'y', (ay + (t * (_Runtime.field(b, 'y') - ay))));
-    _Runtime.setField(out, 'z', (az + (t * (_Runtime.field(b, 'z') - az))));
-    _Runtime.setField(out, 'w', (aw + (t * (_Runtime.field(b, 'w') - aw))));
+    _Runtime.setField(out, 'x', (ax + (t * _Runtime.subtractNumbers(_Runtime.field(b, 'x'), ax))));
+    _Runtime.setField(out, 'y', (ay + (t * _Runtime.subtractNumbers(_Runtime.field(b, 'y'), ay))));
+    _Runtime.setField(out, 'z', (az + (t * _Runtime.subtractNumbers(_Runtime.field(b, 'z'), az))));
+    _Runtime.setField(out, 'w', (aw + (t * _Runtime.subtractNumbers(_Runtime.field(b, 'w'), aw))));
   }
 
   public static function maxVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
@@ -176,32 +176,32 @@ class Vector4 {
   }
 
   public static function multiplyVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(a, 'x') * _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(a, 'y') * _Runtime.field(b, 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(a, 'z') * _Runtime.field(b, 'z')));
-    _Runtime.setField(out, 'w', (_Runtime.field(a, 'w') * _Runtime.field(b, 'w')));
+    _Runtime.setField(out, 'x', _Runtime.multiplyNumbers(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')));
+    _Runtime.setField(out, 'y', _Runtime.multiplyNumbers(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')));
+    _Runtime.setField(out, 'z', _Runtime.multiplyNumbers(_Runtime.field(a, 'z'), _Runtime.field(b, 'z')));
+    _Runtime.setField(out, 'w', _Runtime.multiplyNumbers(_Runtime.field(a, 'w'), _Runtime.field(b, 'w')));
   }
 
   public static function nearEqualsVector4(a:Vector4Like, b:Vector4Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))) : Float) < (cast tolerance : Float)) : Bool) && (cast ((cast HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))) : Float) < (cast tolerance : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))) : Float) < (cast tolerance : Float)) : Bool)), function():Dynamic return cast ((cast HxMath.abs((_Runtime.field(a, 'w') - _Runtime.field(b, 'w'))) : Float) < (cast tolerance : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast HxMath.abs(_Runtime.subtractNumbers(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'))) : Float) < (cast tolerance : Float)) : Bool) && (cast ((cast HxMath.abs(_Runtime.subtractNumbers(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))) : Float) < (cast tolerance : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs(_Runtime.subtractNumbers(_Runtime.field(a, 'z'), _Runtime.field(b, 'z'))) : Float) < (cast tolerance : Float)) : Bool)), function():Dynamic return cast ((cast HxMath.abs(_Runtime.subtractNumbers(_Runtime.field(a, 'w'), _Runtime.field(b, 'w'))) : Float) < (cast tolerance : Float)));
     return cast null;
   }
 
   public static function negateVector4(out:Vector4Like, source:Vector4Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') * -1.0));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') * -1.0));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') * -1.0));
-    _Runtime.setField(out, 'w', (_Runtime.field(source, 'w') * -1.0));
+    _Runtime.setField(out, 'x', _Runtime.multiplyNumbers(_Runtime.field(source, 'x'), -1.0));
+    _Runtime.setField(out, 'y', _Runtime.multiplyNumbers(_Runtime.field(source, 'y'), -1.0));
+    _Runtime.setField(out, 'z', _Runtime.multiplyNumbers(_Runtime.field(source, 'z'), -1.0));
+    _Runtime.setField(out, 'w', _Runtime.multiplyNumbers(_Runtime.field(source, 'w'), -1.0));
   }
 
   public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
     var l:Dynamic = cast _Runtime.UNDEFINED;
     l = _Runtime.callValue(getVector4Length, cast ([source] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
-      _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') / l));
-      _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') / l));
-      _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') / l));
-      _Runtime.setField(out, 'w', (_Runtime.field(source, 'w') / l));
+      _Runtime.setField(out, 'x', _Runtime.divideNumbers(_Runtime.field(source, 'x'), l));
+      _Runtime.setField(out, 'y', _Runtime.divideNumbers(_Runtime.field(source, 'y'), l));
+      _Runtime.setField(out, 'z', _Runtime.divideNumbers(_Runtime.field(source, 'z'), l));
+      _Runtime.setField(out, 'w', _Runtime.divideNumbers(_Runtime.field(source, 'w'), l));
     } else {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
@@ -213,16 +213,16 @@ class Vector4 {
   }
 
   public static function offsetVector4(out:Vector4Like, source:Vector4Like, dx:Float, dy:Float, dz:Float, dw:Float):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') + dx));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') + dy));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') + dz));
-    _Runtime.setField(out, 'w', (_Runtime.field(source, 'w') + dw));
+    _Runtime.setField(out, 'x', _Runtime.addNumbers(_Runtime.field(source, 'x'), dx));
+    _Runtime.setField(out, 'y', _Runtime.addNumbers(_Runtime.field(source, 'y'), dy));
+    _Runtime.setField(out, 'z', _Runtime.addNumbers(_Runtime.field(source, 'z'), dz));
+    _Runtime.setField(out, 'w', _Runtime.addNumbers(_Runtime.field(source, 'w'), dw));
   }
 
   public static function projectVector4(out:Vector3Like, source:Vector4Like):Void {
-    (out.x = cast ((_Runtime.field(source, 'x') / _Runtime.field(source, 'w')) : Dynamic));
-    (out.y = cast ((_Runtime.field(source, 'y') / _Runtime.field(source, 'w')) : Dynamic));
-    (out.z = cast ((_Runtime.field(source, 'z') / _Runtime.field(source, 'w')) : Dynamic));
+    (out.x = cast (_Runtime.divideNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'w')) : Dynamic));
+    (out.y = cast (_Runtime.divideNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'w')) : Dynamic));
+    (out.z = cast (_Runtime.divideNumbers(_Runtime.field(source, 'z'), _Runtime.field(source, 'w')) : Dynamic));
   }
 
   public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {
@@ -251,10 +251,10 @@ class Vector4 {
   }
 
   public static function scaleVector4(out:Vector4Like, source:Vector4Like, scalar:Float):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') * scalar));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') * scalar));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') * scalar));
-    _Runtime.setField(out, 'w', (_Runtime.field(source, 'w') * scalar));
+    _Runtime.setField(out, 'x', _Runtime.multiplyNumbers(_Runtime.field(source, 'x'), scalar));
+    _Runtime.setField(out, 'y', _Runtime.multiplyNumbers(_Runtime.field(source, 'y'), scalar));
+    _Runtime.setField(out, 'z', _Runtime.multiplyNumbers(_Runtime.field(source, 'z'), scalar));
+    _Runtime.setField(out, 'w', _Runtime.multiplyNumbers(_Runtime.field(source, 'w'), scalar));
   }
 
   public static function setVector4(out:Vector4Like, x:Float, y:Float, z:Float, w:Float):Void {
@@ -285,10 +285,10 @@ class Vector4 {
   }
 
   public static function subtractVector4(out:Vector4Like, source:Vector4Like, other:Vector4Like):Void {
-    _Runtime.setField(out, 'x', (_Runtime.field(source, 'x') - _Runtime.field(other, 'x')));
-    _Runtime.setField(out, 'y', (_Runtime.field(source, 'y') - _Runtime.field(other, 'y')));
-    _Runtime.setField(out, 'z', (_Runtime.field(source, 'z') - _Runtime.field(other, 'z')));
-    _Runtime.setField(out, 'w', (_Runtime.field(source, 'w') - _Runtime.field(other, 'w')));
+    _Runtime.setField(out, 'x', _Runtime.subtractNumbers(_Runtime.field(source, 'x'), _Runtime.field(other, 'x')));
+    _Runtime.setField(out, 'y', _Runtime.subtractNumbers(_Runtime.field(source, 'y'), _Runtime.field(other, 'y')));
+    _Runtime.setField(out, 'z', _Runtime.subtractNumbers(_Runtime.field(source, 'z'), _Runtime.field(other, 'z')));
+    _Runtime.setField(out, 'w', _Runtime.subtractNumbers(_Runtime.field(source, 'w'), _Runtime.field(other, 'w')));
   }
 
   public static function writeVector4ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector4Like):Void {

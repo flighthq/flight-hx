@@ -61,7 +61,7 @@ class DirectedGraph__martinezKernel {
     ring = cast ([] : Array<Dynamic>);
     edge = startEdge;
     guard = 0.0;
-    limit = (_Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length') + 2.0);
+    limit = _Runtime.addNumbers(_Runtime.field(_Runtime.field(this, 'edgeFrom'), 'length'), 2.0);
     while ((cast ((cast guard++ : Float) < (cast limit : Float)) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(_Runtime.field(this, 'used'), edge, true);
       var from:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'edgeFrom'), edge);
@@ -78,13 +78,13 @@ class DirectedGraph__martinezKernel {
     var incomingAngle:Dynamic = cast _Runtime.UNDEFINED;
     var best:Dynamic = cast _Runtime.UNDEFINED;
     var bestGap:Dynamic = cast _Runtime.UNDEFINED;
-    incomingAngle = HxMath.atan2((flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), cameFrom) - flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), at)), (flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), cameFrom) - flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), at)));
+    incomingAngle = HxMath.atan2(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), cameFrom), flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), at)), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), cameFrom), flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), at)));
     best = -1.0;
     bestGap = HxMath.POSITIVE_INFINITY;
     for (edge in _Runtime.iterable(flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'outgoing'), at))) {
       if ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'used'), edge) : Bool)) { continue; }
       var to:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'edgeTo'), edge);
-      var angle:Dynamic = HxMath.atan2((flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), to) - flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), at)), (flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), to) - flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), at)));
+      var angle:Dynamic = HxMath.atan2(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), to), flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'ys'), at)), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), to), flighthq._internal._StaticIndex.readArray(_Runtime.field(this, 'xs'), at)));
       var gap:Dynamic = (incomingAngle - angle);
       while ((cast ((cast gap : Float) <= (cast 0.0 : Float)) : Bool)) { (gap = cast ((gap + (HxMath.PI * 2.0)) : Dynamic)); }
       while ((cast ((cast gap : Float) > (cast (HxMath.PI * 2.0) : Float)) : Bool)) { (gap = cast ((gap - (HxMath.PI * 2.0)) : Dynamic)); }
@@ -127,7 +127,7 @@ class EventHeap__martinezKernel {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(this, 'data');
     _Runtime.callProperty(data, 'push', cast ([event] : Array<Dynamic>));
-    i = (_Runtime.field(data, 'length') - 1.0);
+    i = _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0);
     while ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool)) {
       var parent:Dynamic = (_Runtime.toInt32((i - 1.0)) >> 1);
       if ((cast ((cast _Runtime.callValue(MartinezKernel.compareEvents__martinezKernel, cast ([flighthq._internal._StaticIndex.readArray(data, i), flighthq._internal._StaticIndex.readArray(data, parent)] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) {
@@ -212,7 +212,7 @@ class MartinezKernel {
       if ((cast _Runtime.field(event, 'left') : Bool)) {
         var index:Dynamic = _Runtime.callValue(MartinezKernel.insertStatus__martinezKernel, cast ([status, event] : Array<Dynamic>));
         var prev:Dynamic = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
-        var next:Dynamic = ((cast ((cast index : Float) < (cast (_Runtime.field(status, 'length') - 1.0) : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
+        var next:Dynamic = ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(status, 'length'), 1.0) : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
         if ((cast !_Runtime.strictEquals(next, null) : Bool)) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([event, next, heap] : Array<Dynamic>)); }
         if ((cast !_Runtime.strictEquals(prev, null) : Bool)) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([prev, event, heap] : Array<Dynamic>)); }
       } else {
@@ -220,7 +220,7 @@ class MartinezKernel {
         var index:Dynamic = _Runtime.callValue(MartinezKernel.findStatus__martinezKernel, cast ([status, leftEvent] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) {
           var prev:Dynamic = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
-          var next:Dynamic = ((cast ((cast index : Float) < (cast (_Runtime.field(status, 'length') - 1.0) : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
+          var next:Dynamic = ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(status, 'length'), 1.0) : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
           _Runtime.splice(status, Std.int(index), Std.int(1.0), []);
           if ((cast ((cast !_Runtime.strictEquals(prev, null) : Bool) && (cast !_Runtime.strictEquals(next, null) : Bool)) : Bool)) { _Runtime.callValue(MartinezKernel.possibleIntersection__martinezKernel, cast ([prev, next, heap] : Array<Dynamic>)); }
         }
@@ -490,7 +490,7 @@ class MartinezKernel {
         (unique = cast ({ ax: ax, ay: ay, bx: bx, by: by, subjectDelta: 0.0, clipDelta: 0.0 } : Dynamic));
         ((cast map : flighthq._internal._Map).set(key, unique));
       }
-      if ((cast _Runtime.field(seg, 'isSubject') : Bool)) { _Runtime.setField(unique, 'subjectDelta', (_Runtime.field(unique, 'subjectDelta') + _Runtime.field(seg, 'windingDelta'))); } else { _Runtime.setField(unique, 'clipDelta', (_Runtime.field(unique, 'clipDelta') + _Runtime.field(seg, 'windingDelta'))); }
+      if ((cast _Runtime.field(seg, 'isSubject') : Bool)) { _Runtime.setField(unique, 'subjectDelta', _Runtime.addNumbers(_Runtime.field(unique, 'subjectDelta'), _Runtime.field(seg, 'windingDelta'))); } else { _Runtime.setField(unique, 'clipDelta', _Runtime.addNumbers(_Runtime.field(unique, 'clipDelta'), _Runtime.field(seg, 'windingDelta'))); }
     }
     return cast _Runtime.concatArrays([_Runtime.toArray(((cast map : flighthq._internal._Map).values()))]);
     return cast null;
@@ -500,10 +500,10 @@ class MartinezKernel {
     var kept:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     kept = cast ([] : Array<Dynamic>);
     for (seg in _Runtime.iterable(unique)) {
-      var mx:Dynamic = ((_Runtime.field(seg, 'ax') + _Runtime.field(seg, 'bx')) / 2.0);
-      var my:Dynamic = ((_Runtime.field(seg, 'ay') + _Runtime.field(seg, 'by')) / 2.0);
-      var dx:Dynamic = (_Runtime.field(seg, 'bx') - _Runtime.field(seg, 'ax'));
-      var dy:Dynamic = (_Runtime.field(seg, 'by') - _Runtime.field(seg, 'ay'));
+      var mx:Dynamic = (_Runtime.addNumbers(_Runtime.field(seg, 'ax'), _Runtime.field(seg, 'bx')) / 2.0);
+      var my:Dynamic = (_Runtime.addNumbers(_Runtime.field(seg, 'ay'), _Runtime.field(seg, 'by')) / 2.0);
+      var dx:Dynamic = _Runtime.subtractNumbers(_Runtime.field(seg, 'bx'), _Runtime.field(seg, 'ax'));
+      var dy:Dynamic = _Runtime.subtractNumbers(_Runtime.field(seg, 'by'), _Runtime.field(seg, 'ay'));
       var len:Dynamic = _Runtime.hypot(dx, dy);
       if ((cast _Runtime.strictEquals(len, 0.0) : Bool)) { continue; }
       var eps:Dynamic = (len * 0.0001);
@@ -529,8 +529,8 @@ class MartinezKernel {
       var lox:Dynamic = HxMath.min(_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx'));
       var hix:Dynamic = HxMath.max(_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx'));
       if ((cast ((cast ((cast px : Float) < (cast lox : Float)) : Bool) || (cast ((cast px : Float) >= (cast hix : Float)) : Bool)) : Bool)) { continue; }
-      var t:Dynamic = ((px - _Runtime.field(v, 'ax')) / (_Runtime.field(v, 'bx') - _Runtime.field(v, 'ax')));
-      var yAt:Dynamic = (_Runtime.field(v, 'ay') + (t * (_Runtime.field(v, 'by') - _Runtime.field(v, 'ay'))));
+      var t:Dynamic = (_Runtime.subtractNumbers(px, _Runtime.field(v, 'ax')) / _Runtime.subtractNumbers(_Runtime.field(v, 'bx'), _Runtime.field(v, 'ax')));
+      var yAt:Dynamic = _Runtime.addNumbers(_Runtime.field(v, 'ay'), (t * _Runtime.subtractNumbers(_Runtime.field(v, 'by'), _Runtime.field(v, 'ay'))));
       if ((cast ((cast yAt : Float) < (cast py : Float)) : Bool)) { (winding = cast ((winding + ((cast subject : Bool) ? (cast _Runtime.field(v, 'subjectDelta') : Dynamic) : (cast _Runtime.field(v, 'clipDelta') : Dynamic))) : Dynamic)); }
     }
     return cast winding;

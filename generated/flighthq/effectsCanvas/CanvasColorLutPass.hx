@@ -17,10 +17,10 @@ class CanvasColorLutPass {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
           var p:Dynamic = (i * 4.0);
-          _Runtime.callValue(sampleColorLut, cast ([lut, rgb, (flighthq._internal._StaticIndex.readUint8ClampedArray(data, p) / 255.0), (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0)) / 255.0), (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0)) / 255.0)] : Array<Dynamic>));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, (flighthq._internal._StaticIndex.readArray(rgb, 0.0) * 255.0));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), (flighthq._internal._StaticIndex.readArray(rgb, 1.0) * 255.0));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), (flighthq._internal._StaticIndex.readArray(rgb, 2.0) * 255.0));
+          _Runtime.callValue(sampleColorLut, cast ([lut, rgb, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, p), 255.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0)), 255.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0)), 255.0)] : Array<Dynamic>));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 0.0), 255.0));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 1.0), 255.0));
+          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 2.0), 255.0));
           i++;
         }
       }

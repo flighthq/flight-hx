@@ -98,16 +98,16 @@ class WgpuShader {
   public static function setWgpuMatrixFromTransform(matrixArray:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;
-    iw = (2.0 / _Runtime.field(viewport, 'width'));
-    ih = (2.0 / _Runtime.field(viewport, 'height'));
-    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 0.0, (_Runtime.field(t, 'a') * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 1.0, (-_Runtime.field(t, 'b') * ih));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'width'));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'height'));
+    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 0.0, _Runtime.multiplyNumbers(_Runtime.field(t, 'a'), iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 1.0, _Runtime.multiplyNumbers(-_Runtime.field(t, 'b'), ih));
     flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 3.0, (_Runtime.field(t, 'c') * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 4.0, (-_Runtime.field(t, 'd') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 3.0, _Runtime.multiplyNumbers(_Runtime.field(t, 'c'), iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 4.0, _Runtime.multiplyNumbers(-_Runtime.field(t, 'd'), ih));
     flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 6.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 7.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 6.0, (_Runtime.multiplyNumbers(_Runtime.field(t, 'tx'), iw) - 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 7.0, (_Runtime.multiplyNumbers(-_Runtime.field(t, 'ty'), ih) + 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 8.0, 1.0);
   }
 
@@ -166,7 +166,7 @@ class WgpuShader {
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 29.0), v0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 30.0), u1);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 31.0), v1);
-    _Runtime.setField(runtime, 'uniformOffset', (_Runtime.field(runtime, 'uniformOffset') + _Runtime.field(runtime, 'uniformStride')));
+    _Runtime.setField(runtime, 'uniformOffset', _Runtime.addNumbers(_Runtime.field(runtime, 'uniformOffset'), _Runtime.field(runtime, 'uniformStride')));
     return cast byteOffset;
     return cast null;
   }

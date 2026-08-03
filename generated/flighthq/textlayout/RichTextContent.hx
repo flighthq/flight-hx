@@ -53,7 +53,7 @@ class RichTextContent {
       if ((cast StringTools.endsWith(Std.string(_Runtime.field(out, 'text')), ' ') : Bool)) { (value = cast (_Runtime.callProperty(value, 'trimStart', cast ([] : Array<Dynamic>)) : Dynamic)); }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool)) { return; }
-    remaining = ((cast ((cast maxChars : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(value, 'length') : Dynamic) : (cast HxMath.max(0.0, (maxChars - _Runtime.field(_Runtime.field(out, 'text'), 'length'))) : Dynamic));
+    remaining = ((cast ((cast maxChars : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(value, 'length') : Dynamic) : (cast HxMath.max(0.0, _Runtime.subtractNumbers(maxChars, _Runtime.field(_Runtime.field(out, 'text'), 'length'))) : Dynamic));
     if ((cast _Runtime.strictEquals(remaining, 0.0) : Bool)) { return; }
     if ((cast ((cast _Runtime.field(value, 'length') : Float) > (cast remaining : Float)) : Bool)) { (value = cast (_Runtime.slice(value, 0.0, remaining) : Dynamic)); }
     start = _Runtime.field(_Runtime.field(out, 'text'), 'length');
@@ -89,7 +89,7 @@ class RichTextContent {
 
   public static function clampRanges__richTextContent(ranges:Array<TextFormatRange>, length:Float):Void {
     {
-      var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var range:Dynamic = flighthq._internal._StaticIndex.readArray(ranges, i);
         if ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast length : Float)) : Bool)) {
@@ -132,7 +132,7 @@ class RichTextContent {
   public static function writeFormatRange__richTextContent(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(start, end) : Bool)) { return; }
-    previous = flighthq._internal._StaticIndex.readArray(ranges, (_Runtime.field(ranges, 'length') - 1.0));
+    previous = flighthq._internal._StaticIndex.readArray(ranges, _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0));
     if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'end'), start) : Bool)) : Bool) && (cast _Runtime.callValue(RichTextContent.textFormatEquals__richTextContent, cast ([_Runtime.field(previous, 'format'), format] : Array<Dynamic>)) : Bool)) : Bool)) {
       _Runtime.setField(previous, 'end', end);
     } else {

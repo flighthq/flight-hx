@@ -47,8 +47,8 @@ class FlyCameraController {
   }
 
   public static function lookFlyCameraController(controller:flighthq.types.FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
-    _Runtime.setField(controller, 'goalYaw', (_Runtime.field(controller, 'goalYaw') + deltaYaw));
-    _Runtime.setField(controller, 'goalPitch', _Runtime.callValue(clamp, cast ([(_Runtime.field(controller, 'goalPitch') + deltaPitch), _Runtime.field(controller, 'minPitch'), _Runtime.field(controller, 'maxPitch')] : Array<Dynamic>)));
+    _Runtime.setField(controller, 'goalYaw', _Runtime.addNumbers(_Runtime.field(controller, 'goalYaw'), deltaYaw));
+    _Runtime.setField(controller, 'goalPitch', _Runtime.callValue(clamp, cast ([_Runtime.addNumbers(_Runtime.field(controller, 'goalPitch'), deltaPitch), _Runtime.field(controller, 'minPitch'), _Runtime.field(controller, 'maxPitch')] : Array<Dynamic>)));
   }
 
   public static function moveFlyCameraController(controller:flighthq.types.FlyCameraController, forward:Float, right:Float, up:Float):Void {
@@ -96,8 +96,8 @@ class FlyCameraController {
     var position:Dynamic = cast _Runtime.UNDEFINED;
     goalPitch = _Runtime.callValue(clamp, cast ([_Runtime.field(controller, 'goalPitch'), _Runtime.field(controller, 'minPitch'), _Runtime.field(controller, 'maxPitch')] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.field(controller, 'smoothTime') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var lambda:Dynamic = (1.0 / _Runtime.field(controller, 'smoothTime'));
-      var nearestGoalYaw:Dynamic = (_Runtime.field(controller, 'yaw') + _Runtime.callValue(deltaAngle, cast ([_Runtime.field(controller, 'yaw'), _Runtime.field(controller, 'goalYaw')] : Array<Dynamic>)));
+      var lambda:Dynamic = _Runtime.divideNumbers(1.0, _Runtime.field(controller, 'smoothTime'));
+      var nearestGoalYaw:Dynamic = _Runtime.addNumbers(_Runtime.field(controller, 'yaw'), _Runtime.callValue(deltaAngle, cast ([_Runtime.field(controller, 'yaw'), _Runtime.field(controller, 'goalYaw')] : Array<Dynamic>)));
       _Runtime.setField(controller, 'yaw', _Runtime.callValue(damp, cast ([_Runtime.field(controller, 'yaw'), nearestGoalYaw, lambda, deltaTime] : Array<Dynamic>)));
       _Runtime.setField(controller, 'pitch', _Runtime.callValue(damp, cast ([_Runtime.field(controller, 'pitch'), goalPitch, lambda, deltaTime] : Array<Dynamic>)));
     } else {

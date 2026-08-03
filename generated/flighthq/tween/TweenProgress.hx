@@ -11,9 +11,9 @@ class TweenProgress {
   public static function getTweenProgress(tween:Tween<Dynamic>):Float {
     var activeElapsed:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.field(tween, 'complete') : Bool)) { return cast 1.0; }
-    activeElapsed = (_Runtime.field(tween, 'elapsed') - _Runtime.field(tween, 'delay'));
+    activeElapsed = _Runtime.subtractNumbers(_Runtime.field(tween, 'elapsed'), _Runtime.field(tween, 'delay'));
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    return cast HxMath.min((activeElapsed / _Runtime.field(tween, 'duration')), 1.0);
+    return cast HxMath.min(_Runtime.divideNumbers(activeElapsed, _Runtime.field(tween, 'duration')), 1.0);
     return cast null;
   }
 
@@ -39,17 +39,17 @@ class TweenProgress {
     var writes:Array<{ var key:String; var value:Float; }> = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(tween, 'initialized') : Bool) : Bool)) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
-    maxElapsed = (_Runtime.field(tween, 'delay') + _Runtime.field(tween, 'duration'));
+    maxElapsed = _Runtime.addNumbers(_Runtime.field(tween, 'delay'), _Runtime.field(tween, 'duration'));
     clampedElapsed = HxMath.max(0.0, HxMath.min(timeSeconds, maxElapsed));
     _Runtime.setField(tween, 'elapsed', clampedElapsed);
-    activeElapsed = (clampedElapsed - _Runtime.field(tween, 'delay'));
+    activeElapsed = _Runtime.subtractNumbers(clampedElapsed, _Runtime.field(tween, 'delay'));
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    t = HxMath.min((activeElapsed / _Runtime.field(tween, 'duration')), 1.0);
+    t = HxMath.min(_Runtime.divideNumbers(activeElapsed, _Runtime.field(tween, 'duration')), 1.0);
     effectiveT = ((cast _Runtime.field(tween, 'reverse') : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
     easedT = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
     writes = cast ([] : Array<Dynamic>);
     for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-      var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
+      var value:Dynamic = _Runtime.addNumbers(_Runtime.field(detail, 'start'), _Runtime.multiplyNumbers(_Runtime.field(detail, 'change'), easedT));
       if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.callProperty(writes, 'push', cast ([{ key: _Runtime.field(detail, 'key'), value: value }] : Array<Dynamic>));
     }
@@ -70,7 +70,7 @@ class TweenProgress {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var targetElapsed:Dynamic = cast _Runtime.UNDEFINED;
     clamped = HxMath.max(0.0, HxMath.min(progress, 1.0));
-    targetElapsed = (_Runtime.field(tween, 'delay') + (clamped * _Runtime.field(tween, 'duration')));
+    targetElapsed = _Runtime.addNumbers(_Runtime.field(tween, 'delay'), _Runtime.multiplyNumbers(clamped, _Runtime.field(tween, 'duration')));
     _Runtime.callValue(seekTween, cast ([tween, targetElapsed] : Array<Dynamic>));
   }
 }

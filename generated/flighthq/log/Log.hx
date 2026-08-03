@@ -141,7 +141,7 @@ class Log {
     if ((cast ((cast idx : Float) >= (cast _Runtime.field(parts, 'length') : Float)) : Bool)) { return; }
     key = flighthq._internal._StaticIndex.readArray(parts, idx);
     if ((cast !(cast _Runtime.hasField(obj, key) : Bool) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(idx, (_Runtime.field(parts, 'length') - 1.0)) : Bool)) {
+    if ((cast _Runtime.strictEquals(idx, _Runtime.subtractNumbers(_Runtime.field(parts, 'length'), 1.0)) : Bool)) {
       _Runtime.setIndex(obj, key, '[REDACTED]');
       return;
     }
@@ -367,7 +367,7 @@ class Log {
         _Runtime.callProperty(_Runtime.field(state, 'buf'), 'push', cast ([stored] : Array<Dynamic>));
       } else {
         flighthq._internal._StaticIndex.writeArray(_Runtime.field(state, 'buf'), _Runtime.field(state, 'head'), stored);
-        _Runtime.setField(state, 'head', _Runtime.fmod((_Runtime.field(state, 'head') + 1.0), capacity));
+        _Runtime.setField(state, 'head', _Runtime.fmod(_Runtime.addNumbers(_Runtime.field(state, 'head'), 1.0), capacity));
       }
     };
     handle = { sink: sink };
@@ -484,7 +484,7 @@ class Log {
 
   public static function endLogTimer(timer:LogTimer):Float {
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;
-    elapsed = (_Runtime.callValue(Log._timestamp__log, cast ([] : Array<Dynamic>)) - _Runtime.field(timer, 'startedAt'));
+    elapsed = _Runtime.subtractNumbers(_Runtime.callValue(Log._timestamp__log, cast ([] : Array<Dynamic>)), _Runtime.field(timer, 'startedAt'));
     _Runtime.callValue(logDebug, cast ([{ label: _Runtime.field(timer, 'label'), elapsedMs: elapsed }, _Runtime.field(timer, 'channel')] : Array<Dynamic>));
     return cast elapsed;
     return cast null;

@@ -544,11 +544,11 @@ class GltfParse {
             continue;
           }
           var cubic:Dynamic = _Runtime.strictEquals(sampler.interpolation, 'CUBICSPLINE');
-          if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(channel.target, 'path'), 'weights') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(outputResult, 'count'), (((cast cubic : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic)) * _Runtime.field(inputResult, 'count'))) : Bool)) : Bool)) {
+          if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(channel.target, 'path'), 'weights') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(outputResult, 'count'), _Runtime.multiplyNumbers(((cast cubic : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic)), _Runtime.field(inputResult, 'count'))) : Bool)) : Bool)) {
             _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.animation-sampler-cardinality', '', { firstSampler: channel.sampler }] : Array<Dynamic>));
             continue;
           }
-          (duration = cast (HxMath.max(duration, ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(times, (_Runtime.field(times, 'length') - 1.0)) : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic));
+          (duration = cast (HxMath.max(duration, ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(times, _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0)) : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic));
           if ((cast _Runtime.strictEquals(_Runtime.field(channel.target, 'path'), 'weights') : Bool)) {
             var meshNodeIndices:Dynamic = ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, targetNodeIndex), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, targetNodeIndex) : Dynamic) : (cast cast ([flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, targetNodeIndex)] : Array<Dynamic>) : Dynamic));
             _Runtime.callValue(GltfParse.appendGltfWeightsChannels__gltfParse, cast ([channels, meshNodeIndices, nodes, meshes, times, values, sampler.interpolation, gltfDrops] : Array<Dynamic>));
@@ -584,8 +584,8 @@ class GltfParse {
         var meshIndex:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(meshNodeIndices, i)), 'mesh');
         var morph:Dynamic = ((cast !_Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(meshes, meshIndex), 'morph') : Dynamic) : (cast null : Dynamic));
         if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(morph, 'targets'), 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
-        if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), ((perKey * _Runtime.field(times, 'length')) * _Runtime.field(_Runtime.field(morph, 'targets'), 'length'))) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.weights-cardinality-mismatch', '', { firstExpected: ((perKey * _Runtime.field(times, 'length')) * _Runtime.field(_Runtime.field(morph, 'targets'), 'length')), firstActual: _Runtime.field(values, 'length') }] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field(_Runtime.field(morph, 'targets'), 'length'))) : Bool)) {
+          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.weights-cardinality-mismatch', '', { firstExpected: _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field(_Runtime.field(morph, 'targets'), 'length')), firstActual: _Runtime.field(values, 'length') }] : Array<Dynamic>));
           (cardinalityDropped = cast (true : Dynamic));
           i++;
           continue;
@@ -1210,8 +1210,8 @@ class GltfParse {
     if ((cast ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([viewOffset] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([view.byteLength] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([byteOffset] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast -1.0; }
     if ((cast ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([elementByteSize] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(elementByteSize, 0.0) : Bool)) : Bool)) { return cast -1.0; }
     if ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([stride] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast stride : Float) < (cast elementByteSize : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    start = ((_Runtime.field(bytes, 'byteOffset') + viewOffset) + byteOffset);
-    limit = HxMath.min(((_Runtime.field(bytes, 'byteOffset') + viewOffset) + view.byteLength), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
+    start = (_Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), viewOffset) + byteOffset);
+    limit = HxMath.min((_Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), viewOffset) + view.byteLength), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
     end = ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((start + ((count - 1.0) * stride)) + elementByteSize) : Dynamic) : (cast start : Dynamic));
     if ((cast ((cast end : Float) > (cast limit : Float)) : Bool)) { return cast -1.0; }
     return cast start;

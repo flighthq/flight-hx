@@ -63,7 +63,7 @@ class GlParticleEmitter2D {
     gl = _Runtime.field(state, 'gl');
     needed = (count * GlParticleEmitter2D.INSTANCE_FLOATS__glParticleEmitter2D);
     if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0) : Float) >= (cast needed : Float)) : Bool)) { return; }
-    newSize = HxMath.max(needed, (_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0) * 2.0));
+    newSize = HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0), 2.0));
     _Runtime.setField(runtime, 'particleInstanceData', new flighthq._internal._Float32Array(newSize));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'particleInstanceBuffer'));
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
@@ -114,8 +114,8 @@ class GlParticleEmitter2D {
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     t = _Runtime.field(renderProxy, 'transform2D');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([atlas.texture] : Array<Dynamic>))));
-    ih = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([atlas.texture] : Array<Dynamic>))));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([atlas.texture] : Array<Dynamic>))));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([atlas.texture] : Array<Dynamic>))));
     instanceData = _Runtime.field(runtime, 'particleInstanceData');
     base = 0.0;
     drawCount = 0.0;
@@ -131,8 +131,8 @@ class GlParticleEmitter2D {
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
         var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
         var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
-        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
+        var cosR:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinR:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var ct:Dynamic = (i * 3.0);
         var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
         var r:Dynamic = ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));
@@ -145,7 +145,7 @@ class GlParticleEmitter2D {
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 4.0), r);
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 5.0), g);
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 6.0), b);
-        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 7.0), (nodeAlpha * flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
+        flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 7.0), _Runtime.multiplyNumbers(nodeAlpha, flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 8.0), (region.x * iw));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 9.0), (region.y * ih));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (base + 10.0), ((region.x + region.width) * iw));
@@ -164,8 +164,8 @@ class GlParticleEmitter2D {
       flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(shader, 'program'));
       _Runtime.setField(runtime, 'currentProgram', _Runtime.field(shader, 'program'));
     }
-    clipW = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
-    clipH = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
+    clipW = _Runtime.divideNumbers(2.0, flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
+    clipH = _Runtime.divideNumbers(2.0, flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
     m = _Runtime.field(runtime, 'matrixArray');
     if ((cast source.data.worldSpace : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, clipW);

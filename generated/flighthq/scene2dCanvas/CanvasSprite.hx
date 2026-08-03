@@ -34,10 +34,10 @@ class CanvasSprite {
     if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return; }
     textureWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
     textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
-    sourceX = (_Runtime.field(texture, 'uvOffset').x * textureWidth);
-    sourceY = (_Runtime.field(texture, 'uvOffset').y * textureHeight);
-    sourceWidth = HxMath.abs((_Runtime.field(texture, 'uvScale').x * textureWidth));
-    sourceHeight = HxMath.abs((_Runtime.field(texture, 'uvScale').y * textureHeight));
+    sourceX = _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').x, textureWidth);
+    sourceY = _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').y, textureHeight);
+    sourceWidth = HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, textureWidth));
+    sourceHeight = HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, textureHeight));
     if ((cast ((cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(sprite, 'blendMode')] : Array<Dynamic>));

@@ -76,9 +76,9 @@ class ColorLut {
     n = _Runtime.field(lut, 'size');
     s = _Runtime.field(lut, 'samples');
     max = (n - 1.0);
-    fr = (_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([r] : Array<Dynamic>)) * max);
-    fg = (_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([g] : Array<Dynamic>)) * max);
-    fb = (_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([b] : Array<Dynamic>)) * max);
+    fr = _Runtime.multiplyNumbers(_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([r] : Array<Dynamic>)), max);
+    fg = _Runtime.multiplyNumbers(_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([g] : Array<Dynamic>)), max);
+    fb = _Runtime.multiplyNumbers(_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([b] : Array<Dynamic>)), max);
     r0 = HxMath.floor(fr);
     g0 = HxMath.floor(fg);
     b0 = HxMath.floor(fb);

@@ -48,12 +48,12 @@ class RenderViewport {
     }
     objMinX = _Runtime.field(bounds, 'x');
     objMinY = _Runtime.field(bounds, 'y');
-    objMaxX = (_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width'));
-    objMaxY = (_Runtime.field(bounds, 'y') + _Runtime.field(bounds, 'height'));
+    objMaxX = _Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'width'));
+    objMaxY = _Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'height'));
     vpMinX = _Runtime.field(viewport, 'x');
     vpMinY = _Runtime.field(viewport, 'y');
-    vpMaxX = (_Runtime.field(viewport, 'x') + _Runtime.field(viewport, 'width'));
-    vpMaxY = (_Runtime.field(viewport, 'y') + _Runtime.field(viewport, 'height'));
+    vpMaxX = _Runtime.addNumbers(_Runtime.field(viewport, 'x'), _Runtime.field(viewport, 'width'));
+    vpMaxY = _Runtime.addNumbers(_Runtime.field(viewport, 'y'), _Runtime.field(viewport, 'height'));
     return cast !(cast _Runtime.orValue(((cast ((cast ((cast objMaxX : Float) < (cast vpMinX : Float)) : Bool) || (cast ((cast objMinX : Float) > (cast vpMaxX : Float)) : Bool)) : Bool) || (cast ((cast objMaxY : Float) < (cast vpMinY : Float)) : Bool)), function():Dynamic return cast ((cast objMinY : Float) > (cast vpMaxY : Float))) : Bool);
     return cast null;
   }

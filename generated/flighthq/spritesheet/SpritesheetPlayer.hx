@@ -120,7 +120,7 @@ class SpritesheetPlayer {
     __destructure2 = player;
     animation = _Runtime.field(__destructure2, 'animation');
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
-    clamped = HxMath.max(0.0, HxMath.min(frameIndex, (_Runtime.field(animation.frames, 'length') - 1.0)));
+    clamped = HxMath.max(0.0, HxMath.min(frameIndex, _Runtime.subtractNumbers(_Runtime.field(animation.frames, 'length'), 1.0)));
     (player.frameIndex = cast (clamped : Dynamic));
     virtualIndex = _Runtime.callValue(SpritesheetPlayer.resolveDisplayIndexToFirstVirtualIndex__spritesheetPlayer, cast ([animation, clamped] : Array<Dynamic>));
     (player.elapsed = cast (_Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexStartTime__spritesheetPlayer, cast ([animation, virtualIndex] : Array<Dynamic>)) : Dynamic));
@@ -173,7 +173,7 @@ class SpritesheetPlayer {
         return cast true;
       }
       (player.elapsed = cast (playbackTime : Dynamic));
-      var lastVi:Dynamic = (_Runtime.callValue(SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer, cast ([animation] : Array<Dynamic>)) - 1.0);
+      var lastVi:Dynamic = _Runtime.subtractNumbers(_Runtime.callValue(SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer, cast ([animation] : Array<Dynamic>)), 1.0);
       (player.frameIndex = cast (_Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer, cast ([animation, lastVi] : Array<Dynamic>)) : Dynamic));
       (player.complete = cast (true : Dynamic));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[player.onComplete]]), 1);
@@ -194,7 +194,7 @@ class SpritesheetPlayer {
         return cast displayIndex;
       }
       else if (__switchValue == 'reverse' || __switchValue == 'pingpong_reverse') {
-        return cast ((_Runtime.field(animation.frames, 'length') - 1.0) - displayIndex);
+        return cast (_Runtime.subtractNumbers(_Runtime.field(animation.frames, 'length'), 1.0) - displayIndex);
       }
       else  {
         return cast displayIndex;
@@ -244,7 +244,7 @@ class SpritesheetPlayer {
     frameDurations = _Runtime.field(__destructure7, 'frameDurations');
     if ((cast !_Runtime.strictEquals(frameDurations, null) : Bool)) {
       var arr:Dynamic = _Runtime.callValue(SpritesheetPlayer.getCumulativeDurations__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
-      return cast flighthq._internal._StaticIndex.readFloat64Array(arr, (_Runtime.field(arr, 'length') - 1.0));
+      return cast flighthq._internal._StaticIndex.readFloat64Array(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0));
     }
     virtualCount = _Runtime.callValue(SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
     return cast _Runtime.orValue((virtualCount * frameDuration), function():Dynamic return cast 1.0);
@@ -322,7 +322,7 @@ class SpritesheetPlayer {
     __destructure10 = animation;
     direction = _Runtime.field(__destructure10, 'direction');
     frames = _Runtime.field(__destructure10, 'frames');
-    last = (_Runtime.field(frames, 'length') - 1.0);
+    last = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0);
     {
       var __switchValue = direction;
       if (__switchValue == 'forward') {

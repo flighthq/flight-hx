@@ -103,6 +103,7 @@ export interface IrExpressionStaticFacts {
       }
     | undefined;
   indexedAccessEscape?: 'width-sensitive-mixed-write' | undefined;
+  numericOperands?: true | undefined;
   numericRelation?: true | undefined;
   typedArraySet?:
     | {

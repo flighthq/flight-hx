@@ -12,12 +12,12 @@ import flighthq.types.Physics2D.RigidBody2D;
 
 class Solver {
   public static function applyPhysics2DImpulse(bodyA:RigidBody2D, bodyB:RigidBody2D, rAX:Float, rAY:Float, rBX:Float, rBY:Float, impulseX:Float, impulseY:Float):Void {
-    _Runtime.setField(bodyA, 'velocityX', (_Runtime.field(bodyA, 'velocityX') + (impulseX * _Runtime.field(bodyA, 'inverseMass'))));
-    _Runtime.setField(bodyA, 'velocityY', (_Runtime.field(bodyA, 'velocityY') + (impulseY * _Runtime.field(bodyA, 'inverseMass'))));
-    _Runtime.setField(bodyA, 'angularVelocity', (_Runtime.field(bodyA, 'angularVelocity') + (_Runtime.field(bodyA, 'inverseInertia') * ((rAX * impulseY) - (rAY * impulseX)))));
-    _Runtime.setField(bodyB, 'velocityX', (_Runtime.field(bodyB, 'velocityX') - (impulseX * _Runtime.field(bodyB, 'inverseMass'))));
-    _Runtime.setField(bodyB, 'velocityY', (_Runtime.field(bodyB, 'velocityY') - (impulseY * _Runtime.field(bodyB, 'inverseMass'))));
-    _Runtime.setField(bodyB, 'angularVelocity', (_Runtime.field(bodyB, 'angularVelocity') - (_Runtime.field(bodyB, 'inverseInertia') * ((rBX * impulseY) - (rBY * impulseX)))));
+    _Runtime.setField(bodyA, 'velocityX', _Runtime.addNumbers(_Runtime.field(bodyA, 'velocityX'), _Runtime.multiplyNumbers(impulseX, _Runtime.field(bodyA, 'inverseMass'))));
+    _Runtime.setField(bodyA, 'velocityY', _Runtime.addNumbers(_Runtime.field(bodyA, 'velocityY'), _Runtime.multiplyNumbers(impulseY, _Runtime.field(bodyA, 'inverseMass'))));
+    _Runtime.setField(bodyA, 'angularVelocity', _Runtime.addNumbers(_Runtime.field(bodyA, 'angularVelocity'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'inverseInertia'), ((rAX * impulseY) - (rAY * impulseX)))));
+    _Runtime.setField(bodyB, 'velocityX', _Runtime.subtractNumbers(_Runtime.field(bodyB, 'velocityX'), _Runtime.multiplyNumbers(impulseX, _Runtime.field(bodyB, 'inverseMass'))));
+    _Runtime.setField(bodyB, 'velocityY', _Runtime.subtractNumbers(_Runtime.field(bodyB, 'velocityY'), _Runtime.multiplyNumbers(impulseY, _Runtime.field(bodyB, 'inverseMass'))));
+    _Runtime.setField(bodyB, 'angularVelocity', _Runtime.subtractNumbers(_Runtime.field(bodyB, 'angularVelocity'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'inverseInertia'), ((rBX * impulseY) - (rBY * impulseX)))));
   }
 
   public static function relativeNormalVelocity(bodyA:RigidBody2D, bodyB:RigidBody2D, point:Physics2DContactPoint, normalX:Float, normalY:Float):Float {
@@ -25,10 +25,10 @@ class Solver {
     var vay:Dynamic = cast _Runtime.UNDEFINED;
     var vbx:Dynamic = cast _Runtime.UNDEFINED;
     var vby:Dynamic = cast _Runtime.UNDEFINED;
-    vax = (_Runtime.field(bodyA, 'velocityX') - (_Runtime.field(bodyA, 'angularVelocity') * _Runtime.field(point, 'rAY')));
-    vay = (_Runtime.field(bodyA, 'velocityY') + (_Runtime.field(bodyA, 'angularVelocity') * _Runtime.field(point, 'rAX')));
-    vbx = (_Runtime.field(bodyB, 'velocityX') - (_Runtime.field(bodyB, 'angularVelocity') * _Runtime.field(point, 'rBY')));
-    vby = (_Runtime.field(bodyB, 'velocityY') + (_Runtime.field(bodyB, 'angularVelocity') * _Runtime.field(point, 'rBX')));
+    vax = _Runtime.subtractNumbers(_Runtime.field(bodyA, 'velocityX'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'angularVelocity'), _Runtime.field(point, 'rAY')));
+    vay = _Runtime.addNumbers(_Runtime.field(bodyA, 'velocityY'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'angularVelocity'), _Runtime.field(point, 'rAX')));
+    vbx = _Runtime.subtractNumbers(_Runtime.field(bodyB, 'velocityX'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'angularVelocity'), _Runtime.field(point, 'rBY')));
+    vby = _Runtime.addNumbers(_Runtime.field(bodyB, 'velocityY'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'angularVelocity'), _Runtime.field(point, 'rBX')));
     return cast (((vax - vbx) * normalX) + ((vay - vby) * normalY));
     return cast null;
   }
@@ -47,16 +47,16 @@ class Solver {
       while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
         var point:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
         var tangentVelocity:Dynamic = _Runtime.callValue(Solver.relativeAxisVelocity__solver, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), tangentX, tangentY] : Array<Dynamic>));
-        var tangentImpulse:Dynamic = (-_Runtime.field(point, 'tangentMass') * tangentVelocity);
-        var limit:Dynamic = (_Runtime.field(contact, 'friction') * _Runtime.field(point, 'normalImpulse'));
-        var clampedTangent:Dynamic = HxMath.max(-limit, HxMath.min(limit, (_Runtime.field(point, 'tangentImpulse') + tangentImpulse)));
-        (tangentImpulse = cast ((clampedTangent - _Runtime.field(point, 'tangentImpulse')) : Dynamic));
+        var tangentImpulse:Dynamic = _Runtime.multiplyNumbers(-_Runtime.field(point, 'tangentMass'), tangentVelocity);
+        var limit:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(contact, 'friction'), _Runtime.field(point, 'normalImpulse'));
+        var clampedTangent:Dynamic = HxMath.max(-limit, HxMath.min(limit, _Runtime.addNumbers(_Runtime.field(point, 'tangentImpulse'), tangentImpulse)));
+        (tangentImpulse = cast (_Runtime.subtractNumbers(clampedTangent, _Runtime.field(point, 'tangentImpulse')) : Dynamic));
         _Runtime.setField(point, 'tangentImpulse', clampedTangent);
         _Runtime.callValue(applyPhysics2DImpulse, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), (tangentImpulse * tangentX), (tangentImpulse * tangentY)] : Array<Dynamic>));
         var normalVelocity:Dynamic = _Runtime.callValue(relativeNormalVelocity, cast ([bodyA, bodyB, point, normalX, normalY] : Array<Dynamic>));
-        var normalImpulse:Dynamic = (-_Runtime.field(point, 'normalMass') * (normalVelocity + _Runtime.field(point, 'bias')));
-        var clampedNormal:Dynamic = HxMath.max(0.0, (_Runtime.field(point, 'normalImpulse') + normalImpulse));
-        (normalImpulse = cast ((clampedNormal - _Runtime.field(point, 'normalImpulse')) : Dynamic));
+        var normalImpulse:Dynamic = _Runtime.multiplyNumbers(-_Runtime.field(point, 'normalMass'), _Runtime.addNumbers(normalVelocity, _Runtime.field(point, 'bias')));
+        var clampedNormal:Dynamic = HxMath.max(0.0, _Runtime.addNumbers(_Runtime.field(point, 'normalImpulse'), normalImpulse));
+        (normalImpulse = cast (_Runtime.subtractNumbers(clampedNormal, _Runtime.field(point, 'normalImpulse')) : Dynamic));
         _Runtime.setField(point, 'normalImpulse', clampedNormal);
         _Runtime.callValue(applyPhysics2DImpulse, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), (normalImpulse * normalX), (normalImpulse * normalY)] : Array<Dynamic>));
         i++;
@@ -102,8 +102,8 @@ class Solver {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
           var point:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
-          var impulseX:Dynamic = ((_Runtime.field(point, 'normalImpulse') * normalX) + (_Runtime.field(point, 'tangentImpulse') * tangentX));
-          var impulseY:Dynamic = ((_Runtime.field(point, 'normalImpulse') * normalY) + (_Runtime.field(point, 'tangentImpulse') * tangentY));
+          var impulseX:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(point, 'normalImpulse'), normalX) + _Runtime.multiplyNumbers(_Runtime.field(point, 'tangentImpulse'), tangentX));
+          var impulseY:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(point, 'normalImpulse'), normalY) + _Runtime.multiplyNumbers(_Runtime.field(point, 'tangentImpulse'), tangentY));
           _Runtime.callValue(applyPhysics2DImpulse, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), impulseX, impulseY] : Array<Dynamic>));
           i++;
         }
@@ -116,10 +116,10 @@ class Solver {
     var vay:Dynamic = cast _Runtime.UNDEFINED;
     var vbx:Dynamic = cast _Runtime.UNDEFINED;
     var vby:Dynamic = cast _Runtime.UNDEFINED;
-    vax = (_Runtime.field(bodyA, 'velocityX') - (_Runtime.field(bodyA, 'angularVelocity') * rAY));
-    vay = (_Runtime.field(bodyA, 'velocityY') + (_Runtime.field(bodyA, 'angularVelocity') * rAX));
-    vbx = (_Runtime.field(bodyB, 'velocityX') - (_Runtime.field(bodyB, 'angularVelocity') * rBY));
-    vby = (_Runtime.field(bodyB, 'velocityY') + (_Runtime.field(bodyB, 'angularVelocity') * rBX));
+    vax = _Runtime.subtractNumbers(_Runtime.field(bodyA, 'velocityX'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'angularVelocity'), rAY));
+    vay = _Runtime.addNumbers(_Runtime.field(bodyA, 'velocityY'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'angularVelocity'), rAX));
+    vbx = _Runtime.subtractNumbers(_Runtime.field(bodyB, 'velocityX'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'angularVelocity'), rBY));
+    vby = _Runtime.addNumbers(_Runtime.field(bodyB, 'velocityY'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'angularVelocity'), rBX));
     return cast (((vax - vbx) * axisX) + ((vay - vby) * axisY));
     return cast null;
   }

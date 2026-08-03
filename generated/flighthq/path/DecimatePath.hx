@@ -18,7 +18,7 @@ class DecimatePath {
     for (contour in _Runtime.iterable(contours)) {
       var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var closed:Dynamic = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, (_Runtime.field(contour, 'length') - 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, (_Runtime.field(contour, 'length') - 1.0))) : Bool));
+      var closed:Dynamic = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0))) : Bool));
       var last:Dynamic = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
       var keep:Dynamic = new flighthq._internal._UInt8Array(last);
       flighthq._internal._StaticIndex.writeUint8Array(keep, 0.0, 1.0);

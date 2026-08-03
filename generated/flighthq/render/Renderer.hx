@@ -39,7 +39,7 @@ class Renderer {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind)), renderer) : Bool)) { return; }
-    _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(runtime, 'rendererMapId') + 1.0)), 0));
+    _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(runtime, 'rendererMapId'), 1.0)), 0));
     ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).set(kind, renderer));
   }
 

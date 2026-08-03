@@ -41,7 +41,7 @@ class SwfReader {
   public function readFixed8():Float {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast this : SwfReader).readUint16();
-    return cast (((cast ((cast value : Float) >= (cast 32768.0 : Float)) : Bool) ? (cast (value - 65536.0) : Dynamic) : (cast value : Dynamic)) / FIXED_8_8_ONE__swfReader);
+    return cast _Runtime.divideNumbers(((cast ((cast value : Float) >= (cast 32768.0 : Float)) : Bool) ? (cast (value - 65536.0) : Dynamic) : (cast value : Dynamic)), FIXED_8_8_ONE__swfReader);
     return cast null;
   }
   public function readSignedBits(count:Float):Float {
@@ -103,7 +103,7 @@ class SwfReader {
           (this.valid = cast (false : Dynamic));
           return cast 0.0;
         }
-        (value = cast (((value * 2.0) + (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(this, 'source'), _Runtime.field(this, 'pos'))) >> _Runtime.toInt32((7.0 - _Runtime.field(this, 'bitPosition'))))) & 1)) : Dynamic));
+        (value = cast (((value * 2.0) + (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(this, 'source'), _Runtime.field(this, 'pos'))) >> _Runtime.toInt32(_Runtime.subtractNumbers(7.0, _Runtime.field(this, 'bitPosition'))))) & 1)) : Dynamic));
         _Runtime.incrementField(this, 'bitPosition', 1, true);
         if ((cast _Runtime.strictEquals(_Runtime.field(this, 'bitPosition'), 8.0) : Bool)) {
           (this.bitPosition = cast (0.0 : Dynamic));

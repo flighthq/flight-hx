@@ -90,7 +90,7 @@ class SpineParse {
       var parentIndex:Dynamic = -1.0;
       if ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(bone, 'parent')), 'string') : Bool)) {
         {
-          var i:Dynamic = (_Runtime.field(bones, 'length') - 1.0);
+          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(bones, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(bones, i), 'name'), _Runtime.field(bone, 'parent')) : Bool)) {
               (parentIndex = cast (i : Dynamic));
@@ -262,7 +262,7 @@ class SpineParse {
           break;
         }
         var declared:Dynamic = (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(rawVerts, r++)) | 0);
-        var available:Dynamic = HxMath.max(0.0, (_Runtime.toInt32((_Runtime.field(rawVerts, 'length') - r)) >> 2));
+        var available:Dynamic = HxMath.max(0.0, (_Runtime.toInt32(_Runtime.subtractNumbers(_Runtime.field(rawVerts, 'length'), r)) >> 2));
         var boneCount:Dynamic = HxMath.min(HxMath.max(declared, 0.0), available);
         if ((cast !_Runtime.strictEquals(boneCount, declared) : Bool)) { (truncated = cast (true : Dynamic)); }
         flighthq._internal._StaticIndex.writeUint16Array(influenceCounts, v, boneCount);
@@ -329,7 +329,7 @@ class SpineParse {
     var curved:Dynamic = cast _Runtime.UNDEFINED;
     var clampedSegments:Dynamic = cast _Runtime.UNDEFINED;
     var divergentSegments:Dynamic = cast _Runtime.UNDEFINED;
-    segments = (_Runtime.field(times, 'length') - 1.0);
+    segments = _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0);
     if ((cast ((cast segments : Float) < (cast 1.0 : Float)) : Bool)) { return cast null; }
     easings = cast ([] : Array<Dynamic>);
     curved = false;
@@ -339,7 +339,7 @@ class SpineParse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast segments : Float)) : Bool)) {
         var curve:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(keys, i), 'curve');
-        var span:Dynamic = (flighthq._internal._StaticIndex.readArray(times, (i + 1.0)) - flighthq._internal._StaticIndex.readArray(times, i));
+        var span:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(times, (i + 1.0)), flighthq._internal._StaticIndex.readArray(times, i));
         if ((cast ((cast !(cast _Runtime.isArray(curve) : Bool) : Bool) || (cast ((cast span : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
           i++;
@@ -350,7 +350,7 @@ class SpineParse {
         {
           var c:Dynamic = 0.0;
           while ((cast ((cast ((cast c : Float) < (cast components : Float)) : Bool) && (cast ((cast ((c + 1.0) * 4.0) : Float) <= (cast _Runtime.field(curve, 'length') : Float)) : Bool)) : Bool)) {
-            var rise:Dynamic = HxMath.abs((flighthq._internal._StaticIndex.readArray(values, (((i + 1.0) * components) + c)) - flighthq._internal._StaticIndex.readArray(values, ((i * components) + c))));
+            var rise:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(values, (((i + 1.0) * components) + c)), flighthq._internal._StaticIndex.readArray(values, ((i * components) + c))));
             if ((cast ((cast rise : Float) > (cast widest : Float)) : Bool)) {
               (widest = cast (rise : Dynamic));
               (winner = cast (c : Dynamic));
@@ -363,10 +363,10 @@ class SpineParse {
           var rise:Dynamic = cast _Runtime.UNDEFINED;
           var offset:Dynamic = cast _Runtime.UNDEFINED;
           from = flighthq._internal._StaticIndex.readArray(values, ((i * components) + c));
-          rise = (flighthq._internal._StaticIndex.readArray(values, (((i + 1.0) * components) + c)) - from);
+          rise = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(values, (((i + 1.0) * components) + c)), from);
           if ((cast _Runtime.strictEquals(rise, 0.0) : Bool)) { return cast null; }
           offset = (c * 4.0);
-          return cast cast ([((_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, offset), 0.0] : Array<Dynamic>)) - flighthq._internal._StaticIndex.readArray(times, i)) / span), ((_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, (offset + 1.0)), 0.0] : Array<Dynamic>)) - from) / rise), ((_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, (offset + 2.0)), 0.0] : Array<Dynamic>)) - flighthq._internal._StaticIndex.readArray(times, i)) / span), ((_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, (offset + 3.0)), 0.0] : Array<Dynamic>)) - from) / rise)] : Array<Dynamic>);
+          return cast cast ([(_Runtime.subtractNumbers(_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, offset), 0.0] : Array<Dynamic>)), flighthq._internal._StaticIndex.readArray(times, i)) / span), (_Runtime.subtractNumbers(_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, (offset + 1.0)), 0.0] : Array<Dynamic>)), from) / rise), (_Runtime.subtractNumbers(_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, (offset + 2.0)), 0.0] : Array<Dynamic>)), flighthq._internal._StaticIndex.readArray(times, i)) / span), (_Runtime.subtractNumbers(_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([flighthq._internal._StaticIndex.readArray(curve, (offset + 3.0)), 0.0] : Array<Dynamic>)), from) / rise)] : Array<Dynamic>);
         };
         var won:Dynamic = ((cast ((cast winner : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(rebase, cast ([winner] : Array<Dynamic>)) : Dynamic));
         var diverged:Dynamic = false;
@@ -380,7 +380,7 @@ class SpineParse {
               {
                 var k:Dynamic = 0.0;
                 while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-                  if ((cast ((cast HxMath.abs((flighthq._internal._StaticIndex.readArray(other, k) - flighthq._internal._StaticIndex.readArray(won, k))) : Float) > (cast SpineParse.SPINE_CURVE_EPSILON__spineParse : Float)) : Bool)) { (diverged = cast (true : Dynamic)); }
+                  if ((cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(other, k), flighthq._internal._StaticIndex.readArray(won, k))) : Float) > (cast SpineParse.SPINE_CURVE_EPSILON__spineParse : Float)) : Bool)) { (diverged = cast (true : Dynamic)); }
                   k++;
                 }
               }
@@ -477,7 +477,7 @@ class SpineParse {
         var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 0.0);
         var keys:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 1.0);
         if ((cast ((cast !_Runtime.strictEquals(kind, 'rgba') : Bool) && (cast !_Runtime.strictEquals(kind, 'attachment') : Bool)) : Bool)) {
-          ((cast unmodeled : flighthq._internal._Map).set(kind, (_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map).get(kind)), function():Dynamic return cast 0.0) + 1.0)));
+          ((cast unmodeled : flighthq._internal._Map).set(kind, _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map).get(kind)), function():Dynamic return cast 0.0), 1.0)));
           continue;
         }
         if ((cast ((cast ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast !(cast _Runtime.isArray(keys) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) : Bool)) { continue; }
@@ -543,7 +543,7 @@ class SpineParse {
       var index:Dynamic = ((cast indexByName : flighthq._internal._Map).get(name));
       if ((cast _Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var found:Dynamic = _Runtime.callOptionalProperty(_Runtime.optionalField(setup, 'attachments'), 'find', cast ([function(entry:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(entry, 'slotIndex'), slotIndex) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'name'), name) : Bool))] : Array<Dynamic>));
-        (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse : Dynamic) : (cast (_Runtime.callProperty(attachments, 'push', cast ([_Runtime.field(found, 'attachment')] : Array<Dynamic>)) - 1.0) : Dynamic)) : Dynamic));
+        (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([_Runtime.field(found, 'attachment')] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
         ((cast indexByName : flighthq._internal._Map).set(name, index));
       }
       _Runtime.callProperty(values, 'push', cast ([index] : Array<Dynamic>));

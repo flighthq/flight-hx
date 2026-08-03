@@ -62,8 +62,8 @@ class ResourceLoader {
     var now:Dynamic = cast _Runtime.UNDEFINED;
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;
     now = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
-    elapsed = ((now - _Runtime.field(bucket, 'lastRefillMs')) / 1000.0);
-    _Runtime.setField(bucket, 'tokens', HxMath.min(_Runtime.field(bucket, 'maxBytesPerSecond'), (_Runtime.field(bucket, 'tokens') + (elapsed * _Runtime.field(bucket, 'maxBytesPerSecond')))));
+    elapsed = (_Runtime.subtractNumbers(now, _Runtime.field(bucket, 'lastRefillMs')) / 1000.0);
+    _Runtime.setField(bucket, 'tokens', HxMath.min(_Runtime.field(bucket, 'maxBytesPerSecond'), _Runtime.addNumbers(_Runtime.field(bucket, 'tokens'), _Runtime.multiplyNumbers(elapsed, _Runtime.field(bucket, 'maxBytesPerSecond')))));
     _Runtime.setField(bucket, 'lastRefillMs', now);
   }
 
@@ -71,13 +71,13 @@ class ResourceLoader {
     var deficit:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ResourceLoader.refillTokens__resourceLoader, cast ([bucket] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(cost, 0.0) : Bool) || (cast ((cast _Runtime.field(bucket, 'tokens') : Float) >= (cast cost : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    deficit = (cost - _Runtime.field(bucket, 'tokens'));
-    return cast HxMath.ceil(((deficit / _Runtime.field(bucket, 'maxBytesPerSecond')) * 1000.0));
+    deficit = _Runtime.subtractNumbers(cost, _Runtime.field(bucket, 'tokens'));
+    return cast HxMath.ceil((_Runtime.divideNumbers(deficit, _Runtime.field(bucket, 'maxBytesPerSecond')) * 1000.0));
     return cast null;
   }
 
   public static function consumeTokens__resourceLoader(bucket:TokenBucket__resourceLoader, cost:Float):Void {
-    _Runtime.setField(bucket, 'tokens', HxMath.max(0.0, (_Runtime.field(bucket, 'tokens') - cost)));
+    _Runtime.setField(bucket, 'tokens', HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(bucket, 'tokens'), cost)));
   }
 
   public static function cancelResourceLoad(loader:flighthq.types.ResourceLoader):Void {
@@ -215,15 +215,15 @@ class ResourceLoader {
       for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
         if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'group'), group) : Bool)) { groupInFlight++; }
       }
-      var groupTotal:Dynamic = ((_Runtime.field(groupReports, 'length') + _Runtime.field(groupPending, 'length')) + groupInFlight);
+      var groupTotal:Dynamic = (_Runtime.addNumbers(_Runtime.field(groupReports, 'length'), _Runtime.field(groupPending, 'length')) + groupInFlight);
       if ((cast _Runtime.strictEquals(groupTotal, 0.0) : Bool)) { return cast 0.0; }
-      return cast (_Runtime.field(groupReports, 'length') / groupTotal);
+      return cast _Runtime.divideNumbers(_Runtime.field(groupReports, 'length'), groupTotal);
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(internal, 'total'), 0.0) : Bool)) { return cast 1.0; }
     if ((cast ((cast _Runtime.field(internal, 'totalWeight') : Float) > (cast 0.0 : Float)) : Bool)) {
-      return cast (_Runtime.field(internal, 'weightLoaded') / _Runtime.field(internal, 'totalWeight'));
+      return cast _Runtime.divideNumbers(_Runtime.field(internal, 'weightLoaded'), _Runtime.field(internal, 'totalWeight'));
     }
-    return cast (_Runtime.field(internal, 'loaded') / _Runtime.field(internal, 'total'));
+    return cast _Runtime.divideNumbers(_Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total'));
     return cast null;
   }
 
@@ -291,7 +291,7 @@ class ResourceLoader {
     _Runtime.setField(entry, 'wrappedLoad', (cast descriptor.load : Dynamic));
     _Runtime.callProperty(_Runtime.field(internal, 'pending'), 'push', cast ([entry] : Array<Dynamic>));
     _Runtime.incrementField(internal, 'total', 1, true);
-    _Runtime.setField(internal, 'totalWeight', (_Runtime.field(internal, 'totalWeight') + weight));
+    _Runtime.setField(internal, 'totalWeight', _Runtime.addNumbers(_Runtime.field(internal, 'totalWeight'), weight));
     handle = { key: key, promise: promise };
     if ((cast ((cast dedupe : Bool) && (cast !_Runtime.strictEquals(descriptor.key, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).set(key, (cast handle : ResourceLoadHandle<Dynamic>)));
@@ -373,7 +373,7 @@ class ResourceLoader {
   }
 
   public static function sortPendingByPriority__resourceLoader(pending:Array<PendingEntry__resourceLoader>):Void {
-    _Runtime.sortAndReturn(pending, function(a:Dynamic, b:Dynamic) return (_Runtime.field(b, 'priority') - _Runtime.field(a, 'priority')));
+    _Runtime.sortAndReturn(pending, function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(b, 'priority'), _Runtime.field(a, 'priority')));
   }
 
   public static function drainQueue__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):flighthq._internal._Promise<flighthq._internal._Nothing> {
@@ -546,7 +546,7 @@ class ResourceLoader {
                         __flowBranch29 = flighthq._internal._Async.flowNormal();
                       }
                       return flighthq._internal._Async.continueFlow(__flowBranch29, function():Dynamic {
-                        elapsedMs = (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.field(entry, 'startedAt'));
+                        elapsedMs = _Runtime.subtractNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), _Runtime.field(entry, 'startedAt'));
                         report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: elapsedMs, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'loaded' };
                         _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
                         _Runtime.callProperty(entry, 'resolve', cast ([value] : Array<Dynamic>));
@@ -599,7 +599,7 @@ class ResourceLoader {
                       if ((cast _Runtime.field(internal, 'cancelled') : Bool)) {
                         __flowBranch33 = flighthq._internal._Async.protect(function():Dynamic {
                           var report:ResourceLoadReport = cast _Runtime.UNDEFINED;
-                          report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.field(entry, 'startedAt')), group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'cancelled' };
+                          report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: _Runtime.subtractNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), _Runtime.field(entry, 'startedAt')), group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'cancelled' };
                           _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
                           _Runtime.callProperty(entry, 'reject', cast ([error] : Array<Dynamic>));
                           ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
@@ -653,7 +653,7 @@ class ResourceLoader {
                           __flowBranch34 = flighthq._internal._Async.flowNormal();
                         }
                         return flighthq._internal._Async.continueFlow(__flowBranch34, function():Dynamic {
-                          elapsedMs = (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - _Runtime.field(entry, 'startedAt'));
+                          elapsedMs = _Runtime.subtractNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), _Runtime.field(entry, 'startedAt'));
                           report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: elapsedMs, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'failed' };
                           _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
                           var __flowBranch38:Dynamic;
@@ -700,7 +700,7 @@ class ResourceLoader {
 
   public static function _countEntrySettled__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, entry:PendingEntry__resourceLoader):Void {
     _Runtime.incrementField(internal, 'loaded', 1, true);
-    _Runtime.setField(internal, 'weightLoaded', (_Runtime.field(internal, 'weightLoaded') + _Runtime.field(entry, 'weight')));
+    _Runtime.setField(internal, 'weightLoaded', _Runtime.addNumbers(_Runtime.field(internal, 'weightLoaded'), _Runtime.field(entry, 'weight')));
   }
 
   public static function _isOrphaned__resourceLoader(entry:PendingEntry__resourceLoader, internal:ResourceLoaderInternal__resourceLoader):Bool {
@@ -736,7 +736,7 @@ class ResourceLoader {
     maxMs = _Runtime.coalesce(_Runtime.field(internal, 'options').retryMaxDelayMs, function():Dynamic return cast 10000.0);
     if ((cast _Runtime.strictEquals(backoff, 'none') : Bool)) { return cast 0.0; }
     if ((cast _Runtime.strictEquals(backoff, 'linear') : Bool)) { return cast HxMath.min((baseMs * (attempt + 1.0)), maxMs); }
-    return cast HxMath.min((baseMs * HxMath.pow(2.0, attempt)), maxMs);
+    return cast HxMath.min(_Runtime.multiplyNumbers(baseMs, HxMath.pow(2.0, attempt)), maxMs);
     return cast null;
   }
 

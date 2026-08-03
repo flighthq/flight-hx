@@ -64,8 +64,8 @@ class Device {
       (out.logicalWidth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast _Runtime.field(scr, 'width') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       pixelRatio = ((cast !_Runtime.strictEquals(win, null) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(win, 'devicePixelRatio') : Dynamic) : (cast -1.0 : Dynamic));
       (out.pixelRatio = cast (pixelRatio : Dynamic));
-      (out.physicalWidth = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round((_Runtime.field(scr, 'width') * pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.physicalHeight = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round((_Runtime.field(scr, 'height') * pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.physicalWidth = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(scr, 'width'), pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.physicalHeight = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(scr, 'height'), pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       return cast out;
     }, getId: function() {
       try {

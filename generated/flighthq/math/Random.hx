@@ -13,7 +13,7 @@ class Random {
       var t:Dynamic = cast _Runtime.UNDEFINED;
       (a = cast ((_Runtime.toInt32((a + 1831565813.0)) | 0) : Dynamic));
       t = _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(a) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(a), 15)))), _Runtime.toInt32((1 | _Runtime.toInt32(a))));
-      (t = cast ((_Runtime.toInt32((t + _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 7)))), _Runtime.toInt32((61 | _Runtime.toInt32(t)))))) ^ _Runtime.toInt32(t)) : Dynamic));
+      (t = cast ((_Runtime.toInt32(_Runtime.addNumbers(t, _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 7)))), _Runtime.toInt32((61 | _Runtime.toInt32(t)))))) ^ _Runtime.toInt32(t)) : Dynamic));
       return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 14)))), 0) / 4294967296.0);
     };
     return cast null;

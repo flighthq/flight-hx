@@ -181,7 +181,7 @@ class WgpuColorAdjustmentMaterialFeature {
     var grown:Dynamic = cast _Runtime.UNDEFINED;
     existing = _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasData');
     if ((cast ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast floatsNeeded : Float) <= (cast _Runtime.field(existing, 'length') : Float)) : Bool)) : Bool)) { return; }
-    newSize = HxMath.max(HxMath.max(floatsNeeded, (_Runtime.coalesce(_Runtime.optionalField(existing, 'length'), function():Dynamic return cast 0.0) * 2.0)), (WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature * 256.0));
+    newSize = HxMath.max(HxMath.max(floatsNeeded, _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.optionalField(existing, 'length'), function():Dynamic return cast 0.0), 2.0)), (WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature * 256.0));
     grown = new flighthq._internal._Float32Array(newSize);
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast grown : flighthq._internal._Float32Array).set(existing); }
     _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasData', grown);
@@ -359,7 +359,7 @@ class WgpuColorAdjustmentMaterialFeature {
       (out = cast (new flighthq._internal._Float32Array((WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature * 256.0)) : Dynamic));
       _Runtime.setField(runtime, 'quadBatchWriterColorMatrixData', out);
     } else { if ((cast ((cast (offset + WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float) > (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
-      var grown:Dynamic = new flighthq._internal._Float32Array(HxMath.max((offset + WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature), (_Runtime.field(out, 'length') * 2.0)));
+      var grown:Dynamic = new flighthq._internal._Float32Array(HxMath.max((offset + WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature), _Runtime.multiplyNumbers(_Runtime.field(out, 'length'), 2.0)));
       (cast grown : flighthq._internal._Float32Array).set(out);
       _Runtime.setField(runtime, 'quadBatchWriterColorMatrixData', grown);
       (out = cast (grown : Dynamic));
@@ -433,7 +433,7 @@ class WgpuColorAdjustmentMaterialFeature {
       (data = cast (new flighthq._internal._UInt32Array(256.0) : Dynamic));
       _Runtime.setField(runtime, 'quadBatchWriterColorTintData', data);
     } else { if ((cast ((cast instanceIndex : Float) >= (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-      var grown:Dynamic = new flighthq._internal._UInt32Array(HxMath.max((instanceIndex + 1.0), (_Runtime.field(data, 'length') * 2.0)));
+      var grown:Dynamic = new flighthq._internal._UInt32Array(HxMath.max((instanceIndex + 1.0), _Runtime.multiplyNumbers(_Runtime.field(data, 'length'), 2.0)));
       (cast grown : flighthq._internal._UInt32Array).set(data);
       _Runtime.setField(runtime, 'quadBatchWriterColorTintData', grown);
       (data = cast (grown : Dynamic));
@@ -459,7 +459,7 @@ class WgpuColorAdjustmentMaterialFeature {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(value, 'redBias'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'greenBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'blueBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'alphaBias'), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
       return cast null;
     }
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(value, 'redScale') * 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(value, 'greenScale') * 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(value, 'blueScale') * 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round((_Runtime.field(value, 'alphaScale') * 255.0))))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'redScale'), 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'greenScale'), 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'blueScale'), 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'alphaScale'), 255.0))))), 0);
     return cast null;
   }
 

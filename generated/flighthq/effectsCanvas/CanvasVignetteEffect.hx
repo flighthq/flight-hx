@@ -43,7 +43,7 @@ class CanvasVignetteEffect {
     cx = (w * 0.5);
     cy = (h * 0.5);
     outer = HxMath.sqrt(((cx * cx) + (cy * cy)));
-    inner = (HxMath.max(0.0, HxMath.min(radius, 1.0)) * outer);
+    inner = _Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(radius, 1.0)), outer);
     ramp = HxMath.max(0.0, (inner - (softness * outer)));
     gradient = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createRadialGradient', cast ([cx, cy, ramp, cx, cy, outer] : Array<Dynamic>));
     r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);

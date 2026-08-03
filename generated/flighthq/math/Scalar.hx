@@ -21,7 +21,7 @@ class Scalar {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast steps : Float) <= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(min, max) : Bool)) : Bool)) { return cast min; }
     t = ((value - min) / (max - min));
-    return cast (min + ((HxMath.round((HxMath.max(0.0, HxMath.min(1.0, t)) * steps)) / steps) * (max - min)));
+    return cast (min + (_Runtime.divideNumbers(HxMath.round(_Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(1.0, t)), steps)), steps) * (max - min)));
     return cast null;
   }
 

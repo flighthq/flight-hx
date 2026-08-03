@@ -67,7 +67,7 @@ class BitmapBlur {
 
   public static function blurBitmapPixelsHorizontalWeighted(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flighthq._internal._Float32Array):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
-    radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> 1);
+    radius = (_Runtime.toInt32(_Runtime.subtractNumbers(_Runtime.field(kernel, 'length'), 1.0)) >> 1);
     {
       var y:Dynamic = 0.0;
       while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
@@ -84,10 +84,10 @@ class BitmapBlur {
                 var px:Dynamic = HxMath.max(0.0, HxMath.min((width - 1.0), ((x + k) - radius)));
                 var i:Dynamic = (((y * width) + px) * 4.0);
                 var w:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(kernel, k);
-                (r = cast ((r + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, i) * w)) : Dynamic));
-                (g = cast ((g + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)) * w)) : Dynamic));
-                (b = cast ((b + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)) * w)) : Dynamic));
-                (a = cast ((a + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)) * w)) : Dynamic));
+                (r = cast ((r + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, i), w)) : Dynamic));
+                (g = cast ((g + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)), w)) : Dynamic));
+                (b = cast ((b + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)), w)) : Dynamic));
+                (a = cast ((a + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)), w)) : Dynamic));
                 k++;
               }
             }
@@ -162,7 +162,7 @@ class BitmapBlur {
 
   public static function blurBitmapPixelsVerticalWeighted(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flighthq._internal._Float32Array):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
-    radius = (_Runtime.toInt32((_Runtime.field(kernel, 'length') - 1.0)) >> 1);
+    radius = (_Runtime.toInt32(_Runtime.subtractNumbers(_Runtime.field(kernel, 'length'), 1.0)) >> 1);
     {
       var y:Dynamic = 0.0;
       while ((cast ((cast y : Float) < (cast height : Float)) : Bool)) {
@@ -179,10 +179,10 @@ class BitmapBlur {
                 var py:Dynamic = HxMath.max(0.0, HxMath.min((height - 1.0), ((y + k) - radius)));
                 var i:Dynamic = (((py * width) + x) * 4.0);
                 var w:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(kernel, k);
-                (r = cast ((r + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, i) * w)) : Dynamic));
-                (g = cast ((g + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)) * w)) : Dynamic));
-                (b = cast ((b + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)) * w)) : Dynamic));
-                (a = cast ((a + (flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)) * w)) : Dynamic));
+                (r = cast ((r + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, i), w)) : Dynamic));
+                (g = cast ((g + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)), w)) : Dynamic));
+                (b = cast ((b + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)), w)) : Dynamic));
+                (a = cast ((a + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)), w)) : Dynamic));
                 k++;
               }
             }
@@ -231,7 +231,7 @@ class BitmapBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
-      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0))));
+      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int((_Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height')) * 4.0))));
     }
   }
 
@@ -259,7 +259,7 @@ class BitmapBlur {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) / sum)); });
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), sum)); });
         i++;
       }
     }
@@ -303,7 +303,7 @@ class BitmapBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
-      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((_Runtime.field(source, 'width') * _Runtime.field(source, 'height')) * 4.0))));
+      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int((_Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height')) * 4.0))));
     }
   }
 }

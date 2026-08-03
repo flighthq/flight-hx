@@ -68,7 +68,7 @@ class DragonBonesParse {
     armatures = _Runtime.field((cast doc : Dynamic), 'armature');
     if ((cast ((cast !(cast _Runtime.isArray(armatures) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(armatures, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     if ((cast ((cast _Runtime.field(armatures, 'length') : Float) > (cast 1.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'dragonbones.multi-armature-unsupported', 'parseDragonBonesSkeleton', { armatures: (_Runtime.field(armatures, 'length') - 1.0) }] : Array<Dynamic>));
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'dragonbones.multi-armature-unsupported', 'parseDragonBonesSkeleton', { armatures: _Runtime.subtractNumbers(_Runtime.field(armatures, 'length'), 1.0) }] : Array<Dynamic>));
     }
     first = flighthq._internal._StaticIndex.readArray(armatures, 0.0);
     if ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(first), 'object') : Bool)) : Bool)) { return cast null; }
@@ -143,7 +143,7 @@ class DragonBonesParse {
       _Runtime.callValue(DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse, cast ([diagnostics, _Runtime.field(animation, 'ffd'), 'dragonbones.deform-timeline-unsupported'] : Array<Dynamic>));
       _Runtime.callValue(DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse, cast ([diagnostics, _Runtime.field(animation, 'ik'), 'dragonbones.ik-timeline-unsupported'] : Array<Dynamic>));
       _Runtime.callValue(DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse, cast ([diagnostics, _Runtime.field(animation, 'zOrder'), 'dragonbones.zorder-timeline-unsupported'] : Array<Dynamic>));
-      var duration:Dynamic = (_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(animation, 'duration'), 0.0] : Array<Dynamic>)) / frameRate);
+      var duration:Dynamic = _Runtime.divideNumbers(_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(animation, 'duration'), 0.0] : Array<Dynamic>)), frameRate);
       _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels, ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) && (cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast duration : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(animation, 'name')), 'string') : Bool) ? (cast _Runtime.field(animation, 'name') : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_ANIMATION_NAME__dragonBonesParse : Dynamic)) }] : Array<Dynamic>));
     }
     if ((cast ((cast blendTrees : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -169,7 +169,7 @@ class DragonBonesParse {
       var name:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(timeline, 'name')), 'string') : Bool) ? (cast _Runtime.field(timeline, 'name') : Dynamic) : (cast null : Dynamic));
       var slotIndex:Dynamic = ((cast _Runtime.strictEquals(name, null) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.coalesce(((cast slotOrder : flighthq._internal._Map).get(name)), function():Dynamic return cast -1.0) : Dynamic));
       if ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) {
-        ((cast unmodeled : flighthq._internal._Map).set('slot', (_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map).get('slot')), function():Dynamic return cast 0.0) + 1.0)));
+        ((cast unmodeled : flighthq._internal._Map).set('slot', _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map).get('slot')), function():Dynamic return cast 0.0), 1.0)));
         continue;
       }
       var displayFrames:Dynamic = _Runtime.callValue(DragonBonesParse.dragonBonesFrames__dragonBonesParse, cast ([_Runtime.coalesce(_Runtime.field(timeline, 'displayFrame'), function():Dynamic return cast _Runtime.field(timeline, 'display')), _Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>));
@@ -212,7 +212,7 @@ class DragonBonesParse {
 
   public static function colorPercent__dragonBonesParse(value:Dynamic):Float {
     var percent:Dynamic = cast _Runtime.UNDEFINED;
-    percent = (_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([value, 100.0] : Array<Dynamic>)) / 100.0);
+    percent = _Runtime.divideNumbers(_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([value, 100.0] : Array<Dynamic>)), 100.0);
     return cast ((cast ((cast percent : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast percent : Float) >= (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast percent : Dynamic)) : Dynamic));
     return cast null;
   }
@@ -265,7 +265,7 @@ class DragonBonesParse {
         var rotation:Dynamic = _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(frame, 'rotate'), 0.0] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(times, i), 0.0) : Bool)) {
           if ((cast _Runtime.strictEquals(previousClockwise, 0.0) : Bool)) {
-            (rotation = cast ((previousRotation + _Runtime.callValue(DragonBonesParse.normalizeDegrees__dragonBonesParse, cast ([(rotation - previousRotation)] : Array<Dynamic>))) : Dynamic));
+            (rotation = cast (_Runtime.addNumbers(previousRotation, _Runtime.callValue(DragonBonesParse.normalizeDegrees__dragonBonesParse, cast ([(rotation - previousRotation)] : Array<Dynamic>))) : Dynamic));
           } else {
             if ((cast ((cast ((cast previousClockwise : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast rotation : Float) >= (cast previousRotation : Float)) : Dynamic) : (cast ((cast rotation : Float) <= (cast previousRotation : Float)) : Dynamic)) : Bool)) {
               (previousClockwise = cast (((cast ((cast previousClockwise : Float) > (cast 0.0 : Float)) : Bool) ? (cast (previousClockwise - 1.0) : Dynamic) : (cast (previousClockwise + 1.0) : Dynamic)) : Dynamic));
@@ -360,7 +360,7 @@ class DragonBonesParse {
     var segments:Dynamic = cast _Runtime.UNDEFINED;
     var easings:Array<Null<EasingFunction>> = cast _Runtime.UNDEFINED;
     var curved:Dynamic = cast _Runtime.UNDEFINED;
-    segments = (_Runtime.field(frames, 'length') - 1.0);
+    segments = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0);
     if ((cast ((cast segments : Float) < (cast 1.0 : Float)) : Bool)) { return cast null; }
     easings = cast ([] : Array<Dynamic>);
     curved = false;
@@ -410,7 +410,7 @@ class DragonBonesParse {
   public static function normalizeDegrees__dragonBonesParse(degrees:Float):Float {
     var wrapped:Dynamic = cast _Runtime.UNDEFINED;
     wrapped = _Runtime.fmod((degrees + 180.0), 360.0);
-    return cast (wrapped + ((cast ((cast wrapped : Float) > (cast 0.0 : Float)) : Bool) ? (cast -180.0 : Dynamic) : (cast 180.0 : Dynamic)));
+    return cast _Runtime.addNumbers(wrapped, ((cast ((cast wrapped : Float) > (cast 0.0 : Float)) : Bool) ? (cast -180.0 : Dynamic) : (cast 180.0 : Dynamic)));
     return cast null;
   }
 
@@ -525,7 +525,7 @@ class DragonBonesParse {
     spD = _Runtime.callValue(DragonBonesParse.numAt__dragonBonesParse, cast ([slotPose, 3.0, 1.0] : Array<Dynamic>));
     spTx = _Runtime.callValue(DragonBonesParse.numAt__dragonBonesParse, cast ([slotPose, 4.0, 0.0] : Array<Dynamic>));
     spTy = _Runtime.callValue(DragonBonesParse.numAt__dragonBonesParse, cast ([slotPose, 5.0, 0.0] : Array<Dynamic>));
-    usedBoneCount = HxMath.floor((_Runtime.field(bonePose, 'length') / 7.0));
+    usedBoneCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(bonePose, 'length'), 7.0));
     influenceCounts = new flighthq._internal._UInt16Array(vertexCount);
     influences = cast ([] : Array<Dynamic>);
     recovered = false;
@@ -656,7 +656,7 @@ class DragonBonesParse {
   }
 
   public static function colorChannel__dragonBonesParse(value:Dynamic):Float {
-    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([value, 100.0] : Array<Dynamic>)) / 100.0) * 255.0))));
+    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round((_Runtime.divideNumbers(_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([value, 100.0] : Array<Dynamic>)), 100.0) * 255.0))));
     return cast null;
   }
 
@@ -702,7 +702,7 @@ class DragonBonesParse {
       (shearY = cast (_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'skew'), 0.0] : Array<Dynamic>)) : Dynamic));
     } else {
       (rotation = cast (_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'skY'), 0.0] : Array<Dynamic>)) : Dynamic));
-      (shearY = cast ((_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'skX'), 0.0] : Array<Dynamic>)) - rotation) : Dynamic));
+      (shearY = cast (_Runtime.subtractNumbers(_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'skX'), 0.0] : Array<Dynamic>)), rotation) : Dynamic));
     }
     return cast { rotation: rotation, scaleX: _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'scX'), 1.0] : Array<Dynamic>)), scaleY: _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'scY'), 1.0] : Array<Dynamic>)), shearY: shearY, x: _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'x'), 0.0] : Array<Dynamic>)), y: _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(t, 'y'), 0.0] : Array<Dynamic>)) };
     return cast null;

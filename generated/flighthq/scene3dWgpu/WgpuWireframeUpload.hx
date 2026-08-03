@@ -45,7 +45,7 @@ class WgpuWireframeUpload {
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     triangleIndices = geometry.indices;
-    triangleCount = HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0));
+    triangleCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(triangleIndices, 'length'), 3.0));
     lineCount = (triangleCount * 6.0);
     useUint32 = ((cast _Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
     lines = ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(lineCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(lineCount) : Dynamic));

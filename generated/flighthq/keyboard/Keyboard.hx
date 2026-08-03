@@ -191,7 +191,7 @@ class Keyboard {
     }
     viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
     if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    shrink = (flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight') - _Runtime.field(viewport, 'height'));
+    shrink = _Runtime.subtractNumbers(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), _Runtime.field(viewport, 'height'));
     height = ((cast ((cast shrink : Float) > (cast 0.0 : Float)) : Bool) ? (cast shrink : Dynamic) : (cast 0.0 : Dynamic));
     width = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
     y = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(viewport, 'height') : Dynamic) : (cast 0.0 : Dynamic));

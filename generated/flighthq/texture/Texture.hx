@@ -402,7 +402,7 @@ class Texture {
     if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setTextureSource requires a Texture2D')); }
     if ((cast _Runtime.strictEquals(_Runtime.field(texture, 'source'), source) : Bool)) { return; }
     _Runtime.setField(texture, 'source', source);
-    _Runtime.setField(texture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(texture, 'version') + 1.0)), 0));
+    _Runtime.setField(texture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(texture, 'version'), 1.0)), 0));
   }
 
   public static function setTextureUvFromPixelRect(texture:TextureLike, x:Float, y:Float, width:Float, height:Float):Void {

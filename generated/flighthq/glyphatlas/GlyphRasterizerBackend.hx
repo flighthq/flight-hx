@@ -20,7 +20,7 @@ class GlyphRasterizerBackend {
       height = HxMath.max(1.0, HxMath.round((size * 0.7)));
       pixels = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
       _Runtime.fill(pixels, 255.0, 0, null, 1);
-      return cast { advance: (width + HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
+      return cast { advance: _Runtime.addNumbers(width, HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
     } };
     return cast null;
   }
@@ -101,8 +101,8 @@ class GlyphRasterizerBackend {
     ascent = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxAscent'), function():Dynamic return cast options.fontSize);
     descent = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxDescent'), function():Dynamic return cast 0.0);
     guard = 1.0;
-    width = (HxMath.max(0.0, HxMath.ceil((left + right))) + (guard * 2.0));
-    height = (HxMath.max(0.0, HxMath.ceil((ascent + descent))) + (guard * 2.0));
+    width = _Runtime.addNumbers(HxMath.max(0.0, HxMath.ceil((left + right))), (guard * 2.0));
+    height = _Runtime.addNumbers(HxMath.max(0.0, HxMath.ceil((ascent + descent))), (guard * 2.0));
     if ((cast ((cast ((cast width : Float) <= (cast (guard * 2.0) : Float)) : Bool) || (cast ((cast height : Float) <= (cast (guard * 2.0) : Float)) : Bool)) : Bool)) { return cast null; }
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);

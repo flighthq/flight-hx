@@ -175,7 +175,7 @@ class Storage {
       if ((cast !(cast StringTools.startsWith(rawKey, prefix) : Bool) : Bool)) { continue; }
       var value:Dynamic = _Runtime.callProperty(backend, 'getItem', cast ([rawKey] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(value, null) : Bool)) { continue; }
-      (total = cast ((total + ((_Runtime.field(rawKey, 'length') + _Runtime.field(value, 'length')) * 2.0)) : Dynamic));
+      (total = cast ((total + (_Runtime.addNumbers(_Runtime.field(rawKey, 'length'), _Runtime.field(value, 'length')) * 2.0)) : Dynamic));
     }
     return cast total;
     return cast null;
@@ -250,7 +250,7 @@ class Storage {
     for (key in _Runtime.iterable(keys)) {
       var value:Dynamic = _Runtime.callProperty(backend, 'getItem', cast ([key] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(value, null) : Bool)) { continue; }
-      (total = cast ((total + ((_Runtime.field(key, 'length') + _Runtime.field(value, 'length')) * 2.0)) : Dynamic));
+      (total = cast ((total + (_Runtime.addNumbers(_Runtime.field(key, 'length'), _Runtime.field(value, 'length')) * 2.0)) : Dynamic));
     }
     return cast total;
     return cast null;
@@ -376,7 +376,7 @@ class Storage {
               return flighthq._internal._Async.flatMap(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
                 estimate = __awaitValue14;
                 used = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'usage')), 'number') : Bool) ? (cast _Runtime.field(estimate, 'usage') : Dynamic) : (cast -1.0 : Dynamic));
-                available = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'quota')), 'number') : Bool) && (cast ((cast _Runtime.field(estimate, 'quota') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (_Runtime.field(estimate, 'quota') - ((cast ((cast used : Float) >= (cast 0.0 : Float)) : Bool) ? (cast used : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic) : (cast -1.0 : Dynamic));
+                available = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(estimate, 'quota')), 'number') : Bool) && (cast ((cast _Runtime.field(estimate, 'quota') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(estimate, 'quota'), ((cast ((cast used : Float) >= (cast 0.0 : Float)) : Bool) ? (cast used : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic) : (cast -1.0 : Dynamic));
                 return flighthq._internal._Async.flowReturn({ used: used, available: available });
               });
             }), function(__caughtError:Dynamic):Dynamic {

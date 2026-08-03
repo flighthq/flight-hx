@@ -37,27 +37,27 @@ class ColliderTransform {
     cos = HxMath.cos(_Runtime.field(body, 'angle'));
     sin = HxMath.sin(_Runtime.field(body, 'angle'));
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'circle') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'circle') : Bool)) : Bool)) {
-      _Runtime.setField(world, 'x', ((_Runtime.field(body, 'x') + (_Runtime.field(local, 'x') * cos)) - (_Runtime.field(local, 'y') * sin)));
-      _Runtime.setField(world, 'y', ((_Runtime.field(body, 'y') + (_Runtime.field(local, 'x') * sin)) + (_Runtime.field(local, 'y') * cos)));
+      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), sin)));
+      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), cos)));
       _Runtime.setField(world, 'radius', _Runtime.field(local, 'radius'));
       return;
     }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'aabb') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'obb') : Bool)) : Bool)) {
-      var centerX:Dynamic = ((_Runtime.field(local, 'minX') + _Runtime.field(local, 'maxX')) / 2.0);
-      var centerY:Dynamic = ((_Runtime.field(local, 'minY') + _Runtime.field(local, 'maxY')) / 2.0);
-      _Runtime.setField(world, 'x', ((_Runtime.field(body, 'x') + (centerX * cos)) - (centerY * sin)));
-      _Runtime.setField(world, 'y', ((_Runtime.field(body, 'y') + (centerX * sin)) + (centerY * cos)));
-      _Runtime.setField(world, 'halfW', ((_Runtime.field(local, 'maxX') - _Runtime.field(local, 'minX')) / 2.0));
-      _Runtime.setField(world, 'halfH', ((_Runtime.field(local, 'maxY') - _Runtime.field(local, 'minY')) / 2.0));
+      var centerX:Dynamic = (_Runtime.addNumbers(_Runtime.field(local, 'minX'), _Runtime.field(local, 'maxX')) / 2.0);
+      var centerY:Dynamic = (_Runtime.addNumbers(_Runtime.field(local, 'minY'), _Runtime.field(local, 'maxY')) / 2.0);
+      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), (centerX * cos)) - (centerY * sin)));
+      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), (centerX * sin)) + (centerY * cos)));
+      _Runtime.setField(world, 'halfW', (_Runtime.subtractNumbers(_Runtime.field(local, 'maxX'), _Runtime.field(local, 'minX')) / 2.0));
+      _Runtime.setField(world, 'halfH', (_Runtime.subtractNumbers(_Runtime.field(local, 'maxY'), _Runtime.field(local, 'minY')) / 2.0));
       _Runtime.setField(world, 'rotation', _Runtime.field(body, 'angle'));
       return;
     }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'obb') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'obb') : Bool)) : Bool)) {
-      _Runtime.setField(world, 'x', ((_Runtime.field(body, 'x') + (_Runtime.field(local, 'x') * cos)) - (_Runtime.field(local, 'y') * sin)));
-      _Runtime.setField(world, 'y', ((_Runtime.field(body, 'y') + (_Runtime.field(local, 'x') * sin)) + (_Runtime.field(local, 'y') * cos)));
+      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), sin)));
+      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), cos)));
       _Runtime.setField(world, 'halfW', _Runtime.field(local, 'halfW'));
       _Runtime.setField(world, 'halfH', _Runtime.field(local, 'halfH'));
-      _Runtime.setField(world, 'rotation', (_Runtime.field(body, 'angle') + _Runtime.field(local, 'rotation')));
+      _Runtime.setField(world, 'rotation', _Runtime.addNumbers(_Runtime.field(body, 'angle'), _Runtime.field(local, 'rotation')));
       return;
     }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'polygon') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'polygon') : Bool)) : Bool)) {
@@ -68,8 +68,8 @@ class ColliderTransform {
         while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
           var x:Dynamic = flighthq._internal._StaticIndex.readArray(source, i);
           var y:Dynamic = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
-          flighthq._internal._StaticIndex.writeArray(target, i, ((_Runtime.field(body, 'x') + (x * cos)) - (y * sin)));
-          flighthq._internal._StaticIndex.writeArray(target, (i + 1.0), ((_Runtime.field(body, 'y') + (x * sin)) + (y * cos)));
+          flighthq._internal._StaticIndex.writeArray(target, i, (_Runtime.addNumbers(_Runtime.field(body, 'x'), (x * cos)) - (y * sin)));
+          flighthq._internal._StaticIndex.writeArray(target, (i + 1.0), (_Runtime.addNumbers(_Runtime.field(body, 'y'), (x * sin)) + (y * cos)));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
@@ -82,10 +82,10 @@ class ColliderTransform {
     {
       var __switchValue = _Runtime.field(shape, 'kind');
       if (__switchValue == 'circle') {
-        _Runtime.setField(out, 'minX', (_Runtime.field(shape, 'x') - _Runtime.field(shape, 'radius')));
-        _Runtime.setField(out, 'minY', (_Runtime.field(shape, 'y') - _Runtime.field(shape, 'radius')));
-        _Runtime.setField(out, 'maxX', (_Runtime.field(shape, 'x') + _Runtime.field(shape, 'radius')));
-        _Runtime.setField(out, 'maxY', (_Runtime.field(shape, 'y') + _Runtime.field(shape, 'radius')));
+        _Runtime.setField(out, 'minX', _Runtime.subtractNumbers(_Runtime.field(shape, 'x'), _Runtime.field(shape, 'radius')));
+        _Runtime.setField(out, 'minY', _Runtime.subtractNumbers(_Runtime.field(shape, 'y'), _Runtime.field(shape, 'radius')));
+        _Runtime.setField(out, 'maxX', _Runtime.addNumbers(_Runtime.field(shape, 'x'), _Runtime.field(shape, 'radius')));
+        _Runtime.setField(out, 'maxY', _Runtime.addNumbers(_Runtime.field(shape, 'y'), _Runtime.field(shape, 'radius')));
         return;
       }
       else if (__switchValue == 'aabb') {
@@ -99,12 +99,12 @@ class ColliderTransform {
         {
           var cos:Dynamic = HxMath.abs(HxMath.cos(_Runtime.field(shape, 'rotation')));
           var sin:Dynamic = HxMath.abs(HxMath.sin(_Runtime.field(shape, 'rotation')));
-          var extentX:Dynamic = ((_Runtime.field(shape, 'halfW') * cos) + (_Runtime.field(shape, 'halfH') * sin));
-          var extentY:Dynamic = ((_Runtime.field(shape, 'halfW') * sin) + (_Runtime.field(shape, 'halfH') * cos));
-          _Runtime.setField(out, 'minX', (_Runtime.field(shape, 'x') - extentX));
-          _Runtime.setField(out, 'minY', (_Runtime.field(shape, 'y') - extentY));
-          _Runtime.setField(out, 'maxX', (_Runtime.field(shape, 'x') + extentX));
-          _Runtime.setField(out, 'maxY', (_Runtime.field(shape, 'y') + extentY));
+          var extentX:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(shape, 'halfW'), cos) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'halfH'), sin));
+          var extentY:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(shape, 'halfW'), sin) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'halfH'), cos));
+          _Runtime.setField(out, 'minX', _Runtime.subtractNumbers(_Runtime.field(shape, 'x'), extentX));
+          _Runtime.setField(out, 'minY', _Runtime.subtractNumbers(_Runtime.field(shape, 'y'), extentY));
+          _Runtime.setField(out, 'maxX', _Runtime.addNumbers(_Runtime.field(shape, 'x'), extentX));
+          _Runtime.setField(out, 'maxY', _Runtime.addNumbers(_Runtime.field(shape, 'y'), extentY));
           return;
         }
       }

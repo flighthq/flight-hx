@@ -300,42 +300,42 @@ class Obb {
     oqz = obb.orientationZ;
     oqw = obb.orientationW;
     _m = m.m;
-    newCx = ((((flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(_m, 12.0));
-    newCy = ((((flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(_m, 13.0));
-    newCz = ((((flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0) * cx) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0) * cy)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0) * cz)) + flighthq._internal._StaticIndex.readFloat32Array(_m, 14.0));
-    sx = HxMath.sqrt((((flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0))) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0))));
-    sy = HxMath.sqrt((((flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0))) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0))));
-    sz = HxMath.sqrt((((flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0)) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0))) + (flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0) * flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0))));
-    r00 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0) / sx) : Dynamic) : (cast 1.0 : Dynamic));
-    r10 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0) / sx) : Dynamic) : (cast 0.0 : Dynamic));
-    r20 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0) / sx) : Dynamic) : (cast 0.0 : Dynamic));
-    r01 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0) / sy) : Dynamic) : (cast 0.0 : Dynamic));
-    r11 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0) / sy) : Dynamic) : (cast 1.0 : Dynamic));
-    r21 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0) / sy) : Dynamic) : (cast 0.0 : Dynamic));
-    r02 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0) / sz) : Dynamic) : (cast 0.0 : Dynamic));
-    r12 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0) / sz) : Dynamic) : (cast 0.0 : Dynamic));
-    r22 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0) / sz) : Dynamic) : (cast 1.0 : Dynamic));
+    newCx = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0), cz)), flighthq._internal._StaticIndex.readFloat32Array(_m, 12.0));
+    newCy = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0), cz)), flighthq._internal._StaticIndex.readFloat32Array(_m, 13.0));
+    newCz = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0), cz)), flighthq._internal._StaticIndex.readFloat32Array(_m, 14.0));
+    sx = HxMath.sqrt(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0))));
+    sy = HxMath.sqrt(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0))));
+    sz = HxMath.sqrt(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0), flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0))));
+    r00 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0), sx) : Dynamic) : (cast 1.0 : Dynamic));
+    r10 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0), sx) : Dynamic) : (cast 0.0 : Dynamic));
+    r20 = ((cast ((cast sx : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 2.0), sx) : Dynamic) : (cast 0.0 : Dynamic));
+    r01 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 4.0), sy) : Dynamic) : (cast 0.0 : Dynamic));
+    r11 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 5.0), sy) : Dynamic) : (cast 1.0 : Dynamic));
+    r21 = ((cast ((cast sy : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 6.0), sy) : Dynamic) : (cast 0.0 : Dynamic));
+    r02 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 8.0), sz) : Dynamic) : (cast 0.0 : Dynamic));
+    r12 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 9.0), sz) : Dynamic) : (cast 0.0 : Dynamic));
+    r22 = ((cast ((cast sz : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(_m, 10.0), sz) : Dynamic) : (cast 1.0 : Dynamic));
     trace = ((r00 + r11) + r22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
-      var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
+      var s:Dynamic = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
       (mqw = cast ((0.25 / s) : Dynamic));
       (mqx = cast (((r12 - r21) * s) : Dynamic));
       (mqy = cast (((r20 - r02) * s) : Dynamic));
       (mqz = cast (((r01 - r10) * s) : Dynamic));
     } else { if ((cast ((cast ((cast r00 : Float) > (cast r11 : Float)) : Bool) && (cast ((cast r00 : Float) > (cast r22 : Float)) : Bool)) : Bool)) {
-      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r00) - r11) - r22)));
+      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r00) - r11) - r22)));
       (mqw = cast (((r12 - r21) / s) : Dynamic));
       (mqx = cast ((0.25 * s) : Dynamic));
       (mqy = cast (((r10 + r01) / s) : Dynamic));
       (mqz = cast (((r20 + r02) / s) : Dynamic));
     } else { if ((cast ((cast r11 : Float) > (cast r22 : Float)) : Bool)) {
-      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r11) - r00) - r22)));
+      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r11) - r00) - r22)));
       (mqw = cast (((r20 - r02) / s) : Dynamic));
       (mqx = cast (((r10 + r01) / s) : Dynamic));
       (mqy = cast ((0.25 * s) : Dynamic));
       (mqz = cast (((r21 + r12) / s) : Dynamic));
     } else {
-      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r22) - r00) - r11)));
+      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r22) - r00) - r11)));
       (mqw = cast (((r01 - r10) / s) : Dynamic));
       (mqx = cast (((r20 + r02) / s) : Dynamic));
       (mqy = cast (((r21 + r12) / s) : Dynamic));
@@ -421,8 +421,8 @@ class Obb {
       lenSq = (((lx * lx) + (ly * ly)) + (lz * lz));
       if ((cast ((cast lenSq : Float) < (cast 1e-10 : Float)) : Bool)) { return cast false; }
       d = HxMath.abs((((tx * lx) + (ty * ly)) + (tz * lz)));
-      pA = (((HxMath.abs((((ax0 * lx) + (ay0 * ly)) + (az0 * lz))) * hax) + (HxMath.abs((((ax1 * lx) + (ay1 * ly)) + (az1 * lz))) * hay)) + (HxMath.abs((((ax2 * lx) + (ay2 * ly)) + (az2 * lz))) * haz));
-      pB = (((HxMath.abs((((bx0 * lx) + (by0 * ly)) + (bz0 * lz))) * hbx) + (HxMath.abs((((bx1 * lx) + (by1 * ly)) + (bz1 * lz))) * hby)) + (HxMath.abs((((bx2 * lx) + (by2 * ly)) + (bz2 * lz))) * hbz));
+      pA = ((_Runtime.multiplyNumbers(HxMath.abs((((ax0 * lx) + (ay0 * ly)) + (az0 * lz))), hax) + _Runtime.multiplyNumbers(HxMath.abs((((ax1 * lx) + (ay1 * ly)) + (az1 * lz))), hay)) + _Runtime.multiplyNumbers(HxMath.abs((((ax2 * lx) + (ay2 * ly)) + (az2 * lz))), haz));
+      pB = ((_Runtime.multiplyNumbers(HxMath.abs((((bx0 * lx) + (by0 * ly)) + (bz0 * lz))), hbx) + _Runtime.multiplyNumbers(HxMath.abs((((bx1 * lx) + (by1 * ly)) + (bz1 * lz))), hby)) + _Runtime.multiplyNumbers(HxMath.abs((((bx2 * lx) + (by2 * ly)) + (bz2 * lz))), hbz));
       return cast ((cast d : Float) > (cast (pA + pB) : Float));
     };
     if ((cast _Runtime.callValue(onAxis, cast ([ax0, ay0, az0] : Array<Dynamic>)) : Bool)) { return cast true; }

@@ -153,10 +153,10 @@ class WgpuRenderEffectPipeline {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 0.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
-    g = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 1.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
-    b = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 2.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
-    a = (_Runtime.toInt32(HxMath.round((_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 3.0), function():Dynamic return cast 0.0) * 255.0))) & 255);
+    r = (_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 0.0), function():Dynamic return cast 0.0), 255.0))) & 255);
+    g = (_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 1.0), function():Dynamic return cast 0.0), 255.0))) & 255);
+    b = (_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 2.0), function():Dynamic return cast 0.0), 255.0))) & 255);
+    a = (_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(rgba, 3.0), function():Dynamic return cast 0.0), 255.0))) & 255);
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;
   }

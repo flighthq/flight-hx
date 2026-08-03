@@ -42,11 +42,11 @@ class BitmapMorphological {
             {
               var ky:Dynamic = -r;
               while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
-                var sy:Dynamic = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), ((_Runtime.field(source, 'y') + py) + ky)));
+                var sy:Dynamic = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
                 {
                   var kx:Dynamic = -r;
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
-                    var sx:Dynamic = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), ((_Runtime.field(source, 'x') + px) + kx)));
+                    var sx:Dynamic = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
                     var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
                     if ((cast dilate : Bool)) {
                       if ((cast ((cast flighthq._internal._StaticIndex.readUint8ClampedArray(data, si) : Float) > (cast vR : Float)) : Bool)) { (vR = cast (flighthq._internal._StaticIndex.readUint8ClampedArray(data, si) : Dynamic)); }

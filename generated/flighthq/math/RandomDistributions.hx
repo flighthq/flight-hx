@@ -10,7 +10,7 @@ import flighthq.types.Vector3.Vector3Like;
 class RandomDistributions {
   public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
     if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
-    return cast flighthq._internal._StaticIndex.readArray(items, HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * _Runtime.field(items, 'length'))));
+    return cast flighthq._internal._StaticIndex.readArray(items, HxMath.floor(_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), _Runtime.field(items, 'length'))));
     return cast null;
   }
 
@@ -18,7 +18,7 @@ class RandomDistributions {
     var u:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast rate : Float) <= (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomExponential: rate must be > 0')); }
     u = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    return cast (-HxMath.log(((cast _Runtime.strictEquals(u, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u : Dynamic))) / rate);
+    return cast _Runtime.divideNumbers(-HxMath.log(((cast _Runtime.strictEquals(u, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u : Dynamic))), rate);
     return cast null;
   }
 
@@ -28,7 +28,7 @@ class RandomDistributions {
     var z:Dynamic = cast _Runtime.UNDEFINED;
     u1 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     u2 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    z = (HxMath.sqrt((-2.0 * HxMath.log(((cast _Runtime.strictEquals(u1, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u1 : Dynamic))))) * HxMath.cos(((HxMath.PI * 2.0) * u2)));
+    z = _Runtime.multiplyNumbers(HxMath.sqrt(_Runtime.multiplyNumbers(-2.0, HxMath.log(((cast _Runtime.strictEquals(u1, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u1 : Dynamic))))), HxMath.cos(((HxMath.PI * 2.0) * u2)));
     return cast (mean + (z * standardDeviation));
     return cast null;
   }
@@ -42,10 +42,10 @@ class RandomDistributions {
     var z1:Dynamic = cast _Runtime.UNDEFINED;
     u1 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     u2 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    mag = HxMath.sqrt((-2.0 * HxMath.log(((cast _Runtime.strictEquals(u1, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u1 : Dynamic)))));
+    mag = HxMath.sqrt(_Runtime.multiplyNumbers(-2.0, HxMath.log(((cast _Runtime.strictEquals(u1, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u1 : Dynamic)))));
     angle = ((HxMath.PI * 2.0) * u2);
-    z0 = (mean + ((mag * HxMath.cos(angle)) * standardDeviation));
-    z1 = (mean + ((mag * HxMath.sin(angle)) * standardDeviation));
+    z0 = (mean + (_Runtime.multiplyNumbers(mag, HxMath.cos(angle)) * standardDeviation));
+    z1 = (mean + (_Runtime.multiplyNumbers(mag, HxMath.sin(angle)) * standardDeviation));
     return cast cast ([z0, z1] : Array<Dynamic>);
     return cast null;
   }
@@ -54,8 +54,8 @@ class RandomDistributions {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     do {
-      (x = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
-      (y = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
+      (x = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+      (y = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
     } while ((cast ((cast ((x * x) + (y * y)) : Float) > (cast 1.0 : Float)) : Bool));
     (out.x = cast (x : Dynamic));
     (out.y = cast (y : Dynamic));
@@ -66,9 +66,9 @@ class RandomDistributions {
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
     do {
-      (x = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
-      (y = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
-      (z = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
+      (x = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+      (y = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+      (z = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
     } while ((cast ((cast (((x * x) + (y * y)) + (z * z)) : Float) > (cast 1.0 : Float)) : Bool));
     (out.x = cast (x : Dynamic));
     (out.y = cast (y : Dynamic));
@@ -79,7 +79,7 @@ class RandomDistributions {
     var angle:Dynamic = cast _Runtime.UNDEFINED;
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
-    angle = ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * HxMath.PI) * 2.0);
+    angle = (_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), HxMath.PI) * 2.0);
     x = HxMath.cos(angle);
     y = HxMath.sin(angle);
     (out.x = cast (x : Dynamic));
@@ -95,11 +95,11 @@ class RandomDistributions {
     var ry:Dynamic = cast _Runtime.UNDEFINED;
     var rz:Dynamic = cast _Runtime.UNDEFINED;
     do {
-      (x = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
-      (y = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
+      (x = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+      (y = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
       (s = cast (((x * x) + (y * y)) : Dynamic));
     } while ((cast ((cast s : Float) >= (cast 1.0 : Float)) : Bool));
-    f = (2.0 * HxMath.sqrt((1.0 - s)));
+    f = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - s)));
     rx = (x * f);
     ry = (y * f);
     rz = (1.0 - (2.0 * s));
@@ -136,7 +136,7 @@ class RandomDistributions {
       }
     }
     if ((cast ((cast total : Float) <= (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
-    r = (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * total);
+    r = _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), total);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool)) {
@@ -145,7 +145,7 @@ class RandomDistributions {
         i++;
       }
     }
-    return cast (_Runtime.field(weights, 'length') - 1.0);
+    return cast _Runtime.subtractNumbers(_Runtime.field(weights, 'length'), 1.0);
     return cast null;
   }
 
@@ -159,9 +159,9 @@ class RandomDistributions {
 
   public static function shuffleInPlace<T>(random:RandomSource, items:Array<Dynamic>):Void {
     {
-      var i:Dynamic = (_Runtime.field(items, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(items, 'length'), 1.0);
       while ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool)) {
-        var j:Dynamic = HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (i + 1.0)));
+        var j:Dynamic = HxMath.floor(_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), (i + 1.0)));
         var tmp:Dynamic = flighthq._internal._StaticIndex.readArray(items, i);
         flighthq._internal._StaticIndex.writeArray(items, i, flighthq._internal._StaticIndex.readArray(items, j));
         flighthq._internal._StaticIndex.writeArray(items, j, tmp);

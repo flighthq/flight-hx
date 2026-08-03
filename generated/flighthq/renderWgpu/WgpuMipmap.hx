@@ -43,7 +43,7 @@ class WgpuMipmap {
   }
 
   public static function getWgpuMipLevelCount(width:Float, height:Float):Float {
-    return cast (1.0 + HxMath.floor(_Runtime.log2(HxMath.max(HxMath.max(1.0, width), height))));
+    return cast _Runtime.addNumbers(1.0, HxMath.floor(_Runtime.log2(HxMath.max(HxMath.max(1.0, width), height))));
     return cast null;
   }
 

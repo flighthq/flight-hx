@@ -259,9 +259,9 @@ class Hierarchy {
     var numRemovals:Dynamic = cast _Runtime.UNDEFINED;
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
-    if ((cast ((cast beginIndex : Float) > (cast (_Runtime.field(children, 'length') - 1.0) : Float)) : Bool)) { return; }
+    if ((cast ((cast beginIndex : Float) > (cast _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0) : Float)) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(endIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (endIndex = cast ((_Runtime.field(children, 'length') - 1.0) : Dynamic));
+      (endIndex = cast (_Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0) : Dynamic));
     }
     if ((cast ((cast ((cast ((cast endIndex : Float) < (cast beginIndex : Float)) : Bool) || (cast ((cast beginIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast endIndex : Float) > (cast _Runtime.field(children, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(Hierarchy.throwOutOfBoundsError__hierarchy, cast ([] : Array<Dynamic>));
@@ -295,7 +295,7 @@ class Hierarchy {
           (child.scaleY = cast (-child.scaleY : Dynamic));
         }
         var skewYRad:Dynamic = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
-        (child.rotation = cast (((HxMath.atan2(b, a) - skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Dynamic));
+        (child.rotation = cast ((_Runtime.subtractNumbers(HxMath.atan2(b, a), skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Dynamic));
         (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
         (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
         _Runtime.callValue(invalidateNodeLocalTransform, cast ([child] : Array<Dynamic>));

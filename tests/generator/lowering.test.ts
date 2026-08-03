@@ -1896,7 +1896,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('flighthq._internal._StaticIndex.readFloat32Array(floats, 0.0)');
     expect(output).toContain('flighthq._internal._StaticIndex.writeArray(values, 1.0, a)');
     expect(output).toMatch(
-      /\(\{ var __indexedObject\d+:Dynamic = floats; var __indexedKey\d+:Dynamic = 2\.0; flighthq\._internal\._StaticIndex\.writeFloat32Array\(__indexedObject\d+, __indexedKey\d+, \(flighthq\._internal\._StaticIndex\.readFloat32Array\(__indexedObject\d+, __indexedKey\d+\) \+ b\)\); \}\)/u,
+      /\(\{ var __indexedObject\d+:Dynamic = floats; var __indexedKey\d+:Dynamic = 2\.0; flighthq\._internal\._StaticIndex\.writeFloat32Array\(__indexedObject\d+, __indexedKey\d+, _Runtime\.addNumbers\(flighthq\._internal\._StaticIndex\.readFloat32Array\(__indexedObject\d+, __indexedKey\d+\), b\)\); \}\)/u,
     );
     expect(output).toContain('_Runtime.getIndex(mixed, 3.0)');
     expect(output).toContain('_Runtime.getIndex(shadowed, 4.0)');
@@ -2012,7 +2012,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.getIndex(mixed, key)');
     expect(output).toContain('_Runtime.getIndex((cast value : Dynamic), key)');
     expect(output).toMatch(
-      /\(\{ var (__indexedObject\d+):Dynamic = .*receiver.*; var (__indexedKey\d+):Dynamic = .*key.*; flighthq\._internal\._StaticIndex\.writeArray\(\1, \2, \(flighthq\._internal\._StaticIndex\.readArray\(\1, \2\) \+ .*value.*\)\); \}\)/u,
+      /\(\{ var (__indexedObject\d+):Dynamic = .*receiver.*; var (__indexedKey\d+):Dynamic = .*key.*; flighthq\._internal\._StaticIndex\.writeArray\(\1, \2, _Runtime\.addNumbers\(flighthq\._internal\._StaticIndex\.readArray\(\1, \2\), .*value.*\)\); \}\)/u,
     );
   });
 
@@ -2059,7 +2059,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_StaticIndex.readArrayOrFloat32Array(readonlyValues, key)');
     expect(output).toContain('_StaticIndex.readUint16ArrayOrUint32Array(indices, key)');
     expect(output).toContain('_Runtime.setIndex(indices, key, value)');
-    expect(output).toContain('_Runtime.setIndex(indices, key, (_Runtime.getIndex(indices, key) + value))');
+    expect(output).toContain(
+      '_Runtime.setIndex(indices, key, _Runtime.addNumbers(_Runtime.getIndex(indices, key), value))',
+    );
     expect(output).toContain('_Runtime.getIndex(wider, key)');
     expect(output).toContain('_Runtime.getIndex(incompatible, key)');
     expect(output).toContain('_Runtime.getIndex(heterogeneous, key)');
@@ -2520,6 +2522,63 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toMatch(/\s%\s/u);
   });
 
+  it('bridges runtime-Dynamic numeric arithmetic through typed runtime frames', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/dynamicNumeric.ts',
+      `
+        interface NumericBox { value: number; }
+        interface UnknownBox { value: any; }
+
+        export function dynamicNumeric(
+          source: NumericBox,
+          parent: NumericBox,
+          sink: NumericBox,
+          left: number,
+          right: number,
+        ) {
+          sink.value = source.value * parent.value;
+          sink.value = source.value / parent.value;
+          sink.value = source.value - parent.value;
+          sink.value = source.value + parent.value;
+          sink.value *= parent.value;
+          sink.value /= parent.value;
+          sink.value -= parent.value;
+          sink.value += parent.value;
+          const typedProduct = left * right;
+          const typedSum = left + right;
+          return typedProduct + typedSum;
+        }
+
+        export function ambiguousPlus(left: UnknownBox, right: UnknownBox) {
+          return left.value + right.value;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'DynamicNumericFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    for (const [method, operator] of [
+      ['multiplyNumbers', '*'],
+      ['divideNumbers', '/'],
+      ['subtractNumbers', '-'],
+      ['addNumbers', '+'],
+    ]) {
+      expect(output).toContain(`_Runtime.${method}(_Runtime.field(source, 'value'), _Runtime.field(parent, 'value'))`);
+      expect(output).toContain(`_Runtime.${method}(_Runtime.field(sink, 'value'), _Runtime.field(parent, 'value'))`);
+      expect(output).not.toContain(`(_Runtime.field(source, 'value') ${operator} _Runtime.field(parent, 'value'))`);
+    }
+    expect(output).toContain('typedProduct = (left * right)');
+    expect(output).toContain('typedSum = (left + right)');
+    expect(output).toContain("return cast (_Runtime.field(left, 'value') + _Runtime.field(right, 'value'))");
+    expect(output).not.toContain("_Runtime.addNumbers(_Runtime.field(left, 'value')");
+  });
+
   it('pads object-literal closures to their declared contextual method arity', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',
@@ -2575,7 +2634,9 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('_Runtime.normalizeZero(-value)');
-    expect(output).toContain("return (_Runtime.field(b, 'weight') - _Runtime.field(a, 'weight'))");
+    expect(output).toContain(
+      "return _Runtime.subtractNumbers(_Runtime.field(b, 'weight'), _Runtime.field(a, 'weight'))",
+    );
     expect(output).not.toContain('return Std.int(');
   });
 

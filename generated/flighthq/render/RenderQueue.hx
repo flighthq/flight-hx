@@ -39,7 +39,7 @@ class RenderQueue {
       var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : NodeAny)] : Array<Dynamic>)), 'children');
       if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
         {
-          var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(stack, stackLength++, flighthq._internal._StaticIndex.readArray(children, i));
             i--;
@@ -54,7 +54,7 @@ class RenderQueue {
   }
 
   public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
-    return cast (_Runtime.field(a, 'sortKey') - _Runtime.field(b, 'sortKey'));
+    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'sortKey'), _Runtime.field(b, 'sortKey'));
     return cast null;
   }
 
@@ -99,7 +99,7 @@ class RenderQueue {
   }
 
   public static function compareRenderQueueEntriesByKey__renderQueue(a:RenderQueueEntry, b:RenderQueueEntry):Float {
-    return cast (_Runtime.field(a, 'sortKey') - _Runtime.field(b, 'sortKey'));
+    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'sortKey'), _Runtime.field(b, 'sortKey'));
     return cast null;
   }
 

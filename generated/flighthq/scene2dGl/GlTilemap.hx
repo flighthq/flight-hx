@@ -89,8 +89,8 @@ class GlTilemap {
     base = _Runtime.callValue(prepareGlQuadBatchWrite, cast ([state, glTexture, straightAlpha, _Runtime.field(texture, 'sampler'), _Runtime.field(tilemapNode, 'blendMode'), material, materialRenderer, (columns * rows)] : Array<Dynamic>));
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
-    ih = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
     instanceData = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
     pt = _Runtime.field(tilemapNode, 'transform2D');
     pa = pt.a;
@@ -138,7 +138,7 @@ class GlTilemap {
         row++;
       }
     }
-    _Runtime.setField(runtime, 'quadBatchWriterCount', (_Runtime.field(runtime, 'quadBatchWriterCount') + drawCount));
+    _Runtime.setField(runtime, 'quadBatchWriterCount', _Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), drawCount));
   }
 
   public static final defaultGlTilemapRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: GlTilemap.submitGlTilemap__glTilemap };

@@ -53,23 +53,23 @@ class WgpuCompressedTexture {
     var native:Dynamic = cast _Runtime.UNDEFINED;
     var decoded:Array<flighthq._internal._UInt8ClampedArray> = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0), function():Dynamic return cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0)) : Bool)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(container, 'levels'), 'length'), ((_Runtime.field(container, 'mipLevels') * _Runtime.field(container, 'layers')) * _Runtime.field(container, 'faces'))) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0), function():Dynamic return cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0)) : Bool)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(container, 'levels'), 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(_Runtime.field(container, 'mipLevels'), _Runtime.field(container, 'layers')), _Runtime.field(container, 'faces'))) : Bool)) : Bool)) {
       return cast null;
     }
     native = _Runtime.callValue(WgpuCompressedTexture.getWgpuCompressedTextureFormatForColorSpace__wgpuCompressedTexture, cast ([_Runtime.field(state, 'device'), _Runtime.field(container, 'format'), colorSpace] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(native, null) : Bool)) {
       var info:Dynamic = _Runtime.callValue(WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture, cast ([_Runtime.field(container, 'format')] : Array<Dynamic>));
-      var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.field(container, 'width'), _Runtime.field(container, 'height'), (_Runtime.field(container, 'layers') * _Runtime.field(container, 'faces'))] : Array<Dynamic>), format: native, mipLevelCount: _Runtime.field(container, 'mipLevels'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+      var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.field(container, 'width'), _Runtime.field(container, 'height'), _Runtime.multiplyNumbers(_Runtime.field(container, 'layers'), _Runtime.field(container, 'faces'))] : Array<Dynamic>), format: native, mipLevelCount: _Runtime.field(container, 'mipLevels'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
       {
         var flat:Dynamic = 0.0;
         while ((cast ((cast flat : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
           var level:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), flat);
           var mipLevel:Dynamic = _Runtime.fmod(flat, _Runtime.field(container, 'mipLevels'));
-          var slice:Dynamic = HxMath.floor((flat / _Runtime.field(container, 'mipLevels')));
-          var bytes:Dynamic = (cast payload : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(level, 'byteOffset')), Std.int((_Runtime.field(level, 'byteOffset') + _Runtime.field(level, 'byteLength'))));
+          var slice:Dynamic = HxMath.floor(_Runtime.divideNumbers(flat, _Runtime.field(container, 'mipLevels')));
+          var bytes:Dynamic = (cast payload : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(level, 'byteOffset')), Std.int(_Runtime.addNumbers(_Runtime.field(level, 'byteOffset'), _Runtime.field(level, 'byteLength'))));
           var uploadBytes:Dynamic = new flighthq._internal._UInt8Array(bytes);
-          var blockRows:Dynamic = HxMath.ceil((_Runtime.field(level, 'height') / _Runtime.field(info, 'blockHeight')));
-          _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture, mipLevel: mipLevel, origin: cast ([0.0, 0.0, slice] : Array<Dynamic>) }, uploadBytes, { bytesPerRow: (HxMath.ceil((_Runtime.field(level, 'width') / _Runtime.field(info, 'blockWidth'))) * _Runtime.field(info, 'bytesPerBlock')), rowsPerImage: blockRows }, cast ([_Runtime.field(level, 'width'), _Runtime.field(level, 'height'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+          var blockRows:Dynamic = HxMath.ceil(_Runtime.divideNumbers(_Runtime.field(level, 'height'), _Runtime.field(info, 'blockHeight')));
+          _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture, mipLevel: mipLevel, origin: cast ([0.0, 0.0, slice] : Array<Dynamic>) }, uploadBytes, { bytesPerRow: _Runtime.multiplyNumbers(HxMath.ceil(_Runtime.divideNumbers(_Runtime.field(level, 'width'), _Runtime.field(info, 'blockWidth'))), _Runtime.field(info, 'bytesPerBlock')), rowsPerImage: blockRows }, cast ([_Runtime.field(level, 'width'), _Runtime.field(level, 'height'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
           flat++;
         }
       }
@@ -78,9 +78,9 @@ class WgpuCompressedTexture {
     if ((cast ((cast ((cast _Runtime.strictEquals(decode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0) : Bool)) : Bool)) { return cast null; }
     decoded = cast ([] : Array<Dynamic>);
     for (level in _Runtime.iterable(_Runtime.field(container, 'levels'))) {
-      var bytes:Dynamic = (cast payload : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(level, 'byteOffset')), Std.int((_Runtime.field(level, 'byteOffset') + _Runtime.field(level, 'byteLength'))));
+      var bytes:Dynamic = (cast payload : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(level, 'byteOffset')), Std.int(_Runtime.addNumbers(_Runtime.field(level, 'byteOffset'), _Runtime.field(level, 'byteLength'))));
       var rgba:Dynamic = _Runtime.callValue(decode, cast ([_Runtime.field(container, 'format'), _Runtime.field(level, 'width'), _Runtime.field(level, 'height'), bytes] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(rgba, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(rgba, 'byteLength'), ((_Runtime.field(level, 'width') * _Runtime.field(level, 'height')) * 4.0)) : Bool)) : Bool)) { return cast null; }
+      if ((cast ((cast _Runtime.strictEquals(rgba, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(rgba, 'byteLength'), (_Runtime.multiplyNumbers(_Runtime.field(level, 'width'), _Runtime.field(level, 'height')) * 4.0)) : Bool)) : Bool)) { return cast null; }
       _Runtime.callProperty(decoded, 'push', cast ([rgba] : Array<Dynamic>));
     }
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.field(container, 'width'), _Runtime.field(container, 'height'), 1.0] : Array<Dynamic>), format: ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast 'rgba8unorm-srgb' : Dynamic) : (cast 'rgba8unorm' : Dynamic)), mipLevelCount: _Runtime.field(container, 'mipLevels'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
@@ -88,7 +88,7 @@ class WgpuCompressedTexture {
       var mipLevel:Dynamic = 0.0;
       while ((cast ((cast mipLevel : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
         var level:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), mipLevel);
-        _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture, mipLevel: mipLevel }, flighthq._internal._StaticIndex.readArray(decoded, mipLevel), { bytesPerRow: (_Runtime.field(level, 'width') * 4.0), rowsPerImage: _Runtime.field(level, 'height') }, cast ([_Runtime.field(level, 'width'), _Runtime.field(level, 'height'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+        _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture, mipLevel: mipLevel }, flighthq._internal._StaticIndex.readArray(decoded, mipLevel), { bytesPerRow: _Runtime.multiplyNumbers(_Runtime.field(level, 'width'), 4.0), rowsPerImage: _Runtime.field(level, 'height') }, cast ([_Runtime.field(level, 'width'), _Runtime.field(level, 'height'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
         mipLevel++;
       }
     }
@@ -132,9 +132,9 @@ class WgpuCompressedTexture {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var alpha:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), alpha) / 255.0));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), alpha);
         (i = cast ((i + 4.0) : Dynamic));
       }

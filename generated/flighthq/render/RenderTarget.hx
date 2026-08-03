@@ -22,16 +22,16 @@ class RenderTarget {
     (outCacheTransform.b = cast (0.0 : Dynamic));
     (outCacheTransform.c = cast (0.0 : Dynamic));
     (outCacheTransform.d = cast (1.0 : Dynamic));
-    (outCacheTransform.tx = cast ((_Runtime.field(bounds, 'x') - contentX) : Dynamic));
-    (outCacheTransform.ty = cast ((_Runtime.field(bounds, 'y') - contentY) : Dynamic));
+    (outCacheTransform.tx = cast (_Runtime.subtractNumbers(_Runtime.field(bounds, 'x'), contentX) : Dynamic));
+    (outCacheTransform.ty = cast (_Runtime.subtractNumbers(_Runtime.field(bounds, 'y'), contentY) : Dynamic));
   }
 
   public static function computeRenderTargetSize(bounds:RectangleLike, padding:Dynamic = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
     var horizontal:Dynamic = cast _Runtime.UNDEFINED;
     var vertical:Dynamic = cast _Runtime.UNDEFINED;
-    horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast (padding * 2.0) : Dynamic) : (cast (_Runtime.field(padding, 'left') + _Runtime.field(padding, 'right')) : Dynamic));
-    vertical = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast (padding * 2.0) : Dynamic) : (cast (_Runtime.field(padding, 'top') + _Runtime.field(padding, 'bottom')) : Dynamic));
-    return cast { width: HxMath.max(minWidth, (HxMath.ceil(_Runtime.field(bounds, 'width')) + horizontal)), height: HxMath.max(minHeight, (HxMath.ceil(_Runtime.field(bounds, 'height')) + vertical)) };
+    horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast (padding * 2.0) : Dynamic) : (cast _Runtime.addNumbers(_Runtime.field(padding, 'left'), _Runtime.field(padding, 'right')) : Dynamic));
+    vertical = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast (padding * 2.0) : Dynamic) : (cast _Runtime.addNumbers(_Runtime.field(padding, 'top'), _Runtime.field(padding, 'bottom')) : Dynamic));
+    return cast { width: HxMath.max(minWidth, _Runtime.addNumbers(HxMath.ceil(_Runtime.field(bounds, 'width')), horizontal)), height: HxMath.max(minHeight, _Runtime.addNumbers(HxMath.ceil(_Runtime.field(bounds, 'height')), vertical)) };
     return cast null;
   }
 
@@ -43,8 +43,8 @@ class RenderTarget {
     (RenderTarget._tempTranslation__renderTarget.b = cast (0.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.c = cast (0.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.d = cast (1.0 : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.tx = cast ((contentX - _Runtime.field(bounds, 'x')) : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.ty = cast ((contentY - _Runtime.field(bounds, 'y')) : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.tx = cast (_Runtime.subtractNumbers(contentX, _Runtime.field(bounds, 'x')) : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.ty = cast (_Runtime.subtractNumbers(contentY, _Runtime.field(bounds, 'y')) : Dynamic));
     _Runtime.callValue(multiplyMatrix, cast ([outRenderTransform, RenderTarget._tempTranslation__renderTarget, RenderTarget._tempInvLocal__renderTarget] : Array<Dynamic>));
   }
 

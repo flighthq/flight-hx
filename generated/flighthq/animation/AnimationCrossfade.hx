@@ -17,7 +17,7 @@ class AnimationCrossfade {
   public static function advanceAnimationCrossfade(state:flighthq.types.AnimationCrossfade, dt:Float):Void {
     _Runtime.callValue(advanceAnimationPlayer, cast ([_Runtime.field(state, 'from'), dt] : Array<Dynamic>));
     _Runtime.callValue(advanceAnimationPlayer, cast ([_Runtime.field(state, 'to'), dt] : Array<Dynamic>));
-    _Runtime.setField(state, 'elapsed', (_Runtime.field(state, 'elapsed') + dt));
+    _Runtime.setField(state, 'elapsed', _Runtime.addNumbers(_Runtime.field(state, 'elapsed'), dt));
     _Runtime.setField(state, 'weight', _Runtime.callProperty(state, 'curve', cast ([_Runtime.callValue(AnimationCrossfade.getLinearAnimationCrossfadeWeight__animationCrossfade, cast ([_Runtime.field(state, 'elapsed'), _Runtime.field(state, 'duration')] : Array<Dynamic>))] : Array<Dynamic>)));
   }
 

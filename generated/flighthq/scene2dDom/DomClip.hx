@@ -28,7 +28,7 @@ class DomClip {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
-    target = (_Runtime.field(data, 'clipDepth') - ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     if ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), target); }
     _Runtime.setField(state, 'currentClipDepth', _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length'));
   }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {

@@ -21,8 +21,8 @@ class ExplainUnpackedRectangles {
     var explanations:Array<UnpackedRectangleExplanation> = cast _Runtime.UNDEFINED;
     border = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.border; }), function():Dynamic return cast 0.0);
     allowRotation = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.allowRotation; }), function():Dynamic return cast false);
-    usableWidth = (_Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.maxWidth; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT) - (2.0 * border));
-    usableHeight = (_Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.maxHeight; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT) - (2.0 * border));
+    usableWidth = _Runtime.subtractNumbers(_Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.maxWidth; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT), (2.0 * border));
+    usableHeight = _Runtime.subtractNumbers(_Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.maxHeight; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT), (2.0 * border));
     result = _Runtime.callValue(packRectangles, cast ([rectangles, options] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(result, 'unpacked'), 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     unpacked = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.field(result, 'unpacked')]);

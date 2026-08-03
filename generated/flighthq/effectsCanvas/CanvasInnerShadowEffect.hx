@@ -50,11 +50,11 @@ class CanvasInnerShadowEffect {
     shadow = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     shadowPasses = HxMath.max(1.0, HxMath.floor(strength));
-    blur = HxMath.max(0.0, ((_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) + _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
-    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = (HxMath.cos(angle) * distance);
-    offsetY = (HxMath.sin(angle) * distance);
+    offsetX = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
+    offsetY = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
     _Runtime.callValue(drawCanvasInvertedTintedAlphaMask, cast ([mask, source, _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0), HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, mask, ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic))] : Array<Dynamic>));
     _Runtime.callValue(clearCanvasTarget, cast ([shadow] : Array<Dynamic>));

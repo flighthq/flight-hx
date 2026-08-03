@@ -14,7 +14,7 @@ class EasePiecewise {
     if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
       _Runtime.throwValue(_Runtime.error('easePiecewise: segments array must not be empty'));
     }
-    totalWeight = _Runtime.reduce(segments, function(sum:Dynamic, seg:Dynamic) return (sum + _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0)), 0.0);
+    totalWeight = _Runtime.reduce(segments, function(sum:Dynamic, seg:Dynamic) return _Runtime.addNumbers(sum, _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0)), 0.0);
     if ((cast ((cast totalWeight : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('easePiecewise: total segment weight must be greater than zero'));
     }
@@ -32,16 +32,16 @@ class EasePiecewise {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(breakpoints, 'length') : Float)) : Bool)) {
           var bp:Dynamic = flighthq._internal._StaticIndex.readArray(breakpoints, i);
-          if ((cast ((cast ((cast t : Float) <= (cast _Runtime.field(bp, 'end') : Float)) : Bool) || (cast _Runtime.strictEquals(i, (_Runtime.field(breakpoints, 'length') - 1.0)) : Bool)) : Bool)) {
-            var span:Dynamic = (_Runtime.field(bp, 'end') - _Runtime.field(bp, 'start'));
-            var localT:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((t - _Runtime.field(bp, 'start')) / span) : Dynamic) : (cast 1.0 : Dynamic));
+          if ((cast ((cast ((cast t : Float) <= (cast _Runtime.field(bp, 'end') : Float)) : Bool) || (cast _Runtime.strictEquals(i, _Runtime.subtractNumbers(_Runtime.field(breakpoints, 'length'), 1.0)) : Bool)) : Bool)) {
+            var span:Dynamic = _Runtime.subtractNumbers(_Runtime.field(bp, 'end'), _Runtime.field(bp, 'start'));
+            var localT:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.subtractNumbers(t, _Runtime.field(bp, 'start')) / span) : Dynamic) : (cast 1.0 : Dynamic));
             var clampedT:Dynamic = ((cast ((cast localT : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast localT : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast localT : Dynamic)) : Dynamic));
             return cast _Runtime.callProperty(bp, 'ease', cast ([clampedT] : Array<Dynamic>));
           }
           i++;
         }
       }
-      return cast _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)), 'ease', cast ([1.0] : Array<Dynamic>));
+      return cast _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), 'ease', cast ([1.0] : Array<Dynamic>));
     };
     return cast null;
   }

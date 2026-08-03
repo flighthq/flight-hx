@@ -56,8 +56,8 @@ class ApplicationRenderView {
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     devicePixelRatio = _Runtime.field(view, 'window').devicePixelRatio;
-    width = HxMath.max(0.0, HxMath.round((_Runtime.field(view, 'window').width * devicePixelRatio)));
-    height = HxMath.max(0.0, HxMath.round((_Runtime.field(view, 'window').height * devicePixelRatio)));
+    width = HxMath.max(0.0, HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(view, 'window').width, devicePixelRatio)));
+    height = HxMath.max(0.0, HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(view, 'window').height, devicePixelRatio)));
     runtime = _Runtime.callValue(ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView, cast ([view] : Array<Dynamic>));
     _Runtime.callProperty(runtime, 'resize', cast ([_Runtime.field(view, 'renderState'), _Runtime.field(view, 'renderTarget'), width, height] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(view, 'viewport'), 'devicePixelRatio', devicePixelRatio);

@@ -107,8 +107,8 @@ class WgpuVelocity {
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
         var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
         var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosScale:Dynamic = (HxMath.cos(rotation) * scale);
-        var sinScale:Dynamic = (HxMath.sin(rotation) * scale);
+        var cosScale:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinScale:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var minX:Dynamic = HxMath.POSITIVE_INFINITY;
         var minY:Dynamic = HxMath.POSITIVE_INFINITY;
         var maxX:Dynamic = -HxMath.POSITIVE_INFINITY;
@@ -250,10 +250,10 @@ class WgpuVelocity {
     active = ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap).get(_Runtime.field(ctx, 'state')));
     if ((cast _Runtime.strictEquals(active, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     pipeline = _Runtime.field(active, 'pipeline');
-    clipX0 = (((x / _Runtime.field(ctx, 'width')) * 2.0) - 1.0);
-    clipY0 = (1.0 - ((y / _Runtime.field(ctx, 'height')) * 2.0));
-    clipWidth = ((width / _Runtime.field(ctx, 'width')) * 2.0);
-    clipHeight = -((height / _Runtime.field(ctx, 'height')) * 2.0);
+    clipX0 = ((_Runtime.divideNumbers(x, _Runtime.field(ctx, 'width')) * 2.0) - 1.0);
+    clipY0 = (1.0 - (_Runtime.divideNumbers(y, _Runtime.field(ctx, 'height')) * 2.0));
+    clipWidth = (_Runtime.divideNumbers(width, _Runtime.field(ctx, 'width')) * 2.0);
+    clipHeight = -(_Runtime.divideNumbers(height, _Runtime.field(ctx, 'height')) * 2.0);
     slot = _Runtime.field(pipeline, 'cursor');
     _Runtime.setField(pipeline, 'cursor', _Runtime.fmod((slot + WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity), (WgpuVelocity.UNIFORM_SLOTS__wgpuVelocity * WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity)));
     scratch = _Runtime.field(pipeline, 'scratch');
@@ -261,8 +261,8 @@ class WgpuVelocity {
     flighthq._internal._StaticIndex.writeFloat32Array(scratch, 1.0, clipY0);
     flighthq._internal._StaticIndex.writeFloat32Array(scratch, 2.0, clipWidth);
     flighthq._internal._StaticIndex.writeFloat32Array(scratch, 3.0, clipHeight);
-    flighthq._internal._StaticIndex.writeFloat32Array(scratch, 4.0, (velocityX * _Runtime.field(ctx, 'pixelRatio')));
-    flighthq._internal._StaticIndex.writeFloat32Array(scratch, 5.0, (velocityY * _Runtime.field(ctx, 'pixelRatio')));
+    flighthq._internal._StaticIndex.writeFloat32Array(scratch, 4.0, _Runtime.multiplyNumbers(velocityX, _Runtime.field(ctx, 'pixelRatio')));
+    flighthq._internal._StaticIndex.writeFloat32Array(scratch, 5.0, _Runtime.multiplyNumbers(velocityY, _Runtime.field(ctx, 'pixelRatio')));
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(_Runtime.field(ctx, 'state'), 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(pipeline, 'uniformBuffer'), slot, _Runtime.field(scratch, 'buffer'), 0.0, WgpuVelocity.UNIFORM_BYTES__wgpuVelocity] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(active, 'pass'), 'setBindGroup', cast ([0.0, _Runtime.field(pipeline, 'bindGroup'), cast ([slot] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(active, 'pass'), 'draw', cast ([6.0] : Array<Dynamic>));

@@ -81,7 +81,7 @@ class GlParticleEmitter3D {
     var newSize:Dynamic = cast _Runtime.UNDEFINED;
     needed = (count * GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D);
     if ((cast ((cast _Runtime.field(_Runtime.field(shader, 'instanceData'), 'length') : Float) >= (cast needed : Float)) : Bool)) { return; }
-    newSize = HxMath.max(needed, (_Runtime.field(_Runtime.field(shader, 'instanceData'), 'length') * 2.0));
+    newSize = HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(shader, 'instanceData'), 'length'), 2.0));
     _Runtime.setField(shader, 'instanceData', new flighthq._internal._Float32Array(newSize));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(shader, 'instanceBuffer'));
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
@@ -168,8 +168,8 @@ class GlParticleEmitter3D {
     hasAtlas = !_Runtime.strictEquals(resolvedAtlas, null);
     regions = ((cast hasAtlas : Bool) ? (cast atlas.regions : Dynamic) : (cast null : Dynamic));
     numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
-    iw = ((cast hasAtlas : Bool) ? (cast (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([atlasTexture] : Array<Dynamic>)))) : Dynamic) : (cast 0.0 : Dynamic));
-    ih = ((cast hasAtlas : Bool) ? (cast (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([atlasTexture] : Array<Dynamic>)))) : Dynamic) : (cast 0.0 : Dynamic));
+    iw = ((cast hasAtlas : Bool) ? (cast _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([atlasTexture] : Array<Dynamic>)))) : Dynamic) : (cast 0.0 : Dynamic));
+    ih = ((cast hasAtlas : Bool) ? (cast _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([atlasTexture] : Array<Dynamic>)))) : Dynamic) : (cast 0.0 : Dynamic));
     worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : Node3D)] : Array<Dynamic>)) : Matrix4);
     wm = worldMatrix.m;
     worldSpace = data.worldSpace;
@@ -185,11 +185,11 @@ class GlParticleEmitter3D {
         var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
         var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
         var lz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positionsZ, i);
-        var wx:Dynamic = ((cast worldSpace : Bool) ? (cast lx : Dynamic) : (cast ((((flighthq._internal._StaticIndex.readFloat32Array(wm, 0.0) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 4.0) * ly)) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 8.0) * lz)) + flighthq._internal._StaticIndex.readFloat32Array(wm, 12.0)) : Dynamic));
-        var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ly : Dynamic) : (cast ((((flighthq._internal._StaticIndex.readFloat32Array(wm, 1.0) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 5.0) * ly)) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 9.0) * lz)) + flighthq._internal._StaticIndex.readFloat32Array(wm, 13.0)) : Dynamic));
-        var wz:Dynamic = ((cast worldSpace : Bool) ? (cast lz : Dynamic) : (cast ((((flighthq._internal._StaticIndex.readFloat32Array(wm, 2.0) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 6.0) * ly)) + (flighthq._internal._StaticIndex.readFloat32Array(wm, 10.0) * lz)) + flighthq._internal._StaticIndex.readFloat32Array(wm, 14.0)) : Dynamic));
-        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
-        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
+        var wx:Dynamic = ((cast worldSpace : Bool) ? (cast lx : Dynamic) : (cast _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 0.0), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 4.0), ly)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 8.0), lz)), flighthq._internal._StaticIndex.readFloat32Array(wm, 12.0)) : Dynamic));
+        var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ly : Dynamic) : (cast _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 1.0), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 5.0), ly)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 9.0), lz)), flighthq._internal._StaticIndex.readFloat32Array(wm, 13.0)) : Dynamic));
+        var wz:Dynamic = ((cast worldSpace : Bool) ? (cast lz : Dynamic) : (cast _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 2.0), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 6.0), ly)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(wm, 10.0), lz)), flighthq._internal._StaticIndex.readFloat32Array(wm, 14.0)) : Dynamic));
+        var cosR:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinR:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var ct:Dynamic = (i * 3.0);
         var hasColors:Dynamic = ((cast !_Runtime.looseEquals(colors, null) : Bool) && (cast ((cast _Runtime.field(colors, 'length') : Float) > (cast (ct + 2.0) : Float)) : Bool));
         var r:Dynamic = ((cast hasColors : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(colors, ct) : Dynamic) : (cast 1.0 : Dynamic));

@@ -46,17 +46,17 @@ class Follow {
     }
     if (_Runtime.truthy(worldBounds)) {
       _Runtime.callValue(getCamera2DVisibleBounds, cast ([camera, Follow.scratchBounds__follow] : Array<Dynamic>));
-      var halfVisW:Dynamic = (_Runtime.field(Follow.scratchBounds__follow, 'width') * 0.5);
-      var halfVisH:Dynamic = (_Runtime.field(Follow.scratchBounds__follow, 'height') * 0.5);
+      var halfVisW:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(Follow.scratchBounds__follow, 'width'), 0.5);
+      var halfVisH:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(Follow.scratchBounds__follow, 'height'), 0.5);
       if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast _Runtime.field(Follow.scratchBounds__follow, 'width') : Float)) : Bool)) {
-        (nextX = cast ((_Runtime.field(worldBounds, 'x') + (_Runtime.field(worldBounds, 'width') * 0.5)) : Dynamic));
+        (nextX = cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.multiplyNumbers(_Runtime.field(worldBounds, 'width'), 0.5)) : Dynamic));
       } else {
-        (nextX = cast (_Runtime.callValue(clamp, cast ([nextX, (_Runtime.field(worldBounds, 'x') + halfVisW), ((_Runtime.field(worldBounds, 'x') + _Runtime.field(worldBounds, 'width')) - halfVisW)] : Array<Dynamic>)) : Dynamic));
+        (nextX = cast (_Runtime.callValue(clamp, cast ([nextX, _Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), halfVisW), (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.field(worldBounds, 'width')) - halfVisW)] : Array<Dynamic>)) : Dynamic));
       }
       if ((cast ((cast _Runtime.field(worldBounds, 'height') : Float) <= (cast _Runtime.field(Follow.scratchBounds__follow, 'height') : Float)) : Bool)) {
-        (nextY = cast ((_Runtime.field(worldBounds, 'y') + (_Runtime.field(worldBounds, 'height') * 0.5)) : Dynamic));
+        (nextY = cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.multiplyNumbers(_Runtime.field(worldBounds, 'height'), 0.5)) : Dynamic));
       } else {
-        (nextY = cast (_Runtime.callValue(clamp, cast ([nextY, (_Runtime.field(worldBounds, 'y') + halfVisH), ((_Runtime.field(worldBounds, 'y') + _Runtime.field(worldBounds, 'height')) - halfVisH)] : Array<Dynamic>)) : Dynamic));
+        (nextY = cast (_Runtime.callValue(clamp, cast ([nextY, _Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), halfVisH), (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.field(worldBounds, 'height')) - halfVisH)] : Array<Dynamic>)) : Dynamic));
       }
     }
     (camera.x = cast (nextX : Dynamic));

@@ -11,9 +11,9 @@ class DepthMath {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     fd = HxMath.max(0.00001, focusDistance);
-    fl = (HxMath.max(0.00001, focalLength) / 1000.0);
+    fl = _Runtime.divideNumbers(HxMath.max(0.00001, focalLength), 1000.0);
     d = HxMath.max(0.00001, depth);
-    a = (fl / HxMath.max(0.00001, aperture));
+    a = _Runtime.divideNumbers(fl, HxMath.max(0.00001, aperture));
     return cast ((a * (d - fd)) / (d * (fd - fl)));
     return cast null;
   }
@@ -35,9 +35,9 @@ class DepthMath {
         var phi:Dynamic = HxMath.acos((1.0 - h3));
         var scale:Dynamic = (i / n);
         var dist:Dynamic = (0.1 + ((0.9 * scale) * scale));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 0.0), ((HxMath.sin(phi) * HxMath.cos(theta)) * dist));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 1.0), ((HxMath.sin(phi) * HxMath.sin(theta)) * dist));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 2.0), (HxMath.cos(phi) * dist));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 0.0), (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.cos(theta)) * dist));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 1.0), (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.sin(theta)) * dist));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 2.0), _Runtime.multiplyNumbers(HxMath.cos(phi), dist));
         i++;
       }
     }

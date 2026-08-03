@@ -240,7 +240,7 @@ class QuadBatch {
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     stride = _Runtime.callValue(getQuadBatchTransformStride, cast ([_Runtime.field(data, 'transformType')] : Array<Dynamic>));
-    transformCapacity = (_Runtime.toInt32((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / stride)) | 0);
+    transformCapacity = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(_Runtime.field(data, 'transforms'), 'length'), stride)) | 0);
     return cast HxMath.min(_Runtime.field(_Runtime.field(data, 'ids'), 'length'), transformCapacity);
     return cast null;
   }
@@ -461,7 +461,7 @@ class QuadBatch {
     var swapSource:Dynamic = cast _Runtime.UNDEFINED;
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
-    last = (_Runtime.field(data, 'instanceCount') - 1.0);
+    last = _Runtime.subtractNumbers(_Runtime.field(data, 'instanceCount'), 1.0);
     if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) > (cast last : Float)) : Bool)) : Bool)) { return; }
     swapSource = ((cast ((cast index : Float) < (cast last : Float)) : Bool) ? (cast last : Dynamic) : (cast -1.0 : Dynamic));
     if ((cast ((cast index : Float) < (cast last : Float)) : Bool)) {
@@ -498,7 +498,7 @@ class QuadBatch {
     if ((cast ((cast currentCapacity : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = _Runtime.field(target, 'data');
     _Runtime.setField(data, 'ids', _Runtime.callValue(reserveUint16Array, cast ([_Runtime.field(data, 'ids'), capacity] : Array<Dynamic>)));
-    _Runtime.setField(data, 'transforms', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'transforms'), (capacity * _Runtime.callValue(getQuadBatchTransformStride, cast ([_Runtime.field(data, 'transformType')] : Array<Dynamic>)))] : Array<Dynamic>)));
+    _Runtime.setField(data, 'transforms', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'transforms'), _Runtime.multiplyNumbers(capacity, _Runtime.callValue(getQuadBatchTransformStride, cast ([_Runtime.field(data, 'transformType')] : Array<Dynamic>)))] : Array<Dynamic>)));
   }
 
   public static function resizeQuadBatch(target:flighthq.types.QuadBatch, instanceCount:Float):Void {
@@ -584,7 +584,7 @@ class QuadBatch {
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'transformType'), newType) : Bool)) { return; }
     count = _Runtime.field(data, 'instanceCount');
     if ((cast _Runtime.strictEquals(newType, 'matrix3x2') : Bool)) {
-      var newTransforms:Dynamic = new flighthq._internal._Float32Array((HxMath.max((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch), count) * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch));
+      var newTransforms:Dynamic = new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(HxMath.max(_Runtime.divideNumbers(_Runtime.field(_Runtime.field(data, 'transforms'), 'length'), QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch), count), QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch));
       {
         var i:Dynamic = (count - 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {

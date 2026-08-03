@@ -60,11 +60,11 @@ class ReversePath {
     var last:Dynamic = cast _Runtime.UNDEFINED;
     pts = _Runtime.field(subpath, 'points');
     if ((cast _Runtime.strictEquals(_Runtime.field(pts, 'length'), 0.0) : Bool)) { return; }
-    last = flighthq._internal._StaticIndex.readArray(pts, (_Runtime.field(pts, 'length') - 1.0));
+    last = flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0));
     _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(last, 'x'), _Runtime.field(last, 'y')] : Array<Dynamic>));
     {
-      var i:Dynamic = (_Runtime.field(pts, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 1.0 : Float)) : Bool)) {
         var from:Dynamic = flighthq._internal._StaticIndex.readArray(pts, i);
         var to:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i - 1.0));

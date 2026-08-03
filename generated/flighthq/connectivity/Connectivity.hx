@@ -129,7 +129,7 @@ class Connectivity {
                 response = __awaitValue1;
                 _Runtime.clearTimeout(timerId);
                 (out.reachable = cast (_Runtime.field(response, 'ok') : Dynamic));
-                (out.latency = cast ((_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - start) : Dynamic));
+                (out.latency = cast (_Runtime.subtractNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), start) : Dynamic));
                 return flighthq._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {

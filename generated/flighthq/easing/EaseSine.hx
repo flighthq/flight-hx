@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseSine {
-  public static final easeInOutSine:EasingFunction = function(t:Dynamic) return (-(HxMath.cos((HxMath.PI * t)) - 1.0) / 2.0);
+  public static final easeInOutSine:EasingFunction = function(t:Dynamic) return (-_Runtime.subtractNumbers(HxMath.cos((HxMath.PI * t)), 1.0) / 2.0);
 
-  public static final easeInSine:EasingFunction = function(t:Dynamic) return (1.0 - HxMath.cos(((t * HxMath.PI) / 2.0)));
+  public static final easeInSine:EasingFunction = function(t:Dynamic) return _Runtime.subtractNumbers(1.0, HxMath.cos(((t * HxMath.PI) / 2.0)));
 
   public static final easeOutSine:EasingFunction = function(t:Dynamic) return HxMath.sin(((t * HxMath.PI) / 2.0));
 }

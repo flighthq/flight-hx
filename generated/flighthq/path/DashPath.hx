@@ -44,9 +44,9 @@ class DashPath {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-          if ((cast ((cast (acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
+          if ((cast ((cast _Runtime.addNumbers(acc, flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
-            (remaining = cast ((flighthq._internal._StaticIndex.readArray(dash, i) - (offset - acc)) : Dynamic));
+            (remaining = cast (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(dash, i), (offset - acc)) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
             break;
           }

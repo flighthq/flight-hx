@@ -60,7 +60,7 @@ class WgpuSkinPalette {
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
-    jointCount = (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | 0);
+    jointCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0);
     width = (jointCount * 4.0);
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'skinPaletteTexture'), null) : Bool) || (cast ((cast jointCount : Float) > (cast _Runtime.field(runtime, 'skinPaletteCapacity') : Float)) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(_Runtime.field(runtime, 'skinPaletteTexture'), 'destroy', cast ([] : Array<Dynamic>));
@@ -127,7 +127,7 @@ class WgpuSkinPalette {
     floatsPerVertex = (geometry.layout.stride / 4.0);
     positionOffset = _Runtime.callValue(WgpuSkinPalette.floatOffsetForSemantic__wgpuSkinPalette, cast ([geometry, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(WgpuSkinPalette.floatOffsetForSemantic__wgpuSkinPalette, cast ([geometry, 'normal'] : Array<Dynamic>));
-    vertexCount = (_Runtime.toInt32((_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length') / 3.0)) | 0);
+    vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length'), 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -156,7 +156,7 @@ class WgpuSkinPalette {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast (flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset / 4.0); }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset, 4.0); }
         i++;
       }
     }

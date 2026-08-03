@@ -37,8 +37,8 @@ class Sprite {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     sprite = (cast source : flighthq.types.Sprite);
     texture = _Runtime.field(_Runtime.field(sprite, 'data'), 'texture');
-    _Runtime.setField(out, 'width', ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast (HxMath.max(0.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))) * HxMath.abs(_Runtime.field(texture, 'uvScale').x)) : Dynamic)));
-    _Runtime.setField(out, 'height', ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast (HxMath.max(0.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))) * HxMath.abs(_Runtime.field(texture, 'uvScale').y)) : Dynamic)));
+    _Runtime.setField(out, 'width', ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').x)) : Dynamic)));
+    _Runtime.setField(out, 'height', ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').y)) : Dynamic)));
     runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([sprite] : Array<Dynamic>)) : SpriteRuntime);
     _Runtime.setField(runtime, 'localBoundsTexture', texture);
     _Runtime.setField(runtime, 'localBoundsTextureVersion', _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0));

@@ -29,7 +29,7 @@ class AnimationPlayer {
       return;
     }
     fromTime = _Runtime.field(player, 'time');
-    time = (_Runtime.field(player, 'time') + (dt * _Runtime.field(player, 'speed')));
+    time = _Runtime.addNumbers(_Runtime.field(player, 'time'), _Runtime.multiplyNumbers(dt, _Runtime.field(player, 'speed')));
     if ((cast !(cast _Runtime.field(player, 'loop') : Bool) : Bool)) {
       if ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
         _Runtime.callValue(AnimationPlayer.emitAnimationPlayerEvents__animationPlayer, cast ([player, fromTime, duration] : Array<Dynamic>));
@@ -131,7 +131,7 @@ class AnimationPlayer {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     duration = _Runtime.field(player, 'clip').duration;
     if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    n = (_Runtime.field(player, 'time') / duration);
+    n = _Runtime.divideNumbers(_Runtime.field(player, 'time'), duration);
     return cast ((cast ((cast n : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast n : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast n : Dynamic)) : Dynamic));
     return cast null;
   }
@@ -180,7 +180,7 @@ class AnimationPlayer {
     }
     if ((cast ((cast toTime : Float) < (cast fromTime : Float)) : Bool)) {
       {
-        var index:Dynamic = (_Runtime.field(events, 'length') - 1.0);
+        var index:Dynamic = _Runtime.subtractNumbers(_Runtime.field(events, 'length'), 1.0);
         while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
           var event:Dynamic = flighthq._internal._StaticIndex.readArray(events, index);
           if ((cast ((cast _Runtime.field(event, 'time') : Float) < (cast toTime : Float)) : Bool)) { break; }

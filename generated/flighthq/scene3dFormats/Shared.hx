@@ -126,7 +126,7 @@ class Shared {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(outJoints, i, flighthq._internal._StaticIndex.readArray(influences, i).jointIndex);
-        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (flighthq._internal._StaticIndex.readArray(influences, i).weight / sum) : Dynamic) : (cast 0.0 : Dynamic)));
+        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(influences, i).weight, sum) : Dynamic) : (cast 0.0 : Dynamic)));
         i++;
       }
     }

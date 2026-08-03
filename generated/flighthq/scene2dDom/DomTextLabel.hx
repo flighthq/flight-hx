@@ -75,7 +75,7 @@ class DomTextLabel {
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)) }] : Array<Dynamic>));
     divWidth = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-      var right:Dynamic = (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'));
+      var right:Dynamic = _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width'));
       if ((cast ((cast right : Float) > (cast divWidth : Float)) : Bool)) { (divWidth = cast (right : Dynamic)); }
     }
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'width', '' + Std.string(divWidth) + 'px');

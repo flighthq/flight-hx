@@ -45,8 +45,8 @@ class RegisterSpriteHitTest {
     bitmap = _Runtime.callValue(RegisterSpriteHitTest.bitmapForImage__registerSpriteHitTest, cast ([image] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast 0.0; }
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
-    px = HxMath.floor(((_Runtime.field(texture, 'uvOffset').x * _Runtime.field(image, 'width')) + _Runtime.field(RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest, 'x')));
-    py = HxMath.floor(((_Runtime.field(texture, 'uvOffset').y * _Runtime.field(image, 'height')) + _Runtime.field(RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest, 'y')));
+    px = HxMath.floor(_Runtime.addNumbers(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').x, _Runtime.field(image, 'width')), _Runtime.field(RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest, 'x')));
+    py = HxMath.floor(_Runtime.addNumbers(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').y, _Runtime.field(image, 'height')), _Runtime.field(RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest, 'y')));
     if ((cast ((cast ((cast ((cast ((cast px : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast py : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast px : Float) >= (cast bitmap.width : Float)) : Bool)) : Bool) || (cast ((cast py : Float) >= (cast bitmap.height : Float)) : Bool)) : Bool)) { return cast -1.0; }
     return cast ((cast ((cast _Runtime.callValue(getBitmapPixelChannel, cast ([bitmap, px, py, ImageChannelValue.Alpha] : Array<Dynamic>)) : Float) >= (cast alphaThreshold : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;

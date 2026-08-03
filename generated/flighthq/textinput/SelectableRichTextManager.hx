@@ -89,7 +89,7 @@ class SelectableRichTextManager {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return; }
-    _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + HxMath.round(deltaLines))] : Array<Dynamic>));
+    _Runtime.callValue(setRichTextScrollV, cast ([target, _Runtime.addNumbers(_Runtime.field(_Runtime.field(target, 'data'), 'scrollV'), HxMath.round(deltaLines))] : Array<Dynamic>));
   }
 
   public static function focusSelectableRichText(manager:flighthq.types.SelectableRichTextManager, target:RichText):Void {

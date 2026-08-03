@@ -92,11 +92,11 @@ class EmitParticleBurst3D {
       var sIdx:Dynamic = 0.0;
       while ((cast ((cast sIdx : Float) < (cast toSpawn : Float)) : Bool)) {
         var idx:Dynamic = (liveCount + sIdx);
-        var lifetime:Dynamic = (config.lifetimeMin + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (config.lifetimeMax - config.lifetimeMin)));
+        var lifetime:Dynamic = (config.lifetimeMin + _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), (config.lifetimeMax - config.lifetimeMin)));
         var lt:Dynamic = (idx * 2.0);
         flighthq._internal._StaticIndex.writeFloat32Array(state.lifetimes, lt, 0.0);
         flighthq._internal._StaticIndex.writeFloat32Array(state.lifetimes, (lt + 1.0), lifetime);
-        var speed:Dynamic = (config.speedMin + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (config.speedMax - config.speedMin)));
+        var speed:Dynamic = (config.speedMin + _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), (config.speedMax - config.speedMin)));
         var vx:Float = cast _Runtime.UNDEFINED;
         var vy:Float = cast _Runtime.UNDEFINED;
         var vz:Float = cast _Runtime.UNDEFINED;
@@ -110,11 +110,11 @@ class EmitParticleBurst3D {
           var sz:Float = cast _Runtime.UNDEFINED;
           if ((cast ((cast _Runtime.strictEquals(shape, 'cone3d') : Bool) && (cast ((cast config.emitterConeAngle : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
             var coneHalf:Dynamic = (config.emitterConeAngle / 2.0);
-            var cosTheta:Dynamic = (1.0 - (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (1.0 - HxMath.cos(coneHalf))));
+            var cosTheta:Dynamic = (1.0 - _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), _Runtime.subtractNumbers(1.0, HxMath.cos(coneHalf))));
             var sinTheta:Dynamic = HxMath.sqrt((1.0 - (cosTheta * cosTheta)));
-            var phi:Dynamic = (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * EmitParticleBurst3D.TWO_PI__emitParticleBurst3D);
-            var lx:Dynamic = (sinTheta * HxMath.cos(phi));
-            var ly:Dynamic = (sinTheta * HxMath.sin(phi));
+            var phi:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), EmitParticleBurst3D.TWO_PI__emitParticleBurst3D);
+            var lx:Dynamic = _Runtime.multiplyNumbers(sinTheta, HxMath.cos(phi));
+            var ly:Dynamic = _Runtime.multiplyNumbers(sinTheta, HxMath.sin(phi));
             var lz:Dynamic = cosTheta;
             var rDir:Dynamic = _Runtime.callValue(EmitParticleBurst3D.rotateToDirection__emitParticleBurst3D, cast ([lx, ly, lz, dirNx, dirNy, dirNz] : Array<Dynamic>));
             (sx = cast (flighthq._internal._StaticIndex.readArray(rDir, 0.0) : Dynamic));
@@ -125,11 +125,11 @@ class EmitParticleBurst3D {
             var v:Float = cast _Runtime.UNDEFINED;
             var s2:Float = cast _Runtime.UNDEFINED;
             do {
-              (u = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
-              (v = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
+              (u = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+              (v = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
               (s2 = cast (((u * u) + (v * v)) : Dynamic));
             } while ((cast ((cast ((cast s2 : Float) >= (cast 1.0 : Float)) : Bool) || (cast _Runtime.strictEquals(s2, 0.0) : Bool)) : Bool));
-            var f:Dynamic = (2.0 * HxMath.sqrt((1.0 - s2)));
+            var f:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - s2)));
             (sx = cast ((u * f) : Dynamic));
             (sy = cast ((v * f) : Dynamic));
             (sz = cast ((1.0 - (2.0 * s2)) : Dynamic));
@@ -138,63 +138,63 @@ class EmitParticleBurst3D {
           (vy = cast ((sy * speed) : Dynamic));
           (vz = cast ((sz * speed) : Dynamic));
           if ((cast ((cast config.emitterRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-            var r:Dynamic = (_Runtime.cbrt(_Runtime.callValue(random, cast ([] : Array<Dynamic>))) * config.emitterRadius);
+            var r:Dynamic = _Runtime.multiplyNumbers(_Runtime.cbrt(_Runtime.callValue(random, cast ([] : Array<Dynamic>))), config.emitterRadius);
             var pu:Float = cast _Runtime.UNDEFINED;
             var pv:Float = cast _Runtime.UNDEFINED;
             var ps2:Float = cast _Runtime.UNDEFINED;
             do {
-              (pu = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
-              (pv = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
+              (pu = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+              (pv = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
               (ps2 = cast (((pu * pu) + (pv * pv)) : Dynamic));
             } while ((cast ((cast ((cast ps2 : Float) >= (cast 1.0 : Float)) : Bool) || (cast _Runtime.strictEquals(ps2, 0.0) : Bool)) : Bool));
-            var pf:Dynamic = (2.0 * HxMath.sqrt((1.0 - ps2)));
+            var pf:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - ps2)));
             (spawnX = cast ((spawnX + ((pu * pf) * r)) : Dynamic));
             (spawnY = cast ((spawnY + ((pv * pf) * r)) : Dynamic));
             (spawnZ = cast ((spawnZ + ((1.0 - (2.0 * ps2)) * r)) : Dynamic));
           }
         } else {
           var baseAngle:Dynamic = HxMath.atan2(config.directionY, config.directionX);
-          var angle:Dynamic = (baseAngle + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.spread));
-          (vx = cast ((HxMath.cos(angle) * speed) : Dynamic));
-          (vy = cast ((HxMath.sin(angle) * speed) : Dynamic));
-          (vz = cast (((config.directionZ * speed) / ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast dirLen : Dynamic) : (cast 1.0 : Dynamic))) : Dynamic));
+          var angle:Dynamic = (baseAngle + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.spread));
+          (vx = cast (_Runtime.multiplyNumbers(HxMath.cos(angle), speed) : Dynamic));
+          (vy = cast (_Runtime.multiplyNumbers(HxMath.sin(angle), speed) : Dynamic));
+          (vz = cast (_Runtime.divideNumbers((config.directionZ * speed), ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast dirLen : Dynamic) : (cast 1.0 : Dynamic))) : Dynamic));
           if ((cast _Runtime.strictEquals(shape, 'box') : Bool)) {
-            (spawnX = cast ((spawnX + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * config.emitterWidth)) : Dynamic));
-            (spawnY = cast ((spawnY + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * config.emitterHeight)) : Dynamic));
-            (spawnZ = cast ((spawnZ + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * config.emitterDepth)) : Dynamic));
+            (spawnX = cast ((spawnX + (_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterWidth)) : Dynamic));
+            (spawnY = cast ((spawnY + (_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterHeight)) : Dynamic));
+            (spawnZ = cast ((spawnZ + (_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterDepth)) : Dynamic));
           } else { if ((cast ((cast _Runtime.strictEquals(shape, 'circle') : Bool) && (cast ((cast config.emitterRadius : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-            var r:Dynamic = (HxMath.sqrt(_Runtime.callValue(random, cast ([] : Array<Dynamic>))) * config.emitterRadius);
-            var a:Dynamic = (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * EmitParticleBurst3D.TWO_PI__emitParticleBurst3D);
-            (spawnX = cast ((spawnX + (HxMath.cos(a) * r)) : Dynamic));
-            (spawnY = cast ((spawnY + (HxMath.sin(a) * r)) : Dynamic));
+            var r:Dynamic = _Runtime.multiplyNumbers(HxMath.sqrt(_Runtime.callValue(random, cast ([] : Array<Dynamic>))), config.emitterRadius);
+            var a:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), EmitParticleBurst3D.TWO_PI__emitParticleBurst3D);
+            (spawnX = cast ((spawnX + _Runtime.multiplyNumbers(HxMath.cos(a), r)) : Dynamic));
+            (spawnY = cast ((spawnY + _Runtime.multiplyNumbers(HxMath.sin(a), r)) : Dynamic));
           } else { if ((cast ((cast _Runtime.strictEquals(shape, 'rect') : Bool) && (cast _Runtime.orValue(((cast config.emitterWidth : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast config.emitterHeight : Float) > (cast 0.0 : Float))) : Bool)) : Bool)) {
-            (spawnX = cast ((spawnX + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * config.emitterWidth)) : Dynamic));
-            (spawnY = cast ((spawnY + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * config.emitterHeight)) : Dynamic));
+            (spawnX = cast ((spawnX + (_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterWidth)) : Dynamic));
+            (spawnY = cast ((spawnY + (_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterHeight)) : Dynamic));
           } } }
         }
         var vt:Dynamic = (idx * PARTICLE_VELOCITY_STRIDE);
         flighthq._internal._StaticIndex.writeFloat32Array(state.velocities, vt, vx);
         flighthq._internal._StaticIndex.writeFloat32Array(state.velocities, (vt + 1.0), vy);
         flighthq._internal._StaticIndex.writeFloat32Array(state.velocities, (vt + 2.0), vz);
-        var spawnScale:Dynamic = (config.scaleMin + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (config.scaleMax - config.scaleMin)));
+        var spawnScale:Dynamic = (config.scaleMin + _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), (config.scaleMax - config.scaleMin)));
         flighthq._internal._StaticIndex.writeFloat32Array(state.scales, idx, spawnScale);
         var tt:Dynamic = (idx * EmitParticleBurst3D.PARTICLE_TRANSFORM_STRIDE__emitParticleBurst3D);
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, tt, spawnX);
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 1.0), spawnY);
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 2.0), HxMath.atan2(vy, vx));
-        flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), ((cast hasScaleCurve : Bool) ? (cast (spawnScale * _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))) : Dynamic) : (cast spawnScale : Dynamic)));
+        flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), ((cast hasScaleCurve : Bool) ? (cast _Runtime.multiplyNumbers(spawnScale, _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))) : Dynamic) : (cast spawnScale : Dynamic)));
         flighthq._internal._StaticIndex.writeFloat32Array(data.positionsZ, idx, spawnZ);
         flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, idx, ((cast hasAlphaCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, 0.0] : Array<Dynamic>)) : Dynamic) : (cast config.alphaStart : Dynamic)));
         var ct:Dynamic = (idx * 3.0);
         if ((cast hasColorCurve : Bool)) {
           _Runtime.callValue(sampleParticleColorCurve, cast ([data.colors, ct, colorCurve, 0.0] : Array<Dynamic>));
         } else { if ((cast hasColorVariance : Bool)) {
-          var r0:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorStartR + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.colorStartVarianceR))] : Array<Dynamic>));
-          var g0:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorStartG + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.colorStartVarianceG))] : Array<Dynamic>));
-          var b0:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorStartB + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.colorStartVarianceB))] : Array<Dynamic>));
-          var r1:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorEndR + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.colorEndVarianceR))] : Array<Dynamic>));
-          var g1:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorEndG + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.colorEndVarianceG))] : Array<Dynamic>));
-          var b1:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorEndB + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * config.colorEndVarianceB))] : Array<Dynamic>));
+          var r0:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorStartR + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorStartVarianceR))] : Array<Dynamic>));
+          var g0:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorStartG + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorStartVarianceG))] : Array<Dynamic>));
+          var b0:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorStartB + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorStartVarianceB))] : Array<Dynamic>));
+          var r1:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorEndR + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorEndVarianceR))] : Array<Dynamic>));
+          var g1:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorEndG + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorEndVarianceG))] : Array<Dynamic>));
+          var b1:Dynamic = _Runtime.callValue(EmitParticleBurst3D.clamp01__emitParticleBurst3D, cast ([(colorEndB + ((_Runtime.subtractNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorEndVarianceB))] : Array<Dynamic>));
           flighthq._internal._StaticIndex.writeFloat32Array(state.colorBirth, ct, r0);
           flighthq._internal._StaticIndex.writeFloat32Array(state.colorBirth, (ct + 1.0), g0);
           flighthq._internal._StaticIndex.writeFloat32Array(state.colorBirth, (ct + 2.0), b0);
@@ -210,21 +210,21 @@ class EmitParticleBurst3D {
           flighthq._internal._StaticIndex.writeFloat32Array(data.colors, (ct + 2.0), colorStartB);
         } }
         if ((cast hasTint : Bool)) {
-          ({ var __indexedObject0:Dynamic = data.colors; var __indexedKey1:Dynamic = ct; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) * tintR)); });
-          ({ var __indexedObject2:Dynamic = data.colors; var __indexedKey3:Dynamic = (ct + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3) * tintG)); });
-          ({ var __indexedObject4:Dynamic = data.colors; var __indexedKey5:Dynamic = (ct + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5) * tintB)); });
-          ({ var __indexedObject6:Dynamic = data.alphas; var __indexedKey7:Dynamic = idx; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7) * tintA)); });
+          ({ var __indexedObject0:Dynamic = data.colors; var __indexedKey1:Dynamic = ct; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), tintR)); });
+          ({ var __indexedObject2:Dynamic = data.colors; var __indexedKey3:Dynamic = (ct + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3), tintG)); });
+          ({ var __indexedObject4:Dynamic = data.colors; var __indexedKey5:Dynamic = (ct + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5), tintB)); });
+          ({ var __indexedObject6:Dynamic = data.alphas; var __indexedKey7:Dynamic = idx; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7), tintA)); });
           if ((cast hasColorVariance : Bool)) {
-            ({ var __indexedObject8:Dynamic = state.colorBirth; var __indexedKey9:Dynamic = ct; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9) * tintR)); });
-            ({ var __indexedObject10:Dynamic = state.colorBirth; var __indexedKey11:Dynamic = (ct + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject10, __indexedKey11, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject10, __indexedKey11) * tintG)); });
-            ({ var __indexedObject12:Dynamic = state.colorBirth; var __indexedKey13:Dynamic = (ct + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject12, __indexedKey13, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject12, __indexedKey13) * tintB)); });
-            ({ var __indexedObject14:Dynamic = state.colorDeath; var __indexedKey15:Dynamic = ct; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject14, __indexedKey15, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject14, __indexedKey15) * tintR)); });
-            ({ var __indexedObject16:Dynamic = state.colorDeath; var __indexedKey17:Dynamic = (ct + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject16, __indexedKey17, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject16, __indexedKey17) * tintG)); });
-            ({ var __indexedObject18:Dynamic = state.colorDeath; var __indexedKey19:Dynamic = (ct + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject18, __indexedKey19, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject18, __indexedKey19) * tintB)); });
+            ({ var __indexedObject8:Dynamic = state.colorBirth; var __indexedKey9:Dynamic = ct; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9), tintR)); });
+            ({ var __indexedObject10:Dynamic = state.colorBirth; var __indexedKey11:Dynamic = (ct + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject10, __indexedKey11, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject10, __indexedKey11), tintG)); });
+            ({ var __indexedObject12:Dynamic = state.colorBirth; var __indexedKey13:Dynamic = (ct + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject12, __indexedKey13, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject12, __indexedKey13), tintB)); });
+            ({ var __indexedObject14:Dynamic = state.colorDeath; var __indexedKey15:Dynamic = ct; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject14, __indexedKey15, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject14, __indexedKey15), tintR)); });
+            ({ var __indexedObject16:Dynamic = state.colorDeath; var __indexedKey17:Dynamic = (ct + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject16, __indexedKey17, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject16, __indexedKey17), tintG)); });
+            ({ var __indexedObject18:Dynamic = state.colorDeath; var __indexedKey19:Dynamic = (ct + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject18, __indexedKey19, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject18, __indexedKey19), tintB)); });
           }
         }
-        flighthq._internal._StaticIndex.writeUint16Array(data.ids, idx, (regionIdMin + ((cast ((cast config.frameCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast regionRange : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * regionRange)) | 0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic))));
-        flighthq._internal._StaticIndex.writeFloat32Array(state.rotationSpeeds, idx, ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)));
+        flighthq._internal._StaticIndex.writeUint16Array(data.ids, idx, _Runtime.addNumbers(regionIdMin, ((cast ((cast config.frameCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast regionRange : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), regionRange)) | 0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic))));
+        flighthq._internal._StaticIndex.writeFloat32Array(state.rotationSpeeds, idx, ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)));
         sIdx++;
       }
     }

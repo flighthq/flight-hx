@@ -35,7 +35,7 @@ class TextSegmentBoundary {
     var segments:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast null; }
     clamped = _Runtime.callValue(TextSegmentBoundary.clampIndex__textSegmentBoundary, cast ([index, _Runtime.field(text, 'length')] : Array<Dynamic>));
-    lookup = ((cast _Runtime.strictEquals(clamped, _Runtime.field(text, 'length')) : Bool) ? (cast (_Runtime.field(text, 'length') - 1.0) : Dynamic) : (cast clamped : Dynamic));
+    lookup = ((cast _Runtime.strictEquals(clamped, _Runtime.field(text, 'length')) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(text, 'length'), 1.0) : Dynamic) : (cast clamped : Dynamic));
     segments = _Runtime.callValue(segmentWords, cast ([text, locale] : Array<Dynamic>));
     for (segment in _Runtime.iterable(segments)) {
       if ((cast ((cast ((cast lookup : Float) >= (cast _Runtime.field(segment, 'start') : Float)) : Bool) && (cast ((cast lookup : Float) < (cast _Runtime.field(segment, 'end') : Float)) : Bool)) : Bool)) {
@@ -68,7 +68,7 @@ class TextSegmentBoundary {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var previous:Dynamic = cast _Runtime.UNDEFINED;
-    length = ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, (_Runtime.field(segments, 'length') - 1.0)), 'end') : Dynamic));
+    length = ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), 'end') : Dynamic));
     from = _Runtime.callValue(TextSegmentBoundary.clampIndex__textSegmentBoundary, cast ([index, length] : Array<Dynamic>));
     if ((cast ((cast from : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     previous = 0.0;

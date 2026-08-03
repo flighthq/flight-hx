@@ -152,7 +152,7 @@ class GlyphAtlasEntry {
     _Runtime.fill(runtime.bitmap.data, 0.0, 0, null, 1);
     codepoints = _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(((cast runtime.entries : flighthq._internal._Map).keys()))]), 'sort', cast ([function(a:Dynamic, b:Dynamic) {
       var heightDelta:Dynamic = cast _Runtime.UNDEFINED;
-      heightDelta = (((cast runtime.entries : flighthq._internal._Map).get(b)).height - ((cast runtime.entries : flighthq._internal._Map).get(a)).height);
+      heightDelta = _Runtime.subtractNumbers(((cast runtime.entries : flighthq._internal._Map).get(b)).height, ((cast runtime.entries : flighthq._internal._Map).get(a)).height);
       return cast ((cast !_Runtime.strictEquals(heightDelta, 0.0) : Bool) ? (cast heightDelta : Dynamic) : (cast (a - b) : Dynamic));
     }] : Array<Dynamic>));
     for (codepoint in _Runtime.iterable(codepoints)) {

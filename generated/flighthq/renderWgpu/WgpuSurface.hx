@@ -108,7 +108,7 @@ class WgpuSurface {
     if ((cast ((cast _Runtime.strictEquals(mapState, 'pending') : Bool) || (cast _Runtime.strictEquals(mapState, 'mapped') : Bool)) : Bool)) { return; }
     width = _Runtime.field(texture, 'width');
     height = _Runtime.field(texture, 'height');
-    bytesPerRow = (HxMath.ceil(((width * 4.0) / 256.0)) * 256.0);
+    bytesPerRow = _Runtime.multiplyNumbers(HxMath.ceil(((width * 4.0) / 256.0)), 256.0);
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureBuffer'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureBuffer'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureWidth'), width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureHeight'), height) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(_Runtime.field(runtime, 'frameCaptureBuffer'), 'destroy', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'frameCaptureBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (bytesPerRow * height), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'MAP_READ'))) }] : Array<Dynamic>)));

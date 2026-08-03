@@ -140,7 +140,7 @@ class PbrMaterials {
   public static function linearChannelToSrgb8__pbrMaterials(value:Float):Float {
     var srgb:Dynamic = cast _Runtime.UNDEFINED;
     srgb = ((cast ((cast value : Float) <= (cast 0.0031308 : Float)) : Bool) ? (cast (value * 12.92) : Dynamic) : (cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055) : Dynamic));
-    return cast HxMath.round((HxMath.min(1.0, HxMath.max(0.0, srgb)) * 255.0));
+    return cast HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, srgb)), 255.0));
     return cast null;
   }
 

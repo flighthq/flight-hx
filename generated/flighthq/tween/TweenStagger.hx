@@ -49,11 +49,11 @@ class TweenStagger {
       (normalizedPosition = cast ((((count - 1.0) - index) / (count - 1.0)) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(from, 'center') : Bool)) {
       var center:Dynamic = ((count - 1.0) / 2.0);
-      (normalizedPosition = cast ((HxMath.abs((index - center)) / center) : Dynamic));
+      (normalizedPosition = cast (_Runtime.divideNumbers(HxMath.abs((index - center)), center) : Dynamic));
     } else {
       var origin:Dynamic = HxMath.max(0.0, HxMath.min(from, (count - 1.0)));
       var maxDistance:Dynamic = HxMath.max(origin, ((count - 1.0) - origin));
-      (normalizedPosition = cast (((cast ((cast maxDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast (HxMath.abs((index - origin)) / maxDistance) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      (normalizedPosition = cast (((cast ((cast maxDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(HxMath.abs((index - origin)), maxDistance) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     } } }
     eased = ((cast !_Runtime.strictEquals(staggerEase, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(staggerEase, cast ([normalizedPosition] : Array<Dynamic>)) : Dynamic) : (cast normalizedPosition : Dynamic));
     return cast ((eased * each) * (count - 1.0));

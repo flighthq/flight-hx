@@ -33,8 +33,8 @@ class Framing {
     var horizontalHalfFov:Dynamic = cast _Runtime.UNDEFINED;
     paddedRadius = (radius * padding);
     verticalHalfFov = (projection.fovY * 0.5);
-    horizontalHalfFov = HxMath.atan((HxMath.tan(verticalHalfFov) * aspect));
-    return cast (paddedRadius / HxMath.sin(HxMath.min(verticalHalfFov, horizontalHalfFov)));
+    horizontalHalfFov = HxMath.atan(_Runtime.multiplyNumbers(HxMath.tan(verticalHalfFov), aspect));
+    return cast _Runtime.divideNumbers(paddedRadius, HxMath.sin(HxMath.min(verticalHalfFov, horizontalHalfFov)));
     return cast null;
   }
 

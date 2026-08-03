@@ -8,12 +8,12 @@ import flighthq.types.EasingFunction;
 class GetEasingDerivative {
   public static function getEasingDerivative(ease:EasingFunction, t:Float, epsilon:Float = 0.000001):Float {
     if ((cast ((cast t : Float) <= (cast epsilon : Float)) : Bool)) {
-      return cast ((_Runtime.callValue(ease, cast ([(epsilon * 2.0)] : Array<Dynamic>)) - _Runtime.callValue(ease, cast ([0.0] : Array<Dynamic>))) / (epsilon * 2.0));
+      return cast (_Runtime.subtractNumbers(_Runtime.callValue(ease, cast ([(epsilon * 2.0)] : Array<Dynamic>)), _Runtime.callValue(ease, cast ([0.0] : Array<Dynamic>))) / (epsilon * 2.0));
     }
     if ((cast ((cast t : Float) >= (cast (1.0 - epsilon) : Float)) : Bool)) {
-      return cast ((_Runtime.callValue(ease, cast ([1.0] : Array<Dynamic>)) - _Runtime.callValue(ease, cast ([(1.0 - (epsilon * 2.0))] : Array<Dynamic>))) / (epsilon * 2.0));
+      return cast (_Runtime.subtractNumbers(_Runtime.callValue(ease, cast ([1.0] : Array<Dynamic>)), _Runtime.callValue(ease, cast ([(1.0 - (epsilon * 2.0))] : Array<Dynamic>))) / (epsilon * 2.0));
     }
-    return cast ((_Runtime.callValue(ease, cast ([(t + epsilon)] : Array<Dynamic>)) - _Runtime.callValue(ease, cast ([(t - epsilon)] : Array<Dynamic>))) / (2.0 * epsilon));
+    return cast (_Runtime.subtractNumbers(_Runtime.callValue(ease, cast ([(t + epsilon)] : Array<Dynamic>)), _Runtime.callValue(ease, cast ([(t - epsilon)] : Array<Dynamic>))) / (2.0 * epsilon));
     return cast null;
   }
 

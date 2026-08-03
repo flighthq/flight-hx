@@ -33,20 +33,20 @@ class Picking {
     m = Picking.__scratchInverseVP__picking.m;
     nx = ndcX;
     ny = ndcY;
-    nearX = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) * -1.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
-    nearY = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) * -1.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
-    nearZ = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) * -1.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
-    nearW = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 3.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 7.0) * ny)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 11.0) * -1.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
+    nearX = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), -1.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
+    nearY = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), -1.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
+    nearZ = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), -1.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
+    nearW = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 7.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 11.0), -1.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
     if ((cast !_Runtime.strictEquals(nearW, 0.0) : Bool)) {
       var invW:Dynamic = (1.0 / nearW);
       (nearX = cast ((nearX * invW) : Dynamic));
       (nearY = cast ((nearY * invW) : Dynamic));
       (nearZ = cast ((nearZ * invW) : Dynamic));
     }
-    farX = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * ny)) + flighthq._internal._StaticIndex.readFloat32Array(m, 8.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
-    farY = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * ny)) + flighthq._internal._StaticIndex.readFloat32Array(m, 9.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
-    farZ = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * ny)) + flighthq._internal._StaticIndex.readFloat32Array(m, 10.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
-    farW = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 3.0) * nx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 7.0) * ny)) + flighthq._internal._StaticIndex.readFloat32Array(m, 11.0)) + flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
+    farX = _Runtime.addNumbers(_Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), ny)), flighthq._internal._StaticIndex.readFloat32Array(m, 8.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
+    farY = _Runtime.addNumbers(_Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), ny)), flighthq._internal._StaticIndex.readFloat32Array(m, 9.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
+    farZ = _Runtime.addNumbers(_Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), ny)), flighthq._internal._StaticIndex.readFloat32Array(m, 10.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
+    farW = _Runtime.addNumbers(_Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 7.0), ny)), flighthq._internal._StaticIndex.readFloat32Array(m, 11.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
     if ((cast !_Runtime.strictEquals(farW, 0.0) : Bool)) {
       var invW:Dynamic = (1.0 / farW);
       (farX = cast ((farX * invW) : Dynamic));
@@ -86,10 +86,10 @@ class Picking {
     wx = worldPoint.x;
     wy = worldPoint.y;
     wz = worldPoint.z;
-    clipX = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
-    clipY = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
-    clipZ = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
-    clipW = ((((flighthq._internal._StaticIndex.readFloat32Array(m, 3.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(m, 7.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 11.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
+    clipX = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
+    clipY = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
+    clipZ = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
+    clipW = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 7.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 11.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
     if ((cast ((cast clipW : Float) <= (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }

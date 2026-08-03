@@ -50,13 +50,13 @@ class CollisionShapeValidation {
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var previous:Dynamic = _Runtime.fmod(((i + count) - 1.0), count);
         var next:Dynamic = _Runtime.fmod((i + 1.0), count);
-        var x:Dynamic = (flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1)) - xOrigin);
-        var y:Dynamic = (flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0)) - yOrigin);
-        var nextX:Dynamic = (flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(next) << 1)) - xOrigin);
-        var nextY:Dynamic = (flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(next) << 1) + 1.0)) - yOrigin);
+        var x:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1)), xOrigin);
+        var y:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0)), yOrigin);
+        var nextX:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(next) << 1)), xOrigin);
+        var nextY:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(next) << 1) + 1.0)), yOrigin);
         (areaTwice = cast ((areaTwice + ((x * nextY) - (y * nextX))) : Dynamic));
-        var ax:Dynamic = (x - (flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(previous) << 1)) - xOrigin));
-        var ay:Dynamic = (y - (flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(previous) << 1) + 1.0)) - yOrigin));
+        var ax:Dynamic = (x - _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(previous) << 1)), xOrigin));
+        var ay:Dynamic = (y - _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(previous) << 1) + 1.0)), yOrigin));
         var bx:Dynamic = (nextX - x);
         var by:Dynamic = (nextY - y);
         var cross:Dynamic = ((ax * by) - (ay * bx));

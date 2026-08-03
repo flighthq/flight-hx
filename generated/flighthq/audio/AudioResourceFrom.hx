@@ -62,7 +62,7 @@ class AudioResourceFrom {
       var buffer:Dynamic = cast _Runtime.UNDEFINED;
       var audioBuffer:Dynamic = cast _Runtime.UNDEFINED;
       _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
-      buffer = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
+      buffer = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
       return flighthq._internal._Async.flatMap(_Runtime.callProperty(context, 'decodeAudioData', cast ([buffer] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
         audioBuffer = __awaitValue1;
         _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));

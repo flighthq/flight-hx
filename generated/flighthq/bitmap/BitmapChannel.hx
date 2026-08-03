@@ -29,26 +29,26 @@ class BitmapChannel {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var oy:Dynamic = (_Runtime.field(out, 'y') + py);
-        var ry:Dynamic = (_Runtime.field(r, 'y') + py);
-        var gy:Dynamic = (_Runtime.field(g, 'y') + py);
-        var by:Dynamic = (_Runtime.field(b, 'y') + py);
-        var ay:Dynamic = (_Runtime.field(a, 'y') + py);
+        var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(out, 'y'), py);
+        var ry:Dynamic = _Runtime.addNumbers(_Runtime.field(r, 'y'), py);
+        var gy:Dynamic = _Runtime.addNumbers(_Runtime.field(g, 'y'), py);
+        var by:Dynamic = _Runtime.addNumbers(_Runtime.field(b, 'y'), py);
+        var ay:Dynamic = _Runtime.addNumbers(_Runtime.field(a, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(out, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast ry : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ry : Float) >= (cast _Runtime.field(r, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast gy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gy : Float) >= (cast _Runtime.field(g, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast by : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast by : Float) >= (cast _Runtime.field(b, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast ay : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ay : Float) >= (cast _Runtime.field(a, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var ox:Dynamic = (_Runtime.field(out, 'x') + px);
-            var rx:Dynamic = (_Runtime.field(r, 'x') + px);
-            var gx:Dynamic = (_Runtime.field(g, 'x') + px);
-            var bx:Dynamic = (_Runtime.field(b, 'x') + px);
-            var ax:Dynamic = (_Runtime.field(a, 'x') + px);
+            var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(out, 'x'), px);
+            var rx:Dynamic = _Runtime.addNumbers(_Runtime.field(r, 'x'), px);
+            var gx:Dynamic = _Runtime.addNumbers(_Runtime.field(g, 'x'), px);
+            var bx:Dynamic = _Runtime.addNumbers(_Runtime.field(b, 'x'), px);
+            var ax:Dynamic = _Runtime.addNumbers(_Runtime.field(a, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(out, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rx : Float) >= (cast _Runtime.field(r, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast gx : Float) >= (cast _Runtime.field(g, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast bx : Float) >= (cast _Runtime.field(b, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ax : Float) >= (cast _Runtime.field(a, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var di:Dynamic = (((oy * _Runtime.field(out, 'bitmap').width) + ox) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, di, flighthq._internal._StaticIndex.readUint8ClampedArray(rd, (((ry * _Runtime.field(r, 'bitmap').width) + rx) * 4.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(gd, ((((gy * _Runtime.field(g, 'bitmap').width) + gx) * 4.0) + 1.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(bd, ((((by * _Runtime.field(b, 'bitmap').width) + bx) * 4.0) + 2.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ad, ((((ay * _Runtime.field(a, 'bitmap').width) + ax) * 4.0) + 3.0)));
+            var di:Dynamic = ((_Runtime.multiplyNumbers(oy, _Runtime.field(out, 'bitmap').width) + ox) * 4.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, di, flighthq._internal._StaticIndex.readUint8ClampedArray(rd, ((_Runtime.multiplyNumbers(ry, _Runtime.field(r, 'bitmap').width) + rx) * 4.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(gd, (((_Runtime.multiplyNumbers(gy, _Runtime.field(g, 'bitmap').width) + gx) * 4.0) + 1.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(bd, (((_Runtime.multiplyNumbers(by, _Runtime.field(b, 'bitmap').width) + bx) * 4.0) + 2.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ad, (((_Runtime.multiplyNumbers(ay, _Runtime.field(a, 'bitmap').width) + ax) * 4.0) + 3.0)));
             px++;
           }
         }

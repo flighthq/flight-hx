@@ -13,8 +13,8 @@ class VelocityField {
     var ay:Dynamic = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
-    _Runtime.setField(out, 'x', (ax + _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', (ay + _Runtime.field(b, 'y')));
+    _Runtime.setField(out, 'x', _Runtime.addNumbers(ax, _Runtime.field(b, 'x')));
+    _Runtime.setField(out, 'y', _Runtime.addNumbers(ay, _Runtime.field(b, 'y')));
     return cast out;
     return cast null;
   }
@@ -33,7 +33,7 @@ class VelocityField {
     lenSq = ((vx * vx) + (vy * vy));
     maxSq = (maxLength * maxLength);
     if ((cast ((cast ((cast lenSq : Float) > (cast maxSq : Float)) : Bool) && (cast ((cast lenSq : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var scale:Dynamic = (maxLength / HxMath.sqrt(lenSq));
+      var scale:Dynamic = _Runtime.divideNumbers(maxLength, HxMath.sqrt(lenSq));
       _Runtime.setField(out, 'x', (vx * scale));
       _Runtime.setField(out, 'y', (vy * scale));
     } else {
@@ -124,7 +124,7 @@ class VelocityField {
   }
 
   public static function lengthOfVelocity(velocity:Velocity2D):Float {
-    return cast HxMath.sqrt(((_Runtime.field(velocity, 'x') * _Runtime.field(velocity, 'x')) + (_Runtime.field(velocity, 'y') * _Runtime.field(velocity, 'y'))));
+    return cast HxMath.sqrt((_Runtime.multiplyNumbers(_Runtime.field(velocity, 'x'), _Runtime.field(velocity, 'x')) + _Runtime.multiplyNumbers(_Runtime.field(velocity, 'y'), _Runtime.field(velocity, 'y'))));
     return cast null;
   }
 
@@ -133,8 +133,8 @@ class VelocityField {
     var ay:Dynamic = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
-    _Runtime.setField(out, 'x', (ax + ((_Runtime.field(b, 'x') - ax) * t)));
-    _Runtime.setField(out, 'y', (ay + ((_Runtime.field(b, 'y') - ay) * t)));
+    _Runtime.setField(out, 'x', (ax + (_Runtime.subtractNumbers(_Runtime.field(b, 'x'), ax) * t)));
+    _Runtime.setField(out, 'y', (ay + (_Runtime.subtractNumbers(_Runtime.field(b, 'y'), ay) * t)));
     return cast out;
     return cast null;
   }
@@ -174,8 +174,8 @@ class VelocityField {
     var ay:Dynamic = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
-    _Runtime.setField(out, 'x', (ax - _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', (ay - _Runtime.field(b, 'y')));
+    _Runtime.setField(out, 'x', _Runtime.subtractNumbers(ax, _Runtime.field(b, 'x')));
+    _Runtime.setField(out, 'y', _Runtime.subtractNumbers(ay, _Runtime.field(b, 'y')));
     return cast out;
     return cast null;
   }

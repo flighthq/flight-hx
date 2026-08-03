@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class Rounding {
   public static function ceilTo(value:Float, step:Float):Float {
     if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
-    return cast (HxMath.ceil((value / step)) * step);
+    return cast _Runtime.multiplyNumbers(HxMath.ceil((value / step)), step);
     return cast null;
   }
 
@@ -19,18 +19,18 @@ class Rounding {
 
   public static function floorTo(value:Float, step:Float):Float {
     if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
-    return cast (HxMath.floor((value / step)) * step);
+    return cast _Runtime.multiplyNumbers(HxMath.floor((value / step)), step);
     return cast null;
   }
 
   public static function fract(value:Float):Float {
-    return cast (value - _Runtime.trunc(value));
+    return cast _Runtime.subtractNumbers(value, _Runtime.trunc(value));
     return cast null;
   }
 
   public static function roundTo(value:Float, step:Float):Float {
     if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
-    return cast (HxMath.round((value / step)) * step);
+    return cast _Runtime.multiplyNumbers(HxMath.round((value / step)), step);
     return cast null;
   }
 }

@@ -44,12 +44,12 @@ class BitmapAffine {
     {
       var dy:Dynamic = 0.0;
       while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
-        var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
+        var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
         if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { dy++; continue; }
         {
           var dx:Dynamic = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
-            var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
+            var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
             if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
             var sx:Dynamic = (((a * dx) + (c * dy)) + e);
             var sy:Dynamic = (((b * dx) + (d * dy)) + f);

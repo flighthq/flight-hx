@@ -16,7 +16,7 @@ class EaseSteps {
     startOffset = ((cast ((cast _Runtime.strictEquals(position, 'jumpStart') : Bool) || (cast _Runtime.strictEquals(position, 'jumpBoth') : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
     return cast function(t:Dynamic) {
       var step:Dynamic = cast _Runtime.UNDEFINED;
-      step = (HxMath.floor((t * count)) + startOffset);
+      step = _Runtime.addNumbers(HxMath.floor((t * count)), startOffset);
       if ((cast ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast step : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         (step = cast (0.0 : Dynamic));
       }

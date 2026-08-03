@@ -56,7 +56,7 @@ class GlGradientBevelEffect {
     s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
-    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
@@ -64,9 +64,9 @@ class GlGradientBevelEffect {
     gl = _Runtime.field(state, 'gl');
     _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
-    dx = (HxMath.cos(angle) * distance);
-    dy = (HxMath.sin(angle) * distance);
-    _Runtime.callValue(GlGradientBevelEffect.applyBevelEncodePass__glGradientBevelEffect, cast ([state, s1, s0, (dx / _Runtime.field(s1, 'width')), (-dy / _Runtime.field(s1, 'height'))] : Array<Dynamic>));
+    dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
+    dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
+    _Runtime.callValue(GlGradientBevelEffect.applyBevelEncodePass__glGradientBevelEffect, cast ([state, s1, s0, _Runtime.divideNumbers(dx, _Runtime.field(s1, 'width')), _Runtime.divideNumbers(-dy, _Runtime.field(s1, 'height'))] : Array<Dynamic>));
     ramp = _Runtime.callValue(createGlEffectGradientRampTexture, cast ([gl, _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')] : Array<Dynamic>));
     _Runtime.callValue(GlGradientBevelEffect.applyBevelApplyPass__glGradientBevelEffect, cast ([state, s0, ramp, src, s1] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);

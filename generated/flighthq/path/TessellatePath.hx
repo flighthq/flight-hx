@@ -40,7 +40,7 @@ class TessellatePath {
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
         var x:Dynamic = flighthq._internal._StaticIndex.readArray(source, i);
         var y:Dynamic = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
-        if ((cast ((cast ((cast ((cast _Runtime.field(pts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, (_Runtime.field(pts, 'length') - 2.0)), x) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, (_Runtime.field(pts, 'length') - 1.0)), y) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
+        if ((cast ((cast ((cast ((cast _Runtime.field(pts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 2.0)), x) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0)), y) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         _Runtime.pushMany(pts, cast ([x, y] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -64,7 +64,7 @@ class TessellatePath {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var j:Dynamic = _Runtime.fmod((i + 1.0), count);
-        (twiceArea = cast ((twiceArea + ((flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)) * flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0))) - (flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)) * flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))))) : Dynamic));
+        (twiceArea = cast ((twiceArea + (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0))) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))))) : Dynamic));
         i++;
       }
     }
@@ -86,13 +86,13 @@ class TessellatePath {
         }
       }
     }
-    guard = (_Runtime.field(ring, 'length') * _Runtime.field(ring, 'length'));
+    guard = _Runtime.multiplyNumbers(_Runtime.field(ring, 'length'), _Runtime.field(ring, 'length'));
     while ((cast ((cast ((cast _Runtime.field(ring, 'length') : Float) > (cast 3.0 : Float)) : Bool) && (cast ((cast guard-- : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var clipped:Dynamic = false;
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          var a:Dynamic = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod(((i + _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
+          var a:Dynamic = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
           var b:Dynamic = flighthq._internal._StaticIndex.readArray(ring, i);
           var c:Dynamic = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
           if ((cast _Runtime.callValue(TessellatePath.isEar__tessellatePath, cast ([contour, ring, a, b, c] : Array<Dynamic>)) : Bool)) {
@@ -107,7 +107,7 @@ class TessellatePath {
       if ((cast !(cast clipped : Bool) : Bool)) { break; }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(ring, 'length'), 3.0) : Bool)) {
-      _Runtime.pushMany(indices, cast ([(base + flighthq._internal._StaticIndex.readArray(ring, 0.0)), (base + flighthq._internal._StaticIndex.readArray(ring, 1.0)), (base + flighthq._internal._StaticIndex.readArray(ring, 2.0))] : Array<Dynamic>));
+      _Runtime.pushMany(indices, cast ([_Runtime.addNumbers(base, flighthq._internal._StaticIndex.readArray(ring, 0.0)), _Runtime.addNumbers(base, flighthq._internal._StaticIndex.readArray(ring, 1.0)), _Runtime.addNumbers(base, flighthq._internal._StaticIndex.readArray(ring, 2.0))] : Array<Dynamic>));
     }
   }
 

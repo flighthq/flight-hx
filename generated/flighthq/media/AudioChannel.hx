@@ -44,7 +44,7 @@ class AudioChannel {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).get(channel));
     if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) : Bool)) { return cast channel.currentTime; }
-    return cast HxMath.min(((_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime') - _Runtime.field(runtime, 'startedAt')) * 1000.0), channel.length);
+    return cast HxMath.min((_Runtime.subtractNumbers(_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime'), _Runtime.field(runtime, 'startedAt')) * 1000.0), channel.length);
     return cast null;
   }
 
@@ -82,7 +82,7 @@ class AudioChannel {
   public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<flighthq.types.AudioResource.AudioChannel> {
     var channel:flighthq.types.AudioResource.AudioChannel = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.buffer, null) : Bool)) { return cast null; }
-    channel = { currentTime: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.gain; }), function():Dynamic return cast 1.0), length: (_Runtime.field(source.buffer, 'duration') * 1000.0), loops: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    channel = { currentTime: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.gain; }), function():Dynamic return cast 1.0), length: _Runtime.multiplyNumbers(_Runtime.field(source.buffer, 'duration'), 1000.0), loops: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     ((cast AudioChannel.channelRuntime__audioChannel : flighthq._internal._WeakMap).set(channel, { context: context, destinationNode: null, gainNode: null, loopsRemaining: channel.loops, sourceNode: null, startedAt: 0.0 }));
     _Runtime.callValue(AudioChannel.startAudioChannel__audioChannel, cast ([channel] : Array<Dynamic>));
     return cast channel;
@@ -172,7 +172,7 @@ class AudioChannel {
     _Runtime.setField(sourceNode, 'onended', function() return _Runtime.callValue(AudioChannel.completeAudioChannel__audioChannel, cast ([channel] : Array<Dynamic>)));
     _Runtime.setField(runtime, 'gainNode', gainNode);
     _Runtime.setField(runtime, 'sourceNode', sourceNode);
-    _Runtime.setField(runtime, 'startedAt', (_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime') - (currentTime / 1000.0)));
+    _Runtime.setField(runtime, 'startedAt', _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime'), (currentTime / 1000.0)));
     (channel.currentTime = cast (currentTime : Dynamic));
     (channel.state = cast ('playing' : Dynamic));
     _Runtime.callProperty(sourceNode, 'start', cast ([0.0, (currentTime / 1000.0)] : Array<Dynamic>));

@@ -59,8 +59,8 @@ class DomScale9Shape {
       _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }
-    w = HxMath.max(1.0, HxMath.ceil((_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX'))));
-    h = HxMath.max(1.0, HxMath.ceil((_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY'))));
+    w = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), _Runtime.field(source, 'scaleX'))));
+    h = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), _Runtime.field(source, 'scaleY'))));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', w);
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', h);
     ctx = _Runtime.field(data, 'context');

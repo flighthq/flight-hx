@@ -20,10 +20,10 @@ class ColorMatrixMath {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(packedRgba) & 255) / 255.0);
-    rOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 0.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 1.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 2.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 3.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>));
-    gOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 5.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 6.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 7.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 8.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>));
-    bOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 10.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 11.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 12.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 13.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>));
-    aOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([(((((flighthq._internal._StaticIndex.readArray(matrix, 15.0) * r) + (flighthq._internal._StaticIndex.readArray(matrix, 16.0) * g)) + (flighthq._internal._StaticIndex.readArray(matrix, 17.0) * b)) + (flighthq._internal._StaticIndex.readArray(matrix, 18.0) * a)) + flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>));
+    rOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 0.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 1.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 2.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 3.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>));
+    gOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 5.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 6.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 7.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 8.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>));
+    bOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 10.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 11.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 12.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 13.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>));
+    aOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 15.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 16.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 17.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 18.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rOut) << 24)) | _Runtime.toInt32((_Runtime.toInt32(gOut) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(bOut) << 8)))) | _Runtime.toInt32(aOut))), 0);
     return cast null;
   }
@@ -48,9 +48,9 @@ class ColorMatrixMath {
     var gOff:Dynamic = cast _Runtime.UNDEFINED;
     var bOff:Dynamic = cast _Runtime.UNDEFINED;
     scale = (1.0 / 100.0);
-    rOff = ((((flighthq._internal._StaticIndex.readArray(shadows, 0.0) * 0.25) + (flighthq._internal._StaticIndex.readArray(midtones, 0.0) * 0.5)) + (flighthq._internal._StaticIndex.readArray(highlights, 0.0) * 0.25)) * scale);
-    gOff = ((((flighthq._internal._StaticIndex.readArray(shadows, 1.0) * 0.25) + (flighthq._internal._StaticIndex.readArray(midtones, 1.0) * 0.5)) + (flighthq._internal._StaticIndex.readArray(highlights, 1.0) * 0.25)) * scale);
-    bOff = ((((flighthq._internal._StaticIndex.readArray(shadows, 2.0) * 0.25) + (flighthq._internal._StaticIndex.readArray(midtones, 2.0) * 0.5)) + (flighthq._internal._StaticIndex.readArray(highlights, 2.0) * 0.25)) * scale);
+    rOff = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(shadows, 0.0), 0.25) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(midtones, 0.0), 0.5)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(highlights, 0.0), 0.25)) * scale);
+    gOff = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(shadows, 1.0), 0.25) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(midtones, 1.0), 0.5)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(highlights, 1.0), 0.25)) * scale);
+    bOff = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(shadows, 2.0), 0.25) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(midtones, 2.0), 0.5)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(highlights, 2.0), 0.25)) * scale);
     return cast cast ([1.0, 0.0, 0.0, 0.0, rOff, 0.0, 1.0, 0.0, 0.0, gOff, 0.0, 0.0, 1.0, 0.0, bOff, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
@@ -125,7 +125,7 @@ class ColorMatrixMath {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     inRange = (inWhite - inBlack);
     scale = ((cast _Runtime.strictEquals(inRange, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast ((outWhite - outBlack) / inRange) : Dynamic));
-    gammaCorrectedScale = (scale * ((cast _Runtime.strictEquals(gamma, 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast HxMath.pow(0.5, ((1.0 / gamma) - 1.0)) : Dynamic)));
+    gammaCorrectedScale = _Runtime.multiplyNumbers(scale, ((cast _Runtime.strictEquals(gamma, 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast HxMath.pow(0.5, ((1.0 / gamma) - 1.0)) : Dynamic)));
     offset = (outBlack - (inBlack * gammaCorrectedScale));
     return cast cast ([gammaCorrectedScale, 0.0, 0.0, 0.0, offset, 0.0, gammaCorrectedScale, 0.0, 0.0, offset, 0.0, 0.0, gammaCorrectedScale, 0.0, offset, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;

@@ -1720,18 +1720,87 @@ function emitInt32Operand(expression: IrExpression): string {
   return `_Runtime.toInt32(${emitExpression(expression)})`;
 }
 
-function emitArithmeticOperation(left: string, operator: string, right: string): string {
-  return operator === '%' ? `_Runtime.fmod(${left}, ${right})` : `(${left} ${operator} ${right})`;
+const runtimeNumberMethods: Readonly<Record<string, string>> = {
+  '+': 'addNumbers',
+  '-': 'subtractNumbers',
+  '*': 'multiplyNumbers',
+  '/': 'divideNumbers',
+};
+
+function emitArithmeticOperation(left: string, operator: string, right: string, runtimeNumber = false): string {
+  if (operator === '%') return `_Runtime.fmod(${left}, ${right})`;
+  const method = runtimeNumber ? runtimeNumberMethods[operator] : undefined;
+  return method ? `_Runtime.${method}(${left}, ${right})` : `(${left} ${operator} ${right})`;
 }
 
-function emitCompoundOperation(current: string, operator: string, right: IrExpression): string {
+function emitCompoundOperation(current: string, operator: string, right: IrExpression, runtimeNumber = false): string {
   if (operator === '>>>') {
     return `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32Operand(right)})`;
   }
   if (['&', '|', '^', '<<', '>>'].includes(operator)) {
     return `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(right)})`;
   }
-  return emitArithmeticOperation(current, operator, emitExpression(right));
+  return emitArithmeticOperation(current, operator, emitExpression(right), runtimeNumber);
+}
+
+function propertyReadEmitsDynamic(expression: Extract<IrExpression, { kind: 'property' }>): boolean {
+  if (expression.typedStructBinding) {
+    return !expression.typedStructBinding.receiverCast && expressionEmitsDynamic(expression.object);
+  }
+  if (expression.binding === 'WebGl2Backend' || (expression.binding && expression.binding in collectionBindingTypes)) {
+    return false;
+  }
+  if (
+    expression.object.kind === 'identifier' &&
+    (expression.object.name === 'HxMath' ||
+      expression.object.name === 'Number' ||
+      /^[A-Z]/u.test(expression.object.name))
+  ) {
+    return false;
+  }
+  return true;
+}
+
+function runtimeNumericMethod(expression: Extract<IrExpression, { kind: 'binary' }>): string | undefined {
+  const method = runtimeNumberMethods[expression.operator];
+  if (!method || (expression.operator === '+' && !expression.staticFacts?.numericOperands)) return undefined;
+  return expressionEmitsDynamic(expression.left) || expressionEmitsDynamic(expression.right) ? method : undefined;
+}
+
+function expressionEmitsDynamic(expression: IrExpression): boolean {
+  switch (expression.kind) {
+    case 'assignment':
+    case 'await':
+    case 'conditional':
+      return true;
+    case 'binary':
+      if (runtimeNumericMethod(expression) || ['%', '**'].includes(expression.operator)) return false;
+      if (['+', '-', '*', '/'].includes(expression.operator)) {
+        return expressionEmitsDynamic(expression.left) || expressionEmitsDynamic(expression.right);
+      }
+      return [',', '&&', '||', '??', '??undefined'].includes(expression.operator);
+    case 'call':
+      return !expression.direct;
+    case 'cast':
+      return expression.type.kind === 'dynamic';
+    case 'element':
+      return expression.binding !== 'WebGl2Backend';
+    case 'property':
+      return propertyReadEmitsDynamic(expression);
+    case 'unary':
+      return expressionEmitsDynamic(expression.operand);
+    default:
+      return false;
+  }
+}
+
+function compoundUsesRuntimeNumber(expression: Extract<IrExpression, { kind: 'assignment' }>): boolean {
+  const operator = expression.operator.slice(0, -1);
+  return (
+    expressionEmitsDynamic(expression.left) &&
+    Boolean(runtimeNumberMethods[operator]) &&
+    (operator !== '+' || Boolean(expression.staticFacts?.numericOperands))
+  );
 }
 
 function emitTruthiness(expression: IrExpression): string {
@@ -2012,7 +2081,7 @@ function emitExpression(expression: IrExpression): string {
         const indexedKey = directCompound ? `__indexedKey${String(temporaryIndex++)}` : index;
         const current =
           emitStaticIndexedRead(expression.left, indexedObject, indexedKey) ?? `_Runtime.getIndex(${object}, ${index})`;
-        const value = emitCompoundOperation(current, operator, expression.right);
+        const value = emitCompoundOperation(current, operator, expression.right, compoundUsesRuntimeNumber(expression));
         const directWrite = directCompound
           ? emitStaticIndexedWrite(expression.left, value, indexedObject, indexedKey)
           : undefined;
@@ -2049,7 +2118,12 @@ function emitExpression(expression: IrExpression): string {
           const value =
             expression.operator === '='
               ? emitExpression(expression.right)
-              : emitCompoundOperation(current, expression.operator.slice(0, -1), expression.right);
+              : emitCompoundOperation(
+                  current,
+                  expression.operator.slice(0, -1),
+                  expression.right,
+                  compoundUsesRuntimeNumber(expression),
+                );
           return `${binding}.setField(${object}, ${quote(expression.left.name)}, ${value})`;
         }
         if (expression.left.typedStructBinding) {
@@ -2087,7 +2161,7 @@ function emitExpression(expression: IrExpression): string {
         }
         const operation = expression.operator.slice(0, -1);
         const current = `_Runtime.field(${object}, ${quote(expression.left.name)})`;
-        return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperation(current, operation, expression.right)})`;
+        return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperation(current, operation, expression.right, compoundUsesRuntimeNumber(expression))})`;
       }
       if (expression.kind === 'binary' && expression.operator === '**') {
         return `HxMath.pow(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
@@ -2106,6 +2180,12 @@ function emitExpression(expression: IrExpression): string {
         // Haxe's JS optimizer removes `+ 0`, but TypeScript uses this form to
         // normalize an observable negative zero to positive zero.
         return `_Runtime.normalizeZero(${emitExpression(expression.left)})`;
+      }
+      if (expression.kind === 'binary') {
+        const runtimeMethod = runtimeNumericMethod(expression);
+        if (runtimeMethod) {
+          return `_Runtime.${runtimeMethod}(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
+        }
       }
       if (expression.kind === 'binary' && expression.operator === ',') {
         return `({ ${emitExpression(expression.left)}; ${emitExpression(expression.right)}; })`;
@@ -2193,7 +2273,7 @@ function emitExpression(expression: IrExpression): string {
       if (expression.kind === 'assignment' && ['+=', '-=', '*=', '/=', '%='].includes(expression.operator)) {
         const operator = expression.operator.slice(0, -1);
         const left = emitExpression(expression.left);
-        return `(${left} = cast (${emitArithmeticOperation(left, operator, emitExpression(expression.right))} : Dynamic))`;
+        return `(${left} = cast (${emitArithmeticOperation(left, operator, emitExpression(expression.right), compoundUsesRuntimeNumber(expression))} : Dynamic))`;
       }
       const operator = binaryOperatorMap[expression.operator] ?? expression.operator;
       if (expression.kind === 'assignment' && expression.operator === '=') {

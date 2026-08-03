@@ -29,8 +29,8 @@ class Transform2d {
     d = source.d;
     scaleX = HxMath.sqrt(((a * a) + (b * b)));
     scaleY = ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -HxMath.sqrt(((c * c) + (d * d))) : Dynamic) : (cast HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
-    skewXDegrees = (HxMath.atan2(-c, d) * Transform2d.RAD_TO_DEG__transform2d);
-    skewYDegrees = (HxMath.atan2(b, a) * Transform2d.RAD_TO_DEG__transform2d);
+    skewXDegrees = _Runtime.multiplyNumbers(HxMath.atan2(-c, d), Transform2d.RAD_TO_DEG__transform2d);
+    skewYDegrees = _Runtime.multiplyNumbers(HxMath.atan2(b, a), Transform2d.RAD_TO_DEG__transform2d);
     if ((cast _Runtime.strictEquals(skewXDegrees, skewYDegrees) : Bool)) {
       _Runtime.setField(out, 'rotation', skewYDegrees);
       _Runtime.setField(out, 'skewX', 0.0);

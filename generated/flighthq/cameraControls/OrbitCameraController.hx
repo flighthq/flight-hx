@@ -53,7 +53,7 @@ class OrbitCameraController {
   }
 
   public static function dollyOrbitCameraController(controller:flighthq.types.OrbitCameraController, deltaDistance:Float):Void {
-    _Runtime.setField(controller, 'goalDistance', _Runtime.callValue(clamp, cast ([(_Runtime.field(controller, 'goalDistance') + deltaDistance), _Runtime.field(controller, 'minDistance'), _Runtime.field(controller, 'maxDistance')] : Array<Dynamic>)));
+    _Runtime.setField(controller, 'goalDistance', _Runtime.callValue(clamp, cast ([_Runtime.addNumbers(_Runtime.field(controller, 'goalDistance'), deltaDistance), _Runtime.field(controller, 'minDistance'), _Runtime.field(controller, 'maxDistance')] : Array<Dynamic>)));
   }
 
   public static function panOrbitCameraController(controller:flighthq.types.OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
@@ -110,8 +110,8 @@ class OrbitCameraController {
   }
 
   public static function rotateOrbitCameraController(controller:flighthq.types.OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
-    _Runtime.setField(controller, 'goalAzimuth', (_Runtime.field(controller, 'goalAzimuth') + deltaAzimuth));
-    _Runtime.setField(controller, 'goalPolar', _Runtime.callValue(clamp, cast ([(_Runtime.field(controller, 'goalPolar') + deltaPolar), _Runtime.field(controller, 'minPolar'), _Runtime.field(controller, 'maxPolar')] : Array<Dynamic>)));
+    _Runtime.setField(controller, 'goalAzimuth', _Runtime.addNumbers(_Runtime.field(controller, 'goalAzimuth'), deltaAzimuth));
+    _Runtime.setField(controller, 'goalPolar', _Runtime.callValue(clamp, cast ([_Runtime.addNumbers(_Runtime.field(controller, 'goalPolar'), deltaPolar), _Runtime.field(controller, 'minPolar'), _Runtime.field(controller, 'maxPolar')] : Array<Dynamic>)));
   }
 
   public static function snapOrbitCameraController(controller:flighthq.types.OrbitCameraController):Void {
@@ -131,8 +131,8 @@ class OrbitCameraController {
     goalPolar = _Runtime.callValue(clamp, cast ([_Runtime.field(controller, 'goalPolar'), _Runtime.field(controller, 'minPolar'), _Runtime.field(controller, 'maxPolar')] : Array<Dynamic>));
     goalDistance = _Runtime.callValue(clamp, cast ([_Runtime.field(controller, 'goalDistance'), _Runtime.field(controller, 'minDistance'), _Runtime.field(controller, 'maxDistance')] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.field(controller, 'smoothTime') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var lambda:Dynamic = (1.0 / _Runtime.field(controller, 'smoothTime'));
-      var nearestGoalAzimuth:Dynamic = (_Runtime.field(controller, 'azimuth') + _Runtime.callValue(deltaAngle, cast ([_Runtime.field(controller, 'azimuth'), _Runtime.field(controller, 'goalAzimuth')] : Array<Dynamic>)));
+      var lambda:Dynamic = _Runtime.divideNumbers(1.0, _Runtime.field(controller, 'smoothTime'));
+      var nearestGoalAzimuth:Dynamic = _Runtime.addNumbers(_Runtime.field(controller, 'azimuth'), _Runtime.callValue(deltaAngle, cast ([_Runtime.field(controller, 'azimuth'), _Runtime.field(controller, 'goalAzimuth')] : Array<Dynamic>)));
       _Runtime.setField(controller, 'azimuth', _Runtime.callValue(damp, cast ([_Runtime.field(controller, 'azimuth'), nearestGoalAzimuth, lambda, deltaTime] : Array<Dynamic>)));
       _Runtime.setField(controller, 'polar', _Runtime.callValue(damp, cast ([_Runtime.field(controller, 'polar'), goalPolar, lambda, deltaTime] : Array<Dynamic>)));
       _Runtime.setField(controller, 'distance', _Runtime.callValue(damp, cast ([_Runtime.field(controller, 'distance'), goalDistance, lambda, deltaTime] : Array<Dynamic>)));
@@ -146,9 +146,9 @@ class OrbitCameraController {
     cosAzimuth = HxMath.cos(_Runtime.field(controller, 'azimuth'));
     sinAzimuth = HxMath.sin(_Runtime.field(controller, 'azimuth'));
     target = _Runtime.field(controller, 'target');
-    (OrbitCameraController.scratchEye__orbitCameraController.x = cast ((target.x + ((_Runtime.field(controller, 'distance') * sinAzimuth) * cosPolar)) : Dynamic));
-    (OrbitCameraController.scratchEye__orbitCameraController.y = cast ((target.y + (_Runtime.field(controller, 'distance') * sinPolar)) : Dynamic));
-    (OrbitCameraController.scratchEye__orbitCameraController.z = cast ((target.z + ((_Runtime.field(controller, 'distance') * cosAzimuth) * cosPolar)) : Dynamic));
+    (OrbitCameraController.scratchEye__orbitCameraController.x = cast ((target.x + (_Runtime.multiplyNumbers(_Runtime.field(controller, 'distance'), sinAzimuth) * cosPolar)) : Dynamic));
+    (OrbitCameraController.scratchEye__orbitCameraController.y = cast ((target.y + _Runtime.multiplyNumbers(_Runtime.field(controller, 'distance'), sinPolar)) : Dynamic));
+    (OrbitCameraController.scratchEye__orbitCameraController.z = cast ((target.z + (_Runtime.multiplyNumbers(_Runtime.field(controller, 'distance'), cosAzimuth) * cosPolar)) : Dynamic));
     _Runtime.callValue(setCamera3DViewMatrix4FromLookAt, cast ([camera, OrbitCameraController.scratchEye__orbitCameraController, target, OrbitCameraController.WORLD_UP__orbitCameraController] : Array<Dynamic>));
   }
 

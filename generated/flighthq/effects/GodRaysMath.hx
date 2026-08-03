@@ -29,7 +29,7 @@ class GodRaysMath {
     decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.96);
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1);
-    return cast ((HxMath.pow(decay, sampleIndex) * weight) * exposure);
+    return cast (_Runtime.multiplyNumbers(HxMath.pow(decay, sampleIndex), weight) * exposure);
     return cast null;
   }
 

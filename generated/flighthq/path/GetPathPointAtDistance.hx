@@ -50,13 +50,13 @@ class GetPathPointAtDistance {
         {
           var i:Dynamic = 2.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(contour, i) - flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
-            var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)) - flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
+            var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
+            var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)), flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
             var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
             if ((cast ((cast remaining : Float) <= (cast segLen : Float)) : Bool)) {
               var t:Dynamic = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast (remaining / segLen) : Dynamic) : (cast 0.0 : Dynamic));
-              (out.x = cast ((flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)) + (t * dx)) : Dynamic));
-              (out.y = cast ((flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)) + (t * dy)) : Dynamic));
+              (out.x = cast (_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)), (t * dx)) : Dynamic));
+              (out.y = cast (_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)), (t * dy)) : Dynamic));
               return cast true;
             }
             (remaining = cast ((remaining - segLen) : Dynamic));
@@ -66,9 +66,9 @@ class GetPathPointAtDistance {
         ci++;
       }
     }
-    last = flighthq._internal._StaticIndex.readArray(contours, (_Runtime.field(contours, 'length') - 1.0));
-    (out.x = cast (flighthq._internal._StaticIndex.readArray(last, (_Runtime.field(last, 'length') - 2.0)) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readArray(last, (_Runtime.field(last, 'length') - 1.0)) : Dynamic));
+    last = flighthq._internal._StaticIndex.readArray(contours, _Runtime.subtractNumbers(_Runtime.field(contours, 'length'), 1.0));
+    (out.x = cast (flighthq._internal._StaticIndex.readArray(last, _Runtime.subtractNumbers(_Runtime.field(last, 'length'), 2.0)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readArray(last, _Runtime.subtractNumbers(_Runtime.field(last, 'length'), 1.0)) : Dynamic));
     return cast true;
     return cast null;
   }
@@ -93,8 +93,8 @@ class GetPathPointAtDistance {
         {
           var i:Dynamic = 2.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(contour, i) - flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
-            var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)) - flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
+            var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
+            var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)), flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
             var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
             if ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool)) {
               var invLen:Dynamic = (1.0 / segLen);

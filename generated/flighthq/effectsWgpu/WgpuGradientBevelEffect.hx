@@ -56,7 +56,7 @@ class WgpuGradientBevelEffect {
     s0 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s2 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
@@ -66,8 +66,8 @@ class WgpuGradientBevelEffect {
     fs = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
-    dx = ((HxMath.cos(angle) * distance) / _Runtime.field(s1, 'width'));
-    dy = -((HxMath.sin(angle) * distance) / _Runtime.field(s1, 'height'));
+    dx = _Runtime.divideNumbers(_Runtime.multiplyNumbers(HxMath.cos(angle), distance), _Runtime.field(s1, 'width'));
+    dy = -_Runtime.divideNumbers(_Runtime.multiplyNumbers(HxMath.sin(angle), distance), _Runtime.field(s1, 'height'));
     encodePipeline = _Runtime.callValue(WgpuGradientBevelEffect.getEncodePipeline__wgpuGradientBevelEffect, cast ([state] : Array<Dynamic>));
     encodeSlot = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([encodeSlot, function(f32:Dynamic) {

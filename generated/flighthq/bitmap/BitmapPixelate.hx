@@ -35,12 +35,12 @@ class BitmapPixelate {
             {
               var py:Dynamic = by;
               while ((cast ((cast py : Float) < (cast yEnd : Float)) : Bool)) {
-                var sy:Dynamic = (_Runtime.field(source, 'y') + py);
+                var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
                 if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
                 {
                   var px:Dynamic = bx;
                   while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
-                    var sx:Dynamic = (_Runtime.field(source, 'x') + px);
+                    var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
                     if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
                     var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
                     (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(data, si)) : Dynamic));

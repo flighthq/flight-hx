@@ -1499,6 +1499,23 @@ function expressionStaticFacts(node: ts.Expression, context: LoweringContext): I
   if (
     ts.isBinaryExpression(node) &&
     [
+      ts.SyntaxKind.PlusToken,
+      ts.SyntaxKind.MinusToken,
+      ts.SyntaxKind.AsteriskToken,
+      ts.SyntaxKind.SlashToken,
+      ts.SyntaxKind.PlusEqualsToken,
+      ts.SyntaxKind.MinusEqualsToken,
+      ts.SyntaxKind.AsteriskEqualsToken,
+      ts.SyntaxKind.SlashEqualsToken,
+    ].includes(node.operatorToken.kind) &&
+    typeOnlyHasFlags(checker.getTypeAtLocation(node.left), checker, ts.TypeFlags.NumberLike) &&
+    typeOnlyHasFlags(checker.getTypeAtLocation(node.right), checker, ts.TypeFlags.NumberLike)
+  ) {
+    facts.numericOperands = true;
+  }
+  if (
+    ts.isBinaryExpression(node) &&
+    [
       ts.SyntaxKind.LessThanToken,
       ts.SyntaxKind.LessThanEqualsToken,
       ts.SyntaxKind.GreaterThanToken,

@@ -21,13 +21,13 @@ class BitmapFlip {
       {
         var py:Dynamic = 0.0;
         while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-          var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+          var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
           if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Dynamic = 0.0;
             while ((cast ((cast px : Float) < (cast half : Float)) : Bool)) {
-              var xa:Dynamic = (_Runtime.field(dest, 'x') + px);
-              var xb:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - px));
+              var xa:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+              var xb:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((w - 1.0) - px));
               if ((cast ((cast ((cast ((cast ((cast xa : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast xa : Float) >= (cast stride : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
               _Runtime.callValue(BitmapFlip.swapPixels__bitmapFlip, cast ([data, (((y * stride) + xa) * 4.0), (((y * stride) + xb) * 4.0)] : Array<Dynamic>));
               px++;
@@ -56,13 +56,13 @@ class BitmapFlip {
       {
         var py:Dynamic = 0.0;
         while ((cast ((cast py : Float) < (cast half : Float)) : Bool)) {
-          var yTop:Dynamic = (_Runtime.field(dest, 'y') + py);
-          var yBottom:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - py));
+          var yTop:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+          var yBottom:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), ((h - 1.0) - py));
           if ((cast ((cast ((cast ((cast ((cast yTop : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast yTop : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Dynamic = 0.0;
             while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-              var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+              var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
               if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
               _Runtime.callValue(BitmapFlip.swapPixels__bitmapFlip, cast ([data, (((yTop * stride) + x) * 4.0), (((yBottom * stride) + x) * 4.0)] : Array<Dynamic>));
               px++;
@@ -89,14 +89,14 @@ class BitmapFlip {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + ((cast mirrorY : Bool) ? (cast ((h - 1.0) - py) : Dynamic) : (cast py : Dynamic)));
-        var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), ((cast mirrorY : Bool) ? (cast ((h - 1.0) - py) : Dynamic) : (cast py : Dynamic)));
+        var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + ((cast mirrorX : Bool) ? (cast ((w - 1.0) - px) : Dynamic) : (cast px : Dynamic)));
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), ((cast mirrorX : Bool) ? (cast ((w - 1.0) - px) : Dynamic) : (cast px : Dynamic)));
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * sStride) + sx) * 4.0);
             var di:Dynamic = (((dy * dStride) + dx) * 4.0);

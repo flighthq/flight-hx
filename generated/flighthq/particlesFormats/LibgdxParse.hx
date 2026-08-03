@@ -164,7 +164,7 @@ class LibgdxParse {
     scaleMaxPx = flighthq._internal._StaticIndex.readArray(__destructure5, 1.0);
     scaleMin = (scaleMinPx / textureSize);
     scaleMax = (scaleMaxPx / textureSize);
-    lastScaling = ((cast ((cast _Runtime.field(doc.scale.scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(doc.scale.scaling, (_Runtime.field(doc.scale.scaling, 'length') - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+    lastScaling = ((cast ((cast _Runtime.field(doc.scale.scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(doc.scale.scaling, _Runtime.subtractNumbers(_Runtime.field(doc.scale.scaling, 'length'), 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
     scaleEnd = lastScaling;
     __destructure6 = ((cast _Runtime.field(doc.wind, 'active') : Bool) ? (cast _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.wind] : Array<Dynamic>)) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     windMin = flighthq._internal._StaticIndex.readArray(__destructure6, 0.0);
@@ -198,7 +198,7 @@ class LibgdxParse {
       (emitterHeight = cast (shMid : Dynamic));
     } }
     firstColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.tint, 'colors'), 0.0), function():Dynamic return cast 'ffffff');
-    lastColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.tint, 'colors'), (_Runtime.field(_Runtime.field(doc.tint, 'colors'), 'length') - 1.0)), function():Dynamic return cast 'ffffff');
+    lastColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(doc.tint, 'colors'), _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(doc.tint, 'colors'), 'length'), 1.0)), function():Dynamic return cast 'ffffff');
     __destructure10 = _Runtime.callValue(LibgdxParse.hexToRgb__libgdxParse, cast ([firstColor] : Array<Dynamic>));
     sr = flighthq._internal._StaticIndex.readArray(__destructure10, 0.0);
     sg = flighthq._internal._StaticIndex.readArray(__destructure10, 1.0);
@@ -208,7 +208,7 @@ class LibgdxParse {
     eg = flighthq._internal._StaticIndex.readArray(__destructure11, 1.0);
     eb = flighthq._internal._StaticIndex.readArray(__destructure11, 2.0);
     alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, 0.0), function():Dynamic return cast 1.0);
-    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, (_Runtime.field(doc.transparency.scaling, 'length') - 1.0)), function():Dynamic return cast 0.0);
+    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, _Runtime.subtractNumbers(_Runtime.field(doc.transparency.scaling, 'length'), 1.0)), function():Dynamic return cast 0.0);
     __destructure12 = _Runtime.callValue(LibgdxParse.rangeToMinMax__libgdxParse, cast ([doc.duration] : Array<Dynamic>));
     durMin = flighthq._internal._StaticIndex.readArray(__destructure12, 0.0);
     durMax = flighthq._internal._StaticIndex.readArray(__destructure12, 1.0);

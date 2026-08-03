@@ -49,7 +49,7 @@ class DomSprite {
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return; }
     textureWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
     textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
-    sourceRectangle = { height: HxMath.abs((_Runtime.field(texture, 'uvScale').y * textureHeight)), width: HxMath.abs((_Runtime.field(texture, 'uvScale').x * textureWidth)), x: (_Runtime.field(texture, 'uvOffset').x * textureWidth), y: (_Runtime.field(texture, 'uvOffset').y * textureHeight) };
+    sourceRectangle = { height: HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, textureHeight)), width: HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, textureWidth)), x: _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').x, textureWidth), y: _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').y, textureHeight) };
     isFullTexture = ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'y'), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'width'), textureWidth) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'height'), textureHeight) : Bool));
     if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLVideoElement')) : Bool)) : Bool)) {
       _Runtime.callValue(DomSprite.renderSpriteAsVideo__domSprite, cast ([state, renderProxy, data, source] : Array<Dynamic>));
@@ -73,8 +73,8 @@ class DomSprite {
     }
     texture = _Runtime.field(_Runtime.field((cast _Runtime.field(renderProxy, 'source') : Sprite), 'data'), 'texture');
     pixelRatio = _Runtime.field(state, 'pixelRatio');
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', (_Runtime.field(sourceRectangle, 'width') * pixelRatio));
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', (_Runtime.field(sourceRectangle, 'height') * pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'width'), pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'height'), pixelRatio));
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px');
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px');
     context = _Runtime.field(data, 'context');

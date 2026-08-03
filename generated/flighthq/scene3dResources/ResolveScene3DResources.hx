@@ -185,7 +185,7 @@ class ResolveScene3DResources {
     if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(texture, 'source'), image) : Bool)) { return; }
     _Runtime.setField(texture, 'source', image);
-    _Runtime.setField(texture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(texture, 'version') + 1.0)), 0));
+    _Runtime.setField(texture, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(texture, 'version'), 1.0)), 0));
     _Runtime.callValue(ResolveScene3DResources.emitScene3DResourceEvent__resolveScene3DResources, cast ([resolver, texture, ref, true] : Array<Dynamic>));
   }
 

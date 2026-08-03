@@ -17,12 +17,12 @@ class RandomRange {
     lo = HxMath.floor(min);
     hi = HxMath.floor(max);
     if ((cast ((cast lo : Float) > (cast hi : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomInt: min must be <= max')); }
-    return cast (lo + HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * ((hi - lo) + 1.0))));
+    return cast _Runtime.addNumbers(lo, HxMath.floor(_Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), ((hi - lo) + 1.0))));
     return cast null;
   }
 
   public static function randomRange(random:RandomSource, min:Float, max:Float):Float {
-    return cast (min + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (max - min)));
+    return cast (min + _Runtime.multiplyNumbers(_Runtime.callValue(random, cast ([] : Array<Dynamic>)), (max - min)));
     return cast null;
   }
 

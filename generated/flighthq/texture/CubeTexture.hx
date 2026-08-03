@@ -64,6 +64,6 @@ class CubeTexture {
     sources = _Runtime.callValue(CubeTexture.getCubeSources__cubeTexture, cast ([cube] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(sources, faceIndex), source) : Bool)) { return; }
     flighthq._internal._StaticIndex.writeArray((cast (cast sources : Dynamic) : Array<Null<TextureSource>>), faceIndex, source);
-    _Runtime.setField(cube, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(cube, 'version') + 1.0)), 0));
+    _Runtime.setField(cube, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(cube, 'version'), 1.0)), 0));
   }
 }

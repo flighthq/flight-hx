@@ -166,8 +166,8 @@ class GlShape {
     }
     _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     t = _Runtime.field(renderProxy, 'transform2D');
-    tx = ((t.tx + (t.a * _Runtime.field(bounds, 'x'))) + (t.c * _Runtime.field(bounds, 'y')));
-    ty = ((t.ty + (t.b * _Runtime.field(bounds, 'x'))) + (t.d * _Runtime.field(bounds, 'y')));
+    tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
+    ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
     texture = _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(shapeData, 'image'), null, null, true] : Array<Dynamic>));
     straightAlpha = _Runtime.field(runtime, 'currentTextureStraightAlpha');
     startCount = _Runtime.field(runtime, 'quadBatchWriterCount');

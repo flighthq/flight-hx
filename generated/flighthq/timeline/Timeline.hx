@@ -28,8 +28,8 @@ class Timeline {
     totalFrames = _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(frameRate, null) : Bool)) {
       var frameTime:Dynamic = (1000.0 / frameRate);
-      _Runtime.setField(timeline, 'timeElapsed', (_Runtime.field(timeline, 'timeElapsed') + deltaTime));
-      var next:Dynamic = (_Runtime.field(timeline, 'currentFrame') + HxMath.floor((_Runtime.field(timeline, 'timeElapsed') / frameTime)));
+      _Runtime.setField(timeline, 'timeElapsed', _Runtime.addNumbers(_Runtime.field(timeline, 'timeElapsed'), deltaTime));
+      var next:Dynamic = _Runtime.addNumbers(_Runtime.field(timeline, 'currentFrame'), HxMath.floor(_Runtime.divideNumbers(_Runtime.field(timeline, 'timeElapsed'), frameTime)));
       _Runtime.setField(timeline, 'timeElapsed', _Runtime.fmod(_Runtime.field(timeline, 'timeElapsed'), frameTime));
       if ((cast ((cast next : Float) > (cast totalFrames : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once') : Bool)) {
@@ -45,7 +45,7 @@ class Timeline {
       }
       return cast next;
     }
-    next = (_Runtime.field(timeline, 'currentFrame') + 1.0);
+    next = _Runtime.addNumbers(_Runtime.field(timeline, 'currentFrame'), 1.0);
     if ((cast ((cast next : Float) > (cast totalFrames : Float)) : Bool)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once') : Bool)) {
         _Runtime.setField(timeline, 'isPlaying', false);
@@ -179,7 +179,7 @@ class Timeline {
 
   public static function nextFrameTimeline(timeline:flighthq.types.Timeline):Void {
     _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
-    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, (_Runtime.field(timeline, 'currentFrame') + 1.0)] : Array<Dynamic>));
+    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.addNumbers(_Runtime.field(timeline, 'currentFrame'), 1.0)] : Array<Dynamic>));
   }
 
   public static function noopConstructFrame__timeline():Void {
@@ -193,7 +193,7 @@ class Timeline {
 
   public static function prevFrameTimeline(timeline:flighthq.types.Timeline):Void {
     _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
-    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, (_Runtime.field(timeline, 'currentFrame') - 1.0)] : Array<Dynamic>));
+    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.subtractNumbers(_Runtime.field(timeline, 'currentFrame'), 1.0)] : Array<Dynamic>));
   }
 
   public static function removeTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic):Void {

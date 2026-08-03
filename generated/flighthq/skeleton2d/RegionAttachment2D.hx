@@ -19,7 +19,7 @@ class RegionAttachment2D {
     var world:Dynamic = cast _Runtime.UNDEFINED;
     var hw:Dynamic = cast _Runtime.UNDEFINED;
     var hh:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(setTransformMatrix, cast ([RegionAttachment2D._local__regionAttachment2D, _Runtime.field(attachment, 'scaleX'), _Runtime.field(attachment, 'scaleY'), (_Runtime.field(attachment, 'rotation') * DEG_TO_RAD), _Runtime.field(attachment, 'x'), _Runtime.field(attachment, 'y')] : Array<Dynamic>));
+    _Runtime.callValue(setTransformMatrix, cast ([RegionAttachment2D._local__regionAttachment2D, _Runtime.field(attachment, 'scaleX'), _Runtime.field(attachment, 'scaleY'), _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD), _Runtime.field(attachment, 'x'), _Runtime.field(attachment, 'y')] : Array<Dynamic>));
     b = (boneIndex * RegionAttachment2D.MATRIX_STRIDE__regionAttachment2D);
     world = _Runtime.field(skeleton, 'worldMatrices');
     (RegionAttachment2D._bone__regionAttachment2D.a = cast (flighthq._internal._StaticIndex.readFloat32Array(world, b) : Dynamic));
@@ -29,8 +29,8 @@ class RegionAttachment2D {
     (RegionAttachment2D._bone__regionAttachment2D.tx = cast (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0)) : Dynamic));
     (RegionAttachment2D._bone__regionAttachment2D.ty = cast (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0)) : Dynamic));
     _Runtime.callValue(multiplyMatrix, cast ([RegionAttachment2D._combined__regionAttachment2D, RegionAttachment2D._bone__regionAttachment2D, RegionAttachment2D._local__regionAttachment2D] : Array<Dynamic>));
-    hw = (_Runtime.field(attachment, 'width') / 2.0);
-    hh = (_Runtime.field(attachment, 'height') / 2.0);
+    hw = _Runtime.divideNumbers(_Runtime.field(attachment, 'width'), 2.0);
+    hh = _Runtime.divideNumbers(_Runtime.field(attachment, 'height'), 2.0);
     _Runtime.callValue(matrixTransformPointXY, cast ([RegionAttachment2D._corner__regionAttachment2D, RegionAttachment2D._combined__regionAttachment2D, -hw, -hh] : Array<Dynamic>));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, _Runtime.field(RegionAttachment2D._corner__regionAttachment2D, 'x'));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, _Runtime.field(RegionAttachment2D._corner__regionAttachment2D, 'y'));

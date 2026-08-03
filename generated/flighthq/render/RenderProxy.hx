@@ -120,7 +120,7 @@ class RenderProxy {
   public static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     var parentDepth:Dynamic = cast _Runtime.UNDEFINED;
     parentDepth = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(parentData, 'clipDepth') : Dynamic) : (cast 0.0 : Dynamic));
-    _Runtime.setField(data, 'clipDepth', (parentDepth + ((cast !_Runtime.looseEquals(_Runtime.field((cast source : Node2D), 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))));
+    _Runtime.setField(data, 'clipDepth', _Runtime.addNumbers(parentDepth, ((cast !_Runtime.looseEquals(_Runtime.field((cast source : Node2D), 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))));
   }
 
   public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
@@ -196,7 +196,7 @@ class RenderProxy {
         var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>)), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
-            var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Dynamic) : Renderable));
               i--;
@@ -221,7 +221,7 @@ class RenderProxy {
       var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>)), 'children');
       if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
         {
-          var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Dynamic) : Renderable));
             i--;

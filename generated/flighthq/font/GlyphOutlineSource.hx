@@ -21,7 +21,7 @@ class GlyphOutlineSource {
       metrics = _Runtime.callProperty(source, 'getGlyphOutlineMetrics', cast ([] : Array<Dynamic>));
       scale = _Runtime.callValue(GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource, cast ([_Runtime.field(metrics, 'unitsPerEm'), options.fontSize] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
-      return cast { ascent: (_Runtime.field(metrics, 'ascent') * scale), descent: (_Runtime.field(metrics, 'descent') * scale), lineGap: (_Runtime.field(metrics, 'lineGap') * scale) };
+      return cast { ascent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'ascent'), scale), descent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'descent'), scale), lineGap: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'lineGap'), scale) };
     }, rasterize: function(codePoint:Dynamic, options:Dynamic) {
       return cast _Runtime.callValue(GlyphOutlineSource.rasterizeGlyphOutlineSource__glyphOutlineSource, cast ([source, codePoint, options] : Array<Dynamic>));
     } };
@@ -50,16 +50,16 @@ class GlyphOutlineSource {
     if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
     path = _Runtime.callValue(createPath, cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(source, 'getGlyphOutline', cast ([path, glyphIndex] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    advance = (_Runtime.callProperty(source, 'getGlyphOutlineAdvance', cast ([glyphIndex] : Array<Dynamic>)) * scale);
+    advance = _Runtime.multiplyNumbers(_Runtime.callProperty(source, 'getGlyphOutlineAdvance', cast ([glyphIndex] : Array<Dynamic>)), scale);
     if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     bounds = { height: 0.0, width: 0.0, x: 0.0, y: 0.0 };
     if ((cast ((cast ((cast !(cast _Runtime.callValue(getPathBounds, cast ([path, bounds] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'height'), 0.0) : Bool)) : Bool)) {
       return cast { advance: advance, bearingX: 0.0, bearingY: 0.0, height: 0.0, pixels: new flighthq._internal._UInt8ClampedArray(), width: 0.0 };
     }
-    left = (HxMath.floor((_Runtime.field(bounds, 'x') * scale)) - GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
-    top = (HxMath.floor((_Runtime.field(bounds, 'y') * scale)) - GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
-    right = (HxMath.ceil(((_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')) * scale)) + GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
-    bottom = (HxMath.ceil(((_Runtime.field(bounds, 'y') + _Runtime.field(bounds, 'height')) * scale)) + GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    left = _Runtime.subtractNumbers(HxMath.floor(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'x'), scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    top = _Runtime.subtractNumbers(HxMath.floor(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'y'), scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    right = _Runtime.addNumbers(HxMath.ceil((_Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'width')) * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    bottom = _Runtime.addNumbers(HxMath.ceil((_Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'height')) * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
     width = (right - left);
     height = (bottom - top);
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
@@ -107,7 +107,7 @@ class GlyphOutlineSource {
     var crossings:Dynamic = cast _Runtime.UNDEFINED;
     crossings = 0.0;
     for (contour in _Runtime.iterable(contours)) {
-      var pointCount:Dynamic = (_Runtime.toInt32((_Runtime.field(contour, 'length') / 2.0)) | 0);
+      var pointCount:Dynamic = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(contour, 'length'), 2.0)) | 0);
       if ((cast ((cast pointCount : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       var fromX:Dynamic = flighthq._internal._StaticIndex.readArray(contour, ((pointCount - 1.0) * 2.0));
       var fromY:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (((pointCount - 1.0) * 2.0) + 1.0));

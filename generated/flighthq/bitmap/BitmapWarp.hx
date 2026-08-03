@@ -50,12 +50,12 @@ class BitmapWarp {
     {
       var dy:Dynamic = 0.0;
       while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
-        var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
+        var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
         if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { dy++; continue; }
         {
           var dx:Dynamic = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
-            var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
+            var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
             if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
             var w:Dynamic = (((m6 * dx) + (m7 * dy)) + m8);
             var di:Dynamic = (((oy * dStride) + ox) * 4.0);
@@ -289,11 +289,11 @@ class BitmapWarp {
         {
           var row:Dynamic = (col + 1.0);
           while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
-            var factor:Dynamic = (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col) / pivot);
+            var factor:Dynamic = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col), pivot);
             {
               var k:Dynamic = col;
               while ((cast ((cast k : Float) <= (cast n : Float)) : Bool)) {
-                ({ var __indexedObject1:Dynamic = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey2:Dynamic = k; flighthq._internal._StaticIndex.writeArray(__indexedObject1, __indexedKey2, (flighthq._internal._StaticIndex.readArray(__indexedObject1, __indexedKey2) - (factor * flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), k)))); });
+                ({ var __indexedObject1:Dynamic = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey2:Dynamic = k; flighthq._internal._StaticIndex.writeArray(__indexedObject1, __indexedKey2, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject1, __indexedKey2), _Runtime.multiplyNumbers(factor, flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), k)))); });
                 k++;
               }
             }
@@ -311,11 +311,11 @@ class BitmapWarp {
         {
           var col:Dynamic = (row + 1.0);
           while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
-            (sum = cast ((sum - (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col) * flighthq._internal._StaticIndex.readArray(x, col))) : Dynamic));
+            (sum = cast ((sum - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col), flighthq._internal._StaticIndex.readArray(x, col))) : Dynamic));
             col++;
           }
         }
-        flighthq._internal._StaticIndex.writeArray(x, row, (sum / flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), row)));
+        flighthq._internal._StaticIndex.writeArray(x, row, _Runtime.divideNumbers(sum, flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), row)));
         row--;
       }
     }

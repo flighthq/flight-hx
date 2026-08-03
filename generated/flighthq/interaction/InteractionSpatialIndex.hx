@@ -61,8 +61,8 @@ class InteractionSpatialIndex {
         var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast flighthq._internal._StaticIndex.readArray(nodes, rank) : Node2D)] : Array<Dynamic>));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (_Runtime.field(bounds, 'x') : Dynamic));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (_Runtime.field(bounds, 'y') : Dynamic));
-        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')) : Dynamic));
-        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast ((_Runtime.field(bounds, 'y') + _Runtime.field(bounds, 'height')) : Dynamic));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast (_Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'width')) : Dynamic));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast (_Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'height')) : Dynamic));
         _Runtime.callValue(insertSpatialObject, cast ([index, (cast rank : SpatialObjectId), InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex] : Array<Dynamic>));
         rank++;
       }
@@ -83,7 +83,7 @@ class InteractionSpatialIndex {
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex, cast ([flighthq._internal._StaticIndex.readArray(children, i), out] : Array<Dynamic>));
           i--;

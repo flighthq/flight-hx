@@ -141,7 +141,7 @@ class Shortcut {
     if ((cast _Runtime.strictEquals(canonicalKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { reason: 'unknown-key', token: key };
     }
-    _Runtime.sortAndReturn(modifiers, function(a:Dynamic, b:Dynamic) return (_Runtime.callProperty(Shortcut._modifierOrder__shortcut, 'indexOf', cast ([a] : Array<Dynamic>)) - _Runtime.callProperty(Shortcut._modifierOrder__shortcut, 'indexOf', cast ([b] : Array<Dynamic>))));
+    _Runtime.sortAndReturn(modifiers, function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.callProperty(Shortcut._modifierOrder__shortcut, 'indexOf', cast ([a] : Array<Dynamic>)), _Runtime.callProperty(Shortcut._modifierOrder__shortcut, 'indexOf', cast ([b] : Array<Dynamic>))));
     return cast { key: canonicalKey, modifiers: modifiers };
     return cast null;
   }

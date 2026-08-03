@@ -71,8 +71,8 @@ class DrawWgpuScene3D {
         var wy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 13.0);
         var wz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 14.0);
         var vp:Dynamic = viewProjection.m;
-        var clipW:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(vp, 3.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(vp, 7.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(vp, 11.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(vp, 15.0));
-        var clipZ:Dynamic = ((((flighthq._internal._StaticIndex.readFloat32Array(vp, 2.0) * wx) + (flighthq._internal._StaticIndex.readFloat32Array(vp, 6.0) * wy)) + (flighthq._internal._StaticIndex.readFloat32Array(vp, 10.0) * wz)) + flighthq._internal._StaticIndex.readFloat32Array(vp, 14.0));
+        var clipW:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 3.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 7.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 11.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(vp, 15.0));
+        var clipZ:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 2.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 6.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 10.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(vp, 14.0));
         var objectAlpha:Dynamic = _Runtime.callValue(getNode3DWorldAlpha, cast ([mesh] : Array<Dynamic>));
         var nodeRuntime:Dynamic = _Runtime.callValue(getNode3DRuntime, cast ([mesh] : Array<Dynamic>));
         var colorScaleBias:Dynamic = _Runtime.field(nodeRuntime, 'resolvedColorScaleBias');
@@ -198,7 +198,7 @@ class DrawWgpuScene3D {
   }
 
   public static function compareBlendedEntriesDescending__drawWgpuScene3D(a:WgpuScene3DDrawEntry, b:WgpuScene3DDrawEntry):Float {
-    return cast (_Runtime.field(b, 'depth') - _Runtime.field(a, 'depth'));
+    return cast _Runtime.subtractNumbers(_Runtime.field(b, 'depth'), _Runtime.field(a, 'depth'));
     return cast null;
   }
 

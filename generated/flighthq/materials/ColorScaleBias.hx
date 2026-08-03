@@ -14,14 +14,14 @@ class ColorScaleBias {
   }
 
   public static function concatColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike, other:ColorScaleBiasLike):Void {
-    _Runtime.setField(out, 'redBias', ((_Runtime.field(source, 'redScale') * _Runtime.field(other, 'redBias')) + _Runtime.field(source, 'redBias')));
-    _Runtime.setField(out, 'greenBias', ((_Runtime.field(source, 'greenScale') * _Runtime.field(other, 'greenBias')) + _Runtime.field(source, 'greenBias')));
-    _Runtime.setField(out, 'blueBias', ((_Runtime.field(source, 'blueScale') * _Runtime.field(other, 'blueBias')) + _Runtime.field(source, 'blueBias')));
-    _Runtime.setField(out, 'alphaBias', ((_Runtime.field(source, 'alphaScale') * _Runtime.field(other, 'alphaBias')) + _Runtime.field(source, 'alphaBias')));
-    _Runtime.setField(out, 'redScale', (_Runtime.field(source, 'redScale') * _Runtime.field(other, 'redScale')));
-    _Runtime.setField(out, 'greenScale', (_Runtime.field(source, 'greenScale') * _Runtime.field(other, 'greenScale')));
-    _Runtime.setField(out, 'blueScale', (_Runtime.field(source, 'blueScale') * _Runtime.field(other, 'blueScale')));
-    _Runtime.setField(out, 'alphaScale', (_Runtime.field(source, 'alphaScale') * _Runtime.field(other, 'alphaScale')));
+    _Runtime.setField(out, 'redBias', _Runtime.addNumbers(_Runtime.multiplyNumbers(_Runtime.field(source, 'redScale'), _Runtime.field(other, 'redBias')), _Runtime.field(source, 'redBias')));
+    _Runtime.setField(out, 'greenBias', _Runtime.addNumbers(_Runtime.multiplyNumbers(_Runtime.field(source, 'greenScale'), _Runtime.field(other, 'greenBias')), _Runtime.field(source, 'greenBias')));
+    _Runtime.setField(out, 'blueBias', _Runtime.addNumbers(_Runtime.multiplyNumbers(_Runtime.field(source, 'blueScale'), _Runtime.field(other, 'blueBias')), _Runtime.field(source, 'blueBias')));
+    _Runtime.setField(out, 'alphaBias', _Runtime.addNumbers(_Runtime.multiplyNumbers(_Runtime.field(source, 'alphaScale'), _Runtime.field(other, 'alphaBias')), _Runtime.field(source, 'alphaBias')));
+    _Runtime.setField(out, 'redScale', _Runtime.multiplyNumbers(_Runtime.field(source, 'redScale'), _Runtime.field(other, 'redScale')));
+    _Runtime.setField(out, 'greenScale', _Runtime.multiplyNumbers(_Runtime.field(source, 'greenScale'), _Runtime.field(other, 'greenScale')));
+    _Runtime.setField(out, 'blueScale', _Runtime.multiplyNumbers(_Runtime.field(source, 'blueScale'), _Runtime.field(other, 'blueScale')));
+    _Runtime.setField(out, 'alphaScale', _Runtime.multiplyNumbers(_Runtime.field(source, 'alphaScale'), _Runtime.field(other, 'alphaScale')));
   }
 
   public static function copyColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike):Void {
@@ -67,20 +67,20 @@ class ColorScaleBias {
   }
 
   public static function getColorScaleBiasBiasRgb(source:ColorScaleBiasLike):Float {
-    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(source, 'redBias') * 255.0))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(source, 'greenBias') * 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round((_Runtime.field(source, 'blueBias') * 255.0))));
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'redBias'), 255.0))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'greenBias'), 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'blueBias'), 255.0))));
     return cast null;
   }
 
   public static function getColorScaleBiasBiasRgba(source:ColorScaleBiasLike):Float {
-    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(source, 'redBias') * 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(source, 'greenBias') * 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((_Runtime.field(source, 'blueBias') * 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round((_Runtime.field(source, 'alphaBias') * 255.0))));
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'redBias'), 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'greenBias'), 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'blueBias'), 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(source, 'alphaBias'), 255.0))));
     return cast null;
   }
 
   public static function invertColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike):Void {
-    _Runtime.setField(out, 'redScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'redScale'), 0.0) : Bool) ? (cast (1.0 / _Runtime.field(source, 'redScale')) : Dynamic) : (cast 1.0 : Dynamic)));
-    _Runtime.setField(out, 'greenScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'greenScale'), 0.0) : Bool) ? (cast (1.0 / _Runtime.field(source, 'greenScale')) : Dynamic) : (cast 1.0 : Dynamic)));
-    _Runtime.setField(out, 'blueScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'blueScale'), 0.0) : Bool) ? (cast (1.0 / _Runtime.field(source, 'blueScale')) : Dynamic) : (cast 1.0 : Dynamic)));
-    _Runtime.setField(out, 'alphaScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'alphaScale'), 0.0) : Bool) ? (cast (1.0 / _Runtime.field(source, 'alphaScale')) : Dynamic) : (cast 1.0 : Dynamic)));
+    _Runtime.setField(out, 'redScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'redScale'), 0.0) : Bool) ? (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'redScale')) : Dynamic) : (cast 1.0 : Dynamic)));
+    _Runtime.setField(out, 'greenScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'greenScale'), 0.0) : Bool) ? (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'greenScale')) : Dynamic) : (cast 1.0 : Dynamic)));
+    _Runtime.setField(out, 'blueScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'blueScale'), 0.0) : Bool) ? (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'blueScale')) : Dynamic) : (cast 1.0 : Dynamic)));
+    _Runtime.setField(out, 'alphaScale', ((cast !_Runtime.strictEquals(_Runtime.field(source, 'alphaScale'), 0.0) : Bool) ? (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'alphaScale')) : Dynamic) : (cast 1.0 : Dynamic)));
     _Runtime.setField(out, 'redBias', -_Runtime.field(source, 'redBias'));
     _Runtime.setField(out, 'greenBias', -_Runtime.field(source, 'greenBias'));
     _Runtime.setField(out, 'blueBias', -_Runtime.field(source, 'blueBias'));

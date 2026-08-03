@@ -34,7 +34,7 @@ class GaussianKernel {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1) * inverseSum)); });
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1), inverseSum)); });
         i++;
       }
     }

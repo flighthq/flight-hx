@@ -26,21 +26,21 @@ class BitmapSharpen {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
             var di:Dynamic = (((py * w) + px) * 4.0);
             var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, si);
             var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0));
             var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (r + (amount * (r - flighthq._internal._StaticIndex.readUint8ClampedArray(out, di)))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (g + (amount * (g - flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 1.0))))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (b + (amount * (b - flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 2.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (r + (amount * _Runtime.subtractNumbers(r, flighthq._internal._StaticIndex.readUint8ClampedArray(out, di)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (g + (amount * _Runtime.subtractNumbers(g, flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 1.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (b + (amount * _Runtime.subtractNumbers(b, flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 2.0))))));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 3.0)));
             px++;
           }

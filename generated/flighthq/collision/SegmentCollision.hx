@@ -31,19 +31,19 @@ class SegmentCollision {
     var ddy:Dynamic = cast _Runtime.UNDEFINED;
     x0 = _Runtime.field(a, 'x0');
     y0 = _Runtime.field(a, 'y0');
-    dx = (_Runtime.field(a, 'x1') - x0);
-    dy = (_Runtime.field(a, 'y1') - y0);
+    dx = _Runtime.subtractNumbers(_Runtime.field(a, 'x1'), x0);
+    dy = _Runtime.subtractNumbers(_Runtime.field(a, 'y1'), y0);
     lengthSquared = ((dx * dx) + (dy * dy));
     t = 0.0;
     if ((cast ((cast lengthSquared : Float) > (cast 0.0 : Float)) : Bool)) {
-      (t = cast (((((_Runtime.field(b, 'x') - x0) * dx) + ((_Runtime.field(b, 'y') - y0) * dy)) / lengthSquared) : Dynamic));
+      (t = cast ((((_Runtime.subtractNumbers(_Runtime.field(b, 'x'), x0) * dx) + (_Runtime.subtractNumbers(_Runtime.field(b, 'y'), y0) * dy)) / lengthSquared) : Dynamic));
       (t = cast (((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Dynamic));
     }
     closestX = (x0 + (t * dx));
     closestY = (y0 + (t * dy));
-    ddx = (_Runtime.field(b, 'x') - closestX);
-    ddy = (_Runtime.field(b, 'y') - closestY);
-    return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast (_Runtime.field(b, 'radius') * _Runtime.field(b, 'radius')) : Float));
+    ddx = _Runtime.subtractNumbers(_Runtime.field(b, 'x'), closestX);
+    ddy = _Runtime.subtractNumbers(_Runtime.field(b, 'y'), closestY);
+    return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast _Runtime.multiplyNumbers(_Runtime.field(b, 'radius'), _Runtime.field(b, 'radius')) : Float));
     return cast null;
   }
 
@@ -60,10 +60,10 @@ class SegmentCollision {
     var localY1:Dynamic = cast _Runtime.UNDEFINED;
     cos = HxMath.cos(_Runtime.field(b, 'rotation'));
     sin = HxMath.sin(_Runtime.field(b, 'rotation'));
-    d0x = (_Runtime.field(a, 'x0') - _Runtime.field(b, 'x'));
-    d0y = (_Runtime.field(a, 'y0') - _Runtime.field(b, 'y'));
-    d1x = (_Runtime.field(a, 'x1') - _Runtime.field(b, 'x'));
-    d1y = (_Runtime.field(a, 'y1') - _Runtime.field(b, 'y'));
+    d0x = _Runtime.subtractNumbers(_Runtime.field(a, 'x0'), _Runtime.field(b, 'x'));
+    d0y = _Runtime.subtractNumbers(_Runtime.field(a, 'y0'), _Runtime.field(b, 'y'));
+    d1x = _Runtime.subtractNumbers(_Runtime.field(a, 'x1'), _Runtime.field(b, 'x'));
+    d1y = _Runtime.subtractNumbers(_Runtime.field(a, 'y1'), _Runtime.field(b, 'y'));
     localX0 = ((d0x * cos) + (d0y * sin));
     localY0 = ((-d0x * sin) + (d0y * cos));
     localX1 = ((d1x * cos) + (d1y * sin));
@@ -115,7 +115,7 @@ class SegmentCollision {
         var x1:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
         var y1:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
-        var edgeEpsilon:Dynamic = (_Runtime.hypot((x1 - x0), (y1 - y0)) * epsilon);
+        var edgeEpsilon:Dynamic = _Runtime.multiplyNumbers(_Runtime.hypot((x1 - x0), (y1 - y0)), epsilon);
         if ((cast ((cast cross : Float) > (cast edgeEpsilon : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -edgeEpsilon : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
         if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }
         i++;
@@ -154,7 +154,7 @@ class SegmentCollision {
     }
     if ((cast ((cast (denom * denom) : Float) <= (cast (((SegmentCollision.RELATIVE_EPSILON__segmentCollision * SegmentCollision.RELATIVE_EPSILON__segmentCollision) * d1LengthSquared) * d2LengthSquared) : Float)) : Bool)) {
       var epsilon:Dynamic = _Runtime.callValue(SegmentCollision.relativeEpsilon__segmentCollision, cast ([HxMath.max(HxMath.sqrt(d1LengthSquared), HxMath.sqrt(d2LengthSquared))] : Array<Dynamic>));
-      if ((cast ((cast HxMath.abs(((ex * d1y) - (ey * d1x))) : Float) > (cast (HxMath.sqrt(d1LengthSquared) * epsilon) : Float)) : Bool)) { return cast false; }
+      if ((cast ((cast HxMath.abs(((ex * d1y) - (ey * d1x))) : Float) > (cast _Runtime.multiplyNumbers(HxMath.sqrt(d1LengthSquared), epsilon) : Float)) : Bool)) { return cast false; }
       var t0:Dynamic = (((ex * d1x) + (ey * d1y)) / d1LengthSquared);
       var t1:Dynamic = ((((bx1 - ax0) * d1x) + ((by1 - ay0) * d1y)) / d1LengthSquared);
       var lo:Dynamic = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t0 : Dynamic) : (cast t1 : Dynamic));

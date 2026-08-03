@@ -8,7 +8,7 @@ class StylizeMath {
   public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
     var maskScale:Dynamic = cast _Runtime.UNDEFINED;
     var curv:Dynamic = cast _Runtime.UNDEFINED;
-    maskScale = (HxMath.max(1.0, resolution) / 360.0);
+    maskScale = _Runtime.divideNumbers(HxMath.max(1.0, resolution), 360.0);
     curv = HxMath.max(0.0, HxMath.min(1.0, curvature));
     flighthq._internal._StaticIndex.writeArray(out, 0.0, maskScale);
     flighthq._internal._StaticIndex.writeArray(out, 1.0, (curv * 0.1));
@@ -24,7 +24,7 @@ class StylizeMath {
 
   public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
-    scale = (HxMath.max(1.0, resolution) / 480.0);
+    scale = _Runtime.divideNumbers(HxMath.max(1.0, resolution), 480.0);
     flighthq._internal._StaticIndex.writeArray(out, 0.0, scale);
     flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, intensity)));
   }
@@ -53,7 +53,7 @@ class StylizeMath {
           {
             var x:Dynamic = 0.0;
             while ((cast ((cast x : Float) < (cast currentSize : Float)) : Bool)) {
-              var base:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(raw, ((y * currentSize) + x)) * 4.0);
+              var base:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(raw, ((y * currentSize) + x)), 4.0);
               flighthq._internal._StaticIndex.writeFloat32Array(tmp, ((y * next) + x), base);
               flighthq._internal._StaticIndex.writeFloat32Array(tmp, ((y * next) + (x + currentSize)), (base + 2.0));
               flighthq._internal._StaticIndex.writeFloat32Array(tmp, (((y + currentSize) * next) + x), (base + 3.0));
@@ -71,7 +71,7 @@ class StylizeMath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast sizeSq : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, i, (flighthq._internal._StaticIndex.readFloat32Array(raw, i) * invSizeSq));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(raw, i), invSizeSq));
         i++;
       }
     }

@@ -28,7 +28,7 @@ class CanvasClip {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
-    target = (_Runtime.field(data, 'clipDepth') - ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast target : Float)) : Bool)) {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
       _Runtime.incrementField(s, 'currentClipDepth', -1, true);

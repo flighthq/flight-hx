@@ -288,7 +288,7 @@ class Window {
     }, center: function(win:Dynamic) {
       if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined') : Bool)) : Bool)) { return; }
       try {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([HxMath.round(((_Runtime.field(_Runtime.globalValue('screen'), 'availWidth') - win.width) / 2.0)), HxMath.round(((_Runtime.field(_Runtime.globalValue('screen'), 'availHeight') - win.height) / 2.0))] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers(_Runtime.field(_Runtime.globalValue('screen'), 'availWidth'), win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers(_Runtime.field(_Runtime.globalValue('screen'), 'availHeight'), win.height) / 2.0))] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
     }, setResizable: function() {

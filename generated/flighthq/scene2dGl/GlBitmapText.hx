@@ -70,8 +70,8 @@ class GlBitmapText {
       var startCount:Dynamic = _Runtime.field(runtime, 'quadBatchWriterCount');
       var regions:Dynamic = atlas.regions;
       var numRegions:Dynamic = _Runtime.field(regions, 'length');
-      var iw:Dynamic = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
-      var ih:Dynamic = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
+      var iw:Dynamic = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
+      var ih:Dynamic = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
       var instanceData:Dynamic = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
       var ids:Dynamic = _Runtime.field(page, 'ids');
       var transforms:Dynamic = _Runtime.field(page, 'transforms');
@@ -106,7 +106,7 @@ class GlBitmapText {
           i++;
         }
       }
-      _Runtime.setField(runtime, 'quadBatchWriterCount', (_Runtime.field(runtime, 'quadBatchWriterCount') + drawCount));
+      _Runtime.setField(runtime, 'quadBatchWriterCount', _Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), drawCount));
     }
   }
 

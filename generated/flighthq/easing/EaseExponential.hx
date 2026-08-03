@@ -10,8 +10,8 @@ class EaseExponential {
 
   public static final easeInOutExponential:EasingFunction = function(t:Dynamic) {
     if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
-    return cast ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast (HxMath.pow(2.0, ((20.0 * t) - 10.0)) / 2.0) : Dynamic) : (cast ((2.0 - HxMath.pow(2.0, ((-20.0 * t) + 10.0))) / 2.0) : Dynamic));
+    return cast ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast _Runtime.divideNumbers(HxMath.pow(2.0, ((20.0 * t) - 10.0)), 2.0) : Dynamic) : (cast (_Runtime.subtractNumbers(2.0, HxMath.pow(2.0, ((-20.0 * t) + 10.0))) / 2.0) : Dynamic));
   };
 
-  public static final easeOutExponential:EasingFunction = function(t:Dynamic) return ((cast _Runtime.strictEquals(t, 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast (1.0 - HxMath.pow(2.0, (-10.0 * t))) : Dynamic));
+  public static final easeOutExponential:EasingFunction = function(t:Dynamic) return ((cast _Runtime.strictEquals(t, 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.subtractNumbers(1.0, HxMath.pow(2.0, (-10.0 * t))) : Dynamic));
 }

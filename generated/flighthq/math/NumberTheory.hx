@@ -52,7 +52,7 @@ class NumberTheory {
   public static function lcm(a:Float, b:Float):Float {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     g = _Runtime.callValue(gcd, cast ([a, b] : Array<Dynamic>));
-    return cast ((HxMath.abs(_Runtime.trunc(a)) / g) * HxMath.abs(_Runtime.trunc(b)));
+    return cast _Runtime.multiplyNumbers(_Runtime.divideNumbers(HxMath.abs(_Runtime.trunc(a)), g), HxMath.abs(_Runtime.trunc(b)));
     return cast null;
   }
 }

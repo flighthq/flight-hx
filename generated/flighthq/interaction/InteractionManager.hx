@@ -228,7 +228,7 @@ class InteractionManager {
     if ((cast _Runtime.strictEquals(downTarget, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(target, downTarget) : Bool)) {
       _Runtime.callValue(InteractionManager.emitInteractionSignal__interactionManager, cast ([target, _Runtime.field(manager, 'root'), 'onClick', InteractionManager._pointerData__interactionManager] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(state, 'lastClickTarget'), target) : Bool) && (cast ((cast (time - _Runtime.field(state, 'lastClickTime')) : Float) <= (cast _Runtime.field(manager, 'doubleClickDelay') : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(state, 'lastClickTarget'), target) : Bool) && (cast ((cast _Runtime.subtractNumbers(time, _Runtime.field(state, 'lastClickTime')) : Float) <= (cast _Runtime.field(manager, 'doubleClickDelay') : Float)) : Bool)) : Bool)) {
         _Runtime.callValue(InteractionManager.emitInteractionSignal__interactionManager, cast ([target, _Runtime.field(manager, 'root'), 'onDoubleClick', InteractionManager._pointerData__interactionManager] : Array<Dynamic>));
         _Runtime.setField(state, 'lastClickTarget', null);
         _Runtime.setField(state, 'lastClickTime', -HxMath.POSITIVE_INFINITY);
@@ -286,7 +286,7 @@ class InteractionManager {
       }
     }
     {
-      var i:Dynamic = (_Runtime.field(newChain, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(newChain, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var node:Dynamic = flighthq._internal._StaticIndex.readArray(newChain, i);
         if ((cast _Runtime.strictEquals(_Runtime.callProperty(oldChain, 'indexOf', cast ([node] : Array<Dynamic>)), -1.0) : Bool)) {
@@ -431,7 +431,7 @@ class InteractionManager {
   }
 
   public static function incrementInteractionSignalSubscriberCount__interactionManager<N>(manager:flighthq.types.InteractionManager<Dynamic>, name:InteractionSignalName):Void {
-    ((cast _Runtime.field(manager, 'signalSubscriberCounts') : flighthq._internal._Map).set(name, (_Runtime.coalesce(((cast _Runtime.field(manager, 'signalSubscriberCounts') : flighthq._internal._Map).get(name)), function():Dynamic return cast 0.0) + 1.0)));
+    ((cast _Runtime.field(manager, 'signalSubscriberCounts') : flighthq._internal._Map).set(name, _Runtime.addNumbers(_Runtime.coalesce(((cast _Runtime.field(manager, 'signalSubscriberCounts') : flighthq._internal._Map).get(name)), function():Dynamic return cast 0.0), 1.0)));
   }
 
   public static function isInteractionSignalCancelled__interactionManager<N>(source:Dynamic, name:InteractionSignalName):Bool {

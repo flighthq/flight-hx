@@ -82,7 +82,7 @@ class ImageResourceFrom {
       if ((cast _Runtime.strictEquals(type, null) : Bool)) {
         _Runtime.throwValue(_Runtime.error('Unable to determine image type from bytes'));
       }
-      buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
+      buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
       return cast _Runtime.callValue(loadImageResourceFromBlob, cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), signal] : Array<Dynamic>));
       return cast null;
     }));

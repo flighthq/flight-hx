@@ -22,14 +22,14 @@ class BitmapFill {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var i:Dynamic = (((y * _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
+            var i:Dynamic = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, i, r);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (i + 1.0), g);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (i + 2.0), b);

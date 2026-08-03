@@ -57,7 +57,7 @@ class TextSegmenterBackend {
     isWordGranularity = _Runtime.strictEquals(granularity, 'word');
     for (data in _Runtime.iterable(_Runtime.callProperty(segmenter, 'segment', cast ([text] : Array<Dynamic>)))) {
       var start:Dynamic = _Runtime.field(data, 'index');
-      var record:TextSegment = { start: start, end: (start + _Runtime.field(_Runtime.field(data, 'segment'), 'length')), text: _Runtime.field(data, 'segment') };
+      var record:TextSegment = { start: start, end: _Runtime.addNumbers(start, _Runtime.field(_Runtime.field(data, 'segment'), 'length')), text: _Runtime.field(data, 'segment') };
       if ((cast isWordGranularity : Bool)) { _Runtime.setField(record, 'isWordLike', _Runtime.coalesce(_Runtime.field(data, 'isWordLike'), function():Dynamic return cast false)); }
       _Runtime.callProperty(out, 'push', cast ([record] : Array<Dynamic>));
     }

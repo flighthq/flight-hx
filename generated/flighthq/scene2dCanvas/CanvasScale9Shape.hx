@@ -99,8 +99,8 @@ class CanvasScale9Shape {
             var my:Dynamic = _Runtime.callProperty(mapper, 'mapY', cast ([y] : Array<Dynamic>));
             flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), mx);
             flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), my);
-            flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), (_Runtime.callProperty(mapper, 'mapX', cast ([(x + w)] : Array<Dynamic>)) - mx));
-            flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), (_Runtime.callProperty(mapper, 'mapY', cast ([(y + h)] : Array<Dynamic>)) - my));
+            flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapX', cast ([(x + w)] : Array<Dynamic>)), mx));
+            flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapY', cast ([(y + h)] : Array<Dynamic>)), my));
           }
         }
         else if (__switchValue == 'drawRoundRectangle') {
@@ -113,8 +113,8 @@ class CanvasScale9Shape {
             var my:Dynamic = _Runtime.callProperty(mapper, 'mapY', cast ([y] : Array<Dynamic>));
             flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), mx);
             flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), my);
-            flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), (_Runtime.callProperty(mapper, 'mapX', cast ([(x + w)] : Array<Dynamic>)) - mx));
-            flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), (_Runtime.callProperty(mapper, 'mapY', cast ([(y + h)] : Array<Dynamic>)) - my));
+            flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapX', cast ([(x + w)] : Array<Dynamic>)), mx));
+            flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapY', cast ([(y + h)] : Array<Dynamic>)), my));
           }
         }
         else if (__switchValue == 'drawCircle') {

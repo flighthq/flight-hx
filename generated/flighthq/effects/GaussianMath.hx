@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 
 class GaussianMath {
   public static function computeGaussianRadiusFromSigma(sigma:Float):Float {
-    return cast HxMath.ceil((3.0 * HxMath.max(0.0, sigma)));
+    return cast HxMath.ceil(_Runtime.multiplyNumbers(3.0, HxMath.max(0.0, sigma)));
     return cast null;
   }
 
   public static function computeGaussianSigmaFromRadius(radius:Float):Float {
-    return cast (HxMath.max(0.0, radius) / 3.0);
+    return cast _Runtime.divideNumbers(HxMath.max(0.0, radius), 3.0);
     return cast null;
   }
 
@@ -43,7 +43,7 @@ class GaussianMath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) * invSum)); });
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), invSum)); });
         i++;
       }
     }

@@ -131,7 +131,7 @@ class Sensors {
     z = quaternion.z;
     w = quaternion.w;
     sinBeta = (2.0 * ((w * x) - (y * z)));
-    beta = ((cast ((cast HxMath.abs(sinBeta) : Float) >= (cast 1.0 : Float)) : Bool) ? (cast ((_Runtime.sign(sinBeta) * HxMath.PI) / 2.0) : Dynamic) : (cast HxMath.asin(sinBeta) : Dynamic));
+    beta = ((cast ((cast HxMath.abs(sinBeta) : Float) >= (cast 1.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.sign(sinBeta), HxMath.PI) / 2.0) : Dynamic) : (cast HxMath.asin(sinBeta) : Dynamic));
     alpha = HxMath.atan2((2.0 * ((w * z) + (x * y))), (1.0 - (2.0 * ((x * x) + (z * z)))));
     gamma = HxMath.atan2((2.0 * ((w * y) + (x * z))), (1.0 - (2.0 * ((x * x) + (y * y)))));
     toDeg = (180.0 / HxMath.PI);
@@ -490,9 +490,9 @@ class Sensors {
         withGravity = _Runtime.field(event, 'accelerationIncludingGravity');
         linearAccel = _Runtime.field(event, 'acceleration');
         if ((cast !_Runtime.truthy(withGravity) : Bool)) { return; }
-        (Sensors._gravity__sensors.x = cast ((_Runtime.coalesce(_Runtime.field(withGravity, 'x'), function():Dynamic return cast 0.0) - _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'x'), function():Dynamic return cast 0.0)) : Dynamic));
-        (Sensors._gravity__sensors.y = cast ((_Runtime.coalesce(_Runtime.field(withGravity, 'y'), function():Dynamic return cast 0.0) - _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'y'), function():Dynamic return cast 0.0)) : Dynamic));
-        (Sensors._gravity__sensors.z = cast ((_Runtime.coalesce(_Runtime.field(withGravity, 'z'), function():Dynamic return cast 0.0) - _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'z'), function():Dynamic return cast 0.0)) : Dynamic));
+        (Sensors._gravity__sensors.x = cast (_Runtime.subtractNumbers(_Runtime.coalesce(_Runtime.field(withGravity, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'x'), function():Dynamic return cast 0.0)) : Dynamic));
+        (Sensors._gravity__sensors.y = cast (_Runtime.subtractNumbers(_Runtime.coalesce(_Runtime.field(withGravity, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'y'), function():Dynamic return cast 0.0)) : Dynamic));
+        (Sensors._gravity__sensors.z = cast (_Runtime.subtractNumbers(_Runtime.coalesce(_Runtime.field(withGravity, 'z'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(linearAccel, 'z'), function():Dynamic return cast 0.0)) : Dynamic));
         (Sensors._gravity__sensors.interval = cast (_Runtime.coalesce(_Runtime.field(event, 'interval'), function():Dynamic return cast -1.0) : Dynamic));
         (Sensors._gravity__sensors.timestamp = cast (-1.0 : Dynamic));
         _Runtime.callValue(listener, cast ([Sensors._gravity__sensors] : Array<Dynamic>));

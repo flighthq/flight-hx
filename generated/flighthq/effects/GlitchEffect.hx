@@ -20,8 +20,8 @@ class GlitchEffect {
     var tear:Dynamic = cast _Runtime.UNDEFINED;
     var channelShift:Dynamic = cast _Runtime.UNDEFINED;
     var horizontal:Dynamic = cast _Runtime.UNDEFINED;
-    tear = (HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5)) * 40.0);
-    channelShift = (HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0)) * 1.4);
+    tear = _Runtime.multiplyNumbers(HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5)), 40.0);
+    channelShift = _Runtime.multiplyNumbers(HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0)), 1.4);
     horizontal = HxMath.ceil((tear + channelShift));
     return cast { bottom: 0.0, left: horizontal, right: horizontal, top: 0.0 };
     return cast null;

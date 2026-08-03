@@ -34,7 +34,7 @@ class WgpuClip {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    target = (_Runtime.field(data, 'clipDepth') - ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.callValue(WgpuClip.popOneWgpuClip__wgpuClip, cast ([state] : Array<Dynamic>)); }
   }, pushClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D) {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

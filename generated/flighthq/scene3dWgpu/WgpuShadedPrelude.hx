@@ -85,13 +85,13 @@ class WgpuShadedPrelude {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callValue(WgpuShadedPrelude.getModifierRegistry__wgpuShadedPrelude, cast ([state] : Array<Dynamic>));
     plan = _Runtime.callValue(WgpuShadedPrelude.getCachedModifierPlan__wgpuShadedPrelude, cast ([state, material, registry] : Array<Dynamic>));
-    byteLength = (48.0 + (_Runtime.field(plan, 'uniformFloatCount') * 4.0));
+    byteLength = (48.0 + _Runtime.multiplyNumbers(_Runtime.field(plan, 'uniformFloatCount'), 4.0));
     stateBindings = (cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'shadedMaterialBindingCache') : Dynamic);
     binding = ((cast stateBindings : flighthq._internal._WeakMap).get(material));
     sampler = _Runtime.callValue(getWgpuMaterialSampler, cast ([state, _Runtime.field(material, 'diffuseMap')] : Array<Dynamic>));
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(binding, 'layout'), _Runtime.field(pipeline, 'materialBindGroupLayout')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'data'), 'byteLength'), byteLength) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'textures'), 'length'), (_Runtime.field(plan, 'textureCount') + 3.0)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(binding, 'layout'), _Runtime.field(pipeline, 'materialBindGroupLayout')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'data'), 'byteLength'), byteLength) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'textures'), 'length'), _Runtime.addNumbers(_Runtime.field(plan, 'textureCount'), 3.0)) : Bool)) : Bool)) {
       _Runtime.callOptionalProperty(_Runtime.optionalField(binding, 'buffer'), 'destroy', cast ([] : Array<Dynamic>));
-      (binding = cast (_Runtime.callValue(WgpuShadedPrelude.createShadedBinding__wgpuShadedPrelude, cast ([state, _Runtime.field(pipeline, 'materialBindGroupLayout'), byteLength, (_Runtime.field(plan, 'textureCount') + 3.0), sampler] : Array<Dynamic>)) : Dynamic));
+      (binding = cast (_Runtime.callValue(WgpuShadedPrelude.createShadedBinding__wgpuShadedPrelude, cast ([state, _Runtime.field(pipeline, 'materialBindGroupLayout'), byteLength, _Runtime.addNumbers(_Runtime.field(plan, 'textureCount'), 3.0), sampler] : Array<Dynamic>)) : Dynamic));
       ((cast stateBindings : flighthq._internal._WeakMap).set(material, binding));
     }
     flighthq._internal._StaticIndex.writeArray(_Runtime.field(binding, 'textures'), 0.0, _Runtime.field(material, 'diffuseMap'));
@@ -233,7 +233,7 @@ class WgpuShadedPrelude {
     defineKey = { alphaMaskEnabled: _Runtime.field(flags, 'alphaMaskEnabled'), doubleSided: _Runtime.field(flags, 'doubleSided'), hasDiffuseMap: _Runtime.field(flags, 'hasDiffuseMap'), hasAlphaMap: false, hasNormalMap: _Runtime.field(flags, 'hasNormalMap'), hasSpecularMap: _Runtime.field(flags, 'hasSpecularMap'), lightingModel: 'blinnphong' };
     source = _Runtime.callValue(getWgpuClassicSharedSamplerModuleSourceForKey, cast ([defineKey, skinned, skinning] : Array<Dynamic>));
     (source = cast (_Runtime.replace(source, '  let world = draw.world * localPosition;', '  let vertexUv = uv;\n' + Std.string(_Runtime.callValue(WgpuShadedPrelude.indent__wgpuShadedPrelude, cast ([_Runtime.field(plan, 'vertex'), 2.0] : Array<Dynamic>))) + '\n  let world = draw.world * localPosition;', false) : Dynamic));
-    modifierField = ((cast _Runtime.strictEquals(_Runtime.field(plan, 'uniformFloatCount'), 0.0) : Bool) ? (cast '' : Dynamic) : (cast '\n  modifierData : array<vec4f, ' + Std.string((_Runtime.field(plan, 'uniformFloatCount') / 4.0)) + '>,' : Dynamic));
+    modifierField = ((cast _Runtime.strictEquals(_Runtime.field(plan, 'uniformFloatCount'), 0.0) : Bool) ? (cast '' : Dynamic) : (cast '\n  modifierData : array<vec4f, ' + Std.string(_Runtime.divideNumbers(_Runtime.field(plan, 'uniformFloatCount'), 4.0)) + '>,' : Dynamic));
     (source = cast (_Runtime.replace(source, 'params : vec4f,    // x = shininess, y = alphaCutoff', 'params : vec4f,    // x = shininess, y = alphaCutoff, z = time, w = normalScale' + Std.string(modifierField) + '', false) : Dynamic));
     textureDeclarations = '';
     {
@@ -296,7 +296,7 @@ class WgpuShadedPrelude {
         index++;
       }
     }
-    return cast { diffuse: diffuse, effect: effect, emissive: emissive, fragmentDeclarations: ((cast _Runtime.strictEquals((cast declarations : flighthq._internal._Set).size, 0.0) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(_Runtime.join(_Runtime.toArray(declarations), '\n')) + '\n' : Dynamic)), normal: normal, orderedModifiers: ordered, snippets: snippets, specular: specular, textureCount: textureCount, uniformFloatCount: (_Runtime.field(ordered, 'length') * WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude), vertex: vertex };
+    return cast { diffuse: diffuse, effect: effect, emissive: emissive, fragmentDeclarations: ((cast _Runtime.strictEquals((cast declarations : flighthq._internal._Set).size, 0.0) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(_Runtime.join(_Runtime.toArray(declarations), '\n')) + '\n' : Dynamic)), normal: normal, orderedModifiers: ordered, snippets: snippets, specular: specular, textureCount: textureCount, uniformFloatCount: _Runtime.multiplyNumbers(_Runtime.field(ordered, 'length'), WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude), vertex: vertex };
     return cast null;
   }
 
@@ -364,7 +364,7 @@ class WgpuShadedPrelude {
     var secondary:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
     if ((cast _Runtime.strictEquals(_Runtime.field(value, 'map'), null) : Bool)) { return cast { source: '' }; }
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     primary = _Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'map')] : Array<Dynamic>));
     secondary = ((cast _Runtime.strictEquals(_Runtime.field(value, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast ' + textureSample(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'secondaryMap')] : Array<Dynamic>))) + ', materialSampler, in.uv + material.modifierData[' + Std.string((base + 1.0)) + '].xy * material.params.z).xyz * 2.0 - vec3f(1.0)' : Dynamic));
     return cast { source: '{\n  var animatedNormal = textureSample(modifierTexture' + Std.string(primary) + ', materialSampler, in.uv + material.modifierData[' + Std.string(base) + '].xy * material.params.z).xyz * 2.0 - vec3f(1.0)' + Std.string(secondary) + ';\n  animatedNormal.x = animatedNormal.x * material.modifierData[' + Std.string(base) + '].z;\n  animatedNormal.y = animatedNormal.y * material.modifierData[' + Std.string(base) + '].z;\n  normal = normalize(tbn * animatedNormal);\n}\n' };
@@ -395,7 +395,7 @@ class WgpuShadedPrelude {
     var procedural:Dynamic = cast _Runtime.UNDEFINED;
     var noise:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : DissolveModifier);
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     procedural = _Runtime.strictEquals(_Runtime.field(value, 'map'), _Runtime.field(_Runtime, 'UNDEFINED'));
     noise = ((cast procedural : Bool) ? (cast 'shadedValueNoise(in.uv * material.modifierData[' + Std.string(base) + '].z)' : Dynamic) : (cast 'textureSample(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'map')] : Array<Dynamic>))) + ', materialSampler, in.uv).r' : Dynamic));
     return cast { declarations: ((cast procedural : Bool) ? (cast WgpuShadedPrelude.VALUE_NOISE_WGSL__wgpuShadedPrelude : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), source: '{\n  let dissolveNoise = ' + Std.string(noise) + ';\n  if (dissolveNoise < material.modifierData[' + Std.string(base) + '].x) { discard; }\n  let dissolveEdge = 1.0 - smoothstep(material.modifierData[' + Std.string(base) + '].x, material.modifierData[' + Std.string(base) + '].x + max(material.modifierData[' + Std.string(base) + '].y, 0.0001), dissolveNoise);\n  radiance = mix(radiance, material.modifierData[' + Std.string((base + 1.0)) + '].rgb, dissolveEdge);\n}\n' };
@@ -422,7 +422,7 @@ class WgpuShadedPrelude {
     var mask:Dynamic = cast _Runtime.UNDEFINED;
     var gated:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : EmissiveModifier);
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     mask = ((cast _Runtime.strictEquals(_Runtime.field(value, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast ' * textureSample(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'mask')] : Array<Dynamic>))) + ', materialSampler, in.uv).rgb' : Dynamic));
     gated = ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), EmissiveModifierFacingValue.Ignore) : Bool)) : Bool) ? (cast '' : Dynamic) : (cast '\n  let emissiveLightDir = select(vec3f(0.0, 0.0, 1.0), normalize(-frame.lightDirection.xyz), frame.lightDirection.w > 0.5);\n  let emissiveFacing = dot(normal, emissiveLightDir) * material.modifierData[' + Std.string((base + 1.0)) + '].x;\n  let emissiveSoft = max(material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0001);\n  emissiveTerm = emissiveTerm * smoothstep(-emissiveSoft, emissiveSoft, emissiveFacing);' : Dynamic));
     return cast { source: '{\n  var emissiveTerm = material.modifierData[' + Std.string(base) + '].rgb * material.modifierData[' + Std.string(base) + '].w' + Std.string(mask) + ';' + Std.string(gated) + '\n  emissive = emissive + emissiveTerm;\n}\n' };
@@ -447,7 +447,7 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'roughness'), function():Dynamic return cast 0.0));
   }, contribution: function(_modifier:Dynamic, _index:Dynamic, context:Dynamic) {
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     return cast { source: '{\n  let envDirection = reflect(-shadedViewDir, normal);\n  let envMip = clamp(material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0, 1.0) * max(ibl.params.z, 0.0);\n  let envSample = select(material.modifierData[' + Std.string(base) + '].rgb, textureSampleLevel(iblPrefiltered, iblSampler, envDirection, envMip).rgb, ibl.params.x > 0.5);\n  let envFresnel = material.modifierData[' + Std.string((base + 1.0)) + '].x + (1.0 - material.modifierData[' + Std.string((base + 1.0)) + '].x) * pow(1.0 - max(dot(normal, shadedViewDir), 0.0), 5.0);\n  radiance = radiance + envSample * material.modifierData[' + Std.string(base) + '].rgb * (material.modifierData[' + Std.string(base) + '].w * envFresnel);\n}\n' };
   }, kind: EnvReflectModifierKind, slot: ModifierSlotValue.Effect };
 
@@ -465,7 +465,7 @@ class WgpuShadedPrelude {
     var distance:Dynamic = cast _Runtime.UNDEFINED;
     var factor:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : FogModifier);
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     distance = 'length(frame.cameraPosition.xyz - in.worldPosition)';
     factor = ((cast _Runtime.strictEquals(_Runtime.field(value, 'mode'), FogModifierModeValue.Exponential) : Bool) ? (cast '1.0 - exp(-material.modifierData[' + Std.string((base + 1.0)) + '].x * ' + Std.string(distance) + ')' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'mode'), FogModifierModeValue.Exponential2) : Bool) ? (cast '1.0 - exp(-pow(material.modifierData[' + Std.string((base + 1.0)) + '].x * ' + Std.string(distance) + ', 2.0))' : Dynamic) : (cast 'clamp((' + Std.string(distance) + ' - material.modifierData[' + Std.string((base + 1.0)) + '].y) / max(material.modifierData[' + Std.string((base + 1.0)) + '].z - material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0001), 0.0, 1.0)' : Dynamic)) : Dynamic));
     return cast { source: 'radiance = mix(radiance, material.modifierData[' + Std.string(base) + '].rgb, clamp(' + Std.string(factor) + ', 0.0, 1.0));\n' };
@@ -483,7 +483,7 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'bias'), function():Dynamic return cast 0.0));
   }, contribution: function(_modifier:Dynamic, _index:Dynamic, context:Dynamic) {
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     return cast { source: '{\n  let rimFactor = clamp(material.modifierData[' + Std.string((base + 1.0)) + '].y + material.modifierData[' + Std.string((base + 1.0)) + '].x * pow(1.0 - max(dot(normal, shadedViewDir), 0.0), max(material.modifierData[' + Std.string(base) + '].w, 0.0001)), 0.0, 1.0);\n  radiance = radiance + material.modifierData[' + Std.string(base) + '].rgb * rimFactor;\n}\n' };
   }, kind: RimModifierKind, slot: ModifierSlotValue.Effect };
 
@@ -494,7 +494,7 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'smoothness'), function():Dynamic return cast 0.0));
   }, contribution: function(_modifier:Dynamic, _index:Dynamic, context:Dynamic) {
     var base:Dynamic = cast _Runtime.UNDEFINED;
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     return cast { source: '{\n  let toonLum = dot(radiance, vec3f(0.2126, 0.7152, 0.0722));\n  let toonSteps = max(material.modifierData[' + Std.string(base) + '].x, 2.0);\n  let toonScaled = toonLum * toonSteps;\n  let toonBand = floor(toonScaled);\n  let toonSoft = max(material.modifierData[' + Std.string(base) + '].y, 0.0001);\n  let toonQuant = (toonBand + smoothstep(0.5 - toonSoft, 0.5 + toonSoft, toonScaled - toonBand)) / toonSteps;\n  radiance = radiance * select(1.0, toonQuant / toonLum, toonLum > 0.0001);\n}\n' };
   }, kind: ToonModifierKind, slot: ModifierSlotValue.Effect };
 
@@ -516,7 +516,7 @@ class WgpuShadedPrelude {
     var axis:Dynamic = cast _Runtime.UNDEFINED;
     var amount:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);
-    base = (_Runtime.field(context, 'uniformBase') / 4.0);
+    base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     axis = ((cast _Runtime.strictEquals(_Runtime.field(value, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'normalize(localNormal)' : Dynamic) : (cast 'normalize(material.modifierData[' + Std.string((base + 1.0)) + '].xyz)' : Dynamic));
     amount = ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'source'), VertexDisplaceModifierSourceValue.HeightMap) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(value, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 'textureSampleLevel(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'map')] : Array<Dynamic>))) + ', materialSampler, vertexUv, 0.0).r * material.modifierData[' + Std.string(base) + '].x' : Dynamic) : (cast 'sin(dot(localPosition.xyz, normalize(material.modifierData[' + Std.string((base + 2.0)) + '].xyz)) * material.modifierData[' + Std.string(base) + '].y + material.params.z * material.modifierData[' + Std.string(base) + '].z) * material.modifierData[' + Std.string(base) + '].x' : Dynamic));
     return cast { source: 'localPosition = vec4f(localPosition.xyz + ' + Std.string(axis) + ' * (' + Std.string(amount) + '), 1.0);\n' };

@@ -87,8 +87,8 @@ class WgpuQuadBatch {
     base = _Runtime.callValue(prepareWgpuQuadBatchWrite, cast ([state, textureEntry, _Runtime.field(texture, 'sampler'), _Runtime.field(quadBatch, 'blendMode'), material, materialRenderer, instanceCount] : Array<Dynamic>));
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
-    ih = (1.0 / HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
     instanceData = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
     isVector2 = _Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2');
     pt = _Runtime.field(quadBatch, 'transform2D');
@@ -147,7 +147,7 @@ class WgpuQuadBatch {
         i++;
       }
     }
-    _Runtime.setField(runtime, 'quadBatchWriterCount', (_Runtime.field(runtime, 'quadBatchWriterCount') + drawCount));
+    _Runtime.setField(runtime, 'quadBatchWriterCount', _Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), drawCount));
   }
 
   public static final defaultWgpuQuadBatchRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuQuadBatch.submitWgpuQuadBatch__wgpuQuadBatch };

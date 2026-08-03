@@ -270,8 +270,8 @@ class ShapeContact {
         var j:Dynamic = ((cast _Runtime.strictEquals((i + 1.0), sn) : Bool) ? (cast 0.0 : Dynamic) : (cast (i + 1.0) : Dynamic));
         var x0:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var normalX:Dynamic = (_Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0)) - y0);
-        var normalY:Dynamic = (x0 - _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1)));
+        var normalX:Dynamic = _Runtime.subtractNumbers(_Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0)), y0);
+        var normalY:Dynamic = _Runtime.subtractNumbers(x0, _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1)));
         var length:Dynamic = HxMath.sqrt(((normalX * normalX) + (normalY * normalY)));
         if ((cast ((cast length : Float) <= (cast ShapeContact.EPS__shapeContact : Float)) : Bool)) { i++; continue; }
         (normalX = cast ((normalX / length) : Dynamic));
@@ -284,7 +284,7 @@ class ShapeContact {
         {
           var k:Dynamic = 0.0;
           while ((cast ((cast k : Float) < (cast on : Float)) : Bool)) {
-            var projected:Dynamic = ((normalX * (_Runtime.getIndex(ox, (_Runtime.toInt32(k) << 1)) - x0)) + (normalY * (_Runtime.getIndex(ox, ((_Runtime.toInt32(k) << 1) + 1.0)) - y0)));
+            var projected:Dynamic = ((normalX * _Runtime.subtractNumbers(_Runtime.getIndex(ox, (_Runtime.toInt32(k) << 1)), x0)) + (normalY * _Runtime.subtractNumbers(_Runtime.getIndex(ox, ((_Runtime.toInt32(k) << 1) + 1.0)), y0)));
             if ((cast ((cast projected : Float) < (cast separation : Float)) : Bool)) { (separation = cast (projected : Dynamic)); }
             k++;
           }
@@ -330,8 +330,8 @@ class ShapeContact {
         var j:Dynamic = ((cast _Runtime.strictEquals((i + 1.0), pn) : Bool) ? (cast 0.0 : Dynamic) : (cast (i + 1.0) : Dynamic));
         var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
         var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var edgeNormalX:Dynamic = (_Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0)) - y0);
-        var edgeNormalY:Dynamic = (x0 - _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1)));
+        var edgeNormalX:Dynamic = _Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0)), y0);
+        var edgeNormalY:Dynamic = _Runtime.subtractNumbers(x0, _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1)));
         var length:Dynamic = HxMath.sqrt(((edgeNormalX * edgeNormalX) + (edgeNormalY * edgeNormalY)));
         if ((cast ((cast length : Float) <= (cast ShapeContact.EPS__shapeContact : Float)) : Bool)) { i++; continue; }
         (edgeNormalX = cast ((edgeNormalX / length) : Dynamic));

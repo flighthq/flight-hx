@@ -155,8 +155,8 @@ class Md2Parse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast numTexCoords : Float)) : Bool)) {
         var base:Dynamic = (offTexCoords + (i * MD2_TEXCOORD_SIZE));
-        flighthq._internal._StaticIndex.writeFloat32Array(texS, i, (_Runtime.callProperty(view, 'getInt16', cast ([base, true] : Array<Dynamic>)) * uvScaleS));
-        flighthq._internal._StaticIndex.writeFloat32Array(texT, i, (_Runtime.callProperty(view, 'getInt16', cast ([(base + 2.0), true] : Array<Dynamic>)) * uvScaleT));
+        flighthq._internal._StaticIndex.writeFloat32Array(texS, i, _Runtime.multiplyNumbers(_Runtime.callProperty(view, 'getInt16', cast ([base, true] : Array<Dynamic>)), uvScaleS));
+        flighthq._internal._StaticIndex.writeFloat32Array(texT, i, _Runtime.multiplyNumbers(_Runtime.callProperty(view, 'getInt16', cast ([(base + 2.0), true] : Array<Dynamic>)), uvScaleT));
         i++;
       }
     }
@@ -190,7 +190,7 @@ class Md2Parse {
             var key:Dynamic = '' + Std.string(vertIdx) + '/' + Std.string(texIdx) + '';
             var idx:Dynamic = ((cast dedup : flighthq._internal._Map).get(key));
             if ((cast _Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              (idx = cast ((_Runtime.field(interleavedVertices, 'length') / CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
+              (idx = cast (_Runtime.divideNumbers(_Runtime.field(interleavedVertices, 'length'), CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
               var p:Dynamic = (vertIdx * 3.0);
               _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), p), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (p + 2.0))] : Array<Dynamic>));
               _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), p), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (p + 2.0))] : Array<Dynamic>));
@@ -283,9 +283,9 @@ class Md2Parse {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast numVertices : Float)) : Bool)) {
             var b:Dynamic = (verticesBase + (i * MD2_COMPRESSED_VERTEX_SIZE));
-            var px:Dynamic = ((flighthq._internal._StaticIndex.readUint8Array(bytes, b) * scaleX) + translateX);
-            var py:Dynamic = ((flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 1.0)) * scaleY) + translateY);
-            var pz:Dynamic = ((flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 2.0)) * scaleZ) + translateZ);
+            var px:Dynamic = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, b), scaleX) + translateX);
+            var py:Dynamic = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 1.0)), scaleY) + translateY);
+            var pz:Dynamic = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 2.0)), scaleZ) + translateZ);
             var p:Dynamic = (i * 3.0);
             flighthq._internal._StaticIndex.writeFloat32Array(positions, p, px);
             flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), pz);
@@ -330,14 +330,14 @@ class Md2Parse {
         {
           var v:Dynamic = 0.0;
           while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-            var src:Dynamic = (flighthq._internal._StaticIndex.readArray(sourceVertexIndices, v) * 3.0);
+            var src:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(sourceVertexIndices, v), 3.0);
             var dst:Dynamic = (v * 3.0);
-            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, dst, (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), src) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), src)));
-            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 1.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 1.0))));
-            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 2.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 2.0))));
-            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, dst, (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), src) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), src)));
-            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 1.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 1.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 1.0))));
-            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 2.0), (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 2.0)) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 2.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, dst, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), src), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), src)));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 1.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 2.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 2.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, dst, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), src), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), src)));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 1.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 2.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 2.0))));
             v++;
           }
         }

@@ -200,7 +200,7 @@ class ContainsPathPoint {
     y123 = ((y12 + y23) / 2.0);
     xm = ((x012 + x123) / 2.0);
     ym = ((y012 + y123) / 2.0);
-    return cast (_Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, x0, y0, x01, y01, x012, y012, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>)) + _Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>)));
+    return cast _Runtime.addNumbers(_Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, x0, y0, x01, y01, x012, y012, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>)), _Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -220,7 +220,7 @@ class ContainsPathPoint {
     my12 = ((cy + y1) / 2.0);
     mx = ((mx01 + mx12) / 2.0);
     my = ((my01 + my12) / 2.0);
-    return cast (_Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, x0, y0, mx01, my01, mx, my, toleranceSq, (depth + 1.0)] : Array<Dynamic>)) + _Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, mx, my, mx12, my12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>)));
+    return cast _Runtime.addNumbers(_Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, x0, y0, mx01, my01, mx, my, toleranceSq, (depth + 1.0)] : Array<Dynamic>)), _Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, mx, my, mx12, my12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>)));
     return cast null;
   }
 

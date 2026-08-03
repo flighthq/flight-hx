@@ -13,7 +13,7 @@ class HueSaturationAdjustment {
     var saturation:Dynamic = cast _Runtime.UNDEFINED;
     var lightness:Dynamic = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
-    hue = (_Runtime.coalesce(_Runtime.field(options, 'hue'), function():Dynamic return cast 0.0) / 360.0);
+    hue = _Runtime.divideNumbers(_Runtime.coalesce(_Runtime.field(options, 'hue'), function():Dynamic return cast 0.0), 360.0);
     saturation = _Runtime.coalesce(_Runtime.field(options, 'saturation'), function():Dynamic return cast 1.0);
     lightness = _Runtime.coalesce(_Runtime.field(options, 'lightness'), function():Dynamic return cast 0.0);
     transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
@@ -34,7 +34,7 @@ class HueSaturationAdjustment {
       d = (mx - mn);
       if ((cast ((cast d : Float) > (cast 0.0001 : Float)) : Bool)) {
         (s = cast (((cast ((cast l : Float) < (cast 0.5 : Float)) : Bool) ? (cast (d / (mx + mn)) : Dynamic) : (cast (d / ((2.0 - mx) - mn)) : Dynamic)) : Dynamic));
-        if ((cast _Runtime.strictEquals(mx, r) : Bool)) { (h = cast ((((g - b) / d) + ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic)); } else { if ((cast _Runtime.strictEquals(mx, g) : Bool)) { (h = cast ((((b - r) / d) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / d) + 4.0) : Dynamic)); } }
+        if ((cast _Runtime.strictEquals(mx, r) : Bool)) { (h = cast (_Runtime.addNumbers(((g - b) / d), ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic)); } else { if ((cast _Runtime.strictEquals(mx, g) : Bool)) { (h = cast ((((b - r) / d) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / d) + 4.0) : Dynamic)); } }
         (h = cast ((h / 6.0) : Dynamic));
       }
       (h = cast (_Runtime.callValue(HueSaturationAdjustment.fract__hueSaturationAdjustment, cast ([(h + hue)] : Array<Dynamic>)) : Dynamic));
@@ -62,7 +62,7 @@ class HueSaturationAdjustment {
   }
 
   public static function fract__hueSaturationAdjustment(v:Float):Float {
-    return cast (v - HxMath.floor(v));
+    return cast _Runtime.subtractNumbers(v, HxMath.floor(v));
     return cast null;
   }
 

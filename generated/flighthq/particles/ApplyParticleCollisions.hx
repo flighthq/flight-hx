@@ -114,11 +114,11 @@ class ApplyParticleCollisions {
     var nz:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
     nz = _Runtime.coalesce(c.nz, function():Dynamic return cast 0.0);
-    depth = ((((c.nx * flighthq._internal._StaticIndex.readArray(p, 0.0)) + (c.ny * flighthq._internal._StaticIndex.readArray(p, 1.0))) + (nz * flighthq._internal._StaticIndex.readArray(p, 2.0))) - c.distance);
+    depth = (((_Runtime.multiplyNumbers(c.nx, flighthq._internal._StaticIndex.readArray(p, 0.0)) + _Runtime.multiplyNumbers(c.ny, flighthq._internal._StaticIndex.readArray(p, 1.0))) + _Runtime.multiplyNumbers(nz, flighthq._internal._StaticIndex.readArray(p, 2.0))) - c.distance);
     if ((cast ((cast depth : Float) >= (cast 0.0 : Float)) : Bool)) { return cast false; }
-    ({ var __indexedObject0:Dynamic = p; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1) - (c.nx * depth))); });
-    ({ var __indexedObject2:Dynamic = p; var __indexedKey3:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject2, __indexedKey3, (flighthq._internal._StaticIndex.readArray(__indexedObject2, __indexedKey3) - (c.ny * depth))); });
-    ({ var __indexedObject4:Dynamic = p; var __indexedKey5:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject4, __indexedKey5, (flighthq._internal._StaticIndex.readArray(__indexedObject4, __indexedKey5) - (nz * depth))); });
+    ({ var __indexedObject0:Dynamic = p; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1), (c.nx * depth))); });
+    ({ var __indexedObject2:Dynamic = p; var __indexedKey3:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject2, __indexedKey3, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject2, __indexedKey3), (c.ny * depth))); });
+    ({ var __indexedObject4:Dynamic = p; var __indexedKey5:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject4, __indexedKey5, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject4, __indexedKey5), (nz * depth))); });
     _Runtime.callValue(ApplyParticleCollisions.reflect3__applyParticleCollisions, cast ([p, c.nx, c.ny, nz, _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0), _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     return cast true;
     return cast null;
@@ -130,8 +130,8 @@ class ApplyParticleCollisions {
     var dist:Dynamic = cast _Runtime.UNDEFINED;
     var nx:Dynamic = cast _Runtime.UNDEFINED;
     var ny:Dynamic = cast _Runtime.UNDEFINED;
-    dx = (flighthq._internal._StaticIndex.readArray(p, 0.0) - c.x);
-    dy = (flighthq._internal._StaticIndex.readArray(p, 1.0) - c.y);
+    dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 0.0), c.x);
+    dy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 1.0), c.y);
     dist = HxMath.sqrt(((dx * dx) + (dy * dy)));
     if ((cast _Runtime.strictEquals(c.mode, 'exclude') : Bool)) {
       if ((cast ((cast ((cast dist : Float) >= (cast c.radius : Float)) : Bool) || (cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) : Bool)) { return cast false; }
@@ -197,10 +197,10 @@ class ApplyParticleCollisions {
       return cast hit;
     }
     if ((cast ((cast ((cast ((cast ((cast flighthq._internal._StaticIndex.readArray(p, 0.0) : Float) <= (cast minX : Float)) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(p, 0.0) : Float) >= (cast maxX : Float)) : Bool)) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(p, 1.0) : Float) <= (cast minY : Float)) : Bool)) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(p, 1.0) : Float) >= (cast maxY : Float)) : Bool)) : Bool)) { return cast false; }
-    left = (flighthq._internal._StaticIndex.readArray(p, 0.0) - minX);
-    right = (maxX - flighthq._internal._StaticIndex.readArray(p, 0.0));
-    top = (flighthq._internal._StaticIndex.readArray(p, 1.0) - minY);
-    bottom = (maxY - flighthq._internal._StaticIndex.readArray(p, 1.0));
+    left = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 0.0), minX);
+    right = _Runtime.subtractNumbers(maxX, flighthq._internal._StaticIndex.readArray(p, 0.0));
+    top = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 1.0), minY);
+    bottom = _Runtime.subtractNumbers(maxY, flighthq._internal._StaticIndex.readArray(p, 1.0));
     minPen = HxMath.min(HxMath.min(HxMath.min(left, right), top), bottom);
     if ((cast _Runtime.strictEquals(minPen, left) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(p, 0.0, minX);
@@ -227,9 +227,9 @@ class ApplyParticleCollisions {
     var nx:Dynamic = cast _Runtime.UNDEFINED;
     var ny:Dynamic = cast _Runtime.UNDEFINED;
     var nz:Dynamic = cast _Runtime.UNDEFINED;
-    dx = (flighthq._internal._StaticIndex.readArray(p, 0.0) - c.x);
-    dy = (flighthq._internal._StaticIndex.readArray(p, 1.0) - c.y);
-    dz = (flighthq._internal._StaticIndex.readArray(p, 2.0) - c.z);
+    dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 0.0), c.x);
+    dy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 1.0), c.y);
+    dz = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 2.0), c.z);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast _Runtime.strictEquals(c.mode, 'exclude') : Bool)) {
       if ((cast ((cast ((cast dist : Float) >= (cast c.radius : Float)) : Bool) || (cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool)) : Bool)) { return cast false; }
@@ -259,11 +259,11 @@ class ApplyParticleCollisions {
     var tvx:Dynamic = cast _Runtime.UNDEFINED;
     var tvy:Dynamic = cast _Runtime.UNDEFINED;
     var tvz:Dynamic = cast _Runtime.UNDEFINED;
-    vn = (((flighthq._internal._StaticIndex.readArray(p, 3.0) * nx) + (flighthq._internal._StaticIndex.readArray(p, 4.0) * ny)) + (flighthq._internal._StaticIndex.readArray(p, 5.0) * nz));
+    vn = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(p, 3.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(p, 4.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(p, 5.0), nz));
     if ((cast ((cast vn : Float) >= (cast 0.0 : Float)) : Bool)) { return; }
-    tvx = (flighthq._internal._StaticIndex.readArray(p, 3.0) - (vn * nx));
-    tvy = (flighthq._internal._StaticIndex.readArray(p, 4.0) - (vn * ny));
-    tvz = (flighthq._internal._StaticIndex.readArray(p, 5.0) - (vn * nz));
+    tvx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 3.0), (vn * nx));
+    tvy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 4.0), (vn * ny));
+    tvz = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(p, 5.0), (vn * nz));
     flighthq._internal._StaticIndex.writeArray(p, 3.0, ((tvx * (1.0 - friction)) - ((restitution * vn) * nx)));
     flighthq._internal._StaticIndex.writeArray(p, 4.0, ((tvy * (1.0 - friction)) - ((restitution * vn) * ny)));
     flighthq._internal._StaticIndex.writeArray(p, 5.0, ((tvz * (1.0 - friction)) - ((restitution * vn) * nz)));

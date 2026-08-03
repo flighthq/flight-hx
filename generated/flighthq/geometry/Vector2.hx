@@ -80,7 +80,7 @@ class Vector2 {
     la = _Runtime.callValue(getVector2Length, cast ([a] : Array<Dynamic>));
     lb = _Runtime.callValue(getVector2Length, cast ([b] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = (_Runtime.callValue(getVector2Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
+    _dot = _Runtime.divideNumbers(_Runtime.callValue(getVector2Dot, cast ([a, b] : Array<Dynamic>)), (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -211,8 +211,8 @@ class Vector2 {
   }
 
   public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
-    (out.x = cast ((length * HxMath.cos(angle)) : Dynamic));
-    (out.y = cast ((length * HxMath.sin(angle)) : Dynamic));
+    (out.x = cast (_Runtime.multiplyNumbers(length, HxMath.cos(angle)) : Dynamic));
+    (out.y = cast (_Runtime.multiplyNumbers(length, HxMath.sin(angle)) : Dynamic));
   }
 
   public static function setVector2FromVector3(out:Vector2Like, source:Vector3Like):Void {

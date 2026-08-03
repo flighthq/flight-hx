@@ -34,7 +34,7 @@ class EaseCubicBezier {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-          var xError:Dynamic = (_Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>)) - x);
+          var xError:Dynamic = _Runtime.subtractNumbers(_Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>)), x);
           if ((cast ((cast HxMath.abs(xError) : Float) < (cast epsilon : Float)) : Bool)) {
             return cast s;
           }

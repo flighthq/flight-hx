@@ -20,7 +20,7 @@ class WgpuClipRectangle {
     _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
     stack = _Runtime.field(runtime, 'scissorStack');
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
-    previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(stack, (_Runtime.field(stack, 'length') - 1.0)) : Dynamic) : (cast null : Dynamic));
+    previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.setField(runtime, 'currentScissorRect', previous);
     pass = _Runtime.field(runtime, 'renderPass');
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
@@ -68,14 +68,14 @@ class WgpuClipRectangle {
     var minY:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    x0 = (((transform.a * _Runtime.field(rect, 'x')) + (transform.c * _Runtime.field(rect, 'y'))) + transform.tx);
-    y0 = (((transform.b * _Runtime.field(rect, 'x')) + (transform.d * _Runtime.field(rect, 'y'))) + transform.ty);
-    x1 = (((transform.a * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.c * _Runtime.field(rect, 'y'))) + transform.tx);
-    y1 = (((transform.b * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.d * _Runtime.field(rect, 'y'))) + transform.ty);
-    x2 = (((transform.a * _Runtime.field(rect, 'x')) + (transform.c * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.tx);
-    y2 = (((transform.b * _Runtime.field(rect, 'x')) + (transform.d * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.ty);
-    x3 = (((transform.a * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.c * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.tx);
-    y3 = (((transform.b * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.d * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.ty);
+    x0 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
+    y0 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
+    x1 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
+    y1 = (((transform.b * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
+    x2 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + (transform.c * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.tx);
+    y2 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + (transform.d * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.ty);
+    x3 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + (transform.c * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.tx);
+    y3 = (((transform.b * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + (transform.d * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.ty);
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     minX = HxMath.max(0.0, HxMath.floor(HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3)));
     maxX = HxMath.min(_Runtime.field(viewport, 'width'), HxMath.ceil(HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3)));
@@ -93,8 +93,8 @@ class WgpuClipRectangle {
     if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
     x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
     y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
-    right = HxMath.min((_Runtime.field(a, 'x') + _Runtime.field(a, 'width')), (_Runtime.field(b, 'x') + _Runtime.field(b, 'width')));
-    bottom = HxMath.min((_Runtime.field(a, 'y') + _Runtime.field(a, 'height')), (_Runtime.field(b, 'y') + _Runtime.field(b, 'height')));
+    right = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.field(a, 'width')), _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width')));
+    bottom = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.field(a, 'height')), _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height')));
     return cast { height: HxMath.max(0.0, (bottom - y)), width: HxMath.max(0.0, (right - x)), x: x, y: y };
     return cast null;
   }

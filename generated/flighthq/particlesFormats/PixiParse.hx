@@ -124,7 +124,7 @@ class PixiParse {
     scaleEnd = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     scaleMin = HxMath.min(scaleStart, scaleEnd);
     scaleMax = HxMath.max(scaleStart, scaleEnd);
-    scaleEndRatio = ((cast ((cast scaleMax : Float) > (cast 0.0 : Float)) : Bool) ? (cast (HxMath.min(scaleStart, scaleEnd) / scaleMax) : Dynamic) : (cast 1.0 : Dynamic));
+    scaleEndRatio = ((cast ((cast scaleMax : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(HxMath.min(scaleStart, scaleEnd), scaleMax) : Dynamic) : (cast 1.0 : Dynamic));
     __destructure2 = _Runtime.callValue(PixiParse.readStartEnd__pixiParse, cast ([_Runtime.field(raw, 'alpha'), 1.0, 0.0] : Array<Dynamic>));
     alphaStart = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     alphaEnd = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
@@ -159,7 +159,7 @@ class PixiParse {
     blendModeStr = _Runtime.callProperty(_Runtime.callValue(PixiParse.rs__pixiParse, cast ([_Runtime.field(raw, 'blendMode'), 'normal'] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     blendMode = null;
     if ((cast ((cast _Runtime.strictEquals(blendModeStr, 'add') : Bool) || (cast _Runtime.strictEquals(blendModeStr, 'additive') : Bool)) : Bool)) { (blendMode = cast ('add' : Dynamic)); } else { if ((cast _Runtime.strictEquals(blendModeStr, 'multiply') : Bool)) { (blendMode = cast ('multiply' : Dynamic)); } else { if ((cast _Runtime.strictEquals(blendModeStr, 'screen') : Bool)) { (blendMode = cast ('screen' : Dynamic)); } else { if ((cast ((cast _Runtime.strictEquals(blendModeStr, 'normal') : Bool) || (cast _Runtime.strictEquals(blendModeStr, 'src_alpha') : Bool)) : Bool)) { (blendMode = cast ('normal' : Dynamic)); } } } }
-    rotationSpeed = (_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'rotationSpeed'), 0.0] : Array<Dynamic>)) * PixiParse.DEG2RAD__pixiParse);
+    rotationSpeed = _Runtime.multiplyNumbers(_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'rotationSpeed'), 0.0] : Array<Dynamic>)), PixiParse.DEG2RAD__pixiParse);
     return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: maxParticles, spawnRate: spawnRate, lifetimeMin: lifetimeMin, lifetimeMax: lifetimeMax, speedMin: speedMin, speedMax: speedMax, directionX: HxMath.cos(angleMid), directionY: HxMath.sin(angleMid), spread: spread, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEndRatio, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotationSpeed, rotationSpeedMax: rotationSpeed, blendMode: blendMode }] : Array<Dynamic>));
     return cast null;
   }

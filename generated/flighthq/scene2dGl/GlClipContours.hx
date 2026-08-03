@@ -24,7 +24,7 @@ class GlClipContours {
     _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    nextDepth = HxMath.max(0.0, (_Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0) - 1.0));
+    nextDepth = HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0), 1.0));
     _Runtime.setField(runtime, 'currentMaskDepth', nextDepth);
     if ((cast _Runtime.strictEquals(nextDepth, 0.0) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.STENCIL_TEST);

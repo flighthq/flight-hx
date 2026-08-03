@@ -48,7 +48,7 @@ class MeshGeometryDeformationClone {
     offset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([geometry.layout, semantic] : Array<Dynamic>));
     if ((cast ((cast offset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     floatsPerVertex = (geometry.layout.stride / 4.0);
-    vertexCount = HxMath.min((_Runtime.toInt32((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex)) | 0), (_Runtime.toInt32((_Runtime.field(source, 'length') / 3.0)) | 0));
+    vertexCount = HxMath.min((_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) | 0), (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(source, 'length'), 3.0)) | 0));
     {
       var vertex:Dynamic = 0.0;
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {

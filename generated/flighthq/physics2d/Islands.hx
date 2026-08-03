@@ -30,7 +30,7 @@ class Islands {
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) { continue; }
       if ((cast _Runtime.callValue(Islands._isBodyStill__islands, cast ([body, _Runtime.field(config, 'sleepLinearThreshold'), _Runtime.field(config, 'sleepAngularThreshold')] : Array<Dynamic>)) : Bool)) {
-        _Runtime.setField(body, 'sleepTimer', (_Runtime.field(body, 'sleepTimer') + dt));
+        _Runtime.setField(body, 'sleepTimer', _Runtime.addNumbers(_Runtime.field(body, 'sleepTimer'), dt));
       } else {
         _Runtime.setField(body, 'sleepTimer', 0.0);
       }
@@ -79,7 +79,7 @@ class Islands {
   public static function _isBodyStill__islands(body:RigidBody2D, linearThreshold:Float, angularThreshold:Float):Bool {
     var speedSquared:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'forceX'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(body, 'forceY'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(body, 'torque'), 0.0) : Bool)) : Bool)) { return cast false; }
-    speedSquared = ((_Runtime.field(body, 'velocityX') * _Runtime.field(body, 'velocityX')) + (_Runtime.field(body, 'velocityY') * _Runtime.field(body, 'velocityY')));
+    speedSquared = (_Runtime.multiplyNumbers(_Runtime.field(body, 'velocityX'), _Runtime.field(body, 'velocityX')) + _Runtime.multiplyNumbers(_Runtime.field(body, 'velocityY'), _Runtime.field(body, 'velocityY')));
     if ((cast ((cast speedSquared : Float) > (cast (linearThreshold * linearThreshold) : Float)) : Bool)) { return cast false; }
     return cast ((cast HxMath.abs(_Runtime.field(body, 'angularVelocity')) : Float) <= (cast angularThreshold : Float));
     return cast null;

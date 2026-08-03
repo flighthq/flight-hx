@@ -55,7 +55,7 @@ class Path {
     var cos_u3C6_:Dynamic = cast _Runtime.UNDEFINED;
     var sin_u3C6_:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(dtheta, 0.0) : Bool)) { return; }
-    nSegs = HxMath.max(1.0, HxMath.ceil((HxMath.abs(dtheta) / (HxMath.PI / 2.0))));
+    nSegs = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(dtheta), (HxMath.PI / 2.0))));
     dt = (dtheta / nSegs);
     cos_u3C6_ = HxMath.cos(xAxisRotation);
     sin_u3C6_ = HxMath.sin(xAxisRotation);
@@ -68,7 +68,7 @@ class Path {
         var sin1:Dynamic = HxMath.sin(t1);
         var cos2:Dynamic = HxMath.cos(t2);
         var sin2:Dynamic = HxMath.sin(t2);
-        var alpha:Dynamic = ((4.0 / 3.0) * HxMath.tan((dt / 4.0)));
+        var alpha:Dynamic = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((dt / 4.0)));
         var dx1:Dynamic = ((-rx * sin1) * alpha);
         var dy1:Dynamic = ((ry * cos1) * alpha);
         var dx2:Dynamic = ((rx * sin2) * alpha);
@@ -113,8 +113,8 @@ class Path {
     } else {
       if ((cast ((cast sweep : Float) < (cast 0.0 : Float)) : Bool)) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
     }
-    arcStartX = (cx + (HxMath.cos(startAngle) * radius));
-    arcStartY = (cy + (HxMath.sin(startAngle) * radius));
+    arcStartX = (cx + _Runtime.multiplyNumbers(HxMath.cos(startAngle), radius));
+    arcStartY = (cy + _Runtime.multiplyNumbers(HxMath.sin(startAngle), radius));
     if ((cast connectToCurrent : Bool)) {
       _Runtime.callValue(appendPathLineTo, cast ([path, arcStartX, arcStartY] : Array<Dynamic>));
     } else {
@@ -388,7 +388,7 @@ class Path {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(path, 'data');
     if ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
-    return cast cast ([flighthq._internal._StaticIndex.readArray(data, (_Runtime.field(data, 'length') - 2.0)), flighthq._internal._StaticIndex.readArray(data, (_Runtime.field(data, 'length') - 1.0))] : Array<Dynamic>);
+    return cast cast ([flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0)), flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0))] : Array<Dynamic>);
     return cast null;
   }
 
@@ -461,8 +461,8 @@ class Path {
     rtr = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     rbr = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
     rbl = flighthq._internal._StaticIndex.readArray(__destructure1, 3.0);
-    halfW = (HxMath.abs(width) / 2.0);
-    halfH = (HxMath.abs(height) / 2.0);
+    halfW = _Runtime.divideNumbers(HxMath.abs(width), 2.0);
+    halfH = _Runtime.divideNumbers(HxMath.abs(height), 2.0);
     clampTL = HxMath.max(0.0, HxMath.min(HxMath.min(rtl, halfW), halfH));
     clampTR = HxMath.max(0.0, HxMath.min(HxMath.min(rtr, halfW), halfH));
     clampBR = HxMath.max(0.0, HxMath.min(HxMath.min(rbr, halfW), halfH));

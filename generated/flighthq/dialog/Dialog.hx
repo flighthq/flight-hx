@@ -405,7 +405,7 @@ class Dialog {
                   __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
                     var parts:Dynamic = cast _Runtime.UNDEFINED;
                     parts = _Runtime.callProperty(_Runtime.replace(options.defaultPath, _Runtime.regexp('\\\\', 'g'), '/', false), 'split', cast (['/'] : Array<Dynamic>));
-                    _Runtime.setField(pickerOptions, 'suggestedName', flighthq._internal._StaticIndex.readArray(parts, (_Runtime.field(parts, 'length') - 1.0)));
+                    _Runtime.setField(pickerOptions, 'suggestedName', flighthq._internal._StaticIndex.readArray(parts, _Runtime.subtractNumbers(_Runtime.field(parts, 'length'), 1.0)));
                     return flighthq._internal._Async.flowNormal();
                   });
                 } else {

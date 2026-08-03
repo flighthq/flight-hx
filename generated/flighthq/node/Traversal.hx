@@ -87,7 +87,7 @@ class Traversal {
     siblings = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([parent] : Array<Dynamic>)), 'children');
     if ((cast _Runtime.strictEquals(siblings, null) : Bool)) { return cast null; }
     idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(idx, -1.0) : Bool) || (cast _Runtime.strictEquals(idx, (_Runtime.field(siblings, 'length') - 1.0)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(idx, -1.0) : Bool) || (cast _Runtime.strictEquals(idx, _Runtime.subtractNumbers(_Runtime.field(siblings, 'length'), 1.0)) : Bool)) : Bool)) { return cast null; }
     return cast (cast flighthq._internal._StaticIndex.readArray(siblings, (idx + 1.0)) : NodeOf<Traits>);
     return cast null;
   }

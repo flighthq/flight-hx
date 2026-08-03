@@ -116,7 +116,7 @@ class ResolveBidiLevels {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(original, 'length') : Float)) : Bool)) {
         var t:Dynamic = flighthq._internal._StaticIndex.readArray(original, i);
-        var top:Dynamic = (_Runtime.field(stackLevel, 'length') - 1.0);
+        var top:Dynamic = _Runtime.subtractNumbers(_Runtime.field(stackLevel, 'length'), 1.0);
         {
           var __switchValue = t;
           if (__switchValue == 'RLE' || __switchValue == 'LRE' || __switchValue == 'RLO' || __switchValue == 'LRO') {
@@ -156,7 +156,7 @@ class ResolveBidiLevels {
                 overflowIsolate--;
               } else { if ((cast ((cast validIsolate : Float) > (cast 0.0 : Float)) : Bool)) {
                 (overflowEmbedding = cast (0.0 : Dynamic));
-                while ((cast !(cast flighthq._internal._StaticIndex.readArray(stackIsolate, (_Runtime.field(stackLevel, 'length') - 1.0)) : Bool) : Bool)) {
+                while ((cast !(cast flighthq._internal._StaticIndex.readArray(stackIsolate, _Runtime.subtractNumbers(_Runtime.field(stackLevel, 'length'), 1.0)) : Bool) : Bool)) {
                   _Runtime.callProperty(stackLevel, 'pop', cast ([] : Array<Dynamic>));
                   _Runtime.callProperty(stackOverride, 'pop', cast ([] : Array<Dynamic>));
                   _Runtime.callProperty(stackIsolate, 'pop', cast ([] : Array<Dynamic>));
@@ -166,7 +166,7 @@ class ResolveBidiLevels {
                 _Runtime.callProperty(stackIsolate, 'pop', cast ([] : Array<Dynamic>));
                 validIsolate--;
               } }
-              var newTop:Dynamic = (_Runtime.field(stackLevel, 'length') - 1.0);
+              var newTop:Dynamic = _Runtime.subtractNumbers(_Runtime.field(stackLevel, 'length'), 1.0);
               flighthq._internal._StaticIndex.writeArray(levelArray, i, flighthq._internal._StaticIndex.readArray(stackLevel, newTop));
               if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(stackOverride, newTop), null) : Bool)) { flighthq._internal._StaticIndex.writeArray(working, i, (cast flighthq._internal._StaticIndex.readArray(stackOverride, newTop) : BidiClass)); }
             }
@@ -181,7 +181,7 @@ class ResolveBidiLevels {
                 _Runtime.callProperty(stackOverride, 'pop', cast ([] : Array<Dynamic>));
                 _Runtime.callProperty(stackIsolate, 'pop', cast ([] : Array<Dynamic>));
               } } }
-              flighthq._internal._StaticIndex.writeArray(levelArray, i, flighthq._internal._StaticIndex.readArray(stackLevel, (_Runtime.field(stackLevel, 'length') - 1.0)));
+              flighthq._internal._StaticIndex.writeArray(levelArray, i, flighthq._internal._StaticIndex.readArray(stackLevel, _Runtime.subtractNumbers(_Runtime.field(stackLevel, 'length'), 1.0)));
               flighthq._internal._StaticIndex.writeArray(working, i, 'BN');
             }
           }
@@ -277,7 +277,7 @@ class ResolveBidiLevels {
               }
             }
             (keptEnd = cast (_Runtime.field(run, 'keptEnd') : Dynamic));
-            var lastIdx:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(run, 'indices'), (_Runtime.field(_Runtime.field(run, 'indices'), 'length') - 1.0));
+            var lastIdx:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(run, 'indices'), _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(run, 'indices'), 'length'), 1.0));
             var lastType:Dynamic = flighthq._internal._StaticIndex.readArray(original, lastIdx);
             if ((cast ((cast _Runtime.orValue(((cast _Runtime.strictEquals(lastType, 'LRI') : Bool) || (cast _Runtime.strictEquals(lastType, 'RLI') : Bool)), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readInt32Array(matchingPdi, lastIdx) : Float) < (cast length : Float)) : Bool)) : Bool)) {
               var next:Dynamic = ((cast runByFirst : flighthq._internal._Map).get(flighthq._internal._StaticIndex.readInt32Array(matchingPdi, lastIdx)));
@@ -312,7 +312,7 @@ class ResolveBidiLevels {
     seqLevel = flighthq._internal._StaticIndex.readArray(levelArray, flighthq._internal._StaticIndex.readArray(sequence, 0.0));
     prevLevel = ((cast ((cast keptStart : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(levelArray, flighthq._internal._StaticIndex.readArray(kept, (keptStart - 1.0))) : Dynamic) : (cast paragraphLevel : Dynamic));
     sos = ((cast _Runtime.strictEquals(_Runtime.fmod(HxMath.max(seqLevel, prevLevel), 2.0), 1.0) : Bool) ? (cast 'R' : Dynamic) : (cast 'L' : Dynamic));
-    lastIdx = flighthq._internal._StaticIndex.readArray(sequence, (_Runtime.field(sequence, 'length') - 1.0));
+    lastIdx = flighthq._internal._StaticIndex.readArray(sequence, _Runtime.subtractNumbers(_Runtime.field(sequence, 'length'), 1.0));
     lastType = flighthq._internal._StaticIndex.readArray(original, lastIdx);
     endsUnmatchedIsolate = ((cast _Runtime.orValue(((cast _Runtime.strictEquals(lastType, 'LRI') : Bool) || (cast _Runtime.strictEquals(lastType, 'RLI') : Bool)), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readInt32Array(matchingPdi, lastIdx) : Float) >= (cast _Runtime.field(original, 'length') : Float)) : Bool));
     nextLevel = ((cast endsUnmatchedIsolate : Bool) ? (cast paragraphLevel : Dynamic) : (cast ((cast ((cast keptEnd : Float) < (cast _Runtime.field(kept, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(levelArray, flighthq._internal._StaticIndex.readArray(kept, keptEnd)) : Dynamic) : (cast paragraphLevel : Dynamic)) : Dynamic));

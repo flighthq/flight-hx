@@ -25,7 +25,7 @@ class DomClipRectangle {
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     contour = null;
     {
-      var i:Dynamic = (_Runtime.field(entries, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(entries, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var entry:Dynamic = flighthq._internal._StaticIndex.readArray(entries, i);
         if ((cast _Runtime.hasField(entry, 'kind') : Bool)) {
@@ -68,14 +68,14 @@ class DomClipRectangle {
     var y2:Dynamic = cast _Runtime.UNDEFINED;
     var x3:Dynamic = cast _Runtime.UNDEFINED;
     var y3:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = (((transform.a * _Runtime.field(rect, 'x')) + (transform.c * _Runtime.field(rect, 'y'))) + transform.tx);
-    y0 = (((transform.b * _Runtime.field(rect, 'x')) + (transform.d * _Runtime.field(rect, 'y'))) + transform.ty);
-    x1 = (((transform.a * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.c * _Runtime.field(rect, 'y'))) + transform.tx);
-    y1 = (((transform.b * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.d * _Runtime.field(rect, 'y'))) + transform.ty);
-    x2 = (((transform.a * _Runtime.field(rect, 'x')) + (transform.c * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.tx);
-    y2 = (((transform.b * _Runtime.field(rect, 'x')) + (transform.d * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.ty);
-    x3 = (((transform.a * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.c * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.tx);
-    y3 = (((transform.b * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (transform.d * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + transform.ty);
+    x0 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
+    y0 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
+    x1 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
+    y1 = (((transform.b * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
+    x2 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + (transform.c * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.tx);
+    y2 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + (transform.d * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.ty);
+    x3 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + (transform.c * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.tx);
+    y3 = (((transform.b * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + (transform.d * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.ty);
     return cast { bottom: HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3), left: HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3), right: HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3), top: HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3) };
     return cast null;
   }
@@ -172,14 +172,14 @@ class DomClipRectangle {
     invD = (matrix.a / det);
     invTx = (((matrix.c * matrix.ty) - (matrix.d * matrix.tx)) / det);
     invTy = (((matrix.b * matrix.tx) - (matrix.a * matrix.ty)) / det);
-    x0 = (((invA * _Runtime.field(rect, 'left')) + (invC * _Runtime.field(rect, 'top'))) + invTx);
-    y0 = (((invB * _Runtime.field(rect, 'left')) + (invD * _Runtime.field(rect, 'top'))) + invTy);
-    x1 = (((invA * _Runtime.field(rect, 'right')) + (invC * _Runtime.field(rect, 'top'))) + invTx);
-    y1 = (((invB * _Runtime.field(rect, 'right')) + (invD * _Runtime.field(rect, 'top'))) + invTy);
-    x2 = (((invA * _Runtime.field(rect, 'left')) + (invC * _Runtime.field(rect, 'bottom'))) + invTx);
-    y2 = (((invB * _Runtime.field(rect, 'left')) + (invD * _Runtime.field(rect, 'bottom'))) + invTy);
-    x3 = (((invA * _Runtime.field(rect, 'right')) + (invC * _Runtime.field(rect, 'bottom'))) + invTx);
-    y3 = (((invB * _Runtime.field(rect, 'right')) + (invD * _Runtime.field(rect, 'bottom'))) + invTy);
+    x0 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'top'))) + invTx);
+    y0 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'top'))) + invTy);
+    x1 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'top'))) + invTx);
+    y1 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'top'))) + invTy);
+    x2 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'bottom'))) + invTx);
+    y2 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'bottom'))) + invTy);
+    x3 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'bottom'))) + invTx);
+    y3 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'bottom'))) + invTy);
     return cast { bottom: HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3), left: HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3), right: HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3), top: HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3) };
     return cast null;
   }

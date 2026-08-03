@@ -98,7 +98,7 @@ class WgpuQuadBatchWriter {
     slot = _Runtime.callValue(WgpuQuadBatchWriter.acquireWgpuQuadBatchWriterBufferSlot__wgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
     instanceBytes = (count * WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter);
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(slot, 'instanceBuffer'), null) : Bool) || (cast ((cast _Runtime.field(slot, 'instanceCapacity') : Float) < (cast instanceBytes : Float)) : Bool)) : Bool)) {
-      var capacity:Dynamic = HxMath.max(HxMath.max(instanceBytes, (_Runtime.field(slot, 'instanceCapacity') * 2.0)), (WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter * 256.0));
+      var capacity:Dynamic = HxMath.max(HxMath.max(instanceBytes, _Runtime.multiplyNumbers(_Runtime.field(slot, 'instanceCapacity'), 2.0)), (WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter * 256.0));
       _Runtime.setField(slot, 'instanceBuffer', _Runtime.callValue(WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter, cast ([state, capacity] : Array<Dynamic>)));
       _Runtime.setField(slot, 'instanceCapacity', capacity);
     }
@@ -106,7 +106,7 @@ class WgpuQuadBatchWriter {
     if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var group3Bytes:Dynamic = ((count * group3Floats) * 4.0);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(slot, 'materialBuffer'), null) : Bool) || (cast ((cast _Runtime.field(slot, 'materialCapacity') : Float) < (cast group3Bytes : Float)) : Bool)) : Bool)) {
-        var capacity:Dynamic = HxMath.max(HxMath.max(group3Bytes, (_Runtime.field(slot, 'materialCapacity') * 2.0)), ((group3Floats * 4.0) * 256.0));
+        var capacity:Dynamic = HxMath.max(HxMath.max(group3Bytes, _Runtime.multiplyNumbers(_Runtime.field(slot, 'materialCapacity'), 2.0)), ((group3Floats * 4.0) * 256.0));
         _Runtime.setField(slot, 'materialBuffer', _Runtime.callValue(WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter, cast ([state, capacity] : Array<Dynamic>)));
         _Runtime.setField(slot, 'materialCapacity', capacity);
       }
@@ -206,19 +206,19 @@ class WgpuQuadBatchWriter {
     _Runtime.setField(runtime, 'quadBatchWriterMaterialRenderer', materialRenderer);
     floats = _Runtime.field(materialRenderer, 'instanceFloatCount');
     _Runtime.setField(runtime, 'quadBatchWriterMaterialFloats', floats);
-    needed = ((_Runtime.field(runtime, 'quadBatchWriterCount') + maxInstances) * QUAD_BATCH_INSTANCE_FLOATS);
+    needed = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * QUAD_BATCH_INSTANCE_FLOATS);
     if ((cast ((cast needed : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length') : Float)) : Bool)) {
-      var newSize:Dynamic = HxMath.max(HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length') * 2.0)), (QUAD_BATCH_INSTANCE_FLOATS * 256.0));
+      var newSize:Dynamic = HxMath.max(HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length'), 2.0)), (QUAD_BATCH_INSTANCE_FLOATS * 256.0));
       _Runtime.setField(runtime, 'quadBatchWriterInstanceData', new flighthq._internal._Float32Array(newSize));
     }
     if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'quadBatchWriterCount') + maxInstances) * floats);
+      var materialNeeded:Dynamic = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * floats);
       if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length') : Float)) : Bool)) {
-        var newSize:Dynamic = HxMath.max(HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length') * 2.0)), (floats * 256.0));
+        var newSize:Dynamic = HxMath.max(HxMath.max(materialNeeded, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length'), 2.0)), (floats * 256.0));
         _Runtime.setField(runtime, 'quadBatchWriterMaterialData', new flighthq._internal._Float32Array(newSize));
       }
     }
-    return cast (_Runtime.field(runtime, 'quadBatchWriterCount') * QUAD_BATCH_INSTANCE_FLOATS);
+    return cast _Runtime.multiplyNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), QUAD_BATCH_INSTANCE_FLOATS);
     return cast null;
   }
 
@@ -300,8 +300,8 @@ class WgpuQuadBatchWriter {
     uniformData = _Runtime.field(__destructure3, 'uniformData');
     uniformDataU32 = _Runtime.field(__destructure3, 'uniformDataU32');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = (2.0 / _Runtime.field(viewport, 'width'));
-    ih = (2.0 / _Runtime.field(viewport, 'height'));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'width'));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'height'));
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 0.0), iw);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 1.0), 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 2.0), 0.0);
@@ -315,7 +315,7 @@ class WgpuQuadBatchWriter {
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 10.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 11.0), 0.0);
     flighthq._internal._StaticIndex.writeUint32Array(uniformDataU32, (floatBase + 12.0), ((cast straightTextureAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setField(runtime, 'uniformOffset', (_Runtime.field(runtime, 'uniformOffset') + _Runtime.field(runtime, 'uniformStride')));
+    _Runtime.setField(runtime, 'uniformOffset', _Runtime.addNumbers(_Runtime.field(runtime, 'uniformOffset'), _Runtime.field(runtime, 'uniformStride')));
     return cast uniformOffset;
     return cast null;
   }

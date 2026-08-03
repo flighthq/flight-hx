@@ -20,12 +20,12 @@ class LightIntensity {
   }
 
   public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
-    return cast (_Runtime.callValue(getLightLinearIntensity, cast ([fromUnit, value] : Array<Dynamic>)) / _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, toUnit));
+    return cast _Runtime.divideNumbers(_Runtime.callValue(getLightLinearIntensity, cast ([fromUnit, value] : Array<Dynamic>)), _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, toUnit));
     return cast null;
   }
 
   public static function getLightLinearIntensity(unit:LightUnit, value:Float):Float {
-    return cast (value * _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, unit));
+    return cast _Runtime.multiplyNumbers(value, _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, unit));
     return cast null;
   }
 

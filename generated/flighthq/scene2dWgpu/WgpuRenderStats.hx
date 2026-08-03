@@ -19,7 +19,7 @@ class WgpuRenderStats {
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.incrementField(entry, 'drawCallCount', 1, true);
-    _Runtime.setField(entry, 'instanceCount', (_Runtime.field(entry, 'instanceCount') + instances));
+    _Runtime.setField(entry, 'instanceCount', _Runtime.addNumbers(_Runtime.field(entry, 'instanceCount'), instances));
     _Runtime.incrementField(entry, 'batchFlushCount', 1, true);
   }
 

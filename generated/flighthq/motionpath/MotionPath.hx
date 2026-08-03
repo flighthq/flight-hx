@@ -32,7 +32,7 @@ class MotionPath {
   }
 
   public static function getMotionPathProgress(mp:flighthq.types.MotionPath):Float {
-    return cast ((cast ((cast _Runtime.field(mp, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(mp, 'distance') / _Runtime.field(mp, 'length')) : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.field(mp, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.field(mp, 'distance'), _Runtime.field(mp, 'length')) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -49,7 +49,7 @@ class MotionPath {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     clamped = t;
     if ((cast ((cast clamped : Float) < (cast 0.0 : Float)) : Bool)) { (clamped = cast (0.0 : Dynamic)); } else { if ((cast ((cast clamped : Float) > (cast 1.0 : Float)) : Bool)) { (clamped = cast (1.0 : Dynamic)); } }
-    _Runtime.setField(mp, 'distance', (clamped * _Runtime.field(mp, 'length')));
+    _Runtime.setField(mp, 'distance', _Runtime.multiplyNumbers(clamped, _Runtime.field(mp, 'length')));
   }
 
   public static function updateMotionPath(mp:flighthq.types.MotionPath, deltaTime:Float):Void {
@@ -58,7 +58,7 @@ class MotionPath {
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     length = _Runtime.field(mp, 'length');
     if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    move = (_Runtime.field(mp, 'speed') * deltaTime);
+    move = _Runtime.multiplyNumbers(_Runtime.field(mp, 'speed'), deltaTime);
     _Runtime.callValue(MotionPath.applyMotionPathLoopMode__motionPath, cast ([mp, move, length] : Array<Dynamic>));
   }
 

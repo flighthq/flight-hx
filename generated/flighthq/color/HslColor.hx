@@ -54,7 +54,7 @@ class HslColor {
     d = (max - min);
     s = ((cast ((cast l : Float) > (cast 0.5 : Float)) : Bool) ? (cast (d / ((2.0 - max) - min)) : Dynamic) : (cast (d / (max + min)) : Dynamic));
     if ((cast _Runtime.strictEquals(max, r) : Bool)) {
-      (h = cast (((((g - b) / d) + ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) / 6.0) : Dynamic));
+      (h = cast ((_Runtime.addNumbers(((g - b) / d), ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) / 6.0) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(max, g) : Bool)) {
       (h = cast (((((b - r) / d) + 2.0) / 6.0) : Dynamic));
     } else {

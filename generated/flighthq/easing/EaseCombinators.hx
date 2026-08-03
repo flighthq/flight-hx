@@ -21,25 +21,25 @@ class EaseCombinators {
   }
 
   public static function easeInvert(ease:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) return (1.0 - _Runtime.callValue(ease, cast ([t] : Array<Dynamic>)));
+    return cast function(t:Dynamic) return _Runtime.subtractNumbers(1.0, _Runtime.callValue(ease, cast ([t] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function easeMirror(easeIn:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) {
-      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast (_Runtime.callValue(easeIn, cast ([(t * 2.0)] : Array<Dynamic>)) * 0.5); }
-      return cast (1.0 - (_Runtime.callValue(easeIn, cast ([((1.0 - t) * 2.0)] : Array<Dynamic>)) * 0.5));
+      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast _Runtime.multiplyNumbers(_Runtime.callValue(easeIn, cast ([(t * 2.0)] : Array<Dynamic>)), 0.5); }
+      return cast (1.0 - _Runtime.multiplyNumbers(_Runtime.callValue(easeIn, cast ([((1.0 - t) * 2.0)] : Array<Dynamic>)), 0.5));
     };
     return cast null;
   }
 
   public static function easeReverse(easeIn:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) return (1.0 - _Runtime.callValue(easeIn, cast ([(1.0 - t)] : Array<Dynamic>)));
+    return cast function(t:Dynamic) return _Runtime.subtractNumbers(1.0, _Runtime.callValue(easeIn, cast ([(1.0 - t)] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
-    return cast function(t:Dynamic) return (fromValue + (_Runtime.callValue(ease, cast ([t] : Array<Dynamic>)) * (toValue - fromValue)));
+    return cast function(t:Dynamic) return (fromValue + _Runtime.multiplyNumbers(_Runtime.callValue(ease, cast ([t] : Array<Dynamic>)), (toValue - fromValue)));
     return cast null;
   }
 }

@@ -22,14 +22,14 @@ class WgpuClipContours {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'clipContourStack'), 'pop', cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'currentMaskDepth', HxMath.max(0.0, (_Runtime.field(runtime, 'currentMaskDepth') - 1.0)));
+    _Runtime.setField(runtime, 'currentMaskDepth', HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(runtime, 'currentMaskDepth'), 1.0)));
     pass = _Runtime.field(runtime, 'renderPass');
     if ((cast ((cast !_Runtime.strictEquals(pass, null) : Bool) && (cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       var pipelines:Dynamic = _Runtime.callValue(WgpuClipContours.ensureClipContourPipelines__wgpuClipContours, cast ([state] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipelines, 'erase')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(entry, 'bindGroup')] : Array<Dynamic>));
       _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(entry, 'vertexBuffer')] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setStencilReference', cast ([(_Runtime.field(entry, 'depth') + 1.0)] : Array<Dynamic>));
+      _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.addNumbers(_Runtime.field(entry, 'depth'), 1.0)] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(entry, 'vertexCount') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'draw', cast ([_Runtime.field(entry, 'vertexCount')] : Array<Dynamic>)); }
     }
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -80,8 +80,8 @@ class WgpuClipContours {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = (2.0 / _Runtime.field(viewport, 'width'));
-    ih = (2.0 / _Runtime.field(viewport, 'height'));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'width'));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'height'));
     m = new flighthq._internal._Float32Array(12.0);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (t.a * iw));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-t.b * ih));

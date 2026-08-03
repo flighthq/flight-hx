@@ -68,16 +68,16 @@ class GlShader {
   public static function setGlMatrixFromTransform(gl:Dynamic, loc:GlShaderLocations, m:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;
-    iw = (2.0 / _Runtime.field(viewport, 'width'));
-    ih = (2.0 / _Runtime.field(viewport, 'height'));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (_Runtime.field(t, 'a') * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-_Runtime.field(t, 'b') * ih));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'width'));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'height'));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, _Runtime.multiplyNumbers(_Runtime.field(t, 'a'), iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, _Runtime.multiplyNumbers(-_Runtime.field(t, 'b'), ih));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (_Runtime.field(t, 'c') * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (-_Runtime.field(t, 'd') * ih));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, _Runtime.multiplyNumbers(_Runtime.field(t, 'c'), iw));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, _Runtime.multiplyNumbers(-_Runtime.field(t, 'd'), ih));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, (_Runtime.multiplyNumbers(_Runtime.field(t, 'tx'), iw) - 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, (_Runtime.multiplyNumbers(-_Runtime.field(t, 'ty'), ih) + 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(loc, 'locMatrix'), false, m);
   }
@@ -85,8 +85,8 @@ class GlShader {
   public static function setGlMatrixFromValues(gl:Dynamic, loc:GlShaderLocations, m:flighthq._internal._Float32Array, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;
-    iw = (2.0 / _Runtime.field(viewport, 'width'));
-    ih = (2.0 / _Runtime.field(viewport, 'height'));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'width'));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'height'));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (a * iw));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-b * ih));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);

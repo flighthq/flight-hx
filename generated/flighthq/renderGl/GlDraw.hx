@@ -302,9 +302,9 @@ class GlDraw {
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
         var scale:Dynamic = ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * scale));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), scale));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), scale));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), scale));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         (i = cast ((i + 4.0) : Dynamic));
       }
@@ -320,9 +320,9 @@ class GlDraw {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * a) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * a) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), a) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), a) / 255.0));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         (i = cast ((i + 4.0) : Dynamic));
       }

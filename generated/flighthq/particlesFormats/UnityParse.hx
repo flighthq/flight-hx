@@ -135,9 +135,9 @@ class UnityParse {
     var rotHigh:Dynamic = cast _Runtime.UNDEFINED;
     var looping:Dynamic = cast _Runtime.UNDEFINED;
     physicsGravity = _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'physicsGravity'), UnityParse.DEFAULT_GRAVITY__unityParse] : Array<Dynamic>));
-    gravPixels = ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'gravityModifier'), 0.0] : Array<Dynamic>)) * physicsGravity) * ppu);
+    gravPixels = (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'gravityModifier'), 0.0] : Array<Dynamic>)), physicsGravity) * ppu);
     emRaw = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
-    spawnRate = ((_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>)) + _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>))) * 0.5);
+    spawnRate = (_Runtime.addNumbers(_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>)), _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>))) * 0.5);
     burstsRaw = ((cast _Runtime.isArray(_Runtime.optionalField(emRaw, 'bursts')) : Bool) ? (cast (cast _Runtime.field(emRaw, 'bursts') : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     burst0 = flighthq._internal._StaticIndex.readArray(burstsRaw, 0.0);
     burstCount = _Runtime.select(burst0, function():Dynamic return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'count'), 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
@@ -153,7 +153,7 @@ class UnityParse {
     directionY = -1.0;
     spread = HxMath.PI;
     if ((cast shapeEnabled : Bool)) {
-      var shapeRadius:Dynamic = (_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'radius'), 0.0] : Array<Dynamic>)) * ppu);
+      var shapeRadius:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'radius'), 0.0] : Array<Dynamic>)), ppu);
       var scaleRaw:Dynamic = (cast _Runtime.optionalField(shapeRaw, 'scale') : Null<Dynamic>);
       if ((cast ((cast ((cast _Runtime.strictEquals(shapeType, 'Sphere') : Bool) || (cast _Runtime.strictEquals(shapeType, 'Hemisphere') : Bool)) : Bool) || (cast _Runtime.strictEquals(shapeType, 'Circle') : Bool)) : Bool)) {
         (emitterShape = cast ('circle' : Dynamic));
@@ -161,11 +161,11 @@ class UnityParse {
         (spread = cast ((HxMath.PI * 2.0) : Dynamic));
       } else { if ((cast ((cast _Runtime.strictEquals(shapeType, 'Box') : Bool) || (cast _Runtime.strictEquals(shapeType, 'Rectangle') : Bool)) : Bool)) {
         (emitterShape = cast ('rect' : Dynamic));
-        (emitterWidth = cast ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'x'), 1.0] : Array<Dynamic>)) * ppu) : Dynamic));
-        (emitterHeight = cast ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'y'), 1.0] : Array<Dynamic>)) * ppu) : Dynamic));
+        (emitterWidth = cast (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'x'), 1.0] : Array<Dynamic>)), ppu) : Dynamic));
+        (emitterHeight = cast (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'y'), 1.0] : Array<Dynamic>)), ppu) : Dynamic));
         (spread = cast ((HxMath.PI * 2.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(shapeType, 'Cone') : Bool)) {
-        (spread = cast ((_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'angle'), 25.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse) : Dynamic));
+        (spread = cast (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'angle'), 25.0] : Array<Dynamic>)), UnityParse.DEG2RAD__unityParse) : Dynamic));
         (emitterShape = cast (((cast ((cast shapeRadius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'circle' : Dynamic) : (cast 'point' : Dynamic)) : Dynamic));
         (emitterRadius = cast (shapeRadius : Dynamic));
       } } }
@@ -174,7 +174,7 @@ class UnityParse {
     scaleHigh = _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSize'), 1.0] : Array<Dynamic>));
     solRaw = (cast _Runtime.field(raw, 'sizeOverLifetime') : Null<Dynamic>);
     solEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(solRaw, 'enabled'), false] : Array<Dynamic>));
-    scaleEnd = ((cast solEnabled : Bool) ? (cast (_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(solRaw, 'sizeEnd'), 1.0] : Array<Dynamic>)) / HxMath.max(0.001, ((scaleLow + scaleHigh) * 0.5))) : Dynamic) : (cast 1.0 : Dynamic));
+    scaleEnd = ((cast solEnabled : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(solRaw, 'sizeEnd'), 1.0] : Array<Dynamic>)), HxMath.max(0.001, ((scaleLow + scaleHigh) * 0.5))) : Dynamic) : (cast 1.0 : Dynamic));
     colRaw = (cast _Runtime.field(raw, 'colorOverLifetime') : Null<Dynamic>);
     colEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(colRaw, 'enabled'), false] : Array<Dynamic>));
     WHITE = { r: 1.0, g: 1.0, b: 1.0, a: 1.0 };
@@ -187,10 +187,10 @@ class UnityParse {
     scaleCurve = ((cast solEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.sizeKeysToCurve__unityParse, cast ([_Runtime.optionalField(solRaw, 'curve')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     rolRaw = (cast _Runtime.field(raw, 'rotationOverLifetime') : Null<Dynamic>);
     rolEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(rolRaw, 'enabled'), false] : Array<Dynamic>));
-    rotLow = ((cast rolEnabled : Bool) ? (cast (_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
-    rotHigh = ((cast rolEnabled : Bool) ? (cast (_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)) * UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
+    rotLow = ((cast rolEnabled : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)), UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
+    rotHigh = ((cast rolEnabled : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)), UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
     looping = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'looping'), true] : Array<Dynamic>));
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: (_Runtime.toInt32(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0), spawnRate: spawnRate, loop: looping, duration: ((cast looping : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.max(0.0, _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'duration'), 5.0] : Array<Dynamic>))) : Dynamic)), lifetimeMin: _Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), lifetimeMax: _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), speedMin: (_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)) * ppu), speedMax: (_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)) * ppu), directionX: directionX, directionY: directionY, spread: spread, gravityX: 0.0, gravityY: gravPixels, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleLow, scaleMax: scaleHigh, scaleEnd: scaleEnd, colorStartR: startColor.r, colorStartG: startColor.g, colorStartB: startColor.b, colorEndR: endColor.r, colorEndG: endColor.g, colorEndB: endColor.b, alphaStart: startColor.a, alphaEnd: endColor.a, colorCurve: colorCurve, alphaCurve: alphaCurve, scaleCurve: scaleCurve, rotationSpeedMin: rotLow, rotationSpeedMax: rotHigh, burstCount: burstCount, burstInterval: burstInterval, blendMode: _Runtime.callValue(UnityParse.unityBlendMode__unityParse, cast ([raw] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: (_Runtime.toInt32(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0), spawnRate: spawnRate, loop: looping, duration: ((cast looping : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.max(0.0, _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'duration'), 5.0] : Array<Dynamic>))) : Dynamic)), lifetimeMin: _Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), lifetimeMax: _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), speedMin: _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)), ppu), speedMax: _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)), ppu), directionX: directionX, directionY: directionY, spread: spread, gravityX: 0.0, gravityY: gravPixels, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleLow, scaleMax: scaleHigh, scaleEnd: scaleEnd, colorStartR: startColor.r, colorStartG: startColor.g, colorStartB: startColor.b, colorEndR: endColor.r, colorEndG: endColor.g, colorEndB: endColor.b, alphaStart: startColor.a, alphaEnd: endColor.a, colorCurve: colorCurve, alphaCurve: alphaCurve, scaleCurve: scaleCurve, rotationSpeedMin: rotLow, rotationSpeedMax: rotHigh, burstCount: burstCount, burstInterval: burstInterval, blendMode: _Runtime.callValue(UnityParse.unityBlendMode__unityParse, cast ([raw] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -252,7 +252,7 @@ class UnityParse {
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
         var c:Dynamic = (cast _Runtime.coalesce(_Runtime.field(k, 'color'), function():Dynamic return cast k) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'r'), 1.0] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'g'), 1.0] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'b'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0))] : Array<Dynamic>)), r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'r'), 1.0] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'g'), 1.0] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'b'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
       }
     }
@@ -268,7 +268,7 @@ class UnityParse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'alpha'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'alpha'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
       }
     }
@@ -287,7 +287,7 @@ class UnityParse {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
         var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / (_Runtime.field(arr, 'length') - 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'value'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'value'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
         i++;
       }
     }

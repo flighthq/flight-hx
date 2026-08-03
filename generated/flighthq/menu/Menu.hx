@@ -295,8 +295,8 @@ class Menu {
         rect = _Runtime.callProperty(el, 'getBoundingClientRect', cast ([] : Array<Dynamic>));
         vw = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
         vh = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight') : Dynamic) : (cast 0.0 : Dynamic));
-        if ((cast ((cast _Runtime.field(rect, 'right') : Float) > (cast vw : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(HxMath.max(0.0, (anchorX - _Runtime.field(rect, 'width')))) + 'px'); }
-        if ((cast ((cast _Runtime.field(rect, 'bottom') : Float) > (cast vh : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(HxMath.max(0.0, (anchorY - _Runtime.field(rect, 'height')))) + 'px'); }
+        if ((cast ((cast _Runtime.field(rect, 'right') : Float) > (cast vw : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(HxMath.max(0.0, _Runtime.subtractNumbers(anchorX, _Runtime.field(rect, 'width')))) + 'px'); }
+        if ((cast ((cast _Runtime.field(rect, 'bottom') : Float) > (cast vh : Float)) : Bool)) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(HxMath.max(0.0, _Runtime.subtractNumbers(anchorY, _Runtime.field(rect, 'height')))) + 'px'); }
       };
       close = function close(selectedId:Null<String>):Void {
         flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
@@ -310,7 +310,7 @@ class Menu {
         var items:Dynamic = cast _Runtime.UNDEFINED;
         items = _Runtime.toArray(focusableItems);
         if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return; }
-        (focusIndex = cast (((cast _Runtime.strictEquals(focusIndex, -1.0) : Bool) ? (cast ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(items, 'length') - 1.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic) : (cast _Runtime.fmod(((focusIndex + delta) + _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic)) : Dynamic));
+        (focusIndex = cast (((cast _Runtime.strictEquals(focusIndex, -1.0) : Bool) ? (cast ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(items, 'length'), 1.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic) : (cast _Runtime.fmod(_Runtime.addNumbers((focusIndex + delta), _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic)) : Dynamic));
         _Runtime.callProperty(items, 'forEach', cast ([function(el:Dynamic, i:Dynamic) {
           if ((cast _Runtime.strictEquals(i, focusIndex) : Bool)) {
             _Runtime.callProperty(el, 'setAttribute', cast (['data-focused', 'true'] : Array<Dynamic>));

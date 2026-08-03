@@ -8,8 +8,8 @@ import flighthq.types.EasingFunction;
 class EasePower {
   public static function easeInOutPower(exponent:Float):EasingFunction {
     return cast function(t:Dynamic) {
-      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast (HxMath.pow((t * 2.0), exponent) * 0.5); }
-      return cast (1.0 - (HxMath.pow(((1.0 - t) * 2.0), exponent) * 0.5));
+      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast _Runtime.multiplyNumbers(HxMath.pow((t * 2.0), exponent), 0.5); }
+      return cast (1.0 - _Runtime.multiplyNumbers(HxMath.pow(((1.0 - t) * 2.0), exponent), 0.5));
     };
     return cast null;
   }
@@ -20,7 +20,7 @@ class EasePower {
   }
 
   public static function easeOutPower(exponent:Float):EasingFunction {
-    return cast function(t:Dynamic) return (1.0 - HxMath.pow((1.0 - t), exponent));
+    return cast function(t:Dynamic) return _Runtime.subtractNumbers(1.0, HxMath.pow((1.0 - t), exponent));
     return cast null;
   }
 }

@@ -86,7 +86,7 @@ class AnimationRootMotion {
     {
       var component:Dynamic = 0.0;
       while ((cast ((cast component : Float) < (cast _Runtime.field(track, 'components') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, component, ((flighthq._internal._StaticIndex.readFloat32Array(sample, component) - flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'startSample'), component)) + (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), component) * cycle)));
+        flighthq._internal._StaticIndex.writeFloat32Array(out, component, (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(sample, component), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'startSample'), component)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), component), cycle)));
         component++;
       }
     }
@@ -98,13 +98,13 @@ class AnimationRootMotion {
       {
         var component:Dynamic = 0.0;
         while ((cast ((cast component : Float) < (cast width : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, (_Runtime.getIndex(to, component) - _Runtime.getIndex(from, component)));
+          flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, _Runtime.subtractNumbers(_Runtime.getIndex(to, component), _Runtime.getIndex(from, component)));
           component++;
         }
       }
       return;
     }
-    _Runtime.callValue(AnimationRootMotion.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion, cast ([out, ((((_Runtime.getIndex(from, 3.0) * _Runtime.getIndex(to, 0.0)) - (_Runtime.getIndex(from, 0.0) * _Runtime.getIndex(to, 3.0))) - (_Runtime.getIndex(from, 1.0) * _Runtime.getIndex(to, 2.0))) + (_Runtime.getIndex(from, 2.0) * _Runtime.getIndex(to, 1.0))), ((((_Runtime.getIndex(from, 3.0) * _Runtime.getIndex(to, 1.0)) + (_Runtime.getIndex(from, 0.0) * _Runtime.getIndex(to, 2.0))) - (_Runtime.getIndex(from, 1.0) * _Runtime.getIndex(to, 3.0))) - (_Runtime.getIndex(from, 2.0) * _Runtime.getIndex(to, 0.0))), ((((_Runtime.getIndex(from, 3.0) * _Runtime.getIndex(to, 2.0)) - (_Runtime.getIndex(from, 0.0) * _Runtime.getIndex(to, 1.0))) + (_Runtime.getIndex(from, 1.0) * _Runtime.getIndex(to, 0.0))) - (_Runtime.getIndex(from, 2.0) * _Runtime.getIndex(to, 3.0))), ((((_Runtime.getIndex(from, 3.0) * _Runtime.getIndex(to, 3.0)) + (_Runtime.getIndex(from, 0.0) * _Runtime.getIndex(to, 0.0))) + (_Runtime.getIndex(from, 1.0) * _Runtime.getIndex(to, 1.0))) + (_Runtime.getIndex(from, 2.0) * _Runtime.getIndex(to, 2.0)))] : Array<Dynamic>));
+    _Runtime.callValue(AnimationRootMotion.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion, cast ([out, (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 0.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 2.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 1.0))), (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 1.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 2.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 0.0))), (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 2.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 0.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 3.0))), (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 3.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 0.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 2.0)))] : Array<Dynamic>));
   }
 
   public static function writeAnimationRootMotionIdentity__animationRootMotion(out:Dynamic, components:Float, quaternion:Bool):Void {

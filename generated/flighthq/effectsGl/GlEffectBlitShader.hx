@@ -28,7 +28,7 @@ class GlEffectBlitShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlBlitOffsetShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(loc, 'locOffset'), (-dx / _Runtime.field(source, 'width')), (dy / _Runtime.field(source, 'height')));
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(loc, 'locOffset'), _Runtime.divideNumbers(-dx, _Runtime.field(source, 'width')), _Runtime.divideNumbers(dy, _Runtime.field(source, 'height')));
     }] : Array<Dynamic>));
   }
 

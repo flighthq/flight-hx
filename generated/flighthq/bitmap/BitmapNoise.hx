@@ -15,13 +15,13 @@ class BitmapNoise {
     var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(seed) | 0)), 0), function():Dynamic return cast 1.0);
     lo = HxMath.max(0.0, HxMath.min(255.0, low));
-    span = (HxMath.max(0.0, HxMath.min(255.0, high)) - lo);
+    span = _Runtime.subtractNumbers(HxMath.max(0.0, HxMath.min(255.0, high)), lo);
     data = _Runtime.field(dest, 'bitmap').data;
     bitmapWidth = _Runtime.field(dest, 'bitmap').width;
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
@@ -35,7 +35,7 @@ class BitmapNoise {
               (state = cast (_Runtime.callValue(BitmapNoise.nextRandomState__bitmapNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
               (b = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
             }
-            var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(r));
@@ -69,12 +69,12 @@ class BitmapNoise {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Dynamic = (((y * bitmapWidth) + x) * 4.0);
             var nx:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(BitmapNoise.stitchedCoord__bitmapNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)) : Dynamic) : (cast (px * fx0) : Dynamic));
@@ -87,17 +87,17 @@ class BitmapNoise {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round((_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)), 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round((_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)), 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round((_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)), 255.0)));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_A)))) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round((_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)), 255.0)));
             } else {
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
             }
@@ -128,12 +128,12 @@ class BitmapNoise {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Dynamic = (((y * bitmapWidth) + x) * 4.0);
             var nx:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(BitmapNoise.stitchedCoord__bitmapNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)) : Dynamic) : (cast (px * fx0) : Dynamic));
@@ -146,17 +146,17 @@ class BitmapNoise {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round((_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)), 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round((_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)), 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round((_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)), 255.0)));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_A)))) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round((_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)), 255.0)));
             } else {
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
             }
@@ -189,7 +189,7 @@ class BitmapNoise {
     {
       var o:Dynamic = 0.0;
       while ((cast ((cast o : Float) < (cast octaves : Float)) : Bool)) {
-        (sum = cast ((sum + (_Runtime.callValue(BitmapNoise.valueNoise__bitmapNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)) * amplitude)) : Dynamic));
+        (sum = cast ((sum + _Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.valueNoise__bitmapNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)), amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
         (frequency = cast ((frequency * 2.0) : Dynamic));
@@ -202,7 +202,7 @@ class BitmapNoise {
 
   public static function hashLattice__bitmapNoise(ix:Float, iy:Float, seed:Float):Float {
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    h = (_Runtime.toInt32(((_Runtime.imul(_Runtime.toInt32(ix), 374761393) + _Runtime.imul(_Runtime.toInt32(iy), 668265263)) + _Runtime.imul(_Runtime.toInt32(seed), _Runtime.toInt32(2654435761.0)))) | 0);
+    h = (_Runtime.toInt32(_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.imul(_Runtime.toInt32(ix), 374761393), _Runtime.imul(_Runtime.toInt32(iy), 668265263)), _Runtime.imul(_Runtime.toInt32(seed), _Runtime.toInt32(2654435761.0)))) | 0);
     (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 13)))), 1274126177) : Dynamic));
     return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 16)))), 0) / 4294967296.0);
     return cast null;
@@ -212,7 +212,7 @@ class BitmapNoise {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     t = (_Runtime.toInt32((state + 1831565813.0)) | 0);
     (t = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 15)))), _Runtime.toInt32((_Runtime.toInt32(t) | 1))) : Dynamic));
-    (t = (_Runtime.toInt32(t) ^ _Runtime.toInt32((t + _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 7)))), _Runtime.toInt32((_Runtime.toInt32(t) | 61)))))));
+    (t = (_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.addNumbers(t, _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 7)))), _Runtime.toInt32((_Runtime.toInt32(t) | 61)))))));
     return cast _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 14)))), 0), function():Dynamic return cast 1.0);
     return cast null;
   }
@@ -240,7 +240,7 @@ class BitmapNoise {
     {
       var o:Dynamic = 0.0;
       while ((cast ((cast o : Float) < (cast octaves : Float)) : Bool)) {
-        (sum = cast ((sum + (HxMath.abs(((_Runtime.callValue(BitmapNoise.valueNoise__bitmapNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)) * 2.0) - 1.0)) * amplitude)) : Dynamic));
+        (sum = cast ((sum + _Runtime.multiplyNumbers(HxMath.abs((_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.valueNoise__bitmapNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)), 2.0) - 1.0)), amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
         (frequency = cast ((frequency * 2.0) : Dynamic));

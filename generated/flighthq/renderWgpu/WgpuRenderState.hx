@@ -331,7 +331,7 @@ class WgpuRenderState {
     var ringByteSize:Dynamic = cast _Runtime.UNDEFINED;
     var uniformBuffer:Dynamic = cast _Runtime.UNDEFINED;
     var uniformData:Dynamic = cast _Runtime.UNDEFINED;
-    ringByteSize = (_Runtime.field(screenRuntime, 'uniformStride') * WgpuRenderState.RING_SLOT_COUNT__wgpuRenderState);
+    ringByteSize = _Runtime.multiplyNumbers(_Runtime.field(screenRuntime, 'uniformStride'), WgpuRenderState.RING_SLOT_COUNT__wgpuRenderState);
     uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: ringByteSize, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     uniformData = new flighthq._internal._Float32Array((ringByteSize / 4.0));
     _Runtime.setField(runtime, 'currentBlendMode', null);

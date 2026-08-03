@@ -259,7 +259,7 @@ class Matrix {
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
-    _Runtime.callValue(matrixTransformBounds, cast ([out, matrix, _Runtime.field(source, 'x'), _Runtime.field(source, 'y'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
+    _Runtime.callValue(matrixTransformBounds, cast ([out, matrix, _Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height'))] : Array<Dynamic>));
   }
 
   public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {

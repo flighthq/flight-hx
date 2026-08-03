@@ -114,8 +114,8 @@ class WgpuTextLabel {
       var maxX:Dynamic = 0.0;
       var maxY:Dynamic = 0.0;
       for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-        var right:Dynamic = (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'));
-        var bottom:Dynamic = ((_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'ascent')) + _Runtime.field(group, 'descent'));
+        var right:Dynamic = _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width'));
+        var bottom:Dynamic = _Runtime.addNumbers(_Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'ascent')), _Runtime.field(group, 'descent'));
         if ((cast ((cast right : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (right : Dynamic)); }
         if ((cast ((cast bottom : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (bottom : Dynamic)); }
       }
@@ -136,7 +136,7 @@ class WgpuTextLabel {
         flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([_Runtime.field(group, 'format')] : Array<Dynamic>)));
         flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
         var slice:Dynamic = _Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'));
-        flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillText', cast ([slice, _Runtime.field(group, 'offsetX'), (_Runtime.field(group, 'offsetY') + (_Runtime.field(group, 'ascent') * 0.815))] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillText', cast ([slice, _Runtime.field(group, 'offsetX'), _Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.multiplyNumbers(_Runtime.field(group, 'ascent'), 0.815))] : Array<Dynamic>));
       }
       _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(textData, 'image')] : Array<Dynamic>));
       _Runtime.setField(textData, 'logW', w);

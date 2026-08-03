@@ -114,7 +114,7 @@ class GlMeshProgram {
     if ((cast gpuSkinned : Bool)) {
       var palette:Dynamic = _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
-      _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, (_Runtime.toInt32((_Runtime.field(jointMatrices, 'length') / 16.0)) | 0)] : Array<Dynamic>));
+      _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0)] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT);
     }
     upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));

@@ -66,7 +66,7 @@ class GlMeshUpload {
     } else {
       if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'indexBuffer')); }
       _Runtime.setField(upload, 'indexBuffer', null);
-      _Runtime.setField(upload, 'indexCount', ((cast ((cast geometry.layout.stride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geometry.vertices, 'byteLength') / geometry.layout.stride)) : Dynamic) : (cast 0.0 : Dynamic)));
+      _Runtime.setField(upload, 'indexCount', ((cast ((cast geometry.layout.stride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'byteLength'), geometry.layout.stride)) : Dynamic) : (cast 0.0 : Dynamic)));
     }
     _Runtime.setField(upload, 'primitiveMode', primitiveMode);
     _Runtime.setField(upload, 'version', geometry.version);
@@ -112,7 +112,7 @@ class GlMeshUpload {
     __destructure0 = bindPose;
     normals = _Runtime.field(__destructure0, 'normals');
     positions = _Runtime.field(__destructure0, 'positions');
-    vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
+    vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -141,7 +141,7 @@ class GlMeshUpload {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast (flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset / 4.0); }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset, 4.0); }
         i++;
       }
     }

@@ -116,7 +116,7 @@ class HitTests {
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var hit:Dynamic = _Runtime.callValue(HitTests.findFirstHit__hitTests, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : NodeAny), x, y, precise] : Array<Dynamic>));
           if ((cast !_Runtime.strictEquals(hit, null) : Bool)) { return cast hit; }
@@ -166,7 +166,7 @@ class HitTests {
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(HitTests.collectHits__hitTests, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : NodeAny), x, y, precise, out] : Array<Dynamic>));
           i--;

@@ -250,7 +250,7 @@ class Notification {
         var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
         var timeout:Dynamic = cast _Runtime.UNDEFINED;
         id = _Runtime.coalesce(request.id, function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-        delay = HxMath.max(0.0, (schedule.at - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
+        delay = HxMath.max(0.0, _Runtime.subtractNumbers(schedule.at, _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
         entry = { id: id, request: request, schedule: schedule };
         fireAndReschedule = function() {
           ((cast _scheduled : flighthq._internal._Map).delete_(id));
@@ -258,7 +258,7 @@ class Notification {
           if ((cast !_Runtime.strictEquals(schedule.repeat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([schedule.repeat] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
-            ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
+            ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: _Runtime.addNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), ms) }]) } }));
           }
         };
         timeout = _Runtime.setTimeout(fireAndReschedule, delay);
@@ -488,7 +488,7 @@ class Notification {
         var fireAndReschedule:Dynamic = cast _Runtime.UNDEFINED;
         var timeout:Dynamic = cast _Runtime.UNDEFINED;
         id = _Runtime.coalesce(request.id, function():Dynamic return cast _Runtime.callValue(_generateId, cast ([] : Array<Dynamic>)));
-        delay = HxMath.max(0.0, (schedule.at - _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
+        delay = HxMath.max(0.0, _Runtime.subtractNumbers(schedule.at, _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>))));
         entry = { id: id, request: request, schedule: schedule };
         fireAndReschedule = function() {
           ((cast _scheduled : flighthq._internal._Map).delete_(id));
@@ -496,7 +496,7 @@ class Notification {
           if ((cast !_Runtime.strictEquals(schedule.repeat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var ms:Dynamic = _Runtime.callValue(Notification._repeatMs__notification, cast ([schedule.repeat] : Array<Dynamic>));
             var timeout:Dynamic = _Runtime.setTimeout(fireAndReschedule, ms);
-            ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) + ms) }]) } }));
+            ((cast _scheduled : flighthq._internal._Map).set(id, { timeout: timeout, entry: { id: id, request: request, schedule: _Runtime.mergeObjects([schedule, { at: _Runtime.addNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), ms) }]) } }));
           }
         };
         timeout = _Runtime.setTimeout(fireAndReschedule, delay);

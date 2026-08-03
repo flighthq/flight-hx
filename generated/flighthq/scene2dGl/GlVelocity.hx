@@ -108,8 +108,8 @@ class GlVelocity {
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
         var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
         var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosScale:Dynamic = (HxMath.cos(rotation) * scale);
-        var sinScale:Dynamic = (HxMath.sin(rotation) * scale);
+        var cosScale:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinScale:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var minX:Dynamic = HxMath.POSITIVE_INFINITY;
         var minY:Dynamic = HxMath.POSITIVE_INFINITY;
         var maxX:Dynamic = -HxMath.POSITIVE_INFINITY;
@@ -248,12 +248,12 @@ class GlVelocity {
     var clipHeight:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(GlVelocity.ensureGlVelocityProgram__glVelocity, cast ([_Runtime.field(ctx, 'state')] : Array<Dynamic>));
     gl = _Runtime.field(_Runtime.field(ctx, 'state'), 'gl');
-    clipX0 = (((x / _Runtime.field(ctx, 'width')) * 2.0) - 1.0);
-    clipY0 = (1.0 - ((y / _Runtime.field(ctx, 'height')) * 2.0));
-    clipWidth = ((width / _Runtime.field(ctx, 'width')) * 2.0);
-    clipHeight = -((height / _Runtime.field(ctx, 'height')) * 2.0);
+    clipX0 = ((_Runtime.divideNumbers(x, _Runtime.field(ctx, 'width')) * 2.0) - 1.0);
+    clipY0 = (1.0 - (_Runtime.divideNumbers(y, _Runtime.field(ctx, 'height')) * 2.0));
+    clipWidth = (_Runtime.divideNumbers(width, _Runtime.field(ctx, 'width')) * 2.0);
+    clipHeight = -(_Runtime.divideNumbers(height, _Runtime.field(ctx, 'height')) * 2.0);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locClipRect'), clipX0, clipY0, clipWidth, clipHeight);
-    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(program, 'locVelocity'), (velocityX * _Runtime.field(ctx, 'pixelRatio')), (velocityY * _Runtime.field(ctx, 'pixelRatio')));
+    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(program, 'locVelocity'), _Runtime.multiplyNumbers(velocityX, _Runtime.field(ctx, 'pixelRatio')), _Runtime.multiplyNumbers(velocityY, _Runtime.field(ctx, 'pixelRatio')));
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, 6.0);
   }
 

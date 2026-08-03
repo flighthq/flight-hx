@@ -32,22 +32,22 @@ class AbcReader__abcFile {
   }
   public function readBytes(count:Float):flighthq._internal._UInt8Array {
     var value:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (_Runtime.field(this, 'pos') + count) : Float) > (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
+    if ((cast ((cast _Runtime.addNumbers(_Runtime.field(this, 'pos'), count) : Float) > (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
       (this.valid = cast (false : Dynamic));
       return cast new flighthq._internal._UInt8Array(0.0);
     }
-    value = (cast _Runtime.field(this, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(this, 'pos')), Std.int((_Runtime.field(this, 'pos') + count)));
+    value = (cast _Runtime.field(this, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(this, 'pos')), Std.int(_Runtime.addNumbers(_Runtime.field(this, 'pos'), count)));
     (this.pos += count);
     return cast value;
     return cast null;
   }
   public function readDouble():Float {
     var value:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (_Runtime.field(this, 'pos') + 8.0) : Float) > (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
+    if ((cast ((cast _Runtime.addNumbers(_Runtime.field(this, 'pos'), 8.0) : Float) > (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
       (this.valid = cast (false : Dynamic));
       return cast 0.0;
     }
-    value = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(_Runtime.field(this, 'source'), 'buffer'), (_Runtime.field(_Runtime.field(this, 'source'), 'byteOffset') + _Runtime.field(this, 'pos')), 8.0]), 'getFloat64', cast ([0.0, true] : Array<Dynamic>));
+    value = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(_Runtime.field(this, 'source'), 'buffer'), _Runtime.addNumbers(_Runtime.field(_Runtime.field(this, 'source'), 'byteOffset'), _Runtime.field(this, 'pos')), 8.0]), 'getFloat64', cast ([0.0, true] : Array<Dynamic>));
     (this.pos += 8.0);
     return cast value;
     return cast null;
@@ -73,7 +73,7 @@ class AbcReader__abcFile {
   public function readUint16():Float {
     var low:Dynamic = cast _Runtime.UNDEFINED;
     low = (cast this : AbcReader__abcFile).readUint8();
-    return cast (low + ((cast this : AbcReader__abcFile).readUint8() * 256.0));
+    return cast (low + _Runtime.multiplyNumbers((cast this : AbcReader__abcFile).readUint8(), 256.0));
     return cast null;
   }
   public function readVarUint():Float {
@@ -92,7 +92,7 @@ class AbcReader__abcFile {
     return cast null;
   }
   public function remaining():Float {
-    return cast (_Runtime.field(_Runtime.field(this, 'source'), 'length') - _Runtime.field(this, 'pos'));
+    return cast _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(this, 'source'), 'length'), _Runtime.field(this, 'pos'));
     return cast null;
   }
 }

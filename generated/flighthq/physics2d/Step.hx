@@ -84,7 +84,7 @@ class Step {
               var sensorPair:Dynamic = ((cast _Runtime.field(colliderA, 'sensor') : Bool) || (cast _Runtime.field(colliderB, 'sensor') : Bool));
               if ((cast ((cast bothImmovable : Bool) && (cast !(cast sensorPair : Bool) : Bool)) : Bool)) { j++; continue; }
               if ((cast !(cast _Runtime.callValue(collideContactManifold, cast ([_Runtime.field(colliderA, 'world'), _Runtime.field(colliderB, 'world'), Step.manifoldScratch__step] : Array<Dynamic>)) : Bool) : Bool)) { j++; continue; }
-              _Runtime.callValue(Step.mergePhysics2DContact__step, cast ([world, _Runtime.field(bodyA, 'index'), _Runtime.field(bodyB, 'index'), i, j, Step.manifoldScratch__step, sensorPair, ((_Runtime.field(_Runtime.field(colliderA, 'material'), 'friction') + _Runtime.field(_Runtime.field(colliderB, 'material'), 'friction')) / 2.0), HxMath.max(_Runtime.field(_Runtime.field(colliderA, 'material'), 'restitution'), _Runtime.field(_Runtime.field(colliderB, 'material'), 'restitution'))] : Array<Dynamic>));
+              _Runtime.callValue(Step.mergePhysics2DContact__step, cast ([world, _Runtime.field(bodyA, 'index'), _Runtime.field(bodyB, 'index'), i, j, Step.manifoldScratch__step, sensorPair, (_Runtime.addNumbers(_Runtime.field(_Runtime.field(colliderA, 'material'), 'friction'), _Runtime.field(_Runtime.field(colliderB, 'material'), 'friction')) / 2.0), HxMath.max(_Runtime.field(_Runtime.field(colliderA, 'material'), 'restitution'), _Runtime.field(_Runtime.field(colliderB, 'material'), 'restitution'))] : Array<Dynamic>));
               j++;
             }
           }
@@ -93,7 +93,7 @@ class Step {
       }
     }
     {
-      var i:Dynamic = (_Runtime.field(_Runtime.field(world, 'contacts'), 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(world, 'contacts'), 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var contact:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), i);
         if ((cast !(cast _Runtime.field(contact, 'touching') : Bool) : Bool)) {
@@ -167,10 +167,10 @@ class Step {
       var bodyA:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyA')] : Array<Dynamic>));
       var bodyB:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
       if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { continue; }
-      var centerAX:Dynamic = ((_Runtime.field(bodyA, 'x') + (_Runtime.field(bodyA, 'centerX') * HxMath.cos(_Runtime.field(bodyA, 'angle')))) - (_Runtime.field(bodyA, 'centerY') * HxMath.sin(_Runtime.field(bodyA, 'angle'))));
-      var centerAY:Dynamic = ((_Runtime.field(bodyA, 'y') + (_Runtime.field(bodyA, 'centerX') * HxMath.sin(_Runtime.field(bodyA, 'angle')))) + (_Runtime.field(bodyA, 'centerY') * HxMath.cos(_Runtime.field(bodyA, 'angle'))));
-      var centerBX:Dynamic = ((_Runtime.field(bodyB, 'x') + (_Runtime.field(bodyB, 'centerX') * HxMath.cos(_Runtime.field(bodyB, 'angle')))) - (_Runtime.field(bodyB, 'centerY') * HxMath.sin(_Runtime.field(bodyB, 'angle'))));
-      var centerBY:Dynamic = ((_Runtime.field(bodyB, 'y') + (_Runtime.field(bodyB, 'centerX') * HxMath.sin(_Runtime.field(bodyB, 'angle')))) + (_Runtime.field(bodyB, 'centerY') * HxMath.cos(_Runtime.field(bodyB, 'angle'))));
+      var centerAX:Dynamic = (_Runtime.addNumbers(_Runtime.field(bodyA, 'x'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'centerX'), HxMath.cos(_Runtime.field(bodyA, 'angle')))) - _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'centerY'), HxMath.sin(_Runtime.field(bodyA, 'angle'))));
+      var centerAY:Dynamic = (_Runtime.addNumbers(_Runtime.field(bodyA, 'y'), _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'centerX'), HxMath.sin(_Runtime.field(bodyA, 'angle')))) + _Runtime.multiplyNumbers(_Runtime.field(bodyA, 'centerY'), HxMath.cos(_Runtime.field(bodyA, 'angle'))));
+      var centerBX:Dynamic = (_Runtime.addNumbers(_Runtime.field(bodyB, 'x'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'centerX'), HxMath.cos(_Runtime.field(bodyB, 'angle')))) - _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'centerY'), HxMath.sin(_Runtime.field(bodyB, 'angle'))));
+      var centerBY:Dynamic = (_Runtime.addNumbers(_Runtime.field(bodyB, 'y'), _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'centerX'), HxMath.sin(_Runtime.field(bodyB, 'angle')))) + _Runtime.multiplyNumbers(_Runtime.field(bodyB, 'centerY'), HxMath.cos(_Runtime.field(bodyB, 'angle'))));
       var normalX:Dynamic = _Runtime.field(contact, 'normalX');
       var normalY:Dynamic = _Runtime.field(contact, 'normalY');
       var tangentX:Dynamic = -normalY;
@@ -179,16 +179,16 @@ class Step {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
           var point:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
-          _Runtime.setField(point, 'rAX', (_Runtime.field(point, 'x') - centerAX));
-          _Runtime.setField(point, 'rAY', (_Runtime.field(point, 'y') - centerAY));
-          _Runtime.setField(point, 'rBX', (_Runtime.field(point, 'x') - centerBX));
-          _Runtime.setField(point, 'rBY', (_Runtime.field(point, 'y') - centerBY));
+          _Runtime.setField(point, 'rAX', _Runtime.subtractNumbers(_Runtime.field(point, 'x'), centerAX));
+          _Runtime.setField(point, 'rAY', _Runtime.subtractNumbers(_Runtime.field(point, 'y'), centerAY));
+          _Runtime.setField(point, 'rBX', _Runtime.subtractNumbers(_Runtime.field(point, 'x'), centerBX));
+          _Runtime.setField(point, 'rBY', _Runtime.subtractNumbers(_Runtime.field(point, 'y'), centerBY));
           _Runtime.setField(point, 'normalMass', _Runtime.callValue(Step.effectiveMass__step, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), normalX, normalY] : Array<Dynamic>)));
           _Runtime.setField(point, 'tangentMass', _Runtime.callValue(Step.effectiveMass__step, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), tangentX, tangentY] : Array<Dynamic>)));
-          var excess:Dynamic = (_Runtime.field(point, 'depth') - _Runtime.field(config, 'penetrationSlop'));
-          _Runtime.setField(point, 'bias', ((cast ((cast excess : Float) > (cast 0.0 : Float)) : Bool) ? (cast (-(_Runtime.field(config, 'positionCorrection') / dt) * excess) : Dynamic) : (cast 0.0 : Dynamic)));
+          var excess:Dynamic = _Runtime.subtractNumbers(_Runtime.field(point, 'depth'), _Runtime.field(config, 'penetrationSlop'));
+          _Runtime.setField(point, 'bias', ((cast ((cast excess : Float) > (cast 0.0 : Float)) : Bool) ? (cast (-_Runtime.divideNumbers(_Runtime.field(config, 'positionCorrection'), dt) * excess) : Dynamic) : (cast 0.0 : Dynamic)));
           var approach:Dynamic = _Runtime.callValue(relativeNormalVelocity, cast ([bodyA, bodyB, point, normalX, normalY] : Array<Dynamic>));
-          if ((cast ((cast approach : Float) < (cast -_Runtime.field(config, 'restitutionThreshold') : Float)) : Bool)) { _Runtime.setField(point, 'bias', (_Runtime.field(point, 'bias') + (_Runtime.field(contact, 'restitution') * approach))); }
+          if ((cast ((cast approach : Float) < (cast -_Runtime.field(config, 'restitutionThreshold') : Float)) : Bool)) { _Runtime.setField(point, 'bias', _Runtime.addNumbers(_Runtime.field(point, 'bias'), _Runtime.multiplyNumbers(_Runtime.field(contact, 'restitution'), approach))); }
           i++;
         }
       }
@@ -201,7 +201,7 @@ class Step {
     var total:Dynamic = cast _Runtime.UNDEFINED;
     crossA = ((rAX * axisY) - (rAY * axisX));
     crossB = ((rBX * axisY) - (rBY * axisX));
-    total = (((_Runtime.field(bodyA, 'inverseMass') + _Runtime.field(bodyB, 'inverseMass')) + ((_Runtime.field(bodyA, 'inverseInertia') * crossA) * crossA)) + ((_Runtime.field(bodyB, 'inverseInertia') * crossB) * crossB));
+    total = ((_Runtime.addNumbers(_Runtime.field(bodyA, 'inverseMass'), _Runtime.field(bodyB, 'inverseMass')) + (_Runtime.multiplyNumbers(_Runtime.field(bodyA, 'inverseInertia'), crossA) * crossA)) + (_Runtime.multiplyNumbers(_Runtime.field(bodyB, 'inverseInertia'), crossB) * crossB));
     return cast ((cast ((cast total : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / total) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
@@ -217,12 +217,12 @@ class Step {
     _Runtime.callValue(updatePhysics2DSleep, cast ([world, dt] : Array<Dynamic>));
     for (body in _Runtime.iterable(bodies)) {
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic') : Bool) || (cast _Runtime.field(body, 'sleeping') : Bool)) : Bool)) { continue; }
-      _Runtime.setField(body, 'velocityX', (_Runtime.field(body, 'velocityX') + (((_Runtime.field(body, 'forceX') * _Runtime.field(body, 'inverseMass')) + (_Runtime.field(world, 'gravityX') * _Runtime.field(body, 'gravityScale'))) * dt)));
-      _Runtime.setField(body, 'velocityY', (_Runtime.field(body, 'velocityY') + (((_Runtime.field(body, 'forceY') * _Runtime.field(body, 'inverseMass')) + (_Runtime.field(world, 'gravityY') * _Runtime.field(body, 'gravityScale'))) * dt)));
-      _Runtime.setField(body, 'angularVelocity', (_Runtime.field(body, 'angularVelocity') + ((_Runtime.field(body, 'torque') * _Runtime.field(body, 'inverseInertia')) * dt)));
-      _Runtime.setField(body, 'velocityX', (_Runtime.field(body, 'velocityX') / (1.0 + (_Runtime.field(body, 'linearDamping') * dt))));
-      _Runtime.setField(body, 'velocityY', (_Runtime.field(body, 'velocityY') / (1.0 + (_Runtime.field(body, 'linearDamping') * dt))));
-      _Runtime.setField(body, 'angularVelocity', (_Runtime.field(body, 'angularVelocity') / (1.0 + (_Runtime.field(body, 'angularDamping') * dt))));
+      _Runtime.setField(body, 'velocityX', _Runtime.addNumbers(_Runtime.field(body, 'velocityX'), ((_Runtime.multiplyNumbers(_Runtime.field(body, 'forceX'), _Runtime.field(body, 'inverseMass')) + _Runtime.multiplyNumbers(_Runtime.field(world, 'gravityX'), _Runtime.field(body, 'gravityScale'))) * dt)));
+      _Runtime.setField(body, 'velocityY', _Runtime.addNumbers(_Runtime.field(body, 'velocityY'), ((_Runtime.multiplyNumbers(_Runtime.field(body, 'forceY'), _Runtime.field(body, 'inverseMass')) + _Runtime.multiplyNumbers(_Runtime.field(world, 'gravityY'), _Runtime.field(body, 'gravityScale'))) * dt)));
+      _Runtime.setField(body, 'angularVelocity', _Runtime.addNumbers(_Runtime.field(body, 'angularVelocity'), (_Runtime.multiplyNumbers(_Runtime.field(body, 'torque'), _Runtime.field(body, 'inverseInertia')) * dt)));
+      _Runtime.setField(body, 'velocityX', _Runtime.divideNumbers(_Runtime.field(body, 'velocityX'), (1.0 + _Runtime.multiplyNumbers(_Runtime.field(body, 'linearDamping'), dt))));
+      _Runtime.setField(body, 'velocityY', _Runtime.divideNumbers(_Runtime.field(body, 'velocityY'), (1.0 + _Runtime.multiplyNumbers(_Runtime.field(body, 'linearDamping'), dt))));
+      _Runtime.setField(body, 'angularVelocity', _Runtime.divideNumbers(_Runtime.field(body, 'angularVelocity'), (1.0 + _Runtime.multiplyNumbers(_Runtime.field(body, 'angularDamping'), dt))));
     }
     _Runtime.callValue(Step.preparePhysics2DConstraints__step, cast ([world, dt] : Array<Dynamic>));
     for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
@@ -253,9 +253,9 @@ class Step {
     }
     for (body in _Runtime.iterable(bodies)) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool) || (cast _Runtime.field(body, 'sleeping') : Bool)) : Bool)) { continue; }
-      _Runtime.setField(body, 'x', (_Runtime.field(body, 'x') + (_Runtime.field(body, 'velocityX') * dt)));
-      _Runtime.setField(body, 'y', (_Runtime.field(body, 'y') + (_Runtime.field(body, 'velocityY') * dt)));
-      _Runtime.setField(body, 'angle', (_Runtime.field(body, 'angle') + (_Runtime.field(body, 'angularVelocity') * dt)));
+      _Runtime.setField(body, 'x', _Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(body, 'velocityX'), dt)));
+      _Runtime.setField(body, 'y', _Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(body, 'velocityY'), dt)));
+      _Runtime.setField(body, 'angle', _Runtime.addNumbers(_Runtime.field(body, 'angle'), _Runtime.multiplyNumbers(_Runtime.field(body, 'angularVelocity'), dt)));
     }
     for (body in _Runtime.iterable(bodies)) {
       _Runtime.setField(body, 'forceX', 0.0);
@@ -288,10 +288,10 @@ class Step {
   }
 
   public static function comparePhysics2DContacts__step(left:Physics2DContact, right:Physics2DContact):Float {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'bodyA'), _Runtime.field(right, 'bodyA')) : Bool)) { return cast (_Runtime.field(left, 'bodyA') - _Runtime.field(right, 'bodyA')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'bodyB'), _Runtime.field(right, 'bodyB')) : Bool)) { return cast (_Runtime.field(left, 'bodyB') - _Runtime.field(right, 'bodyB')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'colliderA'), _Runtime.field(right, 'colliderA')) : Bool)) { return cast (_Runtime.field(left, 'colliderA') - _Runtime.field(right, 'colliderA')); }
-    return cast (_Runtime.field(left, 'colliderB') - _Runtime.field(right, 'colliderB'));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'bodyA'), _Runtime.field(right, 'bodyA')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(left, 'bodyA'), _Runtime.field(right, 'bodyA')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'bodyB'), _Runtime.field(right, 'bodyB')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(left, 'bodyB'), _Runtime.field(right, 'bodyB')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'colliderA'), _Runtime.field(right, 'colliderA')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(left, 'colliderA'), _Runtime.field(right, 'colliderA')); }
+    return cast _Runtime.subtractNumbers(_Runtime.field(left, 'colliderB'), _Runtime.field(right, 'colliderB'));
     return cast null;
   }
 

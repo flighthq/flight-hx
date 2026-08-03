@@ -27,7 +27,7 @@ class MeshGeometryOperations {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = options;
     positions = _Runtime.field(__destructure0, 'positions');
-    vertexCount = (_Runtime.field(positions, 'length') / 3.0);
+    vertexCount = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
     normals = _Runtime.coalesce(_Runtime.field(options, 'normals'), function():Dynamic return cast null);
     uvs = _Runtime.coalesce(_Runtime.field(options, 'uvs'), function():Dynamic return cast null);
     vertices = new flighthq._internal._Float32Array((vertexCount * MeshGeometryOperations.CANONICAL_FLOATS_PER_VERTEX__meshGeometryOperations));
@@ -158,7 +158,7 @@ class MeshGeometryOperations {
     totalIndexCount = 0.0;
     allIndexed = true;
     for (geo in _Runtime.iterable(geometries)) {
-      var vc:Dynamic = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geo.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+      var vc:Dynamic = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geo.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
       (totalVertexFloats = cast ((totalVertexFloats + (vc * floatsPerVertex)) : Dynamic));
       if (_Runtime.truthy(geo.indices)) {
         (totalIndexCount = cast ((totalIndexCount + _Runtime.field(geo.indices, 'length')) : Dynamic));
@@ -175,7 +175,7 @@ class MeshGeometryOperations {
     indexOffset = 0.0;
     vertexFloatOffset = 0.0;
     for (geo in _Runtime.iterable(geometries)) {
-      var vc:Dynamic = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((_Runtime.field(geo.vertices, 'length') / floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
+      var vc:Dynamic = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geo.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
       (cast mergedVertices : flighthq._internal._Float32Array).set((cast geo.vertices : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((vc * floatsPerVertex))), Std.int(vertexFloatOffset));
       if (_Runtime.truthy(mergedIndices)) {
         var srcCount:Dynamic = _Runtime.select(geo.indices, function():Dynamic return cast _Runtime.field(geo.indices, 'length'), function():Dynamic return cast vc);
@@ -211,7 +211,7 @@ class MeshGeometryOperations {
     floatsPerVertex = (geometry.layout.stride / 4.0);
     if ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex), 0.0) : Bool)) { return cast false; }
-    vertexCount = HxMath.floor((_Runtime.field(geometry.vertices, 'length') / floatsPerVertex));
+    vertexCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex));
     if (_Runtime.truthy(geometry.indices)) {
       {
         var i:Dynamic = 0.0;

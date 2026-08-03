@@ -19,7 +19,7 @@ class BoxBlurMath {
 
   public static function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
     if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    return cast HxMath.max(0.0, HxMath.round(((-1.0 + HxMath.sqrt((1.0 + (((12.0 * sigma) * sigma) / passes)))) / 2.0)));
+    return cast HxMath.max(0.0, HxMath.round((_Runtime.addNumbers(-1.0, HxMath.sqrt((1.0 + (((12.0 * sigma) * sigma) / passes)))) / 2.0)));
     return cast null;
   }
 

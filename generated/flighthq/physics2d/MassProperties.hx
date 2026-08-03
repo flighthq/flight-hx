@@ -17,9 +17,9 @@ class MassProperties {
       var __switchValue = _Runtime.field(shape, 'kind');
       if (__switchValue == 'circle') {
         {
-          var area:Dynamic = ((HxMath.PI * _Runtime.field(shape, 'radius')) * _Runtime.field(shape, 'radius'));
+          var area:Dynamic = _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(HxMath.PI, _Runtime.field(shape, 'radius')), _Runtime.field(shape, 'radius'));
           _Runtime.setField(out, 'mass', (area * density));
-          _Runtime.setField(out, 'inertia', (((0.5 * _Runtime.field(out, 'mass')) * _Runtime.field(shape, 'radius')) * _Runtime.field(shape, 'radius')));
+          _Runtime.setField(out, 'inertia', _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(0.5, _Runtime.field(out, 'mass')), _Runtime.field(shape, 'radius')), _Runtime.field(shape, 'radius')));
           _Runtime.setField(out, 'centerX', _Runtime.field(shape, 'x'));
           _Runtime.setField(out, 'centerY', _Runtime.field(shape, 'y'));
           return;
@@ -27,21 +27,21 @@ class MassProperties {
       }
       else if (__switchValue == 'aabb') {
         {
-          var width:Dynamic = (_Runtime.field(shape, 'maxX') - _Runtime.field(shape, 'minX'));
-          var height:Dynamic = (_Runtime.field(shape, 'maxY') - _Runtime.field(shape, 'minY'));
+          var width:Dynamic = _Runtime.subtractNumbers(_Runtime.field(shape, 'maxX'), _Runtime.field(shape, 'minX'));
+          var height:Dynamic = _Runtime.subtractNumbers(_Runtime.field(shape, 'maxY'), _Runtime.field(shape, 'minY'));
           _Runtime.setField(out, 'mass', ((width * height) * density));
-          _Runtime.setField(out, 'inertia', ((_Runtime.field(out, 'mass') * ((width * width) + (height * height))) / 12.0));
-          _Runtime.setField(out, 'centerX', ((_Runtime.field(shape, 'minX') + _Runtime.field(shape, 'maxX')) / 2.0));
-          _Runtime.setField(out, 'centerY', ((_Runtime.field(shape, 'minY') + _Runtime.field(shape, 'maxY')) / 2.0));
+          _Runtime.setField(out, 'inertia', (_Runtime.multiplyNumbers(_Runtime.field(out, 'mass'), ((width * width) + (height * height))) / 12.0));
+          _Runtime.setField(out, 'centerX', (_Runtime.addNumbers(_Runtime.field(shape, 'minX'), _Runtime.field(shape, 'maxX')) / 2.0));
+          _Runtime.setField(out, 'centerY', (_Runtime.addNumbers(_Runtime.field(shape, 'minY'), _Runtime.field(shape, 'maxY')) / 2.0));
           return;
         }
       }
       else if (__switchValue == 'obb') {
         {
-          var width:Dynamic = (_Runtime.field(shape, 'halfW') * 2.0);
-          var height:Dynamic = (_Runtime.field(shape, 'halfH') * 2.0);
+          var width:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(shape, 'halfW'), 2.0);
+          var height:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(shape, 'halfH'), 2.0);
           _Runtime.setField(out, 'mass', ((width * height) * density));
-          _Runtime.setField(out, 'inertia', ((_Runtime.field(out, 'mass') * ((width * width) + (height * height))) / 12.0));
+          _Runtime.setField(out, 'inertia', (_Runtime.multiplyNumbers(_Runtime.field(out, 'mass'), ((width * width) + (height * height))) / 12.0));
           _Runtime.setField(out, 'centerX', _Runtime.field(shape, 'x'));
           _Runtime.setField(out, 'centerY', _Runtime.field(shape, 'y'));
           return;
@@ -72,8 +72,8 @@ class MassProperties {
     for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
       _Runtime.callValue(computePhysics2DColliderMassData, cast ([collider, MassProperties.scratch__massProperties] : Array<Dynamic>));
       (mass = cast ((mass + _Runtime.field(MassProperties.scratch__massProperties, 'mass')) : Dynamic));
-      (weightedX = cast ((weightedX + (_Runtime.field(MassProperties.scratch__massProperties, 'centerX') * _Runtime.field(MassProperties.scratch__massProperties, 'mass'))) : Dynamic));
-      (weightedY = cast ((weightedY + (_Runtime.field(MassProperties.scratch__massProperties, 'centerY') * _Runtime.field(MassProperties.scratch__massProperties, 'mass'))) : Dynamic));
+      (weightedX = cast ((weightedX + _Runtime.multiplyNumbers(_Runtime.field(MassProperties.scratch__massProperties, 'centerX'), _Runtime.field(MassProperties.scratch__massProperties, 'mass'))) : Dynamic));
+      (weightedY = cast ((weightedY + _Runtime.multiplyNumbers(_Runtime.field(MassProperties.scratch__massProperties, 'centerY'), _Runtime.field(MassProperties.scratch__massProperties, 'mass'))) : Dynamic));
     }
     if ((cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.setField(body, 'centerX', (weightedX / mass));
@@ -85,9 +85,9 @@ class MassProperties {
     inertia = 0.0;
     for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
       _Runtime.callValue(computePhysics2DColliderMassData, cast ([collider, MassProperties.scratch__massProperties] : Array<Dynamic>));
-      var offsetX:Dynamic = (_Runtime.field(MassProperties.scratch__massProperties, 'centerX') - _Runtime.field(body, 'centerX'));
-      var offsetY:Dynamic = (_Runtime.field(MassProperties.scratch__massProperties, 'centerY') - _Runtime.field(body, 'centerY'));
-      (inertia = cast ((inertia + (_Runtime.field(MassProperties.scratch__massProperties, 'inertia') + (_Runtime.field(MassProperties.scratch__massProperties, 'mass') * ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));
+      var offsetX:Dynamic = _Runtime.subtractNumbers(_Runtime.field(MassProperties.scratch__massProperties, 'centerX'), _Runtime.field(body, 'centerX'));
+      var offsetY:Dynamic = _Runtime.subtractNumbers(_Runtime.field(MassProperties.scratch__massProperties, 'centerY'), _Runtime.field(body, 'centerY'));
+      (inertia = cast ((inertia + _Runtime.addNumbers(_Runtime.field(MassProperties.scratch__massProperties, 'inertia'), _Runtime.multiplyNumbers(_Runtime.field(MassProperties.scratch__massProperties, 'mass'), ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));
     }
     simulated = _Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic');
     _Runtime.setField(body, 'mass', ((cast simulated : Bool) ? (cast mass : Dynamic) : (cast 0.0 : Dynamic)));
@@ -145,9 +145,9 @@ class MassProperties {
     _Runtime.setField(out, 'mass', (absoluteArea * density));
     _Runtime.setField(out, 'centerX', (centroidX / (6.0 * area)));
     _Runtime.setField(out, 'centerY', (centroidY / (6.0 * area)));
-    originMoment = ((HxMath.abs(moment) / 12.0) * density);
-    offsetSquared = ((_Runtime.field(out, 'centerX') * _Runtime.field(out, 'centerX')) + (_Runtime.field(out, 'centerY') * _Runtime.field(out, 'centerY')));
-    _Runtime.setField(out, 'inertia', (originMoment - (_Runtime.field(out, 'mass') * offsetSquared)));
+    originMoment = (_Runtime.divideNumbers(HxMath.abs(moment), 12.0) * density);
+    offsetSquared = (_Runtime.multiplyNumbers(_Runtime.field(out, 'centerX'), _Runtime.field(out, 'centerX')) + _Runtime.multiplyNumbers(_Runtime.field(out, 'centerY'), _Runtime.field(out, 'centerY')));
+    _Runtime.setField(out, 'inertia', (originMoment - _Runtime.multiplyNumbers(_Runtime.field(out, 'mass'), offsetSquared)));
   }
 
   public static final scratch__massProperties:Physics2DMassData = { mass: 0.0, inertia: 0.0, centerX: 0.0, centerY: 0.0 };

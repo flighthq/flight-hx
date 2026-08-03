@@ -68,7 +68,7 @@ class GlRenderTexturePool {
         var __returnValue4:Dynamic = _Runtime.callValue(callback, cast ([textures] : Array<Dynamic>));
         {
           {
-            var i:Dynamic = (_Runtime.field(textures, 'length') - 1.0);
+            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
               if ((cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).has(texture)) : Bool)) { _Runtime.callValue(releaseGlRenderTexture, cast ([state, pool, texture] : Array<Dynamic>)); }
@@ -81,7 +81,7 @@ class GlRenderTexturePool {
     } catch (__finallyError5:Dynamic) {
       {
         {
-          var i:Dynamic = (_Runtime.field(textures, 'length') - 1.0);
+          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
             if ((cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).has(texture)) : Bool)) { _Runtime.callValue(releaseGlRenderTexture, cast ([state, pool, texture] : Array<Dynamic>)); }
@@ -93,7 +93,7 @@ class GlRenderTexturePool {
     }
     {
       {
-        var i:Dynamic = (_Runtime.field(textures, 'length') - 1.0);
+        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
           if ((cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).has(texture)) : Bool)) { _Runtime.callValue(releaseGlRenderTexture, cast ([state, pool, texture] : Array<Dynamic>)); }
@@ -115,7 +115,7 @@ class GlRenderTexturePool {
     _Runtime.setField(target, 'colorSpace', _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
     _Runtime.setField(target, 'clearColors', ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'clearColors'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'clearColors'))]) : Dynamic)));
     _Runtime.setField(target, 'clearDepth', _Runtime.field(descriptor, 'clearDepth'));
-    _Runtime.setField(target, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(target, 'version') + 1.0)), 0));
+    _Runtime.setField(target, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(target, 'version'), 1.0)), 0));
   }
 
   public static function assertUsablePool__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {

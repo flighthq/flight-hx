@@ -30,13 +30,13 @@ class RenderAppearance {
     if ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setField(data, 'visible', ((cast _Runtime.field(source, 'visible') : Bool) && (cast _Runtime.field(parentData, 'visible') : Bool)));
       if ((cast !(cast _Runtime.field(data, 'visible') : Bool) : Bool)) { return; }
-      _Runtime.setField(data, 'alpha', (_Runtime.field(source, 'alpha') * _Runtime.field(parentData, 'alpha')));
+      _Runtime.setField(data, 'alpha', _Runtime.multiplyNumbers(_Runtime.field(source, 'alpha'), _Runtime.field(parentData, 'alpha')));
       if ((cast ((cast _Runtime.field(data, 'alpha') : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       _Runtime.setField(data, 'blendMode', _Runtime.field(source, 'blendMode'));
     } else {
       _Runtime.setField(data, 'visible', _Runtime.field(source, 'visible'));
       if ((cast !(cast _Runtime.field(data, 'visible') : Bool) : Bool)) { return; }
-      _Runtime.setField(data, 'alpha', (_Runtime.field(source, 'alpha') * _Runtime.field(state, 'renderAlpha')));
+      _Runtime.setField(data, 'alpha', _Runtime.multiplyNumbers(_Runtime.field(source, 'alpha'), _Runtime.field(state, 'renderAlpha')));
       if ((cast ((cast _Runtime.field(data, 'alpha') : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       _Runtime.setField(data, 'blendMode', ((cast !_Runtime.strictEquals(_Runtime.field(state, 'renderBlendMode'), null) : Bool) ? (cast _Runtime.field(state, 'renderBlendMode') : Dynamic) : (cast _Runtime.field(source, 'blendMode') : Dynamic)));
     }

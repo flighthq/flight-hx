@@ -100,6 +100,6 @@ class DomNativeText {
     _Runtime.setField(_Runtime.field(element, 'style'), 'font', '' + Std.string(slant) + '' + Std.string(weight) + '' + Std.string(size) + 'px ' + Std.string(family) + '');
     _Runtime.setField(_Runtime.field(element, 'style'), 'color', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(style, 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
     if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'textAlign', _Runtime.field(style, 'align')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'lineHeight', '' + Std.string((size + _Runtime.field(style, 'leading'))) + 'px'); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'lineHeight', '' + Std.string(_Runtime.addNumbers(size, _Runtime.field(style, 'leading'))) + 'px'); }
   }
 }

@@ -66,7 +66,7 @@ class GlWireframeUpload {
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     triangleIndices = geometry.indices;
-    triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0)) : Dynamic) : (cast HxMath.floor((((_Runtime.field(geometry.vertices, 'length') * 4.0) / geometry.layout.stride) / 3.0)) : Dynamic));
+    triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(triangleIndices, 'length'), 3.0)) : Dynamic) : (cast HxMath.floor(((_Runtime.multiplyNumbers(_Runtime.field(geometry.vertices, 'length'), 4.0) / geometry.layout.stride) / 3.0)) : Dynamic));
     lineCount = (triangleCount * 6.0);
     useUint32 = ((cast _Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
     lines = ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(lineCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(lineCount) : Dynamic));

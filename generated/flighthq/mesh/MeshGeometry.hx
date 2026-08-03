@@ -149,7 +149,7 @@ class MeshGeometry {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     floatsPerVertex = (layout.stride / 4.0);
     if ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex));
+    return cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex));
     return cast null;
   }
 

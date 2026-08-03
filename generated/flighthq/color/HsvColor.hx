@@ -26,7 +26,7 @@ class HsvColor {
     }
     hn = _Runtime.fmod((_Runtime.fmod(h, 360.0) + 360.0), 360.0);
     i = _Runtime.fmod(HxMath.floor((hn / 60.0)), 6.0);
-    f = ((hn / 60.0) - HxMath.floor((hn / 60.0)));
+    f = _Runtime.subtractNumbers((hn / 60.0), HxMath.floor((hn / 60.0)));
     p = (v * (1.0 - s));
     q = (v * (1.0 - (f * s)));
     t = (v * (1.0 - ((1.0 - f) * s)));
@@ -86,7 +86,7 @@ class HsvColor {
     if ((cast _Runtime.strictEquals(d, 0.0) : Bool)) {
       (h = cast (0.0 : Dynamic));
     } else { if ((cast _Runtime.strictEquals(max, r) : Bool)) {
-      (h = cast (((((g - b) / d) + ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) / 6.0) : Dynamic));
+      (h = cast ((_Runtime.addNumbers(((g - b) / d), ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) / 6.0) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(max, g) : Bool)) {
       (h = cast (((((b - r) / d) + 2.0) / 6.0) : Dynamic));
     } else {

@@ -33,10 +33,10 @@ class AnimationClip {
     if (events == null) events = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var copiedEvents:Dynamic = cast _Runtime.UNDEFINED;
     var computedDuration:Dynamic = cast _Runtime.UNDEFINED;
-    copiedEvents = _Runtime.sortAndReturn(_Runtime.slice(events, 0, null), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'time') - _Runtime.field(b, 'time')));
+    copiedEvents = _Runtime.sortAndReturn(_Runtime.slice(events, 0, null), function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(a, 'time'), _Runtime.field(b, 'time')));
     _Runtime.callValue(AnimationClip.validateAnimationClipEvents__animationClip, cast ([copiedEvents] : Array<Dynamic>));
     computedDuration = HxMath.max(_Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>)), _Runtime.callValue(AnimationClip.computeAnimationClipEventsDuration__animationClip, cast ([copiedEvents] : Array<Dynamic>)));
-    if ((cast ((cast ((cast !_Runtime.strictEquals(duration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(copiedEvents, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(copiedEvents, (_Runtime.field(copiedEvents, 'length') - 1.0)), 'time') : Float) > (cast duration : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(duration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(copiedEvents, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(copiedEvents, _Runtime.subtractNumbers(_Runtime.field(copiedEvents, 'length'), 1.0)), 'time') : Float) > (cast duration : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationClip event time exceeds the explicit clip duration.'));
     }
     return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast computedDuration), events: copiedEvents }] : Array<Dynamic>));
@@ -81,7 +81,7 @@ class AnimationClip {
   }
 
   public static function computeAnimationClipEventsDuration__animationClip(events:Array<Dynamic>):Float {
-    return cast ((cast ((cast _Runtime.field(events, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(events, (_Runtime.field(events, 'length') - 1.0)), 'time') : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.field(events, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(events, _Runtime.subtractNumbers(_Runtime.field(events, 'length'), 1.0)), 'time') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 

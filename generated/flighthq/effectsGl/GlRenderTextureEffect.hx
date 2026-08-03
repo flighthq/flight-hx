@@ -38,7 +38,7 @@ class GlRenderTextureEffect {
         var index:Dynamic = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(operations, 'length') : Float)) : Bool)) {
           var operation:Dynamic = flighthq._internal._StaticIndex.readArray(operations, index);
-          var remaining:Dynamic = (_Runtime.field(operations, 'length') - index);
+          var remaining:Dynamic = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
           var output:Dynamic = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
           _Runtime.callValue(writeGlRenderTextureTarget, cast ([state, output, function(target:Dynamic) {
             _Runtime.callProperty(operation, 'runner', cast ([{ state: state, source: current, dest: target, pool: _Runtime.field(pool, 'effectTargets'), sceneDepthTexture: null, sceneVelocityTexture: null }, _Runtime.field(operation, 'effect')] : Array<Dynamic>));
@@ -59,7 +59,7 @@ class GlRenderTextureEffect {
     var getStatus:Void->Dynamic = cast _Runtime.UNDEFINED;
     unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:Dynamic) return _Runtime.strictEquals(_Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(effect, 'kind')] : Array<Dynamic>)), null)] : Array<Dynamic>)), 'map', cast ([function(effect:Dynamic) return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
     requestedCount = _Runtime.field(effects, 'length');
-    registeredCount = (requestedCount - _Runtime.field(unregisteredKinds, 'length'));
+    registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
     return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: _Runtime.callValue(getStatus, cast ([] : Array<Dynamic>)), unregisteredKinds: unregisteredKinds };
     getStatus = function getStatus():Dynamic {
       if ((cast _Runtime.strictEquals(requestedCount, 0.0) : Bool)) { return cast 'no-effects'; }

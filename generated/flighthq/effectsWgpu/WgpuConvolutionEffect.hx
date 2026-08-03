@@ -39,8 +39,8 @@ class WgpuConvolutionEffect {
     divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.convolution', WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
+      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal._StaticIndex.writeInt32Array(i32, 2.0, matrixX);
       flighthq._internal._StaticIndex.writeInt32Array(i32, 3.0, matrixY);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, divisor);

@@ -56,8 +56,8 @@ class CanvasParticleEmitter2D {
         var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
         var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
         var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
-        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
+        var cosR:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinR:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var a:Float = cast _Runtime.UNDEFINED;
         var b:Float = cast _Runtime.UNDEFINED;
         var c:Float = cast _Runtime.UNDEFINED;
@@ -79,7 +79,7 @@ class CanvasParticleEmitter2D {
           (tx = cast ((((t.a * px) + (t.c * py)) + t.tx) : Dynamic));
           (ty = cast ((((t.b * px) + (t.d * py)) + t.ty) : Dynamic));
         }
-        flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (nodeAlpha * flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.multiplyNumbers(nodeAlpha, flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([imageSource, region.x, region.y, region.width, region.height, 0.0, 0.0, region.width, region.height] : Array<Dynamic>));
         i++;

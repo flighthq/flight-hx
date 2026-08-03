@@ -36,9 +36,9 @@ class StrokePath {
 
   public static function appendContour__strokePath(path:Path, primary:Array<Float>, reversePrimary:Bool, afterPrimary:Array<Float>, afterSecondary:Array<Float>, secondary:Array<Float>):Void {
     if ((cast reversePrimary : Bool)) {
-      _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(primary, (_Runtime.field(primary, 'length') - 2.0)), flighthq._internal._StaticIndex.readArray(primary, (_Runtime.field(primary, 'length') - 1.0))] : Array<Dynamic>));
+      _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(primary, _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 2.0)), flighthq._internal._StaticIndex.readArray(primary, _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 1.0))] : Array<Dynamic>));
       {
-        var i:Dynamic = (_Runtime.field(primary, 'length') - 4.0);
+        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 4.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(primary, i), flighthq._internal._StaticIndex.readArray(primary, (i + 1.0))] : Array<Dynamic>));
           (i = cast ((i - 2.0) : Dynamic));
@@ -49,7 +49,7 @@ class StrokePath {
       _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, primary, 2.0, 2.0] : Array<Dynamic>));
     }
     _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, afterPrimary, 0.0, 2.0] : Array<Dynamic>));
-    _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, secondary, (_Runtime.field(secondary, 'length') - 2.0), -2.0] : Array<Dynamic>));
+    _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, secondary, _Runtime.subtractNumbers(_Runtime.field(secondary, 'length'), 2.0), -2.0] : Array<Dynamic>));
     _Runtime.callValue(StrokePath.appendPoints__strokePath, cast ([path, afterSecondary, 0.0, 2.0] : Array<Dynamic>));
     _Runtime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
   }

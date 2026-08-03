@@ -55,7 +55,7 @@ class TiledProject {
           }
         }
         if ((cast _Runtime.strictEquals(group, null) : Bool)) { i++; continue; }
-        flighthq._internal._StaticIndex.writeInt16Array(_Runtime.field(group, 'tiles'), i, (tileId - _Runtime.field(group, 'firstGid')));
+        flighthq._internal._StaticIndex.writeInt16Array(_Runtime.field(group, 'tiles'), i, _Runtime.subtractNumbers(tileId, _Runtime.field(group, 'firstGid')));
         i++;
       }
     }

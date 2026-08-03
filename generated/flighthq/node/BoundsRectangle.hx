@@ -126,13 +126,13 @@ class BoundsRectangle {
 
   public static function setNodeHeight<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
     if ((cast _Runtime.strictEquals(target.scaleY, 0.0) : Bool)) { return; }
-    (target.scaleY = cast (((value * target.scaleY) / _Runtime.callValue(getNodeHeight, cast ([target] : Array<Dynamic>))) : Dynamic));
+    (target.scaleY = cast (_Runtime.divideNumbers((value * target.scaleY), _Runtime.callValue(getNodeHeight, cast ([target] : Array<Dynamic>))) : Dynamic));
     _Runtime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
   public static function setNodeWidth<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
     if ((cast _Runtime.strictEquals(target.scaleX, 0.0) : Bool)) { return; }
-    (target.scaleX = cast (((value * target.scaleX) / _Runtime.callValue(getNodeWidth, cast ([target] : Array<Dynamic>))) : Dynamic));
+    (target.scaleX = cast (_Runtime.divideNumbers((value * target.scaleX), _Runtime.callValue(getNodeWidth, cast ([target] : Array<Dynamic>))) : Dynamic));
     _Runtime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
@@ -213,8 +213,8 @@ class BoundsRectangle {
       var ty:Dynamic = _Runtime.field(__destructure1, 'ty');
       if ((cast ((cast ((cast ((cast _Runtime.strictEquals(a, _a) : Bool) && (cast _Runtime.strictEquals(b, _b) : Bool)) : Bool) && (cast _Runtime.strictEquals(c, _c) : Bool)) : Bool) && (cast _Runtime.strictEquals(d, _d) : Bool)) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(tx, _tx) : Bool) || (cast !_Runtime.strictEquals(ty, _ty) : Bool)) : Bool)) {
-          _Runtime.setField(_Runtime.field(runtime, 'worldBoundsRectangle'), 'x', (_Runtime.field(_Runtime.field(runtime, 'worldBoundsRectangle'), 'x') + (tx - _tx)));
-          _Runtime.setField(_Runtime.field(runtime, 'worldBoundsRectangle'), 'y', (_Runtime.field(_Runtime.field(runtime, 'worldBoundsRectangle'), 'y') + (ty - _ty)));
+          _Runtime.setField(_Runtime.field(runtime, 'worldBoundsRectangle'), 'x', _Runtime.addNumbers(_Runtime.field(_Runtime.field(runtime, 'worldBoundsRectangle'), 'x'), (tx - _tx)));
+          _Runtime.setField(_Runtime.field(runtime, 'worldBoundsRectangle'), 'y', _Runtime.addNumbers(_Runtime.field(_Runtime.field(runtime, 'worldBoundsRectangle'), 'y'), (ty - _ty)));
         }
         return cast true;
       }

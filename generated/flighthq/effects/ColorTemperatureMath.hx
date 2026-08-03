@@ -10,14 +10,14 @@ class ColorTemperatureMath {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    temp = (HxMath.max(1000.0, HxMath.min(40000.0, kelvin)) / 100.0);
+    temp = _Runtime.divideNumbers(HxMath.max(1000.0, HxMath.min(40000.0, kelvin)), 100.0);
     if ((cast ((cast temp : Float) <= (cast 66.0 : Float)) : Bool)) {
       (r = cast (1.0 : Dynamic));
-      (g = cast ((((99.4708025861 * HxMath.log(temp)) - 161.1195681661) / 255.0) : Dynamic));
-      (b = cast (((cast ((cast temp : Float) <= (cast 19.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (((138.5177312231 * HxMath.log((temp - 10.0))) - 305.0447927307) / 255.0) : Dynamic)) : Dynamic));
+      (g = cast (((_Runtime.multiplyNumbers(99.4708025861, HxMath.log(temp)) - 161.1195681661) / 255.0) : Dynamic));
+      (b = cast (((cast ((cast temp : Float) <= (cast 19.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((_Runtime.multiplyNumbers(138.5177312231, HxMath.log((temp - 10.0))) - 305.0447927307) / 255.0) : Dynamic)) : Dynamic));
     } else {
-      (r = cast (((329.698727446 * HxMath.pow((temp - 60.0), -0.1332047592)) / 255.0) : Dynamic));
-      (g = cast (((288.1221695283 * HxMath.pow((temp - 60.0), -0.0755148492)) / 255.0) : Dynamic));
+      (r = cast ((_Runtime.multiplyNumbers(329.698727446, HxMath.pow((temp - 60.0), -0.1332047592)) / 255.0) : Dynamic));
+      (g = cast ((_Runtime.multiplyNumbers(288.1221695283, HxMath.pow((temp - 60.0), -0.0755148492)) / 255.0) : Dynamic));
       (b = cast (1.0 : Dynamic));
     }
     flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, r)));
@@ -32,7 +32,7 @@ class ColorTemperatureMath {
     _Runtime.callValue(computeColorTemperatureRgb, cast ([kelvin, out] : Array<Dynamic>));
     greenShift = (-tint * 0.1);
     flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 0.0)));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, (flighthq._internal._StaticIndex.readArray(out, 1.0) + greenShift)));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), greenShift)));
     flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 2.0)));
   }
 }

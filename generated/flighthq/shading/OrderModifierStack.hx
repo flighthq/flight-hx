@@ -13,8 +13,8 @@ class OrderModifierStack {
     indexed = _Runtime.callProperty(stack, 'map', cast ([function(modifier:Dynamic, index:Dynamic) return { index: index, modifier: modifier }] : Array<Dynamic>));
     _Runtime.callProperty(indexed, 'sort', cast ([function(a:Dynamic, b:Dynamic) {
       var rankDelta:Dynamic = cast _Runtime.UNDEFINED;
-      rankDelta = (_Runtime.callValue(OrderModifierStack.getModifierSlotRank__orderModifierStack, cast ([_Runtime.field(_Runtime.field(a, 'modifier'), 'slot')] : Array<Dynamic>)) - _Runtime.callValue(OrderModifierStack.getModifierSlotRank__orderModifierStack, cast ([_Runtime.field(_Runtime.field(b, 'modifier'), 'slot')] : Array<Dynamic>)));
-      return cast ((cast !_Runtime.strictEquals(rankDelta, 0.0) : Bool) ? (cast rankDelta : Dynamic) : (cast (_Runtime.field(a, 'index') - _Runtime.field(b, 'index')) : Dynamic));
+      rankDelta = _Runtime.subtractNumbers(_Runtime.callValue(OrderModifierStack.getModifierSlotRank__orderModifierStack, cast ([_Runtime.field(_Runtime.field(a, 'modifier'), 'slot')] : Array<Dynamic>)), _Runtime.callValue(OrderModifierStack.getModifierSlotRank__orderModifierStack, cast ([_Runtime.field(_Runtime.field(b, 'modifier'), 'slot')] : Array<Dynamic>)));
+      return cast ((cast !_Runtime.strictEquals(rankDelta, 0.0) : Bool) ? (cast rankDelta : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.field(a, 'index'), _Runtime.field(b, 'index')) : Dynamic));
     }] : Array<Dynamic>));
     return cast _Runtime.callProperty(indexed, 'map', cast ([function(entry:Dynamic) return _Runtime.field(entry, 'modifier')] : Array<Dynamic>));
     return cast null;

@@ -62,15 +62,15 @@ class RenderEffectPadding {
     gaussian = _Runtime.callValue(getGaussianRenderEffectPadding, cast ([blurX, blurY] : Array<Dynamic>));
     dx = ((cast ((cast HxMath.abs(offsetX) : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast offsetX : Dynamic));
     dy = ((cast ((cast HxMath.abs(offsetY) : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast offsetY : Dynamic));
-    return cast { bottom: HxMath.ceil((_Runtime.field(gaussian, 'bottom') + HxMath.max(0.0, dy))), left: HxMath.ceil((_Runtime.field(gaussian, 'left') + HxMath.max(0.0, -dx))), right: HxMath.ceil((_Runtime.field(gaussian, 'right') + HxMath.max(0.0, dx))), top: HxMath.ceil((_Runtime.field(gaussian, 'top') + HxMath.max(0.0, -dy))) };
+    return cast { bottom: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'bottom'), HxMath.max(0.0, dy))), left: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'left'), HxMath.max(0.0, -dx))), right: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'right'), HxMath.max(0.0, dx))), top: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'top'), HxMath.max(0.0, -dy))) };
     return cast null;
   }
 
   public static function getGaussianRenderEffectPadding(blurX:Float, blurY:Float):flighthq.types.RenderEffectPadding {
     var horizontal:Dynamic = cast _Runtime.UNDEFINED;
     var vertical:Dynamic = cast _Runtime.UNDEFINED;
-    horizontal = HxMath.ceil((HxMath.max(0.0, blurX) * 3.0));
-    vertical = HxMath.ceil((HxMath.max(0.0, blurY) * 3.0));
+    horizontal = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, blurX), 3.0));
+    vertical = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, blurY), 3.0));
     return cast { bottom: vertical, left: horizontal, right: horizontal, top: vertical };
     return cast null;
   }

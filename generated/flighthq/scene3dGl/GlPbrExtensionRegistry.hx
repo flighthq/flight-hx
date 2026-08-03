@@ -151,7 +151,7 @@ class GlPbrExtensionRegistry {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(sceneColor, 'texture'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, samplerUniform), unit);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, maxLodUniform), HxMath.max(0.0, (_Runtime.field(sceneColor, 'mipLevelCount') - 1.0)));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, maxLodUniform), HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(sceneColor, 'mipLevelCount'), 1.0)));
       return cast true;
     }, bindTexture: function(samplerUniform:Dynamic, uvSetUniform:Dynamic, uvTransformUniform:Dynamic, texture:Dynamic, uvSet:Dynamic) {
       var unit:Dynamic = cast _Runtime.UNDEFINED;

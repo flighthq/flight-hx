@@ -72,12 +72,12 @@ class ToneMapMath {
     S0 = (linearStart + l0);
     S1 = (linearStart + (contrast * l0));
     C2 = (contrast / (maxBrightness - S1));
-    CP = (-C2 / HxMath.log(2.0));
-    w0 = (1.0 - _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([linearStart, S0, x] : Array<Dynamic>)));
-    T = ((linearStart * HxMath.pow((x / linearStart), blackTighten)) + pedestal);
+    CP = _Runtime.divideNumbers(-C2, HxMath.log(2.0));
+    w0 = _Runtime.subtractNumbers(1.0, _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([linearStart, S0, x] : Array<Dynamic>)));
+    T = (_Runtime.multiplyNumbers(linearStart, HxMath.pow((x / linearStart), blackTighten)) + pedestal);
     L = (linearStart + (contrast * (x - linearStart)));
-    S = (maxBrightness - ((maxBrightness - S1) * HxMath.exp((CP * (x - S0)))));
-    return cast HxMath.max(0.0, ((((w0 * (1.0 - _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)))) * T) + (_Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)) * L)) + ((1.0 - w0) * S)));
+    S = (maxBrightness - _Runtime.multiplyNumbers((maxBrightness - S1), HxMath.exp((CP * (x - S0)))));
+    return cast HxMath.max(0.0, ((((w0 * _Runtime.subtractNumbers(1.0, _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)))) * T) + _Runtime.multiplyNumbers(_Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)), L)) + ((1.0 - w0) * S)));
     return cast null;
   }
 

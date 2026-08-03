@@ -25,8 +25,8 @@ class BitmapBevel {
     h = _Runtime.field(source, 'height');
     angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
     distance = _Runtime.coalesce(_Runtime.field(options, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = HxMath.round((HxMath.cos(angle) * distance));
-    offsetY = HxMath.round((HxMath.sin(angle) * distance));
+    offsetX = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(angle), distance));
+    offsetY = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(angle), distance));
     type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'inner');
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     highlightColor = _Runtime.coalesce(_Runtime.field(options, 'highlightColor'), function():Dynamic return cast 4294967295.0);
@@ -61,8 +61,8 @@ class BitmapBevel {
             var gradient:Dynamic = (lit - shade);
             var color:Dynamic = ((cast ((cast gradient : Float) >= (cast 0.0 : Float)) : Bool) ? (cast highlightColor : Dynamic) : (cast shadowColor : Dynamic));
             var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & 255) / 255.0);
-            var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast (_Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - (_Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-            var edgeIntensity:Dynamic = HxMath.min(1.0, (HxMath.abs(gradient) * intensity));
+            var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)), 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - _Runtime.divideNumbers(_Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)), 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+            var edgeIntensity:Dynamic = HxMath.min(1.0, _Runtime.multiplyNumbers(HxMath.abs(gradient), intensity));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
@@ -110,16 +110,16 @@ class BitmapBevel {
   public static function readSourceAlpha__bitmapBevel(source:BitmapRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
-    sx = (_Runtime.field(source, 'x') + px);
-    sy = (_Runtime.field(source, 'y') + py);
+    sx = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+    sy = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, ((((sy * _Runtime.field(source, 'bitmap').width) + sx) * 4.0) + 3.0));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
   public static function sampleField__bitmapBevel(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
     if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast h : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast (flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
+    return cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)), 255.0);
     return cast null;
   }
 }

@@ -36,7 +36,7 @@ class MorphMeshGeometry {
     normals = _Runtime.field(__destructure0, 'normals');
     positions = _Runtime.field(__destructure0, 'positions');
     tangents = _Runtime.field(__destructure0, 'tangents');
-    vertexCount = (_Runtime.toInt32((_Runtime.field(positions, 'length') / 3.0)) | 0);
+    vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0)) | 0);
     floats = (vertexCount * 3.0);
     (cast blendedPositions : flighthq._internal._Float32Array).set((cast positions : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats)));
     if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(normals, null) : Bool)) : Bool)) { (cast blendedNormals : flighthq._internal._Float32Array).set((cast normals : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))); }
@@ -109,7 +109,7 @@ class MorphMeshGeometry {
     layout = _Runtime.field(__destructure2, 'layout');
     vertices = _Runtime.field(__destructure2, 'vertices');
     floatsPerVertex = (layout.stride / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
@@ -149,7 +149,7 @@ class MorphMeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = accumulator; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) + (weight * flighthq._internal._StaticIndex.readFloat32Array(deltas, i)))); });
+        ({ var __indexedObject0:Dynamic = accumulator; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), _Runtime.multiplyNumbers(weight, flighthq._internal._StaticIndex.readFloat32Array(deltas, i)))); });
         i++;
       }
     }

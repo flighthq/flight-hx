@@ -167,7 +167,7 @@ class Tween {
     }
     if ((cast overwrite : Bool)) {
       {
-        var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
+        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(list, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var existing:Dynamic = flighthq._internal._StaticIndex.readArray(list, i);
           var existingMap:Dynamic = (cast _Runtime.field(existing, 'propertyMap') : Dynamic);
@@ -242,7 +242,7 @@ class Tween {
       var easedT:Dynamic = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
       var t:Dynamic = (cast _Runtime.field(tween, 'target') : Dynamic);
       for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-        var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
+        var value:Dynamic = _Runtime.addNumbers(_Runtime.field(detail, 'start'), _Runtime.multiplyNumbers(_Runtime.field(detail, 'change'), easedT));
         if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
         _Runtime.setIndex(t, _Runtime.field(detail, 'key'), value);
       }

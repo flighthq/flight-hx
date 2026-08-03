@@ -39,7 +39,7 @@ class TextInputEditing {
     if ((cast !(cast _Runtime.field(data, 'multiline') : Bool) : Bool)) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
     (value = cast (_Runtime.callValue(TextInputEditing.restrictTextInput__textInputEditing, cast ([value, _Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'restrict')] : Array<Dynamic>)) : Dynamic));
     if ((cast ((cast _Runtime.field(data, 'maxChars') : Float) > (cast 0.0 : Float)) : Bool)) {
-      var maxLength:Dynamic = ((_Runtime.field(data, 'maxChars') - _Runtime.field(_Runtime.field(data, 'text'), 'length')) + replaceLength);
+      var maxLength:Dynamic = (_Runtime.subtractNumbers(_Runtime.field(data, 'maxChars'), _Runtime.field(_Runtime.field(data, 'text'), 'length')) + replaceLength);
       if ((cast ((cast maxLength : Float) <= (cast 0.0 : Float)) : Bool)) { return cast ''; }
       if ((cast ((cast _Runtime.field(value, 'length') : Float) > (cast maxLength : Float)) : Bool)) { (value = cast (_Runtime.slice(value, 0.0, maxLength) : Dynamic)); }
     }
@@ -50,7 +50,7 @@ class TextInputEditing {
   public static function canRedoTextInput(source:RichText):Bool {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0) : Float));
+    return cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0) : Float));
     return cast null;
   }
 
@@ -158,7 +158,7 @@ class TextInputEditing {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, i] : Array<Dynamic>));
-        var lineBottom:Dynamic = (lineTop + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
+        var lineBottom:Dynamic = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
         var distance:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast distance : Float) < (cast closestLineDistance : Float)) : Bool)) {
           (closestLineDistance = cast (distance : Dynamic));
@@ -174,7 +174,7 @@ class TextInputEditing {
       (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
       (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
       if ((cast ((cast x : Float) <= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool)) { return cast _Runtime.field(group, 'startIndex'); }
-      if ((cast ((cast x : Float) <= (cast (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')) : Float)) : Bool)) { return cast _Runtime.callValue(TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing, cast ([group, x] : Array<Dynamic>)); }
+      if ((cast ((cast x : Float) <= (cast _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width')) : Float)) : Bool)) { return cast _Runtime.callValue(TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing, cast ([group, x] : Array<Dynamic>)); }
     }
     return cast ((cast ((cast lineEnd : Float) > (cast 0.0 : Float)) : Bool) ? (cast lineEnd : Dynamic) : (cast lineStart : Dynamic));
     return cast null;
@@ -273,7 +273,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'left') {
-        _Runtime.callValue(moveTextInputCaret, cast ([source, (_Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>)) - 1.0), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.subtractNumbers(_Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>)), 1.0), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
         return cast true;
       }
       else if (__switchValue == 'paste') {
@@ -286,7 +286,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'right') {
-        _Runtime.callValue(moveTextInputCaret, cast ([source, (_Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>)) + 1.0), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.addNumbers(_Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>)), 1.0), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
         return cast true;
       }
       else if (__switchValue == 'selectAll') {
@@ -353,12 +353,12 @@ class TextInputEditing {
     out = TextInputEditing.scratchRect__textInputEditing;
     _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
-    targetLineIndex = (_Runtime.field(out, 'lineIndex') + 1.0);
+    targetLineIndex = _Runtime.addNumbers(_Runtime.field(out, 'lineIndex'), 1.0);
     if ((cast ((cast targetLineIndex : Float) >= (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
       return;
     }
-    targetY = (_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)) + (flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex) / 2.0));
+    targetY = _Runtime.addNumbers(_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
     targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
     newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', newCaret);
@@ -405,12 +405,12 @@ class TextInputEditing {
     out = TextInputEditing.scratchRect__textInputEditing;
     _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
-    targetLineIndex = (_Runtime.field(out, 'lineIndex') - 1.0);
+    targetLineIndex = _Runtime.subtractNumbers(_Runtime.field(out, 'lineIndex'), 1.0);
     if ((cast ((cast targetLineIndex : Float) < (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
       return;
     }
-    targetY = (_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)) + (flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex) / 2.0));
+    targetY = _Runtime.addNumbers(_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
     targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
     newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'caretIndex', newCaret);
@@ -458,7 +458,7 @@ class TextInputEditing {
     _Runtime.setField(data, 'text', ((_Runtime.slice(textBefore, 0.0, start) + value) + _Runtime.slice(textBefore, end, null)));
     _Runtime.callValue(TextInputEditing.adjustTextFormatRanges__textInputEditing, cast ([_Runtime.field(data, 'textFormatRanges'), _Runtime.field(data, 'defaultTextFormat'), start, end, _Runtime.field(value, 'length')] : Array<Dynamic>));
     _Runtime.setField(state, 'desiredCaretX', TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
-    _Runtime.callValue(setTextInputSelection, cast ([source, (start + _Runtime.field(value, 'length')), (start + _Runtime.field(value, 'length'))] : Array<Dynamic>));
+    _Runtime.callValue(setTextInputSelection, cast ([source, _Runtime.addNumbers(start, _Runtime.field(value, 'length')), _Runtime.addNumbers(start, _Runtime.field(value, 'length'))] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'skipHistory'), true) : Bool) && (cast ((cast _Runtime.field(state, 'historyLimit') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(TextInputEditing.recordTextInputEdit__textInputEditing, cast ([state, textBefore, _Runtime.field(data, 'text'), caretBefore, selectionBefore, _Runtime.coalesce(_Runtime.optionalField(options, 'mergeKind'), function():Dynamic return cast null)] : Array<Dynamic>));
     }
@@ -479,8 +479,8 @@ class TextInputEditing {
     out = TextInputEditing.scratchRect__textInputEditing;
     _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
     caretTop = _Runtime.field(out, 'y');
-    caretBottom = (_Runtime.field(out, 'y') + _Runtime.field(out, 'height'));
-    scrollVLine = (_Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'scrollV'), function():Dynamic return cast 1.0) - 1.0);
+    caretBottom = _Runtime.addNumbers(_Runtime.field(out, 'y'), _Runtime.field(out, 'height'));
+    scrollVLine = _Runtime.subtractNumbers(_Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'scrollV'), function():Dynamic return cast 1.0), 1.0);
     viewTop = 0.0;
     {
       var i:Dynamic = 0.0;
@@ -491,14 +491,14 @@ class TextInputEditing {
     }
     viewBottom = (viewTop + viewportHeight);
     if ((cast ((cast caretTop : Float) < (cast viewTop : Float)) : Bool)) {
-      _Runtime.callValue(setRichTextScrollV, cast ([source, (_Runtime.field(out, 'lineIndex') + 1.0), layout] : Array<Dynamic>));
+      _Runtime.callValue(setRichTextScrollV, cast ([source, _Runtime.addNumbers(_Runtime.field(out, 'lineIndex'), 1.0), layout] : Array<Dynamic>));
     } else { if ((cast ((cast caretBottom : Float) > (cast viewBottom : Float)) : Bool)) {
       var pixelOffset:Dynamic = 0.0;
       var firstVisibleLine:Dynamic = 0.0;
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
-          if ((cast ((cast (pixelOffset + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
+          if ((cast ((cast _Runtime.addNumbers(pixelOffset, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
             (firstVisibleLine = cast (i : Dynamic));
             break;
           }
@@ -510,12 +510,12 @@ class TextInputEditing {
     } }
     CARET_SCROLL_MARGIN = 8.0;
     scrollH = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), function():Dynamic return cast 0.0);
-    caretLeft = (_Runtime.field(out, 'x') - scrollH);
-    caretRight = (caretLeft + _Runtime.field(out, 'width'));
+    caretLeft = _Runtime.subtractNumbers(_Runtime.field(out, 'x'), scrollH);
+    caretRight = _Runtime.addNumbers(caretLeft, _Runtime.field(out, 'width'));
     if ((cast ((cast caretLeft : Float) < (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(setRichTextScrollH, cast ([source, HxMath.max(0.0, (_Runtime.field(out, 'x') - CARET_SCROLL_MARGIN)), layout] : Array<Dynamic>));
+      _Runtime.callValue(setRichTextScrollH, cast ([source, HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(out, 'x'), CARET_SCROLL_MARGIN)), layout] : Array<Dynamic>));
     } else { if ((cast ((cast (caretRight + CARET_SCROLL_MARGIN) : Float) > (cast viewportWidth : Float)) : Bool)) {
-      _Runtime.callValue(setRichTextScrollH, cast ([source, (((_Runtime.field(out, 'x') + _Runtime.field(out, 'width')) + CARET_SCROLL_MARGIN) - viewportWidth), layout] : Array<Dynamic>));
+      _Runtime.callValue(setRichTextScrollH, cast ([source, ((_Runtime.addNumbers(_Runtime.field(out, 'x'), _Runtime.field(out, 'width')) + CARET_SCROLL_MARGIN) - viewportWidth), layout] : Array<Dynamic>));
     } }
   }
 
@@ -587,24 +587,24 @@ class TextInputEditing {
             i++;
             continue;
           } else { if ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast beginIndex : Float)) : Bool)) {
-            _Runtime.setField(range, 'start', (_Runtime.field(range, 'start') + offset));
-            _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
+            _Runtime.setField(range, 'start', _Runtime.addNumbers(_Runtime.field(range, 'start'), offset));
+            _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
           } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) >= (cast beginIndex : Float)) : Bool)) : Bool)) {
-            _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
+            _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
           } } }
         } else { if ((cast ((cast _Runtime.field(range, 'end') : Float) <= (cast beginIndex : Float)) : Bool)) {
           i++;
           continue;
         } else { if ((cast ((cast _Runtime.field(range, 'start') : Float) > (cast endIndex : Float)) : Bool)) {
-          _Runtime.setField(range, 'start', (_Runtime.field(range, 'start') + offset));
-          _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
+          _Runtime.setField(range, 'start', _Runtime.addNumbers(_Runtime.field(range, 'start'), offset));
+          _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
         } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) <= (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) > (cast endIndex : Float)) : Bool)) : Bool)) {
-          _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
+          _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
         } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.splice(ranges, Std.int(i--), Std.int(1.0), []);
         } else { if ((cast ((cast ((cast ((cast _Runtime.field(range, 'end') : Float) > (cast endIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'start') : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(range, 'start') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.setField(range, 'start', beginIndex);
-          _Runtime.setField(range, 'end', (_Runtime.field(range, 'end') + offset));
+          _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
         } else { if ((cast ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.setField(range, 'end', beginIndex);
         } } } } } } }
@@ -612,7 +612,7 @@ class TextInputEditing {
       }
     }
     {
-      var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         if ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(ranges, i), 'start') : Float) >= (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(ranges, i), 'end') : Float)) : Bool)) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
         i--;
@@ -733,7 +733,7 @@ class TextInputEditing {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if ((cast ((cast ((cast index : Float) >= (cast _Runtime.field(group, 'startIndex') : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(group, 'endIndex') : Float)) : Bool)) : Bool)) { return cast group; }
     }
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 1.0)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -741,7 +741,7 @@ class TextInputEditing {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');
-    limit = HxMath.max(0.0, (HxMath.min(index, _Runtime.field(group, 'endIndex')) - _Runtime.field(group, 'startIndex')));
+    limit = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(index, _Runtime.field(group, 'endIndex')), _Runtime.field(group, 'startIndex')));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
@@ -760,7 +760,7 @@ class TextInputEditing {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
         var advance:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
-        if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast (_Runtime.field(group, 'startIndex') + i); }
+        if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast _Runtime.addNumbers(_Runtime.field(group, 'startIndex'), i); }
         (currentX = cast ((currentX + advance) : Dynamic));
         i++;
       }
@@ -771,8 +771,8 @@ class TextInputEditing {
 
   public static function recordTextInputEdit__textInputEditing(state:TextInputState, textBefore:String, textAfter:String, caretIndexBefore:Float, selectionIndexBefore:Float, mergeKind:Null<String>):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0) : Float)) : Bool)) {
-      _Runtime.setLength(_Runtime.field(state, 'history'), (_Runtime.field(state, 'historyIndex') + 1.0));
+    if ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0) : Float)) : Bool)) {
+      _Runtime.setLength(_Runtime.field(state, 'history'), _Runtime.addNumbers(_Runtime.field(state, 'historyIndex'), 1.0));
     }
     previous = ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'mergeKind'), mergeKind) : Bool)) : Bool)) {
@@ -782,11 +782,11 @@ class TextInputEditing {
       return;
     }
     _Runtime.callProperty(_Runtime.field(state, 'history'), 'push', cast ([{ caretIndexAfter: _Runtime.field(state, 'caretIndex'), caretIndexBefore: caretIndexBefore, mergeKind: mergeKind, selectionIndexAfter: _Runtime.field(state, 'selectionIndex'), selectionIndexBefore: selectionIndexBefore, textAfter: textAfter, textBefore: textBefore }] : Array<Dynamic>));
-    _Runtime.setField(state, 'historyIndex', (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0));
+    _Runtime.setField(state, 'historyIndex', _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0));
     if ((cast ((cast _Runtime.field(_Runtime.field(state, 'history'), 'length') : Float) > (cast _Runtime.field(state, 'historyLimit') : Float)) : Bool)) {
-      var overflow:Dynamic = (_Runtime.field(_Runtime.field(state, 'history'), 'length') - _Runtime.field(state, 'historyLimit'));
+      var overflow:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), _Runtime.field(state, 'historyLimit'));
       _Runtime.splice(_Runtime.field(state, 'history'), Std.int(0.0), Std.int(overflow), []);
-      _Runtime.setField(state, 'historyIndex', (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0));
+      _Runtime.setField(state, 'historyIndex', _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0));
     }
   }
 

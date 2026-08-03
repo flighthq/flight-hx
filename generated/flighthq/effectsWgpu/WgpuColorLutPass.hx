@@ -98,9 +98,9 @@ class WgpuColorLutPass {
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)), 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)), 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)), 255.0)));
         flighthq._internal._StaticIndex.writeUint8Array(data, o++, 255.0);
         i++;
       }

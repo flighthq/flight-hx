@@ -8,7 +8,7 @@ class ContactFeatureId {
   public static final FEATURE_INDEX_LIMIT:Dynamic = (1 << 25);
 
   public static function packContactFeatureId(referenceIsA:Bool, referenceEdge:Float, incidentEdge:Float, secondPoint:Bool):Float {
-    return cast (((((cast referenceIsA : Bool) ? (cast ContactFeatureId.FEATURE_REFERENCE_SCALE__contactFeatureId : Dynamic) : (cast 0.0 : Dynamic)) + (referenceEdge * ContactFeatureId.FEATURE_EDGE_SCALE__contactFeatureId)) + (incidentEdge * 2.0)) + ((cast secondPoint : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    return cast _Runtime.addNumbers((_Runtime.addNumbers(((cast referenceIsA : Bool) ? (cast ContactFeatureId.FEATURE_REFERENCE_SCALE__contactFeatureId : Dynamic) : (cast 0.0 : Dynamic)), (referenceEdge * ContactFeatureId.FEATURE_EDGE_SCALE__contactFeatureId)) + (incidentEdge * 2.0)), ((cast secondPoint : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     return cast null;
   }
 

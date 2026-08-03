@@ -20,17 +20,17 @@ class BitmapTone {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-        var oy:Dynamic = (_Runtime.field(out, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(out, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(out, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-            var ox:Dynamic = (_Runtime.field(out, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(out, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(out, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
-            var oi:Dynamic = (((oy * _Runtime.field(out, 'bitmap').width) + ox) * 4.0);
+            var si:Dynamic = ((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
+            var oi:Dynamic = ((_Runtime.multiplyNumbers(oy, _Runtime.field(out, 'bitmap').width) + ox) * 4.0);
             var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
             var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
             var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
@@ -63,7 +63,7 @@ class BitmapTone {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         var normalized:Dynamic = HxMath.max(0.0, HxMath.min(1.0, ((i - bp) / span)));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(lut, i, HxMath.round((HxMath.pow(normalized, invGamma) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(lut, i, HxMath.round(_Runtime.multiplyNumbers(HxMath.pow(normalized, invGamma), 255.0)));
         i++;
       }
     }

@@ -29,7 +29,7 @@ class BitmapPixel {
   public static function getBitmapPixelLuminance(source:Bitmap, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * source.width) + x) * 4.0);
-    return cast HxMath.round((((flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i) * BitmapPixel.LUMA_R__bitmapPixel) + (flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)) * BitmapPixel.LUMA_G__bitmapPixel)) + (flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)) * BitmapPixel.LUMA_B__bitmapPixel)));
+    return cast HxMath.round(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i), BitmapPixel.LUMA_R__bitmapPixel) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)), BitmapPixel.LUMA_G__bitmapPixel)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)), BitmapPixel.LUMA_B__bitmapPixel)));
     return cast null;
   }
 

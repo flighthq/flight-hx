@@ -56,9 +56,9 @@ class RegisterWebImageDecoders {
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var alpha:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
         if ((cast _Runtime.strictEquals(alpha, 255.0) : Bool)) { (i = cast ((i + 4.0) : Dynamic)); continue; }
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, i) * alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)) * alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), ((flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)) * alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), alpha) / 255.0));
+        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), alpha) / 255.0));
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

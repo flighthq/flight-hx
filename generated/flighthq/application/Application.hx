@@ -382,7 +382,7 @@ class Application {
       _Runtime.callProperty(_Runtime.field(state, 'fpsBuffer'), 'push', cast ([delta] : Array<Dynamic>));
     } else {
       flighthq._internal._StaticIndex.writeArray(_Runtime.field(state, 'fpsBuffer'), _Runtime.field(state, 'fpsHead'), delta);
-      _Runtime.setField(state, 'fpsHead', _Runtime.fmod((_Runtime.field(state, 'fpsHead') + 1.0), Application.ROLLING_FPS_WINDOW__application));
+      _Runtime.setField(state, 'fpsHead', _Runtime.fmod(_Runtime.addNumbers(_Runtime.field(state, 'fpsHead'), 1.0), Application.ROLLING_FPS_WINDOW__application));
     }
   }
 
@@ -542,11 +542,11 @@ class Application {
         return;
       }
       isFirstTick = ((cast _Runtime.field(loopState, 'lastTime') : Float) < (cast 0.0 : Float));
-      raw = ((cast isFirstTick : Bool) ? (cast 0.0 : Dynamic) : (cast (time - _Runtime.field(loopState, 'lastTime')) : Dynamic));
+      raw = ((cast isFirstTick : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.subtractNumbers(time, _Runtime.field(loopState, 'lastTime')) : Dynamic));
       _Runtime.setField(loopState, 'lastTime', time);
       activeInterval = ((cast ((cast ((cast app.isRunning : Bool) && (cast ((cast bgInterval : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !(cast _Runtime.callValue(Application._isApplicationVisible__application, cast ([] : Array<Dynamic>)) : Bool) : Bool)) : Bool) ? (cast bgInterval : Dynamic) : (cast frameInterval : Dynamic));
       if ((cast !(cast isFirstTick : Bool) : Bool)) {
-        _Runtime.setField(loopState, 'frameRateAccumulated', (_Runtime.field(loopState, 'frameRateAccumulated') + raw));
+        _Runtime.setField(loopState, 'frameRateAccumulated', _Runtime.addNumbers(_Runtime.field(loopState, 'frameRateAccumulated'), raw));
         if ((cast ((cast ((cast activeInterval : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(loopState, 'frameRateAccumulated') : Float) < (cast activeInterval : Float)) : Bool)) : Bool)) {
           _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
           ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
@@ -561,10 +561,10 @@ class Application {
       (app.frameCount += 1.0);
       _Runtime.callValue(Application.recordFpsSample__application, cast ([loopState, clamped] : Array<Dynamic>));
       if ((cast ((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(app.onFixedUpdate, null) : Bool)) : Bool)) {
-        _Runtime.setField(loopState, 'fixedAccumulator', (_Runtime.field(loopState, 'fixedAccumulator') + clamped));
+        _Runtime.setField(loopState, 'fixedAccumulator', _Runtime.addNumbers(_Runtime.field(loopState, 'fixedAccumulator'), clamped));
         var iters:Dynamic = 0.0;
         while ((cast ((cast ((cast _Runtime.field(loopState, 'fixedAccumulator') : Float) >= (cast fixedTimeStep : Float)) : Bool) && (cast ((cast iters : Float) < (cast maxUpdatesPerFrame : Float)) : Bool)) : Bool)) {
-          _Runtime.setField(loopState, 'fixedAccumulator', (_Runtime.field(loopState, 'fixedAccumulator') - fixedTimeStep));
+          _Runtime.setField(loopState, 'fixedAccumulator', _Runtime.subtractNumbers(_Runtime.field(loopState, 'fixedAccumulator'), fixedTimeStep));
           iters++;
           if ((cast !_Runtime.strictEquals(app.onError, null) : Bool)) {
             try {
@@ -577,7 +577,7 @@ class Application {
           }
         }
         if ((cast ((cast iters : Float) >= (cast maxUpdatesPerFrame : Float)) : Bool)) { _Runtime.setField(loopState, 'fixedAccumulator', 0.0); }
-        (app.interpolationAlpha = cast (((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.field(loopState, 'fixedAccumulator') / fixedTimeStep) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+        (app.interpolationAlpha = cast (((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.field(loopState, 'fixedAccumulator'), fixedTimeStep) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
       } else {
         (app.interpolationAlpha = cast (1.0 : Dynamic));
       }

@@ -96,9 +96,9 @@ class StandardPbrWgpuMeshMaterialRenderer {
     flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 3.0));
     _Runtime.callValue(unpackColorToLinear, cast ([StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, _Runtime.field(standard, 'emissive')] : Array<Dynamic>));
     strength = _Runtime.field(standard, 'emissiveStrength');
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, (flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0) * strength));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, (flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0) * strength));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, (flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0) * strength));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0), strength));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0), strength));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0), strength));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, _Runtime.field(standard, 'metallic'));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, _Runtime.field(standard, 'roughness'));

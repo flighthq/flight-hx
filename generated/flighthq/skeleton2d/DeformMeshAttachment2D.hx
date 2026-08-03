@@ -36,12 +36,12 @@ class DeformMeshAttachment2D {
           {
             var k:Dynamic = 0.0;
             while ((cast ((cast k : Float) < (cast n : Float)) : Bool)) {
-              var b:Dynamic = (flighthq._internal._StaticIndex.readFloat32Array(inf, vi) * DeformMeshAttachment2D.MATRIX_STRIDE__deformMeshAttachment2D);
+              var b:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, vi), DeformMeshAttachment2D.MATRIX_STRIDE__deformMeshAttachment2D);
               var lx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0));
               var ly:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0));
               var weight:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 3.0));
-              (wx = cast ((wx + (weight * (((flighthq._internal._StaticIndex.readFloat32Array(world, b) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)) * ly)) + flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0))))) : Dynamic));
-              (wy = cast ((wy + (weight * (((flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)) * lx) + (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)) * ly)) + flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0))))) : Dynamic));
+              (wx = cast ((wx + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, b), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0))))) : Dynamic));
+              (wy = cast ((wy + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0))))) : Dynamic));
               (vi = cast ((vi + 4.0) : Dynamic));
               k++;
             }

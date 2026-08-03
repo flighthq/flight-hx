@@ -141,7 +141,7 @@ class DomRichText {
     if ((cast ((cast _Runtime.field(_Runtime.field(source, 'data'), 'selectable') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex')) : Bool)) : Bool)) {
       _Runtime.callValue(getRichTextSelectionRectangles, cast ([DomRichText._richTextSelectionRectangles__domRichText, _Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex'), result] : Array<Dynamic>));
       for (rectangle in _Runtime.iterable(DomRichText._richTextSelectionRectangles__domRichText)) {
-        (html = cast ((html + '<div style="position:absolute;left:' + Std.string((_Runtime.field(rectangle, 'x') - scrollXOffset)) + 'px;top:' + Std.string((_Runtime.field(rectangle, 'y') - scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(rectangle, 'width')) + 'px;height:' + Std.string(_Runtime.field(rectangle, 'height')) + 'px;background:' + Std.string(DomRichText.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(DomRichText.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
+        (html = cast ((html + '<div style="position:absolute;left:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(rectangle, 'x'), scrollXOffset)) + 'px;top:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(rectangle, 'y'), scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(rectangle, 'width')) + 'px;height:' + Std.string(_Runtime.field(rectangle, 'height')) + 'px;background:' + Std.string(DomRichText.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(DomRichText.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
       }
     }
     bulletLines = _Runtime.construct(_Runtime.globalValue('Set'), []);
@@ -149,10 +149,10 @@ class DomRichText {
       if ((cast ((cast _Runtime.field(group, 'lineIndex') : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
       var fmt:Dynamic = _Runtime.field(group, 'format');
       var slice:Dynamic = _Runtime.callValue(escapeDomHtmlString, cast ([_Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'))] : Array<Dynamic>));
-      var x:Dynamic = (_Runtime.field(group, 'offsetX') - scrollXOffset);
+      var x:Dynamic = _Runtime.subtractNumbers(_Runtime.field(group, 'offsetX'), scrollXOffset);
       var fontStr:Dynamic = _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>));
       var fontAscent:Dynamic = _Runtime.callValue(DomRichText.getDomFontAscent__domRichText, cast ([ctx, fontStr] : Array<Dynamic>));
-      var y:Dynamic = (((_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'ascent')) - fontAscent) - scrollYOffset);
+      var y:Dynamic = ((_Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'ascent')) - fontAscent) - scrollYOffset);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(fmt, 'bullet'), function():Dynamic return cast !(cast ((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))) : Bool)))) {
         ((cast bulletLines : flighthq._internal._Set).add(_Runtime.field(group, 'lineIndex')));
         var bulletSize:Dynamic = _Runtime.coalesce(_Runtime.field(fmt, 'size'), function():Dynamic return cast 12.0);

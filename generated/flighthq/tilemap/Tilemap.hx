@@ -216,7 +216,7 @@ class Tilemap {
         {
           var c:Dynamic = 0.0;
           while ((cast ((cast c : Float) < (cast copyColumns : Float)) : Bool)) {
-            flighthq._internal._StaticIndex.writeInt16Array(newTiles, ((r * columns) + c), flighthq._internal._StaticIndex.readInt16Array(_Runtime.field(data, 'tiles'), ((r * _Runtime.field(data, 'columns')) + c)));
+            flighthq._internal._StaticIndex.writeInt16Array(newTiles, ((r * columns) + c), flighthq._internal._StaticIndex.readInt16Array(_Runtime.field(data, 'tiles'), (_Runtime.multiplyNumbers(r, _Runtime.field(data, 'columns')) + c)));
             c++;
           }
         }
@@ -279,8 +279,8 @@ class Tilemap {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(tilemap, 'data');
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast _Runtime.field(data, 'columns') : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast _Runtime.field(data, 'rows') : Float)) : Bool)) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'materialData'), null) : Bool)) { _Runtime.setField(data, 'materialData', _Runtime.fill(_Runtime.createArray((_Runtime.field(data, 'columns') * _Runtime.field(data, 'rows'))), null, 0, null, 1)); }
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(data, 'materialData'), ((row * _Runtime.field(data, 'columns')) + column), { tint: _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0) });
+    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'materialData'), null) : Bool)) { _Runtime.setField(data, 'materialData', _Runtime.fill(_Runtime.createArray(_Runtime.multiplyNumbers(_Runtime.field(data, 'columns'), _Runtime.field(data, 'rows'))), null, 0, null, 1)); }
+    flighthq._internal._StaticIndex.writeArray(_Runtime.field(data, 'materialData'), (_Runtime.multiplyNumbers(row, _Runtime.field(data, 'columns')) + column), { tint: _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0) });
   }
 
   public static final tilemapSignalsSlot__tilemap:Dynamic = _Runtime.symbol('tilemapSignals');

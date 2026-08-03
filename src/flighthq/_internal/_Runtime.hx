@@ -895,6 +895,27 @@ class _Runtime {
     #end
   }
 
+  /**
+   * Keep arithmetic over runtime property/index reads in a typed, non-inline
+   * frame. hxcpp can otherwise specialize an inline Dynamic expression at its
+   * store site as Int and truncate fractional results.
+   */
+  public static function addNumbers(left:Float, right:Float):Float {
+    return left + right;
+  }
+
+  public static function subtractNumbers(left:Float, right:Float):Float {
+    return left - right;
+  }
+
+  public static function multiplyNumbers(left:Float, right:Float):Float {
+    return left * right;
+  }
+
+  public static function divideNumbers(left:Float, right:Float):Float {
+    return left / right;
+  }
+
   public static function setTimeout(callback:Void->Void, delayMs:Float):Dynamic {
     #if js
     return js.Syntax.code('globalThis.setTimeout({0}, {1})', callback, delayMs);

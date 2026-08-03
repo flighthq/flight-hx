@@ -23,7 +23,7 @@ class VideoTexture {
     image = _Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>));
     if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast _Runtime.field(texture, 'version'); }
     _Runtime.callValue(VideoTexture.updateVideoImageSize__videoTexture, cast ([image] : Array<Dynamic>));
-    _Runtime.setField(image, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(image, 'version') + 1.0)), 0));
+    _Runtime.setField(image, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(image, 'version'), 1.0)), 0));
     _Runtime.setField(texture, 'version', _Runtime.field(image, 'version'));
     return cast _Runtime.field(texture, 'version');
     return cast null;

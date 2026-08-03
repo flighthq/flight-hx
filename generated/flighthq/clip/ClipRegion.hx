@@ -73,7 +73,7 @@ class ClipRegion {
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), _Runtime.field(source, 'rect')] : Array<Dynamic>));
     _Runtime.setField(out, 'contours', ((cast _Runtime.strictEquals(_Runtime.field(source, 'contours'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(source, 'contours'), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)) : Dynamic)));
     _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
-    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
   public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Dynamic = 0.25):flighthq.types.ClipRegion {
@@ -214,7 +214,7 @@ class ClipRegion {
       _Runtime.setField(_Runtime.field(out, 'rect'), 'height', 0.0);
       _Runtime.setField(out, 'contours', null);
       _Runtime.setField(out, 'winding', 'nonZero');
-      _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+      _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
       return;
     }
     _Runtime.setField(_Runtime.field(out, 'rect'), 'x', x0);
@@ -235,11 +235,11 @@ class ClipRegion {
       _Runtime.setField(out, 'contours', _Runtime.callProperty(((cast keepA : Bool) ? (cast aContours : Dynamic) : (cast bContours : Dynamic)), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
       _Runtime.setField(out, 'winding', ((cast keepA : Bool) ? (cast aWinding : Dynamic) : (cast bWinding : Dynamic)));
     } } }
-    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
   public static function invalidateClipRegion(clip:flighthq.types.ClipRegion):Void {
-    _Runtime.setField(clip, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(clip, 'version') + 1.0)), 0));
+    _Runtime.setField(clip, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(clip, 'version'), 1.0)), 0));
   }
 
   public static function isClipRegionEmpty(clip:flighthq.types.ClipRegion):Bool {
@@ -265,7 +265,7 @@ class ClipRegion {
       _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), inRect] : Array<Dynamic>));
       _Runtime.setField(out, 'contours', null);
       _Runtime.setField(out, 'winding', inWinding);
-      _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+      _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
       return;
     }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(inContours, 'length'), 1.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(inContours, 0.0), 'length'), 8.0) : Bool)) : Bool)) {
@@ -311,14 +311,14 @@ class ClipRegion {
         _Runtime.setField(_Runtime.field(out, 'rect'), 'height', (maxY - minY));
         _Runtime.setField(out, 'contours', null);
         _Runtime.setField(out, 'winding', 'nonZero');
-        _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+        _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
         return;
       }
     }
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), inRect] : Array<Dynamic>));
     _Runtime.setField(out, 'contours', _Runtime.callProperty(inContours, 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
     _Runtime.setField(out, 'winding', inWinding);
-    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
   public static function releaseClipRegion(clip:flighthq.types.ClipRegion):Void {
@@ -336,7 +336,7 @@ class ClipRegion {
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(out, 'rect'), rectangle] : Array<Dynamic>));
     _Runtime.setField(out, 'contours', null);
     _Runtime.setField(out, 'winding', 'nonZero');
-    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
   public static function transformClipRegion(out:flighthq.types.ClipRegion, clip:flighthq.types.ClipRegion, matrix:MatrixLike):Void {
@@ -407,7 +407,7 @@ class ClipRegion {
       _Runtime.setField(out, 'winding', inWinding);
       _Runtime.callValue(ClipRegion.setRectangleToContoursBounds__clipRegion, cast ([_Runtime.field(out, 'rect'), newContours] : Array<Dynamic>));
     }
-    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
   public static function unionClipRegions(out:flighthq.types.ClipRegion, a:flighthq.types.ClipRegion, b:flighthq.types.ClipRegion):Void {
@@ -438,7 +438,7 @@ class ClipRegion {
       _Runtime.setField(out, 'contours', _Runtime.callProperty(((cast keepA : Bool) ? (cast aContours : Dynamic) : (cast bContours : Dynamic)), 'map', cast ([function(c:Dynamic) return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
       _Runtime.setField(out, 'winding', ((cast keepA : Bool) ? (cast aWinding : Dynamic) : (cast bWinding : Dynamic)));
     } } }
-    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(out, 'version') + 1.0)), 0));
+    _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
   public static final NORMALIZE_EPSILON__clipRegion:Dynamic = 0.000001;
@@ -532,7 +532,7 @@ class ClipRegion {
     var x2:Dynamic = cast _Runtime.UNDEFINED;
     var y1:Dynamic = cast _Runtime.UNDEFINED;
     var y2:Dynamic = cast _Runtime.UNDEFINED;
-    maxR = (HxMath.min(w, h) / 2.0);
+    maxR = _Runtime.divideNumbers(HxMath.min(w, h), 2.0);
     cr = HxMath.min(r, maxR);
     k = (cr * ClipRegion.KAPPA__clipRegion);
     x1 = (x + cr);

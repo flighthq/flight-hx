@@ -16,7 +16,7 @@ class VideoChannel {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) : Bool)) { return cast channel.currentTime; }
-    return cast (_Runtime.field(element, 'currentTime') * 1000.0);
+    return cast _Runtime.multiplyNumbers(_Runtime.field(element, 'currentTime'), 1000.0);
     return cast null;
   }
 
@@ -65,7 +65,7 @@ class VideoChannel {
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty(element, 'removeEventListener', cast (['ended', _Runtime.field(runtime, 'onEnded')] : Array<Dynamic>));
     }
-    channel = { currentTime: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(element, 'duration')] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast (_Runtime.field(element, 'duration') * 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    channel = { currentTime: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(element, 'duration')] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(_Runtime.field(element, 'duration'), 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     onEnded = function() return _Runtime.callValue(VideoChannel.completeVideoChannel__videoChannel, cast ([channel] : Array<Dynamic>));
     ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap).set(element, { loopsRemaining: channel.loops, onEnded: onEnded }));
     _Runtime.setField(element, 'currentTime', (channel.currentTime / 1000.0));

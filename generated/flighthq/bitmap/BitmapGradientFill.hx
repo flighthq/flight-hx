@@ -30,12 +30,12 @@ class BitmapGradientFill {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
-            var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var t:Dynamic = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
             var idx:Dynamic = _Runtime.callValue(BitmapGradientFill.spreadIndex__bitmapGradientFill, cast ([t, spread] : Array<Dynamic>));
@@ -76,16 +76,16 @@ class BitmapGradientFill {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
-        var y:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
-            var x:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var dx:Dynamic = (px - focalX);
             var dy:Dynamic = (py - focalY);
-            var t:Dynamic = ((HxMath.sqrt(((dx * dx) + (dy * dy))) * invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
+            var t:Dynamic = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
             var idx:Dynamic = _Runtime.callValue(BitmapGradientFill.spreadIndex__bitmapGradientFill, cast ([t, spread] : Array<Dynamic>));
             var ri:Dynamic = (idx * 4.0);
             var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
@@ -108,12 +108,12 @@ class BitmapGradientFill {
       var __switchValue = spread;
       if (__switchValue == 'repeat') {
         {
-          (s = cast ((t - HxMath.floor(t)) : Dynamic));
+          (s = cast (_Runtime.subtractNumbers(t, HxMath.floor(t)) : Dynamic));
         }
       }
       else if (__switchValue == 'reflect') {
         {
-          var wrapped:Dynamic = (t - (HxMath.floor((t / 2.0)) * 2.0));
+          var wrapped:Dynamic = (t - _Runtime.multiplyNumbers(HxMath.floor((t / 2.0)), 2.0));
           (s = cast (((cast ((cast wrapped : Float) <= (cast 1.0 : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast (2.0 - wrapped) : Dynamic)) : Dynamic));
         }
       }

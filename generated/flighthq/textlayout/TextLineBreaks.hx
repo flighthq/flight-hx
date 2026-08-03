@@ -11,7 +11,7 @@ class TextLineBreaks {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(lineBreaks, 'length'), 0.0) : Bool)) { return cast -1.0; }
     lo = 0.0;
-    hi = (_Runtime.field(lineBreaks, 'length') - 1.0);
+    hi = _Runtime.subtractNumbers(_Runtime.field(lineBreaks, 'length'), 1.0);
     result = -1.0;
     while ((cast ((cast lo : Float) <= (cast hi : Float)) : Bool)) {
       var mid:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((lo + hi)), 1);

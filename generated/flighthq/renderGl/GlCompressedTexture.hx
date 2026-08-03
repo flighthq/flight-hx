@@ -224,7 +224,7 @@ class GlCompressedTexture {
         var index:Dynamic = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
           var entry:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), index);
-          var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
+          var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), _Runtime.addNumbers(_Runtime.field(payload, 'byteOffset'), _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
           var mip:Dynamic = _Runtime.fmod(index, mipLevels);
           var faceLayer:Dynamic = ((index - mip) / mipLevels);
           var face:Dynamic = _Runtime.fmod(faceLayer, faces);
@@ -245,7 +245,7 @@ class GlCompressedTexture {
       var mip:Dynamic = 0.0;
       while ((cast ((cast mip : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
         var entry:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), mip);
-        var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
+        var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), _Runtime.addNumbers(_Runtime.field(payload, 'byteOffset'), _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
         var rgba:Dynamic = _Runtime.callValue(decode, cast ([_Runtime.field(container, 'format'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), view] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(rgba, null) : Bool)) { return cast false; }
         flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, mip, ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic)), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, rgba);

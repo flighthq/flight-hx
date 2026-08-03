@@ -37,8 +37,8 @@ class BitmapGradient {
         } else {
           var j:Dynamic = 0.0;
           while ((cast ((cast ((cast j : Float) < (cast (n - 1.0) : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0)) : Float) < (cast i : Float)) : Bool)) : Bool)) { j++; }
-          var span:Dynamic = (flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0)) - flighthq._internal._StaticIndex.readArray(ratios, j));
-          var t:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((i - flighthq._internal._StaticIndex.readArray(ratios, j)) / span) : Dynamic) : (cast 0.0 : Dynamic));
+          var span:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0)), flighthq._internal._StaticIndex.readArray(ratios, j));
+          var t:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.subtractNumbers(i, flighthq._internal._StaticIndex.readArray(ratios, j)) / span) : Dynamic) : (cast 0.0 : Dynamic));
           (r = cast (_Runtime.callValue(BitmapGradient.lerp__bitmapGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, j)) >> 16)) & 255), (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (j + 1.0))) >> 16)) & 255), t] : Array<Dynamic>)) : Dynamic));
           (g = cast (_Runtime.callValue(BitmapGradient.lerp__bitmapGradient, cast ([(_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, j)) >> 8)) & 255), (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (j + 1.0))) >> 8)) & 255), t] : Array<Dynamic>)) : Dynamic));
           (b = cast (_Runtime.callValue(BitmapGradient.lerp__bitmapGradient, cast ([(_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, j)) & 255), (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(colors, (j + 1.0))) & 255), t] : Array<Dynamic>)) : Dynamic));
@@ -68,8 +68,8 @@ class BitmapGradient {
     h = _Runtime.field(source, 'height');
     angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
     distance = _Runtime.coalesce(_Runtime.field(options, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = HxMath.round((HxMath.cos(angle) * distance));
-    offsetY = HxMath.round((HxMath.sin(angle) * distance));
+    offsetX = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(angle), distance));
+    offsetY = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(angle), distance));
     type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'inner');
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     {
@@ -102,11 +102,11 @@ class BitmapGradient {
             var gradient:Dynamic = (lit - shade);
             var idx:Dynamic = HxMath.max(0.0, HxMath.min(255.0, HxMath.round((((gradient * 0.5) + 0.5) * 255.0))));
             var ri:Dynamic = (idx * 4.0);
-            var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast (_Runtime.callValue(BitmapGradient.readSourceAlpha__bitmapGradient, cast ([source, px, py] : Array<Dynamic>)) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - (_Runtime.callValue(BitmapGradient.readSourceAlpha__bitmapGradient, cast ([source, px, py] : Array<Dynamic>)) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+            var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callValue(BitmapGradient.readSourceAlpha__bitmapGradient, cast ([source, px, py] : Array<Dynamic>)), 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - _Runtime.divideNumbers(_Runtime.callValue(BitmapGradient.readSourceAlpha__bitmapGradient, cast ([source, px, py] : Array<Dynamic>)), 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)) * intensity) * clip))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)), intensity) * clip))));
             px++;
           }
         }
@@ -148,11 +148,11 @@ class BitmapGradient {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Dynamic = (((py * w) + px) * 4.0);
-            var ri:Dynamic = (flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 3.0)) * 4.0);
+            var ri:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 3.0)), 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)) * intensity))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 3.0)), intensity))));
             px++;
           }
         }
@@ -201,16 +201,16 @@ class BitmapGradient {
   public static function readSourceAlpha__bitmapGradient(source:BitmapRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
-    sx = (_Runtime.field(source, 'x') + px);
-    sy = (_Runtime.field(source, 'y') + py);
+    sx = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+    sy = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, ((((sy * _Runtime.field(source, 'bitmap').width) + sx) * 4.0) + 3.0));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0) + 3.0));
     return cast null;
   }
 
   public static function sampleField__bitmapGradient(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
     if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast h : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast (flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
+    return cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)), 255.0);
     return cast null;
   }
 }

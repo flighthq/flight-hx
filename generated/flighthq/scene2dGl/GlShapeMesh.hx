@@ -35,7 +35,7 @@ class GlShapeMesh {
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, i);
         if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0) : Bool)) { i++; continue; }
-        var a:Dynamic = (_Runtime.field(mesh, 'alpha') * nodeAlpha);
+        var a:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(mesh, 'alpha'), nodeAlpha);
         if ((cast ((cast a : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var r:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 16)) & 255) / 255.0);
         var g:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 8)) & 255) / 255.0);
@@ -93,8 +93,8 @@ class GlShapeMesh {
     var ih:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     viewport = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = (2.0 / _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), function():Dynamic return cast 1.0));
-    ih = (2.0 / _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'), function():Dynamic return cast 1.0));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), function():Dynamic return cast 1.0));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = _Runtime.field(renderProxy, 'transform2D');
     return cast new flighthq._internal._Float32Array(cast ([(t.a * iw), (-t.b * ih), 0.0, (t.c * iw), (-t.d * ih), 0.0, ((t.tx * iw) - 1.0), ((-t.ty * ih) + 1.0), 1.0] : Array<Dynamic>));
     return cast null;

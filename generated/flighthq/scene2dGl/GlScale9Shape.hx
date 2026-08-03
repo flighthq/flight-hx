@@ -86,8 +86,8 @@ class GlScale9Shape {
       return;
     }
     shapeData = (cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : GlScale9ShapeData__glScale9Shape);
-    w = HxMath.ceil((_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX')));
-    h = HxMath.ceil((_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY')));
+    w = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), _Runtime.field(source, 'scaleX')));
+    h = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), _Runtime.field(source, 'scaleY')));
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY')) : Bool)) : Bool)) {
       flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);

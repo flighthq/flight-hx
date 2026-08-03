@@ -20,25 +20,25 @@ class BitmapTransform {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-        var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
-            var di:Dynamic = (((dy * _Runtime.field(dest, 'bitmap').width) + dx) * 4.0);
+            var si:Dynamic = ((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
+            var di:Dynamic = ((_Runtime.multiplyNumbers(dy, _Runtime.field(dest, 'bitmap').width) + dx) * 4.0);
             var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si);
             var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0));
             var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0));
             var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((r * _Runtime.field(ct, 'redScale')) + (_Runtime.field(ct, 'redBias') * 255.0))))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((g * _Runtime.field(ct, 'greenScale')) + (_Runtime.field(ct, 'greenBias') * 255.0))))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((b * _Runtime.field(ct, 'blueScale')) + (_Runtime.field(ct, 'blueBias') * 255.0))))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((a * _Runtime.field(ct, 'alphaScale')) + (_Runtime.field(ct, 'alphaBias') * 255.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(r, _Runtime.field(ct, 'redScale')) + _Runtime.multiplyNumbers(_Runtime.field(ct, 'redBias'), 255.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(g, _Runtime.field(ct, 'greenScale')) + _Runtime.multiplyNumbers(_Runtime.field(ct, 'greenBias'), 255.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(b, _Runtime.field(ct, 'blueScale')) + _Runtime.multiplyNumbers(_Runtime.field(ct, 'blueBias'), 255.0))))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(a, _Runtime.field(ct, 'alphaScale')) + _Runtime.multiplyNumbers(_Runtime.field(ct, 'alphaBias'), 255.0))))));
             px++;
           }
         }
@@ -62,17 +62,17 @@ class BitmapTransform {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-        var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
-            var di:Dynamic = (((dy * _Runtime.field(dest, 'bitmap').width) + dx) * 4.0);
+            var si:Dynamic = ((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
+            var di:Dynamic = ((_Runtime.multiplyNumbers(dy, _Runtime.field(dest, 'bitmap').width) + dx) * 4.0);
             var pixel:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0))))) & _Runtime.toInt32(mask))), 0);
             var passes:Dynamic = _Runtime.callValue(BitmapTransform.compare__bitmapTransform, cast ([pixel, operation, _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), 0)] : Array<Dynamic>));
             if ((cast passes : Bool)) {
@@ -110,21 +110,21 @@ class BitmapTransform {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
-        var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
-            var di:Dynamic = (((dy * _Runtime.field(dest, 'bitmap').width) + dx) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si) * redScale) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di) * (1.0 - redScale)))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)) * greenScale) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)) * (1.0 - greenScale)))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)) * blueScale) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 2.0)) * (1.0 - blueScale)))));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)) * alphaScale) + (flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0)) * (1.0 - alphaScale)))));
+            var si:Dynamic = ((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
+            var di:Dynamic = ((_Runtime.multiplyNumbers(dy, _Runtime.field(dest, 'bitmap').width) + dx) * 4.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si), redScale) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di), (1.0 - redScale)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)), greenScale) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)), (1.0 - greenScale)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)), blueScale) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 2.0)), (1.0 - blueScale)))));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)), alphaScale) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0)), (1.0 - alphaScale)))));
             px++;
           }
         }

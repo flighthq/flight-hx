@@ -25,7 +25,7 @@ class RichTextQuery {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(RichTextQuery.getLineOffsetY__richTextQuery, cast ([layout, i] : Array<Dynamic>));
-        var lineBottom:Dynamic = (lineTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0));
+        var lineBottom:Dynamic = _Runtime.addNumbers(lineTop, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0));
         var dist:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
           (closestDist = cast (dist : Dynamic));
@@ -42,20 +42,20 @@ class RichTextQuery {
       }
       return cast lineEnd;
     }
-    lineStart = ((cast ((cast _Runtime.field(_Runtime.field(layout, 'groups'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), (_Runtime.field(_Runtime.field(layout, 'groups'), 'length') - 1.0)), 'endIndex'), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
+    lineStart = ((cast ((cast _Runtime.field(_Runtime.field(layout, 'groups'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 1.0)), 'endIndex'), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
     lineEnd = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex) : Bool)) { continue; }
       (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
       (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
       if ((cast ((cast x : Float) <= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool)) { return cast _Runtime.field(group, 'startIndex'); }
-      if ((cast ((cast x : Float) <= (cast (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')) : Float)) : Bool)) {
+      if ((cast ((cast x : Float) <= (cast _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width')) : Float)) : Bool)) {
         var gx:Dynamic = _Runtime.field(group, 'offsetX');
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
             var advance:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
-            if ((cast ((cast x : Float) <= (cast (gx + (advance / 2.0)) : Float)) : Bool)) { return cast (_Runtime.field(group, 'startIndex') + i); }
+            if ((cast ((cast x : Float) <= (cast (gx + (advance / 2.0)) : Float)) : Bool)) { return cast _Runtime.addNumbers(_Runtime.field(group, 'startIndex'), i); }
             (gx = cast ((gx + advance) : Dynamic));
             i++;
           }
@@ -87,7 +87,7 @@ class RichTextQuery {
       (descent = cast (HxMath.max(descent, _Runtime.field(group, 'descent')) : Dynamic));
       (leading = cast (HxMath.max(leading, _Runtime.field(group, 'leading')) : Dynamic));
       (x = cast (HxMath.min(x, _Runtime.field(group, 'offsetX')) : Dynamic));
-      (right = cast (HxMath.max(right, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'))) : Dynamic));
+      (right = cast (HxMath.max(right, _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width'))) : Dynamic));
     }
     if ((cast !(cast found : Bool) : Bool)) { return cast null; }
     return cast { ascent: ascent, descent: descent, height: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), lineIndex), function():Dynamic return cast ((ascent + descent) + leading)), leading: leading, width: (right - x), x: ((cast _Runtime.strictEquals(x, HxMath.POSITIVE_INFINITY) : Bool) ? (cast 0.0 : Dynamic) : (cast x : Dynamic)) };
@@ -102,7 +102,7 @@ class RichTextQuery {
     group = _Runtime.callValue(RichTextQuery.getGroupContainingIndex__richTextQuery, cast ([layout, charIndex] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(group, null) : Bool)) { return cast false; }
     x = _Runtime.field(group, 'offsetX');
-    limit = HxMath.min((charIndex - _Runtime.field(group, 'startIndex')), _Runtime.field(_Runtime.field(group, 'positions'), 'length'));
+    limit = HxMath.min(_Runtime.subtractNumbers(charIndex, _Runtime.field(group, 'startIndex')), _Runtime.field(_Runtime.field(group, 'positions'), 'length'));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
@@ -110,7 +110,7 @@ class RichTextQuery {
         i++;
       }
     }
-    charWidth = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), (charIndex - _Runtime.field(group, 'startIndex'))), function():Dynamic return cast 0.0);
+    charWidth = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), _Runtime.subtractNumbers(charIndex, _Runtime.field(group, 'startIndex'))), function():Dynamic return cast 0.0);
     _Runtime.setField(out, 'x', x);
     _Runtime.setField(out, 'y', _Runtime.field(group, 'offsetY'));
     _Runtime.setField(out, 'width', charWidth);
@@ -142,7 +142,7 @@ class RichTextQuery {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Dynamic = _Runtime.callValue(RichTextQuery.getLineOffsetY__richTextQuery, cast ([layout, i] : Array<Dynamic>));
-        var lineBottom:Dynamic = (lineTop + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
+        var lineBottom:Dynamic = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
         var dist:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
           (closestDist = cast (dist : Dynamic));
@@ -201,7 +201,7 @@ class RichTextQuery {
   public static function getRichTextLinkAtPoint(layout:TextLayoutResult, x:Float, y:Float):Null<String> {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if ((cast !_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'url')) : Bool)) { continue; }
-      if ((cast ((cast ((cast ((cast ((cast x : Float) >= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool) && (cast ((cast x : Float) <= (cast (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')) : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast _Runtime.field(group, 'offsetY') : Float)) : Bool)) : Bool) && (cast ((cast y : Float) <= (cast (_Runtime.field(group, 'offsetY') + _Runtime.field(group, 'height')) : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast ((cast ((cast x : Float) >= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool) && (cast ((cast x : Float) <= (cast _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width')) : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast _Runtime.field(group, 'offsetY') : Float)) : Bool)) : Bool) && (cast ((cast y : Float) <= (cast _Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'height')) : Float)) : Bool)) : Bool)) {
         return cast _Runtime.field(_Runtime.field(group, 'format'), 'url');
       }
     }
@@ -241,7 +241,7 @@ class RichTextQuery {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');
-    limit = HxMath.max(0.0, (HxMath.min(index, _Runtime.field(group, 'endIndex')) - _Runtime.field(group, 'startIndex')));
+    limit = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(index, _Runtime.field(group, 'endIndex')), _Runtime.field(group, 'startIndex')));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {

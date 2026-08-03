@@ -21,9 +21,9 @@ class Clock {
   public static function advanceClock(clock:flighthq.types.Clock, deltaSeconds:Float):Void {
     var scaledDelta:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    scaledDelta = ((cast _Runtime.field(clock, 'paused') : Bool) ? (cast 0.0 : Dynamic) : (cast (deltaSeconds * _Runtime.field(clock, 'scale')) : Dynamic));
+    scaledDelta = ((cast _Runtime.field(clock, 'paused') : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(deltaSeconds, _Runtime.field(clock, 'scale')) : Dynamic));
     _Runtime.setField(clock, 'deltaTime', scaledDelta);
-    _Runtime.setField(clock, 'elapsed', (_Runtime.field(clock, 'elapsed') + scaledDelta));
+    _Runtime.setField(clock, 'elapsed', _Runtime.addNumbers(_Runtime.field(clock, 'elapsed'), scaledDelta));
     if ((cast !_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(clock, 'onTick')], [scaledDelta]]), 1); }
     children = _Runtime.field(clock, 'children');
     {

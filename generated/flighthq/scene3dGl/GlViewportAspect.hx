@@ -10,7 +10,7 @@ class GlViewportAspect {
   public static function getGlScene3DViewportAspect(state:GlRenderState):Float {
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
     viewport = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    return cast ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
+    return cast ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 }

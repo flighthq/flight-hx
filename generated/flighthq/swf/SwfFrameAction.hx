@@ -26,10 +26,10 @@ class SwfFrameAction {
         if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_END__swfFrameAction) : Bool)) { break; }
         var length:Dynamic = ((cast ((cast code : Float) >= (cast SwfFrameAction.ACTION_HAS_BODY__swfFrameAction : Float)) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-        var bodyEnd:Dynamic = (_Runtime.field(reader, 'pos') + length);
+        var bodyEnd:Dynamic = _Runtime.addNumbers(_Runtime.field(reader, 'pos'), length);
         if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast bodyEnd : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_STOP__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'stop', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PLAY__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'play', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_NEXT_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'next', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PREVIOUS_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'previous', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_FRAME__swfFrameAction) : Bool)) {
-          _Runtime.callProperty(commands, 'push', cast ([{ frame: (_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) + 1.0), kind: 'goto', label: null }] : Array<Dynamic>));
+          _Runtime.callProperty(commands, 'push', cast ([{ frame: _Runtime.addNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), 1.0), kind: 'goto', label: null }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_LABEL__swfFrameAction) : Bool)) {
           _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'goto', label: _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
         } else {

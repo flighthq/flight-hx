@@ -32,8 +32,8 @@ class SpotLight {
   }
 
   public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:flighthq.types.SpotLight):Void {
-    _Runtime.setField(out, 'innerDegrees', ((HxMath.acos(_Runtime.field(source, 'innerConeCos')) * 180.0) / HxMath.PI));
-    _Runtime.setField(out, 'outerDegrees', ((HxMath.acos(_Runtime.field(source, 'outerConeCos')) * 180.0) / HxMath.PI));
+    _Runtime.setField(out, 'innerDegrees', (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'innerConeCos')), 180.0) / HxMath.PI));
+    _Runtime.setField(out, 'outerDegrees', (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'outerConeCos')), 180.0) / HxMath.PI));
   }
 
   public static function setSpotLightCone(out:flighthq.types.SpotLight, innerDegrees:Float, outerDegrees:Float):Void {

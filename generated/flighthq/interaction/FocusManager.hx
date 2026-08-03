@@ -152,14 +152,14 @@ class FocusManager {
   public static function boundsCenter__focusManager(node:NodeAny, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     bounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast (cast node : Dynamic) : Spatial2DNode<Dynamic>)] : Array<Dynamic>));
-    _Runtime.setField(out, 'x', (_Runtime.field(bounds, 'x') + (_Runtime.field(bounds, 'width') / 2.0)));
-    _Runtime.setField(out, 'y', (_Runtime.field(bounds, 'y') + (_Runtime.field(bounds, 'height') / 2.0)));
+    _Runtime.setField(out, 'x', _Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.divideNumbers(_Runtime.field(bounds, 'width'), 2.0)));
+    _Runtime.setField(out, 'y', _Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.divideNumbers(_Runtime.field(bounds, 'height'), 2.0)));
     return cast out;
     return cast null;
   }
 
   public static function byTabIndexOrder__focusManager(a:NodeAny, b:NodeAny):Float {
-    return cast (_Runtime.callValue(FocusManager.focusOrderKey__focusManager, cast ([a] : Array<Dynamic>)) - _Runtime.callValue(FocusManager.focusOrderKey__focusManager, cast ([b] : Array<Dynamic>)));
+    return cast _Runtime.subtractNumbers(_Runtime.callValue(FocusManager.focusOrderKey__focusManager, cast ([a] : Array<Dynamic>)), _Runtime.callValue(FocusManager.focusOrderKey__focusManager, cast ([b] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -202,7 +202,7 @@ class FocusManager {
       }
     }
     if ((cast ((cast along : Float) <= (cast FocusManager.DIRECTION_EPSILON__focusManager : Float)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
-    return cast (along + (2.0 * HxMath.abs(perpendicular)));
+    return cast (along + _Runtime.multiplyNumbers(2.0, HxMath.abs(perpendicular)));
     return cast null;
   }
 
@@ -239,12 +239,12 @@ class FocusManager {
     current = _Runtime.field(manager, 'focused');
     from = ((cast !_Runtime.strictEquals(current, null) : Bool) ? (cast _Runtime.callProperty(order, 'indexOf', cast ([current] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
     if ((cast _Runtime.strictEquals(from, -1.0) : Bool)) {
-      (index = cast (((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (_Runtime.field(order, 'length') - 1.0) : Dynamic)) : Dynamic));
+      (index = cast (((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.field(order, 'length'), 1.0) : Dynamic)) : Dynamic));
     } else {
       (index = cast ((from + delta) : Dynamic));
       if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(order, 'length') : Float)) : Bool)) : Bool)) {
         if ((cast !(cast _Runtime.field(manager, 'wrap') : Bool) : Bool)) { return cast null; }
-        (index = cast (_Runtime.fmod((index + _Runtime.field(order, 'length')), _Runtime.field(order, 'length')) : Dynamic));
+        (index = cast (_Runtime.fmod(_Runtime.addNumbers(index, _Runtime.field(order, 'length')), _Runtime.field(order, 'length')) : Dynamic));
       }
     }
     next = flighthq._internal._StaticIndex.readArray(order, index);

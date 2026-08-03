@@ -19,7 +19,7 @@ class UpdateTweens {
     easedT = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
     target = (cast _Runtime.field(tween, 'target') : Dynamic);
     for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-      var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
+      var value:Dynamic = _Runtime.addNumbers(_Runtime.field(detail, 'start'), _Runtime.multiplyNumbers(_Runtime.field(detail, 'change'), easedT));
       if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.setIndex(target, _Runtime.field(detail, 'key'), value);
     }
@@ -34,16 +34,16 @@ class UpdateTweens {
     var easedT:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(tween, 'paused') : Bool) || (cast _Runtime.field(tween, 'complete') : Bool)) : Bool)) { return; }
-    _Runtime.setField(tween, 'elapsed', (_Runtime.field(tween, 'elapsed') + deltaTime));
-    activeElapsed = (_Runtime.field(tween, 'elapsed') - _Runtime.field(tween, 'delay'));
+    _Runtime.setField(tween, 'elapsed', _Runtime.addNumbers(_Runtime.field(tween, 'elapsed'), deltaTime));
+    activeElapsed = _Runtime.subtractNumbers(_Runtime.field(tween, 'elapsed'), _Runtime.field(tween, 'delay'));
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     if ((cast !(cast _Runtime.field(tween, 'initialized') : Bool) : Bool)) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
-    t = HxMath.min((activeElapsed / _Runtime.field(tween, 'duration')), 1.0);
+    t = HxMath.min(_Runtime.divideNumbers(activeElapsed, _Runtime.field(tween, 'duration')), 1.0);
     effectiveT = ((cast _Runtime.field(tween, 'reverse') : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
     easedT = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
     target = (cast _Runtime.field(tween, 'target') : Dynamic);
     for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-      var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
+      var value:Dynamic = _Runtime.addNumbers(_Runtime.field(detail, 'start'), _Runtime.multiplyNumbers(_Runtime.field(detail, 'change'), easedT));
       if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.setIndex(target, _Runtime.field(detail, 'key'), value);
     }
@@ -68,7 +68,7 @@ class UpdateTweens {
     for (__iteration0 in _Runtime.iterable(manager.tweens)) {
       var target:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var list:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var i:Dynamic = (_Runtime.field(list, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(list, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         if ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(list, i), 'complete') : Bool)) {
           _Runtime.splice(list, Std.int(i), Std.int(1.0), []);

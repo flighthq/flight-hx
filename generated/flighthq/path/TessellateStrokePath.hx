@@ -61,7 +61,7 @@ class TessellateStrokePath {
       _Runtime.callValue(TessellateStrokePath.appendRoundCap__tessellateStrokePath, cast ([mesh, right, _Runtime.field(piece, 'startCap'), left] : Array<Dynamic>));
     }
     if ((cast ((cast !(cast _Runtime.field(piece, 'closed') : Bool) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(piece, 'endCap'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var end:Dynamic = (_Runtime.field(_Runtime.field(piece, 'left'), 'length') - 2.0);
+      var end:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(piece, 'left'), 'length'), 2.0);
       var left:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), end), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), (end + 1.0))] : Array<Dynamic>);
       var right:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), end), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), (end + 1.0))] : Array<Dynamic>);
       _Runtime.callValue(TessellateStrokePath.appendRoundCap__tessellateStrokePath, cast ([mesh, left, _Runtime.field(piece, 'endCap'), right] : Array<Dynamic>));
@@ -73,7 +73,7 @@ class TessellateStrokePath {
     var arcBase:Dynamic = cast _Runtime.UNDEFINED;
     var arcCount:Dynamic = cast _Runtime.UNDEFINED;
     center = (_Runtime.toInt32(_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length')) >> 1);
-    _Runtime.pushMany(_Runtime.field(mesh, 'vertices'), cast ([((flighthq._internal._StaticIndex.readArray(start, 0.0) + flighthq._internal._StaticIndex.readArray(end, 0.0)) / 2.0), ((flighthq._internal._StaticIndex.readArray(start, 1.0) + flighthq._internal._StaticIndex.readArray(end, 1.0)) / 2.0)] : Array<Dynamic>));
+    _Runtime.pushMany(_Runtime.field(mesh, 'vertices'), cast ([(_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 0.0), flighthq._internal._StaticIndex.readArray(end, 0.0)) / 2.0), (_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 1.0), flighthq._internal._StaticIndex.readArray(end, 1.0)) / 2.0)] : Array<Dynamic>));
     arcBase = (_Runtime.toInt32(_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length')) >> 1);
     _Runtime.callProperty(_Runtime.field(mesh, 'vertices'), 'push', _Runtime.concatArrays([[flighthq._internal._StaticIndex.readArray(start, 0.0)], [flighthq._internal._StaticIndex.readArray(start, 1.0)], _Runtime.toArray(interior), [flighthq._internal._StaticIndex.readArray(end, 0.0)], [flighthq._internal._StaticIndex.readArray(end, 1.0)]]));
     arcCount = ((_Runtime.toInt32(_Runtime.field(interior, 'length')) >> 1) + 2.0);

@@ -14,12 +14,12 @@ class TextFormat {
   }
 
   public static function getTextFormatDescent(format:flighthq.types.TextFormat):Float {
-    return cast (_Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat) * 0.185);
+    return cast _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat), 0.185);
     return cast null;
   }
 
   public static function getTextFormatHeight(format:flighthq.types.TextFormat):Float {
-    return cast ((_Runtime.callValue(getTextFormatAscent, cast ([format] : Array<Dynamic>)) + _Runtime.callValue(getTextFormatDescent, cast ([format] : Array<Dynamic>))) + _Runtime.callValue(getTextFormatLeading, cast ([format] : Array<Dynamic>)));
+    return cast _Runtime.addNumbers(_Runtime.addNumbers(_Runtime.callValue(getTextFormatAscent, cast ([format] : Array<Dynamic>)), _Runtime.callValue(getTextFormatDescent, cast ([format] : Array<Dynamic>))), _Runtime.callValue(getTextFormatLeading, cast ([format] : Array<Dynamic>)));
     return cast null;
   }
 

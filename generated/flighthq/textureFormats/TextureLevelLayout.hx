@@ -48,9 +48,9 @@ class TextureLevelLayout {
     var blocksHigh:Dynamic = cast _Runtime.UNDEFINED;
     block = _Runtime.callValue(TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout, cast ([format] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(block, null) : Bool)) { return cast -1.0; }
-    blocksWide = HxMath.ceil((width / _Runtime.field(block, 'blockWidth')));
-    blocksHigh = HxMath.ceil((height / _Runtime.field(block, 'blockHeight')));
-    return cast ((blocksWide * blocksHigh) * _Runtime.field(block, 'bytesPerBlock'));
+    blocksWide = HxMath.ceil(_Runtime.divideNumbers(width, _Runtime.field(block, 'blockWidth')));
+    blocksHigh = HxMath.ceil(_Runtime.divideNumbers(height, _Runtime.field(block, 'blockHeight')));
+    return cast _Runtime.multiplyNumbers((blocksWide * blocksHigh), _Runtime.field(block, 'bytesPerBlock'));
     return cast null;
   }
 

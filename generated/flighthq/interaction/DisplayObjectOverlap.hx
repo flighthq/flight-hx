@@ -33,10 +33,10 @@ class DisplayObjectOverlap {
     a = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>));
     b = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callValue(intersectsRectangle, cast ([a, b] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    aCenterX = (_Runtime.field(a, 'x') + (_Runtime.field(a, 'width') * 0.5));
-    aCenterY = (_Runtime.field(a, 'y') + (_Runtime.field(a, 'height') * 0.5));
-    bCenterX = (_Runtime.field(b, 'x') + (_Runtime.field(b, 'width') * 0.5));
-    bCenterY = (_Runtime.field(b, 'y') + (_Runtime.field(b, 'height') * 0.5));
+    aCenterX = _Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.multiplyNumbers(_Runtime.field(a, 'width'), 0.5));
+    aCenterY = _Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.multiplyNumbers(_Runtime.field(a, 'height'), 0.5));
+    bCenterX = _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.multiplyNumbers(_Runtime.field(b, 'width'), 0.5));
+    bCenterY = _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.multiplyNumbers(_Runtime.field(b, 'height'), 0.5));
     return cast ((cast _Runtime.callValue(containsRectanglePointXY, cast ([a, bCenterX, bCenterY] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(containsRectanglePointXY, cast ([b, aCenterX, aCenterY] : Array<Dynamic>)) : Bool));
     return cast null;
   }

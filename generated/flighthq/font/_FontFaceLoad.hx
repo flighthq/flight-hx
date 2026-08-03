@@ -11,7 +11,7 @@ class _FontFaceLoad {
   public static function _loadFontFaceFromBytes(family:String, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<Dynamic> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var source:Dynamic = cast _Runtime.UNDEFINED;
-      source = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
+      source = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
       return flighthq._internal._Async.resolve(_Runtime.callValue(_FontFaceLoad.loadAndRegisterFontFace___fontFaceLoad, cast ([family, source] : Array<Dynamic>)));
     }));
   }

@@ -23,7 +23,7 @@ class ParticleDesignerSerialize {
     var rotVar:Dynamic = cast _Runtime.UNDEFINED;
     var vx:Dynamic = cast _Runtime.UNDEFINED;
     var vy:Dynamic = cast _Runtime.UNDEFINED;
-    angleDeg = (HxMath.atan2(-config.directionY, config.directionX) * ParticleDesignerSerialize.RAD2DEG__particleDesignerSerialize);
+    angleDeg = _Runtime.multiplyNumbers(HxMath.atan2(-config.directionY, config.directionX), ParticleDesignerSerialize.RAD2DEG__particleDesignerSerialize);
     startSize = (((config.scaleMin + config.scaleMax) * 0.5) * textureSize);
     startVar = (((config.scaleMax - config.scaleMin) * 0.5) * textureSize);
     finishSize = (startSize * config.scaleEnd);

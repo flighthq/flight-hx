@@ -123,10 +123,10 @@ class NodeTransform2d {
     } else {
       var radY:Dynamic = ((runtime.rotationAngle + target.skewY) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
       var radX:Dynamic = ((runtime.rotationAngle + target.skewX) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
-      (matrix.a = cast ((HxMath.cos(radY) * target.scaleX) : Dynamic));
-      (matrix.b = cast ((HxMath.sin(radY) * target.scaleX) : Dynamic));
-      (matrix.c = cast ((-HxMath.sin(radX) * target.scaleY) : Dynamic));
-      (matrix.d = cast ((HxMath.cos(radX) * target.scaleY) : Dynamic));
+      (matrix.a = cast (_Runtime.multiplyNumbers(HxMath.cos(radY), target.scaleX) : Dynamic));
+      (matrix.b = cast (_Runtime.multiplyNumbers(HxMath.sin(radY), target.scaleX) : Dynamic));
+      (matrix.c = cast (_Runtime.multiplyNumbers(-HxMath.sin(radX), target.scaleY) : Dynamic));
+      (matrix.d = cast (_Runtime.multiplyNumbers(HxMath.cos(radX), target.scaleY) : Dynamic));
     }
     (matrix.tx = cast ((target.x - ((matrix.a * target.pivotX) + (matrix.c * target.pivotY))) : Dynamic));
     (matrix.ty = cast ((target.y - ((matrix.b * target.pivotX) + (matrix.d * target.pivotY))) : Dynamic));

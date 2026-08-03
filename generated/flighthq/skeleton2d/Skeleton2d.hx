@@ -71,12 +71,12 @@ class Skeleton2d {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var bone:Dynamic = flighthq._internal._StaticIndex.readArray(bones, i);
-        var rotX:Dynamic = ((_Runtime.field(bone, 'rotation') + _Runtime.field(bone, 'shearX')) * DEG_TO_RAD);
-        var rotY:Dynamic = (((_Runtime.field(bone, 'rotation') + 90.0) + _Runtime.field(bone, 'shearY')) * DEG_TO_RAD);
-        var la:Dynamic = (HxMath.cos(rotX) * _Runtime.field(bone, 'scaleX'));
-        var lb:Dynamic = (HxMath.sin(rotX) * _Runtime.field(bone, 'scaleX'));
-        var lc:Dynamic = (HxMath.cos(rotY) * _Runtime.field(bone, 'scaleY'));
-        var ld:Dynamic = (HxMath.sin(rotY) * _Runtime.field(bone, 'scaleY'));
+        var rotX:Dynamic = (_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), _Runtime.field(bone, 'shearX')) * DEG_TO_RAD);
+        var rotY:Dynamic = (_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), 90.0), _Runtime.field(bone, 'shearY')) * DEG_TO_RAD);
+        var la:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotX), _Runtime.field(bone, 'scaleX'));
+        var lb:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotX), _Runtime.field(bone, 'scaleX'));
+        var lc:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotY), _Runtime.field(bone, 'scaleY'));
+        var ld:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotY), _Runtime.field(bone, 'scaleY'));
         var o:Dynamic = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
         if ((cast ((cast _Runtime.field(bone, 'parentIndex') : Float) < (cast 0.0 : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(world, o, la);
@@ -88,15 +88,15 @@ class Skeleton2d {
           i++;
           continue;
         }
-        var p:Dynamic = (_Runtime.field(bone, 'parentIndex') * Skeleton2d.MATRIX_STRIDE__skeleton2d);
+        var p:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(bone, 'parentIndex'), Skeleton2d.MATRIX_STRIDE__skeleton2d);
         var pa:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, p);
         var pb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
         var pc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
         var pd:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
         var inherit:Dynamic = _Runtime.field(bone, 'transformMode');
         if ((cast _Runtime.field(inherit, 'translation') : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), (((pa * _Runtime.field(bone, 'x')) + (pc * _Runtime.field(bone, 'y'))) + flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0))));
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), (((pb * _Runtime.field(bone, 'x')) + (pd * _Runtime.field(bone, 'y'))) + flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0))));
+          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pa, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pc, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0))));
+          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pb, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pd, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0))));
         } else {
           flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
           flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));

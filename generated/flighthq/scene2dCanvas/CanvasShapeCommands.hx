@@ -35,8 +35,8 @@ class CanvasShapeCommands {
       _Runtime.setField(state, 'fillMatrixInverse', null);
     }
     _Runtime.setField(state, 'bitmapSrc', _Runtime.callValue(resolveCanvasTextureWindowSource, cast ([_Runtime.field(state, 'canvasRenderState'), texture] : Array<Dynamic>)));
-    _Runtime.setField(state, 'bitmapW', HxMath.abs((_Runtime.field(texture, 'uvScale').x * _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>)))));
-    _Runtime.setField(state, 'bitmapH', HxMath.abs((_Runtime.field(texture, 'uvScale').y * _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>)))));
+    _Runtime.setField(state, 'bitmapW', HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>)))));
+    _Runtime.setField(state, 'bitmapH', HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>)))));
   } };
 
   public static final defaultCanvasBeginFill:Dynamic = { key: 'beginFill', draw: function(_ctx:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {

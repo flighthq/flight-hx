@@ -483,7 +483,7 @@ class Awd2Parse {
       var p:Dynamic = 0.0;
       while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
         _Runtime.callProperty(times, 'push', cast ([timeAccumulator] : Array<Dynamic>));
-        (timeAccumulator = cast ((timeAccumulator + (_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'duration') / 1000.0)) : Dynamic));
+        (timeAccumulator = cast ((timeAccumulator + _Runtime.divideNumbers(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'duration'), 1000.0)) : Dynamic));
         p++;
       }
     }
@@ -622,7 +622,7 @@ class Awd2Parse {
       var p:Dynamic = 0.0;
       while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
         _Runtime.callProperty(times, 'push', cast ([timeAccumulator] : Array<Dynamic>));
-        (timeAccumulator = cast ((timeAccumulator + (_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'duration') / 1000.0)) : Dynamic));
+        (timeAccumulator = cast ((timeAccumulator + _Runtime.divideNumbers(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'duration'), 1000.0)) : Dynamic));
         p++;
       }
     }
@@ -900,7 +900,7 @@ class Awd2Parse {
     var geometries:Array<ParsedGeometry__awd2Parse> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
-    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast ((offset + 2.0) + _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.geometry-truncated', 'parseTriangleGeometryBlock', { field: 'name' }] : Array<Dynamic>));
       return cast cast ([] : Array<Dynamic>);
     }
@@ -1002,10 +1002,10 @@ class Awd2Parse {
         if ((cast !_Runtime.strictEquals(normals, null) : Bool)) { _Runtime.callValue(negateVec3Z, cast ([normals] : Array<Dynamic>)); }
         if ((cast !_Runtime.strictEquals(tangents, null) : Bool)) { _Runtime.callValue(negateVec3Z, cast ([tangents] : Array<Dynamic>)); }
         if ((cast !_Runtime.strictEquals(indices, null) : Bool)) { _Runtime.callValue(reverseTriangleWinding, cast ([indices] : Array<Dynamic>)); }
-        var vertexCount:Dynamic = (_Runtime.field(positions, 'length') / 3.0);
+        var vertexCount:Dynamic = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
         var jointsPerVertex:Dynamic = 0.0;
         if ((cast ((cast ((cast !_Runtime.strictEquals(jointIndices, null) : Bool) && (cast !_Runtime.strictEquals(jointWeights, null) : Bool)) : Bool) && (cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-          (jointsPerVertex = cast (HxMath.floor((_Runtime.field(jointWeights, 'length') / vertexCount)) : Dynamic));
+          (jointsPerVertex = cast (HxMath.floor(_Runtime.divideNumbers(_Runtime.field(jointWeights, 'length'), vertexCount)) : Dynamic));
           if ((cast ((cast ((cast jointsPerVertex : Float) < (cast 1.0 : Float)) : Bool) || (cast ((cast _Runtime.field(jointIndices, 'length') : Float) < (cast (vertexCount * jointsPerVertex) : Float)) : Bool)) : Bool)) {
             _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.skin-streams-mismatch', 'parseTriangleGeometryBlock'] : Array<Dynamic>));
             (jointsPerVertex = cast (0.0 : Dynamic));
@@ -1222,7 +1222,7 @@ class Awd2Parse {
     }
     transformResult = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
     (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
-    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast ((offset + 2.0) + _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'name' }] : Array<Dynamic>));
       return cast null;
     }
@@ -1249,7 +1249,7 @@ class Awd2Parse {
     var lightIds:Array<Float> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
-    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast ((offset + 2.0) + _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'name' }] : Array<Dynamic>));
       return cast null;
     }
@@ -1638,13 +1638,13 @@ class Awd2Parse {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.compression-no-decompressor', 'rehydrateAwdBody', { compression: compression }] : Array<Dynamic>));
       return cast null;
     }
-    compressedEnd = HxMath.min((AWD2_HEADER_BYTES + _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>))), _Runtime.field(input, 'byteLength'));
+    compressedEnd = HxMath.min(_Runtime.addNumbers(AWD2_HEADER_BYTES, _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>))), _Runtime.field(input, 'byteLength'));
     inflated = _Runtime.callValue(decompressor, cast ([(cast input : flighthq._internal._UInt8Array).subarray(Std.int(AWD2_HEADER_BYTES), Std.int(compressedEnd)), 0.0] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(inflated, null) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.decompression-failed', 'rehydrateAwdBody', { compression: compression }] : Array<Dynamic>));
       return cast null;
     }
-    rehydrated = new flighthq._internal._UInt8Array((AWD2_HEADER_BYTES + _Runtime.field(inflated, 'byteLength')));
+    rehydrated = new flighthq._internal._UInt8Array(_Runtime.addNumbers(AWD2_HEADER_BYTES, _Runtime.field(inflated, 'byteLength')));
     (cast rehydrated : flighthq._internal._UInt8Array).set((cast input : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(AWD2_HEADER_BYTES)), Std.int(0.0));
     (cast rehydrated : flighthq._internal._UInt8Array).set(inflated, Std.int(AWD2_HEADER_BYTES));
     rehydratedView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(rehydrated, 'buffer')]);

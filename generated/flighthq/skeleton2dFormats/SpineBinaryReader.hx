@@ -67,7 +67,7 @@ class SpineBinaryReader {
     if ((cast _Runtime.strictEquals(byteCount, 1.0) : Bool)) { return cast ''; }
     length = (byteCount - 1.0);
     if ((cast !(cast _Runtime.callValue(hasSpineBinaryBytes, cast ([reader, length] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader, cast ([reader, null] : Array<Dynamic>)); }
-    start = (_Runtime.field(reader.view, 'byteOffset') + reader.offset);
+    start = _Runtime.addNumbers(_Runtime.field(reader.view, 'byteOffset'), reader.offset);
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(reader.view, 'buffer'), start, length);
     (reader.offset += length);
     return cast _Runtime.callProperty(SpineBinaryReader._decoder__spineBinaryReader, 'decode', cast ([bytes] : Array<Dynamic>));
@@ -97,7 +97,7 @@ class SpineBinaryReader {
   }
 
   public static function markSpineBinaryOverrun__spineBinaryReader<T>(reader:ByteReader, value:Dynamic):Dynamic {
-    (reader.offset = cast ((_Runtime.field(reader.view, 'byteLength') + 1.0) : Dynamic));
+    (reader.offset = cast (_Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0) : Dynamic));
     return cast value;
     return cast null;
   }

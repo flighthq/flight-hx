@@ -7,6 +7,6 @@ import flighthq.types.VoxelGrid;
 
 class VoxelGrid {
   public static function invalidateVoxelGrid(voxelGrid:flighthq.types.VoxelGrid):Void {
-    _Runtime.setField(voxelGrid, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.field(voxelGrid, 'version') + 1.0)), 0));
+    _Runtime.setField(voxelGrid, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(voxelGrid, 'version'), 1.0)), 0));
   }
 }

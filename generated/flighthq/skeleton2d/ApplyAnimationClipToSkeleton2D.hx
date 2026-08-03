@@ -45,19 +45,19 @@ class ApplyAnimationClipToSkeleton2D {
         {
           var __switchValue = _Runtime.field(target, 'path');
           if (__switchValue == Skeleton2DAnimationPathValue.Translation) {
-            _Runtime.setField(poseBone, 'x', (_Runtime.field(setupBone, 'x') + flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
-            _Runtime.setField(poseBone, 'y', (_Runtime.field(setupBone, 'y') + flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 1.0)));
+            _Runtime.setField(poseBone, 'x', _Runtime.addNumbers(_Runtime.field(setupBone, 'x'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
+            _Runtime.setField(poseBone, 'y', _Runtime.addNumbers(_Runtime.field(setupBone, 'y'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 1.0)));
           }
           else if (__switchValue == Skeleton2DAnimationPathValue.Rotation) {
-            _Runtime.setField(poseBone, 'rotation', (_Runtime.field(setupBone, 'rotation') + flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
+            _Runtime.setField(poseBone, 'rotation', _Runtime.addNumbers(_Runtime.field(setupBone, 'rotation'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
           }
           else if (__switchValue == Skeleton2DAnimationPathValue.Scale) {
-            _Runtime.setField(poseBone, 'scaleX', (_Runtime.field(setupBone, 'scaleX') * flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
-            _Runtime.setField(poseBone, 'scaleY', (_Runtime.field(setupBone, 'scaleY') * flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 1.0)));
+            _Runtime.setField(poseBone, 'scaleX', _Runtime.multiplyNumbers(_Runtime.field(setupBone, 'scaleX'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
+            _Runtime.setField(poseBone, 'scaleY', _Runtime.multiplyNumbers(_Runtime.field(setupBone, 'scaleY'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 1.0)));
           }
           else if (__switchValue == Skeleton2DAnimationPathValue.Shear) {
-            _Runtime.setField(poseBone, 'shearX', (_Runtime.field(setupBone, 'shearX') + flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
-            _Runtime.setField(poseBone, 'shearY', (_Runtime.field(setupBone, 'shearY') + flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 1.0)));
+            _Runtime.setField(poseBone, 'shearX', _Runtime.addNumbers(_Runtime.field(setupBone, 'shearX'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 0.0)));
+            _Runtime.setField(poseBone, 'shearY', _Runtime.addNumbers(_Runtime.field(setupBone, 'shearY'), flighthq._internal._StaticIndex.readArray(ApplyAnimationClipToSkeleton2D._scratch__applyAnimationClipToSkeleton2D, 1.0)));
           }
           else  {
           }
@@ -105,7 +105,7 @@ class ApplyAnimationClipToSkeleton2D {
         i--;
       }
     }
-    index = HxMath.round(_Runtime.getIndex(_Runtime.field(_Runtime.field(channel, 'track'), 'values'), (keyframe * _Runtime.field(_Runtime.field(channel, 'track'), 'components'))));
+    index = HxMath.round(_Runtime.getIndex(_Runtime.field(_Runtime.field(channel, 'track'), 'values'), _Runtime.multiplyNumbers(keyframe, _Runtime.field(_Runtime.field(channel, 'track'), 'components'))));
     _Runtime.setField(slot, 'attachment', ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(table, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(table, index) : Dynamic) : (cast null : Dynamic)));
   }
 

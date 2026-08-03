@@ -14,6 +14,19 @@ class CoreSmoke {
     if (_Runtime.isError('not an error')) throw 'non-Error identity failed';
     if (!_Runtime.isError(_Runtime.error('expected'))) throw 'Error identity failed';
 
+    final dynamicProductLeft:Dynamic = {value: 0.8};
+    final dynamicProductRight:Dynamic = {value: 1.0};
+    final dynamicProductSink:Dynamic = {value: 0.0};
+    _Runtime.setField(
+      dynamicProductSink,
+      'value',
+      _Runtime.multiplyNumbers(
+        _Runtime.field(dynamicProductLeft, 'value'),
+        _Runtime.field(dynamicProductRight, 'value')
+      )
+    );
+    if (_Runtime.field(dynamicProductSink, 'value') != 0.8) throw 'dynamic fractional product was truncated';
+
     var synchronousFlowPrefix = 0;
     final synchronousFlow = _Async.continueFlow(_Async.flowNormal(), function() {
       synchronousFlowPrefix = 1;

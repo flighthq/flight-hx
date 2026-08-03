@@ -14,7 +14,7 @@ class AnimationStateMachineAdvance {
     toIndex = _Runtime.field(machine, 'transitionToStateIndex');
     if ((cast _Runtime.strictEquals(toIndex, null) : Bool)) { return; }
     _Runtime.callValue(advanceAnimationPlayers, cast ([_Runtime.field(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), toIndex), 'blendTree'), 'players'), dt, advanced] : Array<Dynamic>));
-    _Runtime.setField(machine, 'transitionElapsed', (_Runtime.field(machine, 'transitionElapsed') + dt));
+    _Runtime.setField(machine, 'transitionElapsed', _Runtime.addNumbers(_Runtime.field(machine, 'transitionElapsed'), dt));
     _Runtime.setField(machine, 'transitionWeight', _Runtime.callProperty(machine, 'transitionCurve', cast ([_Runtime.callValue(AnimationStateMachineAdvance.getLinearAnimationStateMachineTransitionWeight__animationStateMachineAdvance, cast ([_Runtime.field(machine, 'transitionElapsed'), _Runtime.field(machine, 'transitionDuration')] : Array<Dynamic>))] : Array<Dynamic>)));
     if ((cast ((cast ((cast _Runtime.field(machine, 'transitionDuration') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(machine, 'transitionElapsed') : Float) >= (cast _Runtime.field(machine, 'transitionDuration') : Float)) : Bool)) : Bool)) {
       _Runtime.setField(machine, 'currentStateIndex', toIndex);

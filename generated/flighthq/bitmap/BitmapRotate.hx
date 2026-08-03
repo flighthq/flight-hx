@@ -11,8 +11,8 @@ import flighthq.types.BitmapResizeMode;
 
 class BitmapRotate {
   public static function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:BitmapEdgeMode = 'clamp', sampleMode:BitmapResizeMode = 'bilinear'):Void {
-    if (pivotX == null) pivotX = cast (((_Runtime.field(source, 'width') - 1.0) / 2.0) : Dynamic);
-    if (pivotY == null) pivotY = cast (((_Runtime.field(source, 'height') - 1.0) / 2.0) : Dynamic);
+    if (pivotX == null) pivotX = cast ((_Runtime.subtractNumbers(_Runtime.field(source, 'width'), 1.0) / 2.0) : Dynamic);
+    if (pivotY == null) pivotY = cast ((_Runtime.subtractNumbers(_Runtime.field(source, 'height'), 1.0) / 2.0) : Dynamic);
     var cosA:Dynamic = cast _Runtime.UNDEFINED;
     var sinA:Dynamic = cast _Runtime.UNDEFINED;
     var destPivotX:Dynamic = cast _Runtime.UNDEFINED;
@@ -21,8 +21,8 @@ class BitmapRotate {
     var f:Dynamic = cast _Runtime.UNDEFINED;
     cosA = HxMath.cos(-angle);
     sinA = HxMath.sin(-angle);
-    destPivotX = ((_Runtime.field(dest, 'width') - 1.0) / 2.0);
-    destPivotY = ((_Runtime.field(dest, 'height') - 1.0) / 2.0);
+    destPivotX = (_Runtime.subtractNumbers(_Runtime.field(dest, 'width'), 1.0) / 2.0);
+    destPivotY = (_Runtime.subtractNumbers(_Runtime.field(dest, 'height'), 1.0) / 2.0);
     e = ((pivotX - (cosA * destPivotX)) + (sinA * destPivotY));
     f = ((pivotY - (sinA * destPivotX)) - (cosA * destPivotY));
     _Runtime.callValue(transformBitmap, cast ([dest, source, cast ([cosA, sinA, -sinA, cosA, e, f] : Array<Dynamic>), edgeMode, sampleMode] : Array<Dynamic>));
@@ -45,10 +45,10 @@ class BitmapRotate {
       {
         var k:Dynamic = 0.0;
         while ((cast ((cast k : Float) < (cast half : Float)) : Bool)) {
-          var ax:Dynamic = (_Runtime.field(dest, 'x') + _Runtime.fmod(k, w));
-          var ay:Dynamic = (_Runtime.field(dest, 'y') + HxMath.floor((k / w)));
-          var bx:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - _Runtime.fmod(k, w)));
-          var by:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - HxMath.floor((k / w))));
+          var ax:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), _Runtime.fmod(k, w));
+          var ay:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), HxMath.floor((k / w)));
+          var bx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((w - 1.0) - _Runtime.fmod(k, w)));
+          var by:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), _Runtime.subtractNumbers((h - 1.0), HxMath.floor((k / w))));
           if ((cast ((cast !(cast _Runtime.callValue(BitmapRotate.inBounds__bitmapRotate, cast ([ax, ay, stride, _Runtime.field(dest, 'bitmap').height] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(BitmapRotate.inBounds__bitmapRotate, cast ([bx, by, stride, _Runtime.field(dest, 'bitmap').height] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { k++; continue; }
           _Runtime.callValue(BitmapRotate.swapPixels__bitmapRotate, cast ([data, (((ay * stride) + ax) * 4.0), (((by * stride) + bx) * 4.0)] : Array<Dynamic>));
           k++;
@@ -63,14 +63,14 @@ class BitmapRotate {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + ((h - 1.0) - py));
-        var dy:Dynamic = (_Runtime.field(dest, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), ((h - 1.0) - py));
+        var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast !(cast _Runtime.callValue(BitmapRotate.inBounds__bitmapRotate, cast ([0.0, sy, sStride, _Runtime.field(source, 'bitmap').height] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(BitmapRotate.inBounds__bitmapRotate, cast ([0.0, dy, dStride, _Runtime.field(dest, 'bitmap').height] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + ((w - 1.0) - px));
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), ((w - 1.0) - px));
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.callValue(BitmapRotate.copyPixel__bitmapRotate, cast ([dd, (((dy * dStride) + dx) * 4.0), sd, (((sy * sStride) + sx) * 4.0)] : Array<Dynamic>));
             px++;
@@ -98,15 +98,15 @@ class BitmapRotate {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { px++; continue; }
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + ((sh - 1.0) - py));
-            var dy:Dynamic = (_Runtime.field(dest, 'y') + px);
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((sh - 1.0) - py));
+            var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), px);
             if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.callValue(BitmapRotate.copyPixel__bitmapRotate, cast ([dd, (((dy * dStride) + dx) * 4.0), sd, (((sy * sStride) + sx) * 4.0)] : Array<Dynamic>));
             px++;
@@ -134,15 +134,15 @@ class BitmapRotate {
     {
       var py:Dynamic = 0.0;
       while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
-        var sy:Dynamic = (_Runtime.field(source, 'y') + py);
+        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Dynamic = 0.0;
           while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
-            var sx:Dynamic = (_Runtime.field(source, 'x') + px);
+            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { px++; continue; }
-            var dx:Dynamic = (_Runtime.field(dest, 'x') + py);
-            var dy:Dynamic = (_Runtime.field(dest, 'y') + ((sw - 1.0) - px));
+            var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), py);
+            var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), ((sw - 1.0) - px));
             if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { px++; continue; }
             _Runtime.callValue(BitmapRotate.copyPixel__bitmapRotate, cast ([dd, (((dy * dStride) + dx) * 4.0), sd, (((sy * sStride) + sx) * 4.0)] : Array<Dynamic>));
             px++;

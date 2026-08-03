@@ -395,10 +395,10 @@ class UniformGrid {
       }
     }
     if ((cast _Runtime.strictEquals((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).size, 0.0) : Bool)) { return; }
-    boxMinX = (_Runtime.field(grid, 'minCellX') * cs);
-    boxMinY = (_Runtime.field(grid, 'minCellY') * cs);
-    boxMaxX = ((_Runtime.field(grid, 'maxCellX') + 1.0) * cs);
-    boxMaxY = ((_Runtime.field(grid, 'maxCellY') + 1.0) * cs);
+    boxMinX = _Runtime.multiplyNumbers(_Runtime.field(grid, 'minCellX'), cs);
+    boxMinY = _Runtime.multiplyNumbers(_Runtime.field(grid, 'minCellY'), cs);
+    boxMaxX = (_Runtime.addNumbers(_Runtime.field(grid, 'maxCellX'), 1.0) * cs);
+    boxMaxY = (_Runtime.addNumbers(_Runtime.field(grid, 'maxCellY'), 1.0) * cs);
     tEnter = _Runtime.callValue(UniformGrid._rayBoxEntryT__uniformGrid, cast ([ox, oy, dx, dy, boxMinX, boxMinY, boxMaxX, boxMaxY] : Array<Dynamic>));
     if ((cast ((cast tEnter : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     startX = (ox + (tEnter * dx));
@@ -414,16 +414,16 @@ class UniformGrid {
     if ((cast !_Runtime.strictEquals(stepX, 0.0) : Bool)) {
       var boundary:Dynamic = ((cast ((cast stepX : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cx + 1.0) * cs) : Dynamic) : (cast (cx * cs) : Dynamic));
       (tMaxX = cast (((boundary - ox) / dx) : Dynamic));
-      (tDeltaX = cast ((cs / HxMath.abs(dx)) : Dynamic));
+      (tDeltaX = cast (_Runtime.divideNumbers(cs, HxMath.abs(dx)) : Dynamic));
     }
     tMaxY = HxMath.POSITIVE_INFINITY;
     tDeltaY = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(stepY, 0.0) : Bool)) {
       var boundary:Dynamic = ((cast ((cast stepY : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cy + 1.0) * cs) : Dynamic) : (cast (cy * cs) : Dynamic));
       (tMaxY = cast (((boundary - oy) / dy) : Dynamic));
-      (tDeltaY = cast ((cs / HxMath.abs(dy)) : Dynamic));
+      (tDeltaY = cast (_Runtime.divideNumbers(cs, HxMath.abs(dy)) : Dynamic));
     }
-    maxSteps = (((_Runtime.field(grid, 'maxCellX') - _Runtime.field(grid, 'minCellX')) + (_Runtime.field(grid, 'maxCellY') - _Runtime.field(grid, 'minCellY'))) + 3.0);
+    maxSteps = ((_Runtime.subtractNumbers(_Runtime.field(grid, 'maxCellX'), _Runtime.field(grid, 'minCellX')) + _Runtime.subtractNumbers(_Runtime.field(grid, 'maxCellY'), _Runtime.field(grid, 'minCellY'))) + 3.0);
     {
       var step:Dynamic = 0.0;
       while ((cast ((cast step : Float) <= (cast maxSteps : Float)) : Bool)) {

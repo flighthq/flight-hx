@@ -34,25 +34,25 @@ class LightAnalysis {
     var window:Dynamic = cast _Runtime.UNDEFINED;
     var contribution:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    centerDx = (bounds.center.x - _Runtime.field(light, 'position').x);
-    centerDy = (bounds.center.y - _Runtime.field(light, 'position').y);
-    centerDz = (bounds.center.z - _Runtime.field(light, 'position').z);
+    centerDx = _Runtime.subtractNumbers(bounds.center.x, _Runtime.field(light, 'position').x);
+    centerDy = _Runtime.subtractNumbers(bounds.center.y, _Runtime.field(light, 'position').y);
+    centerDz = _Runtime.subtractNumbers(bounds.center.z, _Runtime.field(light, 'position').z);
     centerDistance = _Runtime.hypot(centerDx, centerDy, centerDz);
     distance = HxMath.max((centerDistance - bounds.radius), 0.0);
     distanceSquared = (distance * distance);
     window = 1.0;
     if ((cast ((cast _Runtime.field(light, 'range') : Float) > (cast 0.0 : Float)) : Bool)) {
-      var factor:Dynamic = (distanceSquared / (_Runtime.field(light, 'range') * _Runtime.field(light, 'range')));
+      var factor:Dynamic = (distanceSquared / _Runtime.multiplyNumbers(_Runtime.field(light, 'range'), _Runtime.field(light, 'range')));
       var windowed:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (1.0 - (factor * factor))));
       (window = cast ((windowed * windowed) : Dynamic));
     }
-    contribution = ((_Runtime.callValue(getLightLuminance, cast ([light] : Array<Dynamic>)) * window) / HxMath.max(distanceSquared, 0.0001));
+    contribution = _Runtime.divideNumbers(_Runtime.multiplyNumbers(_Runtime.callValue(getLightLuminance, cast ([light] : Array<Dynamic>)), window), HxMath.max(distanceSquared, 0.0001));
     if ((cast _Runtime.strictEquals(_Runtime.field(light, 'kind'), SpotLightKind) : Bool)) {
       var spot:Dynamic = (cast light : SpotLight);
       var directionLength:Dynamic = _Runtime.hypot(_Runtime.field(spot, 'direction').x, _Runtime.field(spot, 'direction').y, _Runtime.field(spot, 'direction').z);
       var inverseRayLength:Dynamic = ((cast ((cast centerDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / centerDistance) : Dynamic) : (cast 0.0 : Dynamic));
       var inverseDirectionLength:Dynamic = ((cast ((cast directionLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / directionLength) : Dynamic) : (cast 0.0 : Dynamic));
-      var cosine:Dynamic = (((((_Runtime.field(spot, 'direction').x * centerDx) + (_Runtime.field(spot, 'direction').y * centerDy)) + (_Runtime.field(spot, 'direction').z * centerDz)) * inverseRayLength) * inverseDirectionLength);
+      var cosine:Dynamic = ((((_Runtime.multiplyNumbers(_Runtime.field(spot, 'direction').x, centerDx) + _Runtime.multiplyNumbers(_Runtime.field(spot, 'direction').y, centerDy)) + _Runtime.multiplyNumbers(_Runtime.field(spot, 'direction').z, centerDz)) * inverseRayLength) * inverseDirectionLength);
       (contribution = cast ((contribution * _Runtime.callValue(LightAnalysis.smoothstep__lightAnalysis, cast ([_Runtime.field(spot, 'outerConeCos'), _Runtime.field(spot, 'innerConeCos'), ((cast ((cast centerDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast cosine : Dynamic) : (cast 1.0 : Dynamic))] : Array<Dynamic>))) : Dynamic));
     }
     return cast contribution;
@@ -99,7 +99,7 @@ class LightAnalysis {
     color = _Runtime.field(colored, 'color');
     if ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 0.0; }
     intensity = _Runtime.coalesce(_Runtime.field(colored, 'intensity'), function():Dynamic return cast 1.0);
-    return cast (_Runtime.callValue(getColorLuminance, cast ([color] : Array<Dynamic>)) * intensity);
+    return cast _Runtime.multiplyNumbers(_Runtime.callValue(getColorLuminance, cast ([color] : Array<Dynamic>)), intensity);
     return cast null;
   }
 
@@ -119,11 +119,11 @@ class LightAnalysis {
     spatial = (cast light : PointLight);
     if ((cast ((cast _Runtime.field(spatial, 'range') : Float) < (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    dx = (_Runtime.field(spatial, 'position').x - bounds.center.x);
-    dy = (_Runtime.field(spatial, 'position').y - bounds.center.y);
-    dz = (_Runtime.field(spatial, 'position').z - bounds.center.z);
+    dx = _Runtime.subtractNumbers(_Runtime.field(spatial, 'position').x, bounds.center.x);
+    dy = _Runtime.subtractNumbers(_Runtime.field(spatial, 'position').y, bounds.center.y);
+    dz = _Runtime.subtractNumbers(_Runtime.field(spatial, 'position').z, bounds.center.z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
-    radSum = (_Runtime.field(spatial, 'range') + bounds.radius);
+    radSum = _Runtime.addNumbers(_Runtime.field(spatial, 'range'), bounds.radius);
     return cast ((cast distSq : Float) <= (cast (radSum * radSum) : Float));
     return cast null;
   }

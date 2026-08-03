@@ -30,7 +30,7 @@ class SkinMeshGeometry {
     layout = _Runtime.field(__destructure0, 'layout');
     vertices = _Runtime.field(__destructure0, 'vertices');
     floatsPerVertex = (layout.stride / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
@@ -95,7 +95,7 @@ class SkinMeshGeometry {
     __destructure2 = bindPose;
     skinnedNormals = _Runtime.field(__destructure2, 'skinnedNormals');
     skinnedPositions = _Runtime.field(__destructure2, 'skinnedPositions');
-    vertexCount = (_Runtime.toInt32((_Runtime.field(skinnedPositions, 'length') / 3.0)) | 0);
+    vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(skinnedPositions, 'length'), 3.0)) | 0);
     {
       var v:Dynamic = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -129,7 +129,7 @@ class SkinMeshGeometry {
     layout = _Runtime.field(__destructure3, 'layout');
     vertices = _Runtime.field(__destructure3, 'vertices');
     floatsPerVertex = (layout.stride / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.min((_Runtime.toInt32((_Runtime.field(vertices, 'length') / floatsPerVertex)) | 0), (_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length') / 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
+    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.min((_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0), _Runtime.divideNumbers(_Runtime.field(_Runtime.field(bindPose, 'positions'), 'length'), 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
     {
@@ -158,7 +158,7 @@ class SkinMeshGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast (flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset / 4.0); }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attributes, i).semantic, semantic) : Bool)) { return cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(attributes, i).byteOffset, 4.0); }
         i++;
       }
     }

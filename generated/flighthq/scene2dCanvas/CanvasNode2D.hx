@@ -44,7 +44,7 @@ class CanvasNode2D {
         var children:Dynamic = _Runtime.field(_Runtime.callValue(getNode2DRuntime, cast ([current] : Array<Dynamic>)), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
-            var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
+            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node2D));
               i--;

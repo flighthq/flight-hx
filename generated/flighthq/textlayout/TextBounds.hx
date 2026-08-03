@@ -13,13 +13,13 @@ class TextBounds {
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none') : Bool)) { return cast _Runtime.field(spec, 'height'); }
-    return cast HxMath.ceil((_Runtime.field(layout, 'textHeight') + (TEXT_LAYOUT_GUTTER * 2.0)));
+    return cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(layout, 'textHeight'), (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 
   public static function computeTextBoundsOffsetX(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     var slack:Dynamic = cast _Runtime.UNDEFINED;
-    slack = (_Runtime.field(spec, 'width') - _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>)));
+    slack = _Runtime.subtractNumbers(_Runtime.field(spec, 'width'), _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>)));
     if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right') : Bool)) { return cast slack; }
     if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center') : Bool)) { return cast (slack / 2.0); }
     return cast 0.0;
@@ -30,7 +30,7 @@ class TextBounds {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var slack:Dynamic = cast _Runtime.UNDEFINED;
     width = _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>));
-    slack = (_Runtime.field(spec, 'width') - width);
+    slack = _Runtime.subtractNumbers(_Runtime.field(spec, 'width'), width);
     _Runtime.setField(out, 'x', ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)));
     _Runtime.setField(out, 'y', 0.0);
     _Runtime.setField(out, 'width', width);
@@ -39,7 +39,7 @@ class TextBounds {
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(spec, 'wordWrap')))) { return cast _Runtime.field(spec, 'width'); }
-    return cast HxMath.ceil((_Runtime.field(layout, 'textWidth') + (TEXT_LAYOUT_GUTTER * 2.0)));
+    return cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(layout, 'textWidth'), (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 }

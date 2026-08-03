@@ -110,7 +110,7 @@ class PickScene3D {
   }
 
   public static function compareScene3DHitByDistance__pickScene3D(a:Scene3DHit, b:Scene3DHit):Float {
-    return cast (_Runtime.field(a, 'distance') - _Runtime.field(b, 'distance'));
+    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'distance'), _Runtime.field(b, 'distance'));
     return cast null;
   }
 
@@ -220,7 +220,7 @@ class PickScene3D {
     nz = ((e1x * e2y) - (e1y * e2x));
     lengthSquared = (((nx * nx) + (ny * ny)) + (nz * nz));
     if ((cast _Runtime.strictEquals(lengthSquared, 0.0) : Bool)) { return cast false; }
-    inv = (1.0 / HxMath.sqrt(lengthSquared));
+    inv = _Runtime.divideNumbers(1.0, HxMath.sqrt(lengthSquared));
     (out.x = cast ((nx * inv) : Dynamic));
     (out.y = cast ((ny * inv) : Dynamic));
     (out.z = cast ((nz * inv) : Dynamic));
@@ -283,9 +283,9 @@ class PickScene3D {
     x = p.x;
     y = p.y;
     z = p.z;
-    (out.x = cast (((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) * z)) + flighthq._internal._StaticIndex.readFloat32Array(m, 12.0)) : Dynamic));
-    (out.y = cast (((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) * z)) + flighthq._internal._StaticIndex.readFloat32Array(m, 13.0)) : Dynamic));
-    (out.z = cast (((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) * z)) + flighthq._internal._StaticIndex.readFloat32Array(m, 14.0)) : Dynamic));
+    (out.x = cast (_Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), z)), flighthq._internal._StaticIndex.readFloat32Array(m, 12.0)) : Dynamic));
+    (out.y = cast (_Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), z)), flighthq._internal._StaticIndex.readFloat32Array(m, 13.0)) : Dynamic));
+    (out.z = cast (_Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), z)), flighthq._internal._StaticIndex.readFloat32Array(m, 14.0)) : Dynamic));
   }
 
   public static function transformDirectionByMatrix4__pickScene3D(out:Vector3, d:Vector3, m:flighthq._internal._Float32Array):Void {
@@ -295,9 +295,9 @@ class PickScene3D {
     x = d.x;
     y = d.y;
     z = d.z;
-    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) * z)) : Dynamic));
-    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) * z)) : Dynamic));
-    (out.z = cast ((((flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) * x) + (flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) * y)) + (flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) * z)) : Dynamic));
+    (out.x = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), z)) : Dynamic));
+    (out.y = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), z)) : Dynamic));
+    (out.z = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), z)) : Dynamic));
   }
 
   public static final _cameraRay__pickScene3D:Dynamic = _Runtime.callValue(createRay3D, cast ([] : Array<Dynamic>));

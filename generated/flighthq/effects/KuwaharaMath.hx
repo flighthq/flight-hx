@@ -37,7 +37,7 @@ class KuwaharaMath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (size * size) : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, (flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1) * invSum)); });
+        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), invSum)); });
         i++;
       }
     }
@@ -84,7 +84,7 @@ class KuwaharaMath {
   }
 
   public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
-    return cast (HxMath.max(1.0, HxMath.floor(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0))) + 1.0);
+    return cast _Runtime.addNumbers(HxMath.max(1.0, HxMath.floor(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0))), 1.0);
     return cast null;
   }
 }

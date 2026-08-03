@@ -125,7 +125,7 @@ class TextureAtlasRegion {
     {
       var i:Dynamic = start;
       while ((cast ((cast i : Float) < (cast _Runtime.field(name, 'length') : Float)) : Bool)) {
-        (ordinal = cast (((ordinal * 10.0) + (_Runtime.charCodeAt(name, i) - 48.0)) : Dynamic));
+        (ordinal = cast (((ordinal * 10.0) + _Runtime.subtractNumbers(_Runtime.charCodeAt(name, i), 48.0)) : Dynamic));
         i++;
       }
     }
@@ -373,10 +373,10 @@ class TextureAtlasRegion {
       (_Runtime.field(texture, 'uvScale').y = cast (0.0 : Dynamic));
       return;
     }
-    pageX = (_Runtime.field(page, 'uvOffset').x * sourceWidth);
-    pageY = (_Runtime.field(page, 'uvOffset').y * sourceHeight);
-    pageWidth = (_Runtime.field(page, 'uvScale').x * sourceWidth);
-    pageHeight = (_Runtime.field(page, 'uvScale').y * sourceHeight);
+    pageX = _Runtime.multiplyNumbers(_Runtime.field(page, 'uvOffset').x, sourceWidth);
+    pageY = _Runtime.multiplyNumbers(_Runtime.field(page, 'uvOffset').y, sourceHeight);
+    pageWidth = _Runtime.multiplyNumbers(_Runtime.field(page, 'uvScale').x, sourceWidth);
+    pageHeight = _Runtime.multiplyNumbers(_Runtime.field(page, 'uvScale').y, sourceHeight);
     x = ((cast _Runtime.field(page, 'flipX') : Bool) ? (cast (((pageX + pageWidth) - region.x) - region.width) : Dynamic) : (cast (pageX + region.x) : Dynamic));
     y = ((cast _Runtime.field(page, 'flipY') : Bool) ? (cast (((pageY + pageHeight) - region.y) - region.height) : Dynamic) : (cast (pageY + region.y) : Dynamic));
     (_Runtime.field(texture, 'uvOffset').x = cast ((x / sourceWidth) : Dynamic));

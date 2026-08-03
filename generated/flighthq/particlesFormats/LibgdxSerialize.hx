@@ -73,7 +73,7 @@ class LibgdxSerialize {
     var rotDegMax:Dynamic = cast _Runtime.UNDEFINED;
     var durMs:Dynamic = cast _Runtime.UNDEFINED;
     var durVal:Dynamic = cast _Runtime.UNDEFINED;
-    angleMid = (HxMath.atan2(-config.directionY, config.directionX) * LibgdxSerialize.RAD2DEG__libgdxSerialize);
+    angleMid = _Runtime.multiplyNumbers(HxMath.atan2(-config.directionY, config.directionX), LibgdxSerialize.RAD2DEG__libgdxSerialize);
     spreadDeg = (config.spread * LibgdxSerialize.RAD2DEG__libgdxSerialize);
     angleMin = (angleMid - spreadDeg);
     angleMax = (angleMid + spreadDeg);
@@ -185,7 +185,7 @@ class LibgdxSerialize {
 
   public static function rgbToHex__libgdxSerialize(r:Float, g:Float, b:Float):String {
     var c:Dynamic = cast _Runtime.UNDEFINED;
-    c = function(v:Float) return _Runtime.padStart(_Runtime.numberToString(HxMath.round((HxMath.max(0.0, HxMath.min(1.0, v)) * 255.0)), 16.0), 2.0, '0');
+    c = function(v:Float) return _Runtime.padStart(_Runtime.numberToString(HxMath.round(_Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(1.0, v)), 255.0)), 16.0), 2.0, '0');
     return cast '' + Std.string(_Runtime.callValue(c, cast ([r] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(c, cast ([g] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(c, cast ([b] : Array<Dynamic>))) + '';
     return cast null;
   }

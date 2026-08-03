@@ -78,14 +78,14 @@ class XmlParse {
         if ((cast _Runtime.strictEquals(ch, quote) : Bool)) { (quote = cast ('' : Dynamic)); }
       } else { if ((cast ((cast _Runtime.strictEquals(ch, '"') : Bool) || (cast _Runtime.strictEquals(ch, '\'') : Bool)) : Bool)) {
         (quote = cast (ch : Dynamic));
-      } else { if ((cast ((cast _Runtime.strictEquals(ch, '>') : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(ch, '/'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(src, (_Runtime.field(state, 'pos') + 1.0)), '>')) : Bool)) : Bool)) {
+      } else { if ((cast ((cast _Runtime.strictEquals(ch, '>') : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(ch, '/'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.addNumbers(_Runtime.field(state, 'pos'), 1.0)), '>')) : Bool)) : Bool)) {
         break;
       } } }
       (attrsStr = cast ((attrsStr + ch) : Dynamic));
       _Runtime.incrementField(state, 'pos', 1, true);
     }
     selfClosing = _Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '/');
-    _Runtime.setField(state, 'pos', (_Runtime.field(state, 'pos') + ((cast selfClosing : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic))));
+    _Runtime.setField(state, 'pos', _Runtime.addNumbers(_Runtime.field(state, 'pos'), ((cast selfClosing : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic))));
     attributes = _Runtime.callValue(parseXmlAttributes, cast ([attrsStr] : Array<Dynamic>));
     children = cast ([] : Array<Dynamic>);
     content = cast ([] : Array<Dynamic>);
@@ -101,8 +101,8 @@ class XmlParse {
           if ((cast !_Runtime.strictEquals(decoded, '') : Bool)) { _Runtime.callProperty(content, 'push', cast ([decoded] : Array<Dynamic>)); }
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.slice(src, _Runtime.field(state, 'pos'), (_Runtime.field(state, 'pos') + 9.0)), '<![CDATA[') : Bool)) {
-          var cdataStart:Dynamic = (_Runtime.field(state, 'pos') + 9.0);
+        if ((cast _Runtime.strictEquals(_Runtime.slice(src, _Runtime.field(state, 'pos'), _Runtime.addNumbers(_Runtime.field(state, 'pos'), 9.0)), '<![CDATA[') : Bool)) {
+          var cdataStart:Dynamic = _Runtime.addNumbers(_Runtime.field(state, 'pos'), 9.0);
           var cdataEnd:Dynamic = _Runtime.callProperty(src, 'indexOf', cast ([']]>', cdataStart] : Array<Dynamic>));
           var contentEnd:Dynamic = ((cast ((cast cdataEnd : Float) >= (cast 0.0 : Float)) : Bool) ? (cast cdataEnd : Dynamic) : (cast _Runtime.field(src, 'length') : Dynamic));
           var cdata:Dynamic = _Runtime.slice(src, cdataStart, contentEnd);
@@ -111,7 +111,7 @@ class XmlParse {
           _Runtime.setField(state, 'pos', ((cast ((cast cdataEnd : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cdataEnd + 3.0) : Dynamic) : (cast _Runtime.field(src, 'length') : Dynamic)));
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.getIndex(src, (_Runtime.field(state, 'pos') + 1.0)), '/') : Bool)) {
+        if ((cast _Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.addNumbers(_Runtime.field(state, 'pos'), 1.0)), '/') : Bool)) {
           while ((cast ((cast ((cast _Runtime.field(state, 'pos') : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.getIndex(src, _Runtime.field(state, 'pos')), '>') : Bool)) : Bool)) { _Runtime.incrementField(state, 'pos', 1, true); }
           _Runtime.incrementField(state, 'pos', 1, true);
           break;

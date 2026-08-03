@@ -162,7 +162,7 @@ class GlQuadBatchWriter {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     renderer = _Runtime.field(runtime, 'quadBatchWriterMaterialRenderer');
     if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    _Runtime.callProperty(renderer, 'packInstance', cast ([state, materialData, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), (instanceIndex * _Runtime.field(runtime, 'quadBatchWriterMaterialFloats'))] : Array<Dynamic>));
+    _Runtime.callProperty(renderer, 'packInstance', cast ([state, materialData, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), _Runtime.multiplyNumbers(instanceIndex, _Runtime.field(runtime, 'quadBatchWriterMaterialFloats'))] : Array<Dynamic>));
   }
 
   public static function prepareGlQuadBatchWrite(state:GlRenderState, texture:Dynamic, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
@@ -184,9 +184,9 @@ class GlQuadBatchWriter {
     _Runtime.setField(runtime, 'quadBatchWriterMaterialRenderer', materialRenderer);
     floats = _Runtime.field(materialRenderer, 'instanceFloatCount');
     _Runtime.setField(runtime, 'quadBatchWriterMaterialFloats', floats);
-    needed = ((_Runtime.field(runtime, 'quadBatchWriterCount') + maxInstances) * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
+    needed = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
     if ((cast ((cast needed : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length') : Float)) : Bool)) {
-      var newSize:Dynamic = HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length') * 2.0));
+      var newSize:Dynamic = HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length'), 2.0));
       _Runtime.setField(runtime, 'quadBatchWriterInstanceData', new flighthq._internal._Float32Array(newSize));
       if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'), null) : Bool)) {
         var gl:Dynamic = _Runtime.field(state, 'gl');
@@ -195,9 +195,9 @@ class GlQuadBatchWriter {
       }
     }
     if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'quadBatchWriterCount') + maxInstances) * floats);
+      var materialNeeded:Dynamic = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * floats);
       if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length') : Float)) : Bool)) {
-        var newSize:Dynamic = HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length') * 2.0));
+        var newSize:Dynamic = HxMath.max(materialNeeded, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length'), 2.0));
         _Runtime.setField(runtime, 'quadBatchWriterMaterialData', new flighthq._internal._Float32Array(newSize));
         if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'), null) : Bool)) {
           var gl:Dynamic = _Runtime.field(state, 'gl');
@@ -206,7 +206,7 @@ class GlQuadBatchWriter {
         }
       }
     }
-    return cast (_Runtime.field(runtime, 'quadBatchWriterCount') * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
+    return cast _Runtime.multiplyNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
     return cast null;
   }
 
@@ -232,8 +232,8 @@ class GlQuadBatchWriter {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    clipW = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
-    clipH = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
+    clipW = _Runtime.divideNumbers(2.0, flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
+    clipH = _Runtime.divideNumbers(2.0, flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
     m = _Runtime.field(runtime, 'matrixArray');
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, clipW);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, 0.0);

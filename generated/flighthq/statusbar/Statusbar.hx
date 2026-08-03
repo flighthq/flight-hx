@@ -28,7 +28,7 @@ class Statusbar {
     var next:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>));
     {
-      var i:Dynamic = (_Runtime.field(Statusbar._styleStack__statusbar, 'length') - 1.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(Statusbar._styleStack__statusbar, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var e:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(Statusbar._styleStack__statusbar, i), 'entry');
         if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (e.style : Dynamic)); }

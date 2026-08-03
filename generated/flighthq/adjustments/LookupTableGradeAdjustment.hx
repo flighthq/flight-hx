@@ -23,9 +23,9 @@ class LookupTableGradeAdjustment {
         return;
       }
       _Runtime.callValue(sampleColorLut, cast ([lut, out, r, g, b] : Array<Dynamic>));
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, (r + ((flighthq._internal._StaticIndex.readArray(out, 0.0) - r) * strength)));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, (g + ((flighthq._internal._StaticIndex.readArray(out, 1.0) - g) * strength)));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, (b + ((flighthq._internal._StaticIndex.readArray(out, 2.0) - b) * strength)));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, (r + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), r) * strength)));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, (g + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), g) * strength)));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, (b + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 2.0), b) * strength)));
     };
     return cast _Runtime.mergeObjects([{ kind: 'LookupTableGradeAdjustment' }, options, { transform: transform }]);
     return cast null;

@@ -52,21 +52,21 @@ class CompactStrokePath {
     var steps:Dynamic = cast _Runtime.UNDEFINED;
     var stepAngle:Dynamic = cast _Runtime.UNDEFINED;
     ratio = HxMath.max(0.0, HxMath.min(1.0, (tolerance / r)));
-    n = HxMath.max(4.0, HxMath.ceil((HxMath.PI / HxMath.acos((1.0 - ratio)))));
+    n = HxMath.max(4.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.PI, HxMath.acos((1.0 - ratio)))));
     delta = (endAngle - startAngle);
     if ((cast ccw : Bool)) {
       if ((cast ((cast delta : Float) > (cast 0.0 : Float)) : Bool)) { (delta = cast ((delta - (HxMath.PI * 2.0)) : Dynamic)); }
     } else {
       if ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool)) { (delta = cast ((delta + (HxMath.PI * 2.0)) : Dynamic)); }
     }
-    steps = HxMath.ceil((HxMath.abs(delta) / ((HxMath.PI * 2.0) / n)));
+    steps = HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(delta), ((HxMath.PI * 2.0) / n)));
     if ((cast ((cast steps : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
     stepAngle = (delta / steps);
     {
       var i:Dynamic = 1.0;
       while ((cast ((cast i : Float) < (cast steps : Float)) : Bool)) {
         var angle:Dynamic = (startAngle + (i * stepAngle));
-        _Runtime.pushMany(out, cast ([(cx + (HxMath.cos(angle) * r)), (cy + (HxMath.sin(angle) * r))] : Array<Dynamic>));
+        _Runtime.pushMany(out, cast ([(cx + _Runtime.multiplyNumbers(HxMath.cos(angle), r)), (cy + _Runtime.multiplyNumbers(HxMath.sin(angle), r))] : Array<Dynamic>));
         i++;
       }
     }
@@ -182,9 +182,9 @@ class CompactStrokePath {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-          if ((cast ((cast (acc + flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
+          if ((cast ((cast _Runtime.addNumbers(acc, flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
-            (remaining = cast ((flighthq._internal._StaticIndex.readArray(dash, i) - (offset - acc)) : Dynamic));
+            (remaining = cast (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(dash, i), (offset - acc)) : Dynamic));
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(i, 2.0), 0.0) : Dynamic));
             break;
           }
@@ -444,8 +444,8 @@ class CompactStrokePath {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var dx:Dynamic = (flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)) - flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
-        var dy:Dynamic = (flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)) - flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
+        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
+        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
         var len:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(normals, (i * 2.0), (-dy / len));
@@ -502,7 +502,7 @@ class CompactStrokePath {
       }
     }
     {
-      var i:Dynamic = (_Runtime.field(right, 'length') - 2.0);
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(right, 'length'), 2.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(right, i), flighthq._internal._StaticIndex.readArray(right, (i + 1.0))] : Array<Dynamic>));

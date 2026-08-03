@@ -48,10 +48,10 @@ class WgpuBevelEffect {
     tinted = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     blurred = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     blurTemp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = HxMath.round((HxMath.cos(angle) * distance));
-    offsetY = HxMath.round((HxMath.sin(angle) * distance));
+    offsetX = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(angle), distance));
+    offsetY = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(angle), distance));
     shadowColor = _Runtime.coalesce(_Runtime.field(effect, 'shadowColor'), function():Dynamic return cast 0.0);
     shadowAlpha = _Runtime.coalesce(_Runtime.field(effect, 'shadowAlpha'), function():Dynamic return cast 1.0);
     highlightColor = _Runtime.coalesce(_Runtime.field(effect, 'highlightColor'), function():Dynamic return cast 16777215.0);
@@ -64,7 +64,7 @@ class WgpuBevelEffect {
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, tinted, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(WgpuBevelEffect.applyWgpuBevelCompositePass__wgpuBevelEffect, cast ([state, blurred, src, dst, { offsetX: (offsetX / _Runtime.field(source, 'width')), offsetY: (-offsetY / _Runtime.field(source, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: ((cast _Runtime.strictEquals(bevelType, 'inner') : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
+    _Runtime.callValue(WgpuBevelEffect.applyWgpuBevelCompositePass__wgpuBevelEffect, cast ([state, blurred, src, dst, { offsetX: _Runtime.divideNumbers(offsetX, _Runtime.field(source, 'width')), offsetY: _Runtime.divideNumbers(-offsetY, _Runtime.field(source, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: ((cast _Runtime.strictEquals(bevelType, 'inner') : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, tinted] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurred] : Array<Dynamic>));

@@ -37,7 +37,7 @@ class WgpuShapeMesh {
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
         var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, i);
         if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0) : Bool)) { i++; continue; }
-        var a:Dynamic = (_Runtime.field(mesh, 'alpha') * nodeAlpha);
+        var a:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(mesh, 'alpha'), nodeAlpha);
         if ((cast ((cast a : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var uniform:Dynamic = _Runtime.callValue(WgpuShapeMesh.ensureShapeMeshUniform__wgpuShapeMesh, cast ([state, pipelineEntry, buffers, i] : Array<Dynamic>));
         var vertexBuffer:Dynamic = _Runtime.callValue(WgpuShapeMesh.ensureShapeMeshVertexBuffer__wgpuShapeMesh, cast ([state, buffers, i, _Runtime.field(_Runtime.field(mesh, 'vertices'), 'byteLength')] : Array<Dynamic>));
@@ -153,8 +153,8 @@ class WgpuShapeMesh {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'width'), function():Dynamic return cast 1.0));
-    ih = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'height'), function():Dynamic return cast 1.0));
+    iw = _Runtime.divideNumbers(2.0, _Runtime.orValue(_Runtime.field(viewport, 'width'), function():Dynamic return cast 1.0));
+    ih = _Runtime.divideNumbers(2.0, _Runtime.orValue(_Runtime.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = _Runtime.field(renderProxy, 'transform2D');
     m = WgpuShapeMesh._shapeMeshUniformScratch__wgpuShapeMesh;
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (t.a * iw));

@@ -23,7 +23,7 @@ class AudioResource {
   public static function getAudioResourceByteSize(resource:flighthq.types.AudioResource):Float {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     buffer = resource.buffer;
-    return cast ((cast !_Runtime.strictEquals(buffer, null) : Bool) ? (cast ((_Runtime.field(buffer, 'numberOfChannels') * _Runtime.field(buffer, 'length')) * 4.0) : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(buffer, null) : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.field(buffer, 'numberOfChannels'), _Runtime.field(buffer, 'length')) * 4.0) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
