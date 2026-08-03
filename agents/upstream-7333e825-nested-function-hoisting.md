@@ -34,4 +34,5 @@ In `GlRenderTextureEffect.explainGlRenderEffectApplication`, `getStatus` is now 
 - Baseline `effects-gl`: 16 failed and 250 passed. Every failure reached the same uninitialized `getStatus` call in the compiled bundle.
 - Candidate `effects-gl`: all 266 tests across 58 files pass. `reports/upstream-parity-effects-gl.json` records exit code 0 and zero failed packages.
 - The focused lowering file passes 63/63, including textual positive/negative ordering checks and the executable Haxe Eval fixture.
-- Two-generation drift, all maintained generator tests, repository checks, the complete Haxe namespace, and the Eval/JavaScript/Python/Neko/C++ portable matrix are recorded after combined final verification.
+- Regeneration plus repeated `npm run generate:check` is deterministic. `npm run check`, all 119 maintained generator tests, and complete Haxe namespace compilation pass.
+- The committed `CoreSmoke` passes Eval, JavaScript, Python, Neko, and C++/hxcpp. A report-free post-commit `effects-gl` rerun independently confirms 58/58 files and 266/266 tests.

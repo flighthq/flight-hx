@@ -53,5 +53,5 @@ The runtime repair changes no generated Haxe file. Two complete generations and 
 - The baseline `npm run test:portable:cpp` compiled and linked the full namespace, then failed the inherited out-of-bounds Array assertion with status 255.
 - The candidate C++ run compiles, links, and passes `CoreSmoke`, including every new negative fixture.
 - Full Neko `CoreSmoke` compiles and passes with the Neko-only non-inline reader form.
-- Generator tests pass all 118 maintained cases, including positive and negative guarded-fast-path fixtures.
-- Eval, JavaScript, Python, repository checks, and the secondary focused parity gate are recorded after the combined final verification.
+- The primary-only generator suite passes all 118 maintained cases, including positive and negative guarded-fast-path fixtures; the combined final suite passes 119/119 after adding the secondary hoisting fixture.
+- `npm run check`, full Haxe namespace compilation, Eval, JavaScript, Python, Neko, and C++ all pass on the combined candidate. The secondary `effects-gl` gate also passes 266/266.
