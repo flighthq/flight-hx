@@ -929,10 +929,7 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
       const loweredParameters = lowerParameterList(method.parameters, context);
       return {
         async: hasModifier(method, ts.SyntaxKind.AsyncKeyword),
-        body: [
-          ...loweredParameters.prefix,
-          ...method.body.statements.map((statement) => lowerStatement(statement, context)),
-        ],
+        body: [...loweredParameters.prefix, ...lowerStatementList(method.body.statements, context)],
         name: propertyName(method.name, context),
         parameters: loweredParameters.parameters,
         public:
@@ -988,10 +985,7 @@ function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): 
     const loweredParameters = lowerParameterList(node.parameters, context);
     return {
       async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
-      body: [
-        ...loweredParameters.prefix,
-        ...node.body.statements.map((statement) => lowerStatement(statement, context)),
-      ],
+      body: [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)],
       exported: hasModifier(node, ts.SyntaxKind.ExportKeyword),
       kind: 'function',
       name: node.name.text,
@@ -1302,9 +1296,20 @@ function hasReturnValue(body: ts.Block): boolean {
   return found;
 }
 
+function lowerStatementList(nodes: readonly ts.Statement[], context: LoweringContext): IrStatement[] {
+  const lowered = nodes.map((node) => lowerStatement(node, context));
+  const hoisted: IrStatement[] = [];
+  const ordered: IrStatement[] = [];
+  nodes.forEach((node, index) => {
+    const statement = lowered[index]!;
+    if (ts.isFunctionDeclaration(node) && node.name && node.body) hoisted.push(statement);
+    else ordered.push(statement);
+  });
+  return [...hoisted, ...ordered];
+}
+
 function lowerStatement(node: ts.Statement, context: LoweringContext): IrStatement {
-  if (ts.isBlock(node))
-    return { kind: 'block', statements: node.statements.map((item) => lowerStatement(item, context)) };
+  if (ts.isBlock(node)) return { kind: 'block', statements: lowerStatementList(node.statements, context) };
   if (ts.isVariableStatement(node)) {
     const mutable = (node.declarationList.flags & ts.NodeFlags.Const) === 0;
     return { kind: 'variable', declarations: lowerVariables(node.declarationList, mutable, context) };
@@ -1397,7 +1402,7 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
     return {
       cases: node.caseBlock.clauses.map((clause) => ({
         expression: ts.isCaseClause(clause) ? lowerExpression(clause.expression, context) : undefined,
-        statements: clause.statements.map((statement) => lowerStatement(statement, context)),
+        statements: lowerStatementList(clause.statements, context),
       })),
       expression: lowerExpression(node.expression, context),
       kind: 'switch',
@@ -1430,10 +1435,7 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
           {
             initializer: {
               async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
-              body: [
-                ...loweredParameters.prefix,
-                ...node.body.statements.map((statement) => lowerStatement(statement, context)),
-              ],
+              body: [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)],
               kind: 'function',
               name: node.name.text,
               parameters,
@@ -2064,7 +2066,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
           try {
             value = {
               async: hasModifier(property, ts.SyntaxKind.AsyncKeyword),
-              body: property.body.statements.map((statement) => lowerStatement(statement, context)),
+              body: lowerStatementList(property.body.statements, context),
               kind: 'function' as const,
               parameters: property.parameters
                 .filter((parameter) => !isThisParameter(parameter))
@@ -2240,10 +2242,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       return {
         async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
         body: ts.isBlock(node.body)
-          ? [
-              ...loweredParameters.prefix,
-              ...node.body.statements.map((statement) => lowerStatement(statement, context)),
-            ]
+          ? [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)]
           : loweredParameters.prefix.length > 0
             ? [...loweredParameters.prefix, { expression, kind: 'return' }]
             : [],

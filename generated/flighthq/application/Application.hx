@@ -505,6 +505,7 @@ class Application {
 
   public static function startApplicationLoop(app:flighthq.types.Application, ?options:ApplicationLoopOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
+    var tick:Float->Void = cast _Runtime.UNDEFINED;
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var maxDeltaTime:Dynamic = cast _Runtime.UNDEFINED;
@@ -515,21 +516,6 @@ class Application {
     var frameInterval:Dynamic = cast _Runtime.UNDEFINED;
     var bgInterval:Dynamic = cast _Runtime.UNDEFINED;
     var loopState:LoopState__application = cast _Runtime.UNDEFINED;
-    var tick:Float->Void = cast _Runtime.UNDEFINED;
-    observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
-    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
-    ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
-    backend = _Runtime.callValue(getLoopBackend, cast ([] : Array<Dynamic>));
-    maxDeltaTime = _Runtime.coalesce(options.maxDeltaTime, function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
-    targetFrameRate = _Runtime.coalesce(options.targetFrameRate, function():Dynamic return cast 0.0);
-    backgroundFrameRate = _Runtime.coalesce(options.backgroundFrameRate, function():Dynamic return cast Application.DEFAULT_BACKGROUND_FRAME_RATE__application);
-    fixedTimeStep = _Runtime.coalesce(options.fixedTimeStep, function():Dynamic return cast Application.DEFAULT_FIXED_TIMESTEP__application);
-    maxUpdatesPerFrame = _Runtime.coalesce(options.maxUpdatesPerFrame, function():Dynamic return cast Application.DEFAULT_MAX_UPDATES_PER_FRAME__application);
-    frameInterval = ((cast ((cast targetFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / targetFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
-    bgInterval = ((cast ((cast backgroundFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / backgroundFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
-    loopState = { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : Dynamic), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime };
-    ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).set(app, loopState));
-    (app.isRunning = cast (true : Dynamic));
     tick = function tick(time:Float):Void {
       var isFirstTick:Dynamic = cast _Runtime.UNDEFINED;
       var raw:Dynamic = cast _Runtime.UNDEFINED;
@@ -599,6 +585,20 @@ class Application {
       _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
       ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
     };
+    observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
+    ((cast observers : flighthq._internal._Map).delete_(Application.kPaused__application));
+    backend = _Runtime.callValue(getLoopBackend, cast ([] : Array<Dynamic>));
+    maxDeltaTime = _Runtime.coalesce(options.maxDeltaTime, function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
+    targetFrameRate = _Runtime.coalesce(options.targetFrameRate, function():Dynamic return cast 0.0);
+    backgroundFrameRate = _Runtime.coalesce(options.backgroundFrameRate, function():Dynamic return cast Application.DEFAULT_BACKGROUND_FRAME_RATE__application);
+    fixedTimeStep = _Runtime.coalesce(options.fixedTimeStep, function():Dynamic return cast Application.DEFAULT_FIXED_TIMESTEP__application);
+    maxUpdatesPerFrame = _Runtime.coalesce(options.maxUpdatesPerFrame, function():Dynamic return cast Application.DEFAULT_MAX_UPDATES_PER_FRAME__application);
+    frameInterval = ((cast ((cast targetFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / targetFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
+    bgInterval = ((cast ((cast backgroundFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / backgroundFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
+    loopState = { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : Dynamic), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime };
+    ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap).set(app, loopState));
+    (app.isRunning = cast (true : Dynamic));
     _Runtime.setField(loopState, 'frameHandle', _Runtime.callProperty(backend, 'requestFrame', cast ([tick] : Array<Dynamic>)));
     ((cast observers : flighthq._internal._Map).set(Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))));
   }

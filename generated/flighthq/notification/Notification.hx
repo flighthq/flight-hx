@@ -60,6 +60,9 @@ class Notification {
   }
 
   public static function createServiceWorkerNotificationBackend(registration:ServiceWorkerRegistrationLike__notification):NotificationBackend {
+    var _generateId:Void->String = cast _Runtime.UNDEFINED;
+    var _fire:Dynamic->Dynamic->Void = cast _Runtime.UNDEFINED;
+    var _show:NotificationRequest->flighthq._internal._Promise<String> = cast _Runtime.UNDEFINED;
     var _idCounter:Dynamic = cast _Runtime.UNDEFINED;
     var _clickListeners:Dynamic = cast _Runtime.UNDEFINED;
     var _actionListeners:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,18 +70,8 @@ class Notification {
     var _replyListeners:Dynamic = cast _Runtime.UNDEFINED;
     var _showListeners:Dynamic = cast _Runtime.UNDEFINED;
     var _scheduled:Dynamic = cast _Runtime.UNDEFINED;
-    var _generateId:Void->String = cast _Runtime.UNDEFINED;
-    var _fire:Dynamic->Dynamic->Void = cast _Runtime.UNDEFINED;
-    var _show:NotificationRequest->flighthq._internal._Promise<String> = cast _Runtime.UNDEFINED;
     var backend:NotificationBackend = cast _Runtime.UNDEFINED;
     var internal:Dynamic = cast _Runtime.UNDEFINED;
-    _idCounter = 0.0;
-    _clickListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _actionListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _dismissListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _replyListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _showListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _scheduled = _Runtime.construct(_Runtime.globalValue('Map'), []);
     _generateId = function _generateId():String {
       (_idCounter = cast ((_idCounter + 1.0) : Dynamic));
       return cast 'sw-notif-' + Std.string(_idCounter) + '';
@@ -130,6 +123,13 @@ class Notification {
         })
       );
     };
+    _idCounter = 0.0;
+    _clickListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _actionListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _dismissListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _replyListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _showListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _scheduled = _Runtime.construct(_Runtime.globalValue('Map'), []);
     backend = { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
       entry = ((cast _scheduled : flighthq._internal._Map).get(id));
@@ -340,6 +340,9 @@ class Notification {
   }
 
   public static function createWebNotificationBackend():NotificationBackend {
+    var _generateId:Void->String = cast _Runtime.UNDEFINED;
+    var _fire:Dynamic->Dynamic->Void = cast _Runtime.UNDEFINED;
+    var _notify:NotificationRequest->flighthq._internal._Promise<String> = cast _Runtime.UNDEFINED;
     var _live:Dynamic = cast _Runtime.UNDEFINED;
     var _requests:Dynamic = cast _Runtime.UNDEFINED;
     var _clickListeners:Dynamic = cast _Runtime.UNDEFINED;
@@ -349,18 +352,6 @@ class Notification {
     var _showListeners:Dynamic = cast _Runtime.UNDEFINED;
     var _scheduled:Dynamic = cast _Runtime.UNDEFINED;
     var _idCounter:Dynamic = cast _Runtime.UNDEFINED;
-    var _generateId:Void->String = cast _Runtime.UNDEFINED;
-    var _fire:Dynamic->Dynamic->Void = cast _Runtime.UNDEFINED;
-    var _notify:NotificationRequest->flighthq._internal._Promise<String> = cast _Runtime.UNDEFINED;
-    _live = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    _requests = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    _clickListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _actionListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _dismissListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _replyListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _showListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    _scheduled = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    _idCounter = 0.0;
     _generateId = function _generateId():String {
       (_idCounter = cast ((_idCounter + 1.0) : Dynamic));
       return cast 'web-notif-' + Std.string(_idCounter) + '';
@@ -401,6 +392,15 @@ class Notification {
         return cast null;
       }));
     };
+    _live = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    _requests = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    _clickListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _actionListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _dismissListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _replyListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _showListeners = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    _scheduled = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    _idCounter = 0.0;
     return cast { cancelScheduledNotification: function(id:Dynamic) {
       var entry:Dynamic = cast _Runtime.UNDEFINED;
       entry = ((cast _scheduled : flighthq._internal._Map).get(id));

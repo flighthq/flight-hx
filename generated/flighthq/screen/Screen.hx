@@ -89,21 +89,16 @@ class Screen {
   }
 
   public static function createWebScreenBackend():ScreenBackend {
+    var ensureCursorTracking:Void->Void = cast _Runtime.UNDEFINED;
+    var upgradeToScreenDetails:ScreenDetails__screen->Void = cast _Runtime.UNDEFINED;
+    var buildScreenInfoFromDetailed:ScreenDetailed__screen->Float->Float->ScreenInfo->Void = cast _Runtime.UNDEFINED;
+    var buildCurrentScreenInfo:ScreenInfo->Void = cast _Runtime.UNDEFINED;
     var _cursorX:Dynamic = cast _Runtime.UNDEFINED;
     var _cursorY:Dynamic = cast _Runtime.UNDEFINED;
     var _cursorTracking:Dynamic = cast _Runtime.UNDEFINED;
     var _cachedScreens:Null<Array<ScreenInfo>> = cast _Runtime.UNDEFINED;
     var _screenDetails:Null<ScreenDetails__screen> = cast _Runtime.UNDEFINED;
-    var ensureCursorTracking:Void->Void = cast _Runtime.UNDEFINED;
-    var upgradeToScreenDetails:ScreenDetails__screen->Void = cast _Runtime.UNDEFINED;
-    var buildScreenInfoFromDetailed:ScreenDetailed__screen->Float->Float->ScreenInfo->Void = cast _Runtime.UNDEFINED;
-    var buildCurrentScreenInfo:ScreenInfo->Void = cast _Runtime.UNDEFINED;
     var backend:Dynamic = cast _Runtime.UNDEFINED;
-    _cursorX = 0.0;
-    _cursorY = 0.0;
-    _cursorTracking = false;
-    _cachedScreens = null;
-    _screenDetails = null;
     ensureCursorTracking = function ensureCursorTracking():Void {
       if ((cast ((cast _cursorTracking : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) : Bool)) { return; }
       (_cursorTracking = cast (true : Dynamic));
@@ -184,6 +179,11 @@ class Screen {
       (out.touchSupport = cast ('unknown' : Dynamic));
       (out.monochrome = cast (false : Dynamic));
     };
+    _cursorX = 0.0;
+    _cursorY = 0.0;
+    _cursorTracking = false;
+    _cachedScreens = null;
+    _screenDetails = null;
     backend = { _upgrade: upgradeToScreenDetails, getScreens: function(out:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
         _Runtime.setLength(out, 0.0);

@@ -8,12 +8,10 @@ import flighthq.types.Storage.StorageBackend;
 
 class ElectronStorage {
   public static function createElectronStorageBackend(electron:ElectronApi, fileName:Dynamic = 'storage.json'):StorageBackend {
-    var fs:Dynamic = cast _Runtime.UNDEFINED;
-    var store:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var load:Void->Dynamic = cast _Runtime.UNDEFINED;
     var save:Void->Bool = cast _Runtime.UNDEFINED;
-    fs = _Runtime.field(electron, 'fs');
-    store = null;
+    var fs:Dynamic = cast _Runtime.UNDEFINED;
+    var store:Null<Dynamic> = cast _Runtime.UNDEFINED;
     load = function load():Dynamic {
       if ((cast !_Runtime.strictEquals(store, null) : Bool)) { return cast store; }
       try {
@@ -42,6 +40,8 @@ class ElectronStorage {
         return cast false;
       }
     };
+    fs = _Runtime.field(electron, 'fs');
+    store = null;
     return cast { clear: function() {
       (store = cast ({  } : Dynamic));
       return cast _Runtime.callValue(save, cast ([] : Array<Dynamic>));

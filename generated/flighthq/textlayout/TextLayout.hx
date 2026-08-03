@@ -145,6 +145,17 @@ class TextLayout {
   }
 
   public static function buildGroups__textLayout(out:Array<TextLayoutGroup>, paragraphLastLines:Dynamic, text:String, formatRanges:Array<TextFormatRange>, lineBreaks:Array<Float>, containerWidth:Float, measure:TextMeasureFunction, wordWrap:Bool, multiline:Bool, maxLines:Float, truncationCharacter:String):Void {
+    var baseX:Void->Float = cast _Runtime.UNDEFINED;
+    var wrapWidth:Void->Float = cast _Runtime.UNDEFINED;
+    var updateLineMetrics:Void->Void = cast _Runtime.UNDEFINED;
+    var updateParagraphMetrics:Void->Void = cast _Runtime.UNDEFINED;
+    var advanceFormatRange:Void->Bool = cast _Runtime.UNDEFINED;
+    var commitLine:Void->Void = cast _Runtime.UNDEFINED;
+    var checkTruncation:Void->Bool = cast _Runtime.UNDEFINED;
+    var emitBullet:Void->Void = cast _Runtime.UNDEFINED;
+    var placeSpan:Float->Float->Void = cast _Runtime.UNDEFINED;
+    var measureSpan:Float->Float->{ var positions:Array<Float>; var width:Float; } = cast _Runtime.UNDEFINED;
+    var breakLongWord:Float->Void = cast _Runtime.UNDEFINED;
     var groups:Dynamic = cast _Runtime.UNDEFINED;
     var rangeIndex:Dynamic = cast _Runtime.UNDEFINED;
     var formatRange:Dynamic = cast _Runtime.UNDEFINED;
@@ -171,44 +182,6 @@ class TextLayout {
     var breakIndex:Dynamic = cast _Runtime.UNDEFINED;
     var spaceIndex:Dynamic = cast _Runtime.UNDEFINED;
     var activeGroup:Null<TextLayoutGroup> = cast _Runtime.UNDEFINED;
-    var baseX:Void->Float = cast _Runtime.UNDEFINED;
-    var wrapWidth:Void->Float = cast _Runtime.UNDEFINED;
-    var updateLineMetrics:Void->Void = cast _Runtime.UNDEFINED;
-    var updateParagraphMetrics:Void->Void = cast _Runtime.UNDEFINED;
-    var advanceFormatRange:Void->Bool = cast _Runtime.UNDEFINED;
-    var commitLine:Void->Void = cast _Runtime.UNDEFINED;
-    var checkTruncation:Void->Bool = cast _Runtime.UNDEFINED;
-    var emitBullet:Void->Void = cast _Runtime.UNDEFINED;
-    var placeSpan:Float->Float->Void = cast _Runtime.UNDEFINED;
-    var measureSpan:Float->Float->{ var positions:Array<Float>; var width:Float; } = cast _Runtime.UNDEFINED;
-    var breakLongWord:Float->Void = cast _Runtime.UNDEFINED;
-    _Runtime.setLength(out, 0.0);
-    groups = out;
-    rangeIndex = 0.0;
-    formatRange = flighthq._internal._StaticIndex.readArray(formatRanges, 0.0);
-    currentFormat = _Runtime.mergeObjects([_Runtime.field(formatRange, 'format')]);
-    leftMargin = _Runtime.coalesce(_Runtime.field(currentFormat, 'leftMargin'), function():Dynamic return cast 0.0);
-    rightMargin = _Runtime.coalesce(_Runtime.field(currentFormat, 'rightMargin'), function():Dynamic return cast 0.0);
-    blockIndent = _Runtime.coalesce(_Runtime.field(currentFormat, 'blockIndent'), function():Dynamic return cast 0.0);
-    indent = _Runtime.coalesce(_Runtime.field(currentFormat, 'indent'), function():Dynamic return cast 0.0);
-    firstLineOfParagraph = true;
-    bulletPending = false;
-    bulletChar = '•';
-    ascent = _Runtime.callValue(getTextFormatAscent, cast ([currentFormat] : Array<Dynamic>));
-    descent = _Runtime.callValue(getTextFormatDescent, cast ([currentFormat] : Array<Dynamic>));
-    leading = _Runtime.callValue(getTextFormatLeading, cast ([currentFormat] : Array<Dynamic>));
-    lineHeight = HxMath.ceil(((ascent + descent) + leading));
-    maxAscent = ascent;
-    maxLineHeight = lineHeight;
-    textIndex = 0.0;
-    lineIndex = 0.0;
-    offsetX = 0.0;
-    offsetY = 0.0;
-    truncated = false;
-    breakCount = 0.0;
-    breakIndex = ((cast ((cast _Runtime.field(lineBreaks, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(lineBreaks, 0.0) : Dynamic) : (cast -1.0 : Dynamic));
-    spaceIndex = _Runtime.callProperty(text, 'indexOf', cast ([' '] : Array<Dynamic>));
-    activeGroup = null;
     baseX = function baseX():Float {
       return cast _Runtime.addNumbers(((TEXT_LAYOUT_GUTTER + leftMargin) + blockIndent), ((cast firstLineOfParagraph : Bool) ? (cast indent : Dynamic) : (cast 0.0 : Dynamic)));
     };
@@ -429,6 +402,33 @@ class TextLayout {
         (remaining = cast ((remaining + charCount) : Dynamic));
       }
     };
+    _Runtime.setLength(out, 0.0);
+    groups = out;
+    rangeIndex = 0.0;
+    formatRange = flighthq._internal._StaticIndex.readArray(formatRanges, 0.0);
+    currentFormat = _Runtime.mergeObjects([_Runtime.field(formatRange, 'format')]);
+    leftMargin = _Runtime.coalesce(_Runtime.field(currentFormat, 'leftMargin'), function():Dynamic return cast 0.0);
+    rightMargin = _Runtime.coalesce(_Runtime.field(currentFormat, 'rightMargin'), function():Dynamic return cast 0.0);
+    blockIndent = _Runtime.coalesce(_Runtime.field(currentFormat, 'blockIndent'), function():Dynamic return cast 0.0);
+    indent = _Runtime.coalesce(_Runtime.field(currentFormat, 'indent'), function():Dynamic return cast 0.0);
+    firstLineOfParagraph = true;
+    bulletPending = false;
+    bulletChar = '•';
+    ascent = _Runtime.callValue(getTextFormatAscent, cast ([currentFormat] : Array<Dynamic>));
+    descent = _Runtime.callValue(getTextFormatDescent, cast ([currentFormat] : Array<Dynamic>));
+    leading = _Runtime.callValue(getTextFormatLeading, cast ([currentFormat] : Array<Dynamic>));
+    lineHeight = HxMath.ceil(((ascent + descent) + leading));
+    maxAscent = ascent;
+    maxLineHeight = lineHeight;
+    textIndex = 0.0;
+    lineIndex = 0.0;
+    offsetX = 0.0;
+    offsetY = 0.0;
+    truncated = false;
+    breakCount = 0.0;
+    breakIndex = ((cast ((cast _Runtime.field(lineBreaks, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(lineBreaks, 0.0) : Dynamic) : (cast -1.0 : Dynamic));
+    spaceIndex = _Runtime.callProperty(text, 'indexOf', cast ([' '] : Array<Dynamic>));
+    activeGroup = null;
     _Runtime.callValue(updateLineMetrics, cast ([] : Array<Dynamic>));
     _Runtime.callValue(updateParagraphMetrics, cast ([] : Array<Dynamic>));
     while ((cast ((cast textIndex : Float) <= (cast _Runtime.field(text, 'length') : Float)) : Bool)) {

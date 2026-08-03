@@ -150,20 +150,20 @@ class Device {
   }
 
   public static function enableWebSafeAreaInsets():Dynamic {
-    var el:Dynamic = cast _Runtime.UNDEFINED;
     var readInsets:Void->Void = cast _Runtime.UNDEFINED;
+    var el:Dynamic = cast _Runtime.UNDEFINED;
     var observer:Dynamic = cast _Runtime.UNDEFINED;
+    readInsets = function readInsets():Void {
+      var style:Dynamic = cast _Runtime.UNDEFINED;
+      style = _Runtime.callValue(_Runtime.globalValue('getComputedStyle'), cast ([el] : Array<Dynamic>));
+      (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'bottom')] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'left')] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'right')] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'top')] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
+    };
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
 
     }; }
     el = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(el, 'style'), 'cssText', (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;'));
     _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
-    readInsets = function readInsets():Void {
-      var style:Dynamic = cast _Runtime.UNDEFINED;
-      style = _Runtime.callValue(_Runtime.globalValue('getComputedStyle'), cast ([el] : Array<Dynamic>));
-      (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'bottom')] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'left')] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'right')] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'top')] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
-    };
     _Runtime.callValue(readInsets, cast ([] : Array<Dynamic>));
     observer = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('ResizeObserver'), 'undefined') : Bool) ? (cast _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [readInsets]) : Dynamic) : (cast null : Dynamic));
     if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { _Runtime.callProperty(observer, 'observe', cast ([flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')] : Array<Dynamic>)); }

@@ -134,15 +134,11 @@ class Accessibility {
   }
 
   public static function createWebAccessibilityBackend(?container:Dynamic):AccessibilityBackend {
+    var getRoot:Void->Null<Dynamic> = cast _Runtime.UNDEFINED;
     var elements:Dynamic = cast _Runtime.UNDEFINED;
     var liveRegions:Dynamic = cast _Runtime.UNDEFINED;
     var root:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var rootResolved:Dynamic = cast _Runtime.UNDEFINED;
-    var getRoot:Void->Null<Dynamic> = cast _Runtime.UNDEFINED;
-    elements = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    liveRegions = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    root = _Runtime.coalesce(container, function():Dynamic return cast null);
-    rootResolved = !_Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
     getRoot = function getRoot():Null<Dynamic> {
       if ((cast rootResolved : Bool)) { return cast root; }
       (rootResolved = cast (true : Dynamic));
@@ -154,6 +150,10 @@ class Accessibility {
       _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([root] : Array<Dynamic>));
       return cast root;
     };
+    elements = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    liveRegions = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    root = _Runtime.coalesce(container, function():Dynamic return cast null);
+    rootResolved = !_Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast { setNode: function(node:Dynamic) {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       var element:Dynamic = cast _Runtime.UNDEFINED;

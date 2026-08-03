@@ -46,9 +46,8 @@ class ParticleDesignerSerialize {
   }
 
   public static function documentToPlist__particleDesignerSerialize(doc:ParticleDesignerDocument):String {
-    var lines:Array<String> = cast _Runtime.UNDEFINED;
     var kv:String->Dynamic->Void = cast _Runtime.UNDEFINED;
-    lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>'] : Array<Dynamic>);
+    var lines:Array<String> = cast _Runtime.UNDEFINED;
     kv = function kv(key:String, value:Dynamic):Void {
       _Runtime.callProperty(lines, 'push', cast (['	<key>' + Std.string(key) + '</key>'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'boolean') : Bool)) {
@@ -59,6 +58,7 @@ class ParticleDesignerSerialize {
         _Runtime.callProperty(lines, 'push', cast (['	<string>' + Std.string(_Runtime.callValue(ParticleDesignerSerialize.escapeXml__particleDesignerSerialize, cast ([value] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
       } }
     };
+    lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>'] : Array<Dynamic>);
     _Runtime.callValue(kv, cast (['maxParticles', doc.maxParticles] : Array<Dynamic>));
     _Runtime.callValue(kv, cast (['emitterType', doc.emitterType] : Array<Dynamic>));
     _Runtime.callValue(kv, cast (['duration', doc.duration] : Array<Dynamic>));

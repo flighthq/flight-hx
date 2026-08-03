@@ -57,22 +57,22 @@ class CanvasScale9Mapper {
   }
 
   public static function computeCommandsBounds__canvasScale9Mapper(commands:Array<Dynamic>):Null<{ var width:Float; var height:Float; }> {
+    var expand:Float->Float->Void = cast _Runtime.UNDEFINED;
     var minX:Dynamic = cast _Runtime.UNDEFINED;
     var minY:Dynamic = cast _Runtime.UNDEFINED;
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var expand:Float->Float->Void = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    minX = HxMath.POSITIVE_INFINITY;
-    minY = HxMath.POSITIVE_INFINITY;
-    maxX = -HxMath.POSITIVE_INFINITY;
-    maxY = -HxMath.POSITIVE_INFINITY;
     expand = function expand(x:Float, y:Float):Void {
       if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
       if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
       if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
       if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
     };
+    minX = HxMath.POSITIVE_INFINITY;
+    minY = HxMath.POSITIVE_INFINITY;
+    maxX = -HxMath.POSITIVE_INFINITY;
+    maxY = -HxMath.POSITIVE_INFINITY;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);

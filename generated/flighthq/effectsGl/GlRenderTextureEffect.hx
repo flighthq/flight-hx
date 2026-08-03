@@ -53,14 +53,10 @@ class GlRenderTextureEffect {
   }
 
   public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, destinationAvailable:Dynamic = false):GlRenderEffectApplicationExplanation {
+    var getStatus:Void->Dynamic = cast _Runtime.UNDEFINED;
     var unregisteredKinds:Dynamic = cast _Runtime.UNDEFINED;
     var requestedCount:Dynamic = cast _Runtime.UNDEFINED;
     var registeredCount:Dynamic = cast _Runtime.UNDEFINED;
-    var getStatus:Void->Dynamic = cast _Runtime.UNDEFINED;
-    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:Dynamic) return _Runtime.strictEquals(_Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(effect, 'kind')] : Array<Dynamic>)), null)] : Array<Dynamic>)), 'map', cast ([function(effect:Dynamic) return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
-    requestedCount = _Runtime.field(effects, 'length');
-    registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
-    return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: _Runtime.callValue(getStatus, cast ([] : Array<Dynamic>)), unregisteredKinds: unregisteredKinds };
     getStatus = function getStatus():Dynamic {
       if ((cast _Runtime.strictEquals(requestedCount, 0.0) : Bool)) { return cast 'no-effects'; }
       if ((cast ((cast destinationAvailable : Bool) && (cast _Runtime.orValue(!(cast sourceAvailable : Bool), function():Dynamic return cast _Runtime.strictEquals(registeredCount, 0.0)) : Bool)) : Bool)) { return cast 'stale-destination'; }
@@ -68,6 +64,10 @@ class GlRenderTextureEffect {
       if ((cast _Runtime.strictEquals(registeredCount, 0.0) : Bool)) { return cast 'unregistered-effects'; }
       return cast ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'partial-registration' : Dynamic) : (cast 'complete' : Dynamic));
     };
+    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:Dynamic) return _Runtime.strictEquals(_Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(effect, 'kind')] : Array<Dynamic>)), null)] : Array<Dynamic>)), 'map', cast ([function(effect:Dynamic) return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
+    requestedCount = _Runtime.field(effects, 'length');
+    registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
+    return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: _Runtime.callValue(getStatus, cast ([] : Array<Dynamic>)), unregisteredKinds: unregisteredKinds };
     return cast null;
   }
 

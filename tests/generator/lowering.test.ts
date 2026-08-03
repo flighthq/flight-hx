@@ -66,6 +66,41 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.select');
   });
 
+  it('initializes nested function declarations before earlier calls without hoisting function expressions', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/hoisting.ts',
+      `
+        export function callDeclaration(value: number): number {
+          const expression = function expression(input: number): number {
+            return input + 1;
+          };
+          return declaration(expression(value));
+          function declaration(input: number): number {
+            return input * 2;
+          }
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+
+    expect(lowered.diagnostics).toEqual([]);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Hoisting',
+      packageName: '@flighthq/example',
+    });
+    const declaration = output.indexOf('declaration = function declaration');
+    const expression = output.indexOf('expression = function expression');
+    const call = output.indexOf('return cast _Runtime.callValue(declaration');
+    expect(declaration).toBeGreaterThan(-1);
+    expect(expression).toBeGreaterThan(declaration);
+    expect(call).toBeGreaterThan(expression);
+  });
+
   it('leaves JavaScript exposure to target-specific build configuration', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/service.ts',
@@ -135,6 +170,12 @@ describe('TypeScript lowering and Haxe emission', () => {
           let result = value;
           for (let i = 0; i < 2; i++) result /= 2;
           return result;
+        }
+        export function callNestedDeclaration(value: number): number {
+          return twice(value);
+          function twice(input: number): number {
+            return input * 2;
+          }
         }
         export function sumOdd(limit: number): number {
           let result = 0;
@@ -206,6 +247,7 @@ describe('TypeScript lowering and Haxe emission', () => {
           static function main() {
             if (clamp(12, 0, 10) != 10) throw 'clamp failed';
             if (quarter(8) != 2) throw 'quarter failed';
+            if (callNestedDeclaration(4) != 8) throw 'nested function declaration hoisting failed';
             if (sumOdd(6) != 9) throw 'for continue failed';
             if (switchControl() != 211) throw 'switch control ownership failed';
             if (nestedLoopBreak() != 211) throw 'nested loop break ownership failed';

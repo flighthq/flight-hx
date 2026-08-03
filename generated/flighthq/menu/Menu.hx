@@ -271,21 +271,14 @@ class Menu {
 
   public static function showWebContextMenu__menu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
     return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
-      var overlay:Dynamic = cast _Runtime.UNDEFINED;
-      var menu:Dynamic = cast _Runtime.UNDEFINED;
       var clampMenu:Dynamic->Float->Float->Void = cast _Runtime.UNDEFINED;
       var close:Null<String>->Void = cast _Runtime.UNDEFINED;
-      var focusableItems:Dynamic = cast _Runtime.UNDEFINED;
-      var focusIndex:Dynamic = cast _Runtime.UNDEFINED;
       var moveFocus:Float->Void = cast _Runtime.UNDEFINED;
       var onKeyDown:Dynamic->Void = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) {
-        _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
-        return;
-      }
-      overlay = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
-      _Runtime.setField(_Runtime.field(overlay, 'style'), 'cssText', 'position:fixed;inset:0;z-index:2147483646;');
-      menu = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([items, function(id:Dynamic) return _Runtime.callValue(close, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
+      var overlay:Dynamic = cast _Runtime.UNDEFINED;
+      var menu:Dynamic = cast _Runtime.UNDEFINED;
+      var focusableItems:Dynamic = cast _Runtime.UNDEFINED;
+      var focusIndex:Dynamic = cast _Runtime.UNDEFINED;
       clampMenu = function clampMenu(el:Dynamic, anchorX:Float, anchorY:Float):Void {
         var rect:Dynamic = cast _Runtime.UNDEFINED;
         var vw:Dynamic = cast _Runtime.UNDEFINED;
@@ -304,8 +297,6 @@ class Menu {
         _Runtime.callProperty(menu, 'remove', cast ([] : Array<Dynamic>));
         _Runtime.callValue(resolve, cast ([selectedId] : Array<Dynamic>));
       };
-      focusableItems = _Runtime.callProperty(menu, 'querySelectorAll', cast ([':scope > li[data-enabled="true"]'] : Array<Dynamic>));
-      focusIndex = -1.0;
       moveFocus = function moveFocus(delta:Float):Void {
         var items:Dynamic = cast _Runtime.UNDEFINED;
         items = _Runtime.toArray(focusableItems);
@@ -347,6 +338,15 @@ class Menu {
           }
         } } } }
       };
+      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) {
+        _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
+        return;
+      }
+      overlay = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
+      _Runtime.setField(_Runtime.field(overlay, 'style'), 'cssText', 'position:fixed;inset:0;z-index:2147483646;');
+      menu = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([items, function(id:Dynamic) return _Runtime.callValue(close, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
+      focusableItems = _Runtime.callProperty(menu, 'querySelectorAll', cast ([':scope > li[data-enabled="true"]'] : Array<Dynamic>));
+      focusIndex = -1.0;
       _Runtime.callProperty(overlay, 'addEventListener', cast (['click', function() return _Runtime.callValue(close, cast ([null] : Array<Dynamic>))] : Array<Dynamic>));
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
       _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([overlay] : Array<Dynamic>));

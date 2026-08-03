@@ -15,6 +15,9 @@ import flighthq.types.Path;
 
 class SvgPathData {
   public static function appendSvgPathData(path:Path, d:String):Bool {
+    var skipSeparators:Void->Void = cast _Runtime.UNDEFINED;
+    var readNumber:Void->Null<Float> = cast _Runtime.UNDEFINED;
+    var readFlag:Void->Null<Float> = cast _Runtime.UNDEFINED;
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var pos:Dynamic = cast _Runtime.UNDEFINED;
     var currentX:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,20 +29,6 @@ class SvgPathData {
     var lastQuadControlX:Dynamic = cast _Runtime.UNDEFINED;
     var lastQuadControlY:Dynamic = cast _Runtime.UNDEFINED;
     var lastKind:Dynamic = cast _Runtime.UNDEFINED;
-    var skipSeparators:Void->Void = cast _Runtime.UNDEFINED;
-    var readNumber:Void->Null<Float> = cast _Runtime.UNDEFINED;
-    var readFlag:Void->Null<Float> = cast _Runtime.UNDEFINED;
-    length = _Runtime.field(d, 'length');
-    pos = 0.0;
-    currentX = 0.0;
-    currentY = 0.0;
-    startX = 0.0;
-    startY = 0.0;
-    lastControl2X = 0.0;
-    lastControl2Y = 0.0;
-    lastQuadControlX = 0.0;
-    lastQuadControlY = 0.0;
-    lastKind = '';
     skipSeparators = function skipSeparators():Void {
       while ((cast ((cast pos : Float) < (cast length : Float)) : Bool)) {
         var c:Dynamic = _Runtime.charCodeAt(d, pos);
@@ -93,6 +82,17 @@ class SvgPathData {
       }
       return cast null;
     };
+    length = _Runtime.field(d, 'length');
+    pos = 0.0;
+    currentX = 0.0;
+    currentY = 0.0;
+    startX = 0.0;
+    startY = 0.0;
+    lastControl2X = 0.0;
+    lastControl2Y = 0.0;
+    lastQuadControlX = 0.0;
+    lastQuadControlY = 0.0;
+    lastKind = '';
     while ((cast true : Bool)) {
       _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));
       if ((cast ((cast pos : Float) >= (cast length : Float)) : Bool)) { break; }
