@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-03T04:25:20.121Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 37387,
+      "exitCode": 0,
+      "package": "physics2d",
+      "signal": null,
+      "status": "passed",
+      "summary": "155 passed (155)",
+      "testFiles": 8
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "physics2d",
+  "startedAt": "2026-08-03T04:24:42.732Z"
+}
