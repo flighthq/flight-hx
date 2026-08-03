@@ -1264,6 +1264,14 @@ class _Runtime {
     #end
     #if (lime && !js)
     if (Std.isOfType(value, _LimeTypedArray)) return (cast value : _LimeTypedArray).toArray();
+    // Raw Lime views (host code passing `lime.utils.UInt16Array` and friends
+    // through Dynamic) expose no reflectable iterator, so without this branch
+    // they fall through to the empty fallback and copies silently drop their
+    // contents (e.g. `createMeshGeometry` index normalization).
+    if (Std.isOfType(value, lime.utils.ArrayBufferView)) {
+      final view:lime.utils.ArrayBufferView = cast value;
+      return [for (index in 0...view.length) _LimeTypedArray.readRaw(view, index)];
+    }
     #end
     // Never blind-cast Dynamic to Array here: hxcpp's unchecked cast does not
     // throw for a wrong type — it yields a garbage pointer that segfaults on

@@ -85,6 +85,9 @@ class Main extends Application {
     final indexCount = RADIAL_SEGMENTS * heightSegments * 6;
 
     final vertices = new flighthq._internal._Float32Array(vertexCount * FLOATS_PER_VERTEX);
+    // Deliberately a raw Lime typed array (not the portable `_UInt16Array`): Lime host code will
+    // naturally hand Flight views like this, so this example doubles as smoke coverage for the
+    // raw-view interop seam (`_Runtime.iterable` copy inside `createMeshGeometry`).
     final indices = new UInt16Array(indexCount);
 
     // A tube centered at the origin, extending along +Y. Each ring's vertices are weighted to the two

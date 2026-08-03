@@ -277,7 +277,14 @@ class WebGl2Backend {
       #end
       gl.bufferData(Std.int(target), sizeView, Std.int(usage));
     } else {
-      gl.bufferData(Std.int(target), nativeView(cast raw), Std.int(usage));
+      final view = nativeView(cast raw);
+      #if flight_gl_trace
+      if (Std.int(target) == Std.int(ELEMENT_ARRAY_BUFFER)) {
+        glTrace('bufferData element view: type=' + view.type + ', byteLength=' + view.byteLength + ', e0..5='
+          + [for (i in 0...6) _LimeTypedArray.readRaw(view, i)].join(','));
+      }
+      #end
+      gl.bufferData(Std.int(target), view, Std.int(usage));
     }
     #else
     gl.bufferData(Std.int(target), raw, Std.int(usage));
