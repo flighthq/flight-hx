@@ -419,6 +419,10 @@ export interface StaticLoweringEmissionCounts {
       writes: number;
     }
   >;
+  guardedArrayReads: {
+    asyncFlowForInKeys: number;
+    asyncFlowForOfValues: number;
+  };
   numericRelations: number;
   syntheticArrayReads: {
     highArityArguments: number;

@@ -5,6 +5,7 @@ import flighthq._internal._Float64Array;
 import flighthq._internal._Int16Array;
 import flighthq._internal._Int32Array;
 import flighthq._internal._Int8Array;
+import flighthq._internal._Runtime;
 import flighthq._internal._StaticIndex;
 import flighthq._internal._UInt16Array;
 import flighthq._internal._UInt32Array;
@@ -16,6 +17,17 @@ class StaticIndexSmoke {
   static var order = '';
 
   public static function run():Void {
+    assertArrayFractionalIndex();
+    assertFloat32FractionalIndex();
+    assertArrayOutOfBounds([10, 20], new _Float32Array([10, 20]));
+    assertDynamicOutOfBounds([10, 20], new _Float32Array([10, 20]));
+    assertTypedArrayOutOfBounds(new _Float32Array([10, 20]));
+    assertMixedReceivers();
+    assertWriteResults();
+    assertEvaluationOrder();
+  }
+
+  static function assertArrayFractionalIndex():Void {
     final values:Array<Dynamic> = [10, 20];
     #if js
     if (_StaticIndex.readArray(values, 1.5) != null) throw 'JS fractional array read was truncated';
@@ -29,8 +41,9 @@ class StaticIndexSmoke {
       throw 'portable fractional array write was not truncated';
     }
     #end
-    if (_StaticIndex.readArray(values, 99) != null) throw 'array out-of-bounds read was not nullish';
+  }
 
+  static function assertFloat32FractionalIndex():Void {
     final fractional = new _Float32Array([10, 20]);
     #if js
     if (_StaticIndex.readFloat32Array(fractional, 1.5) != null) {
@@ -51,10 +64,9 @@ class StaticIndexSmoke {
       throw 'portable fractional typed-array write was not truncated';
     }
     #end
-    if (_StaticIndex.readFloat32Array(fractional, 99) != null) {
-      throw 'typed-array out-of-bounds read was not nullish';
-    }
+  }
 
+  static function assertMixedReceivers():Void {
     final mixedArray:Array<Dynamic> = [3, 4];
     final mixedFloat32 = new _Float32Array([5, 6]);
     if (_StaticIndex.readArrayOrFloat32Array(mixedArray, 1) != 4
@@ -74,7 +86,9 @@ class StaticIndexSmoke {
       || _StaticIndex.readUint16ArrayOrUint32Array(mixedUint32, 0) != 4294967295.0) {
       throw 'Uint16Array-or-Uint32Array read';
     }
+  }
 
+  static function assertWriteResults():Void {
     assertWrite(
       _StaticIndex.writeFloat32Array(new _Float32Array(1), 0, 1.25),
       1.25,
@@ -108,7 +122,9 @@ class StaticIndexSmoke {
       'Uint8ClampedArray setter result',
     );
     assertStoredClamped(255);
+  }
 
+  static function assertEvaluationOrder():Void {
     ordered = [0];
     order = '';
     if (_StaticIndex.writeArray(orderedSource(), orderedKey(), orderedValue()) != 9 || order != 'rkv') {
@@ -118,6 +134,46 @@ class StaticIndexSmoke {
 
   static function assertWrite(actual:Dynamic, expected:Dynamic, label:String):Void {
     if (actual != expected) throw label;
+  }
+
+  static function assertNullish(actual:Dynamic, label:String):Void {
+    if (actual != null) throw label + ' was not nullish';
+  }
+
+  static function assertArrayOutOfBounds(values:Array<Dynamic>, fractional:_Float32Array):Void {
+    assertNullish(_StaticIndex.readArray(values, 99), 'Array read');
+    assertNullish(_StaticIndex.readArray(values, -1), 'negative Array read');
+    assertNullish(_StaticIndex.readArrayOrFloat32Array(values, 99), 'Array union read');
+    assertNullish(_StaticIndex.readArrayOrFloat32Array(fractional, 99), 'Float32Array union read');
+  }
+
+  static function assertDynamicOutOfBounds(values:Array<Dynamic>, fractional:_Float32Array):Void {
+    assertNullish(_Runtime.getIndex(values, 99), 'dynamic Array read');
+    assertNullish(_Runtime.getIndex(fractional, 99), 'dynamic typed-array read');
+    assertNullish(_Runtime.getIndex('x', 99), 'dynamic String read');
+  }
+
+  static function assertTypedArrayOutOfBounds(fractional:_Float32Array):Void {
+    assertNullish(_StaticIndex.readFloat32Array(fractional, 99), 'Float32Array read');
+    assertNullish(_StaticIndex.readFloat64Array(new _Float64Array([1]), 99), 'Float64Array read');
+    assertNullish(_StaticIndex.readInt16Array(new _Int16Array([1]), 99), 'Int16Array read');
+    assertNullish(_StaticIndex.readInt32Array(new _Int32Array([1]), 99), 'Int32Array read');
+    assertNullish(_StaticIndex.readInt8Array(new _Int8Array([1]), 99), 'Int8Array read');
+    assertNullish(_StaticIndex.readUint16Array(new _UInt16Array([1]), 99), 'Uint16Array read');
+    assertNullish(
+      _StaticIndex.readUint16ArrayOrUint32Array(new _UInt16Array([1]), 99),
+      'Uint16Array union read',
+    );
+    assertNullish(
+      _StaticIndex.readUint16ArrayOrUint32Array(new _UInt32Array([1]), 99),
+      'Uint32Array union read',
+    );
+    assertNullish(_StaticIndex.readUint32Array(new _UInt32Array([1]), 99), 'Uint32Array read');
+    assertNullish(_StaticIndex.readUint8Array(new _UInt8Array([1]), 99), 'Uint8Array read');
+    assertNullish(
+      _StaticIndex.readUint8ClampedArray(new _UInt8ClampedArray([1]), 99),
+      'Uint8ClampedArray read',
+    );
   }
 
   static function assertStoredFloat32(expected:Float):Void {

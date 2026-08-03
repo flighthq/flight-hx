@@ -2,11 +2,24 @@
 package flighthq._internal;
 
 class _StaticIndex {
+  #if !js
+  static inline function boundedIndex(key:Dynamic, length:Int):Int {
+    final index = Std.int(key);
+    return index < 0 || index >= length ? -1 : index;
+  }
+  #end
+
+  #if neko
+  public static function readArray(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readArray(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : Array<Dynamic>)[Std.int(key)];
+    final values:Array<Dynamic> = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -19,14 +32,26 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readArrayOrFloat32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readArrayOrFloat32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #elseif lime
-    if (Std.isOfType(source, Array)) return (cast source : Array<Dynamic>)[Std.int(key)];
-    return (cast source : _LimeTypedArray).get(Std.int(key));
+    if (Std.isOfType(source, Array)) {
+      final values:Array<Dynamic> = cast source;
+      final index = boundedIndex(key, values.length);
+      return index < 0 ? _Runtime.UNDEFINED : values[index];
+    }
+    final values:_LimeTypedArray = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values.get(index);
     #else
-    return (cast source : Array<Dynamic>)[Std.int(key)];
+    final values:Array<Dynamic> = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -45,11 +70,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readFloat32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readFloat32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _Float32Array)[Std.int(key)];
+    final values:_Float32Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -62,11 +93,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readFloat64Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readFloat64Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _Float64Array)[Std.int(key)];
+    final values:_Float64Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -79,11 +116,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readInt16Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readInt16Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _Int16Array)[Std.int(key)];
+    final values:_Int16Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -96,11 +139,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readInt32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readInt32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _Int32Array)[Std.int(key)];
+    final values:_Int32Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -113,11 +162,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readInt8Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readInt8Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _Int8Array)[Std.int(key)];
+    final values:_Int8Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -130,11 +185,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint16Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readUint16Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _UInt16Array)[Std.int(key)];
+    final values:_UInt16Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -147,21 +208,35 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint16ArrayOrUint32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readUint16ArrayOrUint32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #elseif lime
-    return (cast source : _LimeTypedArray).get(Std.int(key));
+    final values:_LimeTypedArray = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values.get(index);
     #else
-    return (cast source : Array<Dynamic>)[Std.int(key)];
+    final values:Array<Dynamic> = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
+  #if neko
+  public static function readUint32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readUint32Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _UInt32Array)[Std.int(key)];
+    final values:_UInt32Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -174,11 +249,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint8Array(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readUint8Array(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _UInt8Array)[Std.int(key)];
+    final values:_UInt8Array = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 
@@ -191,11 +272,17 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint8ClampedArray(source:Dynamic, key:Dynamic):Dynamic {
+  #else
   public static inline function readUint8ClampedArray(source:Dynamic, key:Dynamic):Dynamic {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    return (cast source : _UInt8ClampedArray)[Std.int(key)];
+    final values:_UInt8ClampedArray = cast source;
+    final index = boundedIndex(key, values.length);
+    return index < 0 ? _Runtime.UNDEFINED : values[index];
     #end
   }
 

@@ -3221,7 +3221,7 @@
       }
     }
   ],
-  "schemaVersion": 9,
+  "schemaVersion": 10,
   "summary": {
     "declarations": 11421,
     "diagnostics": 0,
@@ -3323,6 +3323,10 @@
           "declaration": 0,
           "parameter": 0
         }
+      },
+      "guardedArrayReads": {
+        "asyncFlowForInKeys": 0,
+        "asyncFlowForOfValues": 8
       },
       "indexedAccesses": {
         "reads": 6249,

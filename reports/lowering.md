@@ -23,6 +23,8 @@
 | Parked width-sensitive mixed indexed writes | 16 |
 | Direct indexed reads | 6249 |
 | Direct indexed writes | 3261 |
+| Guarded in-bounds async-flow for-of Array reads | 8 |
+| Guarded in-bounds async-flow for-in key reads | 0 |
 | Direct synthetic iteration-binding Array reads | 112 |
 | Direct synthetic high-arity-argument Array reads | 27 |
 | Proven typed-array `set` calls | 68 |

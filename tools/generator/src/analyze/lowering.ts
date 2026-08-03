@@ -32,7 +32,7 @@ export interface PackageLoweringAudit {
 
 export interface LoweringAudit {
   packages: PackageLoweringAudit[];
-  schemaVersion: 9;
+  schemaVersion: 10;
   summary: {
     declarations: number;
     diagnostics: number;
@@ -67,7 +67,7 @@ export function auditLowering(
 
   return {
     packages,
-    schemaVersion: 9,
+    schemaVersion: 10,
     summary: {
       declarations: sum(packages, (item) => item.declarations),
       diagnostics: sum(packages, (item) => item.diagnostics.length),
@@ -98,6 +98,10 @@ export function auditLowering(
             },
           ]),
         ) as StaticLoweringEmissionCounts['destructuringReceivers'],
+        guardedArrayReads: {
+          asyncFlowForInKeys: 0,
+          asyncFlowForOfValues: 0,
+        },
         indexedAccesses: {
           reads: 0,
           writes: 0,

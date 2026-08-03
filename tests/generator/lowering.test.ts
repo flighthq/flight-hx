@@ -643,6 +643,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       ts.ScriptKind.TS,
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    resetStaticLoweringEmissionCounts();
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -655,6 +656,14 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.repeatFlow');
     expect(output).toContain('_Async.flowContinue');
     expect(output).toContain('_Async.flowBreak');
+    expect(output).toMatch(
+      /if \(__flowIndex\d+ >= __flowIterator\d+\.length\).*\n.*__flowIterator\d+\[__flowIndex\d+\+\+\]/u,
+    );
+    expect(output).not.toContain('_StaticIndex.readArray(__flowIterator');
+    expect(staticLoweringEmissionCounts().guardedArrayReads).toEqual({
+      asyncFlowForInKeys: 0,
+      asyncFlowForOfValues: 1,
+    });
 
     const fixtureDirectory = path.resolve('build/haxe-async-loop-fixture');
     const packageDirectory = path.join(fixtureDirectory, 'flighthq');
@@ -1859,6 +1868,10 @@ describe('TypeScript lowering and Haxe emission', () => {
         Uint8Array: { reads: 0, writes: 0 },
         Uint8ClampedArray: { reads: 0, writes: 0 },
       },
+      guardedArrayReads: {
+        asyncFlowForInKeys: 0,
+        asyncFlowForOfValues: 0,
+      },
       numericRelations: 1,
       syntheticArrayReads: {
         highArityArguments: 0,
@@ -2660,6 +2673,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       `,
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    resetStaticLoweringEmissionCounts();
     const output = emitHaxeModule({
       declarations: lowered.declarations,
       imports: [],
@@ -2672,6 +2686,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('for (key in _Runtime.forInKeys(values))');
     expect(output).toContain('var __flowKeys');
     expect(output).toContain(':Array<String> = _Runtime.forInKeys(values);');
+    expect(output).toMatch(/if \(__flowIndex\d+ >= __flowKeys\d+\.length\).*\n.*__flowKeys\d+\[__flowIndex\d+\+\+\]/u);
+    expect(output).not.toContain('_StaticIndex.readArray(__flowKeys');
+    expect(staticLoweringEmissionCounts().guardedArrayReads).toEqual({
+      asyncFlowForInKeys: 1,
+      asyncFlowForOfValues: 0,
+    });
   });
 
   it('rejects for-in initializers that cannot declare one identifier', () => {

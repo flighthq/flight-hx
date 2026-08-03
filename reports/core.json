@@ -12169,6 +12169,10 @@
         "parameter": 0
       }
     },
+    "guardedArrayReads": {
+      "asyncFlowForInKeys": 0,
+      "asyncFlowForOfValues": 8
+    },
     "indexedAccesses": {
       "reads": 6249,
       "writes": 3261

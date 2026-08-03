@@ -532,11 +532,27 @@ class _Runtime {
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
-    if (Std.isOfType(source, String)) return (cast source : String).charAt(Std.int(key));
-    if (Std.isOfType(source, Array)) return (cast source : Array<Dynamic>)[Std.int(key)];
+    if (Std.isOfType(source, String)) {
+      final index = Std.int(key);
+      final value:String = cast source;
+      return index < 0 || index >= value.length ? UNDEFINED : value.charAt(index);
+    }
+    if (Std.isOfType(source, Array)) {
+      final index = Std.int(key);
+      final values:Array<Dynamic> = cast source;
+      return index < 0 || index >= values.length ? UNDEFINED : values[index];
+    }
     #if (lime && !js)
-    if (Std.isOfType(source, _LimeTypedArray)) return (cast source : _LimeTypedArray).get(Std.int(key));
-    if (Std.isOfType(source, lime.utils.ArrayBufferView)) return _LimeTypedArray.readRaw(cast source, Std.int(key));
+    if (Std.isOfType(source, _LimeTypedArray)) {
+      final index = Std.int(key);
+      final values:_LimeTypedArray = cast source;
+      return index < 0 || index >= values.length ? UNDEFINED : values.get(index);
+    }
+    if (Std.isOfType(source, lime.utils.ArrayBufferView)) {
+      final index = Std.int(key);
+      final values:lime.utils.ArrayBufferView = cast source;
+      return index < 0 || index >= values.length ? UNDEFINED : _LimeTypedArray.readRaw(values, index);
+    }
     #end
     return Reflect.field(source, Std.string(key));
     #end

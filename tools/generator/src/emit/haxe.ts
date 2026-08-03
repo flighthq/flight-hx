@@ -21,6 +21,7 @@ type ScalarStaticLoweringEmissionName = Exclude<
   | 'destructuringEscapes'
   | 'destructuringReads'
   | 'destructuringReceivers'
+  | 'guardedArrayReads'
   | 'indexedAccesses'
   | 'indexedReceivers'
   | 'syntheticArrayReads'
@@ -46,6 +47,11 @@ const syntheticArrayReadMarkers = {
   highArityArguments: '/*__flight_direct_synthetic_array_high_arity_arguments__*/',
   iterationBindings: '/*__flight_direct_synthetic_array_iteration_bindings__*/',
 } as const satisfies Record<keyof StaticLoweringEmissionCounts['syntheticArrayReads'], string>;
+
+const guardedArrayReadMarkers = {
+  asyncFlowForInKeys: '/*__flight_guarded_array_async_flow_for_in__*/',
+  asyncFlowForOfValues: '/*__flight_guarded_array_async_flow_for_of__*/',
+} as const satisfies Record<keyof StaticLoweringEmissionCounts['guardedArrayReads'], string>;
 
 const destructuringReadSources = [
   'assignment',
@@ -144,6 +150,7 @@ export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
         { ...staticLoweringEmission.destructuringReceivers[receiver] },
       ]),
     ) as StaticLoweringEmissionCounts['destructuringReceivers'],
+    guardedArrayReads: { ...staticLoweringEmission.guardedArrayReads },
     indexedAccesses: { ...staticLoweringEmission.indexedAccesses },
     indexedReceivers: Object.fromEntries(
       indexedReceiverNames.map((receiver) => [receiver, { ...staticLoweringEmission.indexedReceivers[receiver] }]),
@@ -822,7 +829,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
           : [
               'function():Dynamic {',
               `  if (${indexName} >= ${iterator}.length) return flighthq._internal._Async.flowBreak();`,
-              `  var ${safeName(statement.variable)}:Dynamic = ${iterator}[${indexName}++];`,
+              `  var ${safeName(statement.variable)}:Dynamic = ${markGuardedArrayRead('asyncFlowForOfValues', `${iterator}[${indexName}++]`)};`,
               ...indent(body),
               '}',
             ].join('\n');
@@ -841,7 +848,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         const iteration = [
           'function():Dynamic {',
           `  if (${indexName} >= ${keys}.length) return flighthq._internal._Async.flowBreak();`,
-          `  var ${safeName(statement.variable)}:String = ${keys}[${indexName}++];`,
+          `  var ${safeName(statement.variable)}:String = ${markGuardedArrayRead('asyncFlowForInKeys', `${keys}[${indexName}++]`)};`,
           ...indent(body),
           '}',
         ].join('\n');
@@ -1843,6 +1850,10 @@ function emptyStaticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
         Object.fromEntries(destructuringReadSources.map((source) => [source, 0])),
       ]),
     ) as StaticLoweringEmissionCounts['destructuringReceivers'],
+    guardedArrayReads: {
+      asyncFlowForInKeys: 0,
+      asyncFlowForOfValues: 0,
+    },
     indexedAccesses: {
       reads: 0,
       writes: 0,
@@ -1883,6 +1894,12 @@ function finalizeStaticLoweringEmission(output: string): string {
     [keyof StaticLoweringEmissionCounts['syntheticArrayReads'], string]
   >) {
     staticLoweringEmission.syntheticArrayReads[name] += finalized.split(marker).length - 1;
+    finalized = finalized.replaceAll(marker, '');
+  }
+  for (const [name, marker] of Object.entries(guardedArrayReadMarkers) as Array<
+    [keyof StaticLoweringEmissionCounts['guardedArrayReads'], string]
+  >) {
+    staticLoweringEmission.guardedArrayReads[name] += finalized.split(marker).length - 1;
     finalized = finalized.replaceAll(marker, '');
   }
   for (const receiver of typedArraySetReceiverNames) {
@@ -1937,6 +1954,10 @@ function emitDestructuringRead(expression: IrExpression, object: string, index: 
 
 function markStaticLowering(name: ScalarStaticLoweringEmissionName, value: string): string {
   return `${staticLoweringMarkers[name]}${value}`;
+}
+
+function markGuardedArrayRead(name: keyof StaticLoweringEmissionCounts['guardedArrayReads'], value: string): string {
+  return `${guardedArrayReadMarkers[name]}${value}`;
 }
 
 function staticIndexedLoweringMarker(receiver: IrIndexedReceiver, operation: 'reads' | 'writes'): string {

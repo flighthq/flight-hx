@@ -153,6 +153,8 @@ export function loweringSummary(audit: LoweringAudit): string {
     `| Parked width-sensitive mixed indexed writes | ${facts.indexedAccessEscapes.widthSensitiveMixedWrites} |`,
     `| Direct indexed reads | ${emission.indexedAccesses.reads} |`,
     `| Direct indexed writes | ${emission.indexedAccesses.writes} |`,
+    `| Guarded in-bounds async-flow for-of Array reads | ${emission.guardedArrayReads.asyncFlowForOfValues} |`,
+    `| Guarded in-bounds async-flow for-in key reads | ${emission.guardedArrayReads.asyncFlowForInKeys} |`,
     `| Direct synthetic iteration-binding Array reads | ${emission.syntheticArrayReads.iterationBindings} |`,
     `| Direct synthetic high-arity-argument Array reads | ${emission.syntheticArrayReads.highArityArguments} |`,
     `| Proven typed-array \`set\` calls | ${facts.typedArraySetCalls} |`,
