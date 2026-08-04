@@ -71,12 +71,20 @@ function smokeOne(example, target, mode) {
 
   const log = `/tmp/smoke-${example}-${target}-${mode}.log`;
   const shot = `/tmp/smoke-${example}-${target}-${mode}.png`;
+  const shot2 = `/tmp/smoke-${example}-${target}-${mode}-b.png`;
+  // Two captures a beat apart: a double-buffered app that only draws on
+  // invalidation presents a never-drawn buffer on alternate swaps, so a single
+  // lucky screenshot hides a 50%-duty black flicker. Both frames must be
+  // non-blank.
   const script = [
     `cd ${binDir}`,
+    `rm -f ${shot} ${shot2}`,
     `LIBGL_ALWAYS_SOFTWARE=1 ./${binary} > ${log} 2>&1 & APP=$!`,
     `sleep ${RUN_SECONDS - 2}`,
     `WID=$(xwininfo -root -tree 2>/dev/null | grep -i flight | grep -o "0x[0-9a-f]*" | head -1)`,
     `[ -n "$WID" ] && import -window $WID ${shot} 2>/dev/null`,
+    `sleep 0.4`,
+    `[ -n "$WID" ] && import -window $WID ${shot2} 2>/dev/null`,
     `kill $APP 2>/dev/null; true`,
   ].join(' && ');
   try {
@@ -97,6 +105,12 @@ function smokeOne(example, target, mode) {
   if (!existsSync(shot)) return { status: 'NOWINDOW', detail: 'no capturable window' };
   const deviation = frameStdDev(shot);
   if (!(deviation > 0.005)) return { status: 'BLANK', detail: `frame stddev ${deviation}` };
+  if (existsSync(shot2)) {
+    const secondDeviation = frameStdDev(shot2);
+    if (!(secondDeviation > 0.005)) {
+      return { status: 'FLICKER', detail: `second frame stddev ${secondDeviation} (first ${deviation.toFixed(4)})` };
+    }
+  }
   return { status: 'OK', detail: `stddev ${deviation.toFixed(4)}` };
 }
 
