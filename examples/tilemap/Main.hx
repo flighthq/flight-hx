@@ -55,9 +55,9 @@ class Main extends Application {
       });
       registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
       registerRenderer(renderState, TilemapKind, defaultCanvasTilemapRenderer);
-      registerCanvasShapeCommands(defaultCanvasShapeCommands);
-      registerCanvasImageTextureResolver(renderState);
-      registerCanvasBitmapTextureResolver(renderState);
+      registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
+      registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
+      registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -71,7 +71,7 @@ class Main extends Application {
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);
       registerRenderer(renderState, TilemapKind, defaultGlTilemapRenderer);
-      registerGlShapeCommands(defaultGlShapeCommands);
+      registerGlShapeCommands(renderState, defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
     }
 

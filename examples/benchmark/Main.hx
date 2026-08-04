@@ -72,8 +72,8 @@ class Main extends Application {
       });
       registerRenderer(renderState, QuadBatchKind, defaultCanvasQuadBatchRenderer);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
-      registerCanvasImageTextureResolver(renderState);
-      registerCanvasBitmapTextureResolver(renderState);
+      registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
+      registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);

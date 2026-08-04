@@ -228,7 +228,9 @@ class Main extends Application {
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
     // The directional depth pass must finish before the HDR effect target opens its framebuffer.
     prepareScene3DRender(renderState, scene, camera, lights);
-    drawGlScene3DShadowMap(renderState, scene, shadowCamera);
+    // Upstream f1a7a9a0: the shadow pass now takes the owning directional light, whose
+    // castsShadow/bias policy controls the map (null actively disables a previous map).
+    drawGlScene3DShadowMap(renderState, scene, shadowCamera, lights.directional);
     beginGlRenderEffectPipeline(renderState, pipeline, 'linear');
     renderGlBackground(renderState);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);

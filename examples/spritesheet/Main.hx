@@ -76,9 +76,9 @@ class Main extends Application {
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
       registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
-      registerCanvasShapeCommands(defaultCanvasShapeCommands);
-      registerCanvasImageTextureResolver(renderState);
-      registerCanvasBitmapTextureResolver(renderState);
+      registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
+      registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
+      registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -91,7 +91,7 @@ class Main extends Application {
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);
-      registerGlShapeCommands(defaultGlShapeCommands);
+      registerGlShapeCommands(renderState, defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
     }
 

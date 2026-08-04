@@ -64,7 +64,7 @@ class Main extends Application {
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
-      registerCanvasImageTextureResolver(renderState);
+      registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
     } else {
       final canvas = new _GlCanvas(window);

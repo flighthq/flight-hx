@@ -55,9 +55,9 @@ class Main extends Application {
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
       registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
-      registerCanvasShapeCommands(defaultCanvasShapeCommands);
-      registerCanvasImageTextureResolver(renderState);
-      registerCanvasBitmapTextureResolver(renderState);
+      registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
+      registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
+      registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -70,7 +70,14 @@ class Main extends Application {
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
-      registerGlShapeCommands(defaultGlShapeCommands);
+      // Upstream f1a7a9a0: gradient and texture fills have no tessellated form on this backend, so
+      // they draw through an explicit canvas rasterizer alongside the GPU mesh command lane.
+      final shapeRasterizerResolvers = createCanvasTextureResolvers();
+      connectCanvasTextureResolverMisses(shapeRasterizerResolvers, renderState);
+      registerCanvasBitmapTextureResolver(shapeRasterizerResolvers);
+      registerCanvasImageTextureResolver(shapeRasterizerResolvers);
+      registerGlShapeRasterizer(renderState, createCanvasShapeRasterizer(shapeRasterizerResolvers));
+      registerGlShapeCommands(renderState, defaultGlShapeCommands);
       enableGlBlendModeSupport(renderState);
     }
 

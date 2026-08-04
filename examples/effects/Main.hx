@@ -50,11 +50,11 @@ class Main extends Application {
         backgroundColor: 0x0a0c14ff,
       });
       registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
-      registerCanvasShapeCommands(defaultCanvasShapeCommands);
+      registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
       registerCanvasBloomEffect(renderState);
       registerCanvasVignetteEffect(renderState);
-      registerCanvasImageTextureResolver(renderState);
-      registerCanvasBitmapTextureResolver(renderState);
+      registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
+      registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = new _GlCanvas(window);
@@ -66,7 +66,17 @@ class Main extends Application {
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
-      registerGlShapeCommands(defaultGlShapeCommands);
+      // Upstream f1a7a9a0: the GPU mesh lane covers solid fills and open strokes; closed strokes,
+      // gradients, and texture fills draw through an explicit canvas shape rasterizer, whose
+      // resolver set is pointed at this state's diagnostics. Without it those shapes silently
+      // vanish (this example's GL frame was background-only).
+      final shapeRasterizerResolvers = createCanvasTextureResolvers();
+      connectCanvasTextureResolverMisses(shapeRasterizerResolvers, renderState);
+      registerCanvasImageTextureResolver(shapeRasterizerResolvers);
+      registerCanvasBitmapTextureResolver(shapeRasterizerResolvers);
+      registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
+      registerCanvasShapeCommands(renderState, defaultCanvasTextureShapeCommands);
+      registerGlShapeRasterizer(renderState, createCanvasShapeRasterizer(shapeRasterizerResolvers));
       registerGlBloomEffect(renderState);
       registerGlVignetteEffect(renderState);
       registerGlToneMapEffect(renderState);
