@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-08-04T20:50:43.444Z",
+  "failedPackages": 1,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 752464,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·································x······································································································································\n\n Test Files  1 failed | 28 passed (29)\n      Tests  1 failed | 167 passed (168)\n   Start at  13:38:11\n   Duration  751.38s (transform 20.68s, setup 491ms, import 719.00s, tests 29.60s, environment 1.32s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts > defaultWgpuShapeRenderer > provides the MorphShape renderer alias\nAssertionError: expected { format: +0, …(3) } to be { format: +0, …(3) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { format: +0, …(3) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts:97:43\n     95| describe('defaultWgpuShapeRenderer', () => {\n     96|   it('provides the MorphShape renderer alias', () => {\n     97|     expect(defaultWgpuMorphShapeRenderer).toBe(defaultWgpuShapeRendere…\n       |                                           ^\n     98|   });\n     99|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "package": "scene2d-wgpu",
+      "signal": null,
+      "status": "failed",
+      "summary": "1 failed | 167 passed (168)",
+      "testFiles": 29
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene2d-wgpu",
+  "startedAt": "2026-08-04T20:38:10.976Z"
+}

@@ -1,20 +1,19 @@
 {
-  "completedAt": "2026-08-04T17:09:49.702Z",
-  "failedPackages": 56,
-  "jobs": 12,
+  "completedAt": "2026-08-04T19:37:58.073Z",
+  "failedPackages": 7,
+  "jobs": 6,
   "packages": [
     {
-      "durationMs": 55860,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:53:34\n   Duration  54.62s (transform 19.63s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 101612,
+      "exitCode": 0,
       "package": "abc",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "17 passed (17)",
       "testFiles": 2
     },
     {
-      "durationMs": 26902,
+      "durationMs": 14116,
       "exitCode": 0,
       "package": "accessibility",
       "signal": null,
@@ -23,7 +22,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 63114,
+      "durationMs": 31929,
       "exitCode": 0,
       "package": "adjustments",
       "signal": null,
@@ -32,17 +31,16 @@
       "testFiles": 19
     },
     {
-      "durationMs": 121012,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n····························\n\n Test Files  1 passed (2)\n      Tests  28 passed (28)\n     Errors  1 error\n   Start at  09:53:35\n   Duration  119.44s (transform 31.37s, setup 688ms, import 108.13s, tests 73ms, environment 3.04s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 449432,
+      "exitCode": 0,
       "package": "animation",
       "signal": null,
-      "status": "failed",
-      "summary": "28 passed (28)",
+      "status": "passed",
+      "summary": "131 passed (131)",
       "testFiles": 11
     },
     {
-      "durationMs": 28076,
+      "durationMs": 15497,
       "exitCode": 0,
       "package": "app",
       "signal": null,
@@ -51,17 +49,16 @@
       "testFiles": 1
     },
     {
-      "durationMs": 67794,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·····································································································································\n\n Test Files  2 passed (3)\n      Tests  133 passed (133)\n     Errors  1 error\n   Start at  09:53:35\n   Duration  66.58s (transform 20.08s, setup 690ms, import 25.66s, tests 191ms, environment 3.18s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 64037,
+      "exitCode": 0,
       "package": "application",
       "signal": null,
-      "status": "failed",
-      "summary": "133 passed (133)",
+      "status": "passed",
+      "summary": "138 passed (138)",
       "testFiles": 3
     },
     {
-      "durationMs": 30216,
+      "durationMs": 17552,
       "exitCode": 0,
       "package": "application-gl",
       "signal": null,
@@ -70,7 +67,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 30920,
+      "durationMs": 18132,
       "exitCode": 0,
       "package": "assets",
       "signal": null,
@@ -79,7 +76,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 123279,
+      "durationMs": 62439,
       "exitCode": 0,
       "package": "audio",
       "signal": null,
@@ -88,7 +85,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 28109,
+      "durationMs": 13200,
       "exitCode": 0,
       "package": "binpack",
       "signal": null,
@@ -97,17 +94,16 @@
       "testFiles": 2
     },
     {
-      "durationMs": 58909,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n················\n\n Test Files  1 passed (2)\n      Tests  16 passed (16)\n     Errors  1 error\n   Start at  09:53:34\n   Duration  57.65s (transform 20.48s, setup 578ms, import 21.65s, tests 127ms, environment 3.25s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 247055,
+      "exitCode": 0,
       "package": "bitmap",
       "signal": null,
-      "status": "failed",
-      "summary": "16 passed (16)",
+      "status": "passed",
+      "summary": "372 passed (372)",
       "testFiles": 42
     },
     {
-      "durationMs": 142541,
+      "durationMs": 77343,
       "exitCode": 0,
       "package": "bitmapfont",
       "signal": null,
@@ -116,7 +112,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 53787,
+      "durationMs": 27936,
       "exitCode": 0,
       "package": "bitmapfont-formats",
       "signal": null,
@@ -125,37 +121,34 @@
       "testFiles": 4
     },
     {
-      "durationMs": 126733,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n··················\n\n Test Files  1 passed (2)\n      Tests  18 passed (18)\n     Errors  1 error\n   Start at  09:54:03\n   Duration  125.04s (transform 34.72s, setup 489ms, import 30.06s, tests 64ms, environment 2.94s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 76386,
+      "exitCode": 0,
       "package": "bitmaptext",
       "signal": null,
-      "status": "failed",
-      "summary": "18 passed (18)",
+      "status": "passed",
+      "summary": "36 passed (36)",
       "testFiles": 2
     },
     {
-      "durationMs": 121694,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n····················································\n\n Test Files  6 passed (7)\n      Tests  52 passed (52)\n     Errors  1 error\n   Start at  09:54:03\n   Duration  120.25s (transform 20.53s, setup 483ms, import 102.22s, tests 95ms, environment 2.93s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 154083,
+      "exitCode": 0,
       "package": "camera",
       "signal": null,
-      "status": "failed",
-      "summary": "52 passed (52)",
+      "status": "passed",
+      "summary": "88 passed (88)",
       "testFiles": 15
     },
     {
-      "durationMs": 68987,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:54:05\n   Duration  67.76s (transform 25.01s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 176830,
+      "exitCode": 0,
       "package": "camera-controls",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "37 passed (37)",
       "testFiles": 4
     },
     {
-      "durationMs": 28712,
+      "durationMs": 13431,
       "exitCode": 0,
       "package": "capture",
       "signal": null,
@@ -164,7 +157,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 55563,
+      "durationMs": 35103,
       "exitCode": 0,
       "package": "clip",
       "signal": null,
@@ -173,17 +166,16 @@
       "testFiles": 2
     },
     {
-      "durationMs": 80690,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:54:34\n   Duration  79.23s (transform 24.81s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 76103,
+      "exitCode": 0,
       "package": "clipboard",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "56 passed (56)",
       "testFiles": 1
     },
     {
-      "durationMs": 29479,
+      "durationMs": 17296,
       "exitCode": 0,
       "package": "clock",
       "signal": null,
@@ -192,7 +184,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 44235,
+      "durationMs": 36951,
       "exitCode": 0,
       "package": "collision",
       "signal": null,
@@ -201,7 +193,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 34017,
+      "durationMs": 24777,
       "exitCode": 0,
       "package": "color",
       "signal": null,
@@ -210,17 +202,16 @@
       "testFiles": 9
     },
     {
-      "durationMs": 84548,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:54:56\n   Duration  82.49s (transform 24.59s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 122016,
+      "exitCode": 0,
       "package": "compression",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "15 passed (15)",
       "testFiles": 2
     },
     {
-      "durationMs": 26921,
+      "durationMs": 15715,
       "exitCode": 0,
       "package": "connectivity",
       "signal": null,
@@ -229,17 +220,16 @@
       "testFiles": 1
     },
     {
-      "durationMs": 98705,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:55:14\n   Duration  97.12s (transform 27.26s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 127800,
+      "exitCode": 0,
       "package": "debug",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "27 passed (27)",
       "testFiles": 2
     },
     {
-      "durationMs": 106496,
+      "durationMs": 74949,
       "exitCode": 0,
       "package": "device",
       "signal": null,
@@ -248,7 +238,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 21069,
+      "durationMs": 20803,
       "exitCode": 0,
       "package": "dialog",
       "signal": null,
@@ -257,7 +247,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 50230,
+      "durationMs": 41770,
       "exitCode": 0,
       "package": "easing",
       "signal": null,
@@ -266,57 +256,52 @@
       "testFiles": 20
     },
     {
-      "durationMs": 112836,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·····················\n\n Test Files  1 passed (2)\n      Tests  21 passed (21)\n     Errors  1 error\n   Start at  09:55:31\n   Duration  111.31s (transform 27.55s, setup 779ms, import 102.07s, tests 57ms, environment 3.28s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 1263994,
+      "exitCode": 0,
       "package": "effects",
       "signal": null,
-      "status": "failed",
-      "summary": "21 passed (21)",
+      "status": "passed",
+      "summary": "364 passed (364)",
       "testFiles": 72
     },
     {
-      "durationMs": 63712,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n················\n\n Test Files  1 passed (2)\n      Tests  16 passed (16)\n     Errors  1 error\n   Start at  09:55:36\n   Duration  61.66s (transform 14.82s, setup 565ms, import 40.71s, tests 103ms, environment 2.91s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 250517,
+      "exitCode": 0,
       "package": "effects-canvas",
       "signal": null,
-      "status": "failed",
-      "summary": "16 passed (16)",
+      "status": "passed",
+      "summary": "172 passed (172)",
       "testFiles": 26
     },
     {
-      "durationMs": 109215,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n······················································································\n\n Test Files  7 passed (8)\n      Tests  86 passed (86)\n     Errors  1 error\n   Start at  09:55:38\n   Duration  107.52s (transform 16.83s, setup 693ms, import 83.79s, tests 2.41s, environment 2.62s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 253486,
+      "exitCode": 0,
       "package": "effects-gl",
       "signal": null,
-      "status": "failed",
-      "summary": "86 passed (86)",
+      "status": "passed",
+      "summary": "266 passed (266)",
       "testFiles": 58
     },
     {
-      "durationMs": 91222,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n············································\n\n Test Files  1 passed (2)\n      Tests  44 passed (44)\n     Errors  1 error\n   Start at  09:55:43\n   Duration  89.81s (transform 21.21s, setup 473ms, import 59.79s, tests 169ms, environment 2.84s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 245581,
+      "exitCode": 0,
       "package": "effects-wgpu",
       "signal": null,
-      "status": "failed",
-      "summary": "44 passed (44)",
+      "status": "passed",
+      "summary": "239 passed (239)",
       "testFiles": 56
     },
     {
-      "durationMs": 113932,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n··········\n\n Test Files  1 passed (2)\n      Tests  10 passed (10)\n     Errors  1 error\n   Start at  09:55:55\n   Duration  112.30s (transform 31.45s, setup 881ms, import 102.40s, tests 58ms, environment 3.60s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 300188,
+      "exitCode": 0,
       "package": "entity",
       "signal": null,
-      "status": "failed",
-      "summary": "10 passed (10)",
+      "status": "passed",
+      "summary": "32 passed (32)",
       "testFiles": 6
     },
     {
-      "durationMs": 27609,
+      "durationMs": 14543,
       "exitCode": 0,
       "package": "filesystem",
       "signal": null,
@@ -325,7 +310,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 27426,
+      "durationMs": 14360,
       "exitCode": 0,
       "package": "flow",
       "signal": null,
@@ -334,7 +319,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 45939,
+      "durationMs": 34521,
       "exitCode": 0,
       "package": "font",
       "signal": null,
@@ -343,7 +328,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 24866,
+      "durationMs": 17303,
       "exitCode": 0,
       "package": "geolocation",
       "signal": null,
@@ -352,27 +337,25 @@
       "testFiles": 1
     },
     {
-      "durationMs": 139710,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n···············································································································································································································································································································································································································································································································································································································································································································································································\n\n Test Files  8 passed (9)\n      Tests  751 passed (751)\n     Errors  1 error\n   Start at  09:56:21\n   Duration  137.81s (transform 18.79s, setup 655ms, import 123.98s, tests 404ms, environment 2.92s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 176535,
+      "exitCode": 0,
       "package": "geometry",
       "signal": null,
-      "status": "failed",
-      "summary": "751 passed (751)",
+      "status": "passed",
+      "summary": "997 passed (997)",
       "testFiles": 26
     },
     {
-      "durationMs": 92855,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:56:25\n   Duration  91.54s (transform 27.67s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 88458,
+      "exitCode": 0,
       "package": "glyphatlas",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "54 passed (54)",
       "testFiles": 8
     },
     {
-      "durationMs": 25817,
+      "durationMs": 15429,
       "exitCode": 0,
       "package": "haptics",
       "signal": null,
@@ -381,7 +364,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 128466,
+      "durationMs": 72063,
       "exitCode": 0,
       "package": "host-capacitor",
       "signal": null,
@@ -390,7 +373,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 46454,
+      "durationMs": 27034,
       "exitCode": 0,
       "package": "host-electron",
       "signal": null,
@@ -399,7 +382,7 @@
       "testFiles": 17
     },
     {
-      "durationMs": 46995,
+      "durationMs": 27587,
       "exitCode": 0,
       "package": "host-tauri",
       "signal": null,
@@ -408,17 +391,16 @@
       "testFiles": 11
     },
     {
-      "durationMs": 157741,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·····························\n\n Test Files  1 passed (2)\n      Tests  29 passed (29)\n     Errors  1 error\n   Start at  09:56:56\n   Duration  155.88s (transform 31.31s, setup 769ms, import 103.31s, tests 116ms, environment 2.88s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 143080,
+      "exitCode": 0,
       "package": "image",
       "signal": null,
-      "status": "failed",
-      "summary": "29 passed (29)",
+      "status": "passed",
+      "summary": "50 passed (50)",
       "testFiles": 3
     },
     {
-      "durationMs": 35574,
+      "durationMs": 18548,
       "exitCode": 0,
       "package": "image-codec",
       "signal": null,
@@ -427,37 +409,34 @@
       "testFiles": 9
     },
     {
-      "durationMs": 138658,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·····\n\n Test Files  1 passed (2)\n      Tests  5 passed (5)\n     Errors  1 error\n   Start at  09:57:03\n   Duration  137.16s (transform 27.34s, setup 503ms, import 97.20s, tests 30ms, environment 2.30s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 105358,
+      "exitCode": 0,
       "package": "importdiagnostics",
       "signal": null,
-      "status": "failed",
-      "summary": "5 passed (5)",
+      "status": "passed",
+      "summary": "7 passed (7)",
       "testFiles": 2
     },
     {
-      "durationMs": 75289,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:57:15\n   Duration  73.51s (transform 24.94s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 63274,
+      "exitCode": 0,
       "package": "input",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "109 passed (109)",
       "testFiles": 1
     },
     {
-      "durationMs": 164935,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n···········································\n\n Test Files  1 passed (2)\n      Tests  43 passed (43)\n     Errors  1 error\n   Start at  09:57:24\n   Duration  163.03s (transform 32.08s, setup 1.01s, import 123.86s, tests 125ms, environment 3.37s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 596898,
+      "exitCode": 0,
       "package": "interaction",
       "signal": null,
-      "status": "failed",
-      "summary": "43 passed (43)",
+      "status": "passed",
+      "summary": "154 passed (154)",
       "testFiles": 15
     },
     {
-      "durationMs": 31844,
+      "durationMs": 18646,
       "exitCode": 0,
       "package": "intl",
       "signal": null,
@@ -466,27 +445,25 @@
       "testFiles": 7
     },
     {
-      "durationMs": 50034,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:57:28\n   Duration  48.32s (transform 17.64s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 65366,
+      "exitCode": 0,
       "package": "ipc",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "43 passed (43)",
       "testFiles": 1
     },
     {
-      "durationMs": 41691,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:57:34\n   Duration  40.19s (transform 16.83s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 61764,
+      "exitCode": 0,
       "package": "keyboard",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "60 passed (60)",
       "testFiles": 1
     },
     {
-      "durationMs": 25567,
+      "durationMs": 16352,
       "exitCode": 0,
       "package": "lifecycle",
       "signal": null,
@@ -495,17 +472,16 @@
       "testFiles": 1
     },
     {
-      "durationMs": 210184,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n···················································\n\n Test Files  3 passed (4)\n      Tests  51 passed (51)\n     Errors  1 error\n   Start at  09:57:49\n   Duration  208.37s (transform 30.96s, setup 810ms, import 146.47s, tests 123ms, environment 3.36s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 558617,
+      "exitCode": 0,
       "package": "lighting",
       "signal": null,
-      "status": "failed",
-      "summary": "51 passed (51)",
+      "status": "passed",
+      "summary": "93 passed (93)",
       "testFiles": 11
     },
     {
-      "durationMs": 31759,
+      "durationMs": 20493,
       "exitCode": 0,
       "package": "loader",
       "signal": null,
@@ -514,7 +490,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 103986,
+      "durationMs": 92571,
       "exitCode": 0,
       "package": "log",
       "signal": null,
@@ -523,17 +499,16 @@
       "testFiles": 1
     },
     {
-      "durationMs": 121416,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n························································\n\n Test Files  2 passed (3)\n      Tests  56 passed (56)\n     Errors  1 error\n   Start at  09:58:05\n   Duration  120.27s (transform 29.72s, setup 664ms, import 106.86s, tests 111ms, environment 3.01s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 900492,
+      "exitCode": 0,
       "package": "materials",
       "signal": null,
-      "status": "failed",
-      "summary": "56 passed (56)",
+      "status": "passed",
+      "summary": "161 passed (161)",
       "testFiles": 20
     },
     {
-      "durationMs": 42518,
+      "durationMs": 33150,
       "exitCode": 0,
       "package": "math",
       "signal": null,
@@ -542,7 +517,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 37134,
+      "durationMs": 40928,
       "exitCode": 0,
       "package": "media",
       "signal": null,
@@ -551,7 +526,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 25890,
+      "durationMs": 16980,
       "exitCode": 0,
       "package": "mediasession",
       "signal": null,
@@ -560,7 +535,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 28831,
+      "durationMs": 18392,
       "exitCode": 0,
       "package": "menu",
       "signal": null,
@@ -569,17 +544,16 @@
       "testFiles": 2
     },
     {
-      "durationMs": 76960,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·················\n\n Test Files  1 passed (2)\n      Tests  17 passed (17)\n     Errors  1 error\n   Start at  09:58:40\n   Duration  75.12s (transform 23.79s, setup 788ms, import 16.75s, tests 106ms, environment 2.74s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 126691,
+      "exitCode": 0,
       "package": "mesh",
       "signal": null,
-      "status": "failed",
-      "summary": "17 passed (17)",
+      "status": "passed",
+      "summary": "179 passed (179)",
       "testFiles": 13
     },
     {
-      "durationMs": 49191,
+      "durationMs": 36012,
       "exitCode": 0,
       "package": "motionpath",
       "signal": null,
@@ -588,7 +562,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 118681,
+      "durationMs": 94168,
       "exitCode": 0,
       "package": "movieclip",
       "signal": null,
@@ -597,7 +571,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 27074,
+      "durationMs": 16791,
       "exitCode": 0,
       "package": "net",
       "signal": null,
@@ -606,17 +580,16 @@
       "testFiles": 1
     },
     {
-      "durationMs": 83181,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:58:58\n   Duration  81.54s (transform 22.88s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 411720,
+      "exitCode": 0,
       "package": "node",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "380 passed (380)",
       "testFiles": 18
     },
     {
-      "durationMs": 25386,
+      "durationMs": 16001,
       "exitCode": 0,
       "package": "notification",
       "signal": null,
@@ -625,17 +598,16 @@
       "testFiles": 1
     },
     {
-      "durationMs": 132449,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n························\n\n Test Files  1 passed (2)\n      Tests  24 passed (24)\n     Errors  1 error\n   Start at  09:59:22\n   Duration  130.79s (transform 27.91s, setup 885ms, import 46.01s, tests 49ms, environment 3.78s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 250141,
+      "exitCode": 0,
       "package": "particleemitter",
       "signal": null,
-      "status": "failed",
-      "summary": "24 passed (24)",
+      "status": "passed",
+      "summary": "194 passed (194)",
       "testFiles": 12
     },
     {
-      "durationMs": 48570,
+      "durationMs": 36234,
       "exitCode": 0,
       "package": "particles",
       "signal": null,
@@ -644,27 +616,25 @@
       "testFiles": 10
     },
     {
-      "durationMs": 156011,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·······························\n\n Test Files  1 passed (2)\n      Tests  31 passed (31)\n     Errors  1 error\n   Start at  09:59:24\n   Duration  154.63s (transform 32.03s, setup 528ms, import 108.53s, tests 231ms, environment 3.29s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 527479,
+      "exitCode": 0,
       "package": "particles-formats",
       "signal": null,
-      "status": "failed",
-      "summary": "31 passed (31)",
+      "status": "passed",
+      "summary": "255 passed (255)",
       "testFiles": 14
     },
     {
-      "durationMs": 70434,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  09:59:33\n   Duration  68.91s (transform 21.08s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 631787,
+      "exitCode": 0,
       "package": "path",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "235 passed (235)",
       "testFiles": 28
     },
     {
-      "durationMs": 121523,
+      "durationMs": 69342,
       "exitCode": 0,
       "package": "path-boolean",
       "signal": null,
@@ -673,7 +643,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 38889,
+      "durationMs": 23661,
       "exitCode": 0,
       "package": "path-formats",
       "signal": null,
@@ -682,7 +652,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 28819,
+      "durationMs": 15234,
       "exitCode": 0,
       "package": "permissions",
       "signal": null,
@@ -691,27 +661,25 @@
       "testFiles": 2
     },
     {
-      "durationMs": 58668,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n···························································································································································································································································································································\n\n Test Files  12 passed (13)\n      Tests  315 passed (315)\n     Errors  1 error\n   Start at  10:00:08\n   Duration  56.43s (transform 14.70s, setup 1.15s, import 41.10s, tests 6.16s, environment 3.64s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 42935,
+      "exitCode": 0,
       "package": "physics2d",
       "signal": null,
-      "status": "failed",
-      "summary": "315 passed (315)",
+      "status": "passed",
+      "summary": "346 passed (346)",
       "testFiles": 20
     },
     {
-      "durationMs": 107328,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:00:09\n   Duration  105.96s (transform 25.45s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 190046,
+      "exitCode": 0,
       "package": "picking",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "33 passed (33)",
       "testFiles": 2
     },
     {
-      "durationMs": 22843,
+      "durationMs": 13899,
       "exitCode": 0,
       "package": "platform",
       "signal": null,
@@ -720,7 +688,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 26698,
+      "durationMs": 15981,
       "exitCode": 0,
       "package": "power",
       "signal": null,
@@ -729,7 +697,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 26037,
+      "durationMs": 17911,
       "exitCode": 0,
       "package": "protocol",
       "signal": null,
@@ -738,167 +706,157 @@
       "testFiles": 1
     },
     {
-      "durationMs": 62851,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:00:26\n   Duration  61.38s (transform 18.35s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 126522,
+      "exitCode": 0,
       "package": "quadbatch",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "84 passed (84)",
       "testFiles": 1
     },
     {
-      "durationMs": 106714,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n··································································\n\n Test Files  2 passed (3)\n      Tests  66 passed (66)\n     Errors  1 error\n   Start at  10:00:34\n   Duration  105.28s (transform 17.97s, setup 959ms, import 81.96s, tests 84ms, environment 2.78s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 761111,
+      "exitCode": 0,
       "package": "render",
       "signal": null,
-      "status": "failed",
-      "summary": "66 passed (66)",
+      "status": "passed",
+      "summary": "227 passed (227)",
       "testFiles": 20
     },
     {
-      "durationMs": 106582,
+      "durationMs": 2073754,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:00:44\n   Duration  104.75s (transform 25.64s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n····························xx···········································x···········x···········x·······x·····x··················x··································x··············································································································x································································································\n\n Test Files  5 failed | 24 passed (29)\n      Tests  10 failed | 363 passed (373)\n   Start at  10:53:05\n   Duration  2071.53s (transform 74.10s, setup 1.44s, import 2059.49s, tests 5.13s, environment 3.71s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/render-gl/src/glDraw.test.ts > bindGlTexture > premultiplies alpha on upload for HTMLCanvasElement sources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 37207, true ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   37207,\n+   37441,\n    true,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/render-gl/src/glDraw.test.ts:386:28\n    384|     const canvas = document.createElement('canvas');\n    385|     bindGlTexture(state, canvas);\n    386|     expect(gl.pixelStorei).toHaveBeenCalledWith(\n       |                            ^\n    387|       (gl as unknown as { UNPACK_PREMULTIPLY_ALPHA_WEBGL: number }).UN…\n    388|       true,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glDraw.test.ts > bindGlTexture > sets premultiply to true for non-canvas image sources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 37207, true ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   37207,\n+   37441,\n    true,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/render-gl/src/glDraw.test.ts:396:28\n    394|     const img = document.createElement('img');\n    395|     bindGlTexture(state, img);\n    396|     expect(gl.pixelStorei).toHaveBeenCalledWith(\n       |                            ^\n    397|       (gl as unknown as { UNPACK_PREMULTIPLY_ALPHA_WEBGL: number }).UN…\n    398|       true,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glDraw.test.ts > updateGlTexture > sets premultiply alpha before uploading\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 37207, true ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   37207,\n+   37441,\n    true,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/render-gl/src/glDraw.test.ts:904:28\n    902|     getGlRenderStateRuntime(state).currentTexture = texture;\n    903|     updateGlTexture(state, texture, document.createElement('canvas'));\n    904|     expect(gl.pixelStorei).toHaveBeenCalledWith(\n       |                            ^\n    905|       (gl as unknown as { UNPACK_PREMULTIPLY_ALPHA_WEBGL: number }).UN…\n    906|       true,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glFullscreenPass.test.ts > drawGlFullscreenPass > binds each input texture to its sampler unit\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n  2nd vi.fn() call:\n\n  [\n-   undefined,\n+   33985,\n  ]\n\n  3rd vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n  4th vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n  5th vi.fn() call:\n\n  [\n-   undefined,\n+   33985,\n  ]\n\n  6th vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n\nNumber of calls: 6\n\n ❯ upstream/packages/render-gl/src/glFullscreenPass.test.ts:171:30\n    169|     drawGlFullscreenPass(state, program, inputs, null, () => {});\n    170|\n    171|     expect(activeTextureSpy).toHaveBeenCalledWith(gl.TEXTURE0);\n       |                              ^\n    172|     expect(activeTextureSpy).toHaveBeenCalledWith(gl.TEXTURE0 + 1);\n    173|     expect(bindTextureSpy).toHaveBeenCalledWith(gl.TEXTURE_2D, inputs[…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderPass.test.ts > endGlRenderPass > restores depth writes after a nested depth-clearing pass\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ upstream/packages/render-gl/src/glRenderPass.test.ts:292:23\n    290|     endGlRenderPass(state);\n    291|\n    292|     expect(depthMask).toBe(false);\n       |                       ^\n    293|   });\n    294|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderStateBracket.test.ts > popGlRenderState > restores a non-active texture unit binding\nAssertionError: expected null to be { name: 'unit-two-texture' } // Object.is equality\n\n- Expected:\n{\n  \"name\": \"unit-two-texture\",\n}\n\n+ Received:\nnull\n\n ❯ upstream/packages/render-gl/src/glRenderStateBracket.test.ts:154:54\n    152|     popGlRenderState(fixture.state);\n    153|\n    154|     expect(fixture.textureBindings.get(textureUnit)).toBe(texture);\n       |                                                      ^\n    155|     expect(fixture.parameters.get(fixture.gl.ACTIVE_TEXTURE)).toBe(sav…\n    156|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > createGlRenderTarget > retains canonical requested axes separately from effective storage\nAssertionError: expected 1 to be 4 // Object.is equality\n\n- Expected\n+ Received\n\n- 4\n+ 1\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:117:32\n    115|       colorSpace: 'linear',\n    116|     });\n    117|     expect(target.sampleCount).toBe(4);\n       |                                ^\n    118|     expect(target.depth).toBe('depth-stencil');\n    119|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > explainGlRenderTarget > reports every GL capability substitution without losing the request\nAssertionError: expected [ { axis: 'format', …(2) }, …(2) ] to deeply equal [ { axis: 'format', …(2) }, …(3) ]\n\n- Expected\n+ Received\n\n@@ -13,14 +13,9 @@\n        \"rgba16f\",\n      ],\n    },\n    {\n      \"axis\": \"sampleCount\",\n-     \"effective\": 4,\n+     \"effective\": 1,\n      \"requested\": 8,\n-   },\n-   {\n-     \"axis\": \"depth\",\n-     \"effective\": \"depth-stencil\",\n-     \"requested\": \"depth-stencil-sampled\",\n    },\n  ]\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:271:55\n    269|     });\n    270|\n    271|     expect(explainGlRenderTarget(target).differences).toEqual([\n       |                                                       ^\n    272|       { axis: 'format', effective: 'rgba8', requested: 'rgba16f' },\n    273|       { axis: 'colorFormats', effective: ['rgba8'], requested: ['rgba1…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > resizeGlRenderTarget > preserves heterogeneous color formats and sampled depth across resize\nAssertionError: expected [ 32856, 34836, 35056 ] to deeply equal [ 32856, undefined, 35056 ]\n\n- Expected\n+ Received\n\n  [\n    32856,\n-   undefined,\n+   34836,\n    35056,\n  ]\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:374:72\n    372|     expect(target.depth).toBe('depth-stencil-sampled');\n    373|     expect(target.depthTexture).not.toBeNull();\n    374|     expect(vi.mocked(gl.texImage2D).mock.calls.map((call) => call[2]))…\n       |                                                                        ^\n    375|       gl.RGBA8,\n    376|       gl.RGBA32F,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > resolveGlRenderTargetAxes > queries effective axes without allocating target storage\nAssertionError: expected 1 to be 2 // Object.is equality\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:505:30\n    503|     const axes = resolveGlRenderTargetAxes(state, { width: 32, height:…\n    504|\n    505|     expect(axes.sampleCount).toBe(2);\n       |                              ^\n    506|     expect(gl.createFramebuffer).not.toHaveBeenCalled();\n    507|     expect(gl.createTexture).not.toHaveBeenCalled();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯",
       "package": "render-gl",
       "signal": null,
       "status": "failed",
-      "summary": "no tests",
+      "summary": "10 failed | 363 passed (373)",
       "testFiles": 29
     },
     {
-      "durationMs": 57335,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·········\n\n Test Files  1 passed (2)\n      Tests  9 passed (9)\n     Errors  1 error\n   Start at  10:00:47\n   Duration  56.02s (transform 18.75s, setup 536ms, import 17.90s, tests 122ms, environment 2.99s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 749883,
+      "exitCode": 0,
       "package": "render-wgpu",
       "signal": null,
-      "status": "failed",
-      "summary": "9 passed (9)",
+      "status": "passed",
+      "summary": "206 passed (206)",
       "testFiles": 24
     },
     {
-      "durationMs": 100764,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:00:48\n   Duration  99.40s (transform 24.14s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 344681,
+      "exitCode": 0,
       "package": "scene2d",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "79 passed (79)",
       "testFiles": 6
     },
     {
-      "durationMs": 85131,
+      "durationMs": 2145739,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:00:54\n   Duration  83.77s (transform 23.92s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·································x··························································································································································································································x···········\n\n Test Files  2 failed | 36 passed (38)\n      Tests  2 failed | 262 passed (264)\n   Start at  10:56:24\n   Duration  2142.78s (transform 68.15s, setup 2.11s, import 2131.94s, tests 2.73s, environment 4.11s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-canvas/src/canvasShape.test.ts > drawCanvasShape > renders MorphShapeKind through the explicit default renderer alias\nAssertionError: expected { …(2) } to be { …(2) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { …(2) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-canvas/src/canvasShape.test.ts:105:45\n    103|     const data = getOrCreateRenderProxy2D(state, shape);\n    104|\n    105|     expect(defaultCanvasMorphShapeRenderer).toBe(defaultCanvasShapeRen…\n       |                                             ^\n    106|     expect(() => drawCanvasShape(state, data)).not.toThrow();\n    107|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene2d-canvas/src/canvasTransform.test.ts > setCanvasTransform > should call setTransform with frounded tx and ty when roundPixels is true\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 1, 2, 3, 4, 5.678899765014648, …(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    1,\n    2,\n    3,\n    4,\n-   5.678899765014648,\n-   9.101099967956543,\n+   6,\n+   9,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene2d-canvas/src/canvasTransform.test.ts:33:40\n     31|     state.roundPixels = true;\n     32|     setCanvasTransform(state, state.context, transform);\n     33|     expect(state.context.setTransform).toHaveBeenCalledWith(\n       |                                        ^\n     34|       transform.a,\n     35|       transform.b,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "scene2d-canvas",
       "signal": null,
       "status": "failed",
-      "summary": "no tests",
+      "summary": "2 failed | 262 passed (264)",
       "testFiles": 38
     },
     {
-      "durationMs": 61627,
+      "durationMs": 1739245,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:01:06\n   Duration  59.28s (transform 20.85s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·································································x·············································································x··x···································\n\n Test Files  2 failed | 28 passed (30)\n      Tests  3 failed | 179 passed (182)\n   Start at  10:58:10\n   Duration  1736.97s (transform 68.44s, setup 2.34s, import 1726.22s, tests 3.85s, environment 3.00s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-dom/src/domShape.test.ts > defaultDomShapeRenderer > provides the MorphShape renderer alias\nAssertionError: expected { …(2) } to be { …(2) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { …(2) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-dom/src/domShape.test.ts:35:42\n     33|\n     34|   it('provides the MorphShape renderer alias', () => {\n     35|     expect(defaultDomMorphShapeRenderer).toBe(defaultDomShapeRenderer);\n       |                                          ^\n     36|   });\n     37| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯\n\n FAIL  upstream/packages/scene2d-dom/src/domTransform.test.ts > setDomTransform > frounds tx and ty when roundPixels is true\nAssertionError: expected 'matrix(1,0,0,1,6,9)' to be 'matrix(1,0,0,1,5.678899765014648,9.10…' // Object.is equality\n\nExpected: \"matrix(1,0,0,1,5.678899765014648,9.101099967956543)\"\nReceived: \"matrix(1,0,0,1,6,9)\"\n\n ❯ upstream/packages/scene2d-dom/src/domTransform.test.ts:32:32\n     30|     const expectedTx = Math.fround(5.6789);\n     31|     const expectedTy = Math.fround(9.1011);\n     32|     expect(el.style.transform).toBe(`matrix(1,0,0,1,${expectedTx},${ex…\n       |                                ^\n     33|   });\n     34| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯\n\n FAIL  upstream/packages/scene2d-dom/src/domTransform.test.ts > setDomTransformWithOffset > frounds the adjusted tx/ty when roundPixels is true\nAssertionError: expected 'matrix(1,0,0,1,1,1)' to be 'matrix(1,0,0,1,0.6000000238418579,0.6…' // Object.is equality\n\nExpected: \"matrix(1,0,0,1,0.6000000238418579,0.6000000238418579)\"\nReceived: \"matrix(1,0,0,1,1,1)\"\n\n ❯ upstream/packages/scene2d-dom/src/domTransform.test.ts:66:32\n     64|     const expectedTx = Math.fround(0.6);\n     65|     const expectedTy = Math.fround(0.6);\n     66|     expect(el.style.transform).toBe(`matrix(1,0,0,1,${expectedTx},${ex…\n       |                                ^\n     67|   });\n     68| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯",
       "package": "scene2d-dom",
       "signal": null,
       "status": "failed",
-      "summary": "no tests",
+      "summary": "3 failed | 179 passed (182)",
       "testFiles": 30
     },
     {
-      "durationMs": 51766,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n······\n\n Test Files  1 passed (2)\n      Tests  6 passed (6)\n     Errors  1 error\n   Start at  10:01:19\n   Duration  49.91s (transform 17.07s, setup 700ms, import 19.55s, tests 309ms, environment 3.43s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 1172643,
+      "exitCode": 0,
       "package": "scene2d-formats",
       "signal": null,
-      "status": "failed",
-      "summary": "6 passed (6)",
+      "status": "passed",
+      "summary": "284 passed (284)",
       "testFiles": 19
     },
     {
-      "durationMs": 257072,
+      "durationMs": 1532965,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n------------------------------\n\n Test Files  2 failed (3)\n      Tests  30 skipped (30)\n     Errors  1 error\n   Start at  10:01:29\n   Duration  255.33s (transform 35.37s, setup 2.17s, import 214.62s, tests 20.25s, environment 5.74s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glCache.test.ts [ upstream/packages/scene2d-gl/src/glCache.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glCache.test.ts:42:1\n     40| scopeModuleMocks(['./glQuadBatchWriter', '@flighthq/render-gl', './glN…\n     41|\n     42| beforeAll(async () => {\n       | ^\n     43|   vi.doMock('./glQuadBatchWriter', async (importOriginal) => {\n     44|     const actual = await importOriginal<typeof GlQuadBatchWriterModule…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glShape.test.ts [ upstream/packages/scene2d-gl/src/glShape.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glShape.test.ts:38:1\n     36| scopeModuleMocks(['@flighthq/node']);\n     37|\n     38| beforeAll(async () => {\n       | ^\n     39|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     40|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n------------------------------···············································-----------··········································-----------······x·······························································\n\n Test Files  6 failed | 21 passed (27)\n      Tests  1 failed | 158 passed | 52 skipped (211)\n   Start at  11:04:23\n   Duration  1529.49s (transform 69.43s, setup 7.27s, import 1458.75s, tests 54.84s, environment 4.25s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 5 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glCache.test.ts [ upstream/packages/scene2d-gl/src/glCache.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glCache.test.ts:42:1\n     40| scopeModuleMocks(['./glQuadBatchWriter', '@flighthq/render-gl', './glN…\n     41|\n     42| beforeAll(async () => {\n       | ^\n     43|   vi.doMock('./glQuadBatchWriter', async (importOriginal) => {\n     44|     const actual = await importOriginal<typeof GlQuadBatchWriterModule…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glMeshShapeRenderer.test.ts [ upstream/packages/scene2d-gl/src/glMeshShapeRenderer.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glMeshShapeRenderer.test.ts:23:1\n     21| scopeModuleMocks(['@flighthq/node']);\n     22|\n     23| beforeAll(async () => {\n       | ^\n     24|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     25|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glRasterShapeRenderer.test.ts [ upstream/packages/scene2d-gl/src/glRasterShapeRenderer.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glRasterShapeRenderer.test.ts:18:1\n     16| scopeModuleMocks(['@flighthq/node']);\n     17|\n     18| beforeAll(async () => {\n       | ^\n     19|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     20|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glShape.test.ts [ upstream/packages/scene2d-gl/src/glShape.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glShape.test.ts:38:1\n     36| scopeModuleMocks(['@flighthq/node']);\n     37|\n     38| beforeAll(async () => {\n       | ^\n     39|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     40|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glTextLabel.test.ts [ upstream/packages/scene2d-gl/src/glTextLabel.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glTextLabel.test.ts:22:1\n     20| scopeModuleMocks(['@flighthq/textlayout']);\n     21|\n     22| beforeAll(async () => {\n       | ^\n     23|   vi.doMock('@flighthq/textlayout/contract', async (importOriginal) =>…\n     24|     const actual = (await importOriginal()) as Record<string, unknown>;\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glClipContours.test.ts > pushGlClipContours > uses the even-odd stencil op for an evenOdd winding\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 7680, 7680, undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    7680,\n    7680,\n-   undefined,\n+   5386,\n  ]\n\n  2nd vi.fn() call:\n\n  [\n    7680,\n    7680,\n-   undefined,\n+   7680,\n  ]\n\n\nNumber of calls: 2\n\n ❯ upstream/packages/scene2d-gl/src/glClipContours.test.ts:114:26\n    112|     pushGlClipContours(state, SQUARE, 'evenOdd', createMatrix());\n    113|\n    114|     expect(gl.stencilOp).toHaveBeenCalledWith(gl.KEEP, gl.KEEP, gl.INV…\n       |                          ^\n    115|   });\n    116| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯",
       "package": "scene2d-gl",
       "signal": null,
       "status": "failed",
-      "summary": "30 skipped (30)",
+      "summary": "1 failed | 158 passed | 52 skipped (211)",
       "testFiles": 27
     },
     {
-      "durationMs": 72261,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:01:34\n   Duration  70.54s (transform 22.16s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 239214,
+      "exitCode": 0,
       "package": "scene2d-resources",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "36 passed (36)",
       "testFiles": 8
     },
     {
-      "durationMs": 147514,
+      "durationMs": 1829975,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n----------------\n\n Test Files  1 failed (2)\n      Tests  16 skipped (16)\n     Errors  1 error\n   Start at  10:01:39\n   Duration  146.10s (transform 33.02s, setup 1.14s, import 125.48s, tests 10.13s, environment 2.59s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuCache.test.ts [ upstream/packages/scene2d-wgpu/src/wgpuCache.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-wgpu/src/wgpuCache.test.ts:44:1\n     42| scopeModuleMocks(['./wgpuQuadBatchWriter', '@flighthq/render-wgpu', '.…\n     43|\n     44| beforeAll(async () => {\n       | ^\n     45|   vi.doMock('./wgpuQuadBatchWriter', async (importOriginal) => {\n     46|     const actual = await importOriginal<typeof WgpuQuadBatchWriterModu…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n----------------·················-----------··················------···········----------···············································································\n\n Test Files  5 failed | 24 passed (29)\n      Tests  125 passed | 43 skipped (168)\n   Start at  11:10:01\n   Duration  1827.75s (transform 65.02s, setup 10.01s, import 1758.48s, tests 52.81s, environment 2.77s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 5 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuCache.test.ts [ upstream/packages/scene2d-wgpu/src/wgpuCache.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-wgpu/src/wgpuCache.test.ts:44:1\n     42| scopeModuleMocks(['./wgpuQuadBatchWriter', '@flighthq/render-wgpu', '.…\n     43|\n     44| beforeAll(async () => {\n       | ^\n     45|   vi.doMock('./wgpuQuadBatchWriter', async (importOriginal) => {\n     46|     const actual = await importOriginal<typeof WgpuQuadBatchWriterModu…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuMeshShapeRenderer.test.ts [ upstream/packages/scene2d-wgpu/src/wgpuMeshShapeRenderer.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-wgpu/src/wgpuMeshShapeRenderer.test.ts:24:1\n     22| scopeModuleMocks(['@flighthq/node']);\n     23|\n     24| beforeAll(async () => {\n       | ^\n     25|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     26|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.test.ts [ upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.test.ts:19:1\n     17| scopeModuleMocks(['@flighthq/node']);\n     18|\n     19| beforeAll(async () => {\n       | ^\n     20|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     21|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts [ upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts:38:1\n     36| scopeModuleMocks(['@flighthq/node']);\n     37|\n     38| beforeAll(async () => {\n       | ^\n     39|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     40|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuTextLabel.test.ts [ upstream/packages/scene2d-wgpu/src/wgpuTextLabel.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-wgpu/src/wgpuTextLabel.test.ts:22:1\n     20| scopeModuleMocks(['@flighthq/textlayout']);\n     21|\n     22| beforeAll(async () => {\n       | ^\n     23|   vi.doMock('@flighthq/textlayout/contract', async (importOriginal) =>…\n     24|     const actual = (await importOriginal()) as Record<string, unknown>;\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯",
       "package": "scene2d-wgpu",
       "signal": null,
       "status": "failed",
-      "summary": "16 skipped (16)",
+      "summary": "125 passed | 43 skipped (168)",
       "testFiles": 29
     },
     {
-      "durationMs": 208640,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n····························\n\n Test Files  1 passed (2)\n      Tests  28 passed (28)\n     Errors  1 error\n   Start at  10:01:45\n   Duration  206.78s (transform 33.16s, setup 718ms, import 126.12s, tests 136ms, environment 3.08s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 1403048,
+      "exitCode": 0,
       "package": "scene3d",
       "signal": null,
-      "status": "failed",
-      "summary": "28 passed (28)",
+      "status": "passed",
+      "summary": "153 passed (153)",
       "testFiles": 16
     },
     {
-      "durationMs": 44497,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n··\n\n Test Files  1 passed (2)\n      Tests  2 passed (2)\n     Errors  1 error\n   Start at  10:01:56\n   Duration  42.35s (transform 14.70s, setup 168ms, import 95ms, tests 1.12s, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 1522307,
+      "exitCode": 0,
       "package": "scene3d-formats",
       "signal": null,
-      "status": "failed",
-      "summary": "2 passed (2)",
+      "status": "passed",
+      "summary": "686 passed (686)",
       "testFiles": 23
     },
     {
-      "durationMs": 319952,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·················\n\n Test Files  1 passed (2)\n      Tests  17 passed (17)\n     Errors  1 error\n   Start at  10:02:00\n   Duration  317.99s (transform 38.00s, setup 1.32s, import 188.51s, tests 217ms, environment 2.43s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 4220168,
+      "exitCode": 0,
       "package": "scene3d-gl",
       "signal": null,
-      "status": "failed",
-      "summary": "17 passed (17)",
+      "status": "passed",
+      "summary": "425 passed (425)",
       "testFiles": 62
     },
     {
-      "durationMs": 251772,
+      "durationMs": 1112912,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·x···x···\n\n Test Files  1 failed | 1 passed (3)\n      Tests  2 failed | 7 passed (9)\n     Errors  1 error\n   Start at  10:02:07\n   Duration  249.83s (transform 33.64s, setup 902ms, import 139.78s, tests 2.16s, environment 3.17s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > loadScene3DResources > resolves immediately when there is nothing pending\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:61:56\n     59|     configureResources(scene);\n     60|     const resolver = createBuiltInScene3DResourceResolver({ fetch: asy…\n     61|     await expect(loadScene3DResources(scene, resolver)).resolves.toBeU…\n       |                                                        ^\n     62|     disposeScene3DResourceResolver(resolver);\n     63|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > waitForScene3DResourceResolver > resolves immediately when the resolver has no pending requests\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:132:59\n    130|   it('resolves immediately when the resolver has no pending requests',…\n    131|     const resolver = createBuiltInScene3DResourceResolver();\n    132|     await expect(waitForScene3DResourceResolver(resolver)).resolves.to…\n       |                                                           ^\n    133|     disposeScene3DResourceResolver(resolver);\n    134|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·x···x··································································································\n\n Test Files  1 failed | 25 passed (26)\n      Tests  2 failed | 102 passed (104)\n   Start at  11:29:55\n   Duration  1110.56s (transform 61.00s, setup 1.59s, import 1082.70s, tests 20.03s, environment 3.42s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > loadScene3DResources > resolves immediately when there is nothing pending\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:61:56\n     59|     configureResources(scene);\n     60|     const resolver = createBuiltInScene3DResourceResolver({ fetch: asy…\n     61|     await expect(loadScene3DResources(scene, resolver)).resolves.toBeU…\n       |                                                        ^\n     62|     disposeScene3DResourceResolver(resolver);\n     63|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > waitForScene3DResourceResolver > resolves immediately when the resolver has no pending requests\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:132:59\n    130|   it('resolves immediately when the resolver has no pending requests',…\n    131|     const resolver = createBuiltInScene3DResourceResolver();\n    132|     await expect(waitForScene3DResourceResolver(resolver)).resolves.to…\n       |                                                           ^\n    133|     disposeScene3DResourceResolver(resolver);\n    134|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "scene3d-resources",
       "signal": null,
       "status": "failed",
-      "summary": "2 failed | 7 passed (9)",
+      "summary": "2 failed | 102 passed (104)",
       "testFiles": 26
     },
     {
-      "durationMs": 45827,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:02:11\n   Duration  43.77s (transform 15.16s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 3108617,
+      "exitCode": 0,
       "package": "scene3d-wgpu",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "322 passed (322)",
       "testFiles": 44
     },
     {
-      "durationMs": 24499,
+      "durationMs": 25206,
       "exitCode": 0,
       "package": "screen",
       "signal": null,
@@ -907,7 +865,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 91540,
+      "durationMs": 103967,
       "exitCode": 0,
       "package": "sdk",
       "signal": null,
@@ -916,7 +874,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 28554,
+      "durationMs": 32150,
       "exitCode": 0,
       "package": "sensors",
       "signal": null,
@@ -925,27 +883,25 @@
       "testFiles": 1
     },
     {
-      "durationMs": 41318,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:02:30\n   Duration  39.60s (transform 17.60s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 903184,
+      "exitCode": 0,
       "package": "shading",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "75 passed (75)",
       "testFiles": 16
     },
     {
-      "durationMs": 60208,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:02:41\n   Duration  57.63s (transform 17.71s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 853573,
+      "exitCode": 0,
       "package": "shape",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "160 passed (160)",
       "testFiles": 13
     },
     {
-      "durationMs": 125671,
+      "durationMs": 131907,
       "exitCode": 0,
       "package": "shape-formats",
       "signal": null,
@@ -954,7 +910,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 27175,
+      "durationMs": 28398,
       "exitCode": 0,
       "package": "share",
       "signal": null,
@@ -963,7 +919,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 24903,
+      "durationMs": 33015,
       "exitCode": 0,
       "package": "shell",
       "signal": null,
@@ -972,7 +928,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 29185,
+      "durationMs": 32314,
       "exitCode": 0,
       "package": "shortcut",
       "signal": null,
@@ -981,7 +937,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 30133,
+      "durationMs": 30739,
       "exitCode": 0,
       "package": "signals",
       "signal": null,
@@ -990,37 +946,34 @@
       "testFiles": 5
     },
     {
-      "durationMs": 172036,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n·····························\n\n Test Files  1 passed (2)\n      Tests  29 passed (29)\n     Errors  1 error\n   Start at  10:03:14\n   Duration  170.39s (transform 29.77s, setup 545ms, import 107.82s, tests 161ms, environment 2.75s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 325184,
+      "exitCode": 0,
       "package": "skeleton2d",
       "signal": null,
-      "status": "failed",
-      "summary": "29 passed (29)",
+      "status": "passed",
+      "summary": "45 passed (45)",
       "testFiles": 4
     },
     {
-      "durationMs": 79967,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:03:21\n   Duration  78.23s (transform 22.99s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 299453,
+      "exitCode": 0,
       "package": "skeleton2d-formats",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "118 passed (118)",
       "testFiles": 5
     },
     {
-      "durationMs": 35154,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:03:27\n   Duration  33.34s (transform 14.81s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 376102,
+      "exitCode": 0,
       "package": "skeleton3d",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "42 passed (42)",
       "testFiles": 7
     },
     {
-      "durationMs": 34106,
+      "durationMs": 21952,
       "exitCode": 0,
       "package": "snapshot",
       "signal": null,
@@ -1029,7 +982,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 32134,
+      "durationMs": 20407,
       "exitCode": 0,
       "package": "socket",
       "signal": null,
@@ -1038,7 +991,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 33111,
+      "durationMs": 23554,
       "exitCode": 0,
       "package": "spatial",
       "signal": null,
@@ -1047,7 +1000,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 40376,
+      "durationMs": 25969,
       "exitCode": 0,
       "package": "spring",
       "signal": null,
@@ -1056,7 +1009,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 45010,
+      "durationMs": 31242,
       "exitCode": 0,
       "package": "spritesheet",
       "signal": null,
@@ -1065,7 +1018,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 124497,
+      "durationMs": 69081,
       "exitCode": 0,
       "package": "spritesheet-formats",
       "signal": null,
@@ -1074,7 +1027,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 27392,
+      "durationMs": 19606,
       "exitCode": 0,
       "package": "statusbar",
       "signal": null,
@@ -1083,7 +1036,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 22922,
+      "durationMs": 17027,
       "exitCode": 0,
       "package": "storage",
       "signal": null,
@@ -1092,7 +1045,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 266956,
+      "durationMs": 197584,
       "exitCode": 0,
       "package": "swf",
       "signal": null,
@@ -1101,17 +1054,16 @@
       "testFiles": 8
     },
     {
-      "durationMs": 116652,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:04:42\n   Duration  114.81s (transform 25.89s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 216157,
+      "exitCode": 0,
       "package": "text",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "195 passed (195)",
       "testFiles": 5
     },
     {
-      "durationMs": 34065,
+      "durationMs": 19258,
       "exitCode": 0,
       "package": "text-markup",
       "signal": null,
@@ -1120,7 +1072,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 30531,
+      "durationMs": 17899,
       "exitCode": 0,
       "package": "textbidi",
       "signal": null,
@@ -1129,7 +1081,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 242122,
+      "durationMs": 183920,
       "exitCode": 0,
       "package": "textinput",
       "signal": null,
@@ -1138,7 +1090,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 43247,
+      "durationMs": 29479,
       "exitCode": 0,
       "package": "textlayout",
       "signal": null,
@@ -1147,7 +1099,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 30173,
+      "durationMs": 19379,
       "exitCode": 0,
       "package": "textsegment",
       "signal": null,
@@ -1156,7 +1108,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 36180,
+      "durationMs": 26061,
       "exitCode": 0,
       "package": "textshaper",
       "signal": null,
@@ -1165,7 +1117,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 29703,
+      "durationMs": 21058,
       "exitCode": 0,
       "package": "textshaper-canvas",
       "signal": null,
@@ -1174,7 +1126,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 222929,
+      "durationMs": 189860,
       "exitCode": 0,
       "package": "texture",
       "signal": null,
@@ -1183,7 +1135,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 36777,
+      "durationMs": 21971,
       "exitCode": 0,
       "package": "texture-formats",
       "signal": null,
@@ -1192,7 +1144,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 147055,
+      "durationMs": 97689,
       "exitCode": 0,
       "package": "textureatlas",
       "signal": null,
@@ -1201,7 +1153,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 125433,
+      "durationMs": 82961,
       "exitCode": 0,
       "package": "textureatlas-formats",
       "signal": null,
@@ -1210,17 +1162,16 @@
       "testFiles": 5
     },
     {
-      "durationMs": 76330,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n\n\n Test Files   (1)\n      Tests  no tests\n     Errors  1 error\n   Start at  10:05:52\n   Duration  74.93s (transform 22.81s, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 82536,
+      "exitCode": 0,
       "package": "tilemap",
       "signal": null,
-      "status": "failed",
-      "summary": "no tests",
+      "status": "passed",
+      "summary": "54 passed (54)",
       "testFiles": 1
     },
     {
-      "durationMs": 34849,
+      "durationMs": 24340,
       "exitCode": 0,
       "package": "tilemap-formats",
       "signal": null,
@@ -1229,7 +1180,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 25332,
+      "durationMs": 17185,
       "exitCode": 0,
       "package": "timeline",
       "signal": null,
@@ -1238,17 +1189,17 @@
       "testFiles": 1
     },
     {
-      "durationMs": 211676,
+      "durationMs": 392679,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo\n\n···················································stdout | upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nBuilding tools/examples…\n\n··x··········································\n\n Test Files  11 failed | 15 passed (26)\n      Tests  1 failed | 95 passed (96)\n   Start at  10:06:19\n   Duration  210.17s (transform 33.41s, setup 781ms, import 178.39s, tests 840ms, environment 3.60s)\n\n\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path /tmp/capture-static-OAZjH2/package.json\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '/tmp/capture-static-OAZjH2/package.json'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/agent/.npm/_logs/2026-08-04T17_09_46_518Z-debug-0.log\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 10 ⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts [ upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureBenchmark.test.ts [ upstream/packages/tool-capture/src/captureBenchmark.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureBrowser.test.ts [ upstream/packages/tool-capture/src/captureBrowser.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureEntry.test.ts [ upstream/packages/tool-capture/src/captureEntry.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureEyes.e2e.test.ts [ upstream/packages/tool-capture/src/captureEyes.e2e.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureRenderTarget.test.ts [ upstream/packages/tool-capture/src/captureRenderTarget.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureSuite.test.ts [ upstream/packages/tool-capture/src/captureSuite.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureWorkflow.test.ts [ upstream/packages/tool-capture/src/captureWorkflow.test.ts ]\n FAIL  upstream/packages/tool-capture/src/referenceCapture.test.ts [ upstream/packages/tool-capture/src/referenceCapture.test.ts ]\nError: Failed to resolve import \"@playwright/test\" from \"upstream/packages/tool-capture/src/captureBrowser.ts\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo/upstream/packages/tool-capture/src/captureBrowser.ts:21:36\n  1  |  import { getCaptureTimeoutMs } from \"./captureTimeout.js\";\n  2  |  export async function launchBrowser(options = {}) {\n  3  |  \tconst { chromium } = await import(\"@playwright/test\");\n     |                                     ^\n  4  |  \t// Headless Chromium exposes navigator.gpu but withholds a Wgpu adapter on a software-only,\n  5  |  \t// \"untrusted\" config unless --enable-unsafe-webgpu is set; with it, Dawn falls back to the\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30416:39\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30413:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27438:18\n ❯ node_modules/vite/dist/node/chunks/node.js:27506:30\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27474:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30201:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20124:26\n ❯ fetchModule node_modules/vite/dist/node/chunks/node.js:33584:15\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯\n\n FAIL  upstream/packages/tool-capture/src/captureValidation.test.ts [ upstream/packages/tool-capture/src/captureValidation.test.ts ]\nError: Failed to resolve import \"@playwright/test\" from \"upstream/packages/tool-capture/src/captureBrowser.ts\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/fb4d658c-1f02-40fb-8c53-c4332ce6155b/repo/upstream/packages/tool-capture/src/captureBrowser.ts:21:36\n  1  |  import { getCaptureTimeoutMs } from \"./captureTimeout.js\";\n  2  |  export async function launchBrowser(options = {}) {\n  3  |  \tconst { chromium } = await import(\"@playwright/test\");\n     |                                     ^\n  4  |  \t// Headless Chromium exposes navigator.gpu but withholds a Wgpu adapter on a software-only,\n  5  |  \t// \"untrusted\" config unless --enable-unsafe-webgpu is set; with it, Dawn falls back to the\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30416:39\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30413:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27438:18\n ❯ node_modules/vite/dist/node/chunks/node.js:27506:30\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27474:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30201:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20124:26\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nError: Build failed. Run \"npm run build:examples\" to debug.\n ❯ Module.resolveStaticServer upstream/packages/tool-capture/src/captureServer.ts:102:29\n    100|     const result = runNpm(args, root);\n    101|     if (result.status !== 0) {\n    102|       return Promise.reject(new Error(`Build failed. Run \"npm run buil…\n       |                             ^\n    103|     }\n    104|   }\n ❯ upstream/packages/tool-capture/src/captureServer.test.ts:49:22\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\nstdout | upstream/packages/tool-capture/src/captureValidation.test.ts > runCaptureValidation > does not reload a target when capture already supplied its passed fingerprint\n[1/1] sample\n  · canvas  no fingerprint baseline — skipped\n\nstdout | upstream/packages/tool-capture/src/captureValidation.test.ts > runCaptureValidation > does not reload a target when capture already supplied its passed fingerprint\n\n✓ ok   1 skipped   0 load failures   (report only — nothing gated)\n\n·····················································stdout | upstream/packages/tool-capture/src/captureEyes.e2e.test.ts > capture eyes browser contract > drives static pages and waits for the halt outside the halted animation frame queue\n  ✓ canvas\n\nstdout | upstream/packages/tool-capture/src/captureEyes.e2e.test.ts > capture eyes browser contract > drives static pages and waits for the halt outside the halted animation frame queue\n  ✓ canvas\n\n·stdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > benchmarks a registered page target and writes a calibrated baseline/report\n+ work/dom baseline 0.004 ms\n+ work/wasm:dom baseline 0.006 ms\n\nstdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > benchmarks a registered page target and writes a calibrated baseline/report\n✓ work/dom 0.003 ms, -8.6%\n✓ work/wasm:dom 0.004 ms, -42.5%\n\n·stdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > compares DOM and arbitrary WASM-labelled targets through an explicit visual group\n[1/1] visual\n  · dom       no fingerprint baseline — skipped\n  · wasm:dom  no fingerprint baseline — skipped\n  ✓ parity    visual:dom·wasm:dom 0.00\n\nstdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > compares DOM and arbitrary WASM-labelled targets through an explicit visual group\n\n✓ ok   0 regression passed   0 regression failed   1 parity passed   0 parity failed   0 parity uncovered   2 regression uncovered   2 skipped   0 load failures\n  regression uncovered: visual\n\n············································stdout | upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nBuilding tools/examples…\n\n··x···························stdout | upstream/packages/tool-capture/src/captureWorkflow.test.ts > runCaptureBatch > continues after a subject setup error and aggregates the verdict\nSubject 1/2: ready\n\nSubject 2/2: broken\n\n\nstdout | upstream/packages/tool-capture/src/captureWorkflow.test.ts > runCaptureBatch > continues after a subject setup error and aggregates the verdict\n✗ failed   1 subjects passed   1 subjects failed\n\n······························\n\n Test Files  1 failed | 25 passed (26)\n      Tests  1 failed | 158 passed (159)\n   Start at  12:05:04\n   Duration  391.32s (transform 23.45s, setup 725ms, import 373.50s, tests 13.25s, environment 2.56s)\n\n\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path /tmp/capture-static-8ME6Q4/package.json\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '/tmp/capture-static-8ME6Q4/package.json'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/agent/.npm/_logs/2026-08-04T19_09_54_337Z-debug-0.log\nstderr | upstream/packages/tool-capture/src/captureWorkflow.test.ts > runCaptureBatch > continues after a subject setup error and aggregates the verdict\nbroken: server did not start\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nError: Build failed. Run \"npm run build:examples\" to debug.\n ❯ Module.resolveStaticServer upstream/packages/tool-capture/src/captureServer.ts:102:29\n    100|     const result = runNpm(args, root);\n    101|     if (result.status !== 0) {\n    102|       return Promise.reject(new Error(`Build failed. Run \"npm run buil…\n       |                             ^\n    103|     }\n    104|   }\n ❯ upstream/packages/tool-capture/src/captureServer.test.ts:49:22\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "tool-capture",
       "signal": null,
       "status": "failed",
-      "summary": "1 failed | 95 passed (96)",
+      "summary": "1 failed | 158 passed (159)",
       "testFiles": 26
     },
     {
-      "durationMs": 26982,
+      "durationMs": 19929,
       "exitCode": 0,
       "package": "tray",
       "signal": null,
@@ -1257,7 +1208,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 47596,
+      "durationMs": 35042,
       "exitCode": 0,
       "package": "tween",
       "signal": null,
@@ -1266,7 +1217,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 50282,
+      "durationMs": 37028,
       "exitCode": 0,
       "package": "types",
       "signal": null,
@@ -1275,7 +1226,7 @@
       "testFiles": 30
     },
     {
-      "durationMs": 28033,
+      "durationMs": 19493,
       "exitCode": 0,
       "package": "updater",
       "signal": null,
@@ -1284,7 +1235,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 97838,
+      "durationMs": 58279,
       "exitCode": 0,
       "package": "useragent",
       "signal": null,
@@ -1293,7 +1244,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 54886,
+      "durationMs": 32679,
       "exitCode": 0,
       "package": "velocity",
       "signal": null,
@@ -1302,7 +1253,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 28331,
+      "durationMs": 17296,
       "exitCode": 0,
       "package": "video",
       "signal": null,
@@ -1311,7 +1262,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 82434,
+      "durationMs": 51412,
       "exitCode": 0,
       "package": "webcam",
       "signal": null,
@@ -1320,7 +1271,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 27464,
+      "durationMs": 14292,
       "exitCode": 0,
       "package": "xml",
       "signal": null,
@@ -1331,5 +1282,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": null,
-  "startedAt": "2026-08-04T16:53:34.045Z"
+  "startedAt": "2026-08-04T17:25:36.629Z"
 }
