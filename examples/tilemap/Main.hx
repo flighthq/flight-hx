@@ -197,15 +197,14 @@ class Main extends Application {
   // Upstream `render(root)`, driven by Lime's per-frame `render`.
   override public function render(context:RenderContext):Void {
     if (!ready || root == null) return;
-    // Browsers keep the canvas between frames (preserveDrawingBuffer), so skipping an unchanged
-    // frame's draw is safe there. Lime's native window double-buffers and swaps every frame
-    // regardless, so a skipped draw presents the stale other buffer -- a black flash every second
-    // frame once the scene goes quiet. Redraw the retained scene every frame on native instead.
-    #if js
-    if (!prepareScene2DRender(renderState, root)) return;
-    #else
-    prepareScene2DRender(renderState, root);
-    #end
+    // Nothing changed since the last frame: skip the draw AND cancel this frame's present, so
+    // Lime does not flip to the never-drawn back buffer (a black flash every second frame on
+    // page-flip hardware). OpenFL's Stage pauses rendering the same way; the skipped frame costs
+    // nothing, which matters on the interpreter targets.
+    if (!prepareScene2DRender(renderState, root)) {
+      window.onRender.cancel();
+      return;
+    }
     if (usingCairo) {
       renderCanvasBackground(renderState);
       renderCanvasScene2D(renderState, root);
