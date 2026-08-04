@@ -5,5 +5,7 @@ const api = compiled.flighthq.scene2dCanvas.CanvasTextureResolver;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const connectCanvasTextureResolverMisses = api.connectCanvasTextureResolverMisses;
+export const createCanvasTextureResolvers = api.createCanvasTextureResolvers;
 export const registerCanvasTextureResolver = api.registerCanvasTextureResolver;
 export const resolveCanvasTexture = api.resolveCanvasTexture;

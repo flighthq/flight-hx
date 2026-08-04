@@ -5,9 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource as Facade_Image_flighthq_image_ImageResource;
 import flighthq.image.ImageResourceFrom as Facade_Image_flighthq_image_ImageResourceFrom;
+import flighthq.image.ImageResourceReference as Facade_Image_flighthq_image_ImageResourceReference;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
+import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
+import flighthq.types.ImageResourceReference.ImageResourceFailure;
+import flighthq.types.ImageResourceReference.ImageResourceFetch;
+import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
 
 class Image {
   public static function cloneImageResource(resource:Dynamic):Dynamic {
@@ -20,8 +27,23 @@ class Image {
     return cast null;
   }
 
+  public static function createEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>):EmbeddedImageResourceReference {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.createEmbeddedImageResourceReference(bytes, mimeType);
+    return cast null;
+  }
+
+  public static function createExternalImageResourceReference(uri:String, ?basePath:Null<String>):ExternalImageResourceReference {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.createExternalImageResourceReference(uri, basePath);
+    return cast null;
+  }
+
   public static function createImageResource(image:Dynamic):Dynamic {
     return cast Facade_Image_flighthq_image_ImageResource.createImageResource(image);
+    return cast null;
+  }
+
+  public static function createImageResourceFailure(cause:Dynamic):ImageResourceFailure {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.createImageResourceFailure(cause);
     return cast null;
   }
 
@@ -42,6 +64,11 @@ class Image {
 
   public static function createImageResourceFromImageElement(img:Dynamic):Dynamic {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement(img);
+    return cast null;
+  }
+
+  public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.explainImageResourceReferenceResolution(ref);
     return cast null;
   }
 
@@ -72,6 +99,16 @@ class Image {
 
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromUrl(url, crossOrigin, signal);
+    return cast null;
+  }
+
+  public static function resetFailedImageResourceReference(ref:ImageResourceReference):Bool {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.resetFailedImageResourceReference(ref);
+    return cast null;
+  }
+
+  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.resolveImageResourceReference(ref, fetch, signal);
     return cast null;
   }
 }

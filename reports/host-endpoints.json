@@ -59,12 +59,12 @@
         },
         {
           "column": 3,
-          "line": 37,
+          "line": 44,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
           "column": 3,
-          "line": 103,
+          "line": 113,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
@@ -162,12 +162,12 @@
         },
         {
           "column": 21,
-          "line": 115,
+          "line": 116,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 22,
-          "line": 116,
+          "line": 117,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         }
       ]
@@ -265,24 +265,29 @@
           "source": "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts"
         },
         {
+          "column": 5,
+          "line": 64,
+          "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
+        },
+        {
           "column": 3,
           "line": 83,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 89,
+          "line": 107,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 162,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
         },
         {
           "column": 5,
           "line": 140,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
+        },
+        {
+          "column": 5,
+          "line": 71,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
         },
         {
           "column": 3,
@@ -291,13 +296,8 @@
         },
         {
           "column": 5,
-          "line": 98,
+          "line": 116,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 181,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
         },
         {
           "column": 5,
@@ -393,12 +393,12 @@
       "sites": [
         {
           "column": 22,
-          "line": 99,
+          "line": 100,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 25,
-          "line": 120,
+          "line": 121,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         }
       ]
@@ -422,12 +422,12 @@
         },
         {
           "column": 10,
-          "line": 26,
+          "line": 27,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 10,
-          "line": 157,
+          "line": 158,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         }
       ]
@@ -451,7 +451,7 @@
         },
         {
           "column": 20,
-          "line": 83,
+          "line": 84,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         }
       ]
@@ -550,7 +550,7 @@
         },
         {
           "column": 7,
-          "line": 50,
+          "line": 51,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
@@ -560,17 +560,17 @@
         },
         {
           "column": 5,
-          "line": 63,
+          "line": 64,
           "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
         },
         {
           "column": 7,
-          "line": 51,
+          "line": 52,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
           "column": 7,
-          "line": 80,
+          "line": 81,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
@@ -580,17 +580,17 @@
         },
         {
           "column": 3,
-          "line": 31,
+          "line": 32,
           "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
         },
         {
           "column": 3,
-          "line": 78,
+          "line": 75,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 7,
-          "line": 43,
+          "line": 44,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
@@ -633,12 +633,12 @@
       "sites": [
         {
           "column": 7,
-          "line": 90,
+          "line": 100,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
           "column": 7,
-          "line": 93,
+          "line": 103,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         }
       ]
@@ -692,7 +692,7 @@
         },
         {
           "column": 3,
-          "line": 156,
+          "line": 157,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -801,7 +801,7 @@
         },
         {
           "column": 3,
-          "line": 155,
+          "line": 156,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -821,7 +821,7 @@
         },
         {
           "column": 5,
-          "line": 85,
+          "line": 95,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
@@ -1187,7 +1187,7 @@
       "sites": [
         {
           "column": 90,
-          "line": 47,
+          "line": 54,
           "source": "upstream/packages/scene2d-canvas/src/canvasRenderState.ts"
         }
       ]
@@ -1330,17 +1330,17 @@
         },
         {
           "column": 3,
-          "line": 27,
+          "line": 28,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
           "column": 5,
-          "line": 61,
+          "line": 62,
           "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
         },
         {
           "column": 3,
-          "line": 27,
+          "line": 28,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
@@ -1360,17 +1360,17 @@
         },
         {
           "column": 3,
-          "line": 28,
+          "line": 29,
           "source": "upstream/packages/scene2d-canvas/src/canvasScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 24,
+          "line": 27,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
           "column": 3,
-          "line": 26,
+          "line": 27,
           "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
         },
         {
@@ -1390,7 +1390,7 @@
         },
         {
           "column": 3,
-          "line": 23,
+          "line": 24,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
@@ -1568,7 +1568,7 @@
       "sites": [
         {
           "column": 7,
-          "line": 170,
+          "line": 171,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         }
       ]
@@ -1602,12 +1602,12 @@
         },
         {
           "column": 30,
-          "line": 28,
+          "line": 29,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
           "column": 30,
-          "line": 66,
+          "line": 67,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
@@ -1617,32 +1617,32 @@
         },
         {
           "column": 5,
-          "line": 171,
+          "line": 172,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 19,
-          "line": 26,
+          "line": 27,
           "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
         },
         {
           "column": 19,
-          "line": 66,
+          "line": 67,
           "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
         },
         {
           "column": 5,
-          "line": 31,
+          "line": 32,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
           "column": 5,
-          "line": 90,
+          "line": 91,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
           "column": 3,
-          "line": 55,
+          "line": 66,
           "source": "upstream/packages/scene2d-canvas/src/canvasRenderState.ts"
         },
         {
@@ -1652,27 +1652,27 @@
         },
         {
           "column": 19,
-          "line": 30,
+          "line": 31,
           "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
         },
         {
           "column": 19,
-          "line": 32,
+          "line": 33,
           "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
         },
         {
           "column": 3,
-          "line": 69,
+          "line": 66,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 19,
-          "line": 25,
+          "line": 26,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
           "column": 19,
-          "line": 60,
+          "line": 61,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
@@ -1701,7 +1701,7 @@
         },
         {
           "column": 3,
-          "line": 56,
+          "line": 67,
           "source": "upstream/packages/scene2d-canvas/src/canvasRenderState.ts"
         },
         {
@@ -1842,7 +1842,7 @@
         },
         {
           "column": 5,
-          "line": 98,
+          "line": 108,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
@@ -2222,7 +2222,7 @@
       ]
     },
     {
-      "accesses": 33,
+      "accesses": 29,
       "binding": "Canvas2dBackend",
       "contract": "backend",
       "member": "restore",
@@ -2325,7 +2325,7 @@
         },
         {
           "column": 24,
-          "line": 64,
+          "line": 65,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
@@ -2335,7 +2335,7 @@
         },
         {
           "column": 24,
-          "line": 84,
+          "line": 85,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
@@ -2350,28 +2350,18 @@
         },
         {
           "column": 3,
-          "line": 79,
+          "line": 76,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 24,
-          "line": 57,
+          "line": 58,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
           "column": 3,
           "line": 183,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
-        },
-        {
-          "column": 5,
-          "line": 94,
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 166,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
         },
         {
           "column": 3,
@@ -2382,16 +2372,6 @@
           "column": 3,
           "line": 199,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
-        },
-        {
-          "column": 5,
-          "line": 103,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 185,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
         },
         {
           "column": 3,
@@ -2439,7 +2419,7 @@
       ]
     },
     {
-      "accesses": 32,
+      "accesses": 28,
       "binding": "Canvas2dBackend",
       "contract": "backend",
       "member": "save",
@@ -2567,23 +2547,13 @@
         },
         {
           "column": 3,
-          "line": 75,
+          "line": 72,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 3,
           "line": 144,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
-        },
-        {
-          "column": 5,
-          "line": 90,
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 163,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
         },
         {
           "column": 3,
@@ -2594,16 +2564,6 @@
           "column": 3,
           "line": 160,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
-        },
-        {
-          "column": 5,
-          "line": 99,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 182,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
         },
         {
           "column": 3,
@@ -2626,7 +2586,7 @@
       "sites": [
         {
           "column": 3,
-          "line": 77,
+          "line": 74,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
@@ -2637,7 +2597,7 @@
       ]
     },
     {
-      "accesses": 34,
+      "accesses": 44,
       "binding": "Canvas2dBackend",
       "contract": "backend",
       "member": "setTransform",
@@ -2740,52 +2700,52 @@
         },
         {
           "column": 3,
-          "line": 30,
+          "line": 31,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
           "column": 3,
-          "line": 65,
+          "line": 66,
           "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
         },
         {
           "column": 5,
-          "line": 62,
+          "line": 63,
           "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
         },
         {
           "column": 3,
-          "line": 36,
+          "line": 37,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
           "column": 7,
-          "line": 71,
+          "line": 72,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
           "column": 3,
-          "line": 86,
+          "line": 87,
           "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
         },
         {
           "column": 5,
-          "line": 132,
+          "line": 61,
           "source": "upstream/packages/scene2d-canvas/src/canvasScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 134,
+          "line": 63,
           "source": "upstream/packages/scene2d-canvas/src/canvasScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 30,
+          "line": 31,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
           "column": 3,
-          "line": 59,
+          "line": 60,
           "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
         },
         {
@@ -2800,8 +2760,38 @@
         },
         {
           "column": 3,
+          "line": 76,
+          "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
+        },
+        {
+          "column": 3,
+          "line": 64,
+          "source": "upstream/packages/scene2d-dom/src/domShape.ts"
+        },
+        {
+          "column": 5,
+          "line": 63,
+          "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
+        },
+        {
+          "column": 5,
+          "line": 66,
+          "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
+        },
+        {
+          "column": 3,
           "line": 82,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
+        },
+        {
+          "column": 5,
+          "line": 106,
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
+        },
+        {
+          "column": 5,
+          "line": 110,
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
@@ -2809,9 +2799,29 @@
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
+          "column": 5,
+          "line": 70,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
+        },
+        {
+          "column": 5,
+          "line": 73,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
+        },
+        {
           "column": 3,
           "line": 93,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
+        },
+        {
+          "column": 5,
+          "line": 115,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
+        },
+        {
+          "column": 5,
+          "line": 119,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
           "column": 5,
@@ -2844,7 +2854,7 @@
         },
         {
           "column": 5,
-          "line": 99,
+          "line": 109,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
@@ -2927,7 +2937,7 @@
         },
         {
           "column": 5,
-          "line": 97,
+          "line": 107,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
@@ -3079,18 +3089,18 @@
       "sites": [
         {
           "column": 7,
-          "line": 89,
+          "line": 99,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         },
         {
           "column": 7,
-          "line": 91,
+          "line": 101,
           "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
         }
       ]
     },
     {
-      "accesses": 7,
+      "accesses": 1,
       "binding": "Canvas2dBackend",
       "contract": "backend",
       "member": "translate",
@@ -3103,38 +3113,8 @@
       "sites": [
         {
           "column": 3,
-          "line": 76,
+          "line": 73,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
-        },
-        {
-          "column": 5,
-          "line": 60,
-          "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 50,
-          "source": "upstream/packages/scene2d-dom/src/domShape.ts"
-        },
-        {
-          "column": 5,
-          "line": 92,
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 164,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
-        },
-        {
-          "column": 5,
-          "line": 101,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
-        },
-        {
-          "column": 5,
-          "line": 183,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
         }
       ]
     },
@@ -3278,12 +3258,12 @@
         },
         {
           "column": 16,
-          "line": 117,
+          "line": 118,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 19,
-          "line": 29,
+          "line": 36,
           "source": "upstream/packages/scene2d-canvas/src/canvasRenderState.ts"
         },
         {
@@ -3298,7 +3278,7 @@
         },
         {
           "column": 19,
-          "line": 67,
+          "line": 64,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
@@ -3308,12 +3288,12 @@
         },
         {
           "column": 20,
-          "line": 47,
+          "line": 59,
           "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
         },
         {
           "column": 20,
-          "line": 36,
+          "line": 46,
           "source": "upstream/packages/scene2d-dom/src/domShape.ts"
         },
         {
@@ -3333,13 +3313,13 @@
         },
         {
           "column": 15,
-          "line": 38,
+          "line": 41,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
-          "column": 15,
-          "line": 80,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
+          "column": 10,
+          "line": 23,
+          "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
         },
         {
           "column": 15,
@@ -3353,13 +3333,13 @@
         },
         {
           "column": 15,
-          "line": 44,
+          "line": 48,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
-          "column": 15,
-          "line": 56,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
+          "column": 10,
+          "line": 24,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts"
         },
         {
           "column": 15,
@@ -3528,12 +3508,12 @@
         },
         {
           "column": 22,
-          "line": 116,
+          "line": 117,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 40,
-          "line": 156,
+          "line": 157,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -3548,12 +3528,12 @@
         },
         {
           "column": 56,
-          "line": 76,
+          "line": 73,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 95,
-          "line": 78,
+          "line": 75,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
@@ -3587,6 +3567,11 @@
           "source": "upstream/packages/scene2d-gl/src/glShapeMesh.ts"
         },
         {
+          "column": 9,
+          "line": 68,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
+        },
+        {
           "column": 14,
           "line": 117,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
@@ -3595,11 +3580,6 @@
           "column": 7,
           "line": 210,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
-        },
-        {
-          "column": 9,
-          "line": 179,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
         },
         {
           "column": 32,
@@ -3698,7 +3678,7 @@
         },
         {
           "column": 3,
-          "line": 116,
+          "line": 117,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -3718,17 +3698,17 @@
         },
         {
           "column": 3,
-          "line": 66,
+          "line": 63,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 3,
-          "line": 55,
+          "line": 70,
           "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 46,
+          "line": 59,
           "source": "upstream/packages/scene2d-dom/src/domShape.ts"
         },
         {
@@ -3737,29 +3717,29 @@
           "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
         },
         {
+          "column": 5,
+          "line": 62,
+          "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
+        },
+        {
           "column": 39,
           "line": 221,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 3,
-          "line": 37,
+          "line": 40,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 87,
+          "line": 104,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 79,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
-        },
-        {
-          "column": 5,
-          "line": 160,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
+          "line": 20,
+          "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
         },
         {
           "column": 3,
@@ -3778,28 +3758,28 @@
         },
         {
           "column": 39,
+          "line": 68,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
+        },
+        {
+          "column": 39,
           "line": 210,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
         },
         {
           "column": 3,
-          "line": 43,
+          "line": 47,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 96,
+          "line": 113,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 55,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
-        },
-        {
-          "column": 40,
-          "line": 179,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
+          "line": 21,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts"
         },
         {
           "column": 3,
@@ -3839,7 +3819,7 @@
       ]
     },
     {
-      "accesses": 15,
+      "accesses": 19,
       "binding": "CanvasElementBackend",
       "contract": "dynamic-fallback",
       "member": "style",
@@ -3898,22 +3878,42 @@
         },
         {
           "column": 3,
-          "line": 64,
+          "line": 71,
           "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 65,
+          "line": 72,
           "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 55,
+          "line": 79,
+          "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
+        },
+        {
+          "column": 3,
+          "line": 80,
+          "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
+        },
+        {
+          "column": 3,
+          "line": 60,
+          "source": "upstream/packages/scene2d-dom/src/domShape.ts"
+        },
+        {
+          "column": 3,
+          "line": 61,
+          "source": "upstream/packages/scene2d-dom/src/domShape.ts"
+        },
+        {
+          "column": 3,
+          "line": 68,
           "source": "upstream/packages/scene2d-dom/src/domShape.ts"
         },
         {
           "column": 5,
-          "line": 57,
+          "line": 70,
           "source": "upstream/packages/scene2d-dom/src/domShape.ts"
         },
         {
@@ -4078,12 +4078,12 @@
         },
         {
           "column": 21,
-          "line": 115,
+          "line": 116,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
           "column": 23,
-          "line": 156,
+          "line": 157,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -4098,12 +4098,12 @@
         },
         {
           "column": 29,
-          "line": 76,
+          "line": 73,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 80,
-          "line": 78,
+          "line": 75,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
@@ -4137,6 +4137,11 @@
           "source": "upstream/packages/scene2d-gl/src/glShapeMesh.ts"
         },
         {
+          "column": 9,
+          "line": 67,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
+        },
+        {
           "column": 14,
           "line": 116,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
@@ -4145,11 +4150,6 @@
           "column": 7,
           "line": 209,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
-        },
-        {
-          "column": 9,
-          "line": 178,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
         },
         {
           "column": 10,
@@ -4248,7 +4248,7 @@
         },
         {
           "column": 3,
-          "line": 115,
+          "line": 116,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -4268,17 +4268,17 @@
         },
         {
           "column": 3,
-          "line": 65,
+          "line": 62,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
           "column": 3,
-          "line": 54,
+          "line": 69,
           "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 45,
+          "line": 58,
           "source": "upstream/packages/scene2d-dom/src/domShape.ts"
         },
         {
@@ -4287,29 +4287,29 @@
           "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
         },
         {
+          "column": 5,
+          "line": 61,
+          "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
+        },
+        {
           "column": 38,
           "line": 220,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 3,
-          "line": 36,
+          "line": 39,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 86,
+          "line": 103,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 78,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
-        },
-        {
-          "column": 5,
-          "line": 159,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
+          "line": 19,
+          "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
         },
         {
           "column": 3,
@@ -4328,28 +4328,28 @@
         },
         {
           "column": 38,
+          "line": 67,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts"
+        },
+        {
+          "column": 38,
           "line": 209,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
         },
         {
           "column": 3,
-          "line": 42,
+          "line": 46,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 95,
+          "line": 112,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
           "column": 3,
-          "line": 54,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
-        },
-        {
-          "column": 39,
-          "line": 178,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
+          "line": 20,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts"
         },
         {
           "column": 3,
@@ -4649,7 +4649,7 @@
         },
         {
           "column": 21,
-          "line": 114,
+          "line": 115,
           "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
         },
         {
@@ -4664,7 +4664,7 @@
         },
         {
           "column": 19,
-          "line": 64,
+          "line": 61,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
         },
         {
@@ -4694,12 +4694,12 @@
         },
         {
           "column": 19,
-          "line": 46,
+          "line": 58,
           "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
         },
         {
           "column": 19,
-          "line": 35,
+          "line": 45,
           "source": "upstream/packages/scene2d-dom/src/domShape.ts"
         },
         {
@@ -4734,13 +4734,13 @@
         },
         {
           "column": 18,
-          "line": 35,
+          "line": 38,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 18,
-          "line": 77,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
+          "line": 18,
+          "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
         },
         {
           "column": 18,
@@ -4759,13 +4759,13 @@
         },
         {
           "column": 18,
-          "line": 41,
+          "line": 45,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts"
         },
         {
           "column": 18,
-          "line": 53,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShape.ts"
+          "line": 19,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts"
         },
         {
           "column": 18,
@@ -7034,42 +7034,37 @@
         },
         {
           "column": 5,
-          "line": 90,
+          "line": 91,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 103,
+          "line": 107,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 106,
+          "line": 110,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 109,
+          "line": 113,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 115,
+          "line": 119,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 122,
+          "line": 126,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 125,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 5,
-          "line": 128,
+          "line": 129,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -7078,8 +7073,13 @@
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
+          "column": 5,
+          "line": 136,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
           "column": 3,
-          "line": 148,
+          "line": 152,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -7124,12 +7124,12 @@
         },
         {
           "column": 7,
-          "line": 94,
+          "line": 114,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 3,
-          "line": 111,
+          "line": 131,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -7585,7 +7585,7 @@
         },
         {
           "column": 15,
-          "line": 116,
+          "line": 136,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -7973,12 +7973,12 @@
         },
         {
           "column": 3,
-          "line": 51,
+          "line": 71,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 3,
-          "line": 112,
+          "line": 132,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -8166,7 +8166,7 @@
         },
         {
           "column": 5,
-          "line": 107,
+          "line": 124,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
@@ -8211,47 +8211,47 @@
         },
         {
           "column": 5,
-          "line": 91,
+          "line": 92,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 104,
+          "line": 108,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 107,
+          "line": 111,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 110,
+          "line": 114,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 123,
+          "line": 127,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 126,
+          "line": 130,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 129,
+          "line": 133,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 3,
-          "line": 151,
+          "line": 155,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 3,
-          "line": 159,
+          "line": 163,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -8365,7 +8365,7 @@
         },
         {
           "column": 5,
-          "line": 102,
+          "line": 122,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -8989,7 +8989,7 @@
         },
         {
           "column": 10,
-          "line": 582,
+          "line": 572,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -9093,7 +9093,7 @@
         },
         {
           "column": 3,
-          "line": 62,
+          "line": 82,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -9282,7 +9282,7 @@
         },
         {
           "column": 34,
-          "line": 62,
+          "line": 82,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -9681,12 +9681,12 @@
         },
         {
           "column": 16,
-          "line": 150,
+          "line": 154,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 15,
-          "line": 158,
+          "line": 162,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -9779,12 +9779,12 @@
         },
         {
           "column": 13,
-          "line": 60,
+          "line": 80,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 14,
-          "line": 115,
+          "line": 135,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -9832,12 +9832,12 @@
         },
         {
           "column": 3,
-          "line": 61,
+          "line": 81,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 3,
-          "line": 116,
+          "line": 136,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10169,13 +10169,13 @@
         },
         {
           "column": 3,
-          "line": 55,
+          "line": 59,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 100,
-          "source": "upstream/packages/scene2d-gl/src/glShape.ts"
+          "line": 53,
+          "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
         },
         {
           "column": 5,
@@ -10247,7 +10247,7 @@
       "sites": [
         {
           "column": 12,
-          "line": 62,
+          "line": 82,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10378,7 +10378,7 @@
         },
         {
           "column": 13,
-          "line": 53,
+          "line": 73,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10460,7 +10460,7 @@
         },
         {
           "column": 3,
-          "line": 54,
+          "line": 74,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10519,7 +10519,7 @@
         },
         {
           "column": 3,
-          "line": 55,
+          "line": 75,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10628,7 +10628,7 @@
         },
         {
           "column": 3,
-          "line": 115,
+          "line": 135,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10720,7 +10720,7 @@
         },
         {
           "column": 7,
-          "line": 106,
+          "line": 126,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -10788,7 +10788,7 @@
         },
         {
           "column": 7,
-          "line": 104,
+          "line": 124,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -11088,12 +11088,12 @@
         },
         {
           "column": 3,
-          "line": 53,
+          "line": 73,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 3,
-          "line": 60,
+          "line": 80,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -11841,12 +11841,12 @@
         },
         {
           "column": 22,
-          "line": 51,
+          "line": 71,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 22,
-          "line": 112,
+          "line": 132,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -11875,7 +11875,7 @@
         },
         {
           "column": 43,
-          "line": 48,
+          "line": 68,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -11976,7 +11976,7 @@
         },
         {
           "column": 15,
-          "line": 61,
+          "line": 81,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -12230,7 +12230,7 @@
         },
         {
           "column": 11,
-          "line": 537,
+          "line": 527,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -12274,7 +12274,7 @@
         },
         {
           "column": 36,
-          "line": 539,
+          "line": 529,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -12419,12 +12419,12 @@
         },
         {
           "column": 27,
-          "line": 48,
+          "line": 68,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 24,
-          "line": 49,
+          "line": 69,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -12511,7 +12511,7 @@
       ]
     },
     {
-      "accesses": 347,
+      "accesses": 350,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "getUniformLocation",
@@ -13574,107 +13574,122 @@
         },
         {
           "column": 22,
-          "line": 177,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 25,
-          "line": 178,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 24,
-          "line": 179,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 21,
-          "line": 180,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 26,
           "line": 181,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 29,
+          "column": 25,
           "line": 182,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 25,
+          "column": 24,
           "line": 183,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 26,
+          "column": 21,
           "line": 184,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 17,
+          "column": 26,
           "line": 185,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 20,
+          "column": 29,
           "line": 186,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 22,
+          "column": 25,
           "line": 187,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 23,
+          "column": 26,
           "line": 188,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 19,
+          "column": 17,
           "line": 189,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 24,
+          "column": 20,
           "line": 190,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 20,
+          "column": 22,
           "line": 191,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 21,
+          "column": 23,
           "line": 192,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 23,
+          "column": 19,
           "line": 193,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 19,
+          "column": 24,
           "line": 194,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 22,
+          "column": 20,
           "line": 195,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
-          "column": 19,
+          "column": 21,
           "line": 196,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
           "line": 197,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 23,
+          "line": 198,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 19,
+          "line": 199,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 22,
+          "line": 200,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 31,
+          "line": 201,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 25,
+          "line": 202,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 19,
+          "line": 203,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 20,
+          "line": 204,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -14134,27 +14149,27 @@
         },
         {
           "column": 15,
-          "line": 124,
+          "line": 156,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 24,
-          "line": 126,
+          "line": 158,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 22,
-          "line": 137,
+          "line": 169,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 15,
-          "line": 138,
+          "line": 170,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 24,
-          "line": 140,
+          "line": 172,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -14438,7 +14453,7 @@
         },
         {
           "column": 16,
-          "line": 54,
+          "line": 74,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -14506,17 +14521,17 @@
         },
         {
           "column": 54,
-          "line": 547,
+          "line": 537,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
           "column": 68,
-          "line": 554,
+          "line": 544,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
           "column": 14,
-          "line": 567,
+          "line": 557,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -14556,22 +14571,22 @@
         },
         {
           "column": 64,
-          "line": 155,
+          "line": 159,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 64,
-          "line": 156,
+          "line": 160,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 58,
-          "line": 161,
+          "line": 165,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 58,
-          "line": 162,
+          "line": 166,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -14590,7 +14605,7 @@
       "sites": [
         {
           "column": 14,
-          "line": 557,
+          "line": 547,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -14614,7 +14629,7 @@
       "sites": [
         {
           "column": 14,
-          "line": 559,
+          "line": 549,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         }
       ]
@@ -14771,7 +14786,7 @@
       "sites": [
         {
           "column": 40,
-          "line": 581,
+          "line": 571,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         }
       ]
@@ -14800,17 +14815,17 @@
         },
         {
           "column": 41,
-          "line": 547,
+          "line": 537,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
           "column": 55,
-          "line": 554,
+          "line": 544,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
           "column": 14,
-          "line": 565,
+          "line": 555,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -14859,7 +14874,7 @@
       "sites": [
         {
           "column": 14,
-          "line": 561,
+          "line": 551,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         }
       ]
@@ -14878,7 +14893,7 @@
       "sites": [
         {
           "column": 14,
-          "line": 563,
+          "line": 553,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         }
       ]
@@ -15319,7 +15334,7 @@
       "sites": [
         {
           "column": 33,
-          "line": 580,
+          "line": 570,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         }
       ]
@@ -15478,22 +15493,22 @@
         },
         {
           "column": 61,
-          "line": 153,
+          "line": 157,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 79,
-          "line": 153,
+          "line": 157,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 35,
-          "line": 160,
+          "line": 164,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 53,
-          "line": 160,
+          "line": 164,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -16229,12 +16244,12 @@
         },
         {
           "column": 5,
-          "line": 153,
+          "line": 157,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 3,
-          "line": 160,
+          "line": 164,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -16550,22 +16565,22 @@
         },
         {
           "column": 3,
-          "line": 155,
+          "line": 159,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 3,
-          "line": 156,
+          "line": 160,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 3,
-          "line": 161,
+          "line": 165,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 3,
-          "line": 162,
+          "line": 166,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -16962,7 +16977,7 @@
         },
         {
           "column": 20,
-          "line": 107,
+          "line": 124,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
@@ -17002,37 +17017,37 @@
         },
         {
           "column": 20,
-          "line": 91,
+          "line": 92,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 110,
+          "line": 114,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 129,
+          "line": 133,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 18,
-          "line": 159,
+          "line": 163,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 17,
-          "line": 160,
+          "line": 164,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 161,
+          "line": 165,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 162,
+          "line": 166,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -17253,37 +17268,37 @@
         },
         {
           "column": 20,
-          "line": 104,
+          "line": 108,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 107,
+          "line": 111,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 123,
+          "line": 127,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 126,
+          "line": 130,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 18,
-          "line": 151,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 20,
           "line": 155,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 20,
-          "line": 156,
+          "line": 159,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 20,
+          "line": 160,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -17312,7 +17327,7 @@
         },
         {
           "column": 19,
-          "line": 153,
+          "line": 157,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -17386,12 +17401,12 @@
         },
         {
           "column": 41,
-          "line": 156,
+          "line": 160,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 35,
-          "line": 162,
+          "line": 166,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -17484,12 +17499,12 @@
         },
         {
           "column": 41,
-          "line": 155,
+          "line": 159,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 35,
-          "line": 161,
+          "line": 165,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -17735,42 +17750,37 @@
         },
         {
           "column": 22,
-          "line": 90,
+          "line": 91,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 22,
-          "line": 103,
+          "line": 107,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 22,
-          "line": 106,
+          "line": 110,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 22,
-          "line": 109,
+          "line": 113,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 22,
-          "line": 115,
+          "line": 119,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 22,
-          "line": 122,
+          "line": 126,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 22,
-          "line": 125,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 22,
-          "line": 128,
+          "line": 129,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -17779,8 +17789,13 @@
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
+          "column": 22,
+          "line": 136,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
           "column": 20,
-          "line": 148,
+          "line": 152,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -17825,12 +17840,12 @@
         },
         {
           "column": 24,
-          "line": 94,
+          "line": 114,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 20,
-          "line": 111,
+          "line": 131,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -18065,7 +18080,7 @@
       ]
     },
     {
-      "accesses": 177,
+      "accesses": 179,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "uniform1f",
@@ -18623,17 +18638,17 @@
         },
         {
           "column": 5,
-          "line": 57,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 5,
           "line": 58,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 94,
+          "line": 59,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 5,
+          "line": 93,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -18643,22 +18658,32 @@
         },
         {
           "column": 5,
-          "line": 112,
+          "line": 98,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 113,
+          "line": 100,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 114,
+          "line": 116,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 131,
+          "line": 117,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 5,
+          "line": 118,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 5,
+          "line": 135,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -18998,7 +19023,7 @@
       ]
     },
     {
-      "accesses": 57,
+      "accesses": 58,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "uniform1i",
@@ -19146,11 +19171,6 @@
         },
         {
           "column": 5,
-          "line": 79,
-          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
-        },
-        {
-          "column": 5,
           "line": 80,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
@@ -19161,37 +19181,47 @@
         },
         {
           "column": 5,
-          "line": 92,
+          "line": 82,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 105,
+          "line": 94,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 108,
+          "line": 97,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 111,
+          "line": 109,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 124,
+          "line": 112,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 127,
+          "line": 115,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 130,
+          "line": 128,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 5,
+          "line": 131,
+          "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
+        },
+        {
+          "column": 5,
+          "line": 134,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -19241,7 +19271,7 @@
         },
         {
           "column": 7,
-          "line": 96,
+          "line": 116,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -19548,7 +19578,7 @@
         },
         {
           "column": 5,
-          "line": 56,
+          "line": 57,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -19756,12 +19786,12 @@
         },
         {
           "column": 5,
-          "line": 54,
+          "line": 55,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 55,
+          "line": 56,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -19915,17 +19945,17 @@
         },
         {
           "column": 5,
-          "line": 64,
+          "line": 65,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 68,
+          "line": 69,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 5,
-          "line": 72,
+          "line": 73,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         }
       ]
@@ -20013,7 +20043,7 @@
         },
         {
           "column": 5,
-          "line": 93,
+          "line": 95,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -20033,12 +20063,12 @@
         },
         {
           "column": 7,
-          "line": 85,
+          "line": 105,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 5,
-          "line": 88,
+          "line": 108,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
@@ -20151,12 +20181,12 @@
         },
         {
           "column": 88,
-          "line": 153,
+          "line": 157,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
           "column": 62,
-          "line": 160,
+          "line": 164,
           "source": "upstream/packages/scene3d-gl/src/glLitProgram.ts"
         },
         {
@@ -20302,7 +20332,7 @@
       "sites": [
         {
           "column": 5,
-          "line": 516,
+          "line": 506,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         },
         {
@@ -20372,7 +20402,7 @@
         },
         {
           "column": 7,
-          "line": 84,
+          "line": 104,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -20866,12 +20896,12 @@
         },
         {
           "column": 3,
-          "line": 52,
+          "line": 72,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         },
         {
           "column": 3,
-          "line": 113,
+          "line": 133,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -20900,7 +20930,7 @@
         },
         {
           "column": 40,
-          "line": 49,
+          "line": 69,
           "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
         }
       ]
@@ -21092,12 +21122,12 @@
         },
         {
           "column": 21,
-          "line": 568,
+          "line": 558,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
           "column": 21,
-          "line": 631,
+          "line": 621,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -21202,42 +21232,42 @@
         },
         {
           "column": 10,
-          "line": 79,
+          "line": 81,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 10,
-          "line": 96,
+          "line": 98,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 28,
-          "line": 234,
+          "line": 236,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 302,
+          "line": 304,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 478,
+          "line": 463,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 35,
-          "line": 666,
+          "line": 634,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 27,
-          "line": 867,
+          "line": 860,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 23,
-          "line": 1044,
+          "line": 1037,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -21267,7 +21297,7 @@
         },
         {
           "column": 23,
-          "line": 43,
+          "line": 44,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -21376,7 +21406,7 @@
         },
         {
           "column": 35,
-          "line": 109,
+          "line": 110,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts"
         },
         {
@@ -21411,27 +21441,27 @@
         },
         {
           "column": 29,
-          "line": 324,
+          "line": 326,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 29,
-          "line": 500,
+          "line": 485,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 34,
-          "line": 572,
+          "line": 557,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 577,
+          "line": 562,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 686,
+          "line": 679,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -21461,7 +21491,7 @@
         },
         {
           "column": 35,
-          "line": 93,
+          "line": 94,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -21570,42 +21600,42 @@
         },
         {
           "column": 25,
-          "line": 228,
+          "line": 230,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 30,
-          "line": 254,
+          "line": 256,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 20,
-          "line": 358,
+          "line": 360,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 391,
+          "line": 393,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 30,
-          "line": 409,
+          "line": 411,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 20,
-          "line": 527,
+          "line": 512,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 626,
+          "line": 611,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 20,
-          "line": 1040,
+          "line": 1033,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -21645,7 +21675,7 @@
         },
         {
           "column": 20,
-          "line": 38,
+          "line": 39,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -21803,7 +21833,7 @@
         },
         {
           "column": 18,
-          "line": 144,
+          "line": 146,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -21813,7 +21843,7 @@
         },
         {
           "column": 18,
-          "line": 137,
+          "line": 188,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
         }
       ]
@@ -21922,7 +21952,7 @@
         },
         {
           "column": 20,
-          "line": 145,
+          "line": 147,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -21932,7 +21962,7 @@
         },
         {
           "column": 20,
-          "line": 140,
+          "line": 195,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
         }
       ]
@@ -21971,22 +22001,22 @@
         },
         {
           "column": 24,
-          "line": 261,
+          "line": 263,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 37,
-          "line": 397,
+          "line": 399,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 24,
-          "line": 415,
+          "line": 417,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 37,
-          "line": 632,
+          "line": 617,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         }
       ]
@@ -22100,7 +22130,7 @@
         },
         {
           "column": 18,
-          "line": 106,
+          "line": 107,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts"
         },
         {
@@ -22150,12 +22180,12 @@
         },
         {
           "column": 18,
-          "line": 136,
+          "line": 185,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
         },
         {
           "column": 18,
-          "line": 90,
+          "line": 91,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -22224,12 +22254,12 @@
         },
         {
           "column": 19,
-          "line": 548,
+          "line": 538,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
           "column": 19,
-          "line": 611,
+          "line": 601,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -22274,37 +22304,37 @@
         },
         {
           "column": 33,
-          "line": 270,
+          "line": 272,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 276,
+          "line": 278,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 400,
+          "line": 402,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 422,
+          "line": 424,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 428,
+          "line": 430,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 21,
-          "line": 553,
+          "line": 538,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 637,
+          "line": 622,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -22314,7 +22344,7 @@
         },
         {
           "column": 26,
-          "line": 77,
+          "line": 88,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
         },
         {
@@ -22383,7 +22413,7 @@
       ]
     },
     {
-      "accesses": 51,
+      "accesses": 50,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "queue",
@@ -22451,12 +22481,12 @@
         },
         {
           "column": 3,
-          "line": 564,
+          "line": 554,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
           "column": 5,
-          "line": 618,
+          "line": 608,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -22521,7 +22551,7 @@
         },
         {
           "column": 3,
-          "line": 76,
+          "line": 77,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts"
         },
         {
@@ -22556,32 +22586,27 @@
         },
         {
           "column": 3,
-          "line": 296,
+          "line": 298,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 453,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-        },
-        {
-          "column": 3,
-          "line": 467,
+          "line": 452,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 5,
-          "line": 558,
+          "line": 543,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 662,
+          "line": 668,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 1116,
+          "line": 1109,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -22631,7 +22656,7 @@
         },
         {
           "column": 3,
-          "line": 64,
+          "line": 65,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -22697,14 +22722,14 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "accesses": 3492,
+    "accesses": 3497,
     "backendContractEndpoints": 379,
     "bindings": 9,
-    "calls": 2211,
+    "calls": 2213,
     "dynamicFallbackEndpoints": 12,
     "endpoints": 373,
-    "reads": 1025,
+    "reads": 1028,
     "writes": 256
   },
-  "upstreamCommit": "7333e825d9df46d737c5a6557acbed4805e19e57"
+  "upstreamCommit": "f1a7a9a02f244a18b0e60c136ca1a801ab90f5a3"
 }

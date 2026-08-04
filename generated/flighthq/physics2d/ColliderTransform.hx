@@ -20,6 +20,12 @@ class ColliderTransform {
       else if (__switchValue == 'polygon') {
         return cast { kind: 'polygon', points: _Runtime.slice(_Runtime.field(local, 'points'), 0, null) };
       }
+      else if (__switchValue == 'segment') {
+        return cast { kind: 'segment', x0: _Runtime.field(local, 'x0'), y0: _Runtime.field(local, 'y0'), x1: _Runtime.field(local, 'x1'), y1: _Runtime.field(local, 'y1') };
+      }
+      else if (__switchValue == 'point') {
+        return cast { kind: 'point', x: _Runtime.field(local, 'x'), y: _Runtime.field(local, 'y') };
+      }
       else  {
         return cast { kind: 'point', x: 0.0, y: 0.0 };
       }
@@ -73,6 +79,18 @@ class ColliderTransform {
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
+      return;
+    }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'segment') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'segment') : Bool)) : Bool)) {
+      _Runtime.setField(world, 'x0', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x0'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y0'), sin)));
+      _Runtime.setField(world, 'y0', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x0'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y0'), cos)));
+      _Runtime.setField(world, 'x1', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x1'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y1'), sin)));
+      _Runtime.setField(world, 'y1', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x1'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y1'), cos)));
+      return;
+    }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'point') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'point') : Bool)) : Bool)) {
+      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), sin)));
+      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), cos)));
     }
   }
 
@@ -138,6 +156,20 @@ class ColliderTransform {
           _Runtime.setField(out, 'maxY', maxY);
           return;
         }
+      }
+      else if (__switchValue == 'segment') {
+        _Runtime.setField(out, 'minX', HxMath.min(_Runtime.field(shape, 'x0'), _Runtime.field(shape, 'x1')));
+        _Runtime.setField(out, 'minY', HxMath.min(_Runtime.field(shape, 'y0'), _Runtime.field(shape, 'y1')));
+        _Runtime.setField(out, 'maxX', HxMath.max(_Runtime.field(shape, 'x0'), _Runtime.field(shape, 'x1')));
+        _Runtime.setField(out, 'maxY', HxMath.max(_Runtime.field(shape, 'y0'), _Runtime.field(shape, 'y1')));
+        return;
+      }
+      else if (__switchValue == 'point') {
+        _Runtime.setField(out, 'minX', _Runtime.field(shape, 'x'));
+        _Runtime.setField(out, 'minY', _Runtime.field(shape, 'y'));
+        _Runtime.setField(out, 'maxX', _Runtime.field(shape, 'x'));
+        _Runtime.setField(out, 'maxY', _Runtime.field(shape, 'y'));
+        return;
       }
       else  {
         _Runtime.setField(out, 'minX', 0.0);

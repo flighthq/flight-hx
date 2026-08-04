@@ -11,6 +11,7 @@ export * from './scene.mjs';
 export * from './sceneAnimation.mjs';
 export * from './sceneDocument.mjs';
 export * from './sceneDocumentLights.mjs';
+export * from './sceneKindUsage.mjs';
 export * from './sceneMaterial.mjs';
 export * from './sceneNode.mjs';
 export * from './sceneNodeAppearance.mjs';

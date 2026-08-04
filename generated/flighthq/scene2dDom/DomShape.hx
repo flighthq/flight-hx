@@ -5,17 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
-import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
+import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
+import flighthq.scene2dDom.DomShapeRasterizer.getDomShapeRasterizer;
 import flighthq.scene2dDom.DomStyle.prepareDomElement;
 import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.scene2dDom.DomTransform.setDomTransformWithOffset;
 import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
+import flighthq.types.Types.ShapeKind;
+import flighthq.types._internal._ShapeValues.ShapeKind;
 
 typedef DomShapeData__domShape = Dynamic;
 
@@ -30,9 +34,11 @@ class DomShape {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var commands:Dynamic = cast _Runtime.UNDEFINED;
+    var rasterizer:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
+    var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomShapeData__domShape>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
@@ -40,6 +46,11 @@ class DomShape {
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
+    rasterizer = _Runtime.callValue(getDomShapeRasterizer, cast ([state] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
+      _Runtime.callOptionalProperty(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss', cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+      return;
+    }
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'canvas'), null) : Bool)) {
       _Runtime.setField(data, 'canvas', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
@@ -48,13 +59,14 @@ class DomShape {
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'width')));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'height')));
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', w);
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', h);
+    pixelRatio = _Runtime.field(state, 'pixelRatio');
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', HxMath.ceil((w * pixelRatio)));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', HxMath.ceil((h * pixelRatio)));
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(w) + 'px');
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(h) + 'px');
     ctx = _Runtime.field(data, 'context');
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0) : Bool)) : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
-    }
-    _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, commands] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
+    _Runtime.callValue(rasterizer, cast ([ctx, commands, state] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
     if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) {
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([renderProxy] : Array<Dynamic>)), function():Dynamic return cast ''));
@@ -65,4 +77,6 @@ class DomShape {
   }
 
   public static final defaultDomShapeRenderer:Scene2DRenderer = { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape };
+
+  public static final defaultDomMorphShapeRenderer:Scene2DRenderer = { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape };
 }

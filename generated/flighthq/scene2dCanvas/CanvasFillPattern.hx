@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.scene2dCanvas.CanvasTextureWindowSource.resolveCanvasTextureWindowSource;
-import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.ShapeCommand.GradientType;
@@ -16,13 +16,12 @@ import flighthq.types.Texture;
 class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
 
-  public static function createBitmapPattern(context:Dynamic, texture:Texture, ?state:Null<Dynamic>):Null<Dynamic> {
-    if (state == null) state = cast (null : Dynamic);
+  public static function createBitmapPattern(context:Dynamic, texture:Texture, resolvers:Dynamic, allowSmoothing:Dynamic = true):Null<Dynamic> {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var smooth:Dynamic = cast _Runtime.UNDEFINED;
-    source = _Runtime.callValue(resolveCanvasTextureWindowSource, cast ([state, texture] : Array<Dynamic>));
+    source = _Runtime.callValue(resolveCanvasTextureWindowSource, cast ([resolvers, texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
-    smooth = ((cast _Runtime.coalesce(_Runtime.optionalField(state, 'allowSmoothing'), function():Dynamic return cast true) : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool));
+    smooth = ((cast allowSmoothing : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool));
     _Runtime.callValue(CanvasFillPattern.setSmoothing__canvasFillPattern, cast ([context, smooth] : Array<Dynamic>));
     return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([source, _Runtime.callValue(CanvasFillPattern.getCanvasPatternRepetition__canvasFillPattern, cast ([texture] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;

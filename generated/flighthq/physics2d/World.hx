@@ -3,11 +3,19 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.physics2d.Broadphase.synchronizePhysics2DBroadphase;
 import flighthq.physics2d.ColliderTransform.createPhysics2DColliderWorldShape;
+import flighthq.physics2d.JointCollisionSuppression.rebuildPhysics2DJointCollisionSuppressions;
 import flighthq.physics2d.MassProperties.updateRigidBody2DMassData;
+import flighthq.physics2d.Ownership.assertPhysics2DBodyNotStepping;
+import flighthq.physics2d.Ownership.assertPhysics2DWorldNotStepping;
+import flighthq.physics2d.Ownership.physics2DBodyOwners;
+import flighthq.physics2d.Ownership.physics2DColliderOwners;
+import flighthq.physics2d.Ownership.physics2DJointOwners;
 import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Physics2D.Physics2DCollider;
+import flighthq.types.Physics2D.Physics2DCollisionFilter;
 import flighthq.types.Physics2D.Physics2DMaterial;
 import flighthq.types.Physics2D.Physics2DSolverConfig;
 import flighthq.types.Physics2D.Physics2DWorld;
@@ -16,39 +24,214 @@ import flighthq.types.Spatial.SpatialIndexBackend;
 
 class World {
   public static function addPhysics2DBody(world:Physics2DWorld, body:RigidBody2D):RigidBody2D {
+    var colliders:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    if ((cast ((cast ((cast ((cast physics2DBodyOwners : flighthq._internal._WeakMap).has(body)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(body, 'index'), -1.0) : Bool)) : Bool) || (cast _Runtime.includes(_Runtime.field(world, 'bodies'), body) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot add a rigid body that already belongs to a physics world'));
+    }
+    colliders = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
+      if ((cast ((cast colliders : flighthq._internal._Set).has(collider)) : Bool)) { _Runtime.throwValue(_Runtime.error('Cannot add a rigid body containing the same collider twice')); }
+      ((cast colliders : flighthq._internal._Set).add(collider));
+      var owner:Dynamic = ((cast physics2DColliderOwners : flighthq._internal._WeakMap).get(collider));
+      if ((cast ((cast !_Runtime.strictEquals(owner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(owner, body) : Bool)) : Bool)) {
+        _Runtime.throwValue(_Runtime.error('Cannot share a physics collider between rigid bodies'));
+      }
+    }
     _Runtime.setField(body, 'index', _Runtime.incrementField(world, 'nextBodyIndex', 1, true));
     _Runtime.callProperty(_Runtime.field(world, 'bodies'), 'push', cast ([body] : Array<Dynamic>));
+    ((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).set(_Runtime.field(body, 'index'), body));
+    ((cast physics2DBodyOwners : flighthq._internal._WeakMap).set(body, world));
+    for (collider in _Runtime.iterable(colliders)) {
+      ((cast physics2DColliderOwners : flighthq._internal._WeakMap).set(collider, body));
+    }
     _Runtime.callValue(updateRigidBody2DMassData, cast ([body] : Array<Dynamic>));
     return cast body;
     return cast null;
   }
 
-  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, sensor:Dynamic = false):Physics2DCollider {
-    return cast { local: local, world: _Runtime.callValue(createPhysics2DColliderWorldShape, cast ([local] : Array<Dynamic>)), material: material, sensor: sensor };
+  public static function addPhysics2DCollider(world:Physics2DWorld, body:RigidBody2D, collider:Physics2DCollider):Physics2DCollider {
+    var bodyOwner:Dynamic = cast _Runtime.UNDEFINED;
+    var owner:Dynamic = cast _Runtime.UNDEFINED;
+    var inWorld:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    bodyOwner = ((cast physics2DBodyOwners : flighthq._internal._WeakMap).get(body));
+    if ((cast ((cast !_Runtime.strictEquals(bodyOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(bodyOwner, world) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot mutate a rigid body through a physics world that does not own it'));
+    }
+    if ((cast _Runtime.includes(_Runtime.field(body, 'colliders'), collider) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot add the same physics collider to a rigid body twice'));
+    }
+    owner = ((cast physics2DColliderOwners : flighthq._internal._WeakMap).get(collider));
+    if ((cast ((cast !_Runtime.strictEquals(owner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(owner, body) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot share a physics collider between rigid bodies'));
+    }
+    inWorld = _Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body);
+    if ((cast inWorld : Bool)) { _Runtime.callValue(World._invalidatePhysics2DBodyConstraints__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>)); }
+    _Runtime.callProperty(_Runtime.field(body, 'colliders'), 'push', cast ([collider] : Array<Dynamic>));
+    ((cast physics2DColliderOwners : flighthq._internal._WeakMap).set(collider, body));
+    _Runtime.callValue(updateRigidBody2DMassData, cast ([body] : Array<Dynamic>));
+    if ((cast inWorld : Bool)) {
+      _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+      _Runtime.callValue(synchronizePhysics2DBroadphase, cast ([world] : Array<Dynamic>));
+    }
+    return cast collider;
+    return cast null;
+  }
+
+  public static function applyPhysics2DForce(body:RigidBody2D, forceX:Float, forceY:Float):Bool {
+    _Runtime.callValue(assertPhysics2DBodyNotStepping, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic') : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([forceX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([forceY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    _Runtime.setField(body, 'forceX', _Runtime.addNumbers(_Runtime.field(body, 'forceX'), forceX));
+    _Runtime.setField(body, 'forceY', _Runtime.addNumbers(_Runtime.field(body, 'forceY'), forceY));
+    if ((cast ((cast !_Runtime.strictEquals(forceX, 0.0) : Bool) || (cast !_Runtime.strictEquals(forceY, 0.0) : Bool)) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>)); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function applyPhysics2DForceAtPoint(body:RigidBody2D, forceX:Float, forceY:Float, pointX:Float, pointY:Float):Bool {
+    _Runtime.callValue(assertPhysics2DBodyNotStepping, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic') : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([forceX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([forceY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([pointX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([pointY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
+    _Runtime.setField(body, 'forceX', _Runtime.addNumbers(_Runtime.field(body, 'forceX'), forceX));
+    _Runtime.setField(body, 'forceY', _Runtime.addNumbers(_Runtime.field(body, 'forceY'), forceY));
+    if ((cast !(cast _Runtime.field(body, 'fixedRotation') : Bool) : Bool)) { _Runtime.setField(body, 'torque', _Runtime.addNumbers(_Runtime.field(body, 'torque'), _Runtime.callValue(World._crossPhysics2DBodyPointVector__world, cast ([body, pointX, pointY, forceX, forceY] : Array<Dynamic>)))); }
+    if ((cast ((cast !_Runtime.strictEquals(forceX, 0.0) : Bool) || (cast !_Runtime.strictEquals(forceY, 0.0) : Bool)) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>)); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function applyPhysics2DLinearImpulse(body:RigidBody2D, impulseX:Float, impulseY:Float):Bool {
+    _Runtime.callValue(assertPhysics2DBodyNotStepping, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic') : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([impulseX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([impulseY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    _Runtime.setField(body, 'velocityX', _Runtime.addNumbers(_Runtime.field(body, 'velocityX'), _Runtime.multiplyNumbers(impulseX, _Runtime.field(body, 'inverseMass'))));
+    _Runtime.setField(body, 'velocityY', _Runtime.addNumbers(_Runtime.field(body, 'velocityY'), _Runtime.multiplyNumbers(impulseY, _Runtime.field(body, 'inverseMass'))));
+    if ((cast ((cast !_Runtime.strictEquals(impulseX, 0.0) : Bool) || (cast !_Runtime.strictEquals(impulseY, 0.0) : Bool)) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>)); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function applyPhysics2DLinearImpulseAtPoint(body:RigidBody2D, impulseX:Float, impulseY:Float, pointX:Float, pointY:Float):Bool {
+    _Runtime.callValue(assertPhysics2DBodyNotStepping, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic') : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([impulseX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([impulseY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([pointX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([pointY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
+    _Runtime.setField(body, 'velocityX', _Runtime.addNumbers(_Runtime.field(body, 'velocityX'), _Runtime.multiplyNumbers(impulseX, _Runtime.field(body, 'inverseMass'))));
+    _Runtime.setField(body, 'velocityY', _Runtime.addNumbers(_Runtime.field(body, 'velocityY'), _Runtime.multiplyNumbers(impulseY, _Runtime.field(body, 'inverseMass'))));
+    _Runtime.setField(body, 'angularVelocity', _Runtime.addNumbers(_Runtime.field(body, 'angularVelocity'), _Runtime.multiplyNumbers(_Runtime.callValue(World._crossPhysics2DBodyPointVector__world, cast ([body, pointX, pointY, impulseX, impulseY] : Array<Dynamic>)), _Runtime.field(body, 'inverseInertia'))));
+    if ((cast ((cast !_Runtime.strictEquals(impulseX, 0.0) : Bool) || (cast !_Runtime.strictEquals(impulseY, 0.0) : Bool)) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>)); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function applyPhysics2DTorque(body:RigidBody2D, torque:Float):Bool {
+    _Runtime.callValue(assertPhysics2DBodyNotStepping, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'dynamic') : Bool) || (cast _Runtime.field(body, 'fixedRotation') : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([torque] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    _Runtime.setField(body, 'torque', _Runtime.addNumbers(_Runtime.field(body, 'torque'), torque));
+    if ((cast !_Runtime.strictEquals(torque, 0.0) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>)); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, sensor:Dynamic = false, ?filter:Physics2DCollisionFilter):Physics2DCollider {
+    var ownedLocal:Dynamic = cast _Runtime.UNDEFINED;
+    ownedLocal = _Runtime.callValue(World.clonePhysics2DLocalShape__world, cast ([local] : Array<Dynamic>));
+    return cast { local: ownedLocal, world: _Runtime.callValue(createPhysics2DColliderWorldShape, cast ([ownedLocal] : Array<Dynamic>)), material: _Runtime.mergeObjects([material]), filter: ((cast _Runtime.strictEquals(filter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { categoryBits: 1.0, maskBits: 4294967295.0, groupIndex: 0.0 } : Dynamic) : (cast _Runtime.mergeObjects([filter]) : Dynamic)), sensor: sensor };
+    return cast null;
+  }
+
+  public static function clonePhysics2DLocalShape__world(local:CollisionShape):CollisionShape {
+    {
+      var __switchValue = _Runtime.field(local, 'kind');
+      if (__switchValue == 'circle') {
+        return cast { kind: 'circle', x: _Runtime.field(local, 'x'), y: _Runtime.field(local, 'y'), radius: _Runtime.field(local, 'radius') };
+      }
+      else if (__switchValue == 'aabb') {
+        return cast { kind: 'aabb', minX: _Runtime.field(local, 'minX'), minY: _Runtime.field(local, 'minY'), maxX: _Runtime.field(local, 'maxX'), maxY: _Runtime.field(local, 'maxY') };
+      }
+      else if (__switchValue == 'obb') {
+        return cast { kind: 'obb', x: _Runtime.field(local, 'x'), y: _Runtime.field(local, 'y'), halfW: _Runtime.field(local, 'halfW'), halfH: _Runtime.field(local, 'halfH'), rotation: _Runtime.field(local, 'rotation') };
+      }
+      else if (__switchValue == 'polygon') {
+        return cast { kind: 'polygon', points: _Runtime.slice(_Runtime.field(local, 'points'), 0, null) };
+      }
+      else if (__switchValue == 'segment') {
+        return cast { kind: 'segment', x0: _Runtime.field(local, 'x0'), y0: _Runtime.field(local, 'y0'), x1: _Runtime.field(local, 'x1'), y1: _Runtime.field(local, 'y1') };
+      }
+      else if (__switchValue == 'point') {
+        return cast { kind: 'point', x: _Runtime.field(local, 'x'), y: _Runtime.field(local, 'y') };
+      }
+    }
     return cast null;
   }
 
   public static function createPhysics2DSolverConfig():Physics2DSolverConfig {
-    return cast { allowSleeping: true, sleepLinearThreshold: 0.01, sleepAngularThreshold: ((2.0 * HxMath.PI) / 180.0), timeToSleep: 0.5, velocityIterations: 10.0, positionIterations: 3.0, penetrationSlop: 0.005, positionCorrection: 0.2, restitutionThreshold: 1.0, warmStarting: true };
+    return cast { allowSleeping: true, sleepLinearThreshold: 0.01, sleepAngularThreshold: ((2.0 * HxMath.PI) / 180.0), timeToSleep: 0.5, velocityIterations: 10.0, positionIterations: 3.0, penetrationSlop: 0.005, positionCorrection: 0.2, restitutionThreshold: 1.0, warmStarting: true, continuousCollision: true, maxCcdSubsteps: 8.0, maxCcdRotationSubsteps: 64.0 };
     return cast null;
   }
 
   public static function createPhysics2DWorld(gravityX:Dynamic = 0.0, ?gravityY:Dynamic, ?index:SpatialIndexBackend):Physics2DWorld {
     if (gravityY == null) gravityY = cast (-9.81 : Dynamic);
-    return cast { bodies: cast ([] : Array<Dynamic>), contacts: cast ([] : Array<Dynamic>), joints: cast ([] : Array<Dynamic>), jointSolvers: _Runtime.construct(_Runtime.globalValue('Map'), []), events: { began: cast ([] : Array<Dynamic>), ended: cast ([] : Array<Dynamic>) }, index: _Runtime.coalesce(index, function():Dynamic return cast _Runtime.callValue(createUniformGridSpatialBackend, cast ([1.0] : Array<Dynamic>))), config: _Runtime.callValue(createPhysics2DSolverConfig, cast ([] : Array<Dynamic>)), gravityX: gravityX, gravityY: gravityY, nextBodyIndex: 0.0 };
+    return cast { version: Physics2DWorldVersion, bodies: cast ([] : Array<Dynamic>), bodyByIndex: _Runtime.construct(_Runtime.globalValue('Map'), []), contacts: cast ([] : Array<Dynamic>), joints: cast ([] : Array<Dynamic>), jointSolvers: _Runtime.construct(_Runtime.globalValue('Map'), []), jointCollisionSuppressions: _Runtime.construct(_Runtime.globalValue('Map'), []), events: { began: cast ([] : Array<Dynamic>), ended: cast ([] : Array<Dynamic>) }, contactHooks: { preSolve: null, postSolve: null }, index: _Runtime.coalesce(index, function():Dynamic return cast _Runtime.callValue(createUniformGridSpatialBackend, cast ([1.0] : Array<Dynamic>))), config: _Runtime.callValue(createPhysics2DSolverConfig, cast ([] : Array<Dynamic>)), islandParents: _Runtime.construct(_Runtime.globalValue('Map'), []), islandSleepTimers: _Runtime.construct(_Runtime.globalValue('Map'), []), solveIslandByRoot: _Runtime.construct(_Runtime.globalValue('Map'), []), solveIslandRoots: cast ([] : Array<Dynamic>), solveIslandBodyStarts: cast ([] : Array<Dynamic>), solveIslandBodyCounts: cast ([] : Array<Dynamic>), solveIslandContactStarts: cast ([] : Array<Dynamic>), solveIslandContactCounts: cast ([] : Array<Dynamic>), solveIslandJointStarts: cast ([] : Array<Dynamic>), solveIslandJointCounts: cast ([] : Array<Dynamic>), solveIslandBodyIndices: cast ([] : Array<Dynamic>), solveIslandContactIndices: cast ([] : Array<Dynamic>), solveIslandJointIndices: cast ([] : Array<Dynamic>), solveIslandCursors: cast ([] : Array<Dynamic>), gravityX: gravityX, gravityY: gravityY, previousTimestep: 0.0, nextBodyIndex: 0.0 };
     return cast null;
   }
 
   public static function createRigidBody2D(type:Dynamic, x:Float, y:Float, angle:Dynamic = 0.0):RigidBody2D {
-    return cast { index: -1.0, type: type, x: x, y: y, angle: angle, velocityX: 0.0, velocityY: 0.0, angularVelocity: 0.0, forceX: 0.0, forceY: 0.0, torque: 0.0, mass: 0.0, inverseMass: 0.0, inertia: 0.0, inverseInertia: 0.0, centerX: 0.0, centerY: 0.0, linearDamping: 0.0, angularDamping: 0.0, gravityScale: 1.0, sleeping: false, sleepTimer: 0.0, colliders: cast ([] : Array<Dynamic>) };
+    return cast { index: -1.0, type: type, x: x, y: y, angle: angle, velocityX: 0.0, velocityY: 0.0, angularVelocity: 0.0, forceX: 0.0, forceY: 0.0, torque: 0.0, mass: 0.0, inverseMass: 0.0, inertia: 0.0, inverseInertia: 0.0, centerX: 0.0, centerY: 0.0, linearDamping: 0.0, angularDamping: 0.0, gravityScale: 1.0, fixedRotation: false, bullet: false, sleeping: false, sleepEnabled: true, sleepTimer: 0.0, colliders: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
   public static function findPhysics2DBody(world:Physics2DWorld, index:Float):Null<RigidBody2D> {
-    for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(body, 'index'), index) : Bool)) { return cast body; }
-    }
+    return cast _Runtime.coalesce(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(index)), function():Dynamic return cast null);
     return cast null;
+  }
+
+  public static function hydratePhysics2DWorld(world:Physics2DWorld):Bool {
+    var serializedVersion:Dynamic = cast _Runtime.UNDEFINED;
+    var version:Dynamic = cast _Runtime.UNDEFINED;
+    var defaults:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    serializedVersion = _Runtime.field((cast (cast world : Dynamic) : { @:optional var version:Dynamic; }), 'version');
+    version = ((cast _Runtime.strictEquals(serializedVersion, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast serializedVersion : Dynamic));
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isSafeInteger', cast ([version] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast (cast version : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast version : Float) : Float) > (cast Physics2DWorldVersion : Float)) : Bool)) : Bool)) {
+      return cast false;
+    }
+    if ((cast _Runtime.strictEquals(version, Physics2DWorldVersion) : Bool)) { return cast true; }
+    defaults = _Runtime.callValue(createPhysics2DSolverConfig, cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(world, 'config'), 'continuousCollision'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _Runtime.setField(_Runtime.field(world, 'config'), 'continuousCollision', _Runtime.field(defaults, 'continuousCollision'));
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(world, 'config'), 'maxCcdSubsteps'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(world, 'config'), 'maxCcdSubsteps', _Runtime.field(defaults, 'maxCcdSubsteps')); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(world, 'config'), 'maxCcdRotationSubsteps'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _Runtime.setField(_Runtime.field(world, 'config'), 'maxCcdRotationSubsteps', _Runtime.field(defaults, 'maxCcdRotationSubsteps'));
+    }
+    for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
+      if ((cast _Runtime.strictEquals(_Runtime.field(body, 'fixedRotation'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(body, 'fixedRotation', false); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(body, 'bullet'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(body, 'bullet', false); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(body, 'sleepEnabled'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(body, 'sleepEnabled', true); }
+    }
+    _Runtime.setField(world, 'version', Physics2DWorldVersion);
+    return cast true;
+    return cast null;
+  }
+
+  public static function invalidatePhysics2DCollider(world:Physics2DWorld, body:RigidBody2D, collider:Physics2DCollider):Bool {
+    var bodyOwner:Dynamic = cast _Runtime.UNDEFINED;
+    var inWorld:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    bodyOwner = ((cast physics2DBodyOwners : flighthq._internal._WeakMap).get(body));
+    if ((cast ((cast !_Runtime.strictEquals(bodyOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(bodyOwner, world) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast _Runtime.callProperty(_Runtime.field(body, 'colliders'), 'indexOf', cast ([collider] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
+    inWorld = _Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body);
+    if ((cast inWorld : Bool)) { _Runtime.callValue(World._invalidatePhysics2DBodyConstraints__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>)); }
+    _Runtime.setField(collider, 'world', _Runtime.callValue(createPhysics2DColliderWorldShape, cast ([_Runtime.field(collider, 'local')] : Array<Dynamic>)));
+    _Runtime.callValue(updateRigidBody2DMassData, cast ([body] : Array<Dynamic>));
+    if ((cast inWorld : Bool)) {
+      _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+      _Runtime.callValue(synchronizePhysics2DBroadphase, cast ([world] : Array<Dynamic>));
+    }
+    return cast true;
     return cast null;
   }
 
@@ -59,27 +242,201 @@ class World {
 
   public static function removePhysics2DBody(world:Physics2DWorld, body:RigidBody2D):Bool {
     var at:Dynamic = cast _Runtime.UNDEFINED;
+    var mutableBody:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
     at = _Runtime.callProperty(_Runtime.field(world, 'bodies'), 'indexOf', cast ([(cast body : RigidBody2D)] : Array<Dynamic>));
     if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    _Runtime.splice(_Runtime.field(world, 'bodies'), Std.int(at), Std.int(1.0), []);
-    _Runtime.callProperty(_Runtime.field(world, 'index'), 'removeSpatialObject', cast ([_Runtime.field(body, 'index')] : Array<Dynamic>));
-    {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(world, 'contacts'), 'length'), 1.0);
-      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var contact:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), i);
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(contact, 'bodyA'), _Runtime.field(body, 'index')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(contact, 'bodyB'), _Runtime.field(body, 'index')) : Bool)) : Bool)) { _Runtime.splice(_Runtime.field(world, 'contacts'), Std.int(i), Std.int(1.0), []); }
-        i--;
-      }
-    }
+    _Runtime.callValue(World._invalidatePhysics2DBodyContacts__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>));
     {
       var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(world, 'joints'), 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var joint:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), i);
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(joint, 'bodyA'), _Runtime.field(body, 'index')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(joint, 'bodyB'), _Runtime.field(body, 'index')) : Bool)) : Bool)) { _Runtime.splice(_Runtime.field(world, 'joints'), Std.int(i), Std.int(1.0), []); }
+        var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
+        var usesBodyA:Dynamic = !_Runtime.strictEquals(_Runtime.optionalField(solver, 'usesBodyA'), false);
+        var removesBodyA:Dynamic = ((cast usesBodyA : Bool) && (cast _Runtime.strictEquals(_Runtime.field(joint, 'bodyA'), _Runtime.field(body, 'index')) : Bool));
+        var removesBodyB:Dynamic = _Runtime.strictEquals(_Runtime.field(joint, 'bodyB'), _Runtime.field(body, 'index'));
+        if ((cast ((cast !(cast removesBodyA : Bool) : Bool) && (cast !(cast removesBodyB : Bool) : Bool)) : Bool)) { i--; continue; }
+        if ((cast ((cast !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast usesBodyA : Bool)) : Bool)) {
+          var otherIndex:Dynamic = ((cast removesBodyA : Bool) ? (cast _Runtime.field(joint, 'bodyB') : Dynamic) : (cast _Runtime.field(joint, 'bodyA') : Dynamic));
+          var other:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, otherIndex] : Array<Dynamic>));
+          if ((cast !_Runtime.strictEquals(other, null) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([other] : Array<Dynamic>)); }
+        }
+        _Runtime.splice(_Runtime.field(world, 'joints'), Std.int(i), Std.int(1.0), []);
+        ((cast physics2DJointOwners : flighthq._internal._WeakMap).delete_(joint));
         i--;
       }
+    }
+    _Runtime.callValue(rebuildPhysics2DJointCollisionSuppressions, cast ([world] : Array<Dynamic>));
+    ((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).delete_(_Runtime.field(body, 'index')));
+    _Runtime.splice(_Runtime.field(world, 'bodies'), Std.int(at), Std.int(1.0), []);
+    _Runtime.callProperty(_Runtime.field(world, 'index'), 'removeSpatialObject', cast ([_Runtime.field(body, 'index')] : Array<Dynamic>));
+    mutableBody = (cast body : RigidBody2D);
+    _Runtime.setField(mutableBody, 'index', -1.0);
+    ((cast physics2DBodyOwners : flighthq._internal._WeakMap).delete_(mutableBody));
+    return cast true;
+    return cast null;
+  }
+
+  public static function removePhysics2DCollider(world:Physics2DWorld, body:RigidBody2D, collider:Physics2DCollider):Bool {
+    var bodyOwner:Dynamic = cast _Runtime.UNDEFINED;
+    var at:Dynamic = cast _Runtime.UNDEFINED;
+    var inWorld:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    bodyOwner = ((cast physics2DBodyOwners : flighthq._internal._WeakMap).get(body));
+    if ((cast ((cast !_Runtime.strictEquals(bodyOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(bodyOwner, world) : Bool)) : Bool)) { return cast false; }
+    at = _Runtime.callProperty(_Runtime.field(body, 'colliders'), 'indexOf', cast ([(cast collider : Physics2DCollider)] : Array<Dynamic>));
+    if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
+    inWorld = _Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body);
+    if ((cast inWorld : Bool)) { _Runtime.callValue(World._invalidatePhysics2DBodyConstraints__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>)); }
+    _Runtime.splice(_Runtime.field(body, 'colliders'), Std.int(at), Std.int(1.0), []);
+    ((cast physics2DColliderOwners : flighthq._internal._WeakMap).delete_((cast collider : Physics2DCollider)));
+    _Runtime.callValue(updateRigidBody2DMassData, cast ([body] : Array<Dynamic>));
+    if ((cast inWorld : Bool)) {
+      _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+      _Runtime.callValue(synchronizePhysics2DBroadphase, cast ([world] : Array<Dynamic>));
     }
     return cast true;
     return cast null;
   }
+
+  public static function setPhysics2DBodyBullet(world:Physics2DWorld, body:RigidBody2D, bullet:Bool):Bool {
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(bullet), 'boolean') : Bool)) : Bool)) { return cast false; }
+    _Runtime.setField(body, 'bullet', bullet);
+    _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyFixedRotation(world:Physics2DWorld, body:RigidBody2D, fixedRotation:Bool):Bool {
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(fixedRotation), 'boolean') : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(body, 'fixedRotation'), fixedRotation) : Bool)) { return cast true; }
+    _Runtime.callValue(World._invalidatePhysics2DBodyConstraints__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>));
+    _Runtime.setField(body, 'fixedRotation', fixedRotation);
+    if ((cast fixedRotation : Bool)) {
+      _Runtime.setField(body, 'angularVelocity', 0.0);
+      _Runtime.setField(body, 'torque', 0.0);
+    }
+    _Runtime.callValue(updateRigidBody2DMassData, cast ([body] : Array<Dynamic>));
+    _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics2DBodySleepEnabled(world:Physics2DWorld, body:RigidBody2D, sleepEnabled:Bool):Bool {
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(sleepEnabled), 'boolean') : Bool)) : Bool)) { return cast false; }
+    _Runtime.setField(body, 'sleepEnabled', sleepEnabled);
+    _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyTransform(world:Physics2DWorld, body:RigidBody2D, x:Float, y:Float, angle:Float):Bool {
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([angle] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(body, 'x'), x) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(body, 'y'), y) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(body, 'angle'), angle) : Bool)) : Bool)) { return cast true; }
+    _Runtime.callValue(World._invalidatePhysics2DBodyConstraints__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>));
+    _Runtime.setField(body, 'x', x);
+    _Runtime.setField(body, 'y', y);
+    _Runtime.setField(body, 'angle', angle);
+    _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+    _Runtime.callValue(synchronizePhysics2DBroadphase, cast ([world] : Array<Dynamic>));
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyType(world:Physics2DWorld, body:RigidBody2D, type:Dynamic):Bool {
+    _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map).get(_Runtime.field(body, 'index'))), body) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), type) : Bool)) { return cast true; }
+    _Runtime.callValue(World._invalidatePhysics2DBodyConstraints__world, cast ([world, _Runtime.field(body, 'index')] : Array<Dynamic>));
+    _Runtime.setField(body, 'type', type);
+    _Runtime.callValue(updateRigidBody2DMassData, cast ([body] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(type, 'dynamic') : Bool)) {
+      _Runtime.setField(body, 'forceX', 0.0);
+      _Runtime.setField(body, 'forceY', 0.0);
+      _Runtime.setField(body, 'torque', 0.0);
+    }
+    if ((cast _Runtime.strictEquals(type, 'static') : Bool)) {
+      _Runtime.setField(body, 'velocityX', 0.0);
+      _Runtime.setField(body, 'velocityY', 0.0);
+      _Runtime.setField(body, 'angularVelocity', 0.0);
+    }
+    _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([body] : Array<Dynamic>));
+    return cast true;
+    return cast null;
+  }
+
+  public static function _crossPhysics2DBodyPointVector__world(body:RigidBody2D, pointX:Float, pointY:Float, vectorX:Float, vectorY:Float):Float {
+    var cos:Dynamic = cast _Runtime.UNDEFINED;
+    var sin:Dynamic = cast _Runtime.UNDEFINED;
+    var centerX:Dynamic = cast _Runtime.UNDEFINED;
+    var centerY:Dynamic = cast _Runtime.UNDEFINED;
+    cos = HxMath.cos(_Runtime.field(body, 'angle'));
+    sin = HxMath.sin(_Runtime.field(body, 'angle'));
+    centerX = (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(body, 'centerX'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(body, 'centerY'), sin));
+    centerY = (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(body, 'centerX'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(body, 'centerY'), cos));
+    return cast (((pointX - centerX) * vectorY) - ((pointY - centerY) * vectorX));
+    return cast null;
+  }
+
+  public static function _invalidatePhysics2DBodyConstraints__world(world:Physics2DWorld, bodyIndex:Float):Void {
+    _Runtime.callValue(World._invalidatePhysics2DBodyContacts__world, cast ([world, bodyIndex] : Array<Dynamic>));
+    for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
+      var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
+      var usesBodyA:Dynamic = !_Runtime.strictEquals(_Runtime.optionalField(solver, 'usesBodyA'), false);
+      var connectedA:Dynamic = ((cast usesBodyA : Bool) && (cast _Runtime.strictEquals(_Runtime.field(joint, 'bodyA'), bodyIndex) : Bool));
+      var connectedB:Dynamic = _Runtime.strictEquals(_Runtime.field(joint, 'bodyB'), bodyIndex);
+      if ((cast ((cast !(cast connectedA : Bool) : Bool) && (cast !(cast connectedB : Bool) : Bool)) : Bool)) { continue; }
+      _Runtime.callOptionalProperty(solver, 'clearAccumulatedImpulses', cast ([joint] : Array<Dynamic>));
+      _Runtime.setField(joint, 'impulse0', 0.0);
+      _Runtime.setField(joint, 'impulse1', 0.0);
+      _Runtime.setField(joint, 'impulse2', 0.0);
+      if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast usesBodyA : Bool) : Bool)) : Bool)) { continue; }
+      var otherIndex:Dynamic = ((cast connectedA : Bool) ? (cast _Runtime.field(joint, 'bodyB') : Dynamic) : (cast _Runtime.field(joint, 'bodyA') : Dynamic));
+      if ((cast _Runtime.strictEquals(otherIndex, bodyIndex) : Bool)) { continue; }
+      var other:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, otherIndex] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(other, null) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([other] : Array<Dynamic>)); }
+    }
+  }
+
+  public static function _invalidatePhysics2DBodyContacts__world(world:Physics2DWorld, bodyIndex:Float):Void {
+    {
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(world, 'contacts'), 'length'), 1.0);
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        var contact:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), i);
+        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(contact, 'bodyA'), bodyIndex) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(contact, 'bodyB'), bodyIndex) : Bool)) : Bool)) { i--; continue; }
+        if ((cast ((cast _Runtime.field(contact, 'enabled') : Bool) && (cast !(cast _Runtime.field(contact, 'sensor') : Bool) : Bool)) : Bool)) {
+          var otherIndex:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(contact, 'bodyA'), bodyIndex) : Bool) ? (cast _Runtime.field(contact, 'bodyB') : Dynamic) : (cast _Runtime.field(contact, 'bodyA') : Dynamic));
+          var other:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, otherIndex] : Array<Dynamic>));
+          if ((cast !_Runtime.strictEquals(other, null) : Bool)) { _Runtime.callValue(World._wakePhysics2DBodyFromTopology__world, cast ([other] : Array<Dynamic>)); }
+        }
+        _Runtime.splice(_Runtime.field(world, 'contacts'), Std.int(i), Std.int(1.0), []);
+        i--;
+      }
+    }
+    _Runtime.callValue(World._removePhysics2DContactEventsForBody__world, cast ([_Runtime.field(_Runtime.field(world, 'events'), 'began'), bodyIndex] : Array<Dynamic>));
+    _Runtime.callValue(World._removePhysics2DContactEventsForBody__world, cast ([_Runtime.field(_Runtime.field(world, 'events'), 'ended'), bodyIndex] : Array<Dynamic>));
+  }
+
+  public static function _removePhysics2DContactEventsForBody__world(events:Dynamic, bodyIndex:Float):Void {
+    {
+      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(events, 'length'), 1.0);
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(events, i), 'bodyA'), bodyIndex) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(events, i), 'bodyB'), bodyIndex) : Bool)) : Bool)) { _Runtime.splice(events, Std.int(i), Std.int(1.0), []); }
+        i--;
+      }
+    }
+  }
+
+  public static function _wakePhysics2DBodyFromTopology__world(body:RigidBody2D):Void {
+    _Runtime.setField(body, 'sleeping', false);
+    _Runtime.setField(body, 'sleepTimer', 0.0);
+  }
+
+  public static final Physics2DWorldVersion:Dynamic = 2.0;
 }

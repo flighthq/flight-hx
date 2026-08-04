@@ -7,4 +7,6 @@ import flighthq.types.LottieDocument.LottieImageAsset;
 
 typedef LottieDocumentImportOptions = { @:optional var resolveImageResource:Dynamic; };
 
-typedef LottieDocumentImportResult = { var clip:AnimationClip; var duration:Float; var frameRate:Float; var root:DisplayObject; };
+typedef LottieAdvancedBlend = { var mode:AdvancedBlendMode; var node:DisplayObject; };
+
+typedef LottieDocumentImportResult = { var advancedBlends:Array<LottieAdvancedBlend>; var clip:AnimationClip; var duration:Float; var frameRate:Float; var root:DisplayObject; };

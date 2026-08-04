@@ -22,6 +22,7 @@ import flighthq.scene3dResources.SceneMaterialTextureRegistry as Facade_Scene3dR
 import flighthq.scene3dResources.SceneResourceRecovery as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceRecovery;
 import flighthq.scene3dResources.SceneResourceResolver as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceResolver;
 import flighthq.scene3dResources.SceneResourceSignals as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceSignals;
+import flighthq.scene3dResources.ShadedScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_ShadedScene3DMaterialTextures;
 import flighthq.scene3dResources.SheenPbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_SheenPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.SpecularPbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_SpecularPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.ThreeDsLoad as Facade_Scene3dResources_flighthq_scene3dResources_ThreeDsLoad;
@@ -30,7 +31,6 @@ import flighthq.scene3dResources.WrappedDiffusePbrScene3DMaterialTextures as Fac
 import flighthq.types.Entity.Kind;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
 import flighthq.types.Material;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.Scene3D;
@@ -89,11 +89,6 @@ class Scene3dResources {
     return cast null;
   }
 
-  public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
-    return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceRecovery.explainImageResourceReferenceResolution(ref);
-    return cast null;
-  }
-
   public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_ImageResourceFetch.fetchWebImageResource(ref, signal);
     return cast null;
@@ -115,6 +110,11 @@ class Scene3dResources {
 
   public static function getScene3DResourceTextures(scene:Scene3D, registry:Scene3DMaterialTextureRegistry, out:Array<Texture>):Void {
     Facade_Scene3dResources_flighthq_scene3dResources_GetScene3DResourceTextures.getScene3DResourceTextures(scene, registry, out);
+  }
+
+  public static function hasScene3DMaterialTextureLister(registry:Scene3DMaterialTextureRegistry, kind:Kind):Bool {
+    return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.hasScene3DMaterialTextureLister(registry, kind);
+    return cast null;
   }
 
   public static function loadScene3DDocumentBytesFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
@@ -195,6 +195,10 @@ class Scene3dResources {
     Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerScene3DPbrExtensionTextures(registry, kind, lister);
   }
 
+  public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
+    Facade_Scene3dResources_flighthq_scene3dResources_ShadedScene3DMaterialTextures.registerShadedScene3DMaterialTextures(registry);
+  }
+
   public static function registerSheenPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     Facade_Scene3dResources_flighthq_scene3dResources_SheenPbrScene3DMaterialTextures.registerSheenPbrScene3DMaterialTextures(registry);
   }
@@ -209,11 +213,6 @@ class Scene3dResources {
 
   public static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     Facade_Scene3dResources_flighthq_scene3dResources_WrappedDiffusePbrScene3DMaterialTextures.registerWrappedDiffusePbrScene3DMaterialTextures(registry);
-  }
-
-  public static function resetFailedImageResourceReference(ref:ImageResourceReference):Bool {
-    return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceRecovery.resetFailedImageResourceReference(ref);
-    return cast null;
   }
 
   public static function resolveImageResourceUri(uri:String, basePath:Null<String>):String {

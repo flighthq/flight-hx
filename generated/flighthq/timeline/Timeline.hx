@@ -8,6 +8,7 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.FrameScript;
 import flighthq.types.Node2D;
 import flighthq.types.Timeline;
+import flighthq.types.TimelineCue;
 import flighthq.types.TimelineFrameEvent;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSignals;
@@ -66,7 +67,7 @@ class Timeline {
   }
 
   public static function createTimeline(?obj:Dynamic):flighthq.types.Timeline {
-    return cast { source: _Runtime.coalesce(_Runtime.optionalField(obj, 'source'), function():Dynamic return cast null), target: _Runtime.coalesce(_Runtime.optionalField(obj, 'target'), function():Dynamic return cast null), currentFrame: _Runtime.coalesce(_Runtime.optionalField(obj, 'currentFrame'), function():Dynamic return cast 1.0), frameScripts: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameScripts'), function():Dynamic return cast null), isPlaying: _Runtime.coalesce(_Runtime.optionalField(obj, 'isPlaying'), function():Dynamic return cast false), lastFrameUpdate: -1.0, playMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'playMode'), function():Dynamic return cast 'loop'), signals: _Runtime.coalesce(_Runtime.optionalField(obj, 'signals'), function():Dynamic return cast null), timeElapsed: 0.0 };
+    return cast { source: _Runtime.coalesce(_Runtime.optionalField(obj, 'source'), function():Dynamic return cast null), target: _Runtime.coalesce(_Runtime.optionalField(obj, 'target'), function():Dynamic return cast null), cueRegistry: _Runtime.coalesce(_Runtime.optionalField(obj, 'cueRegistry'), function():Dynamic return cast null), currentFrame: _Runtime.coalesce(_Runtime.optionalField(obj, 'currentFrame'), function():Dynamic return cast 1.0), frameScripts: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameScripts'), function():Dynamic return cast null), isPlaying: _Runtime.coalesce(_Runtime.optionalField(obj, 'isPlaying'), function():Dynamic return cast false), lastFrameUpdate: -1.0, playMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'playMode'), function():Dynamic return cast 'loop'), signals: _Runtime.coalesce(_Runtime.optionalField(obj, 'signals'), function():Dynamic return cast null), timeElapsed: 0.0 };
     return cast null;
   }
 
@@ -75,14 +76,16 @@ class Timeline {
     return cast null;
   }
 
-  public static function createTimelineSource(obj:{ @:optional var totalFrames:Float; @:optional var frameRate:Null<Float>; @:optional var labels:Array<TimelineLabel>; @:optional var constructFrame:Dynamic; }):TimelineSource {
-    return cast { totalFrames: _Runtime.coalesce(_Runtime.field(obj, 'totalFrames'), function():Dynamic return cast 1.0), frameRate: _Runtime.coalesce(_Runtime.field(obj, 'frameRate'), function():Dynamic return cast null), labels: _Runtime.coalesce(_Runtime.field(obj, 'labels'), function():Dynamic return cast Timeline.EMPTY_LABELS__timeline), constructFrame: _Runtime.coalesce(_Runtime.field(obj, 'constructFrame'), function():Dynamic return cast Timeline.noopConstructFrame__timeline) };
+  public static function createTimelineSource(obj:{ @:optional var totalFrames:Float; @:optional var frameRate:Null<Float>; @:optional var labels:Array<TimelineLabel>; @:optional var cues:Array<TimelineCue>; @:optional var constructFrame:Dynamic; }):TimelineSource {
+    return cast { totalFrames: _Runtime.coalesce(_Runtime.field(obj, 'totalFrames'), function():Dynamic return cast 1.0), frameRate: _Runtime.coalesce(_Runtime.field(obj, 'frameRate'), function():Dynamic return cast null), labels: _Runtime.coalesce(_Runtime.field(obj, 'labels'), function():Dynamic return cast Timeline.EMPTY_LABELS__timeline), cues: _Runtime.coalesce(_Runtime.field(obj, 'cues'), function():Dynamic return cast Timeline.EMPTY_CUES__timeline), constructFrame: _Runtime.coalesce(_Runtime.field(obj, 'constructFrame'), function():Dynamic return cast Timeline.noopConstructFrame__timeline) };
     return cast null;
   }
 
   public static function disposeTimelineSignals(timeline:flighthq.types.Timeline):Void {
     _Runtime.setField(timeline, 'signals', null);
   }
+
+  public static final EMPTY_CUES__timeline:Array<TimelineCue> = cast ([] : Array<Dynamic>);
 
   public static final EMPTY_FRAMES__timeline:Array<Float> = cast ([] : Array<Dynamic>);
 

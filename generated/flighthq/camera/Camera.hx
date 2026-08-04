@@ -166,6 +166,11 @@ class Camera {
     return cast null;
   }
 
+  public static function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
+    return cast Facade_Camera_flighthq_camera_Projection.getOrthographicProjectionTexelSize(projection, pixelWidth, pixelHeight);
+    return cast null;
+  }
+
   public static function intersectCamera3DRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
     return cast Facade_Camera_flighthq_camera_Intersection.intersectCamera3DRayWithPlane(out, ray, plane);
     return cast null;

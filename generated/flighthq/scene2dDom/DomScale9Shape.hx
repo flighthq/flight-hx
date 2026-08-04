@@ -5,25 +5,30 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
-import flighthq.scene2dCanvas.CanvasScale9Shape.mapCanvasScale9ShapeCommands;
-import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
+import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.scene2dDom.DomScale9Mapper.buildDomScale9Mapper;
 import flighthq.scene2dDom.DomShape.drawDomShape;
+import flighthq.scene2dDom.DomShapeRasterizer.getDomShapeRasterizer;
 import flighthq.scene2dDom.DomStyle.prepareDomElement;
 import flighthq.scene2dDom.DomStyle.setDomRendererElement;
+import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.DomRenderState;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scale9Shape;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.Types.Scale9ShapeKind;
+import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 typedef DomScale9ShapeData__domScale9Shape = Dynamic;
 
 class DomScale9Shape {
-  public static final _remappedCommands__domScale9Shape:Array<Dynamic> = cast ([] : Array<Dynamic>);
+  public static final _remappedCommands__domScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
 
   public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));
@@ -36,10 +41,12 @@ class DomScale9Shape {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var scale9Grid:Dynamic = cast _Runtime.UNDEFINED;
+    var rasterizer:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     var mapper:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
+    var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomScale9ShapeData__domScale9Shape>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
@@ -48,6 +55,11 @@ class DomScale9Shape {
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
+    rasterizer = _Runtime.callValue(getDomShapeRasterizer, cast ([state] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
+      _Runtime.callOptionalProperty(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss', cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      return;
+    }
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     mapper = _Runtime.callValue(buildDomScale9Mapper, cast ([bounds, scale9Grid, _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
@@ -61,14 +73,15 @@ class DomScale9Shape {
     }
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), _Runtime.field(source, 'scaleX'))));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), _Runtime.field(source, 'scaleY'))));
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', w);
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', h);
+    pixelRatio = _Runtime.field(state, 'pixelRatio');
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', HxMath.ceil((w * pixelRatio)));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', HxMath.ceil((h * pixelRatio)));
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(w) + 'px');
+    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(h) + 'px');
     ctx = _Runtime.field(data, 'context');
-    _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([DomScale9Shape._remappedCommands__domScale9Shape, commands, mapper] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0) : Bool)) : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
-    }
-    _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, DomScale9Shape._remappedCommands__domScale9Shape] : Array<Dynamic>));
+    _Runtime.callValue(mapScale9ShapeCommands, cast ([DomScale9Shape._remappedCommands__domScale9Shape, commands, mapper] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
+    _Runtime.callValue(rasterizer, cast ([ctx, DomScale9Shape._remappedCommands__domScale9Shape, state] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));

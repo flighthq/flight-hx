@@ -9,5 +9,6 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
+export const defaultWgpuMorphShapeRenderer = api.defaultWgpuMorphShapeRenderer;
 export const defaultWgpuShapeRenderer = api.defaultWgpuShapeRenderer;
 export const drawWgpuShape = api.drawWgpuShape;

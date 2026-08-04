@@ -17,7 +17,7 @@ class SpritesheetTimelineSource {
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
     var bitmaps:Dynamic = cast _Runtime.UNDEFINED;
     bitmaps = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
-    return cast { totalFrames: _Runtime.field(animation.frames, 'length'), labels: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float) {
+    return cast { totalFrames: _Runtime.field(animation.frames, 'length'), labels: cast ([] : Array<Dynamic>), cues: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float) {
       var atlas:Dynamic = cast _Runtime.UNDEFINED;
       var bitmap:Dynamic = cast _Runtime.UNDEFINED;
       var sheetFrame:Dynamic = cast _Runtime.UNDEFINED;

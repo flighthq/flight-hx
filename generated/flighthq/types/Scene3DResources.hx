@@ -5,10 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
+import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
-
-typedef ImageResourceFetch = Dynamic;
 
 typedef Scene3DMaterialTextureLister = Dynamic;
 

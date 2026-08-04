@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './imageResource.mjs';
 export * from './imageResourceFrom.mjs';
+export * from './imageResourceReference.mjs';

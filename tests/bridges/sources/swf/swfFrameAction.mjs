@@ -5,4 +5,5 @@ const api = compiled.flighthq.swf.SwfFrameAction;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const readSwfAbcFrameScripts = api.readSwfAbcFrameScripts;
 export const readSwfFrameActions = api.readSwfFrameActions;

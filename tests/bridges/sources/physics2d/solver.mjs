@@ -7,6 +7,8 @@ __syncDependencies();
 
 export const applyPhysics2DImpulse = api.applyPhysics2DImpulse;
 export const relativeNormalVelocity = api.relativeNormalVelocity;
+export const solvePhysics2DContactIndicesOnce = api.solvePhysics2DContactIndicesOnce;
 export const solvePhysics2DContacts = api.solvePhysics2DContacts;
 export const solvePhysics2DContactsOnce = api.solvePhysics2DContactsOnce;
+export const warmStartPhysics2DContactIndices = api.warmStartPhysics2DContactIndices;
 export const warmStartPhysics2DContacts = api.warmStartPhysics2DContacts;

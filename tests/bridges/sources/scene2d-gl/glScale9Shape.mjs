@@ -10,4 +10,3 @@ export const defaultGlScale9ShapeRenderer = api.defaultGlScale9ShapeRenderer;
 export const destroyGlScale9ShapeData = api.destroyGlScale9ShapeData;
 export const drawGlScale9Shape = api.drawGlScale9Shape;
 export const drawGlScale9ShapeMask = api.drawGlScale9ShapeMask;
-export const remapGlScale9Commands = api.remapGlScale9Commands;

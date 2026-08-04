@@ -22,6 +22,7 @@ export * from './sceneMaterialTextureRegistry.mjs';
 export * from './sceneResourceRecovery.mjs';
 export * from './sceneResourceResolver.mjs';
 export * from './sceneResourceSignals.mjs';
+export * from './shadedScene3DMaterialTextures.mjs';
 export * from './sheenPbrScene3DMaterialTextures.mjs';
 export * from './specularPbrScene3DMaterialTextures.mjs';
 export * from './threeDsLoad.mjs';

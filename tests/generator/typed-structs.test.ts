@@ -42,7 +42,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_417,
+      newAuditOnly: 1_538,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -52,7 +52,7 @@ describe('typed struct stable declaration identity', () => {
       baselineUpstreamCommit: '5d24729f7360475e28a105ae0caeeaa2e1328260',
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
-    expect(discovery.candidates).toHaveLength(1_819);
+    expect(discovery.candidates).toHaveLength(1_940);
     expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(402);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
@@ -104,7 +104,7 @@ describe('typed struct stable declaration identity', () => {
     );
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
-    expect(newlyDiscovered).toHaveLength(1_417);
+    expect(newlyDiscovered).toHaveLength(1_538);
     expect(newlyDiscovered.every((candidate) => candidate.emission === 'audit-only')).toBe(true);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -462,32 +462,32 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flighthq/types/Node.hx', 'utf8')).toContain('typedef NodeData = Dynamic;');
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_417,
-      bindableAccesses: 25_341,
-      candidates: 1_819,
-      directAccesses: 10_555,
+      auditOnlySchemas: 1_538,
+      bindableAccesses: 28_027,
+      candidates: 1_940,
+      directAccesses: 10_740,
       directSchemas: 397,
-      eligible: 1_369,
-      escapes: 10_691,
-      fields: 21_675,
-      ineligible: 450,
-      pendingAccesses: 14_786,
-      reflectiveSurvivors: 397,
+      eligible: 1_473,
+      escapes: 10_948,
+      fields: 22_915,
+      ineligible: 467,
+      pendingAccesses: 17_287,
+      reflectiveSurvivors: 440,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_417,
+      newAuditOnly: 1_538,
       preserved: 231,
       relocated: 146,
       removed: 3,
       renamed: 23,
     });
-    expect(classAudit.summary.schemas).toBe(1_369);
+    expect(classAudit.summary.schemas).toBe(1_473);
     expect(provenance.summary).toMatchObject({
-      candidateSchemas: 652,
-      closedSchemas: 490,
-      containmentEdges: 1_620,
+      candidateSchemas: 715,
+      closedSchemas: 535,
+      containmentEdges: 1_748,
     });
     expect(rectangle?.eligible).toBe(false);
     expect(rectangle?.reasons).toContain('presence-sensitive-use');
@@ -505,7 +505,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(10_555);
+    expect(report.summary.directAccesses).toBe(10_740);
     expect(rectangle?.emission).toEqual({
       directAccesses: 0,
       mode: 'direct',

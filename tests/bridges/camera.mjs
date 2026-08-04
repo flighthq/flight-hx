@@ -23,6 +23,7 @@ export const getCamera3DUp = compiled.flighthq.camera.Camera.getCamera3DUp;
 export const getCamera3DViewProjectionMatrix4 = compiled.flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 export const getCamera3DViewSpaceZ = compiled.flighthq.camera.Camera.getCamera3DViewSpaceZ;
 export const getCamera3DWorldToScreen = compiled.flighthq.camera.Camera.getCamera3DWorldToScreen;
+export const getOrthographicProjectionTexelSize = compiled.flighthq.camera.Camera.getOrthographicProjectionTexelSize;
 export const intersectCamera3DRayWithPlane = compiled.flighthq.camera.Camera.intersectCamera3DRayWithPlane;
 export const isBoxInCamera3DFrustum = compiled.flighthq.camera.Camera.isBoxInCamera3DFrustum;
 export const isOrthographicProjection = compiled.flighthq.camera.Camera.isOrthographicProjection;

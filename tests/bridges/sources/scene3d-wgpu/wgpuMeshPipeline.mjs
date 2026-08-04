@@ -30,6 +30,7 @@ export const resolveWgpuMaterialTextureView = api.resolveWgpuMaterialTextureView
 export const SHADOW_DEPTH_FORMAT = api.SHADOW_DEPTH_FORMAT;
 export const spliceWgpuColorAdjustmentPrelude = api.spliceWgpuColorAdjustmentPrelude;
 export const stashWgpuUvTransform = api.stashWgpuUvTransform;
+export const WGPU_DIRECTIONAL_SHADOW_WGSL = api.WGPU_DIRECTIONAL_SHADOW_WGSL;
 export const WGPU_MESH_PRELUDE_WGSL = api.WGPU_MESH_PRELUDE_WGSL;
 export const wgpuPerMapMaterialBindGroupNeedsRebuild = api.wgpuPerMapMaterialBindGroupNeedsRebuild;
 export const writeWgpuDrawUniform = api.writeWgpuDrawUniform;

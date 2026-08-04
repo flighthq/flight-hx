@@ -177,6 +177,14 @@ describe('TypeScript lowering and Haxe emission', () => {
             return input * 2;
           }
         }
+        export function sumNestedRecursive(values: number[]): number {
+          let result = 0;
+          for (const value of values) {
+            const walk = (count: number): number => count <= 0 ? 0 : count + walk(count - 1);
+            result += walk(value);
+          }
+          return result;
+        }
         export function sumOdd(limit: number): number {
           let result = 0;
           for (let i = 0; i < limit; i++) {
@@ -248,6 +256,7 @@ describe('TypeScript lowering and Haxe emission', () => {
             if (clamp(12, 0, 10) != 10) throw 'clamp failed';
             if (quarter(8) != 2) throw 'quarter failed';
             if (callNestedDeclaration(4) != 8) throw 'nested function declaration hoisting failed';
+            if (sumNestedRecursive([2, 3]) != 9) throw 'nested recursive closure failed';
             if (sumOdd(6) != 9) throw 'for continue failed';
             if (switchControl() != 211) throw 'switch control ownership failed';
             if (nestedLoopBreak() != 211) throw 'nested loop break ownership failed';
@@ -266,6 +275,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('do {');
     expect(output).toContain('__switchContinue');
     expect(output).toContain('_Runtime.throwValue(__finallyError');
+    expect(output).toContain('var walk:Dynamic = cast _Runtime.UNDEFINED;');
+    expect(output).toContain('walk = function(count:Float)');
     expect(() =>
       execFileSync(
         'node',

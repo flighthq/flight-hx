@@ -4,4 +4,8 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './lottieDocument.mjs';
+export * from './riveDocument.mjs';
+export * from './riveObjectGraph.mjs';
+export * from './riveScene2D.mjs';
+export * from './riveScene2DDocument.mjs';
 export * from './svgDocument.mjs';

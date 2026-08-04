@@ -439,7 +439,8 @@ class MeshGeometryBuilders {
     faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Dynamic) return cast ([flighthq._internal._StaticIndex.readArray(f, 0.0), flighthq._internal._StaticIndex.readArray(f, 1.0), flighthq._internal._StaticIndex.readArray(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
     if ((cast ((cast subs : Float) > (cast 0.0 : Float)) : Bool)) {
       var midCache:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
-      var getMid:Dynamic = function(a:Float, b:Float) {
+      var getMid:Dynamic = cast _Runtime.UNDEFINED;
+      getMid = function(a:Float, b:Float) {
         var key:Dynamic = cast _Runtime.UNDEFINED;
         var hit:Dynamic = cast _Runtime.UNDEFINED;
         var va:Dynamic = cast _Runtime.UNDEFINED;

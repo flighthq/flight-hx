@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
+import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.RenderProxy2D;
@@ -38,7 +39,7 @@ class CanvasTilemap {
     tileWidth = _Runtime.field(__destructure0, 'tileWidth');
     tiles = _Runtime.field(__destructure0, 'tiles');
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool)) { return; }
-    image = _Runtime.callValue(resolveCanvasTexture, cast ([state, atlas.texture] : Array<Dynamic>));
+    image = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), atlas.texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(tilemapNode, 'blendMode')] : Array<Dynamic>));

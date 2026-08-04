@@ -24,10 +24,15 @@ class Renderer {
 
   public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
     var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceRegistry:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var sourcePaddingRegistry:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceShapeCommands:Dynamic = cast _Runtime.UNDEFINED;
     targetRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([target] : Array<Dynamic>));
-    sourceRegistry = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'renderEffectPaddingResolverRegistry');
-    _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourceRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourceRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourceRegistry]) : Dynamic)));
+    sourceRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>));
+    sourcePaddingRegistry = _Runtime.field(sourceRuntime, 'renderEffectPaddingResolverRegistry');
+    _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourcePaddingRegistry]) : Dynamic)));
+    sourceShapeCommands = _Runtime.field(sourceRuntime, 'canvasShapeCommandRegistry');
+    _Runtime.setField(targetRuntime, 'canvasShapeCommandRegistry', ((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourceShapeCommands]) : Dynamic)));
   }
 
   public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {

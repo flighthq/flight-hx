@@ -11,6 +11,7 @@ import flighthq.scene3dGl.DepthGlMeshMaterialRenderer as Facade_Scene3dGl_flight
 import flighthq.scene3dGl.DrawGlScene3D as Facade_Scene3dGl_flighthq_scene3dGl_DrawGlScene3D;
 import flighthq.scene3dGl.EmissiveGlMeshMaterialRenderer as Facade_Scene3dGl_flighthq_scene3dGl_EmissiveGlMeshMaterialRenderer;
 import flighthq.scene3dGl.EnableGlPbrExtensionGuards as Facade_Scene3dGl_flighthq_scene3dGl_EnableGlPbrExtensionGuards;
+import flighthq.scene3dGl.ExplainGlScene3DCoverage as Facade_Scene3dGl_flighthq_scene3dGl_ExplainGlScene3DCoverage;
 import flighthq.scene3dGl.ExtendedPbrGlMeshMaterialRenderer as Facade_Scene3dGl_flighthq_scene3dGl_ExtendedPbrGlMeshMaterialRenderer;
 import flighthq.scene3dGl.GlEnvironmentIblBake as Facade_Scene3dGl_flighthq_scene3dGl_GlEnvironmentIblBake;
 import flighthq.scene3dGl.GlEnvironmentSkybox as Facade_Scene3dGl_flighthq_scene3dGl_GlEnvironmentSkybox;
@@ -38,6 +39,7 @@ import flighthq.scene3dGl.VertexColorGlMeshMaterialRenderer as Facade_Scene3dGl_
 import flighthq.scene3dGl.WireframeGlMeshMaterialRenderer as Facade_Scene3dGl_flighthq_scene3dGl_WireframeGlMeshMaterialRenderer;
 import flighthq.scene3dGl.WrappedDiffusePbrGlExtension as Facade_Scene3dGl_flighthq_scene3dGl_WrappedDiffusePbrGlExtension;
 import flighthq.types.Camera3D;
+import flighthq.types.DirectionalLight;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Environment;
 import flighthq.types.GlCustomMaterialShaderSource;
@@ -51,6 +53,8 @@ import flighthq.types.GlScene3DRuntime.GlMeshUpload;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node3D;
 import flighthq.types.PbrExtension;
+import flighthq.types.Scene3DCoverageGap;
+import flighthq.types.Scene3DKindUsage;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 
@@ -78,8 +82,8 @@ class Scene3dGl {
     Facade_Scene3dGl_flighthq_scene3dGl_DrawGlScene3D.drawGlScene3D(state, scene, camera, lights, forwardLights);
   }
 
-  public static function drawGlScene3DShadowMap(state:GlRenderState, scene:Node3D, shadowCamera:Camera3D):Void {
-    Facade_Scene3dGl_flighthq_scene3dGl_GlShadowMap.drawGlScene3DShadowMap(state, scene, shadowCamera);
+  public static function drawGlScene3DShadowMap(state:GlRenderState, scene:Node3D, shadowCamera:Camera3D, directionalLight:Null<DirectionalLight>):Void {
+    Facade_Scene3dGl_flighthq_scene3dGl_GlShadowMap.drawGlScene3DShadowMap(state, scene, shadowCamera, directionalLight);
   }
 
   public static function enableGlPbrExtensionGuards(state:GlRenderState):Void {
@@ -96,10 +100,19 @@ class Scene3dGl {
     return cast null;
   }
 
+  public static function explainGlScene3DCoverage(out:Array<Scene3DCoverageGap>, state:GlRenderState, usage:Scene3DKindUsage):Void {
+    Facade_Scene3dGl_flighthq_scene3dGl_ExplainGlScene3DCoverage.explainGlScene3DCoverage(out, state, usage);
+  }
+
   public static final extendedPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = Facade_Scene3dGl_flighthq_scene3dGl_ExtendedPbrGlMeshMaterialRenderer.extendedPbrGlMeshMaterialRenderer;
 
   public static function getGlPbrExtensionRegistration(state:GlRenderState, kind:Kind):Null<GlPbrExtensionRegistration> {
     return cast Facade_Scene3dGl_flighthq_scene3dGl_GlPbrExtensionRegistry.getGlPbrExtensionRegistration(state, kind);
+    return cast null;
+  }
+
+  public static function hasGlScene3DCoverage(state:GlRenderState, usage:Scene3DKindUsage):Bool {
+    return cast Facade_Scene3dGl_flighthq_scene3dGl_ExplainGlScene3DCoverage.hasGlScene3DCoverage(state, usage);
     return cast null;
   }
 

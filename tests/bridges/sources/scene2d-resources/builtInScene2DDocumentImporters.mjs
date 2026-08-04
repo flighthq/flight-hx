@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const registerLottieScene2DDocumentImporter = api.registerLottieScene2DDocumentImporter;
+export const registerRiveScene2DDocumentImporter = api.registerRiveScene2DDocumentImporter;
 export const registerSvgScene2DDocumentImporter = api.registerSvgScene2DDocumentImporter;

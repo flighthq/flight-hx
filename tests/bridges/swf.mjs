@@ -3,4 +3,6 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createGlyphOutlineSourcesFromSwf = compiled.flighthq.swf.Swf.createGlyphOutlineSourcesFromSwf;
 export const createScene2DFromSwf = compiled.flighthq.swf.Swf.createScene2DFromSwf;
+export const createScene2DSymbolFromSwf = compiled.flighthq.swf.Swf.createScene2DSymbolFromSwf;
+export const readSwfExportedSymbolNames = compiled.flighthq.swf.Swf.readSwfExportedSymbolNames;
 export const registerSwfScene2DDocumentImporter = compiled.flighthq.swf.Swf.registerSwfScene2DDocumentImporter;

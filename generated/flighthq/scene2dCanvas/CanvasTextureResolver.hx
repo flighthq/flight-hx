@@ -3,36 +3,45 @@ package flighthq.scene2dCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
+import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
-import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasTextureResolver;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.RenderState;
 import flighthq.types.Texture;
 import flighthq.types.TextureSourceKind;
 
 class CanvasTextureResolver {
-  public static function registerCanvasTextureResolver(state:Dynamic, sourceKind:TextureSourceKind, resolver:Null<Dynamic>):Void {
+  public static function connectCanvasTextureResolverMisses(resolvers:Dynamic, state:RenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    _Runtime.setField(resolvers, 'registryMiss', function(registry:Dynamic, kind:Dynamic) return _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([registry, kind] : Array<Dynamic>)));
+  }
+
+  public static function createCanvasTextureResolvers():Dynamic {
+    return cast { registry: null, registryMiss: null };
+    return cast null;
+  }
+
+  public static function registerCanvasTextureResolver(resolvers:Dynamic, sourceKind:TextureSourceKind, resolver:Null<Dynamic>):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    registry = _Runtime.setField(runtime, 'canvasTextureResolverRegistry', (_Runtime.field(runtime, 'canvasTextureResolverRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
+    registry = _Runtime.setField(resolvers, 'registry', (_Runtime.field(resolvers, 'registry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map).set(sourceKind, resolver)); }
   }
 
-  public static function resolveCanvasTexture(state:Dynamic, texture:Texture):Null<Dynamic> {
+  public static function resolveCanvasTexture(resolvers:Dynamic, texture:Texture):Null<Dynamic> {
     var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { return cast null; }
     sourceKind = _Runtime.callValue(getTextureSourceKind, cast ([texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
-    runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    resolver = ({ final __collection0:Dynamic = _Runtime.field(runtime, 'canvasTextureResolverRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(sourceKind)); });
+    resolver = ({ final __collection0:Dynamic = _Runtime.field(resolvers, 'registry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([3.0, sourceKind] : Array<Dynamic>));
+      _Runtime.callOptionalProperty(resolvers, 'registryMiss', cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast _Runtime.callValue(resolver, cast ([state, texture] : Array<Dynamic>));
+    return cast _Runtime.callValue(resolver, cast ([resolvers, texture] : Array<Dynamic>));
     return cast null;
   }
 }

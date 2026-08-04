@@ -10,25 +10,33 @@ typedef Physics2DBodyType = String;
 
 typedef Physics2DMaterial = { var density:Float; var friction:Float; var restitution:Float; };
 
-typedef Physics2DCollider = { var local:CollisionShape; var world:CollisionShape; var material:Physics2DMaterial; var sensor:Bool; };
+typedef Physics2DCollisionFilter = { var categoryBits:Float; var maskBits:Float; var groupIndex:Float; };
+
+typedef Physics2DCollider = { var local:CollisionShape; var world:CollisionShape; var material:Physics2DMaterial; var filter:Physics2DCollisionFilter; var sensor:Bool; };
 
 typedef Physics2DMassData = { var mass:Float; var inertia:Float; var centerX:Float; var centerY:Float; };
 
-typedef RigidBody2D = { var index:Float; var type:Physics2DBodyType; var x:Float; var y:Float; var angle:Float; var velocityX:Float; var velocityY:Float; var angularVelocity:Float; var forceX:Float; var forceY:Float; var torque:Float; var mass:Float; var inverseMass:Float; var inertia:Float; var inverseInertia:Float; var centerX:Float; var centerY:Float; var linearDamping:Float; var angularDamping:Float; var gravityScale:Float; var sleeping:Bool; var sleepTimer:Float; var colliders:Array<Physics2DCollider>; };
+typedef RigidBody2D = { var index:Float; var type:Physics2DBodyType; var x:Float; var y:Float; var angle:Float; var velocityX:Float; var velocityY:Float; var angularVelocity:Float; var forceX:Float; var forceY:Float; var torque:Float; var mass:Float; var inverseMass:Float; var inertia:Float; var inverseInertia:Float; var centerX:Float; var centerY:Float; var linearDamping:Float; var angularDamping:Float; var gravityScale:Float; var fixedRotation:Bool; var bullet:Bool; var sleeping:Bool; var sleepEnabled:Bool; var sleepTimer:Float; var colliders:Array<Physics2DCollider>; };
 
 typedef Physics2DContactPoint = { var x:Float; var y:Float; var depth:Float; var featureId:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var normalImpulse:Float; var tangentImpulse:Float; var normalMass:Float; var tangentMass:Float; var bias:Float; };
 
-typedef Physics2DContact = { var bodyA:Float; var bodyB:Float; var colliderA:Float; var colliderB:Float; var normalX:Float; var normalY:Float; var pointCount:Float; var points:Array<Physics2DContactPoint>; var friction:Float; var restitution:Float; var sensor:Bool; var touching:Bool; };
+typedef Physics2DContact = { var bodyA:Float; var bodyB:Float; var colliderA:Float; var colliderB:Float; var normalX:Float; var normalY:Float; var pointCount:Float; var points:Array<Physics2DContactPoint>; var friction:Float; var restitution:Float; var enabled:Bool; var sensor:Bool; var touching:Bool; };
 
-typedef Physics2DSolverConfig = { var allowSleeping:Bool; var sleepLinearThreshold:Float; var sleepAngularThreshold:Float; var timeToSleep:Float; var velocityIterations:Float; var positionIterations:Float; var penetrationSlop:Float; var positionCorrection:Float; var restitutionThreshold:Float; var warmStarting:Bool; };
+typedef Physics2DContactCallback = Dynamic;
 
-typedef Physics2DWorld = { var bodies:Array<RigidBody2D>; var contacts:Array<Physics2DContact>; var joints:Array<Physics2DJoint>; var jointSolvers:Dynamic; var events:Physics2DContactEvents; var index:SpatialIndexBackend; var config:Physics2DSolverConfig; var gravityX:Float; var gravityY:Float; var nextBodyIndex:Float; };
+typedef Physics2DContactHooks = { var preSolve:Null<Physics2DContactCallback>; var postSolve:Null<Physics2DContactCallback>; };
+
+typedef Physics2DSolverConfig = { var allowSleeping:Bool; var sleepLinearThreshold:Float; var sleepAngularThreshold:Float; var timeToSleep:Float; var velocityIterations:Float; var positionIterations:Float; var penetrationSlop:Float; var positionCorrection:Float; var restitutionThreshold:Float; var warmStarting:Bool; var continuousCollision:Bool; var maxCcdSubsteps:Float; var maxCcdRotationSubsteps:Float; };
+
+typedef Physics2DStepExplanation = { var bodyStateValid:Bool; var contactStateValid:Bool; var gravityValid:Bool; var jointStateValid:Bool; var previousTimestepValid:Bool; var solverConfigValid:Bool; var timestepValid:Bool; var velocityIterationsValid:Bool; var positionIterationsValid:Bool; var status:String; };
+
+typedef Physics2DWorld = { var version:Float; var bodies:Array<RigidBody2D>; var bodyByIndex:Dynamic; var contacts:Array<Physics2DContact>; var joints:Array<Physics2DJoint>; var jointSolvers:Dynamic; var jointCollisionSuppressions:Dynamic; var events:Physics2DContactEvents; var contactHooks:Physics2DContactHooks; var index:SpatialIndexBackend; var config:Physics2DSolverConfig; var islandParents:Dynamic; var islandSleepTimers:Dynamic; var solveIslandByRoot:Dynamic; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
 
 typedef Physics2DJointKind = String;
 
 typedef Physics2DJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; };
 
-typedef Physics2DDistanceJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var length:Float; var stiffness:Float; var damping:Float; };
+typedef Physics2DDistanceJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var length:Float; var frequencyHz:Float; var dampingRatio:Float; };
 
 typedef Physics2DRevoluteJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorTorque:Float; var motorImpulse:Float; var enableLimit:Bool; var lowerAngle:Float; var upperAngle:Float; var referenceAngle:Float; };
 
@@ -36,10 +44,64 @@ typedef Physics2DWeldJoint = { var kind:Physics2DJointKind; var bodyA:Float; var
 
 typedef Physics2DRopeJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var maxLength:Float; };
 
+typedef Physics2DPulleyJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var groundAnchorAX:Float; var groundAnchorAY:Float; var groundAnchorBX:Float; var groundAnchorBY:Float; var ratio:Float; var constant:Float; };
+
+typedef Physics2DGearCoordinateKind = String;
+
+typedef Physics2DGearJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var coordinateA:Physics2DGearCoordinateKind; var coordinateB:Physics2DGearCoordinateKind; var axisAX:Float; var axisAY:Float; var axisBX:Float; var axisBY:Float; var ratio:Float; var constant:Float; };
+
 typedef Physics2DPrismaticJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var localAxisAX:Float; var localAxisAY:Float; var referenceAngle:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorForce:Float; var motorImpulse:Float; var enableLimit:Bool; var lowerTranslation:Float; var upperTranslation:Float; };
 
-typedef Physics2DMouseJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var targetX:Float; var targetY:Float; var maxForce:Float; var stiffness:Float; var damping:Float; };
+typedef Physics2DWheelJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var localAxisAX:Float; var localAxisAY:Float; var restTranslation:Float; var frequencyHz:Float; var dampingRatio:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorTorque:Float; var motorImpulse:Float; };
 
-typedef Physics2DJointSolver = { var prepare:Dynamic; var solve:Dynamic; @:optional var swapEnds:Dynamic; @:optional var warmStart:Dynamic; @:optional var clearAccumulatedImpulses:Dynamic; };
+typedef Physics2DMouseJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var targetX:Float; var targetY:Float; var maxForce:Float; var frequencyHz:Float; var dampingRatio:Float; };
+
+typedef Physics2DJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; };
+
+typedef Physics2DDistanceJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; var length:Float; @:optional var frequencyHz:Float; @:optional var dampingRatio:Float; };
+
+typedef Physics2DRevoluteJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; @:optional var enableMotor:Bool; @:optional var motorSpeed:Float; @:optional var maxMotorTorque:Float; @:optional var enableLimit:Bool; @:optional var lowerAngle:Float; @:optional var upperAngle:Float; @:optional var referenceAngle:Float; };
+
+typedef Physics2DWeldJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; @:optional var referenceAngle:Float; };
+
+typedef Physics2DRopeJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; var maxLength:Float; };
+
+typedef Physics2DPulleyJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; var groundAnchorAX:Float; var groundAnchorAY:Float; var groundAnchorBX:Float; var groundAnchorBY:Float; var constant:Float; @:optional var ratio:Float; };
+
+typedef Physics2DGearJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; var coordinateA:Physics2DGearCoordinateKind; var coordinateB:Physics2DGearCoordinateKind; var constant:Float; @:optional var axisAX:Float; @:optional var axisAY:Float; @:optional var axisBX:Float; @:optional var axisBY:Float; @:optional var ratio:Float; };
+
+typedef Physics2DPrismaticJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; @:optional var localAxisAX:Float; @:optional var localAxisAY:Float; @:optional var referenceAngle:Float; @:optional var enableMotor:Bool; @:optional var motorSpeed:Float; @:optional var maxMotorForce:Float; @:optional var enableLimit:Bool; @:optional var lowerTranslation:Float; @:optional var upperTranslation:Float; };
+
+typedef Physics2DWheelJointOptions = { var bodyA:Float; var bodyB:Float; @:optional var localAnchorAX:Float; @:optional var localAnchorAY:Float; @:optional var localAnchorBX:Float; @:optional var localAnchorBY:Float; @:optional var collideConnected:Bool; @:optional var localAxisAX:Float; @:optional var localAxisAY:Float; @:optional var restTranslation:Float; @:optional var frequencyHz:Float; @:optional var dampingRatio:Float; @:optional var enableMotor:Bool; @:optional var motorSpeed:Float; @:optional var maxMotorTorque:Float; };
+
+typedef Physics2DMouseJointOptions = { var body:Float; var targetX:Float; var targetY:Float; var maxForce:Float; @:optional var localAnchorX:Float; @:optional var localAnchorY:Float; @:optional var frequencyHz:Float; @:optional var dampingRatio:Float; };
+
+typedef Physics2DJointSolver = { var prepare:Dynamic; var solve:Dynamic; @:optional var usesBodyA:Bool; @:optional var keepsBodiesAwake:Bool; @:optional var swapEnds:Dynamic; @:optional var warmStart:Dynamic; @:optional var scaleAccumulatedImpulses:Dynamic; @:optional var clearAccumulatedImpulses:Dynamic; };
 
 typedef Physics2DContactEvents = { var began:Array<Physics2DContact>; var ended:Array<Physics2DContact>; };
+
+typedef Physics2DQueryHit = { var body:RigidBody2D; var collider:Physics2DCollider; var colliderIndex:Float; };
+
+typedef Physics2DQueryResult = { var hits:Array<Physics2DQueryHit>; var hitCount:Float; };
+
+typedef Physics2DQueryFilter = { var categoryBits:Float; var maskBits:Float; var includeSensors:Bool; var includeDynamic:Bool; var includeKinematic:Bool; var includeStatic:Bool; };
+
+typedef Physics2DRayHit = { var body:RigidBody2D; var collider:Physics2DCollider; var colliderIndex:Float; var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+
+typedef Physics2DRayResult = { var hits:Array<Physics2DRayHit>; var hitCount:Float; };
+
+typedef Physics2DJointResolutionStatus = String;
+
+typedef Physics2DJointResolution = { var jointIndex:Float; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var bodyAFound:Bool; var bodyAUsed:Bool; var bodyBFound:Bool; var solverRegistered:Bool; var status:Physics2DJointResolutionStatus; };
+
+typedef Physics2DJointResolutionExplanation = { var joints:Array<Physics2DJointResolution>; var readyCount:Float; var status:String; };
+
+typedef Physics2DDebugFeature = String;
+
+typedef Physics2DDebugLine = { var feature:Physics2DDebugFeature; var bodyA:Float; var bodyB:Float; var x0:Float; var y0:Float; var x1:Float; var y1:Float; };
+
+typedef Physics2DDebugCircle = { var feature:Physics2DDebugFeature; var bodyA:Float; var bodyB:Float; var x:Float; var y:Float; var radius:Float; };
+
+typedef Physics2DDebugGeometry = { var lines:Array<Physics2DDebugLine>; var lineCount:Float; var circles:Array<Physics2DDebugCircle>; var circleCount:Float; };
+
+typedef Physics2DDebugGeometryOptions = { var drawCentersOfMass:Bool; var drawColliders:Bool; var drawContacts:Bool; var drawJoints:Bool; var centerOfMassRadius:Float; var contactNormalLength:Float; var pointRadius:Float; };

@@ -23,6 +23,11 @@ class Projection {
     return cast null;
   }
 
+  public static function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
+    return cast HxMath.max(((projection.halfWidth * 2.0) / pixelWidth), ((projection.halfHeight * 2.0) / pixelHeight));
+    return cast null;
+  }
+
   public static function isOrthographicProjection(projection:flighthq.types.Camera3D.Projection):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'orthographic');
     return cast null;

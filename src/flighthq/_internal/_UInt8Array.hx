@@ -18,9 +18,15 @@ abstract _UInt8Array(Dynamic) {
       this = [for (_ in 0...Std.int(source)) 0];
     } else if (Std.isOfType(source, haxe.io.Bytes)) {
       final bytes:haxe.io.Bytes = cast source;
-      final start = byteOffset == null ? 0 : byteOffset;
-      final stop = length == null ? bytes.length : start + length;
-      this = [for (index in start...stop) bytes.get(index)];
+      if (byteOffset == null && length == null) {
+        // A full ArrayBuffer view shares storage with DataView, matching the
+        // JavaScript buffer contract used by binary parsers.
+        this = bytes;
+      } else {
+        final start = byteOffset == null ? 0 : byteOffset;
+        final stop = length == null ? bytes.length : start + length;
+        this = [for (index in start...stop) bytes.get(index)];
+      }
     } else {
       final values:Array<Dynamic> = _Runtime.iterable(source);
       this = [for (value in values) Std.int(value) & 0xff];
@@ -31,6 +37,8 @@ abstract _UInt8Array(Dynamic) {
   @:arrayAccess public inline function arrayRead(index:Int):Int {
     #if (lime && !js)
     return (cast this : _LimeTypedArray).get(index);
+    #elseif !js
+    return Std.isOfType(this, haxe.io.Bytes) ? (cast this : haxe.io.Bytes).get(index) : this[index];
     #else
     return this[index];
     #end
@@ -39,6 +47,12 @@ abstract _UInt8Array(Dynamic) {
   @:arrayAccess public inline function arrayWrite(index:Int, value:Int):Int {
     #if (lime && !js)
     return (cast this : _LimeTypedArray).setValue(index, value);
+    #elseif !js
+    if (Std.isOfType(this, haxe.io.Bytes)) {
+      (cast this : haxe.io.Bytes).set(index, value & 0xff);
+      return value & 0xff;
+    }
+    return this[index] = value & 0xff;
     #else
     return this[index] = value & 0xff;
     #end
@@ -49,7 +63,7 @@ abstract _UInt8Array(Dynamic) {
     (cast this : _LimeTypedArray).fill(value, start, end);
     #else
     final stop = end == null ? length : end;
-    for (index in start...stop) this[index] = value & 0xff;
+    for (index in start...stop) arrayWrite(index, value);
     #end
     return cast this;
   }
@@ -57,6 +71,8 @@ abstract _UInt8Array(Dynamic) {
   private inline function get_length():Int {
     #if (lime && !js)
     return (cast this : _LimeTypedArray).length;
+    #elseif !js
+    return Std.isOfType(this, haxe.io.Bytes) ? (cast this : haxe.io.Bytes).length : this.length;
     #else
     return this.length;
     #end
@@ -82,7 +98,9 @@ abstract _UInt8Array(Dynamic) {
     #elseif lime
     return cast (cast this : _LimeTypedArray).subarray(start, stop);
     #else
-    return new _UInt8Array((cast this : Array<Int>).slice(start, stop));
+    return Std.isOfType(this, haxe.io.Bytes)
+      ? new _UInt8Array((cast this : haxe.io.Bytes).sub(start, stop - start))
+      : new _UInt8Array((cast this : Array<Int>).slice(start, stop));
     #end
   }
 }

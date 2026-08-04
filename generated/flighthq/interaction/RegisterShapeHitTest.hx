@@ -11,13 +11,16 @@ import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node2D;
 import flighthq.types.Shape;
+import flighthq.types.Types.MorphShapeKind;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types.Types.ShapeKind;
+import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class RegisterShapeHitTest {
   public static function registerShapeHitTest():Void {
+    _Runtime.callValue(registerHitTestPrecise, cast ([MorphShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
     _Runtime.callValue(registerHitTestPrecise, cast ([ShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
     _Runtime.callValue(registerHitTestPrecise, cast ([Scale9ShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
   }

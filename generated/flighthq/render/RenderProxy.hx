@@ -8,8 +8,10 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Revision.getNodeAppearanceRevision;
+import flighthq.node.Revision.getNodeChildrenRevision;
 import flighthq.node.Revision.getNodeLocalContentRevision;
 import flighthq.node.Revision.getNodeLocalTransformRevision;
+import flighthq.node.Revision.getNodeParentReferenceRevision;
 import flighthq.render.RenderAppearance.updateRenderProxyAppearance;
 import flighthq.render.RenderColorScaleBias.updateRenderProxyColorScaleBias;
 import flighthq.render.RenderMaterial.updateRenderProxyMaterial;
@@ -23,6 +25,7 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyVisitor;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
@@ -35,7 +38,7 @@ class RenderProxy {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     renderer = _Runtime.callValue(RenderProxy.resolveRenderProxyRenderer__renderProxy, cast ([state, _Runtime.field(source, 'kind')] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ source: source, kind: _Runtime.field(source, 'kind'), next: null, alpha: 1.0, appearanceFrameId: -1.0, blendMode: BlendModeValue.Normal, colorScaleBias: null, colorMatrix: null, material: null, materialData: null, lastAppearanceId: -1.0, lastLocalContentId: -1.0, lastLocalTransformId: -1.0, name: null, renderer: renderer, rendererData: _Runtime.coalesce(_Runtime.callOptionalProperty(renderer, 'createData', cast ([state, source] : Array<Dynamic>)), function():Dynamic return cast null), rendererDataSource: source, rendererMapId: _Runtime.field(runtime, 'rendererMapId'), transformFrameId: -1.0, visible: true }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ source: source, kind: _Runtime.field(source, 'kind'), next: null, alpha: 1.0, appearanceFrameId: -1.0, blendMode: BlendModeValue.Normal, colorScaleBias: null, colorMatrix: null, material: null, materialData: null, lastAppearanceId: -1.0, lastChildrenId: -1.0, lastLocalContentId: -1.0, lastLocalTransformId: -1.0, lastParentReferenceId: -1.0, name: null, renderer: renderer, rendererData: _Runtime.coalesce(_Runtime.callOptionalProperty(renderer, 'createData', cast ([state, source] : Array<Dynamic>)), function():Dynamic return cast null), rendererDataSource: source, rendererMapId: _Runtime.field(runtime, 'rendererMapId'), transformFrameId: -1.0, visible: true }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -98,12 +101,14 @@ class RenderProxy {
     var currentFrameId:Dynamic = cast _Runtime.UNDEFINED;
     var parentDirty:Dynamic = cast _Runtime.UNDEFINED;
     var rendererDirty:Dynamic = cast _Runtime.UNDEFINED;
+    var hierarchyDirty:Dynamic = cast _Runtime.UNDEFINED;
     var localDirty:Dynamic = cast _Runtime.UNDEFINED;
     currentFrameId = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId');
     parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), currentFrameId), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'appearanceFrameId'), currentFrameId)) : Bool));
     rendererDirty = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(data, 'renderer'), 'isDirty', cast ([state, source, _Runtime.field(data, 'rendererData')] : Array<Dynamic>)), function():Dynamic return cast false);
+    hierarchyDirty = ((cast !_Runtime.strictEquals(_Runtime.field(data, 'lastChildrenId'), _Runtime.callValue(getNodeChildrenRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>))) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'lastParentReferenceId'), _Runtime.callValue(getNodeParentReferenceRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>))) : Bool));
     localDirty = ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(state, 'sceneGraphSyncPolicy'), 'refreshDerivedState') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>))) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>))) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalContentId'), _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>))) : Bool));
-    return cast ((cast ((cast parentDirty : Bool) || (cast rendererDirty : Bool)) : Bool) || (cast localDirty : Bool));
+    return cast ((cast ((cast ((cast parentDirty : Bool) || (cast rendererDirty : Bool)) : Bool) || (cast hierarchyDirty : Bool)) : Bool) || (cast localDirty : Bool));
     return cast null;
   }
 
@@ -124,12 +129,20 @@ class RenderProxy {
   }
 
   public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+    var parentReferenceId:Dynamic = cast _Runtime.UNDEFINED;
+    parentReferenceId = _Runtime.callValue(getNodeParentReferenceRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'lastParentReferenceId'), parentReferenceId) : Bool)) {
+      _Runtime.setField(data, 'lastAppearanceId', -1.0);
+      _Runtime.setField(data, 'lastLocalTransformId', -1.0);
+    }
     _Runtime.callValue(updateRenderProxyAppearance, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateRenderProxy2DTransform, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateRenderProxyMaterial, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateRenderProxyColorScaleBias, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateNodeClip, cast ([state, source, data, parentData] : Array<Dynamic>));
+    _Runtime.setField(data, 'lastChildrenId', _Runtime.callValue(getNodeChildrenRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)));
     _Runtime.setField(data, 'lastLocalContentId', _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)));
+    _Runtime.setField(data, 'lastParentReferenceId', parentReferenceId);
     _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook', cast ([state, source, data] : Array<Dynamic>));
   }
 
@@ -152,7 +165,7 @@ class RenderProxy {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     renderer = ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind));
-    if ((cast _Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([1.0, kind] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([RenderRegistry.NodeRenderer, kind] : Array<Dynamic>)); }
     return cast _Runtime.coalesce(renderer, function():Dynamic return cast null);
     return cast null;
   }

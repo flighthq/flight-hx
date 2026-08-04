@@ -3,198 +3,22 @@ package flighthq.scene2dGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.image.ImageResource.createImageResource;
-import flighthq.image.ImageResource.invalidateImageResource;
-import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
-import flighthq.node.Revision.getNodeLocalContentRevision;
-import flighthq.path.TessellatePath.tessellatePath;
-import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
-import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
-import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
-import flighthq.scene2dGl.GlQuadBatchWriter.ensureGlQuadBatchShader;
-import flighthq.scene2dGl.GlQuadBatchWriter.packGlQuadBatchMaterialInstance;
-import flighthq.scene2dGl.GlQuadBatchWriter.prepareGlQuadBatchWrite;
-import flighthq.scene2dGl.GlQuadBatchWriter.recordGlQuadBatchColorScaleBias;
-import flighthq.scene2dGl.GlShapeMesh.drawGlShapeMeshes;
-import flighthq.shape.ShapeFill.getShapeFillRegions;
-import flighthq.shape.ShapeStroke.getShapeStrokeRegions;
-import flighthq.shape.ShapeStrokeOutline.getShapeStrokeOutlineRegions;
+import flighthq.scene2dGl.GlMeshShapeRenderer.drawGlMeshShape;
+import flighthq.scene2dGl.GlRasterShapeRenderer.drawGlRasterShape;
+import flighthq.scene2dGl.GlShapeData.createGlShapeData;
+import flighthq.scene2dGl.GlShapeData.destroyGlShapeData;
 import flighthq.types.BatchFormat;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlShapeMesh;
-import flighthq.types.Image;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
-import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.Shape;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
-import flighthq.types.ShapeFillRegion;
-import flighthq.types.ShapeStrokeRegion;
-
-typedef GlShapeData__glShape = { var canvas:Dynamic; var ctx:Dynamic; var image:Dynamic; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<GlShapeMesh>>; };
 
 class GlShape {
-  public static function resolveGlShapeMeshRegions__glShape(commands:Array<ShapeCommandToken>, strokePathTessellatorEnabled:Bool):Null<Array<Dynamic>> {
-    var fillRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var strokeRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Array<Dynamic> = cast _Runtime.UNDEFINED;
-    fillRegions = _Runtime.callValue(getShapeFillRegions, cast ([commands] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(fillRegions, null) : Bool)) { return cast null; }
-    strokeRegions = ((cast strokePathTessellatorEnabled : Bool) ? (cast _Runtime.callValue(getShapeStrokeRegions, cast ([commands] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(getShapeStrokeOutlineRegions, cast ([commands] : Array<Dynamic>)) : Dynamic));
-    if ((cast _Runtime.strictEquals(strokeRegions, null) : Bool)) { return cast null; }
-    regions = _Runtime.concatArrays([_Runtime.toArray(fillRegions), _Runtime.toArray(strokeRegions)]);
-    return cast ((cast ((cast _Runtime.field(regions, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast regions : Dynamic) : (cast null : Dynamic));
-    return cast null;
-  }
-
-  public static function getGlShapeData__glShape(data:RendererData):GlShapeData__glShape {
-    return cast (cast (cast data : Dynamic) : GlShapeData__glShape);
-    return cast null;
-  }
-
-  public static function toGlShapeRendererData__glShape(data:GlShapeData__glShape):RendererData {
-    return cast (cast (cast data : Dynamic) : RendererData);
-    return cast null;
-  }
-
-  public static function createGlShapeData__glShape(_state:GlRenderState, _source:Renderable):Null<RendererData> {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
-    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
-    ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    return cast _Runtime.callValue(GlShape.toGlShapeRendererData__glShape, cast ([{ canvas: canvas, ctx: ctx, image: _Runtime.callValue(createImageResource, cast ([canvas] : Array<Dynamic>)), lastContentId: -1.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null }] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function destroyGlShapeData__glShape(state:GlRenderState, data:RendererData):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    __destructure0 = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([data] : Array<Dynamic>));
-    image = _Runtime.field(__destructure0, 'image');
-    entry = ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).get(image));
-    if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
-      ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).delete_(image));
-    }
-  }
-
   public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var strokePathTessellator:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var materialRenderer:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeData:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var straightAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var startCount:Dynamic = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
-    __destructure1 = _Runtime.field(source, 'data');
-    commands = _Runtime.field(__destructure1, 'commands');
-    version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
-    strokePathTessellator = _Runtime.field(runtime, 'strokeTessellator');
-    regions = _Runtime.callValue(GlShape.resolveGlShapeMeshRegions__glShape, cast ([commands, !_Runtime.strictEquals(strokePathTessellator, null)] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(regions, null) : Bool) && (cast ((cast _Runtime.field(regions, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var meshData:Dynamic = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(meshData, 'meshVersion'), version) : Bool)) {
-        var meshes:Array<GlShapeMesh> = cast ([] : Array<Dynamic>);
-        var supported:Dynamic = true;
-        {
-          var i:Dynamic = 0.0;
-          while ((cast ((cast i : Float) < (cast _Runtime.field(regions, 'length') : Float)) : Bool)) {
-            var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, i);
-            var mesh:Dynamic = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast _Runtime.callValue(GlShape.isShapeStrokeRegion__glShape, cast ([region] : Array<Dynamic>)) : Bool)) : Bool) ? (cast _Runtime.callValue(strokePathTessellator, cast ([_Runtime.field(region, 'path'), _Runtime.field(region, 'style')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(tessellatePath, cast ([_Runtime.field(region, 'path')] : Array<Dynamic>)) : Dynamic));
-            if ((cast _Runtime.strictEquals(mesh, null) : Bool)) {
-              (supported = cast (false : Dynamic));
-              break;
-            }
-            _Runtime.callProperty(meshes, 'push', cast ([{ vertices: new flighthq._internal._Float32Array(_Runtime.field(mesh, 'vertices')), indices: new flighthq._internal._UInt16Array(_Runtime.field(mesh, 'indices')), color: _Runtime.field(region, 'color'), alpha: _Runtime.field(region, 'alpha') }] : Array<Dynamic>));
-            i++;
-          }
-        }
-        _Runtime.setField(meshData, 'meshes', ((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)));
-        _Runtime.setField(meshData, 'meshVersion', version);
-      }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(meshData, 'meshes'), null) : Bool)) {
-        _Runtime.callValue(drawGlShapeMeshes, cast ([state, renderProxy, _Runtime.field(meshData, 'meshes')] : Array<Dynamic>));
-        return;
-      }
-    }
-    material = _Runtime.field(renderProxy, 'material');
-    materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    shapeData = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
-    bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
-    w = HxMath.ceil(_Runtime.field(bounds, 'width'));
-    h = HxMath.ceil(_Runtime.field(bounds, 'height'));
-    if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    if ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool)) {
-      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
-      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
-      var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
-      _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, commands, null, state] : Array<Dynamic>));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-      _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(shapeData, 'image')] : Array<Dynamic>));
-      _Runtime.setField(shapeData, 'lastContentId', version);
-      _Runtime.setField(shapeData, 'lastW', w);
-      _Runtime.setField(shapeData, 'lastH', h);
-    }
-    _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
-    t = _Runtime.field(renderProxy, 'transform2D');
-    tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
-    ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
-    texture = _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(shapeData, 'image'), null, null, true] : Array<Dynamic>));
-    straightAlpha = _Runtime.field(runtime, 'currentTextureStraightAlpha');
-    startCount = _Runtime.field(runtime, 'quadBatchWriterCount');
-    base = _Runtime.callValue(prepareGlQuadBatchWrite, cast ([state, texture, straightAlpha, null, _Runtime.field(renderProxy, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
-    d = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
-    flighthq._internal._StaticIndex.writeFloat32Array(d, base, t.a);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), t.b);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), t.c);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 3.0), t.d);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 4.0), tx);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 5.0), ty);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 6.0), w);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 7.0), h);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 8.0), 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 9.0), 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 10.0), 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 11.0), 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 12.0), _Runtime.field(renderProxy, 'alpha'));
-    _Runtime.callValue(packGlQuadBatchMaterialInstance, cast ([state, _Runtime.field(renderProxy, 'materialData'), startCount] : Array<Dynamic>));
-    _Runtime.callValue(recordGlQuadBatchColorScaleBias, cast ([state, _Runtime.coalesce(_Runtime.field(renderProxy, 'colorMatrix'), function():Dynamic return cast _Runtime.field(renderProxy, 'colorScaleBias')), startCount] : Array<Dynamic>));
-    _Runtime.incrementField(runtime, 'quadBatchWriterCount', 1, true);
+    if ((cast _Runtime.callValue(drawGlMeshShape, cast ([state, renderProxy] : Array<Dynamic>)) : Bool)) { return; }
+    _Runtime.callValue(drawGlRasterShape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function isShapeStrokeRegion__glShape(region:Dynamic):Bool {
-    return cast _Runtime.hasField(region, 'style');
-    return cast null;
-  }
+  public static final defaultGlShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape };
 
-  public static final defaultGlShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: GlShape.createGlShapeData__glShape, destroyData: GlShape.destroyGlShapeData__glShape, submit: drawGlShape };
+  public static final defaultGlMorphShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape };
 }

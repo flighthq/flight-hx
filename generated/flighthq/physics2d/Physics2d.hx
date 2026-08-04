@@ -4,24 +4,57 @@ package flighthq.physics2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics2d.ColliderTransform as Facade_Physics2d_flighthq_physics2d_ColliderTransform;
+import flighthq.physics2d.DebugGeometry as Facade_Physics2d_flighthq_physics2d_DebugGeometry;
+import flighthq.physics2d.ExplainPhysics2DJoints as Facade_Physics2d_flighthq_physics2d_ExplainPhysics2DJoints;
+import flighthq.physics2d.ExplainPhysics2DStep as Facade_Physics2d_flighthq_physics2d_ExplainPhysics2DStep;
 import flighthq.physics2d.Islands as Facade_Physics2d_flighthq_physics2d_Islands;
+import flighthq.physics2d.JointFactories as Facade_Physics2d_flighthq_physics2d_JointFactories;
 import flighthq.physics2d.JointRegistry as Facade_Physics2d_flighthq_physics2d_JointRegistry;
 import flighthq.physics2d.Joints as Facade_Physics2d_flighthq_physics2d_Joints;
 import flighthq.physics2d.MassProperties as Facade_Physics2d_flighthq_physics2d_MassProperties;
+import flighthq.physics2d.Material as Facade_Physics2d_flighthq_physics2d_Material;
+import flighthq.physics2d.RegisterBuiltInPhysics2DJointSolvers as Facade_Physics2d_flighthq_physics2d_RegisterBuiltInPhysics2DJointSolvers;
 import flighthq.physics2d.Solver as Facade_Physics2d_flighthq_physics2d_Solver;
 import flighthq.physics2d.Step as Facade_Physics2d_flighthq_physics2d_Step;
 import flighthq.physics2d.World as Facade_Physics2d_flighthq_physics2d_World;
+import flighthq.physics2d.WorldQueries as Facade_Physics2d_flighthq_physics2d_WorldQueries;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Physics2D.Physics2DCollider;
+import flighthq.types.Physics2D.Physics2DCollisionFilter;
 import flighthq.types.Physics2D.Physics2DContactPoint;
+import flighthq.types.Physics2D.Physics2DDebugGeometry;
+import flighthq.types.Physics2D.Physics2DDistanceJoint;
+import flighthq.types.Physics2D.Physics2DDistanceJointOptions;
+import flighthq.types.Physics2D.Physics2DGearJoint;
+import flighthq.types.Physics2D.Physics2DGearJointOptions;
 import flighthq.types.Physics2D.Physics2DJoint;
 import flighthq.types.Physics2D.Physics2DJointKind;
+import flighthq.types.Physics2D.Physics2DJointResolutionExplanation;
 import flighthq.types.Physics2D.Physics2DJointSolver;
 import flighthq.types.Physics2D.Physics2DMassData;
 import flighthq.types.Physics2D.Physics2DMaterial;
+import flighthq.types.Physics2D.Physics2DMouseJoint;
+import flighthq.types.Physics2D.Physics2DMouseJointOptions;
+import flighthq.types.Physics2D.Physics2DPrismaticJoint;
+import flighthq.types.Physics2D.Physics2DPrismaticJointOptions;
+import flighthq.types.Physics2D.Physics2DPulleyJoint;
+import flighthq.types.Physics2D.Physics2DPulleyJointOptions;
+import flighthq.types.Physics2D.Physics2DQueryFilter;
+import flighthq.types.Physics2D.Physics2DQueryResult;
+import flighthq.types.Physics2D.Physics2DRayResult;
+import flighthq.types.Physics2D.Physics2DRevoluteJoint;
+import flighthq.types.Physics2D.Physics2DRevoluteJointOptions;
+import flighthq.types.Physics2D.Physics2DRopeJoint;
+import flighthq.types.Physics2D.Physics2DRopeJointOptions;
 import flighthq.types.Physics2D.Physics2DSolverConfig;
+import flighthq.types.Physics2D.Physics2DStepExplanation;
+import flighthq.types.Physics2D.Physics2DWeldJoint;
+import flighthq.types.Physics2D.Physics2DWeldJointOptions;
+import flighthq.types.Physics2D.Physics2DWheelJoint;
+import flighthq.types.Physics2D.Physics2DWheelJointOptions;
 import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialIndexBackend;
 
 class Physics2d {
@@ -30,8 +63,23 @@ class Physics2d {
     return cast null;
   }
 
+  public static function addPhysics2DCollider(world:Physics2DWorld, body:RigidBody2D, collider:Physics2DCollider):Physics2DCollider {
+    return cast Facade_Physics2d_flighthq_physics2d_World.addPhysics2DCollider(world, body, collider);
+    return cast null;
+  }
+
   public static function addPhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Physics2DJoint {
     return cast Facade_Physics2d_flighthq_physics2d_JointRegistry.addPhysics2DJoint(world, joint);
+    return cast null;
+  }
+
+  public static function applyPhysics2DForce(body:RigidBody2D, forceX:Float, forceY:Float):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.applyPhysics2DForce(body, forceX, forceY);
+    return cast null;
+  }
+
+  public static function applyPhysics2DForceAtPoint(body:RigidBody2D, forceX:Float, forceY:Float, pointX:Float, pointY:Float):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.applyPhysics2DForceAtPoint(body, forceX, forceY, pointX, pointY);
     return cast null;
   }
 
@@ -39,12 +87,27 @@ class Physics2d {
     Facade_Physics2d_flighthq_physics2d_Solver.applyPhysics2DImpulse(bodyA, bodyB, rAX, rAY, rBX, rBY, impulseX, impulseY);
   }
 
+  public static function applyPhysics2DLinearImpulse(body:RigidBody2D, impulseX:Float, impulseY:Float):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.applyPhysics2DLinearImpulse(body, impulseX, impulseY);
+    return cast null;
+  }
+
+  public static function applyPhysics2DLinearImpulseAtPoint(body:RigidBody2D, impulseX:Float, impulseY:Float, pointX:Float, pointY:Float):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.applyPhysics2DLinearImpulseAtPoint(body, impulseX, impulseY, pointX, pointY);
+    return cast null;
+  }
+
+  public static function applyPhysics2DTorque(body:RigidBody2D, torque:Float):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.applyPhysics2DTorque(body, torque);
+    return cast null;
+  }
+
   public static function computePhysics2DColliderMassData(collider:Physics2DCollider, out:Physics2DMassData):Void {
     Facade_Physics2d_flighthq_physics2d_MassProperties.computePhysics2DColliderMassData(collider, out);
   }
 
-  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, ?sensor:Dynamic):Physics2DCollider {
-    return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DCollider(local, material, sensor);
+  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, ?sensor:Dynamic, ?filter:Physics2DCollisionFilter):Physics2DCollider {
+    return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DCollider(local, material, sensor, filter);
     return cast null;
   }
 
@@ -53,8 +116,73 @@ class Physics2d {
     return cast null;
   }
 
+  public static function createPhysics2DDebugGeometry():Physics2DDebugGeometry {
+    return cast Facade_Physics2d_flighthq_physics2d_DebugGeometry.createPhysics2DDebugGeometry();
+    return cast null;
+  }
+
+  public static function createPhysics2DDistanceJoint(options:Physics2DDistanceJointOptions):Physics2DDistanceJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DDistanceJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DGearJoint(options:Physics2DGearJointOptions):Physics2DGearJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DGearJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DMouseJoint(options:Physics2DMouseJointOptions):Physics2DMouseJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DMouseJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DPrismaticJoint(options:Physics2DPrismaticJointOptions):Physics2DPrismaticJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DPrismaticJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DPulleyJoint(options:Physics2DPulleyJointOptions):Physics2DPulleyJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DPulleyJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DQueryFilter():Physics2DQueryFilter {
+    return cast Facade_Physics2d_flighthq_physics2d_WorldQueries.createPhysics2DQueryFilter();
+    return cast null;
+  }
+
+  public static function createPhysics2DQueryResult():Physics2DQueryResult {
+    return cast Facade_Physics2d_flighthq_physics2d_WorldQueries.createPhysics2DQueryResult();
+    return cast null;
+  }
+
+  public static function createPhysics2DRayResult():Physics2DRayResult {
+    return cast Facade_Physics2d_flighthq_physics2d_WorldQueries.createPhysics2DRayResult();
+    return cast null;
+  }
+
+  public static function createPhysics2DRevoluteJoint(options:Physics2DRevoluteJointOptions):Physics2DRevoluteJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DRevoluteJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DRopeJoint(options:Physics2DRopeJointOptions):Physics2DRopeJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DRopeJoint(options);
+    return cast null;
+  }
+
   public static function createPhysics2DSolverConfig():Physics2DSolverConfig {
     return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DSolverConfig();
+    return cast null;
+  }
+
+  public static function createPhysics2DWeldJoint(options:Physics2DWeldJointOptions):Physics2DWeldJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DWeldJoint(options);
+    return cast null;
+  }
+
+  public static function createPhysics2DWheelJoint(options:Physics2DWheelJointOptions):Physics2DWheelJoint {
+    return cast Facade_Physics2d_flighthq_physics2d_JointFactories.createPhysics2DWheelJoint(options);
     return cast null;
   }
 
@@ -68,6 +196,16 @@ class Physics2d {
     return cast null;
   }
 
+  public static function explainPhysics2DJoints(world:Physics2DWorld):Physics2DJointResolutionExplanation {
+    return cast Facade_Physics2d_flighthq_physics2d_ExplainPhysics2DJoints.explainPhysics2DJoints(world);
+    return cast null;
+  }
+
+  public static function explainPhysics2DStep(world:Physics2DWorld, dt:Float):Physics2DStepExplanation {
+    return cast Facade_Physics2d_flighthq_physics2d_ExplainPhysics2DStep.explainPhysics2DStep(world, dt);
+    return cast null;
+  }
+
   public static function findPhysics2DBody(world:Physics2DWorld, index:Float):Null<RigidBody2D> {
     return cast Facade_Physics2d_flighthq_physics2d_World.findPhysics2DBody(world, index);
     return cast null;
@@ -75,6 +213,21 @@ class Physics2d {
 
   public static function getPhysics2DJointSolver(world:Physics2DWorld, kind:Physics2DJointKind):Null<Physics2DJointSolver> {
     return cast Facade_Physics2d_flighthq_physics2d_JointRegistry.getPhysics2DJointSolver(world, kind);
+    return cast null;
+  }
+
+  public static function hydratePhysics2DWorld(world:Physics2DWorld):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.hydratePhysics2DWorld(world);
+    return cast null;
+  }
+
+  public static function invalidatePhysics2DCollider(world:Physics2DWorld, body:RigidBody2D, collider:Physics2DCollider):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.invalidatePhysics2DCollider(world, body, collider);
+    return cast null;
+  }
+
+  public static function invalidatePhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_JointRegistry.invalidatePhysics2DJoint(world, joint);
     return cast null;
   }
 
@@ -88,13 +241,35 @@ class Physics2d {
     return cast null;
   }
 
+  public static function mixPhysics2DFriction(first:Float, second:Float):Float {
+    return cast Facade_Physics2d_flighthq_physics2d_Material.mixPhysics2DFriction(first, second);
+    return cast null;
+  }
+
+  public static function mixPhysics2DRestitution(first:Float, second:Float):Float {
+    return cast Facade_Physics2d_flighthq_physics2d_Material.mixPhysics2DRestitution(first, second);
+    return cast null;
+  }
+
   public static final Physics2DDistanceJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DDistanceJointKind;
 
   public static final physics2DDistanceJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DDistanceJointSolver;
 
+  public static final Physics2DGearJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DGearJointKind;
+
+  public static final physics2DGearJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DGearJointSolver;
+
   public static final Physics2DMouseJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DMouseJointKind;
 
   public static final physics2DMouseJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DMouseJointSolver;
+
+  public static final Physics2DPrismaticJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPrismaticJointKind;
+
+  public static final physics2DPrismaticJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DPrismaticJointSolver;
+
+  public static final Physics2DPulleyJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPulleyJointKind;
+
+  public static final physics2DPulleyJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DPulleyJointSolver;
 
   public static final Physics2DRevoluteJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DRevoluteJointKind;
 
@@ -107,6 +282,32 @@ class Physics2d {
   public static final Physics2DWeldJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWeldJointKind;
 
   public static final physics2DWeldJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWeldJointSolver;
+
+  public static final Physics2DWheelJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWheelJointKind;
+
+  public static final physics2DWheelJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWheelJointSolver;
+
+  public static final Physics2DWorldVersion:Dynamic = Facade_Physics2d_flighthq_physics2d_World.Physics2DWorldVersion;
+
+  public static function queryPhysics2DPoint(world:Physics2DWorld, x:Float, y:Float, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
+    Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DPoint(world, x, y, out, filter);
+  }
+
+  public static function queryPhysics2DRay(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, ?maxFraction:Dynamic, ?filter:Physics2DQueryFilter):Void {
+    Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRay(world, originX, originY, directionX, directionY, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics2DRayClosest(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, ?maxFraction:Dynamic, ?filter:Physics2DQueryFilter):Void {
+    Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRayClosest(world, originX, originY, directionX, directionY, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics2DRegion(world:Physics2DWorld, region:SpatialAabb, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
+    Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRegion(world, region, out, filter);
+  }
+
+  public static function registerBuiltInPhysics2DJointSolvers(world:Physics2DWorld):Void {
+    Facade_Physics2d_flighthq_physics2d_RegisterBuiltInPhysics2DJointSolvers.registerBuiltInPhysics2DJointSolvers(world);
+  }
 
   public static function registerPhysics2DJointSolver(world:Physics2DWorld, kind:Physics2DJointKind, solver:Physics2DJointSolver):Void {
     Facade_Physics2d_flighthq_physics2d_JointRegistry.registerPhysics2DJointSolver(world, kind, solver);
@@ -122,8 +323,38 @@ class Physics2d {
     return cast null;
   }
 
+  public static function removePhysics2DCollider(world:Physics2DWorld, body:RigidBody2D, collider:Physics2DCollider):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.removePhysics2DCollider(world, body, collider);
+    return cast null;
+  }
+
   public static function removePhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Bool {
     return cast Facade_Physics2d_flighthq_physics2d_JointRegistry.removePhysics2DJoint(world, joint);
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyBullet(world:Physics2DWorld, body:RigidBody2D, bullet:Bool):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.setPhysics2DBodyBullet(world, body, bullet);
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyFixedRotation(world:Physics2DWorld, body:RigidBody2D, fixedRotation:Bool):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.setPhysics2DBodyFixedRotation(world, body, fixedRotation);
+    return cast null;
+  }
+
+  public static function setPhysics2DBodySleepEnabled(world:Physics2DWorld, body:RigidBody2D, sleepEnabled:Bool):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.setPhysics2DBodySleepEnabled(world, body, sleepEnabled);
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyTransform(world:Physics2DWorld, body:RigidBody2D, x:Float, y:Float, angle:Float):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.setPhysics2DBodyTransform(world, body, x, y, angle);
+    return cast null;
+  }
+
+  public static function setPhysics2DBodyType(world:Physics2DWorld, body:RigidBody2D, type:Dynamic):Bool {
+    return cast Facade_Physics2d_flighthq_physics2d_World.setPhysics2DBodyType(world, body, type);
     return cast null;
   }
 
@@ -161,5 +392,9 @@ class Physics2d {
 
   public static function writePhysics2DColliderBounds(collider:Physics2DCollider, out:{ var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }):Void {
     Facade_Physics2d_flighthq_physics2d_ColliderTransform.writePhysics2DColliderBounds(collider, out);
+  }
+
+  public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:Dynamic):Void {
+    Facade_Physics2d_flighthq_physics2d_DebugGeometry.writePhysics2DDebugGeometry(world, out, options);
   }
 }

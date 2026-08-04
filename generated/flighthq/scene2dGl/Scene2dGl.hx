@@ -10,12 +10,15 @@ import flighthq.scene2dGl.GlBitmapText as Facade_Scene2dGl_flighthq_scene2dGl_Gl
 import flighthq.scene2dGl.GlCache as Facade_Scene2dGl_flighthq_scene2dGl_GlCache;
 import flighthq.scene2dGl.GlClip as Facade_Scene2dGl_flighthq_scene2dGl_GlClip;
 import flighthq.scene2dGl.GlColorAdjustmentMaterialFeature as Facade_Scene2dGl_flighthq_scene2dGl_GlColorAdjustmentMaterialFeature;
+import flighthq.scene2dGl.GlMeshShapeRenderer as Facade_Scene2dGl_flighthq_scene2dGl_GlMeshShapeRenderer;
 import flighthq.scene2dGl.GlNode2D as Facade_Scene2dGl_flighthq_scene2dGl_GlNode2D;
 import flighthq.scene2dGl.GlParticleEmitter2D as Facade_Scene2dGl_flighthq_scene2dGl_GlParticleEmitter2D;
 import flighthq.scene2dGl.GlQuadBatch as Facade_Scene2dGl_flighthq_scene2dGl_GlQuadBatch;
+import flighthq.scene2dGl.GlRasterShapeRenderer as Facade_Scene2dGl_flighthq_scene2dGl_GlRasterShapeRenderer;
 import flighthq.scene2dGl.GlRichText as Facade_Scene2dGl_flighthq_scene2dGl_GlRichText;
 import flighthq.scene2dGl.GlScale9Shape as Facade_Scene2dGl_flighthq_scene2dGl_GlScale9Shape;
 import flighthq.scene2dGl.GlShape as Facade_Scene2dGl_flighthq_scene2dGl_GlShape;
+import flighthq.scene2dGl.GlShapeRasterizer as Facade_Scene2dGl_flighthq_scene2dGl_GlShapeRasterizer;
 import flighthq.scene2dGl.GlSprite as Facade_Scene2dGl_flighthq_scene2dGl_GlSprite;
 import flighthq.scene2dGl.GlStandardMaterial as Facade_Scene2dGl_flighthq_scene2dGl_GlStandardMaterial;
 import flighthq.scene2dGl.GlTextInput as Facade_Scene2dGl_flighthq_scene2dGl_GlTextInput;
@@ -31,7 +34,9 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.ShapeRasterizer;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Velocity.VelocityField;
 
@@ -48,6 +53,10 @@ class Scene2dGl {
 
   public static final defaultGlBitmapTextRenderer:SpriteRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlBitmapText.defaultGlBitmapTextRenderer;
 
+  public static final defaultGlMeshShapeRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlMeshShapeRenderer.defaultGlMeshShapeRenderer;
+
+  public static final defaultGlMorphShapeRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlShape.defaultGlMorphShapeRenderer;
+
   public static final defaultGlNode2DVelocityWriter:GlVelocityWriter = Facade_Scene2dGl_flighthq_scene2dGl_GlVelocity.defaultGlNode2DVelocityWriter;
 
   public static final defaultGlParticleEmitter2DRenderer:SpriteRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlParticleEmitter2D.defaultGlParticleEmitter2DRenderer;
@@ -55,6 +64,8 @@ class Scene2dGl {
   public static final defaultGlParticleEmitter2DVelocityWriter:GlVelocityWriter = Facade_Scene2dGl_flighthq_scene2dGl_GlVelocity.defaultGlParticleEmitter2DVelocityWriter;
 
   public static final defaultGlQuadBatchRenderer:SpriteRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlQuadBatch.defaultGlQuadBatchRenderer;
+
+  public static final defaultGlRasterShapeRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlRasterShapeRenderer.defaultGlRasterShapeRenderer;
 
   public static final defaultGlRichTextRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlRichText.defaultGlRichTextRenderer;
 
@@ -92,6 +103,11 @@ class Scene2dGl {
     Facade_Scene2dGl_flighthq_scene2dGl_GlTextInput.enableGlTextInput();
   }
 
+  public static function getGlShapeRasterizer(state:GlRenderState):Null<ShapeRasterizer> {
+    return cast Facade_Scene2dGl_flighthq_scene2dGl_GlShapeRasterizer.getGlShapeRasterizer(state);
+    return cast null;
+  }
+
   public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
     return cast Facade_Scene2dGl_flighthq_scene2dGl_GlCache.refreshGlRenderCache(cacheState, cache, source, options);
     return cast null;
@@ -101,8 +117,12 @@ class Scene2dGl {
     Facade_Scene2dGl_flighthq_scene2dGl_GlColorAdjustmentMaterialFeature.registerGlColorAdjustmentMaterialFeature(state);
   }
 
-  public static function registerGlShapeCommands(commands:Array<Dynamic>):Void {
-    Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(commands);
+  public static function registerGlShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+    Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
+  }
+
+  public static function registerGlShapeRasterizer(state:GlRenderState, rasterizer:Null<ShapeRasterizer>):Void {
+    Facade_Scene2dGl_flighthq_scene2dGl_GlShapeRasterizer.registerGlShapeRasterizer(state, rasterizer);
   }
 
   public static function registerGlStandardMaterial(state:GlRenderState):Void {

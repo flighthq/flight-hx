@@ -23,7 +23,3 @@ typedef ShapeCommandRegistry = { var beginTextureFill:Array<Dynamic>; var beginF
 typedef ShapeCommandKey = ShapeCommandRegistry;
 
 typedef ShapeCommandToken = Null<Dynamic>;
-
-typedef ShapeCommandHitTest = Dynamic;
-
-typedef ShapeHitTestCommand<K> = Dynamic;

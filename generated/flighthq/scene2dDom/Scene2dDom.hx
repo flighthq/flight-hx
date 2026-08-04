@@ -16,6 +16,7 @@ import flighthq.scene2dDom.DomRenderState as Facade_Scene2dDom_flighthq_scene2dD
 import flighthq.scene2dDom.DomRichText as Facade_Scene2dDom_flighthq_scene2dDom_DomRichText;
 import flighthq.scene2dDom.DomScale9Shape as Facade_Scene2dDom_flighthq_scene2dDom_DomScale9Shape;
 import flighthq.scene2dDom.DomShape as Facade_Scene2dDom_flighthq_scene2dDom_DomShape;
+import flighthq.scene2dDom.DomShapeRasterizer as Facade_Scene2dDom_flighthq_scene2dDom_DomShapeRasterizer;
 import flighthq.scene2dDom.DomSprite as Facade_Scene2dDom_flighthq_scene2dDom_DomSprite;
 import flighthq.scene2dDom.DomTextInput as Facade_Scene2dDom_flighthq_scene2dDom_DomTextInput;
 import flighthq.scene2dDom.DomTextLabel as Facade_Scene2dDom_flighthq_scene2dDom_DomTextLabel;
@@ -27,6 +28,7 @@ import flighthq.types.DomTextureResolver;
 import flighthq.types.Node2D;
 import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.ShapeRasterizer;
 import flighthq.types.Texture;
 import flighthq.types.TextureResolutionExplanation;
 import flighthq.types.TextureSourceKind;
@@ -38,6 +40,8 @@ class Scene2dDom {
   }
 
   public static final defaultDomHtmlViewRenderer:Scene2DRenderer = Facade_Scene2dDom_flighthq_scene2dDom_DomHtmlView.defaultDomHtmlViewRenderer;
+
+  public static final defaultDomMorphShapeRenderer:Scene2DRenderer = Facade_Scene2dDom_flighthq_scene2dDom_DomShape.defaultDomMorphShapeRenderer;
 
   public static final defaultDomNativeTextRenderer:Scene2DRenderer = Facade_Scene2dDom_flighthq_scene2dDom_DomNativeText.defaultDomNativeTextRenderer;
 
@@ -76,12 +80,21 @@ class Scene2dDom {
     return cast null;
   }
 
+  public static function getDomShapeRasterizer(state:DomRenderState):Null<ShapeRasterizer> {
+    return cast Facade_Scene2dDom_flighthq_scene2dDom_DomShapeRasterizer.getDomShapeRasterizer(state);
+    return cast null;
+  }
+
   public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
     Facade_Scene2dDom_flighthq_scene2dDom_DomBitmapTextureResolver.registerDomBitmapTextureResolver(state);
   }
 
   public static function registerDomImageTextureResolver(state:DomRenderState):Void {
     Facade_Scene2dDom_flighthq_scene2dDom_DomImageTextureResolver.registerDomImageTextureResolver(state);
+  }
+
+  public static function registerDomShapeRasterizer(state:DomRenderState, rasterizer:Null<ShapeRasterizer>):Void {
+    Facade_Scene2dDom_flighthq_scene2dDom_DomShapeRasterizer.registerDomShapeRasterizer(state, rasterizer);
   }
 
   public static function registerDomTextureResolver(state:DomRenderState, sourceKind:TextureSourceKind, resolver:Null<DomTextureResolver>):Void {

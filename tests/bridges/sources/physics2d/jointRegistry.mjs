@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const addPhysics2DJoint = api.addPhysics2DJoint;
 export const getPhysics2DJointSolver = api.getPhysics2DJointSolver;
+export const invalidatePhysics2DJoint = api.invalidatePhysics2DJoint;
 export const registerPhysics2DJointSolver = api.registerPhysics2DJointSolver;
 export const removePhysics2DJoint = api.removePhysics2DJoint;

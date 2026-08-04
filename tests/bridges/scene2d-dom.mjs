@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createDomRenderState = compiled.flighthq.scene2dDom.Scene2dDom.createDomRenderState;
 export const defaultDomHtmlViewRenderer = compiled.flighthq.scene2dDom.Scene2dDom.defaultDomHtmlViewRenderer;
+export const defaultDomMorphShapeRenderer = compiled.flighthq.scene2dDom.Scene2dDom.defaultDomMorphShapeRenderer;
 export const defaultDomNativeTextRenderer = compiled.flighthq.scene2dDom.Scene2dDom.defaultDomNativeTextRenderer;
 export const defaultDomRichTextRenderer = compiled.flighthq.scene2dDom.Scene2dDom.defaultDomRichTextRenderer;
 export const defaultDomScale9ShapeRenderer = compiled.flighthq.scene2dDom.Scene2dDom.defaultDomScale9ShapeRenderer;
@@ -15,8 +16,10 @@ export const enableDomRenderCache = compiled.flighthq.scene2dDom.Scene2dDom.enab
 export const enableDomTextInput = compiled.flighthq.scene2dDom.Scene2dDom.enableDomTextInput;
 export const enableDomTextureResolverGuards = compiled.flighthq.scene2dDom.Scene2dDom.enableDomTextureResolverGuards;
 export const explainDomTextureResolution = compiled.flighthq.scene2dDom.Scene2dDom.explainDomTextureResolution;
+export const getDomShapeRasterizer = compiled.flighthq.scene2dDom.Scene2dDom.getDomShapeRasterizer;
 export const registerDomBitmapTextureResolver = compiled.flighthq.scene2dDom.Scene2dDom.registerDomBitmapTextureResolver;
 export const registerDomImageTextureResolver = compiled.flighthq.scene2dDom.Scene2dDom.registerDomImageTextureResolver;
+export const registerDomShapeRasterizer = compiled.flighthq.scene2dDom.Scene2dDom.registerDomShapeRasterizer;
 export const registerDomTextureResolver = compiled.flighthq.scene2dDom.Scene2dDom.registerDomTextureResolver;
 export const renderDomBackground = compiled.flighthq.scene2dDom.Scene2dDom.renderDomBackground;
 export const renderDomScene2D = compiled.flighthq.scene2dDom.Scene2dDom.renderDomScene2D;

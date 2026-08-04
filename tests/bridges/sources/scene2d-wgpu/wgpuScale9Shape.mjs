@@ -10,4 +10,3 @@ export const defaultWgpuScale9ShapeRenderer = api.defaultWgpuScale9ShapeRenderer
 export const destroyWgpuScale9ShapeData = api.destroyWgpuScale9ShapeData;
 export const drawWgpuScale9Shape = api.drawWgpuScale9Shape;
 export const drawWgpuScale9ShapeMask = api.drawWgpuScale9ShapeMask;
-export const remapWgpuScale9Commands = api.remapWgpuScale9Commands;

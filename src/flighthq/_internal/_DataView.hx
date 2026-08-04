@@ -13,14 +13,14 @@ package flighthq._internal;
 // strip the constructor or members.
 @:keep
 class _DataView {
-  final bytes:haxe.io.Bytes;
+  public final buffer:haxe.io.Bytes;
   public final byteOffset:Int;
   public final byteLength:Int;
 
-  public function new(buffer:Dynamic, ?byteOffset:Dynamic, ?byteLength:Dynamic) {
-    bytes = cast buffer;
+  public function new(source:Dynamic, ?byteOffset:Dynamic, ?byteLength:Dynamic) {
+    buffer = cast source;
     this.byteOffset = byteOffset == null ? 0 : Std.int(byteOffset);
-    this.byteLength = byteLength == null ? bytes.length - this.byteOffset : Std.int(byteLength);
+    this.byteLength = byteLength == null ? buffer.length - this.byteOffset : Std.int(byteLength);
   }
 
   inline function at(offset:Float):Int {
@@ -28,17 +28,17 @@ class _DataView {
   }
 
   public function getUint8(offset:Float):Int {
-    return bytes.get(at(offset));
+    return buffer.get(at(offset));
   }
 
   public function getInt8(offset:Float):Int {
-    final value = bytes.get(at(offset));
+    final value = buffer.get(at(offset));
     return value >= 128 ? value - 256 : value;
   }
 
   public function getUint16(offset:Float, littleEndian:Bool = false):Int {
     final position = at(offset);
-    final little = bytes.getUInt16(position);
+    final little = buffer.getUInt16(position);
     return littleEndian ? little : ((little & 0xff) << 8) | (little >> 8);
   }
 
@@ -54,23 +54,23 @@ class _DataView {
 
   public function getInt32(offset:Float, littleEndian:Bool = false):Int {
     final position = at(offset);
-    final little = bytes.getInt32(position);
+    final little = buffer.getInt32(position);
     if (littleEndian) return little;
     return ((little & 0xff) << 24) | ((little & 0xff00) << 8) | ((little >>> 8) & 0xff00) | (little >>> 24);
   }
 
   public function getFloat32(offset:Float, littleEndian:Bool = false):Float {
-    if (littleEndian) return bytes.getFloat(at(offset));
+    if (littleEndian) return buffer.getFloat(at(offset));
     return swappedScratch(at(offset), 4).getFloat(0);
   }
 
   public function getFloat64(offset:Float, littleEndian:Bool = false):Float {
-    if (littleEndian) return bytes.getDouble(at(offset));
+    if (littleEndian) return buffer.getDouble(at(offset));
     return swappedScratch(at(offset), 8).getDouble(0);
   }
 
   public function setUint8(offset:Float, value:Float):Void {
-    bytes.set(at(offset), Std.int(value) & 0xff);
+    buffer.set(at(offset), Std.int(value) & 0xff);
   }
 
   public function setInt8(offset:Float, value:Float):Void {
@@ -79,7 +79,7 @@ class _DataView {
 
   public function setUint16(offset:Float, value:Float, littleEndian:Bool = false):Void {
     final raw = Std.int(value) & 0xffff;
-    bytes.setUInt16(at(offset), littleEndian ? raw : ((raw & 0xff) << 8) | (raw >> 8));
+    buffer.setUInt16(at(offset), littleEndian ? raw : ((raw & 0xff) << 8) | (raw >> 8));
   }
 
   public function setInt16(offset:Float, value:Float, littleEndian:Bool = false):Void {
@@ -93,32 +93,32 @@ class _DataView {
   public function setInt32(offset:Float, value:Float, littleEndian:Bool = false):Void {
     final raw = _Runtime.toInt32(value);
     final stored = littleEndian ? raw : ((raw & 0xff) << 24) | ((raw & 0xff00) << 8) | ((raw >>> 8) & 0xff00) | (raw >>> 24);
-    bytes.setInt32(at(offset), stored);
+    buffer.setInt32(at(offset), stored);
   }
 
   public function setFloat32(offset:Float, value:Float, littleEndian:Bool = false):Void {
     if (littleEndian) {
-      bytes.setFloat(at(offset), value);
+      buffer.setFloat(at(offset), value);
       return;
     }
     final scratch = haxe.io.Bytes.alloc(4);
     scratch.setFloat(0, value);
-    for (index in 0...4) bytes.set(at(offset) + index, scratch.get(3 - index));
+    for (index in 0...4) buffer.set(at(offset) + index, scratch.get(3 - index));
   }
 
   public function setFloat64(offset:Float, value:Float, littleEndian:Bool = false):Void {
     if (littleEndian) {
-      bytes.setDouble(at(offset), value);
+      buffer.setDouble(at(offset), value);
       return;
     }
     final scratch = haxe.io.Bytes.alloc(8);
     scratch.setDouble(0, value);
-    for (index in 0...8) bytes.set(at(offset) + index, scratch.get(7 - index));
+    for (index in 0...8) buffer.set(at(offset) + index, scratch.get(7 - index));
   }
 
   function swappedScratch(position:Int, count:Int):haxe.io.Bytes {
     final scratch = haxe.io.Bytes.alloc(count);
-    for (index in 0...count) scratch.set(index, bytes.get(position + count - 1 - index));
+    for (index in 0...count) scratch.set(index, buffer.get(position + count - 1 - index));
     return scratch;
   }
 }

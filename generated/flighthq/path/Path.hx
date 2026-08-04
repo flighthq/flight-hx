@@ -8,6 +8,7 @@ import flighthq.path.ContainsPathPoint as Facade_Path_flighthq_path_ContainsPath
 import flighthq.path.CopyPath as Facade_Path_flighthq_path_CopyPath;
 import flighthq.path.DashPath as Facade_Path_flighthq_path_DashPath;
 import flighthq.path.DecimatePath as Facade_Path_flighthq_path_DecimatePath;
+import flighthq.path.ExplainPathMorphCreation as Facade_Path_flighthq_path_ExplainPathMorphCreation;
 import flighthq.path.ExplainStrokePathTessellation as Facade_Path_flighthq_path_ExplainStrokePathTessellation;
 import flighthq.path.FitPathCurves as Facade_Path_flighthq_path_FitPathCurves;
 import flighthq.path.FlattenPath as Facade_Path_flighthq_path_FlattenPath;
@@ -20,6 +21,7 @@ import flighthq.path.GetPathPointAtDistance as Facade_Path_flighthq_path_GetPath
 import flighthq.path.GetPathSegmentAtParameter as Facade_Path_flighthq_path_GetPathSegmentAtParameter;
 import flighthq.path.GetPathSignedArea as Facade_Path_flighthq_path_GetPathSignedArea;
 import flighthq.path.PathMeshPool as Facade_Path_flighthq_path_PathMeshPool;
+import flighthq.path.PathMorph as Facade_Path_flighthq_path_PathMorph;
 import flighthq.path.ReversePath as Facade_Path_flighthq_path_ReversePath;
 import flighthq.path.StrokePath as Facade_Path_flighthq_path_StrokePath;
 import flighthq.path.TessellatePath as Facade_Path_flighthq_path_TessellatePath;
@@ -31,6 +33,8 @@ import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
+import flighthq.types.PathMorph;
+import flighthq.types.PathMorphCreationExplanation;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.StrokePathTessellationExplanation;
@@ -333,12 +337,22 @@ class Path {
     return cast null;
   }
 
+  public static function createPathMorph(start:flighthq.types.Path, end:flighthq.types.Path):Null<PathMorph> {
+    return cast Facade_Path_flighthq_path_PathMorph.createPathMorph(start, end);
+    return cast null;
+  }
+
   public static function dashPath(source:flighthq.types.Path, dash:Array<Float>, dashOffset:Float, out:flighthq.types.Path, ?tolerance:Dynamic):Void {
     Facade_Path_flighthq_path_DashPath.dashPath(source, dash, dashOffset, out, tolerance);
   }
 
   public static function decimatePath(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Dynamic):Void {
     Facade_Path_flighthq_path_DecimatePath.decimatePath(source, tolerance, out, flattenTolerance);
+  }
+
+  public static function explainPathMorphCreation(start:flighthq.types.Path, end:flighthq.types.Path):PathMorphCreationExplanation {
+    return cast Facade_Path_flighthq_path_ExplainPathMorphCreation.explainPathMorphCreation(start, end);
+    return cast null;
   }
 
   public static function explainStrokePathTessellation(path:flighthq.types.Path, style:StrokeStyle, ?tolerance:Dynamic):StrokePathTessellationExplanation {
@@ -481,6 +495,10 @@ class Path {
 
   public static function reversePath(source:flighthq.types.Path, out:flighthq.types.Path):Void {
     Facade_Path_flighthq_path_ReversePath.reversePath(source, out);
+  }
+
+  public static function samplePathMorph(out:flighthq.types.Path, morph:PathMorph, progress:Float):Void {
+    Facade_Path_flighthq_path_PathMorph.samplePathMorph(out, morph, progress);
   }
 
   public static function strokePath(path:flighthq.types.Path, style:StrokeStyle, ?tolerance:Dynamic):flighthq.types.Path {

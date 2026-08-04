@@ -6,5 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const bindGlMeshLightBlock = api.bindGlMeshLightBlock;
+export const GL_DIRECTIONAL_SHADOW_GLSL = api.GL_DIRECTIONAL_SHADOW_GLSL;
 export const GL_MESH_LIGHT_BLOCK_GLSL = api.GL_MESH_LIGHT_BLOCK_GLSL;
 export const resolveGlLitLocations = api.resolveGlLitLocations;

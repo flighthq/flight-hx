@@ -29,6 +29,7 @@ import flighthq.scene3dWgpu.WgpuShadowMap as Facade_Scene3dWgpu_flighthq_scene3d
 import flighthq.scene3dWgpu.WgpuSkinPalette as Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuSkinPalette;
 import flighthq.scene3dWgpu.WireframeWgpuMeshMaterialRenderer as Facade_Scene3dWgpu_flighthq_scene3dWgpu_WireframeWgpuMeshMaterialRenderer;
 import flighthq.types.Camera3D;
+import flighthq.types.DirectionalLight;
 import flighthq.types.Environment;
 import flighthq.types.Node3D;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
@@ -57,8 +58,8 @@ class Scene3dWgpu {
     Facade_Scene3dWgpu_flighthq_scene3dWgpu_DrawWgpuScene3D.drawWgpuScene3D(state, scene, camera, lights, forwardLights);
   }
 
-  public static function drawWgpuScene3DShadowMap(state:WgpuRenderState, scene:Node3D, shadowCamera:Camera3D):Void {
-    Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuShadowMap.drawWgpuScene3DShadowMap(state, scene, shadowCamera);
+  public static function drawWgpuScene3DShadowMap(state:WgpuRenderState, scene:Node3D, shadowCamera:Camera3D, directionalLight:Null<DirectionalLight>):Void {
+    Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuShadowMap.drawWgpuScene3DShadowMap(state, scene, shadowCamera, directionalLight);
   }
 
   public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):Dynamic {

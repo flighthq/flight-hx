@@ -93,7 +93,7 @@ class MassProperties {
     _Runtime.setField(body, 'mass', ((cast simulated : Bool) ? (cast mass : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setField(body, 'inertia', ((cast simulated : Bool) ? (cast inertia : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setField(body, 'inverseMass', ((cast ((cast simulated : Bool) && (cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (1.0 / mass) : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setField(body, 'inverseInertia', ((cast ((cast simulated : Bool) && (cast ((cast inertia : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (1.0 / inertia) : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(body, 'inverseInertia', ((cast ((cast ((cast simulated : Bool) && (cast !(cast _Runtime.field(body, 'fixedRotation') : Bool) : Bool)) : Bool) && (cast ((cast inertia : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (1.0 / inertia) : Dynamic) : (cast 0.0 : Dynamic)));
   }
 
   public static function writePolygonMassData__massProperties(points:Array<Float>, density:Float, out:Physics2DMassData):Void {

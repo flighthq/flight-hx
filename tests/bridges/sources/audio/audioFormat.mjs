@@ -7,4 +7,6 @@ __syncDependencies();
 
 export const canPlayAudioType = api.canPlayAudioType;
 export const detectAudioMimeType = api.detectAudioMimeType;
+export const getAudioMimeTypeEssence = api.getAudioMimeTypeEssence;
+export const getAudioMimeTypeParameter = api.getAudioMimeTypeParameter;
 export const inferAudioMimeType = api.inferAudioMimeType;

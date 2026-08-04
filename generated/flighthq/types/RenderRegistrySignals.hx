@@ -7,9 +7,12 @@ import flighthq.types.Entity.Kind;
 
 enum abstract RenderRegistry(Int) from Int to Int {
   public static inline var EffectPaddingResolver:RenderRegistry = 0;
-  public static inline var NodeRenderer:RenderRegistry = 1;
-  public static inline var ShapeCommandHandler:RenderRegistry = 2;
-  public static inline var TextureResolver:RenderRegistry = 3;
+  public static inline var MaterialRenderer:RenderRegistry = 1;
+  public static inline var ModifierSnippet:RenderRegistry = 2;
+  public static inline var NodeRenderer:RenderRegistry = 3;
+  public static inline var ShapeCommandHandler:RenderRegistry = 4;
+  public static inline var ShapeRasterizer:RenderRegistry = 5;
+  public static inline var TextureResolver:RenderRegistry = 6;
 }
 
 typedef RenderRegistryMiss = { var kind:Kind; var registry:RenderRegistry; };

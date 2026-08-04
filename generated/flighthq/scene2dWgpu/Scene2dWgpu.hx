@@ -10,12 +10,15 @@ import flighthq.scene2dWgpu.WgpuBitmapText as Facade_Scene2dWgpu_flighthq_scene2
 import flighthq.scene2dWgpu.WgpuCache as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuCache;
 import flighthq.scene2dWgpu.WgpuClip as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuClip;
 import flighthq.scene2dWgpu.WgpuColorAdjustmentMaterialFeature as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuColorAdjustmentMaterialFeature;
+import flighthq.scene2dWgpu.WgpuMeshShapeRenderer as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuMeshShapeRenderer;
 import flighthq.scene2dWgpu.WgpuNode2D as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuNode2D;
 import flighthq.scene2dWgpu.WgpuParticleEmitter2D as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuParticleEmitter2D;
 import flighthq.scene2dWgpu.WgpuQuadBatch as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuQuadBatch;
+import flighthq.scene2dWgpu.WgpuRasterShapeRenderer as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuRasterShapeRenderer;
 import flighthq.scene2dWgpu.WgpuRichText as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuRichText;
 import flighthq.scene2dWgpu.WgpuScale9Shape as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuScale9Shape;
 import flighthq.scene2dWgpu.WgpuShape as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShape;
+import flighthq.scene2dWgpu.WgpuShapeRasterizer as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShapeRasterizer;
 import flighthq.scene2dWgpu.WgpuSprite as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuSprite;
 import flighthq.scene2dWgpu.WgpuStandardMaterial as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuStandardMaterial;
 import flighthq.scene2dWgpu.WgpuTextInput as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTextInput;
@@ -28,7 +31,9 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.ShapeRasterizer;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.WgpuRenderState;
@@ -48,6 +53,10 @@ class Scene2dWgpu {
 
   public static final defaultWgpuBitmapTextRenderer:SpriteRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuBitmapText.defaultWgpuBitmapTextRenderer;
 
+  public static final defaultWgpuMeshShapeRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuMeshShapeRenderer.defaultWgpuMeshShapeRenderer;
+
+  public static final defaultWgpuMorphShapeRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShape.defaultWgpuMorphShapeRenderer;
+
   public static final defaultWgpuNode2DVelocityWriter:WgpuVelocityWriter = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuVelocity.defaultWgpuNode2DVelocityWriter;
 
   public static final defaultWgpuParticleEmitter2DRenderer:SpriteRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuParticleEmitter2D.defaultWgpuParticleEmitter2DRenderer;
@@ -55,6 +64,8 @@ class Scene2dWgpu {
   public static final defaultWgpuParticleEmitter2DVelocityWriter:WgpuVelocityWriter = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuVelocity.defaultWgpuParticleEmitter2DVelocityWriter;
 
   public static final defaultWgpuQuadBatchRenderer:SpriteRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuQuadBatch.defaultWgpuQuadBatchRenderer;
+
+  public static final defaultWgpuRasterShapeRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuRasterShapeRenderer.defaultWgpuRasterShapeRenderer;
 
   public static final defaultWgpuRichTextRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuRichText.defaultWgpuRichTextRenderer;
 
@@ -94,6 +105,11 @@ class Scene2dWgpu {
     Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTextInput.enableWgpuTextInput();
   }
 
+  public static function getWgpuShapeRasterizer(state:WgpuRenderState):Null<ShapeRasterizer> {
+    return cast Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShapeRasterizer.getWgpuShapeRasterizer(state);
+    return cast null;
+  }
+
   public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
     return cast Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuCache.refreshWgpuRenderCache(cacheState, cache, source, options);
     return cast null;
@@ -103,8 +119,12 @@ class Scene2dWgpu {
     Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuColorAdjustmentMaterialFeature.registerWgpuColorAdjustmentMaterialFeature(state);
   }
 
-  public static function registerWgpuShapeCommands(commands:Array<Dynamic>):Void {
-    Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(commands);
+  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+    Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
+  }
+
+  public static function registerWgpuShapeRasterizer(state:WgpuRenderState, rasterizer:Null<ShapeRasterizer>):Void {
+    Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShapeRasterizer.registerWgpuShapeRasterizer(state, rasterizer);
   }
 
   public static function registerWgpuStandardMaterial(state:WgpuRenderState):Void {

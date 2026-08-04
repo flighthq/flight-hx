@@ -1,25 +1,25 @@
 {
   "packages": [
     {
-      "declarations": 19,
+      "declarations": 33,
       "diagnostics": [],
-      "files": 3,
-      "lowered": 19,
+      "files": 4,
+      "lowered": 33,
       "packageName": "@flighthq/abc",
       "staticFacts": {
-        "booleanConditionalTruthiness": 9,
-        "booleanExplicitTruthiness": 98,
-        "booleanLogicalExpressions": 23,
-        "booleanLogicalTruthiness": 23,
+        "booleanConditionalTruthiness": 10,
+        "booleanExplicitTruthiness": 114,
+        "booleanLogicalExpressions": 24,
+        "booleanLogicalTruthiness": 24,
         "indexedAccesses": {
-          "expressions": 2,
-          "reads": 2,
+          "expressions": 8,
+          "reads": 8,
           "writes": 0
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 37,
+        "numericRelations": 45,
         "typedArraySetCalls": 0
       }
     },
@@ -185,25 +185,25 @@
       }
     },
     {
-      "declarations": 20,
+      "declarations": 36,
       "diagnostics": [],
-      "files": 5,
-      "lowered": 20,
+      "files": 7,
+      "lowered": 36,
       "packageName": "@flighthq/audio",
       "staticFacts": {
-        "booleanConditionalTruthiness": 6,
-        "booleanExplicitTruthiness": 17,
-        "booleanLogicalExpressions": 28,
-        "booleanLogicalTruthiness": 28,
+        "booleanConditionalTruthiness": 12,
+        "booleanExplicitTruthiness": 31,
+        "booleanLogicalExpressions": 33,
+        "booleanLogicalTruthiness": 33,
         "indexedAccesses": {
-          "expressions": 33,
-          "reads": 32,
+          "expressions": 35,
+          "reads": 34,
           "writes": 1
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 8,
+        "numericRelations": 14,
         "typedArraySetCalls": 0
       }
     },
@@ -323,10 +323,10 @@
       }
     },
     {
-      "declarations": 61,
+      "declarations": 62,
       "diagnostics": [],
       "files": 17,
-      "lowered": 61,
+      "lowered": 62,
       "packageName": "@flighthq/camera",
       "staticFacts": {
         "booleanConditionalTruthiness": 12,
@@ -461,25 +461,25 @@
       }
     },
     {
-      "declarations": 98,
+      "declarations": 136,
       "diagnostics": [],
-      "files": 15,
-      "lowered": 98,
+      "files": 17,
+      "lowered": 136,
       "packageName": "@flighthq/collision",
       "staticFacts": {
-        "booleanConditionalTruthiness": 59,
-        "booleanExplicitTruthiness": 179,
-        "booleanLogicalExpressions": 71,
-        "booleanLogicalTruthiness": 75,
+        "booleanConditionalTruthiness": 66,
+        "booleanExplicitTruthiness": 308,
+        "booleanLogicalExpressions": 121,
+        "booleanLogicalTruthiness": 125,
         "indexedAccesses": {
-          "expressions": 44,
-          "reads": 28,
+          "expressions": 50,
+          "reads": 34,
           "writes": 16
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 173,
+        "numericRelations": 249,
         "typedArraySetCalls": 0
       }
     },
@@ -990,14 +990,14 @@
       }
     },
     {
-      "declarations": 19,
+      "declarations": 25,
       "diagnostics": [],
-      "files": 4,
-      "lowered": 19,
+      "files": 5,
+      "lowered": 25,
       "packageName": "@flighthq/image",
       "staticFacts": {
-        "booleanConditionalTruthiness": 0,
-        "booleanExplicitTruthiness": 6,
+        "booleanConditionalTruthiness": 2,
+        "booleanExplicitTruthiness": 10,
         "booleanLogicalExpressions": 2,
         "booleanLogicalTruthiness": 2,
         "indexedAccesses": {
@@ -1473,25 +1473,25 @@
       }
     },
     {
-      "declarations": 131,
+      "declarations": 154,
       "diagnostics": [],
-      "files": 19,
-      "lowered": 131,
+      "files": 20,
+      "lowered": 154,
       "packageName": "@flighthq/node",
       "staticFacts": {
-        "booleanConditionalTruthiness": 5,
-        "booleanExplicitTruthiness": 145,
-        "booleanLogicalExpressions": 39,
-        "booleanLogicalTruthiness": 42,
+        "booleanConditionalTruthiness": 7,
+        "booleanExplicitTruthiness": 173,
+        "booleanLogicalExpressions": 40,
+        "booleanLogicalTruthiness": 43,
         "indexedAccesses": {
-          "expressions": 20,
-          "reads": 16,
-          "writes": 4
+          "expressions": 55,
+          "reads": 39,
+          "writes": 16
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 30,
+        "numericRelations": 40,
         "typedArraySetCalls": 0
       }
     },
@@ -1588,25 +1588,25 @@
       }
     },
     {
-      "declarations": 156,
+      "declarations": 187,
       "diagnostics": [],
-      "files": 27,
-      "lowered": 156,
+      "files": 30,
+      "lowered": 187,
       "packageName": "@flighthq/path",
       "staticFacts": {
-        "booleanConditionalTruthiness": 36,
-        "booleanExplicitTruthiness": 347,
-        "booleanLogicalExpressions": 80,
-        "booleanLogicalTruthiness": 94,
+        "booleanConditionalTruthiness": 40,
+        "booleanExplicitTruthiness": 403,
+        "booleanLogicalExpressions": 87,
+        "booleanLogicalTruthiness": 101,
         "indexedAccesses": {
-          "expressions": 528,
-          "reads": 513,
-          "writes": 16
+          "expressions": 568,
+          "reads": 550,
+          "writes": 19
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 250,
+        "numericRelations": 278,
         "typedArraySetCalls": 0
       }
     },
@@ -1680,25 +1680,25 @@
       }
     },
     {
-      "declarations": 70,
+      "declarations": 229,
       "diagnostics": [],
-      "files": 10,
-      "lowered": 70,
+      "files": 21,
+      "lowered": 229,
       "packageName": "@flighthq/physics2d",
       "staticFacts": {
-        "booleanConditionalTruthiness": 23,
-        "booleanExplicitTruthiness": 144,
-        "booleanLogicalExpressions": 56,
-        "booleanLogicalTruthiness": 58,
+        "booleanConditionalTruthiness": 72,
+        "booleanExplicitTruthiness": 546,
+        "booleanLogicalExpressions": 309,
+        "booleanLogicalTruthiness": 325,
         "indexedAccesses": {
-          "expressions": 89,
-          "reads": 48,
-          "writes": 41
+          "expressions": 364,
+          "reads": 267,
+          "writes": 97
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 59,
+        "numericRelations": 226,
         "typedArraySetCalls": 0
       }
     },
@@ -1824,10 +1824,10 @@
       "lowered": 110,
       "packageName": "@flighthq/render",
       "staticFacts": {
-        "booleanConditionalTruthiness": 15,
-        "booleanExplicitTruthiness": 98,
-        "booleanLogicalExpressions": 42,
-        "booleanLogicalTruthiness": 47,
+        "booleanConditionalTruthiness": 16,
+        "booleanExplicitTruthiness": 103,
+        "booleanLogicalExpressions": 45,
+        "booleanLogicalTruthiness": 50,
         "indexedAccesses": {
           "expressions": 100,
           "reads": 49,
@@ -1841,48 +1841,48 @@
       }
     },
     {
-      "declarations": 228,
+      "declarations": 227,
       "diagnostics": [],
       "files": 32,
-      "lowered": 228,
+      "lowered": 227,
       "packageName": "@flighthq/render-gl",
       "staticFacts": {
-        "booleanConditionalTruthiness": 56,
-        "booleanExplicitTruthiness": 146,
+        "booleanConditionalTruthiness": 58,
+        "booleanExplicitTruthiness": 143,
         "booleanLogicalExpressions": 47,
         "booleanLogicalTruthiness": 50,
         "indexedAccesses": {
-          "expressions": 113,
-          "reads": 47,
-          "writes": 66
+          "expressions": 105,
+          "reads": 43,
+          "writes": 62
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 40,
+        "numericRelations": 39,
         "typedArraySetCalls": 0
       }
     },
     {
-      "declarations": 187,
+      "declarations": 186,
       "diagnostics": [],
       "files": 27,
-      "lowered": 187,
+      "lowered": 186,
       "packageName": "@flighthq/render-wgpu",
       "staticFacts": {
-        "booleanConditionalTruthiness": 73,
-        "booleanExplicitTruthiness": 177,
+        "booleanConditionalTruthiness": 75,
+        "booleanExplicitTruthiness": 174,
         "booleanLogicalExpressions": 63,
         "booleanLogicalTruthiness": 65,
         "indexedAccesses": {
-          "expressions": 101,
-          "reads": 44,
-          "writes": 57
+          "expressions": 93,
+          "reads": 40,
+          "writes": 53
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 52,
+        "numericRelations": 51,
         "typedArraySetCalls": 0
       }
     },
@@ -1912,37 +1912,37 @@
     {
       "declarations": 172,
       "diagnostics": [],
-      "files": 39,
+      "files": 40,
       "lowered": 172,
       "packageName": "@flighthq/scene2d-canvas",
       "staticFacts": {
-        "booleanConditionalTruthiness": 37,
-        "booleanExplicitTruthiness": 218,
+        "booleanConditionalTruthiness": 34,
+        "booleanExplicitTruthiness": 212,
         "booleanLogicalExpressions": 68,
         "booleanLogicalTruthiness": 74,
         "indexedAccesses": {
-          "expressions": 250,
-          "reads": 209,
-          "writes": 41
+          "expressions": 169,
+          "reads": 167,
+          "writes": 2
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 72,
+        "numericRelations": 69,
         "typedArraySetCalls": 0
       }
     },
     {
-      "declarations": 119,
+      "declarations": 122,
       "diagnostics": [],
-      "files": 31,
-      "lowered": 119,
+      "files": 32,
+      "lowered": 122,
       "packageName": "@flighthq/scene2d-dom",
       "staticFacts": {
         "booleanConditionalTruthiness": 29,
         "booleanExplicitTruthiness": 132,
-        "booleanLogicalExpressions": 24,
-        "booleanLogicalTruthiness": 26,
+        "booleanLogicalExpressions": 22,
+        "booleanLogicalTruthiness": 24,
         "indexedAccesses": {
           "expressions": 25,
           "reads": 22,
@@ -1956,175 +1956,175 @@
       }
     },
     {
-      "declarations": 133,
+      "declarations": 462,
       "diagnostics": [],
-      "files": 5,
-      "lowered": 133,
+      "files": 20,
+      "lowered": 462,
       "packageName": "@flighthq/scene2d-formats",
       "staticFacts": {
-        "booleanConditionalTruthiness": 100,
-        "booleanExplicitTruthiness": 280,
-        "booleanLogicalExpressions": 124,
-        "booleanLogicalTruthiness": 133,
+        "booleanConditionalTruthiness": 163,
+        "booleanExplicitTruthiness": 504,
+        "booleanLogicalExpressions": 188,
+        "booleanLogicalTruthiness": 199,
         "indexedAccesses": {
-          "expressions": 202,
-          "reads": 196,
-          "writes": 6
+          "expressions": 352,
+          "reads": 339,
+          "writes": 13
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 56,
+        "numericRelations": 133,
         "typedArraySetCalls": 0
       }
     },
     {
-      "declarations": 208,
+      "declarations": 213,
       "diagnostics": [],
-      "files": 27,
-      "lowered": 208,
+      "files": 31,
+      "lowered": 213,
       "packageName": "@flighthq/scene2d-gl",
       "staticFacts": {
         "booleanConditionalTruthiness": 23,
-        "booleanExplicitTruthiness": 246,
-        "booleanLogicalExpressions": 86,
-        "booleanLogicalTruthiness": 89,
+        "booleanExplicitTruthiness": 249,
+        "booleanLogicalExpressions": 90,
+        "booleanLogicalTruthiness": 93,
         "indexedAccesses": {
-          "expressions": 238,
-          "reads": 77,
-          "writes": 161
+          "expressions": 232,
+          "reads": 73,
+          "writes": 159
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 113,
+        "numericRelations": 110,
         "typedArraySetCalls": 3
       }
     },
     {
-      "declarations": 23,
+      "declarations": 26,
       "diagnostics": [],
-      "files": 9,
-      "lowered": 23,
+      "files": 10,
+      "lowered": 26,
       "packageName": "@flighthq/scene2d-resources",
       "staticFacts": {
         "booleanConditionalTruthiness": 0,
-        "booleanExplicitTruthiness": 23,
-        "booleanLogicalExpressions": 8,
-        "booleanLogicalTruthiness": 9,
+        "booleanExplicitTruthiness": 27,
+        "booleanLogicalExpressions": 13,
+        "booleanLogicalTruthiness": 14,
         "indexedAccesses": {
-          "expressions": 5,
-          "reads": 4,
+          "expressions": 13,
+          "reads": 12,
           "writes": 1
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 3,
+        "numericRelations": 6,
         "typedArraySetCalls": 0
       }
     },
     {
-      "declarations": 210,
+      "declarations": 216,
       "diagnostics": [],
-      "files": 28,
-      "lowered": 210,
+      "files": 32,
+      "lowered": 216,
       "packageName": "@flighthq/scene2d-wgpu",
       "staticFacts": {
         "booleanConditionalTruthiness": 41,
-        "booleanExplicitTruthiness": 296,
-        "booleanLogicalExpressions": 99,
-        "booleanLogicalTruthiness": 101,
+        "booleanExplicitTruthiness": 300,
+        "booleanLogicalExpressions": 104,
+        "booleanLogicalTruthiness": 106,
         "indexedAccesses": {
-          "expressions": 309,
-          "reads": 90,
-          "writes": 219
+          "expressions": 303,
+          "reads": 86,
+          "writes": 217
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 131,
+        "numericRelations": 128,
         "typedArraySetCalls": 4
       }
     },
     {
-      "declarations": 75,
+      "declarations": 78,
       "diagnostics": [],
-      "files": 17,
-      "lowered": 75,
+      "files": 18,
+      "lowered": 78,
       "packageName": "@flighthq/scene3d",
       "staticFacts": {
         "booleanConditionalTruthiness": 2,
-        "booleanExplicitTruthiness": 84,
-        "booleanLogicalExpressions": 10,
-        "booleanLogicalTruthiness": 10,
+        "booleanExplicitTruthiness": 95,
+        "booleanLogicalExpressions": 11,
+        "booleanLogicalTruthiness": 11,
         "indexedAccesses": {
-          "expressions": 88,
-          "reads": 56,
+          "expressions": 92,
+          "reads": 60,
           "writes": 32
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 28,
+        "numericRelations": 32,
         "typedArraySetCalls": 1
       }
     },
     {
-      "declarations": 319,
+      "declarations": 393,
       "diagnostics": [],
-      "files": 16,
-      "lowered": 319,
+      "files": 27,
+      "lowered": 393,
       "packageName": "@flighthq/scene3d-formats",
       "staticFacts": {
-        "booleanConditionalTruthiness": 71,
-        "booleanExplicitTruthiness": 801,
-        "booleanLogicalExpressions": 210,
-        "booleanLogicalTruthiness": 213,
+        "booleanConditionalTruthiness": 89,
+        "booleanExplicitTruthiness": 949,
+        "booleanLogicalExpressions": 249,
+        "booleanLogicalTruthiness": 254,
         "indexedAccesses": {
-          "expressions": 545,
-          "reads": 429,
-          "writes": 116
+          "expressions": 631,
+          "reads": 508,
+          "writes": 126
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 424,
+        "numericRelations": 485,
         "typedArraySetCalls": 3
       }
     },
     {
-      "declarations": 376,
+      "declarations": 380,
       "diagnostics": [],
-      "files": 64,
-      "lowered": 376,
+      "files": 65,
+      "lowered": 380,
       "packageName": "@flighthq/scene3d-gl",
       "staticFacts": {
-        "booleanConditionalTruthiness": 165,
-        "booleanExplicitTruthiness": 301,
-        "booleanLogicalExpressions": 112,
-        "booleanLogicalTruthiness": 115,
+        "booleanConditionalTruthiness": 166,
+        "booleanExplicitTruthiness": 317,
+        "booleanLogicalExpressions": 115,
+        "booleanLogicalTruthiness": 118,
         "indexedAccesses": {
-          "expressions": 235,
-          "reads": 210,
+          "expressions": 238,
+          "reads": 213,
           "writes": 25
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 6
         },
-        "numericRelations": 65,
+        "numericRelations": 68,
         "typedArraySetCalls": 0
       }
     },
     {
       "declarations": 68,
       "diagnostics": [],
-      "files": 26,
+      "files": 27,
       "lowered": 68,
       "packageName": "@flighthq/scene3d-resources",
       "staticFacts": {
-        "booleanConditionalTruthiness": 7,
-        "booleanExplicitTruthiness": 114,
+        "booleanConditionalTruthiness": 6,
+        "booleanExplicitTruthiness": 119,
         "booleanLogicalExpressions": 19,
         "booleanLogicalTruthiness": 19,
         "indexedAccesses": {
@@ -2140,25 +2140,25 @@
       }
     },
     {
-      "declarations": 401,
+      "declarations": 405,
       "diagnostics": [],
       "files": 48,
-      "lowered": 401,
+      "lowered": 405,
       "packageName": "@flighthq/scene3d-wgpu",
       "staticFacts": {
-        "booleanConditionalTruthiness": 184,
-        "booleanExplicitTruthiness": 283,
-        "booleanLogicalExpressions": 117,
-        "booleanLogicalTruthiness": 122,
+        "booleanConditionalTruthiness": 192,
+        "booleanExplicitTruthiness": 288,
+        "booleanLogicalExpressions": 121,
+        "booleanLogicalTruthiness": 126,
         "indexedAccesses": {
-          "expressions": 551,
-          "reads": 213,
-          "writes": 338
+          "expressions": 538,
+          "reads": 212,
+          "writes": 326
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 6
         },
-        "numericRelations": 89,
+        "numericRelations": 87,
         "typedArraySetCalls": 3
       }
     },
@@ -2255,25 +2255,25 @@
       }
     },
     {
-      "declarations": 77,
+      "declarations": 110,
       "diagnostics": [],
-      "files": 11,
-      "lowered": 77,
+      "files": 15,
+      "lowered": 110,
       "packageName": "@flighthq/shape",
       "staticFacts": {
         "booleanConditionalTruthiness": 7,
-        "booleanExplicitTruthiness": 137,
-        "booleanLogicalExpressions": 55,
-        "booleanLogicalTruthiness": 60,
+        "booleanExplicitTruthiness": 180,
+        "booleanLogicalExpressions": 62,
+        "booleanLogicalTruthiness": 65,
         "indexedAccesses": {
-          "expressions": 244,
-          "reads": 240,
-          "writes": 4
+          "expressions": 337,
+          "reads": 284,
+          "writes": 53
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 106,
+        "numericRelations": 100,
         "typedArraySetCalls": 0
       }
     },
@@ -2646,26 +2646,26 @@
       }
     },
     {
-      "declarations": 249,
+      "declarations": 399,
       "diagnostics": [],
-      "files": 8,
-      "lowered": 249,
+      "files": 11,
+      "lowered": 399,
       "packageName": "@flighthq/swf",
       "staticFacts": {
-        "booleanConditionalTruthiness": 70,
-        "booleanExplicitTruthiness": 365,
-        "booleanLogicalExpressions": 150,
-        "booleanLogicalTruthiness": 158,
+        "booleanConditionalTruthiness": 140,
+        "booleanExplicitTruthiness": 596,
+        "booleanLogicalExpressions": 217,
+        "booleanLogicalTruthiness": 226,
         "indexedAccesses": {
-          "expressions": 90,
-          "reads": 85,
-          "writes": 6
+          "expressions": 157,
+          "reads": 140,
+          "writes": 18
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 112,
-        "typedArraySetCalls": 4
+        "numericRelations": 154,
+        "typedArraySetCalls": 7
       }
     },
     {
@@ -2991,10 +2991,10 @@
       }
     },
     {
-      "declarations": 29,
+      "declarations": 30,
       "diagnostics": [],
       "files": 3,
-      "lowered": 29,
+      "lowered": 30,
       "packageName": "@flighthq/timeline",
       "staticFacts": {
         "booleanConditionalTruthiness": 1,
@@ -3060,10 +3060,10 @@
       }
     },
     {
-      "declarations": 2080,
+      "declarations": 2229,
       "diagnostics": [],
-      "files": 820,
-      "lowered": 2080,
+      "files": 837,
+      "lowered": 2229,
       "packageName": "@flighthq/types",
       "staticFacts": {
         "booleanConditionalTruthiness": 0,
@@ -3198,16 +3198,16 @@
       }
     },
     {
-      "declarations": 13,
+      "declarations": 18,
       "diagnostics": [],
       "files": 4,
-      "lowered": 13,
+      "lowered": 18,
       "packageName": "@flighthq/xml",
       "staticFacts": {
         "booleanConditionalTruthiness": 10,
-        "booleanExplicitTruthiness": 37,
-        "booleanLogicalExpressions": 13,
-        "booleanLogicalTruthiness": 15,
+        "booleanExplicitTruthiness": 42,
+        "booleanLogicalExpressions": 14,
+        "booleanLogicalTruthiness": 16,
         "indexedAccesses": {
           "expressions": 0,
           "reads": 0,
@@ -3216,23 +3216,23 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 20,
+        "numericRelations": 22,
         "typedArraySetCalls": 0
       }
     }
   ],
   "schemaVersion": 10,
   "summary": {
-    "declarations": 11421,
+    "declarations": 12476,
     "diagnostics": 0,
-    "files": 2363,
-    "lowered": 11421,
+    "files": 2448,
+    "lowered": 12476,
     "packages": 140,
     "staticEmission": {
-      "booleanAndExpressions": 1712,
-      "booleanConditionalExpressions": 2414,
-      "booleanOrExpressions": 2025,
-      "booleanTruthinessUses": 11001,
+      "booleanAndExpressions": 1899,
+      "booleanConditionalExpressions": 2644,
+      "booleanOrExpressions": 2357,
+      "booleanTruthinessUses": 12346,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,
@@ -3252,9 +3252,9 @@
           "proven": 28
         },
         "declaration": {
-          "direct": 223,
+          "direct": 230,
           "parked": 12,
-          "proven": 223
+          "proven": 230
         },
         "parameter": {
           "direct": 11,
@@ -3265,7 +3265,7 @@
       "destructuringReceivers": {
         "Array": {
           "assignment": 28,
-          "declaration": 223,
+          "declaration": 230,
           "parameter": 11
         },
         "ArrayOrFloat32Array": {
@@ -3329,21 +3329,21 @@
         "asyncFlowForOfValues": 8
       },
       "indexedAccesses": {
-        "reads": 6249,
-        "writes": 3261
+        "reads": 6852,
+        "writes": 3347
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 3857,
-          "writes": 599
+          "reads": 4395,
+          "writes": 688
         },
         "ArrayOrFloat32Array": {
           "reads": 8,
           "writes": 39
         },
         "Float32Array": {
-          "reads": 1568,
-          "writes": 2078
+          "reads": 1579,
+          "writes": 2067
         },
         "Float64Array": {
           "reads": 70,
@@ -3374,20 +3374,20 @@
           "writes": 26
         },
         "Uint8Array": {
-          "reads": 267,
-          "writes": 35
+          "reads": 329,
+          "writes": 39
         },
         "Uint8ClampedArray": {
-          "reads": 357,
-          "writes": 375
+          "reads": 349,
+          "writes": 379
         }
       },
-      "numericRelations": 5328,
+      "numericRelations": 5796,
       "syntheticArrayReads": {
         "highArityArguments": 27,
-        "iterationBindings": 112
+        "iterationBindings": 136
       },
-      "typedArraySetCalls": 68,
+      "typedArraySetCalls": 71,
       "typedArraySetReceivers": {
         "Float32Array": 34,
         "Float64Array": 0,
@@ -3397,28 +3397,28 @@
         "Uint16Array": 4,
         "Uint16ArrayOrUint32Array": 1,
         "Uint32Array": 7,
-        "Uint8Array": 12,
+        "Uint8Array": 15,
         "Uint8ClampedArray": 9
       }
     },
     "staticFacts": {
-      "booleanConditionalTruthiness": 2413,
-      "booleanExplicitTruthiness": 10997,
-      "booleanLogicalExpressions": 3739,
-      "booleanLogicalTruthiness": 3939,
+      "booleanConditionalTruthiness": 2645,
+      "booleanExplicitTruthiness": 12338,
+      "booleanLogicalExpressions": 4257,
+      "booleanLogicalTruthiness": 4474,
       "indexedAccesses": {
-        "expressions": 8986,
-        "reads": 5845,
-        "writes": 3264
+        "expressions": 9639,
+        "reads": 6415,
+        "writes": 3350
       },
       "indexedAccessEscapes": {
         "widthSensitiveMixedWrites": 16
       },
       "indexedReceivers": {
         "Array": {
-          "expressions": 4030,
-          "reads": 3452,
-          "writes": 601
+          "expressions": 4621,
+          "reads": 3957,
+          "writes": 690
         },
         "ArrayOrFloat32Array": {
           "expressions": 47,
@@ -3427,8 +3427,8 @@
         },
         "Float32Array": {
           "expressions": 3574,
-          "reads": 1568,
-          "writes": 2078
+          "reads": 1579,
+          "writes": 2067
         },
         "Float64Array": {
           "expressions": 100,
@@ -3466,18 +3466,18 @@
           "writes": 26
         },
         "Uint8Array": {
-          "expressions": 303,
-          "reads": 268,
-          "writes": 36
+          "expressions": 369,
+          "reads": 330,
+          "writes": 40
         },
         "Uint8ClampedArray": {
-          "expressions": 732,
-          "reads": 357,
-          "writes": 375
+          "expressions": 728,
+          "reads": 349,
+          "writes": 379
         }
       },
-      "numericRelations": 5328,
-      "typedArraySetCalls": 68,
+      "numericRelations": 5796,
+      "typedArraySetCalls": 71,
       "typedArraySetReceivers": {
         "Float32Array": 34,
         "Float64Array": 0,
@@ -3487,7 +3487,7 @@
         "Uint16Array": 4,
         "Uint16ArrayOrUint32Array": 1,
         "Uint32Array": 7,
-        "Uint8Array": 12,
+        "Uint8Array": 15,
         "Uint8ClampedArray": 9
       }
     }

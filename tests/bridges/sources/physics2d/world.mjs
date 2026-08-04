@@ -6,10 +6,25 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const addPhysics2DBody = api.addPhysics2DBody;
+export const addPhysics2DCollider = api.addPhysics2DCollider;
+export const applyPhysics2DForce = api.applyPhysics2DForce;
+export const applyPhysics2DForceAtPoint = api.applyPhysics2DForceAtPoint;
+export const applyPhysics2DLinearImpulse = api.applyPhysics2DLinearImpulse;
+export const applyPhysics2DLinearImpulseAtPoint = api.applyPhysics2DLinearImpulseAtPoint;
+export const applyPhysics2DTorque = api.applyPhysics2DTorque;
 export const createPhysics2DCollider = api.createPhysics2DCollider;
 export const createPhysics2DSolverConfig = api.createPhysics2DSolverConfig;
 export const createPhysics2DWorld = api.createPhysics2DWorld;
 export const createRigidBody2D = api.createRigidBody2D;
 export const findPhysics2DBody = api.findPhysics2DBody;
+export const hydratePhysics2DWorld = api.hydratePhysics2DWorld;
+export const invalidatePhysics2DCollider = api.invalidatePhysics2DCollider;
 export const isPhysics2DPairOrdered = api.isPhysics2DPairOrdered;
+export const Physics2DWorldVersion = api.Physics2DWorldVersion;
 export const removePhysics2DBody = api.removePhysics2DBody;
+export const removePhysics2DCollider = api.removePhysics2DCollider;
+export const setPhysics2DBodyBullet = api.setPhysics2DBodyBullet;
+export const setPhysics2DBodyFixedRotation = api.setPhysics2DBodyFixedRotation;
+export const setPhysics2DBodySleepEnabled = api.setPhysics2DBodySleepEnabled;
+export const setPhysics2DBodyTransform = api.setPhysics2DBodyTransform;
+export const setPhysics2DBodyType = api.setPhysics2DBodyType;

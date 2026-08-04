@@ -198,8 +198,20 @@ class _Runtime {
   static var globalThisValue:Dynamic;
 
   static function globalThisNamespace():Dynamic {
-    if (globalThisValue == null) globalThisValue = {ImageData: createImageData, AudioBuffer: createAudioBuffer};
+    if (globalThisValue == null) {
+      globalThisValue = {
+        ArrayBuffer: createArrayBuffer,
+        AudioBuffer: createAudioBuffer,
+        ImageData: createImageData,
+      };
+    }
     return globalThisValue;
+  }
+
+  /** Portable `new ArrayBuffer(length)` storage shared by typed-array and
+   * DataView fallbacks. */
+  static function createArrayBuffer(?length:Dynamic):haxe.io.Bytes {
+    return haxe.io.Bytes.alloc(Std.int(length == null ? 0 : length));
   }
 
   /** Portable `new ImageData(width, height)`: the struct shape the canvas
@@ -511,6 +523,7 @@ class _Runtime {
       case 'Uint8ClampedArray': _UInt8ClampedArray.construct;
       case 'ImageData': createImageData;
       case 'AudioBuffer': createAudioBuffer;
+      case 'ArrayBuffer': createArrayBuffer;
       case 'globalThis': globalThisNamespace();
       case 'Float64Array': _Float64Array.construct;
       case 'Int32Array': _Int32Array.construct;
@@ -1257,6 +1270,10 @@ class _Runtime {
     #else
     if (value == null) return [];
     if (Std.isOfType(value, Array)) return cast value;
+    if (Std.isOfType(value, haxe.io.Bytes)) {
+      final bytes:haxe.io.Bytes = cast value;
+      return [for (index in 0...bytes.length) bytes.get(index)];
+    }
     #if python
     // Python emits haxe.Rest as a native tuple. Its toArray() is inline and
     // therefore cannot be discovered through Reflect.field below.

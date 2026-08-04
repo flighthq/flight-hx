@@ -3,6 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
@@ -13,4 +14,4 @@ typedef Scene3DGraphSyncPolicy = String;
 
 typedef RenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; };
 
-typedef RenderStateRuntime = { var binding:Null<Dynamic>; var colorAdjustmentUnsupportedGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var renderProxySources:Dynamic; var registryMiss:Null<{ var clear:Dynamic; var signals:RenderRegistrySignals; }>; @:optional var renderEffectPaddingResolverRegistry:Null<Dynamic>; var renderRootGuard:Null<Dynamic>; var strokeTessellator:Null<Dynamic>; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; };
+typedef RenderStateRuntime = { var binding:Null<Dynamic>; @:optional var canvasShapeCommandRegistry:Null<Dynamic>; var colorAdjustmentUnsupportedGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var renderProxySources:Dynamic; var registryMiss:Null<{ var clear:Dynamic; var signals:RenderRegistrySignals; }>; @:optional var renderEffectPaddingResolverRegistry:Null<Dynamic>; var renderRootGuard:Null<Dynamic>; var strokeTessellator:Null<Dynamic>; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; };

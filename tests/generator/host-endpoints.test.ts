@@ -15,13 +15,13 @@ describe('checker-derived host endpoint contract', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
 
     expect(audit.summary).toEqual({
-      accesses: 3_492,
+      accesses: 3_497,
       backendContractEndpoints: 379,
       bindings: 9,
-      calls: 2_211,
+      calls: 2_213,
       dynamicFallbackEndpoints: 12,
       endpoints: 373,
-      reads: 1_025,
+      reads: 1_028,
       writes: 256,
     });
     expect(audit.coverageIssues).toEqual([]);

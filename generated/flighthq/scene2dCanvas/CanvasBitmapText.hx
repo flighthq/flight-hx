@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
+import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextRuntime;
@@ -35,7 +36,7 @@ class CanvasBitmapText {
       var atlas:Dynamic = _Runtime.field(page, 'atlas');
       var texture:Dynamic = atlas.texture;
       if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(page, 'instanceCount'), 0.0) : Bool)) : Bool)) { continue; }
-      var domImage:Dynamic = _Runtime.callValue(resolveCanvasTexture, cast ([state, texture] : Array<Dynamic>));
+      var domImage:Dynamic = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), texture] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(domImage, null) : Bool)) { continue; }
       var regions:Dynamic = atlas.regions;
       var numRegions:Dynamic = _Runtime.field(regions, 'length');

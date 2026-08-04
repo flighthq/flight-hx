@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.scene3d.Mesh.isMesh;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.getScene3DMaterialTextures;
+import flighthq.scene3dResources.SceneMaterialTextureRegistry.hasScene3DMaterialTextureLister;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.Material;
 import flighthq.types.Node3D;
@@ -13,11 +14,14 @@ import flighthq.types.Scene3D;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
 import flighthq.types.Texture;
 
+typedef UnknownMaterialKindFlag__getScene3DResourceTextures = { var found:Bool; };
+
 class GetScene3DResourceTextures {
   public static function getScene3DResourceTextures(scene:Scene3D, registry:Scene3DMaterialTextureRegistry, out:Array<Texture>):Void {
     var referenced:Dynamic = cast _Runtime.UNDEFINED;
     var seen:Dynamic = cast _Runtime.UNDEFINED;
     var slots:Array<Texture> = cast _Runtime.UNDEFINED;
+    var unknown:UnknownMaterialKindFlag__getScene3DResourceTextures = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     referenced = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (resource in _Runtime.iterable(scene.resources)) {
@@ -27,8 +31,14 @@ class GetScene3DResourceTextures {
     }
     seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
     slots = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(GetScene3DResourceTextures.collectNodeResourceTextures__getScene3DResourceTextures, cast ([scene.root, registry, referenced, out, seen, slots] : Array<Dynamic>));
-    _Runtime.callValue(forEachNodeDescendant, cast ([scene.root, function(node:Dynamic) return _Runtime.callValue(GetScene3DResourceTextures.collectNodeResourceTextures__getScene3DResourceTextures, cast ([(cast node : Node3D), registry, referenced, out, seen, slots] : Array<Dynamic>))] : Array<Dynamic>));
+    unknown = { found: false };
+    _Runtime.callValue(GetScene3DResourceTextures.collectNodeResourceTextures__getScene3DResourceTextures, cast ([scene.root, registry, referenced, out, seen, slots, unknown] : Array<Dynamic>));
+    _Runtime.callValue(forEachNodeDescendant, cast ([scene.root, function(node:Dynamic) return _Runtime.callValue(GetScene3DResourceTextures.collectNodeResourceTextures__getScene3DResourceTextures, cast ([(cast node : Node3D), registry, referenced, out, seen, slots, unknown] : Array<Dynamic>))] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.field(unknown, 'found') : Bool) : Bool)) { return; }
+    _Runtime.setLength(out, 0.0);
+    for (texture in _Runtime.iterable(referenced)) {
+      _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));
+    }
   }
 
   public static function getScene3DTextureResourceReference(scene:Scene3D, texture:Texture):Null<ImageResourceReference> {
@@ -39,7 +49,7 @@ class GetScene3DResourceTextures {
     return cast null;
   }
 
-  public static function collectNodeResourceTextures__getScene3DResourceTextures(node:Node3D, registry:Scene3DMaterialTextureRegistry, referenced:Dynamic, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>):Void {
+  public static function collectNodeResourceTextures__getScene3DResourceTextures(node:Node3D, registry:Scene3DMaterialTextureRegistry, referenced:Dynamic, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>, unknown:UnknownMaterialKindFlag__getScene3DResourceTextures):Void {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     materials = (cast node : flighthq.types.Mesh).materials;
@@ -48,6 +58,11 @@ class GetScene3DResourceTextures {
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
         var material:Dynamic = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
         if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
+        if ((cast !(cast _Runtime.callValue(hasScene3DMaterialTextureLister, cast ([registry, _Runtime.field(material, 'kind')] : Array<Dynamic>)) : Bool) : Bool)) {
+          _Runtime.setField(unknown, 'found', true);
+          i++;
+          continue;
+        }
         _Runtime.setLength(slots, 0.0);
         _Runtime.callValue(getScene3DMaterialTextures, cast ([registry, material, slots] : Array<Dynamic>));
         {

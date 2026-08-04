@@ -7,6 +7,7 @@ import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.types.DomRenderState;
 import flighthq.types.DomTextureResolver;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Texture;
 import flighthq.types.TextureSourceKind;
 
@@ -29,7 +30,7 @@ class DomTextureResolver {
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
     resolver = ({ final __collection0:Dynamic = _Runtime.field(runtime, 'domTextureResolverRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([3.0, sourceKind] : Array<Dynamic>));
+      _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
     return cast _Runtime.callValue(resolver, cast ([state, texture] : Array<Dynamic>));

@@ -5,20 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasNode2D.drawCanvasScene2D;
+import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasScale9Mapper.buildScale9Mapper;
 import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
+import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.ShapeCommand.ShapeCommandToken;
 
 class CanvasScale9Shape {
-  public static final _remappedCommands__canvasScale9Shape:Array<Dynamic> = cast ([] : Array<Dynamic>);
-
-  public static final _remappedPathData__canvasScale9Shape:Array<Float> = cast ([] : Array<Dynamic>);
+  public static final _remappedCommands__canvasScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
 
   public static function drawCanvasScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,88 +45,11 @@ class CanvasScale9Shape {
     mapper = _Runtime.callValue(buildScale9Mapper, cast ([commands, scale9Grid, scaleX, scaleY] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
-      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, commands, state] : Array<Dynamic>));
+      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, commands, _Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
     } else {
       _Runtime.callValue(CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape, cast ([state, context, _Runtime.field(renderProxy, 'transform2D'), scaleX, scaleY] : Array<Dynamic>));
-      _Runtime.callValue(mapCanvasScale9ShapeCommands, cast ([CanvasScale9Shape._remappedCommands__canvasScale9Shape, commands, mapper] : Array<Dynamic>));
-      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, CanvasScale9Shape._remappedCommands__canvasScale9Shape, state] : Array<Dynamic>));
-    }
-  }
-
-  public static function mapCanvasScale9ShapeCommands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Scale9Mapper):Void {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(out, (cast source : Array<Dynamic>)) : Bool)) {
-      _Runtime.setLength(out, _Runtime.field(source, 'length'));
-      {
-        var k:Dynamic = 0.0;
-        while ((cast ((cast k : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArray(out, k, flighthq._internal._StaticIndex.readArray(source, k));
-          k++;
-        }
-      }
-    }
-    i = 0.0;
-    while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, i) : String);
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 1.0)) : Float);
-      {
-        var __switchValue = key;
-        if (__switchValue == 'moveTo' || __switchValue == 'lineTo') {
-          flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float)] : Array<Dynamic>)));
-        }
-        else if (__switchValue == 'curveTo') {
-          flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 4.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 5.0)) : Float)] : Array<Dynamic>)));
-        }
-        else if (__switchValue == 'cubicCurveTo') {
-          flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 4.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 5.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 6.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 6.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 7.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 7.0)) : Float)] : Array<Dynamic>)));
-        }
-        else if (__switchValue == 'drawRectangle' || __switchValue == 'drawEllipse') {
-          {
-            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Float);
-            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float);
-            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 4.0)) : Float);
-            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 5.0)) : Float);
-            var mx:Dynamic = _Runtime.callProperty(mapper, 'mapX', cast ([x] : Array<Dynamic>));
-            var my:Dynamic = _Runtime.callProperty(mapper, 'mapY', cast ([y] : Array<Dynamic>));
-            flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), mx);
-            flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), my);
-            flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapX', cast ([(x + w)] : Array<Dynamic>)), mx));
-            flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapY', cast ([(y + h)] : Array<Dynamic>)), my));
-          }
-        }
-        else if (__switchValue == 'drawRoundRectangle') {
-          {
-            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Float);
-            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float);
-            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 4.0)) : Float);
-            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(out, (i + 5.0)) : Float);
-            var mx:Dynamic = _Runtime.callProperty(mapper, 'mapX', cast ([x] : Array<Dynamic>));
-            var my:Dynamic = _Runtime.callProperty(mapper, 'mapY', cast ([y] : Array<Dynamic>));
-            flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), mx);
-            flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), my);
-            flighthq._internal._StaticIndex.writeArray(out, (i + 4.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapX', cast ([(x + w)] : Array<Dynamic>)), mx));
-            flighthq._internal._StaticIndex.writeArray(out, (i + 5.0), _Runtime.subtractNumbers(_Runtime.callProperty(mapper, 'mapY', cast ([(y + h)] : Array<Dynamic>)), my));
-          }
-        }
-        else if (__switchValue == 'drawCircle') {
-          flighthq._internal._StaticIndex.writeArray(out, (i + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Float)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([(cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float)] : Array<Dynamic>)));
-        }
-        else if (__switchValue == 'drawPath') {
-          _Runtime.callValue(CanvasScale9Shape.remapPathData__canvasScale9Shape, cast ([CanvasScale9Shape._remappedPathData__canvasScale9Shape, (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Array<Float>), mapper] : Array<Dynamic>));
-          flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), CanvasScale9Shape._remappedPathData__canvasScale9Shape);
-        }
-      }
-      (i = cast ((i + (argCount + 2.0)) : Dynamic));
+      _Runtime.callValue(mapScale9ShapeCommands, cast ([CanvasScale9Shape._remappedCommands__canvasScale9Shape, commands, mapper] : Array<Dynamic>));
+      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, CanvasScale9Shape._remappedCommands__canvasScale9Shape, _Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
     }
   }
 
@@ -145,54 +68,6 @@ class CanvasScale9Shape {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, HxMath.fround(t.tx), HxMath.fround(t.ty)] : Array<Dynamic>));
     } else {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, t.tx, t.ty] : Array<Dynamic>));
-    }
-  }
-
-  public static function remapPathData__canvasScale9Shape(out:Array<Float>, source:Array<Float>, cmds:Array<Float>, mapper:Scale9Mapper):Void {
-    var di:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(out, (cast source : Array<Float>)) : Bool)) {
-      _Runtime.setLength(out, _Runtime.field(source, 'length'));
-      {
-        var k:Dynamic = 0.0;
-        while ((cast ((cast k : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArray(out, k, flighthq._internal._StaticIndex.readArray(source, k));
-          k++;
-        }
-      }
-    }
-    di = 0.0;
-    for (pc in _Runtime.iterable(cmds)) {
-      {
-        var __switchValue = pc;
-        if (__switchValue == 1.0 || __switchValue == 2.0) {
-          flighthq._internal._StaticIndex.writeArray(out, di, _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, di)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 1.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 1.0))] : Array<Dynamic>)));
-          (di = cast ((di + 2.0) : Dynamic));
-        }
-        else if (__switchValue == 3.0) {
-          flighthq._internal._StaticIndex.writeArray(out, di, _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, di)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 1.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 1.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 2.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 3.0))] : Array<Dynamic>)));
-          (di = cast ((di + 4.0) : Dynamic));
-        }
-        else if (__switchValue == 4.0 || __switchValue == 5.0) {
-          flighthq._internal._StaticIndex.writeArray(out, (di + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 2.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 3.0))] : Array<Dynamic>)));
-          (di = cast ((di + 4.0) : Dynamic));
-        }
-        else if (__switchValue == 6.0) {
-          flighthq._internal._StaticIndex.writeArray(out, di, _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, di)] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 1.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 1.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 2.0), _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 2.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 3.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 3.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 4.0), _Runtime.callProperty(mapper, 'mapX', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 4.0))] : Array<Dynamic>)));
-          flighthq._internal._StaticIndex.writeArray(out, (di + 5.0), _Runtime.callProperty(mapper, 'mapY', cast ([flighthq._internal._StaticIndex.readArray(out, (di + 5.0))] : Array<Dynamic>)));
-          (di = cast ((di + 6.0) : Dynamic));
-        }
-        else  {
-        }
-      }
     }
   }
 }

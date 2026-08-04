@@ -29,6 +29,7 @@ export * from './canvasScale9Mapper.mjs';
 export * from './canvasScale9Shape.mjs';
 export * from './canvasShape.mjs';
 export * from './canvasShapeCommands.mjs';
+export * from './canvasShapeRasterizer.mjs';
 export * from './canvasShapeRegistry.mjs';
 export * from './canvasSprite.mjs';
 export * from './canvasTextInput.mjs';

@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createOrthographicProjection = api.createOrthographicProjection;
 export const createPerspectiveProjection = api.createPerspectiveProjection;
+export const getOrthographicProjectionTexelSize = api.getOrthographicProjectionTexelSize;
 export const isOrthographicProjection = api.isOrthographicProjection;
 export const isPerspectiveProjection = api.isPerspectiveProjection;
 export const setProjectionMatrix4 = api.setProjectionMatrix4;

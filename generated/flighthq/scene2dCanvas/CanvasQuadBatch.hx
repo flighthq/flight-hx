@@ -9,6 +9,7 @@ import flighthq.geometry.MatrixPool.acquireMatrix;
 import flighthq.geometry.MatrixPool.releaseMatrix;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
+import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.QuadBatch;
@@ -42,7 +43,7 @@ class CanvasQuadBatch {
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
-    image = _Runtime.callValue(resolveCanvasTexture, cast ([state, atlas.texture] : Array<Dynamic>));
+    image = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), atlas.texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(quadBatch, 'blendMode')] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');

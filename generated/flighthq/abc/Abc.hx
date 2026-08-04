@@ -4,11 +4,18 @@ package flighthq.abc;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.abc.AbcFile as Facade_Abc_flighthq_abc_AbcFile;
+import flighthq.abc.AbcInstruction as Facade_Abc_flighthq_abc_AbcInstruction;
 import flighthq.types.Abc.AbcFile;
+import flighthq.types.Abc.AbcInstruction;
 
 class Abc {
   public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<AbcFile> {
     return cast Facade_Abc_flighthq_abc_AbcFile.readAbcFile(source);
+    return cast null;
+  }
+
+  public static function readAbcInstructions(code:flighthq._internal._UInt8Array):Null<Array<AbcInstruction>> {
+    return cast Facade_Abc_flighthq_abc_AbcInstruction.readAbcInstructions(code);
     return cast null;
   }
 }

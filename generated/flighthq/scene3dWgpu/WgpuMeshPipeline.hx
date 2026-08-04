@@ -26,6 +26,7 @@ import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
+import flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_STRIDE;
@@ -38,8 +39,10 @@ import flighthq.types.WgpuMeshPipeline.WgpuScene3DLayouts;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
+import flighthq.types.WgpuScene3DRuntime.WgpuScene3DShadow;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
+import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
@@ -275,7 +278,6 @@ class WgpuMeshPipeline {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
     var ibl:Dynamic = cast _Runtime.UNDEFINED;
     var u:Dynamic = cast _Runtime.UNDEFINED;
     var shadowView:Dynamic = cast _Runtime.UNDEFINED;
@@ -306,36 +308,7 @@ class WgpuMeshPipeline {
       _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'iblDummyLutView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)));
     }
-    shadow = _Runtime.field(scene, 'shadow');
-    s = WgpuMeshPipeline._shadowSampleScratch__wgpuMeshPipeline;
-    if ((cast !_Runtime.strictEquals(shadow, null) : Bool)) {
-      var m:Dynamic = _Runtime.field(shadow, 'matrix').m;
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(s, i, flighthq._internal._StaticIndex.readFloat32Array(m, i));
-          i++;
-        }
-      }
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 16.0, 1.0);
-    } else {
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(s, i, 0.0);
-          i++;
-        }
-      }
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 0.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 5.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 10.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 15.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 16.0, 0.0);
-    }
-    flighthq._internal._StaticIndex.writeFloat32Array(s, 17.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(s, 18.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(s, 19.0, 0.0);
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'shadowUniformBuffer'), 0.0, _Runtime.field(s, 'buffer'), 0.0, WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    shadow = _Runtime.callValue(WgpuMeshPipeline.writeWgpuShadowSampleUniform__wgpuMeshPipeline, cast ([state] : Array<Dynamic>));
     ibl = _Runtime.field(scene, 'ibl');
     u = WgpuMeshPipeline._iblSampleScratch__wgpuMeshPipeline;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
@@ -442,7 +415,6 @@ class WgpuMeshPipeline {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     device = _Runtime.field(state, 'device');
@@ -456,42 +428,51 @@ class WgpuMeshPipeline {
       _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'shadowDummyView', _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)));
     }
-    shadow = _Runtime.field(scene, 'shadow');
-    s = WgpuMeshPipeline._shadowSampleScratch__wgpuMeshPipeline;
-    if ((cast !_Runtime.strictEquals(shadow, null) : Bool)) {
-      var m:Dynamic = _Runtime.field(shadow, 'matrix').m;
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(s, i, flighthq._internal._StaticIndex.readFloat32Array(m, i));
-          i++;
-        }
-      }
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 16.0, 1.0);
-    } else {
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(s, i, 0.0);
-          i++;
-        }
-      }
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 0.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 5.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 10.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 15.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(s, 16.0, 0.0);
-    }
-    flighthq._internal._StaticIndex.writeFloat32Array(s, 17.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(s, 18.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(s, 19.0, 0.0);
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'shadowUniformBuffer'), 0.0, _Runtime.field(s, 'buffer'), 0.0, WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    shadow = _Runtime.callValue(WgpuMeshPipeline.writeWgpuShadowSampleUniform__wgpuMeshPipeline, cast ([state] : Array<Dynamic>));
     view = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast _Runtime.field(shadow, 'depthView') : Dynamic) : (cast _Runtime.field(scene, 'shadowDummyView') : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(scene, 'shadowSampleBindGroup'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(scene, 'shadowSampleView'), view) : Bool)) : Bool)) {
       _Runtime.setField(scene, 'shadowSampleBindGroup', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(ensureWgpuShadowSampleLayout, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(scene, 'shadowUniformBuffer') } }, { binding: 1.0, resource: view }, { binding: 2.0, resource: _Runtime.field(scene, 'shadowComparisonSampler') }] : Array<Dynamic>) }] : Array<Dynamic>)));
       _Runtime.setField(scene, 'shadowSampleView', view);
     }
     return cast _Runtime.field(scene, 'shadowSampleBindGroup');
+    return cast null;
+  }
+
+  public static function writeWgpuShadowSampleUniform__wgpuMeshPipeline(state:WgpuRenderState):Null<WgpuScene3DShadow> {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var shadow:Dynamic = cast _Runtime.UNDEFINED;
+    var values:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
+    shadow = _Runtime.field(scene, 'shadow');
+    values = WgpuMeshPipeline._shadowSampleScratch__wgpuMeshPipeline;
+    if ((cast !_Runtime.strictEquals(shadow, null) : Bool)) {
+      var matrix:Dynamic = _Runtime.field(shadow, 'matrix').m;
+      {
+        var index:Dynamic = 0.0;
+        while ((cast ((cast index : Float) < (cast 16.0 : Float)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(values, index, flighthq._internal._StaticIndex.readFloat32Array(matrix, index));
+          index++;
+        }
+      }
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 16.0, ((cast _Runtime.field(shadow, 'enabled') : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 17.0, _Runtime.field(shadow, 'pcfRadius'));
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 18.0, _Runtime.field(shadow, 'shadowBias'));
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 19.0, _Runtime.field(shadow, 'normalBiasWorld'));
+    } else {
+      {
+        var index:Dynamic = 0.0;
+        while ((cast ((cast index : Float) < (cast 20.0 : Float)) : Bool)) {
+          flighthq._internal._StaticIndex.writeFloat32Array(values, index, 0.0);
+          index++;
+        }
+      }
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 0.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 5.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 10.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32Array(values, 15.0, 1.0);
+    }
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'shadowUniformBuffer'), 0.0, _Runtime.field(values, 'buffer'), 0.0, WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    return cast shadow;
     return cast null;
   }
 
@@ -833,6 +814,8 @@ class WgpuMeshPipeline {
   public static final DEPTH_STENCIL_FORMAT__wgpuMeshPipeline:Dynamic = 'depth24plus-stencil8';
 
   public static final SHADOW_DEPTH_FORMAT:Dynamic = 'depth32float';
+
+  public static final WGPU_DIRECTIONAL_SHADOW_WGSL:Dynamic = '\nconst MAX_DIRECTIONAL_SHADOW_PCF_RADIUS : i32 = ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + ';\n\nstruct Shadow {\n  matrix : mat4x4f,\n  params : vec4f,\n};\n\n@group(3) @binding(0) var<uniform> shadow : Shadow;\n@group(3) @binding(1) var shadowMap : texture_depth_2d;\n@group(3) @binding(2) var shadowSampler : sampler_comparison;\n\n// Directional shadow factor at a world position. The compile-time radius cap bounds fragment cost;\n// radius 0 and 1 take dedicated one-tap and 3x3 paths, while radius 2 takes the bounded 5x5 path.\n// Outside the frustum / disabled = lit.\nfn compareDirectionalShadow(uv : vec2f, depthRef : f32) -> f32 {\n  return textureSampleCompareLevel(shadowMap, shadowSampler, uv, depthRef);\n}\n\nfn sampleDirectionalShadow(worldPos : vec3f, geometricNormal : vec3f) -> f32 {\n  if (shadow.params.x < 0.5) {\n    return 1.0;\n  }\n  let biasedWorldPos = worldPos + geometricNormal * shadow.params.w;\n  let clip = shadow.matrix * vec4f(biasedWorldPos, 1.0);\n  let ndc = clip.xyz / clip.w;\n  let uv = vec2f(ndc.x * 0.5 + 0.5, 1.0 - (ndc.y * 0.5 + 0.5));\n  let depthRef = ndc.z * 0.5 + 0.5 - shadow.params.z;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0 || depthRef > 1.0) {\n    return 1.0;\n  }\n  let radius = clamp(i32(shadow.params.y), 0, MAX_DIRECTIONAL_SHADOW_PCF_RADIUS);\n  let texel = 1.0 / vec2f(textureDimensions(shadowMap, 0));\n  if (radius == 0) {\n    return compareDirectionalShadow(uv, depthRef);\n  }\n\n  var sum = 0.0;\n  if (radius == 1) {\n    for (var x = -1; x <= 1; x = x + 1) {\n      for (var y = -1; y <= 1; y = y + 1) {\n        let offset = vec2f(f32(x), f32(y)) * texel;\n        sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n      }\n    }\n    return sum / 9.0;\n  }\n  for (var x = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x = x + 1) {\n    for (var y = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y = y + 1) {\n      let offset = vec2f(f32(x), f32(y)) * texel;\n      sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n    }\n  }\n  let diameter = f32(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS * 2 + 1);\n  return sum / (diameter * diameter);\n}\n';
 
   public static final SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline:Dynamic = 80.0;
 

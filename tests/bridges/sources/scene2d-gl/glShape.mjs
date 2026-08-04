@@ -9,5 +9,6 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
+export const defaultGlMorphShapeRenderer = api.defaultGlMorphShapeRenderer;
 export const defaultGlShapeRenderer = api.defaultGlShapeRenderer;
 export const drawGlShape = api.drawGlShape;

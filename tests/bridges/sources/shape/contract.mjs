@@ -3,11 +3,20 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './explainShapeTessellation.mjs';
+export * from './morphShape.mjs';
+export * from './morphShapeAnimation.mjs';
 export * from './scale9Shape.mjs';
+export * from './scale9ShapeCommands.mjs';
 export * from './shape.mjs';
 export * from './shapeCommands.mjs';
 export * from './shapeFill.mjs';
-export * from './shapeHitTestBuiltins.mjs';
-export * from './shapeHitTestRegistry.mjs';
 export * from './shapeStroke.mjs';
 export * from './shapeStrokeOutline.mjs';
+export { appendMorphShapeBeginFill } from './morphShapePaint.mjs';
+export { appendMorphShapeBeginGradientFill } from './morphShapePaint.mjs';
+export { appendMorphShapeBeginTextureFill } from './morphShapePaint.mjs';
+export { appendMorphShapeLineGradientStyle } from './morphShapePaint.mjs';
+export { appendMorphShapeLineStyle } from './morphShapePaint.mjs';
+export { appendMorphShapeLineTextureStyle } from './morphShapePaint.mjs';
+export { explainMorphShapeGradientEndpoints } from './explainMorphShapeGradientEndpoints.mjs';

@@ -3,16 +3,14 @@ package flighthq.scene2dCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.Image;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Texture;
 
 class CanvasTextureWindowSource {
-  public static function resolveCanvasTextureWindowSource(state:Null<Dynamic>, texture:Texture):Null<Dynamic> {
+  public static function resolveCanvasTextureWindowSource(resolvers:Dynamic, texture:Texture):Null<Dynamic> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var uvOffsetX:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +23,6 @@ class CanvasTextureWindowSource {
     var sourceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var sourceHeight:Dynamic = cast _Runtime.UNDEFINED;
     var imageVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,7 +33,7 @@ class CanvasTextureWindowSource {
     var flipY:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { return cast null; }
     image = _Runtime.field(texture, 'source');
-    source = ((cast !_Runtime.strictEquals(state, null) : Bool) ? (cast _Runtime.callValue(resolveCanvasTexture, cast ([state, texture] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField((cast image : Null<Dynamic>), 'source'), function():Dynamic return cast null) : Dynamic));
+    source = _Runtime.callValue(resolveCanvasTexture, cast ([resolvers, texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
     uvOffsetX = _Runtime.field(texture, 'uvOffset').x;
     uvOffsetY = _Runtime.field(texture, 'uvOffset').y;
@@ -52,8 +49,7 @@ class CanvasTextureWindowSource {
     sourceHeight = HxMath.abs((uvScaleY * backingHeight));
     if ((cast ((cast ((cast ((cast ((cast backingWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast backingHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     imageVersion = _Runtime.coalesce(_Runtime.optionalField(image, 'version'), function():Dynamic return cast -1.0);
-    runtime = ((cast !_Runtime.strictEquals(state, null) : Bool) ? (cast _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    cache = ((cast !_Runtime.strictEquals(runtime, null) : Bool) ? (cast _Runtime.setField(runtime, 'textureWindowElementCache', (_Runtime.field(runtime, 'textureWindowElementCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), []))) : Dynamic) : (cast null : Dynamic));
+    cache = _Runtime.setField(resolvers, 'textureWindowElementCache', (_Runtime.field(resolvers, 'textureWindowElementCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), [])));
     entry = ({ final __collection0:Dynamic = cache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap).get(texture)); });
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'source'), source) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'imageVersion'), imageVersion) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'textureVersion'), _Runtime.field(texture, 'version')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvOffsetX'), uvOffsetX) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvOffsetY'), uvOffsetY) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvRotation'), uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvScaleX'), uvScaleX) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvScaleY'), uvScaleY) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'flipX'), _Runtime.field(texture, 'flipX')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'flipY'), _Runtime.field(texture, 'flipY')) : Bool)) : Bool)) {
       return cast _Runtime.field(entry, 'element');

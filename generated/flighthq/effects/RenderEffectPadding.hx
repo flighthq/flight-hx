@@ -9,6 +9,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderEffectPadding.RenderEffectPaddingExplanation;
 import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 
 class RenderEffectPadding {
@@ -19,7 +20,7 @@ class RenderEffectPadding {
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
     explanation = _Runtime.callValue(explainRenderEffectPadding, cast ([state, list] : Array<Dynamic>));
     emitMiss = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss');
-    if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable(_Runtime.field(explanation, 'missingKinds'))) {   _Runtime.callValue(emitMiss, cast ([0.0, kind] : Array<Dynamic>)); } }
+    if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable(_Runtime.field(explanation, 'missingKinds'))) {   _Runtime.callValue(emitMiss, cast ([RenderRegistry.EffectPaddingResolver, kind] : Array<Dynamic>)); } }
     return cast _Runtime.field(explanation, 'padding');
     return cast null;
   }

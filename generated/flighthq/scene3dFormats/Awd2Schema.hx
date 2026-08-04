@@ -29,6 +29,8 @@ class Awd2Schema {
 
   public static final AWD2_BLOCK_LIGHT:Dynamic = 41.0;
 
+  public static final AWD2_BLOCK_CAMERA:Dynamic = 42.0;
+
   public static final AWD2_BLOCK_LIGHT_PICKER:Dynamic = 51.0;
 
   public static final AWD2_BLOCK_MATERIAL:Dynamic = 81.0;
@@ -56,6 +58,36 @@ class Awd2Schema {
   public static final AWD2_MATERIAL_PROP_NORMAL_TEXTURE:Dynamic = 3.0;
 
   public static final AWD2_MATERIAL_PROP_ALPHA:Dynamic = 10.0;
+
+  public static final AWD2_MATERIAL_PROP_SPECULAR_STRENGTH:Dynamic = 18.0;
+
+  public static final AWD2_MATERIAL_PROP_GLOSS:Dynamic = 19.0;
+
+  public static final AWD2_MATERIAL_PROP_SPECULAR_COLOR:Dynamic = 20.0;
+
+  public static final AWD2_MATERIAL_PROP_SPECULAR_TEXTURE:Dynamic = 21.0;
+
+  public static final AWD2_MATERIAL_DEFAULT_SPECULAR_STRENGTH:Dynamic = 1.0;
+
+  public static final AWD2_MATERIAL_DEFAULT_GLOSS:Dynamic = 50.0;
+
+  public static final AWD2_MATERIAL_DEFAULT_SPECULAR_RGB:Dynamic = 16777215.0;
+
+  public static final AWD2_CAMERA_PROJECTION_PERSPECTIVE:Dynamic = 5001.0;
+
+  public static final AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC:Dynamic = 5002.0;
+
+  public static final AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC_OFFCENTER:Dynamic = 5003.0;
+
+  public static final AWD2_CAMERA_PROP_FOV:Dynamic = 101.0;
+
+  public static final AWD2_CAMERA_PROP_ORTHO_LEFT:Dynamic = 101.0;
+
+  public static final AWD2_CAMERA_PROP_ORTHO_RIGHT:Dynamic = 102.0;
+
+  public static final AWD2_CAMERA_PROP_ORTHO_BOTTOM:Dynamic = 103.0;
+
+  public static final AWD2_CAMERA_PROP_ORTHO_TOP:Dynamic = 104.0;
 
   public static final AWD2_LIGHT_TYPE_POINT:Dynamic = 1.0;
 

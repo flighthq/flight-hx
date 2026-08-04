@@ -14,6 +14,7 @@ export * from './hasTransform3d.mjs';
 export * from './hierarchy.mjs';
 export * from './node.mjs';
 export * from './nodeColorAdjustment.mjs';
+export * from './nodeOrderList.mjs';
 export * from './nodeTransform2d.mjs';
 export * from './nodeTransform3d.mjs';
 export * from './revision.mjs';

@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ObjMaterial = { var ambient:Array<Float>; var diffuse:Array<Float>; var dissolve:Float; var illumination:Float; var mapAmbient:Null<String>; var mapBump:Null<String>; var mapDiffuse:Null<String>; var mapSpecular:Null<String>; var name:String; var specular:Array<Float>; var specularExponent:Float; };
+typedef ObjMaterial = { var ambient:Array<Float>; var anisotropy:Null<Float>; var anisotropyRotation:Null<Float>; var clearcoat:Null<Float>; var clearcoatRoughness:Null<Float>; var diffuse:Array<Float>; var dissolve:Float; var emissive:Null<Array<Float>>; var illumination:Float; var mapAmbient:Null<String>; var mapBump:Null<String>; var mapDiffuse:Null<String>; var mapDissolve:Null<String>; var mapEmissive:Null<String>; var mapMetallic:Null<String>; var mapNormal:Null<String>; var mapRoughness:Null<String>; var mapSpecular:Null<String>; var metallic:Null<Float>; var name:String; var roughness:Null<Float>; var sheen:Null<Float>; var specular:Array<Float>; var specularExponent:Float; };
 
 typedef ObjMaterialLibrary = { var materials:Dynamic; };

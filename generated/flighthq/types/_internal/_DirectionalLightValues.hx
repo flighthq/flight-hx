@@ -8,4 +8,8 @@ import flighthq.types.Vector3;
 
 class _DirectionalLightValues {
   public static final DirectionalLightKind:Dynamic = 'DirectionalLight';
+
+  public static final DIRECTIONAL_SHADOW_MAP_SIZE:Dynamic = 1024.0;
+
+  public static final MAX_DIRECTIONAL_SHADOW_PCF_RADIUS:Dynamic = 2.0;
 }

@@ -303,7 +303,8 @@ class SpineBinaryParse {
             v++;
           }
         }
-        var rebase:Dynamic = function(v:Float) {
+        var rebase:Dynamic = cast _Runtime.UNDEFINED;
+        rebase = function(v:Float) {
           var from:Dynamic = cast _Runtime.UNDEFINED;
           var rise:Dynamic = cast _Runtime.UNDEFINED;
           from = flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), ((i * values) + v));

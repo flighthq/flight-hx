@@ -25,13 +25,46 @@ class XmlParse {
 
   public static function parseXmlDocument(xml:String):Null<XmlElement> {
     var src:Dynamic = cast _Runtime.UNDEFINED;
+    var entities:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.replace(_Runtime.callValue(XmlParse.stripXmlComments__xmlParse, cast ([xml] : Array<Dynamic>)), _Runtime.regexp('\\r\\n?', 'g'), '\n', false);
-    (src = cast (StringTools.trim(Std.string(_Runtime.callValue(XmlParse.stripXmlDoctypes__xmlParse, cast ([_Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false)] : Array<Dynamic>)))) : Dynamic));
-    return cast _Runtime.callValue(XmlParse.parseElement__xmlParse, cast ([src, { pos: 0.0 }] : Array<Dynamic>));
+    entities = {  };
+    (src = cast (StringTools.trim(Std.string(_Runtime.callValue(XmlParse.stripXmlDoctypes__xmlParse, cast ([_Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false), entities] : Array<Dynamic>)))) : Dynamic));
+    return cast _Runtime.callValue(XmlParse.parseElement__xmlParse, cast ([_Runtime.callValue(XmlParse.expandXmlEntities__xmlParse, cast ([src, entities] : Array<Dynamic>)), { pos: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
+  public static final MAX_XML_ENTITY_PASSES__xmlParse:Dynamic = 8.0;
+
+  public static final MAX_XML_ENTITY_GROWTH__xmlParse:Dynamic = 16.0;
+
+  public static final MAX_XML_ENTITY_BUDGET__xmlParse:Dynamic = 65536.0;
+
   public static final XML_ENTITIES__xmlParse:Dynamic = { amp: '&', apos: '\'', gt: '>', lt: '<', quot: '"' };
+
+  public static function expandXmlEntities__xmlParse(src:String, entities:Dynamic):String {
+    var output:Dynamic = cast _Runtime.UNDEFINED;
+    var budget:Dynamic = cast _Runtime.UNDEFINED;
+    output = src;
+    budget = (_Runtime.multiplyNumbers(_Runtime.field(src, 'length'), XmlParse.MAX_XML_ENTITY_GROWTH__xmlParse) + XmlParse.MAX_XML_ENTITY_BUDGET__xmlParse);
+    {
+      var pass:Dynamic = 0.0;
+      while ((cast ((cast pass : Float) < (cast XmlParse.MAX_XML_ENTITY_PASSES__xmlParse : Float)) : Bool)) {
+        var expanded:Dynamic = false;
+        var next:Dynamic = _Runtime.replace(output, _Runtime.regexp('&([\\w:.-]+);', 'g'), function(reference:String, name:String) {
+          var replacement:Dynamic = cast _Runtime.UNDEFINED;
+          replacement = _Runtime.getIndex(entities, name);
+          if ((cast _Runtime.strictEquals(replacement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast reference; }
+          (expanded = cast (true : Dynamic));
+          return cast replacement;
+        }, false);
+        if ((cast ((cast !(cast expanded : Bool) : Bool) || (cast ((cast _Runtime.field(next, 'length') : Float) > (cast budget : Float)) : Bool)) : Bool)) { return cast output; }
+        (output = cast (next : Dynamic));
+        pass++;
+      }
+    }
+    return cast output;
+    return cast null;
+  }
 
   public static function decodeXmlEntities__xmlParse(s:String):String {
     return cast _Runtime.replace(s, _Runtime.regexp('&(?:#(\\d+)|#x([\\da-fA-F]+)|(\\w+));', 'g'), function(reference:Dynamic, dec:Dynamic, hex:Dynamic, name:Dynamic) {
@@ -157,7 +190,7 @@ class XmlParse {
     return cast null;
   }
 
-  public static function stripXmlDoctypes__xmlParse(xml:String):String {
+  public static function stripXmlDoctypes__xmlParse(xml:String, out:Dynamic):String {
     var copyStart:Dynamic = cast _Runtime.UNDEFINED;
     var output:Dynamic = cast _Runtime.UNDEFINED;
     var pos:Dynamic = cast _Runtime.UNDEFINED;
@@ -170,6 +203,7 @@ class XmlParse {
         continue;
       }
       (output = cast ((output + _Runtime.slice(xml, copyStart, pos)) : Dynamic));
+      var doctypeStart:Dynamic = pos;
       (pos = cast ((pos + 9.0) : Dynamic));
       var internalSubsetDepth:Dynamic = 0.0;
       var quote:Dynamic = '';
@@ -189,9 +223,19 @@ class XmlParse {
         } } } } }
         pos++;
       }
+      _Runtime.callValue(XmlParse.collectXmlEntityDeclarations__xmlParse, cast ([_Runtime.slice(xml, doctypeStart, pos), out] : Array<Dynamic>));
       (copyStart = cast (pos : Dynamic));
     }
     return cast (output + _Runtime.slice(xml, copyStart, null));
     return cast null;
+  }
+
+  public static function collectXmlEntityDeclarations__xmlParse(doctype:String, out:Dynamic):Void {
+    var declaration:Dynamic = cast _Runtime.UNDEFINED;
+    var match:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    declaration = _Runtime.regexp('<!ENTITY\\s+([\\w:.-]+)\\s*(?:"([^"]*)"|\'([^\']*)\')\\s*>', 'g');
+    while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(declaration, 'exec', cast ([doctype] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
+      _Runtime.setIndex(out, _Runtime.getIndex(match, 1.0), _Runtime.coalesce(_Runtime.coalesce(_Runtime.getIndex(match, 2.0), function():Dynamic return cast _Runtime.getIndex(match, 3.0)), function():Dynamic return cast ''));
+    }
   }
 }

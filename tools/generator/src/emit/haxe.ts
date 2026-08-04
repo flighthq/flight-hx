@@ -1651,7 +1651,7 @@ function emitStatement(statement: IrStatement): string[] {
     case 'try':
       return emitTryStatement(statement);
     case 'variable':
-      return statement.declarations.map((item) => `${emitVariable(item, true)};`);
+      return statement.declarations.flatMap(emitScopedVariable);
     case 'while':
       return [`while (${emitTruthiness(statement.condition)}) ${emitLoopEmbedded(statement.body)}`];
   }
@@ -1675,6 +1675,19 @@ function emitVariable(variable: IrVariable, includeSemicolon: boolean): string {
   const initializer = variable.initializer ? ` = ${emitVariableInitializer(variable)}` : ' = cast _Runtime.UNDEFINED';
   const output = `var ${safeName(variable.name)}${type}${initializer}`;
   return includeSemicolon ? output : output;
+}
+
+function emitScopedVariable(variable: IrVariable): string[] {
+  if (variable.initializer?.kind !== 'function') return [`${emitVariable(variable, true)};`];
+  // A TypeScript closure can capture the const/let binding that owns it. Haxe does
+  // not put a local binding in scope until its initializer has finished, so nested
+  // recursive closures need a declaration followed by assignment. The assignment
+  // stays at the source statement and therefore does not hoist function expressions.
+  const type = variable.type ? emitType(variable.type) : 'Dynamic';
+  return [
+    `var ${safeName(variable.name)}:${type} = cast _Runtime.UNDEFINED;`,
+    `${safeName(variable.name)} = ${emitVariableInitializer(variable)};`,
+  ];
 }
 
 function emitVariableInitializer(variable: IrVariable): string {

@@ -4,6 +4,7 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
+import flighthq.camera.Projection.getOrthographicProjectionTexelSize;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.mesh.MeshGeometry.hasMeshGeometrySkin;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
@@ -18,17 +19,24 @@ import flighthq.scene3dGl.GlMeshUpload.ensureGlMeshUpload;
 import flighthq.scene3dGl.GlScene3DRuntime.ensureGlSkinPalette;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
+import flighthq.types.DirectionalLight;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.Mesh;
 import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Types.DIRECTIONAL_SHADOW_MAP_SIZE;
+import flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
+import flighthq.types._internal._DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
+import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
 class GlShadowMap {
-  public static function drawGlScene3DShadowMap(state:GlRenderState, scene:Node3D, shadowCamera:Camera3D):Void {
+  public static function drawGlScene3DShadowMap(state:GlRenderState, scene:Node3D, shadowCamera:Camera3D, directionalLight:Null<DirectionalLight>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var previousShadow:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
+    var normalBiasWorld:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var rigidProgram:Dynamic = cast _Runtime.UNDEFINED;
     var skinnedProgram:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
@@ -37,11 +45,18 @@ class GlShadowMap {
     var boundProgram:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
+    previousShadow = _Runtime.field(runtime, 'shadow');
+    if ((cast !_Runtime.strictEquals(previousShadow, null) : Bool)) { _Runtime.setField(previousShadow, 'enabled', false); }
+    if ((cast ((cast _Runtime.strictEquals(directionalLight, null) : Bool) || (cast !(cast _Runtime.field(directionalLight, 'castsShadow') : Bool) : Bool)) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(shadowCamera.projection, 'kind'), 'orthographic') : Bool)) {
+      _Runtime.throwValue(_Runtime.error('drawGlScene3DShadowMap requires an orthographic shadow camera'));
+    }
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'shadowTarget'), null) : Bool)) {
-      _Runtime.setField(runtime, 'shadowTarget', _Runtime.callValue(createGlRenderTarget, cast ([state, { depth: 'depth-stencil-sampled', height: GlShadowMap.SHADOW_MAP_SIZE__glShadowMap, width: GlShadowMap.SHADOW_MAP_SIZE__glShadowMap }] : Array<Dynamic>)));
+      _Runtime.setField(runtime, 'shadowTarget', _Runtime.callValue(createGlRenderTarget, cast ([state, { depth: 'depth-stencil-sampled', height: DIRECTIONAL_SHADOW_MAP_SIZE, width: DIRECTIONAL_SHADOW_MAP_SIZE }] : Array<Dynamic>)));
     }
     target = _Runtime.field(runtime, 'shadowTarget');
-    matrix = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'shadow'), 'matrix'), function():Dynamic return cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)));
+    normalBiasWorld = _Runtime.multiplyNumbers(_Runtime.field(directionalLight, 'normalBias'), _Runtime.callValue(getOrthographicProjectionTexelSize, cast ([shadowCamera.projection, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>)));
+    matrix = _Runtime.coalesce(_Runtime.optionalField(previousShadow, 'matrix'), function():Dynamic return cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)));
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
     rigidProgram = _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'shadow:depth', GlShadowMap.compileShadowDepthProgram__glShadowMap] : Array<Dynamic>));
     skinnedProgram = null;
@@ -90,7 +105,13 @@ class GlShadowMap {
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32Array(prevViewport, 0.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 1.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 2.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 3.0));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
     flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.BACK);
-    _Runtime.setField(runtime, 'shadow', { matrix: matrix, texture: _Runtime.field(target, 'depthTexture') });
+    _Runtime.setField(runtime, 'shadow', { enabled: true, matrix: matrix, normalBiasWorld: normalBiasWorld, pcfRadius: _Runtime.callValue(GlShadowMap.normalizeDirectionalShadowPcfRadius__glShadowMap, cast ([_Runtime.field(directionalLight, 'pcfRadius')] : Array<Dynamic>)), shadowBias: _Runtime.field(directionalLight, 'shadowBias'), texture: _Runtime.field(target, 'depthTexture') });
+  }
+
+  public static function normalizeDirectionalShadowPcfRadius__glShadowMap(radius:Float):Float {
+    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([radius] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
+    return cast HxMath.min(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS, HxMath.max(0.0, HxMath.floor(radius)));
+    return cast null;
   }
 
   public static function compileShadowDepthProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
@@ -106,8 +127,6 @@ class GlShadowMap {
     return cast { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
-
-  public static final SHADOW_MAP_SIZE__glShadowMap:Dynamic = 1024.0;
 
   public static final SHADOW_DEPTH_VERTEX__glShadowMap:Dynamic = '#version 300 es\nlayout(location = 0) in vec3 a_position;\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\nvoid main() {\n  gl_Position = u_viewProjection * u_model * vec4(a_position, 1.0);\n}\n';
 

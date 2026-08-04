@@ -3,5 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.Kind;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 
 typedef CanvasTextureResolver = Dynamic;
+
+typedef CanvasTextureResolvers = { @:optional var registry:Null<Dynamic>; @:optional var bitmapElementCache:Dynamic; @:optional var textureWindowElementCache:Dynamic; @:optional var registryMiss:Null<Dynamic>; };

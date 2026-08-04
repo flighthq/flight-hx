@@ -3,11 +3,20 @@ package flighthq.audio;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.audio.AudioDecoderRegistry as Facade_Audio_flighthq_audio_AudioDecoderRegistry;
 import flighthq.audio.AudioFormat as Facade_Audio_flighthq_audio_AudioFormat;
 import flighthq.audio.AudioResource as Facade_Audio_flighthq_audio_AudioResource;
 import flighthq.audio.AudioResourceFrom as Facade_Audio_flighthq_audio_AudioResourceFrom;
+import flighthq.audio.AudioResourceReference as Facade_Audio_flighthq_audio_AudioResourceReference;
 import flighthq.types.AudioResource;
 import flighthq.types.AudioResource.AudioResourceUrl;
+import flighthq.types.AudioResourceReference;
+import flighthq.types.AudioResourceReference.AudioDecoder;
+import flighthq.types.AudioResourceReference.AudioResourceFailure;
+import flighthq.types.AudioResourceReference.AudioResourceFetch;
+import flighthq.types.AudioResourceReference.AudioResourceReferenceResolutionExplanation;
+import flighthq.types.AudioResourceReference.EmbeddedAudioResourceReference;
+import flighthq.types.AudioResourceReference.ExternalAudioResourceReference;
 
 class Audio {
   public static function canPlayAudioType(mimeType:String):Bool {
@@ -25,8 +34,23 @@ class Audio {
     return cast null;
   }
 
+  public static function createAudioResourceFailure(cause:Dynamic):AudioResourceFailure {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.createAudioResourceFailure(cause);
+    return cast null;
+  }
+
   public static function createAudioResourceFromSamples(channels:Array<flighthq._internal._Float32Array>, sampleRate:Float):AudioResource {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.createAudioResourceFromSamples(channels, sampleRate);
+    return cast null;
+  }
+
+  public static function createEmbeddedAudioResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):EmbeddedAudioResourceReference {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.createEmbeddedAudioResourceReference(bytes, mimeType, name);
+    return cast null;
+  }
+
+  public static function createExternalAudioResourceReference(uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):ExternalAudioResourceReference {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.createExternalAudioResourceReference(uri, basePath, mimeType, name);
     return cast null;
   }
 
@@ -37,6 +61,36 @@ class Audio {
 
   public static function disposeAudioResource(resource:AudioResource):Void {
     Facade_Audio_flighthq_audio_AudioResource.disposeAudioResource(resource);
+  }
+
+  public static function explainAudioResourceReferenceResolution(ref:AudioResourceReference):AudioResourceReferenceResolutionExplanation {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.explainAudioResourceReferenceResolution(ref);
+    return cast null;
+  }
+
+  public static function findAudioResourceReferenceByName(references:Array<AudioResourceReference>, name:String):Null<AudioResourceReference> {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.findAudioResourceReferenceByName(references, name);
+    return cast null;
+  }
+
+  public static function getAudioDecoder(mimeType:String):Null<AudioDecoder> {
+    return cast Facade_Audio_flighthq_audio_AudioDecoderRegistry.getAudioDecoder(mimeType);
+    return cast null;
+  }
+
+  public static function getAudioDecoderMimeTypes():Array<String> {
+    return cast Facade_Audio_flighthq_audio_AudioDecoderRegistry.getAudioDecoderMimeTypes();
+    return cast null;
+  }
+
+  public static function getAudioMimeTypeEssence(mimeType:String):String {
+    return cast Facade_Audio_flighthq_audio_AudioFormat.getAudioMimeTypeEssence(mimeType);
+    return cast null;
+  }
+
+  public static function getAudioMimeTypeParameter(mimeType:String, name:String):Null<String> {
+    return cast Facade_Audio_flighthq_audio_AudioFormat.getAudioMimeTypeParameter(mimeType, name);
+    return cast null;
   }
 
   public static function getAudioResourceByteSize(resource:AudioResource):Float {
@@ -61,6 +115,11 @@ class Audio {
 
   public static function getAudioResourceSampleRate(resource:AudioResource):Float {
     return cast Facade_Audio_flighthq_audio_AudioResource.getAudioResourceSampleRate(resource);
+    return cast null;
+  }
+
+  public static function hasAudioDecoder(mimeType:String):Bool {
+    return cast Facade_Audio_flighthq_audio_AudioDecoderRegistry.hasAudioDecoder(mimeType);
     return cast null;
   }
 
@@ -104,8 +163,26 @@ class Audio {
     return cast null;
   }
 
+  public static function registerAudioDecoder(mimeType:String, decoder:AudioDecoder):Void {
+    Facade_Audio_flighthq_audio_AudioDecoderRegistry.registerAudioDecoder(mimeType, decoder);
+  }
+
+  public static function resetFailedAudioResourceReference(ref:AudioResourceReference):Bool {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.resetFailedAudioResourceReference(ref);
+    return cast null;
+  }
+
+  public static function resolveAudioResourceReference(ref:AudioResourceReference, context:Null<Dynamic>, fetch:AudioResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<AudioResource>> {
+    return cast Facade_Audio_flighthq_audio_AudioResourceReference.resolveAudioResourceReference(ref, context, fetch, signal);
+    return cast null;
+  }
+
   public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.selectAudioResourceUrl(sources);
     return cast null;
+  }
+
+  public static function unregisterAudioDecoder(mimeType:String):Void {
+    Facade_Audio_flighthq_audio_AudioDecoderRegistry.unregisterAudioDecoder(mimeType);
   }
 }

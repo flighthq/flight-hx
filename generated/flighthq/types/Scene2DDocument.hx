@@ -3,16 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types._internal._Scene2DDocumentValues.Scene2DContentReferenceKindValue;
 
-typedef Scene2DContentReferenceKind = Dynamic;
+typedef Scene2DSlotReference = { var content:Null<Node2D>; var linkage:Null<String>; var name:String; var required:Bool; var target:Node2D; };
 
-typedef Scene2DContentReferenceBase__Scene2DDocument = { var content:Null<Node2D>; var name:String; var required:Bool; var target:Node2D; };
-
-typedef Scene2DAssetReference = { var content:Null<Node2D>; var name:String; var required:Bool; var target:Node2D; var kind:String; var uri:String; var bytes:Null<flighthq._internal._UInt8Array>; var mimeType:Null<String>; };
-
-typedef Scene2DSlotReference = { var content:Null<Node2D>; var name:String; var required:Bool; var target:Node2D; var kind:String; var linkage:Null<String>; };
-
-typedef Scene2DContentReference = Dynamic;
-
-typedef Scene2DDocument = { var backgroundColor:Null<Float>; var references:Array<Scene2DContentReference>; var root:Node2D; var sourceKind:Null<String>; };
+typedef Scene2DDocument = { var audioResources:Array<AudioResourceReference>; var backgroundColor:Null<Float>; var imageResources:Array<ImageResourceReference>; var root:Node2D; var slots:Array<Scene2DSlotReference>; var sourceKind:Null<String>; };

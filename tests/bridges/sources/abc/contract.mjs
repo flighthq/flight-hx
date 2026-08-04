@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './abcFile.mjs';
+export * from './abcInstruction.mjs';

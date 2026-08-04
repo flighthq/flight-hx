@@ -64,6 +64,18 @@ class Solver {
     }
   }
 
+  public static function solvePhysics2DContactIndicesOnce(world:Physics2DWorld, indices:Array<Float>, start:Float, count:Float):Void {
+    var end:Dynamic = cast _Runtime.UNDEFINED;
+    end = (start + count);
+    {
+      var i:Dynamic = start;
+      while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
+        _Runtime.callValue(Solver._solvePhysics2DContactAt__solver, cast ([world, flighthq._internal._StaticIndex.readArray(indices, i)] : Array<Dynamic>));
+        i++;
+      }
+    }
+  }
+
   public static function solvePhysics2DContacts(world:Physics2DWorld):Void {
     var iterations:Dynamic = cast _Runtime.UNDEFINED;
     iterations = _Runtime.field(_Runtime.field(world, 'config'), 'velocityIterations');
@@ -77,36 +89,74 @@ class Solver {
   }
 
   public static function solvePhysics2DContactsOnce(world:Physics2DWorld):Void {
-    for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
-      if ((cast _Runtime.field(contact, 'sensor') : Bool)) { continue; }
-      var bodyA:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyA')] : Array<Dynamic>));
-      var bodyB:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { continue; }
-      if ((cast !(cast _Runtime.callValue(isRigidBody2DPairAwake, cast ([bodyA, bodyB] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
-      _Runtime.callValue(Solver.solvePhysics2DContact__solver, cast ([contact, bodyA, bodyB] : Array<Dynamic>));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(world, 'contacts'), 'length') : Float)) : Bool)) {
+        _Runtime.callValue(Solver._solvePhysics2DContactAt__solver, cast ([world, i] : Array<Dynamic>));
+        i++;
+      }
+    }
+  }
+
+  public static function warmStartPhysics2DContactIndices(world:Physics2DWorld, indices:Array<Float>, start:Float, count:Float):Void {
+    var end:Dynamic = cast _Runtime.UNDEFINED;
+    end = (start + count);
+    {
+      var i:Dynamic = start;
+      while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
+        _Runtime.callValue(Solver._warmStartPhysics2DContactAt__solver, cast ([world, flighthq._internal._StaticIndex.readArray(indices, i)] : Array<Dynamic>));
+        i++;
+      }
     }
   }
 
   public static function warmStartPhysics2DContacts(world:Physics2DWorld):Void {
-    for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
-      if ((cast _Runtime.field(contact, 'sensor') : Bool)) { continue; }
-      var bodyA:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyA')] : Array<Dynamic>));
-      var bodyB:Dynamic = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { continue; }
-      if ((cast !(cast _Runtime.callValue(isRigidBody2DPairAwake, cast ([bodyA, bodyB] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
-      var normalX:Dynamic = _Runtime.field(contact, 'normalX');
-      var normalY:Dynamic = _Runtime.field(contact, 'normalY');
-      var tangentX:Dynamic = -normalY;
-      var tangentY:Dynamic = normalX;
-      {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
-          var point:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
-          var impulseX:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(point, 'normalImpulse'), normalX) + _Runtime.multiplyNumbers(_Runtime.field(point, 'tangentImpulse'), tangentX));
-          var impulseY:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(point, 'normalImpulse'), normalY) + _Runtime.multiplyNumbers(_Runtime.field(point, 'tangentImpulse'), tangentY));
-          _Runtime.callValue(applyPhysics2DImpulse, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), impulseX, impulseY] : Array<Dynamic>));
-          i++;
-        }
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(world, 'contacts'), 'length') : Float)) : Bool)) {
+        _Runtime.callValue(Solver._warmStartPhysics2DContactAt__solver, cast ([world, i] : Array<Dynamic>));
+        i++;
+      }
+    }
+  }
+
+  public static function _solvePhysics2DContactAt__solver(world:Physics2DWorld, contactIndex:Float):Void {
+    var contact:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyA:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyB:Dynamic = cast _Runtime.UNDEFINED;
+    contact = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), contactIndex);
+    if ((cast ((cast ((cast _Runtime.strictEquals(contact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.field(contact, 'enabled') : Bool) : Bool)) : Bool) || (cast _Runtime.field(contact, 'sensor') : Bool)) : Bool)) { return; }
+    bodyA = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyA')] : Array<Dynamic>));
+    bodyB = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
+    if ((cast ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(isRigidBody2DPairAwake, cast ([bodyA, bodyB] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    _Runtime.callValue(Solver.solvePhysics2DContact__solver, cast ([contact, bodyA, bodyB] : Array<Dynamic>));
+  }
+
+  public static function _warmStartPhysics2DContactAt__solver(world:Physics2DWorld, contactIndex:Float):Void {
+    var contact:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyA:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyB:Dynamic = cast _Runtime.UNDEFINED;
+    var normalX:Dynamic = cast _Runtime.UNDEFINED;
+    var normalY:Dynamic = cast _Runtime.UNDEFINED;
+    var tangentX:Dynamic = cast _Runtime.UNDEFINED;
+    var tangentY:Dynamic = cast _Runtime.UNDEFINED;
+    contact = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), contactIndex);
+    if ((cast ((cast ((cast _Runtime.strictEquals(contact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.field(contact, 'enabled') : Bool) : Bool)) : Bool) || (cast _Runtime.field(contact, 'sensor') : Bool)) : Bool)) { return; }
+    bodyA = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyA')] : Array<Dynamic>));
+    bodyB = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
+    if ((cast ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(isRigidBody2DPairAwake, cast ([bodyA, bodyB] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    normalX = _Runtime.field(contact, 'normalX');
+    normalY = _Runtime.field(contact, 'normalY');
+    tangentX = -normalY;
+    tangentY = normalX;
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
+        var point:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
+        var impulseX:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(point, 'normalImpulse'), normalX) + _Runtime.multiplyNumbers(_Runtime.field(point, 'tangentImpulse'), tangentX));
+        var impulseY:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(point, 'normalImpulse'), normalY) + _Runtime.multiplyNumbers(_Runtime.field(point, 'tangentImpulse'), tangentY));
+        _Runtime.callValue(applyPhysics2DImpulse, cast ([bodyA, bodyB, _Runtime.field(point, 'rAX'), _Runtime.field(point, 'rAY'), _Runtime.field(point, 'rBX'), _Runtime.field(point, 'rBY'), impulseX, impulseY] : Array<Dynamic>));
+        i++;
       }
     }
   }

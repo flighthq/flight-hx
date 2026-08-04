@@ -4,13 +4,13 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromBytes;
+import flighthq.image.ImageResourceReference.createImageResourceFailure;
 import flighthq.loader.ResourceLoader.queueResourceLoad;
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DResourceTextures;
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DTextureResourceReference;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceFailure;
 import flighthq.types.ImageResourceReference.ImageResourceFailureKind;
 import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
 import flighthq.types.ResourceResolutionState;
@@ -174,7 +174,7 @@ class ResolveScene3DResources {
     if ((cast !_Runtime.strictEquals(((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).get(ref)), entry) : Bool)) { return; }
     ((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).delete_(ref));
     if ((cast _Runtime.field(_Runtime.field(entry.controller, 'signal'), 'aborted') : Bool)) { return; }
-    _Runtime.setField(ref, 'failure', _Runtime.callValue(ResolveScene3DResources.createImageResourceFailure__resolveScene3DResources, cast ([cause] : Array<Dynamic>)));
+    _Runtime.setField(ref, 'failure', _Runtime.callValue(createImageResourceFailure, cast ([cause] : Array<Dynamic>)));
     _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
     for (texture in _Runtime.iterable(entry.subscribers)) {
       _Runtime.callValue(ResolveScene3DResources.emitScene3DResourceEvent__resolveScene3DResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
@@ -245,12 +245,4 @@ class ResolveScene3DResources {
   }
 
   public static final _resolvedVoid__resolveScene3DResources:flighthq._internal._Promise<flighthq._internal._Nothing> = flighthq._internal._Async.resolve();
-
-  public static function createImageResourceFailure__resolveScene3DResources(cause:Dynamic):ImageResourceFailure {
-    if ((cast _Runtime.isError(cause) : Bool)) {
-      return cast { kind: ImageResourceFailureKindValue.Error, message: _Runtime.field(cause, 'message'), name: _Runtime.field(cause, 'name') };
-    }
-    return cast { kind: ImageResourceFailureKindValue.Error, message: Std.string(cause), name: null };
-    return cast null;
-  }
 }

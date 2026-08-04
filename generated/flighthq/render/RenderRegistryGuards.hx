@@ -43,17 +43,30 @@ class RenderRegistryGuards {
       if (__switchValue == RenderRegistry.EffectPaddingResolver) {
         return cast 'computeRenderEffectPadding: effect kind has no registered padding resolver — call registerRenderEffectPaddingResolver(state, kind, resolver)';
       }
+      else if (__switchValue == RenderRegistry.MaterialRenderer) {
+        if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'resolveWgpuMaterialRenderer: material kind has no registered renderer, so nodes using it do not draw — call registerWgpuMaterialRenderer(state, kind, renderer)'; }
+        return cast 'resolveGlMaterialRenderer: material kind has no registered renderer, so nodes using it do not draw — call registerGlMaterialRenderer(state, kind, renderer)';
+      }
+      else if (__switchValue == RenderRegistry.ModifierSnippet) {
+        if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'a modifier on this material has no registered shader snippet — call registerWgpuModifierSnippet(state, snippet), or registerBuiltInWgpuModifierSnippets(state)'; }
+        return cast 'a modifier on this material has no registered shader snippet — call registerGlModifierSnippet(state, snippet), or registerBuiltInGlModifierSnippets(state)';
+      }
       else if (__switchValue == RenderRegistry.NodeRenderer) {
         return cast 'createRenderProxy: node kind has no registered renderer — call registerRenderer(state, kind, renderer)';
       }
       else if (__switchValue == RenderRegistry.ShapeCommandHandler) {
-        return cast 'renderCanvasShapeCommands: shape command key has no registered handler — call registerCanvasShapeCommand(command)';
+        return cast 'renderCanvasShapeCommands: shape command key has no registered handler on this state — call registerCanvasShapeCommand(state, command)';
+      }
+      else if (__switchValue == RenderRegistry.ShapeRasterizer) {
+        if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'drawWgpuShape: a fill this node uses has no tessellated form and no rasterizer is registered, so it does not draw — call registerWgpuShapeRasterizer(state, createCanvasShapeRasterizer(resolvers))'; }
+        if ((cast _Runtime.hasField(state, 'element') : Bool)) { return cast 'drawDomShape: a fill this node uses has no tessellated form and no rasterizer is registered, so it does not draw — call registerDomShapeRasterizer(state, createCanvasShapeRasterizer(resolvers))'; }
+        return cast 'drawGlShape: a fill this node uses has no tessellated form and no rasterizer is registered, so it does not draw — call registerGlShapeRasterizer(state, createCanvasShapeRasterizer(resolvers))';
       }
       else if (__switchValue == RenderRegistry.TextureResolver) {
         if ((cast _Runtime.hasField(state, 'gl') : Bool)) { return cast 'resolveGlTexture: texture source kind has no registered resolver — call registerGlTextureResolver(state, sourceKind, resolver), or copyGlRenderStateRegistrations(offscreenState, screenState) after a late screen registration'; }
         if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'resolveWgpuTexture: texture source kind has no registered resolver — call registerWgpuTextureResolver(state, sourceKind, resolver)'; }
         if ((cast _Runtime.hasField(state, 'element') : Bool)) { return cast 'resolveDomTexture: texture source kind has no registered resolver — call registerDomTextureResolver(state, sourceKind, resolver)'; }
-        return cast 'resolveCanvasTexture: texture source kind has no registered resolver — call registerCanvasTextureResolver(state, sourceKind, resolver)';
+        return cast 'resolveCanvasTexture: texture source kind has no registered resolver — call registerCanvasTextureResolver(resolvers, sourceKind, resolver) on the set the caller resolves through';
       }
     }
     return cast null;

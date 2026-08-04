@@ -2,5 +2,8 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const applyAnimationClipToLottieDocument = compiled.flighthq.scene2dFormats.Scene2dFormats.applyAnimationClipToLottieDocument;
+export const createRiveObjectGraph = compiled.flighthq.scene2dFormats.Scene2dFormats.createRiveObjectGraph;
 export const createScene2DFromLottieDocument = compiled.flighthq.scene2dFormats.Scene2dFormats.createScene2DFromLottieDocument;
+export const createScene2DFromRiveDocument = compiled.flighthq.scene2dFormats.Scene2dFormats.createScene2DFromRiveDocument;
 export const createScene2DFromSvgDocument = compiled.flighthq.scene2dFormats.Scene2dFormats.createScene2DFromSvgDocument;
+export const parseRiveDocument = compiled.flighthq.scene2dFormats.Scene2dFormats.parseRiveDocument;

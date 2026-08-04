@@ -8,7 +8,7 @@ import flighthq.types.Entity;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
+import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.Material;
 import flighthq.types.PbrExtension;
 import flighthq.types.ResourceLoader;

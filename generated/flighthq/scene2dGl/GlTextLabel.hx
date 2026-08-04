@@ -104,7 +104,8 @@ class GlTextLabel {
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(textData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(textData, 'lastPixelRatio')) : Bool)) : Bool)) {
-      var measure:Dynamic = function(t:String, format:TextFormat) {
+      var measure:Dynamic = cast _Runtime.UNDEFINED;
+      measure = function(t:String, format:TextFormat) {
         flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(textData, 'ctx'), 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
         return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)), 'width');
       };

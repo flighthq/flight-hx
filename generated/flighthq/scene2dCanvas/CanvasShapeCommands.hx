@@ -24,7 +24,7 @@ class CanvasShapeCommands {
     texture = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Texture);
     matrix = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 1.0)) : Null<Matrix>);
     if ((cast ((cast _Runtime.field(state, 'hasPendingPath') : Bool) && (cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke')) : Bool)) : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
-    pattern = _Runtime.callValue(createBitmapPattern, cast ([context, texture, _Runtime.field(state, 'canvasRenderState')] : Array<Dynamic>));
+    pattern = _Runtime.callValue(createBitmapPattern, cast ([context, texture, _Runtime.field(state, 'canvasTextureResolvers'), _Runtime.field(state, 'allowSmoothing')] : Array<Dynamic>));
     _Runtime.setField(state, 'hasFill', !_Runtime.strictEquals(pattern, null));
     _Runtime.setField(state, 'fillStyle', _Runtime.coalesce(pattern, function():Dynamic return cast ''));
     _Runtime.setField(state, 'fillMatrix', matrix);
@@ -34,7 +34,7 @@ class CanvasShapeCommands {
     } else {
       _Runtime.setField(state, 'fillMatrixInverse', null);
     }
-    _Runtime.setField(state, 'bitmapSrc', _Runtime.callValue(resolveCanvasTextureWindowSource, cast ([_Runtime.field(state, 'canvasRenderState'), texture] : Array<Dynamic>)));
+    _Runtime.setField(state, 'bitmapSrc', _Runtime.callValue(resolveCanvasTextureWindowSource, cast ([_Runtime.field(state, 'canvasTextureResolvers'), texture] : Array<Dynamic>)));
     _Runtime.setField(state, 'bitmapW', HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>)))));
     _Runtime.setField(state, 'bitmapH', HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>)))));
   } };
@@ -291,7 +291,7 @@ class CanvasShapeCommands {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;
     texture = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Texture);
-    pattern = _Runtime.callValue(createBitmapPattern, cast ([context, texture, _Runtime.field(state, 'canvasRenderState')] : Array<Dynamic>));
+    pattern = _Runtime.callValue(createBitmapPattern, cast ([context, texture, _Runtime.field(state, 'canvasTextureResolvers'), _Runtime.field(state, 'allowSmoothing')] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       _Runtime.setField(state, 'strokeStyle', pattern);
       _Runtime.setField(state, 'hasStroke', true);

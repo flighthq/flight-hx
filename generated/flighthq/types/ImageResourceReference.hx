@@ -20,4 +20,6 @@ typedef ExternalImageResourceReference = { var failure:Null<ImageResourceFailure
 
 typedef ImageResourceReference = Dynamic;
 
+typedef ImageResourceFetch = Dynamic;
+
 typedef ImageResourceReferenceResolutionExplanation = { var failure:Null<ImageResourceFailure>; var kind:ImageResourceReferenceKind; var retryable:Bool; var state:ResourceResolutionState; };

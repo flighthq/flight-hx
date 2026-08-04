@@ -21,6 +21,11 @@ class Revision {
     return cast null;
   }
 
+  public static function getNodeChildrenRevision<Traits>(source:Node<Traits>):Float {
+    return cast _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'childrenId');
+    return cast null;
+  }
+
   public static function getNodeLocalBoundsRevision<Traits>(source:Node<Traits>):Float {
     return cast _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'localBoundsId');
     return cast null;
@@ -33,6 +38,11 @@ class Revision {
 
   public static function getNodeLocalTransformRevision<Traits>(source:Node<Traits>):Float {
     return cast _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'localTransformId');
+    return cast null;
+  }
+
+  public static function getNodeParentReferenceRevision<Traits>(source:Node<Traits>):Float {
+    return cast _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'parentReferenceId');
     return cast null;
   }
 
@@ -82,6 +92,7 @@ class Revision {
   public static function invalidateNodeParentReference<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
+    _Runtime.setField(runtime, 'parentReferenceId', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(runtime, 'parentReferenceId'), 1.0)), 0));
     _Runtime.setField(runtime, 'worldTransformUsingParentTransformId', -1.0);
   }
 

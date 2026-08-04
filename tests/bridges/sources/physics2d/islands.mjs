@@ -5,6 +5,7 @@ const api = compiled.flighthq.physics2d.Islands;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const buildPhysics2DSolveIslands = api.buildPhysics2DSolveIslands;
 export const isRigidBody2DPairAwake = api.isRigidBody2DPairAwake;
 export const updatePhysics2DSleep = api.updatePhysics2DSleep;
 export const wakePhysics2DBody = api.wakePhysics2DBody;

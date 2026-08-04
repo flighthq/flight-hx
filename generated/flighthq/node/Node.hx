@@ -9,6 +9,7 @@ import flighthq.node.BoundsRectangle as Facade_Node_flighthq_node_BoundsRectangl
 import flighthq.node.Hierarchy as Facade_Node_flighthq_node_Hierarchy;
 import flighthq.node.Hierarchy.removeNodeChild;
 import flighthq.node.NodeColorAdjustment as Facade_Node_flighthq_node_NodeColorAdjustment;
+import flighthq.node.NodeOrderList as Facade_Node_flighthq_node_NodeOrderList;
 import flighthq.node.NodeTransform2d as Facade_Node_flighthq_node_NodeTransform2d;
 import flighthq.node.NodeTransform3d as Facade_Node_flighthq_node_NodeTransform3d;
 import flighthq.node.Revision as Facade_Node_flighthq_node_Revision;
@@ -36,6 +37,8 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeRuntimeFactory;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
+import flighthq.types.NodeOrderList;
+import flighthq.types.NodeOrderList.NodeOrderListEntryVisitor;
 import flighthq.types.NodeSignals;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
@@ -68,6 +71,18 @@ class Node {
 
   public static function addNodeColorAdjustment<Traits>(source:flighthq.types.Node<Traits>, adjustment:Adjustment):Void {
     Facade_Node_flighthq_node_NodeColorAdjustment.addNodeColorAdjustment(source, adjustment);
+  }
+
+  public static function addNodeOrderListEntry<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>, sortKey:Float):Void {
+    Facade_Node_flighthq_node_NodeOrderList.addNodeOrderListEntry(list, node, sortKey);
+  }
+
+  public static function applyNodeOrderList<Traits>(target:flighthq.types.Node<Traits>, list:NodeOrderList<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.applyNodeOrderList(target, list);
+  }
+
+  public static function clearNodeOrderList<Traits>(list:NodeOrderList<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.clearNodeOrderList(list);
   }
 
   public static function computeNodeBoundsRectangle<Traits>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
@@ -133,6 +148,11 @@ class Node {
     return cast null;
   }
 
+  public static function createNodeOrderList<Traits>():NodeOrderList<Traits> {
+    return cast Facade_Node_flighthq_node_NodeOrderList.createNodeOrderList();
+    return cast null;
+  }
+
   public static function createNodeRuntime<Traits>(?methods:Dynamic):NodeRuntime<Traits> {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : NodeRuntime<Traits>);
@@ -141,6 +161,7 @@ class Node {
     _Runtime.setField(out, 'boundsUsingLocalTransformId', -1.0);
     _Runtime.setField(out, 'canAddChild', _Runtime.coalesce(_Runtime.optionalField(methods, 'canAddChild'), function():Dynamic return cast defaultNodeRuntimeCanAddChild));
     _Runtime.setField(out, 'children', null);
+    _Runtime.setField(out, 'childrenId', 0.0);
     _Runtime.setField(out, 'colorAdjustments', null);
     _Runtime.setField(out, 'colorAdjustmentsUnsupported', false);
     _Runtime.setField(out, 'nodeSignals', null);
@@ -152,6 +173,7 @@ class Node {
     _Runtime.setField(out, 'localTransformId', 0.0);
     _Runtime.setField(out, 'localTransformUsingLocalTransformId', -1.0);
     _Runtime.setField(out, 'parent', null);
+    _Runtime.setField(out, 'parentReferenceId', 0.0);
     _Runtime.setField(out, 'resolvedColorMatrix', null);
     _Runtime.setField(out, 'resolvedColorScaleBias', null);
     _Runtime.setField(out, 'worldBoundsUsingLocalBoundsId', -1.0);
@@ -217,6 +239,10 @@ class Node {
     _Runtime.setField(runtime, 'interactionState', null);
   }
 
+  public static function disposeNodeOrderList<Traits>(list:NodeOrderList<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.disposeNodeOrderList(list);
+  }
+
   public static function enableNodeSignals<Traits>(source:flighthq.types.Node<Traits>):NodeSignals {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
@@ -244,6 +270,10 @@ class Node {
 
   public static function forEachNodeDescendant<Traits>(source:flighthq.types.Node<Traits>, callback:Dynamic):Void {
     Facade_Node_flighthq_node_Traversal.forEachNodeDescendant(source, callback);
+  }
+
+  public static function forEachNodeOrderListEntry<Traits>(list:NodeOrderList<Traits>, callback:NodeOrderListEntryVisitor<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.forEachNodeOrderListEntry(list, callback);
   }
 
   public static function getNodeAncestors<Traits>(source:flighthq.types.Node<Traits>):Array<NodeOf<Traits>> {
@@ -336,6 +366,11 @@ class Node {
     return cast null;
   }
 
+  public static function getNodeOrderListEntrySortKey<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>):Null<Float> {
+    return cast Facade_Node_flighthq_node_NodeOrderList.getNodeOrderListEntrySortKey(list, node);
+    return cast null;
+  }
+
   public static function getNodeParent<Traits>(source:flighthq.types.Node<Traits>):Null<NodeOf<Traits>> {
     return cast Facade_Node_flighthq_node_Hierarchy.getNodeParent(source);
     return cast null;
@@ -404,6 +439,11 @@ class Node {
     return cast null;
   }
 
+  public static function hasNodeOrderListEntry<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>):Bool {
+    return cast Facade_Node_flighthq_node_NodeOrderList.hasNodeOrderListEntry(list, node);
+    return cast null;
+  }
+
   public static function invalidateNodeAppearance<Traits>(target:flighthq.types.Node<Traits>):Void {
     Facade_Node_flighthq_node_Revision.invalidateNodeAppearance(target);
   }
@@ -438,6 +478,11 @@ class Node {
 
   public static function removeNodeChildren<Traits>(target:flighthq.types.Node<Traits>, ?beginIndex:Float, ?endIndex:Float):Void {
     Facade_Node_flighthq_node_Hierarchy.removeNodeChildren(target, beginIndex, endIndex);
+  }
+
+  public static function removeNodeOrderListEntry<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>):Bool {
+    return cast Facade_Node_flighthq_node_NodeOrderList.removeNodeOrderListEntry(list, node);
+    return cast null;
   }
 
   public static function reparentNode<Traits>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):NodeOf<Traits> {
@@ -478,6 +523,22 @@ class Node {
     Facade_Node_flighthq_node_NodeTransform3d.setNodeLocalMatrix4(target, source);
   }
 
+  public static function setNodeOrderListEntry<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>, sortKey:Float):Void {
+    Facade_Node_flighthq_node_NodeOrderList.setNodeOrderListEntry(list, node, sortKey);
+  }
+
+  public static function setNodeOrderListEntryAbove<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>, target:flighthq.types.Node<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.setNodeOrderListEntryAbove(list, node, target);
+  }
+
+  public static function setNodeOrderListEntryBelow<Traits>(list:NodeOrderList<Traits>, node:flighthq.types.Node<Traits>, target:flighthq.types.Node<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.setNodeOrderListEntryBelow(list, node, target);
+  }
+
+  public static function setNodeOrderListFromNodeChildren<Traits>(list:NodeOrderList<Traits>, source:flighthq.types.Node<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.setNodeOrderListFromNodeChildren(list, source);
+  }
+
   public static function setNodeTransform2D<Traits>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
     Facade_Node_flighthq_node_NodeTransform2d.setNodeTransform2D(target, source);
   }
@@ -496,6 +557,10 @@ class Node {
 
   public static function swapNodeChildrenAt<Traits>(target:flighthq.types.Node<Traits>, index1:Float, index2:Float):Void {
     Facade_Node_flighthq_node_Hierarchy.swapNodeChildrenAt(target, index1, index2);
+  }
+
+  public static function swapNodeOrderListEntries<Traits>(list:NodeOrderList<Traits>, nodeA:flighthq.types.Node<Traits>, nodeB:flighthq.types.Node<Traits>):Void {
+    Facade_Node_flighthq_node_NodeOrderList.swapNodeOrderListEntries(list, nodeA, nodeB);
   }
 
   public static function walkNodeDescendants<Traits>(source:flighthq.types.Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {

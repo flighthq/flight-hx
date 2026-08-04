@@ -26,6 +26,42 @@ class AudioFormat {
     return cast null;
   }
 
+  public static function getAudioMimeTypeEssence(mimeType:String):String {
+    var end:Dynamic = cast _Runtime.UNDEFINED;
+    end = _Runtime.callProperty(mimeType, 'indexOf', cast ([';'] : Array<Dynamic>));
+    return cast _Runtime.callProperty(StringTools.trim(Std.string(((cast _Runtime.strictEquals(end, -1.0) : Bool) ? (cast mimeType : Dynamic) : (cast _Runtime.slice(mimeType, 0.0, end) : Dynamic)))), 'toLowerCase', cast ([] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getAudioMimeTypeParameter(mimeType:String, name:String):Null<String> {
+    var wanted:Dynamic = cast _Runtime.UNDEFINED;
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    var quoted:Dynamic = cast _Runtime.UNDEFINED;
+    wanted = _Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>));
+    start = -1.0;
+    quoted = false;
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) <= (cast _Runtime.field(mimeType, 'length') : Float)) : Bool)) {
+        var character:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(mimeType, 'length') : Float)) : Bool) ? (cast _Runtime.getIndex(mimeType, i) : Dynamic) : (cast ';' : Dynamic));
+        if ((cast _Runtime.strictEquals(character, '"') : Bool)) { (quoted = cast (!(cast quoted : Bool) : Dynamic)); }
+        if ((cast ((cast quoted : Bool) || (cast !_Runtime.strictEquals(character, ';') : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast start : Float) >= (cast 0.0 : Float)) : Bool)) {
+          var part:Dynamic = _Runtime.slice(mimeType, start, i);
+          var separator:Dynamic = _Runtime.callProperty(part, 'indexOf', cast (['='] : Array<Dynamic>));
+          if ((cast ((cast ((cast separator : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callProperty(StringTools.trim(Std.string(_Runtime.slice(part, 0.0, separator))), 'toLowerCase', cast ([] : Array<Dynamic>)), wanted) : Bool)) : Bool)) {
+            var value:Dynamic = StringTools.trim(Std.string(_Runtime.slice(part, (separator + 1.0), null)));
+            return cast ((cast ((cast ((cast ((cast _Runtime.field(value, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast StringTools.startsWith(value, '"') : Bool)) : Bool) && (cast StringTools.endsWith(Std.string(value), '"') : Bool)) : Bool) ? (cast _Runtime.slice(value, 1.0, -1.0) : Dynamic) : (cast value : Dynamic));
+          }
+        }
+        (start = cast ((i + 1.0) : Dynamic));
+        i++;
+      }
+    }
+    return cast null;
+    return cast null;
+  }
+
   public static function inferAudioMimeType(url:String):Null<String> {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
     ext = _Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));

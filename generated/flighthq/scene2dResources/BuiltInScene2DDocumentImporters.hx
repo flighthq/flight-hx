@@ -4,6 +4,7 @@ package flighthq.scene2dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dFormats.LottieDocument.createScene2DFromLottieDocument;
+import flighthq.scene2dFormats.RiveScene2DDocument.createScene2DDocumentFromRiveDocument;
 import flighthq.scene2dFormats.SvgDocument.createScene2DFromSvgDocument;
 import flighthq.scene2dResources.Scene2DDocument.createScene2DDocument;
 import flighthq.scene2dResources.Scene2DDocumentImporterRegistry.registerScene2DDocumentImporter;
@@ -19,8 +20,27 @@ class BuiltInScene2DDocumentImporters {
     _Runtime.callValue(registerScene2DDocumentImporter, cast ([registry, 'lottie', BuiltInScene2DDocumentImporters.matchesLottieDocument__builtInScene2DDocumentImporters, BuiltInScene2DDocumentImporters.importLottieDocument__builtInScene2DDocumentImporters] : Array<Dynamic>));
   }
 
+  public static function registerRiveScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
+    _Runtime.callValue(registerScene2DDocumentImporter, cast ([registry, 'rive', BuiltInScene2DDocumentImporters.matchesRiveDocument__builtInScene2DDocumentImporters, BuiltInScene2DDocumentImporters.importRiveDocument__builtInScene2DDocumentImporters] : Array<Dynamic>));
+  }
+
   public static function registerSvgScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
     _Runtime.callValue(registerScene2DDocumentImporter, cast ([registry, 'svg', BuiltInScene2DDocumentImporters.matchesSvgDocument__builtInScene2DDocumentImporters, BuiltInScene2DDocumentImporters.importSvgDocument__builtInScene2DDocumentImporters] : Array<Dynamic>));
+  }
+
+  public static function importRiveDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, _context:Scene2DDocumentImportContext):Null<Scene2DDocument> {
+    var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
+    var result:Dynamic = cast _Runtime.UNDEFINED;
+    diagnostics = cast ([] : Array<Dynamic>);
+    result = _Runtime.callValue(createScene2DDocumentFromRiveDocument, cast ([source, diagnostics] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
+    return cast _Runtime.callValue(createScene2DDocument, cast ([_Runtime.field(result, 'root'), _Runtime.field(result, 'slots'), 'rive', null, _Runtime.field(result, 'imageResources')] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function matchesRiveDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, _context:Scene2DDocumentImportContext):Bool {
+    return cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(source, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 0.0), 82.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 1.0), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 2.0), 86.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 3.0), 69.0) : Bool));
+    return cast null;
   }
 
   public static function importLottieDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, _context:Scene2DDocumentImportContext):Null<Scene2DDocument> {

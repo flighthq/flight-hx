@@ -18,7 +18,27 @@ typedef GltfAnimationChannel = { var sampler:Float; var target:{ @:optional var 
 
 typedef GltfAnimationSampler = { var input:Float; var output:Float; @:optional var interpolation:String; };
 
-typedef GltfMaterial = { @:optional var name:String; @:optional var pbrMetallicRoughness:GltfPbrMetallicRoughness; @:optional var normalTexture:GltfNormalTextureInfo; @:optional var occlusionTexture:GltfOcclusionTextureInfo; @:optional var emissiveTexture:GltfTextureInfo; @:optional var emissiveFactor:Array<Float>; @:optional var alphaMode:String; @:optional var alphaCutoff:Float; @:optional var doubleSided:Bool; };
+typedef GltfMaterial = { @:optional var name:String; @:optional var pbrMetallicRoughness:GltfPbrMetallicRoughness; @:optional var normalTexture:GltfNormalTextureInfo; @:optional var occlusionTexture:GltfOcclusionTextureInfo; @:optional var emissiveTexture:GltfTextureInfo; @:optional var emissiveFactor:Array<Float>; @:optional var alphaMode:String; @:optional var alphaCutoff:Float; @:optional var doubleSided:Bool; @:optional var extensions:{ @:optional var KHR_materials_anisotropy:GltfMaterialsAnisotropy; @:optional var KHR_materials_clearcoat:GltfMaterialsClearcoat; @:optional var KHR_materials_emissive_strength:GltfMaterialsEmissiveStrength; @:optional var KHR_materials_ior:GltfMaterialsIor; @:optional var KHR_materials_iridescence:GltfMaterialsIridescence; @:optional var KHR_materials_pbrSpecularGlossiness:GltfMaterialsPbrSpecularGlossiness; @:optional var KHR_materials_sheen:GltfMaterialsSheen; @:optional var KHR_materials_unlit:Dynamic; @:optional var KHR_materials_specular:GltfMaterialsSpecular; @:optional var KHR_materials_transmission:GltfMaterialsTransmission; @:optional var KHR_materials_volume:GltfMaterialsVolume; }; };
+
+typedef GltfMaterialsAnisotropy = { @:optional var anisotropyRotation:Float; @:optional var anisotropyStrength:Float; @:optional var anisotropyTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsIor = { @:optional var ior:Float; };
+
+typedef GltfMaterialsIridescence = { @:optional var iridescenceFactor:Float; @:optional var iridescenceIor:Float; @:optional var iridescenceTexture:GltfTextureInfo; @:optional var iridescenceThicknessMaximum:Float; @:optional var iridescenceThicknessMinimum:Float; @:optional var iridescenceThicknessTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsPbrSpecularGlossiness = { @:optional var diffuseFactor:Array<Float>; @:optional var diffuseTexture:GltfTextureInfo; @:optional var glossinessFactor:Float; @:optional var specularFactor:Array<Float>; @:optional var specularGlossinessTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsSpecular = { @:optional var specularColorFactor:Array<Float>; @:optional var specularColorTexture:GltfTextureInfo; @:optional var specularFactor:Float; @:optional var specularTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsTransmission = { @:optional var transmissionFactor:Float; @:optional var transmissionTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsVolume = { @:optional var attenuationColor:Array<Float>; @:optional var attenuationDistance:Float; @:optional var thicknessFactor:Float; @:optional var thicknessTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsClearcoat = { @:optional var clearcoatFactor:Float; @:optional var clearcoatNormalTexture:GltfNormalTextureInfo; @:optional var clearcoatRoughnessFactor:Float; @:optional var clearcoatRoughnessTexture:GltfTextureInfo; @:optional var clearcoatTexture:GltfTextureInfo; };
+
+typedef GltfMaterialsEmissiveStrength = { @:optional var emissiveStrength:Float; };
+
+typedef GltfMaterialsSheen = { @:optional var sheenColorFactor:Array<Float>; @:optional var sheenColorTexture:GltfTextureInfo; @:optional var sheenRoughnessFactor:Float; @:optional var sheenRoughnessTexture:GltfTextureInfo; };
 
 typedef GltfPbrMetallicRoughness = { @:optional var baseColorFactor:Array<Float>; @:optional var baseColorTexture:GltfTextureInfo; @:optional var metallicFactor:Float; @:optional var roughnessFactor:Float; @:optional var metallicRoughnessTexture:GltfTextureInfo; };
 
@@ -30,7 +50,7 @@ typedef GltfNormalTextureInfo = { var index:Float; @:optional var texCoord:Float
 
 typedef GltfOcclusionTextureInfo = { var index:Float; @:optional var texCoord:Float; @:optional var extensions:{ @:optional var KHR_texture_transform:GltfTextureTransform; }; @:optional var strength:Float; };
 
-typedef GltfTexture = { @:optional var sampler:Float; @:optional var source:Float; };
+typedef GltfTexture = { @:optional var extensions:{ @:optional var KHR_texture_basisu:{ var source:Float; }; }; @:optional var sampler:Float; @:optional var source:Float; };
 
 typedef GltfSampler = { @:optional var magFilter:Float; @:optional var minFilter:Float; @:optional var wrapS:Float; @:optional var wrapT:Float; };
 
@@ -46,7 +66,9 @@ typedef GltfMesh = { @:optional var name:String; var primitives:Array<GltfPrimit
 
 typedef GltfMorphTarget = { @:optional var NORMAL:Float; @:optional var POSITION:Float; @:optional var TANGENT:Float; };
 
-typedef GltfPrimitive = { var attributes:{ @:optional var JOINTS_0:Float; @:optional var NORMAL:Float; @:optional var POSITION:Float; @:optional var TANGENT:Float; @:optional var TEXCOORD_0:Float; @:optional var WEIGHTS_0:Float; }; @:optional var indices:Float; @:optional var material:Float; @:optional var mode:Float; @:optional var targets:Array<GltfMorphTarget>; };
+typedef GltfPrimitive = { var attributes:{ @:optional var JOINTS_0:Float; @:optional var NORMAL:Float; @:optional var POSITION:Float; @:optional var TANGENT:Float; @:optional var TEXCOORD_0:Float; @:optional var WEIGHTS_0:Float; }; @:optional var indices:Float; @:optional var material:Float; @:optional var mode:Float; @:optional var extensions:{ @:optional var KHR_draco_mesh_compression:GltfDracoMeshCompression; }; @:optional var targets:Array<GltfMorphTarget>; };
+
+typedef GltfDracoMeshCompression = { var attributes:Dynamic; var bufferView:Float; };
 
 typedef GltfComponentType = Float;
 

@@ -14,6 +14,7 @@ import flighthq.texture.TextureColorSpace.getTextureSampleColorSpace;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.Image;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
 import flighthq.types.Texture.TextureColorSpace;
@@ -71,7 +72,7 @@ class WgpuTextureResolver {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     resolver = ({ final __collection0:Dynamic = _Runtime.field(runtime, 'wgpuTextureResolverRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([3.0, sourceKind] : Array<Dynamic>));
+      _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
     return cast _Runtime.callValue(resolver, cast ([state, texture, premultiply, _Runtime.callValue(getTextureSampleColorSpace, cast ([_Runtime.field(texture, 'colorSpace'), workingColorSpace] : Array<Dynamic>))] : Array<Dynamic>));

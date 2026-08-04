@@ -31,11 +31,11 @@ class MtlParse {
         if ((cast ((cast spaceIndex : Float) < (cast 0.0 : Float)) : Bool)) {
           if ((cast _Runtime.strictEquals(raw, 'newmtl') : Bool)) {
             _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Drop, 'mtl.newmtl-no-name', '', { firstLine: (i + 1.0) }] : Array<Dynamic>));
-          } else { if ((cast ((cast ((cast _Runtime.strictEquals(raw, 'Ka') : Bool) || (cast _Runtime.strictEquals(raw, 'Kd') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ks') : Bool)) : Bool)) {
+          } else { if ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'Ka') : Bool) || (cast _Runtime.strictEquals(raw, 'Kd') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ks') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ke') : Bool)) : Bool)) {
             if ((cast _Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); } else { _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Recover, 'mtl.color-malformed', 'too-few-components', { firstDirective: raw, firstLine: (i + 1.0), reason: 'too-few-components' }] : Array<Dynamic>)); }
-          } else { if ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'Ns') : Bool) || (cast _Runtime.strictEquals(raw, 'd') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Tr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'illum') : Bool)) : Bool)) {
+          } else { if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'Ns') : Bool) || (cast _Runtime.strictEquals(raw, 'd') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Tr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'illum') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pm') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ps') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pc') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pcr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'aniso') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'anisor') : Bool)) : Bool)) {
             if ((cast _Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); }
-          } else { if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'map_Kd') : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ka') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ks') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Bump') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'bump') : Bool)) : Bool)) {
+          } else { if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'map_Kd') : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ka') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ks') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Bump') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'bump') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_d') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ke') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Pr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Pm') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'norm') : Bool)) : Bool)) {
             if ((cast _Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); } else { _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Drop, 'mtl.map-no-filename', raw, { directive: raw, firstLine: (i + 1.0) }] : Array<Dynamic>)); }
           } } } }
           i++;
@@ -158,6 +158,131 @@ class MtlParse {
                 (current.mapBump = cast (args : Dynamic));
               }
             }
+            else if (__switchValue == 'Ke') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.emissive = cast (c : Dynamic)); }
+              }
+            }
+            else if (__switchValue == 'Pr') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.roughness = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'Pm') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.metallic = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'Ps') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.sheen = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'Pc') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.clearcoat = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'Pcr') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.clearcoatRoughness = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'aniso') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.anisotropy = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'anisor') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                var v:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.anisotropyRotation = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+              }
+            }
+            else if (__switchValue == 'map_d') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapDissolve = cast (args : Dynamic));
+              }
+            }
+            else if (__switchValue == 'map_Ke') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapEmissive = cast (args : Dynamic));
+              }
+            }
+            else if (__switchValue == 'map_Pr') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapRoughness = cast (args : Dynamic));
+              }
+            }
+            else if (__switchValue == 'map_Pm') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapMetallic = cast (args : Dynamic));
+              }
+            }
+            else if (__switchValue == 'norm') {
+              {
+                if ((cast _Runtime.strictEquals(current, null) : Bool)) {
+                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  break;
+                }
+                (current.mapNormal = cast (args : Dynamic));
+              }
+            }
             else  {
             }
           } while (false);
@@ -175,7 +300,7 @@ class MtlParse {
   }
 
   public static function createDefaultObjMaterial__mtlParse(name:String):ObjMaterial {
-    return cast { ambient: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), diffuse: cast ([0.8, 0.8, 0.8] : Array<Dynamic>), dissolve: 1.0, illumination: 2.0, mapAmbient: null, mapBump: null, mapDiffuse: null, mapSpecular: null, name: name, specular: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), specularExponent: 0.0 };
+    return cast { ambient: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), anisotropy: null, anisotropyRotation: null, clearcoat: null, clearcoatRoughness: null, diffuse: cast ([0.8, 0.8, 0.8] : Array<Dynamic>), dissolve: 1.0, emissive: null, illumination: 2.0, mapAmbient: null, mapBump: null, mapDiffuse: null, mapDissolve: null, mapEmissive: null, mapMetallic: null, mapNormal: null, mapRoughness: null, mapSpecular: null, metallic: null, name: name, roughness: null, sheen: null, specular: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), specularExponent: 0.0 };
     return cast null;
   }
 

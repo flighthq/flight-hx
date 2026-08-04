@@ -358,7 +358,8 @@ class SpineParse {
             c++;
           }
         }
-        var rebase:Dynamic = function(c:Float) {
+        var rebase:Dynamic = cast _Runtime.UNDEFINED;
+        rebase = function(c:Float) {
           var from:Dynamic = cast _Runtime.UNDEFINED;
           var rise:Dynamic = cast _Runtime.UNDEFINED;
           var offset:Dynamic = cast _Runtime.UNDEFINED;

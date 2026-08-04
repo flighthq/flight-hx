@@ -7,7 +7,7 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Texture.TextureColorSpace;
 
-typedef GlScene3DShadow = { var matrix:Matrix4; var texture:Dynamic; };
+typedef GlScene3DShadow = { var enabled:Bool; var matrix:Matrix4; var normalBiasWorld:Float; var pcfRadius:Float; var shadowBias:Float; var texture:Dynamic; };
 
 typedef GlScene3DIbl = { var brdfLut:Dynamic; var intensity:Float; var irradianceCube:Dynamic; var prefilteredCube:Dynamic; var prefilteredMipCount:Float; };
 

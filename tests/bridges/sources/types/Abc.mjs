@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const AbcMultinameKind = api.AbcMultinameKindValue;
+export const AbcOpcode = api.AbcOpcodeValue;
 export const AbcTraitKind = api.AbcTraitKindValue;

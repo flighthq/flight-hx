@@ -3,32 +3,17 @@ package flighthq.scene3dResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.image.ImageResourceReference.resetFailedImageResourceReference;
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DResourceTextures;
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DTextureResourceReference;
 import flighthq.scene3dResources.ResolveScene3DResources.updateScene3DResourceStreaming;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
-import flighthq.types.ResourceResolutionState;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
 import flighthq.types.Texture;
-import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
 class SceneResourceRecovery {
-  public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
-    return cast { failure: ((cast _Runtime.strictEquals(_Runtime.field(ref, 'failure'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.mergeObjects([_Runtime.field(ref, 'failure')]) : Dynamic)), kind: _Runtime.field(ref, 'kind'), retryable: _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed), state: _Runtime.field(ref, 'state') };
-    return cast null;
-  }
-
-  public static function resetFailedImageResourceReference(ref:ImageResourceReference):Bool {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed) : Bool)) { return cast false; }
-    _Runtime.setField(ref, 'failure', null);
-    _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
-    return cast true;
-    return cast null;
-  }
-
   public static function retryFailedScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):Float {
     var textures:Array<Texture> = cast _Runtime.UNDEFINED;
     var reset:Dynamic = cast _Runtime.UNDEFINED;

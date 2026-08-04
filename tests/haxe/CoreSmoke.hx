@@ -110,6 +110,18 @@ class CoreSmoke {
     final decoded = _Runtime.callProperty(decoder, 'decode', [new flighthq._internal._UInt8Array([104, 105])]);
     if (decoded != 'hi') throw 'portable TextDecoder failed';
 
+    final buffer = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [4]);
+    final view = _Runtime.construct(_Runtime.globalValue('DataView'), [buffer]);
+    final bytes = new flighthq._internal._UInt8Array(_Runtime.field(view, 'buffer'));
+    _Runtime.callProperty(view, 'setUint32', [0, 0x01020304, true]);
+    if (flighthq._internal._StaticIndex.readUint8Array(bytes, 0) != 4) {
+      throw 'portable ArrayBuffer DataView-to-typed-array sharing failed';
+    }
+    flighthq._internal._StaticIndex.writeUint8Array(bytes, 3, 8);
+    if (_Runtime.callProperty(view, 'getUint32', [0, true]) != 0x08020304) {
+      throw 'portable ArrayBuffer typed-array-to-DataView sharing failed';
+    }
+
     var asyncValue = 0;
     _Async.flatMap(_Async.resolve(4), function(value:Int) {
       asyncValue = value + 1;

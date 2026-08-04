@@ -7,7 +7,7 @@
   ],
   "modules": [
     {
-      "declarations": 1,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.abc.Abc"
     },
@@ -15,6 +15,11 @@
       "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.abc.AbcFile"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flighthq.abc.AbcInstruction"
     },
     {
       "declarations": 0,
@@ -272,12 +277,17 @@
       "module": "flighthq.assets.ExplainAssetLoad"
     },
     {
-      "declarations": 20,
+      "declarations": 34,
       "diagnostics": [],
       "module": "flighthq.audio.Audio"
     },
     {
-      "declarations": 3,
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.audio.AudioDecoderRegistry"
+    },
+    {
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.audio.AudioFormat"
     },
@@ -290,6 +300,11 @@
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.audio.AudioResourceFrom"
+    },
+    {
+      "declarations": 8,
+      "diagnostics": [],
+      "module": "flighthq.audio.AudioResourceReference"
     },
     {
       "declarations": 0,
@@ -627,7 +642,7 @@
       "module": "flighthq.camera.Basis"
     },
     {
-      "declarations": 41,
+      "declarations": 42,
       "diagnostics": [],
       "module": "flighthq.camera.Camera"
     },
@@ -672,7 +687,7 @@
       "module": "flighthq.camera.Picking"
     },
     {
-      "declarations": 5,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.camera.Projection"
     },
@@ -802,7 +817,7 @@
       "module": "flighthq.collision.CollideContactManifold"
     },
     {
-      "declarations": 36,
+      "declarations": 40,
       "diagnostics": [],
       "module": "flighthq.collision.Collision"
     },
@@ -852,6 +867,11 @@
       "module": "flighthq.collision.PointContainment"
     },
     {
+      "declarations": 16,
+      "diagnostics": [],
+      "module": "flighthq.collision.RaycastCollisionShape"
+    },
+    {
       "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.collision.SegmentCollision"
@@ -865,6 +885,11 @@
       "declarations": 23,
       "diagnostics": [],
       "module": "flighthq.collision.ShapeContact"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "module": "flighthq.collision.SweepCollisionShape"
     },
     {
       "declarations": 4,
@@ -2737,7 +2762,7 @@
       "module": "flighthq.image.Contract"
     },
     {
-      "declarations": 13,
+      "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.image.Image"
     },
@@ -2750,6 +2775,11 @@
       "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.image.ImageResourceFrom"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.image.ImageResourceReference"
     },
     {
       "declarations": 0,
@@ -3507,12 +3537,12 @@
       "module": "flighthq.node.HasTransform3d"
     },
     {
-      "declarations": 25,
+      "declarations": 26,
       "diagnostics": [],
       "module": "flighthq.node.Hierarchy"
     },
     {
-      "declarations": 83,
+      "declarations": 97,
       "diagnostics": [],
       "module": "flighthq.node.Node"
     },
@@ -3520,6 +3550,11 @@
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.node.NodeColorAdjustment"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flighthq.node.NodeOrderList"
     },
     {
       "declarations": 12,
@@ -3532,7 +3567,7 @@
       "module": "flighthq.node.NodeTransform3d"
     },
     {
-      "declarations": 16,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.node.Revision"
     },
@@ -3794,6 +3829,11 @@
     {
       "declarations": 2,
       "diagnostics": [],
+      "module": "flighthq.path.ExplainPathMorphCreation"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
       "module": "flighthq.path.ExplainStrokePathTessellation"
     },
     {
@@ -3847,7 +3887,7 @@
       "module": "flighthq.path.GetPathSignedArea"
     },
     {
-      "declarations": 56,
+      "declarations": 59,
       "diagnostics": [],
       "module": "flighthq.path.Path"
     },
@@ -3855,6 +3895,16 @@
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.path.PathMeshPool"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.path.PathMorph"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "module": "flighthq.path.PathMorphGeometry"
     },
     {
       "declarations": 5,
@@ -3972,6 +4022,11 @@
       "module": "flighthq.permissions.Permissions"
     },
     {
+      "declarations": 7,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.Broadphase"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.physics2d.ColliderTransform"
@@ -3982,17 +4037,42 @@
       "module": "flighthq.physics2d.Contract"
     },
     {
-      "declarations": 7,
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.DebugGeometry"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.ExplainPhysics2DJoints"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.ExplainPhysics2DStep"
+    },
+    {
+      "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.physics2d.Islands"
     },
     {
-      "declarations": 5,
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.JointCollisionSuppression"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.JointFactories"
+    },
+    {
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.physics2d.JointRegistry"
     },
     {
-      "declarations": 20,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flighthq.physics2d.Joints"
     },
@@ -4002,24 +4082,49 @@
       "module": "flighthq.physics2d.MassProperties"
     },
     {
-      "declarations": 36,
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.Material"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.Ownership"
+    },
+    {
+      "declarations": 83,
       "diagnostics": [],
       "module": "flighthq.physics2d.Physics2d"
     },
     {
-      "declarations": 7,
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.RegisterBuiltInPhysics2DJointSolvers"
+    },
+    {
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.physics2d.Solver"
     },
     {
-      "declarations": 16,
+      "declarations": 50,
       "diagnostics": [],
       "module": "flighthq.physics2d.Step"
     },
     {
-      "declarations": 8,
+      "declarations": 13,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.StepValidation"
+    },
+    {
+      "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.physics2d.World"
+    },
+    {
+      "declarations": 21,
+      "diagnostics": [],
+      "module": "flighthq.physics2d.WorldQueries"
     },
     {
       "declarations": 0,
@@ -4232,7 +4337,7 @@
       "module": "flighthq.renderGl.GlCompressedTexture"
     },
     {
-      "declarations": 30,
+      "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.renderGl.GlDraw"
     },
@@ -4392,7 +4497,7 @@
       "module": "flighthq.renderWgpu.WgpuCompressedTexture"
     },
     {
-      "declarations": 27,
+      "declarations": 26,
       "diagnostics": [],
       "module": "flighthq.renderWgpu.WgpuDraw"
     },
@@ -4602,7 +4707,7 @@
       "module": "flighthq.scene2dCanvas.CanvasQuadBatch"
     },
     {
-      "declarations": 6,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasRenderState"
     },
@@ -4622,7 +4727,7 @@
       "module": "flighthq.scene2dCanvas.CanvasRenderTexturePool"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasRenderTextureResolver"
     },
@@ -4637,12 +4742,12 @@
       "module": "flighthq.scene2dCanvas.CanvasScale9Mapper"
     },
     {
-      "declarations": 7,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasScale9Shape"
     },
     {
-      "declarations": 5,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasShape"
     },
@@ -4652,7 +4757,12 @@
       "module": "flighthq.scene2dCanvas.CanvasShapeCommands"
     },
     {
-      "declarations": 4,
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene2dCanvas.CanvasShapeRasterizer"
+    },
+    {
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasShapeRegistry"
     },
@@ -4677,7 +4787,7 @@
       "module": "flighthq.scene2dCanvas.CanvasTextMeasure"
     },
     {
-      "declarations": 2,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasTextureResolver"
     },
@@ -4712,7 +4822,7 @@
       "module": "flighthq.scene2dCanvas.ExplainCanvasTextureResolution"
     },
     {
-      "declarations": 55,
+      "declarations": 60,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.Scene2dCanvas"
     },
@@ -4817,9 +4927,14 @@
       "module": "flighthq.scene2dDom.DomScale9Shape"
     },
     {
-      "declarations": 4,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.scene2dDom.DomShape"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.scene2dDom.DomShapeRasterizer"
     },
     {
       "declarations": 7,
@@ -4867,7 +4982,7 @@
       "module": "flighthq.scene2dDom.ExplainDomTextureResolution"
     },
     {
-      "declarations": 19,
+      "declarations": 22,
       "diagnostics": [],
       "module": "flighthq.scene2dDom.Scene2dDom"
     },
@@ -4877,12 +4992,87 @@
       "module": "flighthq.scene2dFormats.Contract"
     },
     {
-      "declarations": 59,
+      "declarations": 64,
       "diagnostics": [],
       "module": "flighthq.scene2dFormats.LottieDocument"
     },
     {
-      "declarations": 3,
+      "declarations": 45,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveAnimation"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveAssets"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveClipping"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveCoreProperties"
+    },
+    {
+      "declarations": 7,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveCoreTypes"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveDocument"
+    },
+    {
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveDrawOrder"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveObjectGraph"
+    },
+    {
+      "declarations": 39,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveScene2D"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveScene2DDocument"
+    },
+    {
+      "declarations": 49,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveShapePaint"
+    },
+    {
+      "declarations": 51,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveShapePath"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveSolo"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveStateMachine"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flighthq.scene2dFormats.RiveText"
+    },
+    {
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.scene2dFormats.Scene2dFormats"
     },
@@ -4937,6 +5127,11 @@
       "module": "flighthq.scene2dGl.GlColorAdjustmentMaterialFeature"
     },
     {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.scene2dGl.GlMeshShapeRenderer"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.GlNode2D"
@@ -4957,6 +5152,11 @@
       "module": "flighthq.scene2dGl.GlQuadBatchWriter"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.scene2dGl.GlRasterShapeRenderer"
+    },
+    {
       "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.GlRichText"
@@ -4967,19 +5167,29 @@
       "module": "flighthq.scene2dGl.GlScale9Mapper"
     },
     {
-      "declarations": 10,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.GlScale9Shape"
     },
     {
-      "declarations": 9,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.GlShape"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.scene2dGl.GlShapeData"
     },
     {
       "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.GlShapeMesh"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.scene2dGl.GlShapeRasterizer"
     },
     {
       "declarations": 2,
@@ -5012,12 +5222,12 @@
       "module": "flighthq.scene2dGl.GlVelocity"
     },
     {
-      "declarations": 27,
+      "declarations": 32,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.Scene2dGl"
     },
     {
-      "declarations": 9,
+      "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.scene2dResources.BuiltInScene2DDocumentImporters"
     },
@@ -5027,22 +5237,22 @@
       "module": "flighthq.scene2dResources.Contract"
     },
     {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.scene2dResources.LoadScene2DResources"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
-      "module": "flighthq.scene2dResources.ResolveScene2DResources"
+      "module": "flighthq.scene2dResources.LoadScene2DAudioResources"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.scene2dResources.LoadScene2DImageResources"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.scene2dResources.Scene2DContentReference"
+      "module": "flighthq.scene2dResources.ResolveScene2DResources"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.scene2dResources.Scene2DDocument"
     },
@@ -5057,9 +5267,14 @@
       "module": "flighthq.scene2dResources.Scene2DDocumentSource"
     },
     {
-      "declarations": 12,
+      "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.scene2dResources.Scene2dResources"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene2dResources.Scene2DSlotReference"
     },
     {
       "declarations": 0,
@@ -5077,7 +5292,7 @@
       "module": "flighthq.scene2dWgpu.EnableWgpuStrokePathTessellation"
     },
     {
-      "declarations": 28,
+      "declarations": 33,
       "diagnostics": [],
       "module": "flighthq.scene2dWgpu.Scene2dWgpu"
     },
@@ -5112,6 +5327,11 @@
       "module": "flighthq.scene2dWgpu.WgpuColorAdjustmentMaterialFeature"
     },
     {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.scene2dWgpu.WgpuMeshShapeRenderer"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.scene2dWgpu.WgpuNode2D"
@@ -5134,6 +5354,11 @@
     {
       "declarations": 2,
       "diagnostics": [],
+      "module": "flighthq.scene2dWgpu.WgpuRasterShapeRenderer"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
       "module": "flighthq.scene2dWgpu.WgpuRendererData"
     },
     {
@@ -5152,19 +5377,29 @@
       "module": "flighthq.scene2dWgpu.WgpuScale9Mapper"
     },
     {
-      "declarations": 9,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.scene2dWgpu.WgpuScale9Shape"
     },
     {
-      "declarations": 7,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.scene2dWgpu.WgpuShape"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.scene2dWgpu.WgpuShapeData"
     },
     {
       "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.scene2dWgpu.WgpuShapeMesh"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.scene2dWgpu.WgpuShapeRasterizer"
     },
     {
       "declarations": 2,
@@ -5227,7 +5462,7 @@
       "module": "flighthq.scene3d.Scene"
     },
     {
-      "declarations": 33,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flighthq.scene3d.Scene3d"
     },
@@ -5245,6 +5480,11 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.scene3d.SceneDocumentLights"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.scene3d.SceneKindUsage"
     },
     {
       "declarations": 4,
@@ -5282,12 +5522,12 @@
       "module": "flighthq.scene3d.SceneNodeTransform"
     },
     {
-      "declarations": 59,
+      "declarations": 71,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.Awd2Parse"
     },
     {
-      "declarations": 64,
+      "declarations": 80,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.Awd2Schema"
     },
@@ -5297,7 +5537,37 @@
       "module": "flighthq.scene3dFormats.Contract"
     },
     {
-      "declarations": 64,
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfAnisotropy"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfClearcoat"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfDraco"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfEmissiveStrength"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfIridescence"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfMaterialExtension"
+    },
+    {
+      "declarations": 67,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.GltfParse"
     },
@@ -5305,6 +5575,31 @@
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.GltfPunctualLights"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfSheen"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfSpecular"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfSpecularGlossiness"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfTransmissionVolume"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dFormats.GltfUnlit"
     },
     {
       "declarations": 13,
@@ -5332,12 +5627,12 @@
       "module": "flighthq.scene3dFormats.MtlParse"
     },
     {
-      "declarations": 14,
+      "declarations": 21,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.ObjParse"
     },
     {
-      "declarations": 22,
+      "declarations": 37,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.Scene3dFormats"
     },
@@ -5347,12 +5642,12 @@
       "module": "flighthq.scene3dFormats.SceneSkeleton"
     },
     {
-      "declarations": 14,
+      "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.Shared"
     },
     {
-      "declarations": 23,
+      "declarations": 38,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.ThreeDsParse"
     },
@@ -5422,6 +5717,11 @@
       "module": "flighthq.scene3dGl.EnableGlScene3DForwardLightSelectionGuards"
     },
     {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.scene3dGl.ExplainGlScene3DCoverage"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.scene3dGl.ExplainGlScene3DForwardLightSelection"
@@ -5457,7 +5757,7 @@
       "module": "flighthq.scene3dGl.GlEnvironmentSkybox"
     },
     {
-      "declarations": 12,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.scene3dGl.GlLitProgram"
     },
@@ -5612,7 +5912,7 @@
       "module": "flighthq.scene3dGl.RegisterGlStandardPbrMaterial"
     },
     {
-      "declarations": 48,
+      "declarations": 50,
       "diagnostics": [],
       "module": "flighthq.scene3dGl.Scene3dGl"
     },
@@ -5697,7 +5997,7 @@
       "module": "flighthq.scene3dResources.EnableScene3DResourceFailureGuards"
     },
     {
-      "declarations": 3,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.scene3dResources.GetScene3DResourceTextures"
     },
@@ -5737,7 +6037,7 @@
       "module": "flighthq.scene3dResources.ObjLoad"
     },
     {
-      "declarations": 12,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.scene3dResources.ResolveScene3DResources"
     },
@@ -5757,12 +6057,12 @@
       "module": "flighthq.scene3dResources.SceneDocumentSource"
     },
     {
-      "declarations": 9,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.scene3dResources.SceneMaterialTextureRegistry"
     },
     {
-      "declarations": 3,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.scene3dResources.SceneResourceRecovery"
     },
@@ -5775,6 +6075,11 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.scene3dResources.SceneResourceSignals"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.scene3dResources.ShadedScene3DMaterialTextures"
     },
     {
       "declarations": 1,
@@ -5957,7 +6262,7 @@
       "module": "flighthq.scene3dWgpu.WgpuMeshMaterialRegistry"
     },
     {
-      "declarations": 53,
+      "declarations": 55,
       "diagnostics": [],
       "module": "flighthq.scene3dWgpu.WgpuMeshPipeline"
     },
@@ -6007,7 +6312,7 @@
       "module": "flighthq.scene3dWgpu.WgpuShadowMap"
     },
     {
-      "declarations": 12,
+      "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.scene3dWgpu.WgpuSkinPalette"
     },
@@ -6112,7 +6417,7 @@
       "module": "flighthq.sdk.Scene3d"
     },
     {
-      "declarations": 4114,
+      "declarations": 4288,
       "diagnostics": [],
       "module": "flighthq.sdk.Sdk"
     },
@@ -6232,12 +6537,42 @@
       "module": "flighthq.shape.Contract"
     },
     {
+      "declarations": 8,
+      "diagnostics": [],
+      "module": "flighthq.shape.ExplainMorphShapeGradientEndpoints"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.shape.ExplainShapeTessellation"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.shape.MorphShape"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.shape.MorphShapeAnimation"
+    },
+    {
+      "declarations": 16,
+      "diagnostics": [],
+      "module": "flighthq.shape.MorphShapePaint"
+    },
+    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.shape.Scale9Shape"
     },
     {
-      "declarations": 45,
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.shape.Scale9ShapeCommands"
+    },
+    {
+      "declarations": 57,
       "diagnostics": [],
       "module": "flighthq.shape.Shape"
     },
@@ -6250,16 +6585,6 @@
       "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.shape.ShapeFill"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.shape.ShapeHitTestBuiltins"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.shape.ShapeHitTestRegistry"
     },
     {
       "declarations": 3,
@@ -6702,19 +7027,34 @@
       "module": "flighthq.swf.Contract"
     },
     {
-      "declarations": 3,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.swf.Swf"
     },
     {
-      "declarations": 147,
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flighthq.swf.SwfBitmap"
+    },
+    {
+      "declarations": 206,
       "diagnostics": [],
       "module": "flighthq.swf.SwfDocument"
     },
     {
-      "declarations": 14,
+      "declarations": 21,
+      "diagnostics": [],
+      "module": "flighthq.swf.SwfEditText"
+    },
+    {
+      "declarations": 24,
       "diagnostics": [],
       "module": "flighthq.swf.SwfFrameAction"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "module": "flighthq.swf.SwfMorphShape"
     },
     {
       "declarations": 1,
@@ -6722,7 +7062,7 @@
       "module": "flighthq.swf.SwfReader"
     },
     {
-      "declarations": 54,
+      "declarations": 65,
       "diagnostics": [],
       "module": "flighthq.swf.SwfShape"
     },
@@ -7242,7 +7582,7 @@
       "module": "flighthq.timeline.Contract"
     },
     {
-      "declarations": 29,
+      "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.timeline.Timeline"
     },
@@ -7347,6 +7687,11 @@
       "module": "flighthq.types._internal._AttractorForceValues"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types._internal._AudioResourceReferenceValues"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types._internal._BillboardValues"
@@ -7412,7 +7757,7 @@
       "module": "flighthq.types._internal._DeviceFormFactorValues"
     },
     {
-      "declarations": 1,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types._internal._DirectionalLightValues"
     },
@@ -7569,6 +7914,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types._internal._MorphShapeValues"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types._internal._MouseButtonValues"
     },
     {
@@ -7684,17 +8034,22 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.types._internal._Scale9ShapeValues"
+      "module": "flighthq.types._internal._RiveDocumentValues"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.types._internal._Scene2DDocumentValues"
+      "module": "flighthq.types._internal._Scale9ShapeValues"
     },
     {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.types._internal._Scene3DAnimationPathValues"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types._internal._Scene3DCoverageGapValues"
     },
     {
       "declarations": 12,
@@ -7802,6 +8157,11 @@
       "module": "flighthq.types._internal._TilemapValues"
     },
     {
+      "declarations": 8,
+      "diagnostics": [],
+      "module": "flighthq.types._internal._TimelineCueValues"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types._internal._ToonMaterialValues"
@@ -7862,7 +8222,7 @@
       "module": "flighthq.types.Aabb"
     },
     {
-      "declarations": 18,
+      "declarations": 21,
       "diagnostics": [],
       "module": "flighthq.types.Abc"
     },
@@ -8080,6 +8440,11 @@
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.types.AudioResource"
+    },
+    {
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flighthq.types.AudioResourceReference"
     },
     {
       "declarations": 1,
@@ -8412,7 +8777,7 @@
       "module": "flighthq.types.CanvasTextShaperBackend"
     },
     {
-      "declarations": 1,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.CanvasTextureResolver"
     },
@@ -8507,7 +8872,7 @@
       "module": "flighthq.types.CocosPlistSchema"
     },
     {
-      "declarations": 14,
+      "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.types.Collision"
     },
@@ -9207,6 +9572,11 @@
       "module": "flighthq.types.GlShapeMeshBinding"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlShapeRendererData"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.GlSkinPaletteTexture"
@@ -9232,12 +9602,17 @@
       "module": "flighthq.types.GlTextureWrapKind"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GltfDraco"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types.GltfExtension"
     },
     {
-      "declarations": 27,
+      "declarations": 38,
       "diagnostics": [],
       "module": "flighthq.types.GltfSchema"
     },
@@ -9457,7 +9832,7 @@
       "module": "flighthq.types.ImageFormat"
     },
     {
-      "declarations": 8,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.types.ImageResourceReference"
     },
@@ -9692,7 +10067,7 @@
       "module": "flighthq.types.LottieDocument"
     },
     {
-      "declarations": 2,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types.LottieDocumentImport"
     },
@@ -9852,6 +10227,16 @@
       "module": "flighthq.types.ModifierSlot"
     },
     {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flighthq.types.MorphShape"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.MorphShapeAnimationTarget"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.MorphTarget"
@@ -9945,6 +10330,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.NodeInteractionState"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.NodeOrderList"
     },
     {
       "declarations": 1,
@@ -10144,6 +10534,21 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.PathMorph"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.PathMorphCreationExplanation"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.PathMorphCreationReason"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.PathOffsetEnd"
     },
     {
@@ -10182,7 +10587,7 @@
       "module": "flighthq.types.PhongMaterial"
     },
     {
-      "declarations": 19,
+      "declarations": 50,
       "diagnostics": [],
       "module": "flighthq.types.Physics2D"
     },
@@ -10527,6 +10932,11 @@
       "module": "flighthq.types.RimModifierOptions"
     },
     {
+      "declarations": 21,
+      "diagnostics": [],
+      "module": "flighthq.types.RiveDocument"
+    },
+    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.types.Sampler"
@@ -10567,7 +10977,7 @@
       "module": "flighthq.types.Scene2DDisplayState"
     },
     {
-      "declarations": 6,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.Scene2DDocument"
     },
@@ -10597,7 +11007,7 @@
       "module": "flighthq.types.Scene2DRenderExplanation"
     },
     {
-      "declarations": 16,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.types.Scene2DResources"
     },
@@ -10627,6 +11037,11 @@
       "module": "flighthq.types.Scene3DAnimationTarget"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.Scene3DCoverageGap"
+    },
+    {
       "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.types.Scene3DDocument"
@@ -10645,6 +11060,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.Scene3DHit"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.Scene3DKindUsage"
     },
     {
       "declarations": 1,
@@ -10677,7 +11097,7 @@
       "module": "flighthq.types.Scene3DRenderProxy"
     },
     {
-      "declarations": 21,
+      "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.types.Scene3DResources"
     },
@@ -10747,7 +11167,7 @@
       "module": "flighthq.types.Shape"
     },
     {
-      "declarations": 12,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.types.ShapeCommand"
     },
@@ -10769,7 +11189,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.ShapeRasterizer"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.ShapeStrokeRegion"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.types.ShapeTessellationExplanation"
     },
     {
       "declarations": 4,
@@ -11139,6 +11569,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.SwfMorphShapePaths"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.TaaEffect"
     },
     {
@@ -11402,7 +11837,7 @@
       "module": "flighthq.types.TextVerticalAlign"
     },
     {
-      "declarations": 29,
+      "declarations": 44,
       "diagnostics": [],
       "module": "flighthq.types.ThreeDsSchema"
     },
@@ -11465,6 +11900,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.Timeline"
+    },
+    {
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flighthq.types.TimelineCue"
     },
     {
       "declarations": 1,
@@ -11592,7 +12032,7 @@
       "module": "flighthq.types.TweenStaggerOptions"
     },
     {
-      "declarations": 253,
+      "declarations": 281,
       "diagnostics": [],
       "module": "flighthq.types.Types"
     },
@@ -11902,6 +12342,11 @@
       "module": "flighthq.types.WgpuShapeMesh"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuShapeRendererData"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.WgpuSkinningAdapter"
@@ -12062,7 +12507,7 @@
       "module": "flighthq.xml.Xml"
     },
     {
-      "declarations": 9,
+      "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.xml.XmlParse"
     },
@@ -12074,10 +12519,10 @@
   ],
   "schemaVersion": 3,
   "staticLowering": {
-    "booleanAndExpressions": 1712,
-    "booleanConditionalExpressions": 2414,
-    "booleanOrExpressions": 2025,
-    "booleanTruthinessUses": 11001,
+    "booleanAndExpressions": 1899,
+    "booleanConditionalExpressions": 2644,
+    "booleanOrExpressions": 2357,
+    "booleanTruthinessUses": 12346,
     "destructuringEscapes": {
       "regexp-result-array": {
         "assignment": 0,
@@ -12097,9 +12542,9 @@
         "proven": 28
       },
       "declaration": {
-        "direct": 223,
+        "direct": 230,
         "parked": 12,
-        "proven": 223
+        "proven": 230
       },
       "parameter": {
         "direct": 11,
@@ -12110,7 +12555,7 @@
     "destructuringReceivers": {
       "Array": {
         "assignment": 28,
-        "declaration": 223,
+        "declaration": 230,
         "parameter": 11
       },
       "ArrayOrFloat32Array": {
@@ -12174,21 +12619,21 @@
       "asyncFlowForOfValues": 8
     },
     "indexedAccesses": {
-      "reads": 6249,
-      "writes": 3261
+      "reads": 6852,
+      "writes": 3347
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 3857,
-        "writes": 599
+        "reads": 4395,
+        "writes": 688
       },
       "ArrayOrFloat32Array": {
         "reads": 8,
         "writes": 39
       },
       "Float32Array": {
-        "reads": 1568,
-        "writes": 2078
+        "reads": 1579,
+        "writes": 2067
       },
       "Float64Array": {
         "reads": 70,
@@ -12219,20 +12664,20 @@
         "writes": 26
       },
       "Uint8Array": {
-        "reads": 267,
-        "writes": 35
+        "reads": 329,
+        "writes": 39
       },
       "Uint8ClampedArray": {
-        "reads": 357,
-        "writes": 375
+        "reads": 349,
+        "writes": 379
       }
     },
-    "numericRelations": 5328,
+    "numericRelations": 5796,
     "syntheticArrayReads": {
       "highArityArguments": 27,
-      "iterationBindings": 112
+      "iterationBindings": 136
     },
-    "typedArraySetCalls": 68,
+    "typedArraySetCalls": 71,
     "typedArraySetReceivers": {
       "Float32Array": 34,
       "Float64Array": 0,
@@ -12242,7 +12687,7 @@
       "Uint16Array": 4,
       "Uint16ArrayOrUint32Array": 1,
       "Uint32Array": 7,
-      "Uint8Array": 12,
+      "Uint8Array": 15,
       "Uint8ClampedArray": 9
     }
   }

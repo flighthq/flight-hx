@@ -3,24 +3,28 @@ package flighthq.scene2dCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
+import flighthq.types.RenderState;
 import flighthq.types.ShapeCommand.ShapeCommandKey;
 
 class CanvasShapeRegistry {
-  public static final registry__canvasShapeRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
-
-  public static function getCanvasShapeCommand(key:String):Null<Dynamic> {
-    return cast ((cast CanvasShapeRegistry.registry__canvasShapeRegistry : flighthq._internal._Map).get(key));
+  public static function getCanvasShapeCommand(state:RenderState, key:String):Null<Dynamic> {
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasShapeCommandRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(key)); }), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerCanvasShapeCommand<K>(command:Dynamic):Void {
-    ((cast CanvasShapeRegistry.registry__canvasShapeRegistry : flighthq._internal._Map).set(_Runtime.field(command, 'key'), (cast command : Dynamic)));
+  public static function registerCanvasShapeCommand<K>(state:RenderState, command:Dynamic):Void {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var registry:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    registry = _Runtime.setField(runtime, 'canvasShapeCommandRegistry', (_Runtime.field(runtime, 'canvasShapeCommandRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
+    ((cast registry : flighthq._internal._Map).set(_Runtime.field(command, 'key'), command));
   }
 
-  public static function registerCanvasShapeCommands(commands:Array<Dynamic>):Void {
+  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
     for (command in _Runtime.iterable(commands)) {
-      _Runtime.callValue(registerCanvasShapeCommand, cast ([command] : Array<Dynamic>));
+      _Runtime.callValue(registerCanvasShapeCommand, cast ([state, command] : Array<Dynamic>));
     }
   }
 }

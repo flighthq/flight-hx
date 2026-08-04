@@ -3,6 +3,8 @@ package flighthq.swf;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.audio.AudioResource.createAudioResource;
+import flighthq.audio.AudioResourceReference.createEmbeddedAudioResourceReference;
 import flighthq.clip.ClipRegion.createClipRegionFromContours;
 import flighthq.clip.ClipRegion.createClipRegionFromPath;
 import flighthq.compression.Decompressor.getDecompressor;
@@ -10,46 +12,81 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.geometry.Matrix.multiplyMatrix;
+import flighthq.image.ImageResourceReference.createEmbeddedImageResourceReference;
 import flighthq.movieclip.MovieClip.addMovieClipFrameScript;
 import flighthq.movieclip.MovieClip.createMovieClip;
 import flighthq.movieclip.MovieClip.setMovieClipSource;
 import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.node.Hierarchy.removeNodeChild;
 import flighthq.node.Node.getNodeRuntime;
+import flighthq.node.NodeOrderList.addNodeOrderListEntry;
+import flighthq.node.NodeOrderList.applyNodeOrderList;
+import flighthq.node.NodeOrderList.clearNodeOrderList;
+import flighthq.node.NodeOrderList.createNodeOrderList;
 import flighthq.node.NodeTransform2d.setNodeLocalMatrix;
+import flighthq.node.Revision.invalidateNodeAppearance;
+import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.scene2d.DisplayContainer.createDisplayObject;
 import flighthq.scene2d.DisplayObject.setNode2DClip;
-import flighthq.scene2dResources.Scene2DDocument.createScene2DAssetReference;
+import flighthq.scene2d.Sprite.createSprite;
 import flighthq.scene2dResources.Scene2DDocument.createScene2DDocument;
 import flighthq.scene2dResources.Scene2DDocument.createScene2DSlotReference;
 import flighthq.scene2dResources.Scene2DDocumentImporterRegistry.registerScene2DDocumentImporter;
+import flighthq.shape.MorphShape.setMorphShapeProgress;
+import flighthq.shape.Scale9Shape.createScale9Shape;
 import flighthq.shape.Shape.copyShapeCommands;
 import flighthq.shape.Shape.createShape;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
+import flighthq.swf.SwfBitmap.createSwfLosslessBitmap;
+import flighthq.swf.SwfEditText.readSwfEditTextFactory;
+import flighthq.swf.SwfFrameAction.readSwfAbcFrameScripts;
 import flighthq.swf.SwfFrameAction.readSwfFrameActions;
+import flighthq.swf.SwfMorphShape.createSwfMorphShape;
 import flighthq.swf.SwfShape.createSwfShape;
 import flighthq.swf.SwfText.createSwfTextShape;
 import flighthq.swf.SwfText.readSwfFontGlyphOutlineSource;
+import flighthq.texture.Sampler.createSampler;
+import flighthq.texture.Texture.createTexture;
+import flighthq.texture.Texture.setTextureSource;
+import flighthq.types.AudioResource;
+import flighthq.types.AudioResourceReference;
 import flighthq.types.ClipRegion;
 import flighthq.types.Compression;
 import flighthq.types.FrameScript;
 import flighthq.types.GlyphOutlineSource;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
+import flighthq.types.ImageResourceReference;
+import flighthq.types.MorphShape;
 import flighthq.types.MovieClip;
 import flighthq.types.MovieClip.MovieClipData;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Rectangle;
+import flighthq.types.RichText;
+import flighthq.types.Scale9Shape;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DContentReference;
+import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
+import flighthq.types.Sprite;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TimelineCue;
+import flighthq.types.TimelineCue.TimelineAudioCue;
+import flighthq.types.TimelineCue.TimelineAudioEnvelopePoint;
+import flighthq.types.TimelineCue.TimelineStreamAudioCue;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSource;
+import flighthq.types.Types.MorphShapeKind;
+import flighthq.types.Types.TimelineAudioCueKind;
+import flighthq.types.Types.TimelineStreamAudioCueKind;
 import flighthq.types._internal._CompressionValues.CompressionValue;
+import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
+import flighthq.types._internal._TimelineCueValues.TimelineAudioCueKind;
+import flighthq.types._internal._TimelineCueValues.TimelineStreamAudioCueKind;
 
 typedef SwfMatrix__swfDocument = { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; };
 
@@ -57,27 +94,35 @@ typedef SwfRectangle__swfDocument = { var height:Float; var width:Float; var x:F
 
 typedef SwfAuthoredBoundsData__swfDocument = { var authoredBounds:SwfRectangle__swfDocument; };
 
+typedef SwfMorphBoundsData__swfDocument = Dynamic;
+
 typedef SwfDisplayObjectData__swfDocument = Dynamic;
 
 typedef SwfMovieClipData__swfDocument = Dynamic;
 
 typedef SwfShapeNodeData__swfDocument = Dynamic;
 
-typedef SwfPlacement__swfDocument = { var characterId:Float; var clipDepth:Float; var depth:Float; var directLinkage:Null<String>; var matrix:SwfMatrix__swfDocument; var name:Null<String>; };
+typedef SwfPlacement__swfDocument = { var alpha:Float; var characterId:Float; var clipDepth:Float; var depth:Float; var directLinkage:Null<String>; var matrix:SwfMatrix__swfDocument; var name:Null<String>; var ratio:Float; };
 
-typedef SwfTimeline__swfDocument = { var actions:Dynamic; var frames:Array<Dynamic>; var labels:Array<TimelineLabel>; };
+typedef SwfTimeline__swfDocument = { var actions:Dynamic; var cues:Array<TimelineCue>; var frames:Array<Dynamic>; var labels:Array<TimelineLabel>; };
 
 typedef SwfFrameEntry__swfDocument = { var clip:Null<ClipRegion>; var placement:SwfPlacement__swfDocument; };
 
 typedef SwfImagePayload__swfDocument = { var bytes:flighthq._internal._UInt8Array; var mimeType:String; };
 
-typedef SwfTagResult__swfDocument = { var backgroundColor:Null<Float>; var characterBounds:Dynamic; var fontOutlineSources:Dynamic; var images:Dynamic; var linkages:Dynamic; var shapes:Dynamic; var sprites:Dynamic; var timeline:SwfTimeline__swfDocument; };
+typedef SwfSoundInfo__swfDocument = { var envelope:Array<TimelineAudioEnvelopePoint>; var inPointSamples:Float; var loopCount:Float; var outPointSamples:Float; var skipIfPlaying:Bool; var stop:Bool; };
+
+typedef SwfSoundPayload__swfDocument = { var bytes:flighthq._internal._UInt8Array; var mimeType:Null<String>; var sampleRate:Float; };
+
+typedef SwfTagResult__swfDocument = { var backgroundColor:Null<Float>; var editTexts:Dynamic; var fontNames:Dynamic; var characterBounds:Dynamic; var fontOutlineSources:Dynamic; var images:Dynamic; var imageTextures:Dynamic; var linkages:Dynamic; var morphBounds:Dynamic; var morphShapes:Dynamic; var scalingGrids:Dynamic; var shapes:Dynamic; var soundResources:Dynamic; var sounds:Dynamic; var streamSounds:Array<{ var bytes:flighthq._internal._UInt8Array; var mimeType:String; var resource:AudioResource; }>; var sprites:Dynamic; var timeline:SwfTimeline__swfDocument; };
 
 typedef SwfPendingText__swfDocument = { var characterId:Float; var end:Float; var start:Float; var version:Float; };
 
-typedef SwfParseState__swfDocument = { var backgroundColor:Null<Float>; var characterBounds:Dynamic; var definedCharacters:Dynamic; var fontCodePoints:Dynamic; var fontOutlineSources:Dynamic; var images:Dynamic; var jpegTables:Null<flighthq._internal._UInt8Array>; var linkages:Dynamic; var pendingTexts:Array<SwfPendingText__swfDocument>; var remainingFrameEntries:Float; var shapes:Dynamic; var sprites:Dynamic; };
+typedef SwfParseState__swfDocument = { var backgroundColor:Null<Float>; var characterBounds:Dynamic; var definedCharacters:Dynamic; var fontCodePoints:Dynamic; var fontOutlineSources:Dynamic; var images:Dynamic; var imageTextures:Dynamic; var jpegTables:Null<flighthq._internal._UInt8Array>; var linkages:Dynamic; var pendingTexts:Array<SwfPendingText__swfDocument>; var pendingInitActions:Array<{ var characterId:Float; var script:FrameScript; }>; var abcBlobs:Array<flighthq._internal._UInt8Array>; var editTexts:Dynamic; var fontNames:Dynamic; var remainingFrameEntries:Float; var morphBounds:Dynamic; var morphShapes:Dynamic; var scalingGrids:Dynamic; var shapes:Dynamic; var streamSounds:Array<{ var bytes:flighthq._internal._UInt8Array; var mimeType:String; var resource:AudioResource; }>; var soundCuesAwaitingClass:Array<{ var className:String; var cue:TimelineAudioCue; }>; var soundCuesAwaitingRate:Array<{ var characterId:Float; var cue:TimelineAudioCue; }>; var soundResources:Dynamic; var sounds:Dynamic; var sprites:Dynamic; };
 
-typedef SwfInstantiationState__swfDocument = { var activeSymbols:Dynamic; var frameRate:Null<Float>; var remainingNodes:Float; var resolvedBounds:Dynamic; var resolvingBounds:Dynamic; };
+typedef SwfInstantiationState__swfDocument = { var activeSymbols:Dynamic; var frameRate:Null<Float>; var resolvedBounds:Dynamic; var resolvingBounds:Dynamic; };
+
+typedef SwfImageTextureOwner__swfDocument = { var imageTextures:Dynamic; };
 
 typedef SwfFile__swfDocument = { var frameRate:Float; var parsed:SwfTagResult__swfDocument; var stageBounds:SwfRectangle__swfDocument; };
 
@@ -95,7 +140,7 @@ class SwfDocument {
     var frameRate:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var stageBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var references:Array<Scene2DContentReference> = cast _Runtime.UNDEFINED;
+    var slots:Array<Scene2DSlotReference> = cast _Runtime.UNDEFINED;
     var instantiation:SwfInstantiationState__swfDocument = cast _Runtime.UNDEFINED;
     var root:Dynamic = cast _Runtime.UNDEFINED;
     file = _Runtime.callValue(SwfDocument.readSwfFile__swfDocument, cast ([source] : Array<Dynamic>));
@@ -104,11 +149,49 @@ class SwfDocument {
     frameRate = _Runtime.field(__destructure0, 'frameRate');
     parsed = _Runtime.field(__destructure0, 'parsed');
     stageBounds = _Runtime.field(__destructure0, 'stageBounds');
-    references = cast ([] : Array<Dynamic>);
-    instantiation = { activeSymbols: _Runtime.construct(_Runtime.globalValue('Set'), []), frameRate: ((cast ((cast frameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast frameRate : Dynamic) : (cast null : Dynamic)), resolvingBounds: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvedBounds: _Runtime.construct(_Runtime.globalValue('Map'), []), remainingNodes: SwfDocument.MAX_INSTANTIATED_NODES__swfDocument };
-    root = _Runtime.callValue(SwfDocument.createSwfTimelineNode__swfDocument, cast ([_Runtime.field(parsed, 'timeline'), stageBounds, parsed, references, instantiation, 0.0] : Array<Dynamic>));
+    slots = cast ([] : Array<Dynamic>);
+    instantiation = { activeSymbols: _Runtime.construct(_Runtime.globalValue('Set'), []), frameRate: ((cast ((cast frameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast frameRate : Dynamic) : (cast null : Dynamic)), resolvingBounds: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvedBounds: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    root = _Runtime.callValue(SwfDocument.createSwfTimelineNode__swfDocument, cast ([_Runtime.field(parsed, 'timeline'), stageBounds, parsed, slots, instantiation, 0.0] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(root, null) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(createScene2DDocument, cast ([root, references, 'swf', _Runtime.field(parsed, 'backgroundColor')] : Array<Dynamic>));
+    _Runtime.callValue(SwfDocument.fillSwfLosslessBitmapTextures__swfDocument, cast ([parsed] : Array<Dynamic>));
+    return cast _Runtime.callValue(createScene2DDocument, cast ([root, slots, 'swf', _Runtime.field(parsed, 'backgroundColor'), _Runtime.callValue(SwfDocument.createSwfImageResources__swfDocument, cast ([parsed] : Array<Dynamic>)), _Runtime.callValue(SwfDocument.createSwfAudioResources__swfDocument, cast ([parsed] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createScene2DSymbolFromSwf(source:flighthq._internal._UInt8Array, linkageName:String):Null<Scene2DDocument> {
+    var file:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var frameRate:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var characterId:Dynamic = cast _Runtime.UNDEFINED;
+    var slots:Array<Scene2DSlotReference> = cast _Runtime.UNDEFINED;
+    var instantiation:SwfInstantiationState__swfDocument = cast _Runtime.UNDEFINED;
+    var root:Dynamic = cast _Runtime.UNDEFINED;
+    file = _Runtime.callValue(SwfDocument.readSwfFile__swfDocument, cast ([source] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(file, null) : Bool)) { return cast null; }
+    __destructure1 = file;
+    frameRate = _Runtime.field(__destructure1, 'frameRate');
+    parsed = _Runtime.field(__destructure1, 'parsed');
+    characterId = -1.0;
+    for (__iteration2 in _Runtime.iterable(_Runtime.field(parsed, 'linkages'))) {
+      var id:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+      if ((cast _Runtime.strictEquals(name, linkageName) : Bool)) { (characterId = cast (id : Dynamic)); }
+    }
+    if ((cast ((cast characterId : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
+    slots = cast ([] : Array<Dynamic>);
+    instantiation = { activeSymbols: _Runtime.construct(_Runtime.globalValue('Set'), []), frameRate: ((cast ((cast frameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast frameRate : Dynamic) : (cast null : Dynamic)), resolvingBounds: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvedBounds: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    root = _Runtime.callValue(SwfDocument.createSwfSymbolNode__swfDocument, cast ([parsed, characterId, slots, instantiation] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(root, null) : Bool)) { return cast null; }
+    _Runtime.callValue(SwfDocument.fillSwfLosslessBitmapTextures__swfDocument, cast ([parsed] : Array<Dynamic>));
+    return cast _Runtime.callValue(createScene2DDocument, cast ([root, slots, 'swf', null, _Runtime.callValue(SwfDocument.createSwfImageResources__swfDocument, cast ([parsed] : Array<Dynamic>)), _Runtime.callValue(SwfDocument.createSwfAudioResources__swfDocument, cast ([parsed] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function readSwfExportedSymbolNames(source:flighthq._internal._UInt8Array):Array<String> {
+    var file:Dynamic = cast _Runtime.UNDEFINED;
+    file = _Runtime.callValue(SwfDocument.readSwfFile__swfDocument, cast ([source] : Array<Dynamic>));
+    return cast ((cast _Runtime.strictEquals(file, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(((cast _Runtime.field(_Runtime.field(file, 'parsed'), 'linkages') : flighthq._internal._Map).values()))]) : Dynamic));
     return cast null;
   }
 
@@ -144,6 +227,27 @@ class SwfDocument {
     if ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool)) { return cast null; }
     parsed = _Runtime.callValue(SwfDocument.readSwfTags__swfDocument, cast ([body] : Array<Dynamic>));
     return cast ((cast _Runtime.strictEquals(parsed, null) : Bool) ? (cast null : Dynamic) : (cast { frameRate: frameRate, parsed: parsed, stageBounds: stageBounds } : Dynamic));
+    return cast null;
+  }
+
+  public static function fillSwfLosslessBitmapTextures__swfDocument(parsed:SwfTagResult__swfDocument):Void {
+    for (__iteration3 in _Runtime.iterable(_Runtime.field(parsed, 'imageTextures'))) {
+      var characterId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+      var variants:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
+      if ((cast !(cast _Runtime.callValue(SwfDocument.isSwfLosslessImage__swfDocument, cast ([((cast _Runtime.field(parsed, 'images') : flighthq._internal._Map).get(characterId))] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
+      var image:Dynamic = ((cast _Runtime.field(parsed, 'images') : flighthq._internal._Map).get(characterId));
+      if ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      var bitmap:Dynamic = _Runtime.callValue(createSwfLosslessBitmap, cast ([_Runtime.field(image, 'bytes'), _Runtime.strictEquals(_Runtime.field(image, 'mimeType'), SwfDocument.SWF_LOSSLESS_ALPHA_MIME_TYPE__swfDocument)] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { continue; }
+      for (texture in _Runtime.iterable(((cast variants : flighthq._internal._Map).values()))) {
+        _Runtime.callValue(setTextureSource, cast ([texture, bitmap] : Array<Dynamic>));
+      }
+    }
+  }
+
+  public static function isSwfLosslessImage__swfDocument(image:Null<SwfImagePayload__swfDocument>):Bool {
+    if ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(image, 'mimeType'), SwfDocument.SWF_LOSSLESS_MIME_TYPE__swfDocument) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(image, 'mimeType'), SwfDocument.SWF_LOSSLESS_ALPHA_MIME_TYPE__swfDocument) : Bool));
     return cast null;
   }
 
@@ -188,14 +292,14 @@ class SwfDocument {
     return cast null;
   }
 
-  public static function createSwfTimelineNode__swfDocument(timeline:SwfTimeline__swfDocument, bounds:Null<SwfRectangle__swfDocument>, parsed:SwfTagResult__swfDocument, references:Array<Scene2DContentReference>, state:SwfInstantiationState__swfDocument, depth:Float):Null<MovieClip> {
+  public static function createSwfTimelineNode__swfDocument(timeline:SwfTimeline__swfDocument, bounds:Null<SwfRectangle__swfDocument>, parsed:SwfTagResult__swfDocument, slots:Array<Scene2DSlotReference>, state:SwfInstantiationState__swfDocument, depth:Float):Null<MovieClip> {
     var clip:Dynamic = cast _Runtime.UNDEFINED;
     clip = _Runtime.callValue(SwfDocument.createSwfMovieClip__swfDocument, cast ([bounds] : Array<Dynamic>));
-    return cast ((cast _Runtime.callValue(SwfDocument.populateSwfTimelineNode__swfDocument, cast ([clip, timeline, parsed, references, state, depth] : Array<Dynamic>)) : Bool) ? (cast clip : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.callValue(SwfDocument.populateSwfTimelineNode__swfDocument, cast ([clip, timeline, parsed, slots, state, depth] : Array<Dynamic>)) : Bool) ? (cast clip : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function populateSwfTimelineNode__swfDocument(clip:MovieClip, timeline:SwfTimeline__swfDocument, parsed:SwfTagResult__swfDocument, references:Array<Scene2DContentReference>, state:SwfInstantiationState__swfDocument, depth:Float):Bool {
+  public static function populateSwfTimelineNode__swfDocument(clip:MovieClip, timeline:SwfTimeline__swfDocument, parsed:SwfTagResult__swfDocument, slots:Array<Scene2DSlotReference>, state:SwfInstantiationState__swfDocument, depth:Float):Bool {
     var nodes:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Array<Array<SwfFrameEntry__swfDocument>> = cast _Runtime.UNDEFINED;
     var clips:Dynamic = cast _Runtime.UNDEFINED;
@@ -211,77 +315,94 @@ class SwfDocument {
         if ((cast ((cast nodes : flighthq._internal._Map).has(key)) : Bool)) { continue; }
         var sprite:Dynamic = ((cast _Runtime.field(parsed, 'sprites') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')));
         var shape:Dynamic = ((cast _Runtime.field(parsed, 'shapes') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')));
+        var morphShape:Dynamic = ((cast _Runtime.field(parsed, 'morphShapes') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')));
         var image:Dynamic = ((cast _Runtime.field(parsed, 'images') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')));
+        var editText:Dynamic = ((cast _Runtime.field(parsed, 'editTexts') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')));
         if ((cast ((cast _Runtime.field(placement, 'clipDepth') : Float) > (cast 0.0 : Float)) : Bool)) { continue; }
-        if ((cast ((cast ((cast ((cast !_Runtime.truthy(_Runtime.field(placement, 'name')) : Bool) && (cast _Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-        if ((cast _Runtime.strictEquals(_Runtime.field(state, 'remainingNodes'), 0.0) : Bool)) { return cast false; }
-        _Runtime.incrementField(state, 'remainingNodes', -1, true);
+        if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.truthy(_Runtime.field(placement, 'name')) : Bool) && (cast _Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(morphShape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(editText, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+          continue;
+        }
         var targetBounds:Dynamic = _Runtime.callValue(SwfDocument.resolveSwfCharacterBounds__swfDocument, cast ([parsed, _Runtime.field(placement, 'characterId'), state, 0.0] : Array<Dynamic>));
-        var target:Dynamic = _Runtime.callValue(SwfDocument.createSwfPlacementNode__swfDocument, cast ([sprite, shape, targetBounds] : Array<Dynamic>));
+        var scale9Grid:Dynamic = ((cast _Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.field(parsed, 'scalingGrids') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId'))) : Dynamic));
+        var scale9:Dynamic = ((cast _Runtime.strictEquals(scale9Grid, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(SwfDocument.createSwfScale9ShapeNode__swfDocument, cast ([sprite, scale9Grid, parsed, targetBounds] : Array<Dynamic>)) : Dynamic));
+        var target:Dynamic = ((cast !_Runtime.strictEquals(scale9, null) : Bool) ? (cast scale9 : Dynamic) : (cast ((cast !_Runtime.strictEquals(editText, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(SwfDocument.createSwfEditTextTarget__swfDocument, cast ([editText, parsed, targetBounds] : Array<Dynamic>)) : Dynamic) : (cast ((cast !_Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(SwfDocument.createSwfBitmapNode__swfDocument, cast ([_Runtime.callValue(SwfDocument.acquireSwfImageTexture__swfDocument, cast ([parsed, _Runtime.field(placement, 'characterId'), false, true] : Array<Dynamic>)), targetBounds] : Array<Dynamic>)) : Dynamic) : (cast ((cast !_Runtime.strictEquals(morphShape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(SwfDocument.createSwfMorphShapeTarget__swfDocument, cast ([morphShape, targetBounds, ((cast _Runtime.field(parsed, 'morphBounds') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(SwfDocument.createSwfPlacementNode__swfDocument, cast ([sprite, shape, targetBounds] : Array<Dynamic>)) : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
         ((cast nodes : flighthq._internal._Map).set(key, target));
-        if ((cast !_Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty(references, 'push', cast ([_Runtime.callValue(createScene2DAssetReference, cast ([_Runtime.coalesce(_Runtime.field(placement, 'name'), function():Dynamic return cast _Runtime.callValue(SwfDocument.createSwfImageAssetName__swfDocument, cast ([_Runtime.field(placement, 'characterId')] : Array<Dynamic>))), _Runtime.callValue(SwfDocument.createSwfImageAssetUri__swfDocument, cast ([_Runtime.field(placement, 'characterId')] : Array<Dynamic>)), target, true, _Runtime.field(image, 'bytes'), _Runtime.field(image, 'mimeType')] : Array<Dynamic>))] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.field(placement, 'name'))) {
-          _Runtime.callProperty(references, 'push', cast ([_Runtime.callValue(createScene2DSlotReference, cast ([_Runtime.field(placement, 'name'), target, _Runtime.coalesce(_Runtime.coalesce(_Runtime.field(placement, 'directLinkage'), function():Dynamic return cast ((cast _Runtime.field(parsed, 'linkages') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')))), function():Dynamic return cast null)] : Array<Dynamic>))] : Array<Dynamic>));
-        } }
-        if ((cast !_Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        if (_Runtime.truthy(_Runtime.field(placement, 'name'))) {
+          _Runtime.callProperty(slots, 'push', cast ([_Runtime.callValue(createScene2DSlotReference, cast ([_Runtime.field(placement, 'name'), target, _Runtime.coalesce(_Runtime.coalesce(_Runtime.field(placement, 'directLinkage'), function():Dynamic return cast ((cast _Runtime.field(parsed, 'linkages') : flighthq._internal._Map).get(_Runtime.field(placement, 'characterId')))), function():Dynamic return cast null)] : Array<Dynamic>))] : Array<Dynamic>));
+        }
+        if ((cast ((cast !_Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(scale9, null) : Bool)) : Bool)) {
           if ((cast ((cast _Runtime.field(state, 'activeSymbols') : flighthq._internal._Set).has(_Runtime.field(placement, 'characterId'))) : Bool)) { return cast false; }
           ((cast _Runtime.field(state, 'activeSymbols') : flighthq._internal._Set).add(_Runtime.field(placement, 'characterId')));
-          var populated:Dynamic = _Runtime.callValue(SwfDocument.populateSwfTimelineNode__swfDocument, cast ([(cast target : MovieClip), sprite, parsed, references, state, (depth + 1.0)] : Array<Dynamic>));
+          var populated:Dynamic = _Runtime.callValue(SwfDocument.populateSwfTimelineNode__swfDocument, cast ([(cast target : MovieClip), sprite, parsed, slots, state, (depth + 1.0)] : Array<Dynamic>));
           ((cast _Runtime.field(state, 'activeSymbols') : flighthq._internal._Set).delete_(_Runtime.field(placement, 'characterId')));
           if ((cast !(cast populated : Bool) : Bool)) { return cast false; }
         }
       }
     }
-    _Runtime.callValue(setMovieClipSource, cast ([clip, _Runtime.callValue(SwfDocument.createSwfTimelineSource__swfDocument, cast ([frames, nodes, _Runtime.field(timeline, 'labels'), _Runtime.field(state, 'frameRate')] : Array<Dynamic>))] : Array<Dynamic>));
-    for (__iteration1 in _Runtime.iterable(_Runtime.field(timeline, 'actions'))) {
-      var frame:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
-      var script:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+    _Runtime.callValue(setMovieClipSource, cast ([clip, _Runtime.callValue(SwfDocument.createSwfTimelineSource__swfDocument, cast ([frames, nodes, _Runtime.field(timeline, 'labels'), _Runtime.field(timeline, 'cues'), _Runtime.field(state, 'frameRate')] : Array<Dynamic>))] : Array<Dynamic>));
+    for (__iteration4 in _Runtime.iterable(_Runtime.field(timeline, 'actions'))) {
+      var frame:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var script:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
       if ((cast ((cast frame : Float) <= (cast _Runtime.field(frames, 'length') : Float)) : Bool)) { _Runtime.callValue(addMovieClipFrameScript, cast ([clip, frame, script] : Array<Dynamic>)); }
     }
     return cast true;
     return cast null;
   }
 
-  public static function createSwfTimelineSource__swfDocument(frames:Array<Array<SwfFrameEntry__swfDocument>>, nodes:Dynamic, labels:Array<TimelineLabel>, frameRate:Null<Float>):TimelineSource {
-    var attached:Array<Node2D> = cast _Runtime.UNDEFINED;
+  public static function createSwfTimelineSource__swfDocument(frames:Array<Array<SwfFrameEntry__swfDocument>>, nodes:Dynamic, labels:Array<TimelineLabel>, cues:Array<TimelineCue>, frameRate:Null<Float>):TimelineSource {
+    var attached:Dynamic = cast _Runtime.UNDEFINED;
+    var framed:Dynamic = cast _Runtime.UNDEFINED;
+    var depths:Dynamic = cast _Runtime.UNDEFINED;
     var appliedMatrices:Dynamic = cast _Runtime.UNDEFINED;
     var appliedClips:Dynamic = cast _Runtime.UNDEFINED;
-    attached = cast ([] : Array<Dynamic>);
+    var appliedAlphas:Dynamic = cast _Runtime.UNDEFINED;
+    var appliedRatios:Dynamic = cast _Runtime.UNDEFINED;
+    attached = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    framed = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    depths = _Runtime.callValue(createNodeOrderList, cast ([] : Array<Dynamic>));
     appliedMatrices = _Runtime.construct(_Runtime.globalValue('Map'), []);
     appliedClips = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    return cast { totalFrames: _Runtime.field(frames, 'length'), labels: labels, frameRate: frameRate, constructFrame: function(target:Node2D, frame:Float) {
+    appliedAlphas = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    appliedRatios = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    return cast { totalFrames: _Runtime.field(frames, 'length'), labels: labels, frameRate: frameRate, cues: cues, constructFrame: function(target:Node2D, frame:Float) {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
-      var count:Dynamic = cast _Runtime.UNDEFINED;
-      var ordered:Dynamic = cast _Runtime.UNDEFINED;
       entries = flighthq._internal._StaticIndex.readArray(frames, (frame - 1.0));
       if ((cast _Runtime.strictEquals(entries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      count = 0.0;
-      ordered = true;
+      ((cast framed : flighthq._internal._Set).clear());
+      _Runtime.callValue(clearNodeOrderList, cast ([depths] : Array<Dynamic>));
       for (entry in _Runtime.iterable(entries)) {
         var node:Dynamic = ((cast nodes : flighthq._internal._Map).get(_Runtime.callValue(SwfDocument.createSwfInstanceKey__swfDocument, cast ([_Runtime.field(entry, 'placement')] : Array<Dynamic>))));
         if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attached, count), node) : Bool)) { (ordered = cast (false : Dynamic)); }
-        count++;
+        ((cast framed : flighthq._internal._Set).add(node));
+        _Runtime.callValue(addNodeOrderListEntry, cast ([depths, node, _Runtime.field(_Runtime.field(entry, 'placement'), 'depth')] : Array<Dynamic>));
       }
-      if ((cast ((cast !(cast ordered : Bool) : Bool) || (cast !_Runtime.strictEquals(count, _Runtime.field(attached, 'length')) : Bool)) : Bool)) {
-        for (node in _Runtime.iterable(attached)) {
-          _Runtime.callValue(removeNodeChild, cast ([target, node] : Array<Dynamic>));
-        }
-        _Runtime.setLength(attached, 0.0);
-        for (entry in _Runtime.iterable(entries)) {
-          var node:Dynamic = ((cast nodes : flighthq._internal._Map).get(_Runtime.callValue(SwfDocument.createSwfInstanceKey__swfDocument, cast ([_Runtime.field(entry, 'placement')] : Array<Dynamic>))));
-          if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-          _Runtime.callValue(addNodeChild, cast ([target, node] : Array<Dynamic>));
-          _Runtime.callProperty(attached, 'push', cast ([node] : Array<Dynamic>));
-        }
+      for (node in _Runtime.iterable(attached)) {
+        if ((cast ((cast framed : flighthq._internal._Set).has(node)) : Bool)) { continue; }
+        _Runtime.callValue(removeNodeChild, cast ([target, node] : Array<Dynamic>));
+        ((cast attached : flighthq._internal._Set).delete_(node));
       }
+      for (node in _Runtime.iterable(framed)) {
+        if ((cast ((cast attached : flighthq._internal._Set).has(node)) : Bool)) { continue; }
+        _Runtime.callValue(addNodeChild, cast ([target, node] : Array<Dynamic>));
+        ((cast attached : flighthq._internal._Set).add(node));
+      }
+      _Runtime.callValue(applyNodeOrderList, cast ([target, depths] : Array<Dynamic>));
       for (entry in _Runtime.iterable(entries)) {
         var node:Dynamic = ((cast nodes : flighthq._internal._Map).get(_Runtime.callValue(SwfDocument.createSwfInstanceKey__swfDocument, cast ([_Runtime.field(entry, 'placement')] : Array<Dynamic>))));
         if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
         if ((cast !_Runtime.strictEquals(((cast appliedMatrices : flighthq._internal._Map).get(node)), _Runtime.field(_Runtime.field(entry, 'placement'), 'matrix')) : Bool)) {
           _Runtime.callValue(setNodeLocalMatrix, cast ([node, _Runtime.field(_Runtime.field(entry, 'placement'), 'matrix')] : Array<Dynamic>));
           ((cast appliedMatrices : flighthq._internal._Map).set(node, _Runtime.field(_Runtime.field(entry, 'placement'), 'matrix')));
+        }
+        if ((cast !_Runtime.strictEquals(((cast appliedAlphas : flighthq._internal._Map).get(node)), _Runtime.field(_Runtime.field(entry, 'placement'), 'alpha')) : Bool)) {
+          _Runtime.setField(node, 'alpha', _Runtime.field(_Runtime.field(entry, 'placement'), 'alpha'));
+          _Runtime.callValue(invalidateNodeAppearance, cast ([node] : Array<Dynamic>));
+          ((cast appliedAlphas : flighthq._internal._Map).set(node, _Runtime.field(_Runtime.field(entry, 'placement'), 'alpha')));
+        }
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(node, 'kind'), MorphShapeKind) : Bool) && (cast !_Runtime.strictEquals(((cast appliedRatios : flighthq._internal._Map).get(node)), _Runtime.field(_Runtime.field(entry, 'placement'), 'ratio')) : Bool)) : Bool)) {
+          _Runtime.callValue(setMorphShapeProgress, cast ([(cast node : MorphShape), _Runtime.field(_Runtime.field(entry, 'placement'), 'ratio')] : Array<Dynamic>));
+          _Runtime.callValue(SwfDocument.applySwfMorphBounds__swfDocument, cast ([(cast node : MorphShape), _Runtime.field(_Runtime.field(entry, 'placement'), 'ratio')] : Array<Dynamic>));
+          ((cast appliedRatios : flighthq._internal._Map).set(node, _Runtime.field(_Runtime.field(entry, 'placement'), 'ratio')));
         }
         if ((cast !_Runtime.strictEquals(((cast appliedClips : flighthq._internal._Map).get(node)), _Runtime.field(entry, 'clip')) : Bool)) {
           _Runtime.callValue(setNode2DClip, cast ([node, _Runtime.field(entry, 'clip')] : Array<Dynamic>));
@@ -383,13 +504,71 @@ class SwfDocument {
     return cast null;
   }
 
-  public static function createSwfImageAssetName__swfDocument(characterId:Float):String {
-    return cast 'bitmap' + Std.string(characterId) + '';
+  public static function acquireSwfImageTexture__swfDocument(state:SwfImageTextureOwner__swfDocument, characterId:Float, repeat:Bool, smoothed:Bool):Texture2D {
+    var variants:Dynamic = cast _Runtime.UNDEFINED;
+    var key:Dynamic = cast _Runtime.UNDEFINED;
+    var texture:Dynamic = cast _Runtime.UNDEFINED;
+    variants = ((cast _Runtime.field(state, 'imageTextures') : flighthq._internal._Map).get(characterId));
+    if ((cast _Runtime.strictEquals(variants, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (variants = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      ((cast _Runtime.field(state, 'imageTextures') : flighthq._internal._Map).set(characterId, variants));
+    }
+    key = '' + Std.string(((cast repeat : Bool) ? (cast 'r' : Dynamic) : (cast 'c' : Dynamic))) + '' + Std.string(((cast smoothed : Bool) ? (cast 's' : Dynamic) : (cast 'n' : Dynamic))) + '';
+    texture = ((cast variants : flighthq._internal._Map).get(key));
+    if ((cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (texture = cast (_Runtime.callValue(createTexture, cast ([{ sampler: _Runtime.callValue(createSampler, cast ([{ magFilter: ((cast smoothed : Bool) ? (cast 'linear' : Dynamic) : (cast 'nearest' : Dynamic)), minFilter: ((cast smoothed : Bool) ? (cast 'linear-mipmap-linear' : Dynamic) : (cast 'nearest' : Dynamic)), mipmaps: smoothed, wrapU: ((cast repeat : Bool) ? (cast 'repeat' : Dynamic) : (cast 'clamp-to-edge' : Dynamic)), wrapV: ((cast repeat : Bool) ? (cast 'repeat' : Dynamic) : (cast 'clamp-to-edge' : Dynamic)) }] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic));
+      ((cast variants : flighthq._internal._Map).set(key, texture));
+    }
+    return cast texture;
     return cast null;
   }
 
-  public static function createSwfImageAssetUri__swfDocument(characterId:Float):String {
-    return cast 'swf:bitmap/' + Std.string(characterId) + '';
+  public static function createSwfAudioResources__swfDocument(parsed:SwfTagResult__swfDocument):Array<AudioResourceReference> {
+    var resources:Array<AudioResourceReference> = cast _Runtime.UNDEFINED;
+    resources = cast ([] : Array<Dynamic>);
+    for (__iteration5 in _Runtime.iterable(_Runtime.field(parsed, 'sounds'))) {
+      var characterId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 0.0);
+      var sound:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 1.0);
+      var name:Dynamic = _Runtime.coalesce(((cast _Runtime.field(parsed, 'linkages') : flighthq._internal._Map).get(characterId)), function():Dynamic return cast null);
+      var reference:Dynamic = _Runtime.callValue(createEmbeddedAudioResourceReference, cast ([_Runtime.field(sound, 'bytes'), _Runtime.field(sound, 'mimeType'), name] : Array<Dynamic>));
+      var shared:Dynamic = ((cast _Runtime.field(parsed, 'soundResources') : flighthq._internal._Map).get(characterId));
+      if ((cast !_Runtime.strictEquals(shared, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(reference, 'resource', shared); }
+      _Runtime.callProperty(resources, 'push', cast ([reference] : Array<Dynamic>));
+    }
+    for (stream in _Runtime.iterable(_Runtime.field(parsed, 'streamSounds'))) {
+      var reference:Dynamic = _Runtime.callValue(createEmbeddedAudioResourceReference, cast ([_Runtime.field(stream, 'bytes'), _Runtime.field(stream, 'mimeType'), null] : Array<Dynamic>));
+      _Runtime.setField(reference, 'resource', _Runtime.field(stream, 'resource'));
+      _Runtime.callProperty(resources, 'push', cast ([reference] : Array<Dynamic>));
+    }
+    return cast resources;
+    return cast null;
+  }
+
+  public static function createSwfImageResources__swfDocument(parsed:SwfTagResult__swfDocument):Array<ImageResourceReference> {
+    var resources:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
+    resources = cast ([] : Array<Dynamic>);
+    for (__iteration6 in _Runtime.iterable(_Runtime.field(parsed, 'imageTextures'))) {
+      var characterId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
+      var variants:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
+      var image:Dynamic = ((cast _Runtime.field(parsed, 'images') : flighthq._internal._Map).get(characterId));
+      if ((cast ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callValue(SwfDocument.isSwfLosslessImage__swfDocument, cast ([image] : Array<Dynamic>)) : Bool)) : Bool)) { continue; }
+      var reference:Dynamic = _Runtime.callValue(createEmbeddedImageResourceReference, cast ([_Runtime.field(image, 'bytes'), _Runtime.field(image, 'mimeType')] : Array<Dynamic>));
+      (reference.textures = cast (_Runtime.concatArrays([_Runtime.toArray(((cast variants : flighthq._internal._Map).values()))]) : Dynamic));
+      _Runtime.callProperty(resources, 'push', cast ([reference] : Array<Dynamic>));
+    }
+    return cast resources;
+    return cast null;
+  }
+
+  public static function createSwfBitmapNode__swfDocument(texture:Texture2D, bounds:Null<SwfRectangle__swfDocument>):Sprite {
+    var target:Dynamic = cast _Runtime.UNDEFINED;
+    target = _Runtime.callValue(createSprite, cast ([] : Array<Dynamic>));
+    _Runtime.setField(_Runtime.field(target, 'data'), 'texture', texture);
+    if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
+      _Runtime.setField((cast (cast _Runtime.field(target, 'data') : Dynamic) : SwfAuthoredBoundsData__swfDocument), 'authoredBounds', _Runtime.mergeObjects([bounds]));
+      _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : Node2DRuntime), 'computeLocalBoundsRectangle', SwfDocument.computeSwfLocalBoundsRectangle__swfDocument);
+    }
+    return cast target;
     return cast null;
   }
 
@@ -415,9 +594,87 @@ class SwfDocument {
     return cast null;
   }
 
+  public static function createSwfEditTextTarget__swfDocument(create:Dynamic, parsed:SwfTagResult__swfDocument, bounds:Null<SwfRectangle__swfDocument>):Node2D {
+    var node:Dynamic = cast _Runtime.UNDEFINED;
+    node = _Runtime.callValue(create, cast ([function(fontId:Dynamic) return _Runtime.coalesce(((cast _Runtime.field(parsed, 'fontNames') : flighthq._internal._Map).get(fontId)), function():Dynamic return cast '')] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
+      _Runtime.setField((cast (cast _Runtime.field(node, 'data') : Dynamic) : SwfAuthoredBoundsData__swfDocument), 'authoredBounds', _Runtime.mergeObjects([bounds]));
+      _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)) : Node2DRuntime), 'computeLocalBoundsRectangle', SwfDocument.computeSwfLocalBoundsRectangle__swfDocument);
+    }
+    return cast node;
+    return cast null;
+  }
+
   public static function createSwfPlacementNode__swfDocument(sprite:Null<SwfTimeline__swfDocument>, shape:Null<Shape>, bounds:Null<SwfRectangle__swfDocument>):Node2D {
     if ((cast !_Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(SwfDocument.createSwfMovieClip__swfDocument, cast ([bounds] : Array<Dynamic>)); }
     return cast ((cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(SwfDocument.createSwfDisplayObject__swfDocument, cast ([bounds] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(SwfDocument.createSwfShapeNode__swfDocument, cast ([shape, bounds] : Array<Dynamic>)) : Dynamic));
+    return cast null;
+  }
+
+  public static function createSwfMorphShapeTarget__swfDocument(decode:Dynamic, bounds:Null<SwfRectangle__swfDocument>, morphBounds:Null<{ var end:SwfRectangle__swfDocument; var start:SwfRectangle__swfDocument; }>):Node2D {
+    var shape:Dynamic = cast _Runtime.UNDEFINED;
+    shape = _Runtime.callValue(decode, cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast _Runtime.callValue(SwfDocument.createSwfDisplayObject__swfDocument, cast ([bounds] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(morphBounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      var data:Dynamic = (cast (cast _Runtime.field(shape, 'data') : Dynamic) : SwfMorphBoundsData__swfDocument);
+      _Runtime.setField(data, 'morphStartBounds', _Runtime.mergeObjects([_Runtime.field(morphBounds, 'start')]));
+      _Runtime.setField(data, 'morphEndBounds', _Runtime.mergeObjects([_Runtime.field(morphBounds, 'end')]));
+      _Runtime.setField(data, 'authoredBounds', _Runtime.mergeObjects([_Runtime.field(morphBounds, 'start')]));
+      _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([shape] : Array<Dynamic>)) : Node2DRuntime), 'computeLocalBoundsRectangle', SwfDocument.computeSwfLocalBoundsRectangle__swfDocument);
+    } else { if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
+      _Runtime.setField((cast (cast _Runtime.field(shape, 'data') : Dynamic) : SwfAuthoredBoundsData__swfDocument), 'authoredBounds', _Runtime.mergeObjects([bounds]));
+      _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([shape] : Array<Dynamic>)) : Node2DRuntime), 'computeLocalBoundsRectangle', SwfDocument.computeSwfLocalBoundsRectangle__swfDocument);
+    } }
+    return cast shape;
+    return cast null;
+  }
+
+  public static function applySwfMorphBounds__swfDocument(shape:MorphShape, progress:Float):Void {
+    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    var end:Dynamic = cast _Runtime.UNDEFINED;
+    data = (cast (cast _Runtime.field(shape, 'data') : Dynamic) : SwfMorphBoundsData__swfDocument);
+    start = _Runtime.field(data, 'morphStartBounds');
+    end = _Runtime.field(data, 'morphEndBounds');
+    if ((cast ((cast _Runtime.strictEquals(start, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(end, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
+    _Runtime.setField(data, 'authoredBounds', { height: _Runtime.addNumbers(_Runtime.field(start, 'height'), (_Runtime.subtractNumbers(_Runtime.field(end, 'height'), _Runtime.field(start, 'height')) * progress)), width: _Runtime.addNumbers(_Runtime.field(start, 'width'), (_Runtime.subtractNumbers(_Runtime.field(end, 'width'), _Runtime.field(start, 'width')) * progress)), x: _Runtime.addNumbers(_Runtime.field(start, 'x'), (_Runtime.subtractNumbers(_Runtime.field(end, 'x'), _Runtime.field(start, 'x')) * progress)), y: _Runtime.addNumbers(_Runtime.field(start, 'y'), (_Runtime.subtractNumbers(_Runtime.field(end, 'y'), _Runtime.field(start, 'y')) * progress)) });
+    _Runtime.callValue(invalidateNodeLocalBounds, cast ([shape] : Array<Dynamic>));
+  }
+
+  public static function createSwfScale9ShapeNode__swfDocument(sprite:SwfTimeline__swfDocument, grid:SwfRectangle__swfDocument, parsed:SwfTagResult__swfDocument, bounds:Null<SwfRectangle__swfDocument>):Null<Scale9Shape> {
+    var placements:Dynamic = cast _Runtime.UNDEFINED;
+    var inner:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure7:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var c:Dynamic = cast _Runtime.UNDEFINED;
+    var d:Dynamic = cast _Runtime.UNDEFINED;
+    var tx:Dynamic = cast _Runtime.UNDEFINED;
+    var ty:Dynamic = cast _Runtime.UNDEFINED;
+    var shape:Dynamic = cast _Runtime.UNDEFINED;
+    var target:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(sprite, 'frames'), 'length'), 1.0) : Bool) || (cast ((cast (cast _Runtime.field(sprite, 'actions') : flighthq._internal._Map).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    placements = _Runtime.concatArrays([_Runtime.toArray(((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(sprite, 'frames'), 0.0) : flighthq._internal._Map).values()))]);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(placements, 'length'), 1.0) : Bool)) { return cast null; }
+    inner = flighthq._internal._StaticIndex.readArray(placements, 0.0);
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(inner, 'name'), null) : Bool) || (cast ((cast _Runtime.field(inner, 'clipDepth') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(inner, 'alpha'), 1.0) : Bool)) : Bool)) { return cast null; }
+    __destructure7 = _Runtime.field(inner, 'matrix');
+    a = _Runtime.field(__destructure7, 'a');
+    b = _Runtime.field(__destructure7, 'b');
+    c = _Runtime.field(__destructure7, 'c');
+    d = _Runtime.field(__destructure7, 'd');
+    tx = _Runtime.field(__destructure7, 'tx');
+    ty = _Runtime.field(__destructure7, 'ty');
+    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(a, 1.0) : Bool) || (cast !_Runtime.strictEquals(b, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(c, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(d, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(tx, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(ty, 0.0) : Bool)) : Bool)) { return cast null; }
+    shape = ((cast _Runtime.field(parsed, 'shapes') : flighthq._internal._Map).get(_Runtime.field(inner, 'characterId')));
+    if ((cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+    target = _Runtime.callValue(createScale9Shape, cast ([{ height: _Runtime.field(grid, 'height'), width: _Runtime.field(grid, 'width'), x: _Runtime.field(grid, 'x'), y: _Runtime.field(grid, 'y') }] : Array<Dynamic>));
+    _Runtime.callValue(copyShapeCommands, cast ([target, shape] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
+      _Runtime.setField((cast (cast _Runtime.field(target, 'data') : Dynamic) : SwfShapeNodeData__swfDocument), 'authoredBounds', _Runtime.mergeObjects([bounds]));
+      _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : Node2DRuntime), 'computeLocalBoundsRectangle', SwfDocument.computeSwfLocalBoundsRectangle__swfDocument);
+    }
+    return cast target;
     return cast null;
   }
 
@@ -430,6 +687,24 @@ class SwfDocument {
       _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : Node2DRuntime), 'computeLocalBoundsRectangle', SwfDocument.computeSwfLocalBoundsRectangle__swfDocument);
     }
     return cast target;
+    return cast null;
+  }
+
+  public static function createSwfSymbolNode__swfDocument(parsed:SwfTagResult__swfDocument, characterId:Float, slots:Array<Scene2DSlotReference>, state:SwfInstantiationState__swfDocument):Null<Node2D> {
+    var bounds:Dynamic = cast _Runtime.UNDEFINED;
+    var editText:Dynamic = cast _Runtime.UNDEFINED;
+    var sprite:Dynamic = cast _Runtime.UNDEFINED;
+    var shape:Dynamic = cast _Runtime.UNDEFINED;
+    bounds = _Runtime.callValue(SwfDocument.resolveSwfCharacterBounds__swfDocument, cast ([parsed, characterId, state, 0.0] : Array<Dynamic>));
+    editText = ((cast _Runtime.field(parsed, 'editTexts') : flighthq._internal._Map).get(characterId));
+    if ((cast !_Runtime.strictEquals(editText, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(SwfDocument.createSwfEditTextTarget__swfDocument, cast ([editText, parsed, bounds] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(parsed, 'images') : flighthq._internal._Map).has(characterId)) : Bool)) {
+      return cast _Runtime.callValue(SwfDocument.createSwfBitmapNode__swfDocument, cast ([_Runtime.callValue(SwfDocument.acquireSwfImageTexture__swfDocument, cast ([parsed, characterId, false, true] : Array<Dynamic>)), bounds] : Array<Dynamic>));
+    }
+    sprite = ((cast _Runtime.field(parsed, 'sprites') : flighthq._internal._Map).get(characterId));
+    if ((cast !_Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(SwfDocument.createSwfTimelineNode__swfDocument, cast ([sprite, bounds, parsed, slots, state, 0.0] : Array<Dynamic>)); }
+    shape = ((cast _Runtime.field(parsed, 'shapes') : flighthq._internal._Map).get(characterId));
+    return cast ((cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(SwfDocument.createSwfShapeNode__swfDocument, cast ([shape, bounds] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -512,6 +787,8 @@ class SwfDocument {
     var directLinkage:Dynamic = cast _Runtime.UNDEFINED;
     var characterId:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
+    var alpha:Dynamic = cast _Runtime.UNDEFINED;
+    var ratio:Dynamic = cast _Runtime.UNDEFINED;
     var name:Dynamic = cast _Runtime.UNDEFINED;
     var clipDepth:Dynamic = cast _Runtime.UNDEFINED;
     flags = _Runtime.callProperty(body, 'readUint8', cast ([] : Array<Dynamic>));
@@ -525,12 +802,12 @@ class SwfDocument {
     directLinkage = ((cast hasClassName : Bool) ? (cast _Runtime.callProperty(body, 'readString', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'directLinkage'), function():Dynamic return cast null) : Dynamic));
     characterId = ((cast hasCharacter : Bool) ? (cast _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'characterId'), function():Dynamic return cast 0.0) : Dynamic));
     matrix = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 4), 0.0) : Bool) ? (cast _Runtime.callValue(SwfDocument.readSwfMatrix__swfDocument, cast ([body] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'matrix'), function():Dynamic return cast SwfDocument.IDENTITY_MATRIX__swfDocument) : Dynamic));
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 8), 0.0) : Bool)) { _Runtime.callValue(SwfDocument.readSwfColorTransform__swfDocument, cast ([body] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 16), 0.0) : Bool)) { _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>)); }
+    alpha = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 8), 0.0) : Bool) ? (cast _Runtime.callValue(SwfDocument.readSwfColorTransform__swfDocument, cast ([body] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'alpha'), function():Dynamic return cast 1.0) : Dynamic));
+    ratio = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 16), 0.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>)), SwfDocument.MORPH_RATIO_ONE__swfDocument) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'ratio'), function():Dynamic return cast 0.0) : Dynamic));
     name = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 32), 0.0) : Bool) ? (cast _Runtime.callProperty(body, 'readString', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'name'), function():Dynamic return cast null) : Dynamic));
     clipDepth = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & 64), 0.0) : Bool) ? (cast _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'clipDepth'), function():Dynamic return cast 0.0) : Dynamic));
     if ((cast ((cast ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool) || (cast _Runtime.andValue(isMove, function():Dynamic return cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(characterId, 0.0), function():Dynamic return cast _Runtime.strictEquals(directLinkage, null)) : Bool)) : Bool)) { return; }
-    ((cast placements : flighthq._internal._Map).set(depth, { characterId: characterId, clipDepth: clipDepth, depth: depth, directLinkage: directLinkage, matrix: matrix, name: name }));
+    ((cast placements : flighthq._internal._Map).set(depth, { alpha: alpha, characterId: characterId, clipDepth: clipDepth, depth: depth, directLinkage: directLinkage, matrix: matrix, name: name, ratio: ratio }));
   }
 
   public static function readLegacyPlaceObject__swfDocument(body:SwfReader, placements:Dynamic):Void {
@@ -542,7 +819,7 @@ class SwfDocument {
     matrix = _Runtime.callValue(SwfDocument.readSwfMatrix__swfDocument, cast ([body] : Array<Dynamic>));
     if ((cast ((cast _Runtime.field(body, 'pos') : Float) < (cast _Runtime.field(body, 'end') : Float)) : Bool)) { _Runtime.callValue(SwfDocument.readSwfColorTransform__swfDocument, cast ([body, 3.0] : Array<Dynamic>)); }
     if ((cast ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(characterId, 0.0) : Bool)) : Bool)) { return; }
-    ((cast placements : flighthq._internal._Map).set(depth, { characterId: characterId, clipDepth: 0.0, depth: depth, directLinkage: null, matrix: matrix, name: null }));
+    ((cast placements : flighthq._internal._Map).set(depth, { alpha: 1.0, characterId: characterId, clipDepth: 0.0, depth: depth, directLinkage: null, matrix: matrix, name: null, ratio: 0.0 }));
   }
 
   public static function readLegacyRemoveObject__swfDocument(body:SwfReader, placements:Dynamic):Void {
@@ -556,18 +833,21 @@ class SwfDocument {
     if ((cast _Runtime.strictEquals(_Runtime.optionalField(existing, 'characterId'), characterId) : Bool)) { ((cast placements : flighthq._internal._Map).delete_(depth)); }
   }
 
-  public static function readSwfColorTransform__swfDocument(reader:SwfReader, channelCount:Dynamic = 4.0):Void {
+  public static function readSwfColorTransform__swfDocument(reader:SwfReader, channelCount:Dynamic = 4.0):Float {
     var hasAdd:Dynamic = cast _Runtime.UNDEFINED;
     var hasMultiply:Dynamic = cast _Runtime.UNDEFINED;
     var bits:Dynamic = cast _Runtime.UNDEFINED;
+    var alpha:Dynamic = cast _Runtime.UNDEFINED;
     hasAdd = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
     hasMultiply = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
     bits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
+    alpha = 1.0;
     if ((cast hasMultiply : Bool)) {
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast channelCount : Float)) : Bool)) {
-          _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>));
+          var value:Dynamic = _Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>)), SwfDocument.FIXED_8_8_ONE__swfDocument);
+          if ((cast ((cast _Runtime.strictEquals(i, SwfDocument.ALPHA_CHANNEL__swfDocument) : Bool) && (cast ((cast channelCount : Float) > (cast SwfDocument.ALPHA_CHANNEL__swfDocument : Float)) : Bool)) : Bool)) { (alpha = cast (HxMath.max(0.0, HxMath.min(1.0, value)) : Dynamic)); }
           i++;
         }
       }
@@ -582,6 +862,8 @@ class SwfDocument {
       }
     }
     _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
+    return cast alpha;
+    return cast null;
   }
 
   public static function readSwfLinkages__swfDocument(body:SwfReader, linkages:Dynamic):Void {
@@ -640,21 +922,65 @@ class SwfDocument {
     yMin = _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>));
     yMax = _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>));
     _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
-    if ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast xMax : Float) < (cast xMin : Float)) : Bool)) : Bool) || (cast ((cast yMax : Float) < (cast yMin : Float)) : Bool)) : Bool)) { return cast null; }
-    return cast { height: ((yMax - yMin) / SwfDocument.TWIPS_PER_PIXEL__swfDocument), width: ((xMax - xMin) / SwfDocument.TWIPS_PER_PIXEL__swfDocument), x: (xMin / SwfDocument.TWIPS_PER_PIXEL__swfDocument), y: (yMin / SwfDocument.TWIPS_PER_PIXEL__swfDocument) };
+    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    return cast { height: _Runtime.divideNumbers(HxMath.max(0.0, (yMax - yMin)), SwfDocument.TWIPS_PER_PIXEL__swfDocument), width: _Runtime.divideNumbers(HxMath.max(0.0, (xMax - xMin)), SwfDocument.TWIPS_PER_PIXEL__swfDocument), x: (xMin / SwfDocument.TWIPS_PER_PIXEL__swfDocument), y: (yMin / SwfDocument.TWIPS_PER_PIXEL__swfDocument) };
     return cast null;
   }
 
   public static function readSwfTags__swfDocument(reader:SwfReader):Null<SwfTagResult__swfDocument> {
     var state:SwfParseState__swfDocument = cast _Runtime.UNDEFINED;
     var timeline:Dynamic = cast _Runtime.UNDEFINED;
-    state = { backgroundColor: null, characterBounds: _Runtime.construct(_Runtime.globalValue('Map'), []), definedCharacters: _Runtime.construct(_Runtime.globalValue('Set'), []), fontCodePoints: _Runtime.construct(_Runtime.globalValue('Map'), []), fontOutlineSources: _Runtime.construct(_Runtime.globalValue('Map'), []), images: _Runtime.construct(_Runtime.globalValue('Map'), []), jpegTables: null, pendingTexts: cast ([] : Array<Dynamic>), linkages: _Runtime.construct(_Runtime.globalValue('Map'), []), remainingFrameEntries: SwfDocument.MAX_TIMELINE_FRAME_ENTRIES__swfDocument, shapes: _Runtime.construct(_Runtime.globalValue('Map'), []), sprites: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    state = { abcBlobs: cast ([] : Array<Dynamic>), backgroundColor: null, pendingInitActions: cast ([] : Array<Dynamic>), editTexts: _Runtime.construct(_Runtime.globalValue('Map'), []), fontNames: _Runtime.construct(_Runtime.globalValue('Map'), []), characterBounds: _Runtime.construct(_Runtime.globalValue('Map'), []), definedCharacters: _Runtime.construct(_Runtime.globalValue('Set'), []), fontCodePoints: _Runtime.construct(_Runtime.globalValue('Map'), []), fontOutlineSources: _Runtime.construct(_Runtime.globalValue('Map'), []), images: _Runtime.construct(_Runtime.globalValue('Map'), []), imageTextures: _Runtime.construct(_Runtime.globalValue('Map'), []), jpegTables: null, pendingTexts: cast ([] : Array<Dynamic>), linkages: _Runtime.construct(_Runtime.globalValue('Map'), []), remainingFrameEntries: SwfDocument.MAX_TIMELINE_FRAME_ENTRIES__swfDocument, morphBounds: _Runtime.construct(_Runtime.globalValue('Map'), []), morphShapes: _Runtime.construct(_Runtime.globalValue('Map'), []), scalingGrids: _Runtime.construct(_Runtime.globalValue('Map'), []), shapes: _Runtime.construct(_Runtime.globalValue('Map'), []), soundCuesAwaitingClass: cast ([] : Array<Dynamic>), soundCuesAwaitingRate: cast ([] : Array<Dynamic>), streamSounds: cast ([] : Array<Dynamic>), soundResources: _Runtime.construct(_Runtime.globalValue('Map'), []), sounds: _Runtime.construct(_Runtime.globalValue('Map'), []), sprites: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     timeline = _Runtime.callValue(SwfDocument.readSwfTimeline__swfDocument, cast ([reader, state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(timeline, null) : Bool)) { return cast null; }
     _Runtime.callValue(SwfDocument.composeSwfFontCodePoints__swfDocument, cast ([state] : Array<Dynamic>));
+    _Runtime.callValue(SwfDocument.resolveSwfSoundClassCues__swfDocument, cast ([state] : Array<Dynamic>));
+    _Runtime.callValue(SwfDocument.convertSwfSoundCueTimes__swfDocument, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(SwfDocument.appendSwfPendingTextShapes__swfDocument, cast ([reader, state] : Array<Dynamic>));
-    return cast { backgroundColor: _Runtime.field(state, 'backgroundColor'), characterBounds: _Runtime.field(state, 'characterBounds'), fontOutlineSources: _Runtime.field(state, 'fontOutlineSources'), images: _Runtime.field(state, 'images'), linkages: _Runtime.field(state, 'linkages'), shapes: _Runtime.field(state, 'shapes'), sprites: _Runtime.field(state, 'sprites'), timeline: timeline };
+    _Runtime.callValue(SwfDocument.appendSwfAbcFrameScripts__swfDocument, cast ([state, timeline] : Array<Dynamic>));
+    for (pending in _Runtime.iterable(_Runtime.field(state, 'pendingInitActions'))) {
+      var sprite:Dynamic = ((cast _Runtime.field(state, 'sprites') : flighthq._internal._Map).get(_Runtime.field(pending, 'characterId')));
+      if ((cast ((cast !_Runtime.strictEquals(sprite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast _Runtime.field(sprite, 'actions') : flighthq._internal._Map).has(1.0)) : Bool) : Bool)) : Bool)) { ((cast _Runtime.field(sprite, 'actions') : flighthq._internal._Map).set(1.0, _Runtime.field(pending, 'script'))); }
+    }
+    return cast { backgroundColor: _Runtime.field(state, 'backgroundColor'), editTexts: _Runtime.field(state, 'editTexts'), fontNames: _Runtime.field(state, 'fontNames'), characterBounds: _Runtime.field(state, 'characterBounds'), fontOutlineSources: _Runtime.field(state, 'fontOutlineSources'), images: _Runtime.field(state, 'images'), imageTextures: _Runtime.field(state, 'imageTextures'), linkages: _Runtime.field(state, 'linkages'), morphBounds: _Runtime.field(state, 'morphBounds'), morphShapes: _Runtime.field(state, 'morphShapes'), scalingGrids: _Runtime.field(state, 'scalingGrids'), shapes: _Runtime.field(state, 'shapes'), soundResources: _Runtime.field(state, 'soundResources'), sounds: _Runtime.field(state, 'sounds'), streamSounds: _Runtime.field(state, 'streamSounds'), sprites: _Runtime.field(state, 'sprites'), timeline: timeline };
     return cast null;
+  }
+
+  public static function readSwfAbcPayload__swfDocument(body:SwfReader, hasName:Bool):flighthq._internal._UInt8Array {
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !(cast hasName : Bool) : Bool)) { return cast (cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(body, 'pos')), Std.int(_Runtime.field(body, 'end'))); }
+    start = _Runtime.addNumbers(_Runtime.field(body, 'pos'), 4.0);
+    while ((cast ((cast ((cast start : Float) < (cast _Runtime.field(body, 'end') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(body, 'source'), start), 0.0) : Bool)) : Bool)) { start++; }
+    return cast (cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(HxMath.min((start + 1.0), _Runtime.field(body, 'end'))), Std.int(_Runtime.field(body, 'end')));
+    return cast null;
+  }
+
+  public static function appendSwfAbcFrameScripts__swfDocument(state:SwfParseState__swfDocument, timeline:SwfTimeline__swfDocument):Void {
+    var charactersByClass:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'abcBlobs'), 'length'), 0.0) : Bool)) { return; }
+    charactersByClass = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    for (__iteration8 in _Runtime.iterable(_Runtime.field(state, 'linkages'))) {
+      var characterId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 0.0);
+      var className:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 1.0);
+      ((cast charactersByClass : flighthq._internal._Map).set(className, characterId));
+    }
+    for (blob in _Runtime.iterable(_Runtime.field(state, 'abcBlobs'))) {
+      var byClass:Dynamic = _Runtime.callValue(readSwfAbcFrameScripts, cast ([blob] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(byClass, null) : Bool)) { continue; }
+      for (__iteration9 in _Runtime.iterable(byClass)) {
+        var className:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration9, 0.0);
+        var frames:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration9, 1.0);
+        var characterId:Dynamic = ((cast charactersByClass : flighthq._internal._Map).get(className));
+        if ((cast _Runtime.strictEquals(characterId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+        var target:Dynamic = ((cast _Runtime.strictEquals(characterId, 0.0) : Bool) ? (cast timeline : Dynamic) : (cast ((cast _Runtime.field(state, 'sprites') : flighthq._internal._Map).get(characterId)) : Dynamic));
+        if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+        for (__iteration10 in _Runtime.iterable(frames)) {
+          var frame:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration10, 0.0);
+          var script:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration10, 1.0);
+          ((cast _Runtime.field(target, 'actions') : flighthq._internal._Map).set(frame, script));
+        }
+      }
+    }
   }
 
   public static function appendSwfPendingTextShapes__swfDocument(reader:SwfReader, state:SwfParseState__swfDocument):Void {
@@ -667,12 +993,20 @@ class SwfDocument {
   public static function readSwfTimeline__swfDocument(reader:SwfReader, state:SwfParseState__swfDocument):Null<SwfTimeline__swfDocument> {
     var placements:Dynamic = cast _Runtime.UNDEFINED;
     var actions:Dynamic = cast _Runtime.UNDEFINED;
+    var cues:Array<TimelineCue> = cast _Runtime.UNDEFINED;
     var frames:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var labels:Array<TimelineLabel> = cast _Runtime.UNDEFINED;
+    var streamChunks:Array<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+    var streamFormat:Dynamic = cast _Runtime.UNDEFINED;
+    var streamStartFrame:Dynamic = cast _Runtime.UNDEFINED;
     placements = _Runtime.construct(_Runtime.globalValue('Map'), []);
     actions = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    cues = cast ([] : Array<Dynamic>);
     frames = cast ([] : Array<Dynamic>);
     labels = cast ([] : Array<Dynamic>);
+    streamChunks = cast ([] : Array<Dynamic>);
+    streamFormat = -1.0;
+    streamStartFrame = 1.0;
     while ((cast ((cast ((cast _Runtime.field(reader, 'pos') : Float) < (cast _Runtime.field(reader, 'end') : Float)) : Bool) && (cast _Runtime.field(reader, 'valid') : Bool)) : Bool)) {
       var tagHeader:Dynamic = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
       var code:Dynamic = (_Runtime.toInt32(tagHeader) >> 6);
@@ -687,6 +1021,12 @@ class SwfDocument {
         _Runtime.setField(state, 'remainingFrameEntries', _Runtime.subtractNumbers(_Runtime.field(state, 'remainingFrameEntries'), ((cast placements : flighthq._internal._Map).size + 1.0)));
         if ((cast ((cast _Runtime.field(state, 'remainingFrameEntries') : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
         _Runtime.callProperty(frames, 'push', cast ([_Runtime.construct(_Runtime.globalValue('Map'), [placements])] : Array<Dynamic>));
+      } else { if ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DO_ABC__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_DO_ABC_ANONYMOUS__swfDocument) : Bool)) : Bool)) {
+        _Runtime.callProperty(_Runtime.field(state, 'abcBlobs'), 'push', cast ([_Runtime.callValue(SwfDocument.readSwfAbcPayload__swfDocument, cast ([body, _Runtime.strictEquals(code, SwfDocument.TAG_DO_ABC__swfDocument)] : Array<Dynamic>))] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DO_INIT_ACTION__swfDocument) : Bool)) {
+        var spriteId:Dynamic = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+        var script:Dynamic = _Runtime.callValue(readSwfFrameActions, cast ([new SwfReader(_Runtime.field(body, 'source'), _Runtime.field(body, 'pos'), _Runtime.field(body, 'end'))] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(script, null) : Bool)) { _Runtime.callProperty(_Runtime.field(state, 'pendingInitActions'), 'push', cast ([{ characterId: spriteId, script: script }] : Array<Dynamic>)); }
       } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DO_ACTION__swfDocument) : Bool)) {
         var script:Dynamic = _Runtime.callValue(readSwfFrameActions, cast ([new SwfReader(_Runtime.field(body, 'source'), _Runtime.field(body, 'pos'), _Runtime.field(body, 'end'))] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(script, null) : Bool)) { ((cast actions : flighthq._internal._Map).set(_Runtime.addNumbers(_Runtime.field(frames, 'length'), 1.0), script)); }
@@ -694,6 +1034,8 @@ class SwfDocument {
         _Runtime.callValue(SwfDocument.addSwfTimelineLabel__swfDocument, cast ([labels, _Runtime.addNumbers(_Runtime.field(frames, 'length'), 1.0), _Runtime.callProperty(body, 'readString', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_SCENE_AND_FRAME_LABEL_DATA__swfDocument) : Bool)) {
         _Runtime.callValue(SwfDocument.readSwfSceneAndFrameLabelData__swfDocument, cast ([body, labels] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_SCALING_GRID__swfDocument) : Bool)) {
+        _Runtime.callValue(SwfDocument.readSwfScalingGrid__swfDocument, cast ([body, state] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_PLACE_OBJECT__swfDocument) : Bool)) {
         _Runtime.callValue(SwfDocument.readLegacyPlaceObject__swfDocument, cast ([body, placements] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_PLACE_OBJECT_2__swfDocument) : Bool)) {
@@ -717,9 +1059,11 @@ class SwfDocument {
       } else { if ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_EXPORT_ASSETS__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_SYMBOL_CLASS__swfDocument) : Bool)) : Bool)) {
         _Runtime.callValue(SwfDocument.readSwfLinkages__swfDocument, cast ([body, _Runtime.field(state, 'linkages')] : Array<Dynamic>));
       } else { if ((cast ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_BITS_JPEG_2__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_BITS_JPEG_3__swfDocument) : Bool)) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_BITS_JPEG_4__swfDocument) : Bool)) : Bool)) {
-        if ((cast !(cast _Runtime.callValue(SwfDocument.readSwfEmbeddedImageDefinition__swfDocument, cast ([body, state, code] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+        _Runtime.callValue(SwfDocument.readSwfEmbeddedImageDefinition__swfDocument, cast ([body, state, code] : Array<Dynamic>));
       } else { if ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_BITS_LOSSLESS__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_BITS_LOSSLESS_2__swfDocument) : Bool)) : Bool)) {
         if ((cast !(cast _Runtime.callValue(SwfDocument.readSwfLosslessBitmapDefinition__swfDocument, cast ([body, state, _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_BITS_LOSSLESS_2__swfDocument)] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+      } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_SOUND__swfDocument) : Bool)) {
+        _Runtime.callValue(SwfDocument.readSwfSoundDefinition__swfDocument, cast ([body, state] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_VIDEO_STREAM__swfDocument) : Bool)) {
         if ((cast !(cast _Runtime.callValue(SwfDocument.readSwfVideoDefinition__swfDocument, cast ([body, state] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
       } else { if ((cast _Runtime.callValue(SwfDocument.isSwfBoundedDefinitionTag__swfDocument, cast ([code] : Array<Dynamic>)) : Bool)) {
@@ -737,12 +1081,29 @@ class SwfDocument {
         ((cast _Runtime.field(state, 'sprites') : flighthq._internal._Map).set(spriteId, spriteTimeline));
       } else { if ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_PLACE_OBJECT_3__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_PLACE_OBJECT_4__swfDocument) : Bool)) : Bool)) {
         _Runtime.callValue(SwfDocument.readPlaceObject__swfDocument, cast ([body, placements, true] : Array<Dynamic>));
-      } } } } } } } } } } } } } } } } } } } } }
+      } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_START_SOUND__swfDocument) : Bool)) {
+        _Runtime.callValue(SwfDocument.readSwfStartSound__swfDocument, cast ([body, state, cues, _Runtime.addNumbers(_Runtime.field(frames, 'length'), 1.0)] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_START_SOUND_2__swfDocument) : Bool)) {
+        _Runtime.callValue(SwfDocument.readSwfStartSound2__swfDocument, cast ([body, state, cues, _Runtime.addNumbers(_Runtime.field(frames, 'length'), 1.0)] : Array<Dynamic>));
+      } else { if ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_SOUND_STREAM_HEAD__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_SOUND_STREAM_HEAD_2__swfDocument) : Bool)) : Bool)) {
+        var declared:Dynamic = _Runtime.callValue(SwfDocument.readSwfSoundStreamHead__swfDocument, cast ([body] : Array<Dynamic>));
+        if ((cast ((cast declared : Float) >= (cast 0.0 : Float)) : Bool)) {
+          (streamFormat = cast (declared : Dynamic));
+          (streamStartFrame = cast (_Runtime.addNumbers(_Runtime.field(frames, 'length'), 1.0) : Dynamic));
+        }
+      } else { if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_SOUND_STREAM_BLOCK__swfDocument) : Bool)) {
+        if ((cast _Runtime.strictEquals(streamFormat, SwfDocument.SOUND_FORMAT_MP3__swfDocument) : Bool)) {
+          _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+          _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+          if ((cast ((cast _Runtime.field(body, 'valid') : Bool) && (cast ((cast _Runtime.field(body, 'pos') : Float) < (cast _Runtime.field(body, 'end') : Float)) : Bool)) : Bool)) { _Runtime.callProperty(streamChunks, 'push', cast ([(cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(body, 'pos')), Std.int(_Runtime.field(body, 'end')))] : Array<Dynamic>)); }
+        }
+      } } } } } } } } } } } } } } } } } } } } } } } } } } } } }
       if ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool)) { return cast null; }
     }
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { _Runtime.callProperty(frames, 'push', cast ([placements] : Array<Dynamic>)); }
-    return cast { actions: actions, frames: frames, labels: _Runtime.callProperty(_Runtime.callProperty(labels, 'filter', cast ([function(label:Dynamic) return ((cast _Runtime.field(label, 'frame') : Float) <= (cast _Runtime.field(frames, 'length') : Float))] : Array<Dynamic>)), 'sort', cast ([SwfDocument.compareSwfTimelineLabelFrame__swfDocument] : Array<Dynamic>)) };
+    _Runtime.callValue(SwfDocument.appendSwfStreamSoundCue__swfDocument, cast ([state, cues, streamChunks, streamStartFrame] : Array<Dynamic>));
+    return cast { actions: actions, cues: _Runtime.callProperty(cues, 'filter', cast ([function(cue:Dynamic) return ((cast _Runtime.field(cue, 'frame') : Float) <= (cast _Runtime.field(frames, 'length') : Float))] : Array<Dynamic>)), frames: frames, labels: _Runtime.callProperty(_Runtime.callProperty(labels, 'filter', cast ([function(label:Dynamic) return ((cast _Runtime.field(label, 'frame') : Float) <= (cast _Runtime.field(frames, 'length') : Float))] : Array<Dynamic>)), 'sort', cast ([SwfDocument.compareSwfTimelineLabelFrame__swfDocument] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -770,7 +1131,7 @@ class SwfDocument {
         if ((cast _Runtime.strictEquals(version, 2.0) : Bool)) { _Runtime.callValue(SwfDocument.readSwfColorTransform__swfDocument, cast ([reader] : Array<Dynamic>)); }
         if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return; }
         if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.BUTTON_STATE_UP__swfDocument)), 0.0) : Bool) && (cast !_Runtime.strictEquals(characterId, 0.0) : Bool)) : Bool)) {
-          ((cast placements : flighthq._internal._Map).set(depth, { characterId: characterId, clipDepth: 0.0, depth: depth, directLinkage: null, matrix: matrix, name: null }));
+          ((cast placements : flighthq._internal._Map).set(depth, { alpha: 1.0, characterId: characterId, clipDepth: 0.0, depth: depth, directLinkage: null, matrix: matrix, name: null, ratio: 0.0 }));
         }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.BUTTON_HAS_FILTER_LIST__swfDocument)), 0.0) : Bool)) { break; }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.BUTTON_HAS_BLEND_MODE__swfDocument)), 0.0) : Bool)) { _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)); }
@@ -778,7 +1139,7 @@ class SwfDocument {
       }
     }
     ((cast _Runtime.field(state, 'definedCharacters') : flighthq._internal._Set).add(buttonId));
-    ((cast _Runtime.field(state, 'sprites') : flighthq._internal._Map).set(buttonId, { actions: _Runtime.construct(_Runtime.globalValue('Map'), []), frames: cast ([placements] : Array<Dynamic>), labels: cast ([] : Array<Dynamic>) }));
+    ((cast _Runtime.field(state, 'sprites') : flighthq._internal._Map).set(buttonId, { actions: _Runtime.construct(_Runtime.globalValue('Map'), []), cues: cast ([] : Array<Dynamic>), frames: cast ([placements] : Array<Dynamic>), labels: cast ([] : Array<Dynamic>) }));
   }
 
   public static function readSwfFontDefinition__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, code:Float):Void {
@@ -786,12 +1147,15 @@ class SwfDocument {
     var reader:Dynamic = cast _Runtime.UNDEFINED;
     var fontId:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
+    var fontName:Dynamic = cast _Runtime.UNDEFINED;
     version = ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_FONT__swfDocument) : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_FONT_2__swfDocument) : Bool) ? (cast 2.0 : Dynamic) : (cast 3.0 : Dynamic)) : Dynamic));
     reader = new SwfReader(_Runtime.field(body, 'source'), _Runtime.field(body, 'pos'), _Runtime.field(body, 'end'));
     fontId = _Runtime.addNumbers(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(reader, 'source'), _Runtime.field(body, 'pos')), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(reader, 'source'), _Runtime.addNumbers(_Runtime.field(body, 'pos'), 1.0)), 256.0));
     source = _Runtime.callValue(readSwfFontGlyphOutlineSource, cast ([reader, version] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(source, null) : Bool) || (cast _Runtime.strictEquals(fontId, 0.0) : Bool)) : Bool)) { return; }
     ((cast _Runtime.field(state, 'fontOutlineSources') : flighthq._internal._Map).set(fontId, source));
+    fontName = _Runtime.callValue(SwfDocument.readSwfFontName__swfDocument, cast ([body, version] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { ((cast _Runtime.field(state, 'fontNames') : flighthq._internal._Map).set(fontId, fontName)); }
   }
 
   public static function readSwfFontInfo__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, hasLanguage:Bool):Void {
@@ -819,9 +1183,9 @@ class SwfDocument {
   }
 
   public static function composeSwfFontCodePoints__swfDocument(state:SwfParseState__swfDocument):Void {
-    for (__iteration2 in _Runtime.iterable(_Runtime.field(state, 'fontCodePoints'))) {
-      var fontId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
-      var codePoints:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+    for (__iteration11 in _Runtime.iterable(_Runtime.field(state, 'fontCodePoints'))) {
+      var fontId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration11, 0.0);
+      var codePoints:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration11, 1.0);
       var source:Dynamic = ((cast _Runtime.field(state, 'fontOutlineSources') : flighthq._internal._Map).get(fontId));
       if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       var codepointToGlyphIndex:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
@@ -835,6 +1199,19 @@ class SwfDocument {
       }
       ((cast _Runtime.field(state, 'fontOutlineSources') : flighthq._internal._Map).set(fontId, { getGlyphOutline: function(out:Dynamic, glyphIndex:Dynamic) return _Runtime.callProperty(source, 'getGlyphOutline', cast ([out, glyphIndex] : Array<Dynamic>)), getGlyphOutlineAdvance: function(glyphIndex:Dynamic) return _Runtime.callProperty(source, 'getGlyphOutlineAdvance', cast ([glyphIndex] : Array<Dynamic>)), getGlyphOutlineIndexForCodePoint: function(codePoint:Dynamic) return _Runtime.coalesce(((cast codepointToGlyphIndex : flighthq._internal._Map).get(codePoint)), function():Dynamic return cast -1.0), getGlyphOutlineMetrics: function() return _Runtime.callProperty(source, 'getGlyphOutlineMetrics', cast ([] : Array<Dynamic>)) }));
     }
+  }
+
+  public static function readSwfFontName__swfDocument(body:SwfReader, version:Float):String {
+    var reader:Dynamic = cast _Runtime.UNDEFINED;
+    var length:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(version, 1.0) : Bool)) { return cast ''; }
+    reader = new SwfReader(_Runtime.field(body, 'source'), _Runtime.addNumbers(_Runtime.field(body, 'pos'), 2.0), _Runtime.field(body, 'end'));
+    _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    length = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    if ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.addNumbers(_Runtime.field(reader, 'pos'), length) : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast ''; }
+    return cast _Runtime.callProperty(SwfDocument._fontNameDecoder__swfDocument, 'decode', cast ([(cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(reader, 'pos')), Std.int(_Runtime.addNumbers(_Runtime.field(reader, 'pos'), length)))] : Array<Dynamic>));
+    return cast null;
   }
 
   public static function readSwfBackgroundColor__swfDocument(body:SwfReader, state:SwfParseState__swfDocument):Void {
@@ -856,6 +1233,15 @@ class SwfDocument {
   public static function compareSwfTimelineLabelFrame__swfDocument(a:TimelineLabel, b:TimelineLabel):Float {
     return cast _Runtime.subtractNumbers(_Runtime.field(a, 'frame'), _Runtime.field(b, 'frame'));
     return cast null;
+  }
+
+  public static function readSwfScalingGrid__swfDocument(body:SwfReader, state:SwfParseState__swfDocument):Void {
+    var characterId:Dynamic = cast _Runtime.UNDEFINED;
+    var splitter:Dynamic = cast _Runtime.UNDEFINED;
+    characterId = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+    splitter = _Runtime.callValue(SwfDocument.readSwfRectangle__swfDocument, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(characterId, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(splitter, null) : Bool)) : Bool)) { return; }
+    ((cast _Runtime.field(state, 'scalingGrids') : flighthq._internal._Map).set(characterId, splitter));
   }
 
   public static function readSwfSceneAndFrameLabelData__swfDocument(body:SwfReader, labels:Array<TimelineLabel>):Void {
@@ -893,6 +1279,7 @@ class SwfDocument {
     var startBounds:Dynamic = cast _Runtime.UNDEFINED;
     var endBounds:Dynamic = cast _Runtime.UNDEFINED;
     var version:Dynamic = cast _Runtime.UNDEFINED;
+    var morphVersion:Dynamic = cast _Runtime.UNDEFINED;
     hasEndBounds = ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_MORPH_SHAPE__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_MORPH_SHAPE_2__swfDocument) : Bool));
     characterId = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
     startBounds = _Runtime.callValue(SwfDocument.readSwfRectangle__swfDocument, cast ([body] : Array<Dynamic>));
@@ -902,8 +1289,17 @@ class SwfDocument {
     }
     ((cast _Runtime.field(state, 'definedCharacters') : flighthq._internal._Set).add(characterId));
     ((cast _Runtime.field(state, 'characterBounds') : flighthq._internal._Map).set(characterId, ((cast _Runtime.strictEquals(endBounds, null) : Bool) ? (cast startBounds : Dynamic) : (cast _Runtime.callValue(SwfDocument.mergeSwfRectangles__swfDocument, cast ([startBounds, endBounds] : Array<Dynamic>)) : Dynamic))));
+    if ((cast !_Runtime.strictEquals(endBounds, null) : Bool)) { ((cast _Runtime.field(state, 'morphBounds') : flighthq._internal._Map).set(characterId, { end: endBounds, start: startBounds })); }
     version = _Runtime.callValue(SwfDocument.resolveSwfShapeVersion__swfDocument, cast ([code] : Array<Dynamic>));
     if ((cast ((cast version : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(SwfDocument.readSwfShapeBody__swfDocument, cast ([body, state, characterId, version] : Array<Dynamic>)); }
+    morphVersion = _Runtime.callValue(SwfDocument.resolveSwfMorphShapeVersion__swfDocument, cast ([code] : Array<Dynamic>));
+    if ((cast ((cast morphVersion : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(SwfDocument.readSwfMorphShapeBody__swfDocument, cast ([body, state, characterId, morphVersion] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_EDIT_TEXT__swfDocument) : Bool)) {
+      var reader:Dynamic = new SwfReader(_Runtime.field(body, 'source'), _Runtime.field(body, 'pos'), _Runtime.field(body, 'end'));
+      var bounds:Dynamic = ((cast _Runtime.field(state, 'characterBounds') : flighthq._internal._Map).get(characterId));
+      var factory:Dynamic = _Runtime.callValue(readSwfEditTextFactory, cast ([reader, _Runtime.coalesce(_Runtime.optionalField(bounds, 'width'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(bounds, 'height'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(factory, null) : Bool)) { ((cast _Runtime.field(state, 'editTexts') : flighthq._internal._Map).set(characterId, factory)); }
+    }
     if ((cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_TEXT__swfDocument) : Bool) || (cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_TEXT_2__swfDocument) : Bool)) : Bool)) {
       var reader:Dynamic = new SwfReader(_Runtime.field(body, 'source'), _Runtime.field(body, 'pos'), _Runtime.field(body, 'end'));
       _Runtime.callValue(SwfDocument.readSwfMatrix__swfDocument, cast ([reader] : Array<Dynamic>));
@@ -924,8 +1320,26 @@ class SwfDocument {
       _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     }
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return; }
-    shape = _Runtime.callValue(createSwfShape, cast ([reader, version] : Array<Dynamic>));
+    shape = _Runtime.callValue(createSwfShape, cast ([reader, version, function(fillCharacterId:Dynamic, repeat:Dynamic, smoothed:Dynamic) return _Runtime.callValue(SwfDocument.acquireSwfImageTexture__swfDocument, cast ([state, fillCharacterId, repeat, smoothed] : Array<Dynamic>))] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(shape, null) : Bool)) { ((cast _Runtime.field(state, 'shapes') : flighthq._internal._Map).set(characterId, shape)); }
+  }
+
+  public static function readSwfMorphShapeBody__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, characterId:Float, version:Float):Void {
+    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    var end:Dynamic = cast _Runtime.UNDEFINED;
+    var decode:Dynamic = cast _Runtime.UNDEFINED;
+    source = _Runtime.field(body, 'source');
+    start = _Runtime.field(body, 'pos');
+    end = _Runtime.field(body, 'end');
+    decode = function() return _Runtime.callValue(createSwfMorphShape, cast ([new SwfReader(source, start, end), version, function(fillCharacterId:Dynamic, repeat:Dynamic, smoothed:Dynamic) return _Runtime.callValue(SwfDocument.acquireSwfImageTexture__swfDocument, cast ([state, fillCharacterId, repeat, smoothed] : Array<Dynamic>))] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(_Runtime.callValue(decode, cast ([] : Array<Dynamic>)), null) : Bool)) { ((cast _Runtime.field(state, 'morphShapes') : flighthq._internal._Map).set(characterId, decode)); }
+  }
+
+  public static function resolveSwfMorphShapeVersion__swfDocument(code:Float):Float {
+    if ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_MORPH_SHAPE__swfDocument) : Bool)) { return cast 1.0; }
+    return cast ((cast _Runtime.strictEquals(code, SwfDocument.TAG_DEFINE_MORPH_SHAPE_2__swfDocument) : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic));
+    return cast null;
   }
 
   public static function resolveSwfShapeVersion__swfDocument(code:Float):Float {
@@ -959,7 +1373,7 @@ class SwfDocument {
     ((cast _Runtime.field(state, 'images') : flighthq._internal._Map).set(characterId, { bytes: spliced, mimeType: _Runtime.field(image, 'mimeType') }));
   }
 
-  public static function readSwfEmbeddedImageDefinition__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, code:Float):Bool {
+  public static function readSwfEmbeddedImageDefinition__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, code:Float):Void {
     var characterId:Dynamic = cast _Runtime.UNDEFINED;
     var imageStart:Dynamic = cast _Runtime.UNDEFINED;
     var imageEnd:Dynamic = cast _Runtime.UNDEFINED;
@@ -975,14 +1389,31 @@ class SwfDocument {
       (imageEnd = cast ((alphaOffsetBase + alphaDataOffset) : Dynamic));
     }
     if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(characterId, 0.0) : Bool)) : Bool) || (cast ((cast imageEnd : Float) < (cast imageStart : Float)) : Bool)) : Bool) || (cast ((cast imageEnd : Float) > (cast _Runtime.field(body, 'end') : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(state, 'definedCharacters') : flighthq._internal._Set).has(characterId)) : Bool)) : Bool)) {
-      return cast false;
+      return;
     }
     image = _Runtime.callValue(SwfDocument.readSwfEmbeddedImage__swfDocument, cast ([_Runtime.field(body, 'source'), imageStart, imageEnd] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     ((cast _Runtime.field(state, 'definedCharacters') : flighthq._internal._Set).add(characterId));
     ((cast _Runtime.field(state, 'characterBounds') : flighthq._internal._Map).set(characterId, _Runtime.field(image, 'bounds')));
-    ((cast _Runtime.field(state, 'images') : flighthq._internal._Map).set(characterId, { bytes: (cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(imageStart), Std.int(imageEnd)), mimeType: _Runtime.field(image, 'mimeType') }));
-    return cast true;
+    ((cast _Runtime.field(state, 'images') : flighthq._internal._Map).set(characterId, { bytes: _Runtime.callValue(SwfDocument.stripSwfJpegStreamBoundary__swfDocument, cast ([_Runtime.field(body, 'source'), imageStart, imageEnd, _Runtime.field(image, 'mimeType')] : Array<Dynamic>)), mimeType: _Runtime.field(image, 'mimeType') }));
+    return;
+  }
+
+  public static function stripSwfJpegStreamBoundary__swfDocument(source:flighthq._internal._UInt8Array, start:Float, end:Float, mimeType:String):flighthq._internal._UInt8Array {
+    if ((cast !_Runtime.strictEquals(mimeType, SwfDocument.JPEG_MIME_TYPE__swfDocument) : Bool)) { return cast (cast source : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(end)); }
+    {
+      var pos:Dynamic = start;
+      while ((cast ((cast (pos + 3.0) : Float) < (cast end : Float)) : Bool)) {
+        if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, pos), 255.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, (pos + 1.0)), SwfDocument.JPEG_END_OF_IMAGE__swfDocument) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, (pos + 2.0)), 255.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, (pos + 3.0)), SwfDocument.JPEG_START_OF_IMAGE__swfDocument) : Bool)) : Bool)) {
+          var spliced:Dynamic = new flighthq._internal._UInt8Array(((end - start) - 4.0));
+          (cast spliced : flighthq._internal._UInt8Array).set((cast source : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(pos)));
+          (cast spliced : flighthq._internal._UInt8Array).set((cast source : flighthq._internal._UInt8Array).subarray(Std.int((pos + 4.0)), Std.int(end)), Std.int((pos - start)));
+          return cast spliced;
+        }
+        pos++;
+      }
+    }
+    return cast (cast source : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(end));
     return cast null;
   }
 
@@ -1003,7 +1434,11 @@ class SwfDocument {
       while ((cast ((cast ((cast pos : Float) < (cast end : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, pos), 255.0) : Bool)) : Bool)) { pos++; }
       if ((cast ((cast pos : Float) >= (cast end : Float)) : Bool)) { return cast null; }
       var marker:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, pos++);
-      if ((cast ((cast _Runtime.strictEquals(marker, SwfDocument.JPEG_END_OF_IMAGE__swfDocument) : Bool) || (cast _Runtime.strictEquals(marker, SwfDocument.JPEG_START_OF_SCAN__swfDocument) : Bool)) : Bool)) { return cast null; }
+      if ((cast _Runtime.strictEquals(marker, SwfDocument.JPEG_START_OF_SCAN__swfDocument) : Bool)) { return cast null; }
+      if ((cast _Runtime.strictEquals(marker, SwfDocument.JPEG_END_OF_IMAGE__swfDocument) : Bool)) {
+        if ((cast ((cast ((cast ((cast (pos + 1.0) : Float) < (cast end : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, pos), 255.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, (pos + 1.0)), SwfDocument.JPEG_START_OF_IMAGE__swfDocument) : Bool)) : Bool)) { continue; }
+        return cast null;
+      }
       if ((cast ((cast ((cast _Runtime.strictEquals(marker, SwfDocument.JPEG_START_OF_IMAGE__swfDocument) : Bool) || (cast _Runtime.strictEquals(marker, SwfDocument.JPEG_TEMPORARY__swfDocument) : Bool)) : Bool) || (cast _Runtime.andValue(((cast marker : Float) >= (cast 208.0 : Float)), function():Dynamic return cast ((cast marker : Float) <= (cast 215.0 : Float))) : Bool)) : Bool)) { continue; }
       if ((cast ((cast (pos + 2.0) : Float) > (cast end : Float)) : Bool)) { return cast null; }
       var length:Dynamic = _Runtime.callValue(SwfDocument.readBigEndianUint16__swfDocument, cast ([source, pos] : Array<Dynamic>));
@@ -1058,6 +1493,174 @@ class SwfDocument {
     return cast null;
   }
 
+  public static function readSwfSoundStreamHead__swfDocument(body:SwfReader):Float {
+    var streamFlags:Dynamic = cast _Runtime.UNDEFINED;
+    var samplesPerFrame:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callProperty(body, 'readUint8', cast ([] : Array<Dynamic>));
+    streamFlags = _Runtime.callProperty(body, 'readUint8', cast ([] : Array<Dynamic>));
+    samplesPerFrame = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+    if ((cast ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(samplesPerFrame, 0.0) : Bool)) : Bool)) { return cast -1.0; }
+    return cast (_Runtime.toInt32(streamFlags) >> 4);
+    return cast null;
+  }
+
+  public static function appendSwfStreamSoundCue__swfDocument(state:SwfParseState__swfDocument, cues:Array<TimelineCue>, chunks:Array<flighthq._internal._UInt8Array>, startFrame:Float):Void {
+    var length:Dynamic = cast _Runtime.UNDEFINED;
+    var bytes:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var resource:Dynamic = cast _Runtime.UNDEFINED;
+    var cue:TimelineStreamAudioCue = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(chunks, 'length'), 0.0) : Bool)) { return; }
+    length = 0.0;
+    for (chunk in _Runtime.iterable(chunks)) {
+      (length = cast ((length + _Runtime.field(chunk, 'length')) : Dynamic));
+    }
+    if ((cast _Runtime.strictEquals(length, 0.0) : Bool)) { return; }
+    bytes = new flighthq._internal._UInt8Array(length);
+    offset = 0.0;
+    for (chunk in _Runtime.iterable(chunks)) {
+      (cast bytes : flighthq._internal._UInt8Array).set(chunk, Std.int(offset));
+      (offset = cast ((offset + _Runtime.field(chunk, 'length')) : Dynamic));
+    }
+    resource = _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(state, 'streamSounds'), 'push', cast ([{ bytes: bytes, mimeType: 'audio/mpeg', resource: resource }] : Array<Dynamic>));
+    cue = { frame: startFrame, gain: 1.0, kind: TimelineStreamAudioCueKind, resource: resource };
+    _Runtime.callProperty(cues, 'push', cast ([cue] : Array<Dynamic>));
+  }
+
+  public static function readSwfStartSound__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, cues:Array<TimelineCue>, frame:Float):Void {
+    var characterId:Dynamic = cast _Runtime.UNDEFINED;
+    var info:Dynamic = cast _Runtime.UNDEFINED;
+    var cue:Dynamic = cast _Runtime.UNDEFINED;
+    characterId = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+    info = _Runtime.callValue(SwfDocument.readSwfSoundInfo__swfDocument, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(characterId, 0.0) : Bool) || (cast _Runtime.strictEquals(info, null) : Bool)) : Bool)) { return; }
+    cue = _Runtime.callValue(SwfDocument.createSwfAudioCue__swfDocument, cast ([info, frame, _Runtime.callValue(SwfDocument.acquireSwfSoundResource__swfDocument, cast ([state, characterId] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(cues, 'push', cast ([cue] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(state, 'soundCuesAwaitingRate'), 'push', cast ([{ characterId: characterId, cue: cue }] : Array<Dynamic>));
+  }
+
+  public static function readSwfStartSound2__swfDocument(body:SwfReader, state:SwfParseState__swfDocument, cues:Array<TimelineCue>, frame:Float):Void {
+    var className:Dynamic = cast _Runtime.UNDEFINED;
+    var info:Dynamic = cast _Runtime.UNDEFINED;
+    var cue:Dynamic = cast _Runtime.UNDEFINED;
+    className = _Runtime.callProperty(body, 'readString', cast ([] : Array<Dynamic>));
+    info = _Runtime.callValue(SwfDocument.readSwfSoundInfo__swfDocument, cast ([body] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(className, '') : Bool) || (cast _Runtime.strictEquals(info, null) : Bool)) : Bool)) { return; }
+    cue = _Runtime.callValue(SwfDocument.createSwfAudioCue__swfDocument, cast ([info, frame, _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(cues, 'push', cast ([cue] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(state, 'soundCuesAwaitingClass'), 'push', cast ([{ className: className, cue: cue }] : Array<Dynamic>));
+  }
+
+  public static function readSwfSoundInfo__swfDocument(body:SwfReader):Null<SwfSoundInfo__swfDocument> {
+    var flags:Dynamic = cast _Runtime.UNDEFINED;
+    var inPointSamples:Dynamic = cast _Runtime.UNDEFINED;
+    var outPointSamples:Dynamic = cast _Runtime.UNDEFINED;
+    var loopCount:Dynamic = cast _Runtime.UNDEFINED;
+    var envelope:Array<TimelineAudioEnvelopePoint> = cast _Runtime.UNDEFINED;
+    flags = _Runtime.callProperty(body, 'readUint8', cast ([] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool)) { return cast null; }
+    inPointSamples = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.SOUND_INFO_HAS_IN_POINT__swfDocument)), 0.0) : Bool) ? (cast _Runtime.callProperty(body, 'readUint32', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+    outPointSamples = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.SOUND_INFO_HAS_OUT_POINT__swfDocument)), 0.0) : Bool) ? (cast _Runtime.callProperty(body, 'readUint32', cast ([] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+    loopCount = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.SOUND_INFO_HAS_LOOPS__swfDocument)), 0.0) : Bool) ? (cast _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 1.0 : Dynamic));
+    envelope = cast ([] : Array<Dynamic>);
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.SOUND_INFO_HAS_ENVELOPE__swfDocument)), 0.0) : Bool)) {
+      var points:Dynamic = _Runtime.callProperty(body, 'readUint8', cast ([] : Array<Dynamic>));
+      {
+        var i:Dynamic = 0.0;
+        while ((cast ((cast ((cast i : Float) < (cast points : Float)) : Bool) && (cast _Runtime.field(body, 'valid') : Bool)) : Bool)) {
+          var position:Dynamic = _Runtime.callProperty(body, 'readUint32', cast ([] : Array<Dynamic>));
+          var leftLevel:Dynamic = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+          var rightLevel:Dynamic = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+          if ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool)) { return cast null; }
+          _Runtime.callProperty(envelope, 'push', cast ([{ leftGain: _Runtime.divideNumbers(HxMath.min(leftLevel, SwfDocument.SOUND_ENVELOPE_LEVEL_ONE__swfDocument), SwfDocument.SOUND_ENVELOPE_LEVEL_ONE__swfDocument), rightGain: _Runtime.divideNumbers(HxMath.min(rightLevel, SwfDocument.SOUND_ENVELOPE_LEVEL_ONE__swfDocument), SwfDocument.SOUND_ENVELOPE_LEVEL_ONE__swfDocument), time: (position / SwfDocument.SOUND_ENVELOPE_RATE__swfDocument) }] : Array<Dynamic>));
+          i++;
+        }
+      }
+    }
+    if ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool)) { return cast null; }
+    return cast { envelope: envelope, inPointSamples: inPointSamples, loopCount: loopCount, outPointSamples: outPointSamples, skipIfPlaying: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.SOUND_INFO_SYNC_NO_MULTIPLE__swfDocument)), 0.0), stop: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfDocument.SOUND_INFO_SYNC_STOP__swfDocument)), 0.0) };
+    return cast null;
+  }
+
+  public static function createSwfAudioCue__swfDocument(info:SwfSoundInfo__swfDocument, frame:Float, resource:AudioResource):TimelineAudioCue {
+    return cast { duration: ((cast ((cast _Runtime.field(info, 'stop') : Bool) || (cast ((cast _Runtime.field(info, 'outPointSamples') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(info, 'outPointSamples') : Dynamic)), envelope: ((cast _Runtime.field(info, 'stop') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.field(info, 'envelope') : Dynamic)), frame: frame, gain: 1.0, kind: TimelineAudioCueKind, loops: ((cast _Runtime.field(info, 'stop') : Bool) ? (cast 1.0 : Dynamic) : (cast HxMath.max(1.0, _Runtime.field(info, 'loopCount')) : Dynamic)), offset: ((cast _Runtime.field(info, 'stop') : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(info, 'inPointSamples') : Dynamic)), resource: resource, skipIfPlaying: ((cast !(cast _Runtime.field(info, 'stop') : Bool) : Bool) && (cast _Runtime.field(info, 'skipIfPlaying') : Bool)), stop: _Runtime.field(info, 'stop') };
+    return cast null;
+  }
+
+  public static function resolveSwfSoundClassCues__swfDocument(state:SwfParseState__swfDocument):Void {
+    var characterIds:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'soundCuesAwaitingClass'), 'length'), 0.0) : Bool)) { return; }
+    characterIds = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    for (__iteration12 in _Runtime.iterable(_Runtime.field(state, 'linkages'))) {
+      var characterId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration12, 0.0);
+      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration12, 1.0);
+      ((cast characterIds : flighthq._internal._Map).set(name, characterId));
+    }
+    for (pending in _Runtime.iterable(_Runtime.field(state, 'soundCuesAwaitingClass'))) {
+      var characterId:Dynamic = ((cast characterIds : flighthq._internal._Map).get(_Runtime.field(pending, 'className')));
+      if ((cast _Runtime.strictEquals(characterId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      var existing:Dynamic = ((cast _Runtime.field(state, 'soundResources') : flighthq._internal._Map).get(characterId));
+      if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast _Runtime.field(state, 'soundResources') : flighthq._internal._Map).set(characterId, _Runtime.field(_Runtime.field(pending, 'cue'), 'resource'))); } else { _Runtime.setField(_Runtime.field(pending, 'cue'), 'resource', existing); }
+      _Runtime.callProperty(_Runtime.field(state, 'soundCuesAwaitingRate'), 'push', cast ([{ characterId: characterId, cue: _Runtime.field(pending, 'cue') }] : Array<Dynamic>));
+    }
+  }
+
+  public static function convertSwfSoundCueTimes__swfDocument(state:SwfParseState__swfDocument):Void {
+    for (pending in _Runtime.iterable(_Runtime.field(state, 'soundCuesAwaitingRate'))) {
+      var sound:Dynamic = ((cast _Runtime.field(state, 'sounds') : flighthq._internal._Map).get(_Runtime.field(pending, 'characterId')));
+      if ((cast _Runtime.strictEquals(sound, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      var inPoint:Dynamic = _Runtime.divideNumbers(_Runtime.field(_Runtime.field(pending, 'cue'), 'offset'), _Runtime.field(sound, 'sampleRate'));
+      _Runtime.setField(_Runtime.field(pending, 'cue'), 'duration', ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(pending, 'cue'), 'duration'), null) : Bool) ? (cast null : Dynamic) : (cast (_Runtime.divideNumbers(_Runtime.field(_Runtime.field(pending, 'cue'), 'duration'), _Runtime.field(sound, 'sampleRate')) - inPoint) : Dynamic)));
+      _Runtime.setField(_Runtime.field(pending, 'cue'), 'offset', inPoint);
+    }
+  }
+
+  public static function acquireSwfSoundResource__swfDocument(state:SwfParseState__swfDocument, characterId:Float):AudioResource {
+    var existing:Dynamic = cast _Runtime.UNDEFINED;
+    var resource:Dynamic = cast _Runtime.UNDEFINED;
+    existing = ((cast _Runtime.field(state, 'soundResources') : flighthq._internal._Map).get(characterId));
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
+    resource = _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>));
+    ((cast _Runtime.field(state, 'soundResources') : flighthq._internal._Map).set(characterId, resource));
+    return cast resource;
+    return cast null;
+  }
+
+  public static function readSwfSoundDefinition__swfDocument(body:SwfReader, state:SwfParseState__swfDocument):Void {
+    var characterId:Dynamic = cast _Runtime.UNDEFINED;
+    var flags:Dynamic = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
+    characterId = _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>));
+    flags = _Runtime.callProperty(body, 'readUint8', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(body, 'readUint32', cast ([] : Array<Dynamic>));
+    if ((cast ((cast ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(characterId, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(state, 'sounds') : flighthq._internal._Map).has(characterId)) : Bool)) : Bool)) { return; }
+    format = (_Runtime.toInt32(flags) >> 4);
+    if ((cast _Runtime.strictEquals(format, SwfDocument.SOUND_FORMAT_MP3__swfDocument) : Bool)) { _Runtime.callProperty(body, 'readUint16', cast ([] : Array<Dynamic>)); }
+    if ((cast !(cast _Runtime.field(body, 'valid') : Bool) : Bool)) { return; }
+    ((cast _Runtime.field(state, 'sounds') : flighthq._internal._Map).set(characterId, { bytes: (cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(body, 'pos')), Std.int(_Runtime.field(body, 'end'))), mimeType: _Runtime.callValue(SwfDocument.createSwfSoundMimeType__swfDocument, cast ([format, flags] : Array<Dynamic>)), sampleRate: _Runtime.callValue(SwfDocument.resolveSwfSoundSampleRate__swfDocument, cast ([format, flags] : Array<Dynamic>)) }));
+  }
+
+  public static function createSwfSoundMimeType__swfDocument(format:Float, flags:Float):Null<String> {
+    var essence:Dynamic = cast _Runtime.UNDEFINED;
+    var channels:Dynamic = cast _Runtime.UNDEFINED;
+    var bits:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(format, SwfDocument.SOUND_FORMAT_MP3__swfDocument) : Bool)) { return cast 'audio/mpeg'; }
+    essence = _Runtime.getIndex(SwfDocument.SWF_SOUND_MIME_ESSENCES__swfDocument, format);
+    if ((cast _Runtime.strictEquals(essence, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+    channels = ((cast _Runtime.strictEquals((_Runtime.toInt32(flags) & 1), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast 2.0 : Dynamic));
+    bits = ((cast _Runtime.strictEquals((_Runtime.toInt32(flags) & 2), 0.0) : Bool) ? (cast 8.0 : Dynamic) : (cast 16.0 : Dynamic));
+    return cast '' + Std.string(essence) + '; rate=' + Std.string(_Runtime.callValue(SwfDocument.resolveSwfSoundSampleRate__swfDocument, cast ([format, flags] : Array<Dynamic>))) + '; channels=' + Std.string(channels) + '; bits=' + Std.string(bits) + '';
+    return cast null;
+  }
+
+  public static function resolveSwfSoundSampleRate__swfDocument(format:Float, flags:Float):Float {
+    if ((cast _Runtime.strictEquals(format, SwfDocument.SOUND_FORMAT_NELLYMOSER_8K__swfDocument) : Bool)) { return cast 8000.0; }
+    if ((cast _Runtime.strictEquals(format, SwfDocument.SOUND_FORMAT_NELLYMOSER_16K__swfDocument) : Bool)) { return cast 16000.0; }
+    return cast flighthq._internal._StaticIndex.readArray(SwfDocument.SWF_SOUND_RATES__swfDocument, (_Runtime.toInt32((_Runtime.toInt32(flags) >> 2)) & 3));
+    return cast null;
+  }
+
   public static function readSwfVideoDefinition__swfDocument(body:SwfReader, state:SwfParseState__swfDocument):Bool {
     var characterId:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -1078,6 +1681,8 @@ class SwfDocument {
   }
 
   public static final CWS_SIGNATURE__swfDocument:Dynamic = 67.0;
+
+  public static final ALPHA_CHANNEL__swfDocument:Dynamic = 3.0;
 
   public static final FIXED_8_8_ONE__swfDocument:Dynamic = 256.0;
 
@@ -1119,8 +1724,6 @@ class SwfDocument {
 
   public static final MAX_BUTTON_RECORDS__swfDocument:Dynamic = 10000.0;
 
-  public static final MAX_INSTANTIATED_NODES__swfDocument:Dynamic = 100000.0;
-
   public static final MAX_SPRITE_NESTING__swfDocument:Dynamic = 256.0;
 
   public static final MAX_TIMELINE_FRAME_ENTRIES__swfDocument:Dynamic = 1000000.0;
@@ -1132,6 +1735,8 @@ class SwfDocument {
   public static final PNG_MIME_TYPE__swfDocument:Dynamic = 'image/png';
 
   public static final S_SIGNATURE__swfDocument:Dynamic = 83.0;
+
+  public static final MORPH_RATIO_ONE__swfDocument:Dynamic = 65535.0;
 
   public static final SWF_INSTANCE_KEY_SCALE__swfDocument:Dynamic = 65536.0;
 
@@ -1145,7 +1750,47 @@ class SwfDocument {
 
   public static final SWF_PREFIX_LENGTH__swfDocument:Dynamic = 8.0;
 
+  public static final SOUND_ENVELOPE_LEVEL_ONE__swfDocument:Dynamic = 32768.0;
+
+  public static final SOUND_ENVELOPE_RATE__swfDocument:Dynamic = 44100.0;
+
+  public static final SOUND_INFO_HAS_ENVELOPE__swfDocument:Dynamic = 8.0;
+
+  public static final SOUND_INFO_HAS_IN_POINT__swfDocument:Dynamic = 1.0;
+
+  public static final SOUND_INFO_HAS_LOOPS__swfDocument:Dynamic = 4.0;
+
+  public static final SOUND_INFO_HAS_OUT_POINT__swfDocument:Dynamic = 2.0;
+
+  public static final SOUND_INFO_SYNC_NO_MULTIPLE__swfDocument:Dynamic = 16.0;
+
+  public static final SOUND_INFO_SYNC_STOP__swfDocument:Dynamic = 32.0;
+
+  public static final SOUND_FORMAT_MP3__swfDocument:Dynamic = 2.0;
+
+  public static final SOUND_FORMAT_NELLYMOSER_16K__swfDocument:Dynamic = 4.0;
+
+  public static final SOUND_FORMAT_NELLYMOSER_8K__swfDocument:Dynamic = 5.0;
+
+  public static final SWF_SOUND_MIME_ESSENCES__swfDocument:Dynamic = _Runtime.objectFromPairs([{ key: '0', value: 'audio/vnd.adobe.swf-pcm' }, { key: '1', value: 'audio/vnd.adobe.swf-adpcm' }, { key: '3', value: 'audio/vnd.adobe.swf-pcm' }, { key: '4', value: 'audio/vnd.adobe.swf-nellymoser' }, { key: '5', value: 'audio/vnd.adobe.swf-nellymoser' }, { key: '6', value: 'audio/vnd.adobe.swf-nellymoser' }, { key: '11', value: 'audio/vnd.adobe.swf-speex' }]);
+
+  public static final SWF_SOUND_RATES__swfDocument:Array<Float> = cast ([5512.0, 11025.0, 22050.0, 44100.0] : Array<Dynamic>);
+
   public static final TAG_END__swfDocument:Dynamic = 0.0;
+
+  public static final TAG_DEFINE_SOUND__swfDocument:Dynamic = 14.0;
+
+  public static final TAG_START_SOUND__swfDocument:Dynamic = 15.0;
+
+  public static final TAG_START_SOUND_2__swfDocument:Dynamic = 89.0;
+
+  public static final TAG_SOUND_STREAM_BLOCK__swfDocument:Dynamic = 19.0;
+
+  public static final TAG_SOUND_STREAM_HEAD__swfDocument:Dynamic = 18.0;
+
+  public static final TAG_SOUND_STREAM_HEAD_2__swfDocument:Dynamic = 45.0;
+
+  public static final TAG_DEFINE_SCALING_GRID__swfDocument:Dynamic = 78.0;
 
   public static final TAG_DEFINE_SCENE_AND_FRAME_LABEL_DATA__swfDocument:Dynamic = 86.0;
 
@@ -1197,7 +1842,13 @@ class SwfDocument {
 
   public static final TAG_DEFINE_VIDEO_STREAM__swfDocument:Dynamic = 60.0;
 
+  public static final TAG_DO_ABC__swfDocument:Dynamic = 82.0;
+
+  public static final TAG_DO_ABC_ANONYMOUS__swfDocument:Dynamic = 72.0;
+
   public static final TAG_DO_ACTION__swfDocument:Dynamic = 12.0;
+
+  public static final TAG_DO_INIT_ACTION__swfDocument:Dynamic = 59.0;
 
   public static final TAG_EXPORT_ASSETS__swfDocument:Dynamic = 56.0;
 
@@ -1224,6 +1875,8 @@ class SwfDocument {
   public static final TAG_SYMBOL_CLASS__swfDocument:Dynamic = 76.0;
 
   public static final TWIPS_PER_PIXEL__swfDocument:Dynamic = 20.0;
+
+  public static final _fontNameDecoder__swfDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
 
   public static final _maskPoint__swfDocument:Dynamic = { x: 0.0, y: 0.0 };
 

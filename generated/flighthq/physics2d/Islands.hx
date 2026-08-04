@@ -3,11 +3,95 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.physics2d.Ownership.assertPhysics2DBodyNotStepping;
 import flighthq.physics2d.World.findPhysics2DBody;
 import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
 
 class Islands {
+  public static function buildPhysics2DSolveIslands(world:Physics2DWorld):Void {
+    var roots:Dynamic = cast _Runtime.UNDEFINED;
+    var byRoot:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyCounts:Dynamic = cast _Runtime.UNDEFINED;
+    var contactCounts:Dynamic = cast _Runtime.UNDEFINED;
+    var jointCounts:Dynamic = cast _Runtime.UNDEFINED;
+    roots = _Runtime.field(world, 'solveIslandRoots');
+    byRoot = _Runtime.field(world, 'solveIslandByRoot');
+    bodyCounts = _Runtime.field(world, 'solveIslandBodyCounts');
+    contactCounts = _Runtime.field(world, 'solveIslandContactCounts');
+    jointCounts = _Runtime.field(world, 'solveIslandJointCounts');
+    _Runtime.setLength(roots, 0.0);
+    ((cast byRoot : flighthq._internal._Map).clear());
+    _Runtime.setLength(bodyCounts, 0.0);
+    _Runtime.setLength(contactCounts, 0.0);
+    _Runtime.setLength(jointCounts, 0.0);
+    for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool) || (cast _Runtime.field(body, 'sleeping') : Bool)) : Bool)) { continue; }
+      var root:Dynamic = _Runtime.callValue(Islands._islandRootOf__islands, cast ([_Runtime.field(world, 'islandParents'), _Runtime.field(body, 'index')] : Array<Dynamic>));
+      var island:Dynamic = ((cast byRoot : flighthq._internal._Map).get(root));
+      if ((cast _Runtime.strictEquals(island, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        (island = cast (_Runtime.field(roots, 'length') : Dynamic));
+        _Runtime.callProperty(roots, 'push', cast ([root] : Array<Dynamic>));
+        ((cast byRoot : flighthq._internal._Map).set(root, island));
+        _Runtime.callProperty(bodyCounts, 'push', cast ([0.0] : Array<Dynamic>));
+        _Runtime.callProperty(contactCounts, 'push', cast ([0.0] : Array<Dynamic>));
+        _Runtime.callProperty(jointCounts, 'push', cast ([0.0] : Array<Dynamic>));
+      }
+      _Runtime.incrementIndex(bodyCounts, island, 1, true);
+    }
+    for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
+      if ((cast ((cast !(cast _Runtime.field(contact, 'enabled') : Bool) : Bool) || (cast _Runtime.field(contact, 'sensor') : Bool)) : Bool)) { continue; }
+      var island:Dynamic = _Runtime.callValue(Islands._physics2DSolveIslandForPair__islands, cast ([world, _Runtime.field(contact, 'bodyA'), _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
+      if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.incrementIndex(contactCounts, island, 1, true); }
+    }
+    for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
+      var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
+      if ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      var island:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(solver, 'usesBodyA'), false) : Bool) ? (cast _Runtime.callValue(Islands._physics2DSolveIslandForBody__islands, cast ([world, _Runtime.field(joint, 'bodyB')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(Islands._physics2DSolveIslandForPair__islands, cast ([world, _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB')] : Array<Dynamic>)) : Dynamic));
+      if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.incrementIndex(jointCounts, island, 1, true); }
+    }
+    _Runtime.callValue(Islands._preparePhysics2DIslandSlices__islands, cast ([_Runtime.field(world, 'solveIslandBodyStarts'), bodyCounts, _Runtime.field(world, 'solveIslandCursors')] : Array<Dynamic>));
+    _Runtime.callValue(Islands._preparePhysics2DIslandSlices__islands, cast ([_Runtime.field(world, 'solveIslandContactStarts'), contactCounts, _Runtime.field(world, 'solveIslandCursors')] : Array<Dynamic>));
+    _Runtime.callValue(Islands._preparePhysics2DIslandSlices__islands, cast ([_Runtime.field(world, 'solveIslandJointStarts'), jointCounts, _Runtime.field(world, 'solveIslandCursors')] : Array<Dynamic>));
+    _Runtime.setLength(_Runtime.field(world, 'solveIslandBodyIndices'), _Runtime.callValue(Islands._physics2DIslandItemCount__islands, cast ([_Runtime.field(world, 'solveIslandBodyStarts'), bodyCounts] : Array<Dynamic>)));
+    _Runtime.setLength(_Runtime.field(world, 'solveIslandContactIndices'), _Runtime.callValue(Islands._physics2DIslandItemCount__islands, cast ([_Runtime.field(world, 'solveIslandContactStarts'), contactCounts] : Array<Dynamic>)));
+    _Runtime.setLength(_Runtime.field(world, 'solveIslandJointIndices'), _Runtime.callValue(Islands._physics2DIslandItemCount__islands, cast ([_Runtime.field(world, 'solveIslandJointStarts'), jointCounts] : Array<Dynamic>)));
+    _Runtime.callValue(Islands._copyPhysics2DIslandStarts__islands, cast ([_Runtime.field(world, 'solveIslandCursors'), _Runtime.field(world, 'solveIslandBodyStarts')] : Array<Dynamic>));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(world, 'bodies'), 'length') : Float)) : Bool)) {
+        var body:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'bodies'), i);
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool) || (cast _Runtime.field(body, 'sleeping') : Bool)) : Bool)) { i++; continue; }
+        var island:Dynamic = ((cast byRoot : flighthq._internal._Map).get(_Runtime.callValue(Islands._islandRootOf__islands, cast ([_Runtime.field(world, 'islandParents'), _Runtime.field(body, 'index')] : Array<Dynamic>))));
+        if ((cast !_Runtime.strictEquals(island, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(_Runtime.field(world, 'solveIslandBodyIndices'), _Runtime.incrementIndex(_Runtime.field(world, 'solveIslandCursors'), island, 1, true), i); }
+        i++;
+      }
+    }
+    _Runtime.callValue(Islands._copyPhysics2DIslandStarts__islands, cast ([_Runtime.field(world, 'solveIslandCursors'), _Runtime.field(world, 'solveIslandContactStarts')] : Array<Dynamic>));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(world, 'contacts'), 'length') : Float)) : Bool)) {
+        var contact:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'contacts'), i);
+        if ((cast ((cast !(cast _Runtime.field(contact, 'enabled') : Bool) : Bool) || (cast _Runtime.field(contact, 'sensor') : Bool)) : Bool)) { i++; continue; }
+        var island:Dynamic = _Runtime.callValue(Islands._physics2DSolveIslandForPair__islands, cast ([world, _Runtime.field(contact, 'bodyA'), _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
+        if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeArray(_Runtime.field(world, 'solveIslandContactIndices'), _Runtime.incrementIndex(_Runtime.field(world, 'solveIslandCursors'), island, 1, true), i); }
+        i++;
+      }
+    }
+    _Runtime.callValue(Islands._copyPhysics2DIslandStarts__islands, cast ([_Runtime.field(world, 'solveIslandCursors'), _Runtime.field(world, 'solveIslandJointStarts')] : Array<Dynamic>));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(world, 'joints'), 'length') : Float)) : Bool)) {
+        var joint:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), i);
+        var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
+        if ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
+        var island:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(solver, 'usesBodyA'), false) : Bool) ? (cast _Runtime.callValue(Islands._physics2DSolveIslandForBody__islands, cast ([world, _Runtime.field(joint, 'bodyB')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(Islands._physics2DSolveIslandForPair__islands, cast ([world, _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB')] : Array<Dynamic>)) : Dynamic));
+        if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeArray(_Runtime.field(world, 'solveIslandJointIndices'), _Runtime.incrementIndex(_Runtime.field(world, 'solveIslandCursors'), island, 1, true), i); }
+        i++;
+      }
+    }
+  }
+
   public static function isRigidBody2DPairAwake(a:RigidBody2D, b:RigidBody2D):Bool {
     return cast ((cast _Runtime.callValue(Islands._isBodyLive__islands, cast ([a] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(Islands._isBodyLive__islands, cast ([b] : Array<Dynamic>)) : Bool));
     return cast null;
@@ -20,6 +104,19 @@ class Islands {
     var islandTimers:Dynamic = cast _Runtime.UNDEFINED;
     config = _Runtime.field(world, 'config');
     bodies = _Runtime.field(world, 'bodies');
+    parents = _Runtime.field(world, 'islandParents');
+    islandTimers = _Runtime.field(world, 'islandSleepTimers');
+    ((cast parents : flighthq._internal._Map).clear());
+    ((cast islandTimers : flighthq._internal._Map).clear());
+    for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
+      if ((cast ((cast !(cast _Runtime.field(contact, 'enabled') : Bool) : Bool) || (cast _Runtime.field(contact, 'sensor') : Bool)) : Bool)) { continue; }
+      _Runtime.callValue(Islands._unionDynamicPair__islands, cast ([world, parents, _Runtime.field(contact, 'bodyA'), _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
+    }
+    for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
+      var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
+      if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(solver, 'usesBodyA'), false) : Bool)) : Bool)) { continue; }
+      _Runtime.callValue(Islands._unionDynamicPair__islands, cast ([world, parents, _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB')] : Array<Dynamic>));
+    }
     if ((cast !(cast _Runtime.field(config, 'allowSleeping') : Bool) : Bool)) {
       for (body in _Runtime.iterable(bodies)) {
         _Runtime.setField(body, 'sleeping', false);
@@ -29,21 +126,23 @@ class Islands {
     }
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) { continue; }
+      if ((cast !(cast _Runtime.field(body, 'sleepEnabled') : Bool) : Bool)) {
+        _Runtime.setField(body, 'sleeping', false);
+        _Runtime.setField(body, 'sleepTimer', 0.0);
+        continue;
+      }
       if ((cast _Runtime.callValue(Islands._isBodyStill__islands, cast ([body, _Runtime.field(config, 'sleepLinearThreshold'), _Runtime.field(config, 'sleepAngularThreshold')] : Array<Dynamic>)) : Bool)) {
         _Runtime.setField(body, 'sleepTimer', _Runtime.addNumbers(_Runtime.field(body, 'sleepTimer'), dt));
       } else {
         _Runtime.setField(body, 'sleepTimer', 0.0);
       }
     }
-    parents = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
-      if ((cast _Runtime.field(contact, 'sensor') : Bool)) { continue; }
-      _Runtime.callValue(Islands._unionDynamicPair__islands, cast ([world, parents, _Runtime.field(contact, 'bodyA'), _Runtime.field(contact, 'bodyB')] : Array<Dynamic>));
-    }
     for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
-      _Runtime.callValue(Islands._unionDynamicPair__islands, cast ([world, parents, _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB')] : Array<Dynamic>));
+      var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
+      if ((cast !_Runtime.strictEquals(_Runtime.optionalField(solver, 'keepsBodiesAwake'), true) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(solver, 'usesBodyA'), false) : Bool)) { _Runtime.callValue(Islands._keepPhysics2DBodyAwake__islands, cast ([world, _Runtime.field(joint, 'bodyA')] : Array<Dynamic>)); }
+      _Runtime.callValue(Islands._keepPhysics2DBodyAwake__islands, cast ([world, _Runtime.field(joint, 'bodyB')] : Array<Dynamic>));
     }
-    islandTimers = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) { continue; }
       var root:Dynamic = _Runtime.callValue(Islands._islandRootOf__islands, cast ([parents, _Runtime.field(body, 'index')] : Array<Dynamic>));
@@ -53,7 +152,7 @@ class Islands {
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) { continue; }
       var islandTimer:Dynamic = _Runtime.coalesce(((cast islandTimers : flighthq._internal._Map).get(_Runtime.callValue(Islands._islandRootOf__islands, cast ([parents, _Runtime.field(body, 'index')] : Array<Dynamic>)))), function():Dynamic return cast _Runtime.field(body, 'sleepTimer'));
-      var shouldSleep:Dynamic = ((cast islandTimer : Float) >= (cast _Runtime.field(config, 'timeToSleep') : Float));
+      var shouldSleep:Dynamic = ((cast _Runtime.field(body, 'sleepEnabled') : Bool) && (cast ((cast islandTimer : Float) >= (cast _Runtime.field(config, 'timeToSleep') : Float)) : Bool));
       if ((cast ((cast !(cast shouldSleep : Bool) : Bool) && (cast _Runtime.field(body, 'sleeping') : Bool)) : Bool)) {
         _Runtime.setField(body, 'sleepTimer', 0.0);
       }
@@ -67,6 +166,7 @@ class Islands {
   }
 
   public static function wakePhysics2DBody(body:RigidBody2D):Void {
+    _Runtime.callValue(assertPhysics2DBodyNotStepping, cast ([body] : Array<Dynamic>));
     _Runtime.setField(body, 'sleeping', false);
     _Runtime.setField(body, 'sleepTimer', 0.0);
   }
@@ -82,6 +182,61 @@ class Islands {
     speedSquared = (_Runtime.multiplyNumbers(_Runtime.field(body, 'velocityX'), _Runtime.field(body, 'velocityX')) + _Runtime.multiplyNumbers(_Runtime.field(body, 'velocityY'), _Runtime.field(body, 'velocityY')));
     if ((cast ((cast speedSquared : Float) > (cast (linearThreshold * linearThreshold) : Float)) : Bool)) { return cast false; }
     return cast ((cast HxMath.abs(_Runtime.field(body, 'angularVelocity')) : Float) <= (cast angularThreshold : Float));
+    return cast null;
+  }
+
+  public static function _keepPhysics2DBodyAwake__islands(world:Physics2DWorld, bodyIndex:Float):Void {
+    var body:Dynamic = cast _Runtime.UNDEFINED;
+    body = _Runtime.callValue(findPhysics2DBody, cast ([world, bodyIndex] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(body, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) : Bool)) { _Runtime.setField(body, 'sleepTimer', 0.0); }
+  }
+
+  public static function _physics2DSolveIslandForBody__islands(world:Physics2DWorld, bodyIndex:Float):Float {
+    var body:Dynamic = cast _Runtime.UNDEFINED;
+    body = _Runtime.callValue(findPhysics2DBody, cast ([world, bodyIndex] : Array<Dynamic>));
+    if ((cast ((cast ((cast _Runtime.strictEquals(body, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) : Bool) || (cast _Runtime.field(body, 'sleeping') : Bool)) : Bool)) { return cast -1.0; }
+    return cast _Runtime.coalesce(((cast _Runtime.field(world, 'solveIslandByRoot') : flighthq._internal._Map).get(_Runtime.callValue(Islands._islandRootOf__islands, cast ([_Runtime.field(world, 'islandParents'), _Runtime.field(body, 'index')] : Array<Dynamic>)))), function():Dynamic return cast -1.0);
+    return cast null;
+  }
+
+  public static function _physics2DSolveIslandForPair__islands(world:Physics2DWorld, bodyA:Float, bodyB:Float):Float {
+    var islandA:Dynamic = cast _Runtime.UNDEFINED;
+    islandA = _Runtime.callValue(Islands._physics2DSolveIslandForBody__islands, cast ([world, bodyA] : Array<Dynamic>));
+    if ((cast ((cast islandA : Float) >= (cast 0.0 : Float)) : Bool)) { return cast islandA; }
+    return cast _Runtime.callValue(Islands._physics2DSolveIslandForBody__islands, cast ([world, bodyB] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function _preparePhysics2DIslandSlices__islands(starts:Array<Float>, counts:Array<Float>, cursors:Array<Float>):Void {
+    var start:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(starts, _Runtime.field(counts, 'length'));
+    _Runtime.setLength(cursors, _Runtime.field(counts, 'length'));
+    start = 0.0;
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(counts, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray(starts, i, start);
+        (start = cast ((start + flighthq._internal._StaticIndex.readArray(counts, i)) : Dynamic));
+        i++;
+      }
+    }
+  }
+
+  public static function _copyPhysics2DIslandStarts__islands(cursors:Array<Float>, starts:Array<Float>):Void {
+    _Runtime.setLength(cursors, _Runtime.field(starts, 'length'));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(starts, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray(cursors, i, flighthq._internal._StaticIndex.readArray(starts, i));
+        i++;
+      }
+    }
+  }
+
+  public static function _physics2DIslandItemCount__islands(starts:Array<Float>, counts:Array<Float>):Float {
+    var last:Dynamic = cast _Runtime.UNDEFINED;
+    last = _Runtime.subtractNumbers(_Runtime.field(counts, 'length'), 1.0);
+    return cast ((cast ((cast last : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(starts, last), flighthq._internal._StaticIndex.readArray(counts, last)) : Dynamic));
     return cast null;
   }
 

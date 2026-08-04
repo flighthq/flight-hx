@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.scene2d.Sprite.createSpriteRendererData;
 import flighthq.scene2d.Sprite.isSpriteRendererDirty;
 import flighthq.scene2dCanvas.CanvasNode2D.drawCanvasScene2D;
+import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.texture.Texture.getTextureHeight;
@@ -30,7 +31,7 @@ class CanvasSprite {
     _Runtime.callValue(drawCanvasScene2D, cast ([state, sprite] : Array<Dynamic>));
     texture = _Runtime.field(_Runtime.field((cast _Runtime.field(sprite, 'source') : Sprite), 'data'), 'texture');
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool)) { return; }
-    drawable = _Runtime.callValue(resolveCanvasTexture, cast ([state, texture] : Array<Dynamic>));
+    drawable = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return; }
     textureWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
     textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));

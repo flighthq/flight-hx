@@ -5,4 +5,6 @@ const api = compiled.flighthq.types._internal._DirectionalLightValues;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const DIRECTIONAL_SHADOW_MAP_SIZE = api.DIRECTIONAL_SHADOW_MAP_SIZE;
 export const DirectionalLightKind = api.DirectionalLightKind;
+export const MAX_DIRECTIONAL_SHADOW_PCF_RADIUS = api.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;

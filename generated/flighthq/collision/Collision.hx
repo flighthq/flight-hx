@@ -9,9 +9,11 @@ import flighthq.collision.EnableCollisionGuards as Facade_Collision_flighthq_col
 import flighthq.collision.ExplainCollisionTest as Facade_Collision_flighthq_collision_ExplainCollisionTest;
 import flighthq.collision.Manifold as Facade_Collision_flighthq_collision_Manifold;
 import flighthq.collision.PointContainment as Facade_Collision_flighthq_collision_PointContainment;
+import flighthq.collision.RaycastCollisionShape as Facade_Collision_flighthq_collision_RaycastCollisionShape;
 import flighthq.collision.SegmentCollision as Facade_Collision_flighthq_collision_SegmentCollision;
 import flighthq.collision.ShapeCollision as Facade_Collision_flighthq_collision_ShapeCollision;
 import flighthq.collision.ShapeContact as Facade_Collision_flighthq_collision_ShapeContact;
+import flighthq.collision.SweepCollisionShape as Facade_Collision_flighthq_collision_SweepCollisionShape;
 import flighthq.collision.TestCollision as Facade_Collision_flighthq_collision_TestCollision;
 import flighthq.types.Collision.CollisionAabb;
 import flighthq.types.Collision.CollisionCircle;
@@ -19,9 +21,11 @@ import flighthq.types.Collision.CollisionContactManifold;
 import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
+import flighthq.types.Collision.CollisionRaycastHit;
 import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Collision.CollisionTestExplanation;
+import flighthq.types.Collision.CollisionTimeOfImpact;
 
 class Collision {
   public static function areCollisionGuardsEnabled():Bool {
@@ -102,6 +106,16 @@ class Collision {
     return cast null;
   }
 
+  public static function createCollisionRaycastHit():CollisionRaycastHit {
+    return cast Facade_Collision_flighthq_collision_RaycastCollisionShape.createCollisionRaycastHit();
+    return cast null;
+  }
+
+  public static function createCollisionTimeOfImpact():CollisionTimeOfImpact {
+    return cast Facade_Collision_flighthq_collision_SweepCollisionShape.createCollisionTimeOfImpact();
+    return cast null;
+  }
+
   public static function disableCollisionGuards():Void {
     Facade_Collision_flighthq_collision_EnableCollisionGuards.disableCollisionGuards();
   }
@@ -117,6 +131,16 @@ class Collision {
 
   public static function getCollisionShapeContainsPoint(shape:CollisionShape, x:Float, y:Float):Bool {
     return cast Facade_Collision_flighthq_collision_PointContainment.getCollisionShapeContainsPoint(shape, x, y);
+    return cast null;
+  }
+
+  public static function raycastCollisionShape(shape:CollisionShape, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit, ?maxFraction:Dynamic):Bool {
+    return cast Facade_Collision_flighthq_collision_RaycastCollisionShape.raycastCollisionShape(shape, originX, originY, directionX, directionY, out, maxFraction);
+    return cast null;
+  }
+
+  public static function sweepCollisionShape(shapeA:CollisionShape, translationAX:Float, translationAY:Float, shapeB:CollisionShape, translationBX:Float, translationBY:Float, out:CollisionTimeOfImpact, ?maxFraction:Dynamic):Bool {
+    return cast Facade_Collision_flighthq_collision_SweepCollisionShape.sweepCollisionShape(shapeA, translationAX, translationAY, shapeB, translationBX, translationBY, out, maxFraction);
     return cast null;
   }
 

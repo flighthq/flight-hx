@@ -2,3 +2,4 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const readAbcFile = compiled.flighthq.abc.Abc.readAbcFile;
+export const readAbcInstructions = compiled.flighthq.abc.Abc.readAbcInstructions;

@@ -4,10 +4,22 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './colliderTransform.mjs';
-export * from './islands.mjs';
+export * from './explainPhysics2DJoints.mjs';
+export * from './explainPhysics2DStep.mjs';
+export * from './jointFactories.mjs';
 export * from './jointRegistry.mjs';
 export * from './joints.mjs';
 export * from './massProperties.mjs';
-export * from './solver.mjs';
+export * from './material.mjs';
+export * from './registerBuiltInPhysics2DJointSolvers.mjs';
 export * from './step.mjs';
 export * from './world.mjs';
+export * from './worldQueries.mjs';
+export { applyPhysics2DImpulse } from './solver.mjs';
+export { isRigidBody2DPairAwake } from './islands.mjs';
+export { relativeNormalVelocity } from './solver.mjs';
+export { solvePhysics2DContacts } from './solver.mjs';
+export { solvePhysics2DContactsOnce } from './solver.mjs';
+export { updatePhysics2DSleep } from './islands.mjs';
+export { wakePhysics2DBody } from './islands.mjs';
+export { warmStartPhysics2DContacts } from './solver.mjs';

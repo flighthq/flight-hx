@@ -3,35 +3,27 @@ package flighthq.scene2dResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.AudioResourceReference;
+import flighthq.types.ImageResourceReference;
 import flighthq.types.Node2D;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DAssetReference;
-import flighthq.types.Scene2DDocument.Scene2DContentReference;
-import flighthq.types.Scene2DDocument.Scene2DContentReferenceKind;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
-import flighthq.types._internal._Scene2DDocumentValues.Scene2DContentReferenceKindValue;
 
 class Scene2DDocument {
-  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, required:Dynamic = true, ?bytes:Null<flighthq._internal._UInt8Array>, ?mimeType:Null<String>):Scene2DAssetReference {
-    if (bytes == null) bytes = cast (null : Dynamic);
-    if (mimeType == null) mimeType = cast (null : Dynamic);
-    _Runtime.setField(target, 'name', name);
-    return cast { bytes: bytes, content: null, kind: Scene2DContentReferenceKindValue.Asset, mimeType: mimeType, name: name, required: required, target: target, uri: uri };
-    return cast null;
-  }
-
-  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>):flighthq.types.Scene2DDocument {
-    if (references == null) references = cast (cast ([] : Array<Dynamic>) : Dynamic);
+  public static function createScene2DDocument(root:Node2D, ?slots:Array<Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<ImageResourceReference>, ?audioResources:Array<AudioResourceReference>):flighthq.types.Scene2DDocument {
+    if (slots == null) slots = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (sourceKind == null) sourceKind = cast (null : Dynamic);
     if (backgroundColor == null) backgroundColor = cast (null : Dynamic);
-    return cast { backgroundColor: backgroundColor, references: references, root: root, sourceKind: sourceKind };
+    if (imageResources == null) imageResources = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    if (audioResources == null) audioResources = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    return cast { audioResources: audioResources, backgroundColor: backgroundColor, imageResources: imageResources, root: root, slots: slots, sourceKind: sourceKind };
     return cast null;
   }
 
   public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, required:Dynamic = true):Scene2DSlotReference {
     if (linkage == null) linkage = cast (null : Dynamic);
     _Runtime.setField(target, 'name', name);
-    return cast { content: null, kind: Scene2DContentReferenceKindValue.Slot, linkage: linkage, name: name, required: required, target: target };
+    return cast { content: null, linkage: linkage, name: name, required: required, target: target };
     return cast null;
   }
 }

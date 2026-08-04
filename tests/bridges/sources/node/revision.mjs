@@ -7,9 +7,11 @@ __syncDependencies();
 
 export const computeNodeWorldTransformRevision = api.computeNodeWorldTransformRevision;
 export const getNodeAppearanceRevision = api.getNodeAppearanceRevision;
+export const getNodeChildrenRevision = api.getNodeChildrenRevision;
 export const getNodeLocalBoundsRevision = api.getNodeLocalBoundsRevision;
 export const getNodeLocalContentRevision = api.getNodeLocalContentRevision;
 export const getNodeLocalTransformRevision = api.getNodeLocalTransformRevision;
+export const getNodeParentReferenceRevision = api.getNodeParentReferenceRevision;
 export const getNodeWorldTransformRevision = api.getNodeWorldTransformRevision;
 export const invalidateContent = api.invalidateContent;
 export const invalidateNode = api.invalidateNode;

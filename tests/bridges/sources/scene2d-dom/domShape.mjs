@@ -5,5 +5,6 @@ const api = compiled.flighthq.scene2dDom.DomShape;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const defaultDomMorphShapeRenderer = api.defaultDomMorphShapeRenderer;
 export const defaultDomShapeRenderer = api.defaultDomShapeRenderer;
 export const drawDomShape = api.drawDomShape;

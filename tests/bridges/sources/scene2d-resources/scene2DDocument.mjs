@@ -5,6 +5,5 @@ const api = compiled.flighthq.scene2dResources.Scene2DDocument;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createScene2DAssetReference = api.createScene2DAssetReference;
 export const createScene2DDocument = api.createScene2DDocument;
 export const createScene2DSlotReference = api.createScene2DSlotReference;

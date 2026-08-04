@@ -3,9 +3,24 @@ package flighthq.scene3dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.Matrix4.createMatrix4;
+import flighthq.geometry.Matrix4.inverseMatrix4;
+import flighthq.geometry.Matrix4.matrix4TransformPoint;
+import flighthq.geometry.Matrix4.multiplyMatrix4;
+import flighthq.geometry.Quaternion.createQuaternion;
+import flighthq.geometry.Quaternion.multiplyQuaternion;
+import flighthq.geometry.Quaternion.setQuaternionFromAxisAngle;
+import flighthq.geometry.Quaternion.setQuaternionFromUnitVectors;
 import flighthq.geometry.Transform3d.createTransform3D;
+import flighthq.geometry.Transform3d.decomposeMatrix4ToTransform3D;
+import flighthq.geometry.Vector3.createVector3;
+import flighthq.geometry.Vector3.normalizeVector3;
+import flighthq.geometry.Vector3.subtractVector3;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
+import flighthq.lighting.PointLight.createPointLight;
+import flighthq.lighting.SpotLight.createSpotLight;
 import flighthq.materials.ClassicMaterials.createBlinnPhongMaterial;
+import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.scene3d.SceneDocument.createScene3DFromDocument;
 import flighthq.scene3dFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
@@ -14,6 +29,7 @@ import flighthq.scene3dFormats.Shared.convertPositionsZUpToYUp;
 import flighthq.scene3dFormats.Shared.createExternalTextureRef;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.Light;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialLike;
 import flighthq.types.MeshGeometry.MeshSubset;
@@ -21,18 +37,32 @@ import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
 import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
+import flighthq.types.ThreeDsSchema.THREE_DS_CAMERA;
+import flighthq.types.ThreeDsSchema.THREE_DS_CAMERA_APERTURE_MM;
+import flighthq.types.ThreeDsSchema.THREE_DS_CAMERA_RANGES;
 import flighthq.types.ThreeDsSchema.THREE_DS_CHUNK_HEADER_BYTES;
 import flighthq.types.ThreeDsSchema.THREE_DS_COLOR_BYTE;
 import flighthq.types.ThreeDsSchema.THREE_DS_COLOR_FLOAT;
 import flighthq.types.ThreeDsSchema.THREE_DS_EDITOR;
 import flighthq.types.ThreeDsSchema.THREE_DS_FACES;
 import flighthq.types.ThreeDsSchema.THREE_DS_FACE_MATERIAL;
+import flighthq.types.ThreeDsSchema.THREE_DS_KEYFRAME;
+import flighthq.types.ThreeDsSchema.THREE_DS_KEYFRAME_NODE_HEADER;
+import flighthq.types.ThreeDsSchema.THREE_DS_KEYFRAME_OBJECT_NODE;
+import flighthq.types.ThreeDsSchema.THREE_DS_KEYFRAME_PIVOT;
+import flighthq.types.ThreeDsSchema.THREE_DS_LIGHT;
+import flighthq.types.ThreeDsSchema.THREE_DS_LIGHT_INNER_RANGE;
+import flighthq.types.ThreeDsSchema.THREE_DS_LIGHT_MULTIPLIER;
+import flighthq.types.ThreeDsSchema.THREE_DS_LIGHT_OFF;
+import flighthq.types.ThreeDsSchema.THREE_DS_LIGHT_OUTER_RANGE;
+import flighthq.types.ThreeDsSchema.THREE_DS_LIGHT_SPOT;
 import flighthq.types.ThreeDsSchema.THREE_DS_MAIN;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_AMBIENT;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_BUMP_MAP;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_DIFFUSE;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_NAME;
+import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_OPACITY_MAP;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_SHININESS;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_SPECULAR;
 import flighthq.types.ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_FILENAME;
@@ -42,25 +72,43 @@ import flighthq.types.ThreeDsSchema.THREE_DS_OBJECT;
 import flighthq.types.ThreeDsSchema.THREE_DS_PERCENT_FLOAT;
 import flighthq.types.ThreeDsSchema.THREE_DS_PERCENT_INT;
 import flighthq.types.ThreeDsSchema.THREE_DS_SMOOTH_GROUP;
+import flighthq.types.ThreeDsSchema.THREE_DS_TRANSFORM_MATRIX;
 import flighthq.types.ThreeDsSchema.THREE_DS_TRIMESH;
 import flighthq.types.ThreeDsSchema.THREE_DS_UV_COORDS;
 import flighthq.types.ThreeDsSchema.THREE_DS_VERTICES;
+import flighthq.types.ThreeDsSchema.ThreeDsCamera;
+import flighthq.types.ThreeDsSchema.ThreeDsLight;
 import flighthq.types.ThreeDsSchema.ThreeDsMaterial;
 import flighthq.types.ThreeDsSchema.ThreeDsMaterialGroup;
 import flighthq.types.ThreeDsSchema.ThreeDsMesh;
+import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
+import flighthq.types.Types.THREE_DS_CAMERA;
+import flighthq.types.Types.THREE_DS_CAMERA_APERTURE_MM;
+import flighthq.types.Types.THREE_DS_CAMERA_RANGES;
 import flighthq.types.Types.THREE_DS_CHUNK_HEADER_BYTES;
 import flighthq.types.Types.THREE_DS_COLOR_BYTE;
 import flighthq.types.Types.THREE_DS_COLOR_FLOAT;
 import flighthq.types.Types.THREE_DS_EDITOR;
 import flighthq.types.Types.THREE_DS_FACES;
 import flighthq.types.Types.THREE_DS_FACE_MATERIAL;
+import flighthq.types.Types.THREE_DS_KEYFRAME;
+import flighthq.types.Types.THREE_DS_KEYFRAME_NODE_HEADER;
+import flighthq.types.Types.THREE_DS_KEYFRAME_OBJECT_NODE;
+import flighthq.types.Types.THREE_DS_KEYFRAME_PIVOT;
+import flighthq.types.Types.THREE_DS_LIGHT;
+import flighthq.types.Types.THREE_DS_LIGHT_INNER_RANGE;
+import flighthq.types.Types.THREE_DS_LIGHT_MULTIPLIER;
+import flighthq.types.Types.THREE_DS_LIGHT_OFF;
+import flighthq.types.Types.THREE_DS_LIGHT_OUTER_RANGE;
+import flighthq.types.Types.THREE_DS_LIGHT_SPOT;
 import flighthq.types.Types.THREE_DS_MAIN;
 import flighthq.types.Types.THREE_DS_MATERIAL;
 import flighthq.types.Types.THREE_DS_MATERIAL_AMBIENT;
 import flighthq.types.Types.THREE_DS_MATERIAL_BUMP_MAP;
 import flighthq.types.Types.THREE_DS_MATERIAL_DIFFUSE;
 import flighthq.types.Types.THREE_DS_MATERIAL_NAME;
+import flighthq.types.Types.THREE_DS_MATERIAL_OPACITY_MAP;
 import flighthq.types.Types.THREE_DS_MATERIAL_SHININESS;
 import flighthq.types.Types.THREE_DS_MATERIAL_SPECULAR;
 import flighthq.types.Types.THREE_DS_MATERIAL_TEXTURE_FILENAME;
@@ -70,9 +118,11 @@ import flighthq.types.Types.THREE_DS_OBJECT;
 import flighthq.types.Types.THREE_DS_PERCENT_FLOAT;
 import flighthq.types.Types.THREE_DS_PERCENT_INT;
 import flighthq.types.Types.THREE_DS_SMOOTH_GROUP;
+import flighthq.types.Types.THREE_DS_TRANSFORM_MATRIX;
 import flighthq.types.Types.THREE_DS_TRIMESH;
 import flighthq.types.Types.THREE_DS_UV_COORDS;
 import flighthq.types.Types.THREE_DS_VERTICES;
+import flighthq.types.Vector3;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
 
@@ -91,7 +141,10 @@ class ThreeDsParse {
     var mainId:Dynamic = cast _Runtime.UNDEFINED;
     var threeDsDrops:Dynamic = cast _Runtime.UNDEFINED;
     var materials:Dynamic = cast _Runtime.UNDEFINED;
-    var meshes:Dynamic = cast _Runtime.UNDEFINED;
+    var meshes:Array<ThreeDsMesh> = cast _Runtime.UNDEFINED;
+    var lights:Array<ThreeDsLight> = cast _Runtime.UNDEFINED;
+    var cameras:Array<ThreeDsCamera> = cast _Runtime.UNDEFINED;
+    var pivots:Dynamic = cast _Runtime.UNDEFINED;
     var materialIndexByName:Dynamic = cast _Runtime.UNDEFINED;
     document = { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) };
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool)) {
@@ -107,12 +160,30 @@ class ThreeDsParse {
     }
     threeDsDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []), function():Dynamic return cast null);
     materials = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    meshes = _Runtime.callValue(ThreeDsParse.collectMeshes__threeDsParse, cast ([view, 0.0, materials, threeDsDrops] : Array<Dynamic>));
+    meshes = cast ([] : Array<Dynamic>);
+    lights = cast ([] : Array<Dynamic>);
+    cameras = cast ([] : Array<Dynamic>);
+    _Runtime.callValue(ThreeDsParse.collectThreeDsObjects__threeDsParse, cast ([view, 0.0, materials, meshes, lights, cameras, threeDsDrops] : Array<Dynamic>));
+    pivots = _Runtime.callValue(ThreeDsParse.collectThreeDsPivots__threeDsParse, cast ([view, 0.0] : Array<Dynamic>));
     materialIndexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(ThreeDsParse.appendMeshDocument__threeDsParse, cast ([flighthq._internal._StaticIndex.readArray(meshes, i), materials, materialIndexByName, document, threeDsDrops] : Array<Dynamic>));
+        _Runtime.callValue(ThreeDsParse.appendMeshDocument__threeDsParse, cast ([flighthq._internal._StaticIndex.readArray(meshes, i), materials, materialIndexByName, pivots, document, threeDsDrops] : Array<Dynamic>));
+        i++;
+      }
+    }
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
+        _Runtime.callValue(ThreeDsParse.appendThreeDsLightDocument__threeDsParse, cast ([flighthq._internal._StaticIndex.readArray(lights, i), document, threeDsDrops] : Array<Dynamic>));
+        i++;
+      }
+    }
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(cameras, 'length') : Float)) : Bool)) {
+        _Runtime.callValue(ThreeDsParse.appendThreeDsCameraDocument__threeDsParse, cast ([flighthq._internal._StaticIndex.readArray(cameras, i), document] : Array<Dynamic>));
         i++;
       }
     }
@@ -125,12 +196,10 @@ class ThreeDsParse {
     return cast null;
   }
 
-  public static function collectMeshes__threeDsParse(view:Dynamic, offset:Float, materials:Dynamic, threeDsDrops:Null<Dynamic>):Array<ThreeDsMesh> {
+  public static function collectThreeDsObjects__threeDsParse(view:Dynamic, offset:Float, materials:Dynamic, meshes:Array<ThreeDsMesh>, lights:Array<ThreeDsLight>, cameras:Array<ThreeDsCamera>, threeDsDrops:Null<Dynamic>):Void {
     var end:Dynamic = cast _Runtime.UNDEFINED;
-    var meshes:Array<ThreeDsMesh> = cast _Runtime.UNDEFINED;
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
     end = HxMath.min(_Runtime.addNumbers(offset, _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, offset] : Array<Dynamic>))), _Runtime.field(view, 'byteLength'));
-    meshes = cast ([] : Array<Dynamic>);
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
     while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
       var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
@@ -141,28 +210,18 @@ class ThreeDsParse {
         break;
       }
       if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_EDITOR) : Bool) || (cast _Runtime.strictEquals(chunkId, THREE_DS_MAIN) : Bool)) : Bool)) {
-        var inner:Dynamic = _Runtime.callValue(ThreeDsParse.collectMeshes__threeDsParse, cast ([view, cursor, materials, threeDsDrops] : Array<Dynamic>));
-        {
-          var i:Dynamic = 0.0;
-          while ((cast ((cast i : Float) < (cast _Runtime.field(inner, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(meshes, 'push', cast ([flighthq._internal._StaticIndex.readArray(inner, i)] : Array<Dynamic>));
-            i++;
-          }
-        }
+        _Runtime.callValue(ThreeDsParse.collectThreeDsObjects__threeDsParse, cast ([view, cursor, materials, meshes, lights, cameras, threeDsDrops] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_OBJECT) : Bool)) {
-        var mesh:Dynamic = _Runtime.callValue(ThreeDsParse.parseObject__threeDsParse, cast ([view, cursor, chunkEnd, threeDsDrops] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(mesh, null) : Bool)) { _Runtime.callProperty(meshes, 'push', cast ([mesh] : Array<Dynamic>)); }
+        _Runtime.callValue(ThreeDsParse.parseThreeDsObject__threeDsParse, cast ([view, cursor, chunkEnd, meshes, lights, cameras, threeDsDrops] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL) : Bool)) {
         var material:Dynamic = _Runtime.callValue(ThreeDsParse.parseMaterial__threeDsParse, cast ([view, cursor, chunkEnd] : Array<Dynamic>));
         if ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flighthq._internal._Map).set(material.name, material)); }
       } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
-    return cast meshes;
-    return cast null;
   }
 
-  public static function parseObject__threeDsParse(view:Dynamic, offset:Float, end:Float, threeDsDrops:Null<Dynamic>):Null<ThreeDsMesh> {
+  public static function parseThreeDsObject__threeDsParse(view:Dynamic, offset:Float, end:Float, meshes:Array<ThreeDsMesh>, lights:Array<ThreeDsLight>, cameras:Array<ThreeDsCamera>, threeDsDrops:Null<Dynamic>):Void {
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
     var name:Dynamic = cast _Runtime.UNDEFINED;
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
@@ -173,15 +232,123 @@ class ThreeDsParse {
       var chunkEnd:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkEnd__threeDsParse, cast ([view, cursor, end] : Array<Dynamic>));
       if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
         _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Recover, '3ds.subchunk-exceeds-object', '', { firstOffset: cursor }] : Array<Dynamic>));
-        return cast null;
+        return;
       }
       if ((cast _Runtime.strictEquals(chunkId, THREE_DS_TRIMESH) : Bool)) {
-        return cast _Runtime.callValue(ThreeDsParse.parseTrimesh__threeDsParse, cast ([view, cursor, chunkEnd, name, threeDsDrops] : Array<Dynamic>));
+        var mesh:Dynamic = _Runtime.callValue(ThreeDsParse.parseTrimesh__threeDsParse, cast ([view, cursor, chunkEnd, name, threeDsDrops] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(mesh, null) : Bool)) { _Runtime.callProperty(meshes, 'push', cast ([mesh] : Array<Dynamic>)); }
+        return;
+      }
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_LIGHT) : Bool)) {
+        var light:Dynamic = _Runtime.callValue(ThreeDsParse.parseThreeDsLight__threeDsParse, cast ([view, cursor, chunkEnd, name, threeDsDrops] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(light, null) : Bool)) { _Runtime.callProperty(lights, 'push', cast ([light] : Array<Dynamic>)); }
+        return;
+      }
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_CAMERA) : Bool)) {
+        var camera:Dynamic = _Runtime.callValue(ThreeDsParse.parseThreeDsCamera__threeDsParse, cast ([view, cursor, chunkEnd, name, threeDsDrops] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(camera, null) : Bool)) { _Runtime.callProperty(cameras, 'push', cast ([camera] : Array<Dynamic>)); }
+        return;
       }
       (cursor = cast (chunkEnd : Dynamic));
     }
-    _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Skip, '3ds.non-mesh-object', '', { firstName: name }] : Array<Dynamic>));
+    _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Skip, '3ds.non-entity-object', '', { firstName: name }] : Array<Dynamic>));
+  }
+
+  public static function parseThreeDsLight__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, threeDsDrops:Null<Dynamic>):Null<ThreeDsLight> {
+    var cursor:Dynamic = cast _Runtime.UNDEFINED;
+    var position:Array<Float> = cast _Runtime.UNDEFINED;
+    var color:Array<Float> = cast _Runtime.UNDEFINED;
+    var enabled:Dynamic = cast _Runtime.UNDEFINED;
+    var falloff:Dynamic = cast _Runtime.UNDEFINED;
+    var hotspot:Dynamic = cast _Runtime.UNDEFINED;
+    var innerRange:Null<Float> = cast _Runtime.UNDEFINED;
+    var multiplier:Dynamic = cast _Runtime.UNDEFINED;
+    var outerRange:Null<Float> = cast _Runtime.UNDEFINED;
+    var target:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
+    if ((cast ((cast (cursor + 12.0) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Drop, '3ds.light-truncated', '', { firstName: name }] : Array<Dynamic>));
+      return cast null;
+    }
+    position = cast ([_Runtime.callProperty(view, 'getFloat32', cast ([cursor, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>);
+    (cursor = cast ((cursor + 12.0) : Dynamic));
+    color = cast ([1.0, 1.0, 1.0] : Array<Dynamic>);
+    enabled = true;
+    falloff = 0.0;
+    hotspot = 0.0;
+    innerRange = null;
+    multiplier = 1.0;
+    outerRange = null;
+    target = null;
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
+      var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
+      var chunkEnd:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkEnd__threeDsParse, cast ([view, cursor, end] : Array<Dynamic>));
+      if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
+        _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Recover, '3ds.subchunk-exceeds-light', '', { firstName: name }] : Array<Dynamic>));
+        break;
+      }
+      var dataStart:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
+      if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_COLOR_FLOAT) : Bool) || (cast _Runtime.strictEquals(chunkId, THREE_DS_COLOR_BYTE) : Bool)) : Bool)) {
+        var parsed:Dynamic = _Runtime.callValue(ThreeDsParse.parseColorChunk__threeDsParse, cast ([view, cursor, chunkEnd] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) { (color = cast (parsed : Dynamic)); }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_LIGHT_OFF) : Bool)) {
+        (enabled = cast (false : Dynamic));
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_LIGHT_MULTIPLIER) : Bool)) {
+        if ((cast ((cast (dataStart + 4.0) : Float) <= (cast chunkEnd : Float)) : Bool)) { (multiplier = cast (_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)) : Dynamic)); }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_LIGHT_INNER_RANGE) : Bool)) {
+        if ((cast ((cast (dataStart + 4.0) : Float) <= (cast chunkEnd : Float)) : Bool)) { (innerRange = cast (_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)) : Dynamic)); }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_LIGHT_OUTER_RANGE) : Bool)) {
+        if ((cast ((cast (dataStart + 4.0) : Float) <= (cast chunkEnd : Float)) : Bool)) { (outerRange = cast (_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)) : Dynamic)); }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_LIGHT_SPOT) : Bool)) {
+        if ((cast ((cast (dataStart + 20.0) : Float) <= (cast chunkEnd : Float)) : Bool)) {
+          (target = cast (cast ([_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>) : Dynamic));
+          (hotspot = cast (_Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 12.0), true] : Array<Dynamic>)) : Dynamic));
+          (falloff = cast (_Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 16.0), true] : Array<Dynamic>)) : Dynamic));
+        } else {
+          _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Recover, '3ds.light-spot-truncated', '', { firstName: name }] : Array<Dynamic>));
+        }
+      } } } } } }
+      (cursor = cast (chunkEnd : Dynamic));
+    }
+    return cast { color: color, enabled: enabled, falloff: falloff, hotspot: hotspot, innerRange: innerRange, multiplier: multiplier, name: name, outerRange: outerRange, position: position, target: target };
     return cast null;
+  }
+
+  public static function parseThreeDsCamera__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, threeDsDrops:Null<Dynamic>):Null<ThreeDsCamera> {
+    var cursor:Dynamic = cast _Runtime.UNDEFINED;
+    var position:Array<Float> = cast _Runtime.UNDEFINED;
+    var target:Array<Float> = cast _Runtime.UNDEFINED;
+    var roll:Dynamic = cast _Runtime.UNDEFINED;
+    var focalLength:Dynamic = cast _Runtime.UNDEFINED;
+    var far:Null<Float> = cast _Runtime.UNDEFINED;
+    var near:Null<Float> = cast _Runtime.UNDEFINED;
+    cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
+    if ((cast ((cast (cursor + 32.0) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Drop, '3ds.camera-truncated', '', { firstName: name }] : Array<Dynamic>));
+      return cast null;
+    }
+    position = cast ([_Runtime.callProperty(view, 'getFloat32', cast ([cursor, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>);
+    target = cast ([_Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 12.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 16.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 20.0), true] : Array<Dynamic>))] : Array<Dynamic>);
+    roll = _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 24.0), true] : Array<Dynamic>));
+    focalLength = _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 28.0), true] : Array<Dynamic>));
+    (cursor = cast ((cursor + 32.0) : Dynamic));
+    far = null;
+    near = null;
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
+      var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
+      var chunkEnd:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkEnd__threeDsParse, cast ([view, cursor, end] : Array<Dynamic>));
+      if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
+        _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Recover, '3ds.subchunk-exceeds-camera', '', { firstName: name }] : Array<Dynamic>));
+        break;
+      }
+      var dataStart:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
+      if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_CAMERA_RANGES) : Bool) && (cast ((cast (dataStart + 8.0) : Float) <= (cast chunkEnd : Float)) : Bool)) : Bool)) {
+        (near = cast (_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)) : Dynamic));
+        (far = cast (_Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 4.0), true] : Array<Dynamic>)) : Dynamic));
+      }
+      (cursor = cast (chunkEnd : Dynamic));
+    }
+    return cast { far: far, focalLength: focalLength, name: name, near: near, position: position, roll: roll, target: target };
     return cast null;
   }
 
@@ -189,12 +356,14 @@ class ThreeDsParse {
     var vertices:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var faces:Null<flighthq._internal._UInt16Array> = cast _Runtime.UNDEFINED;
     var uvs:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var localMatrix:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var materialGroups:Array<ThreeDsMaterialGroup> = cast _Runtime.UNDEFINED;
     var smoothingGroups:Null<flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
     vertices = null;
     faces = null;
     uvs = null;
+    localMatrix = null;
     materialGroups = cast ([] : Array<Dynamic>);
     smoothingGroups = null;
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
@@ -217,14 +386,34 @@ class ThreeDsParse {
         }
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_UV_COORDS) : Bool)) {
         (uvs = cast (_Runtime.callValue(ThreeDsParse.parseUvCoords__threeDsParse, cast ([view, dataStart, chunkEnd, threeDsDrops] : Array<Dynamic>)) : Dynamic));
-      } } }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_TRANSFORM_MATRIX) : Bool)) {
+        (localMatrix = cast (_Runtime.callValue(ThreeDsParse.parseLocalMatrix__threeDsParse, cast ([view, dataStart, chunkEnd, name, threeDsDrops] : Array<Dynamic>)) : Dynamic));
+      } } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
     if ((cast ((cast _Runtime.strictEquals(vertices, null) : Bool) || (cast _Runtime.strictEquals(faces, null) : Bool)) : Bool)) {
       _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Drop, '3ds.mesh-missing-geometry', ((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic)), { firstName: name, missing: ((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic)) }] : Array<Dynamic>));
       return cast null;
     }
-    return cast { faces: faces, materialGroups: materialGroups, name: name, smoothingGroups: smoothingGroups, uvs: uvs, vertices: vertices };
+    return cast { faces: faces, localMatrix: localMatrix, materialGroups: materialGroups, name: name, smoothingGroups: smoothingGroups, uvs: uvs, vertices: vertices };
+    return cast null;
+  }
+
+  public static function parseLocalMatrix__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, threeDsDrops:Null<Dynamic>):Null<flighthq._internal._Float32Array> {
+    var values:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast (offset + 48.0) : Float) > (cast end : Float)) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Recover, '3ds.local-matrix-truncated', '', { firstName: name }] : Array<Dynamic>));
+      return cast null;
+    }
+    values = new flighthq._internal._Float32Array(12.0);
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeFloat32Array(values, i, _Runtime.callProperty(view, 'getFloat32', cast ([(offset + (i * 4.0)), true] : Array<Dynamic>)));
+        i++;
+      }
+    }
+    return cast values;
     return cast null;
   }
 
@@ -398,10 +587,12 @@ class ThreeDsParse {
     return cast null;
   }
 
-  public static function appendMeshDocument__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, materialIndexByName:Dynamic, document:Scene3DDocument, threeDsDrops:Null<Dynamic>):Void {
+  public static function appendMeshDocument__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, materialIndexByName:Dynamic, pivots:Dynamic, document:Scene3DDocument, threeDsDrops:Null<Dynamic>):Void {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var faceCount:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:Dynamic = cast _Runtime.UNDEFINED;
+    var pivot:Dynamic = cast _Runtime.UNDEFINED;
     var faceNormals:Dynamic = cast _Runtime.UNDEFINED;
     var incidentFaces:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var faceValid:Dynamic = cast _Runtime.UNDEFINED;
@@ -427,6 +618,11 @@ class ThreeDsParse {
       return;
     }
     positions = _Runtime.toArray(mesh.vertices);
+    transform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    pivot = _Runtime.coalesce(((cast pivots : flighthq._internal._Map).get(mesh.name)), function():Dynamic return cast null);
+    if ((cast !_Runtime.strictEquals(mesh.localMatrix, null) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.localizeThreeDsPositions__threeDsParse, cast ([positions, mesh.localMatrix, pivot, transform, mesh.name, threeDsDrops] : Array<Dynamic>));
+    }
     _Runtime.callValue(convertPositionsZUpToYUp, cast ([positions] : Array<Dynamic>));
     faceNormals = new flighthq._internal._Float64Array((faceCount * 3.0));
     incidentFaces = (cast _Runtime.toArray({ length: vertexCount }, function() return cast ([] : Array<Dynamic>)) : Array<Array<Float>>);
@@ -558,11 +754,178 @@ class ThreeDsParse {
     documentMesh = { geometry: geometry, materials: meshMaterials };
     meshIndex = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
     _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([documentMesh] : Array<Dynamic>));
-    node = { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) };
+    node = { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: transform };
     if ((cast ((cast _Runtime.field(mesh.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(node, 'name', mesh.name); }
     nodeIndex = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
     _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([node] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([nodeIndex] : Array<Dynamic>));
+  }
+
+  public static function appendThreeDsCameraDocument__threeDsParse(camera:ThreeDsCamera, document:Scene3DDocument):Void {
+    var position:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:Dynamic = cast _Runtime.UNDEFINED;
+    var aim:Dynamic = cast _Runtime.UNDEFINED;
+    var focalLength:Dynamic = cast _Runtime.UNDEFINED;
+    position = _Runtime.callValue(ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse, cast ([_Runtime.field(camera, 'position')] : Array<Dynamic>));
+    transform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    (_Runtime.field(transform, 'position').x = cast (position.x : Dynamic));
+    (_Runtime.field(transform, 'position').y = cast (position.y : Dynamic));
+    (_Runtime.field(transform, 'position').z = cast (position.z : Dynamic));
+    aim = _Runtime.callValue(ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse, cast ([_Runtime.field(camera, 'target')] : Array<Dynamic>));
+    _Runtime.callValue(subtractVector3, cast ([aim, aim, position] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.callValue(normalizeVector3, cast ([aim, aim] : Array<Dynamic>)) : Float) > (cast 0.0 : Float)) : Bool)) {
+      _Runtime.callValue(setQuaternionFromUnitVectors, cast ([_Runtime.field(transform, 'rotation'), ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse, aim] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(_Runtime.field(camera, 'roll'), 0.0) : Bool)) {
+        var roll:Dynamic = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
+        _Runtime.callValue(setQuaternionFromAxisAngle, cast ([roll, aim, _Runtime.multiplyNumbers(_Runtime.field(camera, 'roll'), DEG_TO_RAD)] : Array<Dynamic>));
+        _Runtime.callValue(multiplyQuaternion, cast ([_Runtime.field(transform, 'rotation'), roll, _Runtime.field(transform, 'rotation')] : Array<Dynamic>));
+      }
+    }
+    focalLength = ((cast ((cast _Runtime.field(camera, 'focalLength') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(camera, 'focalLength') : Dynamic) : (cast ThreeDsParse.THREE_DS_DEFAULT_FOCAL_LENGTH_MM__threeDsParse : Dynamic));
+    _Runtime.callProperty(_Runtime.field(document, 'cameras'), 'push', cast ([_Runtime.mergeObjects([{ far: _Runtime.coalesce(_Runtime.field(camera, 'far'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_FAR__threeDsParse) }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: _Runtime.coalesce(_Runtime.field(camera, 'near'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_NEAR__threeDsParse) }, { projection: { aspect: 1.0, fovY: _Runtime.multiplyNumbers(2.0, HxMath.atan((THREE_DS_CAMERA_APERTURE_MM / (2.0 * focalLength)))), kind: 'perspective' } }, { transform: transform }])] : Array<Dynamic>));
+  }
+
+  public static function appendThreeDsLightDocument__threeDsParse(light:ThreeDsLight, document:Scene3DDocument, threeDsDrops:Null<Dynamic>):Void {
+    var position:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:Dynamic = cast _Runtime.UNDEFINED;
+    var color:Dynamic = cast _Runtime.UNDEFINED;
+    var range:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Dynamic = cast _Runtime.UNDEFINED;
+    var descriptor:Light = cast _Runtime.UNDEFINED;
+    position = _Runtime.callValue(ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse, cast ([_Runtime.field(light, 'position')] : Array<Dynamic>));
+    transform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    (_Runtime.field(transform, 'position').x = cast (position.x : Dynamic));
+    (_Runtime.field(transform, 'position').y = cast (position.y : Dynamic));
+    (_Runtime.field(transform, 'position').z = cast (position.z : Dynamic));
+    color = _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(light, 'color')] : Array<Dynamic>));
+    range = _Runtime.coalesce(_Runtime.field(light, 'outerRange'), function():Dynamic return cast -1.0);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'innerRange'), null) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Skip, '3ds.light-inner-range-dropped', '', { firstName: _Runtime.field(light, 'name') }] : Array<Dynamic>));
+    }
+    intensity = ((cast _Runtime.field(light, 'enabled') : Bool) ? (cast _Runtime.field(light, 'multiplier') : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast !(cast _Runtime.field(light, 'enabled') : Bool) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Skip, '3ds.light-disabled', '', { firstName: _Runtime.field(light, 'name') }] : Array<Dynamic>));
+    }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'target'), null) : Bool)) {
+      var aim:Dynamic = _Runtime.callValue(ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse, cast ([_Runtime.field(light, 'target')] : Array<Dynamic>));
+      _Runtime.callValue(subtractVector3, cast ([aim, aim, position] : Array<Dynamic>));
+      if ((cast ((cast _Runtime.callValue(normalizeVector3, cast ([aim, aim] : Array<Dynamic>)) : Float) > (cast 0.0 : Float)) : Bool)) {
+        _Runtime.callValue(setQuaternionFromUnitVectors, cast ([_Runtime.field(transform, 'rotation'), ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse, aim] : Array<Dynamic>));
+      }
+      (descriptor = cast (_Runtime.callValue(createSpotLight, cast ([{ color: color, direction: ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse, innerConeDegrees: _Runtime.divideNumbers(_Runtime.field(light, 'hotspot'), 2.0), intensity: intensity, outerConeDegrees: _Runtime.divideNumbers(_Runtime.field(light, 'falloff'), 2.0), range: range }] : Array<Dynamic>)) : Dynamic));
+    } else {
+      (descriptor = cast (_Runtime.callValue(createPointLight, cast ([{ color: color, intensity: intensity, range: range }] : Array<Dynamic>)) : Dynamic));
+    }
+    _Runtime.callProperty(_Runtime.field(document, 'lights'), 'push', cast ([_Runtime.mergeObjects([{ descriptor: descriptor }, ((cast ((cast _Runtime.field(_Runtime.field(light, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(light, 'name') } : Dynamic) : (cast {  } : Dynamic)), { transform: transform }])] : Array<Dynamic>));
+  }
+
+  public static function collectThreeDsPivots__threeDsParse(view:Dynamic, offset:Float):Dynamic {
+    var pivots:Dynamic = cast _Runtime.UNDEFINED;
+    var end:Dynamic = cast _Runtime.UNDEFINED;
+    var cursor:Dynamic = cast _Runtime.UNDEFINED;
+    pivots = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    end = HxMath.min(_Runtime.addNumbers(offset, _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, offset] : Array<Dynamic>))), _Runtime.field(view, 'byteLength'));
+    cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
+      var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
+      var chunkEnd:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkEnd__threeDsParse, cast ([view, cursor, end] : Array<Dynamic>));
+      if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) { break; }
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MAIN) : Bool)) {
+        for (__iteration0 in _Runtime.iterable(_Runtime.callValue(ThreeDsParse.collectThreeDsPivots__threeDsParse, cast ([view, cursor] : Array<Dynamic>)))) {
+          var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+          var pivot:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+          ((cast pivots : flighthq._internal._Map).set(name, pivot));
+        }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_KEYFRAME) : Bool)) {
+        _Runtime.callValue(ThreeDsParse.collectThreeDsNodePivots__threeDsParse, cast ([view, cursor, chunkEnd, pivots] : Array<Dynamic>));
+      } }
+      (cursor = cast (chunkEnd : Dynamic));
+    }
+    return cast pivots;
+    return cast null;
+  }
+
+  public static function collectThreeDsNodePivots__threeDsParse(view:Dynamic, offset:Float, end:Float, pivots:Dynamic):Void {
+    var cursor:Dynamic = cast _Runtime.UNDEFINED;
+    cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
+    while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {
+      var chunkId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
+      var chunkEnd:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkEnd__threeDsParse, cast ([view, cursor, end] : Array<Dynamic>));
+      if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(chunkId, THREE_DS_KEYFRAME_OBJECT_NODE) : Bool)) {
+        var name:Null<String> = null;
+        var pivot:Null<Array<Float>> = null;
+        var inner:Dynamic = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
+        while ((cast ((cast (inner + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast chunkEnd : Float)) : Bool)) {
+          var innerId:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([inner, true] : Array<Dynamic>));
+          var innerEnd:Dynamic = _Runtime.callValue(ThreeDsParse.readChunkEnd__threeDsParse, cast ([view, inner, chunkEnd] : Array<Dynamic>));
+          if ((cast ((cast innerEnd : Float) < (cast 0.0 : Float)) : Bool)) { break; }
+          var dataStart:Dynamic = (inner + THREE_DS_CHUNK_HEADER_BYTES);
+          if ((cast _Runtime.strictEquals(innerId, THREE_DS_KEYFRAME_NODE_HEADER) : Bool)) {
+            (name = cast (_Runtime.callValue(ThreeDsParse.readNullTerminatedString__threeDsParse, cast ([view, dataStart, innerEnd] : Array<Dynamic>)) : Dynamic));
+          } else { if ((cast ((cast _Runtime.strictEquals(innerId, THREE_DS_KEYFRAME_PIVOT) : Bool) && (cast ((cast (dataStart + 12.0) : Float) <= (cast innerEnd : Float)) : Bool)) : Bool)) {
+            (pivot = cast (cast ([_Runtime.callProperty(view, 'getFloat32', cast ([dataStart, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>) : Dynamic));
+          } }
+          (inner = cast (innerEnd : Dynamic));
+        }
+        if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(name, null) : Bool) && (cast ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(pivot, null) : Bool)) : Bool) && (cast _Runtime.orValue(((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pivot, 0.0), 0.0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pivot, 1.0), 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pivot, 2.0), 0.0)) : Bool)) : Bool)) {
+          ((cast pivots : flighthq._internal._Map).set(name, pivot));
+        }
+      }
+      (cursor = cast (chunkEnd : Dynamic));
+    }
+  }
+
+  public static function localizeThreeDsPositions__threeDsParse(positions:Array<Float>, localMatrix:flighthq._internal._Float32Array, pivot:Null<Array<Float>>, out:Transform3D, name:String, threeDsDrops:Null<Dynamic>):Void {
+    var placement:Dynamic = cast _Runtime.UNDEFINED;
+    var inverse:Dynamic = cast _Runtime.UNDEFINED;
+    var point:Dynamic = cast _Runtime.UNDEFINED;
+    var conjugated:Dynamic = cast _Runtime.UNDEFINED;
+    placement = _Runtime.callValue(createMatrix4, cast ([flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 0.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 1.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 2.0), 0.0, flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 3.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 4.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 5.0), 0.0, flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 6.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 7.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 8.0), 0.0, flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 9.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 10.0), flighthq._internal._StaticIndex.readFloat32Array(localMatrix, 11.0), 1.0] : Array<Dynamic>));
+    inverse = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([inverse, placement] : Array<Dynamic>)) : Bool) : Bool)) {
+      _Runtime.callValue(ThreeDsParse.tallyThreeDsDrop__threeDsParse, cast ([threeDsDrops, ImportDiagnosticSeverityValue.Recover, '3ds.local-matrix-singular', '', { firstName: name }] : Array<Dynamic>));
+      return;
+    }
+    point = _Runtime.callValue(createVector3, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
+    {
+      var i:Dynamic = 0.0;
+      while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(positions, 'length') : Float)) : Bool)) {
+        (point.x = cast (flighthq._internal._StaticIndex.readArray(positions, i) : Dynamic));
+        (point.y = cast (flighthq._internal._StaticIndex.readArray(positions, (i + 1.0)) : Dynamic));
+        (point.z = cast (flighthq._internal._StaticIndex.readArray(positions, (i + 2.0)) : Dynamic));
+        _Runtime.callValue(matrix4TransformPoint, cast ([point, inverse, point] : Array<Dynamic>));
+        flighthq._internal._StaticIndex.writeArray(positions, i, point.x);
+        flighthq._internal._StaticIndex.writeArray(positions, (i + 1.0), point.y);
+        flighthq._internal._StaticIndex.writeArray(positions, (i + 2.0), point.z);
+        (i = cast ((i + 3.0) : Dynamic));
+      }
+    }
+    if ((cast !_Runtime.strictEquals(pivot, null) : Bool)) {
+      {
+        var i:Dynamic = 0.0;
+        while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(positions, 'length') : Float)) : Bool)) {
+          ({ var __indexedObject4:Dynamic = positions; var __indexedKey5:Dynamic = i; flighthq._internal._StaticIndex.writeArray(__indexedObject4, __indexedKey5, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject4, __indexedKey5), flighthq._internal._StaticIndex.readArray(pivot, 0.0))); });
+          ({ var __indexedObject6:Dynamic = positions; var __indexedKey7:Dynamic = (i + 1.0); flighthq._internal._StaticIndex.writeArray(__indexedObject6, __indexedKey7, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject6, __indexedKey7), flighthq._internal._StaticIndex.readArray(pivot, 1.0))); });
+          ({ var __indexedObject8:Dynamic = positions; var __indexedKey9:Dynamic = (i + 2.0); flighthq._internal._StaticIndex.writeArray(__indexedObject8, __indexedKey9, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject8, __indexedKey9), flighthq._internal._StaticIndex.readArray(pivot, 2.0))); });
+          (i = cast ((i + 3.0) : Dynamic));
+        }
+      }
+      var pivotTranslation:Dynamic = _Runtime.callValue(createMatrix4, cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, flighthq._internal._StaticIndex.readArray(pivot, 0.0), flighthq._internal._StaticIndex.readArray(pivot, 1.0), flighthq._internal._StaticIndex.readArray(pivot, 2.0), 1.0] : Array<Dynamic>));
+      _Runtime.callValue(multiplyMatrix4, cast ([placement, placement, pivotTranslation] : Array<Dynamic>));
+    }
+    conjugated = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+    _Runtime.callValue(multiplyMatrix4, cast ([conjugated, ThreeDsParse.THREE_DS_Z_UP_TO_Y_UP__threeDsParse, placement] : Array<Dynamic>));
+    _Runtime.callValue(multiplyMatrix4, cast ([conjugated, conjugated, ThreeDsParse.THREE_DS_Y_UP_TO_Z_UP__threeDsParse] : Array<Dynamic>));
+    _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([out, conjugated] : Array<Dynamic>));
+  }
+
+  public static function convertThreeDsPointZUpToYUp__threeDsParse(point:Array<Float>):Vector3 {
+    var values:Dynamic = cast _Runtime.UNDEFINED;
+    values = cast ([flighthq._internal._StaticIndex.readArray(point, 0.0), flighthq._internal._StaticIndex.readArray(point, 1.0), flighthq._internal._StaticIndex.readArray(point, 2.0)] : Array<Dynamic>);
+    _Runtime.callValue(convertPositionsZUpToYUp, cast ([values] : Array<Dynamic>));
+    return cast _Runtime.callValue(createVector3, cast ([flighthq._internal._StaticIndex.readArray(values, 0.0), flighthq._internal._StaticIndex.readArray(values, 1.0), flighthq._internal._StaticIndex.readArray(values, 2.0)] : Array<Dynamic>));
+    return cast null;
   }
 
   public static function resolveThreeDsMaterial__threeDsParse(name:String, materials:Dynamic, materialIndexByName:Dynamic, document:Scene3DDocument, threeDsDrops:Null<Dynamic>):Float {
@@ -586,9 +949,9 @@ class ThreeDsParse {
 
   public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial, document:Scene3DDocument):Material {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([_Runtime.mergeObjects([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.diffuse, material.opacity] : Array<Dynamic>)) }, { diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast _Runtime.callValue(createExternalTextureRef, cast ([material.textureFilename, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)) }, { specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.specular] : Array<Dynamic>)) }, ((cast !_Runtime.strictEquals(material.shininess, null) : Bool) ? (cast { shininess: material.shininess } : Dynamic) : (cast {  } : Dynamic))])] : Array<Dynamic>));
+    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([_Runtime.mergeObjects([{ alphaMap: ((cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool) ? (cast _Runtime.callValue(createExternalTextureRef, cast ([material.opacityFilename, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)) }, { diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.diffuse, material.opacity] : Array<Dynamic>)) }, { diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast _Runtime.callValue(createExternalTextureRef, cast ([material.textureFilename, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)) }, { specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.specular] : Array<Dynamic>)) }, ((cast !_Runtime.strictEquals(material.shininess, null) : Bool) ? (cast { shininess: material.shininess } : Dynamic) : (cast {  } : Dynamic))])] : Array<Dynamic>));
     _Runtime.setField(result, 'name', ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast material.name : Dynamic) : (cast null : Dynamic)));
-    if ((cast ((cast material.opacity : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.setField(result, 'alphaMode', 'blend'); }
+    if ((cast ((cast ((cast material.opacity : Float) < (cast 1.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool)) : Bool)) { _Runtime.setField(result, 'alphaMode', 'blend'); }
     return cast (cast (cast result : Dynamic) : Material);
     return cast null;
   }
@@ -599,6 +962,7 @@ class ThreeDsParse {
     var bumpFilename:Null<String> = cast _Runtime.UNDEFINED;
     var diffuse:Array<Float> = cast _Runtime.UNDEFINED;
     var opacity:Dynamic = cast _Runtime.UNDEFINED;
+    var opacityFilename:Null<String> = cast _Runtime.UNDEFINED;
     var shininess:Null<Float> = cast _Runtime.UNDEFINED;
     var specular:Array<Float> = cast _Runtime.UNDEFINED;
     var textureFilename:Null<String> = cast _Runtime.UNDEFINED;
@@ -608,6 +972,7 @@ class ThreeDsParse {
     bumpFilename = null;
     diffuse = cast ([1.0, 1.0, 1.0] : Array<Dynamic>);
     opacity = 1.0;
+    opacityFilename = null;
     shininess = null;
     specular = cast ([1.0, 1.0, 1.0] : Array<Dynamic>);
     textureFilename = null;
@@ -635,10 +1000,12 @@ class ThreeDsParse {
         (textureFilename = cast (_Runtime.callValue(ThreeDsParse.parseTextureFilename__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_BUMP_MAP) : Bool)) {
         (bumpFilename = cast (_Runtime.callValue(ThreeDsParse.parseTextureFilename__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)) : Dynamic));
-      } } } } } } } }
+      } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL_OPACITY_MAP) : Bool)) {
+        (opacityFilename = cast (_Runtime.callValue(ThreeDsParse.parseTextureFilename__threeDsParse, cast ([view, dataStart, chunkEnd] : Array<Dynamic>)) : Dynamic));
+      } } } } } } } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
-    return cast { ambient: ambient, bumpFilename: bumpFilename, diffuse: diffuse, name: name, opacity: opacity, shininess: shininess, specular: specular, textureFilename: textureFilename };
+    return cast { ambient: ambient, bumpFilename: bumpFilename, diffuse: diffuse, name: name, opacity: opacity, opacityFilename: opacityFilename, shininess: shininess, specular: specular, textureFilename: textureFilename };
     return cast null;
   }
 
@@ -741,6 +1108,18 @@ class ThreeDsParse {
     return cast _Runtime.callProperty(view, 'getUint32', cast ([(offset + 2.0), true] : Array<Dynamic>));
     return cast null;
   }
+
+  public static final DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse:Dynamic = _Runtime.callValue(createVector3, cast ([0.0, 0.0, -1.0] : Array<Dynamic>));
+
+  public static final THREE_DS_Z_UP_TO_Y_UP__threeDsParse:Dynamic = _Runtime.callValue(createMatrix4, cast ([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+
+  public static final THREE_DS_Y_UP_TO_Z_UP__threeDsParse:Dynamic = _Runtime.callValue(createMatrix4, cast ([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+
+  public static final THREE_DS_DEFAULT_FAR__threeDsParse:Dynamic = 1000.0;
+
+  public static final THREE_DS_DEFAULT_FOCAL_LENGTH_MM__threeDsParse:Dynamic = 50.0;
+
+  public static final THREE_DS_DEFAULT_NEAR__threeDsParse:Dynamic = 1.0;
 
   public static function tallyThreeDsDrop__threeDsParse(tallies:Null<Dynamic>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:Dynamic):Void {
     var key:Dynamic = cast _Runtime.UNDEFINED;

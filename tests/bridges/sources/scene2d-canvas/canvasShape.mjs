@@ -5,6 +5,7 @@ const api = compiled.flighthq.scene2dCanvas.CanvasShape;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const defaultCanvasMorphShapeRenderer = api.defaultCanvasMorphShapeRenderer;
 export const defaultCanvasShapeRenderer = api.defaultCanvasShapeRenderer;
 export const drawCanvasShape = api.drawCanvasShape;
 export const renderCanvasShapeCommands = api.renderCanvasShapeCommands;

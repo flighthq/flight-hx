@@ -5,6 +5,4 @@ const api = compiled.flighthq.scene3dResources.SceneResourceRecovery;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const explainImageResourceReferenceResolution = api.explainImageResourceReferenceResolution;
-export const resetFailedImageResourceReference = api.resetFailedImageResourceReference;
 export const retryFailedScene3DResources = api.retryFailedScene3DResources;

@@ -4,8 +4,10 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './builtInScene2DDocumentImporters.mjs';
-export * from './loadScene2DResources.mjs';
+export * from './loadScene2DAudioResources.mjs';
+export * from './loadScene2DImageResources.mjs';
 export * from './resolveScene2DResources.mjs';
 export * from './scene2DDocument.mjs';
 export * from './scene2DDocumentImporterRegistry.mjs';
 export * from './scene2DDocumentSource.mjs';
+export * from './scene2DSlotReference.mjs';

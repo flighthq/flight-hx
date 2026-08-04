@@ -4,11 +4,15 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ThreeDsMaterial = { var ambient:Array<Float>; var bumpFilename:Null<String>; var diffuse:Array<Float>; var name:String; var opacity:Float; var shininess:Null<Float>; var specular:Array<Float>; var textureFilename:Null<String>; };
+typedef ThreeDsMaterial = { var ambient:Array<Float>; var bumpFilename:Null<String>; var diffuse:Array<Float>; var name:String; var opacity:Float; var opacityFilename:Null<String>; var shininess:Null<Float>; var specular:Array<Float>; var textureFilename:Null<String>; };
+
+typedef ThreeDsLight = { var color:Array<Float>; var enabled:Bool; var falloff:Float; var hotspot:Float; var innerRange:Null<Float>; var multiplier:Float; var name:String; var outerRange:Null<Float>; var position:Array<Float>; var target:Null<Array<Float>>; };
+
+typedef ThreeDsCamera = { var far:Null<Float>; var focalLength:Float; var name:String; var near:Null<Float>; var position:Array<Float>; var roll:Float; var target:Array<Float>; };
 
 typedef ThreeDsMaterialGroup = { var faces:flighthq._internal._UInt16Array; var name:String; };
 
-typedef ThreeDsMesh = { var faces:flighthq._internal._UInt16Array; var materialGroups:Array<ThreeDsMaterialGroup>; var name:String; var smoothingGroups:Null<flighthq._internal._UInt32Array>; var uvs:Null<flighthq._internal._Float32Array>; var vertices:flighthq._internal._Float32Array; };
+typedef ThreeDsMesh = { var faces:flighthq._internal._UInt16Array; var localMatrix:Null<flighthq._internal._Float32Array>; var materialGroups:Array<ThreeDsMaterialGroup>; var name:String; var smoothingGroups:Null<flighthq._internal._UInt32Array>; var uvs:Null<flighthq._internal._Float32Array>; var vertices:flighthq._internal._Float32Array; };
 
 class ThreeDsSchema {
   public static final THREE_DS_MAIN:Dynamic = 19789.0;
@@ -16,6 +20,12 @@ class ThreeDsSchema {
   public static final THREE_DS_EDITOR:Dynamic = 15677.0;
 
   public static final THREE_DS_KEYFRAME:Dynamic = 45056.0;
+
+  public static final THREE_DS_KEYFRAME_OBJECT_NODE:Dynamic = 45058.0;
+
+  public static final THREE_DS_KEYFRAME_NODE_HEADER:Dynamic = 45072.0;
+
+  public static final THREE_DS_KEYFRAME_PIVOT:Dynamic = 45075.0;
 
   public static final THREE_DS_OBJECT:Dynamic = 16384.0;
 
@@ -33,6 +43,24 @@ class ThreeDsSchema {
 
   public static final THREE_DS_TRANSFORM_MATRIX:Dynamic = 16736.0;
 
+  public static final THREE_DS_LIGHT:Dynamic = 17920.0;
+
+  public static final THREE_DS_LIGHT_SPOT:Dynamic = 17936.0;
+
+  public static final THREE_DS_LIGHT_OFF:Dynamic = 17952.0;
+
+  public static final THREE_DS_LIGHT_INNER_RANGE:Dynamic = 18009.0;
+
+  public static final THREE_DS_LIGHT_OUTER_RANGE:Dynamic = 18010.0;
+
+  public static final THREE_DS_LIGHT_MULTIPLIER:Dynamic = 18011.0;
+
+  public static final THREE_DS_CAMERA:Dynamic = 18176.0;
+
+  public static final THREE_DS_CAMERA_RANGES:Dynamic = 18208.0;
+
+  public static final THREE_DS_CAMERA_APERTURE_MM:Dynamic = 36.0;
+
   public static final THREE_DS_MATERIAL:Dynamic = 45055.0;
 
   public static final THREE_DS_MATERIAL_NAME:Dynamic = 40960.0;
@@ -48,6 +76,8 @@ class ThreeDsSchema {
   public static final THREE_DS_MATERIAL_TRANSPARENCY:Dynamic = 41040.0;
 
   public static final THREE_DS_MATERIAL_TEXTURE_MAP:Dynamic = 41472.0;
+
+  public static final THREE_DS_MATERIAL_OPACITY_MAP:Dynamic = 41488.0;
 
   public static final THREE_DS_MATERIAL_TEXTURE_FILENAME:Dynamic = 41728.0;
 

@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createScene3DMaterialTextureRegistry = api.createScene3DMaterialTextureRegistry;
 export const getScene3DMaterialTextures = api.getScene3DMaterialTextures;
+export const hasScene3DMaterialTextureLister = api.hasScene3DMaterialTextureLister;
 export const registerBuiltInScene3DMaterialTextures = api.registerBuiltInScene3DMaterialTextures;
 export const registerExtendedPbrScene3DMaterialTextures = api.registerExtendedPbrScene3DMaterialTextures;
 export const registerScene3DMaterialTextures = api.registerScene3DMaterialTextures;

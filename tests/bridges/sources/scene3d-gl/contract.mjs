@@ -15,6 +15,7 @@ export * from './enableGlScene3DColorSpaceGuards.mjs';
 export * from './enableGlScene3DCustomShaderGuards.mjs';
 export * from './enableGlScene3DDeformGuards.mjs';
 export * from './enableGlScene3DForwardLightSelectionGuards.mjs';
+export * from './explainGlScene3DCoverage.mjs';
 export * from './explainGlScene3DForwardLightSelection.mjs';
 export * from './extendedPbrGlMeshMaterialRenderer.mjs';
 export * from './glClassicPrelude.mjs';

@@ -3,15 +3,10 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.AudioResourceReference.AudioResourceFetch;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Scene2DDocument.Scene2DAssetReference;
-import flighthq.types.Scene2DDocument.Scene2DContentReference;
-import flighthq.types.Scene2DDocument.Scene2DContentReferenceKind;
+import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
-
-typedef Scene2DAssetContentLoader = Dynamic;
-
-typedef Scene2DAssetContentResolver = Dynamic;
 
 typedef Scene2DDocumentFetchProgress = { var loaded:Float; var total:Float; var url:String; };
 
@@ -29,14 +24,22 @@ typedef Scene2DDocumentImporterRegistry = { @:optional var __EntityRuntimeKey:Nu
 
 typedef Scene2DDocumentLoadOptions = { @:optional var mimeType:Null<String>; @:optional var progress:Signal<Dynamic>; @:optional var signal:Dynamic; };
 
-typedef Scene2DResourceLoadProgress = { var kind:Scene2DContentReferenceKind; var loaded:Float; var name:String; var total:Float; };
-
-typedef Scene2DResourceResolution = { var content:Node2D; var reference:Scene2DContentReference; };
-
-typedef Scene2DResources = { var document:Scene2DDocument; var resolved:Array<Scene2DResourceResolution>; var root:Node2D; var unresolved:Array<Scene2DContentReference>; };
-
 typedef Scene2DSlotContentResolver = Dynamic;
 
-typedef ResolveScene2DResourcesOptions = { @:optional var resolveAssetContent:Scene2DAssetContentResolver; @:optional var resolveSlotContent:Scene2DSlotContentResolver; @:optional var select:Dynamic; };
+typedef Scene2DSlotResolution = { var content:Node2D; var reference:Scene2DSlotReference; };
 
-typedef LoadScene2DResourcesOptions = { var loadAssetContent:Scene2DAssetContentLoader; @:optional var progress:Signal<Dynamic>; @:optional var signal:Dynamic; };
+typedef Scene2DResources = { var document:Scene2DDocument; var resolved:Array<Scene2DSlotResolution>; var root:Node2D; var unresolved:Array<Scene2DSlotReference>; };
+
+typedef ResolveScene2DResourcesOptions = { @:optional var resolveSlotContent:Scene2DSlotContentResolver; @:optional var select:Dynamic; };
+
+typedef Scene2DImageResourceLoadProgress = { var loaded:Float; var reference:ImageResourceReference; var total:Float; };
+
+typedef Scene2DImageResources = { var document:Scene2DDocument; var resolved:Array<ImageResourceReference>; var unresolved:Array<ImageResourceReference>; };
+
+typedef LoadScene2DImageResourcesOptions = { @:optional var fetch:ImageResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:Dynamic; };
+
+typedef Scene2DAudioResourceLoadProgress = { var loaded:Float; var reference:AudioResourceReference; var total:Float; };
+
+typedef Scene2DAudioResources = { var document:Scene2DDocument; var resolved:Array<AudioResourceReference>; var unresolved:Array<AudioResourceReference>; };
+
+typedef LoadScene2DAudioResourcesOptions = { @:optional var context:Null<Dynamic>; @:optional var fetch:AudioResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:Dynamic; };

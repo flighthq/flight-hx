@@ -3,44 +3,51 @@ package flighthq.swf;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.abc.AbcFile.readAbcFile;
+import flighthq.abc.AbcInstruction.readAbcInstructions;
 import flighthq.movieclip.MovieClip.gotoAndPlayMovieClip;
 import flighthq.movieclip.MovieClip.nextFrameMovieClip;
 import flighthq.movieclip.MovieClip.playMovieClip;
 import flighthq.movieclip.MovieClip.prevFrameMovieClip;
 import flighthq.movieclip.MovieClip.stopMovieClip;
+import flighthq.types.Abc.AbcFile;
+import flighthq.types.Abc.AbcInstruction;
+import flighthq.types.Abc.AbcOpcode;
+import flighthq.types.Abc.AbcOpcodeValue;
+import flighthq.types.Abc.AbcTraitKind;
+import flighthq.types.Abc.AbcTraitKindValue;
 import flighthq.types.FrameScript;
 import flighthq.types.MovieClip;
 import flighthq.types.Node2D;
 
 typedef SwfFrameCommand__swfFrameAction = { var frame:Float; var kind:String; var label:Null<String>; };
 
+typedef SwfAbcValue__swfFrameAction = { var kind:String; var label:String; var value:Float; };
+
 class SwfFrameAction {
-  public static function readSwfFrameActions(reader:SwfReader):Null<FrameScript> {
-    var commands:Array<SwfFrameCommand__swfFrameAction> = cast _Runtime.UNDEFINED;
-    commands = cast ([] : Array<Dynamic>);
-    {
-      var actions:Dynamic = 0.0;
-      while ((cast ((cast actions : Float) < (cast SwfFrameAction.MAX_FRAME_ACTIONS__swfFrameAction : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.field(reader, 'pos') : Float) >= (cast _Runtime.field(reader, 'end') : Float)) : Bool)) { break; }
-        var code:Dynamic = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-        if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_END__swfFrameAction) : Bool)) { break; }
-        var length:Dynamic = ((cast ((cast code : Float) >= (cast SwfFrameAction.ACTION_HAS_BODY__swfFrameAction : Float)) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-        var bodyEnd:Dynamic = _Runtime.addNumbers(_Runtime.field(reader, 'pos'), length);
-        if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast bodyEnd : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
-        if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_STOP__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'stop', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PLAY__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'play', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_NEXT_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'next', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PREVIOUS_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'previous', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_FRAME__swfFrameAction) : Bool)) {
-          _Runtime.callProperty(commands, 'push', cast ([{ frame: _Runtime.addNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), 1.0), kind: 'goto', label: null }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_LABEL__swfFrameAction) : Bool)) {
-          _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'goto', label: _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
-        } else {
-          return cast null;
-        } } } } } }
-        _Runtime.setField(reader, 'pos', bodyEnd);
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-        actions++;
-      }
+  public static function readSwfAbcFrameScripts(source:flighthq._internal._UInt8Array):Null<Dynamic> {
+    var file:Dynamic = cast _Runtime.UNDEFINED;
+    var bodies:Dynamic = cast _Runtime.UNDEFINED;
+    var byClass:Dynamic = cast _Runtime.UNDEFINED;
+    file = _Runtime.callValue(readAbcFile, cast ([source] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(file, null) : Bool)) { return cast null; }
+    bodies = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    for (body in _Runtime.iterable(_Runtime.field(file, 'methodBodies'))) {
+      var instructions:Dynamic = _Runtime.callValue(readAbcInstructions, cast ([_Runtime.field(body, 'code')] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(instructions, null) : Bool)) { ((cast bodies : flighthq._internal._Map).set(_Runtime.field(body, 'method'), instructions)); }
     }
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(SwfFrameAction.createSwfFrameScript__swfFrameAction, cast ([commands] : Array<Dynamic>)) : Dynamic));
+    byClass = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    for (instance in _Runtime.iterable(_Runtime.field(file, 'instances'))) {
+      var constructor:Dynamic = ((cast bodies : flighthq._internal._Map).get(_Runtime.field(instance, 'initializer')));
+      if ((cast _Runtime.strictEquals(constructor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      var methodsByName:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+      for (trait in _Runtime.iterable(_Runtime.field(instance, 'traits'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(trait, 'kind'), AbcTraitKindValue.Method) : Bool)) { ((cast methodsByName : flighthq._internal._Map).set(_Runtime.callValue(SwfFrameAction.resolveAbcName__swfFrameAction, cast ([file, _Runtime.field(trait, 'name')] : Array<Dynamic>)), _Runtime.field(trait, 'methodIndex'))); }
+      }
+      var frames:Dynamic = _Runtime.callValue(SwfFrameAction.readSwfAbcFrameScriptCalls__swfFrameAction, cast ([file, constructor, bodies, methodsByName] : Array<Dynamic>));
+      if ((cast ((cast (cast frames : flighthq._internal._Map).size : Float) > (cast 0.0 : Float)) : Bool)) { ((cast byClass : flighthq._internal._Map).set(_Runtime.callValue(SwfFrameAction.resolveAbcQualifiedName__swfFrameAction, cast ([file, _Runtime.field(instance, 'name')] : Array<Dynamic>)), frames)); }
+    }
+    return cast byClass;
     return cast null;
   }
 
@@ -56,11 +63,11 @@ class SwfFrameAction {
             if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'stop') : Bool)) { _Runtime.callValue(stopMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'play') : Bool)) { _Runtime.callValue(playMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'next') : Bool)) { _Runtime.callValue(nextFrameMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(command, 'kind'), 'previous') : Bool)) { _Runtime.callValue(prevFrameMovieClip, cast ([clip] : Array<Dynamic>)); } else { if ((cast !_Runtime.strictEquals(_Runtime.field(command, 'label'), null) : Bool)) { _Runtime.callValue(gotoAndPlayMovieClip, cast ([clip, _Runtime.field(command, 'label')] : Array<Dynamic>)); } else { _Runtime.callValue(gotoAndPlayMovieClip, cast ([clip, _Runtime.field(command, 'frame')] : Array<Dynamic>)); } } } } }
           }
         } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-      } catch (__finallyError2:Dynamic) {
+      } catch (__finallyError8:Dynamic) {
         {
           SwfFrameAction._gotoDepth__swfFrameAction--;
         }
-        _Runtime.throwValue(__finallyError2);
+        _Runtime.throwValue(__finallyError8);
       }
       {
         SwfFrameAction._gotoDepth__swfFrameAction--;
@@ -90,4 +97,147 @@ class SwfFrameAction {
   public static final MAX_GOTO_DEPTH__swfFrameAction:Dynamic = 8.0;
 
   public static var _gotoDepth__swfFrameAction:Dynamic = 0.0;
+
+  public static function readSwfFrameActions(reader:SwfReader):Null<FrameScript> {
+    var commands:Array<SwfFrameCommand__swfFrameAction> = cast _Runtime.UNDEFINED;
+    commands = cast ([] : Array<Dynamic>);
+    {
+      var actions:Dynamic = 0.0;
+      while ((cast ((cast actions : Float) < (cast SwfFrameAction.MAX_FRAME_ACTIONS__swfFrameAction : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.field(reader, 'pos') : Float) >= (cast _Runtime.field(reader, 'end') : Float)) : Bool)) { break; }
+        var code:Dynamic = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_END__swfFrameAction) : Bool)) { break; }
+        var length:Dynamic = ((cast ((cast code : Float) >= (cast SwfFrameAction.ACTION_HAS_BODY__swfFrameAction : Float)) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var bodyEnd:Dynamic = _Runtime.addNumbers(_Runtime.field(reader, 'pos'), length);
+        if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast bodyEnd : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
+        if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_STOP__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'stop', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PLAY__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'play', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_NEXT_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'next', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PREVIOUS_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'previous', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_FRAME__swfFrameAction) : Bool)) {
+          _Runtime.callProperty(commands, 'push', cast ([{ frame: _Runtime.addNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), 1.0), kind: 'goto', label: null }] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_LABEL__swfFrameAction) : Bool)) {
+          _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'goto', label: _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+        } else {
+          return cast null;
+        } } } } } }
+        _Runtime.setField(reader, 'pos', bodyEnd);
+        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        actions++;
+      }
+    }
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(SwfFrameAction.createSwfFrameScript__swfFrameAction, cast ([commands] : Array<Dynamic>)) : Dynamic));
+    return cast null;
+  }
+
+  public static function readSwfAbcFrameScriptCalls__swfFrameAction(file:AbcFile, constructor:Array<AbcInstruction>, bodies:Dynamic, methodsByName:Dynamic):Dynamic {
+    var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var stack:Array<SwfAbcValue__swfFrameAction> = cast _Runtime.UNDEFINED;
+    frames = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    stack = cast ([] : Array<Dynamic>);
+    for (instruction in _Runtime.iterable(constructor)) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.CallPropVoid) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.CallProperty) : Bool)) : Bool)) {
+        var argumentCount:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 1.0);
+        var argumentsGiven:Dynamic = _Runtime.splice(stack, Std.int(HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), argumentCount))), Std.int(argumentCount), []);
+        if ((cast !_Runtime.strictEquals(_Runtime.callValue(SwfFrameAction.resolveAbcName__swfFrameAction, cast ([file, flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0)] : Array<Dynamic>)), SwfFrameAction.ADD_FRAME_SCRIPT__swfFrameAction) : Bool)) { continue; }
+        {
+          var i:Dynamic = 0.0;
+          while ((cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(argumentsGiven, 'length') : Float)) : Bool)) {
+            var frame:Dynamic = flighthq._internal._StaticIndex.readArray(argumentsGiven, i);
+            var handler:Dynamic = flighthq._internal._StaticIndex.readArray(argumentsGiven, (i + 1.0));
+            if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(frame, 'kind'), 'number') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(handler, 'kind'), 'method') : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
+            var body:Dynamic = ((cast bodies : flighthq._internal._Map).get(_Runtime.field(handler, 'value')));
+            var commands:Dynamic = ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(SwfFrameAction.readSwfAbcCommands__swfFrameAction, cast ([file, body] : Array<Dynamic>)) : Dynamic));
+            if ((cast !_Runtime.strictEquals(commands, null) : Bool)) { ((cast frames : flighthq._internal._Map).set(_Runtime.addNumbers(_Runtime.field(frame, 'value'), 1.0), _Runtime.callValue(SwfFrameAction.createSwfFrameScript__swfFrameAction, cast ([commands] : Array<Dynamic>)))); }
+            (i = cast ((i + 2.0) : Dynamic));
+          }
+        }
+        continue;
+      }
+      if ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.GetProperty) : Bool)) {
+        _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
+        var methodIndex:Dynamic = ((cast methodsByName : flighthq._internal._Map).get(_Runtime.callValue(SwfFrameAction.resolveAbcName__swfFrameAction, cast ([file, flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0)] : Array<Dynamic>))));
+        _Runtime.callProperty(stack, 'push', cast ([((cast _Runtime.strictEquals(methodIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { kind: 'other', label: '', value: 0.0 } : Dynamic) : (cast { kind: 'method', label: '', value: methodIndex } : Dynamic))] : Array<Dynamic>));
+        continue;
+      }
+      _Runtime.callValue(SwfFrameAction.pushSwfAbcValue__swfFrameAction, cast ([file, stack, instruction] : Array<Dynamic>));
+    }
+    return cast frames;
+    return cast null;
+  }
+
+  public static function readSwfAbcCommands__swfFrameAction(file:AbcFile, body:Array<AbcInstruction>):Null<Array<SwfFrameCommand__swfFrameAction>> {
+    var commands:Array<SwfFrameCommand__swfFrameAction> = cast _Runtime.UNDEFINED;
+    var stack:Array<SwfAbcValue__swfFrameAction> = cast _Runtime.UNDEFINED;
+    commands = cast ([] : Array<Dynamic>);
+    stack = cast ([] : Array<Dynamic>);
+    for (instruction in _Runtime.iterable(body)) {
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.CallPropVoid) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.CallProperty) : Bool)) : Bool)) {
+        var argumentCount:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 1.0);
+        var argumentsGiven:Dynamic = _Runtime.splice(stack, Std.int(HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), argumentCount))), Std.int(argumentCount), []);
+        var command:Dynamic = _Runtime.callValue(SwfFrameAction.resolveSwfAbcCommand__swfFrameAction, cast ([_Runtime.callValue(SwfFrameAction.resolveAbcName__swfFrameAction, cast ([file, flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0)] : Array<Dynamic>)), argumentsGiven] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(command, null) : Bool)) { return cast null; }
+        _Runtime.callProperty(commands, 'push', cast ([command] : Array<Dynamic>));
+        continue;
+      }
+      if ((cast ((cast SwfFrameAction.SCAFFOLDING__swfFrameAction : flighthq._internal._Set).has(_Runtime.field(instruction, 'opcode'))) : Bool)) { continue; }
+      if ((cast !(cast _Runtime.callValue(SwfFrameAction.pushSwfAbcValue__swfFrameAction, cast ([file, stack, instruction] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    }
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) ? (cast null : Dynamic) : (cast commands : Dynamic));
+    return cast null;
+  }
+
+  public static function resolveSwfAbcCommand__swfFrameAction(name:String, argumentsGiven:Array<SwfAbcValue__swfFrameAction>):Null<SwfFrameCommand__swfFrameAction> {
+    var target:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals(name, 'stop') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(argumentsGiven, 'length'), 0.0) : Bool)) : Bool)) { return cast { frame: 0.0, kind: 'stop', label: null }; }
+    if ((cast ((cast _Runtime.strictEquals(name, 'play') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(argumentsGiven, 'length'), 0.0) : Bool)) : Bool)) { return cast { frame: 0.0, kind: 'play', label: null }; }
+    if ((cast ((cast _Runtime.strictEquals(name, 'nextFrame') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(argumentsGiven, 'length'), 0.0) : Bool)) : Bool)) { return cast { frame: 0.0, kind: 'next', label: null }; }
+    if ((cast ((cast _Runtime.strictEquals(name, 'prevFrame') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(argumentsGiven, 'length'), 0.0) : Bool)) : Bool)) { return cast { frame: 0.0, kind: 'previous', label: null }; }
+    if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(name, 'gotoAndStop'), function():Dynamic return cast !_Runtime.strictEquals(name, 'gotoAndPlay')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(argumentsGiven, 'length'), 1.0) : Bool)) : Bool)) { return cast null; }
+    target = flighthq._internal._StaticIndex.readArray(argumentsGiven, 0.0);
+    if ((cast _Runtime.strictEquals(_Runtime.field(target, 'kind'), 'label') : Bool)) { return cast { frame: 0.0, kind: 'goto', label: _Runtime.field(target, 'label') }; }
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(target, 'kind'), 'number') : Bool) ? (cast { frame: _Runtime.field(target, 'value'), kind: 'goto', label: null } : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
+
+  public static function pushSwfAbcValue__swfFrameAction(file:AbcFile, stack:Array<SwfAbcValue__swfFrameAction>, instruction:AbcInstruction):Bool {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.PushByte) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.PushShort) : Bool)) : Bool)) {
+      _Runtime.callProperty(stack, 'push', cast ([{ kind: 'number', label: '', value: flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0) }] : Array<Dynamic>));
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.PushInt) : Bool)) {
+      _Runtime.callProperty(stack, 'push', cast ([{ kind: 'number', label: '', value: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'integers'), flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0)), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.PushUint) : Bool)) {
+      _Runtime.callProperty(stack, 'push', cast ([{ kind: 'number', label: '', value: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'unsignedIntegers'), flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0)), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.PushString) : Bool)) {
+      _Runtime.callProperty(stack, 'push', cast ([{ kind: 'label', label: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'strings'), flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0)), function():Dynamic return cast ''), value: 0.0 }] : Array<Dynamic>));
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.NewFunction) : Bool)) {
+      _Runtime.callProperty(stack, 'push', cast ([{ kind: 'method', label: '', value: flighthq._internal._StaticIndex.readArray(_Runtime.field(instruction, 'operands'), 0.0) }] : Array<Dynamic>));
+    } else {
+      _Runtime.callProperty(stack, 'push', cast ([{ kind: 'other', label: '', value: 0.0 }] : Array<Dynamic>));
+      return cast false;
+    } } } } }
+    return cast true;
+    return cast null;
+  }
+
+  public static function resolveAbcName__swfFrameAction(file:AbcFile, index:Float):String {
+    var multiname:Dynamic = cast _Runtime.UNDEFINED;
+    multiname = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'multinames'), index);
+    return cast ((cast _Runtime.strictEquals(multiname, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'strings'), _Runtime.field(multiname, 'name')), function():Dynamic return cast '') : Dynamic));
+    return cast null;
+  }
+
+  public static function resolveAbcQualifiedName__swfFrameAction(file:AbcFile, index:Float):String {
+    var multiname:Dynamic = cast _Runtime.UNDEFINED;
+    var name:Dynamic = cast _Runtime.UNDEFINED;
+    var namespace:Dynamic = cast _Runtime.UNDEFINED;
+    var packageName:Dynamic = cast _Runtime.UNDEFINED;
+    multiname = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'multinames'), index);
+    if ((cast _Runtime.strictEquals(multiname, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ''; }
+    name = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'strings'), _Runtime.field(multiname, 'name')), function():Dynamic return cast '');
+    namespace = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'namespaces'), _Runtime.field(multiname, 'namespace'));
+    packageName = ((cast _Runtime.strictEquals(namespace, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(file, 'constantPool'), 'strings'), _Runtime.field(namespace, 'name')), function():Dynamic return cast '') : Dynamic));
+    return cast ((cast _Runtime.strictEquals(packageName, '') : Bool) ? (cast name : Dynamic) : (cast '' + Std.string(packageName) + '.' + Std.string(name) + '' : Dynamic));
+    return cast null;
+  }
+
+  public static final ADD_FRAME_SCRIPT__swfFrameAction:Dynamic = 'addFrameScript';
+
+  public static final SCAFFOLDING__swfFrameAction:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([AbcOpcodeValue.CoerceAny, AbcOpcodeValue.Debug, AbcOpcodeValue.DebugFile, AbcOpcodeValue.DebugLine, AbcOpcodeValue.FindPropStrict, AbcOpcodeValue.GetLex, AbcOpcodeValue.GetLocal0, AbcOpcodeValue.Pop, AbcOpcodeValue.PushScope, AbcOpcodeValue.ReturnVoid] : Array<Dynamic>)]);
 }

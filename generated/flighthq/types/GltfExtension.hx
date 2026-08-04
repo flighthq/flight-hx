@@ -4,8 +4,10 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfTextureInfo;
+import flighthq.types.Texture.TextureColorSpace;
 
-typedef GltfExtensionContext = { var buildNodeTransform:Dynamic; @:optional var diagnostics:Array<ImportDiagnostic>; var document:Scene3DDocument; var nodeIndices:Array<Float>; var source:GltfDocument; };
+typedef GltfExtensionContext = { var buildNodeTransform:Dynamic; @:optional var diagnostics:Array<ImportDiagnostic>; var document:Scene3DDocument; var nodeIndices:Array<Float>; var resolveTexture:Dynamic; var source:GltfDocument; };
 
 typedef GltfExtensionHandler = { var apply:Dynamic; var kind:String; };
 

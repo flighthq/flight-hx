@@ -6,18 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasRenderTexture.bindCanvasRenderTexture;
 import flighthq.scene2dCanvas.CanvasTextureResolver.registerCanvasTextureResolver;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.RenderTexture;
 import flighthq.types.Texture;
 import flighthq.types.Types.RenderTargetTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 
 class CanvasRenderTextureResolver {
-  public static function registerCanvasRenderTextureResolver(state:Dynamic):Void {
-    _Runtime.callValue(registerCanvasTextureResolver, cast ([state, RenderTargetTextureSourceKind, CanvasRenderTextureResolver.resolveCanvasRenderTexture__canvasRenderTextureResolver] : Array<Dynamic>));
-  }
-
-  public static function resolveCanvasRenderTexture__canvasRenderTextureResolver(state:Dynamic, texture:Texture):Null<Dynamic> {
-    return cast _Runtime.callValue(bindCanvasRenderTexture, cast ([state, (cast texture : RenderTexture)] : Array<Dynamic>));
-    return cast null;
+  public static function registerCanvasRenderTextureResolver(resolvers:Dynamic, state:Dynamic):Void {
+    _Runtime.callValue(registerCanvasTextureResolver, cast ([resolvers, RenderTargetTextureSourceKind, function(_resolvers:Dynamic, texture:Texture) return _Runtime.callValue(bindCanvasRenderTexture, cast ([state, (cast texture : RenderTexture)] : Array<Dynamic>))] : Array<Dynamic>));
   }
 }

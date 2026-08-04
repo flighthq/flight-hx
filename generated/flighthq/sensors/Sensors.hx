@@ -412,7 +412,8 @@ class Sensors {
         try {
           var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
           var sensor:Dynamic = (cast _Runtime.construct(ctor, [sensorOptions]) : WebOrientationSensor__sensors);
-          var handler:Dynamic = function() {
+          var handler:Dynamic = cast _Runtime.UNDEFINED;
+          handler = function() {
             var q:Dynamic = cast _Runtime.UNDEFINED;
             q = _Runtime.field(sensor, 'quaternion');
             if (_Runtime.truthy(q)) {
@@ -458,7 +459,8 @@ class Sensors {
       try {
         var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:Dynamic = (cast _Runtime.construct(ctor, [sensorOptions]) : WebAmbientLightSensor__sensors);
-        var handler:Dynamic = function() {
+        var handler:Dynamic = cast _Runtime.UNDEFINED;
+        handler = function() {
           (Sensors._ambientLight__sensors.illuminance = cast (_Runtime.coalesce(_Runtime.field(sensor, 'illuminance'), function():Dynamic return cast 0.0) : Dynamic));
           (Sensors._ambientLight__sensors.interval = cast (-1.0 : Dynamic));
           (Sensors._ambientLight__sensors.timestamp = cast (-1.0 : Dynamic));
@@ -530,7 +532,8 @@ class Sensors {
       try {
         var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:Dynamic = _Runtime.construct(ctor, [sensorOptions]);
-        var handler:Dynamic = function() {
+        var handler:Dynamic = cast _Runtime.UNDEFINED;
+        handler = function() {
           (Sensors._magnetometer__sensors.x = cast (_Runtime.coalesce(_Runtime.field(sensor, 'x'), function():Dynamic return cast 0.0) : Dynamic));
           (Sensors._magnetometer__sensors.y = cast (_Runtime.coalesce(_Runtime.field(sensor, 'y'), function():Dynamic return cast 0.0) : Dynamic));
           (Sensors._magnetometer__sensors.z = cast (_Runtime.coalesce(_Runtime.field(sensor, 'z'), function():Dynamic return cast 0.0) : Dynamic));
@@ -609,7 +612,8 @@ class Sensors {
       try {
         var sensorOptions:Dynamic = ((cast !_Runtime.strictEquals(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:Dynamic = (cast _Runtime.construct(ctor, [sensorOptions]) : WebOrientationSensor__sensors);
-        var handler:Dynamic = function() {
+        var handler:Dynamic = cast _Runtime.UNDEFINED;
+        handler = function() {
           var q:Dynamic = cast _Runtime.UNDEFINED;
           q = _Runtime.field(sensor, 'quaternion');
           (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 0.0), function():Dynamic return cast 0.0) : Dynamic));

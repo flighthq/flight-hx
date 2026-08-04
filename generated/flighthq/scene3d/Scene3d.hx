@@ -11,6 +11,7 @@ import flighthq.scene3d.Scene as Facade_Scene3d_flighthq_scene3d_Scene;
 import flighthq.scene3d.SceneAnimation as Facade_Scene3d_flighthq_scene3d_SceneAnimation;
 import flighthq.scene3d.SceneDocument as Facade_Scene3d_flighthq_scene3d_SceneDocument;
 import flighthq.scene3d.SceneDocumentLights as Facade_Scene3d_flighthq_scene3d_SceneDocumentLights;
+import flighthq.scene3d.SceneKindUsage as Facade_Scene3d_flighthq_scene3d_SceneKindUsage;
 import flighthq.scene3d.SceneMaterial as Facade_Scene3d_flighthq_scene3d_SceneMaterial;
 import flighthq.scene3d.SceneNode as Facade_Scene3d_flighthq_scene3d_SceneNode;
 import flighthq.scene3d.SceneNodeAppearance as Facade_Scene3d_flighthq_scene3d_SceneNodeAppearance;
@@ -35,6 +36,7 @@ import flighthq.types.Node3D;
 import flighthq.types.NodeSignals;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
+import flighthq.types.Scene3DKindUsage;
 import flighthq.types.Scene3DLights;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._BillboardValues as Facade_Scene3d_flighthq_types__internal__BillboardValues;
@@ -79,6 +81,11 @@ class Scene3d {
 
   public static function createScene3DFromDocument(document:Scene3DDocument, ?sceneIndex:Dynamic):Scene3D {
     return cast Facade_Scene3d_flighthq_scene3d_SceneDocument.createScene3DFromDocument(document, sceneIndex);
+    return cast null;
+  }
+
+  public static function createScene3DKindUsage():Scene3DKindUsage {
+    return cast Facade_Scene3d_flighthq_scene3d_SceneKindUsage.createScene3DKindUsage();
     return cast null;
   }
 
@@ -148,6 +155,10 @@ class Scene3d {
 
   public static function getNode3DWorldBounds(out:AabbLike, node:Node3D):Void {
     Facade_Scene3d_flighthq_scene3d_SceneNodeBounds.getNode3DWorldBounds(out, node);
+  }
+
+  public static function getScene3DKindUsage(out:Scene3DKindUsage, scene:Scene3D):Void {
+    Facade_Scene3d_flighthq_scene3d_SceneKindUsage.getScene3DKindUsage(out, scene);
   }
 
   public static function getScene3DMaterials(root:Node3D, out:Array<Material>):Void {

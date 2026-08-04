@@ -4,8 +4,18 @@ package flighthq.scene3dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dFormats.Awd2Parse as Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Parse;
+import flighthq.scene3dFormats.GltfAnisotropy as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfAnisotropy;
+import flighthq.scene3dFormats.GltfClearcoat as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfClearcoat;
+import flighthq.scene3dFormats.GltfDraco as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfDraco;
+import flighthq.scene3dFormats.GltfEmissiveStrength as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfEmissiveStrength;
+import flighthq.scene3dFormats.GltfIridescence as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfIridescence;
 import flighthq.scene3dFormats.GltfParse as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfParse;
 import flighthq.scene3dFormats.GltfPunctualLights as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfPunctualLights;
+import flighthq.scene3dFormats.GltfSheen as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfSheen;
+import flighthq.scene3dFormats.GltfSpecular as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfSpecular;
+import flighthq.scene3dFormats.GltfSpecularGlossiness as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfSpecularGlossiness;
+import flighthq.scene3dFormats.GltfTransmissionVolume as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfTransmissionVolume;
+import flighthq.scene3dFormats.GltfUnlit as Facade_Scene3dFormats_flighthq_scene3dFormats_GltfUnlit;
 import flighthq.scene3dFormats.Md2Parse as Facade_Scene3dFormats_flighthq_scene3dFormats_Md2Parse;
 import flighthq.scene3dFormats.Md5AnimParse as Facade_Scene3dFormats_flighthq_scene3dFormats_Md5AnimParse;
 import flighthq.scene3dFormats.Md5Parse as Facade_Scene3dFormats_flighthq_scene3dFormats_Md5Parse;
@@ -14,6 +24,7 @@ import flighthq.scene3dFormats.ObjParse as Facade_Scene3dFormats_flighthq_scene3
 import flighthq.scene3dFormats.SceneSkeleton as Facade_Scene3dFormats_flighthq_scene3dFormats_SceneSkeleton;
 import flighthq.scene3dFormats.ThreeDsParse as Facade_Scene3dFormats_flighthq_scene3dFormats_ThreeDsParse;
 import flighthq.types.AnimationClip;
+import flighthq.types.GltfDraco.GltfDracoDecoder;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfExtension.GltfImportOptions;
 import flighthq.types.ImportDiagnostic;
@@ -73,7 +84,39 @@ class Scene3dFormats {
     return cast null;
   }
 
+  public static function getGltfDracoDecoder():Null<GltfDracoDecoder> {
+    return cast Facade_Scene3dFormats_flighthq_scene3dFormats_GltfDraco.getGltfDracoDecoder();
+    return cast null;
+  }
+
+  public static final GltfAnisotropyExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfAnisotropy.GltfAnisotropyExtensionHandler;
+
+  public static final GltfClearcoatExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfClearcoat.GltfClearcoatExtensionHandler;
+
+  public static final GltfEmissiveStrengthExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfEmissiveStrength.GltfEmissiveStrengthExtensionHandler;
+
+  public static final GltfIorExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfTransmissionVolume.GltfIorExtensionHandler;
+
+  public static final GltfIridescenceExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfIridescence.GltfIridescenceExtensionHandler;
+
   public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfPunctualLights.GltfPunctualLightsExtensionHandler;
+
+  public static final GltfSheenExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfSheen.GltfSheenExtensionHandler;
+
+  public static final GltfSpecularExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfSpecular.GltfSpecularExtensionHandler;
+
+  public static final GltfSpecularGlossinessExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfSpecularGlossiness.GltfSpecularGlossinessExtensionHandler;
+
+  public static final GltfTransmissionExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfTransmissionVolume.GltfTransmissionExtensionHandler;
+
+  public static final GltfUnlitExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfUnlit.GltfUnlitExtensionHandler;
+
+  public static final GltfVolumeExtensionHandler:GltfExtensionHandler = Facade_Scene3dFormats_flighthq_scene3dFormats_GltfTransmissionVolume.GltfVolumeExtensionHandler;
+
+  public static function hasGltfDracoDecoder():Bool {
+    return cast Facade_Scene3dFormats_flighthq_scene3dFormats_GltfDraco.hasGltfDracoDecoder();
+    return cast null;
+  }
 
   public static function importMd5Mesh(meshSource:String, ?animSource:Null<String>, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_Md5Parse.importMd5Mesh(meshSource, animSource, diagnostics);
@@ -128,5 +171,13 @@ class Scene3dFormats {
   public static function parseObjMaterialLibrary(source:String, ?diagnostics:Array<ImportDiagnostic>):ObjMaterialLibrary {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_MtlParse.parseObjMaterialLibrary(source, diagnostics);
     return cast null;
+  }
+
+  public static function registerGltfDracoDecoder(decoder:GltfDracoDecoder):Void {
+    Facade_Scene3dFormats_flighthq_scene3dFormats_GltfDraco.registerGltfDracoDecoder(decoder);
+  }
+
+  public static function unregisterGltfDracoDecoder():Void {
+    Facade_Scene3dFormats_flighthq_scene3dFormats_GltfDraco.unregisterGltfDracoDecoder();
   }
 }

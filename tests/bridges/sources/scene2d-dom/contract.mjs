@@ -19,6 +19,7 @@ export * from './domRenderState.mjs';
 export * from './domRichText.mjs';
 export * from './domScale9Shape.mjs';
 export * from './domShape.mjs';
+export * from './domShapeRasterizer.mjs';
 export * from './domSprite.mjs';
 export * from './domStyle.mjs';
 export * from './domTextInput.mjs';

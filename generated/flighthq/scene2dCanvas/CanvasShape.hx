@@ -6,11 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasNode2D.drawCanvasScene2D;
+import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasShapeRegistry.getCanvasShapeCommand;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasShapeDrawState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
@@ -30,24 +33,20 @@ class CanvasShape {
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
     _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
-    _Runtime.callValue(renderCanvasShapeCommands, cast ([context, commands, state] : Array<Dynamic>));
+    _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, commands, _Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function renderCanvasShapeCommands(context:Dynamic, commands:Array<Dynamic>, ?state:Null<Dynamic>, ?registryState:Null<RenderState>):Void {
-    if (state == null) state = cast (null : Dynamic);
-    if (registryState == null) registryState = cast (state : Dynamic);
+  public static function renderCanvasShapeCommands(context:Dynamic, state:RenderState, commands:Array<Dynamic>, resolvers:Dynamic):Void {
     var drawState:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    drawState = _Runtime.callValue(CanvasShape.createCanvasShapeDrawState__canvasShape, cast ([context, state] : Array<Dynamic>));
+    drawState = _Runtime.callValue(CanvasShape.createCanvasShapeDrawState__canvasShape, cast ([context, resolvers, _Runtime.field(state, 'allowSmoothing')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
       var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var def:Dynamic = _Runtime.callValue(getCanvasShapeCommand, cast ([key] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(def, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(def, 'draw', cast ([context, drawState, commands, (i + 2.0)] : Array<Dynamic>)); } else {
-        if ((cast !_Runtime.strictEquals(registryState, null) : Bool)) { _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([registryState] : Array<Dynamic>)), 'registryMiss', cast ([2.0, key] : Array<Dynamic>)); }
-      }
+      var def:Dynamic = _Runtime.callValue(getCanvasShapeCommand, cast ([state, key] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { _Runtime.callProperty(def, 'draw', cast ([context, drawState, commands, (i + 2.0)] : Array<Dynamic>)); } else { _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss', cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
     if ((cast ((cast _Runtime.field(drawState, 'hasPendingPath') : Bool) && (cast _Runtime.orValue(_Runtime.field(drawState, 'hasFill'), function():Dynamic return cast _Runtime.field(drawState, 'hasStroke')) : Bool)) : Bool)) {
@@ -57,9 +56,11 @@ class CanvasShape {
 
   public static final defaultCanvasShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasShape };
 
-  public static function createCanvasShapeDrawState__canvasShape(context:Dynamic, renderState:Null<Dynamic>):Dynamic {
+  public static final defaultCanvasMorphShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasShape };
+
+  public static function createCanvasShapeDrawState__canvasShape(context:Dynamic, resolvers:Dynamic, allowSmoothing:Bool):Dynamic {
     var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = { bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasRenderState: renderState, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function() return _Runtime.callValue(CanvasShape.flushCanvasShapePath__canvasShape, cast ([context, state] : Array<Dynamic>)) };
+    state = { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function() return _Runtime.callValue(CanvasShape.flushCanvasShapePath__canvasShape, cast ([context, state] : Array<Dynamic>)) };
     return cast state;
     return cast null;
   }

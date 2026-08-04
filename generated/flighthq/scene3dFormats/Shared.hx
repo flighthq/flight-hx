@@ -3,6 +3,8 @@ package flighthq.scene3dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.image.ImageResourceReference.createEmbeddedImageResourceReference;
+import flighthq.image.ImageResourceReference.createExternalImageResourceReference;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.ImageResourceReference;
@@ -10,11 +12,9 @@ import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.ResourceResolutionState;
 import flighthq.types.SkinInfluence;
 import flighthq.types.Texture;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
-import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
 class Shared {
   public static final CANONICAL_FLOATS_PER_VERTEX:Dynamic = 12.0;
@@ -24,17 +24,6 @@ class Shared {
   public static final SKINNED_FLOATS_PER_VERTEX:Dynamic = (CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT.stride / 4.0);
 
   public static final MAX_SKIN_INFLUENCES:Dynamic = 4.0;
-
-  public static function buildEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, mimeType:Null<String>):EmbeddedImageResourceReference {
-    return cast { bytes: bytes, failure: null, kind: ImageResourceReferenceKindValue.Embedded, mimeType: mimeType, state: ResourceResolutionStateValue.Unresolved, textures: cast ([] : Array<Dynamic>) };
-    return cast null;
-  }
-
-  public static function buildExternalImageResourceReference(uri:String, ?basePath:Null<String>):ExternalImageResourceReference {
-    if (basePath == null) basePath = cast (null : Dynamic);
-    return cast { basePath: basePath, failure: null, kind: ImageResourceReferenceKindValue.External, mimeType: null, state: ResourceResolutionStateValue.Unresolved, textures: cast ([] : Array<Dynamic>), uri: uri };
-    return cast null;
-  }
 
   public static function convertPositionsZUpToYUp(values:{  }, stride:Dynamic = 3.0, offset:Dynamic = 0.0):Void {
     {
@@ -72,7 +61,7 @@ class Shared {
     var resource:Dynamic = cast _Runtime.UNDEFINED;
     resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:Dynamic) return ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'kind'), ImageResourceReferenceKindValue.Embedded) : Bool) && (cast _Runtime.strictEquals(candidate.bytes, bytes) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.mimeType, mimeType) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast (_Runtime.callValue(buildEmbeddedImageResourceReference, cast ([bytes, mimeType] : Array<Dynamic>)) : Dynamic));
+      (resource = cast (_Runtime.callValue(createEmbeddedImageResourceReference, cast ([bytes, mimeType] : Array<Dynamic>)) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(createTexture, cast ([{ resource: resource }] : Array<Dynamic>));
@@ -84,7 +73,7 @@ class Shared {
     var resource:Dynamic = cast _Runtime.UNDEFINED;
     resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:Dynamic) return ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'kind'), ImageResourceReferenceKindValue.External) : Bool) && (cast _Runtime.strictEquals(candidate.uri, uri) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.basePath, basePath) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast (_Runtime.callValue(buildExternalImageResourceReference, cast ([uri, basePath] : Array<Dynamic>)) : Dynamic));
+      (resource = cast (_Runtime.callValue(createExternalImageResourceReference, cast ([uri, basePath] : Array<Dynamic>)) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(createTexture, cast ([{ resource: resource }] : Array<Dynamic>));

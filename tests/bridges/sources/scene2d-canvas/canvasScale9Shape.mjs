@@ -7,4 +7,3 @@ __syncDependencies();
 
 export const defaultCanvasScale9ShapeRenderer = api.defaultCanvasScale9ShapeRenderer;
 export const drawCanvasScale9Shape = api.drawCanvasScale9Shape;
-export const mapCanvasScale9ShapeCommands = api.mapCanvasScale9ShapeCommands;

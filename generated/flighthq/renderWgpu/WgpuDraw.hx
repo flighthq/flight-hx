@@ -334,35 +334,17 @@ class WgpuDraw {
     _Runtime.callValue(getWgpuPipeline, cast ([state, BlendModeValue.Add, 'normal'] : Array<Dynamic>));
   }
 
-  public static function unpremultiplyToStraightRgba8__wgpuDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
+  public static function convertRgba8AlphaEncoding__wgpuDraw(data:flighthq._internal._UInt8ClampedArray, toPremultiplied:Bool):flighthq._internal._UInt8ClampedArray {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        var scale:Dynamic = ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic));
+        var scale:Dynamic = ((cast toPremultiplied : Bool) ? (cast (a / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic)) : Dynamic));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), scale));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), scale));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
-        (i = cast ((i + 4.0) : Dynamic));
-      }
-    }
-    return cast out;
-    return cast null;
-  }
-
-  public static function premultiplyStraightRgba8__wgpuDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
-    {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), a) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), a) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), a) / 255.0));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         (i = cast ((i + 4.0) : Dynamic));
       }
@@ -394,7 +376,7 @@ class WgpuDraw {
     mipLevelCount = ((cast generateMips : Bool) ? (cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)) : Dynamic) : (cast 1.0 : Dynamic));
     format = ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast 'rgba8unorm-srgb' : Dynamic) : (cast 'rgba8unorm' : Dynamic));
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: format, mipLevelCount: mipLevelCount, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
-    data = ((cast ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(WgpuDraw.premultiplyStraightRgba8__wgpuDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast ((cast ((cast !(cast premultiply : Bool) : Bool) && (cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(WgpuDraw.unpremultiplyToStraightRgba8__wgpuDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast bitmap.data : Dynamic)) : Dynamic));
+    data = ((cast ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(WgpuDraw.convertRgba8AlphaEncoding__wgpuDraw, cast ([bitmap.data, true] : Array<Dynamic>)) : Dynamic) : (cast ((cast ((cast !(cast premultiply : Bool) : Bool) && (cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(WgpuDraw.convertRgba8AlphaEncoding__wgpuDraw, cast ([bitmap.data, false] : Array<Dynamic>)) : Dynamic) : (cast bitmap.data : Dynamic)) : Dynamic));
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture }, data, { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     if ((cast ((cast mipLevelCount : Float) > (cast 1.0 : Float)) : Bool)) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, format] : Array<Dynamic>)); }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));

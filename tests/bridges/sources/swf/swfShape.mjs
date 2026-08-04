@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createSwfGlyphShape = api.createSwfGlyphShape;
 export const createSwfShape = api.createSwfShape;
+export const readSwfMorphShapePaths = api.readSwfMorphShapePaths;

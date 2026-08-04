@@ -4,34 +4,34 @@ package flighthq.scene2dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dResources.BuiltInScene2DDocumentImporters as Facade_Scene2dResources_flighthq_scene2dResources_BuiltInScene2DDocumentImporters;
-import flighthq.scene2dResources.LoadScene2DResources as Facade_Scene2dResources_flighthq_scene2dResources_LoadScene2DResources;
+import flighthq.scene2dResources.LoadScene2DAudioResources as Facade_Scene2dResources_flighthq_scene2dResources_LoadScene2DAudioResources;
+import flighthq.scene2dResources.LoadScene2DImageResources as Facade_Scene2dResources_flighthq_scene2dResources_LoadScene2DImageResources;
 import flighthq.scene2dResources.ResolveScene2DResources as Facade_Scene2dResources_flighthq_scene2dResources_ResolveScene2DResources;
 import flighthq.scene2dResources.Scene2DDocument as Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument;
 import flighthq.scene2dResources.Scene2DDocumentImporterRegistry as Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocumentImporterRegistry;
 import flighthq.scene2dResources.Scene2DDocumentSource as Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocumentSource;
+import flighthq.scene2dResources.Scene2DSlotReference as Facade_Scene2dResources_flighthq_scene2dResources_Scene2DSlotReference;
+import flighthq.types.AudioResourceReference;
+import flighthq.types.ImageResourceReference;
 import flighthq.types.Node2D;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DAssetReference;
-import flighthq.types.Scene2DDocument.Scene2DContentReference;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.Scene2DResources;
-import flighthq.types.Scene2DResources.LoadScene2DResourcesOptions;
+import flighthq.types.Scene2DResources.LoadScene2DAudioResourcesOptions;
+import flighthq.types.Scene2DResources.LoadScene2DImageResourcesOptions;
 import flighthq.types.Scene2DResources.ResolveScene2DResourcesOptions;
+import flighthq.types.Scene2DResources.Scene2DAudioResources;
 import flighthq.types.Scene2DResources.Scene2DDocumentFetcher;
 import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporter;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterMatcher;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
+import flighthq.types.Scene2DResources.Scene2DImageResources;
 
 class Scene2dResources {
-  public static function createScene2DAssetReference(name:String, uri:String, target:Node2D, ?required:Dynamic, ?bytes:Null<flighthq._internal._UInt8Array>, ?mimeType:Null<String>):Scene2DAssetReference {
-    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DAssetReference(name, uri, target, required, bytes, mimeType);
-    return cast null;
-  }
-
-  public static function createScene2DDocument(root:Node2D, ?references:Array<Scene2DContentReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>):Scene2DDocument {
-    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DDocument(root, references, sourceKind, backgroundColor);
+  public static function createScene2DDocument(root:Node2D, ?slots:Array<Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<ImageResourceReference>, ?audioResources:Array<AudioResourceReference>):Scene2DDocument {
+    return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DDocument(root, slots, sourceKind, backgroundColor, imageResources, audioResources);
     return cast null;
   }
 
@@ -50,18 +50,27 @@ class Scene2dResources {
     return cast null;
   }
 
+  public static function loadScene2DAudioResources(document:Scene2DDocument, ?options:LoadScene2DAudioResourcesOptions):flighthq._internal._Promise<Scene2DAudioResources> {
+    return cast Facade_Scene2dResources_flighthq_scene2dResources_LoadScene2DAudioResources.loadScene2DAudioResources(document, options);
+    return cast null;
+  }
+
   public static function loadScene2DDocumentFromUrl(url:String, registry:Scene2DDocumentImporterRegistry, fetchDocument:Scene2DDocumentFetcher, ?options:Scene2DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene2DDocument>> {
     return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocumentSource.loadScene2DDocumentFromUrl(url, registry, fetchDocument, options);
     return cast null;
   }
 
-  public static function loadScene2DResources(document:Scene2DDocument, options:LoadScene2DResourcesOptions):flighthq._internal._Promise<Scene2DResources> {
-    return cast Facade_Scene2dResources_flighthq_scene2dResources_LoadScene2DResources.loadScene2DResources(document, options);
+  public static function loadScene2DImageResources(document:Scene2DDocument, ?options:LoadScene2DImageResourcesOptions):flighthq._internal._Promise<Scene2DImageResources> {
+    return cast Facade_Scene2dResources_flighthq_scene2dResources_LoadScene2DImageResources.loadScene2DImageResources(document, options);
     return cast null;
   }
 
   public static function registerLottieScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
     Facade_Scene2dResources_flighthq_scene2dResources_BuiltInScene2DDocumentImporters.registerLottieScene2DDocumentImporter(registry);
+  }
+
+  public static function registerRiveScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
+    Facade_Scene2dResources_flighthq_scene2dResources_BuiltInScene2DDocumentImporters.registerRiveScene2DDocumentImporter(registry);
   }
 
   public static function registerScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry, kind:String, matches:Scene2DDocumentImporterMatcher, importDocument:Scene2DDocumentImporter):Void {
@@ -75,6 +84,10 @@ class Scene2dResources {
   public static function resolveScene2DResources(document:Scene2DDocument, ?options:ResolveScene2DResourcesOptions):Scene2DResources {
     return cast Facade_Scene2dResources_flighthq_scene2dResources_ResolveScene2DResources.resolveScene2DResources(document, options);
     return cast null;
+  }
+
+  public static function setScene2DSlotReferenceContent(reference:Scene2DSlotReference, content:Null<Node2D>):Void {
+    Facade_Scene2dResources_flighthq_scene2dResources_Scene2DSlotReference.setScene2DSlotReferenceContent(reference, content);
   }
 
   public static function unregisterScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry, kind:String):Bool {

@@ -3,8 +3,8 @@ package flighthq.scene3dResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.image.ImageResourceReference.explainImageResourceReferenceResolution;
 import flighthq.log.Log.logOnce;
-import flighthq.scene3dResources.SceneResourceRecovery.explainImageResourceReferenceResolution;
 import flighthq.scene3dResources.SceneResourceSignals.enableScene3DResourceSignals;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;

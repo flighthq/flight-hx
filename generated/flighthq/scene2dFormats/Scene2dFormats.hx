@@ -4,12 +4,18 @@ package flighthq.scene2dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dFormats.LottieDocument as Facade_Scene2dFormats_flighthq_scene2dFormats_LottieDocument;
+import flighthq.scene2dFormats.RiveDocument as Facade_Scene2dFormats_flighthq_scene2dFormats_RiveDocument;
+import flighthq.scene2dFormats.RiveObjectGraph as Facade_Scene2dFormats_flighthq_scene2dFormats_RiveObjectGraph;
+import flighthq.scene2dFormats.RiveScene2D as Facade_Scene2dFormats_flighthq_scene2dFormats_RiveScene2D;
 import flighthq.scene2dFormats.SvgDocument as Facade_Scene2dFormats_flighthq_scene2dFormats_SvgDocument;
 import flighthq.types.AnimationClip;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.LottieDocumentImport.LottieDocumentImportOptions;
 import flighthq.types.LottieDocumentImport.LottieDocumentImportResult;
+import flighthq.types.RiveDocument;
+import flighthq.types.RiveDocument.RiveDocumentImportResult;
+import flighthq.types.RiveDocument.RiveObjectGraph;
 import flighthq.types.SvgDocumentImport.SvgDocumentImportOptions;
 
 class Scene2dFormats {
@@ -17,13 +23,28 @@ class Scene2dFormats {
     Facade_Scene2dFormats_flighthq_scene2dFormats_LottieDocument.applyAnimationClipToLottieDocument(clip, time);
   }
 
+  public static function createRiveObjectGraph(document:RiveDocument, ?diagnostics:Array<ImportDiagnostic>):RiveObjectGraph {
+    return cast Facade_Scene2dFormats_flighthq_scene2dFormats_RiveObjectGraph.createRiveObjectGraph(document, diagnostics);
+    return cast null;
+  }
+
   public static function createScene2DFromLottieDocument(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:LottieDocumentImportOptions):LottieDocumentImportResult {
     return cast Facade_Scene2dFormats_flighthq_scene2dFormats_LottieDocument.createScene2DFromLottieDocument(source, diagnostics, options);
     return cast null;
   }
 
+  public static function createScene2DFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):RiveDocumentImportResult {
+    return cast Facade_Scene2dFormats_flighthq_scene2dFormats_RiveScene2D.createScene2DFromRiveDocument(source, diagnostics);
+    return cast null;
+  }
+
   public static function createScene2DFromSvgDocument(source:String, ?diagnostics:Array<ImportDiagnostic>, ?options:SvgDocumentImportOptions):DisplayObject {
     return cast Facade_Scene2dFormats_flighthq_scene2dFormats_SvgDocument.createScene2DFromSvgDocument(source, diagnostics, options);
+    return cast null;
+  }
+
+  public static function parseRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveDocument> {
+    return cast Facade_Scene2dFormats_flighthq_scene2dFormats_RiveDocument.parseRiveDocument(source, diagnostics);
     return cast null;
   }
 }

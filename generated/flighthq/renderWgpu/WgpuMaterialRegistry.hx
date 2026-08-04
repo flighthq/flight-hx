@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
@@ -28,14 +29,15 @@ class WgpuMaterialRegistry {
   public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var map:Dynamic = cast _Runtime.UNDEFINED;
+    var kind:Dynamic = cast _Runtime.UNDEFINED;
+    var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     map = _Runtime.field(runtime, 'materialRendererMap');
-    if ((cast _Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
-      var renderer:Dynamic = ((cast map : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
-      if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
-    }
-    return cast _Runtime.coalesce(((cast map : flighthq._internal._Map).get(StandardMaterialKindValue)), function():Dynamic return cast null);
+    kind = _Runtime.coalesce(_Runtime.optionalField(material, 'kind'), function():Dynamic return cast StandardMaterialKindValue);
+    renderer = _Runtime.coalesce(({ final __collection1:Dynamic = map; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
+    if ((cast !_Runtime.strictEquals(renderer, null) : Bool)) { return cast renderer; }
+    _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([RenderRegistry.MaterialRenderer, kind] : Array<Dynamic>));
+    return cast ((cast _Runtime.strictEquals(kind, StandardMaterialKindValue) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection2:Dynamic = map; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).get(StandardMaterialKindValue)); }), function():Dynamic return cast null) : Dynamic));
     return cast null;
   }
 }

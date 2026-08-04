@@ -536,7 +536,8 @@ class Clipboard {
 
       }; }
       if ((cast flighthq._internal.backend.DomWindowBackend.hasField(flighthq._internal.backend.DomWindowBackend.value(), 'onclipboardchange') : Bool)) {
-        var handler:Dynamic = function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
+        var handler:Dynamic = cast _Runtime.UNDEFINED;
+        handler = function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
         return cast function() return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
       }

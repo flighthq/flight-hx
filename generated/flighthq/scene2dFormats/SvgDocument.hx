@@ -932,7 +932,8 @@ class SvgDocument {
     if ((cast ((cast !_Runtime.strictEquals(functionMatch, null) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'rgb'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'rgba')) : Bool)) : Bool)) {
       var components:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(functionMatch, 2.0), 'split', cast ([_Runtime.regexp('[\\s,/]+', '')] : Array<Dynamic>)), 'filter', cast ([_Runtime.truthy] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(components, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) {
-        var component:Dynamic = function(index:Float) {
+        var component:Dynamic = cast _Runtime.UNDEFINED;
+        component = function(index:Float) {
           var text:Dynamic = cast _Runtime.UNDEFINED;
           text = flighthq._internal._StaticIndex.readArray(components, index);
           return cast ((cast StringTools.endsWith(Std.string(text), '%') : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)), 255.0) / 100.0) : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)) : Dynamic));
@@ -1112,6 +1113,7 @@ class SvgDocument {
   public static function resolveSvgStyle__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):SvgStyle__svgDocument {
     var declarations:Dynamic = cast _Runtime.UNDEFINED;
     var matchingRules:Dynamic = cast _Runtime.UNDEFINED;
+    var inheritedProperties:Dynamic = cast _Runtime.UNDEFINED;
     var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
     declarations = {  };
     for (name in _Runtime.iterable(SvgDocument.svgPresentationAttributes__svgDocument)) {
@@ -1123,19 +1125,25 @@ class SvgDocument {
       flighthq._internal.DynamicObject.assign(declarations, _Runtime.field(rule, 'declarations'));
     }
     flighthq._internal.DynamicObject.assign(declarations, _Runtime.callValue(SvgDocument.parseStyleDeclarations__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'style'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>)));
+    inheritedProperties = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(declarations))) {
+      if ((cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(declarations, name))), 'inherit') : Bool)) { continue; }
+      ((cast inheritedProperties : flighthq._internal._Set).add(name));
+      _Runtime.deleteIndex(declarations, name);
+    }
     style = _Runtime.mergeObjects([parentStyle]);
     _Runtime.setField(style, 'clipRule', _Runtime.callValue(SvgDocument.resolveSvgWinding__svgDocument, cast ([_Runtime.getIndex(declarations, 'clip-rule'), _Runtime.field(style, 'clipRule')] : Array<Dynamic>)));
     _Runtime.setField(style, 'color', _Runtime.coalesce(_Runtime.field(declarations, 'color'), function():Dynamic return cast _Runtime.field(style, 'color')));
-    _Runtime.setField(style, 'display', _Runtime.coalesce(_Runtime.field(declarations, 'display'), function():Dynamic return cast 'inline'));
+    _Runtime.setField(style, 'display', ((cast ((cast inheritedProperties : flighthq._internal._Set).has('display')) : Bool) ? (cast _Runtime.field(parentStyle, 'display') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(declarations, 'display'), function():Dynamic return cast 'inline') : Dynamic)));
     _Runtime.setField(style, 'fill', _Runtime.coalesce(_Runtime.field(declarations, 'fill'), function():Dynamic return cast _Runtime.field(style, 'fill')));
     _Runtime.setField(style, 'fillOpacity', _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.getIndex(declarations, 'fill-opacity'), _Runtime.field(style, 'fillOpacity')] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)));
     _Runtime.setField(style, 'fillRule', _Runtime.callValue(SvgDocument.resolveSvgWinding__svgDocument, cast ([_Runtime.getIndex(declarations, 'fill-rule'), _Runtime.field(style, 'fillRule')] : Array<Dynamic>)));
-    _Runtime.setField(style, 'filter', _Runtime.coalesce(_Runtime.field(declarations, 'filter'), function():Dynamic return cast 'none'));
+    _Runtime.setField(style, 'filter', ((cast ((cast inheritedProperties : flighthq._internal._Set).has('filter')) : Bool) ? (cast _Runtime.field(parentStyle, 'filter') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(declarations, 'filter'), function():Dynamic return cast 'none') : Dynamic)));
     _Runtime.setField(style, 'fontFamily', _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-family'), function():Dynamic return cast _Runtime.field(style, 'fontFamily')));
     _Runtime.setField(style, 'fontSize', _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.coalesce(_Runtime.getIndex(declarations, 'font-size'), function():Dynamic return cast null), _Runtime.field(style, 'fontSize')] : Array<Dynamic>)));
     _Runtime.setField(style, 'fontStyle', _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-style'), function():Dynamic return cast _Runtime.field(style, 'fontStyle')));
     _Runtime.setField(style, 'fontWeight', _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-weight'), function():Dynamic return cast _Runtime.field(style, 'fontWeight')));
-    _Runtime.setField(style, 'opacity', _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.field(declarations, 'opacity'), 1.0] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)));
+    _Runtime.setField(style, 'opacity', ((cast ((cast inheritedProperties : flighthq._internal._Set).has('opacity')) : Bool) ? (cast _Runtime.field(parentStyle, 'opacity') : Dynamic) : (cast _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.field(declarations, 'opacity'), 1.0] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)) : Dynamic)));
     _Runtime.setField(style, 'stroke', _Runtime.coalesce(_Runtime.field(declarations, 'stroke'), function():Dynamic return cast _Runtime.field(style, 'stroke')));
     _Runtime.setField(style, 'strokeDasharray', _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dasharray'), function():Dynamic return cast _Runtime.field(style, 'strokeDasharray')));
     _Runtime.setField(style, 'strokeDashoffset', _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dashoffset'), function():Dynamic return cast null), _Runtime.field(style, 'strokeDashoffset')] : Array<Dynamic>)));

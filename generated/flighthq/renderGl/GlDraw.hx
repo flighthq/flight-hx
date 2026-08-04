@@ -277,7 +277,7 @@ class GlDraw {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     bitmap = (cast image : Bitmap);
     gl = _Runtime.field(state, 'gl');
-    data = ((cast ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(GlDraw.premultiplyStraightRgba8__glDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast ((cast ((cast !(cast premultiply : Bool) : Bool) && (cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(GlDraw.unpremultiplyToStraightRgba8__glDraw, cast ([bitmap.data] : Array<Dynamic>)) : Dynamic) : (cast bitmap.data : Dynamic)) : Dynamic));
+    data = ((cast ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(GlDraw.convertRgba8AlphaEncoding__glDraw, cast ([bitmap.data, true] : Array<Dynamic>)) : Dynamic) : (cast ((cast ((cast !(cast premultiply : Bool) : Bool) && (cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast _Runtime.callValue(GlDraw.convertRgba8AlphaEncoding__glDraw, cast ([bitmap.data, false] : Array<Dynamic>)) : Dynamic) : (cast bitmap.data : Dynamic)) : Dynamic));
     _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, bitmap.width, bitmap.height, data, ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic))] : Array<Dynamic>));
   }
 
@@ -294,35 +294,17 @@ class GlDraw {
     _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast _Runtime.field((cast image : Dynamic), 'source') : Dynamic), ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic))] : Array<Dynamic>));
   }
 
-  public static function unpremultiplyToStraightRgba8__glDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
+  public static function convertRgba8AlphaEncoding__glDraw(data:flighthq._internal._UInt8ClampedArray, toPremultiplied:Bool):flighthq._internal._UInt8ClampedArray {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        var scale:Dynamic = ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic));
+        var scale:Dynamic = ((cast toPremultiplied : Bool) ? (cast (a / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic)) : Dynamic));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), scale));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), scale));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
-        (i = cast ((i + 4.0) : Dynamic));
-      }
-    }
-    return cast out;
-    return cast null;
-  }
-
-  public static function premultiplyStraightRgba8__glDraw(data:flighthq._internal._UInt8ClampedArray):flighthq._internal._UInt8ClampedArray {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = new flighthq._internal._UInt8ClampedArray(_Runtime.field(data, 'length'));
-    {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), a) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), a) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), a) / 255.0));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
         (i = cast ((i + 4.0) : Dynamic));
       }

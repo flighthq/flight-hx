@@ -33,6 +33,11 @@ class SceneMaterialTextureRegistry {
     if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(lister, cast ([material, out] : Array<Dynamic>)); }
   }
 
+  public static function hasScene3DMaterialTextureLister(registry:Scene3DMaterialTextureRegistry, kind:Kind):Bool {
+    return cast ((cast registry.listers : flighthq._internal._Map).has(kind));
+    return cast null;
+  }
+
   public static function registerBuiltInScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerExtendedPbrScene3DMaterialTextures, cast ([registry] : Array<Dynamic>));
     _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, StandardPbrMaterialKind, SceneMaterialTextureRegistry.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));

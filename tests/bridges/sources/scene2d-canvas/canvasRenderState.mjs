@@ -10,3 +10,4 @@ export const createCanvasRenderState = api.createCanvasRenderState;
 export const createCanvasRenderStateRuntime = api.createCanvasRenderStateRuntime;
 export const destroyCanvasRenderState = api.destroyCanvasRenderState;
 export const getCanvasRenderStateRuntime = api.getCanvasRenderStateRuntime;
+export const getCanvasRenderStateTextureResolvers = api.getCanvasRenderStateTextureResolvers;
