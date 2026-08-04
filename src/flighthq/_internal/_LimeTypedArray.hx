@@ -114,12 +114,21 @@ class _LimeTypedArray {
     // byte-level storage only exists when the backing really is a Lime view.
     if (!Std.isOfType(nativeView, lime.utils.ArrayBufferView) || !Std.isOfType((view : Dynamic), lime.utils.ArrayBufferView)) return false;
     final target = arrayBufferView(nativeView);
+    // On Neko a zero-length Lime view can leave byteOffset/byteLength/buffer
+    // null, and null arithmetic throws (`Invalid operation (+)`); read the
+    // fields as nullable and fall back to the element loop.
+    final targetOffset:Null<Int> = target.byteOffset;
+    final targetLength:Null<Int> = target.byteLength;
+    final sourceOffset:Null<Int> = view.byteOffset;
+    final sourceLength:Null<Int> = view.byteLength;
+    if (targetOffset == null || targetLength == null || sourceOffset == null || sourceLength == null) return false;
+    final targetBytes:Null<haxe.io.Bytes> = target.buffer;
+    final sourceBytes:Null<haxe.io.Bytes> = view.buffer;
+    if (targetBytes == null || sourceBytes == null) return false;
     final bytesPerElement = elementByteSize(kind);
-    final targetByteStart = target.byteOffset + start * bytesPerElement;
-    if (start < 0 || targetByteStart + view.byteLength > target.byteOffset + target.byteLength) return false;
-    final targetBytes:haxe.io.Bytes = target.buffer;
-    final sourceBytes:haxe.io.Bytes = view.buffer;
-    targetBytes.blit(targetByteStart, sourceBytes, view.byteOffset, view.byteLength);
+    final targetByteStart = targetOffset + start * bytesPerElement;
+    if (start < 0 || targetByteStart + sourceLength > targetOffset + targetLength) return false;
+    targetBytes.blit(targetByteStart, sourceBytes, sourceOffset, sourceLength);
     return true;
   }
 
