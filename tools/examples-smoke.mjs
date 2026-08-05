@@ -29,7 +29,10 @@ const resume = flag('resume');
 
 // Examples that only implement the GL path (no cairo branch).
 const GL_ONLY = new Set(['scene3d', 'skeleton']);
-const RUN_SECONDS = 10;
+// Interpreter-target first frames can legitimately take ~7-8s (path-heavy scenes
+// tessellate and rasterize in generated code on Neko), so the capture waits long
+// enough that slow-but-correct startup is not reported as BLANK.
+const RUN_SECONDS = 14;
 const BUILD_SECONDS = 600;
 
 const examples = readdirSync(path.join(repo, 'examples'), { withFileTypes: true })

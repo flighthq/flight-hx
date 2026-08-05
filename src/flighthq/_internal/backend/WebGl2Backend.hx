@@ -737,12 +737,31 @@ class WebGl2Backend {
     final canvasHeight = canvasContext.height;
     final bgra = canvasContext.pixels;
     final rgba = new lime.utils.UInt8Array(canvasWidth * canvasHeight * 4);
-    for (index in 0...canvasWidth * canvasHeight) {
-      final offset = index * 4;
-      rgba[offset] = bgra[offset + 2];
-      rgba[offset + 1] = bgra[offset + 1];
-      rgba[offset + 2] = bgra[offset];
-      rgba[offset + 3] = bgra[offset + 3];
+    // Cairo hands premultiplied ARGB32 words, which sit as B,G,R,A bytes in
+    // little-endian memory; GL wants R,G,B,A. Swap the R/B lanes with 32-bit
+    // Bytes reads: the per-element typed-array path costs ~2.5us per access on
+    // the Neko interpreter, which turned this once-per-upload conversion into
+    // ~8s of an 11s first frame for a full-window raster.
+    final bgraView:lime.utils.ArrayBufferView = cast (bgra : Dynamic);
+    final rgbaView:lime.utils.ArrayBufferView = cast (rgba : Dynamic);
+    final bgraBytes:Null<haxe.io.Bytes> = bgraView.buffer;
+    final rgbaBytes:Null<haxe.io.Bytes> = rgbaView.buffer;
+    if (bgraBytes != null && rgbaBytes != null) {
+      final bgraBase:Int = bgraView.byteOffset;
+      final rgbaBase:Int = rgbaView.byteOffset;
+      for (index in 0...canvasWidth * canvasHeight) {
+        final offset = index * 4;
+        final word = bgraBytes.getInt32(bgraBase + offset);
+        rgbaBytes.setInt32(rgbaBase + offset, (word & 0xFF00FF00) | ((word >> 16) & 0xFF) | ((word & 0xFF) << 16));
+      }
+    } else {
+      for (index in 0...canvasWidth * canvasHeight) {
+        final offset = index * 4;
+        rgba[offset] = bgra[offset + 2];
+        rgba[offset + 1] = bgra[offset + 1];
+        rgba[offset + 2] = bgra[offset];
+        rgba[offset + 3] = bgra[offset + 3];
+      }
     }
     #if (flight_gl_trace && sys)
     if (textureDumps < 4) {
@@ -947,7 +966,7 @@ class WebGl2Backend {
   static function glTrace(message:String):Void {
     if (traceLines >= 700) return;
     traceLines++;
-    haxe.Log.trace('[gl] ' + message, null);
+    haxe.Log.trace('[gl ' + Std.string(Sys.time()) + '] ' + message, null);
   }
 
   /** After-draw probe: surfaces GL errors and samples the center pixel of the
