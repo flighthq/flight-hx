@@ -38,12 +38,6 @@ class SceneMaterialTextureRegistry {
     return cast null;
   }
 
-  public static function registerBuiltInScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    _Runtime.callValue(registerExtendedPbrScene3DMaterialTextures, cast ([registry] : Array<Dynamic>));
-    _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, StandardPbrMaterialKind, SceneMaterialTextureRegistry.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, UnlitMaterialKind, SceneMaterialTextureRegistry.listUnlitMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));
-  }
-
   public static function registerExtendedPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, ExtendedPbrMaterialKind, function(material:Dynamic, out:Dynamic) {
       var extended:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,6 +61,14 @@ class SceneMaterialTextureRegistry {
 
   public static function registerScene3DPbrExtensionTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DPbrExtensionTextureLister):Void {
     ((cast registry.extensionListers : flighthq._internal._Map).set(kind, lister));
+  }
+
+  public static function registerStandardPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
+    _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, StandardPbrMaterialKind, SceneMaterialTextureRegistry.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));
+  }
+
+  public static function registerUnlitScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
+    _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, UnlitMaterialKind, SceneMaterialTextureRegistry.listUnlitMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));
   }
 
   public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {

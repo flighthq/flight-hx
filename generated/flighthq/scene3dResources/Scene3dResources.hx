@@ -3,14 +3,11 @@ package flighthq.scene3dResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.scene3dResources.AnisotropyPbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_AnisotropyPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.Awd2Load as Facade_Scene3dResources_flighthq_scene3dResources_Awd2Load;
-import flighthq.scene3dResources.ClearcoatPbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_ClearcoatPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.EnableScene3DResourceFailureGuards as Facade_Scene3dResources_flighthq_scene3dResources_EnableScene3DResourceFailureGuards;
 import flighthq.scene3dResources.GetScene3DResourceTextures as Facade_Scene3dResources_flighthq_scene3dResources_GetScene3DResourceTextures;
 import flighthq.scene3dResources.GltfLoad as Facade_Scene3dResources_flighthq_scene3dResources_GltfLoad;
 import flighthq.scene3dResources.ImageResourceFetch as Facade_Scene3dResources_flighthq_scene3dResources_ImageResourceFetch;
-import flighthq.scene3dResources.IridescencePbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_IridescencePbrScene3DMaterialTextures;
 import flighthq.scene3dResources.LoadScene3DResources as Facade_Scene3dResources_flighthq_scene3dResources_LoadScene3DResources;
 import flighthq.scene3dResources.Md2Load as Facade_Scene3dResources_flighthq_scene3dResources_Md2Load;
 import flighthq.scene3dResources.Md5Load as Facade_Scene3dResources_flighthq_scene3dResources_Md5Load;
@@ -18,20 +15,12 @@ import flighthq.scene3dResources.ObjLoad as Facade_Scene3dResources_flighthq_sce
 import flighthq.scene3dResources.ResolveScene3DResources as Facade_Scene3dResources_flighthq_scene3dResources_ResolveScene3DResources;
 import flighthq.scene3dResources.RevealScene3DResourcesOnResolve as Facade_Scene3dResources_flighthq_scene3dResources_RevealScene3DResourcesOnResolve;
 import flighthq.scene3dResources.SceneDocumentSource as Facade_Scene3dResources_flighthq_scene3dResources_SceneDocumentSource;
-import flighthq.scene3dResources.SceneMaterialTextureRegistry as Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry;
 import flighthq.scene3dResources.SceneResourceRecovery as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceRecovery;
 import flighthq.scene3dResources.SceneResourceResolver as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceResolver;
 import flighthq.scene3dResources.SceneResourceSignals as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceSignals;
-import flighthq.scene3dResources.ShadedScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_ShadedScene3DMaterialTextures;
-import flighthq.scene3dResources.SheenPbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_SheenPbrScene3DMaterialTextures;
-import flighthq.scene3dResources.SpecularPbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_SpecularPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.ThreeDsLoad as Facade_Scene3dResources_flighthq_scene3dResources_ThreeDsLoad;
-import flighthq.scene3dResources.TransmissionVolumePbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_TransmissionVolumePbrScene3DMaterialTextures;
-import flighthq.scene3dResources.WrappedDiffusePbrScene3DMaterialTextures as Facade_Scene3dResources_flighthq_scene3dResources_WrappedDiffusePbrScene3DMaterialTextures;
-import flighthq.types.Entity.Kind;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.Material;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
@@ -39,9 +28,6 @@ import flighthq.types.Scene3DResources;
 import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
 import flighthq.types.Scene3DResources.ResolveScene3DResourcesOptions;
 import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureLister;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
-import flighthq.types.Scene3DResources.Scene3DPbrExtensionTextureLister;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceRevealOptions;
@@ -58,11 +44,6 @@ class Scene3dResources {
 
   public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceResolver.createBuiltInScene3DResourceResolver(options);
-    return cast null;
-  }
-
-  public static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.createScene3DMaterialTextureRegistry();
     return cast null;
   }
 
@@ -99,22 +80,13 @@ class Scene3dResources {
     return cast null;
   }
 
-  public static function getScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.getScene3DMaterialTextures(registry, material, out);
-  }
-
   public static function getScene3DResourceSignals(resolver:Scene3DResourceResolver):Null<Scene3DResourceSignals> {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceSignals.getScene3DResourceSignals(resolver);
     return cast null;
   }
 
-  public static function getScene3DResourceTextures(scene:Scene3D, registry:Scene3DMaterialTextureRegistry, out:Array<Texture>):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_GetScene3DResourceTextures.getScene3DResourceTextures(scene, registry, out);
-  }
-
-  public static function hasScene3DMaterialTextureLister(registry:Scene3DMaterialTextureRegistry, kind:Kind):Bool {
-    return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.hasScene3DMaterialTextureLister(registry, kind);
-    return cast null;
+  public static function getScene3DResourceTextures(out:Array<Texture>, scene:Scene3D):Void {
+    Facade_Scene3dResources_flighthq_scene3dResources_GetScene3DResourceTextures.getScene3DResourceTextures(out, scene);
   }
 
   public static function loadScene3DDocumentBytesFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
@@ -165,54 +137,6 @@ class Scene3dResources {
   public static function loadScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:LoadScene3DResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_LoadScene3DResources.loadScene3DResources(scene, resolver, options);
     return cast null;
-  }
-
-  public static function registerAnisotropyPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_AnisotropyPbrScene3DMaterialTextures.registerAnisotropyPbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerBuiltInScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerBuiltInScene3DMaterialTextures(registry);
-  }
-
-  public static function registerClearcoatPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_ClearcoatPbrScene3DMaterialTextures.registerClearcoatPbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerExtendedPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerExtendedPbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerIridescencePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_IridescencePbrScene3DMaterialTextures.registerIridescencePbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DMaterialTextureLister):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerScene3DMaterialTextures(registry, kind, lister);
-  }
-
-  public static function registerScene3DPbrExtensionTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DPbrExtensionTextureLister):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerScene3DPbrExtensionTextures(registry, kind, lister);
-  }
-
-  public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_ShadedScene3DMaterialTextures.registerShadedScene3DMaterialTextures(registry);
-  }
-
-  public static function registerSheenPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SheenPbrScene3DMaterialTextures.registerSheenPbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerSpecularPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_SpecularPbrScene3DMaterialTextures.registerSpecularPbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerTransmissionVolumePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_TransmissionVolumePbrScene3DMaterialTextures.registerTransmissionVolumePbrScene3DMaterialTextures(registry);
-  }
-
-  public static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Scene3dResources_flighthq_scene3dResources_WrappedDiffusePbrScene3DMaterialTextures.registerWrappedDiffusePbrScene3DMaterialTextures(registry);
   }
 
   public static function resolveImageResourceUri(uri:String, basePath:Null<String>):String {

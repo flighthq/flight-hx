@@ -45,4 +45,8 @@ class SkeletonDetect {
   public static function registerSkeleton2DFormat(kind:String, detect:Dynamic, parse:Dynamic):Void {
     ((cast _Runtime.callValue(SkeletonDetect.getRegistry__skeletonDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).set(kind, { detect: detect, parse: parse }));
   }
+
+  public static function unregisterSkeleton2DFormat(kind:String):Void {
+    ((cast _Runtime.callValue(SkeletonDetect.getRegistry__skeletonDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).delete_(kind));
+  }
 }

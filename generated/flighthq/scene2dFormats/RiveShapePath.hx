@@ -89,6 +89,7 @@ class RiveShapePath {
         (toPrevY = cast ((toPrevY / previousLength) : Dynamic));
         (toNextX = cast ((toNextX / nextLength) : Dynamic));
         (toNextY = cast ((toNextY / nextLength) : Dynamic));
+        var inverted:Dynamic = ((cast _Runtime.field(vertex, 'radius') : Float) < (cast 0.0 : Float));
         var radius:Dynamic = HxMath.min(HxMath.min((previousLength / 2.0), (nextLength / 2.0)), HxMath.abs(_Runtime.field(vertex, 'radius')));
         var angle:Dynamic = HxMath.abs(HxMath.atan2(((toPrevX * toNextY) - (toPrevY * toNextX)), ((toPrevX * toNextX) + (toPrevY * toNextY))));
         var spread:Dynamic = ((cast ((cast angle : Float) < (cast (HxMath.PI / 2.0) : Float)) : Bool) ? (cast _Runtime.addNumbers(1.0, HxMath.cos(angle)) : Dynamic) : (cast _Runtime.subtractNumbers(2.0, HxMath.sin(angle)) : Dynamic));
@@ -101,7 +102,7 @@ class RiveShapePath {
         _Runtime.setField(vertex, 'inY', _Runtime.field(vertex, 'entryY'));
         _Runtime.setField(vertex, 'outX', _Runtime.field(vertex, 'exitX'));
         _Runtime.setField(vertex, 'outY', _Runtime.field(vertex, 'exitY'));
-        _Runtime.setField(vertex, 'corner', cast ([_Runtime.addNumbers(_Runtime.field(vertex, 'x'), (toPrevX * (radius - ideal))), _Runtime.addNumbers(_Runtime.field(vertex, 'y'), (toPrevY * (radius - ideal))), _Runtime.addNumbers(_Runtime.field(vertex, 'x'), (toNextX * (radius - ideal))), _Runtime.addNumbers(_Runtime.field(vertex, 'y'), (toNextY * (radius - ideal)))] : Array<Dynamic>));
+        _Runtime.setField(vertex, 'corner', ((cast inverted : Bool) ? (cast cast ([_Runtime.addNumbers(_Runtime.field(vertex, 'entryX'), (toNextX * ideal)), _Runtime.addNumbers(_Runtime.field(vertex, 'entryY'), (toNextY * ideal)), _Runtime.addNumbers(_Runtime.field(vertex, 'exitX'), (toPrevX * ideal)), _Runtime.addNumbers(_Runtime.field(vertex, 'exitY'), (toPrevY * ideal))] : Array<Dynamic>) : Dynamic) : (cast cast ([_Runtime.addNumbers(_Runtime.field(vertex, 'x'), (toPrevX * (radius - ideal))), _Runtime.addNumbers(_Runtime.field(vertex, 'y'), (toPrevY * (radius - ideal))), _Runtime.addNumbers(_Runtime.field(vertex, 'x'), (toNextX * (radius - ideal))), _Runtime.addNumbers(_Runtime.field(vertex, 'y'), (toNextY * (radius - ideal)))] : Array<Dynamic>) : Dynamic)));
         index++;
       }
     }

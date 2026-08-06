@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomBackground as Facade_Scene2dDom_flighthq_scene2dDom_DomBackground;
 import flighthq.scene2dDom.DomBitmapTextureResolver as Facade_Scene2dDom_flighthq_scene2dDom_DomBitmapTextureResolver;
+import flighthq.scene2dDom.DomCSSFilterBinding as Facade_Scene2dDom_flighthq_scene2dDom_DomCSSFilterBinding;
 import flighthq.scene2dDom.DomCache as Facade_Scene2dDom_flighthq_scene2dDom_DomCache;
 import flighthq.scene2dDom.DomClip as Facade_Scene2dDom_flighthq_scene2dDom_DomClip;
 import flighthq.scene2dDom.DomHtmlView as Facade_Scene2dDom_flighthq_scene2dDom_DomHtmlView;
@@ -63,6 +64,10 @@ class Scene2dDom {
     Facade_Scene2dDom_flighthq_scene2dDom_DomClip.enableDomClipSupport(state);
   }
 
+  public static function enableDomCssFilterSupport(state:DomRenderState):Void {
+    Facade_Scene2dDom_flighthq_scene2dDom_DomCSSFilterBinding.enableDomCssFilterSupport(state);
+  }
+
   public static function enableDomRenderCache(state:RenderState):Void {
     Facade_Scene2dDom_flighthq_scene2dDom_DomCache.enableDomRenderCache(state);
   }
@@ -107,5 +112,9 @@ class Scene2dDom {
 
   public static function renderDomScene2D(state:DomRenderState, source:Node2D):Void {
     Facade_Scene2dDom_flighthq_scene2dDom_DomNode2D.renderDomScene2D(state, source);
+  }
+
+  public static function setDomCssFilter(state:DomRenderState, node:Node2D, filter:Null<String>):Void {
+    Facade_Scene2dDom_flighthq_scene2dDom_DomCSSFilterBinding.setDomCssFilter(state, node, filter);
   }
 }

@@ -41,12 +41,12 @@ describe('analyzeUpstream', () => {
     expect(inventory.summary).toMatchObject({
       excludedPackages: 1,
       exportConflicts: 0,
-      exportLanes: 295,
-      exports: 32_364,
-      packages: 141,
-      rootExports: 12_544,
-      sourceFiles: 2_476,
-      testFiles: 1_375,
+      exportLanes: 299,
+      exports: 32_998,
+      packages: 143,
+      rootExports: 12_782,
+      sourceFiles: 2_544,
+      testFiles: 1_419,
     });
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);
@@ -200,7 +200,7 @@ describe('auditLowering', () => {
     const audit = auditLowering(path.resolve('.'));
     const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
 
-    expect(audit.summary.packages).toBe(140);
+    expect(audit.summary.packages).toBe(142);
     expect(audit.summary.declarations).toBeGreaterThan(5_000);
     expect(audit.summary.lowered).toBe(audit.summary.declarations);
     expect(audit.summary.diagnostics).toBe(0);

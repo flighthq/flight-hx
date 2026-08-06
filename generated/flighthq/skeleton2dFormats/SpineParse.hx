@@ -9,6 +9,9 @@ import flighthq.animation.AnimationTrack.createAnimationTrack;
 import flighthq.easing.EaseCubicBezier.easeCubicBezier;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.skeleton2d.Skeleton2d.createSkeleton2D;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DBoneAnimationTarget;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DSlotAnimationTarget;
+import flighthq.skeleton2dFormats.SpineDrawOrder.resolveSpineDrawOrdering;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
 import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
@@ -19,6 +22,7 @@ import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types.Skeleton2DImport;
 import flighthq.types.Skeleton2DImport.Skeleton2DImportAnimation;
 import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
@@ -40,33 +44,24 @@ import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimati
 import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
 class SpineParse {
-  public static function parseSpineSkeleton(json:String, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
-    var record:Dynamic = cast _Runtime.UNDEFINED;
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var attachmentNames:Dynamic = cast _Runtime.UNDEFINED;
-    var slots:Dynamic = cast _Runtime.UNDEFINED;
-    var skins:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
-    var skeleton:Dynamic = cast _Runtime.UNDEFINED;
-    try {
-      (doc = cast (_Runtime.jsonParse(json) : Dynamic));
-    } catch (__error:Dynamic) {
-      return cast null;
+  public static function parseSpineDrawOrderTimeline(raw:Dynamic, slots:Array<Slot2D>, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DDrawOrderTimeline> {
+    var times:Array<Float> = cast _Runtime.UNDEFINED;
+    var orderings:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(slots, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
+    times = cast ([] : Array<Dynamic>);
+    orderings = cast ([] : Array<Dynamic>);
+    for (frame in _Runtime.iterable(raw)) {
+      if ((cast ((cast _Runtime.strictEquals(frame, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(frame), 'object') : Bool)) : Bool)) { continue; }
+      var entry:Dynamic = (cast frame : { @:optional var offsets:Dynamic; @:optional var time:Dynamic; });
+      var ordering:Dynamic = _Runtime.callValue(SpineParse.resolveSpineDrawOrder__spineParse, cast ([_Runtime.field(entry, 'offsets'), slots] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(ordering, null) : Bool)) {
+        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.draworder-keyframe-unresolved', 'parseSpineSkeleton', { time: _Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(entry, 'time'), 0.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        continue;
+      }
+      _Runtime.callProperty(times, 'push', cast ([_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(entry, 'time'), 0.0] : Array<Dynamic>))] : Array<Dynamic>));
+      _Runtime.callProperty(orderings, 'push', _Runtime.concatArrays([_Runtime.toArray(ordering)]));
     }
-    if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) { return cast null; }
-    record = (cast doc : Dynamic);
-    bones = _Runtime.callValue(SpineParse.parseSpineBones__spineParse, cast ([_Runtime.field(record, 'bones'), diagnostics] : Array<Dynamic>));
-    __destructure0 = _Runtime.callValue(SpineParse.parseSpineSlots__spineParse, cast ([_Runtime.field(record, 'slots'), bones] : Array<Dynamic>));
-    attachmentNames = _Runtime.field(__destructure0, 'attachmentNames');
-    slots = _Runtime.field(__destructure0, 'slots');
-    skins = _Runtime.callValue(SpineParse.parseSpineSkins__spineParse, cast ([_Runtime.field(record, 'skins'), slots, diagnostics] : Array<Dynamic>));
-    _Runtime.callValue(SpineParse.resolveSpineSetupAttachments__spineParse, cast ([slots, attachmentNames, skins] : Array<Dynamic>));
-    animations = _Runtime.callValue(SpineParse.parseSpineAnimations__spineParse, cast ([_Runtime.field(record, 'animations'), bones, slots, skins, diagnostics] : Array<Dynamic>));
-    skeleton = _Runtime.callValue(createSkeleton2D, cast ([bones, slots] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(skeleton, 'skins', skins); }
-    return cast { animations: animations, skeleton: skeleton };
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool) ? (cast null : Dynamic) : (cast { orderings: orderings, times: times } : Dynamic));
     return cast null;
   }
 
@@ -133,25 +128,25 @@ class SpineParse {
         _Runtime.callProperty(named, 'push', cast ([cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'name')), 'string') : Bool) ? (cast _Runtime.field(s, 'name') : Dynamic) : (cast 'default' : Dynamic)), _Runtime.field(s, 'attachments')] : Array<Dynamic>)] : Array<Dynamic>));
       }
     } else { if ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) {
-      for (__iteration1 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
-        var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
-        var attachments:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+      for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
+        var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var attachments:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         _Runtime.callProperty(named, 'push', cast ([cast ([name, attachments] : Array<Dynamic>)] : Array<Dynamic>));
       }
     } }
-    for (__iteration2 in _Runtime.iterable(named)) {
-      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
-      var rawAttachments:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+    for (__iteration1 in _Runtime.iterable(named)) {
+      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var rawAttachments:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast ((cast _Runtime.strictEquals(rawAttachments, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawAttachments), 'object') : Bool)) : Bool)) { continue; }
       var attachments:Array<SkinAttachment2D> = cast ([] : Array<Dynamic>);
-      for (__iteration3 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast rawAttachments : Dynamic)))) {
-        var slotName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
-        var slotAttachments:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
+      for (__iteration2 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast rawAttachments : Dynamic)))) {
+        var slotName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+        var slotAttachments:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
         if ((cast ((cast _Runtime.strictEquals(slotAttachments, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(slotAttachments), 'object') : Bool)) : Bool)) { continue; }
         var slotIndex:Dynamic = _Runtime.callValue(SpineParse.indexOfSpineSlot__spineParse, cast ([slots, slotName] : Array<Dynamic>));
-        for (__iteration4 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast slotAttachments : Dynamic)))) {
-          var attachmentName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
-          var rawAttachment:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
+        for (__iteration3 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast slotAttachments : Dynamic)))) {
+          var attachmentName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+          var rawAttachment:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
           if ((cast ((cast _Runtime.strictEquals(rawAttachment, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawAttachment), 'object') : Bool)) : Bool)) { continue; }
           var attachment:Dynamic = _Runtime.callValue(SpineParse.parseSpineAttachment__spineParse, cast ([attachmentName, (cast rawAttachment : Dynamic), diagnostics] : Array<Dynamic>));
           if ((cast ((cast !_Runtime.strictEquals(attachment, null) : Bool) && (cast ((cast slotIndex : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(attachments, 'push', cast ([{ attachment: attachment, name: attachmentName, slotIndex: slotIndex }] : Array<Dynamic>)); }
@@ -320,7 +315,7 @@ class SpineParse {
     interpolation = ((cast allStepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
     segmentEasings = _Runtime.callValue(SpineParse.buildSpineSegmentEasings__spineParse, cast ([keys, times, values, components, diagnostics] : Array<Dynamic>));
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: components, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { boneIndex: boneIndex, path: path }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DBoneAnimationTarget, cast ([boneIndex, path] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function buildSpineSegmentEasings__spineParse(keys:Array<Dynamic>, times:Array<Float>, values:Array<Float>, components:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Array<Null<EasingFunction>>> {
@@ -433,16 +428,16 @@ class SpineParse {
     var animations:Array<Skeleton2DImportAnimation> = cast _Runtime.UNDEFINED;
     animations = cast ([] : Array<Dynamic>);
     if ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { return cast animations; }
-    for (__iteration5 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
-      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 0.0);
-      var animEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 1.0);
+    for (__iteration4 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
+      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var animEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
       if ((cast ((cast _Runtime.strictEquals(animEntry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(animEntry), 'object') : Bool)) : Bool)) { continue; }
       var anim:Dynamic = (cast animEntry : Dynamic);
       var channels:Array<Dynamic> = cast ([] : Array<Dynamic>);
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(anim, 'bones'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(anim, 'bones')), 'object') : Bool)) : Bool)) {
-        for (__iteration6 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast _Runtime.field(anim, 'bones') : Dynamic)))) {
-          var boneName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
-          var timelinesEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
+        for (__iteration5 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast _Runtime.field(anim, 'bones') : Dynamic)))) {
+          var boneName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 0.0);
+          var timelinesEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration5, 1.0);
           var boneIndex:Dynamic = _Runtime.callValue(SpineParse.indexOfBone__spineParse, cast ([bones, boneName] : Array<Dynamic>));
           if ((cast ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(timelinesEntry, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(timelinesEntry), 'object') : Bool)) : Bool)) { continue; }
           var timelines:Dynamic = (cast timelinesEntry : Dynamic);
@@ -450,6 +445,9 @@ class SpineParse {
           _Runtime.callValue(SpineParse.addSpineBoneChannel__spineParse, cast ([channels, _Runtime.field(timelines, 'translate'), boneIndex, Skeleton2DAnimationPathValue.Translation, 2.0, function(k:Dynamic) return cast ([_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'x'), 0.0] : Array<Dynamic>)), _Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'y'), 0.0] : Array<Dynamic>))] : Array<Dynamic>), diagnostics] : Array<Dynamic>));
           _Runtime.callValue(SpineParse.addSpineBoneChannel__spineParse, cast ([channels, _Runtime.field(timelines, 'scale'), boneIndex, Skeleton2DAnimationPathValue.Scale, 2.0, function(k:Dynamic) return cast ([_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'x'), 1.0] : Array<Dynamic>)), _Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'y'), 1.0] : Array<Dynamic>))] : Array<Dynamic>), diagnostics] : Array<Dynamic>));
           _Runtime.callValue(SpineParse.addSpineBoneChannel__spineParse, cast ([channels, _Runtime.field(timelines, 'shear'), boneIndex, Skeleton2DAnimationPathValue.Shear, 2.0, function(k:Dynamic) return cast ([_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'x'), 0.0] : Array<Dynamic>)), _Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'y'), 0.0] : Array<Dynamic>))] : Array<Dynamic>), diagnostics] : Array<Dynamic>));
+          for (axis in _Runtime.iterable(SpineParse.SPINE_BONE_AXIS_TIMELINES__spineParse)) {
+            _Runtime.callValue(SpineParse.addSpineBoneChannel__spineParse, cast ([channels, _Runtime.getIndex(timelines, _Runtime.field(axis, 'key')), boneIndex, _Runtime.field(axis, 'path'), 1.0, function(k:Dynamic) return cast ([_Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(k, 'value'), _Runtime.field(axis, 'identity')] : Array<Dynamic>))] : Array<Dynamic>), diagnostics] : Array<Dynamic>));
+          }
         }
       }
       _Runtime.callValue(SpineParse.parseSpineSlotTimelines__spineParse, cast ([channels, _Runtime.field(anim, 'slots'), slots, skins, diagnostics] : Array<Dynamic>));
@@ -458,8 +456,8 @@ class SpineParse {
       _Runtime.callValue(SpineParse.skipCrumbSpineTimelineGroup__spineParse, cast ([diagnostics, _Runtime.field(anim, 'path'), 'spine.path-timeline-unsupported'] : Array<Dynamic>));
       _Runtime.callValue(SpineParse.skipCrumbSpineTimelineGroup__spineParse, cast ([diagnostics, _Runtime.field(anim, 'deform'), 'spine.deform-timeline-unsupported'] : Array<Dynamic>));
       _Runtime.callValue(SpineParse.skipCrumbSpineTimelineGroup__spineParse, cast ([diagnostics, _Runtime.field(anim, 'events'), 'spine.event-timeline-unsupported'] : Array<Dynamic>));
-      _Runtime.callValue(SpineParse.skipCrumbSpineTimelineGroup__spineParse, cast ([diagnostics, _Runtime.coalesce(_Runtime.field(anim, 'drawOrder'), function():Dynamic return cast _Runtime.field(anim, 'draworder')), 'spine.draworder-timeline-unsupported'] : Array<Dynamic>));
-      _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)), name: name }] : Array<Dynamic>));
+      var drawOrder:Dynamic = _Runtime.callValue(parseSpineDrawOrderTimeline, cast ([_Runtime.coalesce(_Runtime.field(anim, 'drawOrder'), function():Dynamic return cast _Runtime.field(anim, 'draworder')), slots, diagnostics] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)), drawOrder: drawOrder, name: name }] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -469,14 +467,14 @@ class SpineParse {
     var unmodeled:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { return; }
     unmodeled = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    for (__iteration7 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
-      var slotName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration7, 0.0);
-      var timelinesEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration7, 1.0);
+    for (__iteration6 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
+      var slotName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
+      var timelinesEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
       if ((cast ((cast _Runtime.strictEquals(timelinesEntry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(timelinesEntry), 'object') : Bool)) : Bool)) { continue; }
       var slotIndex:Dynamic = _Runtime.callValue(SpineParse.indexOfSpineSlot__spineParse, cast ([slots, slotName] : Array<Dynamic>));
-      for (__iteration8 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast timelinesEntry : Dynamic)))) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 0.0);
-        var keys:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 1.0);
+      for (__iteration7 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast timelinesEntry : Dynamic)))) {
+        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration7, 0.0);
+        var keys:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration7, 1.0);
         if ((cast ((cast !_Runtime.strictEquals(kind, 'rgba') : Bool) && (cast !_Runtime.strictEquals(kind, 'attachment') : Bool)) : Bool)) {
           ((cast unmodeled : flighthq._internal._Map).set(kind, _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map).get(kind)), function():Dynamic return cast 0.0), 1.0)));
           continue;
@@ -485,9 +483,9 @@ class SpineParse {
         if ((cast _Runtime.strictEquals(kind, 'attachment') : Bool)) { _Runtime.callValue(SpineParse.addSpineSlotAttachmentChannel__spineParse, cast ([channels, keys, slotIndex, slotName, skins] : Array<Dynamic>)); } else { _Runtime.callValue(SpineParse.addSpineSlotColorChannel__spineParse, cast ([channels, keys, slotIndex, diagnostics] : Array<Dynamic>)); }
       }
     }
-    for (__iteration9 in _Runtime.iterable(unmodeled)) {
-      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration9, 0.0);
-      var count:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration9, 1.0);
+    for (__iteration8 in _Runtime.iterable(unmodeled)) {
+      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 0.0);
+      var count:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration8, 1.0);
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.slot-' + Std.string(kind) + '-timeline-unsupported', 'parseSpineSkeleton', { timelines: count }] : Array<Dynamic>));
     }
   }
@@ -517,7 +515,7 @@ class SpineParse {
     interpolation = ((cast allStepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
     segmentEasings = _Runtime.callValue(SpineParse.buildSpineSegmentEasings__spineParse, cast ([keys, times, values, 4.0, diagnostics] : Array<Dynamic>));
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { path: Skeleton2DSlotAnimationPathValue.Color, slotIndex: slotIndex }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Color] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function addSpineSlotAttachmentChannel__spineParse(channels:Array<Dynamic>, rawKeys:Array<Dynamic>, slotIndex:Float, slotName:String, skins:Array<AttachmentSkin2D>):Void {
@@ -551,7 +549,7 @@ class SpineParse {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool)) { return; }
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { attachments: attachments, path: Skeleton2DSlotAnimationPathValue.Attachment, slotIndex: slotIndex }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Attachment, attachments] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function skipCrumbSpineTimelineGroup__spineParse(diagnostics:Null<Array<ImportDiagnostic>>, raw:Dynamic, kind:String):Void {
@@ -565,6 +563,8 @@ class SpineParse {
     return cast ((cast ((cast value : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast value : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast value : Dynamic)) : Dynamic));
     return cast null;
   }
+
+  public static final SPINE_BONE_AXIS_TIMELINES__spineParse:Dynamic = cast ([{ identity: 0.0, key: 'translatex', path: Skeleton2DAnimationPathValue.TranslationX }, { identity: 0.0, key: 'translatey', path: Skeleton2DAnimationPathValue.TranslationY }, { identity: 1.0, key: 'scalex', path: Skeleton2DAnimationPathValue.ScaleX }, { identity: 1.0, key: 'scaley', path: Skeleton2DAnimationPathValue.ScaleY }, { identity: 0.0, key: 'shearx', path: Skeleton2DAnimationPathValue.ShearX }, { identity: 0.0, key: 'sheary', path: Skeleton2DAnimationPathValue.ShearY }] : Array<Dynamic>);
 
   public static final SPINE_CURVE_EPSILON__spineParse:Dynamic = 0.000001;
 
@@ -591,6 +591,52 @@ class SpineParse {
         return cast TransformMode2D.Normal;
       }
     }
+    return cast null;
+  }
+
+  public static function parseSpineSkeleton(json:String, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
+    var doc:Dynamic = cast _Runtime.UNDEFINED;
+    var record:Dynamic = cast _Runtime.UNDEFINED;
+    var bones:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure9:Dynamic = cast _Runtime.UNDEFINED;
+    var attachmentNames:Dynamic = cast _Runtime.UNDEFINED;
+    var slots:Dynamic = cast _Runtime.UNDEFINED;
+    var skins:Dynamic = cast _Runtime.UNDEFINED;
+    var animations:Dynamic = cast _Runtime.UNDEFINED;
+    var skeleton:Dynamic = cast _Runtime.UNDEFINED;
+    try {
+      (doc = cast (_Runtime.jsonParse(json) : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast null;
+    }
+    if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) { return cast null; }
+    record = (cast doc : Dynamic);
+    bones = _Runtime.callValue(SpineParse.parseSpineBones__spineParse, cast ([_Runtime.field(record, 'bones'), diagnostics] : Array<Dynamic>));
+    __destructure9 = _Runtime.callValue(SpineParse.parseSpineSlots__spineParse, cast ([_Runtime.field(record, 'slots'), bones] : Array<Dynamic>));
+    attachmentNames = _Runtime.field(__destructure9, 'attachmentNames');
+    slots = _Runtime.field(__destructure9, 'slots');
+    skins = _Runtime.callValue(SpineParse.parseSpineSkins__spineParse, cast ([_Runtime.field(record, 'skins'), slots, diagnostics] : Array<Dynamic>));
+    _Runtime.callValue(SpineParse.resolveSpineSetupAttachments__spineParse, cast ([slots, attachmentNames, skins] : Array<Dynamic>));
+    animations = _Runtime.callValue(SpineParse.parseSpineAnimations__spineParse, cast ([_Runtime.field(record, 'animations'), bones, slots, skins, diagnostics] : Array<Dynamic>));
+    skeleton = _Runtime.callValue(createSkeleton2D, cast ([bones, slots] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(skeleton, 'skins', skins); }
+    return cast { animations: animations, skeleton: skeleton };
+    return cast null;
+  }
+
+  public static function resolveSpineDrawOrder__spineParse(raw:Dynamic, slots:Array<Slot2D>):Null<Array<Float>> {
+    var moves:Array<{ var offset:Float; var slotIndex:Float; }> = cast _Runtime.UNDEFINED;
+    moves = cast ([] : Array<Dynamic>);
+    if ((cast _Runtime.isArray(raw) : Bool)) {
+      for (offset in _Runtime.iterable(raw)) {
+        if ((cast ((cast _Runtime.strictEquals(offset, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(offset), 'object') : Bool)) : Bool)) { continue; }
+        var move:Dynamic = (cast offset : { @:optional var offset:Dynamic; @:optional var slot:Dynamic; });
+        var slotIndex:Dynamic = _Runtime.callValue(SpineParse.indexOfSpineSlot__spineParse, cast ([slots, ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(move, 'slot')), 'string') : Bool) ? (cast _Runtime.field(move, 'slot') : Dynamic) : (cast '' : Dynamic))] : Array<Dynamic>));
+        if ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
+        _Runtime.callProperty(moves, 'push', cast ([{ offset: _Runtime.callValue(SpineParse.numberOr__spineParse, cast ([_Runtime.field(move, 'offset'), 0.0] : Array<Dynamic>)), slotIndex: slotIndex }] : Array<Dynamic>));
+      }
+    }
+    return cast _Runtime.callValue(resolveSpineDrawOrdering, cast ([moves, _Runtime.field(slots, 'length')] : Array<Dynamic>));
     return cast null;
   }
 }

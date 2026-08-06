@@ -97,6 +97,7 @@ class WgpuCache {
     _Runtime.setField(cacheRuntime, 'quadBatchWriterTexture', null);
     _Runtime.setField(cacheRuntime, 'quadBatchWriterSampler', null);
     _Runtime.setField(cacheRuntime, 'quadBatchWriterSmoothing', null);
+    _Runtime.setField(cacheRuntime, 'colorAdjustmentResolver', _Runtime.field(screenRuntime, 'colorAdjustmentResolver'));
     _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentMaterialFeature', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentMaterialFeature'));
     _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentMaterialFeatureGuard', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentMaterialFeatureGuard'));
     _Runtime.setField(cacheRuntime, 'quadBatchWriterBufferPool', cast ([] : Array<Dynamic>));

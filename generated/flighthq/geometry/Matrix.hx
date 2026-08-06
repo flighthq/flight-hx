@@ -408,8 +408,21 @@ class Matrix {
   }
 
   public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
-    (out.tx = cast ((source.tx + dx) : Dynamic));
-    (out.ty = cast ((source.ty + dy) : Dynamic));
+    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var c:Dynamic = cast _Runtime.UNDEFINED;
+    var d:Dynamic = cast _Runtime.UNDEFINED;
+    var tx:Dynamic = cast _Runtime.UNDEFINED;
+    var ty:Dynamic = cast _Runtime.UNDEFINED;
+    __destructure1 = source;
+    a = _Runtime.field(__destructure1, 'a');
+    b = _Runtime.field(__destructure1, 'b');
+    c = _Runtime.field(__destructure1, 'c');
+    d = _Runtime.field(__destructure1, 'd');
+    tx = _Runtime.field(__destructure1, 'tx');
+    ty = _Runtime.field(__destructure1, 'ty');
+    _Runtime.callValue(setMatrix, cast ([out, a, b, c, d, (tx + dx), (ty + dy)] : Array<Dynamic>));
   }
 
   public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
@@ -417,8 +430,21 @@ class Matrix {
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
-    (out.tx = cast (((source.tx + (source.a * x)) + (source.c * y)) : Dynamic));
-    (out.ty = cast (((source.ty + (source.b * x)) + (source.d * y)) : Dynamic));
+    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var c:Dynamic = cast _Runtime.UNDEFINED;
+    var d:Dynamic = cast _Runtime.UNDEFINED;
+    var tx:Dynamic = cast _Runtime.UNDEFINED;
+    var ty:Dynamic = cast _Runtime.UNDEFINED;
+    __destructure2 = source;
+    a = _Runtime.field(__destructure2, 'a');
+    b = _Runtime.field(__destructure2, 'b');
+    c = _Runtime.field(__destructure2, 'c');
+    d = _Runtime.field(__destructure2, 'd');
+    tx = _Runtime.field(__destructure2, 'tx');
+    ty = _Runtime.field(__destructure2, 'ty');
+    _Runtime.callValue(setMatrix, cast ([out, a, b, c, d, ((tx + (a * x)) + (c * y)), ((ty + (b * x)) + (d * y))] : Array<Dynamic>));
   }
 
   public static function writeMatrixToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:MatrixLike):Void {

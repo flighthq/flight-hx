@@ -655,16 +655,13 @@ function computeSelfShadowTypeModules(modules: IrModule[]): Map<string, string> 
     }
   }
   const selfShadowTypeModules = new Map<string, string>();
-  // Prefer the canonical `flighthq.types.*` declaration; fall back to any other type-only module.
+  // Prefer the canonical `flighthq.types.*` declaration; fall back to any other
+  // module that owns the type. A canonical types module may also own runtime
+  // constants, so its value declarations do not disqualify its secondary types.
   const isTypesPackage = (module: IrModule): boolean => (module.haxePackage ?? '').startsWith('flighthq.types');
   for (const pass of [true, false]) {
     for (const module of modules) {
       if (isTypesPackage(module) !== pass) continue;
-      if (
-        module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')
-      ) {
-        continue;
-      }
       for (const declaration of module.declarations) {
         if (declaration.kind !== 'type' && declaration.kind !== 'class' && declaration.kind !== 'enum') continue;
         if (!namespaceModuleNames.has(declaration.name) || selfShadowTypeModules.has(declaration.name)) continue;

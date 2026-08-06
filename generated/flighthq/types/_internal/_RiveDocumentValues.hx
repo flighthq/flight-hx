@@ -7,9 +7,15 @@ import flighthq.types.AdvancedBlendMode;
 import flighthq.types.AnimationClip;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResourceReference;
+import flighthq.types.Layout.LayoutTree;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.Skeleton2D;
 
 class _RiveDocumentValues {
   public static final RiveFieldTypeValue:Dynamic = { Uint: 0.0, String: 1.0, Double: 2.0, Color: 3.0 };
+
+  public static final RiveAnimationLoopValue:Dynamic = { OneShot: 'OneShot', Loop: 'Loop', PingPong: 'PingPong' };
+
+  public static final RiveWeightedPointKindValue:Dynamic = { Point: 'Point', In: 'In', Out: 'Out' };
 }

@@ -4,6 +4,23 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './applyAnimationClipToSkeleton2D.mjs';
+export * from './boundingBoxAttachment2D.mjs';
+export * from './clippingAttachment2D.mjs';
+export * from './deformAnimationTarget2D.mjs';
 export * from './deformMeshAttachment2D.mjs';
+export * from './deformPathAttachment2D.mjs';
+export * from './enableSkeleton2DGuards.mjs';
+export * from './explainSkeleton2DChannel.mjs';
+export * from './explainSkeleton2DDeformLength.mjs';
+export * from './ikConstraint2D.mjs';
+export * from './pathConstraint2D.mjs';
+export * from './pointAttachment2D.mjs';
 export * from './regionAttachment2D.mjs';
 export * from './skeleton2d.mjs';
+export * from './skeleton2dAnimationTarget.mjs';
+export * from './skeleton2dConstraint.mjs';
+export * from './skeleton2dDrawOrderTarget.mjs';
+export * from './skeleton2dGuards.mjs';
+export * from './skinAttachment2DPoints.mjs';
+export * from './slotDeform2D.mjs';
+export * from './transformConstraint2D.mjs';

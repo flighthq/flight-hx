@@ -5,4 +5,6 @@ const api = compiled.flighthq.types._internal._RiveDocumentValues;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const RiveAnimationLoop = api.RiveAnimationLoopValue;
 export const RiveFieldType = api.RiveFieldTypeValue;
+export const RiveWeightedPointKind = api.RiveWeightedPointKindValue;

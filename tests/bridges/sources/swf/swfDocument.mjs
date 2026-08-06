@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createGlyphOutlineSourcesFromSwf = api.createGlyphOutlineSourcesFromSwf;
 export const createScene2DFromSwf = api.createScene2DFromSwf;
+export const createScene2DImportFromSwf = api.createScene2DImportFromSwf;
 export const createScene2DSymbolFromSwf = api.createScene2DSymbolFromSwf;
 export const readSwfExportedSymbolNames = api.readSwfExportedSymbolNames;
 export const registerSwfScene2DDocumentImporter = api.registerSwfScene2DDocumentImporter;

@@ -5,6 +5,7 @@ __syncDependencies();
 
 export * from './enableGlColorAdjustmentGuards.mjs';
 export * from './enableGlStrokePathTessellation.mjs';
+export * from './explainGlScene2DCoverage.mjs';
 export * from './glBitmapText.mjs';
 export * from './glCache.mjs';
 export * from './glClip.mjs';

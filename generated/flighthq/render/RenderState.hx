@@ -25,6 +25,7 @@ class RenderState {
   public static function createRenderStateRuntime():RenderStateRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : RenderStateRuntime);
+    _Runtime.setField(runtime, 'colorAdjustmentResolver', null);
     _Runtime.setField(runtime, 'colorAdjustmentUnsupportedGuard', null);
     _Runtime.setField(runtime, 'currentFrameId', 0.0);
     _Runtime.setField(runtime, 'renderAdaptHook', null);

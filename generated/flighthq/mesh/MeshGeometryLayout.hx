@@ -5,7 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 typedef AttributeMapping__meshGeometryLayout = { var destination:Dynamic; var source:Dynamic; var sourceByteLength:Float; };
 
@@ -20,6 +23,9 @@ class MeshGeometryLayout {
     var sourceView:Dynamic = cast _Runtime.UNDEFINED;
     var destinationView:Dynamic = cast _Runtime.UNDEFINED;
     var mappings:Array<AttributeMapping__meshGeometryLayout> = cast _Runtime.UNDEFINED;
+    var converted:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var smoothingSources:Dynamic = cast _Runtime.UNDEFINED;
     srcStride = source.layout.stride;
     dstStride = targetLayout.stride;
     vertexCount = ((cast ((cast srcStride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(source.vertices, 'byteLength'), srcStride)) : Dynamic) : (cast 0.0 : Dynamic));
@@ -61,7 +67,13 @@ class MeshGeometryLayout {
         vertex++;
       }
     }
-    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices }] : Array<Dynamic>));
+    converted = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices }] : Array<Dynamic>));
+    sourceRuntime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
+    smoothingSources = _Runtime.optionalField(sourceRuntime, 'tangentSmoothingSources');
+    if ((cast ((cast !_Runtime.strictEquals(smoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(smoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+      _Runtime.setField((cast _Runtime.getIndex(converted, EntityRuntimeKey) : MeshGeometryRuntime), 'tangentSmoothingSources', _Runtime.slice(smoothingSources, 0, null));
+    }
+    return cast converted;
     return cast null;
   }
 

@@ -5,4 +5,5 @@ const api = compiled.flighthq.skeleton2dFormats.SpineParse;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const parseSpineDrawOrderTimeline = api.parseSpineDrawOrderTimeline;
 export const parseSpineSkeleton = api.parseSpineSkeleton;

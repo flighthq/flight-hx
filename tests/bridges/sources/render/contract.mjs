@@ -4,12 +4,13 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './enableColorAdjustmentGuards.mjs';
+export * from './enableColorAdjustments.mjs';
 export * from './enableSceneRenderGuards.mjs';
+export * from './explainScene2DCoverage.mjs';
 export * from './explainScene2DRender.mjs';
 export * from './renderAppearance.mjs';
 export * from './renderCache.mjs';
 export * from './renderColor.mjs';
-export * from './renderColorScaleBias.mjs';
 export * from './renderMaterial.mjs';
 export * from './renderProxy.mjs';
 export * from './renderProxyAdapter.mjs';

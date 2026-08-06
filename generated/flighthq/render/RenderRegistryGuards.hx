@@ -40,8 +40,14 @@ class RenderRegistryGuards {
   public static function getRenderRegistryMissMessage__renderRegistryGuards(state:RenderState, registry:RenderRegistry):String {
     {
       var __switchValue = registry;
-      if (__switchValue == RenderRegistry.EffectPaddingResolver) {
+      if (__switchValue == RenderRegistry.BlendRealization) {
+        return cast 'a blend mode this scene uses has no registered GL realization, so the node composites as Normal instead — call registerGlBlendMode(state, blendMode, realization)';
+      }
+      else if (__switchValue == RenderRegistry.EffectPaddingResolver) {
         return cast 'computeRenderEffectPadding: effect kind has no registered padding resolver — call registerRenderEffectPaddingResolver(state, kind, resolver)';
+      }
+      else if (__switchValue == RenderRegistry.MaterialTextureLister) {
+        return cast 'a material kind in this scene has no registered texture lister, so a mesh waiting on its maps never reveals — call registerScene3DMaterialTextures(registry, kind, lister), or the named door for that family';
       }
       else if (__switchValue == RenderRegistry.MaterialRenderer) {
         if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'resolveWgpuMaterialRenderer: material kind has no registered renderer, so nodes using it do not draw — call registerWgpuMaterialRenderer(state, kind, renderer)'; }

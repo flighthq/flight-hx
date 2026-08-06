@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const parseSkeleton2D = api.parseSkeleton2D;
 export const registerSkeleton2DFormat = api.registerSkeleton2DFormat;
+export const unregisterSkeleton2DFormat = api.unregisterSkeleton2DFormat;

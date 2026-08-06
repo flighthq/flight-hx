@@ -7,4 +7,4 @@ import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DS
 
 typedef Skeleton2DSlotAnimationPath = Dynamic;
 
-typedef Skeleton2DSlotAnimationTarget = { @:optional var attachments:Null<Array<Null<Attachment2D>>>; var path:Skeleton2DSlotAnimationPath; var slotIndex:Float; };
+typedef Skeleton2DSlotAnimationTarget = { @:optional var attachments:Null<Array<Null<Attachment2D>>>; var kind:Skeleton2DAnimationTargetKind; var path:Skeleton2DSlotAnimationPath; var slotIndex:Float; };

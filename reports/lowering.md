@@ -2,57 +2,57 @@
 
 | Metric | Count |
 | --- | ---: |
-| Packages | 140 |
-| Source files | 2448 |
-| Candidate declarations | 12476 |
-| Lowered declarations | 12476 |
+| Packages | 142 |
+| Source files | 2515 |
+| Candidate declarations | 13067 |
+| Lowered declarations | 13067 |
 | Current diagnostics | 0 |
-| Proven explicit Boolean truthiness uses | 12338 |
-| Proven Boolean conditional conditions | 2645 |
-| Proven Boolean logical-left truthiness uses | 4474 |
-| Proven Boolean logical expressions | 4257 |
-| Proven numeric relations | 5796 |
-| Direct Boolean truthiness uses | 12346 |
-| Direct Boolean conditional expressions | 2644 |
-| Direct Boolean `&&` expressions | 1899 |
-| Direct Boolean `\|\|` expressions | 2357 |
-| Direct numeric relations | 5796 |
-| Proven indexed expressions | 9639 |
-| Proven indexed reads | 6415 |
-| Proven indexed writes | 3350 |
-| Parked width-sensitive mixed indexed writes | 16 |
-| Direct indexed reads | 6852 |
-| Direct indexed writes | 3347 |
+| Proven explicit Boolean truthiness uses | 12890 |
+| Proven Boolean conditional conditions | 2830 |
+| Proven Boolean logical-left truthiness uses | 4758 |
+| Proven Boolean logical expressions | 4522 |
+| Proven numeric relations | 6108 |
+| Direct Boolean truthiness uses | 12898 |
+| Direct Boolean conditional expressions | 2829 |
+| Direct Boolean `&&` expressions | 2019 |
+| Direct Boolean `\|\|` expressions | 2502 |
+| Direct numeric relations | 6108 |
+| Proven indexed expressions | 10114 |
+| Proven indexed reads | 6803 |
+| Proven indexed writes | 3424 |
+| Parked width-sensitive mixed indexed writes | 18 |
+| Direct indexed reads | 7245 |
+| Direct indexed writes | 3421 |
 | Guarded in-bounds async-flow for-of Array reads | 8 |
 | Guarded in-bounds async-flow for-in key reads | 0 |
-| Direct synthetic iteration-binding Array reads | 136 |
+| Direct synthetic iteration-binding Array reads | 138 |
 | Direct synthetic high-arity-argument Array reads | 27 |
-| Proven typed-array `set` calls | 71 |
-| Direct typed-array `set` calls | 71 |
-| Audited ordinary destructuring indexed reads | 281 |
-| Destructuring reads with retained receiver facts | 269 |
-| Direct destructuring Array reads | 269 |
+| Proven typed-array `set` calls | 74 |
+| Direct typed-array `set` calls | 74 |
+| Audited ordinary destructuring indexed reads | 284 |
+| Destructuring reads with retained receiver facts | 272 |
+| Direct destructuring Array reads | 272 |
 | Proven destructuring reads awaiting a direct endpoint | 0 |
 | Parked destructuring reads | 12 |
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 4621 | 3957 | 690 | 4395 | 688 |
-| `ArrayOrFloat32Array` | 47 | 8 | 39 | 8 | 39 |
-| `Float32Array` | 3574 | 1579 | 2067 | 1579 | 2067 |
-| `Float64Array` | 100 | 70 | 57 | 70 | 57 |
+| `Array` | 4837 | 4147 | 717 | 4590 | 715 |
+| `ArrayOrFloat32Array` | 56 | 13 | 43 | 13 | 43 |
+| `Float32Array` | 3756 | 1734 | 2100 | 1734 | 2100 |
+| `Float64Array` | 112 | 70 | 49 | 70 | 49 |
 | `Int16Array` | 9 | 5 | 4 | 5 | 4 |
-| `Int32Array` | 39 | 23 | 16 | 23 | 16 |
-| `Int8Array` | 0 | 0 | 0 | 0 | 0 |
-| `Uint16Array` | 77 | 45 | 32 | 45 | 32 |
-| `Uint16ArrayOrUint32Array` | 29 | 29 | 0 | 29 | 0 |
-| `Uint32Array` | 46 | 20 | 26 | 20 | 26 |
+| `Int32Array` | 61 | 38 | 23 | 38 | 23 |
+| `Int8Array` | 5 | 3 | 2 | 3 | 2 |
+| `Uint16Array` | 78 | 45 | 33 | 45 | 33 |
+| `Uint16ArrayOrUint32Array` | 33 | 33 | 0 | 33 | 0 |
+| `Uint32Array` | 70 | 36 | 34 | 36 | 34 |
 | `Uint8Array` | 369 | 330 | 40 | 329 | 39 |
 | `Uint8ClampedArray` | 728 | 349 | 379 | 349 | 379 |
 
 | Typed-array set receiver | Proven calls | Direct calls |
 | --- | ---: | ---: |
-| `Float32Array` | 34 | 34 |
+| `Float32Array` | 37 | 37 |
 | `Float64Array` | 0 | 0 |
 | `Int16Array` | 1 | 1 |
 | `Int32Array` | 0 | 0 |
@@ -65,13 +65,13 @@
 
 | Destructuring emission | Assignment reads | Declaration reads | Parameter reads | Total |
 | --- | ---: | ---: | ---: | ---: |
-| Direct Array | 28 | 230 | 11 | 269 |
+| Direct Array | 28 | 233 | 11 | 272 |
 | Proven, awaiting endpoint | 0 | 0 | 0 | 0 |
 | Parked | 0 | 12 | 0 | 12 |
 
 | Proven destructuring receiver | Assignment reads | Declaration reads | Parameter reads | Total |
 | --- | ---: | ---: | ---: | ---: |
-| <code>Array</code> | 28 | 230 | 11 | 269 |
+| <code>Array</code> | 28 | 233 | 11 | 272 |
 | <code>ArrayOrFloat32Array</code> | 0 | 0 | 0 | 0 |
 | <code>Float32Array</code> | 0 | 0 | 0 | 0 |
 | <code>Float64Array</code> | 0 | 0 | 0 | 0 |
@@ -107,7 +107,7 @@
 | `@flighthq/bitmaptext` | 34 | 34 | 0 | 49 | 18 | 8 | 0 |
 | `@flighthq/camera` | 62 | 62 | 0 | 38 | 13 | 131 | 2 |
 | `@flighthq/camera-controls` | 32 | 32 | 0 | 22 | 13 | 0 | 0 |
-| `@flighthq/capture` | 10 | 10 | 0 | 8 | 2 | 0 | 0 |
+| `@flighthq/capture` | 10 | 10 | 0 | 9 | 2 | 0 | 0 |
 | `@flighthq/clip` | 37 | 37 | 0 | 83 | 34 | 24 | 0 |
 | `@flighthq/clipboard` | 38 | 38 | 0 | 36 | 2 | 0 | 0 |
 | `@flighthq/clock` | 14 | 14 | 0 | 13 | 2 | 2 | 0 |
@@ -118,7 +118,7 @@
 | `@flighthq/debug` | 22 | 22 | 0 | 12 | 0 | 0 | 0 |
 | `@flighthq/device` | 19 | 19 | 0 | 40 | 7 | 0 | 0 |
 | `@flighthq/dialog` | 33 | 33 | 0 | 52 | 5 | 3 | 0 |
-| `@flighthq/easing` | 61 | 61 | 0 | 65 | 45 | 6 | 0 |
+| `@flighthq/easing` | 69 | 69 | 0 | 74 | 48 | 6 | 0 |
 | `@flighthq/effects` | 186 | 186 | 0 | 93 | 48 | 119 | 1 |
 | `@flighthq/effects-canvas` | 104 | 104 | 0 | 82 | 30 | 63 | 0 |
 | `@flighthq/effects-gl` | 298 | 298 | 0 | 122 | 26 | 34 | 0 |
@@ -142,6 +142,7 @@
 | `@flighthq/intl` | 25 | 25 | 0 | 7 | 1 | 0 | 0 |
 | `@flighthq/ipc` | 23 | 23 | 0 | 13 | 0 | 0 | 0 |
 | `@flighthq/keyboard` | 27 | 27 | 0 | 25 | 4 | 0 | 0 |
+| `@flighthq/layout` | 53 | 53 | 0 | 247 | 54 | 51 | 0 |
 | `@flighthq/lifecycle` | 16 | 16 | 0 | 20 | 1 | 1 | 0 |
 | `@flighthq/lighting` | 41 | 41 | 0 | 50 | 27 | 17 | 0 |
 | `@flighthq/loader` | 39 | 39 | 0 | 92 | 14 | 1 | 0 |
@@ -151,9 +152,9 @@
 | `@flighthq/media` | 68 | 68 | 0 | 83 | 2 | 0 | 0 |
 | `@flighthq/mediasession` | 12 | 12 | 0 | 11 | 0 | 0 | 0 |
 | `@flighthq/menu` | 23 | 23 | 0 | 65 | 6 | 2 | 0 |
-| `@flighthq/mesh` | 137 | 137 | 0 | 346 | 216 | 426 | 17 |
+| `@flighthq/mesh` | 146 | 146 | 0 | 409 | 242 | 517 | 19 |
 | `@flighthq/motionpath` | 9 | 9 | 0 | 15 | 13 | 0 | 0 |
-| `@flighthq/movieclip` | 23 | 23 | 0 | 17 | 0 | 2 | 0 |
+| `@flighthq/movieclip` | 34 | 34 | 0 | 28 | 5 | 6 | 0 |
 | `@flighthq/net` | 14 | 14 | 0 | 34 | 4 | 0 | 1 |
 | `@flighthq/node` | 154 | 154 | 0 | 223 | 40 | 55 | 0 |
 | `@flighthq/notification` | 29 | 29 | 0 | 27 | 0 | 0 | 0 |
@@ -170,21 +171,21 @@
 | `@flighthq/power` | 28 | 28 | 0 | 54 | 3 | 0 | 0 |
 | `@flighthq/protocol` | 25 | 25 | 0 | 37 | 14 | 0 | 0 |
 | `@flighthq/quadbatch` | 39 | 39 | 0 | 103 | 74 | 87 | 0 |
-| `@flighthq/render` | 110 | 110 | 0 | 169 | 25 | 108 | 1 |
+| `@flighthq/render` | 124 | 124 | 0 | 193 | 27 | 130 | 1 |
 | `@flighthq/render-gl` | 227 | 227 | 0 | 251 | 39 | 105 | 0 |
 | `@flighthq/render-wgpu` | 186 | 186 | 0 | 314 | 51 | 93 | 0 |
-| `@flighthq/scene2d` | 37 | 37 | 0 | 13 | 1 | 19 | 0 |
-| `@flighthq/scene2d-canvas` | 172 | 172 | 0 | 320 | 69 | 169 | 0 |
+| `@flighthq/scene2d` | 40 | 40 | 0 | 20 | 3 | 22 | 0 |
+| `@flighthq/scene2d-canvas` | 175 | 175 | 0 | 326 | 70 | 170 | 0 |
 | `@flighthq/scene2d-dom` | 122 | 122 | 0 | 185 | 38 | 25 | 0 |
-| `@flighthq/scene2d-formats` | 462 | 462 | 0 | 866 | 133 | 352 | 0 |
-| `@flighthq/scene2d-gl` | 213 | 213 | 0 | 365 | 110 | 232 | 3 |
+| `@flighthq/scene2d-formats` | 683 | 683 | 0 | 1157 | 224 | 440 | 0 |
+| `@flighthq/scene2d-gl` | 216 | 216 | 0 | 375 | 112 | 234 | 3 |
 | `@flighthq/scene2d-resources` | 26 | 26 | 0 | 41 | 6 | 13 | 0 |
-| `@flighthq/scene2d-wgpu` | 216 | 216 | 0 | 447 | 128 | 303 | 4 |
+| `@flighthq/scene2d-wgpu` | 222 | 222 | 0 | 453 | 128 | 311 | 4 |
 | `@flighthq/scene3d` | 78 | 78 | 0 | 108 | 32 | 92 | 1 |
 | `@flighthq/scene3d-formats` | 393 | 393 | 0 | 1292 | 485 | 634 | 3 |
 | `@flighthq/scene3d-gl` | 380 | 380 | 0 | 601 | 68 | 238 | 0 |
-| `@flighthq/scene3d-resources` | 68 | 68 | 0 | 144 | 18 | 17 | 0 |
-| `@flighthq/scene3d-wgpu` | 405 | 405 | 0 | 606 | 87 | 538 | 3 |
+| `@flighthq/scene3d-resources` | 70 | 70 | 0 | 137 | 17 | 16 | 0 |
+| `@flighthq/scene3d-wgpu` | 408 | 408 | 0 | 618 | 90 | 541 | 3 |
 | `@flighthq/screen` | 45 | 45 | 0 | 95 | 18 | 22 | 0 |
 | `@flighthq/sdk` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | `@flighthq/sensors` | 57 | 57 | 0 | 39 | 1 | 13 | 0 |
@@ -195,8 +196,8 @@
 | `@flighthq/shell` | 16 | 16 | 0 | 6 | 0 | 0 | 0 |
 | `@flighthq/shortcut` | 55 | 55 | 0 | 61 | 3 | 0 | 0 |
 | `@flighthq/signals` | 14 | 14 | 0 | 29 | 8 | 4 | 0 |
-| `@flighthq/skeleton2d` | 32 | 32 | 0 | 85 | 29 | 92 | 0 |
-| `@flighthq/skeleton2d-formats` | 152 | 152 | 0 | 539 | 160 | 98 | 0 |
+| `@flighthq/skeleton2d` | 113 | 113 | 0 | 233 | 94 | 196 | 1 |
+| `@flighthq/skeleton2d-formats` | 158 | 158 | 0 | 568 | 166 | 104 | 0 |
 | `@flighthq/skeleton3d` | 25 | 25 | 0 | 82 | 48 | 116 | 2 |
 | `@flighthq/snapshot` | 18 | 18 | 0 | 70 | 4 | 6 | 0 |
 | `@flighthq/socket` | 22 | 22 | 0 | 32 | 0 | 0 | 0 |
@@ -204,9 +205,10 @@
 | `@flighthq/spring` | 14 | 14 | 0 | 9 | 5 | 0 | 0 |
 | `@flighthq/spritesheet` | 38 | 38 | 0 | 62 | 21 | 17 | 0 |
 | `@flighthq/spritesheet-formats` | 74 | 74 | 0 | 116 | 15 | 12 | 0 |
+| `@flighthq/statechart` | 28 | 28 | 0 | 86 | 44 | 59 | 0 |
 | `@flighthq/statusbar` | 29 | 29 | 0 | 49 | 1 | 1 | 0 |
 | `@flighthq/storage` | 46 | 46 | 0 | 72 | 5 | 2 | 0 |
-| `@flighthq/swf` | 399 | 399 | 0 | 962 | 154 | 158 | 7 |
+| `@flighthq/swf` | 453 | 453 | 0 | 1040 | 163 | 179 | 7 |
 | `@flighthq/text` | 96 | 96 | 0 | 90 | 22 | 3 | 0 |
 | `@flighthq/text-markup` | 51 | 51 | 0 | 114 | 9 | 11 | 0 |
 | `@flighthq/textbidi` | 45 | 45 | 0 | 176 | 60 | 131 | 0 |
@@ -224,7 +226,7 @@
 | `@flighthq/timeline` | 30 | 30 | 0 | 32 | 5 | 0 | 0 |
 | `@flighthq/tray` | 34 | 34 | 0 | 6 | 2 | 2 | 0 |
 | `@flighthq/tween` | 37 | 37 | 0 | 65 | 13 | 4 | 0 |
-| `@flighthq/types` | 2229 | 2229 | 0 | 0 | 0 | 0 | 0 |
+| `@flighthq/types` | 2315 | 2315 | 0 | 0 | 0 | 0 | 0 |
 | `@flighthq/updater` | 27 | 27 | 0 | 4 | 1 | 0 | 0 |
 | `@flighthq/useragent` | 12 | 12 | 0 | 58 | 1 | 3 | 0 |
 | `@flighthq/velocity` | 21 | 21 | 0 | 16 | 6 | 0 | 0 |

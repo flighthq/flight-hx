@@ -17,6 +17,7 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.materials.ClassicMaterials.createBlinnPhongMaterial;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryNormals;
+import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 import flighthq.scene3d.SceneDocument.createScene3DFromDocument;
 import flighthq.scene3dFormats.Md5AnimParse.parseMd5Anim;
@@ -218,6 +219,7 @@ class Md5Parse {
         if ((cast ((cast _Runtime.field(indices, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
           var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
+          _Runtime.callValue(computeMeshGeometryTangents, cast ([geometry, geometry] : Array<Dynamic>));
           var meshMaterials:Array<Float> = cast ([] : Array<Dynamic>);
           if ((cast ((cast _Runtime.field(md5Mesh.shader, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
             var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([md5Mesh.shader, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);

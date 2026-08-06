@@ -3,4 +3,6 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableSwfGuards.mjs';
 export * from './swfDocument.mjs';
+export * from './swfFilter.mjs';

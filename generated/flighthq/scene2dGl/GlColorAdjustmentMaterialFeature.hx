@@ -3,6 +3,7 @@ package flighthq.scene2dGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.render.EnableColorAdjustments.enableColorAdjustments;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene2dGl.GlQuadBatchWriter.QUAD_BATCH_VS;
@@ -28,6 +29,7 @@ typedef ColorAdjustmentData__glColorAdjustmentMaterialFeature = Dynamic;
 class GlColorAdjustmentMaterialFeature {
   public static function registerGlColorAdjustmentMaterialFeature(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(enableColorAdjustments, cast ([state] : Array<Dynamic>));
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'glColorAdjustmentMaterialFeature', GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature);
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterColorScaleBiasMode'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasMode', GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature); }

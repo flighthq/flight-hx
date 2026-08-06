@@ -19,6 +19,16 @@ describe('public Haxe facades', () => {
     expect(scene2dGl).toContain('public static final defaultGlSpriteRenderer:');
   });
 
+  it('fully qualifies a self-named type owned by a mixed canonical types module', () => {
+    const workspace = process.cwd();
+    const layoutState = readFileSync(path.join(workspace, 'generated', 'flighthq', 'layout', 'LayoutState.hx'), 'utf8');
+
+    expect(layoutState).toContain('public static function createLayoutState():flighthq.types.Layout.LayoutState');
+    expect(layoutState).toContain(
+      'public static function registerLayoutResolver(state:flighthq.types.Layout.LayoutState,',
+    );
+  });
+
   it('preserves source-level export-star barrels in JavaScript bridges', () => {
     const workspace = process.cwd();
     const rendering = readFileSync(path.join(workspace, 'tests', 'bridges', 'sources', 'sdk', 'rendering.mjs'), 'utf8');

@@ -161,6 +161,7 @@ import flighthq.easing.EaseCircular as Facade_Sdk_flighthq_easing_EaseCircular;
 import flighthq.easing.EaseCombinators as Facade_Sdk_flighthq_easing_EaseCombinators;
 import flighthq.easing.EaseCubic as Facade_Sdk_flighthq_easing_EaseCubic;
 import flighthq.easing.EaseCubicBezier as Facade_Sdk_flighthq_easing_EaseCubicBezier;
+import flighthq.easing.EaseDampedSine as Facade_Sdk_flighthq_easing_EaseDampedSine;
 import flighthq.easing.EaseElastic as Facade_Sdk_flighthq_easing_EaseElastic;
 import flighthq.easing.EaseExponential as Facade_Sdk_flighthq_easing_EaseExponential;
 import flighthq.easing.EaseLinear as Facade_Sdk_flighthq_easing_EaseLinear;
@@ -444,6 +445,12 @@ import flighthq.intl.Plural as Facade_Sdk_flighthq_intl_Plural;
 import flighthq.intl.RelativeTime as Facade_Sdk_flighthq_intl_RelativeTime;
 import flighthq.ipc.Ipc as Facade_Sdk_flighthq_ipc_Ipc;
 import flighthq.keyboard.Keyboard as Facade_Sdk_flighthq_keyboard_Keyboard;
+import flighthq.layout.AnchorLayout as Facade_Sdk_flighthq_layout_AnchorLayout;
+import flighthq.layout.EnableLayoutGuards as Facade_Sdk_flighthq_layout_EnableLayoutGuards;
+import flighthq.layout.FlexLayout as Facade_Sdk_flighthq_layout_FlexLayout;
+import flighthq.layout.GridLayout as Facade_Sdk_flighthq_layout_GridLayout;
+import flighthq.layout.LayoutState as Facade_Sdk_flighthq_layout_LayoutState;
+import flighthq.layout.ResolveLayoutTree as Facade_Sdk_flighthq_layout_ResolveLayoutTree;
 import flighthq.lifecycle.Lifecycle as Facade_Sdk_flighthq_lifecycle_Lifecycle;
 import flighthq.lighting.AmbientLight as Facade_Sdk_flighthq_lighting_AmbientLight;
 import flighthq.lighting.AreaLight as Facade_Sdk_flighthq_lighting_AreaLight;
@@ -513,6 +520,7 @@ import flighthq.mesh.MeshGeometryUvs as Facade_Sdk_flighthq_mesh_MeshGeometryUvs
 import flighthq.mesh.MorphMeshGeometry as Facade_Sdk_flighthq_mesh_MorphMeshGeometry;
 import flighthq.mesh.UpdateMeshMorph as Facade_Sdk_flighthq_mesh_UpdateMeshMorph;
 import flighthq.motionpath.MotionPath as Facade_Sdk_flighthq_motionpath_MotionPath;
+import flighthq.movieclip.EnableMovieClipGuards as Facade_Sdk_flighthq_movieclip_EnableMovieClipGuards;
 import flighthq.movieclip.MovieClip as Facade_Sdk_flighthq_movieclip_MovieClip;
 import flighthq.movieclip.SpritesheetTimelineSource as Facade_Sdk_flighthq_movieclip_SpritesheetTimelineSource;
 import flighthq.net.Net as Facade_Sdk_flighthq_net_Net;
@@ -616,6 +624,7 @@ import flighthq.platform.Platform as Facade_Sdk_flighthq_platform_Platform;
 import flighthq.power.Power as Facade_Sdk_flighthq_power_Power;
 import flighthq.protocol.Protocol as Facade_Sdk_flighthq_protocol_Protocol;
 import flighthq.quadbatch.QuadBatch as Facade_Sdk_flighthq_quadbatch_QuadBatch;
+import flighthq.render.EnableColorAdjustments as Facade_Sdk_flighthq_render_EnableColorAdjustments;
 import flighthq.render.EnableSceneRenderGuards as Facade_Sdk_flighthq_render_EnableSceneRenderGuards;
 import flighthq.render.RenderCache as Facade_Sdk_flighthq_render_RenderCache;
 import flighthq.render.RenderProxy as Facade_Sdk_flighthq_render_RenderProxy;
@@ -690,6 +699,7 @@ import flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards as Facade_Sdk_fl
 import flighthq.scene2dCanvas.ExplainCanvasTextureResolution as Facade_Sdk_flighthq_scene2dCanvas_ExplainCanvasTextureResolution;
 import flighthq.scene2dDom.DomBackground as Facade_Sdk_flighthq_scene2dDom_DomBackground;
 import flighthq.scene2dDom.DomBitmapTextureResolver as Facade_Sdk_flighthq_scene2dDom_DomBitmapTextureResolver;
+import flighthq.scene2dDom.DomCSSFilterBinding as Facade_Sdk_flighthq_scene2dDom_DomCSSFilterBinding;
 import flighthq.scene2dDom.DomCache as Facade_Sdk_flighthq_scene2dDom_DomCache;
 import flighthq.scene2dDom.DomClip as Facade_Sdk_flighthq_scene2dDom_DomClip;
 import flighthq.scene2dDom.DomHtmlView as Facade_Sdk_flighthq_scene2dDom_DomHtmlView;
@@ -832,14 +842,11 @@ import flighthq.scene3dGl.UnlitGlMeshMaterialRenderer as Facade_Sdk_flighthq_sce
 import flighthq.scene3dGl.VertexColorGlMeshMaterialRenderer as Facade_Sdk_flighthq_scene3dGl_VertexColorGlMeshMaterialRenderer;
 import flighthq.scene3dGl.WireframeGlMeshMaterialRenderer as Facade_Sdk_flighthq_scene3dGl_WireframeGlMeshMaterialRenderer;
 import flighthq.scene3dGl.WrappedDiffusePbrGlExtension as Facade_Sdk_flighthq_scene3dGl_WrappedDiffusePbrGlExtension;
-import flighthq.scene3dResources.AnisotropyPbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_AnisotropyPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.Awd2Load as Facade_Sdk_flighthq_scene3dResources_Awd2Load;
-import flighthq.scene3dResources.ClearcoatPbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_ClearcoatPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.EnableScene3DResourceFailureGuards as Facade_Sdk_flighthq_scene3dResources_EnableScene3DResourceFailureGuards;
 import flighthq.scene3dResources.GetScene3DResourceTextures as Facade_Sdk_flighthq_scene3dResources_GetScene3DResourceTextures;
 import flighthq.scene3dResources.GltfLoad as Facade_Sdk_flighthq_scene3dResources_GltfLoad;
 import flighthq.scene3dResources.ImageResourceFetch as Facade_Sdk_flighthq_scene3dResources_ImageResourceFetch;
-import flighthq.scene3dResources.IridescencePbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_IridescencePbrScene3DMaterialTextures;
 import flighthq.scene3dResources.LoadScene3DResources as Facade_Sdk_flighthq_scene3dResources_LoadScene3DResources;
 import flighthq.scene3dResources.Md2Load as Facade_Sdk_flighthq_scene3dResources_Md2Load;
 import flighthq.scene3dResources.Md5Load as Facade_Sdk_flighthq_scene3dResources_Md5Load;
@@ -847,16 +854,10 @@ import flighthq.scene3dResources.ObjLoad as Facade_Sdk_flighthq_scene3dResources
 import flighthq.scene3dResources.ResolveScene3DResources as Facade_Sdk_flighthq_scene3dResources_ResolveScene3DResources;
 import flighthq.scene3dResources.RevealScene3DResourcesOnResolve as Facade_Sdk_flighthq_scene3dResources_RevealScene3DResourcesOnResolve;
 import flighthq.scene3dResources.SceneDocumentSource as Facade_Sdk_flighthq_scene3dResources_SceneDocumentSource;
-import flighthq.scene3dResources.SceneMaterialTextureRegistry as Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry;
 import flighthq.scene3dResources.SceneResourceRecovery as Facade_Sdk_flighthq_scene3dResources_SceneResourceRecovery;
 import flighthq.scene3dResources.SceneResourceResolver as Facade_Sdk_flighthq_scene3dResources_SceneResourceResolver;
 import flighthq.scene3dResources.SceneResourceSignals as Facade_Sdk_flighthq_scene3dResources_SceneResourceSignals;
-import flighthq.scene3dResources.ShadedScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_ShadedScene3DMaterialTextures;
-import flighthq.scene3dResources.SheenPbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_SheenPbrScene3DMaterialTextures;
-import flighthq.scene3dResources.SpecularPbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_SpecularPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.ThreeDsLoad as Facade_Sdk_flighthq_scene3dResources_ThreeDsLoad;
-import flighthq.scene3dResources.TransmissionVolumePbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_TransmissionVolumePbrScene3DMaterialTextures;
-import flighthq.scene3dResources.WrappedDiffusePbrScene3DMaterialTextures as Facade_Sdk_flighthq_scene3dResources_WrappedDiffusePbrScene3DMaterialTextures;
 import flighthq.scene3dWgpu.BlinnPhongWgpuMeshMaterialRenderer as Facade_Sdk_flighthq_scene3dWgpu_BlinnPhongWgpuMeshMaterialRenderer;
 import flighthq.scene3dWgpu.CustomShaderWgpuMeshMaterialRenderer as Facade_Sdk_flighthq_scene3dWgpu_CustomShaderWgpuMeshMaterialRenderer;
 import flighthq.scene3dWgpu.DepthWgpuMeshMaterialRenderer as Facade_Sdk_flighthq_scene3dWgpu_DepthWgpuMeshMaterialRenderer;
@@ -923,9 +924,21 @@ import flighthq.signals.Signal as Facade_Sdk_flighthq_signals_Signal;
 import flighthq.signals.Slot as Facade_Sdk_flighthq_signals_Slot;
 import flighthq.signals.Throttle as Facade_Sdk_flighthq_signals_Throttle;
 import flighthq.skeleton2d.ApplyAnimationClipToSkeleton2D as Facade_Sdk_flighthq_skeleton2d_ApplyAnimationClipToSkeleton2D;
+import flighthq.skeleton2d.BoundingBoxAttachment2D as Facade_Sdk_flighthq_skeleton2d_BoundingBoxAttachment2D;
+import flighthq.skeleton2d.ClippingAttachment2D as Facade_Sdk_flighthq_skeleton2d_ClippingAttachment2D;
+import flighthq.skeleton2d.DeformAnimationTarget2D as Facade_Sdk_flighthq_skeleton2d_DeformAnimationTarget2D;
 import flighthq.skeleton2d.DeformMeshAttachment2D as Facade_Sdk_flighthq_skeleton2d_DeformMeshAttachment2D;
+import flighthq.skeleton2d.DeformPathAttachment2D as Facade_Sdk_flighthq_skeleton2d_DeformPathAttachment2D;
+import flighthq.skeleton2d.ExplainSkeleton2DDeformLength as Facade_Sdk_flighthq_skeleton2d_ExplainSkeleton2DDeformLength;
+import flighthq.skeleton2d.IkConstraint2D as Facade_Sdk_flighthq_skeleton2d_IkConstraint2D;
+import flighthq.skeleton2d.PathConstraint2D as Facade_Sdk_flighthq_skeleton2d_PathConstraint2D;
+import flighthq.skeleton2d.PointAttachment2D as Facade_Sdk_flighthq_skeleton2d_PointAttachment2D;
 import flighthq.skeleton2d.RegionAttachment2D as Facade_Sdk_flighthq_skeleton2d_RegionAttachment2D;
 import flighthq.skeleton2d.Skeleton2d as Facade_Sdk_flighthq_skeleton2d_Skeleton2d;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget as Facade_Sdk_flighthq_skeleton2d_Skeleton2dAnimationTarget;
+import flighthq.skeleton2d.Skeleton2dConstraint as Facade_Sdk_flighthq_skeleton2d_Skeleton2dConstraint;
+import flighthq.skeleton2d.SlotDeform2D as Facade_Sdk_flighthq_skeleton2d_SlotDeform2D;
+import flighthq.skeleton2d.TransformConstraint2D as Facade_Sdk_flighthq_skeleton2d_TransformConstraint2D;
 import flighthq.skeleton2dFormats.DragonBonesParse as Facade_Sdk_flighthq_skeleton2dFormats_DragonBonesParse;
 import flighthq.skeleton2dFormats.SkeletonDetect as Facade_Sdk_flighthq_skeleton2dFormats_SkeletonDetect;
 import flighthq.skeleton2dFormats.SpineBinaryParse as Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryParse;
@@ -970,8 +983,12 @@ import flighthq.spritesheetFormats.StarlingParse as Facade_Sdk_flighthq_spritesh
 import flighthq.spritesheetFormats.StarlingSerialize as Facade_Sdk_flighthq_spritesheetFormats_StarlingSerialize;
 import flighthq.spritesheetFormats.TexturePackerParse as Facade_Sdk_flighthq_spritesheetFormats_TexturePackerParse;
 import flighthq.spritesheetFormats.TexturePackerSerialize as Facade_Sdk_flighthq_spritesheetFormats_TexturePackerSerialize;
+import flighthq.statechart.EnableStatechartGuards as Facade_Sdk_flighthq_statechart_EnableStatechartGuards;
+import flighthq.statechart.Statechart as Facade_Sdk_flighthq_statechart_Statechart;
+import flighthq.statechart.StatechartSignals as Facade_Sdk_flighthq_statechart_StatechartSignals;
 import flighthq.statusbar.Statusbar as Facade_Sdk_flighthq_statusbar_Statusbar;
 import flighthq.storage.Storage as Facade_Sdk_flighthq_storage_Storage;
+import flighthq.swf.EnableSwfGuards as Facade_Sdk_flighthq_swf_EnableSwfGuards;
 import flighthq.swf.SwfDocument as Facade_Sdk_flighthq_swf_SwfDocument;
 import flighthq.text.NativeText as Facade_Sdk_flighthq_text_NativeText;
 import flighthq.text.RichText as Facade_Sdk_flighthq_text_RichText;
@@ -1116,6 +1133,7 @@ import flighthq.types.Assets.AssetLoadExplanation;
 import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
+import flighthq.types.Attachment2D;
 import flighthq.types.AudioBus;
 import flighthq.types.AudioBus.AudioBusOptions;
 import flighthq.types.AudioBus.AudioMixer;
@@ -1179,6 +1197,7 @@ import flighthq.types.BloomEffect;
 import flighthq.types.BlurEffect;
 import flighthq.types.BokehDepthOfFieldEffect;
 import flighthq.types.Bone2D;
+import flighthq.types.BoundingBoxAttachment2D;
 import flighthq.types.BoundingSphere;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.BrightnessContrastAdjustment;
@@ -1205,6 +1224,7 @@ import flighthq.types.Clipboard.ClipboardBookmark;
 import flighthq.types.Clipboard.ClipboardWriteItem;
 import flighthq.types.ClipboardFormat as Facade_Sdk_flighthq_types_ClipboardFormat;
 import flighthq.types.ClipboardWatch;
+import flighthq.types.ClippingAttachment2D;
 import flighthq.types.Clock;
 import flighthq.types.ClockOptions;
 import flighthq.types.CocosPlistSchema.CocosPlistParsed;
@@ -1427,6 +1447,12 @@ import flighthq.types.Keyboard.SoftKeyboardTransition;
 import flighthq.types.KeyboardEventData;
 import flighthq.types.KuwaharaEffect;
 import flighthq.types.LambertMaterial;
+import flighthq.types.Layout as Facade_Sdk_flighthq_types_Layout;
+import flighthq.types.Layout.LayoutResolutionExplanation;
+import flighthq.types.Layout.LayoutResolutionGuard;
+import flighthq.types.Layout.LayoutResolver;
+import flighthq.types.Layout.LayoutState;
+import flighthq.types.Layout.LayoutTree;
 import flighthq.types.LensDirtEffect;
 import flighthq.types.LensDistortionEffect;
 import flighthq.types.LensFlareEffect;
@@ -1563,6 +1589,7 @@ import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 import flighthq.types.ParticleSerializeResult;
 import flighthq.types.Path;
+import flighthq.types.PathAttachment2D;
 import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
 import flighthq.types.PathMesh;
@@ -1621,6 +1648,7 @@ import flighthq.types.Platform.PlatformEngine;
 import flighthq.types.Platform.PlatformInfo;
 import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
+import flighthq.types.PointAttachment2D;
 import flighthq.types.PointLight;
 import flighthq.types.PointLightOptions;
 import flighthq.types.PosterizeEffect;
@@ -1709,7 +1737,6 @@ import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
 import flighthq.types.Scene2DResources.Scene2DImageResources;
 import flighthq.types.Scene2DSignals;
 import flighthq.types.Scene3D;
-import flighthq.types.Scene3DCoverageGap;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DForwardLightSelection;
 import flighthq.types.Scene3DHit;
@@ -1724,14 +1751,12 @@ import flighthq.types.Scene3DResources;
 import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
 import flighthq.types.Scene3DResources.ResolveScene3DResourcesOptions;
 import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureLister;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
-import flighthq.types.Scene3DResources.Scene3DPbrExtensionTextureLister;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceRevealOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceSignals;
 import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
+import flighthq.types.SceneCoverageEntry;
 import flighthq.types.Screen.ScreenInfo;
 import flighthq.types.ScreenMode;
 import flighthq.types.ScreenSignals;
@@ -1779,10 +1804,23 @@ import flighthq.types.Signal;
 import flighthq.types.SignalConnectOptions;
 import flighthq.types.SignalThrottleOptions;
 import flighthq.types.Skeleton2D;
+import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types.Skeleton2DAnimationTarget;
+import flighthq.types.Skeleton2DAnimationTargetBinder;
+import flighthq.types.Skeleton2DAnimationTargetKind;
+import flighthq.types.Skeleton2DConstraint;
+import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
+import flighthq.types.Skeleton2DDeformLengthExplanation;
 import flighthq.types.Skeleton2DImport;
+import flighthq.types.Skeleton2DSlotAnimationTarget;
+import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
+import flighthq.types.Skeleton2DSlotDeform;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
 import flighthq.types.SketchEffect;
+import flighthq.types.Skin2D;
+import flighthq.types.Slot2D;
 import flighthq.types.SmaaEffect;
 import flighthq.types.Snapshot;
 import flighthq.types.Snapshot.SnapshotSchema;
@@ -1821,6 +1859,7 @@ import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.SpritesheetParseOptions;
 import flighthq.types.SpritesheetPlayer;
+import flighthq.types.SpritesheetTimelineSourceExplanation;
 import flighthq.types.SpritesheetValidationDiagnostic;
 import flighthq.types.SsaoEffect;
 import flighthq.types.SsrEffect;
@@ -1832,6 +1871,10 @@ import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
 import flighthq.types.StarlingPexSchema.StarlingPexSerializeOptions;
 import flighthq.types.StarlingSchema.StarlingParseOptions;
 import flighthq.types.StarlingSchema.StarlingParsed;
+import flighthq.types.Statechart;
+import flighthq.types.Statechart.StatechartInstance;
+import flighthq.types.Statechart.StatechartTransitionExplanation;
+import flighthq.types.StatechartSignals;
 import flighthq.types.StatusBar;
 import flighthq.types.StatusBar.StatusBarAnimation;
 import flighthq.types.StatusBar.StatusBarInfo;
@@ -1850,6 +1893,7 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.SurfaceMaterialOptions;
 import flighthq.types.SvgDocumentImport.SvgDocumentImportOptions;
+import flighthq.types.SwfDocumentImport;
 import flighthq.types.TaaEffect;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextBoundsSpec;
@@ -2017,8 +2061,10 @@ import flighthq.types._internal._BitmapCompositeModeValues as Facade_Sdk_flighth
 import flighthq.types._internal._BitmapTextValues as Facade_Sdk_flighthq_types__internal__BitmapTextValues;
 import flighthq.types._internal._BlendModeValues as Facade_Sdk_flighthq_types__internal__BlendModeValues;
 import flighthq.types._internal._BlinnPhongMaterialValues as Facade_Sdk_flighthq_types__internal__BlinnPhongMaterialValues;
+import flighthq.types._internal._BoundingBoxAttachment2DValues as Facade_Sdk_flighthq_types__internal__BoundingBoxAttachment2DValues;
 import flighthq.types._internal._CircleColliderValues as Facade_Sdk_flighthq_types__internal__CircleColliderValues;
 import flighthq.types._internal._ClearcoatPbrExtensionValues as Facade_Sdk_flighthq_types__internal__ClearcoatPbrExtensionValues;
+import flighthq.types._internal._ClippingAttachment2DValues as Facade_Sdk_flighthq_types__internal__ClippingAttachment2DValues;
 import flighthq.types._internal._CompositeOperatorValues as Facade_Sdk_flighthq_types__internal__CompositeOperatorValues;
 import flighthq.types._internal._CompressionValues as Facade_Sdk_flighthq_types__internal__CompressionValues;
 import flighthq.types._internal._CurlNoiseForceValues as Facade_Sdk_flighthq_types__internal__CurlNoiseForceValues;
@@ -2068,9 +2114,11 @@ import flighthq.types._internal._NormalMaterialValues as Facade_Sdk_flighthq_typ
 import flighthq.types._internal._ParticleEmitter2DValues as Facade_Sdk_flighthq_types__internal__ParticleEmitter2DValues;
 import flighthq.types._internal._ParticleEmitter3DValues as Facade_Sdk_flighthq_types__internal__ParticleEmitter3DValues;
 import flighthq.types._internal._ParticleFormatKindValues as Facade_Sdk_flighthq_types__internal__ParticleFormatKindValues;
+import flighthq.types._internal._PathAttachment2DValues as Facade_Sdk_flighthq_types__internal__PathAttachment2DValues;
 import flighthq.types._internal._PathValues as Facade_Sdk_flighthq_types__internal__PathValues;
 import flighthq.types._internal._PhongMaterialValues as Facade_Sdk_flighthq_types__internal__PhongMaterialValues;
 import flighthq.types._internal._PlaneColliderValues as Facade_Sdk_flighthq_types__internal__PlaneColliderValues;
+import flighthq.types._internal._PointAttachment2DValues as Facade_Sdk_flighthq_types__internal__PointAttachment2DValues;
 import flighthq.types._internal._PointGravityWellForceValues as Facade_Sdk_flighthq_types__internal__PointGravityWellForceValues;
 import flighthq.types._internal._PointLightValues as Facade_Sdk_flighthq_types__internal__PointLightValues;
 import flighthq.types._internal._QuadBatchValues as Facade_Sdk_flighthq_types__internal__QuadBatchValues;
@@ -2083,13 +2131,16 @@ import flighthq.types._internal._RimModifierValues as Facade_Sdk_flighthq_types_
 import flighthq.types._internal._RiveDocumentValues as Facade_Sdk_flighthq_types__internal__RiveDocumentValues;
 import flighthq.types._internal._Scale9ShapeValues as Facade_Sdk_flighthq_types__internal__Scale9ShapeValues;
 import flighthq.types._internal._Scene3DAnimationPathValues as Facade_Sdk_flighthq_types__internal__Scene3DAnimationPathValues;
-import flighthq.types._internal._Scene3DCoverageGapValues as Facade_Sdk_flighthq_types__internal__Scene3DCoverageGapValues;
 import flighthq.types._internal._Scene3DLightBlockValues as Facade_Sdk_flighthq_types__internal__Scene3DLightBlockValues;
 import flighthq.types._internal._Scene3DResourcesValues as Facade_Sdk_flighthq_types__internal__Scene3DResourcesValues;
+import flighthq.types._internal._SceneCoverageEntryValues as Facade_Sdk_flighthq_types__internal__SceneCoverageEntryValues;
 import flighthq.types._internal._ShadedMaterialValues as Facade_Sdk_flighthq_types__internal__ShadedMaterialValues;
 import flighthq.types._internal._ShapeValues as Facade_Sdk_flighthq_types__internal__ShapeValues;
 import flighthq.types._internal._SheenPbrExtensionValues as Facade_Sdk_flighthq_types__internal__SheenPbrExtensionValues;
 import flighthq.types._internal._Skeleton2DAnimationPathValues as Facade_Sdk_flighthq_types__internal__Skeleton2DAnimationPathValues;
+import flighthq.types._internal._Skeleton2DAnimationTargetKindValues as Facade_Sdk_flighthq_types__internal__Skeleton2DAnimationTargetKindValues;
+import flighthq.types._internal._Skeleton2DConstraintValues as Facade_Sdk_flighthq_types__internal__Skeleton2DConstraintValues;
+import flighthq.types._internal._Skeleton2DPathConstraintValues as Facade_Sdk_flighthq_types__internal__Skeleton2DPathConstraintValues;
 import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues as Facade_Sdk_flighthq_types__internal__Skeleton2DSlotAnimationTargetValues;
 import flighthq.types._internal._SoftKeyboardEasingKindValues as Facade_Sdk_flighthq_types__internal__SoftKeyboardEasingKindValues;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues as Facade_Sdk_flighthq_types__internal__SpecularGlossinessPbrMaterialValues;
@@ -2099,6 +2150,7 @@ import flighthq.types._internal._SpotLightValues as Facade_Sdk_flighthq_types__i
 import flighthq.types._internal._SpriteValues as Facade_Sdk_flighthq_types__internal__SpriteValues;
 import flighthq.types._internal._StandardMaterialValues as Facade_Sdk_flighthq_types__internal__StandardMaterialValues;
 import flighthq.types._internal._StandardPbrMaterialValues as Facade_Sdk_flighthq_types__internal__StandardPbrMaterialValues;
+import flighthq.types._internal._StatechartValues as Facade_Sdk_flighthq_types__internal__StatechartValues;
 import flighthq.types._internal._TextDirectionValues as Facade_Sdk_flighthq_types__internal__TextDirectionValues;
 import flighthq.types._internal._TextFeatureValues as Facade_Sdk_flighthq_types__internal__TextFeatureValues;
 import flighthq.types._internal._TextLabelValues as Facade_Sdk_flighthq_types__internal__TextLabelValues;
@@ -2140,7 +2192,7 @@ class Sdk {
 
   public static final __enum_LogLevel:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'None', value: Facade_Sdk_flighthq_types_Log_LogLevel.None }, { key: Facade_Sdk_flighthq_types_Log_LogLevel.None, value: 'None' }, { key: 'Error', value: Facade_Sdk_flighthq_types_Log_LogLevel.Error }, { key: Facade_Sdk_flighthq_types_Log_LogLevel.Error, value: 'Error' }, { key: 'Warn', value: Facade_Sdk_flighthq_types_Log_LogLevel.Warn }, { key: Facade_Sdk_flighthq_types_Log_LogLevel.Warn, value: 'Warn' }, { key: 'Info', value: Facade_Sdk_flighthq_types_Log_LogLevel.Info }, { key: Facade_Sdk_flighthq_types_Log_LogLevel.Info, value: 'Info' }, { key: 'Debug', value: Facade_Sdk_flighthq_types_Log_LogLevel.Debug }, { key: Facade_Sdk_flighthq_types_Log_LogLevel.Debug, value: 'Debug' }, { key: 'Verbose', value: Facade_Sdk_flighthq_types_Log_LogLevel.Verbose }, { key: Facade_Sdk_flighthq_types_Log_LogLevel.Verbose, value: 'Verbose' }] : Array<Dynamic>));
 
-  public static final __enum_RenderRegistry:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'EffectPaddingResolver', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver, value: 'EffectPaddingResolver' }, { key: 'MaterialRenderer', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialRenderer }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialRenderer, value: 'MaterialRenderer' }, { key: 'ModifierSnippet', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ModifierSnippet }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ModifierSnippet, value: 'ModifierSnippet' }, { key: 'NodeRenderer', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer, value: 'NodeRenderer' }, { key: 'ShapeCommandHandler', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler, value: 'ShapeCommandHandler' }, { key: 'ShapeRasterizer', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeRasterizer }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeRasterizer, value: 'ShapeRasterizer' }, { key: 'TextureResolver', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver, value: 'TextureResolver' }] : Array<Dynamic>));
+  public static final __enum_RenderRegistry:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'BlendRealization', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.BlendRealization }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.BlendRealization, value: 'BlendRealization' }, { key: 'EffectPaddingResolver', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver, value: 'EffectPaddingResolver' }, { key: 'MaterialRenderer', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialRenderer }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialRenderer, value: 'MaterialRenderer' }, { key: 'MaterialTextureLister', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialTextureLister }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialTextureLister, value: 'MaterialTextureLister' }, { key: 'ModifierSnippet', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ModifierSnippet }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ModifierSnippet, value: 'ModifierSnippet' }, { key: 'NodeRenderer', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer, value: 'NodeRenderer' }, { key: 'ShapeCommandHandler', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler, value: 'ShapeCommandHandler' }, { key: 'ShapeRasterizer', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeRasterizer }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeRasterizer, value: 'ShapeRasterizer' }, { key: 'TextureResolver', value: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver }, { key: Facade_Sdk_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver, value: 'TextureResolver' }] : Array<Dynamic>));
 
   public static final AbcMultinameKind:Dynamic = Facade_Sdk_flighthq_types_Abc.AbcMultinameKindValue;
 
@@ -2405,6 +2457,11 @@ class Sdk {
 
   public static final AdvancedBlendMode:Dynamic = Facade_Sdk_flighthq_types__internal__AdvancedBlendModeValues.AdvancedBlendModeValue;
 
+  public static function advanceStatechartInstance(instance:StatechartInstance, deltaTime:Float):Float {
+    return cast Facade_Sdk_flighthq_statechart_Statechart.advanceStatechartInstance(instance, deltaTime);
+    return cast null;
+  }
+
   public static function advanceVideoTexture(texture:TextureLike):Float {
     return cast Facade_Sdk_flighthq_texture_VideoTexture.advanceVideoTexture(texture);
     return cast null;
@@ -2426,6 +2483,8 @@ class Sdk {
   }
 
   public static final AmbientLightKind:Dynamic = Facade_Sdk_flighthq_types__internal__AmbientLightValues.AmbientLightKind;
+
+  public static final AnchorLayoutKind:Dynamic = Facade_Sdk_flighthq_types_Layout.AnchorLayoutKind;
 
   public static final animatedNormalModifierDefinition:ModifierDefinition = Facade_Sdk_flighthq_shading_RegisterBuiltInModifiers.animatedNormalModifierDefinition;
 
@@ -2856,8 +2915,18 @@ class Sdk {
     return cast null;
   }
 
+  public static function areColorAdjustmentsEnabled(state:RenderState):Bool {
+    return cast Facade_Sdk_flighthq_render_EnableColorAdjustments.areColorAdjustmentsEnabled(state);
+    return cast null;
+  }
+
   public static function areGlPbrExtensionGuardsEnabled(state:GlRenderState):Bool {
     return cast Facade_Sdk_flighthq_scene3dGl_EnableGlPbrExtensionGuards.areGlPbrExtensionGuardsEnabled(state);
+    return cast null;
+  }
+
+  public static function areMovieClipGuardsEnabled():Bool {
+    return cast Facade_Sdk_flighthq_movieclip_EnableMovieClipGuards.areMovieClipGuardsEnabled();
     return cast null;
   }
 
@@ -2868,6 +2937,16 @@ class Sdk {
 
   public static function areSocketGuardsEnabled():Bool {
     return cast Facade_Sdk_flighthq_socket_EnableSocketGuards.areSocketGuardsEnabled();
+    return cast null;
+  }
+
+  public static function areStatechartGuardsEnabled(instance:StatechartInstance):Bool {
+    return cast Facade_Sdk_flighthq_statechart_EnableStatechartGuards.areStatechartGuardsEnabled(instance);
+    return cast null;
+  }
+
+  public static function areSwfGuardsEnabled():Bool {
+    return cast Facade_Sdk_flighthq_swf_EnableSwfGuards.areSwfGuardsEnabled();
     return cast null;
   }
 
@@ -3165,6 +3244,8 @@ class Sdk {
     return cast Facade_Sdk_flighthq_app_App.bounceAppDock();
     return cast null;
   }
+
+  public static final BoundingBoxAttachment2DKind:Dynamic = Facade_Sdk_flighthq_types__internal__BoundingBoxAttachment2DValues.BoundingBoxAttachment2DKind;
 
   public static function boxBlurBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapBoxBlurOptions):Void {
     Facade_Sdk_flighthq_bitmap_BitmapBlur.boxBlurBitmap(out, scratch, source, options);
@@ -3612,6 +3693,8 @@ class Sdk {
   public static function clipCanvasBevelBand(band:Dynamic, source:Dynamic, bevelType:Dynamic):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.clipCanvasBevelBand(band, source, bevelType);
   }
+
+  public static final ClippingAttachment2DKind:Dynamic = Facade_Sdk_flighthq_types__internal__ClippingAttachment2DValues.ClippingAttachment2DKind;
 
   public static function clipRegionContainsPoint(clip:ClipRegion, x:Float, y:Float):Bool {
     return cast Facade_Sdk_flighthq_clip_ClipRegion.clipRegionContainsPoint(clip, x, y);
@@ -4362,6 +4445,27 @@ class Sdk {
 
   public static function computeSkeleton2DBoneMatrices(skeleton:Skeleton2D):Void {
     Facade_Sdk_flighthq_skeleton2d_Skeleton2d.computeSkeleton2DBoneMatrices(skeleton);
+  }
+
+  public static function computeSkeleton2DBoneWorldTransform(skeleton:Skeleton2D, boneIndex:Float):Void {
+    Facade_Sdk_flighthq_skeleton2d_Skeleton2d.computeSkeleton2DBoneWorldTransform(skeleton, boneIndex);
+  }
+
+  public static function computeSkeleton2DBoundingBoxAttachmentVertices(out:flighthq._internal._Float32Array, attachment:BoundingBoxAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Sdk_flighthq_skeleton2d_BoundingBoxAttachment2D.computeSkeleton2DBoundingBoxAttachmentVertices(out, attachment, skeleton, boneIndex, deform);
+  }
+
+  public static function computeSkeleton2DClippingAttachmentVertices(out:flighthq._internal._Float32Array, attachment:ClippingAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Sdk_flighthq_skeleton2d_ClippingAttachment2D.computeSkeleton2DClippingAttachmentVertices(out, attachment, skeleton, boneIndex, deform);
+  }
+
+  public static function computeSkeleton2DPointAttachmentPosition(out:Vector2Like, attachment:PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
+    Facade_Sdk_flighthq_skeleton2d_PointAttachment2D.computeSkeleton2DPointAttachmentPosition(out, attachment, skeleton, boneIndex);
+  }
+
+  public static function computeSkeleton2DPointAttachmentRotation(attachment:PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Float {
+    return cast Facade_Sdk_flighthq_skeleton2d_PointAttachment2D.computeSkeleton2DPointAttachmentRotation(attachment, skeleton, boneIndex);
+    return cast null;
   }
 
   public static function computeSkeleton2DRegionAttachmentVertices(out:flighthq._internal._Float32Array, attachment:RegionAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
@@ -5838,6 +5942,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createLayoutState():LayoutState {
+    return cast Facade_Sdk_flighthq_layout_LayoutState.createLayoutState();
+    return cast null;
+  }
+
   public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
     return cast Facade_Sdk_flighthq_effects_LensDirtEffect.createLensDirtEffect(options);
     return cast null;
@@ -6407,6 +6516,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createScene2DImportFromSwf(source:flighthq._internal._UInt8Array):Null<SwfDocumentImport> {
+    return cast Facade_Sdk_flighthq_swf_SwfDocument.createScene2DImportFromSwf(source);
+    return cast null;
+  }
+
   public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, ?required:Dynamic):Scene2DSlotReference {
     return cast Facade_Sdk_flighthq_scene2dResources_Scene2DDocument.createScene2DSlotReference(name, target, linkage, required);
     return cast null;
@@ -6479,11 +6593,6 @@ class Sdk {
 
   public static function createScene3DLightsFromDocument(document:Scene3DDocument):Scene3DLights {
     return cast Facade_Sdk_flighthq_scene3d_SceneDocumentLights.createScene3DLightsFromDocument(document);
-    return cast null;
-  }
-
-  public static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.createScene3DMaterialTextureRegistry();
     return cast null;
   }
 
@@ -6569,6 +6678,16 @@ class Sdk {
 
   public static function createSkeleton2D(bones:Array<Bone2D>, ?slots:Dynamic):Skeleton2D {
     return cast Facade_Sdk_flighthq_skeleton2d_Skeleton2d.createSkeleton2D(bones, slots);
+    return cast null;
+  }
+
+  public static function createSkeleton2DBoneAnimationTarget(boneIndex:Float, path:Skeleton2DAnimationPath):Skeleton2DAnimationTarget {
+    return cast Facade_Sdk_flighthq_skeleton2d_Skeleton2dAnimationTarget.createSkeleton2DBoneAnimationTarget(boneIndex, path);
+    return cast null;
+  }
+
+  public static function createSkeleton2DSlotAnimationTarget(slotIndex:Float, path:Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<Attachment2D>>>):Skeleton2DSlotAnimationTarget {
+    return cast Facade_Sdk_flighthq_skeleton2d_Skeleton2dAnimationTarget.createSkeleton2DSlotAnimationTarget(slotIndex, path, attachments);
     return cast null;
   }
 
@@ -6739,6 +6858,11 @@ class Sdk {
 
   public static function createStandardPbrMaterialProperties(?opts:Dynamic):StandardPbrMaterialProperties {
     return cast Facade_Sdk_flighthq_materials_PbrMaterials.createStandardPbrMaterialProperties(opts);
+    return cast null;
+  }
+
+  public static function createStatechartInstance(chart:Statechart):StatechartInstance {
+    return cast Facade_Sdk_flighthq_statechart_Statechart.createStatechartInstance(chart);
     return cast null;
   }
 
@@ -7541,8 +7665,12 @@ class Sdk {
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = Facade_Sdk_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
 
-  public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
-    Facade_Sdk_flighthq_skeleton2d_DeformMeshAttachment2D.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex);
+  public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Sdk_flighthq_skeleton2d_DeformMeshAttachment2D.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex, deform);
+  }
+
+  public static function deformSkeleton2DPathAttachment(out:Path, attachment:PathAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Sdk_flighthq_skeleton2d_DeformPathAttachment2D.deformSkeleton2DPathAttachment(out, attachment, skeleton, boneIndex, deform);
   }
 
   public static final DEG_TO_RAD:Dynamic = Facade_Sdk_flighthq_math_Constants.DEG_TO_RAD;
@@ -7902,6 +8030,10 @@ class Sdk {
     Facade_Sdk_flighthq_interaction_EnableInteractionGuards.disableInteractionGuards();
   }
 
+  public static function disableMovieClipGuards():Void {
+    Facade_Sdk_flighthq_movieclip_EnableMovieClipGuards.disableMovieClipGuards();
+  }
+
   public static function disablePermissionGuards():Void {
     Facade_Sdk_flighthq_permissions_EnablePermissionGuards.disablePermissionGuards();
   }
@@ -7926,8 +8058,16 @@ class Sdk {
     Facade_Sdk_flighthq_socket_EnableSocketGuards.disableSocketGuards();
   }
 
+  public static function disableStatechartGuards(instance:StatechartInstance):Void {
+    Facade_Sdk_flighthq_statechart_EnableStatechartGuards.disableStatechartGuards(instance);
+  }
+
   public static function disableStorageSignals():Void {
     Facade_Sdk_flighthq_storage_Storage.disableStorageSignals();
+  }
+
+  public static function disableSwfGuards():Void {
+    Facade_Sdk_flighthq_swf_EnableSwfGuards.disableSwfGuards();
   }
 
   public static function disableTextInput(node:RichText):Void {
@@ -8296,6 +8436,11 @@ class Sdk {
 
   public static final easeInCubic:EasingFunction = Facade_Sdk_flighthq_easing_EaseCubic.easeInCubic;
 
+  public static function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
+    return cast Facade_Sdk_flighthq_easing_EaseDampedSine.easeInDampedSine(amplitude, period);
+    return cast null;
+  }
+
   public static final easeInElastic:EasingFunction = Facade_Sdk_flighthq_easing_EaseElastic.easeInElastic;
 
   public static final easeInExponential:EasingFunction = Facade_Sdk_flighthq_easing_EaseExponential.easeInExponential;
@@ -8307,6 +8452,11 @@ class Sdk {
   public static final easeInOutCircular:EasingFunction = Facade_Sdk_flighthq_easing_EaseCircular.easeInOutCircular;
 
   public static final easeInOutCubic:EasingFunction = Facade_Sdk_flighthq_easing_EaseCubic.easeInOutCubic;
+
+  public static function easeInOutDampedSine(amplitude:Float, period:Float):EasingFunction {
+    return cast Facade_Sdk_flighthq_easing_EaseDampedSine.easeInOutDampedSine(amplitude, period);
+    return cast null;
+  }
 
   public static final easeInOutElastic:EasingFunction = Facade_Sdk_flighthq_easing_EaseElastic.easeInOutElastic;
 
@@ -8357,6 +8507,11 @@ class Sdk {
   public static final easeOutCircular:EasingFunction = Facade_Sdk_flighthq_easing_EaseCircular.easeOutCircular;
 
   public static final easeOutCubic:EasingFunction = Facade_Sdk_flighthq_easing_EaseCubic.easeOutCubic;
+
+  public static function easeOutDampedSine(amplitude:Float, period:Float):EasingFunction {
+    return cast Facade_Sdk_flighthq_easing_EaseDampedSine.easeOutDampedSine(amplitude, period);
+    return cast null;
+  }
 
   public static final easeOutElastic:EasingFunction = Facade_Sdk_flighthq_easing_EaseElastic.easeOutElastic;
 
@@ -8476,6 +8631,10 @@ class Sdk {
     Facade_Sdk_flighthq_collision_EnableCollisionGuards.enableCollisionGuards();
   }
 
+  public static function enableColorAdjustments(state:RenderState):Void {
+    Facade_Sdk_flighthq_render_EnableColorAdjustments.enableColorAdjustments(state);
+  }
+
   public static function enableDebug(?options:DebugOptions):Void {
     Facade_Sdk_flighthq_debug_Debug.enableDebug(options);
   }
@@ -8486,6 +8645,10 @@ class Sdk {
 
   public static function enableDomClipSupport(state:DomRenderState):Void {
     Facade_Sdk_flighthq_scene2dDom_DomClip.enableDomClipSupport(state);
+  }
+
+  public static function enableDomCssFilterSupport(state:DomRenderState):Void {
+    Facade_Sdk_flighthq_scene2dDom_DomCSSFilterBinding.enableDomCssFilterSupport(state);
   }
 
   public static function enableDomRenderCache(state:RenderState):Void {
@@ -8572,6 +8735,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function enableLayoutGuards(state:LayoutState, warningSink:LayoutResolutionGuard):Void {
+    Facade_Sdk_flighthq_layout_EnableLayoutGuards.enableLayoutGuards(state, warningSink);
+  }
+
   public static function enableLogSignals():LogSignals {
     return cast Facade_Sdk_flighthq_log_Log.enableLogSignals();
     return cast null;
@@ -8585,6 +8752,10 @@ class Sdk {
   public static function enableMeshSignals(source:Mesh):NodeSignals {
     return cast Facade_Sdk_flighthq_scene3d_Mesh.enableMeshSignals(source);
     return cast null;
+  }
+
+  public static function enableMovieClipGuards():Void {
+    Facade_Sdk_flighthq_movieclip_EnableMovieClipGuards.enableMovieClipGuards();
   }
 
   public static function enableMovieClipSignals(clip:MovieClip):MovieClipSignals {
@@ -8685,9 +8856,22 @@ class Sdk {
     return cast null;
   }
 
+  public static function enableStatechartGuards(instance:StatechartInstance):Void {
+    Facade_Sdk_flighthq_statechart_EnableStatechartGuards.enableStatechartGuards(instance);
+  }
+
+  public static function enableStatechartSignals(instance:StatechartInstance):StatechartSignals {
+    return cast Facade_Sdk_flighthq_statechart_StatechartSignals.enableStatechartSignals(instance);
+    return cast null;
+  }
+
   public static function enableStorageSignals():StorageSignals {
     return cast Facade_Sdk_flighthq_storage_Storage.enableStorageSignals();
     return cast null;
+  }
+
+  public static function enableSwfGuards():Void {
+    Facade_Sdk_flighthq_swf_EnableSwfGuards.enableSwfGuards();
   }
 
   public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
@@ -9060,7 +9244,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainGlScene3DCoverage(out:Array<Scene3DCoverageGap>, state:GlRenderState, usage:Scene3DKindUsage):Void {
+  public static function explainGlScene3DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene3DKindUsage):Void {
     Facade_Sdk_flighthq_scene3dGl_ExplainGlScene3DCoverage.explainGlScene3DCoverage(out, state, usage);
   }
 
@@ -9091,6 +9275,11 @@ class Sdk {
 
   public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
     return cast Facade_Sdk_flighthq_interaction_EnableInteractionGuards.explainInteractionHitEligibility(node);
+    return cast null;
+  }
+
+  public static function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Float):Null<LayoutResolutionExplanation> {
+    return cast Facade_Sdk_flighthq_layout_ResolveLayoutTree.explainLayoutResolution(state, tree, nodeIndex);
     return cast null;
   }
 
@@ -9134,6 +9323,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainSkeleton2DDeformLength(skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, deform:Null<flighthq._internal._Float32Array>):Skeleton2DDeformLengthExplanation {
+    return cast Facade_Sdk_flighthq_skeleton2d_ExplainSkeleton2DDeformLength.explainSkeleton2DDeformLength(skin, vertices, deform);
+    return cast null;
+  }
+
   public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
     return cast Facade_Sdk_flighthq_socket_ExplainSocketSendFailure.explainSocketSendFailure(socket);
     return cast null;
@@ -9141,6 +9335,16 @@ class Sdk {
 
   public static function explainSpatialIndexing(index:SpatialIndex, id:SpatialObjectId):SpatialIndexingExplanation {
     return cast Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing.explainSpatialIndexing(index, id);
+    return cast null;
+  }
+
+  public static function explainSpritesheetTimelineSource(animation:SpritesheetAnimation):SpritesheetTimelineSourceExplanation {
+    return cast Facade_Sdk_flighthq_movieclip_SpritesheetTimelineSource.explainSpritesheetTimelineSource(animation);
+    return cast null;
+  }
+
+  public static function explainStatechartTransition(instance:StatechartInstance, regionIndex:Float):StatechartTransitionExplanation {
+    return cast Facade_Sdk_flighthq_statechart_Statechart.explainStatechartTransition(instance, regionIndex);
     return cast null;
   }
 
@@ -9324,6 +9528,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function fireStatechartTrigger(instance:StatechartInstance, inputIndex:Float):Void {
+    Facade_Sdk_flighthq_statechart_Statechart.fireStatechartTrigger(instance, inputIndex);
+  }
+
   public static function fitPathCurves(source:Path, tolerance:Float, out:Path, ?flattenTolerance:Dynamic):Void {
     Facade_Sdk_flighthq_path_FitPathCurves.fitPathCurves(source, tolerance, out, flattenTolerance);
   }
@@ -9336,6 +9544,8 @@ class Sdk {
     return cast Facade_Sdk_flighthq_path_FlattenPath.flattenPath(path, tolerance);
     return cast null;
   }
+
+  public static final FlexLayoutKind:Dynamic = Facade_Sdk_flighthq_types_Layout.FlexLayoutKind;
 
   public static function flipBitmapHorizontal(dest:BitmapRegion, source:BitmapRegion):Void {
     Facade_Sdk_flighthq_bitmap_BitmapFlip.flipBitmapHorizontal(dest, source);
@@ -11608,17 +11818,13 @@ class Sdk {
     Facade_Sdk_flighthq_scene3d_SceneMaterial.getScene3DMaterials(root, out);
   }
 
-  public static function getScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
-    Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.getScene3DMaterialTextures(registry, material, out);
-  }
-
   public static function getScene3DResourceSignals(resolver:Scene3DResourceResolver):Null<Scene3DResourceSignals> {
     return cast Facade_Sdk_flighthq_scene3dResources_SceneResourceSignals.getScene3DResourceSignals(resolver);
     return cast null;
   }
 
-  public static function getScene3DResourceTextures(scene:Scene3D, registry:Scene3DMaterialTextureRegistry, out:Array<Texture>):Void {
-    Facade_Sdk_flighthq_scene3dResources_GetScene3DResourceTextures.getScene3DResourceTextures(scene, registry, out);
+  public static function getScene3DResourceTextures(out:Array<Texture>, scene:Scene3D):Void {
+    Facade_Sdk_flighthq_scene3dResources_GetScene3DResourceTextures.getScene3DResourceTextures(out, scene);
   }
 
   public static function getScreenBounds(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
@@ -11730,6 +11936,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function getSkeleton2DClippingAttachmentSlotRange(attachment:ClippingAttachment2D, slotIndex:Float, slotCount:Float):{ var end:Float; var start:Float; } {
+    return cast Facade_Sdk_flighthq_skeleton2d_ClippingAttachment2D.getSkeleton2DClippingAttachmentSlotRange(attachment, slotIndex, slotCount);
+    return cast null;
+  }
+
+  public static function getSkeleton2DSlotDeformOffsets(slot:Slot2D):Null<flighthq._internal._Float32Array> {
+    return cast Facade_Sdk_flighthq_skeleton2d_SlotDeform2D.getSkeleton2DSlotDeformOffsets(slot);
+    return cast null;
+  }
+
   public static function getSkeleton3DJointIndexByName(skeleton:Skeleton3D, name:String):Float {
     return cast Facade_Sdk_flighthq_skeleton3d_Skeleton3d.getSkeleton3DJointIndexByName(skeleton, name);
     return cast null;
@@ -11790,6 +12006,26 @@ class Sdk {
 
   public static function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Null<SpritesheetFrame> {
     return cast Facade_Sdk_flighthq_spritesheet_SpritesheetPlayer.getSpritesheetPlayerFrameAt(player, spritesheet, frameOffset);
+    return cast null;
+  }
+
+  public static function getStatechartInputIndex(chart:Statechart, name:String):Float {
+    return cast Facade_Sdk_flighthq_statechart_Statechart.getStatechartInputIndex(chart, name);
+    return cast null;
+  }
+
+  public static function getStatechartRegionBlend(instance:StatechartInstance, regionIndex:Float):Float {
+    return cast Facade_Sdk_flighthq_statechart_Statechart.getStatechartRegionBlend(instance, regionIndex);
+    return cast null;
+  }
+
+  public static function getStatechartRegionState(instance:StatechartInstance, regionIndex:Float):Float {
+    return cast Facade_Sdk_flighthq_statechart_Statechart.getStatechartRegionState(instance, regionIndex);
+    return cast null;
+  }
+
+  public static function getStatechartSignals(instance:StatechartInstance):Null<StatechartSignals> {
+    return cast Facade_Sdk_flighthq_statechart_StatechartSignals.getStatechartSignals(instance);
     return cast null;
   }
 
@@ -12490,6 +12726,8 @@ class Sdk {
     Facade_Sdk_flighthq_bitmap_BitmapGradient.gradientGlowBitmap(out, scratch, source, ramp, options);
   }
 
+  public static final GridLayoutKind:Dynamic = Facade_Sdk_flighthq_types_Layout.GridLayoutKind;
+
   public static final GroupKind:Dynamic = Facade_Sdk_flighthq_types__internal__GroupValues.GroupKind;
 
   public static final HALF_PI:Dynamic = Facade_Sdk_flighthq_math_Constants.HALF_PI;
@@ -12696,11 +12934,6 @@ class Sdk {
 
   public static function hasProximitySensor():Bool {
     return cast Facade_Sdk_flighthq_sensors_Sensors.hasProximitySensor();
-    return cast null;
-  }
-
-  public static function hasScene3DMaterialTextureLister(registry:Scene3DMaterialTextureRegistry, kind:Kind):Bool {
-    return cast Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.hasScene3DMaterialTextureLister(registry, kind);
     return cast null;
   }
 
@@ -13721,6 +13954,8 @@ class Sdk {
   }
 
   public static final LambertMaterialKind:Dynamic = Facade_Sdk_flighthq_types__internal__LambertMaterialValues.LambertMaterialKind;
+
+  public static final LayoutResolutionFailureKind:Dynamic = Facade_Sdk_flighthq_types_Layout.LayoutResolutionFailureKindValue;
 
   public static function lcm(a:Float, b:Float):Float {
     return cast Facade_Sdk_flighthq_math_NumberTheory.lcm(a, b);
@@ -15058,6 +15293,8 @@ class Sdk {
     Facade_Sdk_flighthq_text_NativeText.patchNativeTextStyle(source, patch);
   }
 
+  public static final PathAttachment2DKind:Dynamic = Facade_Sdk_flighthq_types__internal__PathAttachment2DValues.PathAttachment2DKind;
+
   public static final PathCommand:Dynamic = Facade_Sdk_flighthq_types__internal__PathValues.PathCommandValue;
 
   public static function pauseAllAudioMixerChannels(mixer:AudioMixer):Void {
@@ -15205,6 +15442,8 @@ class Sdk {
     return cast Facade_Sdk_flighthq_media_VideoChannel.playVideoResource(source, options);
     return cast null;
   }
+
+  public static final PointAttachment2DKind:Dynamic = Facade_Sdk_flighthq_types__internal__PointAttachment2DValues.PointAttachment2DKind;
 
   public static final PointGravityWellForceKind:Dynamic = Facade_Sdk_flighthq_types__internal__PointGravityWellForceValues.PointGravityWellForceKind;
 
@@ -15623,8 +15862,8 @@ class Sdk {
 
   public static final RegionAttachment2DKind:Dynamic = Facade_Sdk_flighthq_types__internal__RegionAttachment2DValues.RegionAttachment2DKind;
 
-  public static function registerAnisotropyPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_AnisotropyPbrScene3DMaterialTextures.registerAnisotropyPbrScene3DMaterialTextures(registry);
+  public static function registerAnchorLayoutResolver(state:LayoutState):Void {
+    Facade_Sdk_flighthq_layout_AnchorLayout.registerAnchorLayoutResolver(state);
   }
 
   public static function registerApplicationWindow(app:Application, win:ApplicationWindow):Void {
@@ -15673,10 +15912,6 @@ class Sdk {
 
   public static function registerBuiltInPhysics2DJointSolvers(world:Physics2DWorld):Void {
     Facade_Sdk_flighthq_physics2d_RegisterBuiltInPhysics2DJointSolvers.registerBuiltInPhysics2DJointSolvers(world);
-  }
-
-  public static function registerBuiltInScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerBuiltInScene3DMaterialTextures(registry);
   }
 
   public static function registerBuiltInWgpuModifierSnippets(state:WgpuRenderState):Void {
@@ -15771,10 +16006,6 @@ class Sdk {
     Facade_Sdk_flighthq_effectsCanvas_CanvasVignetteEffect.registerCanvasVignetteEffect(state);
   }
 
-  public static function registerClearcoatPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_ClearcoatPbrScene3DMaterialTextures.registerClearcoatPbrScene3DMaterialTextures(registry);
-  }
-
   public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
     Facade_Sdk_flighthq_effects_ContactShadowsEffect.registerContactShadowsEffectPaddingResolver(state);
   }
@@ -15827,8 +16058,8 @@ class Sdk {
     Facade_Sdk_flighthq_effects_DropShadowEffect.registerDropShadowEffectPaddingResolver(state);
   }
 
-  public static function registerExtendedPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerExtendedPbrScene3DMaterialTextures(registry);
+  public static function registerFlexLayoutResolver(state:LayoutState):Void {
+    Facade_Sdk_flighthq_layout_FlexLayout.registerFlexLayoutResolver(state);
   }
 
   public static function registerGlAnisotropyPbrExtension(state:GlRenderState):Void {
@@ -16192,6 +16423,10 @@ class Sdk {
     Facade_Sdk_flighthq_effects_GradientGlowEffect.registerGradientGlowEffectPaddingResolver(state);
   }
 
+  public static function registerGridLayoutResolver(state:LayoutState):Void {
+    Facade_Sdk_flighthq_layout_GridLayout.registerGridLayoutResolver(state);
+  }
+
   public static function registerHitTest(kind:Kind, fn:HitTestFunction):Void {
     Facade_Sdk_flighthq_interaction_HitTests.registerHitTest(kind, fn);
   }
@@ -16216,8 +16451,8 @@ class Sdk {
     Facade_Sdk_flighthq_effects_InnerShadowEffect.registerInnerShadowEffectPaddingResolver(state);
   }
 
-  public static function registerIridescencePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_IridescencePbrScene3DMaterialTextures.registerIridescencePbrScene3DMaterialTextures(registry);
+  public static function registerLayoutResolver(state:LayoutState, kind:String, resolver:Null<LayoutResolver>):Void {
+    Facade_Sdk_flighthq_layout_LayoutState.registerLayoutResolver(state, kind, resolver);
   }
 
   public static function registerLogSerializer(kind:String, fn:Dynamic):Void {
@@ -16290,32 +16525,36 @@ class Sdk {
     Facade_Sdk_flighthq_scene2dResources_Scene2DDocumentImporterRegistry.registerScene2DDocumentImporter(registry, kind, matches, importDocument);
   }
 
-  public static function registerScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DMaterialTextureLister):Void {
-    Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerScene3DMaterialTextures(registry, kind, lister);
-  }
-
-  public static function registerScene3DPbrExtensionTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DPbrExtensionTextureLister):Void {
-    Facade_Sdk_flighthq_scene3dResources_SceneMaterialTextureRegistry.registerScene3DPbrExtensionTextures(registry, kind, lister);
-  }
-
-  public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_ShadedScene3DMaterialTextures.registerShadedScene3DMaterialTextures(registry);
-  }
-
   public static function registerShapeHitTest():Void {
     Facade_Sdk_flighthq_interaction_RegisterShapeHitTest.registerShapeHitTest();
   }
 
-  public static function registerSheenPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_SheenPbrScene3DMaterialTextures.registerSheenPbrScene3DMaterialTextures(registry);
+  public static function registerSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind, bind:Skeleton2DAnimationTargetBinder):Void {
+    Facade_Sdk_flighthq_skeleton2d_Skeleton2dAnimationTarget.registerSkeleton2DAnimationTargetBinder(kind, bind);
+  }
+
+  public static function registerSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind, solve:Skeleton2DConstraintSolver):Void {
+    Facade_Sdk_flighthq_skeleton2d_Skeleton2dConstraint.registerSkeleton2DConstraintSolver(kind, solve);
+  }
+
+  public static function registerSkeleton2DDeformAnimationTarget():Void {
+    Facade_Sdk_flighthq_skeleton2d_DeformAnimationTarget2D.registerSkeleton2DDeformAnimationTarget();
   }
 
   public static function registerSkeleton2DFormat(kind:String, detect:Dynamic, parse:Dynamic):Void {
     Facade_Sdk_flighthq_skeleton2dFormats_SkeletonDetect.registerSkeleton2DFormat(kind, detect, parse);
   }
 
-  public static function registerSpecularPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_SpecularPbrScene3DMaterialTextures.registerSpecularPbrScene3DMaterialTextures(registry);
+  public static function registerSkeleton2DIkConstraintSolver():Void {
+    Facade_Sdk_flighthq_skeleton2d_IkConstraint2D.registerSkeleton2DIkConstraintSolver();
+  }
+
+  public static function registerSkeleton2DPathConstraintSolver():Void {
+    Facade_Sdk_flighthq_skeleton2d_PathConstraint2D.registerSkeleton2DPathConstraintSolver();
+  }
+
+  public static function registerSkeleton2DTransformConstraintSolver():Void {
+    Facade_Sdk_flighthq_skeleton2d_TransformConstraint2D.registerSkeleton2DTransformConstraintSolver();
   }
 
   public static function registerSpriteHitTest(?alphaThreshold:Float):Void {
@@ -16356,10 +16595,6 @@ class Sdk {
 
   public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
     Facade_Sdk_flighthq_effects_TiltShiftEffect.registerTiltShiftEffectPaddingResolver(state);
-  }
-
-  public static function registerTransmissionVolumePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_TransmissionVolumePbrScene3DMaterialTextures.registerTransmissionVolumePbrScene3DMaterialTextures(registry);
   }
 
   public static function registerWebImageDecoders():Void {
@@ -16668,10 +16903,6 @@ class Sdk {
 
   public static function registerWgpuWireframeMaterial(state:WgpuRenderState):Void {
     Facade_Sdk_flighthq_scene3dWgpu_WireframeWgpuMeshMaterialRenderer.registerWgpuWireframeMaterial(state);
-  }
-
-  public static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    Facade_Sdk_flighthq_scene3dResources_WrappedDiffusePbrScene3DMaterialTextures.registerWrappedDiffusePbrScene3DMaterialTextures(registry);
   }
 
   public static function relativeNormalVelocity(bodyA:RigidBody2D, bodyB:RigidBody2D, point:Physics2DContactPoint, normalX:Float, normalY:Float):Float {
@@ -17187,6 +17418,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function resolveLayoutTree(out:flighthq._internal._Float32Array, state:LayoutState, tree:LayoutTree, intrinsicSizes:Dynamic, availableWidth:Float, availableHeight:Float):Bool {
+    return cast Facade_Sdk_flighthq_layout_ResolveLayoutTree.resolveLayoutTree(out, state, tree, intrinsicSizes, availableWidth, availableHeight);
+    return cast null;
+  }
+
   public static function resolveMarkupHexColor(value:String):Null<Float> {
     return cast Facade_Sdk_flighthq_textMarkup_MarkupTagRegistry.resolveMarkupHexColor(value);
     return cast null;
@@ -17310,7 +17546,11 @@ class Sdk {
 
   public static final RimModifierKind:Dynamic = Facade_Sdk_flighthq_types__internal__RimModifierValues.RimModifierKind;
 
+  public static final RiveAnimationLoop:Dynamic = Facade_Sdk_flighthq_types__internal__RiveDocumentValues.RiveAnimationLoopValue;
+
   public static final RiveFieldType:Dynamic = Facade_Sdk_flighthq_types__internal__RiveDocumentValues.RiveFieldTypeValue;
+
+  public static final RiveWeightedPointKind:Dynamic = Facade_Sdk_flighthq_types__internal__RiveDocumentValues.RiveWeightedPointKindValue;
 
   public static function rollbackAppUpdate():Void {
     Facade_Sdk_flighthq_updater_Updater.rollbackAppUpdate();
@@ -17499,9 +17739,9 @@ class Sdk {
 
   public static final Scene3DAnimationPathWeights:Dynamic = Facade_Sdk_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathWeights;
 
-  public static final Scene3DCoverage:Dynamic = Facade_Sdk_flighthq_types__internal__Scene3DCoverageGapValues.Scene3DCoverageValue;
-
   public static final Scene3DResourceResolverRuntimeKey:Dynamic = Facade_Sdk_flighthq_types__internal__Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
+
+  public static final SceneCoverage:Dynamic = Facade_Sdk_flighthq_types__internal__SceneCoverageEntryValues.SceneCoverageValue;
 
   public static function scheduleNotification(request:NotificationRequest, schedule:NotificationSchedule):flighthq._internal._Promise<String> {
     return cast Facade_Sdk_flighthq_notification_Notification.scheduleNotification(request, schedule);
@@ -17928,6 +18168,10 @@ class Sdk {
 
   public static function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
     Facade_Sdk_flighthq_lighting_DirectionalLight.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
+  }
+
+  public static function setDomCssFilter(state:DomRenderState, node:Node2D, filter:Null<String>):Void {
+    Facade_Sdk_flighthq_scene2dDom_DomCSSFilterBinding.setDomCssFilter(state, node, filter);
   }
 
   public static function setEmptyRectangle(out:RectangleLike):Void {
@@ -18596,6 +18840,11 @@ class Sdk {
     Facade_Sdk_flighthq_skeleton2d_Skeleton2d.setSkeleton2DBindPose(skeleton);
   }
 
+  public static function setSkeleton2DSlotDeform(slot:Slot2D, attachment:Dynamic, offsets:Null<flighthq._internal._Float32Array>):Null<Skeleton2DSlotDeform> {
+    return cast Facade_Sdk_flighthq_skeleton2d_SlotDeform2D.setSkeleton2DSlotDeform(slot, attachment, offsets);
+    return cast null;
+  }
+
   public static function setSkeleton3DBindPose(skeleton:Skeleton3D):Void {
     Facade_Sdk_flighthq_skeleton3d_Skeleton3d.setSkeleton3DBindPose(skeleton);
   }
@@ -18630,6 +18879,18 @@ class Sdk {
 
   public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
     Facade_Sdk_flighthq_lighting_SpotLight.setSpotLightTarget(out, targetX, targetY, targetZ);
+  }
+
+  public static function setStatechartBooleanInput(instance:StatechartInstance, inputIndex:Float, value:Bool):Void {
+    Facade_Sdk_flighthq_statechart_Statechart.setStatechartBooleanInput(instance, inputIndex, value);
+  }
+
+  public static function setStatechartNumberInput(instance:StatechartInstance, inputIndex:Float, value:Float):Void {
+    Facade_Sdk_flighthq_statechart_Statechart.setStatechartNumberInput(instance, inputIndex, value);
+  }
+
+  public static function setStatechartRegionDuration(instance:StatechartInstance, regionIndex:Float, duration:Float):Void {
+    Facade_Sdk_flighthq_statechart_Statechart.setStatechartRegionDuration(instance, regionIndex, duration);
   }
 
   public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
@@ -19106,6 +19367,16 @@ class Sdk {
 
   public static final Skeleton2DAnimationPath:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
 
+  public static final Skeleton2DAnimationTargetKind:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue;
+
+  public static final Skeleton2DConstraintKind:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
+
+  public static final Skeleton2DPathPositionMode:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathPositionModeValue;
+
+  public static final Skeleton2DPathRotateMode:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathRotateModeValue;
+
+  public static final Skeleton2DPathSpacingMode:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathSpacingModeValue;
+
   public static final Skeleton2DSlotAnimationPath:Dynamic = Facade_Sdk_flighthq_types__internal__Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
   public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
@@ -19162,6 +19433,10 @@ class Sdk {
 
   public static function solvePhysics2DContactsOnce(world:Physics2DWorld):Void {
     Facade_Sdk_flighthq_physics2d_Solver.solvePhysics2DContactsOnce(world);
+  }
+
+  public static function solveSkeleton2DConstraints(skeleton:Skeleton2D, constraints:Array<Skeleton2DConstraint>):Void {
+    Facade_Sdk_flighthq_skeleton2d_Skeleton2dConstraint.solveSkeleton2DConstraints(skeleton, constraints);
   }
 
   public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:flighthq._internal._UInt32Array, outViewDepths:flighthq._internal._Float64Array, source:ParticleEmitter3D, positionToView:Matrix4Like):Bool {
@@ -19238,6 +19513,16 @@ class Sdk {
     return cast Facade_Sdk_flighthq_tray_Tray.startTrayIconAnimation(tray, frames, intervalMs);
     return cast null;
   }
+
+  public static final StatechartAtomicStateKind:Dynamic = Facade_Sdk_flighthq_types__internal__StatechartValues.StatechartAtomicStateKind;
+
+  public static final StatechartComparison:Dynamic = Facade_Sdk_flighthq_types__internal__StatechartValues.StatechartComparisonValue;
+
+  public static final StatechartInputKind:Dynamic = Facade_Sdk_flighthq_types__internal__StatechartValues.StatechartInputKindValue;
+
+  public static final StatechartNestedStateKind:Dynamic = Facade_Sdk_flighthq_types__internal__StatechartValues.StatechartNestedStateKind;
+
+  public static final StatechartTransitionStatus:Dynamic = Facade_Sdk_flighthq_types__internal__StatechartValues.StatechartTransitionStatusValue;
 
   public static function statFile(path:String):flighthq._internal._Promise<Null<FileStat>> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.statFile(path);
@@ -19856,6 +20141,10 @@ class Sdk {
   public static function unregisterScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry, kind:String):Bool {
     return cast Facade_Sdk_flighthq_scene2dResources_Scene2DDocumentImporterRegistry.unregisterScene2DDocumentImporter(registry, kind);
     return cast null;
+  }
+
+  public static function unregisterSkeleton2DFormat(kind:String):Void {
+    Facade_Sdk_flighthq_skeleton2dFormats_SkeletonDetect.unregisterSkeleton2DFormat(kind);
   }
 
   public static function unrouteAudioChannelFromMixerBus(mixer:AudioMixer, channel:AudioChannel):Void {

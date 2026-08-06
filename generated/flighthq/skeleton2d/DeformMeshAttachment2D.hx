@@ -3,75 +3,13 @@ package flighthq.skeleton2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.skeleton2d.SkinAttachment2DPoints.skinSkeleton2DAttachmentPoints;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.Skeleton2D;
 
 class DeformMeshAttachment2D {
-  public static final MATRIX_STRIDE__deformMeshAttachment2D:Dynamic = 6.0;
-
-  public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var skin:Dynamic = cast _Runtime.UNDEFINED;
-    var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var bb:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    world = _Runtime.field(skeleton, 'worldMatrices');
-    skin = _Runtime.field(attachment, 'skin');
-    if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast !_Runtime.strictEquals(skin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      var counts:Dynamic = _Runtime.field(skin, 'influenceCounts');
-      var inf:Dynamic = _Runtime.field(skin, 'influences');
-      var vi:Dynamic = 0.0;
-      var oi:Dynamic = 0.0;
-      {
-        var v:Dynamic = 0.0;
-        while ((cast ((cast v : Float) < (cast _Runtime.field(counts, 'length') : Float)) : Bool)) {
-          var wx:Dynamic = 0.0;
-          var wy:Dynamic = 0.0;
-          var n:Dynamic = flighthq._internal._StaticIndex.readUint16Array(counts, v);
-          {
-            var k:Dynamic = 0.0;
-            while ((cast ((cast k : Float) < (cast n : Float)) : Bool)) {
-              var b:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, vi), DeformMeshAttachment2D.MATRIX_STRIDE__deformMeshAttachment2D);
-              var lx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0));
-              var ly:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0));
-              var weight:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 3.0));
-              (wx = cast ((wx + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, b), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0))))) : Dynamic));
-              (wy = cast ((wy + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0))))) : Dynamic));
-              (vi = cast ((vi + 4.0) : Dynamic));
-              k++;
-            }
-          }
-          flighthq._internal._StaticIndex.writeFloat32Array(out, oi, wx);
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (oi + 1.0), wy);
-          (oi = cast ((oi + 2.0) : Dynamic));
-          v++;
-        }
-      }
-      return;
-    }
-    vertices = _Runtime.field(attachment, 'vertices');
-    if ((cast ((cast _Runtime.strictEquals(vertices, null) : Bool) || (cast _Runtime.strictEquals(vertices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    b = (boneIndex * DeformMeshAttachment2D.MATRIX_STRIDE__deformMeshAttachment2D);
-    a = flighthq._internal._StaticIndex.readFloat32Array(world, b);
-    bb = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0));
-    c = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0));
-    d = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0));
-    tx = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0));
-    ty = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0));
-    {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-        var vx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, i);
-        var vy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, i, (((a * vx) + (c * vy)) + tx));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, (i + 1.0), (((bb * vx) + (d * vy)) + ty));
-        (i = cast ((i + 2.0) : Dynamic));
-      }
-    }
+  public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    if (deform == null) deform = cast (null : Dynamic);
+    _Runtime.callValue(skinSkeleton2DAttachmentPoints, cast ([out, _Runtime.field(attachment, 'skin'), _Runtime.field(attachment, 'vertices'), skeleton, boneIndex, deform, 'MeshAttachment2D'] : Array<Dynamic>));
   }
 }

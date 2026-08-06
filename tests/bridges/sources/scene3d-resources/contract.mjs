@@ -7,6 +7,7 @@ export * from './anisotropyPbrScene3DMaterialTextures.mjs';
 export * from './awd2Load.mjs';
 export * from './clearcoatPbrScene3DMaterialTextures.mjs';
 export * from './enableScene3DResourceFailureGuards.mjs';
+export * from './explainScene3DResourceCoverage.mjs';
 export * from './getScene3DResourceTextures.mjs';
 export * from './gltfLoad.mjs';
 export * from './imageResourceFetch.mjs';

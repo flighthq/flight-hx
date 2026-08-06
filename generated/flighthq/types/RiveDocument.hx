@@ -3,9 +3,12 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Layout.LayoutTree;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types._internal._RiveDocumentValues.RiveAnimationLoopValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
+import flighthq.types._internal._RiveDocumentValues.RiveWeightedPointKindValue;
 
 typedef RiveFieldType = Dynamic;
 
@@ -39,9 +42,19 @@ typedef RiveStateMachineDescriptor = { var inputs:Array<RiveStateMachineInput>; 
 
 typedef RiveAdvancedBlend = { var mode:AdvancedBlendMode; var node:DisplayObject; };
 
-typedef RiveAnimationClip = { var clip:AnimationClip; var name:String; };
+typedef RiveAnimationLoop = Dynamic;
 
-typedef RiveArtboardImport = { var advancedBlends:Array<RiveAdvancedBlend>; var animations:Array<RiveAnimationClip>; var stateMachines:Array<RiveStateMachineDescriptor>; var height:Float; var name:String; var root:DisplayObject; var width:Float; };
+typedef RiveSkeleton2DImport = { var boneIndices:Array<Float>; var skeleton:Skeleton2D; };
+
+typedef RiveAnimationClip = { var clip:AnimationClip; var loop:RiveAnimationLoop; var name:String; var speed:Float; var workAreaEnd:Null<Float>; var workAreaStart:Null<Float>; };
+
+typedef RiveLayoutImport = { var targets:Array<DisplayObject>; var tree:LayoutTree; };
+
+typedef RiveArtboardImport = { var advancedBlends:Array<RiveAdvancedBlend>; var animations:Array<RiveAnimationClip>; var stateMachines:Array<RiveStateMachineDescriptor>; var height:Float; var layouts:Array<RiveLayoutImport>; var name:String; var root:DisplayObject; var skeleton:Null<RiveSkeleton2DImport>; var width:Float; };
+
+typedef RiveWeightedPointKind = Dynamic;
+
+typedef RiveWeightedPoint = { var kind:RiveWeightedPointKind; var vertex:Float; var x:Float; var y:Float; };
 
 typedef RivePathRecord = { var commands:Array<Float>; var data:Array<Float>; var pathIndex:Float; var winding:PathWinding; };
 

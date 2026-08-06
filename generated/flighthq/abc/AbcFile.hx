@@ -98,7 +98,7 @@ class AbcReader__abcFile {
 }
 
 class AbcFile {
-  public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<AbcFile> {
+  public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<flighthq.types.Abc.AbcFile> {
     var reader:Dynamic = cast _Runtime.UNDEFINED;
     var minorVersion:Dynamic = cast _Runtime.UNDEFINED;
     var majorVersion:Dynamic = cast _Runtime.UNDEFINED;

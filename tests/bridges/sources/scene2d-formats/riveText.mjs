@@ -5,4 +5,4 @@ const api = compiled.flighthq.scene2dFormats.RiveText;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createRiveTextLabel = api.createRiveTextLabel;
+export const createRiveRichText = api.createRiveRichText;

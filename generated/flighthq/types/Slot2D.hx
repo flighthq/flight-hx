@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Slot2D = { @:optional var attachment:Null<Attachment2D>; var boneIndex:Float; @:optional var color:Float; @:optional var name:Null<String>; };
+typedef Slot2D = { @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Float; @:optional var name:Null<String>; };

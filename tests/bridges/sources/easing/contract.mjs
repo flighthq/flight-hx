@@ -10,6 +10,7 @@ export * from './easeCircular.mjs';
 export * from './easeCombinators.mjs';
 export * from './easeCubic.mjs';
 export * from './easeCubicBezier.mjs';
+export * from './easeDampedSine.mjs';
 export * from './easeElastic.mjs';
 export * from './easeExponential.mjs';
 export * from './easeLinear.mjs';

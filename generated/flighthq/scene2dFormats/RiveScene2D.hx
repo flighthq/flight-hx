@@ -14,14 +14,16 @@ import flighthq.scene2dFormats.RiveClipping.applyRiveClipping;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.scene2dFormats.RiveDocument.parseRiveDocument;
 import flighthq.scene2dFormats.RiveDrawOrder.applyRiveDrawOrder;
+import flighthq.scene2dFormats.RiveLayout.createRiveLayoutImports;
 import flighthq.scene2dFormats.RiveObjectGraph.createRiveObjectGraph;
 import flighthq.scene2dFormats.RiveScene2DDocument.createRiveImageSprite;
 import flighthq.scene2dFormats.RiveScene2DDocument.markRiveNestedArtboard;
 import flighthq.scene2dFormats.RiveShapePaint.appendRiveShapePaint;
 import flighthq.scene2dFormats.RiveShapePath.createRivePath;
+import flighthq.scene2dFormats.RiveSkeleton.createRiveSkeleton2D;
 import flighthq.scene2dFormats.RiveSolo.applyRiveSolo;
 import flighthq.scene2dFormats.RiveStateMachine.createRiveStateMachines;
-import flighthq.scene2dFormats.RiveText.createRiveTextLabel;
+import flighthq.scene2dFormats.RiveText.createRiveRichText;
 import flighthq.shape.Shape.clearShapeCommands;
 import flighthq.shape.Shape.createShape;
 import flighthq.types.AdvancedBlendMode;
@@ -45,14 +47,18 @@ class RiveScene2D {
   public static function createScene2DFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):RiveDocumentImportResult {
     var document:Dynamic = cast _Runtime.UNDEFINED;
     var graph:Dynamic = cast _Runtime.UNDEFINED;
+    var assets:Dynamic = cast _Runtime.UNDEFINED;
+    var fontNames:Dynamic = cast _Runtime.UNDEFINED;
     document = _Runtime.callValue(parseRiveDocument, cast ([source, diagnostics] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast { artboards: cast ([] : Array<Dynamic>), assets: cast ([] : Array<Dynamic>) }; }
     graph = _Runtime.callValue(createRiveObjectGraph, cast ([document, diagnostics] : Array<Dynamic>));
-    return cast { artboards: _Runtime.callProperty(_Runtime.field(graph, 'artboards'), 'map', cast ([function(artboard:Dynamic) return _Runtime.callValue(RiveScene2D.createRiveArtboardImport__riveScene2D, cast ([artboard, _Runtime.field(document, 'objects'), diagnostics] : Array<Dynamic>))] : Array<Dynamic>)), assets: _Runtime.callValue(createRiveFileAssets, cast ([_Runtime.field(document, 'objects')] : Array<Dynamic>)) };
+    assets = _Runtime.callValue(createRiveFileAssets, cast ([_Runtime.field(document, 'objects')] : Array<Dynamic>));
+    fontNames = _Runtime.callProperty(assets, 'map', cast ([function(asset:Dynamic) return _Runtime.field(asset, 'name')] : Array<Dynamic>));
+    return cast { artboards: _Runtime.callProperty(_Runtime.field(graph, 'artboards'), 'map', cast ([function(artboard:Dynamic) return _Runtime.callValue(RiveScene2D.createRiveArtboardImport__riveScene2D, cast ([artboard, _Runtime.field(document, 'objects'), fontNames, diagnostics] : Array<Dynamic>))] : Array<Dynamic>)), assets: assets };
     return cast null;
   }
 
-  public static function createRiveArtboardImport__riveScene2D(artboard:RiveArtboardGraph, objects:Array<RiveCoreObject>, diagnostics:Null<Array<ImportDiagnostic>>):RiveArtboardImport {
+  public static function createRiveArtboardImport__riveScene2D(artboard:RiveArtboardGraph, objects:Array<RiveCoreObject>, fontNames:Array<String>, diagnostics:Null<Array<ImportDiagnostic>>):RiveArtboardImport {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
@@ -63,7 +69,9 @@ class RiveScene2D {
     var shapePaths:Dynamic = cast _Runtime.UNDEFINED;
     var rebuilds:Dynamic = cast _Runtime.UNDEFINED;
     var span:Dynamic = cast _Runtime.UNDEFINED;
+    var skeleton:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
+    var layouts:Dynamic = cast _Runtime.UNDEFINED;
     var stateMachines:Dynamic = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), 0.0);
     width = _Runtime.callValue(RiveScene2D.readRiveNumber__riveScene2D, cast ([source, RiveScene2D.RIVE_WIDTH__riveScene2D, 0.0] : Array<Dynamic>));
@@ -91,7 +99,7 @@ class RiveScene2D {
           index++;
           continue;
         }
-        var node:Dynamic = _Runtime.callValue(RiveScene2D.createRiveDisplayNode__riveScene2D, cast ([object, artboard, index] : Array<Dynamic>));
+        var node:Dynamic = _Runtime.callValue(RiveScene2D.createRiveDisplayNode__riveScene2D, cast ([object, artboard, index, fontNames] : Array<Dynamic>));
         _Runtime.callValue(RiveScene2D.applyRiveTransform__riveScene2D, cast ([node, object] : Array<Dynamic>));
         _Runtime.callValue(RiveScene2D.applyRiveBlendMode__riveScene2D, cast ([node, object, advancedBlends] : Array<Dynamic>));
         _Runtime.callProperty(nodes, 'push', cast ([node] : Array<Dynamic>));
@@ -112,17 +120,19 @@ class RiveScene2D {
       _Runtime.callValue(rebuild, cast ([] : Array<Dynamic>));
     }
     span = { end: _Runtime.field(artboard, 'streamEnd'), start: _Runtime.field(artboard, 'streamStart') };
-    animations = _Runtime.callValue(createRiveAnimationClips, cast ([objects, span, nodes, artboard, rebuilds] : Array<Dynamic>));
+    skeleton = _Runtime.callValue(createRiveSkeleton2D, cast ([artboard] : Array<Dynamic>));
+    animations = _Runtime.callValue(createRiveAnimationClips, cast ([objects, span, nodes, artboard, rebuilds, skeleton] : Array<Dynamic>));
+    layouts = _Runtime.callValue(createRiveLayoutImports, cast ([artboard, nodes, diagnostics] : Array<Dynamic>));
     stateMachines = _Runtime.callValue(createRiveStateMachines, cast ([objects, span] : Array<Dynamic>));
-    return cast { advancedBlends: advancedBlends, animations: animations, height: height, name: name, root: root, stateMachines: stateMachines, width: width };
+    return cast { advancedBlends: advancedBlends, animations: animations, height: height, layouts: layouts, name: name, root: root, skeleton: skeleton, stateMachines: stateMachines, width: width };
     return cast null;
   }
 
-  public static function createRiveDisplayNode__riveScene2D(object:RiveCoreObject, artboard:RiveArtboardGraph, index:Float):DisplayObject {
+  public static function createRiveDisplayNode__riveScene2D(object:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>):DisplayObject {
     var name:Dynamic = cast _Runtime.UNDEFINED;
     name = _Runtime.callValue(RiveScene2D.readRiveText__riveScene2D, cast ([object, RiveScene2D.RIVE_NAME__riveScene2D, ''] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
-      var label:Dynamic = _Runtime.callValue(createRiveTextLabel, cast ([artboard, index] : Array<Dynamic>));
+      var label:Dynamic = _Runtime.callValue(createRiveRichText, cast ([artboard, index, fontNames] : Array<Dynamic>));
       _Runtime.setField(label, 'name', name);
       return cast label;
     }

@@ -19,6 +19,6 @@ class EnableColorAdjustmentGuards {
   }
 
   public static function warnUnsupportedColorAdjustment__enableColorAdjustmentGuards():Void {
-    _Runtime.callValue(logOnce, cast (['render:unsupported-color-adjustment', LogLevel.Warn, { message: 'updateRenderProxyColorScaleBias: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' }, 'render'] : Array<Dynamic>));
+    _Runtime.callValue(logOnce, cast (['render:unsupported-color-adjustment', LogLevel.Warn, { message: 'enableColorAdjustments: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' }, 'render'] : Array<Dynamic>));
   }
 }

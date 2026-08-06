@@ -10,7 +10,9 @@ import flighthq.loader.ResourceLoader.disposeResourceLoader;
 import flighthq.loader.ResourceLoader.startResourceLoad;
 import flighthq.scene3dResources.ImageResourceFetch.fetchWebImageResource;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.createScene3DMaterialTextureRegistry;
-import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerBuiltInScene3DMaterialTextures;
+import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerExtendedPbrScene3DMaterialTextures;
+import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerStandardPbrScene3DMaterialTextures;
+import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerUnlitScene3DMaterialTextures;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
@@ -21,7 +23,9 @@ class SceneResourceResolver {
   public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
     resolver = _Runtime.callValue(createScene3DResourceResolver, cast ([options] : Array<Dynamic>));
-    _Runtime.callValue(registerBuiltInScene3DMaterialTextures, cast ([resolver.registry] : Array<Dynamic>));
+    _Runtime.callValue(registerStandardPbrScene3DMaterialTextures, cast ([resolver.registry] : Array<Dynamic>));
+    _Runtime.callValue(registerUnlitScene3DMaterialTextures, cast ([resolver.registry] : Array<Dynamic>));
+    _Runtime.callValue(registerExtendedPbrScene3DMaterialTextures, cast ([resolver.registry] : Array<Dynamic>));
     return cast resolver;
     return cast null;
   }

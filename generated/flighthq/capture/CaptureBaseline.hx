@@ -19,6 +19,7 @@ class CaptureBaseline {
       var entry:Dynamic = _Runtime.getIndex(baseline, column);
       var out:CaptureColumnBaseline = {  };
       if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'fingerprint'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'fingerprint', _Runtime.field(entry, 'fingerprint')); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'sourceHash'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'sourceHash', _Runtime.field(entry, 'sourceHash')); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'sha256'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'sha256', _Runtime.field(entry, 'sha256')); }
       _Runtime.setIndex(sorted, column, out);
     }

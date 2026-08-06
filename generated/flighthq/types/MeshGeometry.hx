@@ -23,4 +23,4 @@ typedef MeshGeometryGlData = { var __meshGeometryGlData:Dynamic; };
 
 typedef MeshGeometryWgpuData = { var __meshGeometryWgpuData:Dynamic; };
 
-typedef MeshGeometryRuntime = { var binding:Null<Dynamic>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flighthq._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };
+typedef MeshGeometryRuntime = { var binding:Null<Dynamic>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flighthq._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };

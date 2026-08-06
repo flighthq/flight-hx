@@ -3,5 +3,6 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableMovieClipGuards.mjs';
 export * from './movieClip.mjs';
 export * from './spritesheetTimelineSource.mjs';

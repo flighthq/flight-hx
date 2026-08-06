@@ -10,6 +10,7 @@ export * from './drawWgpuScene3D.mjs';
 export * from './emissiveWgpuMeshMaterialRenderer.mjs';
 export * from './enableWgpuScene3DCustomShaderGuards.mjs';
 export * from './enableWgpuScene3DForwardLightSelectionGuards.mjs';
+export * from './explainWgpuScene3DCoverage.mjs';
 export * from './explainWgpuScene3DForwardLightSelection.mjs';
 export * from './lambertWgpuMeshMaterialRenderer.mjs';
 export * from './matcapWgpuMeshMaterialRenderer.mjs';

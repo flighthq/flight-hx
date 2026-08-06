@@ -13,7 +13,6 @@ import flighthq.node.Revision.getNodeLocalContentRevision;
 import flighthq.node.Revision.getNodeLocalTransformRevision;
 import flighthq.node.Revision.getNodeParentReferenceRevision;
 import flighthq.render.RenderAppearance.updateRenderProxyAppearance;
-import flighthq.render.RenderColorScaleBias.updateRenderProxyColorScaleBias;
 import flighthq.render.RenderMaterial.updateRenderProxyMaterial;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.render.RenderTransform2d.updateRenderProxy2DTransform;
@@ -138,7 +137,7 @@ class RenderProxy {
     _Runtime.callValue(updateRenderProxyAppearance, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateRenderProxy2DTransform, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateRenderProxyMaterial, cast ([state, data, parentData] : Array<Dynamic>));
-    _Runtime.callValue(updateRenderProxyColorScaleBias, cast ([state, data, parentData] : Array<Dynamic>));
+    _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentResolver', cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateNodeClip, cast ([state, source, data, parentData] : Array<Dynamic>));
     _Runtime.setField(data, 'lastChildrenId', _Runtime.callValue(getNodeChildrenRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)));
     _Runtime.setField(data, 'lastLocalContentId', _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)));

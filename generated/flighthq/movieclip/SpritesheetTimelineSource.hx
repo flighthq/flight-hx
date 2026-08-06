@@ -11,13 +11,20 @@ import flighthq.types.Node2D;
 import flighthq.types.Sprite;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetTimelineSourceExplanation;
+import flighthq.types.SpritesheetTimelineSourceExplanation.SpritesheetTimelineSourceGuard;
 import flighthq.types.TimelineSource;
 
 class SpritesheetTimelineSource {
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
     var bitmaps:Dynamic = cast _Runtime.UNDEFINED;
+    var frames:Dynamic = cast _Runtime.UNDEFINED;
     bitmaps = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
-    return cast { totalFrames: _Runtime.field(animation.frames, 'length'), labels: cast ([] : Array<Dynamic>), cues: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float) {
+    frames = _Runtime.callValue(SpritesheetTimelineSource.materializeSpritesheetTimelineFrames__spritesheetTimelineSource, cast ([animation] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource, null) : Bool)) {
+      _Runtime.callValue(SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource, cast ([animation, _Runtime.callValue(explainSpritesheetTimelineSource, cast ([animation] : Array<Dynamic>))] : Array<Dynamic>));
+    }
+    return cast { totalFrames: _Runtime.field(frames, 'length'), labels: cast ([] : Array<Dynamic>), cues: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float) {
       var atlas:Dynamic = cast _Runtime.UNDEFINED;
       var bitmap:Dynamic = cast _Runtime.UNDEFINED;
       var sheetFrame:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +36,7 @@ class SpritesheetTimelineSource {
         _Runtime.callValue(addNodeChild, cast ([target, bitmap] : Array<Dynamic>));
         ((cast bitmaps : flighthq._internal._WeakMap).set(target, bitmap));
       }
-      sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readArray(animation.frames, (frame - 1.0)));
+      sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readArray(frames, (frame - 1.0)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       _Runtime.setField(_Runtime.field(bitmap, 'data'), 'texture', _Runtime.callValue(getTextureAtlasRegionTexture, cast ([atlas, sheetFrame.id] : Array<Dynamic>)));
       _Runtime.setField(bitmap, 'x', (sheetFrame.offsetX - animation.originX));
@@ -38,4 +45,61 @@ class SpritesheetTimelineSource {
     } };
     return cast null;
   }
+
+  public static function explainSpritesheetTimelineSource(animation:SpritesheetAnimation):SpritesheetTimelineSourceExplanation {
+    return cast { directionMaterialized: true, unsupportedFields: ((cast _Runtime.strictEquals(animation.frameDurations, null) : Bool) ? (cast SpritesheetTimelineSource.REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource : Dynamic) : (cast SpritesheetTimelineSource.FRAME_DURATIONS_AND_REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource : Dynamic)) };
+    return cast null;
+  }
+
+  public static function setSpritesheetTimelineSourceGuard(guard:Null<SpritesheetTimelineSourceGuard>):Void {
+    (SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource = cast (guard : Dynamic));
+  }
+
+  public static function materializeSpritesheetTimelineFrames__spritesheetTimelineSource(animation:SpritesheetAnimation):Array<Float> {
+    var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var out:Array<Float> = cast _Runtime.UNDEFINED;
+    frames = animation.frames;
+    if ((cast ((cast ((cast _Runtime.field(frames, 'length') : Float) < (cast 2.0 : Float)) : Bool) || (cast _Runtime.strictEquals(animation.direction, 'forward') : Bool)) : Bool)) { return cast frames; }
+    if ((cast _Runtime.strictEquals(animation.direction, 'reverse') : Bool)) { return cast _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(frames)]), 'reverse', cast ([] : Array<Dynamic>)); }
+    out = cast ([] : Array<Dynamic>);
+    if ((cast _Runtime.strictEquals(animation.direction, 'pingpong') : Bool)) {
+      {
+        var index:Dynamic = 0.0;
+        while ((cast ((cast index : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
+          _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+          index++;
+        }
+      }
+      {
+        var index:Dynamic = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 2.0);
+        while ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool)) {
+          _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+          index--;
+        }
+      }
+      return cast out;
+    }
+    {
+      var index:Dynamic = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0);
+      while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
+        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+        index--;
+      }
+    }
+    {
+      var index:Dynamic = 1.0;
+      while ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0) : Float)) : Bool)) {
+        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+        index++;
+      }
+    }
+    return cast out;
+    return cast null;
+  }
+
+  public static final FRAME_DURATIONS_AND_REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource:Dynamic = cast (['frameDurations', 'repeatCount'] : Array<Dynamic>);
+
+  public static final REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource:Dynamic = cast (['repeatCount'] : Array<Dynamic>);
+
+  public static var _spritesheetTimelineSourceGuard__spritesheetTimelineSource:Null<SpritesheetTimelineSourceGuard> = _Runtime.explicitNull();
 }

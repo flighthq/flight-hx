@@ -3,6 +3,7 @@ package flighthq.movieclip;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.movieclip.EnableMovieClipGuards as Facade_Movieclip_flighthq_movieclip_EnableMovieClipGuards;
 import flighthq.movieclip.MovieClip as Facade_Movieclip_flighthq_movieclip_MovieClip;
 import flighthq.movieclip.SpritesheetTimelineSource as Facade_Movieclip_flighthq_movieclip_SpritesheetTimelineSource;
 import flighthq.types.FrameScript;
@@ -11,12 +12,18 @@ import flighthq.types.MovieClipSignals;
 import flighthq.types.PartialNode;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetTimelineSourceExplanation;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSource;
 
 class Movieclip {
   public static function addMovieClipFrameScript(clip:MovieClip, frame:Dynamic, script:FrameScript):Void {
     Facade_Movieclip_flighthq_movieclip_MovieClip.addMovieClipFrameScript(clip, frame, script);
+  }
+
+  public static function areMovieClipGuardsEnabled():Bool {
+    return cast Facade_Movieclip_flighthq_movieclip_EnableMovieClipGuards.areMovieClipGuardsEnabled();
+    return cast null;
   }
 
   public static function createMovieClip(?obj:PartialNode<MovieClip>):MovieClip {
@@ -29,12 +36,25 @@ class Movieclip {
     return cast null;
   }
 
+  public static function disableMovieClipGuards():Void {
+    Facade_Movieclip_flighthq_movieclip_EnableMovieClipGuards.disableMovieClipGuards();
+  }
+
   public static function disposeMovieClipSignals(clip:MovieClip):Void {
     Facade_Movieclip_flighthq_movieclip_MovieClip.disposeMovieClipSignals(clip);
   }
 
+  public static function enableMovieClipGuards():Void {
+    Facade_Movieclip_flighthq_movieclip_EnableMovieClipGuards.enableMovieClipGuards();
+  }
+
   public static function enableMovieClipSignals(clip:MovieClip):MovieClipSignals {
     return cast Facade_Movieclip_flighthq_movieclip_MovieClip.enableMovieClipSignals(clip);
+    return cast null;
+  }
+
+  public static function explainSpritesheetTimelineSource(animation:SpritesheetAnimation):SpritesheetTimelineSourceExplanation {
+    return cast Facade_Movieclip_flighthq_movieclip_SpritesheetTimelineSource.explainSpritesheetTimelineSource(animation);
     return cast null;
   }
 

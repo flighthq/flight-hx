@@ -9,6 +9,8 @@ import flighthq.animation.AnimationTrack.createAnimationTrack;
 import flighthq.easing.EaseCubicBezier.easeCubicBezier;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.skeleton2d.Skeleton2d.createSkeleton2D;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DBoneAnimationTarget;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DSlotAnimationTarget;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.Attachment2D;
@@ -192,7 +194,7 @@ class DragonBonesParse {
       _Runtime.callProperty(values, 'push', cast ([((cast ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(displays, index), null) : Bool)) : Bool) ? (cast index : Dynamic) : (cast -1.0 : Dynamic))] : Array<Dynamic>));
     }
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { attachments: _Runtime.slice(displays, 0, null), path: Skeleton2DSlotAnimationPathValue.Attachment, slotIndex: slotIndex }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Attachment, _Runtime.slice(displays, 0, null)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function addDragonBonesSlotColorChannel__dragonBonesParse(channels:Array<AnimationChannel>, frames:Array<Dynamic>, slotIndex:Float, frameRate:Float):Void {
@@ -207,7 +209,7 @@ class DragonBonesParse {
       _Runtime.pushMany(values, cast ([_Runtime.callValue(DragonBonesParse.colorPercent__dragonBonesParse, cast ([_Runtime.field(color, 'rM')] : Array<Dynamic>)), _Runtime.callValue(DragonBonesParse.colorPercent__dragonBonesParse, cast ([_Runtime.field(color, 'gM')] : Array<Dynamic>)), _Runtime.callValue(DragonBonesParse.colorPercent__dragonBonesParse, cast ([_Runtime.field(color, 'bM')] : Array<Dynamic>)), _Runtime.callValue(DragonBonesParse.colorPercent__dragonBonesParse, cast ([_Runtime.field(color, 'aM')] : Array<Dynamic>))] : Array<Dynamic>));
     }
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, interpolation: _Runtime.callValue(DragonBonesParse.dragonBonesInterpolation__dragonBonesParse, cast ([frames, _Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>)), segmentEasings: _Runtime.callValue(DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse, cast ([frames] : Array<Dynamic>)), times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { path: Skeleton2DSlotAnimationPathValue.Color, slotIndex: slotIndex }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Color] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function colorPercent__dragonBonesParse(value:Dynamic):Float {
@@ -295,7 +297,7 @@ class DragonBonesParse {
     if (segmentEasings == null) segmentEasings = cast (null : Dynamic);
     var track:Dynamic = cast _Runtime.UNDEFINED;
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: components, interpolation: interpolation, segmentEasings: segmentEasings, times: _Runtime.slice(times, 0, null), values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { boneIndex: boneIndex, path: path }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DBoneAnimationTarget, cast ([boneIndex, path] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function dragonBonesFrameTimes__dragonBonesParse(frames:Array<Dynamic>, frameRate:Float):Array<Float> {

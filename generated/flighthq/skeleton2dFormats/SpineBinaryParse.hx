@@ -9,6 +9,8 @@ import flighthq.animation.AnimationTrack.createAnimationTrack;
 import flighthq.easing.EaseCubicBezier.easeCubicBezier;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.skeleton2d.Skeleton2d.createSkeleton2D;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DBoneAnimationTarget;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DSlotAnimationTarget;
 import flighthq.skeleton2dFormats.SpineBinaryReader.createSpineBinaryReader;
 import flighthq.skeleton2dFormats.SpineBinaryReader.isSpineBinaryReaderOverrun;
 import flighthq.skeleton2dFormats.SpineBinaryReader.readSpineBinaryBoolean;
@@ -19,6 +21,7 @@ import flighthq.skeleton2dFormats.SpineBinaryReader.readSpineBinaryString;
 import flighthq.skeleton2dFormats.SpineBinaryReader.readSpineBinaryUnsignedShort;
 import flighthq.skeleton2dFormats.SpineBinaryReader.readSpineBinaryVarint;
 import flighthq.skeleton2dFormats.SpineBinaryReader.skipSpineBinaryBytes;
+import flighthq.skeleton2dFormats.SpineDrawOrder.resolveSpineDrawOrdering;
 import flighthq.types.AnimationChannel;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
@@ -31,6 +34,7 @@ import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types.Skeleton2DImport;
 import flighthq.types.Skeleton2DImport.Skeleton2DImportAnimation;
 import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
@@ -98,7 +102,7 @@ class SpineBinaryParse {
       }
     }
     _Runtime.callValue(SpineBinaryParse.skipSpineBinaryEvents__spineBinaryParse, cast ([reader, diagnostics] : Array<Dynamic>));
-    animations = _Runtime.callValue(SpineBinaryParse.parseSpineBinaryAnimations__spineBinaryParse, cast ([reader, strings, setup, diagnostics] : Array<Dynamic>));
+    animations = _Runtime.callValue(SpineBinaryParse.parseSpineBinaryAnimations__spineBinaryParse, cast ([reader, strings, setup, _Runtime.field(slots, 'length'), diagnostics] : Array<Dynamic>));
     if ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'spine.binary-truncated', 'parseSpineSkeletonBinary', { bones: _Runtime.field(bones, 'length'), slots: _Runtime.field(slots, 'length') }] : Array<Dynamic>));
     } else {
@@ -127,7 +131,7 @@ class SpineBinaryParse {
     _Runtime.callValue(SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse, cast ([diagnostics, count, 'spine.event-unsupported', 'events'] : Array<Dynamic>));
   }
 
-  public static function parseSpineBinaryAnimations__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, setup:Null<AttachmentSkin2D>, ?diagnostics:Array<ImportDiagnostic>):Array<Skeleton2DImportAnimation> {
+  public static function parseSpineBinaryAnimations__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, setup:Null<AttachmentSkin2D>, slotCount:Float, ?diagnostics:Array<ImportDiagnostic>):Array<Skeleton2DImportAnimation> {
     var animations:Array<Skeleton2DImportAnimation> = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var unmodeled:Dynamic = cast _Runtime.UNDEFINED;
@@ -144,9 +148,9 @@ class SpineBinaryParse {
         _Runtime.callValue(SpineBinaryParse.parseSpineBinaryBoneTimelines__spineBinaryParse, cast ([reader, channels, diagnostics] : Array<Dynamic>));
         _Runtime.callValue(SpineBinaryParse.skipSpineBinaryConstraintTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
         _Runtime.callValue(SpineBinaryParse.skipSpineBinaryDeformTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryDrawOrderTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
+        var drawOrder:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryDrawOrderTimeline__spineBinaryParse, cast ([reader, slotCount, diagnostics] : Array<Dynamic>));
         _Runtime.callValue(SpineBinaryParse.skipSpineBinaryEventTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
-        _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)), name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
+        _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)), drawOrder: drawOrder, name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
         i++;
       }
     }
@@ -242,34 +246,17 @@ class SpineBinaryParse {
     var values:Dynamic = cast _Runtime.UNDEFINED;
     var track:Dynamic = cast _Runtime.UNDEFINED;
     frames = _Runtime.field(_Runtime.field(timeline, 'times'), 'length');
-    components = _Runtime.field(kind, 'components');
+    components = _Runtime.field(kind, 'values');
     values = _Runtime.createArray((frames * components));
     {
       var f:Dynamic = 0.0;
-      while ((cast ((cast f : Float) < (cast frames : Float)) : Bool)) {
-        {
-          var c:Dynamic = 0.0;
-          while ((cast ((cast c : Float) < (cast components : Float)) : Bool)) {
-            flighthq._internal._StaticIndex.writeArray(values, ((f * components) + c), _Runtime.field(kind, 'identity'));
-            c++;
-          }
-        }
-        if ((cast ((cast _Runtime.field(kind, 'axis') : Float) < (cast 0.0 : Float)) : Bool)) {
-          {
-            var c:Dynamic = 0.0;
-            while ((cast ((cast c : Float) < (cast _Runtime.field(kind, 'values') : Float)) : Bool)) {
-              flighthq._internal._StaticIndex.writeArray(values, ((f * components) + c), flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), (_Runtime.multiplyNumbers(f, _Runtime.field(kind, 'values')) + c)));
-              c++;
-            }
-          }
-        } else {
-          flighthq._internal._StaticIndex.writeArray(values, _Runtime.addNumbers((f * components), _Runtime.field(kind, 'axis')), flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), f));
-        }
+      while ((cast ((cast f : Float) < (cast (frames * components) : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray(values, f, flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), f));
         f++;
       }
     }
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: components, interpolation: AnimationInterpolationLinear, segmentEasings: _Runtime.callValue(SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse, cast ([timeline, _Runtime.field(kind, 'values'), diagnostics] : Array<Dynamic>)), times: _Runtime.field(timeline, 'times'), values: values }] : Array<Dynamic>));
-    return cast _Runtime.callValue(createAnimationChannel, cast ([track, { boneIndex: boneIndex, path: _Runtime.field(kind, 'path') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DBoneAnimationTarget, cast ([boneIndex, _Runtime.field(kind, 'path')] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
@@ -381,7 +368,7 @@ class SpineBinaryParse {
             }
             var timeline:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryColorTimeline__spineBinaryParse, cast ([reader, frameCount, count] : Array<Dynamic>));
             var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: count, interpolation: AnimationInterpolationLinear, segmentEasings: _Runtime.callValue(SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse, cast ([timeline, count, diagnostics] : Array<Dynamic>)), times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'values') }] : Array<Dynamic>));
-            _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { path: Skeleton2DSlotAnimationPathValue.Color, slotIndex: slotIndex }] : Array<Dynamic>))] : Array<Dynamic>));
+            _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Color] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
             j++;
           }
         }
@@ -422,7 +409,7 @@ class SpineBinaryParse {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool)) { return; }
     track = _Runtime.callValue(createAnimationTrack, cast ([{ components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, { attachments: attachments, path: Skeleton2DSlotAnimationPathValue.Attachment, slotIndex: slotIndex }] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Attachment, attachments] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function readSpineBinaryColorTimeline__spineBinaryParse(reader:ByteReader, frameCount:Float, channelCount:Float):{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; } {
@@ -587,26 +574,41 @@ class SpineBinaryParse {
     }
   }
 
-  public static function skipSpineBinaryDrawOrderTimelines__spineBinaryParse(reader:ByteReader, unmodeled:Dynamic):Void {
+  public static function readSpineBinaryDrawOrderTimeline__spineBinaryParse(reader:ByteReader, slotCount:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DDrawOrderTimeline> {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var times:Array<Float> = cast _Runtime.UNDEFINED;
+    var orderings:Array<Float> = cast _Runtime.UNDEFINED;
     frames = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    if ((cast ((cast frames : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'draworder'] : Array<Dynamic>)); }
+    times = cast ([] : Array<Dynamic>);
+    orderings = cast ([] : Array<Dynamic>);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast ((cast i : Float) < (cast frames : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
+        var time:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
         var offsets:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+        var moves:Array<{ var offset:Float; var slotIndex:Float; }> = cast ([] : Array<Dynamic>);
         {
           var j:Dynamic = 0.0;
           while ((cast ((cast ((cast j : Float) < (cast offsets : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+            var slotIndex:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+            _Runtime.callProperty(moves, 'push', cast ([{ offset: _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>)), slotIndex: slotIndex }] : Array<Dynamic>));
             j++;
           }
         }
+        if ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool)) { break; }
+        var ordering:Dynamic = _Runtime.callValue(resolveSpineDrawOrdering, cast ([moves, slotCount] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(ordering, null) : Bool)) {
+          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.draworder-keyframe-unresolved', 'parseSpineBinarySkeleton', { time: time }] : Array<Dynamic>));
+          i++;
+          continue;
+        }
+        _Runtime.callProperty(times, 'push', cast ([time] : Array<Dynamic>));
+        _Runtime.callProperty(orderings, 'push', _Runtime.concatArrays([_Runtime.toArray(ordering)]));
         i++;
       }
     }
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool) ? (cast null : Dynamic) : (cast { orderings: orderings, times: times } : Dynamic));
+    return cast null;
   }
 
   public static function skipSpineBinaryEventTimelines__spineBinaryParse(reader:ByteReader, unmodeled:Dynamic):Void {
@@ -1038,7 +1040,7 @@ class SpineBinaryParse {
 
   public static final SPINE_BINARY_ATTACHMENT_TYPES__spineBinaryParse:Dynamic = cast (['region', 'boundingbox', 'mesh', 'linkedmesh', 'path', 'point', 'clipping'] : Array<Dynamic>);
 
-  public static final SPINE_BINARY_BONE_TIMELINES__spineBinaryParse:Dynamic = cast ([{ axis: -1.0, components: 1.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Rotation, values: 1.0 }, { axis: -1.0, components: 2.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Translation, values: 2.0 }, { axis: 0.0, components: 2.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Translation, values: 1.0 }, { axis: 1.0, components: 2.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Translation, values: 1.0 }, { axis: -1.0, components: 2.0, identity: 1.0, path: Skeleton2DAnimationPathValue.Scale, values: 2.0 }, { axis: 0.0, components: 2.0, identity: 1.0, path: Skeleton2DAnimationPathValue.Scale, values: 1.0 }, { axis: 1.0, components: 2.0, identity: 1.0, path: Skeleton2DAnimationPathValue.Scale, values: 1.0 }, { axis: -1.0, components: 2.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Shear, values: 2.0 }, { axis: 0.0, components: 2.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Shear, values: 1.0 }, { axis: 1.0, components: 2.0, identity: 0.0, path: Skeleton2DAnimationPathValue.Shear, values: 1.0 }] : Array<Dynamic>);
+  public static final SPINE_BINARY_BONE_TIMELINES__spineBinaryParse:Dynamic = cast ([{ path: Skeleton2DAnimationPathValue.Rotation, values: 1.0 }, { path: Skeleton2DAnimationPathValue.Translation, values: 2.0 }, { path: Skeleton2DAnimationPathValue.TranslationX, values: 1.0 }, { path: Skeleton2DAnimationPathValue.TranslationY, values: 1.0 }, { path: Skeleton2DAnimationPathValue.Scale, values: 2.0 }, { path: Skeleton2DAnimationPathValue.ScaleX, values: 1.0 }, { path: Skeleton2DAnimationPathValue.ScaleY, values: 1.0 }, { path: Skeleton2DAnimationPathValue.Shear, values: 2.0 }, { path: Skeleton2DAnimationPathValue.ShearX, values: 1.0 }, { path: Skeleton2DAnimationPathValue.ShearY, values: 1.0 }] : Array<Dynamic>);
 
   public static final SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse:Dynamic = cast ([0.0, 4.0, 3.0, 7.0, 6.0, 1.0] : Array<Dynamic>);
 

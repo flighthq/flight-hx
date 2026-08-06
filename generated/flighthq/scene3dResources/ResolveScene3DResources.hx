@@ -48,7 +48,7 @@ class ResolveScene3DResources {
     var unresolved:Array<Scene3DResourceWorkingSet> = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
     textures = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getScene3DResourceTextures, cast ([scene, resolver.registry, textures] : Array<Dynamic>));
+    _Runtime.callValue(getScene3DResourceTextures, cast ([textures, scene] : Array<Dynamic>));
     working = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;

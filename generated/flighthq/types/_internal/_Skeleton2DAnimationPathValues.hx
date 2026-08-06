@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _Skeleton2DAnimationPathValues {
-  public static final Skeleton2DAnimationPathValue:Dynamic = { Translation: 'Translation', Rotation: 'Rotation', Scale: 'Scale', Shear: 'Shear' };
+  public static final Skeleton2DAnimationPathValue:Dynamic = { Translation: 'Translation', TranslationX: 'TranslationX', TranslationY: 'TranslationY', Rotation: 'Rotation', Scale: 'Scale', ScaleX: 'ScaleX', ScaleY: 'ScaleY', Shear: 'Shear', ShearX: 'ShearX', ShearY: 'ShearY' };
 }

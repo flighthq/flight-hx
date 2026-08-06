@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef Skeleton2DImport = { var animations:Array<Skeleton2DImportAnimation>; var skeleton:Skeleton2D; };
 
-typedef Skeleton2DImportAnimation = { var clip:AnimationClip; var name:String; };
+typedef Skeleton2DImportAnimation = { var clip:AnimationClip; @:optional var drawOrder:Null<Skeleton2DDrawOrderTimeline>; var name:String; };

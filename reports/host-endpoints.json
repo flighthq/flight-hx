@@ -7262,57 +7262,57 @@
         },
         {
           "column": 17,
-          "line": 308,
+          "line": 311,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 17,
-          "line": 327,
+          "line": 330,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 17,
-          "line": 344,
+          "line": 347,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 19,
-          "line": 457,
+          "line": 460,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 19,
-          "line": 458,
+          "line": 461,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 19,
-          "line": 467,
+          "line": 470,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 469,
+          "line": 472,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 19,
-          "line": 482,
+          "line": 485,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 487,
+          "line": 490,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 19,
-          "line": 501,
+          "line": 504,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 503,
+          "line": 506,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -7639,37 +7639,37 @@
         },
         {
           "column": 3,
-          "line": 308,
+          "line": 311,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 3,
-          "line": 327,
+          "line": 330,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 3,
-          "line": 344,
+          "line": 347,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 457,
+          "line": 460,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 467,
+          "line": 470,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 482,
+          "line": 485,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 501,
+          "line": 504,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -8757,22 +8757,22 @@
         },
         {
           "column": 5,
-          "line": 458,
+          "line": 461,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 468,
+          "line": 471,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 486,
+          "line": 489,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 502,
+          "line": 505,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -9416,22 +9416,22 @@
         },
         {
           "column": 53,
-          "line": 455,
+          "line": 458,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 53,
-          "line": 466,
+          "line": 469,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 53,
-          "line": 480,
+          "line": 483,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 53,
-          "line": 500,
+          "line": 503,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -10870,22 +10870,22 @@
         },
         {
           "column": 94,
-          "line": 458,
+          "line": 461,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 471,
+          "line": 474,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 489,
+          "line": 492,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 505,
+          "line": 508,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -11137,12 +11137,7 @@
         },
         {
           "column": 5,
-          "line": 311,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 3,
-          "line": 328,
+          "line": 314,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -11152,7 +11147,12 @@
         },
         {
           "column": 3,
-          "line": 345,
+          "line": 334,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 3,
+          "line": 348,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -11370,17 +11370,17 @@
         },
         {
           "column": 41,
-          "line": 312,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 32,
-          "line": 329,
+          "line": 315,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 32,
           "line": 332,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 32,
+          "line": 335,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -12111,12 +12111,12 @@
         },
         {
           "column": 23,
-          "line": 910,
+          "line": 913,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 23,
-          "line": 934,
+          "line": 937,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -13229,97 +13229,82 @@
         },
         {
           "column": 21,
-          "line": 359,
+          "line": 362,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 17,
-          "line": 360,
+          "line": 363,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 30,
-          "line": 361,
+          "line": 364,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 21,
-          "line": 374,
+          "line": 377,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 17,
-          "line": 375,
+          "line": 378,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 30,
-          "line": 376,
+          "line": 379,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 21,
-          "line": 390,
+          "line": 393,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 17,
-          "line": 391,
+          "line": 394,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 30,
-          "line": 392,
+          "line": 395,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 21,
-          "line": 406,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 17,
-          "line": 407,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 30,
-          "line": 408,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 20,
           "line": 409,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
-          "column": 19,
+          "column": 17,
           "line": 410,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
-          "column": 21,
-          "line": 911,
+          "column": 30,
+          "line": 411,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 20,
-          "line": 912,
+          "line": 412,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
-          "column": 7,
-          "line": 916,
+          "column": 19,
+          "line": 413,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
-          "column": 7,
-          "line": 917,
+          "column": 21,
+          "line": 914,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
-          "column": 7,
-          "line": 918,
+          "column": 20,
+          "line": 915,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -13333,23 +13318,38 @@
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
+          "column": 7,
+          "line": 921,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 7,
+          "line": 922,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 7,
+          "line": 923,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
           "column": 21,
-          "line": 935,
+          "line": 938,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 20,
-          "line": 936,
+          "line": 939,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 25,
-          "line": 937,
+          "line": 940,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 24,
-          "line": 938,
+          "line": 941,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -19726,32 +19726,32 @@
         },
         {
           "column": 3,
-          "line": 284,
+          "line": 287,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 3,
-          "line": 291,
+          "line": 294,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 9,
-          "line": 875,
+          "line": 878,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 7,
-          "line": 883,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 5,
           "line": 886,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 5,
-          "line": 893,
+          "line": 889,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 5,
+          "line": 896,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -20176,7 +20176,7 @@
         },
         {
           "column": 32,
-          "line": 346,
+          "line": 349,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -20478,12 +20478,7 @@
       "sites": [
         {
           "column": 5,
-          "line": 313,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 3,
-          "line": 330,
+          "line": 316,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -20493,7 +20488,12 @@
         },
         {
           "column": 3,
-          "line": 347,
+          "line": 336,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 3,
+          "line": 350,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -20677,12 +20677,7 @@
         },
         {
           "column": 5,
-          "line": 312,
-          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
-        },
-        {
-          "column": 3,
-          "line": 329,
+          "line": 315,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -20692,7 +20687,12 @@
         },
         {
           "column": 3,
-          "line": 346,
+          "line": 335,
+          "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 3,
+          "line": 349,
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -21181,8 +21181,8 @@
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
-          "column": 37,
-          "line": 141,
+          "column": 29,
+          "line": 172,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -21313,7 +21313,7 @@
       ]
     },
     {
-      "accesses": 36,
+      "accesses": 37,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createBindGroupLayout",
@@ -21370,6 +21370,11 @@
           "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
         },
         {
+          "column": 27,
+          "line": 574,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
+        },
+        {
           "column": 35,
           "line": 104,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
@@ -21386,7 +21391,7 @@
         },
         {
           "column": 27,
-          "line": 159,
+          "line": 189,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -21555,17 +21560,17 @@
         },
         {
           "column": 14,
-          "line": 116,
+          "line": 145,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
           "column": 27,
-          "line": 136,
+          "line": 167,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
           "column": 14,
-          "line": 213,
+          "line": 243,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -21730,7 +21735,7 @@
       ]
     },
     {
-      "accesses": 21,
+      "accesses": 22,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createPipelineLayout",
@@ -21792,6 +21797,11 @@
           "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
         },
         {
+          "column": 18,
+          "line": 577,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
+        },
+        {
           "column": 26,
           "line": 114,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
@@ -21808,7 +21818,7 @@
         },
         {
           "column": 18,
-          "line": 162,
+          "line": 192,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -21849,7 +21859,7 @@
       ]
     },
     {
-      "accesses": 21,
+      "accesses": 22,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createRenderPipeline",
@@ -21912,6 +21922,11 @@
         },
         {
           "column": 20,
+          "line": 578,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 20,
           "line": 136,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
@@ -21922,7 +21937,7 @@
         },
         {
           "column": 20,
-          "line": 167,
+          "line": 197,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -22022,7 +22037,7 @@
       ]
     },
     {
-      "accesses": 33,
+      "accesses": 34,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createShaderModule",
@@ -22090,17 +22105,22 @@
         },
         {
           "column": 18,
-          "line": 256,
+          "line": 264,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 18,
-          "line": 266,
+          "line": 274,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
         },
         {
           "column": 18,
-          "line": 276,
+          "line": 284,
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
+        },
+        {
+          "column": 18,
+          "line": 573,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
         },
         {
@@ -22110,7 +22130,7 @@
         },
         {
           "column": 18,
-          "line": 158,
+          "line": 188,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -22531,7 +22551,7 @@
         },
         {
           "column": 17,
-          "line": 47,
+          "line": 49,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
@@ -22709,12 +22729,12 @@
       "sites": [
         {
           "column": 5,
-          "line": 256,
+          "line": 284,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
           "column": 3,
-          "line": 263,
+          "line": 291,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         }
       ]
@@ -22722,14 +22742,14 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "accesses": 3497,
+    "accesses": 3501,
     "backendContractEndpoints": 379,
     "bindings": 9,
-    "calls": 2213,
+    "calls": 2217,
     "dynamicFallbackEndpoints": 12,
     "endpoints": 373,
     "reads": 1028,
     "writes": 256
   },
-  "upstreamCommit": "f1a7a9a02f244a18b0e60c136ca1a801ab90f5a3"
+  "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
 }

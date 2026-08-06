@@ -108,6 +108,7 @@ export * from '@flighthq/spatial';
 export * from '@flighthq/spring';
 export * from '@flighthq/spritesheet';
 export * from '@flighthq/spritesheet-formats';
+export * from '@flighthq/statechart';
 export * from '@flighthq/statusbar';
 export * from '@flighthq/storage';
 export * from '@flighthq/text';

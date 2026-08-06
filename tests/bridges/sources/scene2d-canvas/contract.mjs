@@ -40,4 +40,5 @@ export * from './canvasTextureWindowSource.mjs';
 export * from './canvasTilemap.mjs';
 export * from './canvasTransform.mjs';
 export * from './enableCanvasTextureResolverGuards.mjs';
+export * from './explainCanvasScene2DCoverage.mjs';
 export * from './explainCanvasTextureResolution.mjs';

@@ -9,11 +9,14 @@ import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.path.Path.createPath;
+import flighthq.pathBoolean.BooleanPaths.intersectPaths;
+import flighthq.pathBoolean.SimplifyPath.simplifyPath;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Matrix;
+import flighthq.types.Path;
 import flighthq.types.RiveDocument.RiveArtboardGraph;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RivePathRecord;
@@ -22,7 +25,9 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 class RiveClipping {
   public static function applyRiveClipping(nodes:Array<Null<DisplayObject>>, artboard:RiveArtboardGraph, shapePaths:Dynamic, diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var relative:Dynamic = cast _Runtime.UNDEFINED;
+    var clips:Dynamic = cast _Runtime.UNDEFINED;
     relative = _Runtime.callValue(RiveClipping.createRiveRelativeTransforms__riveClipping, cast ([artboard] : Array<Dynamic>));
+    clips = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var index:Dynamic = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
@@ -32,11 +37,6 @@ class RiveClipping {
         var owner:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
         var target:Dynamic = ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(nodes, owner) : Dynamic) : (cast null : Dynamic));
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
-        if ((cast !_Runtime.strictEquals(_Runtime.field(target, 'clip'), null) : Bool)) {
-          _Runtime.callValue(RiveClipping.reportRiveClipDrop__riveClipping, cast ([diagnostics, 'rive.multiple-clipping-shapes', { index: index }] : Array<Dynamic>));
-          index++;
-          continue;
-        }
         var source:Dynamic = _Runtime.callValue(RiveClipping.readRiveNumber__riveClipping, cast ([object, RiveClipping.RIVE_CLIP_SOURCE_ID__riveClipping, -1.0] : Array<Dynamic>));
         var paths:Dynamic = ((cast shapePaths : flighthq._internal._Map).get(source));
         if ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(paths, 'length'), 0.0) : Bool)) : Bool)) {
@@ -44,13 +44,20 @@ class RiveClipping {
           index++;
           continue;
         }
-        _Runtime.setField(target, 'clip', _Runtime.callValue(RiveClipping.createRiveClipRegion__riveClipping, cast ([paths, flighthq._internal._StaticIndex.readArray(relative, owner), flighthq._internal._StaticIndex.readArray(relative, source), object] : Array<Dynamic>)));
+        var next:Dynamic = _Runtime.callValue(RiveClipping.createRiveClipPath__riveClipping, cast ([paths, flighthq._internal._StaticIndex.readArray(relative, owner), flighthq._internal._StaticIndex.readArray(relative, source), object] : Array<Dynamic>));
+        var current:Dynamic = ((cast clips : flighthq._internal._Map).get(target));
+        ((cast clips : flighthq._internal._Map).set(target, ((cast _Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast next : Dynamic) : (cast _Runtime.callValue(intersectPaths, cast ([current, next] : Array<Dynamic>)) : Dynamic))));
         index++;
       }
     }
+    for (__iteration0 in _Runtime.iterable(clips)) {
+      var target:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var path:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      _Runtime.setField(target, 'clip', _Runtime.callValue(createClipRegionFromPath, cast ([path] : Array<Dynamic>)));
+    }
   }
 
-  public static function createRiveClipRegion__riveClipping(paths:Array<RivePathRecord>, clipped:Matrix, source:Matrix, clipping:RiveCoreObject):Dynamic {
+  public static function createRiveClipPath__riveClipping(paths:Array<RivePathRecord>, clipped:Matrix, source:Matrix, clipping:RiveCoreObject):Path {
     var into:Dynamic = cast _Runtime.UNDEFINED;
     var combined:Dynamic = cast _Runtime.UNDEFINED;
     var path:Dynamic = cast _Runtime.UNDEFINED;
@@ -72,7 +79,7 @@ class RiveClipping {
         }
       }
     }
-    return cast _Runtime.callValue(createClipRegionFromPath, cast ([path] : Array<Dynamic>));
+    return cast _Runtime.callValue(simplifyPath, cast ([path, { fillRule: _Runtime.field(path, 'winding') }] : Array<Dynamic>));
     return cast null;
   }
 

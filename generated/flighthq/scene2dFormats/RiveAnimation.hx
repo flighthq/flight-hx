@@ -8,20 +8,35 @@ import flighthq.animation.AnimationClip.createAnimationClip;
 import flighthq.animation.AnimationTrack.createAnimationTrack;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.easing.EaseCubicBezier.easeCubicBezier;
+import flighthq.easing.EaseDampedSine.easeInDampedSine;
+import flighthq.easing.EaseDampedSine.easeInOutDampedSine;
+import flighthq.easing.EaseDampedSine.easeOutDampedSine;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.scene2d.DisplayObjectAnimation.applyAnimationClipToNode2D;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget.createSkeleton2DBoneAnimationTarget;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.Bone2D;
 import flighthq.types.DisplayObject;
 import flighthq.types.EasingFunction;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Node2DAnimationPath;
 import flighthq.types.Node2DAnimationTarget;
 import flighthq.types.RiveDocument.RiveAnimationClip;
+import flighthq.types.RiveDocument.RiveAnimationLoop;
 import flighthq.types.RiveDocument.RiveArtboardGraph;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveFieldType;
+import flighthq.types.RiveDocument.RiveSkeleton2DImport;
+import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
+import flighthq.types._internal._RiveDocumentValues.RiveAnimationLoopValue;
+import flighthq.types._internal._RiveDocumentValues.RiveAnimationLoopValue as RiveAnimationLoopValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
+import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
 
 typedef RiveMutableTarget__riveAnimation = { var riveApply:Dynamic; };
 
@@ -32,7 +47,7 @@ class RiveAnimation {
       var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<RiveMutableTarget__riveAnimation>);
       if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'riveApply'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
       _Runtime.callValue(sampleAnimationTrack, cast ([RiveAnimation._sampleScratch__riveAnimation, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
-      _Runtime.callProperty(target, 'riveApply', cast ([flighthq._internal._StaticIndex.readArray(RiveAnimation._sampleScratch__riveAnimation, 0.0)] : Array<Dynamic>));
+      _Runtime.callProperty(target, 'riveApply', cast ([RiveAnimation._sampleScratch__riveAnimation] : Array<Dynamic>));
     }
     for (rebuild in _Runtime.iterable(RiveAnimation._pendingRebuilds__riveAnimation)) {
       _Runtime.callValue(rebuild, cast ([] : Array<Dynamic>));
@@ -40,7 +55,8 @@ class RiveAnimation {
     ((cast RiveAnimation._pendingRebuilds__riveAnimation : flighthq._internal._Set).clear());
   }
 
-  public static function createRiveAnimationClips(objects:Array<RiveCoreObject>, range:{ var end:Float; var start:Float; }, nodes:Array<Null<DisplayObject>>, artboard:RiveArtboardGraph, rebuilds:Dynamic):Array<RiveAnimationClip> {
+  public static function createRiveAnimationClips(objects:Array<RiveCoreObject>, range:{ var end:Float; var start:Float; }, nodes:Array<Null<DisplayObject>>, artboard:RiveArtboardGraph, rebuilds:Dynamic, ?skeleton:Null<RiveSkeleton2DImport>, ?diagnostics:Array<ImportDiagnostic>):Array<RiveAnimationClip> {
+    if (skeleton == null) skeleton = cast (null : Dynamic);
     var interpolators:Dynamic = cast _Runtime.UNDEFINED;
     var clips:Array<RiveAnimationClip> = cast _Runtime.UNDEFINED;
     interpolators = _Runtime.callValue(RiveAnimation.collectRiveInterpolators__riveAnimation, cast ([objects, range] : Array<Dynamic>));
@@ -49,7 +65,7 @@ class RiveAnimation {
       var index:Dynamic = _Runtime.field(range, 'start');
       while ((cast ((cast index : Float) < (cast _Runtime.field(range, 'end') : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(objects, index), 'typeKey'), RiveAnimation.RIVE_LINEAR_ANIMATION__riveAnimation) : Bool)) { index++; continue; }
-        _Runtime.callProperty(clips, 'push', cast ([_Runtime.callValue(RiveAnimation.createRiveAnimationClip__riveAnimation, cast ([objects, index, _Runtime.field(range, 'end'), nodes, interpolators, artboard, rebuilds] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(clips, 'push', cast ([_Runtime.callValue(RiveAnimation.createRiveAnimationClip__riveAnimation, cast ([objects, index, _Runtime.field(range, 'end'), nodes, interpolators, artboard, rebuilds, skeleton, diagnostics] : Array<Dynamic>))] : Array<Dynamic>));
         index++;
       }
     }
@@ -57,13 +73,16 @@ class RiveAnimation {
     return cast null;
   }
 
-  public static function createRiveAnimationClip__riveAnimation(objects:Array<RiveCoreObject>, start:Float, limit:Float, nodes:Array<Null<DisplayObject>>, interpolators:Dynamic, artboard:RiveArtboardGraph, rebuilds:Dynamic):RiveAnimationClip {
+  public static function createRiveAnimationClip__riveAnimation(objects:Array<RiveCoreObject>, start:Float, limit:Float, nodes:Array<Null<DisplayObject>>, interpolators:Dynamic, artboard:RiveArtboardGraph, rebuilds:Dynamic, skeleton:Null<RiveSkeleton2DImport>, diagnostics:Null<Array<ImportDiagnostic>>):RiveAnimationClip {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var fps:Dynamic = cast _Runtime.UNDEFINED;
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
     var keyed:Null<DisplayObject> = cast _Runtime.UNDEFINED;
     var keyedIndex:Dynamic = cast _Runtime.UNDEFINED;
     var duration:Dynamic = cast _Runtime.UNDEFINED;
+    var hasWorkArea:Dynamic = cast _Runtime.UNDEFINED;
+    var workStart:Dynamic = cast _Runtime.UNDEFINED;
+    var workEnd:Dynamic = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(objects, start);
     fps = HxMath.max(1.0, _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_FPS__riveAnimation, 60.0] : Array<Dynamic>)));
     channels = cast ([] : Array<Dynamic>);
@@ -82,6 +101,12 @@ class RiveAnimation {
         }
         if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveAnimation.RIVE_KEYED_PROPERTY__riveAnimation) : Bool)) { index++; continue; }
         var propertyKey:Dynamic = _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([object, RiveAnimation.RIVE_KEYED_PROPERTY_KEY__riveAnimation, -1.0] : Array<Dynamic>));
+        var boneChannel:Dynamic = _Runtime.callValue(RiveAnimation.createRiveBoneChannel__riveAnimation, cast ([objects, index, limit, fps, interpolators, skeleton, keyedIndex, propertyKey, diagnostics] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals(boneChannel, null) : Bool)) {
+          _Runtime.callProperty(channels, 'push', cast ([boneChannel] : Array<Dynamic>));
+          index++;
+          continue;
+        }
         var path:Dynamic = _Runtime.callValue(RiveAnimation.toRiveAnimationPath__riveAnimation, cast ([propertyKey] : Array<Dynamic>));
         if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast !_Runtime.strictEquals(keyed, null) : Bool)) : Bool)) {
           var channel:Dynamic = _Runtime.callValue(RiveAnimation.createRiveChannel__riveAnimation, cast ([objects, index, limit, fps, interpolators, _Runtime.callValue(RiveAnimation.toRiveValueConversion__riveAnimation, cast ([path] : Array<Dynamic>)), { node: keyed, path: path }] : Array<Dynamic>));
@@ -89,19 +114,83 @@ class RiveAnimation {
           index++;
           continue;
         }
-        var target:Dynamic = _Runtime.callValue(RiveAnimation.createRiveMutableTarget__riveAnimation, cast ([artboard, rebuilds, keyedIndex, propertyKey] : Array<Dynamic>));
+        var keyframeType:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(objects, (index + 1.0)), 'typeKey');
+        if ((cast ((cast !_Runtime.strictEquals(keyframeType, RiveAnimation.RIVE_KEYFRAME_DOUBLE__riveAnimation) : Bool) && (cast !_Runtime.strictEquals(keyframeType, RiveAnimation.RIVE_KEYFRAME_COLOR__riveAnimation) : Bool)) : Bool)) { index++; continue; }
+        var target:Dynamic = _Runtime.callValue(RiveAnimation.createRiveMutableTarget__riveAnimation, cast ([artboard, rebuilds, keyedIndex, propertyKey, ((cast _Runtime.strictEquals(keyframeType, RiveAnimation.RIVE_KEYFRAME_COLOR__riveAnimation) : Bool) ? (cast RiveFieldTypeValue.Color : Dynamic) : (cast RiveFieldTypeValue.Double : Dynamic))] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(target, null) : Bool)) { index++; continue; }
-        var channel:Dynamic = _Runtime.callValue(RiveAnimation.createRiveChannel__riveAnimation, cast ([objects, index, limit, fps, interpolators, function(value:Dynamic) return value, target] : Array<Dynamic>));
+        var channel:Dynamic = _Runtime.callValue(RiveAnimation.createRiveMutableChannel__riveAnimation, cast ([objects, index, limit, fps, interpolators, target] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(channel, null) : Bool)) { _Runtime.callProperty(channels, 'push', cast ([channel] : Array<Dynamic>)); }
         index++;
       }
     }
     duration = _Runtime.divideNumbers(_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_DURATION__riveAnimation, 60.0] : Array<Dynamic>)), fps);
-    return cast { clip: _Runtime.callValue(createAnimationClip, cast ([channels, duration] : Array<Dynamic>)), name: _Runtime.callValue(RiveAnimation.readRiveText__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_NAME__riveAnimation, ''] : Array<Dynamic>)) };
+    hasWorkArea = !_Runtime.strictEquals(_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_ENABLE_WORK_AREA__riveAnimation, 0.0] : Array<Dynamic>)), 0.0);
+    workStart = _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_WORK_START__riveAnimation, RiveAnimation.RIVE_UNSET_FRAME__riveAnimation] : Array<Dynamic>));
+    workEnd = _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_WORK_END__riveAnimation, RiveAnimation.RIVE_UNSET_FRAME__riveAnimation] : Array<Dynamic>));
+    return cast { clip: _Runtime.callValue(createAnimationClip, cast ([channels, duration] : Array<Dynamic>)), loop: _Runtime.callValue(RiveAnimation.toRiveAnimationLoop__riveAnimation, cast ([_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_LOOP__riveAnimation, RiveAnimation.RIVE_LOOP_ONE_SHOT__riveAnimation] : Array<Dynamic>))] : Array<Dynamic>)), name: _Runtime.callValue(RiveAnimation.readRiveText__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_NAME__riveAnimation, ''] : Array<Dynamic>)), speed: _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_ANIMATION_SPEED__riveAnimation, 1.0] : Array<Dynamic>)), workAreaEnd: ((cast ((cast !(cast hasWorkArea : Bool) : Bool) || (cast ((cast workEnd : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (workEnd / fps) : Dynamic)), workAreaStart: ((cast ((cast !(cast hasWorkArea : Bool) : Bool) || (cast ((cast workStart : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (workStart / fps) : Dynamic)) };
+    return cast null;
+  }
+
+  public static function toRiveAnimationLoop__riveAnimation(value:Float):RiveAnimationLoop {
+    if ((cast _Runtime.strictEquals(value, RiveAnimation.RIVE_LOOP_LOOP__riveAnimation) : Bool)) { return cast RiveAnimationLoopValue.Loop; }
+    return cast ((cast _Runtime.strictEquals(value, RiveAnimation.RIVE_LOOP_PING_PONG__riveAnimation) : Bool) ? (cast RiveAnimationLoopValue.PingPong : Dynamic) : (cast RiveAnimationLoopValue.OneShot : Dynamic));
+    return cast null;
+  }
+
+  public static function createRiveBoneChannel__riveAnimation(objects:Array<RiveCoreObject>, propertyIndex:Float, limit:Float, fps:Float, interpolators:Dynamic, skeleton:Null<RiveSkeleton2DImport>, keyedIndex:Float, propertyKey:Float, diagnostics:Null<Array<ImportDiagnostic>>):Null<AnimationChannel> {
+    var boneIndex:Dynamic = cast _Runtime.UNDEFINED;
+    var path:Dynamic = cast _Runtime.UNDEFINED;
+    var convert:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast _Runtime.strictEquals(skeleton, null) : Bool) || (cast ((cast keyedIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast keyedIndex : Float) >= (cast _Runtime.field(_Runtime.field(skeleton, 'boneIndices'), 'length') : Float)) : Bool)) : Bool)) { return cast null; }
+    boneIndex = flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'boneIndices'), keyedIndex);
+    if ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
+    path = _Runtime.callValue(RiveAnimation.toRiveBoneAnimationPath__riveAnimation, cast ([propertyKey] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(path, null) : Bool)) { return cast null; }
+    convert = _Runtime.callValue(RiveAnimation.toRiveBoneValueConversion__riveAnimation, cast ([path, flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(skeleton, 'skeleton'), 'bones'), boneIndex)] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(convert, null) : Bool)) {
+      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'rive.unrepresentable-bone-scale', 'createRiveAnimationClips', { bone: boneIndex, property: propertyKey }] : Array<Dynamic>));
+      return cast null;
+    }
+    return cast _Runtime.callValue(RiveAnimation.createRiveChannel__riveAnimation, cast ([objects, propertyIndex, limit, fps, interpolators, convert, _Runtime.callValue(createSkeleton2DBoneAnimationTarget, cast ([boneIndex, path] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function toRiveBoneAnimationPath__riveAnimation(propertyKey:Float):Null<Skeleton2DAnimationPath> {
+    if ((cast ((cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_X__riveAnimation) : Bool) || (cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_X_LEGACY__riveAnimation) : Bool)) : Bool)) { return cast Skeleton2DAnimationPathValue.TranslationX; }
+    if ((cast ((cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_Y__riveAnimation) : Bool) || (cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_Y_LEGACY__riveAnimation) : Bool)) : Bool)) { return cast Skeleton2DAnimationPathValue.TranslationY; }
+    if ((cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_ROTATION__riveAnimation) : Bool)) { return cast Skeleton2DAnimationPathValue.Rotation; }
+    if ((cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_SCALE_X__riveAnimation) : Bool)) { return cast Skeleton2DAnimationPathValue.ScaleX; }
+    return cast ((cast _Runtime.strictEquals(propertyKey, RiveAnimation.RIVE_SCALE_Y__riveAnimation) : Bool) ? (cast Skeleton2DAnimationPathValue.ScaleY : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
+
+  public static function toRiveBoneValueConversion__riveAnimation(path:Skeleton2DAnimationPath, setup:Bone2D):Null<Dynamic> {
+    var setupScale:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(path, Skeleton2DAnimationPathValue.TranslationX) : Bool)) { return cast function(value:Dynamic) return _Runtime.subtractNumbers(value, _Runtime.field(setup, 'x')); }
+    if ((cast _Runtime.strictEquals(path, Skeleton2DAnimationPathValue.TranslationY) : Bool)) { return cast function(value:Dynamic) return _Runtime.subtractNumbers(value, _Runtime.field(setup, 'y')); }
+    if ((cast _Runtime.strictEquals(path, Skeleton2DAnimationPathValue.Rotation) : Bool)) { return cast function(value:Dynamic) return _Runtime.subtractNumbers((value * RAD_TO_DEG), _Runtime.field(setup, 'rotation')); }
+    setupScale = ((cast _Runtime.strictEquals(path, Skeleton2DAnimationPathValue.ScaleX) : Bool) ? (cast _Runtime.field(setup, 'scaleX') : Dynamic) : (cast _Runtime.field(setup, 'scaleY') : Dynamic));
+    if ((cast _Runtime.strictEquals(setupScale, 0.0) : Bool)) { return cast null; }
+    return cast function(value:Dynamic) return (value / setupScale);
     return cast null;
   }
 
   public static function createRiveChannel__riveAnimation(objects:Array<RiveCoreObject>, propertyIndex:Float, limit:Float, fps:Float, interpolators:Dynamic, convert:Dynamic, targetRef:Dynamic):Null<AnimationChannel> {
+    return cast _Runtime.callValue(RiveAnimation.createRiveTypedChannel__riveAnimation, cast ([objects, propertyIndex, limit, fps, interpolators, 1.0, function(keyframe:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(keyframe, 'typeKey'), RiveAnimation.RIVE_KEYFRAME_DOUBLE__riveAnimation) : Bool) ? (cast cast ([_Runtime.callValue(convert, cast ([_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([keyframe, RiveAnimation.RIVE_KEYFRAME_DOUBLE_VALUE__riveAnimation, 0.0] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>) : Dynamic) : (cast null : Dynamic)), targetRef] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createRiveMutableChannel__riveAnimation(objects:Array<RiveCoreObject>, propertyIndex:Float, limit:Float, fps:Float, interpolators:Dynamic, targetRef:RiveMutableTarget__riveAnimation):Null<AnimationChannel> {
+    var first:Dynamic = cast _Runtime.UNDEFINED;
+    first = flighthq._internal._StaticIndex.readArray(objects, (propertyIndex + 1.0));
+    if ((cast _Runtime.strictEquals(_Runtime.optionalField(first, 'typeKey'), RiveAnimation.RIVE_KEYFRAME_COLOR__riveAnimation) : Bool)) {
+      return cast _Runtime.callValue(RiveAnimation.createRiveTypedChannel__riveAnimation, cast ([objects, propertyIndex, limit, fps, interpolators, 4.0, RiveAnimation.readRiveColorKeyframe__riveAnimation, targetRef] : Array<Dynamic>));
+    }
+    return cast _Runtime.callValue(RiveAnimation.createRiveChannel__riveAnimation, cast ([objects, propertyIndex, limit, fps, interpolators, function(value:Dynamic) return value, targetRef] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createRiveTypedChannel__riveAnimation(objects:Array<RiveCoreObject>, propertyIndex:Float, limit:Float, fps:Float, interpolators:Dynamic, components:Float, readValue:Dynamic, targetRef:Dynamic):Null<AnimationChannel> {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var segmentEasings:Array<Null<EasingFunction>> = cast _Runtime.UNDEFINED;
@@ -113,21 +202,31 @@ class RiveAnimation {
       while ((cast ((cast index : Float) < (cast limit : Float)) : Bool)) {
         var object:Dynamic = flighthq._internal._StaticIndex.readArray(objects, index);
         if ((cast !(cast _Runtime.callValue(isRiveCoreTypeDerivedFrom, cast ([_Runtime.field(object, 'typeKey'), RiveAnimation.RIVE_INTERPOLATING_KEYFRAME__riveAnimation] : Array<Dynamic>)) : Bool) : Bool)) { break; }
+        var value:Dynamic = _Runtime.callValue(readValue, cast ([object] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(value, null) : Bool)) { break; }
         var time:Dynamic = _Runtime.divideNumbers(_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([object, RiveAnimation.RIVE_KEYFRAME_FRAME__riveAnimation, 0.0] : Array<Dynamic>)), fps);
         if ((cast ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast time : Float) <= (cast flighthq._internal._StaticIndex.readArray(times, _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0)) : Float)) : Bool)) : Bool)) { index++; continue; }
         _Runtime.callProperty(times, 'push', cast ([time] : Array<Dynamic>));
-        _Runtime.callProperty(values, 'push', cast ([_Runtime.callValue(convert, cast ([_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([object, RiveAnimation.RIVE_KEYFRAME_VALUE__riveAnimation, 0.0] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(values, 'push', _Runtime.concatArrays([_Runtime.toArray(value)]));
         _Runtime.callProperty(segmentEasings, 'push', cast ([_Runtime.callValue(RiveAnimation.toRiveSegmentEasing__riveAnimation, cast ([object, interpolators] : Array<Dynamic>))] : Array<Dynamic>));
         index++;
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool)) { return cast null; }
     _Runtime.callProperty(segmentEasings, 'pop', cast ([] : Array<Dynamic>));
-    return cast _Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(createAnimationTrack, cast ([{ interpolation: 'Linear', segmentEasings: segmentEasings, times: times, values: values }] : Array<Dynamic>)), targetRef] : Array<Dynamic>));
+    return cast _Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(createAnimationTrack, cast ([{ components: components, interpolation: 'Linear', segmentEasings: segmentEasings, times: times, values: values }] : Array<Dynamic>)), targetRef] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRiveMutableTarget__riveAnimation(artboard:RiveArtboardGraph, rebuilds:Dynamic, objectIndex:Float, propertyKey:Float):Null<RiveMutableTarget__riveAnimation> {
+  public static function readRiveColorKeyframe__riveAnimation(keyframe:RiveCoreObject):Null<Array<Float>> {
+    var packed:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(_Runtime.field(keyframe, 'typeKey'), RiveAnimation.RIVE_KEYFRAME_COLOR__riveAnimation) : Bool)) { return cast null; }
+    packed = _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([keyframe, RiveAnimation.RIVE_KEYFRAME_COLOR_VALUE__riveAnimation, 0.0] : Array<Dynamic>))), 0);
+    return cast cast ([(_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255), (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255), (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255), (_Runtime.toInt32(packed) & 255)] : Array<Dynamic>);
+    return cast null;
+  }
+
+  public static function createRiveMutableTarget__riveAnimation(artboard:RiveArtboardGraph, rebuilds:Dynamic, objectIndex:Float, propertyKey:Float, defaultType:RiveFieldType):Null<RiveMutableTarget__riveAnimation> {
     var object:Dynamic = cast _Runtime.UNDEFINED;
     var rebuild:Dynamic = cast _Runtime.UNDEFINED;
     var property:Dynamic = cast _Runtime.UNDEFINED;
@@ -137,12 +236,30 @@ class RiveAnimation {
     rebuild = ((cast rebuilds : flighthq._internal._Map).get(_Runtime.callValue(RiveAnimation.findRiveShapeOwner__riveAnimation, cast ([artboard, objectIndex] : Array<Dynamic>))));
     if ((cast _Runtime.strictEquals(rebuild, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     property = _Runtime.find(_Runtime.field(object, 'properties'), function(candidate:Dynamic) return _Runtime.strictEquals(_Runtime.field(candidate, 'key'), propertyKey));
-    slot = _Runtime.coalesce(property, function():Dynamic return cast { key: propertyKey, type: RiveFieldTypeValue.Double, value: 0.0 });
+    slot = _Runtime.coalesce(property, function():Dynamic return cast { key: propertyKey, type: defaultType, value: 0.0 });
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(_Runtime.field(object, 'properties'), 'push', cast ([slot] : Array<Dynamic>)); }
-    return cast { riveApply: function(value:Float) {
-      _Runtime.setField(slot, 'value', value);
+    return cast { riveApply: function(sample:Dynamic) {
+      _Runtime.setField(slot, 'value', ((cast _Runtime.strictEquals(_Runtime.field(slot, 'type'), RiveFieldTypeValue.Color) : Bool) ? (cast _Runtime.callValue(RiveAnimation.packRiveColorSample__riveAnimation, cast ([sample] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0) : Dynamic)));
       ((cast RiveAnimation._pendingRebuilds__riveAnimation : flighthq._internal._Set).add(rebuild));
     } };
+    return cast null;
+  }
+
+  public static function packRiveColorSample__riveAnimation(sample:Dynamic):Float {
+    var alpha:Dynamic = cast _Runtime.UNDEFINED;
+    var red:Dynamic = cast _Runtime.UNDEFINED;
+    var green:Dynamic = cast _Runtime.UNDEFINED;
+    var blue:Dynamic = cast _Runtime.UNDEFINED;
+    alpha = _Runtime.callValue(RiveAnimation.toRiveColorByte__riveAnimation, cast ([flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0)] : Array<Dynamic>));
+    red = _Runtime.callValue(RiveAnimation.toRiveColorByte__riveAnimation, cast ([flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 1.0)] : Array<Dynamic>));
+    green = _Runtime.callValue(RiveAnimation.toRiveColorByte__riveAnimation, cast ([flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 2.0)] : Array<Dynamic>));
+    blue = _Runtime.callValue(RiveAnimation.toRiveColorByte__riveAnimation, cast ([flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 3.0)] : Array<Dynamic>));
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(alpha) << 24)) | _Runtime.toInt32((_Runtime.toInt32(red) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(green) << 8)))) | _Runtime.toInt32(blue))), 0);
+    return cast null;
+  }
+
+  public static function toRiveColorByte__riveAnimation(value:Float):Float {
+    return cast HxMath.round(HxMath.min(255.0, HxMath.max(0.0, value)));
     return cast null;
   }
 
@@ -172,16 +289,32 @@ class RiveAnimation {
     var interpolators:Dynamic = cast _Runtime.UNDEFINED;
     interpolators = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
-      var index:Dynamic = 0.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callValue(isRiveCoreTypeDerivedFrom, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(objects, index), 'typeKey'), RiveAnimation.RIVE_CUBIC_INTERPOLATOR__riveAnimation] : Array<Dynamic>)) : Bool) : Bool)) { index++; continue; }
-        if ((cast ((cast ((cast index : Float) < (cast _Runtime.field(range, 'start') : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(range, 'end') : Float)) : Bool)) : Bool)) { index++; continue; }
+      var index:Dynamic = _Runtime.field(range, 'start');
+      while ((cast ((cast ((cast index : Float) < (cast _Runtime.field(range, 'end') : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) : Bool)) {
         var source:Dynamic = flighthq._internal._StaticIndex.readArray(objects, index);
-        ((cast interpolators : flighthq._internal._Map).set(index, _Runtime.callValue(easeCubicBezier, cast ([_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_X1__riveAnimation, 0.42] : Array<Dynamic>)), _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_Y1__riveAnimation, 0.0] : Array<Dynamic>)), _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_X2__riveAnimation, 0.58] : Array<Dynamic>)), _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_Y2__riveAnimation, 1.0] : Array<Dynamic>))] : Array<Dynamic>))));
+        if ((cast _Runtime.callValue(isRiveCoreTypeDerivedFrom, cast ([_Runtime.field(source, 'typeKey'), RiveAnimation.RIVE_CUBIC_INTERPOLATOR__riveAnimation] : Array<Dynamic>)) : Bool)) {
+          ((cast interpolators : flighthq._internal._Map).set(index, _Runtime.callValue(easeCubicBezier, cast ([_Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_X1__riveAnimation, 0.42] : Array<Dynamic>)), _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_Y1__riveAnimation, 0.0] : Array<Dynamic>)), _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_X2__riveAnimation, 0.58] : Array<Dynamic>)), _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_Y2__riveAnimation, 1.0] : Array<Dynamic>))] : Array<Dynamic>))));
+          index++;
+          continue;
+        }
+        if ((cast !(cast _Runtime.callValue(isRiveCoreTypeDerivedFrom, cast ([_Runtime.field(source, 'typeKey'), RiveAnimation.RIVE_ELASTIC_INTERPOLATOR__riveAnimation] : Array<Dynamic>)) : Bool) : Bool)) { index++; continue; }
+        ((cast interpolators : flighthq._internal._Map).set(index, _Runtime.callValue(RiveAnimation.toRiveElasticEasing__riveAnimation, cast ([source] : Array<Dynamic>))));
         index++;
       }
     }
     return cast interpolators;
+    return cast null;
+  }
+
+  public static function toRiveElasticEasing__riveAnimation(source:RiveCoreObject):EasingFunction {
+    var amplitude:Dynamic = cast _Runtime.UNDEFINED;
+    var period:Dynamic = cast _Runtime.UNDEFINED;
+    var easing:Dynamic = cast _Runtime.UNDEFINED;
+    amplitude = _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_AMPLITUDE__riveAnimation, 1.0] : Array<Dynamic>));
+    period = _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_PERIOD__riveAnimation, RiveAnimation.RIVE_DEFAULT_ELASTIC_PERIOD__riveAnimation] : Array<Dynamic>));
+    easing = _Runtime.callValue(RiveAnimation.readRiveNumber__riveAnimation, cast ([source, RiveAnimation.RIVE_INTERPOLATOR_EASING__riveAnimation, RiveAnimation.RIVE_ELASTIC_EASE_OUT__riveAnimation] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(easing, RiveAnimation.RIVE_ELASTIC_EASE_IN__riveAnimation) : Bool)) { return cast _Runtime.callValue(easeInDampedSine, cast ([amplitude, period] : Array<Dynamic>)); }
+    return cast ((cast _Runtime.strictEquals(easing, RiveAnimation.RIVE_ELASTIC_EASE_IN_OUT__riveAnimation) : Bool) ? (cast _Runtime.callValue(easeInOutDampedSine, cast ([amplitude, period] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(easeOutDampedSine, cast ([amplitude, period] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -219,11 +352,17 @@ class RiveAnimation {
 
   public static final RIVE_KEYED_PROPERTY__riveAnimation:Dynamic = 26.0;
 
+  public static final RIVE_KEYFRAME_DOUBLE__riveAnimation:Dynamic = 30.0;
+
   public static final RIVE_SHAPE_TYPE_KEY__riveAnimation:Dynamic = 3.0;
 
   public static final RIVE_LINEAR_ANIMATION__riveAnimation:Dynamic = 31.0;
 
+  public static final RIVE_KEYFRAME_COLOR__riveAnimation:Dynamic = 37.0;
+
   public static final RIVE_CUBIC_INTERPOLATOR__riveAnimation:Dynamic = 139.0;
+
+  public static final RIVE_ELASTIC_INTERPOLATOR__riveAnimation:Dynamic = 174.0;
 
   public static final RIVE_INTERPOLATING_KEYFRAME__riveAnimation:Dynamic = 170.0;
 
@@ -253,6 +392,16 @@ class RiveAnimation {
 
   public static final RIVE_ANIMATION_DURATION__riveAnimation:Dynamic = 57.0;
 
+  public static final RIVE_ANIMATION_SPEED__riveAnimation:Dynamic = 58.0;
+
+  public static final RIVE_ANIMATION_LOOP__riveAnimation:Dynamic = 59.0;
+
+  public static final RIVE_ANIMATION_WORK_START__riveAnimation:Dynamic = 60.0;
+
+  public static final RIVE_ANIMATION_WORK_END__riveAnimation:Dynamic = 61.0;
+
+  public static final RIVE_ANIMATION_ENABLE_WORK_AREA__riveAnimation:Dynamic = 62.0;
+
   public static final RIVE_INTERPOLATOR_X1__riveAnimation:Dynamic = 63.0;
 
   public static final RIVE_INTERPOLATOR_Y1__riveAnimation:Dynamic = 64.0;
@@ -267,7 +416,31 @@ class RiveAnimation {
 
   public static final RIVE_KEYFRAME_INTERPOLATOR_ID__riveAnimation:Dynamic = 69.0;
 
-  public static final RIVE_KEYFRAME_VALUE__riveAnimation:Dynamic = 70.0;
+  public static final RIVE_KEYFRAME_DOUBLE_VALUE__riveAnimation:Dynamic = 70.0;
+
+  public static final RIVE_KEYFRAME_COLOR_VALUE__riveAnimation:Dynamic = 88.0;
+
+  public static final RIVE_INTERPOLATOR_EASING__riveAnimation:Dynamic = 405.0;
+
+  public static final RIVE_INTERPOLATOR_AMPLITUDE__riveAnimation:Dynamic = 406.0;
+
+  public static final RIVE_INTERPOLATOR_PERIOD__riveAnimation:Dynamic = 407.0;
+
+  public static final RIVE_LOOP_ONE_SHOT__riveAnimation:Dynamic = 0.0;
+
+  public static final RIVE_LOOP_LOOP__riveAnimation:Dynamic = 1.0;
+
+  public static final RIVE_LOOP_PING_PONG__riveAnimation:Dynamic = 2.0;
+
+  public static final RIVE_UNSET_FRAME__riveAnimation:Dynamic = -1.0;
+
+  public static final RIVE_ELASTIC_EASE_IN__riveAnimation:Dynamic = 0.0;
+
+  public static final RIVE_ELASTIC_EASE_OUT__riveAnimation:Dynamic = 1.0;
+
+  public static final RIVE_ELASTIC_EASE_IN_OUT__riveAnimation:Dynamic = 2.0;
+
+  public static final RIVE_DEFAULT_ELASTIC_PERIOD__riveAnimation:Dynamic = 1.0;
 
   public static final RIVE_INTERPOLATION_HOLD__riveAnimation:Dynamic = 0.0;
 

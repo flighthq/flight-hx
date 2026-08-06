@@ -29,6 +29,7 @@ class Renderer {
     var sourceShapeCommands:Dynamic = cast _Runtime.UNDEFINED;
     targetRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([target] : Array<Dynamic>));
     sourceRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>));
+    _Runtime.setField(targetRuntime, 'colorAdjustmentResolver', _Runtime.field(sourceRuntime, 'colorAdjustmentResolver'));
     sourcePaddingRegistry = _Runtime.field(sourceRuntime, 'renderEffectPaddingResolverRegistry');
     _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourcePaddingRegistry]) : Dynamic)));
     sourceShapeCommands = _Runtime.field(sourceRuntime, 'canvasShapeCommandRegistry');

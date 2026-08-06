@@ -8,9 +8,9 @@ import flighthq.types.Abc.AbcOpcode;
 import flighthq.types.Abc.AbcOpcodeValue;
 
 class AbcInstruction {
-  public static function readAbcInstructions(code:flighthq._internal._UInt8Array):Null<Array<AbcInstruction>> {
+  public static function readAbcInstructions(code:flighthq._internal._UInt8Array):Null<Array<flighthq.types.Abc.AbcInstruction>> {
     var source:Dynamic = cast _Runtime.UNDEFINED;
-    var instructions:Array<AbcInstruction> = cast _Runtime.UNDEFINED;
+    var instructions:Array<flighthq.types.Abc.AbcInstruction> = cast _Runtime.UNDEFINED;
     var pos:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast code : flighthq._internal._UInt8Array);
     instructions = cast ([] : Array<Dynamic>);

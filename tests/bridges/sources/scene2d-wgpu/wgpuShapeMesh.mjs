@@ -5,4 +5,5 @@ const api = compiled.flighthq.scene2dWgpu.WgpuShapeMesh;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const drawWgpuShapeMeshBatch = api.drawWgpuShapeMeshBatch;
 export const drawWgpuShapeMeshes = api.drawWgpuShapeMeshes;

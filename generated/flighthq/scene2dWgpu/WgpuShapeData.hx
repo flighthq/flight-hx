@@ -31,7 +31,7 @@ class WgpuShapeData {
   }
 
   public static function createWgpuShapeData(_state:RenderState, _source:Renderable):RendererData {
-    return cast _Runtime.callValue(createWgpuRendererData, cast ([{ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>) } }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createWgpuRendererData, cast ([{ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -61,12 +61,17 @@ class WgpuShapeData {
     for (buffer in _Runtime.iterable(_Runtime.field(b, 'uniformBuffers'))) {
       _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>));
     }
+    for (buffer in _Runtime.iterable(_Runtime.field(b, 'colorScaleBiasUniformBuffers'))) {
+      _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>));
+    }
     _Runtime.setLength(_Runtime.field(b, 'vertexBuffers'), 0.0);
     _Runtime.setLength(_Runtime.field(b, 'vertexCapacities'), 0.0);
     _Runtime.setLength(_Runtime.field(b, 'indexBuffers'), 0.0);
     _Runtime.setLength(_Runtime.field(b, 'indexCapacities'), 0.0);
     _Runtime.setLength(_Runtime.field(b, 'uniformBuffers'), 0.0);
     _Runtime.setLength(_Runtime.field(b, 'bindGroups'), 0.0);
+    _Runtime.setLength(_Runtime.field(b, 'colorScaleBiasUniformBuffers'), 0.0);
+    _Runtime.setLength(_Runtime.field(b, 'colorScaleBiasBindGroups'), 0.0);
   }
 
   public static function getWgpuShapeData(data:RendererData):Null<WgpuShapeRendererData> {

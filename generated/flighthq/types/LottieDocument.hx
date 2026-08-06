@@ -42,7 +42,7 @@ typedef LottieStrokeShapeItem = { @:optional var hd:Bool; @:optional var ix:Floa
 
 typedef LottieGradient = { var p:Float; var k:LottieAnimatable<Array<Float>>; };
 
-typedef LottieGradientShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var e:LottieAnimatable<Array<Float>>; var g:LottieGradient; @:optional var a:LottieAnimatable<Float>; @:optional var h:LottieAnimatable<Float>; @:optional var o:LottieAnimatable<Float>; var t:Float; var s:LottieAnimatable<Array<Float>>; @:optional var w:LottieAnimatable<Float>; };
+typedef LottieGradientShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; @:optional var d:Array<LottieDashEntry>; var e:LottieAnimatable<Array<Float>>; var g:LottieGradient; @:optional var a:LottieAnimatable<Float>; @:optional var h:LottieAnimatable<Float>; @:optional var lc:Float; @:optional var lj:Float; @:optional var ml:Float; @:optional var o:LottieAnimatable<Float>; var t:Float; var s:LottieAnimatable<Array<Float>>; @:optional var w:LottieAnimatable<Float>; };
 
 typedef LottieTransformShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; @:optional var a:LottieAnimatable<Array<Float>>; @:optional var o:LottieAnimatable<Float>; @:optional var p:LottiePositionProperty; @:optional var r:LottieAnimatable<Float>; @:optional var rz:LottieAnimatable<Float>; @:optional var s:LottieAnimatable<Array<Float>>; @:optional var sa:LottieAnimatable<Float>; @:optional var sk:LottieAnimatable<Float>; };
 

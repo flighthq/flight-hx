@@ -337,12 +337,13 @@ class LottieDocument {
     ((cast _Runtime.field(context, 'resolvingPrecompositions') : flighthq._internal._Set).delete_(id));
   }
 
-  public static function appendLottieShapeItems__lottieDocument(parent:DisplayObject, items:Array<LottieShapeItem>, context:LottieImportContext__lottieDocument):Void {
+  public static function appendLottieShapeItems__lottieDocument(parent:DisplayObject, items:Array<LottieShapeItem>, context:LottieImportContext__lottieDocument, ?name:Null<String>):Void {
+    if (name == null) name = cast (null : Dynamic);
     var group:Dynamic = cast _Runtime.UNDEFINED;
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var state:LottieShapeState__lottieDocument = cast _Runtime.UNDEFINED;
     var rerender:Dynamic = cast _Runtime.UNDEFINED;
-    group = _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>));
+    group = _Runtime.callValue(createDisplayObject, cast ([{ name: name }] : Array<Dynamic>));
     transform = _Runtime.find(items, function(item:Dynamic) return _Runtime.strictEquals(_Runtime.field(item, 'ty'), 'tr'));
     if ((cast _Runtime.strictEquals(_Runtime.optionalField(transform, 'ty'), 'tr') : Bool)) { _Runtime.callValue(LottieDocument.applyLottieTransform__lottieDocument, cast ([group, (cast transform : LottieTransform), context] : Array<Dynamic>)); }
     state = { paints: cast ([] : Array<Dynamic>), paths: cast ([] : Array<Dynamic>), shape: _Runtime.callValue(createShape, cast ([] : Array<Dynamic>)) };
@@ -350,7 +351,8 @@ class LottieDocument {
     for (item in _Runtime.iterable(items)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(item, 'hd'), true) : Bool)) { continue; }
       if ((cast _Runtime.strictEquals(_Runtime.field(item, 'ty'), 'gr') : Bool)) {
-        _Runtime.callValue(LottieDocument.appendLottieShapeItems__lottieDocument, cast ([group, _Runtime.field((cast item : LottieShapeGroup), 'it'), context] : Array<Dynamic>));
+        var shapeGroup:Dynamic = (cast item : LottieShapeGroup);
+        _Runtime.callValue(LottieDocument.appendLottieShapeItems__lottieDocument, cast ([group, _Runtime.field(shapeGroup, 'it'), context, _Runtime.coalesce(_Runtime.field(shapeGroup, 'nm'), function():Dynamic return cast null)] : Array<Dynamic>));
         continue;
       }
       var path:Dynamic = _Runtime.callValue(LottieDocument.createLottieShapeItemPath__lottieDocument, cast ([item] : Array<Dynamic>));
@@ -375,7 +377,13 @@ class LottieDocument {
         var color:Dynamic = _Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(stroke, 'c')] : Array<Dynamic>)), 3.0] : Array<Dynamic>));
         var opacity:Dynamic = cast ([_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(stroke, 'o')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0), 100.0)] : Array<Dynamic>);
         var width:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(stroke, 'w')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0)] : Array<Dynamic>);
-        var paint:Dynamic = { color: color, kind: 'stroke', opacity: flighthq._internal._StaticIndex.readArray(opacity, 0.0), width: flighthq._internal._StaticIndex.readArray(width, 0.0) };
+        var dashEntries:Dynamic = _Runtime.coalesce(_Runtime.field(stroke, 'd'), function():Dynamic return cast cast ([] : Array<Dynamic>));
+        var hasAnimatedDash:Dynamic = _Runtime.callProperty(dashEntries, 'some', cast ([function(entry:Dynamic) return _Runtime.callValue(LottieDocument.isAnimatedProperty__lottieDocument, cast ([_Runtime.field(entry, 'v')] : Array<Dynamic>))] : Array<Dynamic>));
+        var dash:Dynamic = ((cast hasAnimatedDash : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.callProperty(dashEntries, 'filter', cast ([function(entry:Dynamic) return !_Runtime.strictEquals(_Runtime.field(entry, 'n'), 'o')] : Array<Dynamic>)), 'map', cast ([function(entry:Dynamic) return HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(entry, 'v')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0))] : Array<Dynamic>)) : Dynamic));
+        var dashOffsetEntry:Dynamic = _Runtime.find(dashEntries, function(entry:Dynamic) return _Runtime.strictEquals(_Runtime.field(entry, 'n'), 'o'));
+        var dashOffset:Dynamic = ((cast ((cast hasAnimatedDash : Bool) || (cast _Runtime.strictEquals(dashOffsetEntry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(dashOffsetEntry, 'v')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0) : Dynamic));
+        if ((cast hasAnimatedDash : Bool)) { _Runtime.callValue(LottieDocument.reportLottieSkip__lottieDocument, cast ([context, 'lottie.unsupported-shape-modifier', { modifier: 'dash' }] : Array<Dynamic>)); }
+        var paint:Dynamic = { caps: _Runtime.callValue(LottieDocument.mapLottieLineCap__lottieDocument, cast ([_Runtime.field(stroke, 'lc')] : Array<Dynamic>)), color: color, dash: ((cast _Runtime.callProperty(dash, 'some', cast ([function(value:Dynamic) return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast dash : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)), dashOffset: dashOffset, joints: _Runtime.callValue(LottieDocument.mapLottieLineJoin__lottieDocument, cast ([_Runtime.field(stroke, 'lj')] : Array<Dynamic>)), kind: 'stroke', miterLimit: _Runtime.coalesce(_Runtime.field(stroke, 'ml'), function():Dynamic return cast 4.0), opacity: flighthq._internal._StaticIndex.readArray(opacity, 0.0), width: flighthq._internal._StaticIndex.readArray(width, 0.0) };
         _Runtime.callProperty(_Runtime.field(state, 'paints'), 'push', cast ([paint] : Array<Dynamic>));
         _Runtime.callValue(LottieDocument.bindMutableNumericProperty__lottieDocument, cast ([_Runtime.field(stroke, 'c'), color, function(value:Dynamic) return value, rerender, context] : Array<Dynamic>));
         _Runtime.callValue(LottieDocument.bindMutableNumericProperty__lottieDocument, cast ([_Runtime.field(stroke, 'o'), opacity, function(value:Dynamic) return (value / 100.0), function() {
@@ -388,12 +396,19 @@ class LottieDocument {
         }, context] : Array<Dynamic>));
       } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(item, 'ty'), 'gf') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(item, 'ty'), 'gs') : Bool)) : Bool)) {
         var gradient:Dynamic = (cast item : LottieGradientShapeItem);
-        var values:Dynamic = _Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(_Runtime.field(gradient, 'g'), 'k')] : Array<Dynamic>)), _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(gradient, 'g'), 'p'), 4.0)] : Array<Dynamic>));
+        var initialGradient:Dynamic = _Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(_Runtime.field(gradient, 'g'), 'k')] : Array<Dynamic>));
+        var values:Dynamic = _Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([initialGradient, HxMath.max(_Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(gradient, 'g'), 'p'), 4.0), ((cast _Runtime.isArray(initialGradient) : Bool) ? (cast _Runtime.field(initialGradient, 'length') : Dynamic) : (cast 0.0 : Dynamic)))] : Array<Dynamic>));
         var start:Dynamic = _Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(gradient, 's')] : Array<Dynamic>)), 2.0] : Array<Dynamic>));
         var end:Dynamic = _Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(gradient, 'e')] : Array<Dynamic>)), 2.0] : Array<Dynamic>));
         var opacity:Dynamic = cast ([((cast _Runtime.strictEquals(_Runtime.field(gradient, 'o'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 100.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(gradient, 'o')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0) : Dynamic))] : Array<Dynamic>);
         var width:Dynamic = cast ([((cast _Runtime.strictEquals(_Runtime.field(gradient, 'w'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(gradient, 'w')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0) : Dynamic))] : Array<Dynamic>);
-        var paint:Dynamic = { count: _Runtime.field(_Runtime.field(gradient, 'g'), 'p'), end: end, kind: 'gradient', opacity: _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(opacity, 0.0), 100.0), shape: _Runtime.field(gradient, 't'), start: start, type: _Runtime.field(gradient, 'ty'), values: values, width: flighthq._internal._StaticIndex.readArray(width, 0.0) };
+        var dashEntries:Dynamic = _Runtime.coalesce(_Runtime.field(gradient, 'd'), function():Dynamic return cast cast ([] : Array<Dynamic>));
+        var hasAnimatedDash:Dynamic = _Runtime.callProperty(dashEntries, 'some', cast ([function(entry:Dynamic) return _Runtime.callValue(LottieDocument.isAnimatedProperty__lottieDocument, cast ([_Runtime.field(entry, 'v')] : Array<Dynamic>))] : Array<Dynamic>));
+        var dash:Dynamic = ((cast hasAnimatedDash : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.callProperty(dashEntries, 'filter', cast ([function(entry:Dynamic) return !_Runtime.strictEquals(_Runtime.field(entry, 'n'), 'o')] : Array<Dynamic>)), 'map', cast ([function(entry:Dynamic) return HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(entry, 'v')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0))] : Array<Dynamic>)) : Dynamic));
+        var dashOffsetEntry:Dynamic = _Runtime.find(dashEntries, function(entry:Dynamic) return _Runtime.strictEquals(_Runtime.field(entry, 'n'), 'o'));
+        var dashOffset:Dynamic = ((cast ((cast hasAnimatedDash : Bool) || (cast _Runtime.strictEquals(dashOffsetEntry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(_Runtime.callValue(LottieDocument.numericValue__lottieDocument, cast ([_Runtime.callValue(LottieDocument.initialLottieValue__lottieDocument, cast ([_Runtime.field(dashOffsetEntry, 'v')] : Array<Dynamic>)), 1.0] : Array<Dynamic>)), 0.0) : Dynamic));
+        if ((cast hasAnimatedDash : Bool)) { _Runtime.callValue(LottieDocument.reportLottieSkip__lottieDocument, cast ([context, 'lottie.unsupported-shape-modifier', { modifier: 'dash' }] : Array<Dynamic>)); }
+        var paint:Dynamic = { caps: _Runtime.callValue(LottieDocument.mapLottieLineCap__lottieDocument, cast ([_Runtime.field(gradient, 'lc')] : Array<Dynamic>)), count: _Runtime.field(_Runtime.field(gradient, 'g'), 'p'), dash: ((cast _Runtime.callProperty(dash, 'some', cast ([function(value:Dynamic) return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast dash : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)), dashOffset: dashOffset, end: end, joints: _Runtime.callValue(LottieDocument.mapLottieLineJoin__lottieDocument, cast ([_Runtime.field(gradient, 'lj')] : Array<Dynamic>)), kind: 'gradient', miterLimit: _Runtime.coalesce(_Runtime.field(gradient, 'ml'), function():Dynamic return cast 4.0), opacity: _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(opacity, 0.0), 100.0), shape: _Runtime.field(gradient, 't'), start: start, type: _Runtime.field(gradient, 'ty'), values: values, width: flighthq._internal._StaticIndex.readArray(width, 0.0) };
         _Runtime.callProperty(_Runtime.field(state, 'paints'), 'push', cast ([paint] : Array<Dynamic>));
         _Runtime.callValue(LottieDocument.bindMutableNumericProperty__lottieDocument, cast ([_Runtime.field(_Runtime.field(gradient, 'g'), 'k'), values, function(value:Dynamic) return value, rerender, context] : Array<Dynamic>));
         _Runtime.callValue(LottieDocument.bindMutableNumericProperty__lottieDocument, cast ([_Runtime.field(gradient, 's'), start, function(value:Dynamic) return value, rerender, context] : Array<Dynamic>));
@@ -755,22 +770,28 @@ class LottieDocument {
         _Runtime.callValue(LottieDocument.appendLottieShapePaths__lottieDocument, cast ([state, _Runtime.field(paint, 'winding')] : Array<Dynamic>));
         _Runtime.callValue(appendShapeEndFill, cast ([_Runtime.field(state, 'shape')] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(_Runtime.field(paint, 'kind'), 'stroke') : Bool)) {
-        _Runtime.callValue(appendShapeLineStyle, cast ([_Runtime.field(state, 'shape'), _Runtime.field(paint, 'width'), _Runtime.callValue(LottieDocument.lottieRgb__lottieDocument, cast ([_Runtime.field(paint, 'color')] : Array<Dynamic>)), _Runtime.field(paint, 'opacity')] : Array<Dynamic>));
-        _Runtime.callValue(LottieDocument.appendLottieShapePaths__lottieDocument, cast ([state, null] : Array<Dynamic>));
+        _Runtime.callValue(appendShapeLineStyle, cast ([_Runtime.field(state, 'shape'), _Runtime.field(paint, 'width'), _Runtime.callValue(LottieDocument.lottieRgb__lottieDocument, cast ([_Runtime.field(paint, 'color')] : Array<Dynamic>)), _Runtime.field(paint, 'opacity'), false, 'normal', _Runtime.field(paint, 'caps'), _Runtime.field(paint, 'joints'), _Runtime.field(paint, 'miterLimit')] : Array<Dynamic>));
+        _Runtime.callValue(LottieDocument.appendLottieShapePaths__lottieDocument, cast ([state, null, _Runtime.field(paint, 'dash'), _Runtime.field(paint, 'dashOffset')] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(_Runtime.field(paint, 'type'), 'gf') : Bool)) {
         _Runtime.callValue(LottieDocument.appendLottieGradientFill__lottieDocument, cast ([_Runtime.field(state, 'shape'), paint] : Array<Dynamic>));
         _Runtime.callValue(LottieDocument.appendLottieShapePaths__lottieDocument, cast ([state, null] : Array<Dynamic>));
         _Runtime.callValue(appendShapeEndFill, cast ([_Runtime.field(state, 'shape')] : Array<Dynamic>));
       } else {
         _Runtime.callValue(LottieDocument.appendLottieGradientStroke__lottieDocument, cast ([_Runtime.field(state, 'shape'), paint] : Array<Dynamic>));
-        _Runtime.callValue(LottieDocument.appendLottieShapePaths__lottieDocument, cast ([state, null] : Array<Dynamic>));
+        _Runtime.callValue(LottieDocument.appendLottieShapePaths__lottieDocument, cast ([state, null, _Runtime.field(paint, 'dash'), _Runtime.field(paint, 'dashOffset')] : Array<Dynamic>));
       } } }
     }
   }
 
-  public static function appendLottieShapePaths__lottieDocument(state:LottieShapeState__lottieDocument, winding:Null<String>):Void {
+  public static function appendLottieShapePaths__lottieDocument(state:LottieShapeState__lottieDocument, winding:Null<String>, ?dash:Array<Float>, dashOffset:Dynamic = 0.0):Void {
+    if (dash == null) dash = cast (cast ([] : Array<Dynamic>) : Dynamic);
     for (path in _Runtime.iterable(_Runtime.field(state, 'paths'))) {
-      _Runtime.callValue(appendShapePath, cast ([_Runtime.field(state, 'shape'), _Runtime.slice(_Runtime.field(path, 'commands'), 0, null), _Runtime.slice(_Runtime.field(path, 'data'), 0, null), _Runtime.coalesce(winding, function():Dynamic return cast _Runtime.field(path, 'winding'))] : Array<Dynamic>));
+      var output:Dynamic = path;
+      if ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
+        (output = cast (_Runtime.callValue(createPath, cast ([_Runtime.field(path, 'winding')] : Array<Dynamic>)) : Dynamic));
+        _Runtime.callValue(dashPath, cast ([path, ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic)), dashOffset, output] : Array<Dynamic>));
+      }
+      _Runtime.callValue(appendShapePath, cast ([_Runtime.field(state, 'shape'), _Runtime.slice(_Runtime.field(output, 'commands'), 0, null), _Runtime.slice(_Runtime.field(output, 'data'), 0, null), _Runtime.coalesce(winding, function():Dynamic return cast _Runtime.field(output, 'winding'))] : Array<Dynamic>));
     }
   }
 
@@ -783,7 +804,7 @@ class LottieDocument {
   public static function appendLottieGradientStroke__lottieDocument(shape:Shape, paint:LottieGradientPaint__lottieDocument):Void {
     var gradient:Dynamic = cast _Runtime.UNDEFINED;
     gradient = _Runtime.callValue(LottieDocument.parseLottieGradient__lottieDocument, cast ([_Runtime.field(paint, 'values'), _Runtime.field(paint, 'count'), _Runtime.field(paint, 'opacity')] : Array<Dynamic>));
-    _Runtime.callValue(appendShapeLineStyle, cast ([shape, _Runtime.field(paint, 'width')] : Array<Dynamic>));
+    _Runtime.callValue(appendShapeLineStyle, cast ([shape, _Runtime.field(paint, 'width'), 0.0, 1.0, false, 'normal', _Runtime.field(paint, 'caps'), _Runtime.field(paint, 'joints'), _Runtime.field(paint, 'miterLimit')] : Array<Dynamic>));
     _Runtime.callValue(appendShapeLineGradientStyle, cast ([shape, ((cast _Runtime.strictEquals(_Runtime.field(paint, 'shape'), 2.0) : Bool) ? (cast 'radial' : Dynamic) : (cast 'linear' : Dynamic)), _Runtime.field(gradient, 'colors'), _Runtime.field(gradient, 'alphas'), _Runtime.field(gradient, 'ratios'), _Runtime.callValue(LottieDocument.createLottieGradientMatrix__lottieDocument, cast ([_Runtime.field(paint, 'start'), _Runtime.field(paint, 'end')] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
@@ -973,18 +994,52 @@ class LottieDocument {
   public static function parseLottieGradient__lottieDocument(values:Array<Float>, count:Float, opacity:Float):Dynamic {
     var colors:Array<Float> = cast _Runtime.UNDEFINED;
     var ratios:Array<Float> = cast _Runtime.UNDEFINED;
+    var opacityStops:Array<{ var alpha:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    var alphas:Array<Float> = cast _Runtime.UNDEFINED;
     colors = cast ([] : Array<Dynamic>);
     ratios = cast ([] : Array<Dynamic>);
+    opacityStops = cast ([] : Array<Dynamic>);
+    {
+      var index:Dynamic = (count * 4.0);
+      while ((cast ((cast (index + 1.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
+        _Runtime.callProperty(opacityStops, 'push', cast ([{ alpha: _Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([flighthq._internal._StaticIndex.readArray(values, (index + 1.0)), 0.0, 1.0] : Array<Dynamic>)), offset: _Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([flighthq._internal._StaticIndex.readArray(values, index), 0.0, 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        (index = cast ((index + 2.0) : Dynamic));
+      }
+    }
+    _Runtime.sortAndReturn(opacityStops, function(left:Dynamic, right:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(left, 'offset'), _Runtime.field(right, 'offset')));
+    alphas = cast ([] : Array<Dynamic>);
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
         var offset:Dynamic = (index * 4.0);
-        _Runtime.callProperty(ratios, 'push', cast ([HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, offset), function():Dynamic return cast 0.0), 0.0, 1.0] : Array<Dynamic>)), 255.0))] : Array<Dynamic>));
+        var ratio:Dynamic = _Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, offset), function():Dynamic return cast 0.0), 0.0, 1.0] : Array<Dynamic>));
+        _Runtime.callProperty(ratios, 'push', cast ([HxMath.round((ratio * 255.0))] : Array<Dynamic>));
         _Runtime.callProperty(colors, 'push', cast ([_Runtime.callValue(LottieDocument.lottieRgb__lottieDocument, cast ([_Runtime.slice(values, (offset + 1.0), (offset + 4.0))] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(alphas, 'push', cast ([_Runtime.multiplyNumbers(opacity, _Runtime.callValue(LottieDocument.interpolateLottieGradientOpacity__lottieDocument, cast ([opacityStops, ratio] : Array<Dynamic>)))] : Array<Dynamic>));
         index++;
       }
     }
-    return cast { alphas: _Runtime.fill(_Runtime.createArray(count), opacity, 0, null, 1), colors: colors, ratios: ratios };
+    return cast { alphas: alphas, colors: colors, ratios: ratios };
+    return cast null;
+  }
+
+  public static function interpolateLottieGradientOpacity__lottieDocument(stops:Array<{ var alpha:Float; var offset:Float; }>, offset:Float):Float {
+    if ((cast _Runtime.strictEquals(_Runtime.field(stops, 'length'), 0.0) : Bool)) { return cast 1.0; }
+    if ((cast ((cast offset : Float) <= (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(stops, 0.0), 'offset') : Float)) : Bool)) { return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(stops, 0.0), 'alpha'); }
+    {
+      var index:Dynamic = 1.0;
+      while ((cast ((cast index : Float) < (cast _Runtime.field(stops, 'length') : Float)) : Bool)) {
+        var previous:Dynamic = flighthq._internal._StaticIndex.readArray(stops, (index - 1.0));
+        var next:Dynamic = flighthq._internal._StaticIndex.readArray(stops, index);
+        if ((cast ((cast offset : Float) > (cast _Runtime.field(next, 'offset') : Float)) : Bool)) { index++; continue; }
+        var distance:Dynamic = _Runtime.subtractNumbers(_Runtime.field(next, 'offset'), _Runtime.field(previous, 'offset'));
+        if ((cast _Runtime.strictEquals(distance, 0.0) : Bool)) { return cast _Runtime.field(next, 'alpha'); }
+        var progress:Dynamic = (_Runtime.subtractNumbers(offset, _Runtime.field(previous, 'offset')) / distance);
+        return cast _Runtime.addNumbers(_Runtime.field(previous, 'alpha'), (_Runtime.subtractNumbers(_Runtime.field(next, 'alpha'), _Runtime.field(previous, 'alpha')) * progress));
+        index++;
+      }
+    }
+    return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(stops, _Runtime.subtractNumbers(_Runtime.field(stops, 'length'), 1.0)), 'alpha');
     return cast null;
   }
 
@@ -999,6 +1054,16 @@ class LottieDocument {
 
   public static function lottieRgb__lottieDocument(color:Array<Float>):Float {
     return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 0.0), 0.0, 1.0] : Array<Dynamic>)), 255.0))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 0.0), 0.0, 1.0] : Array<Dynamic>)), 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 0.0), 0.0, 1.0] : Array<Dynamic>)), 255.0))));
+    return cast null;
+  }
+
+  public static function mapLottieLineCap__lottieDocument(value:Null<Float>):String {
+    return cast ((cast _Runtime.strictEquals(value, 2.0) : Bool) ? (cast 'round' : Dynamic) : (cast ((cast _Runtime.strictEquals(value, 3.0) : Bool) ? (cast 'square' : Dynamic) : (cast 'none' : Dynamic)) : Dynamic));
+    return cast null;
+  }
+
+  public static function mapLottieLineJoin__lottieDocument(value:Null<Float>):String {
+    return cast ((cast _Runtime.strictEquals(value, 2.0) : Bool) ? (cast 'round' : Dynamic) : (cast ((cast _Runtime.strictEquals(value, 3.0) : Bool) ? (cast 'bevel' : Dynamic) : (cast 'miter' : Dynamic)) : Dynamic));
     return cast null;
   }
 

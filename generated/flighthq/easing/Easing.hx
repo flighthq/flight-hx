@@ -10,6 +10,7 @@ import flighthq.easing.EaseCircular as Facade_Easing_flighthq_easing_EaseCircula
 import flighthq.easing.EaseCombinators as Facade_Easing_flighthq_easing_EaseCombinators;
 import flighthq.easing.EaseCubic as Facade_Easing_flighthq_easing_EaseCubic;
 import flighthq.easing.EaseCubicBezier as Facade_Easing_flighthq_easing_EaseCubicBezier;
+import flighthq.easing.EaseDampedSine as Facade_Easing_flighthq_easing_EaseDampedSine;
 import flighthq.easing.EaseElastic as Facade_Easing_flighthq_easing_EaseElastic;
 import flighthq.easing.EaseExponential as Facade_Easing_flighthq_easing_EaseExponential;
 import flighthq.easing.EaseLinear as Facade_Easing_flighthq_easing_EaseLinear;
@@ -56,6 +57,11 @@ class Easing {
 
   public static final easeInCubic:EasingFunction = Facade_Easing_flighthq_easing_EaseCubic.easeInCubic;
 
+  public static function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
+    return cast Facade_Easing_flighthq_easing_EaseDampedSine.easeInDampedSine(amplitude, period);
+    return cast null;
+  }
+
   public static final easeInElastic:EasingFunction = Facade_Easing_flighthq_easing_EaseElastic.easeInElastic;
 
   public static final easeInExponential:EasingFunction = Facade_Easing_flighthq_easing_EaseExponential.easeInExponential;
@@ -67,6 +73,11 @@ class Easing {
   public static final easeInOutCircular:EasingFunction = Facade_Easing_flighthq_easing_EaseCircular.easeInOutCircular;
 
   public static final easeInOutCubic:EasingFunction = Facade_Easing_flighthq_easing_EaseCubic.easeInOutCubic;
+
+  public static function easeInOutDampedSine(amplitude:Float, period:Float):EasingFunction {
+    return cast Facade_Easing_flighthq_easing_EaseDampedSine.easeInOutDampedSine(amplitude, period);
+    return cast null;
+  }
 
   public static final easeInOutElastic:EasingFunction = Facade_Easing_flighthq_easing_EaseElastic.easeInOutElastic;
 
@@ -117,6 +128,11 @@ class Easing {
   public static final easeOutCircular:EasingFunction = Facade_Easing_flighthq_easing_EaseCircular.easeOutCircular;
 
   public static final easeOutCubic:EasingFunction = Facade_Easing_flighthq_easing_EaseCubic.easeOutCubic;
+
+  public static function easeOutDampedSine(amplitude:Float, period:Float):EasingFunction {
+    return cast Facade_Easing_flighthq_easing_EaseDampedSine.easeOutDampedSine(amplitude, period);
+    return cast null;
+  }
 
   public static final easeOutElastic:EasingFunction = Facade_Easing_flighthq_easing_EaseElastic.easeOutElastic;
 

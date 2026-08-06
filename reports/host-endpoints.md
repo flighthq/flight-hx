@@ -1,6 +1,6 @@
 # Host Endpoint Audit
 
-Upstream commit: `f1a7a9a02f244a18b0e60c136ca1a801ab90f5a3`
+Upstream commit: `cad72aa3ea4e6e76a050918a403dcb10efdfcb0d`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 
@@ -8,8 +8,8 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | --- | ---: |
 | Receiver bindings | 9 |
 | Canonical endpoints | 373 |
-| Property accesses | 3497 |
-| Calls | 2213 |
+| Property accesses | 3501 |
+| Calls | 2217 |
 | Reads | 1028 |
 | Writes | 256 |
 | Backend contract endpoints | 379 |
@@ -378,13 +378,13 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `ZERO` | `read` | `ZERO` | `backend` | 12 | `src/flighthq/_internal/backend/WebGl2Backend.hx` |
 | `WebGpuCanvasContextBackend` | `getCurrentTexture` | `call` | `getCurrentTexture` | `backend` | 1 | `src/flighthq/_internal/backend/WebGpuCanvasContextBackend.hx` |
 | `WebGpuDeviceBackend` | `createBindGroup` | `call` | `createBindGroup` | `backend` | 54 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createBindGroupLayout` | `call` | `createBindGroupLayout` | `backend` | 36 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createBindGroupLayout` | `call` | `createBindGroupLayout` | `backend` | 37 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createBuffer` | `call` | `createBuffer` | `backend` | 35 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createCommandEncoder` | `call` | `createCommandEncoder` | `backend` | 4 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createPipelineLayout` | `call` | `createPipelineLayout` | `backend` | 21 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createRenderPipeline` | `call` | `createRenderPipeline` | `backend` | 21 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createPipelineLayout` | `call` | `createPipelineLayout` | `backend` | 22 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createRenderPipeline` | `call` | `createRenderPipeline` | `backend` | 22 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createSampler` | `call` | `createSampler` | `backend` | 8 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createShaderModule` | `call` | `createShaderModule` | `backend` | 33 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createShaderModule` | `call` | `createShaderModule` | `backend` | 34 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createTexture` | `call` | `createTexture` | `backend` | 28 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `features` | `read` | `features` | `dynamic-fallback` | 3 | `src/flighthq/_internal/_Runtime.hx` |
 | `WebGpuDeviceBackend` | `limits` | `read` | `limits` | `backend` | 3 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |

@@ -34,4 +34,8 @@ class Skeleton2dFormats {
   public static function registerSkeleton2DFormat(kind:String, detect:Dynamic, parse:Dynamic):Void {
     Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect.registerSkeleton2DFormat(kind, detect, parse);
   }
+
+  public static function unregisterSkeleton2DFormat(kind:String):Void {
+    Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect.unregisterSkeleton2DFormat(kind);
+  }
 }

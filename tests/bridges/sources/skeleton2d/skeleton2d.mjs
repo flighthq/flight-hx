@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const cloneSkeleton2D = api.cloneSkeleton2D;
 export const computeSkeleton2DBoneMatrices = api.computeSkeleton2DBoneMatrices;
+export const computeSkeleton2DBoneWorldTransform = api.computeSkeleton2DBoneWorldTransform;
 export const computeSkeleton2DWorldTransforms = api.computeSkeleton2DWorldTransforms;
 export const createSkeleton2D = api.createSkeleton2D;
 export const disposeSkeleton2D = api.disposeSkeleton2D;

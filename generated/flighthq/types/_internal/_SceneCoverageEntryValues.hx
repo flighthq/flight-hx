@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 
-class _Scene3DCoverageGapValues {
-  public static final Scene3DCoverageValue:Dynamic = { Fallback: 'Fallback', Missing: 'Missing' };
+class _SceneCoverageEntryValues {
+  public static final SceneCoverageValue:Dynamic = { Fallback: 'Fallback', Missing: 'Missing', Satisfied: 'Satisfied' };
 }

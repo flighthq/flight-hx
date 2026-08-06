@@ -8,15 +8,47 @@ import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.skeleton2d.ApplyAnimationClipToSkeleton2D as Facade_Skeleton2d_flighthq_skeleton2d_ApplyAnimationClipToSkeleton2D;
+import flighthq.skeleton2d.BoundingBoxAttachment2D as Facade_Skeleton2d_flighthq_skeleton2d_BoundingBoxAttachment2D;
+import flighthq.skeleton2d.ClippingAttachment2D as Facade_Skeleton2d_flighthq_skeleton2d_ClippingAttachment2D;
+import flighthq.skeleton2d.DeformAnimationTarget2D as Facade_Skeleton2d_flighthq_skeleton2d_DeformAnimationTarget2D;
 import flighthq.skeleton2d.DeformMeshAttachment2D as Facade_Skeleton2d_flighthq_skeleton2d_DeformMeshAttachment2D;
+import flighthq.skeleton2d.DeformPathAttachment2D as Facade_Skeleton2d_flighthq_skeleton2d_DeformPathAttachment2D;
+import flighthq.skeleton2d.ExplainSkeleton2DDeformLength as Facade_Skeleton2d_flighthq_skeleton2d_ExplainSkeleton2DDeformLength;
+import flighthq.skeleton2d.IkConstraint2D as Facade_Skeleton2d_flighthq_skeleton2d_IkConstraint2D;
+import flighthq.skeleton2d.PathConstraint2D as Facade_Skeleton2d_flighthq_skeleton2d_PathConstraint2D;
+import flighthq.skeleton2d.PointAttachment2D as Facade_Skeleton2d_flighthq_skeleton2d_PointAttachment2D;
 import flighthq.skeleton2d.RegionAttachment2D as Facade_Skeleton2d_flighthq_skeleton2d_RegionAttachment2D;
+import flighthq.skeleton2d.Skeleton2dAnimationTarget as Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget;
+import flighthq.skeleton2d.Skeleton2dConstraint as Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dConstraint;
+import flighthq.skeleton2d.SlotDeform2D as Facade_Skeleton2d_flighthq_skeleton2d_SlotDeform2D;
+import flighthq.skeleton2d.TransformConstraint2D as Facade_Skeleton2d_flighthq_skeleton2d_TransformConstraint2D;
 import flighthq.types.AnimationClip;
+import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
 import flighthq.types.Bone2D;
+import flighthq.types.BoundingBoxAttachment2D;
+import flighthq.types.ClippingAttachment2D;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.MeshAttachment2D;
+import flighthq.types.Path;
+import flighthq.types.PathAttachment2D;
+import flighthq.types.PointAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
+import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types.Skeleton2DAnimationTarget;
+import flighthq.types.Skeleton2DAnimationTargetBinder;
+import flighthq.types.Skeleton2DAnimationTargetKind;
+import flighthq.types.Skeleton2DConstraint;
+import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
+import flighthq.types.Skeleton2DDeformLengthExplanation;
+import flighthq.types.Skeleton2DSlotAnimationTarget;
+import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
+import flighthq.types.Skeleton2DSlotDeform;
+import flighthq.types.Skin2D;
+import flighthq.types.Slot2D;
+import flighthq.types.Vector2.Vector2Like;
 
 class Skeleton2d {
   public static final _scratchA__skeleton2d:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
@@ -56,88 +88,112 @@ class Skeleton2d {
     }
   }
 
+  public static function computeSkeleton2DBoneWorldTransform(skeleton:Skeleton2D, boneIndex:Float):Void {
+    var bones:Dynamic = cast _Runtime.UNDEFINED;
+    var world:Dynamic = cast _Runtime.UNDEFINED;
+    bones = _Runtime.field(skeleton, 'bones');
+    world = _Runtime.field(skeleton, 'worldMatrices');
+    if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
+    {
+      var i:Dynamic = boneIndex;
+      var bone:Dynamic = flighthq._internal._StaticIndex.readArray(bones, i);
+      var rotX:Dynamic = (_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), _Runtime.field(bone, 'shearX')) * DEG_TO_RAD);
+      var rotY:Dynamic = (_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), 90.0), _Runtime.field(bone, 'shearY')) * DEG_TO_RAD);
+      var la:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotX), _Runtime.field(bone, 'scaleX'));
+      var lb:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotX), _Runtime.field(bone, 'scaleX'));
+      var lc:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotY), _Runtime.field(bone, 'scaleY'));
+      var ld:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotY), _Runtime.field(bone, 'scaleY'));
+      var o:Dynamic = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
+      if ((cast ((cast _Runtime.field(bone, 'parentIndex') : Float) < (cast 0.0 : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeFloat32Array(world, o, la);
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 1.0), lb);
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 2.0), lc);
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 3.0), ld);
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));
+        return;
+      }
+      var p:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(bone, 'parentIndex'), Skeleton2d.MATRIX_STRIDE__skeleton2d);
+      var pa:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, p);
+      var pb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
+      var pc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
+      var pd:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
+      var inherit:Dynamic = _Runtime.field(bone, 'transformMode');
+      if ((cast _Runtime.field(inherit, 'translation') : Bool)) {
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pa, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pc, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0))));
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pb, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pd, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0))));
+      } else {
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));
+      }
+      var ea:Float = cast _Runtime.UNDEFINED;
+      var eb:Float = cast _Runtime.UNDEFINED;
+      var ec:Float = cast _Runtime.UNDEFINED;
+      var ed:Float = cast _Runtime.UNDEFINED;
+      if ((cast ((cast ((cast _Runtime.field(inherit, 'rotation') : Bool) && (cast _Runtime.field(inherit, 'scale') : Bool)) : Bool) && (cast _Runtime.field(inherit, 'reflection') : Bool)) : Bool)) {
+        (ea = cast (pa : Dynamic));
+        (eb = cast (pb : Dynamic));
+        (ec = cast (pc : Dynamic));
+        (ed = cast (pd : Dynamic));
+      } else {
+        var psx:Dynamic = _Runtime.orValue(_Runtime.hypot(pa, pb), function():Dynamic return cast 1.0);
+        var psy:Dynamic = _Runtime.orValue(_Runtime.hypot(pc, pd), function():Dynamic return cast 1.0);
+        var d0x:Dynamic = ((cast _Runtime.field(inherit, 'rotation') : Bool) ? (cast (pa / psx) : Dynamic) : (cast 1.0 : Dynamic));
+        var d0y:Dynamic = ((cast _Runtime.field(inherit, 'rotation') : Bool) ? (cast (pb / psx) : Dynamic) : (cast 0.0 : Dynamic));
+        var d1x:Float = cast _Runtime.UNDEFINED;
+        var d1y:Float = cast _Runtime.UNDEFINED;
+        if ((cast ((cast _Runtime.field(inherit, 'rotation') : Bool) && (cast _Runtime.field(inherit, 'reflection') : Bool)) : Bool)) {
+          (d1x = cast ((pc / psy) : Dynamic));
+          (d1y = cast ((pd / psy) : Dynamic));
+        } else { if ((cast _Runtime.field(inherit, 'rotation') : Bool)) {
+          (d1x = cast (-d0y : Dynamic));
+          (d1y = cast (d0x : Dynamic));
+        } else {
+          (d1x = cast (0.0 : Dynamic));
+          (d1y = cast (((cast ((cast _Runtime.field(inherit, 'reflection') : Bool) && (cast ((cast ((pa * pd) - (pb * pc)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+        } }
+        var sx:Dynamic = ((cast _Runtime.field(inherit, 'scale') : Bool) ? (cast psx : Dynamic) : (cast 1.0 : Dynamic));
+        var sy:Dynamic = ((cast _Runtime.field(inherit, 'scale') : Bool) ? (cast psy : Dynamic) : (cast 1.0 : Dynamic));
+        (ea = cast ((d0x * sx) : Dynamic));
+        (eb = cast ((d0y * sx) : Dynamic));
+        (ec = cast ((d1x * sy) : Dynamic));
+        (ed = cast ((d1y * sy) : Dynamic));
+      }
+      flighthq._internal._StaticIndex.writeFloat32Array(world, o, ((ea * la) + (ec * lb)));
+      flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 1.0), ((eb * la) + (ed * lb)));
+      flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 2.0), ((ea * lc) + (ec * ld)));
+      flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 3.0), ((eb * lc) + (ed * ld)));
+    }
+  }
+
+  public static function computeSkeleton2DBoundingBoxAttachmentVertices(out:flighthq._internal._Float32Array, attachment:BoundingBoxAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_BoundingBoxAttachment2D.computeSkeleton2DBoundingBoxAttachmentVertices(out, attachment, skeleton, boneIndex, deform);
+  }
+
+  public static function computeSkeleton2DClippingAttachmentVertices(out:flighthq._internal._Float32Array, attachment:ClippingAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_ClippingAttachment2D.computeSkeleton2DClippingAttachmentVertices(out, attachment, skeleton, boneIndex, deform);
+  }
+
+  public static function computeSkeleton2DPointAttachmentPosition(out:Vector2Like, attachment:PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_PointAttachment2D.computeSkeleton2DPointAttachmentPosition(out, attachment, skeleton, boneIndex);
+  }
+
+  public static function computeSkeleton2DPointAttachmentRotation(attachment:PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Float {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_PointAttachment2D.computeSkeleton2DPointAttachmentRotation(attachment, skeleton, boneIndex);
+    return cast null;
+  }
+
   public static function computeSkeleton2DRegionAttachmentVertices(out:flighthq._internal._Float32Array, attachment:RegionAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
     Facade_Skeleton2d_flighthq_skeleton2d_RegionAttachment2D.computeSkeleton2DRegionAttachmentVertices(out, attachment, skeleton, boneIndex);
   }
 
   public static function computeSkeleton2DWorldTransforms(skeleton:Skeleton2D):Void {
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
-    var world:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
-    bones = _Runtime.field(skeleton, 'bones');
-    world = _Runtime.field(skeleton, 'worldMatrices');
-    count = _Runtime.field(bones, 'length');
+    count = _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length');
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var bone:Dynamic = flighthq._internal._StaticIndex.readArray(bones, i);
-        var rotX:Dynamic = (_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), _Runtime.field(bone, 'shearX')) * DEG_TO_RAD);
-        var rotY:Dynamic = (_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), 90.0), _Runtime.field(bone, 'shearY')) * DEG_TO_RAD);
-        var la:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotX), _Runtime.field(bone, 'scaleX'));
-        var lb:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotX), _Runtime.field(bone, 'scaleX'));
-        var lc:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotY), _Runtime.field(bone, 'scaleY'));
-        var ld:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotY), _Runtime.field(bone, 'scaleY'));
-        var o:Dynamic = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        if ((cast ((cast _Runtime.field(bone, 'parentIndex') : Float) < (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(world, o, la);
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 1.0), lb);
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 2.0), lc);
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 3.0), ld);
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));
-          i++;
-          continue;
-        }
-        var p:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(bone, 'parentIndex'), Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        var pa:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, p);
-        var pb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
-        var pc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
-        var pd:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
-        var inherit:Dynamic = _Runtime.field(bone, 'transformMode');
-        if ((cast _Runtime.field(inherit, 'translation') : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pa, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pc, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0))));
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pb, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pd, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0))));
-        } else {
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
-          flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));
-        }
-        var ea:Float = cast _Runtime.UNDEFINED;
-        var eb:Float = cast _Runtime.UNDEFINED;
-        var ec:Float = cast _Runtime.UNDEFINED;
-        var ed:Float = cast _Runtime.UNDEFINED;
-        if ((cast ((cast ((cast _Runtime.field(inherit, 'rotation') : Bool) && (cast _Runtime.field(inherit, 'scale') : Bool)) : Bool) && (cast _Runtime.field(inherit, 'reflection') : Bool)) : Bool)) {
-          (ea = cast (pa : Dynamic));
-          (eb = cast (pb : Dynamic));
-          (ec = cast (pc : Dynamic));
-          (ed = cast (pd : Dynamic));
-        } else {
-          var psx:Dynamic = _Runtime.orValue(_Runtime.hypot(pa, pb), function():Dynamic return cast 1.0);
-          var psy:Dynamic = _Runtime.orValue(_Runtime.hypot(pc, pd), function():Dynamic return cast 1.0);
-          var d0x:Dynamic = ((cast _Runtime.field(inherit, 'rotation') : Bool) ? (cast (pa / psx) : Dynamic) : (cast 1.0 : Dynamic));
-          var d0y:Dynamic = ((cast _Runtime.field(inherit, 'rotation') : Bool) ? (cast (pb / psx) : Dynamic) : (cast 0.0 : Dynamic));
-          var d1x:Float = cast _Runtime.UNDEFINED;
-          var d1y:Float = cast _Runtime.UNDEFINED;
-          if ((cast ((cast _Runtime.field(inherit, 'rotation') : Bool) && (cast _Runtime.field(inherit, 'reflection') : Bool)) : Bool)) {
-            (d1x = cast ((pc / psy) : Dynamic));
-            (d1y = cast ((pd / psy) : Dynamic));
-          } else { if ((cast _Runtime.field(inherit, 'rotation') : Bool)) {
-            (d1x = cast (-d0y : Dynamic));
-            (d1y = cast (d0x : Dynamic));
-          } else {
-            (d1x = cast (0.0 : Dynamic));
-            (d1y = cast (((cast ((cast _Runtime.field(inherit, 'reflection') : Bool) && (cast ((cast ((pa * pd) - (pb * pc)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-          } }
-          var sx:Dynamic = ((cast _Runtime.field(inherit, 'scale') : Bool) ? (cast psx : Dynamic) : (cast 1.0 : Dynamic));
-          var sy:Dynamic = ((cast _Runtime.field(inherit, 'scale') : Bool) ? (cast psy : Dynamic) : (cast 1.0 : Dynamic));
-          (ea = cast ((d0x * sx) : Dynamic));
-          (eb = cast ((d0y * sx) : Dynamic));
-          (ec = cast ((d1x * sy) : Dynamic));
-          (ed = cast ((d1y * sy) : Dynamic));
-        }
-        flighthq._internal._StaticIndex.writeFloat32Array(world, o, ((ea * la) + (ec * lb)));
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 1.0), ((eb * la) + (ed * lb)));
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 2.0), ((ea * lc) + (ec * ld)));
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 3.0), ((eb * lc) + (ed * ld)));
+        _Runtime.callValue(computeSkeleton2DBoneWorldTransform, cast ([skeleton, i] : Array<Dynamic>));
         i++;
       }
     }
@@ -151,8 +207,22 @@ class Skeleton2d {
     return cast null;
   }
 
-  public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
-    Facade_Skeleton2d_flighthq_skeleton2d_DeformMeshAttachment2D.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex);
+  public static function createSkeleton2DBoneAnimationTarget(boneIndex:Float, path:Skeleton2DAnimationPath):Skeleton2DAnimationTarget {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget.createSkeleton2DBoneAnimationTarget(boneIndex, path);
+    return cast null;
+  }
+
+  public static function createSkeleton2DSlotAnimationTarget(slotIndex:Float, path:Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<Attachment2D>>>):Skeleton2DSlotAnimationTarget {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget.createSkeleton2DSlotAnimationTarget(slotIndex, path, attachments);
+    return cast null;
+  }
+
+  public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_DeformMeshAttachment2D.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex, deform);
+  }
+
+  public static function deformSkeleton2DPathAttachment(out:Path, attachment:PathAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_DeformPathAttachment2D.deformSkeleton2DPathAttachment(out, attachment, skeleton, boneIndex, deform);
   }
 
   public static function disposeSkeleton2D(skeleton:Skeleton2D):Void {
@@ -178,6 +248,11 @@ class Skeleton2d {
     return cast null;
   }
 
+  public static function explainSkeleton2DDeformLength(skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, deform:Null<flighthq._internal._Float32Array>):Skeleton2DDeformLengthExplanation {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_ExplainSkeleton2DDeformLength.explainSkeleton2DDeformLength(skin, vertices, deform);
+    return cast null;
+  }
+
   public static function getSkeleton2DBoneIndexByName(skeleton:Skeleton2D, name:String):Float {
     var bones:Dynamic = cast _Runtime.UNDEFINED;
     bones = _Runtime.field(skeleton, 'bones');
@@ -199,6 +274,11 @@ class Skeleton2d {
     return cast null;
   }
 
+  public static function getSkeleton2DClippingAttachmentSlotRange(attachment:ClippingAttachment2D, slotIndex:Float, slotCount:Float):{ var end:Float; var start:Float; } {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_ClippingAttachment2D.getSkeleton2DClippingAttachmentSlotRange(attachment, slotIndex, slotCount);
+    return cast null;
+  }
+
   public static function getSkeleton2DSkin(skeleton:Skeleton2D, name:String):Null<AttachmentSkin2D> {
     var skins:Dynamic = cast _Runtime.UNDEFINED;
     skins = _Runtime.field(skeleton, 'skins');
@@ -207,6 +287,11 @@ class Skeleton2d {
       if ((cast _Runtime.strictEquals(_Runtime.field(skin, 'name'), name) : Bool)) { return cast skin; }
     }
     return cast null;
+    return cast null;
+  }
+
+  public static function getSkeleton2DSlotDeformOffsets(slot:Slot2D):Null<flighthq._internal._Float32Array> {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_SlotDeform2D.getSkeleton2DSlotDeformOffsets(slot);
     return cast null;
   }
 
@@ -219,6 +304,30 @@ class Skeleton2d {
     (out.d = cast (flighthq._internal._StaticIndex.readFloat32Array(buffer, (offset + 3.0)) : Dynamic));
     (out.tx = cast (flighthq._internal._StaticIndex.readFloat32Array(buffer, (offset + 4.0)) : Dynamic));
     (out.ty = cast (flighthq._internal._StaticIndex.readFloat32Array(buffer, (offset + 5.0)) : Dynamic));
+  }
+
+  public static function registerSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind, bind:Skeleton2DAnimationTargetBinder):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget.registerSkeleton2DAnimationTargetBinder(kind, bind);
+  }
+
+  public static function registerSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind, solve:Skeleton2DConstraintSolver):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dConstraint.registerSkeleton2DConstraintSolver(kind, solve);
+  }
+
+  public static function registerSkeleton2DDeformAnimationTarget():Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_DeformAnimationTarget2D.registerSkeleton2DDeformAnimationTarget();
+  }
+
+  public static function registerSkeleton2DIkConstraintSolver():Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_IkConstraint2D.registerSkeleton2DIkConstraintSolver();
+  }
+
+  public static function registerSkeleton2DPathConstraintSolver():Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_PathConstraint2D.registerSkeleton2DPathConstraintSolver();
+  }
+
+  public static function registerSkeleton2DTransformConstraintSolver():Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_TransformConstraint2D.registerSkeleton2DTransformConstraintSolver();
   }
 
   public static function setMatrixIdentityLocal__skeleton2d(out:MatrixLike):Void {
@@ -256,6 +365,15 @@ class Skeleton2d {
     for (entry in _Runtime.iterable(_Runtime.field(skin, 'attachments'))) {
       if ((cast ((cast ((cast _Runtime.field(entry, 'slotIndex') : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(entry, 'slotIndex') : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { _Runtime.setField(flighthq._internal._StaticIndex.readArray(slots, _Runtime.field(entry, 'slotIndex')), 'attachment', _Runtime.field(entry, 'attachment')); }
     }
+  }
+
+  public static function setSkeleton2DSlotDeform(slot:Slot2D, attachment:Dynamic, offsets:Null<flighthq._internal._Float32Array>):Null<Skeleton2DSlotDeform> {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_SlotDeform2D.setSkeleton2DSlotDeform(slot, attachment, offsets);
+    return cast null;
+  }
+
+  public static function solveSkeleton2DConstraints(skeleton:Skeleton2D, constraints:Array<Skeleton2DConstraint>):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dConstraint.solveSkeleton2DConstraints(skeleton, constraints);
   }
 
   public static function validateSkeleton2D(skeleton:Skeleton2D):Null<String> {

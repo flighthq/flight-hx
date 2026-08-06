@@ -986,7 +986,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 7,
+        "inputSignatures": 8,
         "outputSignatures": 1
       },
       "construction": {
@@ -1022,7 +1022,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 3,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -1039,6 +1039,26 @@
           ],
           "scope": "production",
           "source": "upstream/packages/node/src/nodeColorAdjustment.ts"
+        },
+        {
+          "column": 7,
+          "kind": "cross-schema-transfer",
+          "line": 1324,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#ColorScaleBiasAdjustment"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfDocument.ts"
+        },
+        {
+          "column": 27,
+          "kind": "cross-schema-transfer",
+          "line": 203,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#ColorMatrixAdjustment"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
         }
       ],
       "source": "upstream/packages/types/src/Adjustment.ts"
@@ -1249,6 +1269,62 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/Sensors.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 5
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 7,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#AnchorLayoutItemStyle",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "AnchorLayoutItemStyle",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 1,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 17,
+          "kind": "anonymous-structural-transfer",
+          "line": 15,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/anchorLayout.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Layout.ts"
     },
     {
       "bridge": {
@@ -1646,8 +1722,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 2,
-        "outputSignatures": 1
+        "inputSignatures": 3,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -4454,7 +4530,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
+        "inputSignatures": 2,
         "outputSignatures": 0
       },
       "construction": {
@@ -4501,7 +4577,7 @@
         {
           "column": 32,
           "kind": "cross-schema-transfer",
-          "line": 666,
+          "line": 671,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RegionAttachment2D"
           ],
@@ -4511,7 +4587,7 @@
         {
           "column": 31,
           "kind": "cross-schema-transfer",
-          "line": 667,
+          "line": 672,
           "relatedSchemaIds": [
             "@flighthq/types:interface#MeshAttachment2D"
           ],
@@ -4521,7 +4597,7 @@
         {
           "column": 33,
           "kind": "cross-schema-transfer",
-          "line": 803,
+          "line": 845,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RegionAttachment2D"
           ],
@@ -4531,7 +4607,7 @@
         {
           "column": 31,
           "kind": "cross-schema-transfer",
-          "line": 804,
+          "line": 846,
           "relatedSchemaIds": [
             "@flighthq/types:interface#MeshAttachment2D"
           ],
@@ -4541,7 +4617,7 @@
         {
           "column": 33,
           "kind": "cross-schema-transfer",
-          "line": 142,
+          "line": 165,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RegionAttachment2D"
           ],
@@ -4551,7 +4627,7 @@
         {
           "column": 31,
           "kind": "cross-schema-transfer",
-          "line": 143,
+          "line": 166,
           "relatedSchemaIds": [
             "@flighthq/types:interface#MeshAttachment2D"
           ],
@@ -8308,11 +8384,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
+        "objectLiterals": 5,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 4,
-        "testObjectLiterals": 4
+        "plainObjectLiterals": 5,
+        "testObjectLiterals": 15
       },
       "directAccesses": 0,
       "fields": {
@@ -8356,6 +8432,52 @@
         }
       ],
       "source": "upstream/packages/types/src/Bone2D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 3,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#BoundingBoxAttachment2D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "BoundingBoxAttachment2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/BoundingBoxAttachment2D.ts"
     },
     {
       "bridge": {
@@ -9116,7 +9238,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 87,
+        "inputSignatures": 89,
         "outputSignatures": 4
       },
       "construction": {
@@ -9215,7 +9337,7 @@
       "fields": {
         "optional": 5,
         "requiredUndefined": 0,
-        "total": 22
+        "total": 23
       },
       "id": "@flighthq/types:interface#CanvasRenderStateRuntime",
       "migration": {
@@ -12366,9 +12488,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 2,
+        "optional": 3,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 3
       },
       "id": "@flighthq/types:interface#CaptureColumnBaseline",
       "migration": {
@@ -12407,7 +12529,7 @@
         {
           "column": 25,
           "kind": "optional-omission",
-          "line": 61,
+          "line": 62,
           "scope": "production",
           "source": "upstream/packages/capture/src/captureBaseline.ts"
         }
@@ -12911,6 +13033,52 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/Clipboard.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 3,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#ClippingAttachment2D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "ClippingAttachment2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/ClippingAttachment2D.ts"
     },
     {
       "bridge": {
@@ -16359,7 +16527,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 5,
+        "inputSignatures": 6,
         "outputSignatures": 3
       },
       "construction": {
@@ -16406,7 +16574,7 @@
         {
           "column": 83,
           "kind": "cross-schema-transfer",
-          "line": 1100,
+          "line": 1177,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -16416,9 +16584,9 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 133,
+          "line": 148,
           "relatedSchemaIds": [
-            "@flighthq/types:interface#TextLabel"
+            "@flighthq/types:interface#RichText"
           ],
           "scope": "production",
           "source": "upstream/packages/scene2d-formats/src/riveScene2D.ts"
@@ -16426,7 +16594,7 @@
         {
           "column": 78,
           "kind": "cross-schema-transfer",
-          "line": 146,
+          "line": 161,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Shape"
           ],
@@ -16971,7 +17139,7 @@
       "fields": {
         "optional": 5,
         "requiredUndefined": 0,
-        "total": 26
+        "total": 27
       },
       "id": "@flighthq/types:interface#DomRenderStateRuntime",
       "migration": {
@@ -19554,7 +19722,7 @@
         {
           "column": 32,
           "kind": "cross-schema-transfer",
-          "line": 190,
+          "line": 197,
           "relatedSchemaIds": [
             "@flighthq/types:interface#MeshGeometryRuntime"
           ],
@@ -20061,7 +20229,7 @@
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 53,
+          "line": 44,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Material"
           ],
@@ -20903,6 +21071,157 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 6
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 9,
+        "requiredUndefined": 0,
+        "total": 9
+      },
+      "id": "@flighthq/types:interface#FlexLayoutContainerStyle",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "FlexLayoutContainerStyle",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 1,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 21,
+          "kind": "anonymous-structural-transfer",
+          "line": 27,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/flexLayout.ts"
+        },
+        {
+          "column": 44,
+          "kind": "optional-omission",
+          "line": 272,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveLayout.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 9
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 4,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#FlexLayoutItemStyle",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "FlexLayoutItemStyle",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 4,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 18,
+          "kind": "anonymous-structural-transfer",
+          "line": 78,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/flexLayout.ts"
+        },
+        {
+          "column": 18,
+          "kind": "anonymous-structural-transfer",
+          "line": 104,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/flexLayout.ts"
+        },
+        {
+          "column": 16,
+          "kind": "anonymous-structural-transfer",
+          "line": 129,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/flexLayout.ts"
+        },
+        {
+          "column": 16,
+          "kind": "anonymous-structural-transfer",
+          "line": 179,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/flexLayout.ts"
+        },
+        {
+          "column": 39,
+          "kind": "optional-omission",
+          "line": 354,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveLayout.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 8,
         "outputSignatures": 1
       },
@@ -21695,10 +22014,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -24986,7 +25305,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 365,
+        "inputSignatures": 367,
         "outputSignatures": 5
       },
       "construction": {
@@ -25085,7 +25404,7 @@
       "fields": {
         "optional": 45,
         "requiredUndefined": 0,
-        "total": 91
+        "total": 92
       },
       "id": "@flighthq/types:interface#GlRenderStateRuntime",
       "migration": {
@@ -26202,7 +26521,7 @@
         {
           "column": 43,
           "kind": "optional-omission",
-          "line": 932,
+          "line": 935,
           "scope": "production",
           "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
         }
@@ -30122,6 +30441,164 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 2,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 6
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 6,
+        "requiredUndefined": 0,
+        "total": 8
+      },
+      "id": "@flighthq/types:interface#GridLayoutContainerStyle",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "GridLayoutContainerStyle",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 1,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 21,
+          "kind": "anonymous-structural-transfer",
+          "line": 23,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/gridLayout.ts"
+        },
+        {
+          "column": 45,
+          "kind": "optional-omission",
+          "line": 293,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveLayout.ts"
+        },
+        {
+          "column": 44,
+          "kind": "optional-omission",
+          "line": 316,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveLayout.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 6
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 4,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#GridLayoutItemStyle",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "GridLayoutItemStyle",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 4,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 16,
+          "kind": "anonymous-structural-transfer",
+          "line": 26,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/gridLayout.ts"
+        },
+        {
+          "column": 18,
+          "kind": "anonymous-structural-transfer",
+          "line": 118,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/gridLayout.ts"
+        },
+        {
+          "column": 16,
+          "kind": "anonymous-structural-transfer",
+          "line": 141,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/gridLayout.ts"
+        },
+        {
+          "column": 16,
+          "kind": "anonymous-structural-transfer",
+          "line": 147,
+          "scope": "production",
+          "source": "upstream/packages/layout/src/gridLayout.ts"
+        },
+        {
+          "column": 39,
+          "kind": "optional-omission",
+          "line": 422,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveLayout.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 2,
         "outputSignatures": 0
       },
@@ -32101,7 +32578,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 35,
+        "inputSignatures": 39,
         "outputSignatures": 1
       },
       "construction": {
@@ -34033,6 +34510,228 @@
         }
       ],
       "source": "upstream/packages/types/src/LambertMaterial.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 11
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#LayoutNode",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "LayoutNode",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 5,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 53,
+          "kind": "object-spread",
+          "line": 47,
+          "scope": "test",
+          "source": "upstream/packages/layout/src/anchorLayout.test.ts"
+        },
+        {
+          "column": 30,
+          "kind": "object-spread",
+          "line": 98,
+          "scope": "test",
+          "source": "upstream/packages/layout/src/flexLayout.test.ts"
+        },
+        {
+          "column": 9,
+          "kind": "object-spread",
+          "line": 107,
+          "scope": "test",
+          "source": "upstream/packages/layout/src/gridLayout.test.ts"
+        },
+        {
+          "column": 56,
+          "kind": "object-spread",
+          "line": 32,
+          "scope": "test",
+          "source": "upstream/packages/layout/src/resolveLayoutTree.test.ts"
+        },
+        {
+          "column": 29,
+          "kind": "object-spread",
+          "line": 68,
+          "scope": "test",
+          "source": "upstream/packages/layout/src/resolveLayoutTree.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#LayoutResolutionExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "LayoutResolutionExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 7,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 8
+      },
+      "id": "@flighthq/types:interface#LayoutState",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "LayoutState",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Layout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 12
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#LayoutTree",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "LayoutTree",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Layout.ts"
     },
     {
       "bridge": {
@@ -36039,7 +36738,7 @@
         {
           "column": 12,
           "kind": "dynamic-ingress",
-          "line": 1137,
+          "line": 1214,
           "scope": "production",
           "source": "upstream/packages/scene2d-formats/src/lottieDocument.ts"
         },
@@ -36390,9 +37089,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 7,
+        "optional": 11,
         "requiredUndefined": 0,
-        "total": 12
+        "total": 16
       },
       "id": "@flighthq/types:interface#LottieGradientShapeItem",
       "migration": {
@@ -36478,7 +37177,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 29
+        "testObjectLiterals": 30
       },
       "directAccesses": 0,
       "fields": {
@@ -36976,7 +37675,7 @@
         {
           "column": 10,
           "kind": "dynamic-ingress",
-          "line": 948,
+          "line": 1005,
           "scope": "production",
           "source": "upstream/packages/scene2d-formats/src/lottieDocument.ts"
         }
@@ -37216,7 +37915,7 @@
         {
           "column": 59,
           "kind": "cross-schema-transfer",
-          "line": 484,
+          "line": 500,
           "relatedSchemaIds": [
             "@flighthq/types:interface#LottieTransformShapeItem"
           ],
@@ -37321,7 +38020,7 @@
         {
           "column": 16,
           "kind": "cross-schema-transfer",
-          "line": 921,
+          "line": 978,
           "relatedSchemaIds": [
             "@flighthq/types:interface#LottieEllipseShapeItem",
             "@flighthq/types:interface#LottieFillShapeItem",
@@ -37497,7 +38196,7 @@
         "objectLiteralsOmittingOptionalFields": 5,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 5,
-        "testObjectLiterals": 7
+        "testObjectLiterals": 6
       },
       "directAccesses": 0,
       "fields": {
@@ -37579,7 +38278,7 @@
         {
           "column": 26,
           "kind": "dynamic-ingress",
-          "line": 348,
+          "line": 353,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
@@ -37648,7 +38347,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 776,
+      "directAccesses": 764,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -38996,7 +39695,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 76,
+      "directAccesses": 75,
       "fields": {
         "optional": 2,
         "requiredUndefined": 0,
@@ -39113,7 +39812,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 5,
-        "testObjectLiterals": 2
+        "testObjectLiterals": 5
       },
       "directAccesses": 0,
       "fields": {
@@ -39207,7 +39906,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 281,
+      "directAccesses": 288,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -39243,7 +39942,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 169,
+          "line": 175,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -39356,7 +40055,7 @@
         "objectLiteralsOmittingOptionalFields": 8,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 11,
-        "testObjectLiterals": 108
+        "testObjectLiterals": 114
       },
       "directAccesses": 7,
       "fields": {
@@ -39394,7 +40093,7 @@
         {
           "column": 39,
           "kind": "optional-omission",
-          "line": 790,
+          "line": 791,
           "scope": "production",
           "source": "upstream/packages/mesh/src/meshGeometryBuilders.ts"
         },
@@ -39429,7 +40128,7 @@
         {
           "column": 43,
           "kind": "optional-omission",
-          "line": 336,
+          "line": 337,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
@@ -39467,7 +40166,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 7
+        "total": 8
       },
       "id": "@flighthq/types:interface#MeshGeometryRuntime",
       "migration": {
@@ -39488,7 +40187,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 13,
+        "crossSchemaTransfers": 22,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -39497,9 +40196,19 @@
       },
       "sites": [
         {
-          "column": 19,
+          "column": 25,
           "kind": "cross-schema-transfer",
-          "line": 89,
+          "line": 51,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometry.ts"
+        },
+        {
+          "column": 6,
+          "kind": "cross-schema-transfer",
+          "line": 54,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39509,7 +40218,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 98,
+          "line": 95,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39519,7 +40228,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 111,
+          "line": 104,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39529,7 +40238,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 119,
+          "line": 117,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39539,7 +40248,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 154,
+          "line": 125,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39549,7 +40258,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 162,
+          "line": 160,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39559,7 +40268,57 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 366,
+          "line": 168,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometry.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 186,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryCompute.ts"
+        },
+        {
+          "column": 25,
+          "kind": "cross-schema-transfer",
+          "line": 580,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryCompute.ts"
+        },
+        {
+          "column": 25,
+          "kind": "cross-schema-transfer",
+          "line": 581,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryCompute.ts"
+        },
+        {
+          "column": 25,
+          "kind": "cross-schema-transfer",
+          "line": 598,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryCompute.ts"
+        },
+        {
+          "column": 25,
+          "kind": "cross-schema-transfer",
+          "line": 599,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -39569,12 +40328,42 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 387,
+          "line": 630,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
           "scope": "production",
           "source": "upstream/packages/mesh/src/meshGeometryCompute.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 651,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryCompute.ts"
+        },
+        {
+          "column": 25,
+          "kind": "cross-schema-transfer",
+          "line": 82,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryLayout.ts"
+        },
+        {
+          "column": 6,
+          "kind": "cross-schema-transfer",
+          "line": 85,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#EntityRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/mesh/src/meshGeometryLayout.ts"
         },
         {
           "column": 19,
@@ -40413,7 +41202,7 @@
         {
           "column": 33,
           "kind": "cross-schema-transfer",
-          "line": 651,
+          "line": 765,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -40423,7 +41212,7 @@
         {
           "column": 31,
           "kind": "cross-schema-transfer",
-          "line": 652,
+          "line": 766,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -41312,7 +42101,7 @@
         {
           "column": 51,
           "kind": "cross-schema-transfer",
-          "line": 559,
+          "line": 636,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -42140,7 +42929,7 @@
         {
           "column": 19,
           "kind": "anonymous-structural-transfer",
-          "line": 862,
+          "line": 998,
           "scope": "production",
           "source": "upstream/packages/swf/src/swfDocument.ts"
         }
@@ -42287,7 +43076,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 13,
+        "inputSignatures": 15,
         "outputSignatures": 1
       },
       "construction": {
@@ -44997,6 +45786,65 @@
     {
       "bridge": {
         "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 6
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 3,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#PathAttachment2D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "PathAttachment2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 54,
+          "kind": "cross-schema-transfer",
+          "line": 152,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Attachment2D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/pathConstraint2D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/PathAttachment2D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
         "outputSignatures": 3
       },
       "construction": {
@@ -45047,10 +45895,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 9
       },
       "directAccesses": 7,
@@ -45063,7 +45911,9 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "optional-omission"
+        ]
       },
       "name": "PathBooleanOptions",
       "oracle": {
@@ -45083,7 +45933,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 29,
+          "kind": "optional-omission",
+          "line": 83,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveClipping.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/PathBooleanOptions.ts"
     },
     {
@@ -48805,6 +49663,52 @@
     },
     {
       "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#PointAttachment2D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "PointAttachment2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/PointAttachment2D.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 0
       },
@@ -50486,7 +51390,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 123,
+        "inputSignatures": 124,
         "outputSignatures": 0
       },
       "construction": {
@@ -50523,7 +51427,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 3,
+        "crossSchemaTransfers": 9,
         "dynamicIngresses": 1,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -50567,6 +51471,69 @@
           "line": 44,
           "scope": "production",
           "source": "upstream/packages/effects/src/renderEffectPadding.ts"
+        },
+        {
+          "column": 9,
+          "kind": "cross-schema-transfer",
+          "line": 47,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#DropShadowEffect",
+            "@flighthq/types:interface#InnerShadowEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
+        },
+        {
+          "column": 23,
+          "kind": "cross-schema-transfer",
+          "line": 76,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#BlurEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
+        },
+        {
+          "column": 23,
+          "kind": "cross-schema-transfer",
+          "line": 94,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#InnerGlowEffect",
+            "@flighthq/types:interface#OuterGlowEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
+        },
+        {
+          "column": 9,
+          "kind": "cross-schema-transfer",
+          "line": 108,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#BevelEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
+        },
+        {
+          "column": 9,
+          "kind": "cross-schema-transfer",
+          "line": 145,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GradientBevelEffect",
+            "@flighthq/types:interface#GradientGlowEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
+        },
+        {
+          "column": 9,
+          "kind": "cross-schema-transfer",
+          "line": 181,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#ConvolutionEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/swf/src/swfFilter.ts"
         }
       ],
       "source": "upstream/packages/types/src/RenderEffect.ts"
@@ -50857,7 +51824,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 141,
+          "line": 143,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Scene2DRenderer"
           ],
@@ -51010,7 +51977,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 14,
+        "inputSignatures": 12,
         "outputSignatures": 1
       },
       "construction": {
@@ -51105,7 +52072,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 36,
+          "line": 35,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -51115,7 +52082,7 @@
         {
           "column": 32,
           "kind": "cross-schema-transfer",
-          "line": 107,
+          "line": 106,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51125,7 +52092,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 111,
+          "line": 110,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51135,7 +52102,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 189,
+          "line": 188,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51145,7 +52112,7 @@
         {
           "column": 44,
           "kind": "cross-schema-transfer",
-          "line": 189,
+          "line": 188,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51155,7 +52122,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 191,
+          "line": 190,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51165,6 +52132,16 @@
         {
           "column": 42,
           "kind": "cross-schema-transfer",
+          "line": 190,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#RenderProxy2D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/render/src/renderProxy.ts"
+        },
+        {
+          "column": 65,
+          "kind": "cross-schema-transfer",
           "line": 191,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
@@ -51173,19 +52150,9 @@
           "source": "upstream/packages/render/src/renderProxy.ts"
         },
         {
-          "column": 42,
+          "column": 71,
           "kind": "cross-schema-transfer",
-          "line": 192,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#RenderProxy2D"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/render/src/renderProxy.ts"
-        },
-        {
-          "column": 48,
-          "kind": "cross-schema-transfer",
-          "line": 192,
+          "line": 191,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51195,7 +52162,7 @@
         {
           "column": 44,
           "kind": "cross-schema-transfer",
-          "line": 255,
+          "line": 254,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51205,7 +52172,7 @@
         {
           "column": 50,
           "kind": "cross-schema-transfer",
-          "line": 255,
+          "line": 254,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy2D"
           ],
@@ -51287,7 +52254,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 69,
+        "inputSignatures": 70,
         "outputSignatures": 3
       },
       "construction": {
@@ -51334,7 +52301,7 @@
         {
           "column": 16,
           "kind": "cross-schema-transfer",
-          "line": 69,
+          "line": 68,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy"
           ],
@@ -51344,7 +52311,7 @@
         {
           "column": 14,
           "kind": "cross-schema-transfer",
-          "line": 104,
+          "line": 103,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy"
           ],
@@ -51354,7 +52321,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 117,
+          "line": 116,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderProxy"
           ],
@@ -51628,7 +52595,7 @@
       "fields": {
         "optional": 2,
         "requiredUndefined": 0,
-        "total": 15
+        "total": 16
       },
       "id": "@flighthq/types:interface#RenderStateRuntime",
       "migration": {
@@ -51670,7 +52637,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 61,
+          "line": 62,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -52947,7 +53914,7 @@
         {
           "column": 39,
           "kind": "optional-omission",
-          "line": 33,
+          "line": 39,
           "scope": "production",
           "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts"
         }
@@ -53105,7 +54072,7 @@
     {
       "bridge": {
         "inputSignatures": 91,
-        "outputSignatures": 1
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -53658,7 +54625,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 20
+        "testObjectLiterals": 21
       },
       "directAccesses": 0,
       "fields": {
@@ -53756,7 +54723,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 6
       },
       "id": "@flighthq/types:interface#RiveAnimationClip",
       "migration": {
@@ -53787,7 +54754,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 7,
+        "inputSignatures": 10,
         "outputSignatures": 0
       },
       "construction": {
@@ -53796,7 +54763,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 6
+        "testObjectLiterals": 11
       },
       "directAccesses": 0,
       "fields": {
@@ -53848,7 +54815,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 7
+        "total": 9
       },
       "id": "@flighthq/types:interface#RiveArtboardImport",
       "migration": {
@@ -53888,7 +54855,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 20
+        "testObjectLiterals": 23
       },
       "directAccesses": 0,
       "fields": {
@@ -54124,6 +55091,62 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#RiveLayoutImport",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "enumeration"
+        ]
+      },
+      "name": "RiveLayoutImport",
+      "oracle": {
+        "enumerations": 1,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 12,
+          "kind": "enumeration",
+          "line": 72,
+          "scope": "test",
+          "source": "upstream/packages/scene2d-formats/src/riveLayout.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/RiveDocument.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
         "total": 1
       },
       "id": "@flighthq/types:interface#RiveObjectGraph",
@@ -54160,11 +55183,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
-        "testObjectLiterals": 3
+        "plainObjectLiterals": 3,
+        "testObjectLiterals": 4
       },
       "directAccesses": 0,
       "fields": {
@@ -54210,7 +55233,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 2,
-        "testObjectLiterals": 4
+        "testObjectLiterals": 5
       },
       "directAccesses": 0,
       "fields": {
@@ -54317,6 +55340,52 @@
         "observabilityReasons": []
       },
       "name": "RiveScene2DDocumentResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/RiveDocument.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#RiveSkeleton2DImport",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "RiveSkeleton2DImport",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54547,6 +55616,52 @@
         "observabilityReasons": []
       },
       "name": "RiveStateMachineTransition",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/RiveDocument.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 5
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#RiveWeightedPoint",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "RiveWeightedPoint",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55124,7 +56239,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 5,
+        "inputSignatures": 6,
         "outputSignatures": 2
       },
       "construction": {
@@ -55795,6 +56910,52 @@
     },
     {
       "bridge": {
+        "inputSignatures": 7,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 3
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#Scene2DKindUsage",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Scene2DKindUsage",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Scene2DKindUsage.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 38
       },
@@ -56017,7 +57178,7 @@
         {
           "column": 64,
           "kind": "optional-omission",
-          "line": 294,
+          "line": 296,
           "scope": "production",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuCache.ts"
         },
@@ -56402,7 +57563,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 19,
+      "directAccesses": 17,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -56503,52 +57664,6 @@
         }
       ],
       "source": "upstream/packages/types/src/Scene3DAnimationTarget.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 3,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
-        "testObjectLiterals": 0
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 0,
-        "requiredUndefined": 0,
-        "total": 3
-      },
-      "id": "@flighthq/types:interface#Scene3DCoverageGap",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "Scene3DCoverageGap",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/Scene3DCoverageGap.ts"
     },
     {
       "bridge": {
@@ -57046,7 +58161,7 @@
         {
           "column": 49,
           "kind": "optional-omission",
-          "line": 356,
+          "line": 361,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
@@ -57193,21 +58308,21 @@
         {
           "column": 27,
           "kind": "optional-omission",
-          "line": 361,
+          "line": 366,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
         {
           "column": 23,
           "kind": "optional-omission",
-          "line": 408,
+          "line": 413,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
         {
           "column": 25,
           "kind": "optional-omission",
-          "line": 424,
+          "line": 429,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
@@ -57298,7 +58413,7 @@
         {
           "column": 14,
           "kind": "optional-omission",
-          "line": 548,
+          "line": 553,
           "scope": "production",
           "source": "upstream/packages/scene3d-formats/src/md5Parse.ts"
         },
@@ -57518,7 +58633,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 3,
+        "inputSignatures": 7,
         "outputSignatures": 1
       },
       "construction": {
@@ -58088,21 +59203,21 @@
         {
           "column": 54,
           "kind": "object-spread",
-          "line": 75,
+          "line": 81,
           "scope": "test",
           "source": "upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts"
         },
         {
           "column": 54,
           "kind": "object-spread",
-          "line": 92,
+          "line": 98,
           "scope": "test",
           "source": "upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts"
         },
         {
           "column": 54,
           "kind": "object-spread",
-          "line": 116,
+          "line": 122,
           "scope": "test",
           "source": "upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts"
         }
@@ -58157,7 +59272,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 13,
+        "inputSignatures": 15,
         "outputSignatures": 2
       },
       "construction": {
@@ -58168,7 +59283,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 5,
+      "directAccesses": 6,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -58204,7 +59319,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 36,
+          "line": 42,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -58502,6 +59617,52 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/Scene3DResources.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 6,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 24,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 24,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#SceneCoverageEntry",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SceneCoverageEntry",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts"
     },
     {
       "bridge": {
@@ -59397,7 +60558,7 @@
         "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 23
+        "testObjectLiterals": 24
       },
       "directAccesses": 0,
       "fields": {
@@ -59520,7 +60681,7 @@
         {
           "column": 50,
           "kind": "cross-schema-transfer",
-          "line": 111,
+          "line": 120,
           "relatedSchemaIds": [
             "@flighthq/types:interface#DisplayObject"
           ],
@@ -59677,7 +60838,7 @@
         {
           "column": 21,
           "kind": "cross-schema-transfer",
-          "line": 969,
+          "line": 1105,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Scale9Shape"
           ],
@@ -61119,7 +62280,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 2
       },
-      "directAccesses": 39,
+      "directAccesses": 40,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -61394,7 +62555,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 16,
+        "inputSignatures": 27,
         "outputSignatures": 2
       },
       "construction": {
@@ -61451,7 +62612,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 138,
+          "line": 149,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -61464,21 +62625,21 @@
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 0
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 3
       },
       "id": "@flighthq/types:interface#Skeleton2DAnimationTarget",
       "migration": {
@@ -61500,7 +62661,7 @@
       "production": {
         "anonymousStructuralTransfers": 0,
         "crossSchemaTransfers": 0,
-        "dynamicIngresses": 1,
+        "dynamicIngresses": 2,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
@@ -61510,12 +62671,454 @@
         {
           "column": 20,
           "kind": "dynamic-ingress",
-          "line": 51,
+          "line": 42,
           "scope": "production",
           "source": "upstream/packages/skeleton2d/src/applyAnimationClipToSkeleton2D.ts"
+        },
+        {
+          "column": 22,
+          "kind": "dynamic-ingress",
+          "line": 90,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/skeleton2dAnimationTarget.ts"
         }
       ],
       "source": "upstream/packages/types/src/Skeleton2DAnimationTarget.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Skeleton2DCoercedInterpolation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DCoercedInterpolation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Skeleton2DGuards.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 4,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Skeleton2DConstraint",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DConstraint",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Skeleton2DConstraint.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Skeleton2DDeformAnimationTarget",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "dynamic-ingress"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DDeformAnimationTarget",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 1,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 24,
+          "kind": "dynamic-ingress",
+          "line": 32,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/deformAnimationTarget2D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DDeformAnimationTarget.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#Skeleton2DDeformLengthExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DDeformLengthExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Skeleton2DDeformLengthExplanation.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Skeleton2DDeformLengthMismatch",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "Skeleton2DDeformLengthMismatch",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 2,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 63,
+          "kind": "object-spread",
+          "line": 132,
+          "scope": "test",
+          "source": "upstream/packages/skeleton2d/src/deformMeshAttachment2D.test.ts"
+        },
+        {
+          "column": 63,
+          "kind": "object-spread",
+          "line": 137,
+          "scope": "test",
+          "source": "upstream/packages/skeleton2d/src/deformPathAttachment2D.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DGuards.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Skeleton2DDrawOrderAnimationTarget",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "dynamic-ingress"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DDrawOrderAnimationTarget",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 1,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 22,
+          "kind": "dynamic-ingress",
+          "line": 111,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/skeleton2dDrawOrderTarget.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DDrawOrderAnimationTarget.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 5
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Skeleton2DDrawOrderTimeline",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DDrawOrderTimeline",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 2,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 10,
+          "kind": "anonymous-structural-transfer",
+          "line": 601,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d-formats/src/spineBinaryParse.ts"
+        },
+        {
+          "column": 10,
+          "kind": "anonymous-structural-transfer",
+          "line": 79,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DDrawOrderTimeline.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#Skeleton2DIkConstraint",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DIkConstraint",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 14,
+          "kind": "cross-schema-transfer",
+          "line": 24,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Skeleton2DConstraint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/ikConstraint2D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DIkConstraint.ts"
     },
     {
       "bridge": {
@@ -61571,22 +63174,24 @@
       "construction": {
         "computedObjectLiterals": 0,
         "objectLiterals": 3,
-        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 3,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 0,
+        "optional": 1,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 3
       },
       "id": "@flighthq/types:interface#Skeleton2DImportAnimation",
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "optional-omission"
+        ]
       },
       "name": "Skeleton2DImportAnimation",
       "oracle": {
@@ -61606,7 +63211,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 21,
+          "kind": "optional-omission",
+          "line": 177,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d-formats/src/dragonBonesParse.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Skeleton2DImport.ts"
     },
     {
@@ -61620,13 +63233,72 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 12
+      },
+      "id": "@flighthq/types:interface#Skeleton2DPathConstraint",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DPathConstraint",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 26,
+          "kind": "cross-schema-transfer",
+          "line": 45,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Skeleton2DConstraint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/pathConstraint2D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DPathConstraint.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
       "fields": {
         "optional": 1,
         "requiredUndefined": 0,
-        "total": 3
+        "total": 4
       },
       "id": "@flighthq/types:interface#Skeleton2DSlotAnimationTarget",
       "migration": {
@@ -61656,14 +63328,119 @@
       },
       "sites": [
         {
-          "column": 49,
+          "column": 22,
           "kind": "dynamic-ingress",
-          "line": 57,
+          "line": 157,
           "scope": "production",
-          "source": "upstream/packages/skeleton2d/src/applyAnimationClipToSkeleton2D.ts"
+          "source": "upstream/packages/skeleton2d/src/skeleton2dAnimationTarget.ts"
         }
       ],
       "source": "upstream/packages/types/src/Skeleton2DSlotAnimationTarget.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Skeleton2DSlotDeform",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DSlotDeform",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Skeleton2DSlotDeform.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 16
+      },
+      "id": "@flighthq/types:interface#Skeleton2DTransformConstraint",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Skeleton2DTransformConstraint",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 21,
+          "kind": "cross-schema-transfer",
+          "line": 30,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Skeleton2DConstraint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d/src/transformConstraint2D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Skeleton2DTransformConstraint.ts"
     },
     {
       "bridge": {
@@ -61925,16 +63702,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
+        "inputSignatures": 2,
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
-        "testObjectLiterals": 2
+        "plainObjectLiterals": 4,
+        "testObjectLiterals": 18
       },
       "directAccesses": 0,
       "fields": {
@@ -62063,29 +63840,30 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 4,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
         "objectLiterals": 3,
-        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsOmittingOptionalFields": 3,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 3,
-        "testObjectLiterals": 6
+        "testObjectLiterals": 11
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 3,
+        "optional": 4,
         "requiredUndefined": 0,
-        "total": 4
+        "total": 5
       },
       "id": "@flighthq/types:interface#Slot2D",
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
         "observabilityReasons": [
-          "object-spread"
+          "object-spread",
+          "optional-omission"
         ]
       },
       "name": "Slot2D",
@@ -62107,6 +63885,27 @@
         "objectSpreads": 1
       },
       "sites": [
+        {
+          "column": 16,
+          "kind": "optional-omission",
+          "line": 890,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d-formats/src/dragonBonesParse.ts"
+        },
+        {
+          "column": 16,
+          "kind": "optional-omission",
+          "line": 706,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d-formats/src/spineBinaryParse.ts"
+        },
+        {
+          "column": 16,
+          "kind": "optional-omission",
+          "line": 295,
+          "scope": "production",
+          "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
+        },
         {
           "column": 111,
           "kind": "object-spread",
@@ -64739,7 +66538,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 5,
+        "inputSignatures": 6,
         "outputSignatures": 3
       },
       "construction": {
@@ -64750,7 +66549,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 22,
+      "directAccesses": 27,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -65131,6 +66930,52 @@
     {
       "bridge": {
         "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#SpritesheetTimelineSourceExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SpritesheetTimelineSourceExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/SpritesheetTimelineSourceExplanation.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
         "outputSignatures": 2
       },
       "construction": {
@@ -65482,7 +67327,7 @@
         {
           "column": 37,
           "kind": "cross-schema-transfer",
-          "line": 82,
+          "line": 81,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Material"
           ],
@@ -65588,7 +67433,7 @@
         {
           "column": 37,
           "kind": "cross-schema-transfer",
-          "line": 82,
+          "line": 81,
           "relatedSchemaIds": [
             "@flighthq/types:interface#StandardPbrMaterial"
           ],
@@ -66081,6 +67926,430 @@
         }
       ],
       "source": "upstream/packages/types/src/StarlingSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 12
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Statechart",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "json-serialization"
+        ]
+      },
+      "name": "Statechart",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 1,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 12,
+          "kind": "json-serialization",
+          "line": 31,
+          "scope": "test",
+          "source": "upstream/packages/statechart/src/statechartSignals.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#StatechartCondition",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartCondition",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 16
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#StatechartInput",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartInput",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 13,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 9
+      },
+      "id": "@flighthq/types:interface#StatechartInstance",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartInstance",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 10
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#StatechartRegion",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartRegion",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#StatechartSignals",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartSignals",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/StatechartSignals.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 20
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#StatechartState",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartState",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 4
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#StatechartTransition",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartTransition",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 8,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 8,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#StatechartTransitionExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "StatechartTransitionExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Statechart.ts"
     },
     {
       "bridge": {
@@ -67076,7 +69345,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 8
+        "testObjectLiterals": 9
       },
       "directAccesses": 0,
       "fields": {
@@ -67130,6 +69399,52 @@
         "requiredUndefined": 0,
         "total": 2
       },
+      "id": "@flighthq/types:interface#SwfDocumentImport",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SwfDocumentImport",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/SwfDocumentImport.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
       "id": "@flighthq/types:interface#SwfMorphShapePaths",
       "migration": {
         "mechanicallyCompatible": true,
@@ -67156,6 +69471,52 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/SwfMorphShapePaths.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#SwfNodeAppearance",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SwfNodeAppearance",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/SwfDocumentImport.ts"
     },
     {
       "bridge": {
@@ -69153,17 +71514,17 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 22,
-        "objectLiteralsOmittingOptionalFields": 13,
+        "objectLiterals": 23,
+        "objectLiteralsOmittingOptionalFields": 14,
         "objectLiteralsWithSpread": 9,
-        "plainObjectLiterals": 13,
+        "plainObjectLiterals": 14,
         "testObjectLiterals": 208
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 20,
+        "optional": 21,
         "requiredUndefined": 0,
-        "total": 20
+        "total": 21
       },
       "id": "@flighthq/types:interface#TextFormat",
       "migration": {
@@ -69189,7 +71550,7 @@
         "strictEqualityAssertions": 1
       },
       "production": {
-        "anonymousStructuralTransfers": 3,
+        "anonymousStructuralTransfers": 2,
         "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 7,
@@ -69201,21 +71562,21 @@
         {
           "column": 19,
           "kind": "anonymous-structural-transfer",
-          "line": 446,
+          "line": 461,
           "scope": "production",
           "source": "upstream/packages/scene2d-formats/src/lottieDocument.ts"
         },
         {
-          "column": 19,
-          "kind": "anonymous-structural-transfer",
-          "line": 36,
+          "column": 30,
+          "kind": "optional-omission",
+          "line": 82,
           "scope": "production",
           "source": "upstream/packages/scene2d-formats/src/riveText.ts"
         },
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 839,
+          "line": 844,
           "scope": "production",
           "source": "upstream/packages/scene2d-formats/src/svgDocument.ts"
         },
@@ -69516,10 +71877,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
+        "objectLiterals": 5,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 4,
+        "plainObjectLiterals": 5,
         "testObjectLiterals": 16
       },
       "directAccesses": 0,
@@ -69897,7 +72258,7 @@
     {
       "bridge": {
         "inputSignatures": 15,
-        "outputSignatures": 2
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -73299,7 +75660,7 @@
         {
           "column": 97,
           "kind": "cross-schema-transfer",
-          "line": 431,
+          "line": 446,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Image"
           ],
@@ -73309,7 +75670,7 @@
         {
           "column": 63,
           "kind": "cross-schema-transfer",
-          "line": 703,
+          "line": 701,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Image"
           ],
@@ -73369,7 +75730,7 @@
         {
           "column": 70,
           "kind": "cross-schema-transfer",
-          "line": 62,
+          "line": 64,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Image"
           ],
@@ -73379,7 +75740,7 @@
         {
           "column": 61,
           "kind": "cross-schema-transfer",
-          "line": 65,
+          "line": 67,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Image"
           ],
@@ -73419,7 +75780,7 @@
         {
           "column": 72,
           "kind": "cross-schema-transfer",
-          "line": 406,
+          "line": 476,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Bitmap"
           ],
@@ -75032,7 +77393,7 @@
         {
           "column": 13,
           "kind": "cross-schema-transfer",
-          "line": 1944,
+          "line": 2192,
           "relatedSchemaIds": [
             "@flighthq/types:interface#TimelineStreamAudioCue"
           ],
@@ -75042,7 +77403,7 @@
         {
           "column": 13,
           "kind": "cross-schema-transfer",
-          "line": 1960,
+          "line": 2208,
           "relatedSchemaIds": [
             "@flighthq/types:interface#TimelineAudioCue"
           ],
@@ -75052,7 +77413,7 @@
         {
           "column": 13,
           "kind": "cross-schema-transfer",
-          "line": 1973,
+          "line": 2221,
           "relatedSchemaIds": [
             "@flighthq/types:interface#TimelineAudioCue"
           ],
@@ -75957,7 +78318,7 @@
         "strictEqualityAssertions": 0
       },
       "production": {
-        "anonymousStructuralTransfers": 6,
+        "anonymousStructuralTransfers": 7,
         "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
@@ -75969,42 +78330,49 @@
         {
           "column": 20,
           "kind": "anonymous-structural-transfer",
-          "line": 127,
+          "line": 80,
+          "scope": "production",
+          "source": "upstream/packages/scene2d-formats/src/riveSkeleton.ts"
+        },
+        {
+          "column": 20,
+          "kind": "anonymous-structural-transfer",
+          "line": 150,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
         },
         {
           "column": 14,
           "kind": "anonymous-structural-transfer",
-          "line": 744,
+          "line": 797,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
         },
         {
           "column": 14,
           "kind": "anonymous-structural-transfer",
-          "line": 746,
+          "line": 799,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
         },
         {
           "column": 14,
           "kind": "anonymous-structural-transfer",
-          "line": 748,
+          "line": 801,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
         },
         {
           "column": 14,
           "kind": "anonymous-structural-transfer",
-          "line": 750,
+          "line": 803,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
         },
         {
           "column": 14,
           "kind": "anonymous-structural-transfer",
-          "line": 752,
+          "line": 805,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/spineParse.ts"
         }
@@ -77802,7 +80170,7 @@
         {
           "column": 17,
           "kind": "cross-schema-transfer",
-          "line": 94,
+          "line": 93,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Material"
           ],
@@ -78425,7 +80793,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 126,
+        "inputSignatures": 127,
         "outputSignatures": 11
       },
       "construction": {
@@ -78436,7 +80804,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 396,
+      "directAccesses": 398,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -78797,7 +81165,7 @@
         "plainObjectLiterals": 4,
         "testObjectLiterals": 42
       },
-      "directAccesses": 66,
+      "directAccesses": 67,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -80762,9 +83130,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 0,
+        "optional": 1,
         "requiredUndefined": 0,
-        "total": 4
+        "total": 5
       },
       "id": "@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature",
       "migration": {
@@ -82207,7 +84575,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 347,
+        "inputSignatures": 350,
         "outputSignatures": 5
       },
       "construction": {
@@ -82299,7 +84667,7 @@
       "fields": {
         "optional": 27,
         "requiredUndefined": 0,
-        "total": 99
+        "total": 100
       },
       "id": "@flighthq/types:interface#WgpuRenderStateRuntime",
       "migration": {
@@ -83080,7 +85448,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 0
       },
       "construction": {
@@ -83089,7 +85457,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 5
+        "testObjectLiterals": 7
       },
       "directAccesses": 0,
       "fields": {
@@ -83110,7 +85478,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 4,
+        "objectSpreads": 6,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -83125,30 +85493,44 @@
       },
       "sites": [
         {
+          "column": 10,
+          "kind": "object-spread",
+          "line": 114,
+          "scope": "test",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.test.ts"
+        },
+        {
           "column": 58,
           "kind": "object-spread",
-          "line": 75,
+          "line": 149,
           "scope": "test",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 95,
+          "line": 169,
           "scope": "test",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.test.ts"
         },
         {
-          "column": 67,
+          "column": 62,
           "kind": "object-spread",
-          "line": 148,
+          "line": 222,
           "scope": "test",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.test.ts"
         },
         {
           "column": 48,
           "kind": "object-spread",
-          "line": 164,
+          "line": 238,
+          "scope": "test",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.test.ts"
+        },
+        {
+          "column": 10,
+          "kind": "object-spread",
+          "line": 291,
           "scope": "test",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.test.ts"
         }
@@ -83157,7 +85539,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 0
       },
       "construction": {
@@ -83172,7 +85554,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 6
+        "total": 8
       },
       "id": "@flighthq/types:interface#WgpuShapeMeshBuffers",
       "migration": {
@@ -83203,16 +85585,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
+        "inputSignatures": 1,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 0
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 1
       },
       "directAccesses": 0,
       "fields": {
@@ -83250,7 +85632,7 @@
         {
           "column": 38,
           "kind": "dynamic-ingress",
-          "line": 155,
+          "line": 185,
           "scope": "production",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         }
@@ -84648,7 +87030,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 386,
+          "line": 650,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Aabb"
           ],
@@ -86660,7 +89042,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 125,
+        "inputSignatures": 126,
         "outputSignatures": 4
       },
       "construction": {
@@ -87013,28 +89395,28 @@
     }
   ],
   "summary": {
-    "anonymousStructuralTransfers": 184,
-    "bridgeInputSignatures": 6510,
-    "bridgeOutputSignatures": 1524,
-    "crossSchemaTransfers": 932,
-    "directAccesses": 10740,
-    "dynamicIngresses": 64,
-    "mechanicallyCompatibleSchemas": 1098,
-    "normalizationRequiredSchemas": 375,
-    "objectLiterals": 1757,
-    "objectLiteralsOmittingOptionalFields": 380,
+    "anonymousStructuralTransfers": 197,
+    "bridgeInputSignatures": 6609,
+    "bridgeOutputSignatures": 1544,
+    "crossSchemaTransfers": 953,
+    "directAccesses": 10742,
+    "dynamicIngresses": 67,
+    "mechanicallyCompatibleSchemas": 1126,
+    "normalizationRequiredSchemas": 387,
+    "objectLiterals": 1822,
+    "objectLiteralsOmittingOptionalFields": 391,
     "objectLiteralsWithComputedKeys": 1,
     "objectLiteralsWithSpread": 174,
-    "observabilityReviewSchemas": 225,
-    "optionalFields": 1902,
-    "oracleObservations": 229,
+    "observabilityReviewSchemas": 235,
+    "optionalFields": 1955,
+    "oracleObservations": 240,
     "productionEnumerations": 8,
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
     "productionObjectSpreads": 100,
     "requiredUndefinedFields": 1,
-    "schemas": 1473,
-    "testObjectLiterals": 5032
+    "schemas": 1513,
+    "testObjectLiterals": 5235
   },
-  "upstreamCommit": "f1a7a9a02f244a18b0e60c136ca1a801ab90f5a3"
+  "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
 }

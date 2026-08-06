@@ -3,6 +3,7 @@ package flighthq.render;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.render.EnableColorAdjustments as Facade_Render_flighthq_render_EnableColorAdjustments;
 import flighthq.render.EnableSceneRenderGuards as Facade_Render_flighthq_render_EnableSceneRenderGuards;
 import flighthq.render.RenderCache as Facade_Render_flighthq_render_RenderCache;
 import flighthq.render.RenderProxy as Facade_Render_flighthq_render_RenderProxy;
@@ -28,6 +29,11 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 
 class Render {
+  public static function areColorAdjustmentsEnabled(state:RenderState):Bool {
+    return cast Facade_Render_flighthq_render_EnableColorAdjustments.areColorAdjustmentsEnabled(state);
+    return cast null;
+  }
+
   public static function createRenderCache():RenderCache {
     return cast Facade_Render_flighthq_render_RenderCache.createRenderCache();
     return cast null;
@@ -43,6 +49,10 @@ class Render {
 
   public static function disposeScene2DRender(state:RenderState, root:Renderable):Void {
     Facade_Render_flighthq_render_RenderProxy.disposeScene2DRender(state, root);
+  }
+
+  public static function enableColorAdjustments(state:RenderState):Void {
+    Facade_Render_flighthq_render_EnableColorAdjustments.enableColorAdjustments(state);
   }
 
   public static function enableRenderRegistryGuards(state:RenderState):Void {

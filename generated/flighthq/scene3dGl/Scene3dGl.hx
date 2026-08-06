@@ -53,10 +53,10 @@ import flighthq.types.GlScene3DRuntime.GlMeshUpload;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node3D;
 import flighthq.types.PbrExtension;
-import flighthq.types.Scene3DCoverageGap;
 import flighthq.types.Scene3DKindUsage;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
+import flighthq.types.SceneCoverageEntry;
 
 class Scene3dGl {
   public static final anisotropyPbrGlExtension:GlPbrExtensionRegistration = Facade_Scene3dGl_flighthq_scene3dGl_AnisotropyPbrGlExtension.anisotropyPbrGlExtension;
@@ -100,7 +100,7 @@ class Scene3dGl {
     return cast null;
   }
 
-  public static function explainGlScene3DCoverage(out:Array<Scene3DCoverageGap>, state:GlRenderState, usage:Scene3DKindUsage):Void {
+  public static function explainGlScene3DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene3DKindUsage):Void {
     Facade_Scene3dGl_flighthq_scene3dGl_ExplainGlScene3DCoverage.explainGlScene3DCoverage(out, state, usage);
   }
 

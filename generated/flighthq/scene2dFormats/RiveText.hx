@@ -5,17 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.packColor;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
-import flighthq.text.TextLabel.createTextLabel;
+import flighthq.text.RichText.createRichText;
+import flighthq.types.FontVariation;
+import flighthq.types.RichText;
 import flighthq.types.RiveDocument.RiveArtboardGraph;
 import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.TextLabel;
+import flighthq.types.TextFormat;
+import flighthq.types.TextFormatRange;
 
 class RiveText {
-  public static function createRiveTextLabel(artboard:RiveArtboardGraph, index:Float):TextLabel {
+  public static function createRiveRichText(artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>):RichText {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var runs:Array<Float> = cast _Runtime.UNDEFINED;
+    var align:Dynamic = cast _Runtime.UNDEFINED;
+    var formatRanges:Array<TextFormatRange> = cast _Runtime.UNDEFINED;
     var text:Dynamic = cast _Runtime.UNDEFINED;
-    var style:Dynamic = cast _Runtime.UNDEFINED;
+    var baseStyle:Dynamic = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
+    var node:Dynamic = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
     runs = cast ([] : Array<Dynamic>);
     {
@@ -26,19 +33,70 @@ class RiveText {
         child++;
       }
     }
+    align = _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([source, RiveText.RIVE_TEXT_ALIGN__riveText, 0.0] : Array<Dynamic>));
+    formatRanges = cast ([] : Array<Dynamic>);
     text = '';
     for (run in _Runtime.iterable(runs)) {
-      (text = cast ((text + _Runtime.callValue(RiveText.readRiveText__riveText, cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run), RiveText.RIVE_RUN_TEXT__riveText, ''] : Array<Dynamic>))) : Dynamic));
+      var value:Dynamic = _Runtime.callValue(RiveText.readRiveText__riveText, cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run), RiveText.RIVE_RUN_TEXT__riveText, ''] : Array<Dynamic>));
+      var style:Dynamic = _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run), RiveText.RIVE_RUN_STYLE_ID__riveText, -1.0] : Array<Dynamic>));
+      _Runtime.callProperty(formatRanges, 'push', cast ([{ end: _Runtime.addNumbers(_Runtime.field(text, 'length'), _Runtime.field(value, 'length')), format: _Runtime.callValue(RiveText.createRiveTextFormat__riveText, cast ([artboard, style, align, fontNames] : Array<Dynamic>)), start: _Runtime.field(text, 'length') }] : Array<Dynamic>));
+      (text = cast ((text + value) : Dynamic));
     }
-    style = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readArray(runs, 0.0)), RiveText.RIVE_RUN_STYLE_ID__riveText, -1.0] : Array<Dynamic>)) : Dynamic));
-    return cast _Runtime.callValue(createTextLabel, cast ([{ data: { autoSize: 'none', height: _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([source, RiveText.RIVE_TEXT_HEIGHT__riveText, 0.0] : Array<Dynamic>)), text: text, textFormat: _Runtime.callValue(RiveText.createRiveTextFormat__riveText, cast ([artboard, style, _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([source, RiveText.RIVE_TEXT_ALIGN__riveText, 0.0] : Array<Dynamic>))] : Array<Dynamic>)), width: _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([source, RiveText.RIVE_TEXT_WIDTH__riveText, 0.0] : Array<Dynamic>)) } }] : Array<Dynamic>));
+    baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readArray(runs, 0.0)), RiveText.RIVE_RUN_STYLE_ID__riveText, -1.0] : Array<Dynamic>)) : Dynamic));
+    format = _Runtime.callValue(RiveText.createRiveTextFormat__riveText, cast ([artboard, baseStyle, align, fontNames] : Array<Dynamic>));
+    node = _Runtime.callValue(createRichText, cast ([] : Array<Dynamic>));
+    _Runtime.setField(_Runtime.field(node, 'data'), 'defaultTextFormat', format);
+    _Runtime.setField(_Runtime.field(node, 'data'), 'height', _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([source, RiveText.RIVE_TEXT_HEIGHT__riveText, 0.0] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(node, 'data'), 'text', text);
+    _Runtime.setField(_Runtime.field(node, 'data'), 'textColor', _Runtime.coalesce(_Runtime.field(format, 'color'), function():Dynamic return cast RiveText.RIVE_DEFAULT_TEXT_COLOR__riveText));
+    _Runtime.setField(_Runtime.field(node, 'data'), 'textFormat', format);
+    _Runtime.setField(_Runtime.field(node, 'data'), 'textFormatRanges', formatRanges);
+    _Runtime.setField(_Runtime.field(node, 'data'), 'width', _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([source, RiveText.RIVE_TEXT_WIDTH__riveText, 0.0] : Array<Dynamic>)));
+    return cast node;
     return cast null;
   }
 
-  public static function createRiveTextFormat__riveText(artboard:RiveArtboardGraph, styleIndex:Float, align:Float):Dynamic {
+  public static function createRiveTextFormat__riveText(artboard:RiveArtboardGraph, styleIndex:Float, align:Float, fontNames:Array<String>):TextFormat {
     var style:Dynamic = cast _Runtime.UNDEFINED;
+    var format:TextFormat = cast _Runtime.UNDEFINED;
+    var fontAsset:Dynamic = cast _Runtime.UNDEFINED;
+    var fontName:Dynamic = cast _Runtime.UNDEFINED;
+    var variations:Dynamic = cast _Runtime.UNDEFINED;
     style = ((cast ((cast ((cast styleIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast styleIndex : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), styleIndex) : Dynamic) : (cast null : Dynamic));
-    return cast { align: ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_RIGHT__riveText) : Bool) ? (cast 'right' : Dynamic) : (cast ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_CENTER__riveText) : Bool) ? (cast 'center' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), color: _Runtime.callValue(RiveText.readRiveStyleColor__riveText, cast ([artboard, styleIndex] : Array<Dynamic>)), leading: ((cast _Runtime.strictEquals(style, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_LINE_HEIGHT__riveText, -1.0] : Array<Dynamic>)) : Dynamic)), letterSpacing: ((cast _Runtime.strictEquals(style, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_LETTER_SPACING__riveText, 0.0] : Array<Dynamic>)) : Dynamic)), size: ((cast _Runtime.strictEquals(style, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_FONT_SIZE__riveText, 12.0] : Array<Dynamic>)) : Dynamic)) };
+    format = { align: ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_RIGHT__riveText) : Bool) ? (cast 'right' : Dynamic) : (cast ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_CENTER__riveText) : Bool) ? (cast 'center' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), color: _Runtime.callValue(RiveText.readRiveStyleColor__riveText, cast ([artboard, styleIndex] : Array<Dynamic>)) };
+    if ((cast _Runtime.strictEquals(style, null) : Bool)) { return cast format; }
+    _Runtime.setField(format, 'leading', _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_LINE_HEIGHT__riveText, -1.0] : Array<Dynamic>)));
+    _Runtime.setField(format, 'letterSpacing', _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_LETTER_SPACING__riveText, 0.0] : Array<Dynamic>)));
+    _Runtime.setField(format, 'size', _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_FONT_SIZE__riveText, RiveText.RIVE_DEFAULT_FONT_SIZE__riveText] : Array<Dynamic>)));
+    fontAsset = _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([style, RiveText.RIVE_STYLE_FONT_ASSET_ID__riveText, RiveText.RIVE_MISSING_ASSET_ID__riveText] : Array<Dynamic>));
+    fontName = ((cast ((cast ((cast fontAsset : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast fontAsset : Float) < (cast _Runtime.field(fontNames, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(fontNames, fontAsset) : Dynamic) : (cast '' : Dynamic));
+    if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { _Runtime.setField(format, 'font', fontName); }
+    variations = _Runtime.callValue(RiveText.readRiveStyleAxes__riveText, cast ([artboard, styleIndex] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field(variations, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(format, 'variations', variations); }
+    return cast format;
+    return cast null;
+  }
+
+  public static function readRiveStyleAxes__riveText(artboard:RiveArtboardGraph, styleIndex:Float):Array<FontVariation> {
+    var variations:Array<FontVariation> = cast _Runtime.UNDEFINED;
+    variations = cast ([] : Array<Dynamic>);
+    if ((cast ((cast styleIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast variations; }
+    {
+      var index:Dynamic = (styleIndex + 1.0);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
+        var object:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+        if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveText.RIVE_TEXT_STYLE_AXIS__riveText) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), styleIndex) : Bool)) { index++; continue; }
+        _Runtime.callProperty(variations, 'push', cast ([{ axis: _Runtime.callValue(RiveText.toRiveOpenTypeTag__riveText, cast ([_Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([object, RiveText.RIVE_AXIS_TAG__riveText, 0.0] : Array<Dynamic>))] : Array<Dynamic>)), value: _Runtime.callValue(RiveText.readRiveNumber__riveText, cast ([object, RiveText.RIVE_AXIS_VALUE__riveText, 0.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        index++;
+      }
+    }
+    return cast variations;
+    return cast null;
+  }
+
+  public static function toRiveOpenTypeTag__riveText(packed:Float):String {
+    return cast _Runtime.callProperty(String, 'fromCharCode', cast ([(_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255), (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255), (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255), (_Runtime.toInt32(packed) & 255)] : Array<Dynamic>));
     return cast null;
   }
 
@@ -86,6 +144,8 @@ class RiveText {
 
   public static final RIVE_TEXT_VALUE_RUN__riveText:Dynamic = 135.0;
 
+  public static final RIVE_TEXT_STYLE_AXIS__riveText:Dynamic = 144.0;
+
   public static final RIVE_SOLID_COLOR__riveText:Dynamic = 18.0;
 
   public static final RIVE_RUN_TEXT__riveText:Dynamic = 268.0;
@@ -93,6 +153,12 @@ class RiveText {
   public static final RIVE_RUN_STYLE_ID__riveText:Dynamic = 272.0;
 
   public static final RIVE_STYLE_FONT_SIZE__riveText:Dynamic = 274.0;
+
+  public static final RIVE_STYLE_FONT_ASSET_ID__riveText:Dynamic = 279.0;
+
+  public static final RIVE_AXIS_VALUE__riveText:Dynamic = 288.0;
+
+  public static final RIVE_AXIS_TAG__riveText:Dynamic = 289.0;
 
   public static final RIVE_TEXT_ALIGN__riveText:Dynamic = 281.0;
 
@@ -109,6 +175,10 @@ class RiveText {
   public static final RIVE_ALIGN_RIGHT__riveText:Dynamic = 1.0;
 
   public static final RIVE_ALIGN_CENTER__riveText:Dynamic = 2.0;
+
+  public static final RIVE_DEFAULT_FONT_SIZE__riveText:Dynamic = 12.0;
+
+  public static final RIVE_MISSING_ASSET_ID__riveText:Dynamic = -1.0;
 
   public static final RIVE_DEFAULT_TEXT_COLOR__riveText:Dynamic = _Runtime.callValue(packColor, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
 }

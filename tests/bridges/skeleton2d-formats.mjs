@@ -6,3 +6,4 @@ export const parseSkeleton2D = compiled.flighthq.skeleton2dFormats.Skeleton2dFor
 export const parseSpineSkeleton = compiled.flighthq.skeleton2dFormats.Skeleton2dFormats.parseSpineSkeleton;
 export const parseSpineSkeletonBinary = compiled.flighthq.skeleton2dFormats.Skeleton2dFormats.parseSpineSkeletonBinary;
 export const registerSkeleton2DFormat = compiled.flighthq.skeleton2dFormats.Skeleton2dFormats.registerSkeleton2DFormat;
+export const unregisterSkeleton2DFormat = compiled.flighthq.skeleton2dFormats.Skeleton2dFormats.unregisterSkeleton2DFormat;

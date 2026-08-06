@@ -21,6 +21,9 @@ class MeshGeometry {
     var indices:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
+    var clone:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var smoothingSources:Dynamic = cast _Runtime.UNDEFINED;
     vertices = new flighthq._internal._Float32Array(_Runtime.field(source.vertices, 'length'));
     (cast vertices : flighthq._internal._Float32Array).set(source.vertices);
     indices = null;
@@ -45,7 +48,13 @@ class MeshGeometry {
       var b:Dynamic = source.bounds;
       (bounds = cast (_Runtime.callValue(createAabb, cast ([b.min.x, b.min.y, b.min.z, b.max.x, b.max.y, b.max.z] : Array<Dynamic>)) : Dynamic));
     }
-    return cast _Runtime.callValue(MeshGeometry.createMeshGeometryRuntime__meshGeometry, cast ([{ bounds: bounds, indices: indices, layout: source.layout, subsets: subsets, topology: source.topology, version: 0.0, vertices: vertices }] : Array<Dynamic>));
+    clone = _Runtime.callValue(MeshGeometry.createMeshGeometryRuntime__meshGeometry, cast ([{ bounds: bounds, indices: indices, layout: source.layout, subsets: subsets, topology: source.topology, version: 0.0, vertices: vertices }] : Array<Dynamic>));
+    sourceRuntime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
+    smoothingSources = _Runtime.optionalField(sourceRuntime, 'tangentSmoothingSources');
+    if ((cast ((cast !_Runtime.strictEquals(smoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(smoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+      _Runtime.setField((cast _Runtime.getIndex(clone, EntityRuntimeKey) : MeshGeometryRuntime), 'tangentSmoothingSources', _Runtime.slice(smoothingSources, 0, null));
+    }
+    return cast clone;
     return cast null;
   }
 
@@ -139,7 +148,7 @@ class MeshGeometry {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:MeshGeometryRuntime = cast _Runtime.UNDEFINED;
     geometry = (cast _Runtime.callValue(createEntity, cast ([{ bounds: _Runtime.field(fields, 'bounds'), indices: _Runtime.field(fields, 'indices'), layout: _Runtime.field(fields, 'layout'), subsets: _Runtime.field(fields, 'subsets'), topology: _Runtime.field(fields, 'topology'), version: _Runtime.field(fields, 'version'), vertices: _Runtime.field(fields, 'vertices') }] : Array<Dynamic>)) : flighthq.types.MeshGeometry);
-    runtime = { binding: null, boundsVersion: ((cast !_Runtime.strictEquals(_Runtime.field(fields, 'bounds'), null) : Bool) ? (cast _Runtime.field(fields, 'version') : Dynamic) : (cast -1.0 : Dynamic)), morphBindPose: null, morphBlendedWeights: null, skinBindPose: null, webglData: null, webgpuData: null };
+    runtime = { binding: null, boundsVersion: ((cast !_Runtime.strictEquals(_Runtime.field(fields, 'bounds'), null) : Bool) ? (cast _Runtime.field(fields, 'version') : Dynamic) : (cast -1.0 : Dynamic)), morphBindPose: null, morphBlendedWeights: null, skinBindPose: null, tangentSmoothingSources: null, webglData: null, webgpuData: null };
     _Runtime.setIndex(geometry, EntityRuntimeKey, runtime);
     return cast geometry;
     return cast null;

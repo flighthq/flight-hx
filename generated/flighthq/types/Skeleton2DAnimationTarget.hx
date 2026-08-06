@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Skeleton2DAnimationTarget = { var boneIndex:Float; var path:Skeleton2DAnimationPath; };
+typedef Skeleton2DAnimationTarget = { var boneIndex:Float; var kind:Skeleton2DAnimationTargetKind; var path:Skeleton2DAnimationPath; };

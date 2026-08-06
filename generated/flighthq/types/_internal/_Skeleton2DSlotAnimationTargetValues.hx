@@ -4,6 +4,7 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Attachment2D;
+import flighthq.types.Skeleton2DAnimationTargetKind;
 
 class _Skeleton2DSlotAnimationTargetValues {
   public static final Skeleton2DSlotAnimationPathValue:Dynamic = { Attachment: 'Attachment', Color: 'Color' };
