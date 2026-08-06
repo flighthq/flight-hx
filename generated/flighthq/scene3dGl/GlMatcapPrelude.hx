@@ -15,6 +15,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.Texture;
 
 class GlMatcapPrelude {
+  @:noCompletion
   public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -26,11 +27,13 @@ class GlMatcapPrelude {
     }
   }
 
+  @:noCompletion
   public static function buildGlMatcapDefineKey(key:GlMatcapDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 't' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileGlMatcapProgram(gl:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlMatcapVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlMatcapFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
@@ -38,16 +41,19 @@ class GlMatcapPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
     return cast _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'matcap:' + Std.string(_Runtime.callValue(buildGlMatcapDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlMatcapProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlMatcapFragmentSourceForKey(key:GlMatcapDefineKey):String {
     return cast (_Runtime.callValue(GlMatcapPrelude.buildDefineSource__glMatcapPrelude, cast ([key] : Array<Dynamic>)) + GlMatcapPrelude.MATCAP_FRAGMENT_BODY__glMatcapPrelude);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlMatcapVertexSourceForKey(key:GlMatcapDefineKey):String {
     return cast (_Runtime.callValue(GlMatcapPrelude.buildDefineSource__glMatcapPrelude, cast ([key] : Array<Dynamic>)) + GlMatcapPrelude.MATCAP_VERTEX_BODY__glMatcapPrelude);
     return cast null;

@@ -17,6 +17,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 
 class WgpuPbrPipelineCache {
+  @:noCompletion
   public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuPbrPipeline {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,6 +30,7 @@ class WgpuPbrPipelineCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
     var fullKey:WgpuPbrDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasColorAdjustment: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorAdjustmentRun') }, { hasColorMatrix: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorMatrixRun') }]);

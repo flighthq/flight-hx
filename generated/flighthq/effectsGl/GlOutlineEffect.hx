@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.OutlineEffect;
 
 class GlOutlineEffect {
+  @:noCompletion
   public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var thickness:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,6 +7,7 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
 
 class WgpuMipmap {
+  @:noCompletion
   public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
     var levelCount:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -42,6 +43,7 @@ class WgpuMipmap {
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([_Runtime.callProperty(encoder, 'finish', cast ([] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getWgpuMipLevelCount(width:Float, height:Float):Float {
     return cast _Runtime.addNumbers(1.0, HxMath.floor(_Runtime.log2(HxMath.max(HxMath.max(1.0, width), height))));
     return cast null;

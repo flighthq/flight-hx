@@ -12,11 +12,13 @@ import flighthq.types.SceneCoverageEntry.SceneCoverage;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
 class ExplainScene2DCoverage {
+  @:noCompletion
   public static function explainScene2DCoverage(out:Array<SceneCoverageEntry>, state:RenderState, usage:Scene2DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
     _Runtime.callValue(ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function hasScene2DCoverage(state:RenderState, usage:Scene2DKindUsage):Bool {
     return cast !(cast _Runtime.callValue(ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
     return cast null;

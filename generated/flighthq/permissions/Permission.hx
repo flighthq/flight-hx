@@ -13,6 +13,7 @@ import flighthq.types.Permission.PermissionStateExplanation;
 typedef WakeLockLike__permission = { @:optional var release:Dynamic; };
 
 class Permission {
+  @:noCompletion
   public static function createWebPermissionBackend():PermissionBackend {
     return cast { getState: function(name:Dynamic) {
       return cast _Runtime.callValue(Permission.readWebPermissionState__permission, cast ([name] : Array<Dynamic>));
@@ -73,6 +74,7 @@ class Permission {
     );
   }
 
+  @:noCompletion
   public static function getPermissionBackend():PermissionBackend {
     if ((cast _Runtime.strictEquals(Permission._backend__permission, null) : Bool)) {
       (Permission._backend__permission = cast (_Runtime.callValue(createWebPermissionBackend, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -97,10 +99,12 @@ class Permission {
     return cast null;
   }
 
+  @:noCompletion
   public static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
     (Permission._backend__permission = cast (backend : Dynamic));
   }
 
+  @:noCompletion
   public static function setPermissionRequestFallbackGuard(guard:Null<PermissionRequestFallbackGuard>):Void {
     (Permission._requestFallbackGuard__permission = cast (guard : Dynamic));
   }

@@ -42,6 +42,7 @@ class Filesystem {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebFileSystemBackend():Dynamic {
     return cast { readTextFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -915,6 +916,7 @@ class Filesystem {
     return cast null;
   }
 
+  @:noCompletion
   public static function getFileSystemBackend():Dynamic {
     if ((cast _Runtime.strictEquals(Filesystem._backend__filesystem, null) : Bool)) { (Filesystem._backend__filesystem = cast (_Runtime.callValue(createWebFileSystemBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Filesystem._backend__filesystem;
@@ -1303,6 +1305,7 @@ class Filesystem {
     return cast null;
   }
 
+  @:noCompletion
   public static function setFileSystemBackend(backend:Null<Dynamic>):Void {
     (Filesystem._backend__filesystem = cast (backend : Dynamic));
   }

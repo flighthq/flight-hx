@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderState;
 
 class WgpuScene3DTime {
+  @:noCompletion
   public static function getWgpuScene3DTime(state:WgpuRenderState):Float {
     return cast _Runtime.coalesce(((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast 0.0);
     return cast null;

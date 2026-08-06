@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.SmaaEffect;
 
 class GlSmaaEffect {
+  @:noCompletion
   public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

@@ -19,6 +19,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.SwfFilterListGuard;
 
 class SwfFilter {
+  @:noCompletion
   public static function readSwfFilterList(reader:SwfReader, outEffects:Array<RenderEffect>, outAdjustments:Array<Adjustment>):Bool {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
@@ -157,6 +158,7 @@ class SwfFilter {
     return cast null;
   }
 
+  @:noCompletion
   public static function setSwfFilterListGuard(guard:Null<SwfFilterListGuard>):Void {
     (SwfFilter._swfFilterListGuard__swfFilter = cast (guard : Dynamic));
   }

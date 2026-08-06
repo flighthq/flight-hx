@@ -13,6 +13,7 @@ class DomFontSource {
     return cast null;
   }
 
+  @:noCompletion
   public static function invalidateDomFontResource(source:FontResource):Void {
     var family:Dynamic = cast _Runtime.UNDEFINED;
     family = source.family;

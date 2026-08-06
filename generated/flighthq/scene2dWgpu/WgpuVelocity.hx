@@ -135,6 +135,7 @@ class WgpuVelocity {
     }
   };
 
+  @:noCompletion
   public static final defaultWgpuQuadBatchVelocityWriter:WgpuVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
     var batch:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -238,6 +239,7 @@ class WgpuVelocity {
     _Runtime.callValue(drawWgpuVelocityQuad, cast ([ctx, _Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'width'), _Runtime.field(bounds, 'height'), _Runtime.field(WgpuVelocity._scratchVelocity__wgpuVelocity, 'x'), _Runtime.field(WgpuVelocity._scratchVelocity__wgpuVelocity, 'y')] : Array<Dynamic>));
   };
 
+  @:noCompletion
   public static function drawWgpuVelocityQuad(ctx:WgpuVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
     var active:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
@@ -268,6 +270,7 @@ class WgpuVelocity {
     _Runtime.callProperty(_Runtime.field(active, 'pass'), 'draw', cast ([6.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast WgpuVelocity._velocityWriters__wgpuVelocity : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;

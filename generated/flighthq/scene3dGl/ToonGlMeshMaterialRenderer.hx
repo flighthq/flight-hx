@@ -30,6 +30,7 @@ import flighthq.types.Types.ToonMaterialKind;
 import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
 class ToonGlMeshMaterialRenderer {
+  @:noCompletion
   public static final toonGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var toon:Dynamic = cast _Runtime.UNDEFINED;

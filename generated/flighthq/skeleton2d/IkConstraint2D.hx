@@ -19,6 +19,7 @@ class IkConstraint2D {
     _Runtime.callValue(registerSkeleton2DConstraintSolver, cast ([Skeleton2DConstraintKindValue.Ik, solveSkeleton2DIkConstraint] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function solveSkeleton2DIkConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
     var ik:Dynamic = cast _Runtime.UNDEFINED;
     var bones:Dynamic = cast _Runtime.UNDEFINED;

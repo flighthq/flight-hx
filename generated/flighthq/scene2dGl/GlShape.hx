@@ -13,6 +13,7 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
 class GlShape {
+  @:noCompletion
   public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast _Runtime.callValue(drawGlMeshShape, cast ([state, renderProxy] : Array<Dynamic>)) : Bool)) { return; }
     _Runtime.callValue(drawGlRasterShape, cast ([state, renderProxy] : Array<Dynamic>));

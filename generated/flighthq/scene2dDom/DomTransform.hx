@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Matrix;
 
 class DomTransform {
+  @:noCompletion
   public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
@@ -14,6 +15,7 @@ class DomTransform {
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
+  @:noCompletion
   public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;

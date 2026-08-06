@@ -11,6 +11,7 @@ import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuScene3DRuntime {
+  @:noCompletion
   public static function getWgpuScene3DRuntime(state:WgpuRenderState):flighthq.types.WgpuScene3DRuntime {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,6 +27,7 @@ class WgpuScene3DRuntime {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuSkinningAdapter(state:WgpuRenderState):Null<WgpuSkinningAdapter> {
     return cast (cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'skinningAdapter') : Null<WgpuSkinningAdapter>);
     return cast null;

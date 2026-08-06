@@ -19,6 +19,7 @@ class GlEffectBoxBlur {
 
   public static final boxBlurShaders__glEffectBoxBlur:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     var passes:Dynamic = cast _Runtime.UNDEFINED;
     var blurX:Dynamic = cast _Runtime.UNDEFINED;

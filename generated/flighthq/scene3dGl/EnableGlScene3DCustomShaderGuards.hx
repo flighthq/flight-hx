@@ -9,11 +9,13 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 class EnableGlScene3DCustomShaderGuards {
+  @:noCompletion
   public static function areGlScene3DCustomShaderGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableGlScene3DCustomShaderGuards(state:GlRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard', EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards);
   }

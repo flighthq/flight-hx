@@ -4,4 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 typedef RenderProxyResolver = { var resolve:Dynamic; };

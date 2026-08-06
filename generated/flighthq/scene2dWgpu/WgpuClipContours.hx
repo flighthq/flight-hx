@@ -15,6 +15,7 @@ class WgpuClipContours {
 
   public static final CLIP_UNIFORM_BYTES__wgpuClipContours:Dynamic = 48.0;
 
+  @:noCompletion
   public static function popWgpuClipContours(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
@@ -37,6 +38,7 @@ class WgpuClipContours {
     }
   }
 
+  @:noCompletion
   public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;

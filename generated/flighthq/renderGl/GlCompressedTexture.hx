@@ -13,11 +13,13 @@ import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
 class GlCompressedTexture {
+  @:noCompletion
   public static function detectGlCompressedTextureSupport(gl:Dynamic):GlCompressedTextureSupport {
     return cast { astc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_astc'), null), bptc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_bptc'), null), etc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_etc'), null), pvrtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_pvrtc'), null), rgtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_rgtc'), null), s3tc: ((cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc'), null) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb'), null) : Bool)) };
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlCompressedTextureFormat(gl:Dynamic, format:TextureContainerFormat):Float {
     var s3tc:Dynamic = cast _Runtime.UNDEFINED;
     var s3tcSrgb:Dynamic = cast _Runtime.UNDEFINED;
@@ -170,6 +172,7 @@ class GlCompressedTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function hasGlCompressedTextureFormat(support:GlCompressedTextureSupport, format:TextureContainerFormat):Bool {
     {
       var __switchValue = format;

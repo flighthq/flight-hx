@@ -208,6 +208,7 @@ class Menu {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebMenuBackend():MenuBackend {
     return cast { setApplicationMenu: function() {
       return cast false;
@@ -229,6 +230,7 @@ class Menu {
     return cast null;
   }
 
+  @:noCompletion
   public static function getMenuBackend():MenuBackend {
     if ((cast _Runtime.strictEquals(Menu._backend__menu, null) : Bool)) { (Menu._backend__menu = cast (_Runtime.callValue(createWebMenuBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Menu._backend__menu;
@@ -253,6 +255,7 @@ class Menu {
     return cast null;
   }
 
+  @:noCompletion
   public static function setMenuBackend(backend:Null<MenuBackend>):Void {
     (Menu._backend__menu = cast (backend : Dynamic));
   }

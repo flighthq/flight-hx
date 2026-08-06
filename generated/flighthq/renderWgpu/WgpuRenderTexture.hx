@@ -45,6 +45,7 @@ class WgpuRenderTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuRenderTextureTarget(state:WgpuRenderState, renderTexture:RenderTexture):Null<Dynamic> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
@@ -54,6 +55,7 @@ class WgpuRenderTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function invalidateWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
@@ -87,10 +89,12 @@ class WgpuRenderTexture {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setWgpuRenderTextureGuard(state:WgpuRenderState, guard:Null<WgpuRenderTextureGuard>):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuRenderTextureGuard', guard);
   }
 
+  @:noCompletion
   public static function writeWgpuRenderTextureTarget<T>(state:WgpuRenderState, renderTexture:RenderTexture, callback:Dynamic):Dynamic {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var previousStatus:Dynamic = cast _Runtime.UNDEFINED;

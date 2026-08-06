@@ -14,22 +14,26 @@ import flighthq.types.RenderProxy2D;
 class GlShaderBinding {
   public static final _shaderBindings__glShaderBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialBitmapShaderMap'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlShader(renderProxy:RenderProxy2D):Null<GlBitmapShader> {
     return cast ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap).get(renderProxy));
     return cast null;
   }
 
+  @:noCompletion
   public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     ((cast _Runtime.setField(runtime, 'materialBitmapShaderMap', (_Runtime.field(runtime, 'materialBitmapShaderMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, shader));
   }
 
+  @:noCompletion
   public static function resolveGlShader(state:GlRenderState, renderProxy:RenderProxy2D):GlBitmapShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,6 +53,7 @@ class GlShaderBinding {
     return cast null;
   }
 
+  @:noCompletion
   public static function setGlShader(state:GlRenderState, node:Node2D, shader:Null<GlBitmapShader>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));

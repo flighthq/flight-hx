@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class ColorMatrixMath {
+  @:noCompletion
   public static final COLOR_MATRIX_LENGTH:Dynamic = 20.0;
 
   public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
@@ -37,11 +38,13 @@ class ColorMatrixMath {
     return cast null;
   }
 
+  @:noCompletion
   public static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
     return cast cast ([flighthq._internal._StaticIndex.readArray(redOut, 0.0), flighthq._internal._StaticIndex.readArray(redOut, 1.0), flighthq._internal._StaticIndex.readArray(redOut, 2.0), 0.0, 0.0, flighthq._internal._StaticIndex.readArray(greenOut, 0.0), flighthq._internal._StaticIndex.readArray(greenOut, 1.0), flighthq._internal._StaticIndex.readArray(greenOut, 2.0), 0.0, 0.0, flighthq._internal._StaticIndex.readArray(blueOut, 0.0), flighthq._internal._StaticIndex.readArray(blueOut, 1.0), flighthq._internal._StaticIndex.readArray(blueOut, 2.0), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
+  @:noCompletion
   public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
     var rOff:Dynamic = cast _Runtime.UNDEFINED;
@@ -75,11 +78,13 @@ class ColorMatrixMath {
     return cast null;
   }
 
+  @:noCompletion
   public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
     return cast _Runtime.callValue(createSaturationColorMatrix, cast ([(1.0 - amount)] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function createGrayscaleColorMatrix():Array<Float> {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
@@ -113,11 +118,13 @@ class ColorMatrixMath {
     return cast null;
   }
 
+  @:noCompletion
   public static function createInvertColorMatrix():Array<Float> {
     return cast cast ([-1.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
+  @:noCompletion
   public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Dynamic = 1.0):Array<Float> {
     var inRange:Dynamic = cast _Runtime.UNDEFINED;
     var scale:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,11 +138,13 @@ class ColorMatrixMath {
     return cast null;
   }
 
+  @:noCompletion
   public static function createOpacityColorMatrix(alpha:Float):Array<Float> {
     return cast cast ([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, alpha, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
+  @:noCompletion
   public static function createPolaroidColorMatrix():Array<Float> {
     return cast cast ([1.438, -0.062, -0.062, 0.0, (-31.8 / 255.0), -0.122, 1.378, -0.122, 0.0, (16.2 / 255.0), -0.016, -0.016, 1.484, 0.0, (-47.6 / 255.0), 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
@@ -152,21 +161,25 @@ class ColorMatrixMath {
     return cast null;
   }
 
+  @:noCompletion
   public static function createSepiaColorMatrix():Array<Float> {
     return cast cast ([0.393, 0.769, 0.189, 0.0, 0.0, 0.349, 0.686, 0.168, 0.0, 0.0, 0.272, 0.534, 0.131, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
+  @:noCompletion
   public static function createTechnicolorColorMatrix():Array<Float> {
     return cast cast ([1.9126, -0.8, -0.09, 0.0, (11.79 / 255.0), -0.2, 1.7, -0.27, 0.0, (-14.69 / 255.0), -0.14, -0.21, 1.62, 0.0, (-3.38 / 255.0), 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
+  @:noCompletion
   public static function createVintageColorMatrix():Array<Float> {
     return cast cast ([0.9, 0.05, 0.05, 0.0, (10.0 / 255.0), 0.0, 0.85, 0.0, 0.0, (5.0 / 255.0), 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
+  @:noCompletion
   public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
     var tempScale:Dynamic = cast _Runtime.UNDEFINED;
     var tintScale:Dynamic = cast _Runtime.UNDEFINED;

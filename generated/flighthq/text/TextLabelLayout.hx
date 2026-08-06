@@ -15,6 +15,7 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextMetrics;
 
 class TextLabelLayout {
+  @:noCompletion
   public static function ensureTextLayout(source:TextLabel):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var contentId:Dynamic = cast _Runtime.UNDEFINED;

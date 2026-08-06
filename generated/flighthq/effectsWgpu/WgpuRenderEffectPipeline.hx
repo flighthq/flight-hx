@@ -57,6 +57,7 @@ class WgpuRenderEffectPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline):Void {
     if (_Runtime.truthy(_Runtime.field(pipeline, 'sceneTarget'))) {
       _Runtime.callValue(destroyWgpuRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));

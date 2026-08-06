@@ -20,16 +20,19 @@ class Scale9Shape {
     return cast null;
   }
 
+  @:noCompletion
   public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:Dynamic):Scale9ShapeData {
     return cast { commands: _Runtime.coalesce(_Runtime.optionalField(data, 'commands'), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
     return cast null;
   }
 
+  @:noCompletion
   public static function createScale9ShapeRuntime():Scale9ShapeRuntime {
     return cast (cast _Runtime.callValue(createShapeRuntime, cast ([] : Array<Dynamic>)) : Scale9ShapeRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : Scale9ShapeRuntime);
     return cast null;

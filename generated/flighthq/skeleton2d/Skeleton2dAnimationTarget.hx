@@ -31,6 +31,7 @@ class Skeleton2dAnimationTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function findSkeleton2DStepKeyframe(times:Dynamic, time:Float):Float {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.field(times, 'length');
@@ -46,6 +47,7 @@ class Skeleton2dAnimationTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function getSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Null<Skeleton2DAnimationTargetBinder> {
     return cast _Runtime.coalesce(((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
@@ -55,6 +57,7 @@ class Skeleton2dAnimationTarget {
     ((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map).set(kind, bind));
   }
 
+  @:noCompletion
   public static function unregisterSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Void {
     ((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map).delete_(kind));
   }

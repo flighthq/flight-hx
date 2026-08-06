@@ -10,6 +10,7 @@ import flighthq.types.Types.AnisotropyPbrExtensionKind;
 import flighthq.types._internal._AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
 
 class AnisotropyPbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerAnisotropyPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, AnisotropyPbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var anisotropy:Dynamic = cast _Runtime.UNDEFINED;

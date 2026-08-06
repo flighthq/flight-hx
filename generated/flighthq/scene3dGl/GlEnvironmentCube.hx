@@ -18,6 +18,7 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class GlEnvironmentCube {
+  @:noCompletion
   public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
@@ -53,11 +54,13 @@ class GlEnvironmentCube {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlCubeFaceTarget(gl:Dynamic, face:Float):Float {
     return cast (flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X + face);
     return cast null;
   }
 
+  @:noCompletion
   public static function updateGlEnvironmentCubeFace(state:GlRenderState, face:Float, image:TextureSource):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;

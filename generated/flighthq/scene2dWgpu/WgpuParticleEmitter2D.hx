@@ -86,6 +86,7 @@ class WgpuParticleEmitter2D {
     _Runtime.setField(runtime, 'particleInstanceData', new flighthq._internal._Float32Array((newCapacity / 4.0)));
   }
 
+  @:noCompletion
   public static function drawWgpuParticleEmitter2D(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

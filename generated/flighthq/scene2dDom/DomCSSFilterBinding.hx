@@ -13,6 +13,7 @@ class DomCSSFilterBinding {
     _Runtime.setField(state, 'domCssFilterResolver', getDomCssFilter);
   }
 
+  @:noCompletion
   public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
     return cast ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).get(renderProxy));
     return cast null;

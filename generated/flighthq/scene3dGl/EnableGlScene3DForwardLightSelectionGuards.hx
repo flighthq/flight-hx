@@ -10,11 +10,13 @@ import flighthq.types.Log.LogLevel;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 
 class EnableGlScene3DForwardLightSelectionGuards {
+  @:noCompletion
   public static function areGlScene3DForwardLightSelectionGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableGlScene3DForwardLightSelectionGuards(state:GlRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard', EnableGlScene3DForwardLightSelectionGuards.warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards);
   }

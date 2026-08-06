@@ -16,6 +16,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
 class GlCompositeEffect {
+  @:noCompletion
   public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,6 +42,7 @@ class GlCompositeEffect {
     _Runtime.callValue(applyCompositeEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CompositeEffect)] : Array<Dynamic>));
   };
 
+  @:noCompletion
   public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
     return cast _Runtime.coalesce(_Runtime.getIndex(GlCompositeEffect.COMPOSITE_OPERATOR_INDEX__glCompositeEffect, operator_), function():Dynamic return cast 0.0);
     return cast null;

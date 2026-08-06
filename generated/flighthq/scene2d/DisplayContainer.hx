@@ -18,11 +18,13 @@ class DisplayContainer {
     return cast null;
   }
 
+  @:noCompletion
   public static function createDisplayObjectRuntime():DisplayObjectRuntime {
     return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([] : Array<Dynamic>)) : DisplayObjectRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : DisplayObjectRuntime);
     return cast null;

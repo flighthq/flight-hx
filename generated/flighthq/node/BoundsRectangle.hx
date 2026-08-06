@@ -59,6 +59,7 @@ class BoundsRectangle {
     _Runtime.callValue(BoundsRectangle.mergeRootLocalBounds__boundsRectangle, cast ([out, root, null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
@@ -67,6 +68,7 @@ class BoundsRectangle {
     }
   }
 
+  @:noCompletion
   public static function ensureNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
@@ -75,6 +77,7 @@ class BoundsRectangle {
     }
   }
 
+  @:noCompletion
   public static function ensureNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var localBoundsInvalid:Dynamic = cast _Runtime.UNDEFINED;

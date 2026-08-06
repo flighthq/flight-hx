@@ -14,6 +14,7 @@ import flighthq.types.Node3D;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 
 class PresentGlScene3D {
+  @:noCompletion
   public static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
     _Runtime.callValue(beginGlRenderPass, cast ([state, target] : Array<Dynamic>));
     try {

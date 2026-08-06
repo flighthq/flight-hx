@@ -24,6 +24,7 @@ class GlEffectBlitShader {
 
   public static final eraseShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlBlitOffsetShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
@@ -32,6 +33,7 @@ class GlEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlBlitShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
@@ -40,6 +42,7 @@ class GlEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlEraseShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));

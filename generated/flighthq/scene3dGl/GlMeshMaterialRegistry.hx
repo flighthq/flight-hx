@@ -12,15 +12,18 @@ import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class GlMeshMaterialRegistry {
+  @:noCompletion
   public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
     return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
+  @:noCompletion
   public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
     ((cast _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).set(kind, renderer));
   }
 
+  @:noCompletion
   public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');

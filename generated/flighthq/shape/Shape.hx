@@ -507,11 +507,13 @@ class Shape {
     return cast null;
   }
 
+  @:noCompletion
   public static function createShapeData(?data:Dynamic):ShapeData {
     return cast { commands: _Runtime.coalesce(_Runtime.optionalField(data, 'commands'), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createShapeRuntime():ShapeRuntime {
     return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([{ computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle }] : Array<Dynamic>)) : ShapeRuntime);
     return cast null;
@@ -557,6 +559,7 @@ class Shape {
     return cast null;
   }
 
+  @:noCompletion
   public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : ShapeRuntime);
     return cast null;

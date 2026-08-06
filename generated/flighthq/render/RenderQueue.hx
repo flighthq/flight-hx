@@ -14,6 +14,7 @@ import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 class RenderQueue {
+  @:noCompletion
   public static function buildRenderQueue(state:RenderState, source:Renderable, out:flighthq.types.RenderQueue):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var renderProxyMap:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,20 +50,24 @@ class RenderQueue {
     }
   }
 
+  @:noCompletion
   public static function clearRenderQueue(queue:flighthq.types.RenderQueue):Void {
     _Runtime.setField(queue, 'entryCount', 0.0);
   }
 
+  @:noCompletion
   public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
     return cast _Runtime.subtractNumbers(_Runtime.field(a, 'sortKey'), _Runtime.field(b, 'sortKey'));
     return cast null;
   }
 
+  @:noCompletion
   public static function createRenderQueue():flighthq.types.RenderQueue {
     return cast { entries: cast ([] : Array<Dynamic>), entryCount: 0.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
     var layerBits:Dynamic = cast _Runtime.UNDEFINED;
     var transparentBit:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,6 +79,7 @@ class RenderQueue {
     return cast null;
   }
 
+  @:noCompletion
   public static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = { proxy: proxy, sortKey: sortKey };
@@ -85,6 +91,7 @@ class RenderQueue {
     _Runtime.incrementField(queue, 'entryCount', 1, true);
   }
 
+  @:noCompletion
   public static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:Dynamic):Void {
     var slice:Dynamic = cast _Runtime.UNDEFINED;
     slice = _Runtime.slice(_Runtime.field(queue, 'entries'), 0.0, _Runtime.field(queue, 'entryCount'));

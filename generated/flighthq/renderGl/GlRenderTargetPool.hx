@@ -16,6 +16,7 @@ import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
 
 class GlRenderTargetPool {
+  @:noCompletion
   public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<GlRenderTarget> {
     var requested:Dynamic = cast _Runtime.UNDEFINED;
     var effective:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,11 +42,13 @@ class GlRenderTargetPool {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGlRenderTargetPool():flighthq.types.GlRenderTarget.GlRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool):Void {
     for (target in _Runtime.iterable(_Runtime.field(pool, 'free'))) {
       _Runtime.callValue(destroyGlRenderTarget, cast ([state, target] : Array<Dynamic>));
@@ -53,6 +56,7 @@ class GlRenderTargetPool {
     _Runtime.setLength(_Runtime.field(pool, 'free'), 0.0);
   }
 
+  @:noCompletion
   public static function releaseGlRenderTarget(pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, target:GlRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }

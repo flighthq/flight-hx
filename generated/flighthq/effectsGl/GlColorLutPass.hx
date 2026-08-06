@@ -11,6 +11,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlColorLutPass {
+  @:noCompletion
   public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;

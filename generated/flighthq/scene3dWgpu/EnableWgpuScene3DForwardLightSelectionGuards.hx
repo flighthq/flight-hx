@@ -10,11 +10,13 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.WgpuRenderState;
 
 class EnableWgpuScene3DForwardLightSelectionGuards {
+  @:noCompletion
   public static function areWgpuScene3DForwardLightSelectionGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableWgpuScene3DForwardLightSelectionGuards(state:WgpuRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard', EnableWgpuScene3DForwardLightSelectionGuards.warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards);
   }

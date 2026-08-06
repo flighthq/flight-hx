@@ -20,6 +20,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DropShadowEffect;
 
 class CanvasDropShadowEffect {
+  @:noCompletion
   public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:DropShadowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var css:Dynamic = cast _Runtime.UNDEFINED;

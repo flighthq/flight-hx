@@ -13,6 +13,7 @@ import flighthq.types.WgpuRenderState.WgpuShapeMeshPipeline;
 import flighthq.types.WgpuShapeMesh;
 
 class WgpuShapeMesh {
+  @:noCompletion
   public static function drawWgpuShapeMeshBatch(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers, pipelineEntry:WgpuShapeMeshPipeline, uniformBuffers:Array<Dynamic>, bindGroups:Array<Dynamic>, uniformData:flighthq._internal._Float32Array):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,6 +60,7 @@ class WgpuShapeMesh {
     }
   }
 
+  @:noCompletion
   public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }

@@ -15,6 +15,7 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class GlScene3DRuntime {
+  @:noCompletion
   public static function destroyGlScene3DRuntime(state:GlRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -56,6 +57,7 @@ class GlScene3DRuntime {
     _Runtime.setLength(_Runtime.field(scene, 'opaquePool'), 0.0);
   }
 
+  @:noCompletion
   public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var palette:Dynamic = cast _Runtime.UNDEFINED;
@@ -69,6 +71,7 @@ class GlScene3DRuntime {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlScene3DRuntime(state:GlRenderState):flighthq.types.GlScene3DRuntime {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;

@@ -9,10 +9,12 @@ import flighthq.types.Log.LogLevel;
 import flighthq.types.StepPosition;
 
 class EnableEasingGuards {
+  @:noCompletion
   public static function disableEasingGuards():Void {
     _Runtime.callValue(setEasingStepsGuard, cast ([null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function enableEasingGuards():Void {
     _Runtime.callValue(setEasingStepsGuard, cast ([EnableEasingGuards.warnOnDegenerateSteps__enableEasingGuards] : Array<Dynamic>));
   }

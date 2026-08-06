@@ -8,6 +8,7 @@ import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 
 class WgpuEffectProgramCache {
+  @:noCompletion
   public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;

@@ -234,6 +234,7 @@ class Window {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebWindowBackend():WindowBackend {
     return cast { open: function() {
       return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined');
@@ -439,6 +440,7 @@ class Window {
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'focus', cast ([win] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getWindowBackend():WindowBackend {
     if ((cast _Runtime.strictEquals(Window._windowBackend__window, null) : Bool)) { (Window._windowBackend__window = cast (_Runtime.callValue(createWebWindowBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Window._windowBackend__window;
@@ -545,6 +547,7 @@ class Window {
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setAlwaysOnTop', cast ([win, alwaysOnTop] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setWindowBackend(backend:Null<WindowBackend>):Void {
     (Window._windowBackend__window = cast (backend : Dynamic));
   }

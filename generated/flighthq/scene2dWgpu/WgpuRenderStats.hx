@@ -9,11 +9,13 @@ import flighthq.types.WgpuRenderStats;
 typedef Mutable__wgpuRenderStats<T> = Dynamic;
 
 class WgpuRenderStats {
+  @:noCompletion
   public static function getWgpuRenderStats(state:WgpuRenderState):flighthq.types.WgpuRenderStats {
     return cast _Runtime.callValue(WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
@@ -23,6 +25,7 @@ class WgpuRenderStats {
     _Runtime.incrementField(entry, 'batchFlushCount', 1, true);
   }
 
+  @:noCompletion
   public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
@@ -30,6 +33,7 @@ class WgpuRenderStats {
     _Runtime.incrementField(entry, 'textureUploadCount', 1, true);
   }
 
+  @:noCompletion
   public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));

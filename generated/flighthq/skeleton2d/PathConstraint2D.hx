@@ -32,6 +32,7 @@ class PathConstraint2D {
     _Runtime.callValue(registerSkeleton2DConstraintSolver, cast ([Skeleton2DConstraintKindValue.Path, solveSkeleton2DPathConstraint] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function solveSkeleton2DPathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
     var pathConstraint:Dynamic = cast _Runtime.UNDEFINED;
     var attachment:Dynamic = cast _Runtime.UNDEFINED;

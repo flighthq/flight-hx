@@ -84,11 +84,13 @@ class GlRenderTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlRenderTextureColorSpace(state:GlRenderState, renderTexture:RenderTexture):TextureColorSpace {
     return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(_Runtime.callValue(GlRenderTexture.getEntry__glRenderTexture, cast ([state, renderTexture] : Array<Dynamic>)), 'target'), 'colorSpace'), function():Dynamic return cast _Runtime.field(renderTexture, 'colorSpace'));
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlRenderTextureTarget(state:GlRenderState, renderTexture:RenderTexture):Null<Dynamic> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(GlRenderTexture.getEntry__glRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
@@ -98,12 +100,14 @@ class GlRenderTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function invalidateGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(GlRenderTexture.getEntry__glRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(entry, 'status', status); }
   }
 
+  @:noCompletion
   public static function isGlRenderTextureReady(state:GlRenderState, renderTexture:RenderTexture):Bool {
     var ready:Dynamic = cast _Runtime.UNDEFINED;
     ready = _Runtime.strictEquals(_Runtime.optionalField(_Runtime.callValue(GlRenderTexture.getEntry__glRenderTexture, cast ([state, renderTexture] : Array<Dynamic>)), 'status'), 'ready');
@@ -144,10 +148,12 @@ class GlRenderTexture {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setGlRenderTextureGuard(state:GlRenderState, guard:Null<GlRenderTextureGuard>):Void {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderTextureGuard', guard);
   }
 
+  @:noCompletion
   public static function writeGlRenderTextureTarget<T>(state:GlRenderState, renderTexture:RenderTexture, callback:Dynamic):Dynamic {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var previousStatus:Dynamic = cast _Runtime.UNDEFINED;

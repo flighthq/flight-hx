@@ -26,6 +26,7 @@ import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuSkinningAdapter;
 
 class WgpuClassicPrelude {
+  @:noCompletion
   public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>, alphaMap:Null<Texture>):Dynamic {
     var binding:Dynamic = cast _Runtime.UNDEFINED;
     flighthq._internal._StaticIndex.writeArray(WgpuClassicPrelude._samplerScratch__wgpuClassicPrelude, 0.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, diffuseMap] : Array<Dynamic>)));
@@ -55,6 +56,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function buildWgpuClassicDefineKey(key:WgpuClassicDefineKey):String {
     var model:Dynamic = cast _Runtime.UNDEFINED;
     model = ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong') : Bool) ? (cast 'p' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong') : Bool) ? (cast 'b' : Dynamic) : (cast 'l' : Dynamic)) : Dynamic));
@@ -62,6 +64,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuClassicPipeline {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,6 +77,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
     var fullKey:WgpuClassicDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasColorAdjustment: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorAdjustmentRun') }, { hasColorMatrix: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorMatrixRun') }]);
@@ -81,6 +85,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuClassicModuleSourceForKey(key:WgpuClassicDefineKey, skinned:Dynamic = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
@@ -93,6 +98,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuClassicSharedSamplerModuleSourceForKey(key:WgpuClassicDefineKey, skinned:Dynamic = false, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast _Runtime.callValue(WgpuClassicPrelude.assembleWgpuClassicModuleSource__wgpuClassicPrelude, cast ([key, skinned, skinning, WgpuClassicPrelude.CLASSIC_SHARED_SAMPLER_WGSL_BODY__wgpuClassicPrelude] : Array<Dynamic>));

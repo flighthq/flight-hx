@@ -9,11 +9,13 @@ import flighthq.types.Log.LogLevel;
 import flighthq.types.WgpuRenderState;
 
 class EnableWgpuColorAdjustmentGuards {
+  @:noCompletion
   public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentMaterialFeatureGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentMaterialFeatureGuard', EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards);
   }

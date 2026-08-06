@@ -31,6 +31,7 @@ class Tray {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebTrayBackend():TrayBackend {
     return cast { create: function() {
       return cast -1.0;
@@ -93,6 +94,7 @@ class Tray {
     Facade_Tray_flighthq_tray_EnableTrayGuards.enableTrayGuards();
   }
 
+  @:noCompletion
   public static function getTrayBackend():TrayBackend {
     if ((cast _Runtime.strictEquals(Tray._backend__tray, null) : Bool)) { (Tray._backend__tray = cast (_Runtime.callValue(createWebTrayBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Tray._backend__tray;
@@ -147,10 +149,12 @@ class Tray {
     _Runtime.callProperty(_Runtime.callValue(getTrayBackend, cast ([] : Array<Dynamic>)), 'removeBalloon', cast ([tray.id] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setTrayAnimationGuard(guard:Null<Dynamic>):Void {
     (Tray._animationGuard__tray = cast (guard : Dynamic));
   }
 
+  @:noCompletion
   public static function setTrayBackend(backend:Null<TrayBackend>):Void {
     (Tray._backend__tray = cast (backend : Dynamic));
   }

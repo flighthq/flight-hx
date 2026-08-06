@@ -238,6 +238,7 @@ class ClipRegion {
     _Runtime.setField(out, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(out, 'version'), 1.0)), 0));
   }
 
+  @:noCompletion
   public static function invalidateClipRegion(clip:flighthq.types.ClipRegion):Void {
     _Runtime.setField(clip, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(clip, 'version'), 1.0)), 0));
   }
@@ -326,6 +327,7 @@ class ClipRegion {
     _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'push', cast ([clip] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setClipRegionReleaseGuard(guard:Null<ClipRegionReleaseGuard>):Void {
     (ClipRegion._releaseGuard__clipRegion = cast (guard : Dynamic));
   }

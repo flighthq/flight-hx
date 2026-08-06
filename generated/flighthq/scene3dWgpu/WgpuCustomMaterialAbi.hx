@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class WgpuCustomMaterialAbi {
+  @:noCompletion
   public static final WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY:Dynamic = 32.0;
 
+  @:noCompletion
   public static final WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY:Dynamic = 8.0;
 }

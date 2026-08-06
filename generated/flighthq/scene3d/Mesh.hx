@@ -69,6 +69,7 @@ class Mesh {
     return cast null;
   }
 
+  @:noCompletion
   public static function getMeshRuntime(source:flighthq.types.Mesh):MeshRuntime {
     return cast _Runtime.callValue(getNode3DRuntime, cast ([source] : Array<Dynamic>));
     return cast null;

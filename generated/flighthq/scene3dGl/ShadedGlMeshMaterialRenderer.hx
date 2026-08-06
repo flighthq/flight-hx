@@ -37,6 +37,7 @@ import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 class ShadedGlMeshMaterialRenderer {
+  @:noCompletion
   public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var shaded:Dynamic = cast _Runtime.UNDEFINED;

@@ -45,11 +45,13 @@ class WgpuRichText {
 
   public static var _webgpuTextInputOverlay__wgpuRichText:Null<WgpuRichTextOverlay> = _Runtime.explicitNull();
 
+  @:noCompletion
   public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
     return cast _Runtime.callValue(createWgpuRendererData, cast ([{ entry: null, h: 0.0, w: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
     var richData:Dynamic = cast _Runtime.UNDEFINED;
     richData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
@@ -57,12 +59,14 @@ class WgpuRichText {
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(richData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast _Runtime.UNDEFINED;
     overlay = ((cast ((cast !_Runtime.strictEquals(WgpuRichText._webgpuTextInputOverlay__wgpuRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool) ? (cast WgpuRichText._webgpuTextInputOverlay__wgpuRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     _Runtime.callValue(drawWgpuRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
@@ -134,6 +138,7 @@ class WgpuRichText {
     _Runtime.callValue(drawWgpuQuad, cast ([state, renderProxy, entry, offsetX, 0.0, (offsetX + fieldW), fieldH, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function registerWgpuTextInputOverlay(overlay:WgpuRichTextOverlay):Void {
     (WgpuRichText._webgpuTextInputOverlay__wgpuRichText = cast (overlay : Dynamic));
   }

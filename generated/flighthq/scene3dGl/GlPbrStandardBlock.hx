@@ -16,20 +16,28 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class GlPbrStandardBlock {
+  @:noCompletion
   public static final GL_PBR_BASE_COLOR_TEXTURE_UNIT:Dynamic = 0.0;
 
+  @:noCompletion
   public static final GL_PBR_NORMAL_TEXTURE_UNIT:Dynamic = 1.0;
 
+  @:noCompletion
   public static final GL_PBR_METALLIC_ROUGHNESS_TEXTURE_UNIT:Dynamic = 2.0;
 
+  @:noCompletion
   public static final GL_PBR_OCCLUSION_TEXTURE_UNIT:Dynamic = 3.0;
 
+  @:noCompletion
   public static final GL_PBR_EMISSIVE_TEXTURE_UNIT:Dynamic = 4.0;
 
+  @:noCompletion
   public static final GL_PBR_ALPHA_TEXTURE_UNIT:Dynamic = 5.0;
 
+  @:noCompletion
   public static final GL_PBR_EXTENSION_TEXTURE_UNIT:Dynamic = 6.0;
 
+  @:noCompletion
   public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -61,6 +69,7 @@ class GlPbrStandardBlock {
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, _Runtime.field(standard, 'baseColorMap')] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return; }
@@ -70,6 +79,7 @@ class GlPbrStandardBlock {
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);
   }
 
+  @:noCompletion
   public static function buildGlPbrStandardDefineKey(state:GlRenderState, standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):GlPbrDefineKey {
     var baseColorMap:Dynamic = cast _Runtime.UNDEFINED;
     var alphaMode:Dynamic = cast _Runtime.UNDEFINED;
@@ -79,6 +89,7 @@ class GlPbrStandardBlock {
     return cast null;
   }
 
+  @:noCompletion
   public static function isGlTextureReady(state:GlRenderState, texture:Null<Texture>):Bool {
     return cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, texture] : Array<Dynamic>)), null) : Bool));
     return cast null;

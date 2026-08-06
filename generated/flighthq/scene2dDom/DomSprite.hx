@@ -33,6 +33,7 @@ class DomSprite {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawDomSprite(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;

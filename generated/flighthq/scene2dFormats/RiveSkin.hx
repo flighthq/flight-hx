@@ -22,6 +22,7 @@ import flighthq.types._internal._RiveDocumentValues.RiveWeightedPointKindValue;
 typedef RiveTendonBone__riveSkin = { var boneIndex:Float; var bind:Matrix; };
 
 class RiveSkin {
+  @:noCompletion
   public static function createRiveSkin2D(artboard:RiveArtboardGraph, skinnableIndex:Float, boneIndices:Array<Float>, points:Array<RiveWeightedPoint>, ?diagnostics:Array<ImportDiagnostic>):Null<Skin2D> {
     var skinIndex:Dynamic = cast _Runtime.UNDEFINED;
     var skinWorld:Dynamic = cast _Runtime.UNDEFINED;

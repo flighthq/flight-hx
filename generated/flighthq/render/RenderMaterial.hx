@@ -8,6 +8,7 @@ import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 
 class RenderMaterial {
+  @:noCompletion
   public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast _Runtime.field(data, 'source') : Dynamic);

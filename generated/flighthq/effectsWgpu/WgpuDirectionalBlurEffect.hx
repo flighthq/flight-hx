@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuDirectionalBlurEffect {
+  @:noCompletion
   public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Dynamic = cast _Runtime.UNDEFINED;
     var length:Dynamic = cast _Runtime.UNDEFINED;

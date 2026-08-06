@@ -18,6 +18,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 
 class WgpuMatcapPrelude {
+  @:noCompletion
   public static function bindWgpuMatcapSurface(state:WgpuRenderState, pipeline:WgpuMatcapPipeline, materialKey:Dynamic, tint:LinearColor, alphaCutoff:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
@@ -44,11 +45,13 @@ class WgpuMatcapPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function buildWgpuMatcapDefineKey(key:WgpuMatcapDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 't' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:Dynamic, blended:Dynamic = false):WgpuMatcapPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -60,11 +63,13 @@ class WgpuMatcapPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'matcap:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuMatcapDefineKey, cast ([key] : Array<Dynamic>))) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuMatcapPipeline, cast ([state, key, format, blended] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuMatcapModuleSourceForKey(key:WgpuMatcapDefineKey):String {
     return cast ((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const HAS_MATCAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + WGPU_MESH_PRELUDE_WGSL) + WgpuMatcapPrelude.MATCAP_WGSL_BODY__wgpuMatcapPrelude);
     return cast null;

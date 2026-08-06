@@ -14,6 +14,7 @@ class Shell {
 
   public static var _urlSchemeAllowlist__shell:Null<Array<String>> = _Runtime.explicitNull();
 
+  @:noCompletion
   public static function createWebShellBackend():ShellBackend {
     return cast { beep: function() {
 
@@ -59,6 +60,7 @@ class Shell {
     return cast null;
   }
 
+  @:noCompletion
   public static function getShellBackend():ShellBackend {
     if ((cast _Runtime.strictEquals(Shell._backend__shell, null) : Bool)) { (Shell._backend__shell = cast (_Runtime.callValue(createWebShellBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Shell._backend__shell;
@@ -107,6 +109,7 @@ class Shell {
     return cast null;
   }
 
+  @:noCompletion
   public static function setShellBackend(backend:Null<ShellBackend>):Void {
     (Shell._backend__shell = cast (backend : Dynamic));
   }

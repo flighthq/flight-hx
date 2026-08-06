@@ -15,9 +15,11 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
 class CanvasNode2D {
+  @:noCompletion
   public static function drawCanvasScene2D(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
   }
 
+  @:noCompletion
   public static final defaultCanvasScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasScene2D };
 
   public static function renderCanvasScene2D(state:Dynamic, source:Node2D):Void {

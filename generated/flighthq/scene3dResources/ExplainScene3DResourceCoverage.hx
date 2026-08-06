@@ -12,11 +12,13 @@ import flighthq.types.SceneCoverageEntry.SceneCoverage;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
 class ExplainScene3DResourceCoverage {
+  @:noCompletion
   public static function explainScene3DResourceCoverage(out:Array<SceneCoverageEntry>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
     _Runtime.callValue(ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage, cast ([out, resolver, usage, false] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function hasScene3DResourceCoverage(resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Bool {
     return cast !(cast _Runtime.callValue(ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage, cast ([null, resolver, usage, true] : Array<Dynamic>)) : Bool);
     return cast null;

@@ -12,11 +12,13 @@ import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 class SceneKindUsage {
+  @:noCompletion
   public static function createScene2DKindUsage():Scene2DKindUsage {
     return cast { blendModes: cast ([] : Array<Dynamic>), materialKinds: cast ([] : Array<Dynamic>), nodeKinds: cast ([] : Array<Dynamic>), shapeCommandKeys: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
+  @:noCompletion
   public static function getScene2DKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
     var visit:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(_Runtime.field(out, 'blendModes'), 0.0);

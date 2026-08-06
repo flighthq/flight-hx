@@ -16,11 +16,13 @@ class GlShader {
 
   public static final FRAGMENT_SRC__glShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
 
+  @:noCompletion
   public static function compileDefaultGlProgram(gl:Dynamic):GlShaderLocations {
     return cast _Runtime.callValue(compileGlBitmapProgram, cast ([gl] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function compileGlBitmapProgram(gl:Dynamic, fragmentSrc:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}'):GlShaderLocations {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlShader.VERTEX_SRC__glShader, fragmentSrc, 'Bitmap'] : Array<Dynamic>));
@@ -28,6 +30,7 @@ class GlShader {
     return cast null;
   }
 
+  @:noCompletion
   public static function createDefaultGlBitmapShader(shaderLoc:GlShaderLocations, matrixArray:flighthq._internal._Float32Array):GlBitmapShader {
     return cast { locations: shaderLoc, program: _Runtime.field(shaderLoc, 'program'), bind: function(gl:Dynamic, state:GlRenderState, renderProxy:RenderProxy2D) {
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,6 +42,7 @@ class GlShader {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGlBitmapShader(gl:Dynamic, fragmentSrc:String, ?onBind:Dynamic):GlBitmapShader {
     var locations:Dynamic = cast _Runtime.UNDEFINED;
     locations = _Runtime.callValue(compileGlBitmapProgram, cast ([gl, fragmentSrc] : Array<Dynamic>));
@@ -53,6 +57,7 @@ class GlShader {
     return cast null;
   }
 
+  @:noCompletion
   public static function setGlAttributes(gl:Dynamic, loc:GlShaderLocations):Void {
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(loc, 'locPosition'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(loc, 'locTexCoord'));
@@ -60,11 +65,13 @@ class GlShader {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(loc, 'locTexCoord'), 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 16.0, 8.0);
   }
 
+  @:noCompletion
   public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), _Runtime.field(renderProxy, 'alpha'));
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(loc, 'locTexture'), 0.0);
   }
 
+  @:noCompletion
   public static function setGlMatrixFromTransform(gl:Dynamic, loc:GlShaderLocations, m:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;
@@ -82,6 +89,7 @@ class GlShader {
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(loc, 'locMatrix'), false, m);
   }
 
+  @:noCompletion
   public static function setGlMatrixFromValues(gl:Dynamic, loc:GlShaderLocations, m:flighthq._internal._Float32Array, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;

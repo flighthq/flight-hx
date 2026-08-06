@@ -10,6 +10,7 @@ import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
 class ExplainGlScene3DForwardLightSelection {
+  @:noCompletion
   public static function explainGlScene3DForwardLightSelection(lights:Scene3DLightsLike, ?selection:GlScene3DForwardLightList):Scene3DForwardLightSelectionExplanation {
     var pointLightCount:Dynamic = cast _Runtime.UNDEFINED;
     var spotLightCount:Dynamic = cast _Runtime.UNDEFINED;

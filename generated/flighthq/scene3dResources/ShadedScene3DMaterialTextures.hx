@@ -10,6 +10,7 @@ import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 class ShadedScene3DMaterialTextures {
+  @:noCompletion
   public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, ShadedMaterialKind, function(material:Dynamic, out:Dynamic) {
       var shaded:Dynamic = cast _Runtime.UNDEFINED;

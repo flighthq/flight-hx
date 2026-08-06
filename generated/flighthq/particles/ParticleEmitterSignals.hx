@@ -7,6 +7,7 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.ParticleEmitterSignals;
 
 class ParticleEmitterSignals {
+  @:noCompletion
   public static function createParticleEmitterSignals():flighthq.types.ParticleEmitterSignals {
     return cast { onEmitterComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleDeath: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleSpawn: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;

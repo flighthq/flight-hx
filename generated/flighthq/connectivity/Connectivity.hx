@@ -79,11 +79,13 @@ class Connectivity {
     return cast null;
   }
 
+  @:noCompletion
   public static function createConnectivityStatus():ConnectivityStatus {
     return cast { downlink: -1.0, downlinkMax: -1.0, effectiveType: '', metered: false, online: false, rtt: -1.0, saveData: false, type: 'unknown' };
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebConnectivityBackend():ConnectivityBackend {
     return cast { getStatus: function(out:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
@@ -197,6 +199,7 @@ class Connectivity {
     _Runtime.callValue(detachConnectivity, cast ([net] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getConnectivityBackend():ConnectivityBackend {
     if ((cast _Runtime.strictEquals(Connectivity._backend__connectivity, null) : Bool)) { (Connectivity._backend__connectivity = cast (_Runtime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Connectivity._backend__connectivity;
@@ -270,6 +273,7 @@ class Connectivity {
     return cast null;
   }
 
+  @:noCompletion
   public static function setConnectivityBackend(backend:Null<ConnectivityBackend>):Void {
     (Connectivity._backend__connectivity = cast (backend : Dynamic));
   }

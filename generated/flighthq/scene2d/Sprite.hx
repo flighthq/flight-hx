@@ -49,11 +49,13 @@ class Sprite {
     return cast null;
   }
 
+  @:noCompletion
   public static function createSpriteData(?data:Dynamic):SpriteData {
     return cast { texture: _Runtime.coalesce(_Runtime.optionalField(data, 'texture'), function():Dynamic return cast null) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createSpriteRendererData(_state:RenderState, source:Renderable):RendererData {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.field(_Runtime.field((cast source : flighthq.types.Sprite), 'data'), 'texture');
@@ -61,6 +63,7 @@ class Sprite {
     return cast null;
   }
 
+  @:noCompletion
   public static function createSpriteRuntime():SpriteRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createNode2DRuntime, cast ([Sprite.defaultMethods__sprite] : Array<Dynamic>)) : SpriteRuntime);
@@ -70,11 +73,13 @@ class Sprite {
     return cast null;
   }
 
+  @:noCompletion
   public static function getSpriteRuntime(source:flighthq.types.Sprite):SpriteRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : SpriteRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function isSpriteRendererDirty(_state:RenderState, source:Renderable, rendererData:Null<RendererData>):Bool {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;

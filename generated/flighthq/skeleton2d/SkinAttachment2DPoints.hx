@@ -10,6 +10,7 @@ import flighthq.types.Skin2D;
 class SkinAttachment2DPoints {
   public static final MATRIX_STRIDE__skinAttachment2DPoints:Dynamic = 6.0;
 
+  @:noCompletion
   public static function skinSkeleton2DAttachmentPoints(out:Dynamic, skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, skeleton:Skeleton2D, boneIndex:Float, deform:Null<flighthq._internal._Float32Array>, subject:String):Void {
     var world:Dynamic = cast _Runtime.UNDEFINED;
     var offsets:Dynamic = cast _Runtime.UNDEFINED;

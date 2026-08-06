@@ -18,6 +18,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.InnerGlowEffect;
 
 class CanvasInnerGlowEffect {
+  @:noCompletion
   public static function applyInnerGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:InnerGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;

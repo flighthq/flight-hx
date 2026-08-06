@@ -66,6 +66,34 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.select');
   });
 
+  it('emits completion metadata deterministically on selected declarations only', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/service.ts',
+      `
+        export function protectedService(): number { return 1; }
+        export function publicService(): number { return 2; }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const protectedDeclaration = lowered.declarations.find((declaration) => declaration.name === 'protectedService');
+    if (!protectedDeclaration) throw new Error('Expected protectedService fixture declaration');
+    protectedDeclaration.noCompletion = true;
+    const module = {
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Service',
+      packageName: '@flighthq/example',
+    };
+    const output = emitHaxeModule(module);
+
+    expect(output).toBe(emitHaxeModule(module));
+    expect(output).toContain('@:noCompletion\n  public static function protectedService()');
+    expect(output).not.toContain('@:noCompletion\n  public static function publicService()');
+  });
+
   it('initializes nested function declarations before earlier calls without hoisting function expressions', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/hoisting.ts',

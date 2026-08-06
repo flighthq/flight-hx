@@ -58,6 +58,7 @@ class Socket {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebSocketBackend():SocketBackend {
     return cast { openSocket: function(options:Dynamic, events:Dynamic) {
       var ws:Dynamic = cast _Runtime.UNDEFINED;
@@ -119,6 +120,7 @@ class Socket {
     return cast null;
   }
 
+  @:noCompletion
   public static function getSocketBackend():SocketBackend {
     if ((cast _Runtime.strictEquals(Socket._backend__socket, null) : Bool)) { (Socket._backend__socket = cast (_Runtime.callValue(createWebSocketBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Socket._backend__socket;
@@ -161,10 +163,12 @@ class Socket {
     return cast null;
   }
 
+  @:noCompletion
   public static function setSocketBackend(backend:Null<SocketBackend>):Void {
     (Socket._backend__socket = cast (backend : Dynamic));
   }
 
+  @:noCompletion
   public static function setSocketGuard(guard:Null<SocketGuard>):Void {
     (Socket._guard__socket = cast (guard : Dynamic));
   }

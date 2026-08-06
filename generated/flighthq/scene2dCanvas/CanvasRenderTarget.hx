@@ -18,6 +18,7 @@ typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context
 class CanvasRenderTarget {
   public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function beginCanvasRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,6 +42,7 @@ class CanvasRenderTarget {
     if ((cast !(cast preserved : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(handles, 'context'), 'clearRect', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>)); }
   }
 
+  @:noCompletion
   public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,6 +54,7 @@ class CanvasRenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyCanvasRenderTarget(target:Dynamic):Void {
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', 0.0);
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', 0.0);
@@ -59,6 +62,7 @@ class CanvasRenderTarget {
     _Runtime.setField(target, 'height', 0.0);
   }
 
+  @:noCompletion
   public static function endCanvasRenderPass(state:Dynamic):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var saved:Dynamic = cast _Runtime.UNDEFINED;
@@ -70,6 +74,7 @@ class CanvasRenderTarget {
     _Runtime.setField(handles, 'renderTransform2D', _Runtime.field(saved, 'renderTransform2D'));
   }
 
+  @:noCompletion
   public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', HxMath.max(1.0, HxMath.ceil(width)));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', HxMath.max(1.0, HxMath.ceil(height)));

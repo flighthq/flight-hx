@@ -1,11 +1,53 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
 import { packageBridge } from '../../vitest.upstream.config.ts';
+import { contractOnlyDeclarationIdentities } from '../../tools/generator/src/emit/core.ts';
+import type { PackageInventory } from '../../tools/generator/src/model/inventory.ts';
 
 describe('public Haxe facades', () => {
+  it('omits empty contract modules and hides only globally contract-exclusive declarations', () => {
+    const workspace = process.cwd();
+    const inventory = JSON.parse(readFileSync(path.join(workspace, 'reports', 'inventory.json'), 'utf8')) as {
+      packages: PackageInventory[];
+    };
+    const core = JSON.parse(readFileSync(path.join(workspace, 'reports', 'core.json'), 'utf8')) as {
+      contractSurface: {
+        noCompletionDeclarations: number;
+        omittedModules: Array<{ reason: string }>;
+        protectedDeclarationIdentities: number;
+      };
+    };
+    const firstIdentities = [...contractOnlyDeclarationIdentities(inventory.packages)];
+    const secondIdentities = [...contractOnlyDeclarationIdentities(inventory.packages)];
+    const entity = readFileSync(path.join(workspace, 'generated', 'flighthq', 'entity', 'Entity.hx'), 'utf8');
+    const renderCacheAdapter = readFileSync(
+      path.join(workspace, 'generated', 'flighthq', 'types', 'RenderCacheAdapter.hx'),
+      'utf8',
+    );
+    const vector2 = readFileSync(path.join(workspace, 'generated', 'flighthq', 'geometry', 'Vector2.hx'), 'utf8');
+    const precedingLine = (source: string, declaration: string): string | undefined =>
+      source.slice(0, source.indexOf(declaration)).trimEnd().split('\n').at(-1)?.trim();
+
+    expect(firstIdentities).toEqual(secondIdentities);
+    expect(firstIdentities).toHaveLength(1_213);
+    expect(core.contractSurface).toMatchObject({
+      noCompletionDeclarations: 1_213,
+      protectedDeclarationIdentities: 1_213,
+    });
+    expect(core.contractSurface.omittedModules).toHaveLength(142);
+    expect(
+      core.contractSurface.omittedModules.every((item) => item.reason === 'header-only-contract-export-lane'),
+    ).toBe(true);
+    expect(existsSync(path.join(workspace, 'generated', 'flighthq', 'entity', 'Contract.hx'))).toBe(false);
+    expect(existsSync(path.join(workspace, 'tests', 'bridges', 'sources', 'entity', 'contract.mjs'))).toBe(true);
+    expect(precedingLine(entity, 'public static function createEntity<Type>')).toBe('@:noCompletion');
+    expect(precedingLine(renderCacheAdapter, 'typedef RenderCacheAdapter =')).toBe('@:noCompletion');
+    expect(precedingLine(vector2, 'public static function createVector2(')).not.toBe('@:noCompletion');
+  });
+
   it('emits the broad SDK facade and renamed package re-exports', () => {
     const workspace = process.cwd();
     const sdk = readFileSync(path.join(workspace, 'generated', 'flighthq', 'sdk', 'Sdk.hx'), 'utf8');

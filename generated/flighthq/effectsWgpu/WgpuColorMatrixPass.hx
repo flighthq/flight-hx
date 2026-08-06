@@ -9,6 +9,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuColorMatrixPass {
+  @:noCompletion
   public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'adjustment.colorMatrix', WgpuColorMatrixPass.COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass, 'replace'] : Array<Dynamic>));

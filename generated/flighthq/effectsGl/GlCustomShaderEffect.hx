@@ -13,6 +13,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlCustomShaderEffect {
+  @:noCompletion
   public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
     var fragmentSource:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,6 +62,7 @@ class GlCustomShaderEffect {
     _Runtime.callValue(applyCustomShaderEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CustomShaderEffect)] : Array<Dynamic>));
   };
 
+  @:noCompletion
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     return cast _Runtime.coalesce(({ final __collection2:Dynamic = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state)); __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).get(shaderKey)); }), function():Dynamic return cast null);
     return cast null;
@@ -70,6 +72,7 @@ class GlCustomShaderEffect {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CustomShaderEffect', defaultGlCustomShaderEffectRunner] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state));

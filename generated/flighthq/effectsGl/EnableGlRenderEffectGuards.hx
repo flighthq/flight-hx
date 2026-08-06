@@ -10,6 +10,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 class EnableGlRenderEffectGuards {
+  @:noCompletion
   public static function areGlRenderEffectGuardsEnabled(state:GlRenderState):Bool {
     return cast ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet).has(state));
     return cast null;

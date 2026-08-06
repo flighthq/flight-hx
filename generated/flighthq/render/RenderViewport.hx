@@ -13,6 +13,7 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderViewport2D;
 
 class RenderViewport {
+  @:noCompletion
   public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
     var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.callValue(RenderViewport.isSpatial2DNode__renderViewport, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
@@ -25,11 +26,13 @@ class RenderViewport {
     return cast null;
   }
 
+  @:noCompletion
   public static function createRenderViewport2D(x:Float, y:Float, width:Float, height:Float):RenderViewport2D {
     return cast { height: height, width: width, x: x, y: y };
     return cast null;
   }
 
+  @:noCompletion
   public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     var objMinX:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,6 +61,7 @@ class RenderViewport {
     return cast null;
   }
 
+  @:noCompletion
   public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
     return cast _Runtime.callValue(isRenderableInViewport, cast ([_Runtime.field(proxy, 'source'), viewport, renderTransform2D] : Array<Dynamic>));
     return cast null;

@@ -17,6 +17,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 
 class WgpuDebugPrelude {
+  @:noCompletion
   public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
@@ -39,11 +40,13 @@ class WgpuDebugPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function buildWgpuDebugDefineKey(key:WgpuDebugDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic, blended:Dynamic = false, doubleSided:Dynamic = false):WgpuDebugPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,11 +58,13 @@ class WgpuDebugPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic, doubleSided:Dynamic = false):WgpuDebugPipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'debug:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuDebugDefineKey, cast ([key] : Array<Dynamic>))) + '|' + Std.string(((cast doubleSided : Bool) ? (cast 'double' : Dynamic) : (cast 'single' : Dynamic))) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuDebugPipeline, cast ([state, key, format, blended, doubleSided] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuDebugModuleSourceForKey(key:WgpuDebugDefineKey):String {
     return cast (((('const MODE : i32 = ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'DEPTH_MODE' : Dynamic) : (cast 'NORMAL_MODE' : Dynamic))) + ';\n' + 'const HAS_NORMAL_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + WgpuDebugPrelude.DEBUG_MODE_CONSTS_WGSL__wgpuDebugPrelude) + WGPU_MESH_PRELUDE_WGSL) + WgpuDebugPrelude.DEBUG_WGSL_BODY__wgpuDebugPrelude);
     return cast null;

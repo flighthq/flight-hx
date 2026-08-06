@@ -17,6 +17,7 @@ import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
 
 class RenderTarget {
+  @:noCompletion
   public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     (outCacheTransform.a = cast (1.0 : Dynamic));
     (outCacheTransform.b = cast (0.0 : Dynamic));
@@ -26,6 +27,7 @@ class RenderTarget {
     (outCacheTransform.ty = cast (_Runtime.subtractNumbers(_Runtime.field(bounds, 'y'), contentY) : Dynamic));
   }
 
+  @:noCompletion
   public static function computeRenderTargetSize(bounds:RectangleLike, padding:Dynamic = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
     var horizontal:Dynamic = cast _Runtime.UNDEFINED;
     var vertical:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,6 +37,7 @@ class RenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function computeScene2DRenderTargetTransform(outRenderTransform:MatrixLike, source:Node2D, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     var localTransform:Dynamic = cast _Runtime.UNDEFINED;
     localTransform = _Runtime.callValue(getNodeLocalMatrix, cast ([source] : Array<Dynamic>));
@@ -48,6 +51,7 @@ class RenderTarget {
     _Runtime.callValue(multiplyMatrix, cast ([outRenderTransform, RenderTarget._tempTranslation__renderTarget, RenderTarget._tempInvLocal__renderTarget] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function explainRenderTargetAxes(requested:RenderTargetAxes, effective:RenderTargetAxes):Array<RenderTargetAxisDifference> {
     var differences:Array<RenderTargetAxisDifference> = cast _Runtime.UNDEFINED;
     differences = cast ([] : Array<Dynamic>);
@@ -61,6 +65,7 @@ class RenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function resolveRenderTargetDescriptor(descriptor:RenderTargetDescriptor):ResolvedRenderTargetDescriptor {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;

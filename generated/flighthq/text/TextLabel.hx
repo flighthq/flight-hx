@@ -71,11 +71,13 @@ class TextLabel {
     return cast null;
   }
 
+  @:noCompletion
   public static function createTextLabelData(?data:Dynamic):TextLabelData {
     return cast { autoSize: _Runtime.coalesce(_Runtime.optionalField(data, 'autoSize'), function():Dynamic return cast 'none'), height: _Runtime.coalesce(_Runtime.optionalField(data, 'height'), function():Dynamic return cast 100.0), text: _Runtime.coalesce(_Runtime.optionalField(data, 'text'), function():Dynamic return cast ''), textFormat: _Runtime.coalesce(_Runtime.optionalField(data, 'textFormat'), function():Dynamic return cast {  }), verticalAlign: _Runtime.coalesce(_Runtime.optionalField(data, 'verticalAlign'), function():Dynamic return cast 'top'), width: _Runtime.coalesce(_Runtime.optionalField(data, 'width'), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createTextLabelRuntime():TextLabelRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createNode2DRuntime, cast ([TextLabel.defaultMethods__textLabel] : Array<Dynamic>)) : TextLabelRuntime);
@@ -91,6 +93,7 @@ class TextLabel {
     return cast null;
   }
 
+  @:noCompletion
   public static function getTextLabelRuntime(source:flighthq.types.TextLabel):TextLabelRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
     return cast null;

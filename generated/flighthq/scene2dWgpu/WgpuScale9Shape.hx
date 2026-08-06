@@ -33,6 +33,7 @@ import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 typedef WgpuScale9ShapeData__wgpuScale9Shape = { var canvas:Dynamic; var ctx:Dynamic; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var entry:Null<WgpuTextureEntry>; };
 
 class WgpuScale9Shape {
+  @:noCompletion
   public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,6 +45,7 @@ class WgpuScale9Shape {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
     var shapeData:Dynamic = cast _Runtime.UNDEFINED;
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
@@ -51,6 +53,7 @@ class WgpuScale9Shape {
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
@@ -132,6 +135,7 @@ class WgpuScale9Shape {
     _Runtime.callValue(drawWgpuQuadWithTransform, cast ([state, renderProxy, { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty }, _Runtime.field(shapeData, 'entry'), 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
     _Runtime.callValue(drawWgpuScale9Shape, cast ([state, data] : Array<Dynamic>));
   }

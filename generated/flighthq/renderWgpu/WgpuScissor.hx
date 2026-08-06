@@ -8,6 +8,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 class WgpuScissor {
+  @:noCompletion
   public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var rect:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,6 +26,7 @@ class WgpuScissor {
     _Runtime.callProperty(pass, 'setScissorRect', cast ([x, y, w, h] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function popWgpuScissorRect(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var prev:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,6 +35,7 @@ class WgpuScissor {
     _Runtime.setField(runtime, 'currentScissorRect', _Runtime.coalesce(prev, function():Dynamic return cast null));
   }
 
+  @:noCompletion
   public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));

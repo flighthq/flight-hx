@@ -19,6 +19,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderTexture;
 
 class GlBlurEffect {
+  @:noCompletion
   public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
     _Runtime.callValue(applyGaussianBlurToGl, cast ([state, source, dest, temp, { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }] : Array<Dynamic>));
   }
@@ -28,6 +29,7 @@ class GlBlurEffect {
     return cast null;
   }
 
+  @:noCompletion
   public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     var sigmaX:Dynamic = cast _Runtime.UNDEFINED;
     var sigmaY:Dynamic = cast _Runtime.UNDEFINED;

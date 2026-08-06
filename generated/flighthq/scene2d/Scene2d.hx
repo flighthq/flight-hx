@@ -77,11 +77,13 @@ class Scene2d {
     return cast null;
   }
 
+  @:noCompletion
   public static function createScene2DRuntime():Scene2DRuntime {
     return cast { binding: null, scene2dSignals: null };
     return cast null;
   }
 
+  @:noCompletion
   public static function createScene2DSignals():Scene2DSignals {
     return cast { onFullscreenChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOrientationChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResize: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
@@ -117,6 +119,7 @@ class Scene2d {
     return cast null;
   }
 
+  @:noCompletion
   public static function getScene2DRuntime(source:Scene2D):Scene2DRuntime {
     return cast _Runtime.callValue(Scene2d.ensureScene2DRuntime__scene2d, cast ([(cast source : Scene2D)] : Array<Dynamic>));
     return cast null;

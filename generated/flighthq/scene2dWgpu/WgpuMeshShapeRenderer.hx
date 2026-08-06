@@ -27,6 +27,7 @@ import flighthq.types.WgpuShapeMesh;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class WgpuMeshShapeRenderer {
+  @:noCompletion
   public static function drawWgpuMeshShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

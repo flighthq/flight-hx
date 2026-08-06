@@ -69,6 +69,7 @@ class GlTextLabel {
     }
   }
 
+  @:noCompletion
   public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

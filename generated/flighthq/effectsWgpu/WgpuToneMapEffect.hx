@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuToneMapEffect {
+  @:noCompletion
   public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
     var operator_:Dynamic = cast _Runtime.UNDEFINED;
     var exposure:Dynamic = cast _Runtime.UNDEFINED;

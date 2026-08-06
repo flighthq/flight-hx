@@ -58,6 +58,7 @@ class CanvasRenderState {
     return cast null;
   }
 
+  @:noCompletion
   public static function createCanvasRenderStateRuntime():Dynamic {
     return cast (cast _Runtime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)) : Dynamic);
     return cast null;
@@ -67,6 +68,7 @@ class CanvasRenderState {
     _Runtime.callValue(destroyRenderState, cast ([state] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getCanvasRenderStateRuntime(state:Dynamic):Dynamic {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : Dynamic);
     return cast null;

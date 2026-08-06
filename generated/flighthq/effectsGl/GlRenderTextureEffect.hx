@@ -71,6 +71,7 @@ class GlRenderTextureEffect {
     return cast null;
   }
 
+  @:noCompletion
   public static function setGlRenderEffectApplicationGuard(state:GlRenderState, guard:Null<GlRenderEffectApplicationGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap).delete_(state)); } else { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap).set(state, guard)); }
   }

@@ -7,17 +7,20 @@ import flighthq.pathBoolean.MartinezKernel.createMartinezPathBooleanBackend;
 import flighthq.types.PathBooleanBackend;
 
 class PathBooleanBackend {
+  @:noCompletion
   public static function createDefaultPathBooleanBackend():flighthq.types.PathBooleanBackend {
     return cast _Runtime.callValue(createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getPathBooleanBackend():flighthq.types.PathBooleanBackend {
     if ((cast _Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null) : Bool)) { (PathBooleanBackend._backend__pathBooleanBackend = cast (_Runtime.callValue(createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast PathBooleanBackend._backend__pathBooleanBackend;
     return cast null;
   }
 
+  @:noCompletion
   public static function setPathBooleanBackend(backend:Null<flighthq.types.PathBooleanBackend>):Void {
     (PathBooleanBackend._backend__pathBooleanBackend = cast (backend : Dynamic));
   }

@@ -4,4 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 typedef RenderTargetSizeOptions = { @:optional var minWidth:Float; @:optional var minHeight:Float; };

@@ -13,6 +13,7 @@ import flighthq.types.SpriteRenderer;
 import flighthq.types.Tilemap;
 
 class CanvasTilemap {
+  @:noCompletion
   public static function drawCanvasTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

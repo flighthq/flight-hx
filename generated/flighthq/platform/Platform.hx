@@ -48,16 +48,19 @@ class Platform {
     return cast null;
   }
 
+  @:noCompletion
   public static function createPlatformInfo():PlatformInfo {
     return cast { arch: '', distro: '', distroVersion: '', endianness: 'unknown', engine: 'unknown', engineVersion: '', isTouch: false, kind: 'unknown', locale: '', name: 'unknown', osBuild: '', pointerWidth: -1.0, runtime: 'unknown', version: '' };
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebPlatformBackend():PlatformBackend {
     return cast { getInfo: Platform.getWebPlatformInfo__platform };
     return cast null;
   }
 
+  @:noCompletion
   public static function getPlatformBackend():PlatformBackend {
     if ((cast _Runtime.strictEquals(Platform._backend__platform, null) : Bool)) { (Platform._backend__platform = cast (_Runtime.callValue(createWebPlatformBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Platform._backend__platform;
@@ -84,6 +87,7 @@ class Platform {
     return cast null;
   }
 
+  @:noCompletion
   public static function getPlatformRuntime():PlatformRuntime {
     return cast _Runtime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)).runtime;
     return cast null;
@@ -147,6 +151,7 @@ class Platform {
     return cast null;
   }
 
+  @:noCompletion
   public static function setPlatformBackend(backend:Null<PlatformBackend>):Void {
     (Platform._backend__platform = cast (backend : Dynamic));
   }

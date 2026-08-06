@@ -84,6 +84,7 @@ class VelocityField {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureVelocitySample(field:flighthq.types.Velocity.VelocityField, source:Dynamic):VelocitySample {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
     sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));

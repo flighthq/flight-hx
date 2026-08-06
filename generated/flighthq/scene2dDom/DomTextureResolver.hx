@@ -20,6 +20,7 @@ class DomTextureResolver {
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map).set(sourceKind, resolver)); }
   }
 
+  @:noCompletion
   public static function resolveDomTexture(state:DomRenderState, texture:Texture):Null<Dynamic> {
     var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

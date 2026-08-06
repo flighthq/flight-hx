@@ -11,6 +11,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 class WgpuClipRectangle {
+  @:noCompletion
   public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,6 +35,7 @@ class WgpuClipRectangle {
     } }
   }
 
+  @:noCompletion
   public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;

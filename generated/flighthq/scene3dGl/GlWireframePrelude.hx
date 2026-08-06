@@ -11,6 +11,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlWireframeProgram;
 
 class GlWireframePrelude {
+  @:noCompletion
   public static function compileGlWireframeProgram(gl:Dynamic, alphaMaskEnabled:Dynamic = false):GlWireframeProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlWireframeVertexSource, cast ([] : Array<Dynamic>)), _Runtime.callValue(getGlWireframeFragmentSource, cast ([alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
@@ -18,16 +19,19 @@ class GlWireframePrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlWireframeProgram(state:GlRenderState, alphaMaskEnabled:Dynamic = false):GlWireframeProgram {
     return cast _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'wireframe:' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlWireframeProgram, cast ([gl, alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlWireframeFragmentSource(alphaMaskEnabled:Dynamic = false):String {
     return cast '#version 300 es\n' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast '#define ALPHA_MASK\n' : Dynamic) : (cast '' : Dynamic))) + '' + Std.string(GlWireframePrelude.WIREFRAME_FRAGMENT__glWireframePrelude) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlWireframeVertexSource():String {
     return cast GlWireframePrelude.WIREFRAME_VERTEX__glWireframePrelude;
     return cast null;

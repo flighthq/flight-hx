@@ -34,6 +34,7 @@ typedef GlScale9ShapeData__glScale9Shape = { var canvas:Dynamic; var ctx:Dynamic
 class GlScale9Shape {
   public static final _remappedCommands__glScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
 
+  @:noCompletion
   public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,6 +48,7 @@ class GlScale9Shape {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,6 +57,7 @@ class GlScale9Shape {
     flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture);
   }
 
+  @:noCompletion
   public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,6 +134,7 @@ class GlScale9Shape {
     _Runtime.callValue(drawGlQuad, cast ([state, 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
     _Runtime.callValue(drawGlScale9Shape, cast ([state, data] : Array<Dynamic>));
   }

@@ -11,6 +11,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.ScanlinesEffect;
 
 class CanvasScanlinesEffect {
+  @:noCompletion
   public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

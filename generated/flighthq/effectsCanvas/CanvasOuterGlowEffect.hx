@@ -20,6 +20,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.OuterGlowEffect;
 
 class CanvasOuterGlowEffect {
+  @:noCompletion
   public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var css:Dynamic = cast _Runtime.UNDEFINED;

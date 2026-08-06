@@ -21,6 +21,7 @@ import flighthq.types.WgpuUnlitPipeline;
 import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 
 class WgpuUnlitPrelude {
+  @:noCompletion
   public static function bindWgpuUnlitSurface(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Null<Texture>):Dynamic {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,6 +35,7 @@ class WgpuUnlitPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function bindWgpuUnlitVideoSurface(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Texture):Dynamic {
     return cast _Runtime.callValue(bindWgpuUnlitSurface, cast ([state, pipeline, materialKey, color, intensity, alphaCutoff, colorMap] : Array<Dynamic>));
     return cast null;
@@ -76,11 +78,13 @@ class WgpuUnlitPrelude {
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 'buffer'), 0.0, WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function buildWgpuUnlitDefineKey(key:WgpuUnlitDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false):WgpuUnlitPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -92,11 +96,13 @@ class WgpuUnlitPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'unlit:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuUnlitDefineKey, cast ([key] : Array<Dynamic>))) + '', function(blended:Dynamic, skinned:Dynamic) return _Runtime.callValue(compileWgpuUnlitPipeline, cast ([state, key, format, blended, skinned] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuUnlitModuleSourceForKey(key:WgpuUnlitDefineKey, skinned:Dynamic = false, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast ((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const HAS_COLOR_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + _Runtime.callValue(getWgpuMeshPreludeWgsl, cast ([skinned, skinning] : Array<Dynamic>))) + WgpuUnlitPrelude.UNLIT_WGSL_BODY__wgpuUnlitPrelude);

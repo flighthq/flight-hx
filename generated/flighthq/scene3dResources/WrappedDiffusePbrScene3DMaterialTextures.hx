@@ -10,6 +10,7 @@ import flighthq.types.WrappedDiffusePbrExtension;
 import flighthq.types._internal._WrappedDiffusePbrExtensionValues.WrappedDiffusePbrExtensionKind;
 
 class WrappedDiffusePbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, WrappedDiffusePbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var wrappedDiffuse:Dynamic = cast _Runtime.UNDEFINED;

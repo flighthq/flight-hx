@@ -20,6 +20,7 @@ import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 
 class TextLayout {
+  @:noCompletion
   public static final TEXT_LAYOUT_GUTTER:Dynamic = 2.0;
 
   public static final _lineBreaks__textLayout:Array<Float> = cast ([] : Array<Dynamic>);

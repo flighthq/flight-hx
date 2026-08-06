@@ -28,6 +28,7 @@ class EaseSteps {
     return cast null;
   }
 
+  @:noCompletion
   public static function setEasingStepsGuard(guard:Null<EasingStepsGuard>):Void {
     (EaseSteps._stepsGuard__easeSteps = cast (guard : Dynamic));
   }

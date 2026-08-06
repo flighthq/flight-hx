@@ -42,13 +42,23 @@ import {
 import { stableJson, writeOrCheck } from './reports.ts';
 
 export interface CoreGenerationReport {
+  contractSurface: {
+    noCompletionDeclarations: number;
+    omittedModules: Array<{
+      module: string;
+      packageName: string;
+      reason: 'header-only-contract-export-lane';
+      source: string;
+    }>;
+    protectedDeclarationIdentities: number;
+  };
   excludedPackages: Array<{ packageName: string; reason: string }>;
   modules: Array<{
     declarations: number;
     diagnostics: LoweringDiagnostic[];
     module: string;
   }>;
-  schemaVersion: 3;
+  schemaVersion: 4;
   staticLowering: StaticLoweringEmissionCounts;
 }
 
@@ -201,6 +211,8 @@ export function generateCoreModules(
       });
     }
   }
+  const omittedContractModules = omitHeaderOnlyContractModules(modules, inventory.packages);
+  const contractVisibility = markContractOnlyDeclarationsNoCompletion(modules, inventory.packages);
   markCppStructInitTypes(modules, structRegistry, typedStructProvenance);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
@@ -301,6 +313,11 @@ export function generateCoreModules(
     }
   }
   const report: CoreGenerationReport = {
+    contractSurface: {
+      noCompletionDeclarations: contractVisibility.noCompletionDeclarations,
+      omittedModules: omittedContractModules,
+      protectedDeclarationIdentities: contractVisibility.protectedDeclarationIdentities,
+    },
     excludedPackages: inventory.packages
       .filter((item) => item.exclusion !== null)
       .map((item) => ({ packageName: item.name, reason: item.exclusion!.reason }))
@@ -318,7 +335,7 @@ export function generateCoreModules(
         module: modulePath(module),
       }))
       .sort((left, right) => left.module.localeCompare(right.module)),
-    schemaVersion: 3,
+    schemaVersion: 4,
     staticLowering: staticLoweringEmissionCounts(),
   };
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);
@@ -455,6 +472,104 @@ export function buildSourceModules(packageName: string, source: LoweredSource, w
     },
     valuesModule,
   ];
+}
+
+function exportDeclarationIdentities(record: ExportRecord): string[] {
+  const identities = new Set([`${record.source}\0${record.fingerprint}`]);
+  if (record.runtime) {
+    const binding = runtimeExportBinding(record);
+    identities.add(`${binding.source}\0${binding.fingerprint}`);
+  }
+  return [...identities];
+}
+
+/**
+ * A declaration is completion-hidden only when at least one translated package
+ * exposes it through `./contract` and no package exposes the same canonical source
+ * identity through any non-contract lane. Public aliases and filenames are not part
+ * of the decision.
+ */
+export function contractOnlyDeclarationIdentities(inventories: ReadonlyArray<PackageInventory>): Set<string> {
+  const contract = new Set<string>();
+  const ordinary = new Set<string>();
+  for (const inventory of inventories) {
+    const contractLanes = inventory.exportLanes.filter((lane) => lane.entry === './contract');
+    if (!inventory.exclusion && contractLanes.length !== 1) {
+      throw new Error(`Expected one contract export lane for ${inventory.name}, found ${String(contractLanes.length)}`);
+    }
+    for (const lane of inventory.exportLanes) {
+      for (const record of lane.exports) {
+        for (const identity of exportDeclarationIdentities(record)) {
+          if (lane.entry === './contract' && !inventory.exclusion) contract.add(identity);
+          else if (lane.entry !== './contract') ordinary.add(identity);
+        }
+      }
+    }
+  }
+  return new Set([...contract].filter((identity) => !ordinary.has(identity)));
+}
+
+export function markContractOnlyDeclarationsNoCompletion(
+  modules: IrModule[],
+  inventories: ReadonlyArray<PackageInventory>,
+): { noCompletionDeclarations: number; protectedDeclarationIdentities: number } {
+  const protectedIdentities = contractOnlyDeclarationIdentities(inventories);
+  const declarationsByIdentity = new Map<string, IrDeclaration[]>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      const identity = `${declaration.origin.source}\0${declaration.origin.fingerprint}`;
+      const declarations = declarationsByIdentity.get(identity) ?? [];
+      declarations.push(declaration);
+      declarationsByIdentity.set(identity, declarations);
+    }
+  }
+  for (const identity of protectedIdentities) {
+    const declarations = declarationsByIdentity.get(identity) ?? [];
+    if (declarations.length !== 1) {
+      const [source] = identity.split('\0');
+      throw new Error(
+        `Contract-only declaration ${source} resolves to ${String(declarations.length)} generated Haxe declarations`,
+      );
+    }
+    declarations[0]!.noCompletion = true;
+  }
+  return {
+    noCompletionDeclarations: protectedIdentities.size,
+    protectedDeclarationIdentities: protectedIdentities.size,
+  };
+}
+
+export function omitHeaderOnlyContractModules(
+  modules: IrModule[],
+  inventories: ReadonlyArray<PackageInventory>,
+): CoreGenerationReport['contractSurface']['omittedModules'] {
+  const omitted: CoreGenerationReport['contractSurface']['omittedModules'] = [];
+  for (const inventory of inventories) {
+    if (inventory.exclusion) continue;
+    const lane = inventory.exportLanes.find((candidate) => candidate.entry === './contract');
+    if (!lane) throw new Error(`Package manifest has no contract export lane: ${inventory.name}`);
+    const haxePackage = packageNameToHaxePackage(inventory.name);
+    const matches = modules.filter(
+      (module) =>
+        module.packageName === inventory.name && module.haxePackage === haxePackage && module.source === lane.source,
+    );
+    if (matches.length !== 1) {
+      throw new Error(
+        `Contract export lane ${lane.specifier} resolves to ${String(matches.length)} public Haxe modules from ${lane.source}`,
+      );
+    }
+    const module = matches[0]!;
+    if (module.declarations.length > 0) continue;
+    const index = modules.indexOf(module);
+    modules.splice(index, 1);
+    omitted.push({
+      module: modulePath(module),
+      packageName: inventory.name,
+      reason: 'header-only-contract-export-lane',
+      source: lane.source,
+    });
+  }
+  return omitted.sort((left, right) => left.module.localeCompare(right.module));
 }
 
 function populateSourceImports(

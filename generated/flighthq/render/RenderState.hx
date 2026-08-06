@@ -14,6 +14,7 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class RenderState {
+  @:noCompletion
   public static function createRenderState(?obj:Dynamic):flighthq.types.RenderState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = (cast _Runtime.callValue(createEntity, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.optionalField(obj, 'allowSmoothing'), function():Dynamic return cast true), backgroundColor: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColor'), function():Dynamic return cast 0.0), backgroundColorRgba: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColorRgba'), function():Dynamic return cast cast ([] : Array<Dynamic>)), backgroundColorString: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColorString'), function():Dynamic return cast ''), currentClipDepth: _Runtime.coalesce(_Runtime.optionalField(obj, 'currentClipDepth'), function():Dynamic return cast 0.0), displayObjectClipHooks: _Runtime.coalesce(_Runtime.optionalField(obj, 'displayObjectClipHooks'), function():Dynamic return cast null), pixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'pixelRatio'), function():Dynamic return cast 1.0), renderAlpha: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderAlpha'), function():Dynamic return cast 1.0), renderBlendMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderBlendMode'), function():Dynamic return cast BlendModeValue.Normal), renderTransform2D: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderTransform2D'), function():Dynamic return cast null), roundPixels: _Runtime.coalesce(_Runtime.optionalField(obj, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.coalesce(_Runtime.optionalField(obj, 'sceneGraphSyncPolicy'), function():Dynamic return cast 'refreshDerivedState') }] : Array<Dynamic>)) : flighthq.types.RenderState);
@@ -22,6 +23,7 @@ class RenderState {
     return cast null;
   }
 
+  @:noCompletion
   public static function createRenderStateRuntime():RenderStateRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : RenderStateRuntime);
@@ -55,6 +57,7 @@ class RenderState {
     _Runtime.setLength(_Runtime.field(runtime, 'tempStack'), 0.0);
   }
 
+  @:noCompletion
   public static function getRenderStateRuntime(state:flighthq.types.RenderState):RenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : RenderStateRuntime);
     return cast null;

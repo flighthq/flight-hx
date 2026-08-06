@@ -10,6 +10,7 @@ import flighthq.types.Types.SpecularPbrExtensionKind;
 import flighthq.types._internal._SpecularPbrExtensionValues.SpecularPbrExtensionKind;
 
 class SpecularPbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerSpecularPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, SpecularPbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var specular:Dynamic = cast _Runtime.UNDEFINED;

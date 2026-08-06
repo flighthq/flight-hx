@@ -43,6 +43,7 @@ class MorphShape {
     return cast null;
   }
 
+  @:noCompletion
   public static function createMorphShapeData(morph:PathMorph, ?data:Dynamic):MorphShapeData {
     var progress:Dynamic = cast _Runtime.UNDEFINED;
     var path:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,11 +75,13 @@ class MorphShape {
     return cast null;
   }
 
+  @:noCompletion
   public static function createMorphShapeRuntime():MorphShapeRuntime {
     return cast (cast _Runtime.callValue(createShapeRuntime, cast ([] : Array<Dynamic>)) : MorphShapeRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function getMorphShapeRuntime(source:flighthq.types.MorphShape):MorphShapeRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : MorphShapeRuntime);
     return cast null;

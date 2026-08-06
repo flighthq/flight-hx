@@ -13,6 +13,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class WgpuMaterialRegistry {
+  @:noCompletion
   public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -20,12 +21,14 @@ class WgpuMaterialRegistry {
     return cast null;
   }
 
+  @:noCompletion
   public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     ((cast _Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, renderer));
   }
 
+  @:noCompletion
   public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var map:Dynamic = cast _Runtime.UNDEFINED;

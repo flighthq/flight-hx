@@ -117,6 +117,7 @@ class InteractionManager {
     return cast null;
   }
 
+  @:noCompletion
   public static function createInteractionSignals():InteractionSignals {
     return cast { onClick: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onContextMenu: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDoubleClick: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFocusIn: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFocusOut: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyDown: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyUp: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerCancel: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerDown: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerMove: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerOut: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerOver: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerRollOut: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerRollOver: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerUp: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onReleaseOutside: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWheel: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;

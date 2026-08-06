@@ -15,11 +15,13 @@ import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.Node.NodeAny;
 
 class EnableGlScene3DDeformGuards {
+  @:noCompletion
   public static function areGlScene3DDeformGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'deformGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableGlScene3DDeformGuards(state:GlRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'deformGuard', EnableGlScene3DDeformGuards.warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards);
   }

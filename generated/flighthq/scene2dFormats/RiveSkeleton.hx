@@ -14,6 +14,7 @@ import flighthq.types.TransformMode2D.TransformMode2D;
 import flighthq.types.Types.TransformMode2D;
 
 class RiveSkeleton {
+  @:noCompletion
   public static function createRiveSkeleton2D(artboard:RiveArtboardGraph):Null<RiveSkeleton2DImport> {
     var objects:Dynamic = cast _Runtime.UNDEFINED;
     var boneIndices:Dynamic = cast _Runtime.UNDEFINED;

@@ -15,6 +15,7 @@ class WgpuStandardMaterial {
     _Runtime.callValue(registerWgpuMaterialRenderer, cast ([state, StandardMaterialKindValue, standardWgpuMaterialRenderer] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static final standardWgpuMaterialRenderer:WgpuMaterialRenderer = { instanceFloatCount: 0.0, getShaderModule: function(state:WgpuRenderState) {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;

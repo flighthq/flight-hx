@@ -26,6 +26,7 @@ class Share {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebShareBackend():ShareBackend {
     return cast { isAvailable: function() {
       return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool));
@@ -116,6 +117,7 @@ class Share {
     return cast null;
   }
 
+  @:noCompletion
   public static function getShareBackend():ShareBackend {
     if ((cast _Runtime.strictEquals(Share._backend__share, null) : Bool)) { (Share._backend__share = cast (_Runtime.callValue(createWebShareBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Share._backend__share;
@@ -136,6 +138,7 @@ class Share {
     return cast null;
   }
 
+  @:noCompletion
   public static function setShareBackend(backend:Null<ShareBackend>):Void {
     (Share._backend__share = cast (backend : Dynamic));
   }

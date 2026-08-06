@@ -73,6 +73,7 @@ typedef CachedShadedPlan__wgpuShadedPrelude = { var defineKey:String; var modifi
 typedef ShadedBinding__wgpuShadedPrelude = { var bindGroup:Dynamic; var buffer:Dynamic; var data:flighthq._internal._Float32Array; var entries:Array<Dynamic>; var layout:Dynamic; var sampler:Dynamic; var textures:Array<Null<Texture>>; var views:Array<Dynamic>; };
 
 class WgpuShadedPrelude {
+  @:noCompletion
   public static function bindWgpuShadedSurface(state:WgpuRenderState, pipeline:WgpuMeshPipeline, material:ShadedMaterial, diffuse:LinearColor, specular:LinearColor):Dynamic {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var plan:Dynamic = cast _Runtime.UNDEFINED;
@@ -171,6 +172,7 @@ class WgpuShadedPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function buildWgpuShadedCacheKey(material:ShadedMaterial, ?registry:ModifierRegistry):String {
     if (registry == null) registry = cast ({ definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) } : Dynamic);
     var flags:Dynamic = cast _Runtime.UNDEFINED;
@@ -181,6 +183,7 @@ class WgpuShadedPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuShadedPipeline(state:WgpuRenderState, material:ShadedMaterial, format:Dynamic):WgpuMeshPipeline {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var defineKey:Dynamic = cast _Runtime.UNDEFINED;
@@ -213,6 +216,7 @@ class WgpuShadedPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuShadedModuleSource(material:ShadedMaterial, ?registry:ModifierRegistry, skinned:Dynamic = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>, colorMatrix:Dynamic = false):String {
     if (registry == null) registry = cast ({ definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) } : Dynamic);
     if (skinning == null) skinning = cast (null : Dynamic);
@@ -349,6 +353,7 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), flighthq._internal._StaticIndex.readArray(WgpuShadedPrelude._color__wgpuShadedPrelude, 2.0));
   }
 
+  @:noCompletion
   public static final animatedNormalWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
@@ -381,6 +386,7 @@ class WgpuShadedPrelude {
     return cast offset;
   } };
 
+  @:noCompletion
   public static final dissolveWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : DissolveModifier);
@@ -408,6 +414,7 @@ class WgpuShadedPrelude {
     return cast offset;
   } };
 
+  @:noCompletion
   public static final emissiveWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : EmissiveModifier);
@@ -437,6 +444,7 @@ class WgpuShadedPrelude {
     return cast offset;
   } };
 
+  @:noCompletion
   public static final envReflectWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : EnvReflectModifier);
@@ -451,6 +459,7 @@ class WgpuShadedPrelude {
     return cast { source: '{\n  let envDirection = reflect(-shadedViewDir, normal);\n  let envMip = clamp(material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0, 1.0) * max(ibl.params.z, 0.0);\n  let envSample = select(material.modifierData[' + Std.string(base) + '].rgb, textureSampleLevel(iblPrefiltered, iblSampler, envDirection, envMip).rgb, ibl.params.x > 0.5);\n  let envFresnel = material.modifierData[' + Std.string((base + 1.0)) + '].x + (1.0 - material.modifierData[' + Std.string((base + 1.0)) + '].x) * pow(1.0 - max(dot(normal, shadedViewDir), 0.0), 5.0);\n  radiance = radiance + envSample * material.modifierData[' + Std.string(base) + '].rgb * (material.modifierData[' + Std.string(base) + '].w * envFresnel);\n}\n' };
   }, kind: EnvReflectModifierKind, slot: ModifierSlotValue.Effect };
 
+  @:noCompletion
   public static final fogWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : FogModifier);
@@ -473,6 +482,7 @@ class WgpuShadedPrelude {
     return cast _Runtime.coalesce(_Runtime.field((cast modifier : FogModifier), 'mode'), function():Dynamic return cast FogModifierModeValue.Linear);
   }, kind: FogModifierKind, slot: ModifierSlotValue.Effect };
 
+  @:noCompletion
   public static final rimWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : RimModifier);
@@ -487,6 +497,7 @@ class WgpuShadedPrelude {
     return cast { source: '{\n  let rimFactor = clamp(material.modifierData[' + Std.string((base + 1.0)) + '].y + material.modifierData[' + Std.string((base + 1.0)) + '].x * pow(1.0 - max(dot(normal, shadedViewDir), 0.0), max(material.modifierData[' + Std.string(base) + '].w, 0.0001)), 0.0, 1.0);\n  radiance = radiance + material.modifierData[' + Std.string(base) + '].rgb * rimFactor;\n}\n' };
   }, kind: RimModifierKind, slot: ModifierSlotValue.Effect };
 
+  @:noCompletion
   public static final toonWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : ToonModifier);
@@ -498,6 +509,7 @@ class WgpuShadedPrelude {
     return cast { source: '{\n  let toonLum = dot(radiance, vec3f(0.2126, 0.7152, 0.0722));\n  let toonSteps = max(material.modifierData[' + Std.string(base) + '].x, 2.0);\n  let toonScaled = toonLum * toonSteps;\n  let toonBand = floor(toonScaled);\n  let toonSoft = max(material.modifierData[' + Std.string(base) + '].y, 0.0001);\n  let toonQuant = (toonBand + smoothstep(0.5 - toonSoft, 0.5 + toonSoft, toonScaled - toonBand)) / toonSteps;\n  radiance = radiance * select(1.0, toonQuant / toonLum, toonLum > 0.0001);\n}\n' };
   }, kind: ToonModifierKind, slot: ModifierSlotValue.Effect };
 
+  @:noCompletion
   public static final vertexDisplaceWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Dynamic, out:Dynamic, base:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);

@@ -13,6 +13,7 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 typedef StencilMode__wgpuShader = String;
 
 class WgpuShader {
+  @:noCompletion
   public static final UNIFORM_BYTE_SIZE:Dynamic = 128.0;
 
   public static final BITMAP_SHADER_SRC__wgpuShader:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  alpha : f32,\n  hasColorScaleBias : u32,\n  straightTextureAlpha : u32,\n  _pad1 : f32,\n  colorScale : vec4f,\n  colorBias : vec4f,\n  x0 : f32, y0 : f32, x1 : f32, y1 : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n}\n\n// Quad corner order matching index pattern [0,1,2, 0,2,3]:\n//   vi 0 → corner (x0,y0,u0,v0)\n//   vi 1 → corner (x1,y0,u1,v0)\n//   vi 2 → corner (x1,y1,u1,v1)\n//   vi 3 → corner (x0,y0,u0,v0)  [repeated]\n//   vi 4 → corner (x1,y1,u1,v1)  [repeated]\n//   vi 5 → corner (x0,y1,u0,v1)\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VertexOut {\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let x = select(uni.x0, uni.x1, xi);\n  let y = select(uni.y0, uni.y1, yi);\n  let u = select(uni.u0, uni.u1, xi);\n  let v = select(uni.v0, uni.v1, yi);\n  let p = uni.matrix * vec3f(x, y, 1.0);\n  var out : VertexOut;\n  out.position = vec4f(p.x, p.y, 0.0, 1.0);\n  out.uv = vec2f(u, v);\n  return out;\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  var color = textureSample(tex, smp, in.uv);\n  if (color.a <= 0.0) { discard; }\n  if (uni.straightTextureAlpha != 0u) {\n    color = vec4f(color.rgb * color.a, color.a);\n  }\n  if (uni.hasColorScaleBias != 0u && color.a > 0.0) {\n    // Unpremultiply, apply transform, repremultiply\n    color = vec4f(color.rgb / color.a, color.a);\n    color = clamp(color * uni.colorScale + uni.colorBias, vec4f(0.0), vec4f(1.0));\n    color = vec4f(color.rgb * color.a, color.a);\n  }\n  return color * clamp(uni.alpha, 0.0, 1.0);\n}\n';
@@ -23,6 +24,7 @@ class WgpuShader {
 
   public static final BLEND_MODES__wgpuShader:Dynamic = _Runtime.objectFromPairs([{ key: BlendModeValue.Add, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one'] : Array<Dynamic>)) }, { key: BlendModeValue.Darken, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'min'] : Array<Dynamic>)) }, { key: BlendModeValue.Lighten, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'max'] : Array<Dynamic>)) }, { key: BlendModeValue.Multiply, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['dst', 'one-minus-src-alpha'] : Array<Dynamic>)) }, { key: BlendModeValue.Normal, value: WgpuShader.NORMAL_BLEND__wgpuShader }, { key: BlendModeValue.Screen, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src'] : Array<Dynamic>)) }]);
 
+  @:noCompletion
   public static function createWgpuBindGroupLayouts(device:Dynamic):{ var uniformBindGroupLayout:Dynamic; var textureBindGroupLayout:Dynamic; } {
     var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     var textureBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,11 +34,13 @@ class WgpuShader {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWgpuPipelineLayout(device:Dynamic, uniformBindGroupLayout:Dynamic, textureBindGroupLayout:Dynamic):Dynamic {
     return cast flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getActiveWgpuPipeline(state:WgpuRenderState):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast _Runtime.UNDEFINED;
@@ -57,11 +61,13 @@ class WgpuShader {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuBlendState(blendMode:Null<BlendMode>):Dynamic {
     return cast _Runtime.coalesce(((cast !_Runtime.strictEquals(blendMode, null) : Bool) ? (cast _Runtime.getIndex(WgpuShader.BLEND_MODES__wgpuShader, blendMode) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast WgpuShader.NORMAL_BLEND__wgpuShader);
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
@@ -95,6 +101,7 @@ class WgpuShader {
     return cast null;
   }
 
+  @:noCompletion
   public static function setWgpuMatrixFromTransform(matrixArray:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;
@@ -111,11 +118,13 @@ class WgpuShader {
     flighthq._internal._StaticIndex.writeFloat32Array(matrixArray, 8.0, 1.0);
   }
 
+  @:noCompletion
   public static function writeWgpuMatrixOnlyUniforms(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     return cast _Runtime.callValue(writeWgpuQuadUniforms, cast ([state, { alpha: _Runtime.field(renderProxy, 'alpha'), transform2D: transform }, null, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function writeWgpuQuadUniforms(state:WgpuRenderState, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorScaleBias:Null<ColorScaleBias>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float, straightTextureAlpha:Dynamic = false):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var byteOffset:Dynamic = cast _Runtime.UNDEFINED;

@@ -21,6 +21,7 @@ import flighthq.types.RichText;
 import flighthq.types.TextSelectionRectangle;
 
 class CanvasTextInput {
+  @:noCompletion
   public static function drawCanvasTextInputOverlay(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var input:Dynamic = cast _Runtime.UNDEFINED;

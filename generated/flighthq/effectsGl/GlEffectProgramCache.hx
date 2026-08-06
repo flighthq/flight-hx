@@ -8,6 +8,7 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 
 class GlEffectProgramCache {
+  @:noCompletion
   public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,6 +26,7 @@ class GlEffectProgramCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;

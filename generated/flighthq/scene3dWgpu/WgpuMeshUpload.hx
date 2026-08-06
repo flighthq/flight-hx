@@ -13,6 +13,7 @@ import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuMeshUpload {
+  @:noCompletion
   public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry, gpuSkinned:Dynamic = false):Null<flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload> {
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;

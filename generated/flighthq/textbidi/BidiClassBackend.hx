@@ -7,17 +7,20 @@ import flighthq.types.Bidi.BidiClass;
 import flighthq.types.Bidi.BidiClassBackend;
 
 class BidiClassBackend {
+  @:noCompletion
   public static function createCompactBidiClassBackend():flighthq.types.Bidi.BidiClassBackend {
     return cast { getBidiClass: BidiClassBackend.getCompactBidiClass__bidiClassBackend };
     return cast null;
   }
 
+  @:noCompletion
   public static function getBidiClassBackend():flighthq.types.Bidi.BidiClassBackend {
     if ((cast _Runtime.strictEquals(BidiClassBackend._backend__bidiClassBackend, null) : Bool)) { (BidiClassBackend._backend__bidiClassBackend = cast (_Runtime.callValue(createCompactBidiClassBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast BidiClassBackend._backend__bidiClassBackend;
     return cast null;
   }
 
+  @:noCompletion
   public static function setBidiClassBackend(backend:Null<flighthq.types.Bidi.BidiClassBackend>):Void {
     (BidiClassBackend._backend__bidiClassBackend = cast (backend : Dynamic));
   }

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.HasMaterial;
 
 class HasMaterial {
+  @:noCompletion
   public static function initMaterialTrait(target:flighthq.types.HasMaterial, ?obj:Dynamic):Void {
     _Runtime.setField(target, 'material', _Runtime.coalesce(_Runtime.optionalField(obj, 'material'), function():Dynamic return cast null));
     _Runtime.setField(target, 'materialData', _Runtime.coalesce(_Runtime.optionalField(obj, 'materialData'), function():Dynamic return cast null));

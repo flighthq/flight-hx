@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class GlProgram {
+  @:noCompletion
   public static function compileGlShader(gl:Dynamic, type:Float, source:String, label:Dynamic = 'GL'):Dynamic {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     shader = flighthq._internal.backend.WebGl2Backend.createShader(gl, type);
@@ -17,6 +18,7 @@ class GlProgram {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String, label:Dynamic = 'GL'):Dynamic {
     var vertexShader:Dynamic = cast _Runtime.UNDEFINED;
     var fragmentShader:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,6 +35,7 @@ class GlProgram {
     return cast null;
   }
 
+  @:noCompletion
   public static function linkGlProgram(gl:Dynamic, program:Dynamic, label:Dynamic = 'GL'):Void {
     flighthq._internal.backend.WebGl2Backend.linkProgram(gl, program);
     if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.LINK_STATUS)) : Bool)) {

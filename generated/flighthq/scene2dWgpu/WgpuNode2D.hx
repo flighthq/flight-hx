@@ -15,6 +15,7 @@ import flighthq.types.Scene2DRenderer;
 import flighthq.types.WgpuRenderState;
 
 class WgpuNode2D {
+  @:noCompletion
   public static function drawWgpuScene2D(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
   }
 

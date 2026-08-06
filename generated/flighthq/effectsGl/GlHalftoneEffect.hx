@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.HalftoneEffect;
 
 class GlHalftoneEffect {
+  @:noCompletion
   public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
     var angle:Dynamic = cast _Runtime.UNDEFINED;

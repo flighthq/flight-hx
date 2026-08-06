@@ -7,6 +7,7 @@ import flighthq.types.ColorLut;
 import flighthq.types.ColorTransformFunction;
 
 class ColorLut {
+  @:noCompletion
   public static final COLOR_LUT_DEFAULT_SIZE:Dynamic = 32.0;
 
   public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):flighthq.types.ColorLut {

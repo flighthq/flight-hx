@@ -30,13 +30,16 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 
 class StandardPbrWgpuMeshMaterialRenderer {
+  @:noCompletion
   public static final WGPU_PBR_MATERIAL_UNIFORM_FLOATS:Dynamic = 48.0;
 
+  @:noCompletion
   public static function buildWgpuPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):WgpuPbrDefineKey {
     return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'mask') : Bool)), anisotropyEnabled: false, clearcoatEnabled: false, doubleSided: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.field(surface, 'doubleSided') : Bool)), hasAlphaMap: ((cast ((cast ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'opaque') : Bool)) : Bool) && (cast !_Runtime.strictEquals(standard, null) : Bool)) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'alphaMap')] : Array<Dynamic>)) : Bool)), hasBaseColorMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'baseColorMap')] : Array<Dynamic>)) : Bool)), hasEmissiveMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'emissiveMap')] : Array<Dynamic>)) : Bool)), hasMetallicRoughnessMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'metallicRoughnessMap')] : Array<Dynamic>)) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'normalMap')] : Array<Dynamic>)) : Bool)), hasOcclusionMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'occlusionMap')] : Array<Dynamic>)) : Bool)), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuPbrMaterialBindGroup(state:WgpuRenderState, pipeline:WgpuPbrPipeline, key:Dynamic, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
     var baseColorMap:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,15 +62,18 @@ class StandardPbrWgpuMeshMaterialRenderer {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuPbrMaterialScratch():flighthq._internal._Float32Array {
     return cast StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer;
     return cast null;
   }
 
+  @:noCompletion
   public static function writeWgpuPbrMaterialUniform(state:WgpuRenderState, binding:WgpuMaterialBinding):Void {
     _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 'buffer'), 0.0, (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0)] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function writeWgpuPbrStandardBlock(out:flighthq._internal._Float32Array, standard:Null<StandardPbrMaterialProperties>, alphaCutoff:Float):Void {
     var strength:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(standard, null) : Bool)) {

@@ -15,6 +15,7 @@ import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuSkinPalette {
+  @:noCompletion
   public static function destroyWgpuSkinPalette(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -25,6 +26,7 @@ class WgpuSkinPalette {
     _Runtime.setField(runtime, 'skinDrawBindGroup', null);
   }
 
+  @:noCompletion
   public static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,6 +43,7 @@ class WgpuSkinPalette {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -55,6 +58,7 @@ class WgpuSkinPalette {
     _Runtime.setField(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'skinningAdapter', WgpuSkinPalette.WGPU_SKINNING_ADAPTER__wgpuSkinPalette);
   }
 
+  @:noCompletion
   public static function uploadWgpuSkinPalette(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;

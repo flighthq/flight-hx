@@ -10,9 +10,11 @@ import flighthq.types.MethodsOf;
 import flighthq.types.Rectangle;
 
 class HasBoundsRectangle {
+  @:noCompletion
   public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
   }
 
+  @:noCompletion
   public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
     (target.boundsRectangle = cast (null : Dynamic));
     (target.localBoundsRectangle = cast (null : Dynamic));
@@ -21,6 +23,7 @@ class HasBoundsRectangle {
     (target.isLocalBoundsRectangleValid = cast (_Runtime.coalesce(_Runtime.optionalField(methods, 'isLocalBoundsRectangleValid'), function():Dynamic return cast null) : Dynamic));
   }
 
+  @:noCompletion
   public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:Dynamic):Void {
   }
 }

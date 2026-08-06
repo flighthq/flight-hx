@@ -10,6 +10,7 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Binding {
+  @:noCompletion
   public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
     if ((cast _Runtime.strictEquals(_Runtime.getIndex(entity, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setIndex(entity, EntityRuntimeKey, _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)));
@@ -17,6 +18,7 @@ class Binding {
     _Runtime.setField(_Runtime.getIndex(entity, EntityRuntimeKey), 'binding', binding);
   }
 
+  @:noCompletion
   public static function getEntityBinding(source:Entity):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>));

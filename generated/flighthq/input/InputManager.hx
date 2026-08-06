@@ -405,6 +405,7 @@ class InputManager {
     return cast null;
   }
 
+  @:noCompletion
   public static function createInputSignals():InputSignals {
     return cast { onGamepadAxisMove: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadButtonDown: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadButtonUp: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadConnect: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadDisconnect: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyDown: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyUp: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerCancel: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerDown: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerMove: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerMoveRelative: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerUp: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextEdit: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextInput: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWheel: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;

@@ -27,6 +27,7 @@ import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class GlMeshShapeRenderer {
+  @:noCompletion
   public static function drawGlMeshShape(state:GlRenderState, renderProxy:RenderProxy2D):Bool {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

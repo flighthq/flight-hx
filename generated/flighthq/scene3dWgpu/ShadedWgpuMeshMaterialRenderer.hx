@@ -27,6 +27,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 class ShadedWgpuMeshMaterialRenderer {
+  @:noCompletion
   public static final shadedWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var shaded:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,6 +50,7 @@ class ShadedWgpuMeshMaterialRenderer {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
+  @:noCompletion
   public static function getWgpuShadedBaseFlags(material:ShadedMaterial):{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } {
     return cast { alphaMaskEnabled: _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask'), doubleSided: _Runtime.field(material, 'doubleSided'), hasDiffuseMap: _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(material, 'diffuseMap')] : Array<Dynamic>)), hasNormalMap: _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(material, 'normalMap')] : Array<Dynamic>)), hasSpecularMap: _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(material, 'specularMap')] : Array<Dynamic>)) };
     return cast null;

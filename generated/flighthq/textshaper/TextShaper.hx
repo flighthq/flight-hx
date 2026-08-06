@@ -8,6 +8,7 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextShaper.TextShaperBackend;
 
 class TextShaper {
+  @:noCompletion
   public static function getTextShaperBackend():Null<TextShaperBackend> {
     return cast TextShaper._backend__textShaper;
     return cast null;
@@ -19,6 +20,7 @@ class TextShaper {
     return cast null;
   }
 
+  @:noCompletion
   public static function setTextShaperBackend(backend:Null<TextShaperBackend>):Void {
     (TextShaper._backend__textShaper = cast (backend : Dynamic));
     _Runtime.callOptionalValue(_textShaperBackendHook, cast ([backend] : Array<Dynamic>));

@@ -17,6 +17,7 @@ class WgpuEffectTintShader {
 
   public static final INVERT_TINT_WGSL__wgpuEffectTintShader:Dynamic = '\nstruct Uniforms {\n  colorAlpha : vec4f,\n  strength : f32,\n  _pad0 : f32, _pad1 : f32, _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let a = min(1.0, (1.0 - textureSampleLevel(tex, smp, uv, 0.0).a) * uni.colorAlpha.w * uni.strength);\n  return vec4f(uni.colorAlpha.xyz * a, a);\n}';
 
+  @:noCompletion
   public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuInnerClipShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
@@ -25,6 +26,7 @@ class WgpuEffectTintShader {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,6 +47,7 @@ class WgpuEffectTintShader {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;

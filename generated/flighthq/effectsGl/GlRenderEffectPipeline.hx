@@ -61,6 +61,7 @@ class GlRenderEffectPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
     if (_Runtime.truthy(_Runtime.field(pipeline, 'sceneTarget'))) {
       _Runtime.callValue(destroyGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));

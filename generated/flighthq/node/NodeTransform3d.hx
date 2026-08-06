@@ -37,6 +37,7 @@ class NodeTransform3d {
     _Runtime.callValue(matrix4TransformPoint, cast ([out, _Runtime.callValue(getNodeWorldMatrix4, cast ([source] : Array<Dynamic>)), point] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
@@ -45,6 +46,7 @@ class NodeTransform3d {
     }
   }
 
+  @:noCompletion
   public static function ensureNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var parent:Dynamic = cast _Runtime.UNDEFINED;
@@ -104,6 +106,7 @@ class NodeTransform3d {
     _Runtime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function syncNodeTransform3DFromMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);

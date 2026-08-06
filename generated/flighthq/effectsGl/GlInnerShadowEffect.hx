@@ -27,6 +27,7 @@ class GlInnerShadowEffect {
 
   public static final clipShaders__glInnerShadowEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;

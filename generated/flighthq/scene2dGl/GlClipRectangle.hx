@@ -11,6 +11,7 @@ import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 
 class GlClipRectangle {
+  @:noCompletion
   public static function popGlClipRectangle(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,6 +31,7 @@ class GlClipRectangle {
     }
   }
 
+  @:noCompletion
   public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;

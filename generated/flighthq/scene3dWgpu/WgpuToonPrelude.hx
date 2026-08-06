@@ -21,6 +21,7 @@ import flighthq.types.WgpuToonPipeline;
 import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 
 class WgpuToonPrelude {
+  @:noCompletion
   public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
@@ -48,11 +49,13 @@ class WgpuToonPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function buildWgpuToonDefineKey(key:WgpuToonDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false):WgpuToonPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -64,11 +67,13 @@ class WgpuToonPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'toon:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuToonDefineKey, cast ([key] : Array<Dynamic>))) + '', function(blended:Dynamic, skinned:Dynamic) return _Runtime.callValue(compileWgpuToonPipeline, cast ([state, key, format, blended, skinned] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuToonModuleSourceForKey(key:WgpuToonDefineKey, skinned:Dynamic = false, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast ((((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const DOUBLE_SIDED : bool = ' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + 'const HAS_BASE_COLOR_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + 'const HAS_RAMP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + _Runtime.callValue(getWgpuMeshPreludeWgsl, cast ([skinned, skinning] : Array<Dynamic>))) + WgpuToonPrelude.TOON_WGSL_BODY__wgpuToonPrelude);

@@ -10,11 +10,13 @@ import flighthq.types.Entity.EntityRuntimeWriteSlot;
 import flighthq.types.Log.LogLevel;
 
 class EnableEntityRuntimeGuards {
+  @:noCompletion
   public static function disableEntityRuntimeGuards():Void {
     _Runtime.callValue(setEntityRuntimeGuardMode, cast ([false] : Array<Dynamic>));
     _Runtime.callValue(setEntityRuntimeWriteGuard, cast ([null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function enableEntityRuntimeGuards():Void {
     _Runtime.callValue(setEntityRuntimeGuardMode, cast ([true] : Array<Dynamic>));
     _Runtime.callValue(setEntityRuntimeWriteGuard, cast ([EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards] : Array<Dynamic>));

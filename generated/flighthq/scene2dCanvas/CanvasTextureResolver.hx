@@ -30,6 +30,7 @@ class CanvasTextureResolver {
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map).set(sourceKind, resolver)); }
   }
 
+  @:noCompletion
   public static function resolveCanvasTexture(resolvers:Dynamic, texture:Texture):Null<Dynamic> {
     var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;

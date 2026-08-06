@@ -8,6 +8,7 @@ import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 
 class ParticleEmitterState {
+  @:noCompletion
   public static final PARTICLE_VELOCITY_STRIDE:Dynamic = 3.0;
 
   public static function createParticleEmitterState(?random:RandomSource):flighthq.types.ParticleEmitterState {
@@ -16,6 +17,7 @@ class ParticleEmitterState {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureParticleEmitterStateCapacity(state:flighthq.types.ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
     if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) {
       if ((cast ((cast hasColorVariance : Bool) && (cast ((cast _Runtime.field(state.colorBirth, 'length') : Float) < (cast (capacity * 3.0) : Float)) : Bool)) : Bool)) {

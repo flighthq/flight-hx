@@ -252,6 +252,7 @@ class Net {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebNetBackend():NetBackend {
     return cast { sendNetRequest: function(request:Dynamic, options:Dynamic):flighthq._internal._Promise<NetResponse> {
       return cast flighthq._internal._Async.finishFlow(
@@ -289,6 +290,7 @@ class Net {
     return cast null;
   }
 
+  @:noCompletion
   public static function getNetBackend():NetBackend {
     if ((cast _Runtime.strictEquals(Net._backend__net, null) : Bool)) { (Net._backend__net = cast (_Runtime.callValue(createWebNetBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Net._backend__net;
@@ -300,6 +302,7 @@ class Net {
     return cast null;
   }
 
+  @:noCompletion
   public static function setNetBackend(backend:Null<NetBackend>):Void {
     (Net._backend__net = cast (backend : Dynamic));
   }

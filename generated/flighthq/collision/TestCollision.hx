@@ -20,6 +20,7 @@ import flighthq.types.Collision.CollisionShapeKind;
 import flighthq.types.Collision.CollisionTestGuard;
 
 class TestCollision {
+  @:noCompletion
   public static function setCollisionTestGuard(guard:Null<CollisionTestGuard>):Void {
     (TestCollision.collisionTestGuard__testCollision = cast (guard : Dynamic));
   }

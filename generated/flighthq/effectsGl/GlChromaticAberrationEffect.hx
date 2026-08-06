@@ -12,6 +12,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlChromaticAberrationEffect {
+  @:noCompletion
   public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radial:Dynamic = cast _Runtime.UNDEFINED;

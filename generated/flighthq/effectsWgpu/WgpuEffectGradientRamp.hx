@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderState;
 
 class WgpuEffectGradientRamp {
+  @:noCompletion
   public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;

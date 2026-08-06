@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.ScanlinesEffect;
 
 class GlScanlinesEffect {
+  @:noCompletion
   public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

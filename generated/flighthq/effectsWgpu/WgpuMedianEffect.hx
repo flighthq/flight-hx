@@ -12,10 +12,12 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuMedianEffect {
+  @:noCompletion
   public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Dynamic = 2.0;
 
   public static final MAX_SAMPLES__wgpuMedianEffect:Dynamic = (((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0));
 
+  @:noCompletion
   public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;

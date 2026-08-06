@@ -26,6 +26,7 @@ class Mediasession {
     _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPositionState', cast ([null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function createWebMediaSessionBackend():MediaSessionBackend {
     return cast { setMetadata: function(metadata:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,6 +60,7 @@ class Mediasession {
     return cast null;
   }
 
+  @:noCompletion
   public static function getMediaSessionBackend():MediaSessionBackend {
     if ((cast _Runtime.strictEquals(Mediasession._backend__mediasession, null) : Bool)) { (Mediasession._backend__mediasession = cast (_Runtime.callValue(createWebMediaSessionBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Mediasession._backend__mediasession;
@@ -75,6 +77,7 @@ class Mediasession {
     _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setActionHandler', cast ([action, handler] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setMediaSessionBackend(backend:Null<MediaSessionBackend>):Void {
     (Mediasession._backend__mediasession = cast (backend : Dynamic));
   }

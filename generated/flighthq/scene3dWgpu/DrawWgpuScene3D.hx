@@ -116,6 +116,7 @@ class DrawWgpuScene3D {
     _Runtime.setField(runtime, 'activeSkinnedRun', false);
   }
 
+  @:noCompletion
   public static function isWgpuMeshGpuSkinned(state:WgpuRenderState, mesh:Mesh):Bool {
     var skinning:Dynamic = cast _Runtime.UNDEFINED;
     skinning = (cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'skinningAdapter') : Null<WgpuSkinningAdapter>);

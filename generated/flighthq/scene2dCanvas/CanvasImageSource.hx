@@ -10,6 +10,7 @@ import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
 class CanvasImageSource {
+  @:noCompletion
   public static function explainCanvasImageSource(image:Dynamic):Dynamic {
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) { return cast 'data'; }
     return cast 'element';

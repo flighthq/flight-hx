@@ -41,11 +41,13 @@ class GlRichText {
 
   public static var _webglTextInputOverlay__glRichText:Null<GlRichTextOverlay> = _Runtime.explicitNull();
 
+  @:noCompletion
   public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { texture: null } : Dynamic) : RendererData);
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -54,12 +56,14 @@ class GlRichText {
     if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture); }
   }
 
+  @:noCompletion
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast _Runtime.UNDEFINED;
     overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     _Runtime.callValue(drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -117,6 +121,7 @@ class GlRichText {
     _Runtime.callValue(drawGlQuad, cast ([state, offsetX, 0.0, (offsetX + fieldW), fieldH, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function registerGlTextInputOverlay(overlay:GlRichTextOverlay):Void {
     (GlRichText._webglTextInputOverlay__glRichText = cast (overlay : Dynamic));
   }

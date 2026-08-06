@@ -24,6 +24,7 @@ class RenderCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function createRenderCacheAdapter(?cache:Null<flighthq.types.RenderCache>):RenderCacheAdapter {
     if (cache == null) cache = cast (null : Dynamic);
     var adapter:RenderCacheAdapter = cast _Runtime.UNDEFINED;
@@ -40,10 +41,12 @@ class RenderCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
     _Runtime.setField(adapter, 'signals', (_Runtime.field(adapter, 'signals') ?? { onPrepare: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }));
   }
 
+  @:noCompletion
   public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<flighthq.types.RenderCache> {
     var adapter:Dynamic = cast _Runtime.UNDEFINED;
     adapter = _Runtime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
@@ -51,16 +54,19 @@ class RenderCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function isRenderCache(source:Dynamic):Bool {
     return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool) && (cast !_Runtime.strictEquals(source, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast source : flighthq.types.RenderCache), 'kind'), RenderCacheKindValue) : Bool));
     return cast null;
   }
 
+  @:noCompletion
   public static function isRenderCacheAdapter(value:Dynamic):Bool {
     return cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast value : RenderCacheAdapter), 'adapt')), 'function') : Bool)), function():Dynamic return cast _Runtime.hasField((cast value : RenderCacheAdapter), 'cache'));
     return cast null;
   }
 
+  @:noCompletion
   public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
     _Runtime.callValue(registerRenderer, cast ([state, RenderCacheKindValue, renderer] : Array<Dynamic>));
   }

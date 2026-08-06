@@ -19,6 +19,7 @@ class TransformConstraint2D {
     _Runtime.callValue(registerSkeleton2DConstraintSolver, cast ([Skeleton2DConstraintKindValue.Transform, solveSkeleton2DTransformConstraint] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function solveSkeleton2DTransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var bones:Dynamic = cast _Runtime.UNDEFINED;

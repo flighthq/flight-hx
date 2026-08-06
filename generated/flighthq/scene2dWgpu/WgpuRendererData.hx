@@ -6,11 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.types.RendererData;
 
 class WgpuRendererData {
+  @:noCompletion
   public static function createWgpuRendererData<T>(data:Dynamic):RendererData {
     return cast (cast (cast data : Dynamic) : RendererData);
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuRendererData<T>(data:Null<RendererData>):Null<Dynamic> {
     return cast (cast (cast data : Dynamic) : Null<Dynamic>);
     return cast null;

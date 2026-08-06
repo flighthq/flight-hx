@@ -18,6 +18,7 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class WgpuEnvironmentCube {
+  @:noCompletion
   public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<Dynamic> {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,6 +51,7 @@ class WgpuEnvironmentCube {
     return cast null;
   }
 
+  @:noCompletion
   public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'environmentSourceCube');

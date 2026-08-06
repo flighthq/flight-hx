@@ -49,6 +49,7 @@ class GlEnvironmentIblBake {
     _Runtime.setField(runtime, 'ibl', { brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
   }
 
+  @:noCompletion
   public static function destroyGlEnvironmentIblBakePrograms(state:GlRenderState):Void {
     var byState:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;

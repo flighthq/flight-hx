@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuChromaticAberrationEffect {
+  @:noCompletion
   public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radial:Dynamic = cast _Runtime.UNDEFINED;

@@ -273,6 +273,7 @@ class GlParticleEmitter3D {
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
   }
 
+  @:noCompletion
   public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -286,6 +287,7 @@ class GlParticleEmitter3D {
     ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap).delete_(state));
   }
 
+  @:noCompletion
   public static function drawGlScene3DParticleEmitter3Ds(state:GlRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var shader:Dynamic = cast _Runtime.UNDEFINED;

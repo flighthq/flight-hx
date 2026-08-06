@@ -23,6 +23,7 @@ import flighthq.types.Types.NormalMaterialKind;
 import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
 class NormalGlMeshMaterialRenderer {
+  @:noCompletion
   public static final normalGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
     var normal:Dynamic = cast _Runtime.UNDEFINED;
     var hasNormalMap:Dynamic = cast _Runtime.UNDEFINED;

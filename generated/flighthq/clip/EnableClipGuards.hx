@@ -9,10 +9,12 @@ import flighthq.types.ClipRegion;
 import flighthq.types.Log.LogLevel;
 
 class EnableClipGuards {
+  @:noCompletion
   public static function disableClipGuards():Void {
     _Runtime.callValue(setClipRegionReleaseGuard, cast ([null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function enableClipGuards():Void {
     _Runtime.callValue(setClipRegionReleaseGuard, cast ([EnableClipGuards.warnOnDoubleRelease__enableClipGuards] : Array<Dynamic>));
   }

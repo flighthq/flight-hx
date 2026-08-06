@@ -44,6 +44,7 @@ import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimati
 import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
 class SpineParse {
+  @:noCompletion
   public static function parseSpineDrawOrderTimeline(raw:Dynamic, slots:Array<Slot2D>, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DDrawOrderTimeline> {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var orderings:Array<Float> = cast _Runtime.UNDEFINED;

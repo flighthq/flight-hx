@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WhiteBalanceEffect;
 
 class WgpuWhiteBalanceEffect {
+  @:noCompletion
   public static function applyWhiteBalanceEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:WhiteBalanceEffect):Void {
     var temperature:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;

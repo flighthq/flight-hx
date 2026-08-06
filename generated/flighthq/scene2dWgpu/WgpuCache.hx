@@ -116,6 +116,7 @@ class WgpuCache {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultWgpuRenderCacheRenderer] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,11 +132,13 @@ class WgpuCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuRenderCacheScreenState(state:WgpuRenderState):WgpuRenderState {
     return cast _Runtime.coalesce(((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
     return cast _Runtime.coalesce(((cast _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
@@ -204,6 +207,7 @@ class WgpuCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -236,6 +240,7 @@ class WgpuCache {
     return cast null;
   }
 
+  @:noCompletion
   public static final defaultWgpuRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: WgpuCache.drawWgpuRenderCache__wgpuCache };
 
   public static final _renderCacheTargets__wgpuCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

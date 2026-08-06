@@ -279,6 +279,7 @@ class Skeleton2d {
     return cast null;
   }
 
+  @:noCompletion
   public static function getSkeleton2DSkin(skeleton:Skeleton2D, name:String):Null<AttachmentSkin2D> {
     var skins:Dynamic = cast _Runtime.UNDEFINED;
     skins = _Runtime.field(skeleton, 'skins');
@@ -358,6 +359,7 @@ class Skeleton2d {
     }
   }
 
+  @:noCompletion
   public static function setSkeleton2DSkin(skeleton:Skeleton2D, skin:AttachmentSkin2D):Void {
     var slots:Dynamic = cast _Runtime.UNDEFINED;
     slots = _Runtime.field(skeleton, 'slots');

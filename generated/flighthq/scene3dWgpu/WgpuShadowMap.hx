@@ -33,6 +33,7 @@ import flighthq.types._internal._DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_S
 import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
 class WgpuShadowMap {
+  @:noCompletion
   public static function destroyWgpuScene3DShadow(state:WgpuRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));

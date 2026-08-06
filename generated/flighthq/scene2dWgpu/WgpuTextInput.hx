@@ -16,6 +16,7 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
 class WgpuTextInput {
+  @:noCompletion
   public static function drawWgpuTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;

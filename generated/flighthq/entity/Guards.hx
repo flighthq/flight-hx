@@ -10,11 +10,13 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Guards {
+  @:noCompletion
   public static function areEntityRuntimeGuardsEnabled():Bool {
     return cast Guards._guardsEnabled__guards;
     return cast null;
   }
 
+  @:noCompletion
   public static function createGuardedEntity<Type>(entity:Type):Type {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
@@ -27,6 +29,7 @@ class Guards {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
     return cast _Runtime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
@@ -39,11 +42,13 @@ class Guards {
     return cast null;
   }
 
+  @:noCompletion
   public static function setEntityRuntimeGuardMode(enabled:Bool):Void {
     if ((cast ((cast enabled : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return; }
     (Guards._guardsEnabled__guards = cast (enabled : Dynamic));
   }
 
+  @:noCompletion
   public static function setEntityRuntimeWriteGuard(guard:Null<EntityRuntimeWriteGuard>):Void {
     (Guards._writeGuard__guards = cast (guard : Dynamic));
   }

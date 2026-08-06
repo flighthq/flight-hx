@@ -16,6 +16,7 @@ import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKi
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class GltfMaterialExtension {
+  @:noCompletion
   public static function attachGltfPbrExtension(document:Scene3DDocument, index:Float, extension:PbrExtension):Bool {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var standard:Dynamic = cast _Runtime.UNDEFINED;
@@ -40,6 +41,7 @@ class GltfMaterialExtension {
     return cast null;
   }
 
+  @:noCompletion
   public static function findGltfPbrExtension(document:Scene3DDocument, index:Float, kind:String):Null<PbrExtension> {
     var material:Dynamic = cast _Runtime.UNDEFINED;
     var extended:Dynamic = cast _Runtime.UNDEFINED;

@@ -44,11 +44,13 @@ class MovieClip {
     return cast null;
   }
 
+  @:noCompletion
   public static function createMovieClipData(?data:Dynamic):MovieClipData {
     return cast { timeline: _Runtime.coalesce(_Runtime.optionalField(data, 'timeline'), function():Dynamic return cast null) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createMovieClipRuntime():MovieClipRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createNode2DRuntime, cast ([] : Array<Dynamic>)) : MovieClipRuntime);
@@ -93,6 +95,7 @@ class MovieClip {
     return cast null;
   }
 
+  @:noCompletion
   public static function getMovieClipRuntime(source:flighthq.types.MovieClip):MovieClipRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : MovieClipRuntime);
     return cast null;

@@ -12,6 +12,7 @@ import flighthq.types.GlShapeMeshBinding;
 import flighthq.types.RenderProxy2D;
 
 class GlShapeMesh {
+  @:noCompletion
   public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,6 +51,7 @@ class GlShapeMesh {
     flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, _Runtime.field(binding, 'positionLocation'));
   }
 
+  @:noCompletion
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
@@ -61,6 +63,7 @@ class GlShapeMesh {
     _Runtime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, _Runtime.callValue(ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;

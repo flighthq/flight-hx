@@ -14,6 +14,7 @@ import flighthq.types.MeshGeometry.VertexAttribute;
 import flighthq.types.MeshSkinBindPose;
 
 class GlMeshUpload {
+  @:noCompletion
   public static function destroyGlMeshUpload(state:GlRenderState, upload:flighthq.types.GlScene3DRuntime.GlMeshUpload):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');

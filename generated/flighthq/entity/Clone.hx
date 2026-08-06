@@ -10,6 +10,7 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Clone {
+  @:noCompletion
   public static function cloneEntity<Type>(source:Type):Type {
     var copy:Dynamic = cast _Runtime.UNDEFINED;
     copy = (cast _Runtime.mergeObjects([source]) : Dynamic);
@@ -18,6 +19,7 @@ class Clone {
     return cast null;
   }
 
+  @:noCompletion
   public static function stripEntityRuntime<Type>(source:Type):EntityWithoutRuntime<Type> {
     var copy:Dynamic = cast _Runtime.UNDEFINED;
     copy = (cast _Runtime.mergeObjects([source]) : Dynamic);

@@ -10,6 +10,7 @@ import flighthq.types.Types.TransmissionVolumePbrExtensionKind;
 import flighthq.types._internal._TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
 
 class TransmissionVolumePbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerTransmissionVolumePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, TransmissionVolumePbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var transmission:Dynamic = cast _Runtime.UNDEFINED;

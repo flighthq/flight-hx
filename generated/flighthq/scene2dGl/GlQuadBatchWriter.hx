@@ -23,6 +23,7 @@ class GlQuadBatchWriter {
 
   public static final MAX_INSTANCE_ATTRIB_LOCATION__glQuadBatchWriter:Dynamic = 8.0;
 
+  @:noCompletion
   public static final QUAD_BATCH_VS:Dynamic = '#version 300 es\nprecision mediump float;\n\nlayout(location = 0) in vec2 a_corner;\nlayout(location = 1) in vec2 a_matAB;\nlayout(location = 2) in vec2 a_matCD;\nlayout(location = 3) in vec2 a_matTXTY;\nlayout(location = 4) in vec2 a_size;\nlayout(location = 5) in vec4 a_uvRect;\nlayout(location = 6) in float a_alpha;\n\nuniform mat3 u_world;\n\nout vec2 v_texCoord;\nout float v_alpha;\n\nvoid main() {\n  vec2 local = a_corner * a_size;\n  vec2 worldPos = vec2(\n    a_matAB.x * local.x + a_matCD.x * local.y + a_matTXTY.x,\n    a_matAB.y * local.x + a_matCD.y * local.y + a_matTXTY.y\n  );\n  vec3 clip = u_world * vec3(worldPos, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_texCoord = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_alpha = a_alpha;\n}';
 
   public static final QUAD_BATCH_FS__glQuadBatchWriter:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform bool u_straightTextureAlpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord);\n  if (u_straightTextureAlpha) color.rgb *= color.a;\n  color *= clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
@@ -34,6 +35,7 @@ class GlQuadBatchWriter {
     return cast null;
   }
 
+  @:noCompletion
   public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -66,6 +68,7 @@ class GlQuadBatchWriter {
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 6.0, 1.0);
   }
 
+  @:noCompletion
   public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -84,6 +87,7 @@ class GlQuadBatchWriter {
     return cast null;
   }
 
+  @:noCompletion
   public static function flushGlQuadBatchWriter(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
@@ -156,6 +160,7 @@ class GlQuadBatchWriter {
     }
   }
 
+  @:noCompletion
   public static function packGlQuadBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
@@ -165,6 +170,7 @@ class GlQuadBatchWriter {
     _Runtime.callProperty(renderer, 'packInstance', cast ([state, materialData, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), _Runtime.multiplyNumbers(instanceIndex, _Runtime.field(runtime, 'quadBatchWriterMaterialFloats'))] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function prepareGlQuadBatchWrite(state:GlRenderState, texture:Dynamic, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -210,6 +216,7 @@ class GlQuadBatchWriter {
     return cast null;
   }
 
+  @:noCompletion
   public static function recordGlQuadBatchColorScaleBias(state:GlRenderState, colorScaleBias:Null<Dynamic>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var fold:Dynamic = cast _Runtime.UNDEFINED;
@@ -222,6 +229,7 @@ class GlQuadBatchWriter {
     if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalProperty(runtime, 'glColorAdjustmentMaterialFeatureGuard', cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
+  @:noCompletion
   public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic, ?locStraightTextureAlpha:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -251,6 +259,7 @@ class GlQuadBatchWriter {
     }
   }
 
+  @:noCompletion
   public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));

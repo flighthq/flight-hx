@@ -34,6 +34,7 @@ class GlGradientBevelEffect {
 
   public static final applyShaders__glGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;

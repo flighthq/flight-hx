@@ -12,6 +12,7 @@ import flighthq.types.Scene2DRenderBlankReason;
 import flighthq.types.Scene2DRenderExplanation;
 
 class ExplainScene2DRender {
+  @:noCompletion
   public static function explainScene2DRender(state:RenderState, source:Renderable):Scene2DRenderExplanation {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     var hasRenderer:Dynamic = cast _Runtime.UNDEFINED;

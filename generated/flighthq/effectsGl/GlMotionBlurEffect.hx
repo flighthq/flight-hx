@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.MotionBlurEffect;
 
 class GlMotionBlurEffect {
+  @:noCompletion
   public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var samples:Dynamic = cast _Runtime.UNDEFINED;

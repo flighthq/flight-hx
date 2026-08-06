@@ -30,6 +30,7 @@ import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
 class GlShadedPrelude {
+  @:noCompletion
   public static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
     var base:Dynamic = cast _Runtime.UNDEFINED;
     base = '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasDiffuseMap') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasSpecularMap') : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast 'x', function():Dynamic return cast _Runtime.select(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast 'c', function():Dynamic return cast ''))) + '';
@@ -37,6 +38,7 @@ class GlShadedPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function compileGlShadedProgram(gl:Dynamic, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:ModifierRegistry, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlShadedProgram {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var defineSource:Dynamic = cast _Runtime.UNDEFINED;
@@ -56,6 +58,7 @@ class GlShadedPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var ordered:Dynamic = cast _Runtime.UNDEFINED;

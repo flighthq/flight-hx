@@ -649,6 +649,7 @@ class MeshGeometryCompute {
     _Runtime.setField(targetRuntime, 'morphBlendedWeights', null);
   }
 
+  @:noCompletion
   public static function ensureMeshGeometryBounds(geometry:MeshGeometry):Null<Aabb> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;

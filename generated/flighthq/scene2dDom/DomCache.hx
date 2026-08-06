@@ -23,6 +23,7 @@ class DomCache {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultDomRenderCacheRenderer] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,11 +40,13 @@ class DomCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
     return cast _Runtime.coalesce(((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
+  @:noCompletion
   public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
     ((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).delete_(cache));
   }
@@ -77,6 +80,7 @@ class DomCache {
     return cast null;
   }
 
+  @:noCompletion
   public static final defaultDomRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: DomCache.drawDomRenderCache__domCache };
 
   public static final _renderCacheTargets__domCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

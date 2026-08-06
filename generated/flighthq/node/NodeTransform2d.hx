@@ -29,6 +29,7 @@ class NodeTransform2d {
     _Runtime.callValue(matrixTransformPointXY, cast ([out, _Runtime.callValue(getNodeWorldMatrix, cast ([source] : Array<Dynamic>)), vector.x, vector.y] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
@@ -37,6 +38,7 @@ class NodeTransform2d {
     }
   }
 
+  @:noCompletion
   public static function ensureNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var parent:Dynamic = cast _Runtime.UNDEFINED;

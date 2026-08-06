@@ -9,11 +9,13 @@ import flighthq.types.Log.LogLevel;
 import flighthq.types.RenderState;
 
 class EnableColorAdjustmentGuards {
+  @:noCompletion
   public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentUnsupportedGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableColorAdjustmentGuards(state:RenderState):Void {
     _Runtime.setField(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentUnsupportedGuard', EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards);
   }

@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.WhiteBalanceEffect;
 
 class GlWhiteBalanceEffect {
+  @:noCompletion
   public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
     var temperature:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;

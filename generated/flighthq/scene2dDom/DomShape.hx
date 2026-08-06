@@ -29,6 +29,7 @@ class DomShape {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

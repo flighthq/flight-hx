@@ -20,26 +20,31 @@ class Device {
 
   public static var _safeAreaInsets__device:Null<SafeAreaInsets> = _Runtime.explicitNull();
 
+  @:noCompletion
   public static function createDeviceCapabilities():DeviceCapabilities {
     return cast { hasKeyboard: false, hasMouse: false, hasStylus: false };
     return cast null;
   }
 
+  @:noCompletion
   public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
     return cast { colorDepth: -1.0, densityDpi: -1.0, logicalHeight: -1.0, logicalWidth: -1.0, physicalHeight: -1.0, physicalWidth: -1.0, pixelRatio: -1.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createDeviceInfo():DeviceInfo {
     return cast { arch: '', availableMemory: -1.0, boardName: '', colorGamut: '', cpuCores: -1.0, fontScale: -1.0, formFactor: DeviceFormFactorUnknown, gpuRenderer: '', gpuVendor: '', isHdr: false, isJailbroken: false, isLowEndDevice: false, isRooted: false, isVirtual: false, manufacturer: '', marketingName: '', model: '', osBuild: '', osName: '', osVersion: '', platformString: '', productName: '', supportedAbis: cast ([] : Array<Dynamic>), totalMemory: -1.0, webViewVersion: '' };
     return cast null;
   }
 
+  @:noCompletion
   public static function createSafeAreaInsets():SafeAreaInsets {
     return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebDeviceBackend():DeviceBackend {
     return cast { getCapabilities: function(out:DeviceCapabilities) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
@@ -175,6 +180,7 @@ class Device {
     return cast null;
   }
 
+  @:noCompletion
   public static function getDeviceBackend():DeviceBackend {
     if ((cast _Runtime.strictEquals(Device._backend__device, null) : Bool)) { (Device._backend__device = cast (_Runtime.callValue(createWebDeviceBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Device._backend__device;
@@ -233,6 +239,7 @@ class Device {
     }
   }
 
+  @:noCompletion
   public static function setDeviceBackend(backend:Null<DeviceBackend>):Void {
     (Device._backend__device = cast (backend : Dynamic));
   }

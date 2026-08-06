@@ -12,6 +12,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlCrtEffect {
+  @:noCompletion
   public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
     var curvature:Dynamic = cast _Runtime.UNDEFINED;
     var scanlineIntensity:Dynamic = cast _Runtime.UNDEFINED;

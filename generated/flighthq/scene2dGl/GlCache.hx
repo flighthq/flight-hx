@@ -45,6 +45,7 @@ class GlCache {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultGlRenderCacheRenderer] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -60,11 +61,13 @@ class GlCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlRenderCacheScreenState(state:GlRenderState):GlRenderState {
     return cast _Runtime.coalesce(((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
     return cast _Runtime.coalesce(((cast _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
@@ -120,6 +123,7 @@ class GlCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -152,6 +156,7 @@ class GlCache {
     return cast null;
   }
 
+  @:noCompletion
   public static final defaultGlRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache };
 
   public static final _renderCacheTargets__glCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

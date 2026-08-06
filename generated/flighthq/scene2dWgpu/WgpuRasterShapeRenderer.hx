@@ -28,6 +28,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class WgpuRasterShapeRenderer {
+  @:noCompletion
   public static function drawWgpuRasterShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

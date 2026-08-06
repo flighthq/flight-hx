@@ -258,6 +258,7 @@ class WgpuRenderState {
     );
   }
 
+  @:noCompletion
   public static function createWgpuRenderStateRuntime(?sharedRuntime:WgpuRenderStateRuntime):WgpuRenderStateRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var deviceRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -290,11 +291,13 @@ class WgpuRenderState {
     _Runtime.incrementField(_Runtime.callValue(WgpuRenderState.getWgpuDeviceRuntime__wgpuRenderState, cast ([runtime] : Array<Dynamic>)), 'references', -1, true);
   }
 
+  @:noCompletion
   public static function getWgpuRenderStateRuntime(state:flighthq.types.WgpuRenderState):WgpuRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : WgpuRenderStateRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuSampler(state:flighthq.types.WgpuRenderState, minFilter:Dynamic, magFilter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, maxAnisotropy:Dynamic = 1.0):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var anisotropy:Dynamic = cast _Runtime.UNDEFINED;
@@ -420,6 +423,7 @@ class WgpuRenderState {
 
   public static final _destroyedStates__wgpuRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
 
+  @:noCompletion
   public static function isWgpuSupported():Bool {
     return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), null) : Bool));
     return cast null;

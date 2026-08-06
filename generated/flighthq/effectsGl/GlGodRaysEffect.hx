@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.GodRaysEffect;
 
 class GlGodRaysEffect {
+  @:noCompletion
   public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
     var centerX:Dynamic = cast _Runtime.UNDEFINED;
     var centerY:Dynamic = cast _Runtime.UNDEFINED;

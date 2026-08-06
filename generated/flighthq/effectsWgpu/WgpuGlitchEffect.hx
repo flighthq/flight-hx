@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuGlitchEffect {
+  @:noCompletion
   public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var blockSize:Dynamic = cast _Runtime.UNDEFINED;

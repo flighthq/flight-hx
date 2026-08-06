@@ -9,6 +9,7 @@ import flighthq.types.TextBoundsSpec;
 import flighthq.types.TextLayout.TextLayoutResult;
 
 class TextBounds {
+  @:noCompletion
   public static final TEXT_BOUNDS_GUTTER:Dynamic = 2.0;
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {

@@ -304,36 +304,43 @@ class Sensors {
     (out.accuracy = cast (acceleration.accuracy : Dynamic));
   }
 
+  @:noCompletion
   public static function createAmbientLightReading():AmbientLightReading {
     return cast { accuracy: 'unknown', illuminance: 0.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createMotionReading():MotionReading {
     return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, x: 0.0, y: 0.0, z: 0.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createOrientationReading():OrientationReading {
     return cast { absolute: false, accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, heading: -1.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createPressureReading():PressureReading {
     return cast { accuracy: 'unknown', altitude: -1.0, interval: -1.0, pressure: 0.0, timestamp: -1.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createProximityReading():ProximityReading {
     return cast { accuracy: 'unknown', distance: -1.0, interval: -1.0, max: -1.0, near: false, timestamp: -1.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createQuaternionReading():QuaternionReading {
     return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createRotationRateReading():RotationRateReading {
     return cast { accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
@@ -344,6 +351,7 @@ class Sensors {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebSensorsBackend():SensorsBackend {
     return cast { getPermissionState: function(?sensor:String) {
       return cast _Runtime.callValue(Sensors.getWebSensorsPermissionState__sensors, cast ([sensor] : Array<Dynamic>));
@@ -654,6 +662,7 @@ class Sensors {
     _Runtime.callValue(detachSensors, cast ([sensors] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getSensorsBackend():SensorsBackend {
     if ((cast _Runtime.strictEquals(Sensors._backend__sensors, null) : Bool)) { (Sensors._backend__sensors = cast (_Runtime.callValue(createWebSensorsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Sensors._backend__sensors;
@@ -833,6 +842,7 @@ class Sensors {
     return cast null;
   }
 
+  @:noCompletion
   public static function setSensorsBackend(backend:Null<SensorsBackend>):Void {
     (Sensors._backend__sensors = cast (backend : Dynamic));
   }

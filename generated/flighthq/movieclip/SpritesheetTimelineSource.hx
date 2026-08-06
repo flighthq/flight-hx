@@ -51,6 +51,7 @@ class SpritesheetTimelineSource {
     return cast null;
   }
 
+  @:noCompletion
   public static function setSpritesheetTimelineSourceGuard(guard:Null<SpritesheetTimelineSourceGuard>):Void {
     (SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource = cast (guard : Dynamic));
   }

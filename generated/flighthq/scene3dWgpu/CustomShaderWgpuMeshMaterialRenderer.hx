@@ -38,6 +38,7 @@ typedef CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer = { var text
 typedef CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer = { var texture:Dynamic; var user:Dynamic; };
 
 class CustomShaderWgpuMeshMaterialRenderer {
+  @:noCompletion
   public static final customShaderWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -84,6 +85,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
+  @:noCompletion
   public static function getWgpuCustomMaterialShaderSource(state:WgpuRenderState, shaderKey:String):Null<WgpuCustomMaterialShaderSource> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialShaders__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(shaderKey)); }), function():Dynamic return cast null);
     return cast null;

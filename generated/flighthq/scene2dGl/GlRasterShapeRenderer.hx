@@ -28,6 +28,7 @@ import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class GlRasterShapeRenderer {
+  @:noCompletion
   public static function drawGlRasterShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

@@ -40,6 +40,7 @@ class CanvasRenderTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function getCanvasRenderTextureTarget(state:Dynamic, renderTexture:RenderTexture):Null<Dynamic> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
@@ -47,12 +48,14 @@ class CanvasRenderTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function invalidateCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(entry, 'status', status); }
   }
 
+  @:noCompletion
   public static function isCanvasRenderTextureReady(state:Dynamic, renderTexture:RenderTexture):Bool {
     return cast _Runtime.strictEquals(_Runtime.optionalField(_Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>)), 'status'), 'ready');
     return cast null;
@@ -77,6 +80,7 @@ class CanvasRenderTexture {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function writeCanvasRenderTextureTarget<T>(state:Dynamic, renderTexture:RenderTexture, callback:Dynamic):Dynamic {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var previousStatus:Dynamic = cast _Runtime.UNDEFINED;

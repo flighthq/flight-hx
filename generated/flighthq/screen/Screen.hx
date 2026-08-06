@@ -73,6 +73,7 @@ class Screen {
     (dst.monochrome = cast (src.monochrome : Dynamic));
   }
 
+  @:noCompletion
   public static function createScreenInfo():ScreenInfo {
     return cast { id: 0.0, x: 0.0, y: 0.0, width: 0.0, height: 0.0, workWidth: 0.0, workHeight: 0.0, scaleFactor: 1.0, isPrimary: false, rotation: -1.0, orientation: 'Landscape', refreshRate: -1.0, colorDepth: -1.0, pixelDepth: -1.0, physicalWidth: -1.0, physicalHeight: -1.0, isHdr: false, colorSpace: 'srgb', maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false };
     return cast null;
@@ -83,11 +84,13 @@ class Screen {
     return cast null;
   }
 
+  @:noCompletion
   public static function createScreenSignals():ScreenSignals {
     return cast { onScreenAdded: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onScreenMetricsChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onScreenRemoved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebScreenBackend():ScreenBackend {
     var ensureCursorTracking:Void->Void = cast _Runtime.UNDEFINED;
     var upgradeToScreenDetails:ScreenDetails__screen->Void = cast _Runtime.UNDEFINED;
@@ -410,6 +413,7 @@ class Screen {
     return cast null;
   }
 
+  @:noCompletion
   public static function getScreenBackend():ScreenBackend {
     if ((cast _Runtime.strictEquals(Screen._backend__screen, null) : Bool)) { (Screen._backend__screen = cast (_Runtime.callValue(createWebScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Screen._backend__screen;
@@ -788,6 +792,7 @@ class Screen {
     return cast null;
   }
 
+  @:noCompletion
   public static function setScreenBackend(backend:Null<ScreenBackend>):Void {
     (Screen._backend__screen = cast (backend : Dynamic));
   }

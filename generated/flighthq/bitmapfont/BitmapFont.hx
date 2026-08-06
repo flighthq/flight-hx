@@ -61,15 +61,18 @@ class BitmapFont {
     return cast null;
   }
 
+  @:noCompletion
   public static function packBitmapFontKerningKey(left:Float, right:Float):Float {
     return cast ((left * BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont) + right);
     return cast null;
   }
 
+  @:noCompletion
   public static function setBitmapFontGuard(guard:Null<Dynamic>):Void {
     (BitmapFont._guard__bitmapFont = cast (guard : Dynamic));
   }
 
+  @:noCompletion
   public static function unpackBitmapFontKerningKey(key:Float, out:BitmapFontKerningPair):BitmapFontKerningPair {
     _Runtime.setField(out, 'left', HxMath.floor((key / BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont)));
     _Runtime.setField(out, 'right', _Runtime.fmod(key, BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont));

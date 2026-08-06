@@ -149,6 +149,7 @@ class Application {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebLoopBackend():LoopBackend {
     return cast { requestFrame: function(callback:Dynamic) {
       return cast _Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([callback] : Array<Dynamic>));
@@ -314,6 +315,7 @@ class Application {
     return cast null;
   }
 
+  @:noCompletion
   public static function getLoopBackend():LoopBackend {
     if ((cast _Runtime.strictEquals(Application._loopBackend__application, null) : Bool)) { (Application._loopBackend__application = cast (_Runtime.callValue(createWebLoopBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Application._loopBackend__application;
@@ -431,6 +433,7 @@ class Application {
     ((cast Application._mainWindows__application : flighthq._internal._WeakMap).set(app, win));
   }
 
+  @:noCompletion
   public static function setLoopBackend(backend:Null<LoopBackend>):Void {
     (Application._loopBackend__application = cast (backend : Dynamic));
   }

@@ -18,9 +18,11 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
 class DomNode2D {
+  @:noCompletion
   public static function drawDomScene2D(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
+  @:noCompletion
   public static final defaultDomScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawDomScene2D };
 
   public static function renderDomScene2D(state:DomRenderState, source:Node2D):Void {

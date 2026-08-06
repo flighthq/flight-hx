@@ -27,6 +27,7 @@ class TextShaperPool {
     }
   }
 
+  @:noCompletion
   public static function setShapedRunReleaseGuard(guard:Null<Dynamic>):Void {
     (TextShaperPool._releaseGuard__textShaperPool = cast (guard : Dynamic));
   }

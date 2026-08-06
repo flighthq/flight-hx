@@ -26,6 +26,7 @@ import flighthq.types.Types.MatcapMaterialKind;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
 class MatcapGlMeshMaterialRenderer {
+  @:noCompletion
   public static final matcapGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var matcap:Dynamic = cast _Runtime.UNDEFINED;

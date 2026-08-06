@@ -15,6 +15,7 @@ class CaptureSnapshot {
     return cast null;
   }
 
+  @:noCompletion
   public static function setSnapshotCaptureGuard(guard:Null<Dynamic>):Void {
     (CaptureSnapshot._captureGuard__captureSnapshot = cast (guard : Dynamic));
   }

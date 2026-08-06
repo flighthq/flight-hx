@@ -62,6 +62,7 @@ class Clipboard {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebClipboardBackend():ClipboardBackend {
     return cast { readFormat: function(format:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
@@ -561,6 +562,7 @@ class Clipboard {
     _Runtime.callValue(detachClipboardWatch, cast ([watch] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getClipboardBackend():ClipboardBackend {
     if ((cast _Runtime.strictEquals(Clipboard._backend__clipboard, null) : Bool)) { (Clipboard._backend__clipboard = cast (_Runtime.callValue(createWebClipboardBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Clipboard._backend__clipboard;
@@ -679,6 +681,7 @@ class Clipboard {
     return cast null;
   }
 
+  @:noCompletion
   public static function setClipboardBackend(backend:Null<ClipboardBackend>):Void {
     (Clipboard._backend__clipboard = cast (backend : Dynamic));
   }

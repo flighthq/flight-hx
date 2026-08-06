@@ -14,6 +14,7 @@ import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 class RenderProxyAdapter {
+  @:noCompletion
   public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
     var renderAdapter:Dynamic = cast _Runtime.UNDEFINED;
     var traverseChildren:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,11 +30,13 @@ class RenderProxyAdapter {
     _Runtime.setField(data, 'traverseChildren', traverseChildren);
   }
 
+  @:noCompletion
   public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<flighthq.types.RenderProxyAdapter> {
     return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap') : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast null);
     return cast null;
   }
 
+  @:noCompletion
   public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<flighthq.types.RenderProxyAdapter>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook'), applyRenderProxyAdapter) : Bool)) {

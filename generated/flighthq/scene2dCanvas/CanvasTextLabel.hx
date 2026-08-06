@@ -20,6 +20,7 @@ import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
 class CanvasTextLabel {
+  @:noCompletion
   public static function drawCanvasTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

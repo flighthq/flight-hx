@@ -443,6 +443,7 @@ class Log {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebLogTransportBackend():LogTransportBackend {
     return cast { write: function(_line:String) {
 
@@ -526,6 +527,7 @@ class Log {
     return cast null;
   }
 
+  @:noCompletion
   public static function getLogTransportBackend():Null<LogTransportBackend> {
     return cast Log._transportBackend__log;
     return cast null;
@@ -732,6 +734,7 @@ class Log {
     if ((cast !_Runtime.strictEquals(sink, null) : Bool)) { _Runtime.callProperty(Log._sinks__log, 'push', cast ([sink] : Array<Dynamic>)); }
   }
 
+  @:noCompletion
   public static function setLogTransportBackend(backend:Null<LogTransportBackend>):Void {
     (Log._transportBackend__log = cast (backend : Dynamic));
   }

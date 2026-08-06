@@ -17,6 +17,7 @@ class TweenProgress {
     return cast null;
   }
 
+  @:noCompletion
   public static function invalidateTween(tween:Tween<Dynamic>):Void {
     _Runtime.setField(tween, 'initialized', false);
     _Runtime.setField(tween, 'complete', false);

@@ -197,6 +197,7 @@ class GlyphAtlasEntry {
     (runtime.occupiedArea -= (bitmap.width * bitmap.height));
   }
 
+  @:noCompletion
   public static function setGlyphAtlasEntryGuard(guard:Null<Dynamic>):Void {
     (GlyphAtlasEntry._entryGuard__glyphAtlasEntry = cast (guard : Dynamic));
   }

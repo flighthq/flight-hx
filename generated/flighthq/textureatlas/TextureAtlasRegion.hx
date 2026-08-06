@@ -326,6 +326,7 @@ class TextureAtlasRegion {
     (out.trimmed = cast (trimmed : Dynamic));
   }
 
+  @:noCompletion
   public static function setTextureAtlasRegionTextureGuard(guard:Null<TextureAtlasRegionTextureGuard>):Void {
     (TextureAtlasRegion.textureAtlasRegionTextureGuard__textureAtlasRegion = cast (guard : Dynamic));
   }

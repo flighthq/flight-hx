@@ -30,6 +30,7 @@ class Geolocation {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebGeolocationBackend():GeolocationBackend {
     return cast { clearWatch: function(id:Dynamic) {
       var geo:Dynamic = cast _Runtime.UNDEFINED;
@@ -179,6 +180,7 @@ class Geolocation {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGeolocationBackend():GeolocationBackend {
     if ((cast _Runtime.strictEquals(Geolocation._backend__geolocation, null) : Bool)) { (Geolocation._backend__geolocation = cast (_Runtime.callValue(createWebGeolocationBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Geolocation._backend__geolocation;
@@ -236,6 +238,7 @@ class Geolocation {
     return cast null;
   }
 
+  @:noCompletion
   public static function setGeolocationBackend(backend:Null<GeolocationBackend>):Void {
     (Geolocation._backend__geolocation = cast (backend : Dynamic));
   }

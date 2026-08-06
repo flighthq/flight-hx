@@ -9,12 +9,14 @@ import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 
 class HasTransform3d {
+  @:noCompletion
   public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
     (target.localMatrix4 = cast (null : Dynamic));
     (target.localMatrix4Detached = cast (false : Dynamic));
     (target.worldMatrix4 = cast (null : Dynamic));
   }
 
+  @:noCompletion
   public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
     (target.rotation = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>))) : Dynamic));
     (target.scale = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>))) : Dynamic));

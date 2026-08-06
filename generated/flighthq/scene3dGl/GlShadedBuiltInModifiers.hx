@@ -36,6 +36,7 @@ import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
 class GlShadedBuiltInModifiers {
+  @:noCompletion
   public static final animatedNormalGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([animatedNormalModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var animated:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -77,6 +78,7 @@ class GlShadedBuiltInModifiers {
     return cast source;
   } }]);
 
+  @:noCompletion
   public static final emissiveGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([emissiveModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var emissive:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -120,6 +122,7 @@ class GlShadedBuiltInModifiers {
     return cast source;
   } }]);
 
+  @:noCompletion
   public static final rimGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([rimModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var rim:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -142,6 +145,7 @@ class GlShadedBuiltInModifiers {
     return cast ((('uniform vec3 u_rimColor' + Std.string(suffix) + ';\n' + 'uniform float u_rimPower' + Std.string(suffix) + ';\n') + 'uniform float u_rimIntensity' + Std.string(suffix) + ';\n') + 'uniform float u_rimBias' + Std.string(suffix) + ';\n');
   } }]);
 
+  @:noCompletion
   public static final dissolveGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([dissolveModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var dissolve:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -173,6 +177,7 @@ class GlShadedBuiltInModifiers {
     return cast source;
   } }]);
 
+  @:noCompletion
   public static final envReflectGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([envReflectModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var reflect:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -195,6 +200,7 @@ class GlShadedBuiltInModifiers {
     return cast (((((('uniform samplerCube u_iblPrefiltered;\n' + 'uniform float u_iblEnabled;\n') + 'uniform float u_iblMaxMip;\n') + 'uniform vec3 u_envReflectTint' + Std.string(suffix) + ';\n') + 'uniform float u_envReflectIntensity' + Std.string(suffix) + ';\n') + 'uniform float u_envReflectFresnel' + Std.string(suffix) + ';\n') + 'uniform float u_envReflectRoughness' + Std.string(suffix) + ';\n');
   } }]);
 
+  @:noCompletion
   public static final fogGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([fogModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var fog:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -235,6 +241,7 @@ class GlShadedBuiltInModifiers {
     return cast source;
   } }]);
 
+  @:noCompletion
   public static final toonGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([toonModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var toon:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -254,6 +261,7 @@ class GlShadedBuiltInModifiers {
     return cast 'uniform float u_toonSteps' + Std.string(suffix) + ';\nuniform float u_toonSmoothness' + Std.string(suffix) + ';\n';
   } }]);
 
+  @:noCompletion
   public static final vertexDisplaceGlModifierSnippet:GlModifierSnippet = _Runtime.mergeObjects([vertexDisplaceModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext) {
     var displace:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;

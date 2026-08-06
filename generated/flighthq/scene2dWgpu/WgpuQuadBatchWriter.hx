@@ -20,12 +20,14 @@ import flighthq.types.WgpuRenderState.WgpuQuadBatchWriterBufferSlot;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 class WgpuQuadBatchWriter {
+  @:noCompletion
   public static final QUAD_BATCH_INSTANCE_FLOATS:Dynamic = 13.0;
 
   public static final QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter:Dynamic = (QUAD_BATCH_INSTANCE_FLOATS * 4.0);
 
   public static final QUAD_BATCH_PRELUDE_WGSL__wgpuQuadBatchWriter:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  straightTextureAlpha : u32,\n}\n\nstruct InstanceData {\n  a : f32, b : f32, c : f32, d : f32,\n  tx : f32, ty : f32,\n  width : f32, height : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  alpha : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct BaseVertex {\n  position : vec4f,\n  uv : vec2f,\n  alpha : f32,\n}\n\nfn quadBaseVertex(vi : u32, ii : u32) -> BaseVertex {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  let wx = inst.a * lx + inst.c * ly + inst.tx;\n  let wy = inst.b * lx + inst.d * ly + inst.ty;\n  let p = uni.matrix * vec3f(wx, wy, 1.0);\n  var bv : BaseVertex;\n  bv.position = vec4f(p.x, p.y, 0.0, 1.0);\n  bv.uv = vec2f(select(inst.u0, inst.u1, xi), select(inst.v0, inst.v1, yi));\n  bv.alpha = inst.alpha;\n  return bv;\n}\n';
 
+  @:noCompletion
   public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,6 +61,7 @@ class WgpuQuadBatchWriter {
 
   public static final _quadBatchResources__wgpuQuadBatchWriter:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function flushWgpuQuadBatchWriter(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,6 +134,7 @@ class WgpuQuadBatchWriter {
     _Runtime.callProperty(pass, 'draw', cast ([6.0, count, 0.0, 0.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var perModule:Dynamic = cast _Runtime.UNDEFINED;
@@ -172,11 +176,13 @@ class WgpuQuadBatchWriter {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuQuadBatchPreludeWGSL():String {
     return cast WgpuQuadBatchWriter.QUAD_BATCH_PRELUDE_WGSL__wgpuQuadBatchWriter;
     return cast null;
   }
 
+  @:noCompletion
   public static function packWgpuQuadBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var floats:Dynamic = cast _Runtime.UNDEFINED;
@@ -189,6 +195,7 @@ class WgpuQuadBatchWriter {
     _Runtime.callProperty(renderer, 'packInstance', cast ([state, _Runtime.field(runtime, 'quadBatchWriterMaterial'), materialData, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), (instanceIndex * floats)] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function prepareWgpuQuadBatchWrite(state:WgpuRenderState, texture:WgpuTextureEntry, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -222,6 +229,7 @@ class WgpuQuadBatchWriter {
     return cast null;
   }
 
+  @:noCompletion
   public static function recordWgpuQuadBatchColorScaleBias(state:WgpuRenderState, colorScaleBias:Null<Dynamic>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var fold:Dynamic = cast _Runtime.UNDEFINED;
@@ -234,6 +242,7 @@ class WgpuQuadBatchWriter {
     if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalProperty(runtime, 'wgpuColorAdjustmentMaterialFeatureGuard', cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
+  @:noCompletion
   public static function resetWgpuQuadBatchWriterBufferPool(state:WgpuRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'quadBatchWriterBufferCursor', 0.0);
   }

@@ -9,6 +9,7 @@ import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
 import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
 
 class Skeleton2dConstraint {
+  @:noCompletion
   public static function getSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind):Null<Skeleton2DConstraintSolver> {
     return cast _Runtime.coalesce(((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
     return cast null;
@@ -31,6 +32,7 @@ class Skeleton2dConstraint {
     }
   }
 
+  @:noCompletion
   public static function unregisterSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind):Void {
     ((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map).delete_(kind));
   }

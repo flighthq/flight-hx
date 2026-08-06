@@ -23,6 +23,7 @@ typedef DomTextInputData__domTextInput = Dynamic;
 class DomTextInput {
   public static var _keyframesInjected__domTextInput:Dynamic = false;
 
+  @:noCompletion
   public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var input:Dynamic = cast _Runtime.UNDEFINED;

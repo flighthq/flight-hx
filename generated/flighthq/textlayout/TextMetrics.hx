@@ -7,6 +7,7 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextMetrics;
 
 class TextMetrics {
+  @:noCompletion
   public static function createTextMetrics():flighthq.types.TextMetrics {
     return cast { height: 0.0, numLines: 0.0, width: 0.0 };
     return cast null;

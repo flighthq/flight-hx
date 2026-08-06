@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.GlitchEffect;
 
 class GlGlitchEffect {
+  @:noCompletion
   public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var blockSize:Dynamic = cast _Runtime.UNDEFINED;

@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuCrtEffect {
+  @:noCompletion
   public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
     var curvature:Dynamic = cast _Runtime.UNDEFINED;
     var scanlineIntensity:Dynamic = cast _Runtime.UNDEFINED;

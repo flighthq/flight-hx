@@ -17,6 +17,7 @@ import flighthq.types.Texture;
 class CanvasShapeCommands {
   public static final _fillMatrixInverse__canvasShapeCommands:Matrix = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
+  @:noCompletion
   public static final defaultCanvasBeginTextureFill:Dynamic = { key: 'beginTextureFill', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
@@ -287,6 +288,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'bitmapSrc', null);
   } };
 
+  @:noCompletion
   public static final defaultCanvasLineTextureStyle:Dynamic = { key: 'lineTextureStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;

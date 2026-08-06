@@ -19,6 +19,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.GradientGlowEffect;
 
 class CanvasGradientGlowEffect {
+  @:noCompletion
   public static function applyGradientGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:GradientGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;

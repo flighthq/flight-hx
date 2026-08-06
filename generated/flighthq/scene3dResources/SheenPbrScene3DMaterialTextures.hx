@@ -10,6 +10,7 @@ import flighthq.types.Types.SheenPbrExtensionKind;
 import flighthq.types._internal._SheenPbrExtensionValues.SheenPbrExtensionKind;
 
 class SheenPbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerSheenPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, SheenPbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var sheen:Dynamic = cast _Runtime.UNDEFINED;

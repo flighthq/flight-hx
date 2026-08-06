@@ -9,11 +9,13 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 class EnableGlScene3DColorSpaceGuards {
+  @:noCompletion
   public static function areGlScene3DColorSpaceGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableGlScene3DColorSpaceGuards(state:GlRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard', EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards);
   }

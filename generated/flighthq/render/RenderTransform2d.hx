@@ -14,6 +14,7 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 
 class RenderTransform2d {
+  @:noCompletion
   public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
     var localTransformId:Dynamic = cast _Runtime.UNDEFINED;
     var parentDirty:Dynamic = cast _Runtime.UNDEFINED;

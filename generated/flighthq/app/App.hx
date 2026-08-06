@@ -82,6 +82,7 @@ class App {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebAppBackend():AppBackend {
     return cast { addRecentDocument: function() {
 
@@ -223,6 +224,7 @@ class App {
     _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'focus', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getAppBackend():AppBackend {
     if ((cast _Runtime.strictEquals(App._backend__app, null) : Bool)) { (App._backend__app = cast (_Runtime.callValue(createWebAppBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast App._backend__app;
@@ -338,6 +340,7 @@ class App {
     _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setActivationPolicy', cast ([policy] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setAppBackend(backend:Null<AppBackend>):Void {
     (App._backend__app = cast (backend : Dynamic));
   }

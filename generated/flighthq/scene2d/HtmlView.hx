@@ -30,16 +30,19 @@ class HtmlView {
     return cast null;
   }
 
+  @:noCompletion
   public static function createHtmlViewData(?data:Dynamic):HtmlViewData {
     return cast { element: _Runtime.coalesce(_Runtime.optionalField(data, 'element'), function():Dynamic return cast null), height: _Runtime.coalesce(_Runtime.optionalField(data, 'height'), function():Dynamic return cast 100.0), width: _Runtime.coalesce(_Runtime.optionalField(data, 'width'), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createHtmlViewRuntime():HtmlViewRuntime {
     return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([HtmlView.defaultMethods__htmlView] : Array<Dynamic>)) : HtmlViewRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : HtmlViewRuntime);
     return cast null;

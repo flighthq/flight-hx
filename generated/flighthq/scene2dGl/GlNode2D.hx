@@ -15,6 +15,7 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
 class GlNode2D {
+  @:noCompletion
   public static function drawGlScene2D(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
@@ -52,5 +53,6 @@ class GlNode2D {
     _Runtime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static final defaultGlScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawGlScene2D };
 }

@@ -32,6 +32,7 @@ class QuadBatch {
 
   public static final QUAD_MATRIX3X2_STRIDE__quadBatch:Dynamic = 6.0;
 
+  @:noCompletion
   public static final QUAD_BATCH_DELETED_ID:Dynamic = 65535.0;
 
   public static function appendQuadBatchInstance(target:flighthq.types.QuadBatch, id:Float, x:Float, y:Float):Float {
@@ -208,11 +209,13 @@ class QuadBatch {
     return cast null;
   }
 
+  @:noCompletion
   public static function createQuadBatchData(?data:Dynamic):QuadBatchData {
     return cast { atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), ids: _Runtime.coalesce(_Runtime.optionalField(data, 'ids'), function():Dynamic return cast new flighthq._internal._UInt16Array()), instanceCount: _Runtime.coalesce(_Runtime.optionalField(data, 'instanceCount'), function():Dynamic return cast 0.0), materialData: _Runtime.coalesce(_Runtime.optionalField(data, 'materialData'), function():Dynamic return cast null), transforms: _Runtime.coalesce(_Runtime.optionalField(data, 'transforms'), function():Dynamic return cast new flighthq._internal._Float32Array()), transformType: _Runtime.coalesce(_Runtime.optionalField(data, 'transformType'), function():Dynamic return cast 'vector2') };
     return cast null;
   }
 
+  @:noCompletion
   public static function createQuadBatchRuntime():QuadBatchRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createNode2DRuntime, cast ([QuadBatch.defaultMethods__quadBatch] : Array<Dynamic>)) : QuadBatchRuntime);
@@ -222,6 +225,7 @@ class QuadBatch {
     return cast null;
   }
 
+  @:noCompletion
   public static function createQuadBatchSignals():QuadBatchSignals {
     return cast { onCleared: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onInstanceAppended: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onInstanceRemoved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
@@ -274,6 +278,7 @@ class QuadBatch {
     return cast null;
   }
 
+  @:noCompletion
   public static function getQuadBatchRuntime(source:flighthq.types.QuadBatch):QuadBatchRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : QuadBatchRuntime);
     return cast null;

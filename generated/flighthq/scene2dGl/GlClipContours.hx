@@ -17,6 +17,7 @@ class GlClipContours {
 
   public static final FRAGMENT_SOURCE__glClipContours:Dynamic = '\nprecision mediump float;\nvoid main() { gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); }\n';
 
+  @:noCompletion
   public static function popGlClipContours(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,6 +33,7 @@ class GlClipContours {
     }
   }
 
+  @:noCompletion
   public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;

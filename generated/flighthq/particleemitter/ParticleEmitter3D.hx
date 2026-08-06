@@ -26,6 +26,7 @@ class ParticleEmitter3D {
 
   public static final PARTICLE_VELOCITY_STRIDE__particleEmitter3D:Dynamic = 3.0;
 
+  @:noCompletion
   public static final PARTICLE_EMITTER_3D_DELETED_ID:Dynamic = 65535.0;
 
   public static function appendParticleEmitter3DParticle(target:flighthq.types.ParticleEmitter3D, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
@@ -211,6 +212,7 @@ class ParticleEmitter3D {
     return cast null;
   }
 
+  @:noCompletion
   public static function getParticleEmitter3DRuntime(source:flighthq.types.ParticleEmitter3D):ParticleEmitter3DRuntime {
     return cast (cast _Runtime.callValue(getNode3DRuntime, cast ([(cast (cast source : Dynamic) : Node3D)] : Array<Dynamic>)) : ParticleEmitter3DRuntime);
     return cast null;

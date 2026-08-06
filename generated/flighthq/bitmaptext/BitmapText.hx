@@ -56,11 +56,13 @@ class BitmapText {
     return cast null;
   }
 
+  @:noCompletion
   public static function createBitmapTextData(?data:Dynamic):BitmapTextData {
     return cast { align: _Runtime.coalesce(_Runtime.optionalField(data, 'align'), function():Dynamic return cast 'left'), glyphSource: _Runtime.coalesce(_Runtime.optionalField(data, 'glyphSource'), function():Dynamic return cast null), letterSpacing: _Runtime.coalesce(_Runtime.optionalField(data, 'letterSpacing'), function():Dynamic return cast 0.0), lineHeight: _Runtime.coalesce(_Runtime.optionalField(data, 'lineHeight'), function():Dynamic return cast 1.0), text: _Runtime.coalesce(_Runtime.optionalField(data, 'text'), function():Dynamic return cast ''), wrapWidth: _Runtime.coalesce(_Runtime.optionalField(data, 'wrapWidth'), function():Dynamic return cast null) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createBitmapTextRuntime():BitmapTextRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createNode2DRuntime, cast ([BitmapText.defaultMethods__bitmapText] : Array<Dynamic>)) : BitmapTextRuntime);

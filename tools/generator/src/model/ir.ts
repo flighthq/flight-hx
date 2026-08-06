@@ -263,6 +263,7 @@ export interface IrFunctionDeclaration {
   haxeBody?: string | undefined;
   kind: 'function';
   name: string;
+  noCompletion?: true | undefined;
   origin: SourceOrigin;
   parameters: IrParameter[];
   returns: IrType;
@@ -273,6 +274,7 @@ export interface IrFunctionDeclaration {
 export interface IrVariableDeclaration extends IrVariable {
   exported: boolean;
   kind: 'variable';
+  noCompletion?: true | undefined;
   origin: SourceOrigin;
 }
 
@@ -281,6 +283,7 @@ export interface IrTypeDeclaration {
   exported: boolean;
   kind: 'type';
   name: string;
+  noCompletion?: true | undefined;
   origin: SourceOrigin;
   // Emitted as a module-private type when its name collides with a like-named module
   // in the same Haxe package (the module owns the package identity; this secondary type
@@ -296,6 +299,7 @@ export interface IrEnumDeclaration {
   members: Array<{ initializer?: IrExpression | undefined; name: string; reverseMapping: boolean }>;
   methods: IrFunctionDeclaration[];
   name: string;
+  noCompletion?: true | undefined;
   origin: SourceOrigin;
   packagePrivate?: boolean;
 }
@@ -329,6 +333,7 @@ export interface IrClassDeclaration {
   kind: 'class';
   methods: IrClassMethod[];
   name: string;
+  noCompletion?: true | undefined;
   origin: SourceOrigin;
   packagePrivate?: boolean;
   typeParameters: string[];

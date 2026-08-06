@@ -166,6 +166,7 @@ class EventHeap__martinezKernel {
 }
 
 class MartinezKernel {
+  @:noCompletion
   public static function createMartinezPathBooleanBackend():PathBooleanBackend {
     return cast { computePathBoolean: function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule) {
       return cast _Runtime.callValue(MartinezKernel.computeMartinezBoolean__martinezKernel, cast ([subject, clip, operation, fillRule] : Array<Dynamic>));

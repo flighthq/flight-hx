@@ -30,11 +30,13 @@ typedef DomScale9ShapeData__domScale9Shape = Dynamic;
 class DomScale9Shape {
   public static final _remappedCommands__domScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
 
+  @:noCompletion
   public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

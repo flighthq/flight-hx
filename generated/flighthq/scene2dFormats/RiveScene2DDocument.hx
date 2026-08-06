@@ -22,6 +22,7 @@ import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.Texture;
 
 class RiveScene2DDocument {
+  @:noCompletion
   public static function createRiveImageSprite(name:String, assetIndex:Float):DisplayObject {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var sprite:Dynamic = cast _Runtime.UNDEFINED;
@@ -100,6 +101,7 @@ class RiveScene2DDocument {
     return cast null;
   }
 
+  @:noCompletion
   public static function createScene2DDocumentFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveScene2DDocumentResult> {
     var imported:Dynamic = cast _Runtime.UNDEFINED;
     var root:Dynamic = cast _Runtime.UNDEFINED;
@@ -113,6 +115,7 @@ class RiveScene2DDocument {
     return cast null;
   }
 
+  @:noCompletion
   public static function markRiveNestedArtboard(node:Node2D, artboardIndex:Float):Void {
     ((cast RiveScene2DDocument._nestedArtboards__riveScene2DDocument : flighthq._internal._WeakMap).set(node, artboardIndex));
   }

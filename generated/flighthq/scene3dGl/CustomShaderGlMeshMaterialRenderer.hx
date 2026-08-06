@@ -29,6 +29,7 @@ import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterial
 typedef GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = Dynamic;
 
 class CustomShaderGlMeshMaterialRenderer {
+  @:noCompletion
   public static final customShaderGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
     var custom:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,6 +58,7 @@ class CustomShaderGlMeshMaterialRenderer {
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
+  @:noCompletion
   public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(shaderKey)); }), function():Dynamic return cast null);
     return cast null;

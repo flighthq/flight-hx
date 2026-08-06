@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.SsaoEffect;
 
 class GlSsaoEffect {
+  @:noCompletion
   public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

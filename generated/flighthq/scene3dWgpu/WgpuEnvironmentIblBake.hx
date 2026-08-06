@@ -37,6 +37,7 @@ class WgpuEnvironmentIblBake {
     _Runtime.setField(scene, 'ibl', ibl);
   }
 
+  @:noCompletion
   public static function destroyWgpuScene3DIbl(state:WgpuRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));

@@ -13,6 +13,7 @@ import flighthq.types.CompositeOperator;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
 class CanvasCompositeEffect {
+  @:noCompletion
   public static function applyCompositeEffectToCanvas(state:Dynamic, source:Dynamic, dest:Dynamic, effect:CompositeEffect):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');

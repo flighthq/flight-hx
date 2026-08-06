@@ -62,6 +62,7 @@ class Lifecycle {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebLifecycleBackend():LifecycleBackend {
     var _windowFocused:Dynamic = cast _Runtime.UNDEFINED;
     _windowFocused = !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined');
@@ -160,6 +161,7 @@ class Lifecycle {
     return cast null;
   }
 
+  @:noCompletion
   public static function getLifecycleBackend():LifecycleBackend {
     if ((cast _Runtime.strictEquals(Lifecycle._backend__lifecycle, null) : Bool)) { (Lifecycle._backend__lifecycle = cast (_Runtime.callValue(createWebLifecycleBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Lifecycle._backend__lifecycle;
@@ -187,6 +189,7 @@ class Lifecycle {
     return cast null;
   }
 
+  @:noCompletion
   public static function setLifecycleBackend(backend:Null<LifecycleBackend>):Void {
     (Lifecycle._backend__lifecycle = cast (backend : Dynamic));
   }

@@ -14,6 +14,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Texture;
 
 class GlDebugPrelude {
+  @:noCompletion
   public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -24,6 +25,7 @@ class GlDebugPrelude {
     }
   }
 
+  @:noCompletion
   public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -31,11 +33,13 @@ class GlDebugPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locFar'), far);
   }
 
+  @:noCompletion
   public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileGlDebugProgram(gl:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlDebugVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlDebugFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
@@ -43,16 +47,19 @@ class GlDebugPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
     return cast _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'debug:' + Std.string(_Runtime.callValue(buildGlDebugDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlDebugProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
     return cast (_Runtime.callValue(GlDebugPrelude.buildDefineSource__glDebugPrelude, cast ([key] : Array<Dynamic>)) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
     return cast (_Runtime.callValue(GlDebugPrelude.buildDefineSource__glDebugPrelude, cast ([key] : Array<Dynamic>)) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
     return cast null;

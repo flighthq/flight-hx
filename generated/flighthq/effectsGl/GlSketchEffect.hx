@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.SketchEffect;
 
 class GlSketchEffect {
+  @:noCompletion
   public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
     var strength:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

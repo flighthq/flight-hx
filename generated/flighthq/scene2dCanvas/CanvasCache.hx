@@ -55,6 +55,7 @@ class CanvasCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -73,6 +74,7 @@ class CanvasCache {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultCanvasRenderCacheRenderer] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -88,11 +90,13 @@ class CanvasCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function getCanvasRenderCacheScreenState(state:Dynamic):Dynamic {
     return cast _Runtime.coalesce(((cast CanvasCache._cacheStateScreen__canvasCache : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
+  @:noCompletion
   public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
     return cast _Runtime.coalesce(((cast _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
@@ -141,6 +145,7 @@ class CanvasCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
     ((cast _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).delete_(cache));
   }
@@ -169,6 +174,7 @@ class CanvasCache {
     return cast null;
   }
 
+  @:noCompletion
   public static final defaultCanvasRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: CanvasCache.drawCanvasRenderCache__canvasCache };
 
   public static final _renderCacheTargets__canvasCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);

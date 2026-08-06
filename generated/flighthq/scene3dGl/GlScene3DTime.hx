@@ -7,6 +7,7 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlRenderState;
 
 class GlScene3DTime {
+  @:noCompletion
   public static function getGlScene3DTime(state:GlRenderState):Float {
     return cast _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'time');
     return cast null;

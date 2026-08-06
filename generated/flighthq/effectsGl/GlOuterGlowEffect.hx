@@ -18,6 +18,7 @@ import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.OuterGlowEffect;
 
 class GlOuterGlowEffect {
+  @:noCompletion
   public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;

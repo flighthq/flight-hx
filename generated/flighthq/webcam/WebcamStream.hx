@@ -21,6 +21,7 @@ class WebcamStream {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWebcamStreamRuntime(stream:flighthq.types.WebcamStream):Null<WebcamStreamRuntime> {
     var rt:Dynamic = cast _Runtime.UNDEFINED;
     rt = _Runtime.getIndex(stream, EntityRuntimeKey);

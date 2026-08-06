@@ -9,6 +9,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuFullscreenPass {
+  @:noCompletion
   public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
     if (format == null) format = cast (_Runtime.field(state, 'format') : Dynamic);
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,9 +39,11 @@ class WgpuFullscreenPass {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
   }
 
+  @:noCompletion
   public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;

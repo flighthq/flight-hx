@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuRadialBlurEffect {
+  @:noCompletion
   public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
     var centerX:Dynamic = cast _Runtime.UNDEFINED;
     var centerY:Dynamic = cast _Runtime.UNDEFINED;

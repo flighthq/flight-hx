@@ -40,11 +40,13 @@ class DomRenderState {
     return cast null;
   }
 
+  @:noCompletion
   public static function createDomRenderStateRuntime():DomRenderStateRuntime {
     return cast (cast _Runtime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)) : DomRenderStateRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function getDomRenderStateRuntime(state:flighthq.types.DomRenderState):DomRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : DomRenderStateRuntime);
     return cast null;

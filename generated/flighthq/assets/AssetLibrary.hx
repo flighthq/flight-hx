@@ -265,6 +265,7 @@ class AssetLibrary {
     }
   }
 
+  @:noCompletion
   public static function setAssetAcquireGuard(library:flighthq.types.Assets.AssetLibrary, guard:Null<AssetAcquireGuard>):Void {
     (library.runtime.acquireGuard = cast (guard : Dynamic));
   }

@@ -22,6 +22,7 @@ import flighthq.types.Matrix3;
 import flighthq.types.PbrExtension;
 
 class GlPbrExtensionRegistry {
+  @:noCompletion
   public static function bindGlPbrExtensions(state:GlRenderState, program:Dynamic, extensions:Array<PbrExtension>):Bool {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -106,6 +107,7 @@ class GlPbrExtensionRegistry {
     _Runtime.incrementField(runtime, 'pbrExtensionRegistryVersion', 1, true);
   }
 
+  @:noCompletion
   public static function resolveGlPbrExtensionContributions(state:GlRenderState, extensions:Array<PbrExtension>):Null<Array<GlPbrExtensionShaderContribution>> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;

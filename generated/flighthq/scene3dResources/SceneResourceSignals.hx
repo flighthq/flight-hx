@@ -12,6 +12,7 @@ import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
 class SceneResourceSignals {
+  @:noCompletion
   public static function createScene3DResourceSignals():Scene3DResourceSignals {
     return cast _Runtime.callValue(createEntity, cast ([{ onResourceFailed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResourceResolved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;

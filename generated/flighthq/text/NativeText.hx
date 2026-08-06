@@ -45,11 +45,13 @@ class NativeText {
     return cast null;
   }
 
+  @:noCompletion
   public static function createNativeTextData(?data:Dynamic):NativeTextData {
     return cast { autoSize: _Runtime.coalesce(_Runtime.optionalField(data, 'autoSize'), function():Dynamic return cast 'none'), height: _Runtime.coalesce(_Runtime.optionalField(data, 'height'), function():Dynamic return cast 100.0), style: _Runtime.coalesce(_Runtime.optionalField(data, 'style'), function():Dynamic return cast {  }), text: _Runtime.coalesce(_Runtime.optionalField(data, 'text'), function():Dynamic return cast ''), verticalAlign: _Runtime.coalesce(_Runtime.optionalField(data, 'verticalAlign'), function():Dynamic return cast 'top'), width: _Runtime.coalesce(_Runtime.optionalField(data, 'width'), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
+  @:noCompletion
   public static function createNativeTextRuntime():NativeTextRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createNode2DRuntime, cast ([NativeText.defaultMethods__nativeText] : Array<Dynamic>)) : NativeTextRuntime);
@@ -70,6 +72,7 @@ class NativeText {
     return cast null;
   }
 
+  @:noCompletion
   public static function getNativeTextRuntime(source:flighthq.types.NativeText):NativeTextRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
     return cast null;

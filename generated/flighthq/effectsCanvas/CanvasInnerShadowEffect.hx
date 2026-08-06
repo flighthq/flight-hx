@@ -18,6 +18,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.InnerShadowEffect;
 
 class CanvasInnerShadowEffect {
+  @:noCompletion
   public static function applyInnerShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:InnerShadowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;

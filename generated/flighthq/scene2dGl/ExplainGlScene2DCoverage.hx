@@ -16,11 +16,13 @@ import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class ExplainGlScene2DCoverage {
+  @:noCompletion
   public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage):Void {
     _Runtime.callValue(explainScene2DCoverage, cast ([out, state, usage] : Array<Dynamic>));
     _Runtime.callValue(ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
     if ((cast !(cast _Runtime.callValue(hasScene2DCoverage, cast ([state, usage] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     return cast !(cast _Runtime.callValue(ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);

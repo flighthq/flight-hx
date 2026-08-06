@@ -135,6 +135,7 @@ class GlRenderState {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGlRenderStateRuntime(?sharedRuntime:GlRenderStateRuntime):GlRenderStateRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var contextRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -190,11 +191,13 @@ class GlRenderState {
     if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'))) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer')); }
   }
 
+  @:noCompletion
   public static function getGlRenderStateRuntime(state:flighthq.types.GlRenderState):GlRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function invalidateGlRenderStateCache(state:flighthq.types.GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));

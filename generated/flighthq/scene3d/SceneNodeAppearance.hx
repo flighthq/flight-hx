@@ -9,6 +9,7 @@ import flighthq.scene3d.SceneNode.getNode3DRuntime;
 import flighthq.types.Node3D;
 
 class SceneNodeAppearance {
+  @:noCompletion
   public static function ensureNode3DWorldAlpha(source:Node3D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var parent:Dynamic = cast _Runtime.UNDEFINED;

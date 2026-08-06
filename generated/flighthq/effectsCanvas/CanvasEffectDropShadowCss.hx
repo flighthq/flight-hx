@@ -7,6 +7,7 @@ import flighthq.types.DropShadowEffect;
 import flighthq.types.OuterGlowEffect;
 
 class CanvasEffectDropShadowCss {
+  @:noCompletion
   public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;
@@ -28,6 +29,7 @@ class CanvasEffectDropShadowCss {
     return cast null;
   }
 
+  @:noCompletion
   public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;

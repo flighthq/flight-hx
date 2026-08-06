@@ -20,6 +20,7 @@ class Webcam {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebWebcamBackend():WebcamBackend {
     return cast { capture: function(options:Dynamic) {
       return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
@@ -128,6 +129,7 @@ class Webcam {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWebcamBackend():WebcamBackend {
     if ((cast _Runtime.strictEquals(Webcam._backend__webcam, null) : Bool)) { (Webcam._backend__webcam = cast (_Runtime.callValue(createWebWebcamBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Webcam._backend__webcam;
@@ -149,6 +151,7 @@ class Webcam {
     return cast null;
   }
 
+  @:noCompletion
   public static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
     (Webcam._backend__webcam = cast (backend : Dynamic));
   }

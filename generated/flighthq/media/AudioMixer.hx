@@ -151,6 +151,7 @@ class AudioMixer {
     return cast null;
   }
 
+  @:noCompletion
   public static function setAudioBusMixerGuard(guard:Null<AudioBusMixerGuard>):Void {
     (AudioMixer._unmixedBusGuard__audioMixer = cast (guard : Dynamic));
   }

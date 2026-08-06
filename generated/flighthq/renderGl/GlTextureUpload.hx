@@ -6,16 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.types.Image;
 
 class GlTextureUpload {
+  @:noCompletion
   public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic);
     flighthq._internal.backend.WebGl2Backend.texImage2D(gl, target, 0.0, internalFormat, width, height, 0.0, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, (cast data : flighthq._internal._UInt8ClampedArray));
   }
 
+  @:noCompletion
   public static function uploadGlTextureElement(gl:Dynamic, target:Float, source:Dynamic, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic);
     flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, target, 0.0, internalFormat, flighthq._internal.backend.WebGl2Backend.RGBA, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, source);
   }
 
+  @:noCompletion
   public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:Dynamic, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic);
     _Runtime.callValue(uploadGlTextureElement, cast ([gl, target, (cast _Runtime.field(image, 'source') : Dynamic), internalFormat] : Array<Dynamic>));

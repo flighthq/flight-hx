@@ -14,6 +14,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.FilmGrainEffect;
 
 class CanvasFilmGrainEffect {
+  @:noCompletion
   public static function applyFilmGrainEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;

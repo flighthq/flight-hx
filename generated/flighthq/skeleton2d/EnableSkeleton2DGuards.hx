@@ -11,11 +11,13 @@ import flighthq.types.Skeleton2DGuards.Skeleton2DCoercedInterpolation;
 import flighthq.types.Skeleton2DGuards.Skeleton2DDeformLengthMismatch;
 
 class EnableSkeleton2DGuards {
+  @:noCompletion
   public static function disableSkeleton2DGuards():Void {
     _Runtime.callValue(setSkeleton2DCoercedInterpolationGuard, cast ([null] : Array<Dynamic>));
     _Runtime.callValue(setSkeleton2DDeformLengthGuard, cast ([null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function enableSkeleton2DGuards():Void {
     _Runtime.callValue(setSkeleton2DCoercedInterpolationGuard, cast ([EnableSkeleton2DGuards.warnOnCoercedInterpolation__enableSkeleton2DGuards] : Array<Dynamic>));
     _Runtime.callValue(setSkeleton2DDeformLengthGuard, cast ([EnableSkeleton2DGuards.warnOnDeformLengthMismatch__enableSkeleton2DGuards] : Array<Dynamic>));

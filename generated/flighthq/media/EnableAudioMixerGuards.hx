@@ -10,10 +10,12 @@ import flighthq.types.AudioBus.AudioBusMixerOperation;
 import flighthq.types.Log.LogLevel;
 
 class EnableAudioMixerGuards {
+  @:noCompletion
   public static function disableAudioMixerGuards():Void {
     _Runtime.callValue(setAudioBusMixerGuard, cast ([null] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function enableAudioMixerGuards():Void {
     _Runtime.callValue(setAudioBusMixerGuard, cast ([EnableAudioMixerGuards.warnOnUnmixedBus__enableAudioMixerGuards] : Array<Dynamic>));
   }

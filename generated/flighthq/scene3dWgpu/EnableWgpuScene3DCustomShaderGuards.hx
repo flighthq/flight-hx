@@ -13,15 +13,18 @@ import flighthq.types.WgpuCustomMaterialShaderSource;
 import flighthq.types.WgpuRenderState;
 
 class EnableWgpuScene3DCustomShaderGuards {
+  @:noCompletion
   public static function areWgpuScene3DCustomShaderGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableWgpuScene3DCustomShaderGuards(state:WgpuRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard', runWgpuCustomShaderGuards);
   }
 
+  @:noCompletion
   public static function runWgpuCustomShaderGuards(state:WgpuRenderState, shaderKey:String, source:WgpuCustomMaterialShaderSource, material:CustomShaderMaterial):Void {
     var uniforms:Dynamic = cast _Runtime.UNDEFINED;
     var uniformNames:Dynamic = cast _Runtime.UNDEFINED;

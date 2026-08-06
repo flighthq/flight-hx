@@ -8,6 +8,7 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextLayout.TextMeasureFunction;
 
 class CanvasTextMeasure {
+  @:noCompletion
   public static function createCanvasTextMeasure():TextMeasureFunction {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;

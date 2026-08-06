@@ -7,20 +7,24 @@ import flighthq.types.Skeleton2DGuards.Skeleton2DCoercedInterpolationGuard;
 import flighthq.types.Skeleton2DGuards.Skeleton2DDeformLengthGuard;
 
 class Skeleton2dGuards {
+  @:noCompletion
   public static function reportSkeleton2DCoercedInterpolation(subject:String, stated:String, applied:String):Void {
     if ((cast _Runtime.strictEquals(Skeleton2dGuards._coercedInterpolationGuard__skeleton2dGuards, null) : Bool)) { return; }
     _Runtime.callValue(Skeleton2dGuards._coercedInterpolationGuard__skeleton2dGuards, cast ([{ applied: applied, stated: stated, subject: subject }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function reportSkeleton2DDeformLengthMismatch(subject:String, offsets:Float, addressed:Float):Void {
     if ((cast _Runtime.strictEquals(Skeleton2dGuards._deformLengthGuard__skeleton2dGuards, null) : Bool)) { return; }
     _Runtime.callValue(Skeleton2dGuards._deformLengthGuard__skeleton2dGuards, cast ([{ addressed: addressed, offsets: offsets, subject: subject }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setSkeleton2DCoercedInterpolationGuard(guard:Null<Skeleton2DCoercedInterpolationGuard>):Void {
     (Skeleton2dGuards._coercedInterpolationGuard__skeleton2dGuards = cast (guard : Dynamic));
   }
 
+  @:noCompletion
   public static function setSkeleton2DDeformLengthGuard(guard:Null<Skeleton2DDeformLengthGuard>):Void {
     (Skeleton2dGuards._deformLengthGuard__skeleton2dGuards = cast (guard : Dynamic));
   }

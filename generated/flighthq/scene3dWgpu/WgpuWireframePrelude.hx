@@ -15,6 +15,7 @@ import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuWireframePipeline;
 
 class WgpuWireframePrelude {
+  @:noCompletion
   public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor, alphaCutoff:Dynamic = 0.5):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
@@ -40,6 +41,7 @@ class WgpuWireframePrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, blended:Dynamic = false, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -51,11 +53,13 @@ class WgpuWireframePrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'wireframe:' + Std.string(format) + '|' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuWireframePipeline, cast ([state, format, blended, alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuWireframeModuleSource(alphaMaskEnabled:Dynamic = false):String {
     return cast (('const ALPHA_MASK : bool = ' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + WGPU_MESH_PRELUDE_WGSL) + WgpuWireframePrelude.WIREFRAME_WGSL_BODY__wgpuWireframePrelude);
     return cast null;

@@ -19,6 +19,7 @@ class GlStandardMaterial {
     _Runtime.callValue(registerGlMaterialRenderer, cast ([state, StandardMaterialKindValue, standardGlMaterialRenderer] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static final standardGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>) {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     shader = _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));

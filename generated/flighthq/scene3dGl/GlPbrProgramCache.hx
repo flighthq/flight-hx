@@ -18,6 +18,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
 
 class GlPbrProgramCache {
+  @:noCompletion
   public static function compileGlPbrProgram(gl:Dynamic, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlPbrProgram {
     if (contributions == null) contributions = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
@@ -31,6 +32,7 @@ class GlPbrProgramCache {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>):GlPbrProgram {
     if (contributions == null) contributions = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var fullKey:GlPbrDefineKey = cast _Runtime.UNDEFINED;

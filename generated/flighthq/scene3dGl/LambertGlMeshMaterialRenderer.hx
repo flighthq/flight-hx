@@ -29,6 +29,7 @@ import flighthq.types.Types.LambertMaterialKind;
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 
 class LambertGlMeshMaterialRenderer {
+  @:noCompletion
   public static final lambertGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
     var lambert:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

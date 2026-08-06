@@ -42,6 +42,7 @@ class DomTextLabel {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

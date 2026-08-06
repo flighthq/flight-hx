@@ -25,6 +25,7 @@ typedef BevelCompositeLocations__glBevelEffect = Dynamic;
 typedef BevelCompositeParams__glBevelEffect = { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; };
 
 class GlBevelEffect {
+  @:noCompletion
   public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;

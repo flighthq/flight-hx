@@ -42,6 +42,7 @@ class DisplayObject {
     return cast null;
   }
 
+  @:noCompletion
   public static function createNode2DRuntime(?methods:Dynamic):Node2DRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createNodeRuntime, cast ([methods] : Array<Dynamic>)) : Node2DRuntime);
@@ -53,6 +54,7 @@ class DisplayObject {
     return cast null;
   }
 
+  @:noCompletion
   public static function getNode2DRuntime(source:Node2D):Node2DRuntime {
     return cast (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : Node2DRuntime);
     return cast null;

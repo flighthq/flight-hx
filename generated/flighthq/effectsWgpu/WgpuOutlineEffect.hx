@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuOutlineEffect {
+  @:noCompletion
   public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var thickness:Dynamic = cast _Runtime.UNDEFINED;

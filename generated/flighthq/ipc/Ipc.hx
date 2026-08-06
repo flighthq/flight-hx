@@ -44,6 +44,7 @@ class Ipc {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebIpcBackend():IpcBackend {
     return cast { send: function() {
 
@@ -67,6 +68,7 @@ class Ipc {
     return cast null;
   }
 
+  @:noCompletion
   public static function getIpcBackend():IpcBackend {
     if ((cast _Runtime.strictEquals(Ipc._backend__ipc, null) : Bool)) { (Ipc._backend__ipc = cast (_Runtime.callValue(createWebIpcBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Ipc._backend__ipc;
@@ -85,6 +87,7 @@ class Ipc {
     return cast null;
   }
 
+  @:noCompletion
   public static function hasIpcBackend():Bool {
     return cast !_Runtime.strictEquals(Ipc._backend__ipc, null);
     return cast null;
@@ -213,6 +216,7 @@ class Ipc {
     _Runtime.callOptionalProperty(_Runtime.callValue(getIpcBackend, cast ([] : Array<Dynamic>)), 'sendTo', cast ([target, _Runtime.callValue(Ipc.resolveChannel__ipc, cast ([channel] : Array<Dynamic>)), args] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setIpcBackend(backend:Null<IpcBackend>):Void {
     (Ipc._backend__ipc = cast (backend : Dynamic));
     if ((cast !_Runtime.strictEquals(Ipc._ipcSignals__ipc, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Ipc._ipcSignals__ipc.onBackendChanged]]), 1); }

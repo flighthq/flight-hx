@@ -8,6 +8,7 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Entity {
+  @:noCompletion
   public static function createEntity<Type>(?obj:Type):Type {
     if (obj == null) obj = cast {};
     final entity:Type = cast obj;

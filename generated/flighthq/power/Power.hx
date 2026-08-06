@@ -103,16 +103,19 @@ class Power {
     return cast null;
   }
 
+  @:noCompletion
   public static function createPowerBatteryHealth():PowerBatteryHealth {
     return cast { capacityWearLevel: -1.0, cycleCount: -1.0, healthState: 'Unknown', temperatureCelsius: -1.0, voltage: -1.0 };
     return cast null;
   }
 
+  @:noCompletion
   public static function createPowerStatus():PowerStatus {
     return cast { batteryLevel: -1.0, chargingTime: -1.0, dischargingTime: -1.0, isBatteryLow: false, isCharging: false, isLowPower: false, isOnBattery: false, thermalState: 'Unknown' };
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebPowerBackend():PowerBackend {
     var cachedLevel:Dynamic = cast _Runtime.UNDEFINED;
     var cachedCharging:Dynamic = cast _Runtime.UNDEFINED;
@@ -299,6 +302,7 @@ class Power {
     if ((cast _Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { (power.onUnlockScreen = cast (_Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) : Dynamic)); }
   }
 
+  @:noCompletion
   public static function getPowerBackend():PowerBackend {
     if ((cast _Runtime.strictEquals(Power._backend__power, null) : Bool)) { (Power._backend__power = cast (_Runtime.callValue(createWebPowerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Power._backend__power;
@@ -353,6 +357,7 @@ class Power {
     return cast null;
   }
 
+  @:noCompletion
   public static function setPowerBackend(backend:Null<PowerBackend>):Void {
     (Power._backend__power = cast (backend : Dynamic));
   }

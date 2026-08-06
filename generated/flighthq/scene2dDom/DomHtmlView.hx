@@ -12,6 +12,7 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
 class DomHtmlView {
+  @:noCompletion
   public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;

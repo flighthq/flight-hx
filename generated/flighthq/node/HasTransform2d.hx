@@ -8,6 +8,7 @@ import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.MethodsOf;
 
 class HasTransform2d {
+  @:noCompletion
   public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:Dynamic):Void {
     (target.localMatrix = cast (null : Dynamic));
     (target.rotationAngle = cast (0.0 : Dynamic));
@@ -16,6 +17,7 @@ class HasTransform2d {
     (target.worldMatrix = cast (null : Dynamic));
   }
 
+  @:noCompletion
   public static function initTransform2DTrait(target:HasTransform2D, ?obj:Dynamic):Void {
     (target.pivotX = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'pivotX'), function():Dynamic return cast 0.0) : Dynamic));
     (target.pivotY = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'pivotY'), function():Dynamic return cast 0.0) : Dynamic));

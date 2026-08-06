@@ -12,6 +12,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlDisplacementEffect {
+  @:noCompletion
   public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var frequency:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,6 +10,7 @@ import flighthq.types.Types.ClearcoatPbrExtensionKind;
 import flighthq.types._internal._ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
 
 class ClearcoatPbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerClearcoatPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, ClearcoatPbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var clearcoat:Dynamic = cast _Runtime.UNDEFINED;

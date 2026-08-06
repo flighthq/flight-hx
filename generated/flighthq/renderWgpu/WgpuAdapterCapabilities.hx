@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.WgpuAdapterCapabilities;
 
 class WgpuAdapterCapabilities {
+  @:noCompletion
   public static function getWgpuAdapterCapabilities(adapter:Dynamic):flighthq.types.WgpuAdapterCapabilities {
     var features:Dynamic = cast _Runtime.UNDEFINED;
     var limits:Dynamic = cast _Runtime.UNDEFINED;

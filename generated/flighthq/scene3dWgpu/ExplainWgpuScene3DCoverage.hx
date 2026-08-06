@@ -16,11 +16,13 @@ import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class ExplainWgpuScene3DCoverage {
+  @:noCompletion
   public static function explainWgpuScene3DCoverage(out:Array<SceneCoverageEntry>, state:WgpuRenderState, usage:Scene3DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
     _Runtime.callValue(ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function hasWgpuScene3DCoverage(state:WgpuRenderState, usage:Scene3DKindUsage):Bool {
     return cast !(cast _Runtime.callValue(ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
     return cast null;

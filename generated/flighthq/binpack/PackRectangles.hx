@@ -290,5 +290,6 @@ class PackRectangles {
     return cast null;
   }
 
+  @:noCompletion
   public static final BIN_PACK_DEFAULT_MAX_EXTENT:Dynamic = 16384.0;
 }

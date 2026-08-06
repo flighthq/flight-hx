@@ -25,6 +25,7 @@ import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
 
 class CanvasRenderEffectPipeline {
+  @:noCompletion
   public static function acquireCanvasRenderTarget(pool:Dynamic, width:Float, height:Float):Dynamic {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,11 +58,13 @@ class CanvasRenderEffectPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function createCanvasRenderTargetPool():Dynamic {
     return cast { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyCanvasRenderEffectPipeline(_state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.setField(pipeline, 'sceneTarget', null);
     _Runtime.setLength(_Runtime.field(_Runtime.field(pipeline, 'pool'), 'free'), 0.0);
@@ -127,6 +130,7 @@ class CanvasRenderEffectPipeline {
     if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, scratchB] : Array<Dynamic>)); }
   }
 
+  @:noCompletion
   public static function releaseCanvasRenderTarget(pool:Dynamic, target:Dynamic):Void {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.callProperty(_Runtime.field(pool, 'inUse'), 'indexOf', cast ([target] : Array<Dynamic>));

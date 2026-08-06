@@ -343,6 +343,7 @@ class SceneRender {
 
   public static final scratchLightData__sceneRender:Dynamic = new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS);
 
+  @:noCompletion
   public static function setSkinnedMeshBoundsGuard(guard:Null<Dynamic>):Void {
     (SceneRender._skinnedBoundsGuard__sceneRender = cast (guard : Dynamic));
   }

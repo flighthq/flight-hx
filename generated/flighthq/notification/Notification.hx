@@ -59,6 +59,7 @@ class Notification {
     _Runtime.callOptionalProperty(backend, 'createNotificationChannel', cast ([channel] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function createServiceWorkerNotificationBackend(registration:ServiceWorkerRegistrationLike__notification):NotificationBackend {
     var _generateId:Void->String = cast _Runtime.UNDEFINED;
     var _fire:Dynamic->Dynamic->Void = cast _Runtime.UNDEFINED;
@@ -339,6 +340,7 @@ class Notification {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebNotificationBackend():NotificationBackend {
     var _generateId:Void->String = cast _Runtime.UNDEFINED;
     var _fire:Dynamic->Dynamic->Void = cast _Runtime.UNDEFINED;
@@ -585,6 +587,7 @@ class Notification {
     return cast null;
   }
 
+  @:noCompletion
   public static function getNotificationBackend():NotificationBackend {
     if ((cast _Runtime.strictEquals(Notification._backend__notification, null) : Bool)) { (Notification._backend__notification = cast (_Runtime.callValue(createWebNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Notification._backend__notification;
@@ -618,6 +621,7 @@ class Notification {
     return cast null;
   }
 
+  @:noCompletion
   public static function notifyServiceWorkerBackendAction(backend:NotificationBackend, message:{ var type:String; var notificationId:String; @:optional var actionId:String; @:optional var reply:String; }):Void {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(message, 'type'), 'notificationclick') : Bool)) { return; }
@@ -666,6 +670,7 @@ class Notification {
     return cast null;
   }
 
+  @:noCompletion
   public static function setNotificationBackend(backend:Null<NotificationBackend>):Void {
     (Notification._backend__notification = cast (backend : Dynamic));
   }

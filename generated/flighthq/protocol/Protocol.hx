@@ -82,6 +82,7 @@ class Protocol {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebProtocolBackend():ProtocolBackend {
     var _registeredSchemes:Array<String> = cast _Runtime.UNDEFINED;
     _registeredSchemes = cast ([] : Array<Dynamic>);
@@ -144,6 +145,7 @@ class Protocol {
     _Runtime.callValue(detachProtocolHandler, cast ([handler] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getProtocolBackend():ProtocolBackend {
     if ((cast _Runtime.strictEquals(Protocol._backend__protocol, null) : Bool)) { (Protocol._backend__protocol = cast (_Runtime.callValue(createWebProtocolBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Protocol._backend__protocol;
@@ -258,6 +260,7 @@ class Protocol {
     return cast null;
   }
 
+  @:noCompletion
   public static function setProtocolBackend(backend:Null<ProtocolBackend>):Void {
     (Protocol._backend__protocol = cast (backend : Dynamic));
   }

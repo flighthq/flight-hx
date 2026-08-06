@@ -12,10 +12,12 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.MedianEffect;
 
 class GlMedianEffect {
+  @:noCompletion
   public static final MAX_MEDIAN_EFFECT_GL_RADIUS:Dynamic = 2.0;
 
   public static final MAX_SAMPLES__glMedianEffect:Dynamic = (((MAX_MEDIAN_EFFECT_GL_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_GL_RADIUS * 2.0) + 1.0));
 
+  @:noCompletion
   public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

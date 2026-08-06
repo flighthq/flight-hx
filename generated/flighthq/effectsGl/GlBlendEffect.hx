@@ -15,6 +15,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue as AdvancedBlendModeValues;
 
 class GlBlendEffect {
+  @:noCompletion
   public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,11 +46,13 @@ class GlBlendEffect {
     _Runtime.callValue(applyBlendEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlendEffect)] : Array<Dynamic>));
   };
 
+  @:noCompletion
   public static function getBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
     return cast _Runtime.coalesce(_Runtime.getIndex(GlBlendEffect.BLEND_MODE_INDEX__glBlendEffect, mode), function():Dynamic return cast -1.0);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(backdropKey)); }), function():Dynamic return cast null);
@@ -70,6 +73,7 @@ class GlBlendEffect {
     ((cast registry : flighthq._internal._Map).set(backdropKey, texture));
   }
 
+  @:noCompletion
   public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
     return cast _Runtime.coalesce(({ final __collection1:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state)); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
@@ -79,5 +83,6 @@ class GlBlendEffect {
 
   public static final _backdrops__glBlendEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static final BLEND_FRAGMENT_SRC:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform int u_mode;\nuniform float u_opacity;\nuniform int u_hasBackdrop;\nout vec4 o_color;\n\nfloat lum(vec3 c) { return 0.3 * c.r + 0.59 * c.g + 0.11 * c.b; }\nfloat sat(vec3 c) { return max(max(c.r, c.g), c.b) - min(min(c.r, c.g), c.b); }\n\nvec3 clipColor(vec3 c) {\n  float l = lum(c);\n  float mn = min(min(c.r, c.g), c.b);\n  float mx = max(max(c.r, c.g), c.b);\n  if (mn < 0.0) c = l + (c - l) * l / (l - mn);\n  if (mx > 1.0) c = l + (c - l) * (1.0 - l) / (mx - l);\n  return c;\n}\nvec3 setLum(vec3 c, float l) { return clipColor(c + (l - lum(c))); }\n\nvec3 setSat(vec3 c, float s) {\n  // Resolve min/mid/max channels, rescale mid+max to s, pin min to 0. Branchy but only three channels.\n  float mn = min(min(c.r, c.g), c.b);\n  float mx = max(max(c.r, c.g), c.b);\n  float md = (c.r + c.g + c.b) - mn - mx;\n  vec3 o;\n  float rmid = (mx > mn) ? (md - mn) * s / (mx - mn) : 0.0;\n  float rmax = (mx > mn) ? s : 0.0;\n  o.r = (c.r == mx) ? rmax : ((c.r == mn) ? 0.0 : rmid);\n  o.g = (c.g == mx) ? rmax : ((c.g == mn) ? 0.0 : rmid);\n  o.b = (c.b == mx) ? rmax : ((c.b == mn) ? 0.0 : rmid);\n  return o;\n}\n\nfloat sepChannel(int mode, float cb, float cs) {\n  if (mode == 0) return cb <= 0.5 ? 2.0 * cb * cs : 1.0 - 2.0 * (1.0 - cb) * (1.0 - cs);      // Overlay\n  if (mode == 1) return cs <= 0.5 ? 2.0 * cb * cs : 1.0 - 2.0 * (1.0 - cb) * (1.0 - cs);      // HardLight\n  if (mode == 2) {                                                                             // SoftLight\n    float d = cb <= 0.25 ? ((16.0 * cb - 12.0) * cb + 4.0) * cb : sqrt(cb);\n    return cs <= 0.5 ? cb - (1.0 - 2.0 * cs) * cb * (1.0 - cb) : cb + (2.0 * cs - 1.0) * (d - cb);\n  }\n  if (mode == 3) return abs(cb - cs);                                                          // Difference\n  if (mode == 4) return cb + cs - 2.0 * cb * cs;                                               // Exclusion\n  if (mode == 5) return cb <= 0.0 ? 0.0 : (cs >= 1.0 ? 1.0 : min(1.0, cb / (1.0 - cs)));       // ColorDodge\n  if (mode == 6) return cb >= 1.0 ? 1.0 : (cs <= 0.0 ? 0.0 : 1.0 - min(1.0, (1.0 - cb) / cs)); // ColorBurn\n  if (mode == 11) return min(cb, cs);                                                          // Darken\n  if (mode == 12) return max(cb, cs);                                                          // Lighten\n  return cs;                                                                                   // Normal\n}\n\nvec3 blendRgb(int mode, vec3 cb, vec3 cs) {\n  if (mode == 7) return setLum(setSat(cs, sat(cb)), lum(cb));  // Hue\n  if (mode == 8) return setLum(setSat(cb, sat(cs)), lum(cb));  // Saturation\n  if (mode == 9) return setLum(cs, lum(cb));                   // Color\n  if (mode == 10) return setLum(cb, lum(cs));                  // Luminosity\n  return vec3(sepChannel(mode, cb.r, cs.r), sepChannel(mode, cb.g, cs.g), sepChannel(mode, cb.b, cs.b));\n}\n\nvoid main() {\n  vec4 layer = texture(u_texture0, v_texCoord);\n  // No backdrop registered: the blend has nothing to read, so pass the layer through unchanged.\n  if (u_hasBackdrop == 0) { o_color = layer; return; }\n  vec4 back = texture(u_texture1, v_texCoord);\n\n  // Un-premultiply to straight RGB for the blend math.\n  vec3 cs = layer.a > 0.0 ? layer.rgb / layer.a : vec3(0.0);\n  vec3 cb = back.a > 0.0 ? back.rgb / back.a : vec3(0.0);\n  float as = layer.a * u_opacity;\n  float ab = back.a;\n\n  // W3C blend mixing: the blended color contributes only where the backdrop is opaque; elsewhere the\n  // straight source shows through. cs\' = (1 - ab) * cs + ab * B(cb, cs).\n  vec3 blended = blendRgb(u_mode, cb, cs);\n  vec3 mixed = (1.0 - ab) * cs + ab * blended;\n\n  // Porter-Duff source-over of the (mixed) layer onto the backdrop, output premultiplied.\n  float outA = as + ab * (1.0 - as);\n  vec3 outRgb = mixed * as + cb * ab * (1.0 - as);\n  o_color = vec4(outRgb, outA);\n}';
 }

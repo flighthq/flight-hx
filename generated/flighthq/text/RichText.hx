@@ -107,6 +107,7 @@ class RichText {
     return cast null;
   }
 
+  @:noCompletion
   public static function createRichTextData(?data:Dynamic):RichTextData {
     var _data:Dynamic = cast _Runtime.UNDEFINED;
     _data = (cast _Runtime.callValue(createTextLabelData, cast ([data] : Array<Dynamic>)) : RichTextData);
@@ -131,6 +132,7 @@ class RichText {
     return cast null;
   }
 
+  @:noCompletion
   public static function createRichTextRuntime():RichTextRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createNode2DRuntime, cast ([RichText.defaultMethods__richText] : Array<Dynamic>)) : RichTextRuntime);
@@ -146,6 +148,7 @@ class RichText {
     return cast null;
   }
 
+  @:noCompletion
   public static function createTextFieldSignals():TextFieldSignals {
     return cast { onTextFieldChange: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextFieldLink: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextFieldScroll: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
@@ -291,6 +294,7 @@ class RichText {
     return cast null;
   }
 
+  @:noCompletion
   public static function getRichTextRuntime(source:flighthq.types.RichText):RichTextRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast null;

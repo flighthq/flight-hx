@@ -7,6 +7,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Mapper;
 
 class CanvasScale9Mapper {
+  @:noCompletion
   public static function buildScale9Mapper(commands:Array<Dynamic>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

@@ -20,6 +20,7 @@ class GlEffectTintShader {
 
   public static final invertTintShaders__glEffectTintShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectTintShader.getGlInvertTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
@@ -31,6 +32,7 @@ class GlEffectTintShader {
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectTintShader.getGlTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));

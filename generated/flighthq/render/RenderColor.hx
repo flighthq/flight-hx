@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.RenderState;
 
 class RenderColor {
+  @:noCompletion
   public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
     var _state:Dynamic = cast _Runtime.UNDEFINED;
     var uint:Dynamic = cast _Runtime.UNDEFINED;

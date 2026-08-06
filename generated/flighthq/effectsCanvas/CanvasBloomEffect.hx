@@ -15,6 +15,7 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasBloomEffect {
+  @:noCompletion
   public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

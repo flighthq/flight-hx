@@ -10,6 +10,7 @@ import flighthq.types.Types.IridescencePbrExtensionKind;
 import flighthq.types._internal._IridescencePbrExtensionValues.IridescencePbrExtensionKind;
 
 class IridescencePbrScene3DMaterialTextures {
+  @:noCompletion
   public static function registerIridescencePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, IridescencePbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
       var iridescence:Dynamic = cast _Runtime.UNDEFINED;

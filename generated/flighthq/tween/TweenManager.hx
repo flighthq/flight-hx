@@ -13,5 +13,6 @@ class TweenManager {
     return cast null;
   }
 
+  @:noCompletion
   public static final defaultManager:flighthq.types.TweenManager = _Runtime.callValue(createTweenManager, cast ([] : Array<Dynamic>));
 }

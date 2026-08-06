@@ -7,12 +7,14 @@ import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasColorMatrixPass {
+  @:noCompletion
   public static function applyColorMatrixPassToCanvas(source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
       _Runtime.callValue(applyColorMatrixToImageDataBytes, cast ([data, pixelCount, matrix] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyColorMatrixToImageDataBytes(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float, matrix:Array<Float>):Void {
     var m0:Dynamic = cast _Runtime.UNDEFINED;
     var m1:Dynamic = cast _Runtime.UNDEFINED;

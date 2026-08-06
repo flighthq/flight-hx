@@ -11,6 +11,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.VignetteEffect;
 
 class CanvasVignetteEffect {
+  @:noCompletion
   public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;

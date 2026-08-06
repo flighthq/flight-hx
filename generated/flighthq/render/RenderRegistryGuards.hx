@@ -14,6 +14,7 @@ import flighthq.types.RenderRegistrySignals.RenderRegistryMissExplanation;
 import flighthq.types.RenderState;
 
 class RenderRegistryGuards {
+  @:noCompletion
   public static function areRenderRegistryGuardsEnabled(state:RenderState):Bool {
     return cast ((cast RenderRegistryGuards._stateIds__renderRegistryGuards : flighthq._internal._WeakMap).has(state));
     return cast null;

@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.LensDirtEffect;
 
 class GlLensDirtEffect {
+  @:noCompletion
   public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var threshold:Dynamic = cast _Runtime.UNDEFINED;

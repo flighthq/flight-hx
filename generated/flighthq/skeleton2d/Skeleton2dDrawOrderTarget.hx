@@ -20,11 +20,13 @@ import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types._internal._Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue as TargetKind;
 
 class Skeleton2dDrawOrderTarget {
+  @:noCompletion
   public static function createSkeleton2DDrawOrderAnimationTarget<Traits>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
     return cast { kind: TargetKind.DrawOrder, nodes: nodes, orderList: orderList };
     return cast null;
   }
 
+  @:noCompletion
   public static function createSkeleton2DDrawOrderChannel<Traits>(timeline:Skeleton2DDrawOrderTimeline, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Null<AnimationChannel> {
     var keyframes:Dynamic = cast _Runtime.UNDEFINED;
     var slotCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,10 +38,12 @@ class Skeleton2dDrawOrderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function registerSkeleton2DDrawOrderAnimationBinder():Void {
     _Runtime.callValue(registerSkeleton2DAnimationTargetBinder, cast ([TargetKind.DrawOrder, Skeleton2dDrawOrderTarget.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function unregisterSkeleton2DDrawOrderAnimationBinder():Void {
     _Runtime.callValue(unregisterSkeleton2DAnimationTargetBinder, cast ([TargetKind.DrawOrder] : Array<Dynamic>));
   }

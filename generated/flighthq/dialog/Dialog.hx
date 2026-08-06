@@ -76,6 +76,7 @@ class Dialog {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebDialogBackend():DialogBackend {
     return cast { confirm: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
@@ -124,6 +125,7 @@ class Dialog {
     return cast null;
   }
 
+  @:noCompletion
   public static function getDialogBackend():DialogBackend {
     if ((cast _Runtime.strictEquals(Dialog._backend__dialog, null) : Bool)) { (Dialog._backend__dialog = cast (_Runtime.callValue(createWebDialogBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Dialog._backend__dialog;
@@ -472,6 +474,7 @@ class Dialog {
     );
   }
 
+  @:noCompletion
   public static function setDialogBackend(backend:Null<DialogBackend>):Void {
     (Dialog._backend__dialog = cast (backend : Dynamic));
   }

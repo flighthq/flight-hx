@@ -69,6 +69,7 @@ class GlParticleEmitter2D {
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
   }
 
+  @:noCompletion
   public static function drawGlParticleEmitter2D(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

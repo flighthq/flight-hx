@@ -30,6 +30,7 @@ class ParticleEmitter {
 
   public static final PARTICLE_VELOCITY_STRIDE__particleEmitter:Dynamic = 2.0;
 
+  @:noCompletion
   public static final PARTICLE_EMITTER_DELETED_ID:Dynamic = 65535.0;
 
   public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Node<Dynamic>):Void {
@@ -201,6 +202,7 @@ class ParticleEmitter {
     return cast null;
   }
 
+  @:noCompletion
   public static function createParticleEmitter2DRuntime():ParticleEmitter2DRuntime {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(createNode2DRuntime, cast ([ParticleEmitter.defaultMethods__particleEmitter] : Array<Dynamic>)) : ParticleEmitter2DRuntime);
@@ -209,6 +211,7 @@ class ParticleEmitter {
     return cast null;
   }
 
+  @:noCompletion
   public static function createParticleEmitterData(?data:Dynamic):ParticleEmitterData {
     return cast { alphas: _Runtime.coalesce(_Runtime.optionalField(data, 'alphas'), function():Dynamic return cast new flighthq._internal._Float32Array()), atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), colors: _Runtime.coalesce(_Runtime.optionalField(data, 'colors'), function():Dynamic return cast new flighthq._internal._Float32Array()), ids: _Runtime.coalesce(_Runtime.optionalField(data, 'ids'), function():Dynamic return cast new flighthq._internal._UInt16Array()), particleCount: _Runtime.coalesce(_Runtime.optionalField(data, 'particleCount'), function():Dynamic return cast 0.0), positionsZ: _Runtime.coalesce(_Runtime.optionalField(data, 'positionsZ'), function():Dynamic return cast new flighthq._internal._Float32Array()), transforms: _Runtime.coalesce(_Runtime.optionalField(data, 'transforms'), function():Dynamic return cast new flighthq._internal._Float32Array()), velocities: _Runtime.coalesce(_Runtime.optionalField(data, 'velocities'), function():Dynamic return cast new flighthq._internal._Float32Array()), worldSpace: _Runtime.coalesce(_Runtime.optionalField(data, 'worldSpace'), function():Dynamic return cast false) };
     return cast null;
@@ -245,6 +248,7 @@ class ParticleEmitter {
     return cast null;
   }
 
+  @:noCompletion
   public static function getParticleEmitter2DRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : ParticleEmitter2DRuntime);
     return cast null;

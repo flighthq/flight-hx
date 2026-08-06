@@ -119,11 +119,13 @@ class Statusbar {
     return cast null;
   }
 
+  @:noCompletion
   public static function createStatusBarInfo():StatusBarInfo {
     return cast { color: 0.0, height: -1.0, overlaysContent: false, style: 'default', visible: true };
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebStatusBarBackend():StatusBarBackend {
     return cast { getInfo: function(out:StatusBarInfo) {
       (out.color = cast (_Runtime.callValue(Statusbar._webReadThemeColor__statusbar, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -172,6 +174,7 @@ class Statusbar {
     _Runtime.callValue(detachStatusBar, cast ([bar] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getStatusBarBackend():StatusBarBackend {
     if ((cast _Runtime.strictEquals(Statusbar._backend__statusbar, null) : Bool)) { (Statusbar._backend__statusbar = cast (_Runtime.callValue(createWebStatusBarBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Statusbar._backend__statusbar;
@@ -225,6 +228,7 @@ class Statusbar {
     return cast null;
   }
 
+  @:noCompletion
   public static function setStatusBarBackend(backend:Null<StatusBarBackend>):Void {
     (Statusbar._backend__statusbar = cast (backend : Dynamic));
   }

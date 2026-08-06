@@ -29,6 +29,7 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextSelectionRectangle;
 
 class CanvasRichText {
+  @:noCompletion
   public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(CanvasRichText.drawCanvasRichTextField__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool)) {
@@ -36,6 +37,7 @@ class CanvasRichText {
     }
   }
 
+  @:noCompletion
   public static function drawCanvasRichTextMask(state:Dynamic, data:RenderProxy2D):Void {
     _Runtime.callValue(drawCanvasScene2D, cast ([state, data] : Array<Dynamic>));
   }
@@ -140,6 +142,7 @@ class CanvasRichText {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function registerCanvasTextInputOverlay(overlay:Dynamic):Void {
     (CanvasRichText._canvasTextInputOverlay__canvasRichText = cast (overlay : Dynamic));
   }

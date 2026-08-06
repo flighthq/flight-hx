@@ -16,6 +16,7 @@ import flighthq.types.WgpuRenderTarget;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
 class WgpuCompositeEffect {
+  @:noCompletion
   public static function applyCompositeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CompositeEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;
     var hasBackdrop:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,6 +32,7 @@ class WgpuCompositeEffect {
     _Runtime.callValue(applyCompositeEffectToWgpu, cast ([_Runtime.field(context, 'state'), _Runtime.field(context, 'source'), _Runtime.field(context, 'dest'), (cast effect : CompositeEffect)] : Array<Dynamic>));
   };
 
+  @:noCompletion
   public static function getWgpuCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
     return cast _Runtime.coalesce(_Runtime.getIndex(WgpuCompositeEffect.COMPOSITE_OPERATOR_INDEX__wgpuCompositeEffect, operator_), function():Dynamic return cast 0.0);
     return cast null;
@@ -55,5 +57,6 @@ class WgpuCompositeEffect {
 
   public static final pipelines__wgpuCompositeEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static final WGPU_COMPOSITE_FRAGMENT_WGSL:Dynamic = '\nstruct Uniforms {\n  operatorIndex : i32,\n  hasBackdrop : i32,\n  _pad0 : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var layerTexture : texture_2d<f32>;\n@group(1) @binding(1) var layerSampler : sampler;\n@group(2) @binding(0) var backdropTexture : texture_2d<f32>;\n@group(2) @binding(1) var backdropSampler : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let layer = textureSampleLevel(layerTexture, layerSampler, uv, 0.0);\n  let back = select(vec4f(0.0), textureSampleLevel(backdropTexture, backdropSampler, uv, 0.0),\n                    uni.hasBackdrop == 1);\n  let sourceAlpha = layer.a;\n  let backdropAlpha = back.a;\n  var sourceFactor = 1.0;\n  var backdropFactor = 1.0 - sourceAlpha;\n  if (uni.operatorIndex == 1) {\n    sourceFactor = 1.0 - backdropAlpha; backdropFactor = 1.0;\n  } else if (uni.operatorIndex == 2) {\n    sourceFactor = backdropAlpha; backdropFactor = 0.0;\n  } else if (uni.operatorIndex == 3) {\n    sourceFactor = 0.0; backdropFactor = sourceAlpha;\n  } else if (uni.operatorIndex == 4) {\n    sourceFactor = 1.0 - backdropAlpha; backdropFactor = 0.0;\n  } else if (uni.operatorIndex == 5) {\n    sourceFactor = 0.0; backdropFactor = 1.0 - sourceAlpha;\n  } else if (uni.operatorIndex == 6) {\n    sourceFactor = backdropAlpha; backdropFactor = 1.0 - sourceAlpha;\n  } else if (uni.operatorIndex == 7) {\n    sourceFactor = 1.0 - backdropAlpha; backdropFactor = sourceAlpha;\n  } else if (uni.operatorIndex == 8) {\n    sourceFactor = 1.0 - backdropAlpha; backdropFactor = 1.0 - sourceAlpha;\n  } else if (uni.operatorIndex == 9) {\n    sourceFactor = 1.0; backdropFactor = 0.0;\n  } else if (uni.operatorIndex == 10) {\n    sourceFactor = 0.0; backdropFactor = 0.0;\n  }\n  return sourceFactor * layer + backdropFactor * back;\n}\n';
 }

@@ -12,6 +12,7 @@ import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 
 class GlShapeData {
+  @:noCompletion
   public static function acquireGlShapeRasterSurface(data:GlShapeRendererData):GlShapeRasterSurface {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,11 +28,13 @@ class GlShapeData {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGlShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     return cast _Runtime.callValue(toGlShapeRendererData, cast ([{ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null }] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlShapeData(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var surface:Dynamic = cast _Runtime.UNDEFINED;
@@ -46,11 +49,13 @@ class GlShapeData {
     }
   }
 
+  @:noCompletion
   public static function getGlShapeData(data:RendererData):GlShapeRendererData {
     return cast (cast (cast data : Dynamic) : GlShapeRendererData);
     return cast null;
   }
 
+  @:noCompletion
   public static function toGlShapeRendererData(data:GlShapeRendererData):RendererData {
     return cast (cast (cast data : Dynamic) : RendererData);
     return cast null;

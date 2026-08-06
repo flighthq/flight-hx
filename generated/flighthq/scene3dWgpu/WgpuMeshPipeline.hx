@@ -73,6 +73,7 @@ class WgpuMeshPipeline {
     }
   }
 
+  @:noCompletion
   public static function buildWgpuMaterialBindGroup(state:WgpuRenderState, layout:Dynamic, buffer:Dynamic, sampler:Dynamic, views:Array<Dynamic>):Dynamic {
     var entries:Array<Dynamic> = cast _Runtime.UNDEFINED;
     entries = cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: sampler }] : Array<Dynamic>);
@@ -87,6 +88,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function buildWgpuPerMapMaterialBindGroup(state:WgpuRenderState, layout:Dynamic, buffer:Dynamic, samplers:Array<Dynamic>, views:Array<Dynamic>):Dynamic {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var entries:Array<Dynamic> = cast _Runtime.UNDEFINED;
@@ -110,6 +112,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ @:optional var blended:Bool; var doubleSided:Bool; @:optional var extraBindGroupLayout:Dynamic; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var skinned:Bool; @:optional var topology:Dynamic; }):flighthq.types.WgpuMeshPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var layouts:Dynamic = cast _Runtime.UNDEFINED;
@@ -145,6 +148,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawWgpuMeshSubset(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -176,6 +180,7 @@ class WgpuMeshPipeline {
     _Runtime.callProperty(pass, 'drawIndexed', cast ([subset.indexCount, 1.0, subset.indexOffset, 0.0, 0.0] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function ensureWgpuFrameBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -189,6 +194,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -235,6 +241,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuIblSampleLayout(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -245,6 +252,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuMaterialBinding(state:WgpuRenderState, key:Dynamic, layout:Dynamic, uniformByteSize:Float, sampler:Dynamic, views:Array<Dynamic>):WgpuMaterialBinding {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Dynamic = cast _Runtime.UNDEFINED;
@@ -274,6 +282,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuPbrSampleBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -335,6 +344,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuPbrSampleLayout(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -345,6 +355,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuPerMapMaterialBinding(state:WgpuRenderState, key:Dynamic, layout:Dynamic, uniformByteSize:Float, samplers:Array<Dynamic>, views:Array<Dynamic>):WgpuMaterialBinding {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Dynamic = cast _Runtime.UNDEFINED;
@@ -363,6 +374,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuPlaceholderTextureView(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
@@ -378,6 +390,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuScene3DLayouts(state:WgpuRenderState):WgpuScene3DLayouts {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -390,6 +403,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuScene3DPipeline<T>(state:WgpuRenderState, key:String, compile:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var blended:Dynamic = cast _Runtime.UNDEFINED;
@@ -411,6 +425,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureWgpuShadowSampleBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -486,6 +501,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     var minFilter:Dynamic = cast _Runtime.UNDEFINED;
@@ -502,12 +518,14 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuMeshPreludeWgsl(skinned:Bool, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.callProperty(skinning, 'extendMeshPrelude', cast ([WGPU_MESH_PRELUDE_WGSL] : Array<Dynamic>)) : Dynamic) : (cast WGPU_MESH_PRELUDE_WGSL : Dynamic));
     return cast null;
   }
 
+  @:noCompletion
   public static function isWgpuMaterialBindGroupRebuildNeeded(binding:WgpuMaterialBinding, sampler:Dynamic, views:Array<Dynamic>):Bool {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(binding, 'sampler'), sampler) : Bool)) { return cast true; }
@@ -524,16 +542,19 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function isWgpuTextureReady(texture:Null<Texture>):Bool {
     return cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
+  @:noCompletion
   public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
     return cast _Runtime.coalesce(((cast !_Runtime.strictEquals(texture, null) : Bool) ? (cast _Runtime.optionalField(_Runtime.callValue(resolveWgpuTexture, cast ([state, texture] : Array<Dynamic>)), 'view') : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>)));
     return cast null;
   }
 
+  @:noCompletion
   public static function spliceWgpuColorAdjustmentPrelude(source:String, feature:WgpuColorAdjustmentMaterialFeature, matrix:Dynamic = false):String {
     var fields:Dynamic = cast _Runtime.UNDEFINED;
     fields = ((cast matrix : Bool) ? (cast '  flightColorMatrix0 : vec4f,\n  flightColorMatrix1 : vec4f,\n  flightColorMatrix2 : vec4f,\n  flightColorMatrix3 : vec4f,\n  flightColorMatrixOffset : vec4f,' : Dynamic) : (cast '  flightColorScale : vec4f,\n  flightColorBias : vec4f,' : Dynamic));
@@ -541,6 +562,7 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static function stashWgpuUvTransform(state:WgpuRenderState, texture:Null<TextureLike>):Void {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
@@ -560,6 +582,7 @@ class WgpuMeshPipeline {
     }
   }
 
+  @:noCompletion
   public static function wgpuPerMapMaterialBindGroupNeedsRebuild(binding:WgpuMaterialBinding, samplers:Array<Dynamic>, views:Array<Dynamic>):Bool {
     var cachedSamplers:Dynamic = cast _Runtime.UNDEFINED;
     var cachedViews:Dynamic = cast _Runtime.UNDEFINED;
@@ -684,8 +707,10 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
+  @:noCompletion
   public static final WGPU_MESH_PRELUDE_WGSL:Dynamic = '\nconst PI : f32 = 3.14159265359;\nconst MAX_FORWARD_LIGHTS : u32 = 4u;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraPosition : vec4f,\n  lightDirection : vec4f,       // xyz = directional light travel direction; w = directionalCount\n  directionalRadiance : vec4f,  // rgb = linear premultiplied radiance\n  ambientRadiance : vec4f,      // rgb = linear premultiplied radiance; w = ambientCount\n  view : mat4x4f,               // camera view matrix; rotates world normals into view space (matcap)\n  // Punctual light arrays — layout mirrors Scene3DLightBlock.data (packScene3DLightBlock).\n  //   point[i]      = pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n  //   spot[i]       = spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n  //   hemisphere[i] = hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\n  pointLights : array<vec4f, 8>,       // MAX_FORWARD_LIGHTS * 2\n  spotLights : array<vec4f, 16>,       // MAX_FORWARD_LIGHTS * 4\n  hemisphereLights : array<vec4f, 12>, // MAX_FORWARD_LIGHTS * 3\n  punctualCounts : vec4f,              // x = pointCount, y = spotCount, z = hemisphereCount\n};\n\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,   // KHR_texture_transform of the material\'s primary map (identity when unused)\n  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var<uniform> draw : Draw;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) worldPosition : vec3f,\n  @location(1) worldNormal : vec3f,\n  @location(2) worldTangent : vec4f,\n  @location(3) uv : vec2f,\n  @location(4) @interpolate(flat) objectAlpha : f32,\n};\n\n@vertex fn vs_main(\n  @location(0) position : vec3f,\n  @location(1) normal : vec3f,\n  @location(2) tangent : vec4f,\n  @location(3) uv : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  var localPosition = vec4f(position, 1.0);\n  var localNormal = normal;\n  var localTangent = tangent.xyz;\n  let world = draw.world * localPosition;\n  out.worldPosition = world.xyz;\n  out.clipPosition = frame.viewProjection * world;\n  out.worldNormal = draw.normalMatrix * localNormal;\n  out.worldTangent = vec4f(draw.normalMatrix * localTangent, tangent.w);\n  // Apply the material\'s KHR_texture_transform to the uv. draw.uvTransform is identity for an untiled\n  // material (writeWgpuDrawUniform\'s default), so this is a no-op there — applied unconditionally rather\n  // than behind a pipeline const because this vs_main is shared by every family (classic/unlit/toon/\n  // matcap/debug/wireframe) and a const would have to thread through all of them; a per-vertex mat3\n  // multiply is negligible. The scene-gl mirror gates the equivalent branch via its #ifdef variant.\n  out.uv = (draw.uvTransform * vec3f(uv, 1.0)).xy;\n  out.objectAlpha = draw.params.x;\n  return out;\n}\n\n';
 
+  @:noCompletion
   public static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera3D, lights:Scene3DLightBlock):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Dynamic = cast _Runtime.UNDEFINED;
@@ -813,8 +838,10 @@ class WgpuMeshPipeline {
 
   public static final DEPTH_STENCIL_FORMAT__wgpuMeshPipeline:Dynamic = 'depth24plus-stencil8';
 
+  @:noCompletion
   public static final SHADOW_DEPTH_FORMAT:Dynamic = 'depth32float';
 
+  @:noCompletion
   public static final WGPU_DIRECTIONAL_SHADOW_WGSL:Dynamic = '\nconst MAX_DIRECTIONAL_SHADOW_PCF_RADIUS : i32 = ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + ';\n\nstruct Shadow {\n  matrix : mat4x4f,\n  params : vec4f,\n};\n\n@group(3) @binding(0) var<uniform> shadow : Shadow;\n@group(3) @binding(1) var shadowMap : texture_depth_2d;\n@group(3) @binding(2) var shadowSampler : sampler_comparison;\n\n// Directional shadow factor at a world position. The compile-time radius cap bounds fragment cost;\n// radius 0 and 1 take dedicated one-tap and 3x3 paths, while radius 2 takes the bounded 5x5 path.\n// Outside the frustum / disabled = lit.\nfn compareDirectionalShadow(uv : vec2f, depthRef : f32) -> f32 {\n  return textureSampleCompareLevel(shadowMap, shadowSampler, uv, depthRef);\n}\n\nfn sampleDirectionalShadow(worldPos : vec3f, geometricNormal : vec3f) -> f32 {\n  if (shadow.params.x < 0.5) {\n    return 1.0;\n  }\n  let biasedWorldPos = worldPos + geometricNormal * shadow.params.w;\n  let clip = shadow.matrix * vec4f(biasedWorldPos, 1.0);\n  let ndc = clip.xyz / clip.w;\n  let uv = vec2f(ndc.x * 0.5 + 0.5, 1.0 - (ndc.y * 0.5 + 0.5));\n  let depthRef = ndc.z * 0.5 + 0.5 - shadow.params.z;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0 || depthRef > 1.0) {\n    return 1.0;\n  }\n  let radius = clamp(i32(shadow.params.y), 0, MAX_DIRECTIONAL_SHADOW_PCF_RADIUS);\n  let texel = 1.0 / vec2f(textureDimensions(shadowMap, 0));\n  if (radius == 0) {\n    return compareDirectionalShadow(uv, depthRef);\n  }\n\n  var sum = 0.0;\n  if (radius == 1) {\n    for (var x = -1; x <= 1; x = x + 1) {\n      for (var y = -1; y <= 1; y = y + 1) {\n        let offset = vec2f(f32(x), f32(y)) * texel;\n        sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n      }\n    }\n    return sum / 9.0;\n  }\n  for (var x = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x = x + 1) {\n    for (var y = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y = y + 1) {\n      let offset = vec2f(f32(x), f32(y)) * texel;\n      sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n    }\n  }\n  let diameter = f32(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS * 2 + 1);\n  return sum / (diameter * diameter);\n}\n';
 
   public static final SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline:Dynamic = 80.0;

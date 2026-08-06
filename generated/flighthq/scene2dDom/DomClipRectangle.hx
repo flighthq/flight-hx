@@ -15,6 +15,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
 
 class DomClipRectangle {
+  @:noCompletion
   public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     var contour:Null<DomClipContourEntry> = cast _Runtime.UNDEFINED;
@@ -59,6 +60,7 @@ class DomClipRectangle {
     _Runtime.setField((cast _Runtime.field(element, 'style') : { var webkitClipPath:String; }), 'webkitClipPath', clipPath);
   }
 
+  @:noCompletion
   public static function createDomScene2DRectangle(rect:RectangleLike, transform:MatrixLike):DomScene2DRectangle {
     var x0:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
@@ -80,10 +82,12 @@ class DomClipRectangle {
     return cast null;
   }
 
+  @:noCompletion
   public static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
     _Runtime.callProperty(stack, 'push', cast ([_Runtime.callValue(createDomScene2DRectangle, cast ([rect, transform] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setDomClipHooks(state:DomRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));

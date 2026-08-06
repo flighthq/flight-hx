@@ -18,6 +18,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.Texture;
 
 class GlUnlitPrelude {
+  @:noCompletion
   public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -30,11 +31,13 @@ class GlUnlitPrelude {
     }
   }
 
+  @:noCompletion
   public static function buildGlUnlitDefineKey(key:GlUnlitDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'vertexColor') : Bool) ? (cast 'v' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileGlUnlitProgram(gl:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlUnlitVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlUnlitFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
@@ -42,6 +45,7 @@ class GlUnlitPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasSkin: _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
@@ -49,11 +53,13 @@ class GlUnlitPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlUnlitFragmentSourceForKey(key:GlUnlitDefineKey):String {
     return cast (_Runtime.callValue(GlUnlitPrelude.buildDefineSource__glUnlitPrelude, cast ([key] : Array<Dynamic>)) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlUnlitVertexSourceForKey(key:GlUnlitDefineKey):String {
     return cast ((_Runtime.callValue(GlUnlitPrelude.buildDefineSource__glUnlitPrelude, cast ([key] : Array<Dynamic>)) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
     return cast null;

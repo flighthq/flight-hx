@@ -61,6 +61,7 @@ class Storage {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebStorageBackend():StorageBackend {
     return cast { getItem: function(key:Dynamic) {
       var ls:Dynamic = cast _Runtime.UNDEFINED;
@@ -217,6 +218,7 @@ class Storage {
     return cast null;
   }
 
+  @:noCompletion
   public static function getStorageBackend():StorageBackend {
     if ((cast _Runtime.strictEquals(Storage._backend__storage, null) : Bool)) { (Storage._backend__storage = cast (_Runtime.callValue(createWebStorageBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Storage._backend__storage;
@@ -480,6 +482,7 @@ class Storage {
     return cast null;
   }
 
+  @:noCompletion
   public static function setStorageBackend(backend:Null<StorageBackend>):Void {
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast !_Runtime.strictEquals(Storage._crossTabUnsubscribe__storage, null) : Bool)) : Bool)) {
       _Runtime.callValue(Storage._crossTabUnsubscribe__storage, cast ([] : Array<Dynamic>));

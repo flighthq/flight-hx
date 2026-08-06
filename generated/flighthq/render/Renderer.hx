@@ -11,17 +11,20 @@ import flighthq.types.Renderer;
 import flighthq.types.RendererData;
 
 class Renderer {
+  @:noCompletion
   public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     _Runtime.callValue(copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'displayObjectClipHooks'), null) : Bool)) { _Runtime.setField(target, 'displayObjectClipHooks', _Runtime.field(source, 'displayObjectClipHooks')); }
   }
 
+  @:noCompletion
   public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     ((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'rendererMap') : flighthq._internal._Map).forEach(function(renderer:Dynamic, kind:Dynamic) {
       _Runtime.callValue(registerRenderer, cast ([target, kind, renderer] : Array<Dynamic>));
     }));
   }
 
+  @:noCompletion
   public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
     var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var sourceRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,6 +39,7 @@ class Renderer {
     _Runtime.setField(targetRuntime, 'canvasShapeCommandRegistry', ((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourceShapeCommands]) : Dynamic)));
   }
 
+  @:noCompletion
   public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
@@ -49,6 +53,7 @@ class Renderer {
     ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).set(kind, renderer));
   }
 
+  @:noCompletion
   public static function registerRenderers(state:RenderState, entries:Array<Array<Dynamic>>):Void {
     for (__iteration0 in _Runtime.iterable(entries)) {
       var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);

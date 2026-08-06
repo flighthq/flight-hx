@@ -12,6 +12,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuGodRaysEffect {
+  @:noCompletion
   public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
     var centerX:Dynamic = cast _Runtime.UNDEFINED;
     var centerY:Dynamic = cast _Runtime.UNDEFINED;

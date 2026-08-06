@@ -53,6 +53,7 @@ class DomRichText {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(DomRichText.drawDomRichTextField__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool)) {
@@ -60,6 +61,7 @@ class DomRichText {
     }
   }
 
+  @:noCompletion
   public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(drawDomRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
@@ -242,6 +244,7 @@ class DomRichText {
 
   public static var _domTextInputOverlay__domRichText:Null<DomTextInputOverlay> = _Runtime.explicitNull();
 
+  @:noCompletion
   public static function registerDomTextInputOverlay(overlay:DomTextInputOverlay):Void {
     (DomRichText._domTextInputOverlay__domRichText = cast (overlay : Dynamic));
   }

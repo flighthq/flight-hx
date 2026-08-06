@@ -12,6 +12,7 @@ import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 
 class RenderAppearance {
+  @:noCompletion
   public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Dynamic = cast _Runtime.UNDEFINED;
     appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));

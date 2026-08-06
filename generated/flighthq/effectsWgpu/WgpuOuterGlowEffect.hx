@@ -18,6 +18,7 @@ import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 class WgpuOuterGlowEffect {
+  @:noCompletion
   public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     var dst:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,6 +7,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Mapper;
 
 class WgpuScale9Mapper {
+  @:noCompletion
   public static function buildWgpuScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var gx:Dynamic = cast _Runtime.UNDEFINED;
     var gy:Dynamic = cast _Runtime.UNDEFINED;

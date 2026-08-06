@@ -62,6 +62,7 @@ class Tilemap {
     return cast null;
   }
 
+  @:noCompletion
   public static function createTilemapData(?data:Dynamic):TilemapData {
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
@@ -71,11 +72,13 @@ class Tilemap {
     return cast null;
   }
 
+  @:noCompletion
   public static function createTilemapRuntime():TilemapRuntime {
     return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([Tilemap.defaultMethods__tilemap] : Array<Dynamic>)) : TilemapRuntime);
     return cast null;
   }
 
+  @:noCompletion
   public static function createTilemapSignals():TilemapSignals {
     return cast { onCleared: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTileChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTilesChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
@@ -140,6 +143,7 @@ class Tilemap {
     return cast null;
   }
 
+  @:noCompletion
   public static function getTilemapRuntime(source:flighthq.types.Tilemap):TilemapRuntime {
     return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TilemapRuntime);
     return cast null;

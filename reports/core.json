@@ -1,4 +1,862 @@
 {
+  "contractSurface": {
+    "noCompletionDeclarations": 1213,
+    "omittedModules": [
+      {
+        "module": "flighthq.abc.Contract",
+        "packageName": "@flighthq/abc",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/abc/src/contract.ts"
+      },
+      {
+        "module": "flighthq.accessibility.Contract",
+        "packageName": "@flighthq/accessibility",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/accessibility/src/contract.ts"
+      },
+      {
+        "module": "flighthq.adjustments.Contract",
+        "packageName": "@flighthq/adjustments",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/adjustments/src/contract.ts"
+      },
+      {
+        "module": "flighthq.animation.Contract",
+        "packageName": "@flighthq/animation",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/animation/src/contract.ts"
+      },
+      {
+        "module": "flighthq.app.Contract",
+        "packageName": "@flighthq/app",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/app/src/contract.ts"
+      },
+      {
+        "module": "flighthq.application.Contract",
+        "packageName": "@flighthq/application",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/application/src/contract.ts"
+      },
+      {
+        "module": "flighthq.applicationGl.Contract",
+        "packageName": "@flighthq/application-gl",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/application-gl/src/contract.ts"
+      },
+      {
+        "module": "flighthq.assets.Contract",
+        "packageName": "@flighthq/assets",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/assets/src/contract.ts"
+      },
+      {
+        "module": "flighthq.audio.Contract",
+        "packageName": "@flighthq/audio",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/audio/src/contract.ts"
+      },
+      {
+        "module": "flighthq.binpack.Contract",
+        "packageName": "@flighthq/binpack",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/binpack/src/contract.ts"
+      },
+      {
+        "module": "flighthq.bitmap.Contract",
+        "packageName": "@flighthq/bitmap",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/bitmap/src/contract.ts"
+      },
+      {
+        "module": "flighthq.bitmapfont.Contract",
+        "packageName": "@flighthq/bitmapfont",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/bitmapfont/src/contract.ts"
+      },
+      {
+        "module": "flighthq.bitmapfontFormats.Contract",
+        "packageName": "@flighthq/bitmapfont-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/bitmapfont-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.bitmaptext.Contract",
+        "packageName": "@flighthq/bitmaptext",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/bitmaptext/src/contract.ts"
+      },
+      {
+        "module": "flighthq.camera.Contract",
+        "packageName": "@flighthq/camera",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/camera/src/contract.ts"
+      },
+      {
+        "module": "flighthq.cameraControls.Contract",
+        "packageName": "@flighthq/camera-controls",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/camera-controls/src/contract.ts"
+      },
+      {
+        "module": "flighthq.capture.Contract",
+        "packageName": "@flighthq/capture",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/capture/src/contract.ts"
+      },
+      {
+        "module": "flighthq.clip.Contract",
+        "packageName": "@flighthq/clip",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/clip/src/contract.ts"
+      },
+      {
+        "module": "flighthq.clipboard.Contract",
+        "packageName": "@flighthq/clipboard",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/clipboard/src/contract.ts"
+      },
+      {
+        "module": "flighthq.clock.Contract",
+        "packageName": "@flighthq/clock",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/clock/src/contract.ts"
+      },
+      {
+        "module": "flighthq.collision.Contract",
+        "packageName": "@flighthq/collision",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/collision/src/contract.ts"
+      },
+      {
+        "module": "flighthq.color.Contract",
+        "packageName": "@flighthq/color",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/color/src/contract.ts"
+      },
+      {
+        "module": "flighthq.compression.Contract",
+        "packageName": "@flighthq/compression",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/compression/src/contract.ts"
+      },
+      {
+        "module": "flighthq.connectivity.Contract",
+        "packageName": "@flighthq/connectivity",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/connectivity/src/contract.ts"
+      },
+      {
+        "module": "flighthq.debug.Contract",
+        "packageName": "@flighthq/debug",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/debug/src/contract.ts"
+      },
+      {
+        "module": "flighthq.device.Contract",
+        "packageName": "@flighthq/device",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/device/src/contract.ts"
+      },
+      {
+        "module": "flighthq.dialog.Contract",
+        "packageName": "@flighthq/dialog",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/dialog/src/contract.ts"
+      },
+      {
+        "module": "flighthq.easing.Contract",
+        "packageName": "@flighthq/easing",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/easing/src/contract.ts"
+      },
+      {
+        "module": "flighthq.effects.Contract",
+        "packageName": "@flighthq/effects",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/effects/src/contract.ts"
+      },
+      {
+        "module": "flighthq.effectsCanvas.Contract",
+        "packageName": "@flighthq/effects-canvas",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/effects-canvas/src/contract.ts"
+      },
+      {
+        "module": "flighthq.effectsGl.Contract",
+        "packageName": "@flighthq/effects-gl",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/effects-gl/src/contract.ts"
+      },
+      {
+        "module": "flighthq.effectsWgpu.Contract",
+        "packageName": "@flighthq/effects-wgpu",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/effects-wgpu/src/contract.ts"
+      },
+      {
+        "module": "flighthq.entity.Contract",
+        "packageName": "@flighthq/entity",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/entity/src/contract.ts"
+      },
+      {
+        "module": "flighthq.filesystem.Contract",
+        "packageName": "@flighthq/filesystem",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/filesystem/src/contract.ts"
+      },
+      {
+        "module": "flighthq.flow.Contract",
+        "packageName": "@flighthq/flow",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/flow/src/contract.ts"
+      },
+      {
+        "module": "flighthq.font.Contract",
+        "packageName": "@flighthq/font",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/font/src/contract.ts"
+      },
+      {
+        "module": "flighthq.geolocation.Contract",
+        "packageName": "@flighthq/geolocation",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/geolocation/src/contract.ts"
+      },
+      {
+        "module": "flighthq.geometry.Contract",
+        "packageName": "@flighthq/geometry",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/geometry/src/contract.ts"
+      },
+      {
+        "module": "flighthq.glyphatlas.Contract",
+        "packageName": "@flighthq/glyphatlas",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/glyphatlas/src/contract.ts"
+      },
+      {
+        "module": "flighthq.haptics.Contract",
+        "packageName": "@flighthq/haptics",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/haptics/src/contract.ts"
+      },
+      {
+        "module": "flighthq.hostCapacitor.Contract",
+        "packageName": "@flighthq/host-capacitor",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/host-capacitor/src/contract.ts"
+      },
+      {
+        "module": "flighthq.hostElectron.Contract",
+        "packageName": "@flighthq/host-electron",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/host-electron/src/contract.ts"
+      },
+      {
+        "module": "flighthq.hostTauri.Contract",
+        "packageName": "@flighthq/host-tauri",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/host-tauri/src/contract.ts"
+      },
+      {
+        "module": "flighthq.image.Contract",
+        "packageName": "@flighthq/image",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/image/src/contract.ts"
+      },
+      {
+        "module": "flighthq.imageCodec.Contract",
+        "packageName": "@flighthq/image-codec",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/image-codec/src/contract.ts"
+      },
+      {
+        "module": "flighthq.importdiagnostics.Contract",
+        "packageName": "@flighthq/importdiagnostics",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/importdiagnostics/src/contract.ts"
+      },
+      {
+        "module": "flighthq.input.Contract",
+        "packageName": "@flighthq/input",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/input/src/contract.ts"
+      },
+      {
+        "module": "flighthq.interaction.Contract",
+        "packageName": "@flighthq/interaction",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/interaction/src/contract.ts"
+      },
+      {
+        "module": "flighthq.intl.Contract",
+        "packageName": "@flighthq/intl",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/intl/src/contract.ts"
+      },
+      {
+        "module": "flighthq.ipc.Contract",
+        "packageName": "@flighthq/ipc",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/ipc/src/contract.ts"
+      },
+      {
+        "module": "flighthq.keyboard.Contract",
+        "packageName": "@flighthq/keyboard",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/keyboard/src/contract.ts"
+      },
+      {
+        "module": "flighthq.layout.Contract",
+        "packageName": "@flighthq/layout",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/layout/src/contract.ts"
+      },
+      {
+        "module": "flighthq.lifecycle.Contract",
+        "packageName": "@flighthq/lifecycle",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/lifecycle/src/contract.ts"
+      },
+      {
+        "module": "flighthq.lighting.Contract",
+        "packageName": "@flighthq/lighting",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/lighting/src/contract.ts"
+      },
+      {
+        "module": "flighthq.loader.Contract",
+        "packageName": "@flighthq/loader",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/loader/src/contract.ts"
+      },
+      {
+        "module": "flighthq.log.Contract",
+        "packageName": "@flighthq/log",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/log/src/contract.ts"
+      },
+      {
+        "module": "flighthq.materials.Contract",
+        "packageName": "@flighthq/materials",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/materials/src/contract.ts"
+      },
+      {
+        "module": "flighthq.math.Contract",
+        "packageName": "@flighthq/math",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/math/src/contract.ts"
+      },
+      {
+        "module": "flighthq.media.Contract",
+        "packageName": "@flighthq/media",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/media/src/contract.ts"
+      },
+      {
+        "module": "flighthq.mediasession.Contract",
+        "packageName": "@flighthq/mediasession",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/mediasession/src/contract.ts"
+      },
+      {
+        "module": "flighthq.menu.Contract",
+        "packageName": "@flighthq/menu",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/menu/src/contract.ts"
+      },
+      {
+        "module": "flighthq.mesh.Contract",
+        "packageName": "@flighthq/mesh",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/mesh/src/contract.ts"
+      },
+      {
+        "module": "flighthq.motionpath.Contract",
+        "packageName": "@flighthq/motionpath",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/motionpath/src/contract.ts"
+      },
+      {
+        "module": "flighthq.movieclip.Contract",
+        "packageName": "@flighthq/movieclip",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/movieclip/src/contract.ts"
+      },
+      {
+        "module": "flighthq.net.Contract",
+        "packageName": "@flighthq/net",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/net/src/contract.ts"
+      },
+      {
+        "module": "flighthq.node.Contract",
+        "packageName": "@flighthq/node",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/node/src/contract.ts"
+      },
+      {
+        "module": "flighthq.notification.Contract",
+        "packageName": "@flighthq/notification",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/notification/src/contract.ts"
+      },
+      {
+        "module": "flighthq.particleemitter.Contract",
+        "packageName": "@flighthq/particleemitter",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/particleemitter/src/contract.ts"
+      },
+      {
+        "module": "flighthq.particles.Contract",
+        "packageName": "@flighthq/particles",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/particles/src/contract.ts"
+      },
+      {
+        "module": "flighthq.particlesFormats.Contract",
+        "packageName": "@flighthq/particles-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/particles-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.path.Contract",
+        "packageName": "@flighthq/path",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/path/src/contract.ts"
+      },
+      {
+        "module": "flighthq.pathBoolean.Contract",
+        "packageName": "@flighthq/path-boolean",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/path-boolean/src/contract.ts"
+      },
+      {
+        "module": "flighthq.pathFormats.Contract",
+        "packageName": "@flighthq/path-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/path-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.permissions.Contract",
+        "packageName": "@flighthq/permissions",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/permissions/src/contract.ts"
+      },
+      {
+        "module": "flighthq.physics2d.Contract",
+        "packageName": "@flighthq/physics2d",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/physics2d/src/contract.ts"
+      },
+      {
+        "module": "flighthq.picking.Contract",
+        "packageName": "@flighthq/picking",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/picking/src/contract.ts"
+      },
+      {
+        "module": "flighthq.platform.Contract",
+        "packageName": "@flighthq/platform",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/platform/src/contract.ts"
+      },
+      {
+        "module": "flighthq.power.Contract",
+        "packageName": "@flighthq/power",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/power/src/contract.ts"
+      },
+      {
+        "module": "flighthq.protocol.Contract",
+        "packageName": "@flighthq/protocol",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/protocol/src/contract.ts"
+      },
+      {
+        "module": "flighthq.quadbatch.Contract",
+        "packageName": "@flighthq/quadbatch",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/quadbatch/src/contract.ts"
+      },
+      {
+        "module": "flighthq.render.Contract",
+        "packageName": "@flighthq/render",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/render/src/contract.ts"
+      },
+      {
+        "module": "flighthq.renderGl.Contract",
+        "packageName": "@flighthq/render-gl",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/render-gl/src/contract.ts"
+      },
+      {
+        "module": "flighthq.renderWgpu.Contract",
+        "packageName": "@flighthq/render-wgpu",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/render-wgpu/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2d.Contract",
+        "packageName": "@flighthq/scene2d",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2dCanvas.Contract",
+        "packageName": "@flighthq/scene2d-canvas",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d-canvas/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2dDom.Contract",
+        "packageName": "@flighthq/scene2d-dom",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d-dom/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2dFormats.Contract",
+        "packageName": "@flighthq/scene2d-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2dGl.Contract",
+        "packageName": "@flighthq/scene2d-gl",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d-gl/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2dResources.Contract",
+        "packageName": "@flighthq/scene2d-resources",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d-resources/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene2dWgpu.Contract",
+        "packageName": "@flighthq/scene2d-wgpu",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene2d-wgpu/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene3d.Contract",
+        "packageName": "@flighthq/scene3d",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene3d/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene3dFormats.Contract",
+        "packageName": "@flighthq/scene3d-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene3d-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene3dGl.Contract",
+        "packageName": "@flighthq/scene3d-gl",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene3d-gl/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene3dResources.Contract",
+        "packageName": "@flighthq/scene3d-resources",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene3d-resources/src/contract.ts"
+      },
+      {
+        "module": "flighthq.scene3dWgpu.Contract",
+        "packageName": "@flighthq/scene3d-wgpu",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/scene3d-wgpu/src/contract.ts"
+      },
+      {
+        "module": "flighthq.screen.Contract",
+        "packageName": "@flighthq/screen",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/screen/src/contract.ts"
+      },
+      {
+        "module": "flighthq.sdk.Contract",
+        "packageName": "@flighthq/sdk",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/sdk/src/contract.ts"
+      },
+      {
+        "module": "flighthq.sensors.Contract",
+        "packageName": "@flighthq/sensors",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/sensors/src/contract.ts"
+      },
+      {
+        "module": "flighthq.shading.Contract",
+        "packageName": "@flighthq/shading",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/shading/src/contract.ts"
+      },
+      {
+        "module": "flighthq.shape.Contract",
+        "packageName": "@flighthq/shape",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/shape/src/contract.ts"
+      },
+      {
+        "module": "flighthq.shapeFormats.Contract",
+        "packageName": "@flighthq/shape-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/shape-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.share.Contract",
+        "packageName": "@flighthq/share",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/share/src/contract.ts"
+      },
+      {
+        "module": "flighthq.shell.Contract",
+        "packageName": "@flighthq/shell",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/shell/src/contract.ts"
+      },
+      {
+        "module": "flighthq.shortcut.Contract",
+        "packageName": "@flighthq/shortcut",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/shortcut/src/contract.ts"
+      },
+      {
+        "module": "flighthq.signals.Contract",
+        "packageName": "@flighthq/signals",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/signals/src/contract.ts"
+      },
+      {
+        "module": "flighthq.skeleton2d.Contract",
+        "packageName": "@flighthq/skeleton2d",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/skeleton2d/src/contract.ts"
+      },
+      {
+        "module": "flighthq.skeleton2dFormats.Contract",
+        "packageName": "@flighthq/skeleton2d-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/skeleton2d-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.skeleton3d.Contract",
+        "packageName": "@flighthq/skeleton3d",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/skeleton3d/src/contract.ts"
+      },
+      {
+        "module": "flighthq.snapshot.Contract",
+        "packageName": "@flighthq/snapshot",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/snapshot/src/contract.ts"
+      },
+      {
+        "module": "flighthq.socket.Contract",
+        "packageName": "@flighthq/socket",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/socket/src/contract.ts"
+      },
+      {
+        "module": "flighthq.spatial.Contract",
+        "packageName": "@flighthq/spatial",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/spatial/src/contract.ts"
+      },
+      {
+        "module": "flighthq.spring.Contract",
+        "packageName": "@flighthq/spring",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/spring/src/contract.ts"
+      },
+      {
+        "module": "flighthq.spritesheet.Contract",
+        "packageName": "@flighthq/spritesheet",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/spritesheet/src/contract.ts"
+      },
+      {
+        "module": "flighthq.spritesheetFormats.Contract",
+        "packageName": "@flighthq/spritesheet-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/spritesheet-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.statechart.Contract",
+        "packageName": "@flighthq/statechart",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/statechart/src/contract.ts"
+      },
+      {
+        "module": "flighthq.statusbar.Contract",
+        "packageName": "@flighthq/statusbar",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/statusbar/src/contract.ts"
+      },
+      {
+        "module": "flighthq.storage.Contract",
+        "packageName": "@flighthq/storage",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/storage/src/contract.ts"
+      },
+      {
+        "module": "flighthq.swf.Contract",
+        "packageName": "@flighthq/swf",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/swf/src/contract.ts"
+      },
+      {
+        "module": "flighthq.text.Contract",
+        "packageName": "@flighthq/text",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/text/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textbidi.Contract",
+        "packageName": "@flighthq/textbidi",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textbidi/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textinput.Contract",
+        "packageName": "@flighthq/textinput",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textinput/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textlayout.Contract",
+        "packageName": "@flighthq/textlayout",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textlayout/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textMarkup.Contract",
+        "packageName": "@flighthq/text-markup",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/text-markup/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textsegment.Contract",
+        "packageName": "@flighthq/textsegment",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textsegment/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textshaper.Contract",
+        "packageName": "@flighthq/textshaper",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textshaper/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textshaperCanvas.Contract",
+        "packageName": "@flighthq/textshaper-canvas",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textshaper-canvas/src/contract.ts"
+      },
+      {
+        "module": "flighthq.texture.Contract",
+        "packageName": "@flighthq/texture",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/texture/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textureatlas.Contract",
+        "packageName": "@flighthq/textureatlas",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textureatlas/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textureatlasFormats.Contract",
+        "packageName": "@flighthq/textureatlas-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/textureatlas-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.textureFormats.Contract",
+        "packageName": "@flighthq/texture-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/texture-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.tilemap.Contract",
+        "packageName": "@flighthq/tilemap",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/tilemap/src/contract.ts"
+      },
+      {
+        "module": "flighthq.tilemapFormats.Contract",
+        "packageName": "@flighthq/tilemap-formats",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/tilemap-formats/src/contract.ts"
+      },
+      {
+        "module": "flighthq.timeline.Contract",
+        "packageName": "@flighthq/timeline",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/timeline/src/contract.ts"
+      },
+      {
+        "module": "flighthq.tray.Contract",
+        "packageName": "@flighthq/tray",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/tray/src/contract.ts"
+      },
+      {
+        "module": "flighthq.tween.Contract",
+        "packageName": "@flighthq/tween",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/tween/src/contract.ts"
+      },
+      {
+        "module": "flighthq.types.Contract",
+        "packageName": "@flighthq/types",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/types/src/contract.ts"
+      },
+      {
+        "module": "flighthq.updater.Contract",
+        "packageName": "@flighthq/updater",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/updater/src/contract.ts"
+      },
+      {
+        "module": "flighthq.useragent.Contract",
+        "packageName": "@flighthq/useragent",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/useragent/src/contract.ts"
+      },
+      {
+        "module": "flighthq.velocity.Contract",
+        "packageName": "@flighthq/velocity",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/velocity/src/contract.ts"
+      },
+      {
+        "module": "flighthq.video.Contract",
+        "packageName": "@flighthq/video",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/video/src/contract.ts"
+      },
+      {
+        "module": "flighthq.webcam.Contract",
+        "packageName": "@flighthq/webcam",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/webcam/src/contract.ts"
+      },
+      {
+        "module": "flighthq.xml.Contract",
+        "packageName": "@flighthq/xml",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/xml/src/contract.ts"
+      }
+    ],
+    "protectedDeclarationIdentities": 1213
+  },
   "excludedPackages": [
     {
       "packageName": "@flighthq/tool-capture",
@@ -22,19 +880,9 @@
       "module": "flighthq.abc.AbcInstruction"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.abc.Contract"
-    },
-    {
       "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.accessibility.Accessibility"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.accessibility.Contract"
     },
     {
       "declarations": 38,
@@ -95,11 +943,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.adjustments.ColorScaleBiasAdjustment"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.adjustments.Contract"
     },
     {
       "declarations": 1,
@@ -202,19 +1045,9 @@
       "module": "flighthq.animation.AnimationTrack"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.animation.Contract"
-    },
-    {
       "declarations": 44,
       "diagnostics": [],
       "module": "flighthq.app.App"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.app.Contract"
     },
     {
       "declarations": 101,
@@ -227,11 +1060,6 @@
       "module": "flighthq.application.ApplicationRenderView"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.application.Contract"
-    },
-    {
       "declarations": 74,
       "diagnostics": [],
       "module": "flighthq.application.Window"
@@ -240,11 +1068,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.applicationGl.ApplicationGl"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.applicationGl.Contract"
     },
     {
       "declarations": 4,
@@ -260,11 +1083,6 @@
       "declarations": 17,
       "diagnostics": [],
       "module": "flighthq.assets.Assets"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.assets.Contract"
     },
     {
       "declarations": 4,
@@ -307,19 +1125,9 @@
       "module": "flighthq.audio.AudioResourceReference"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.audio.Contract"
-    },
-    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.binpack.Binpack"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.binpack.Contract"
     },
     {
       "declarations": 3,
@@ -537,11 +1345,6 @@
       "module": "flighthq.bitmap.BitmapWarp"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.bitmap.Contract"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.bitmap.ExplainBitmapReadback"
@@ -565,11 +1368,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.bitmapfont.BitmapFontGlyphSource"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.bitmapfont.Contract"
     },
     {
       "declarations": 3,
@@ -612,11 +1410,6 @@
       "module": "flighthq.bitmapfontFormats.BitmapFontXml"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.bitmapfontFormats.Contract"
-    },
-    {
       "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.bitmaptext.Bitmaptext"
@@ -625,11 +1418,6 @@
       "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.bitmaptext.BitmapText"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.bitmaptext.Contract"
     },
     {
       "declarations": 16,
@@ -650,11 +1438,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.camera.Camera2d"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.camera.Contract"
     },
     {
       "declarations": 6,
@@ -722,11 +1505,6 @@
       "module": "flighthq.cameraControls.CameraControls"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.cameraControls.Contract"
-    },
-    {
       "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.cameraControls.FlyCameraController"
@@ -762,11 +1540,6 @@
       "module": "flighthq.capture.CaptureComparison"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.capture.Contract"
-    },
-    {
       "declarations": 22,
       "diagnostics": [],
       "module": "flighthq.clip.Clip"
@@ -775,11 +1548,6 @@
       "declarations": 34,
       "diagnostics": [],
       "module": "flighthq.clip.ClipRegion"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.clip.Contract"
     },
     {
       "declarations": 3,
@@ -792,11 +1560,6 @@
       "module": "flighthq.clipboard.Clipboard"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.clipboard.Contract"
-    },
-    {
       "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.clock.Clock"
@@ -805,11 +1568,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.clock.ClockSignals"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.clock.Contract"
     },
     {
       "declarations": 2,
@@ -835,11 +1593,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.collision.ContactManifold"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.collision.Contract"
     },
     {
       "declarations": 2,
@@ -907,11 +1660,6 @@
       "module": "flighthq.color.ColorFromKelvin"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.color.Contract"
-    },
-    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.color.HslColor"
@@ -957,11 +1705,6 @@
       "module": "flighthq.compression.Compression"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.compression.Contract"
-    },
-    {
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.compression.Decompressor"
@@ -977,16 +1720,6 @@
       "module": "flighthq.connectivity.Connectivity"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.connectivity.Contract"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.debug.Contract"
-    },
-    {
       "declarations": 21,
       "diagnostics": [],
       "module": "flighthq.debug.Debug"
@@ -997,29 +1730,14 @@
       "module": "flighthq.debug.DebugTiming"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.device.Contract"
-    },
-    {
       "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.device.Device"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.dialog.Contract"
-    },
-    {
       "declarations": 33,
       "diagnostics": [],
       "module": "flighthq.dialog.Dialog"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.easing.Contract"
     },
     {
       "declarations": 1,
@@ -1210,11 +1928,6 @@
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.effects.ContactShadowsEffect"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.effects.Contract"
     },
     {
       "declarations": 4,
@@ -1622,19 +2335,9 @@
       "module": "flighthq.effectsCanvas.CanvasVignetteEffect"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.effectsCanvas.Contract"
-    },
-    {
       "declarations": 43,
       "diagnostics": [],
       "module": "flighthq.effectsCanvas.EffectsCanvas"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.effectsGl.Contract"
     },
     {
       "declarations": 104,
@@ -1927,11 +2630,6 @@
       "module": "flighthq.effectsGl.GlWhiteBalanceEffect"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.effectsWgpu.Contract"
-    },
-    {
       "declarations": 95,
       "diagnostics": [],
       "module": "flighthq.effectsWgpu.EffectsWgpu"
@@ -2222,11 +2920,6 @@
       "module": "flighthq.entity.Clone"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.entity.Contract"
-    },
-    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.entity.EnableEntityRuntimeGuards"
@@ -2247,19 +2940,9 @@
       "module": "flighthq.entity.Runtime"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.filesystem.Contract"
-    },
-    {
       "declarations": 54,
       "diagnostics": [],
       "module": "flighthq.filesystem.Filesystem"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.flow.Contract"
     },
     {
       "declarations": 9,
@@ -2270,11 +2953,6 @@
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.font._FontFaceLoad"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.font.Contract"
     },
     {
       "declarations": 16,
@@ -2317,11 +2995,6 @@
       "module": "flighthq.font.GlyphOutlineSource"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.geolocation.Contract"
-    },
-    {
       "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.geolocation.Geolocation"
@@ -2340,11 +3013,6 @@
       "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.geometry.Capsule"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.geometry.Contract"
     },
     {
       "declarations": 9,
@@ -2467,11 +3135,6 @@
       "module": "flighthq.geometry.Vector4Pool"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.glyphatlas.Contract"
-    },
-    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.glyphatlas.EnableGlyphAtlasGuards"
@@ -2515,11 +3178,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.glyphatlas.GlyphSource"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.haptics.Contract"
     },
     {
       "declarations": 15,
@@ -2592,19 +3250,9 @@
       "module": "flighthq.hostCapacitor.CapacitorStatusBar"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.hostCapacitor.Contract"
-    },
-    {
       "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.hostCapacitor.HostCapacitor"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.hostElectron.Contract"
     },
     {
       "declarations": 3,
@@ -2697,11 +3345,6 @@
       "module": "flighthq.hostElectron.HostElectron"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.hostTauri.Contract"
-    },
-    {
       "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.hostTauri.HostTauri"
@@ -2762,11 +3405,6 @@
       "module": "flighthq.hostTauri.TauriWindow"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.image.Contract"
-    },
-    {
       "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.image.Image"
@@ -2785,11 +3423,6 @@
       "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.image.ImageResourceReference"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.imageCodec.Contract"
     },
     {
       "declarations": 3,
@@ -2842,11 +3475,6 @@
       "module": "flighthq.imageCodec.RegisterWebImageEncoders"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.importdiagnostics.Contract"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.importdiagnostics.ImportDiagnosticCollector"
@@ -2862,11 +3490,6 @@
       "module": "flighthq.importdiagnostics.ImportDiagnosticText"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.input.Contract"
-    },
-    {
       "declarations": 39,
       "diagnostics": [],
       "module": "flighthq.input.Input"
@@ -2875,11 +3498,6 @@
       "declarations": 69,
       "diagnostics": [],
       "module": "flighthq.input.InputManager"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.interaction.Contract"
     },
     {
       "declarations": 1,
@@ -2972,11 +3590,6 @@
       "module": "flighthq.intl.Collator"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.intl.Contract"
-    },
-    {
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.intl.Datetime"
@@ -3007,19 +3620,9 @@
       "module": "flighthq.intl.RelativeTime"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.ipc.Contract"
-    },
-    {
       "declarations": 23,
       "diagnostics": [],
       "module": "flighthq.ipc.Ipc"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.keyboard.Contract"
     },
     {
       "declarations": 27,
@@ -3030,11 +3633,6 @@
       "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.layout.AnchorLayout"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.layout.Contract"
     },
     {
       "declarations": 1,
@@ -3067,11 +3665,6 @@
       "module": "flighthq.layout.ResolveLayoutTree"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.lifecycle.Contract"
-    },
-    {
       "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.lifecycle.Lifecycle"
@@ -3085,11 +3678,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.lighting.AreaLight"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.lighting.Contract"
     },
     {
       "declarations": 4,
@@ -3142,11 +3730,6 @@
       "module": "flighthq.lighting.SpotLight"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.loader.Contract"
-    },
-    {
       "declarations": 15,
       "diagnostics": [],
       "module": "flighthq.loader.Loader"
@@ -3155,11 +3738,6 @@
       "declarations": 39,
       "diagnostics": [],
       "module": "flighthq.loader.ResourceLoader"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.log.Contract"
     },
     {
       "declarations": 91,
@@ -3185,11 +3763,6 @@
       "declarations": 17,
       "diagnostics": [],
       "module": "flighthq.materials.ColorScaleBias"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.materials.Contract"
     },
     {
       "declarations": 1,
@@ -3297,11 +3870,6 @@
       "module": "flighthq.math.Constants"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.math.Contract"
-    },
-    {
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.math.Hash"
@@ -3372,11 +3940,6 @@
       "module": "flighthq.media.AudioMixer"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.media.Contract"
-    },
-    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.media.EnableAudioMixerGuards"
@@ -3392,19 +3955,9 @@
       "module": "flighthq.media.VideoChannel"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.mediasession.Contract"
-    },
-    {
       "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.mediasession.Mediasession"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.menu.Contract"
     },
     {
       "declarations": 23,
@@ -3415,11 +3968,6 @@
       "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.menu.MenuTemplates"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.mesh.Contract"
     },
     {
       "declarations": 82,
@@ -3492,11 +4040,6 @@
       "module": "flighthq.mesh.UpdateMeshMorph"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.Contract"
-    },
-    {
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.motionpath.Motionpath"
@@ -3505,11 +4048,6 @@
       "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.motionpath.MotionPath"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.movieclip.Contract"
     },
     {
       "declarations": 5,
@@ -3532,11 +4070,6 @@
       "module": "flighthq.movieclip.SpritesheetTimelineSource"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.net.Contract"
-    },
-    {
       "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.net.Net"
@@ -3545,11 +4078,6 @@
       "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.node.BoundsRectangle"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.node.Contract"
     },
     {
       "declarations": 1,
@@ -3637,19 +4165,9 @@
       "module": "flighthq.node.Viewport"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.notification.Contract"
-    },
-    {
       "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.notification.Notification"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.particleemitter.Contract"
     },
     {
       "declarations": 4,
@@ -3717,11 +4235,6 @@
       "module": "flighthq.particles.ApplyParticleForces"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.particles.Contract"
-    },
-    {
       "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.particles.Curve"
@@ -3765,11 +4278,6 @@
       "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.particles.ValidateParticleEmitterConfig"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.Contract"
     },
     {
       "declarations": 3,
@@ -3855,11 +4363,6 @@
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.path.ContainsPathPoint"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.path.Contract"
     },
     {
       "declarations": 2,
@@ -3997,11 +4500,6 @@
       "module": "flighthq.pathBoolean.BooleanPaths"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.pathBoolean.Contract"
-    },
-    {
       "declarations": 40,
       "diagnostics": [],
       "module": "flighthq.pathBoolean.MartinezKernel"
@@ -4037,11 +4535,6 @@
       "module": "flighthq.pathBoolean.UnionAllPaths"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.pathFormats.Contract"
-    },
-    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.pathFormats.PathFormats"
@@ -4050,11 +4543,6 @@
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.pathFormats.SvgPathData"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.permissions.Contract"
     },
     {
       "declarations": 5,
@@ -4080,11 +4568,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.physics2d.ColliderTransform"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.physics2d.Contract"
     },
     {
       "declarations": 10,
@@ -4177,11 +4660,6 @@
       "module": "flighthq.physics2d.WorldQueries"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.picking.Contract"
-    },
-    {
       "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.picking.Picking"
@@ -4197,19 +4675,9 @@
       "module": "flighthq.picking.SceneHitAttributes"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.platform.Contract"
-    },
-    {
       "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.platform.Platform"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.power.Contract"
     },
     {
       "declarations": 28,
@@ -4217,19 +4685,9 @@
       "module": "flighthq.power.Power"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.protocol.Contract"
-    },
-    {
       "declarations": 25,
       "diagnostics": [],
       "module": "flighthq.protocol.Protocol"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.quadbatch.Contract"
     },
     {
       "declarations": 26,
@@ -4240,11 +4698,6 @@
       "declarations": 39,
       "diagnostics": [],
       "module": "flighthq.quadbatch.QuadBatch"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.render.Contract"
     },
     {
       "declarations": 3,
@@ -4355,11 +4808,6 @@
       "declarations": 22,
       "diagnostics": [],
       "module": "flighthq.render.SceneRender"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.renderGl.Contract"
     },
     {
       "declarations": 5,
@@ -4517,11 +4965,6 @@
       "module": "flighthq.renderWgpu._internal._WgpuTestHelper"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.renderWgpu.Contract"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.renderWgpu.EnableWgpuTextureResolverGuards"
@@ -4645,11 +5088,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.renderWgpu.WgpuTextureUpload"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2d.Contract"
     },
     {
       "declarations": 3,
@@ -4867,11 +5305,6 @@
       "module": "flighthq.scene2dCanvas.CanvasTransform"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2dCanvas.Contract"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards"
@@ -4890,11 +5323,6 @@
       "declarations": 60,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.Scene2dCanvas"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2dDom.Contract"
     },
     {
       "declarations": 1,
@@ -5052,11 +5480,6 @@
       "module": "flighthq.scene2dDom.Scene2dDom"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2dFormats.Contract"
-    },
-    {
       "declarations": 67,
       "diagnostics": [],
       "module": "flighthq.scene2dFormats.LottieDocument"
@@ -5160,11 +5583,6 @@
       "declarations": 78,
       "diagnostics": [],
       "module": "flighthq.scene2dFormats.SvgDocument"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2dGl.Contract"
     },
     {
       "declarations": 3,
@@ -5317,11 +5735,6 @@
       "module": "flighthq.scene2dResources.BuiltInScene2DDocumentImporters"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2dResources.Contract"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.scene2dResources.LoadScene2DAudioResources"
@@ -5360,11 +5773,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.scene2dResources.Scene2DSlotReference"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene2dWgpu.Contract"
     },
     {
       "declarations": 3,
@@ -5527,11 +5935,6 @@
       "module": "flighthq.scene3d.BillboardCamera"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene3d.Contract"
-    },
-    {
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.scene3d.Mesh"
@@ -5615,11 +6018,6 @@
       "declarations": 80,
       "diagnostics": [],
       "module": "flighthq.scene3dFormats.Awd2Schema"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene3dFormats.Contract"
     },
     {
       "declarations": 1,
@@ -5750,11 +6148,6 @@
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.scene3dGl.ClearcoatPbrGlExtension"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene3dGl.Contract"
     },
     {
       "declarations": 10,
@@ -6072,11 +6465,6 @@
       "module": "flighthq.scene3dResources.ClearcoatPbrScene3DMaterialTextures"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene3dResources.Contract"
-    },
-    {
       "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.scene3dResources.EnableScene3DResourceFailureGuards"
@@ -6200,11 +6588,6 @@
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.scene3dWgpu.BlinnPhongWgpuMeshMaterialRenderer"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.scene3dWgpu.Contract"
     },
     {
       "declarations": 20,
@@ -6437,11 +6820,6 @@
       "module": "flighthq.scene3dWgpu.WireframeWgpuMeshMaterialRenderer"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.screen.Contract"
-    },
-    {
       "declarations": 45,
       "diagnostics": [],
       "module": "flighthq.screen.Screen"
@@ -6455,11 +6833,6 @@
       "declarations": 0,
       "diagnostics": [],
       "module": "flighthq.sdk.Application"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.sdk.Contract"
     },
     {
       "declarations": 0,
@@ -6522,19 +6895,9 @@
       "module": "flighthq.sdk.Text"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.sensors.Contract"
-    },
-    {
       "declarations": 57,
       "diagnostics": [],
       "module": "flighthq.sensors.Sensors"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.shading.Contract"
     },
     {
       "declarations": 1,
@@ -6627,11 +6990,6 @@
       "module": "flighthq.shape.CompactStrokePath"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.shape.Contract"
-    },
-    {
       "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.shape.ExplainMorphShapeGradientEndpoints"
@@ -6692,11 +7050,6 @@
       "module": "flighthq.shape.ShapeStrokeOutline"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.shapeFormats.Contract"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.shapeFormats.ShapeFormats"
@@ -6707,29 +7060,14 @@
       "module": "flighthq.shapeFormats.ShapeJson"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.share.Contract"
-    },
-    {
       "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.share.Share"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.shell.Contract"
-    },
-    {
       "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.shell.Shell"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.shortcut.Contract"
     },
     {
       "declarations": 3,
@@ -6750,11 +7088,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.signals._internal._Internal"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.signals.Contract"
     },
     {
       "declarations": 2,
@@ -6795,11 +7128,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.skeleton2d.ClippingAttachment2D"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.skeleton2d.Contract"
     },
     {
       "declarations": 3,
@@ -6892,11 +7220,6 @@
       "module": "flighthq.skeleton2d.TransformConstraint2D"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.skeleton2dFormats.Contract"
-    },
-    {
       "declarations": 49,
       "diagnostics": [],
       "module": "flighthq.skeleton2dFormats.DragonBonesParse"
@@ -6930,11 +7253,6 @@
       "declarations": 31,
       "diagnostics": [],
       "module": "flighthq.skeleton2dFormats.SpineParse"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.skeleton3d.Contract"
     },
     {
       "declarations": 3,
@@ -6977,11 +7295,6 @@
       "module": "flighthq.snapshot.CaptureSnapshot"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.snapshot.Contract"
-    },
-    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.snapshot.EnableSnapshotGuards"
@@ -7007,11 +7320,6 @@
       "module": "flighthq.snapshot.Snapshot"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.socket.Contract"
-    },
-    {
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.socket.EnableSocketGuards"
@@ -7025,11 +7333,6 @@
       "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.socket.Socket"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.spatial.Contract"
     },
     {
       "declarations": 1,
@@ -7057,11 +7360,6 @@
       "module": "flighthq.spatial.UniformGrid"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.spring.Contract"
-    },
-    {
       "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.spring.Spring"
@@ -7080,11 +7378,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.spring.SpringConfig"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.spritesheet.Contract"
     },
     {
       "declarations": 28,
@@ -7142,11 +7435,6 @@
       "module": "flighthq.spritesheetFormats.CocosPlistSerialize"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.spritesheetFormats.Contract"
-    },
-    {
       "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.LibgdxAtlasParse"
@@ -7182,11 +7470,6 @@
       "module": "flighthq.spritesheetFormats.TexturePackerSerialize"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.statechart.Contract"
-    },
-    {
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.statechart.EnableStatechartGuards"
@@ -7202,19 +7485,9 @@
       "module": "flighthq.statechart.StatechartSignals"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.statusbar.Contract"
-    },
-    {
       "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.statusbar.Statusbar"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.storage.Contract"
     },
     {
       "declarations": 46,
@@ -7225,11 +7498,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.swf._internal._SwfReaderValues"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.swf.Contract"
     },
     {
       "declarations": 5,
@@ -7287,11 +7555,6 @@
       "module": "flighthq.swf.SwfText"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.text.Contract"
-    },
-    {
       "declarations": 17,
       "diagnostics": [],
       "module": "flighthq.text.NativeText"
@@ -7327,11 +7590,6 @@
       "module": "flighthq.textbidi.BidiClassBackend"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textbidi.Contract"
-    },
-    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.textbidi.GetBidiRuns"
@@ -7350,11 +7608,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.textbidi.Textbidi"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textinput.Contract"
     },
     {
       "declarations": 9,
@@ -7380,11 +7633,6 @@
       "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.textinput.TextInputManager"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textlayout.Contract"
     },
     {
       "declarations": 13,
@@ -7452,11 +7700,6 @@
       "module": "flighthq.textlayout.TextMetrics"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textMarkup.Contract"
-    },
-    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.textMarkup.MarkupClassStyles"
@@ -7475,11 +7718,6 @@
       "declarations": 33,
       "diagnostics": [],
       "module": "flighthq.textMarkup.TextMarkup"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textsegment.Contract"
     },
     {
       "declarations": 8,
@@ -7505,11 +7743,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.textshaper._TextShaperHooks"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textshaper.Contract"
     },
     {
       "declarations": 3,
@@ -7564,17 +7797,7 @@
     {
       "declarations": 0,
       "diagnostics": [],
-      "module": "flighthq.textshaperCanvas.Contract"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
       "module": "flighthq.textshaperCanvas.TextshaperCanvas"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.texture.Contract"
     },
     {
       "declarations": 8,
@@ -7612,11 +7835,6 @@
       "module": "flighthq.texture.VoxelGrid"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textureatlas.Contract"
-    },
-    {
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.textureatlas.EnableTextureAtlasGuards"
@@ -7645,11 +7863,6 @@
       "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.textureatlas.TextureAtlasRegion"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textureatlasFormats.Contract"
     },
     {
       "declarations": 3,
@@ -7685,11 +7898,6 @@
       "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.textureFormats.ByteReader"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.textureFormats.Contract"
     },
     {
       "declarations": 3,
@@ -7737,19 +7945,9 @@
       "module": "flighthq.textureFormats.TextureLevelLayout"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.tilemap.Contract"
-    },
-    {
       "declarations": 25,
       "diagnostics": [],
       "module": "flighthq.tilemap.Tilemap"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.tilemapFormats.Contract"
     },
     {
       "declarations": 4,
@@ -7792,19 +7990,9 @@
       "module": "flighthq.tilemapFormats.TilemapFormats"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.timeline.Contract"
-    },
-    {
       "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.timeline.Timeline"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.tray.Contract"
     },
     {
       "declarations": 3,
@@ -7825,11 +8013,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.tween.ColorTween"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.tween.Contract"
     },
     {
       "declarations": 1,
@@ -9230,11 +9413,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.ContactShadowsEffect"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.types.Contract"
     },
     {
       "declarations": 1,
@@ -12772,19 +12950,9 @@
       "module": "flighthq.types.XmlElement"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.updater.Contract"
-    },
-    {
       "declarations": 27,
       "diagnostics": [],
       "module": "flighthq.updater.Updater"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.useragent.Contract"
     },
     {
       "declarations": 11,
@@ -12800,11 +12968,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.useragent.UserAgentParse"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.velocity.Contract"
     },
     {
       "declarations": 2,
@@ -12827,11 +12990,6 @@
       "module": "flighthq.velocity.VelocitySample"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.video.Contract"
-    },
-    {
       "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.video.Video"
@@ -12852,11 +13010,6 @@
       "module": "flighthq.video.VideoResourceFrom"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.webcam.Contract"
-    },
-    {
       "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.webcam.Webcam"
@@ -12865,11 +13018,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.webcam.WebcamStream"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.xml.Contract"
     },
     {
       "declarations": 6,
@@ -12887,7 +13035,7 @@
       "module": "flighthq.xml.XmlQuery"
     }
   ],
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "staticLowering": {
     "booleanAndExpressions": 2019,
     "booleanConditionalExpressions": 2829,

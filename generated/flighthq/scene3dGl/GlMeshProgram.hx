@@ -27,6 +27,7 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture.TextureLike;
 
 class GlMeshProgram {
+  @:noCompletion
   public static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -43,6 +44,7 @@ class GlMeshProgram {
     }
   }
 
+  @:noCompletion
   public static function bindGlUvTransform(gl:Dynamic, program:flighthq.types.GlMeshProgram, texture:Null<TextureLike>):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.field(program, 'locUvTransform');
@@ -55,15 +57,18 @@ class GlMeshProgram {
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, loc, false, GlMeshProgram.scratchUvMatrix__glMeshProgram.m);
   }
 
+  @:noCompletion
   public static function compileGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String):Dynamic {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, vertexSource, fragmentSource, 'Mesh'] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlMeshProgram(state:GlRenderState, program:flighthq.types.GlMeshProgram):Void {
     flighthq._internal.backend.WebGl2Backend.deleteProgram(_Runtime.field(state, 'gl'), _Runtime.field(program, 'program'));
   }
 
+  @:noCompletion
   public static function drawGlMeshSubset(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
@@ -127,6 +132,7 @@ class GlMeshProgram {
     }
   }
 
+  @:noCompletion
   public static function ensureGlScene3DProgram<T>(state:GlRenderState, key:String, compile:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -140,22 +146,26 @@ class GlMeshProgram {
     return cast null;
   }
 
+  @:noCompletion
   public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
     return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
+  @:noCompletion
   public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera3D):Void {
     _Runtime.callValue(inverseMatrix4, cast ([GlMeshProgram.scratchInverseView__glMeshProgram, camera.view] : Array<Dynamic>));
     _Runtime.callValue(getMatrix4Position, cast ([GlMeshProgram.scratchCameraPosition__glMeshProgram, GlMeshProgram.scratchInverseView__glMeshProgram] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, locCameraPosition, _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'x'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'y'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'z'));
   }
 
+  @:noCompletion
   public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<Dynamic>, camera:Camera3D):Void {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([GlMeshProgram.scratchViewProjection__glMeshProgram, camera, _Runtime.callValue(getGlScene3DViewportAspect, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(_Runtime.field(state, 'gl'), locViewProjection, false, GlMeshProgram.scratchViewProjection__glMeshProgram.m);
   }
 
+  @:noCompletion
   public static function uploadGlMeshDrawAlpha(gl:Dynamic, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
     var location:Dynamic = cast _Runtime.UNDEFINED;
     var coverageLocation:Dynamic = cast _Runtime.UNDEFINED;
@@ -180,10 +190,13 @@ class GlMeshProgram {
     return cast null;
   }
 
+  @:noCompletion
   public static final GL_UV_TRANSFORM_VERTEX_GLSL:Dynamic = '\n#ifdef HAS_UV_TRANSFORM\nuniform mat3 u_uvTransform;\nvec2 applyUvTransform(vec2 uv) { return (u_uvTransform * vec3(uv, 1.0)).xy; }\n#else\nvec2 applyUvTransform(vec2 uv) { return uv; }\n#endif\n';
 
+  @:noCompletion
   public static final SKIN_PALETTE_TEXTURE_UNIT:Dynamic = 12.0;
 
+  @:noCompletion
   public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:Dynamic = '\nlayout(location = 6) in vec4 a_joints0;\nlayout(location = 7) in vec4 a_weights0;\nuniform highp sampler2D u_jointTexture;\n\nmat4 fetchJointMatrix(int joint) {\n  int x = joint * 4;\n  return mat4(\n    texelFetch(u_jointTexture, ivec2(x, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 1, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 2, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 3, 0), 0)\n  );\n}\n\nmat4 skinMatrix() {\n  return a_weights0.x * fetchJointMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointMatrix(int(a_joints0.w));\n}\n';
 
   public static final scratchViewProjection__glMeshProgram:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));

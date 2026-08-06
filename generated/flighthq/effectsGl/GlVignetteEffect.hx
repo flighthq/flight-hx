@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.VignetteEffect;
 
 class GlVignetteEffect {
+  @:noCompletion
   public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;

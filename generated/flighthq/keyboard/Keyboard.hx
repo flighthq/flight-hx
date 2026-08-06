@@ -71,6 +71,7 @@ class Keyboard {
     return cast null;
   }
 
+  @:noCompletion
   public static function createSoftKeyboardInfo():SoftKeyboardInfo {
     return cast { visible: false, height: 0.0, x: 0.0, y: 0.0, width: 0.0 };
     return cast null;
@@ -81,6 +82,7 @@ class Keyboard {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebSoftKeyboardBackend():SoftKeyboardBackend {
     return cast { getInfo: function(out:Dynamic) {
       var geo:Dynamic = cast _Runtime.UNDEFINED;
@@ -145,6 +147,7 @@ class Keyboard {
     _Runtime.callValue(detachSoftKeyboard, cast ([keyboard] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function getSoftKeyboardBackend():SoftKeyboardBackend {
     if ((cast _Runtime.strictEquals(Keyboard._backend__keyboard, null) : Bool)) { (Keyboard._backend__keyboard = cast (_Runtime.callValue(createWebSoftKeyboardBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Keyboard._backend__keyboard;
@@ -217,6 +220,7 @@ class Keyboard {
     _Runtime.callOptionalProperty(_Runtime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'setAccessoryBarVisible', cast ([visible] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setSoftKeyboardBackend(backend:Null<SoftKeyboardBackend>):Void {
     (Keyboard._backend__keyboard = cast (backend : Dynamic));
   }

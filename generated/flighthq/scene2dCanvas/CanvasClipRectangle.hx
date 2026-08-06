@@ -10,10 +10,12 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 
 class CanvasClipRectangle {
+  @:noCompletion
   public static function popCanvasClipRectangle(state:Dynamic):Void {
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'restore', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'save', cast ([] : Array<Dynamic>));
     _Runtime.callValue(setCanvasTransform, cast ([state, _Runtime.field(state, 'context'), transform] : Array<Dynamic>));
@@ -38,6 +40,7 @@ class CanvasClipRectangle {
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'clip', cast ([((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool) ? (cast 'evenodd' : Dynamic) : (cast 'nonzero' : Dynamic))] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'save', cast ([] : Array<Dynamic>));
     _Runtime.callValue(setCanvasTransform, cast ([state, _Runtime.field(state, 'context'), transform] : Array<Dynamic>));

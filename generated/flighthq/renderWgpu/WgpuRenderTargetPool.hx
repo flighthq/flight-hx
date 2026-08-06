@@ -11,6 +11,7 @@ import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 class WgpuRenderTargetPool {
+  @:noCompletion
   public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; @:optional var colorSpace:RenderTargetColorSpace; }):WgpuRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,11 +35,13 @@ class WgpuRenderTargetPool {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWgpuRenderTargetPool():flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool):Void {
     for (target in _Runtime.iterable(_Runtime.field(pool, 'free'))) {
       _Runtime.callValue(destroyWgpuRenderTarget, cast ([state, target] : Array<Dynamic>));
@@ -46,6 +49,7 @@ class WgpuRenderTargetPool {
     _Runtime.setLength(_Runtime.field(pool, 'free'), 0.0);
   }
 
+  @:noCompletion
   public static function releaseWgpuRenderTarget(pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }

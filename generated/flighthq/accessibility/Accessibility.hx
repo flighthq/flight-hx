@@ -133,6 +133,7 @@ class Accessibility {
     _Runtime.callProperty(_Runtime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'clear', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function createWebAccessibilityBackend(?container:Dynamic):AccessibilityBackend {
     var getRoot:Void->Null<Dynamic> = cast _Runtime.UNDEFINED;
     var elements:Dynamic = cast _Runtime.UNDEFINED;
@@ -203,6 +204,7 @@ class Accessibility {
     return cast null;
   }
 
+  @:noCompletion
   public static function getAccessibilityBackend():AccessibilityBackend {
     if ((cast _Runtime.strictEquals(Accessibility._backend__accessibility, null) : Bool)) { (Accessibility._backend__accessibility = cast (_Runtime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Accessibility._backend__accessibility;
@@ -213,6 +215,7 @@ class Accessibility {
     _Runtime.callProperty(_Runtime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'removeNode', cast ([id] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setAccessibilityBackend(backend:Null<AccessibilityBackend>):Void {
     (Accessibility._backend__accessibility = cast (backend : Dynamic));
   }

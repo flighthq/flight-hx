@@ -13,6 +13,7 @@ import flighthq.types.Scene2DRenderer;
 import flighthq.types.WgpuRenderState;
 
 class WgpuShape {
+  @:noCompletion
   public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast _Runtime.callValue(drawWgpuMeshShape, cast ([state, renderProxy] : Array<Dynamic>)) : Bool)) { return; }
     _Runtime.callValue(drawWgpuRasterShape, cast ([state, renderProxy] : Array<Dynamic>));

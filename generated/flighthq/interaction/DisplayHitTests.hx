@@ -7,36 +7,43 @@ import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
 import flighthq.types.Node.NodeAny;
 
 class DisplayHitTests {
+  @:noCompletion
   public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultNode2DHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;

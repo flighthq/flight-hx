@@ -35,6 +35,7 @@ class Billboard {
     return cast null;
   }
 
+  @:noCompletion
   public static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
     return cast _Runtime.callValue(getNode3DRuntime, cast ([source] : Array<Dynamic>));
     return cast null;

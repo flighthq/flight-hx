@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 class GlFullscreenPass {
   public static final FULLSCREEN_VERTEX_SRC__glFullscreenPass:Dynamic = '#version 300 es\nin vec2 a_position;\nin vec2 a_texCoord;\nout vec2 v_texCoord;\nvoid main() {\n  gl_Position = vec4(a_position, 0.0, 1.0);\n  v_texCoord = a_texCoord;\n}';
 
+  @:noCompletion
   public static function clearGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,6 +30,7 @@ class GlFullscreenPass {
     _Runtime.setField(runtime, 'currentBlendMode', null);
   }
 
+  @:noCompletion
   public static function compileGlFullscreenProgram(gl:Dynamic, fragmentSource:String):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var textures:Array<Dynamic> = cast _Runtime.UNDEFINED;
@@ -49,6 +51,7 @@ class GlFullscreenPass {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<GlRenderTarget>, setUniforms:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;

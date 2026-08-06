@@ -19,11 +19,13 @@ import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
 class GlToonPrelude {
+  @:noCompletion
   public static function buildGlToonDefineKey(key:GlToonDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
+  @:noCompletion
   public static function compileGlToonProgram(gl:Dynamic, key:GlToonDefineKey):GlToonProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlToonVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlToonFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
@@ -31,6 +33,7 @@ class GlToonPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
     var fullKey:GlToonDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasSkin: _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
@@ -38,11 +41,13 @@ class GlToonPrelude {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlToonFragmentSourceForKey(key:GlToonDefineKey):String {
     return cast (_Runtime.callValue(GlToonPrelude.buildGlToonDefineSource__glToonPrelude, cast ([key] : Array<Dynamic>)) + GlToonPrelude.TOON_FRAGMENT_BODY__glToonPrelude);
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlToonVertexSourceForKey(key:GlToonDefineKey):String {
     var skin:Dynamic = cast _Runtime.UNDEFINED;
     skin = _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');

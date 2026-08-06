@@ -13,6 +13,7 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasBlendEffect {
+  @:noCompletion
   public static function applyBlendEffectToCanvas(state:Dynamic, source:Dynamic, dest:Dynamic, effect:BlendEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;
     var operation:Dynamic = cast _Runtime.UNDEFINED;

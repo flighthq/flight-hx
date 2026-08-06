@@ -20,6 +20,7 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.GradientBevelEffect;
 
 class CanvasGradientBevelEffect {
+  @:noCompletion
   public static function applyGradientBevelEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:GradientBevelEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;

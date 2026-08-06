@@ -10,6 +10,7 @@ import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
 
 class EnablePermissionGuards {
+  @:noCompletion
   public static function arePermissionGuardsEnabled():Bool {
     return cast EnablePermissionGuards._enabled__enablePermissionGuards;
     return cast null;

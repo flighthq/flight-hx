@@ -12,6 +12,7 @@ import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 class EnableGlRenderStateGuards {
+  @:noCompletion
   public static function areGlRenderStateGuardsEnabled(state:GlRenderState):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderRootGuard'), EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
     return cast null;

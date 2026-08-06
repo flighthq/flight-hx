@@ -281,6 +281,7 @@ class WgpuParticleEmitter3D {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuParticleEmitter3DResources(state:WgpuRenderState):Void {
     var resources:Dynamic = cast _Runtime.UNDEFINED;
     resources = ((cast WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap).get(state));
@@ -292,6 +293,7 @@ class WgpuParticleEmitter3D {
     ((cast WgpuParticleEmitter3D.dummyTextureCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap).delete_(state));
   }
 
+  @:noCompletion
   public static function drawWgpuScene3DParticleEmitter3Ds(state:WgpuRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var list:Dynamic = cast _Runtime.UNDEFINED;

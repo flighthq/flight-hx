@@ -110,6 +110,7 @@ class UserAgent {
     return cast null;
   }
 
+  @:noCompletion
   public static function parseUserAgentRuntime(win:Null<Dynamic>):PlatformRuntime {
     var proc:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(win, null) : Bool)) { return cast 'unknown'; }

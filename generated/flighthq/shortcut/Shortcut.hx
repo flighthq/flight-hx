@@ -182,6 +182,7 @@ class Shortcut {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebShortcutBackend():ShortcutBackend {
     return cast { getRegistered: function() {
       return cast Shortcut._emptyList__shortcut;
@@ -325,6 +326,7 @@ class Shortcut {
     return cast null;
   }
 
+  @:noCompletion
   public static function getShortcutBackend():ShortcutBackend {
     if ((cast !_Runtime.strictEquals(Shortcut._backend__shortcut, null) : Bool)) { return cast Shortcut._backend__shortcut; }
     if ((cast _Runtime.strictEquals(Shortcut._webBackend__shortcut, null) : Bool)) { (Shortcut._webBackend__shortcut = cast (_Runtime.callValue(createWebShortcutBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
@@ -405,10 +407,12 @@ class Shortcut {
     _Runtime.callProperty(_Runtime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setAllEnabled', cast ([true] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setShortcutBackend(backend:Null<ShortcutBackend>):Void {
     (Shortcut._backend__shortcut = cast (backend : Dynamic));
   }
 
+  @:noCompletion
   public static function setShortcutDropGuard(guard:Null<ShortcutDropGuard>):Void {
     (Shortcut._dropGuard__shortcut = cast (guard : Dynamic));
   }

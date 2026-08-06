@@ -47,6 +47,7 @@ class GlRenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentRenderTarget');
@@ -57,6 +58,7 @@ class GlRenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -72,6 +74,7 @@ class GlRenderTarget {
     if (_Runtime.truthy(_Runtime.field(target, 'depthStencilRenderbuffer'))) { flighthq._internal.backend.WebGl2Backend.deleteRenderbuffer(gl, _Runtime.field(target, 'depthStencilRenderbuffer')); }
   }
 
+  @:noCompletion
   public static function drawGlRenderTargetResult(state:GlRenderState, renderProxy:RenderProxy2D, target:flighthq.types.GlRenderTarget, transform:Matrix):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -112,6 +115,7 @@ class GlRenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function resizeGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget, width:Float, height:Float):Void {
     var requested:Dynamic = cast _Runtime.UNDEFINED;
     var effective:Dynamic = cast _Runtime.UNDEFINED;
@@ -146,6 +150,7 @@ class GlRenderTarget {
     _Runtime.setField(runtime, 'currentTexture', null);
   }
 
+  @:noCompletion
   public static function resolveGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;

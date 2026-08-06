@@ -9,16 +9,19 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Runtime {
+  @:noCompletion
   public static function createEntityRuntime():EntityRuntime {
     return cast { binding: null };
     return cast null;
   }
 
+  @:noCompletion
   public static function getEntityRuntime(source:Entity):EntityRuntime {
     return cast _Runtime.getIndex(source, EntityRuntimeKey);
     return cast null;
   }
 
+  @:noCompletion
   public static function hasEntityRuntime(source:Entity):Bool {
     return cast !_Runtime.strictEquals(_Runtime.getIndex(source, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast null;

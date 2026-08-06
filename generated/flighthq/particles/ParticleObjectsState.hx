@@ -14,6 +14,7 @@ class ParticleObjectsState {
     return cast null;
   }
 
+  @:noCompletion
   public static function ensureParticleObjectsStateCapacity(state:flighthq.types.ParticleObjectsState, capacity:Float):Void {
     if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) { return; }
     (state.lifetimes = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.lifetimes, (capacity * 2.0)] : Array<Dynamic>)) : Dynamic));

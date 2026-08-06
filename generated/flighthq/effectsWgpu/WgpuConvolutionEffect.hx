@@ -12,8 +12,10 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuConvolutionEffect {
+  @:noCompletion
   public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Dynamic = 49.0;
 
+  @:noCompletion
   public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;

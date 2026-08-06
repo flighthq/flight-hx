@@ -16,6 +16,7 @@ class Haptics {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebHapticsBackend():HapticsBackend {
     return cast { cancel: function() {
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([0.0] : Array<Dynamic>));
@@ -57,6 +58,7 @@ class Haptics {
     return cast null;
   }
 
+  @:noCompletion
   public static function getHapticsBackend():HapticsBackend {
     if ((cast _Runtime.strictEquals(Haptics._backend__haptics, null) : Bool)) { (Haptics._backend__haptics = cast (_Runtime.callValue(createWebHapticsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Haptics._backend__haptics;
@@ -77,6 +79,7 @@ class Haptics {
     _Runtime.callOptionalProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'prepare', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setHapticsBackend(backend:Null<HapticsBackend>):Void {
     (Haptics._backend__haptics = cast (backend : Dynamic));
   }

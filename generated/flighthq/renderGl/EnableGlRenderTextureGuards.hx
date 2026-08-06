@@ -11,6 +11,7 @@ import flighthq.types.Log.LogLevel;
 import flighthq.types.RenderTexture;
 
 class EnableGlRenderTextureGuards {
+  @:noCompletion
   public static function areGlRenderTextureGuardsEnabled(state:GlRenderState):Bool {
     var enabled:Dynamic = cast _Runtime.UNDEFINED;
     enabled = false;

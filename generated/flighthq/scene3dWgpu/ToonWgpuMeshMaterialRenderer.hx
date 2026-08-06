@@ -27,6 +27,7 @@ import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
 class ToonWgpuMeshMaterialRenderer {
+  @:noCompletion
   public static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,6 +7,7 @@ import flighthq.renderGl.GlTextureUpload.uploadGlTextureElement;
 import flighthq.types.Image;
 
 class GlTextureVideoUpload {
+  @:noCompletion
   public static function uploadGlTextureVideoFrame(gl:Dynamic, image:Dynamic, uploadedVersion:Float, ?internalFormat:Float):Float {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic);
     var element:Dynamic = cast _Runtime.UNDEFINED;

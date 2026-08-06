@@ -22,6 +22,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 class DepthWgpuMeshMaterialRenderer {
+  @:noCompletion
   public static final depthWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;

@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.RadialBlurEffect;
 
 class GlRadialBlurEffect {
+  @:noCompletion
   public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
     var centerX:Dynamic = cast _Runtime.UNDEFINED;
     var centerY:Dynamic = cast _Runtime.UNDEFINED;

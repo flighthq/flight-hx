@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.HasBlendMode;
 
 class HasBlendMode {
+  @:noCompletion
   public static function initBlendModeTrait(target:flighthq.types.HasBlendMode, ?obj:Dynamic):Void {
     _Runtime.setField(target, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(obj, 'blendMode'), function():Dynamic return cast null));
   }

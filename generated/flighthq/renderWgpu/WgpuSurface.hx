@@ -9,6 +9,7 @@ import flighthq.types.Bitmap;
 import flighthq.types.WgpuRenderState;
 
 class WgpuSurface {
+  @:noCompletion
   public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -94,6 +95,7 @@ class WgpuSurface {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'frameCaptureEnabled', true);
   }
 
+  @:noCompletion
   public static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;

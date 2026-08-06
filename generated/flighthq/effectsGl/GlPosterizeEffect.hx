@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.PosterizeEffect;
 
 class GlPosterizeEffect {
+  @:noCompletion
   public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
     var levels:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

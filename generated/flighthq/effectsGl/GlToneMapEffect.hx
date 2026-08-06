@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.ToneMapEffect;
 
 class GlToneMapEffect {
+  @:noCompletion
   public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
     var operator_:Dynamic = cast _Runtime.UNDEFINED;
     var exposure:Dynamic = cast _Runtime.UNDEFINED;

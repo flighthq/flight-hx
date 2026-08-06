@@ -136,6 +136,7 @@ class GlVelocity {
     }
   };
 
+  @:noCompletion
   public static final defaultGlQuadBatchVelocityWriter:GlVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
     var batch:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -239,6 +240,7 @@ class GlVelocity {
     _Runtime.callValue(drawGlVelocityQuad, cast ([ctx, _Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'width'), _Runtime.field(bounds, 'height'), _Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), _Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y')] : Array<Dynamic>));
   };
 
+  @:noCompletion
   public static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -257,6 +259,7 @@ class GlVelocity {
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, 6.0);
   }
 
+  @:noCompletion
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;

@@ -17,6 +17,7 @@ import flighthq.types.Scene2DRenderer;
 import flighthq.types.Sprite;
 
 class CanvasSprite {
+  @:noCompletion
   public static function drawCanvasSprite(state:Dynamic, sprite:RenderProxy2D):Void {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var drawable:Dynamic = cast _Runtime.UNDEFINED;

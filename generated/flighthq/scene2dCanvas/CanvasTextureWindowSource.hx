@@ -10,6 +10,7 @@ import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Texture;
 
 class CanvasTextureWindowSource {
+  @:noCompletion
   public static function resolveCanvasTextureWindowSource(resolvers:Dynamic, texture:Texture):Null<Dynamic> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

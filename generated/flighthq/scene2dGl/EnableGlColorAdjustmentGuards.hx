@@ -9,11 +9,13 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 class EnableGlColorAdjustmentGuards {
+  @:noCompletion
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentMaterialFeatureGuard'), null);
     return cast null;
   }
 
+  @:noCompletion
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentMaterialFeatureGuard', EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards);
   }

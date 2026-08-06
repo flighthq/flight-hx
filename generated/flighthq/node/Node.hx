@@ -153,6 +153,7 @@ class Node {
     return cast null;
   }
 
+  @:noCompletion
   public static function createNodeRuntime<Traits>(?methods:Dynamic):NodeRuntime<Traits> {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : NodeRuntime<Traits>);
@@ -185,6 +186,7 @@ class Node {
     return cast null;
   }
 
+  @:noCompletion
   public static function createNodeSignals():NodeSignals {
     return cast { onChildAdded: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildRemoved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildrenChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildrenOrderChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParentChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
@@ -195,6 +197,7 @@ class Node {
     return cast null;
   }
 
+  @:noCompletion
   public static function defaultNodeRuntimeCanAddChild<Traits>(_target:flighthq.types.Node<Traits>, _child:flighthq.types.Node<Traits>):Bool {
     return cast true;
     return cast null;
@@ -391,6 +394,7 @@ class Node {
     return cast null;
   }
 
+  @:noCompletion
   public static function getNodeRuntime<Traits>(source:flighthq.types.Node<Traits>):NodeRuntime<Traits> {
     return cast (cast _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
     return cast null;

@@ -32,6 +32,7 @@ class SceneNode {
     return cast null;
   }
 
+  @:noCompletion
   public static function createNode3DRuntime():Node3DRuntime {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = (cast _Runtime.callValue(createNodeRuntime, cast ([] : Array<Dynamic>)) : Node3DRuntime);
@@ -50,6 +51,7 @@ class SceneNode {
     return cast null;
   }
 
+  @:noCompletion
   public static function getNode3DRuntime(source:Node3D):Node3DRuntime {
     return cast (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : Node3DRuntime);
     return cast null;

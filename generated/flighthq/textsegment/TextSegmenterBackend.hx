@@ -8,17 +8,20 @@ import flighthq.types.TextSegment.TextSegmentGranularity;
 import flighthq.types.TextSegment.TextSegmenterBackend;
 
 class TextSegmenterBackend {
+  @:noCompletion
   public static function createWebTextSegmenterBackend():flighthq.types.TextSegment.TextSegmenterBackend {
     return cast { segment: TextSegmenterBackend.segmentWithIntlSegmenter__textSegmenterBackend };
     return cast null;
   }
 
+  @:noCompletion
   public static function getTextSegmenterBackend():flighthq.types.TextSegment.TextSegmenterBackend {
     if ((cast _Runtime.strictEquals(TextSegmenterBackend._backend__textSegmenterBackend, null) : Bool)) { (TextSegmenterBackend._backend__textSegmenterBackend = cast (_Runtime.callValue(createWebTextSegmenterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast TextSegmenterBackend._backend__textSegmenterBackend;
     return cast null;
   }
 
+  @:noCompletion
   public static function setTextSegmenterBackend(backend:Null<flighthq.types.TextSegment.TextSegmenterBackend>):Void {
     (TextSegmenterBackend._backend__textSegmenterBackend = cast (backend : Dynamic));
   }

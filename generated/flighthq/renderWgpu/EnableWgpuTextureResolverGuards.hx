@@ -8,6 +8,7 @@ import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.WgpuRenderState;
 
 class EnableWgpuTextureResolverGuards {
+  @:noCompletion
   public static function areWgpuTextureResolverGuardsEnabled(state:WgpuRenderState):Bool {
     return cast _Runtime.callValue(areRenderRegistryGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;

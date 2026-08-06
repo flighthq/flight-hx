@@ -12,6 +12,7 @@ import flighthq.types.WgpuModifierSnippet;
 import flighthq.types.WgpuRenderState;
 
 class WgpuShadedModifierSnippet {
+  @:noCompletion
   public static function registerWgpuModifierSnippet(state:WgpuRenderState, snippet:WgpuModifierSnippet):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -20,6 +21,7 @@ class WgpuShadedModifierSnippet {
     _Runtime.incrementField(runtime, 'modifierSnippetRevision', 1, true);
   }
 
+  @:noCompletion
   public static function resolveWgpuModifierSnippet(state:WgpuRenderState, kind:ModifierKind):Null<WgpuModifierSnippet> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');

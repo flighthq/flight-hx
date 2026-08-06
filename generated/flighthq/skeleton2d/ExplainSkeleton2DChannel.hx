@@ -7,6 +7,7 @@ import flighthq.types.AnimationChannel;
 import flighthq.types.Skeleton2DGuards.Skeleton2DCoercedInterpolation;
 
 class ExplainSkeleton2DChannel {
+  @:noCompletion
   public static function explainSkeleton2DChannelInterpolation(channel:AnimationChannel, subject:String):Null<Skeleton2DCoercedInterpolation> {
     var stated:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.callValue(isSkeleton2DSteppedChannelSubject, cast ([subject] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
@@ -16,6 +17,7 @@ class ExplainSkeleton2DChannel {
     return cast null;
   }
 
+  @:noCompletion
   public static function isSkeleton2DSteppedChannelSubject(subject:String):Bool {
     return cast ((cast _Runtime.strictEquals(subject, ExplainSkeleton2DChannel.ATTACHMENT_SUBJECT__explainSkeleton2DChannel) : Bool) || (cast _Runtime.strictEquals(subject, ExplainSkeleton2DChannel.DRAW_ORDER_SUBJECT__explainSkeleton2DChannel) : Bool));
     return cast null;

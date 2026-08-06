@@ -16,11 +16,13 @@ import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 typedef WgpuCompressedFormatInfo__wgpuCompressedTexture = { var blockHeight:Float; var blockWidth:Float; var bytesPerBlock:Float; var format:Dynamic; };
 
 class WgpuCompressedTexture {
+  @:noCompletion
   public static function detectWgpuCompressedTextureSupport(device:Dynamic):WgpuCompressedTextureSupport {
     return cast { astc: _Runtime.callProperty(_Runtime.field(device, 'features'), 'has', cast (['texture-compression-astc'] : Array<Dynamic>)), bc: _Runtime.callProperty(_Runtime.field(device, 'features'), 'has', cast (['texture-compression-bc'] : Array<Dynamic>)), etc2: _Runtime.callProperty(_Runtime.field(device, 'features'), 'has', cast (['texture-compression-etc2'] : Array<Dynamic>)) };
     return cast null;
   }
 
+  @:noCompletion
   public static function getWgpuCompressedTextureFormat(device:Dynamic, format:TextureContainerFormat):Null<Dynamic> {
     var info:Dynamic = cast _Runtime.UNDEFINED;
     var support:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,6 +35,7 @@ class WgpuCompressedTexture {
     return cast null;
   }
 
+  @:noCompletion
   public static function hasWgpuCompressedTextureFormat(support:WgpuCompressedTextureSupport, format:TextureContainerFormat):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.callValue(WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture, cast ([format] : Array<Dynamic>)), null) : Bool)) { return cast false; }
     if ((cast StringTools.startsWith(format, 'bc') : Bool)) { return cast _Runtime.field(support, 'bc'); }
@@ -49,6 +52,7 @@ class WgpuCompressedTexture {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture : Dynamic)));
   }
 
+  @:noCompletion
   public static function uploadWgpuCompressedTextureContainer(state:WgpuRenderState, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:WgpuCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Null<Dynamic> {
     var native:Dynamic = cast _Runtime.UNDEFINED;
     var decoded:Array<flighthq._internal._UInt8ClampedArray> = cast _Runtime.UNDEFINED;

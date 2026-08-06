@@ -48,6 +48,7 @@ class GlyphRasterizerBackend {
     return cast null;
   }
 
+  @:noCompletion
   public static function getGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
     if ((cast _Runtime.strictEquals(GlyphRasterizerBackend._backend__glyphRasterizerBackend, null) : Bool)) { (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast (_Runtime.callValue(createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast GlyphRasterizerBackend._backend__glyphRasterizerBackend;

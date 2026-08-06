@@ -25,6 +25,7 @@ class DomNativeText {
     return cast null;
   }
 
+  @:noCompletion
   public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -66,6 +67,7 @@ class DomNativeText {
     _Runtime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(drawDomNativeText, cast ([state, renderProxy] : Array<Dynamic>));
   }

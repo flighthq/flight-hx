@@ -12,6 +12,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.ModifierKind;
 
 class GlShadedModifierSnippet {
+  @:noCompletion
   public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -19,6 +20,7 @@ class GlShadedModifierSnippet {
     _Runtime.callValue(registerModifier, cast ([_Runtime.field(runtime, 'modifierSnippetRegistry'), snippet] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');

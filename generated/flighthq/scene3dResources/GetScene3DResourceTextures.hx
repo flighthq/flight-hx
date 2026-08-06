@@ -21,6 +21,7 @@ class GetScene3DResourceTextures {
     }
   }
 
+  @:noCompletion
   public static function getScene3DTextureResourceReference(scene:Scene3D, texture:Texture):Null<ImageResourceReference> {
     for (resource in _Runtime.iterable(scene.resources)) {
       if ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(_Runtime.field(resource, 'textures'), 'includes', cast ([(cast texture : Texture)] : Array<Dynamic>)), true) : Bool)) { return cast resource; }

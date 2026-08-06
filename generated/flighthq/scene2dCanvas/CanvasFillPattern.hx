@@ -16,6 +16,7 @@ import flighthq.types.Texture;
 class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
 
+  @:noCompletion
   public static function createBitmapPattern(context:Dynamic, texture:Texture, resolvers:Dynamic, allowSmoothing:Dynamic = true):Null<Dynamic> {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var smooth:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,6 +28,7 @@ class CanvasFillPattern {
     return cast null;
   }
 
+  @:noCompletion
   public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
     var mat:Dynamic = cast _Runtime.UNDEFINED;
     mat = _Runtime.coalesce(m, function():Dynamic return cast CanvasFillPattern.IDENTITY__canvasFillPattern);

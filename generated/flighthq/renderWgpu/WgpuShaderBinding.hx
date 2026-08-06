@@ -13,11 +13,13 @@ import flighthq.types.WgpuRenderState.WgpuBitmapShader;
 class WgpuShaderBinding {
   public static final _shaderBindings__wgpuShaderBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
+  @:noCompletion
   public static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     return cast ((cast WgpuShaderBinding._shaderBindings__wgpuShaderBinding : flighthq._internal._WeakMap).get(renderProxy));
     return cast null;
   }
 
+  @:noCompletion
   public static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,6 +33,7 @@ class WgpuShaderBinding {
     return cast null;
   }
 
+  @:noCompletion
   public static function setWgpuShader(state:WgpuRenderState, node:Node2D, shader:Null<WgpuBitmapShader>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));

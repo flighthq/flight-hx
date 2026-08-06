@@ -62,6 +62,7 @@ class WgpuTextLabel {
     }
   }
 
+  @:noCompletion
   public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;

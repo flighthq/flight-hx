@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.LensFlareEffect;
 
 class GlLensFlareEffect {
+  @:noCompletion
   public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;

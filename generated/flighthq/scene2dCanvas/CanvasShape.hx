@@ -19,6 +19,7 @@ import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
 
 class CanvasShape {
+  @:noCompletion
   public static function drawCanvasShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,6 +37,7 @@ class CanvasShape {
     _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, commands, _Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function renderCanvasShapeCommands(context:Dynamic, state:RenderState, commands:Array<Dynamic>, resolvers:Dynamic):Void {
     var drawState:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;

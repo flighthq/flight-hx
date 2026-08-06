@@ -20,6 +20,7 @@ import flighthq.types.ShapeCommand.ShapeCommandToken;
 class CanvasScale9Shape {
   public static final _remappedCommands__canvasScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
 
+  @:noCompletion
   public static function drawCanvasScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

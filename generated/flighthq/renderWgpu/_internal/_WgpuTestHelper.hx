@@ -113,6 +113,7 @@ class _WgpuTestHelper {
     return cast null;
   }
 
+  @:noCompletion
   public static function createReadyImageElementForTest(width:Dynamic = 1.0, height:Dynamic = 1.0):Dynamic {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>));
@@ -123,6 +124,7 @@ class _WgpuTestHelper {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWgpuRenderStateForTest():flighthq._internal._Promise<WgpuRenderState> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var canvas:Dynamic = cast _Runtime.UNDEFINED;
@@ -133,6 +135,7 @@ class _WgpuTestHelper {
     }));
   }
 
+  @:noCompletion
   public static function installWgpuMock():Void {
     var gpu:Dynamic = cast _Runtime.UNDEFINED;
     var origGetContext:Dynamic = cast _Runtime.UNDEFINED;

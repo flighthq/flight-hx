@@ -14,10 +14,12 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuBlurEffect {
+  @:noCompletion
   public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
     _Runtime.callValue(applyGaussianBlurToWgpu, cast ([state, source, dest, temp, { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     var sigmaX:Dynamic = cast _Runtime.UNDEFINED;
     var sigmaY:Dynamic = cast _Runtime.UNDEFINED;

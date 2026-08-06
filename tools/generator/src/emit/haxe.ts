@@ -228,7 +228,10 @@ export function emitHaxeModule(module: IrModule): string {
     );
   }
   for (const declaration of valueDeclarations) {
-    lines.push(...indent(emitModuleValue(declaration)), '');
+    lines.push(
+      ...indent([...(declaration.noCompletion ? ['@:noCompletion'] : []), ...emitModuleValue(declaration)]),
+      '',
+    );
   }
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '');
@@ -382,12 +385,14 @@ function collectInitializerIdentifiers(expression: IrExpression | undefined, out
 
 function emitDeclaration(declaration: IrDeclaration): string[] {
   const access = 'public ';
+  const completionMetadata = declaration.noCompletion ? ['@:noCompletion'] : [];
   if (declaration.kind === 'class') {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
     const parent = declaration.extends ? ` extends ${emitType(declaration.extends)}` : '';
     // Spread calls and method references still use dynamic dispatch, so internal-class
     // members need a DCE retention belt even though ordinary typed calls are direct.
     const lines = [
+      ...completionMetadata,
       ...(!declaration.exported ? ['@:keep'] : []),
       declaration.packagePrivate
         ? `private class ${safeName(declaration.name)}${generics}${parent} {`
@@ -473,6 +478,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     );
     const underlying = hasStringMember ? (hasNumericMember ? 'Dynamic' : 'String') : 'Int';
     const lines = [
+      ...completionMetadata,
       `${declaration.packagePrivate ? 'private ' : ''}enum abstract ${safeName(declaration.name)}(${underlying}) from ${underlying} to ${underlying} {`,
     ];
     for (const member of declaration.members) {
@@ -505,7 +511,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         throw new Error(`cpp @:structInit declaration is not anonymous: ${declaration.cppStructInitSchemaId}`);
       }
       const fields = declaration.type.fields;
-      const lines = ['#if cpp', '@:structInit', `${modifier}class ${safeName(declaration.name)}${generics} {`];
+      const lines = [
+        '#if cpp',
+        ...completionMetadata,
+        '@:structInit',
+        `${modifier}class ${safeName(declaration.name)}${generics} {`,
+      ];
       for (const field of fields) {
         lines.push(`  public var ${safeName(field.name)}:${emitType(field.type)};`);
       }
@@ -518,12 +529,16 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         '  }',
         '}',
         '#else',
+        ...completionMetadata,
         `${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`,
         '#end',
       );
       return lines;
     }
-    return [`${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`];
+    return [
+      ...completionMetadata,
+      `${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`,
+    ];
   }
   if (declaration.kind === 'variable') {
     const mutability = declaration.mutable || !declaration.initializer ? 'var' : 'final';

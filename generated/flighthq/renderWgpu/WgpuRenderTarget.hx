@@ -72,6 +72,7 @@ class WgpuRenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function declareWgpuRenderTargetColorSpace(state:WgpuRenderState, colorSpace:RenderTargetColorSpace):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -83,11 +84,13 @@ class WgpuRenderTarget {
     return cast null;
   }
 
+  @:noCompletion
   public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:flighthq.types.WgpuRenderTarget, transform:Matrix):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -151,6 +154,7 @@ class WgpuRenderTarget {
     }
   }
 
+  @:noCompletion
   public static function resizeWgpuRenderTarget(state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget, width:Float, height:Float):Void {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;

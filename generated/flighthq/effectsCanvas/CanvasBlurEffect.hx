@@ -11,6 +11,7 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasBlurEffect {
+  @:noCompletion
   public static function applyBlurEffectToCanvas(source:Dynamic, dest:Dynamic, effect:BlurEffect):Void {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;

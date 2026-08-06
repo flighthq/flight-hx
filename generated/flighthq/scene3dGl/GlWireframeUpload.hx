@@ -9,6 +9,7 @@ import flighthq.types.GlWireframeProgram.GlWireframeUpload;
 import flighthq.types.MeshGeometry;
 
 class GlWireframeUpload {
+  @:noCompletion
   public static function destroyGlWireframeUpload(state:GlRenderState, upload:flighthq.types.GlWireframeProgram.GlWireframeUpload):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -16,6 +17,7 @@ class GlWireframeUpload {
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'lineIndexBuffer'));
   }
 
+  @:noCompletion
   public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):flighthq.types.GlWireframeProgram.GlWireframeUpload {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var meshUpload:Dynamic = cast _Runtime.UNDEFINED;

@@ -104,6 +104,7 @@ class Updater {
     return cast null;
   }
 
+  @:noCompletion
   public static function createWebUpdaterBackend():UpdaterBackend {
     var _config:UpdaterConfig = cast _Runtime.UNDEFINED;
     var _channel:Dynamic = cast _Runtime.UNDEFINED;
@@ -197,6 +198,7 @@ class Updater {
     return cast null;
   }
 
+  @:noCompletion
   public static function getUpdaterBackend():UpdaterBackend {
     if ((cast _Runtime.strictEquals(Updater._backend__updater, null) : Bool)) { (Updater._backend__updater = cast (_Runtime.callValue(createWebUpdaterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Updater._backend__updater;
@@ -226,6 +228,7 @@ class Updater {
     _Runtime.callProperty(_Runtime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'rollback', cast ([] : Array<Dynamic>));
   }
 
+  @:noCompletion
   public static function setUpdaterBackend(backend:Null<UpdaterBackend>):Void {
     (Updater._backend__updater = cast (backend : Dynamic));
   }
