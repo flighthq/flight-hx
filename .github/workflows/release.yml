@@ -1,0 +1,41 @@
+# Tag-triggered haxelib release: push a tag `v<version>` whose version equals
+# the committed haxelib.json version, and this job re-runs the release gate,
+# builds + validates the zip, publishes it to lib.haxe.org, and attaches the
+# artifact to a GitHub release. Prereleases (`v0.1.0-rc.1`) follow the same
+# path; haxelib does not offer them to default `haxelib install` while a
+# stable version exists.
+#
+# Required repository secrets: HAXELIB_USERNAME, HAXELIB_PASSWORD.
+name: release
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  haxelib:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install Neko (haxelib runtime)
+        run: sudo apt-get update && sudo apt-get install -y neko
+      - name: Install pinned toolchain
+        run: npm ci && npm run setup
+      - name: Release gate
+        run: npm run check && npm run test:generator && npm run test:haxe:all
+      - name: Package and publish to haxelib
+        env:
+          HAXELIB_USERNAME: ${{ secrets.HAXELIB_USERNAME }}
+          HAXELIB_PASSWORD: ${{ secrets.HAXELIB_PASSWORD }}
+        run: node tools/release-haxelib.mjs
+      - name: Attach artifact to GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" --generate-notes build/package/*.zip ||
+          gh release upload "$GITHUB_REF_NAME" build/package/*.zip
