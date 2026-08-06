@@ -43,12 +43,12 @@ class GlMeshUpload {
       return cast upload;
     }
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (upload = cast ({ indexBuffer: null, indexCount: 0.0, indexType: flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, primitiveMode: primitiveMode, vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl) } : Dynamic));
+      (upload = cast ({ indexBuffer: null, indexCount: 0.0, indexType: flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), primitiveMode: primitiveMode, vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl) } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(upload, 'vao'));
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(upload, 'vertexBuffer'));
-    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.callValue(GlMeshUpload.buildSkinBindVertices__glMeshUpload, cast ([geometry, bindPose] : Array<Dynamic>)) : Dynamic) : (cast geometry.vertices : Dynamic)), flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(upload, 'vertexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.callValue(GlMeshUpload.buildSkinBindVertices__glMeshUpload, cast ([geometry, bindPose] : Array<Dynamic>)) : Dynamic) : (cast geometry.vertices : Dynamic)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
     _Runtime.setField(upload, 'skinBindUploaded', !_Runtime.strictEquals(bindPose, null));
     stride = geometry.layout.stride;
     {
@@ -60,9 +60,9 @@ class GlMeshUpload {
     }
     if ((cast !_Runtime.strictEquals(geometry.indices, null) : Bool)) {
       if ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { _Runtime.setField(upload, 'indexBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(upload, 'indexBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, geometry.indices, flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
-      _Runtime.setField(upload, 'indexType', ((cast _Runtime.isInstanceOf(geometry.indices, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT : Dynamic)));
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(upload, 'indexBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), geometry.indices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
+      _Runtime.setField(upload, 'indexType', ((cast _Runtime.isInstanceOf(geometry.indices, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic)));
       _Runtime.setField(upload, 'indexCount', _Runtime.field(geometry.indices, 'length'));
     } else {
       if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'indexBuffer')); }
@@ -79,19 +79,19 @@ class GlMeshUpload {
     {
       var __switchValue = topology;
       if (__switchValue == 'line-list') {
-        return cast flighthq._internal.backend.WebGl2Backend.LINES;
+        return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINES', flighthq._internal.backend.WebGl2Backend.LINES);
       }
       else if (__switchValue == 'line-strip') {
-        return cast flighthq._internal.backend.WebGl2Backend.LINE_STRIP;
+        return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINE_STRIP', flighthq._internal.backend.WebGl2Backend.LINE_STRIP);
       }
       else if (__switchValue == 'point-list') {
-        return cast flighthq._internal.backend.WebGl2Backend.POINTS;
+        return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'POINTS', flighthq._internal.backend.WebGl2Backend.POINTS);
       }
       else if (__switchValue == 'triangle-strip') {
-        return cast flighthq._internal.backend.WebGl2Backend.TRIANGLE_STRIP;
+        return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLE_STRIP', flighthq._internal.backend.WebGl2Backend.TRIANGLE_STRIP);
       }
       else  {
-        return cast flighthq._internal.backend.WebGl2Backend.TRIANGLES;
+        return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES);
       }
     }
     return cast null;
@@ -172,25 +172,25 @@ class GlMeshUpload {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2') {
-        return cast cast ([2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false] : Array<Dynamic>);
+        return cast cast ([2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false] : Array<Dynamic>);
       }
       else if (__switchValue == 'float32x3') {
-        return cast cast ([3.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false] : Array<Dynamic>);
+        return cast cast ([3.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false] : Array<Dynamic>);
       }
       else if (__switchValue == 'float32x4') {
-        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false] : Array<Dynamic>);
+        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false] : Array<Dynamic>);
       }
       else if (__switchValue == 'uint8x4') {
-        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, false] : Array<Dynamic>);
+        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), false] : Array<Dynamic>);
       }
       else if (__switchValue == 'unorm8x4') {
-        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, true] : Array<Dynamic>);
+        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), true] : Array<Dynamic>);
       }
       else if (__switchValue == 'uint16x4') {
-        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, false] : Array<Dynamic>);
+        return cast cast ([4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), false] : Array<Dynamic>);
       }
       else  {
-        return cast cast ([3.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false] : Array<Dynamic>);
+        return cast cast ([3.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false] : Array<Dynamic>);
       }
     }
     return cast null;

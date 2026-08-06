@@ -26,10 +26,10 @@ class GlShapeMesh {
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(binding, 'matrixLocation'), false, _Runtime.callValue(GlShapeMesh.shapeMeshMatrix__glShapeMesh, cast ([state, renderProxy] : Array<Dynamic>)));
     _Runtime.callOptionalValue(onProgramBound, cast ([state] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(binding, 'vertexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(binding, 'vertexBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(binding, 'positionLocation'));
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(binding, 'positionLocation'), 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 0.0, 0.0);
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(binding, 'indexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(binding, 'positionLocation'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(binding, 'indexBuffer'));
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     {
       var i:Dynamic = 0.0;
@@ -42,9 +42,9 @@ class GlShapeMesh {
         var g:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 8)) & 255) / 255.0);
         var b:Dynamic = ((_Runtime.toInt32(_Runtime.field(mesh, 'color')) & 255) / 255.0);
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(binding, 'colorLocation'), (r * a), (g * a), (b * a), a);
-        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(mesh, 'vertices'), flighthq._internal.backend.WebGl2Backend.STREAM_DRAW);
-        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(mesh, 'indices'), flighthq._internal.backend.WebGl2Backend.STREAM_DRAW);
-        flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, _Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, 0.0);
+        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(mesh, 'vertices'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
+        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(mesh, 'indices'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
+        flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), _Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
         i++;
       }
     }

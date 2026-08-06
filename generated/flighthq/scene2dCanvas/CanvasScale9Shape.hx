@@ -66,7 +66,7 @@ class CanvasScale9Shape {
     c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
     d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
     if ((cast _Runtime.field(state, 'roundPixels') : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, HxMath.fround(t.tx), HxMath.fround(t.ty)] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, _Runtime.fround(t.tx), _Runtime.fround(t.ty)] : Array<Dynamic>));
     } else {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, t.tx, t.ty] : Array<Dynamic>));
     }

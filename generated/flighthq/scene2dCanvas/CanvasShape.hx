@@ -58,7 +58,7 @@ class CanvasShape {
 
   public static final defaultCanvasShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasShape };
 
-  public static final defaultCanvasMorphShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasShape };
+  public static final defaultCanvasMorphShapeRenderer:Scene2DRenderer = defaultCanvasShapeRenderer;
 
   public static function createCanvasShapeDrawState__canvasShape(context:Dynamic, resolvers:Dynamic, allowSmoothing:Bool):Dynamic {
     var state:Dynamic = cast _Runtime.UNDEFINED;

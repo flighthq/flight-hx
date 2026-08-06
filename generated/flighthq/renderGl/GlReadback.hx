@@ -22,16 +22,16 @@ class GlReadback {
     gl = _Runtime.field(state, 'gl');
     readFbo = _Runtime.coalesce(_Runtime.field(target, 'resolveFramebuffer'), function():Dynamic return cast _Runtime.field(target, 'framebuffer'));
     prevFbo = _Runtime.field(runtime, 'currentFramebuffer');
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER, readFbo);
-    status = flighthq._internal.backend.WebGl2Backend.checkFramebufferStatus(gl, flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER);
-    if ((cast !_Runtime.strictEquals(status, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_COMPLETE) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER, prevFbo);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER), readFbo);
+    status = flighthq._internal.backend.WebGl2Backend.checkFramebufferStatus(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER));
+    if ((cast !_Runtime.strictEquals(status, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_COMPLETE', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_COMPLETE)) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER), prevFbo);
       return cast false;
     }
-    format = flighthq._internal.backend.WebGl2Backend.RGBA;
-    type = ((cast _Runtime.isInstanceOf(out, _Runtime.globalValue('Float32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.FLOAT : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE : Dynamic));
+    format = flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA);
+    type = ((cast _Runtime.isInstanceOf(out, _Runtime.globalValue('Float32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE) : Dynamic));
     flighthq._internal.backend.WebGl2Backend.readPixels(gl, x, y, width, height, format, type, out);
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER, prevFbo);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER), prevFbo);
     return cast true;
     return cast null;
   }

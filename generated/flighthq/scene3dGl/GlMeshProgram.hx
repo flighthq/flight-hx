@@ -33,14 +33,14 @@ class GlMeshProgram {
     gl = _Runtime.field(state, 'gl');
     _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram', program);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
-    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
-    flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.LESS);
+    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
+    flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LESS', flighthq._internal.backend.WebGl2Backend.LESS));
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     if ((cast doubleSided : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
+      flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
     } else {
-      flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
-      flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.BACK);
+      flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
+      flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BACK', flighthq._internal.backend.WebGl2Backend.BACK));
     }
   }
 
@@ -118,14 +118,14 @@ class GlMeshProgram {
     gpuSkinned = ((cast !_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
     if ((cast gpuSkinned : Bool)) {
       var palette:Dynamic = _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
       _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0)] : Array<Dynamic>));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT);
     }
     upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
     if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) {
-      var elementSize:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
+      var elementSize:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
       flighthq._internal.backend.WebGl2Backend.drawElements(gl, _Runtime.field(upload, 'primitiveMode'), subset.indexCount, _Runtime.field(upload, 'indexType'), (subset.indexOffset * elementSize));
     } else {
       flighthq._internal.backend.WebGl2Backend.drawArrays(gl, _Runtime.field(upload, 'primitiveMode'), subset.indexOffset, subset.indexCount);

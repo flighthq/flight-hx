@@ -38,6 +38,12 @@ class _Runtime {
     return value < 0 ? -HxMath.pow(-value, 1 / 3) : HxMath.pow(value, 1 / 3);
   }
 
+  /** ECMAScript Math.fround: round once to IEEE-754 binary32, then return the
+   * exactly representable result as the target's ordinary Float. */
+  public static inline function fround(value:Float):Float {
+    return haxe.io.FPHelper.i32ToFloat(haxe.io.FPHelper.floatToI32(value));
+  }
+
   public static inline function apply(callable:Dynamic, arguments:Array<Dynamic>):Dynamic {
     return Reflect.callMethod(null, callable, adjustArguments(callable, arguments));
   }

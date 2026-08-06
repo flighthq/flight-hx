@@ -76,12 +76,12 @@ class ToonGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     baseColorMap = _Runtime.field(material, 'baseColorMap');
     if ((cast !_Runtime.strictEquals(baseColorMap, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, baseColorMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locBaseColorMap'), 0.0); }
     }
     ramp = _Runtime.field(material, 'ramp');
     if ((cast !_Runtime.strictEquals(ramp, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, ramp] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locRamp'), 1.0); }
     }
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, baseColorMap] : Array<Dynamic>));

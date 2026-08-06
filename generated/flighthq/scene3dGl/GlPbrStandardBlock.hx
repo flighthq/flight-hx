@@ -74,7 +74,7 @@ class GlPbrStandardBlock {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
     if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, texture] : Array<Dynamic>)), null) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);
   }

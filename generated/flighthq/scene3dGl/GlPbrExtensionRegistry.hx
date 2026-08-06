@@ -150,8 +150,8 @@ class GlPbrExtensionRegistry {
       if ((cast _Runtime.strictEquals(sceneColor, null) : Bool)) { return cast false; }
       unit = flighthq._internal._StaticIndex.readArray(textureUnits, textureIndex++);
       if ((cast _Runtime.strictEquals(unit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(sceneColor, 'texture'));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(sceneColor, 'texture'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, samplerUniform), unit);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, maxLodUniform), HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(sceneColor, 'mipLevelCount'), 1.0)));
       return cast true;
@@ -160,7 +160,7 @@ class GlPbrExtensionRegistry {
       if ((cast !(cast _Runtime.callValue(isGlTextureReady, cast ([state, texture] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       unit = flighthq._internal._StaticIndex.readArray(textureUnits, textureIndex++);
       if ((cast ((cast _Runtime.strictEquals(unit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return cast false; }
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
       if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, texture] : Array<Dynamic>)), null) : Bool)) { return cast false; }
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, samplerUniform), unit);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uvSetUniform), uvSet);
@@ -179,7 +179,7 @@ class GlPbrExtensionRegistry {
   public static function getGlPbrExtensionTextureUnits__glPbrExtensionRegistry(gl:Dynamic):Array<Float> {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var units:Array<Float> = cast _Runtime.UNDEFINED;
-    count = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.MAX_TEXTURE_IMAGE_UNITS) : Float);
+    count = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'MAX_TEXTURE_IMAGE_UNITS', flighthq._internal.backend.WebGl2Backend.MAX_TEXTURE_IMAGE_UNITS)) : Float);
     units = cast ([] : Array<Dynamic>);
     {
       var unit:Dynamic = 6.0;

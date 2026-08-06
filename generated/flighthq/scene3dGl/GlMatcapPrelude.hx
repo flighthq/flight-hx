@@ -22,7 +22,7 @@ class GlMatcapPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locTint'), flighthq._internal._StaticIndex.readArray(tint, 0.0), flighthq._internal._StaticIndex.readArray(tint, 1.0), flighthq._internal._StaticIndex.readArray(tint, 2.0), flighthq._internal._StaticIndex.readArray(tint, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     if ((cast !_Runtime.strictEquals(matcap, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, matcap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locMatcap'), 0.0); }
     }
   }

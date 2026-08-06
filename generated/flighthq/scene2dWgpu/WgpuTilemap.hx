@@ -24,7 +24,7 @@ import flighthq.types.TintMaterialData;
 import flighthq.types.WgpuRenderState;
 
 class WgpuTilemap {
-  public static final INSTANCE_STRIDE_FLOATS__wgpuTilemap:Dynamic = 13.0;
+  public static final INSTANCE_STRIDE_FLOATS__wgpuTilemap:Dynamic = QUAD_BATCH_INSTANCE_FLOATS;
 
   public static function submitWgpuTilemap__wgpuTilemap(state:WgpuRenderState, tilemapNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

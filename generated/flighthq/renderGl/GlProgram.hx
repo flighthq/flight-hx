@@ -11,7 +11,7 @@ class GlProgram {
     shader = flighthq._internal.backend.WebGl2Backend.createShader(gl, type);
     flighthq._internal.backend.WebGl2Backend.shaderSource(gl, shader, source);
     flighthq._internal.backend.WebGl2Backend.compileShader(gl, shader);
-    if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getShaderParameter(gl, shader, flighthq._internal.backend.WebGl2Backend.COMPILE_STATUS)) : Bool)) {
+    if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getShaderParameter(gl, shader, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COMPILE_STATUS', flighthq._internal.backend.WebGl2Backend.COMPILE_STATUS))) : Bool)) {
       _Runtime.throwValue(_Runtime.error('' + Std.string(label) + ' shader compile error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getShaderInfoLog(gl, shader)) + ''));
     }
     return cast shader;
@@ -23,8 +23,8 @@ class GlProgram {
     var vertexShader:Dynamic = cast _Runtime.UNDEFINED;
     var fragmentShader:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    vertexShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.backend.WebGl2Backend.VERTEX_SHADER, vertexSource, label] : Array<Dynamic>));
-    fragmentShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.backend.WebGl2Backend.FRAGMENT_SHADER, fragmentSource, label] : Array<Dynamic>));
+    vertexShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VERTEX_SHADER', flighthq._internal.backend.WebGl2Backend.VERTEX_SHADER), vertexSource, label] : Array<Dynamic>));
+    fragmentShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAGMENT_SHADER', flighthq._internal.backend.WebGl2Backend.FRAGMENT_SHADER), fragmentSource, label] : Array<Dynamic>));
     program = flighthq._internal.backend.WebGl2Backend.createProgram(gl);
     flighthq._internal.backend.WebGl2Backend.attachShader(gl, program, vertexShader);
     flighthq._internal.backend.WebGl2Backend.attachShader(gl, program, fragmentShader);
@@ -38,7 +38,7 @@ class GlProgram {
   @:noCompletion
   public static function linkGlProgram(gl:Dynamic, program:Dynamic, label:Dynamic = 'GL'):Void {
     flighthq._internal.backend.WebGl2Backend.linkProgram(gl, program);
-    if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.LINK_STATUS)) : Bool)) {
+    if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINK_STATUS', flighthq._internal.backend.WebGl2Backend.LINK_STATUS))) : Bool)) {
       _Runtime.throwValue(_Runtime.error('' + Std.string(label) + ' program link error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getProgramInfoLog(gl, program)) + ''));
     }
   }

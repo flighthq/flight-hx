@@ -32,9 +32,9 @@ class GlEnvironmentCube {
     if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(cube, 'dimension'), 'cube') : Bool)) : Bool) || (cast !(cast _Runtime.callValue(GlEnvironmentCube.hasGlCubeFacePixels__glEnvironmentCube, cast ([cube] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast null; }
     sources = _Runtime.field(cube, 'sources');
     gl = _Runtime.field(state, 'gl');
-    internalFormat = ((cast _Runtime.strictEquals(_Runtime.field(cube, 'colorSpace'), 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic));
+    internalFormat = ((cast _Runtime.strictEquals(_Runtime.field(cube, 'colorSpace'), 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic));
     texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
-    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, texture);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), texture);
     {
       var face:Dynamic = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
@@ -42,12 +42,12 @@ class GlEnvironmentCube {
         face++;
       }
     }
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER, flighthq._internal.backend.WebGl2Backend.LINEAR);
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R, flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);
-    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, null);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MIN_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_S', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_R', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), null);
     _Runtime.setField(runtime, 'environmentSourceCube', texture);
     _Runtime.setField(runtime, 'environmentSourceCubeColorSpace', _Runtime.field(cube, 'colorSpace'));
     return cast texture;
@@ -56,7 +56,7 @@ class GlEnvironmentCube {
 
   @:noCompletion
   public static function getGlCubeFaceTarget(gl:Dynamic, face:Float):Float {
-    return cast (flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X + face);
+    return cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X) + face);
     return cast null;
   }
 
@@ -69,9 +69,9 @@ class GlEnvironmentCube {
     texture = _Runtime.field(runtime, 'environmentSourceCube');
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, texture);
-    _Runtime.callValue(GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube, cast ([gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), image, ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'environmentSourceCubeColorSpace'), 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8 : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic))] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP, null);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), texture);
+    _Runtime.callValue(GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube, cast ([gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), image, ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'environmentSourceCubeColorSpace'), 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic))] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), null);
     return cast true;
     return cast null;
   }
@@ -93,7 +93,7 @@ class GlEnvironmentCube {
   }
 
   public static function uploadGlEnvironmentImage__glEnvironmentCube(gl:Dynamic, target:Float, image:TextureSource, ?internalFormat:Float):Void {
-    if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic);
+    if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) {
       var bitmap:Dynamic = (cast image : Bitmap);
       _Runtime.callValue(uploadGlTextureData, cast ([gl, target, bitmap.width, bitmap.height, bitmap.data, internalFormat] : Array<Dynamic>));

@@ -28,7 +28,7 @@ class GlEffectTintShader {
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), alpha);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locStrength'), strength);
-      flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ZERO);
+      flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
     }] : Array<Dynamic>));
   }
 
@@ -40,7 +40,7 @@ class GlEffectTintShader {
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), alpha);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locStrength'), strength);
-      flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.ONE, flighthq._internal.backend.WebGl2Backend.ZERO);
+      flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
     }] : Array<Dynamic>));
   }
 

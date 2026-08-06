@@ -20,7 +20,7 @@ class GlDebugPrelude {
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), normalScale);
     if ((cast !_Runtime.strictEquals(normalMap, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, normalMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0); }
     }
   }

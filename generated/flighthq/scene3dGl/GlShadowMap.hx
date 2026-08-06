@@ -60,16 +60,16 @@ class GlShadowMap {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
     rigidProgram = _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'shadow:depth', GlShadowMap.compileShadowDepthProgram__glShadowMap] : Array<Dynamic>));
     skinnedProgram = null;
-    prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING) : Null<Dynamic>);
-    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.VIEWPORT) : flighthq._internal._Int32Array);
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, _Runtime.field(target, 'framebuffer'));
+    prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<Dynamic>);
+    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), _Runtime.field(target, 'framebuffer'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'));
-    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_TEST);
-    flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.LESS);
+    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
+    flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LESS', flighthq._internal.backend.WebGl2Backend.LESS));
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
-    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
-    flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.FRONT);
-    flighthq._internal.backend.WebGl2Backend.clear(gl, (_Runtime.toInt32(flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT) | _Runtime.toInt32(flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT)));
+    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
+    flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRONT', flighthq._internal.backend.WebGl2Backend.FRONT));
+    flighthq._internal.backend.WebGl2Backend.clear(gl, (_Runtime.toInt32(flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT)) | _Runtime.toInt32(flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT))));
     boundProgram = null;
     _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) {
       var mesh:Dynamic = cast _Runtime.UNDEFINED;
@@ -88,7 +88,7 @@ class GlShadowMap {
       flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)).m);
       if ((cast skinned : Bool)) {
         var jointMatrices:Dynamic = _Runtime.field(_Runtime.field(mesh.skin, 'skeleton'), 'jointMatrices');
-        flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + SKIN_PALETTE_TEXTURE_UNIT));
+        flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
         _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>)), jointMatrices, (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0)] : Array<Dynamic>));
         flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce(_Runtime.field(program, 'locJointTexture'), function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
       }
@@ -100,11 +100,11 @@ class GlShadowMap {
         flighthq._internal.backend.WebGl2Backend.drawArrays(gl, _Runtime.field(upload, 'primitiveMode'), 0.0, _Runtime.field(upload, 'indexCount'));
       }
     }] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER, prevFramebuffer);
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), prevFramebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32Array(prevViewport, 0.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 1.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 2.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 3.0));
-    flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.CULL_FACE);
-    flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.BACK);
+    flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
+    flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BACK', flighthq._internal.backend.WebGl2Backend.BACK));
     _Runtime.setField(runtime, 'shadow', { enabled: true, matrix: matrix, normalBiasWorld: normalBiasWorld, pcfRadius: _Runtime.callValue(GlShadowMap.normalizeDirectionalShadowPcfRadius__glShadowMap, cast ([_Runtime.field(directionalLight, 'pcfRadius')] : Array<Dynamic>)), shadowBias: _Runtime.field(directionalLight, 'shadowBias'), texture: _Runtime.field(target, 'depthTexture') });
   }
 

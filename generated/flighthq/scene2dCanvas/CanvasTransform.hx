@@ -10,7 +10,7 @@ class CanvasTransform {
   @:noCompletion
   public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
     if ((cast _Runtime.field(state, 'roundPixels') : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, HxMath.fround(transform.tx), HxMath.fround(transform.ty)] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, _Runtime.fround(transform.tx), _Runtime.fround(transform.ty)] : Array<Dynamic>));
     } else {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     }

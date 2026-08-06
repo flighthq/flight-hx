@@ -26,7 +26,7 @@ import flighthq.types.TintMaterialData;
 import flighthq.types.WgpuRenderState;
 
 class WgpuQuadBatch {
-  public static final INSTANCE_STRIDE_FLOATS__wgpuQuadBatch:Dynamic = 13.0;
+  public static final INSTANCE_STRIDE_FLOATS__wgpuQuadBatch:Dynamic = QUAD_BATCH_INSTANCE_FLOATS;
 
   public static function submitWgpuQuadBatch__wgpuQuadBatch(state:WgpuRenderState, quadBatch:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

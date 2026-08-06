@@ -3,7 +3,10 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
-import { padContextualObjectFunctionParameters } from '../../tools/generator/src/emit/core.ts';
+import {
+  inlineParameterDefaultConstants,
+  padContextualObjectFunctionParameters,
+} from '../../tools/generator/src/emit/core.ts';
 import {
   emitHaxeModule,
   resetStaticLoweringEmissionCounts,
@@ -64,6 +67,52 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('@:expose');
     expect(output).toContain('static function clamp');
     expect(output).toContain('_Runtime.select');
+  });
+
+  it('inlines parameter defaults without cloning top-level const aliases', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/aliases.ts',
+      `
+        export const DEFAULT_VALUE = 3;
+        export const renderer = { value: 1 };
+        export const rendererAlias = renderer;
+        export function withDefault(value: number = DEFAULT_VALUE): number { return value; }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    inlineParameterDefaultConstants(lowered.declarations);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Aliases',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).toContain('public static final rendererAlias:Dynamic = renderer;');
+    expect(output).toContain('public static function withDefault(value:Float = 3.0):Float');
+  });
+
+  it('lowers ECMAScript Math.fround to the portable binary32 runtime operation', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/fround.ts',
+      'export function single(value: number): number { return Math.fround(value); }',
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Fround',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).toContain('return cast _Runtime.fround(value);');
+    expect(output).not.toContain('HxMath.fround');
   });
 
   it('emits completion metadata deterministically on selected declarations only', () => {
@@ -993,6 +1042,8 @@ describe('TypeScript lowering and Haxe emission', () => {
           const alias = gl;
           alias.drawArrays(gl.TRIANGLES, 0, 3);
           gl.bufferData(gl.ARRAY_BUFFER, 64, gl.STATIC_DRAW);
+          gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+          gl.stencilOp(gl.KEEP, gl.KEEP, gl.INVERT);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, null);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
         }
@@ -1012,17 +1063,23 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain(
-      'flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, buffer)',
+      "flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), buffer)",
     );
     expect(output).toContain(
-      'flighthq._internal.backend.WebGl2Backend.drawArrays(alias, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 0.0, 3.0)',
+      "flighthq._internal.backend.WebGl2Backend.drawArrays(alias, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 0.0, 3.0)",
     );
     expect(output).toContain('flighthq._internal.backend.WebGl2Backend.bufferData(');
+    expect(output).toContain(
+      "flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true)",
+    );
+    expect(output).toContain(
+      "flighthq._internal.backend.WebGl2Backend.stencilOp(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'INVERT', flighthq._internal.backend.WebGl2Backend.INVERT))",
+    );
     expect(output).not.toContain('WebGl2Backend.bufferDataSize(');
     expect(output).toContain('flighthq._internal.backend.WebGl2Backend.texImage2DSource(');
     expect(output).toContain('flighthq._internal.backend.WebGl2Backend.texImage2D(');
     expect(output).toContain(
-      'flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT)',
+      "flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT))",
     );
     expect(output).not.toContain('WebGl2Backend.call(');
     expect(output).not.toContain('WebGl2Backend.field(');

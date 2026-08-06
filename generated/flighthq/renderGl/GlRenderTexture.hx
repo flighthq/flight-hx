@@ -30,7 +30,7 @@ class GlRenderTexture {
     entry = _Runtime.callValue(GlRenderTexture.getEntry__glRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'status'), 'ready') : Bool)) : Bool)) {
       _Runtime.callValue(GlRenderTexture.notifyGuard__glRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, null);
+      flighthq._internal.backend.WebGl2Backend.bindTexture(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.contextConstant(_Runtime.field(state, 'gl'), 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), null);
       var runtime:Dynamic = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentTexture', null);
       _Runtime.setField(runtime, 'currentTextureStraightAlpha', false);
@@ -38,7 +38,7 @@ class GlRenderTexture {
     }
     texture = _Runtime.field(_Runtime.field(entry, 'target'), 'texture');
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.bindTexture(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, texture);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.contextConstant(_Runtime.field(state, 'gl'), 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     _Runtime.setField(runtime, 'currentTexture', texture);
     _Runtime.setField(runtime, 'currentTextureStraightAlpha', false);
     _Runtime.callValue(applyGlSamplerState, cast ([state, runtime, texture, _Runtime.coalesce(sampler, function():Dynamic return cast _Runtime.field(renderTexture, 'sampler'))] : Array<Dynamic>));

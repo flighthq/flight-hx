@@ -205,8 +205,23 @@ class WebGl2Backend {
   public static inline final VIEWPORT:Int = 2978;
   public static inline final ZERO:Int = 0;
 
+  /** Preserve context-owned WebGL constants on JavaScript so wrappers observe
+   * their own enum surface. Native targets use the fixed specification value
+   * because their context types do not expose instance constants. */
+  public static inline function contextConstant(gl:GlContext, name:String, fallback:Float):Dynamic {
+    #if js
+    return cast js.Syntax.code('{0}[{1}]', gl, name);
+    #else
+    return fallback;
+    #end
+  }
+
   public static inline function activeTexture(gl:GlContext, texture:Float):Void {
+    #if js
+    js.Syntax.code('{0}.activeTexture({1})', gl, texture);
+    #else
     gl.activeTexture(Std.int(texture));
+    #end
     #if flight_gl_trace
     final e:Int = gl.getError();
     if (e != 0) glTrace('activeTexture getError -> 0x' + StringTools.hex(e, 4));
@@ -553,7 +568,9 @@ class WebGl2Backend {
   }
 
   public static inline function getParameter(gl:GlContext, pname:Float):Dynamic {
-    #if ((neko || cpp) && lime)
+    #if js
+    return js.Syntax.code('{0}.getParameter({1})', gl, pname);
+    #elseif ((neko || cpp) && lime)
     return nativeParameter(gl, Std.int(pname));
     #else
     return gl.getParameter(Std.int(pname));
@@ -682,7 +699,11 @@ class WebGl2Backend {
   }
 
   public static inline function stencilOp(gl:GlContext, fail:Float, zfail:Float, zpass:Float):Void {
+    #if js
+    js.Syntax.code('{0}.stencilOp({1}, {2}, {3})', gl, fail, zfail, zpass);
+    #else
     gl.stencilOp(Std.int(fail), Std.int(zfail), Std.int(zpass));
+    #end
   }
 
   public static inline function stencilOpSeparate(gl:GlContext, face:Float, fail:Float, zfail:Float, zpass:Float):Void {
@@ -706,8 +727,8 @@ class WebGl2Backend {
     if (uploadError != 0) glTrace('texImage2D getError -> 0x' + StringTools.hex(uploadError, 4));
     #end
     #elseif js
-    js.Syntax.code('{0}.texImage2D({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9})', gl, Std.int(target), Std.int(level),
-      Std.int(internalformat), Std.int(width), Std.int(height), Std.int(border), Std.int(format), Std.int(type), pixels);
+    js.Syntax.code('{0}.texImage2D({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9})', gl, target, level,
+      internalformat, width, height, border, format, type, pixels);
     #else
     gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
       Std.int(border), Std.int(format), Std.int(type), pixels);

@@ -23,25 +23,25 @@ class EnableGlScene3DCustomShaderGuards {
   public static function glUniformTypeName__enableGlScene3DCustomShaderGuards(gl:Dynamic, type:Float):String {
     {
       var __switchValue = type;
-      if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4) {
+      if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT4', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4)) {
         return cast 'mat4';
       }
-      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT_MAT3) {
+      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT3', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT3)) {
         return cast 'mat3';
       }
-      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT_MAT2) {
+      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT2', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT2)) {
         return cast 'mat2';
       }
-      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT_VEC4) {
+      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_VEC4', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC4)) {
         return cast 'vec4';
       }
-      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT_VEC3) {
+      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_VEC3', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC3)) {
         return cast 'vec3';
       }
-      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT_VEC2) {
+      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_VEC2', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC2)) {
         return cast 'vec2';
       }
-      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.FLOAT) {
+      else if (__switchValue == flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT)) {
         return cast 'float';
       }
       else  {
@@ -58,8 +58,8 @@ class EnableGlScene3DCustomShaderGuards {
     if ((cast ((cast EnableGlScene3DCustomShaderGuards._checkedPrograms__enableGlScene3DCustomShaderGuards : flighthq._internal._WeakSet).has(program)) : Bool)) { return; }
     ((cast EnableGlScene3DCustomShaderGuards._checkedPrograms__enableGlScene3DCustomShaderGuards : flighthq._internal._WeakSet).add(program));
     gl = _Runtime.field(state, 'gl');
-    expected = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['u_model', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4] : Array<Dynamic>), cast (['u_viewProjection', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4] : Array<Dynamic>), cast (['u_normalMatrix', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT3] : Array<Dynamic>), cast (['u_cameraPosition', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC3] : Array<Dynamic>)] : Array<Dynamic>)]);
-    count = (cast flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.ACTIVE_UNIFORMS) : Float);
+    expected = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['u_model', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT4', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4)] : Array<Dynamic>), cast (['u_viewProjection', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT4', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4)] : Array<Dynamic>), cast (['u_normalMatrix', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT3', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT3)] : Array<Dynamic>), cast (['u_cameraPosition', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_VEC3', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC3)] : Array<Dynamic>)] : Array<Dynamic>)]);
+    count = (cast flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ACTIVE_UNIFORMS', flighthq._internal.backend.WebGl2Backend.ACTIVE_UNIFORMS)) : Float);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {

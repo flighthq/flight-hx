@@ -4,6 +4,7 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
+import flighthq.types.Types.SCENE_LIGHT_HEAD_FLOATS;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_STRIDE;
 import flighthq.types.Types.SCENE_LIGHT_POINT_OFFSET;
@@ -22,7 +23,7 @@ class _Scene3DLightBlockValues {
 
   public static final SCENE_LIGHT_HEAD_FLOATS:Dynamic = 12.0;
 
-  public static final SCENE_LIGHT_POINT_OFFSET:Dynamic = 12.0;
+  public static final SCENE_LIGHT_POINT_OFFSET:Dynamic = SCENE_LIGHT_HEAD_FLOATS;
 
   public static final SCENE_LIGHT_POINT_STRIDE:Dynamic = 8.0;
 

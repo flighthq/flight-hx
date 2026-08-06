@@ -9,14 +9,14 @@ import flighthq.types.Image;
 class GlTextureVideoUpload {
   @:noCompletion
   public static function uploadGlTextureVideoFrame(gl:Dynamic, image:Dynamic, uploadedVersion:Float, ?internalFormat:Float):Float {
-    if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.RGBA : Dynamic);
+    if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     var element:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'version'), uploadedVersion) : Bool)) { return cast uploadedVersion; }
     element = (cast _Runtime.field(image, 'source') : Null<Dynamic>);
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoWidth') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoHeight') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast uploadedVersion;
     }
-    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, (cast (cast element : Dynamic) : Dynamic), internalFormat] : Array<Dynamic>));
+    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast (cast element : Dynamic) : Dynamic), internalFormat] : Array<Dynamic>));
     return cast _Runtime.field(image, 'version');
     return cast null;
   }

@@ -79,5 +79,5 @@ class DomShape {
 
   public static final defaultDomShapeRenderer:Scene2DRenderer = { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape };
 
-  public static final defaultDomMorphShapeRenderer:Scene2DRenderer = { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape };
+  public static final defaultDomMorphShapeRenderer:Scene2DRenderer = defaultDomShapeRenderer;
 }

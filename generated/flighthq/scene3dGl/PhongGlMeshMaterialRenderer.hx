@@ -77,17 +77,17 @@ class PhongGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     diffuseMap = _Runtime.field(material, 'diffuseMap');
     if ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, diffuseMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0); }
     }
     specularMap = _Runtime.field(material, 'specularMap');
     if ((cast !_Runtime.strictEquals(specularMap, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE1);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, specularMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpecularMap'), 1.0); }
     }
     normalMap = _Runtime.field(material, 'normalMap');
     if ((cast !_Runtime.strictEquals(normalMap, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE2);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE2', flighthq._internal.backend.WebGl2Backend.TEXTURE2));
       if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, normalMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 2.0); }
     }
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));

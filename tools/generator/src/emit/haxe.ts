@@ -2529,7 +2529,8 @@ function emitExpression(expression: IrExpression): string {
         if (expression.optional) {
           throw new Error(`Optional WebGL2 constant access has no typed backend endpoint: ${expression.name}`);
         }
-        return `flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(expression.name)}`;
+        const endpoint = webGl2ConstantEndpoint(expression.name);
+        return `flighthq._internal.backend.WebGl2Backend.contextConstant(${emitExpression(expression.object)}, ${quote(expression.name)}, flighthq._internal.backend.WebGl2Backend.${endpoint})`;
       }
       if (expression.binding && expression.binding in collectionBindingTypes) {
         if (expression.name !== 'size') {
@@ -2951,6 +2952,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (owner === 'HxMath' && name === 'cbrt') {
       return `_Runtime.cbrt(${expression.arguments.map(emitExpression).join(', ')})`;
+    }
+    if (owner === 'HxMath' && name === 'fround') {
+      return `_Runtime.fround(${expression.arguments.map(emitExpression).join(', ')})`;
     }
     if (owner === 'HxMath') {
       return `HxMath.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;

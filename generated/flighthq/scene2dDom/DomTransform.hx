@@ -10,8 +10,8 @@ class DomTransform {
   public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
-    tx = ((cast roundPixels : Bool) ? (cast HxMath.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
-    ty = ((cast roundPixels : Bool) ? (cast HxMath.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
+    tx = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
+    ty = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
@@ -32,8 +32,8 @@ class DomTransform {
     tx = (((a * offsetX) + (c * offsetY)) + transform.tx);
     ty = (((b * offsetX) + (d * offsetY)) + transform.ty);
     if ((cast roundPixels : Bool)) {
-      (tx = cast (HxMath.fround(tx) : Dynamic));
-      (ty = cast (HxMath.fround(ty) : Dynamic));
+      (tx = cast (_Runtime.fround(tx) : Dynamic));
+      (ty = cast (_Runtime.fround(ty) : Dynamic));
     }
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }

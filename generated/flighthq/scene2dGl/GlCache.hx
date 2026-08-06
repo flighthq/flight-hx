@@ -106,7 +106,7 @@ class GlCache {
         (dirty = cast (_Runtime.callValue(prepareScene2DRender, cast ([cacheState, source] : Array<Dynamic>)) : Dynamic));
         if ((cast ((cast dirty : Bool) || (cast resized : Bool)) : Bool)) {
           flighthq._internal.backend.WebGl2Backend.clearColor(_Runtime.field(cacheState, 'gl'), 0.0, 0.0, 0.0, 0.0);
-          flighthq._internal.backend.WebGl2Backend.clear(_Runtime.field(cacheState, 'gl'), flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT);
+          flighthq._internal.backend.WebGl2Backend.clear(_Runtime.field(cacheState, 'gl'), flighthq._internal.backend.WebGl2Backend.contextConstant(_Runtime.field(cacheState, 'gl'), 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT));
           _Runtime.callValue(renderGlScene2D, cast ([cacheState, source] : Array<Dynamic>));
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }

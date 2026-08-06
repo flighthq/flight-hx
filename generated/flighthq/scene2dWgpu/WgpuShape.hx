@@ -21,5 +21,5 @@ class WgpuShape {
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuShape };
 
-  public static final defaultWgpuMorphShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuShape };
+  public static final defaultWgpuMorphShapeRenderer:Scene2DRenderer = defaultWgpuShapeRenderer;
 }

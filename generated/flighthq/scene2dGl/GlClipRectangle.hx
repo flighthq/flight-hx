@@ -25,7 +25,7 @@ class GlClipRectangle {
     _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST);
+      flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
     } else {
       flighthq._internal.backend.WebGl2Backend.scissor(gl, _Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height'));
     }
@@ -42,7 +42,7 @@ class GlClipRectangle {
     _Runtime.callProperty(_Runtime.callValue(GlClipRectangle.getScissorStack__glClipRectangle, cast ([state] : Array<Dynamic>)), 'push', cast ([next] : Array<Dynamic>));
     _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST);
+    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
     flighthq._internal.backend.WebGl2Backend.scissor(gl, _Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height'));
   }
 

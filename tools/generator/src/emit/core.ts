@@ -183,7 +183,7 @@ export function generateCoreModules(
   fillGenericArguments(loweredPackages.flatMap((item) => item.lowered.declarations));
   flattenStructuralTypes(types.lowered.declarations);
   padContextualObjectFunctionParameters(loweredPackages.flatMap((item) => item.lowered.declarations));
-  for (const item of loweredPackages) inlineDefaultConstants(item.lowered.declarations);
+  for (const item of loweredPackages) inlineParameterDefaultConstants(item.lowered.declarations);
   const declarationsBeforePatches = loweredPackages.flatMap((item) => item.lowered.declarations);
   const patchAudit = applySemanticPatches(declarationsBeforePatches, patches, workspaceDirectory);
   const retainedDeclarations = new Set(declarationsBeforePatches);
@@ -2045,7 +2045,7 @@ function mutatesAnyName(value: unknown, names: ReadonlySet<string>): boolean {
   return Object.values(record).some((item) => mutatesAnyName(item, names));
 }
 
-function inlineDefaultConstants(declarations: IrDeclaration[]): void {
+export function inlineParameterDefaultConstants(declarations: IrDeclaration[]): void {
   const constants = new Map<string, NonNullable<Extract<IrDeclaration, { kind: 'variable' }>['initializer']>>();
   for (const declaration of declarations) {
     if (declaration.kind === 'variable' && !declaration.mutable && declaration.initializer) {
@@ -2053,13 +2053,6 @@ function inlineDefaultConstants(declarations: IrDeclaration[]): void {
     }
   }
   for (const declaration of declarations) {
-    if (
-      declaration.kind === 'variable' &&
-      declaration.initializer?.kind === 'identifier' &&
-      constants.has(declaration.initializer.name)
-    ) {
-      declaration.initializer = constants.get(declaration.initializer.name);
-    }
     if (declaration.kind !== 'function') continue;
     for (const parameter of declaration.parameters) {
       if (parameter.initializer?.kind !== 'identifier') continue;

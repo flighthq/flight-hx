@@ -42,29 +42,29 @@ class GlQuadBatchWriter {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchCornerBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchCornerBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, locCorner);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 8.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 8.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, locCorner, 0.0);
     stride = GlQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__glQuadBatchWriter;
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 1.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 1.0, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 1.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 1.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 2.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 2.0, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, 8.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 2.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 8.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 2.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 3.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 3.0, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, 16.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 3.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 16.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 3.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 4.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 4.0, 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, 24.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 4.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 24.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 4.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 5.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 5.0, 4.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, 32.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 5.0, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 32.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 5.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 6.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 6.0, 1.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, stride, 48.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 6.0, 1.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 48.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 6.0, 1.0);
   }
 
@@ -80,8 +80,8 @@ class GlQuadBatchWriter {
     _Runtime.setField(runtime, 'quadBatchShader', _Runtime.callValue(GlQuadBatchWriter.compileQuadBatchWriterShader__glQuadBatchWriter, cast ([gl] : Array<Dynamic>)));
     cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
     cornerBuf = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, cornerBuf);
-    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, cornerData, flighthq._internal.backend.WebGl2Backend.STATIC_DRAW);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), cornerBuf);
+    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), cornerData, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
     _Runtime.setField(runtime, 'quadBatchCornerBuffer', cornerBuf);
     return cast _Runtime.field(runtime, 'quadBatchShader');
     return cast null;
@@ -124,14 +124,14 @@ class GlQuadBatchWriter {
     gl = _Runtime.field(state, 'gl');
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'), null) : Bool)) {
       _Runtime.setField(runtime, 'quadBatchWriterInstanceBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
     } else {
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
     }
-    flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, 0.0, _Runtime.field(runtime, 'quadBatchWriterInstanceData'), 0.0, (count * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter));
+    flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, _Runtime.field(runtime, 'quadBatchWriterInstanceData'), 0.0, (count * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, blendMode] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, texture);
+    flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     _Runtime.setField(runtime, 'currentTexture', texture);
     _Runtime.setField(runtime, 'currentTextureStraightAlpha', straightAlpha);
     _Runtime.callValue(applyGlSamplerState, cast ([state, runtime, texture, sampler, smoothing] : Array<Dynamic>));
@@ -140,17 +140,17 @@ class GlQuadBatchWriter {
       if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'), null) : Bool)) {
           _Runtime.setField(runtime, 'quadBatchWriterMaterialBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
-          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
-          flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
+          flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
         } else {
-          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
+          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
         }
-        flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, 0.0, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), 0.0, (count * floats));
+        flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), 0.0, (count * floats));
       }
       _Runtime.callProperty(renderer, 'bind', cast ([state, material] : Array<Dynamic>));
     }
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER, _Runtime.field(runtime, 'quadIndexBuffer'));
-    flighthq._internal.backend.WebGl2Backend.drawElementsInstanced(gl, flighthq._internal.backend.WebGl2Backend.TRIANGLES, 6.0, flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT, 0.0, count);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(runtime, 'quadIndexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.drawElementsInstanced(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0, count);
     {
       var loc:Dynamic = 1.0;
       while ((cast ((cast loc : Float) <= (cast GlQuadBatchWriter.MAX_INSTANCE_ATTRIB_LOCATION__glQuadBatchWriter : Float)) : Bool)) {
@@ -196,8 +196,8 @@ class GlQuadBatchWriter {
       _Runtime.setField(runtime, 'quadBatchWriterInstanceData', new flighthq._internal._Float32Array(newSize));
       if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'), null) : Bool)) {
         var gl:Dynamic = _Runtime.field(state, 'gl');
-        flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
-        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+        flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       }
     }
     if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -207,8 +207,8 @@ class GlQuadBatchWriter {
         _Runtime.setField(runtime, 'quadBatchWriterMaterialData', new flighthq._internal._Float32Array(newSize));
         if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'), null) : Bool)) {
           var gl:Dynamic = _Runtime.field(state, 'gl');
-          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
-          flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
+          flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
         }
       }
     }

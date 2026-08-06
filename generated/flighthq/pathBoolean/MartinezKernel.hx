@@ -182,7 +182,7 @@ class MartinezKernel {
 
   public static var nextEventId__martinezKernel:Dynamic = 0.0;
 
-  public static var vertexSnap__martinezKernel:Dynamic = 1e-9;
+  public static var vertexSnap__martinezKernel:Dynamic = MartinezKernel.VERTEX_SNAP_FALLBACK__martinezKernel;
 
   public static function computeMartinezBoolean__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<PathBooleanContour> {
     var segments:Dynamic = cast _Runtime.UNDEFINED;

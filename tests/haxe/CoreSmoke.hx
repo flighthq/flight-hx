@@ -13,6 +13,7 @@ class CoreSmoke {
     if (quarterForSmoke(8) != 2) throw 'loop lowering failed';
     if (_Runtime.isError('not an error')) throw 'non-Error identity failed';
     if (!_Runtime.isError(_Runtime.error('expected'))) throw 'Error identity failed';
+    if (_Runtime.fround(5.6789) != 5.678899765014648) throw 'Math.fround binary32 rounding failed';
 
     final dynamicProductLeft:Dynamic = {value: 0.8};
     final dynamicProductRight:Dynamic = {value: 1.0};

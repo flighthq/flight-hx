@@ -93,13 +93,13 @@ class GlColorAdjustmentMaterialFeature {
     _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture'), _Runtime.field(shader, 'locStraightTextureAlpha')] : Array<Dynamic>));
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
     {
       var attribute:Dynamic = 0.0;
       while ((cast ((cast attribute : Float) < (cast 5.0 : Float)) : Bool)) {
         var location:Dynamic = (7.0 + attribute);
         flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, location);
-        flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, location, 4.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, GlColorAdjustmentMaterialFeature.COLOR_MATRIX_STRIDE__glColorAdjustmentMaterialFeature, (attribute * 16.0));
+        flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, location, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlColorAdjustmentMaterialFeature.COLOR_MATRIX_STRIDE__glColorAdjustmentMaterialFeature, (attribute * 16.0));
         flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, location, 1.0);
         attribute++;
       }
@@ -116,12 +116,12 @@ class GlColorAdjustmentMaterialFeature {
     _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture'), _Runtime.field(shader, 'locStraightTextureAlpha')] : Array<Dynamic>));
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 7.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 7.0, 4.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_STRIDE__glColorAdjustmentMaterialFeature, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 7.0, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_STRIDE__glColorAdjustmentMaterialFeature, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 7.0, 1.0);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 8.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 8.0, 4.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_STRIDE__glColorAdjustmentMaterialFeature, 16.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 8.0, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_STRIDE__glColorAdjustmentMaterialFeature, 16.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 8.0, 1.0);
   }
 
@@ -135,9 +135,9 @@ class GlColorAdjustmentMaterialFeature {
     _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture'), _Runtime.field(shader, 'locStraightTextureAlpha')] : Array<Dynamic>));
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 7.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 7.0, 4.0, flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE, true, 4.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 7.0, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), true, 4.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 7.0, 1.0);
   }
 
@@ -235,16 +235,16 @@ class GlColorAdjustmentMaterialFeature {
       if ((cast _Runtime.looseEquals(_Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'), null) : Bool)) {
         _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
       }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (cast _Runtime.field(runtime, 'quadBatchWriterColorTintData') : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(count)), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast _Runtime.field(runtime, 'quadBatchWriterColorTintData') : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(count)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       _Runtime.callValue(GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterPackedTint__glColorAdjustmentMaterialFeature, cast ([state] : Array<Dynamic>));
       return cast true;
     }
     if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature) : Bool)) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       if ((cast _Runtime.looseEquals(_Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'), null) : Bool)) { _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (cast _Runtime.field(runtime, 'quadBatchWriterColorMatrixData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast _Runtime.field(runtime, 'quadBatchWriterColorMatrixData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       _Runtime.callValue(GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterInstancedColorMatrix__glColorAdjustmentMaterialFeature, cast ([state] : Array<Dynamic>));
       return cast true;
     }
@@ -253,8 +253,8 @@ class GlColorAdjustmentMaterialFeature {
       if ((cast _Runtime.looseEquals(_Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'), null) : Bool)) {
         _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
       }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (cast _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       _Runtime.callValue(GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterInstancedColorScaleBias__glColorAdjustmentMaterialFeature, cast ([state] : Array<Dynamic>));
       return cast true;
     }
@@ -263,8 +263,8 @@ class GlColorAdjustmentMaterialFeature {
       _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasMode', GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
       var gl:Dynamic = _Runtime.field(state, 'gl');
       if ((cast _Runtime.looseEquals(_Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'), null) : Bool)) { _Runtime.setField(runtime, 'quadBatchWriterColorScaleBiasBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER, (cast _Runtime.field(runtime, 'quadBatchWriterColorMatrixData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW);
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterColorScaleBiasBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast _Runtime.field(runtime, 'quadBatchWriterColorMatrixData') : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       _Runtime.callValue(GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterInstancedColorMatrix__glColorAdjustmentMaterialFeature, cast ([state] : Array<Dynamic>));
     } else {
       _Runtime.callValue(GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterUniformColorScaleBias__glColorAdjustmentMaterialFeature, cast ([state, uniformColorScaleBias] : Array<Dynamic>));

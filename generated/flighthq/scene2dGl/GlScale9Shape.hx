@@ -122,7 +122,7 @@ class GlScale9Shape {
     _Runtime.callValue(useGlProgram, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentTexture'), _Runtime.field(shapeData, 'texture')) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE_2D, _Runtime.field(shapeData, 'texture'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(shapeData, 'texture'));
       _Runtime.setField(runtime, 'currentTexture', _Runtime.field(shapeData, 'texture'));
     }
     __destructure2 = runtime;

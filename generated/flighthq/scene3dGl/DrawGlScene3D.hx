@@ -167,7 +167,7 @@ class DrawGlScene3D {
     if ((cast ((cast _Runtime.field(blendedDrawList, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(blendedDrawList, 'sort', cast ([DrawGlScene3D.compareBlendedEntriesDescending__drawGlScene3D] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.field(state, 'gl');
-      flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
+      flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
       (boundMaterial = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       (boundLightBlock = cast (null : Dynamic));
       (boundRenderer = cast (null : Dynamic));
@@ -208,7 +208,7 @@ class DrawGlScene3D {
           i++;
         }
       }
-      flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.BLEND);
+      flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     }
     _Runtime.callValue(drawGlScene3DParticleEmitter3Ds, cast ([state, scene, camera, lights] : Array<Dynamic>));
     _Runtime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));

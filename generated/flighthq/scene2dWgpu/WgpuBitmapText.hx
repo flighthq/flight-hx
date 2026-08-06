@@ -24,7 +24,7 @@ import flighthq.types.SpriteRenderer;
 import flighthq.types.WgpuRenderState;
 
 class WgpuBitmapText {
-  public static final INSTANCE_STRIDE_FLOATS__wgpuBitmapText:Dynamic = 13.0;
+  public static final INSTANCE_STRIDE_FLOATS__wgpuBitmapText:Dynamic = QUAD_BATCH_INSTANCE_FLOATS;
 
   public static function submitWgpuBitmapText__wgpuBitmapText(state:WgpuRenderState, node:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

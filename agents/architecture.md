@@ -89,6 +89,8 @@ Each package's `./contract` export lane is Flight's protected inter-package chan
 
 The generator emits forwarding functions and value aliases for package-barrel and SDK value re-exports. It resolves renamed cross-package exports before building `flighthq.sdk.Sdk`, so names such as `defaultGlBeginBitmapFill` exist in both the granular public module and the SDK when upstream exports them. Forwarders reuse canonical implementations; they do not create maintained duplicate bodies. Type re-exports retain their original defining-module identity.
 
+Source-level `const alias = target` declarations also retain reference identity. The generator may inline a same-module constant into a Haxe parameter default, where Haxe requires a compile-time value, but it does not clone that initializer into another top-level declaration. This keeps renderer aliases, arrays, functions, and other reference values identical to their canonical target.
+
 Facade parameters retain the public signature but do not repeat source default initializers. A forwarded `null`/omitted value reaches the canonical function, which applies the generated default once in its owning module.
 
 ## Runtime and Portability Boundary
@@ -106,12 +108,16 @@ Generated ordinary implementation code should use portable Haxe constructs. A sm
 
 Runtime source lives under `src/flighthq/_internal/` on the maintained classpath. Its underscore-prefixed package and type names, such as `flighthq._internal._Promise`, keep implementation details out of normal code completion. It never hides target-specific behavior behind an apparently portable implementation.
 
+The runtime distinguishes ECMAScript `Math.fround` from Haxe's integer-oriented `Math.fround`: the JavaScript operation is one IEEE-754 binary32 round whose result is returned as the target's ordinary `Float`. Async flow also distinguishes normal fallthrough, which fulfills with JavaScript `undefined`, from an explicit `return null`.
+
 Platform adapters follow these rules:
 
 - An obvious, small target distinction may use a local Haxe conditional.
 - A maintained platform implementation lives in a named runtime type or adapter under `src/`, not inside bulk generated source.
 - Generated upstream backend code remains generated wherever possible; only the primitive host access crosses the adapter seam.
 - Unsupported targets return the upstream sentinel or expose an explicit compile limitation. They do not silently behave as though the capability worked.
+
+WebGL member calls remain typed maintained endpoints. Direct constant reads use the actual JavaScript context's enum surface so wrapped contexts and browser implementations observe the same identity as the TypeScript source; non-JavaScript targets use the fixed WebGL specification values. JavaScript endpoints preserve those context values through dispatch, while native endpoints own the integer coercion required by Lime/OpenGL signatures.
 
 ## JavaScript and Vitest Bridge
 

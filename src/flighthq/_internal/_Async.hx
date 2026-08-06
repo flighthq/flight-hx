@@ -59,7 +59,9 @@ class _Async {
 
   public static function finishFlow<T>(value:Dynamic):_Promise<T> {
     return cast resolve(mapImmediate(value, function(outcome:Dynamic) {
-      return outcome == null ? null : Reflect.field(outcome, 'value');
+      // Falling off an ECMAScript async function fulfills with undefined. An
+      // explicit `return null` is a flowReturn and therefore remains null.
+      return outcome == null ? _Runtime.UNDEFINED : Reflect.field(outcome, 'value');
     }));
   }
 

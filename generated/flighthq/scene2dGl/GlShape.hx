@@ -21,5 +21,5 @@ class GlShape {
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape };
 
-  public static final defaultGlMorphShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape };
+  public static final defaultGlMorphShapeRenderer:Scene2DRenderer = defaultGlShapeRenderer;
 }

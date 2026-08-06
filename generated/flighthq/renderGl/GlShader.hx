@@ -61,8 +61,8 @@ class GlShader {
   public static function setGlAttributes(gl:Dynamic, loc:GlShaderLocations):Void {
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(loc, 'locPosition'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(loc, 'locTexCoord'));
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(loc, 'locPosition'), 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 16.0, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(loc, 'locTexCoord'), 2.0, flighthq._internal.backend.WebGl2Backend.FLOAT, false, 16.0, 8.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(loc, 'locPosition'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 16.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(loc, 'locTexCoord'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 16.0, 8.0);
   }
 
   @:noCompletion

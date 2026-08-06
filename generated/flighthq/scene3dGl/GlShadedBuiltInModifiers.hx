@@ -322,10 +322,10 @@ class GlShadedBuiltInModifiers {
     gl = _Runtime.field(state, 'gl');
     unit = _Runtime.callProperty(context, 'acquireModifierTextureUnit', cast ([] : Array<Dynamic>));
     if ((cast ((cast unit : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.TEXTURE0 + unit));
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
     _Runtime.callValue(resolveGlTexture, cast ([state, texture] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), uniformName), unit);
-    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.TEXTURE0);
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
   }
 
   public static function isEmissiveGated__glShadedBuiltInModifiers(modifier:EmissiveModifier):Bool {
