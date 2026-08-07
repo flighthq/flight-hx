@@ -4,4 +4,4 @@
 // HTMLCanvasElement.hx for the model.
 package flighthq._internal.dom;
 
-typedef ReadableStream = Dynamic;
+typedef ReadableStream<T> = Dynamic;
