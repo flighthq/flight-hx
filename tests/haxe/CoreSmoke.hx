@@ -7,6 +7,14 @@ import flighthq._internal._Runtime;
 
 class CoreSmoke {
   static function main():Void {
+    // Cairo alias surface: the derived Cairo-named entry points and typedefs
+    // must forward to the canvas originals with reference identity.
+    final cairoResolvers:flighthq.types.CairoTextureResolvers = flighthq.scene2dCairo.Scene2dCairo.createCairoTextureResolvers();
+    final canvasResolvers:Dynamic = cairoResolvers;
+    if (canvasResolvers == null) throw 'cairo alias returned null resolvers';
+    if (flighthq.scene2dCairo.Scene2dCairo.defaultCairoShapeCommands != flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands) {
+      throw 'cairo alias lost reference identity';
+    }
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
     StaticLoweringSmoke.run();
     StaticIndexSmoke.run();
