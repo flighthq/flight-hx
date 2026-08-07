@@ -50,22 +50,22 @@ class WgpuShapeData {
     if ((cast !_Runtime.strictEquals(surface, null) : Bool)) {
       var entry:Dynamic = ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).get(_Runtime.field(surface, 'image')));
       if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (cast _Runtime.field(entry, 'texture') : flighthq._internal.dom.GPUTexture).destroy();
+        (#if js (cast _Runtime.field(entry, 'texture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
         ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).delete_(_Runtime.field(surface, 'image')));
       }
     }
     b = _Runtime.field(shapeData, 'meshBuffers');
     for (buffer in _Runtime.iterable(_Runtime.field(b, 'vertexBuffers'))) {
-      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
+      (#if js (cast buffer : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>)) #end);
     }
     for (buffer in _Runtime.iterable(_Runtime.field(b, 'indexBuffers'))) {
-      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
+      (#if js (cast buffer : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>)) #end);
     }
     for (buffer in _Runtime.iterable(_Runtime.field(b, 'uniformBuffers'))) {
-      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
+      (#if js (cast buffer : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>)) #end);
     }
     for (buffer in _Runtime.iterable(_Runtime.field(b, 'colorScaleBiasUniformBuffers'))) {
-      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
+      (#if js (cast buffer : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>)) #end);
     }
     _Runtime.setLength(_Runtime.field(b, 'vertexBuffers'), 0.0);
     _Runtime.setLength(_Runtime.field(b, 'vertexCapacities'), 0.0);

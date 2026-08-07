@@ -67,7 +67,7 @@ class GlDraw {
     ext = _Runtime.callValue(GlDraw.ensureGlAnisotropyExt__glDraw, cast ([state, runtime] : Array<Dynamic>));
     if (_Runtime.truthy(ext)) {
       var level:Dynamic = HxMath.max(1.0, HxMath.min(sampler.anisotropy, _Runtime.coalesce(_Runtime.field(runtime, 'maxAnisotropy'), function():Dynamic return cast 1.0)));
-      flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).TEXTURE_MAX_ANISOTROPY_EXT, level);
+      flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (#if js (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).TEXTURE_MAX_ANISOTROPY_EXT #else _Runtime.field(ext, 'TEXTURE_MAX_ANISOTROPY_EXT') #end), level);
     }
     if ((cast useMips : Bool)) {
       var mipped:Dynamic = _Runtime.setField(runtime, 'mipmappedTextures', (_Runtime.field(runtime, 'mipmappedTextures') ?? _Runtime.construct(_Runtime.globalValue('WeakSet'), [])));
@@ -348,7 +348,7 @@ class GlDraw {
     if ((cast _Runtime.strictEquals(ext, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (ext = cast (flighthq._internal.backend.WebGl2Backend.getExtension(_Runtime.field(state, 'gl'), 'EXT_texture_filter_anisotropic') : Dynamic));
       _Runtime.setField(runtime, 'anisotropyExt', ext);
-      _Runtime.setField(runtime, 'maxAnisotropy', _Runtime.select(ext, function():Dynamic return cast (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).MAX_TEXTURE_MAX_ANISOTROPY_EXT) : Float), function():Dynamic return cast 1.0));
+      _Runtime.setField(runtime, 'maxAnisotropy', _Runtime.select(ext, function():Dynamic return cast (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), (#if js (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).MAX_TEXTURE_MAX_ANISOTROPY_EXT #else _Runtime.field(ext, 'MAX_TEXTURE_MAX_ANISOTROPY_EXT') #end)) : Float), function():Dynamic return cast 1.0));
     }
     return cast ext;
     return cast null;

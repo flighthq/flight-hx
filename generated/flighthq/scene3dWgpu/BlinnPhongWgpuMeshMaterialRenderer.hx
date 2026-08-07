@@ -51,7 +51,7 @@ class BlinnPhongWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuClassicSurface, cast ([state, pipeline, blinnPhong, BlinnPhongWgpuMeshMaterialRenderer._diffuse__blinnPhongWgpuMeshMaterialRenderer, BlinnPhongWgpuMeshMaterialRenderer._specular__blinnPhongWgpuMeshMaterialRenderer, _Runtime.field(blinnPhong, 'shininess'), _Runtime.field(blinnPhong, 'alphaCutoff'), _Runtime.field(blinnPhong, 'diffuseMap'), _Runtime.field(blinnPhong, 'specularMap'), _Runtime.field(blinnPhong, 'normalMap'), _Runtime.field(blinnPhong, 'alphaMap')] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>)) #end);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

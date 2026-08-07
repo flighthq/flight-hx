@@ -23,30 +23,30 @@ class AudioResource {
   public static function getAudioResourceByteSize(resource:flighthq.types.AudioResource):Float {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     buffer = resource.buffer;
-    return cast ((cast !_Runtime.strictEquals(buffer, null) : Bool) ? (cast (_Runtime.multiplyNumbers((cast buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels, (cast buffer : flighthq._internal.dom.AudioBuffer).length) * 4.0) : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(buffer, null) : Bool) ? (cast (_Runtime.multiplyNumbers((#if js (cast buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels #else _Runtime.field(buffer, 'numberOfChannels') #end), (#if js (cast buffer : flighthq._internal.dom.AudioBuffer).length #else _Runtime.field(buffer, 'length') #end)) * 4.0) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getAudioResourceChannelCount(resource:flighthq.types.AudioResource):Float {
-    return cast ((cast !_Runtime.strictEquals(resource.buffer, null) : Bool) ? (cast (cast resource.buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(resource.buffer, null) : Bool) ? (cast (#if js (cast resource.buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels #else _Runtime.field(resource.buffer, 'numberOfChannels') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getAudioResourceChannelData(resource:flighthq.types.AudioResource, channel:Float):Null<flighthq._internal._Float32Array> {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     buffer = resource.buffer;
-    if ((cast ((cast ((cast _Runtime.strictEquals(buffer, null) : Bool) || (cast ((cast channel : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channel : Float) >= (cast (cast buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels : Float)) : Bool)) : Bool)) { return cast null; }
-    return cast (cast buffer : flighthq._internal.dom.AudioBuffer).getChannelData(channel);
+    if ((cast ((cast ((cast _Runtime.strictEquals(buffer, null) : Bool) || (cast ((cast channel : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channel : Float) >= (cast (#if js (cast buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels #else _Runtime.field(buffer, 'numberOfChannels') #end) : Float)) : Bool)) : Bool)) { return cast null; }
+    return cast (#if js (cast buffer : flighthq._internal.dom.AudioBuffer).getChannelData(channel) #else _Runtime.callProperty(buffer, 'getChannelData', cast ([channel] : Array<Dynamic>)) #end);
     return cast null;
   }
 
   public static function getAudioResourceDuration(resource:flighthq.types.AudioResource):Float {
-    return cast ((cast !_Runtime.strictEquals(resource.buffer, null) : Bool) ? (cast (cast resource.buffer : flighthq._internal.dom.AudioBuffer).duration : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(resource.buffer, null) : Bool) ? (cast (#if js (cast resource.buffer : flighthq._internal.dom.AudioBuffer).duration #else _Runtime.field(resource.buffer, 'duration') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getAudioResourceSampleRate(resource:flighthq.types.AudioResource):Float {
-    return cast ((cast !_Runtime.strictEquals(resource.buffer, null) : Bool) ? (cast (cast resource.buffer : flighthq._internal.dom.AudioBuffer).sampleRate : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(resource.buffer, null) : Bool) ? (cast (#if js (cast resource.buffer : flighthq._internal.dom.AudioBuffer).sampleRate #else _Runtime.field(resource.buffer, 'sampleRate') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -56,7 +56,7 @@ class AudioResource {
   }
 
   public static function isAudioResourceEmpty(resource:flighthq.types.AudioResource):Bool {
-    return cast ((cast _Runtime.strictEquals(resource.buffer, null) : Bool) || (cast _Runtime.strictEquals((cast resource.buffer : flighthq._internal.dom.AudioBuffer).length, 0.0) : Bool));
+    return cast ((cast _Runtime.strictEquals(resource.buffer, null) : Bool) || (cast _Runtime.strictEquals((#if js (cast resource.buffer : flighthq._internal.dom.AudioBuffer).length #else _Runtime.field(resource.buffer, 'length') #end), 0.0) : Bool));
     return cast null;
   }
 }

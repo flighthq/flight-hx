@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class AudioFormat {
   public static function canPlayAudioType(mimeType:String):Bool {
     if ((cast _Runtime.strictEquals(mimeType, '') : Bool)) { return cast false; }
-    return cast !_Runtime.strictEquals((cast _Runtime.construct(_Runtime.globalValue('Audio'), []) : flighthq._internal.dom.HTMLAudioElement).canPlayType(mimeType), '');
+    return cast !_Runtime.strictEquals((#if js (cast _Runtime.construct(_Runtime.globalValue('Audio'), []) : flighthq._internal.dom.HTMLAudioElement).canPlayType(mimeType) #else _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('Audio'), []), 'canPlayType', cast ([mimeType] : Array<Dynamic>)) #end), '');
     return cast null;
   }
 

@@ -167,11 +167,11 @@ class Power {
           (Power._wakeLockSentinel__power = cast (null : Dynamic));
           return cast true;
         }
-        flighthq._internal._Async.recover(_Runtime.callProperty((cast wakeLock : flighthq._internal.dom.WakeLock).request('screen'), 'then', cast ([function(sentinel:Dynamic) {
+        flighthq._internal._Async.recover(_Runtime.callProperty((#if js (cast wakeLock : flighthq._internal.dom.WakeLock).request('screen') #else _Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)) #end), 'then', cast ([function(sentinel:Dynamic) {
           (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
           _Runtime.callOptionalProperty(sentinel, 'addEventListener', cast (['release', function() {
             if ((cast ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool) && (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool)) : Bool)) {
-              flighthq._internal._Async.recover(_Runtime.callProperty((cast wakeLock : flighthq._internal.dom.WakeLock).request('screen'), 'then', cast ([function(newSentinel:Dynamic) {
+              flighthq._internal._Async.recover(_Runtime.callProperty((#if js (cast wakeLock : flighthq._internal.dom.WakeLock).request('screen') #else _Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)) #end), 'then', cast ([function(newSentinel:Dynamic) {
                 if ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool)) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
               }] : Array<Dynamic>)), function() {
 

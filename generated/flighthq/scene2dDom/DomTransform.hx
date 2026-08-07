@@ -12,7 +12,7 @@ class DomTransform {
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     tx = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
     ty = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'transform', 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')') #end);
   }
 
   @:noCompletion
@@ -35,6 +35,6 @@ class DomTransform {
       (tx = cast (_Runtime.fround(tx) : Dynamic));
       (ty = cast (_Runtime.fround(ty) : Dynamic));
     }
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')') #end);
   }
 }

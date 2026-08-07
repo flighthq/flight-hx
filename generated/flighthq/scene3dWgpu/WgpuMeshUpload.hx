@@ -39,8 +39,8 @@ class WgpuMeshUpload {
     }
     device = _Runtime.field(state, 'device');
     if ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cast _Runtime.field(upload, 'vertexBuffer') : flighthq._internal.dom.GPUBuffer).destroy();
-      ({ final __hostTypeCall0 = _Runtime.field(upload, 'indexBuffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); });
+      (#if js (cast _Runtime.field(upload, 'vertexBuffer') : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(_Runtime.field(upload, 'vertexBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+      (#if js ({ final __hostTypeCall0 = _Runtime.field(upload, 'indexBuffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(upload, 'indexBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
     }
     vertices = ((cast hasSkinBindPose : Bool) ? (cast _Runtime.callProperty(skinning, 'getUploadVertices', cast ([geometry] : Array<Dynamic>)) : Dynamic) : (cast geometry.vertices : Dynamic));
     vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuMeshUpload.alignTo4__wgpuMeshUpload, cast ([_Runtime.field(vertices, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));

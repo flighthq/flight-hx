@@ -59,11 +59,11 @@ class DomTextInput {
       _Runtime.callValue(getTextInputCaretRectangle, cast ([DomTextInput.caretRectangle__domTextInput, source, layout] : Array<Dynamic>));
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'x'), scrollXOffset)) + 'px;top:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'y'), scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(input, 'caretWidth')) + 'px;height:' + Std.string(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'height')) + 'px;background:' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'caretColor')] : Array<Dynamic>))) + ';animation:flight-caret-blink 1s step-end infinite;pointer-events:none;"></div>') : Dynamic));
     }
-    for (el in _Runtime.iterable((cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).querySelectorAll('[data-input-overlay]'))) {
-      (cast el : flighthq._internal.dom.Element).remove();
+    for (el in _Runtime.iterable((#if js (cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).querySelectorAll('[data-input-overlay]') #else _Runtime.callProperty(_Runtime.field(data, 'div'), 'querySelectorAll', cast (['[data-input-overlay]'] : Array<Dynamic>)) #end))) {
+      (#if js (cast el : flighthq._internal.dom.Element).remove() #else _Runtime.callProperty(el, 'remove', cast ([] : Array<Dynamic>)) #end);
     }
     if ((cast ((cast _Runtime.field(html, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).insertAdjacentHTML('beforeend', html);
+      (#if js (cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).insertAdjacentHTML('beforeend', html) #else _Runtime.callProperty(_Runtime.field(data, 'div'), 'insertAdjacentHTML', cast (['beforeend', html] : Array<Dynamic>)) #end);
     }
   }
 
@@ -78,9 +78,9 @@ class DomTextInput {
     id = 'flight-caret-blink-style';
     if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
     style = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['style'] : Array<Dynamic>));
-    ((cast style : flighthq._internal.dom.HTMLStyleElement).id = id);
-    ((cast style : flighthq._internal.dom.HTMLStyleElement).textContent = '@keyframes flight-caret-blink{0%,100%{opacity:1}50%{opacity:0}}');
-    (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(style);
+    (#if js ((cast style : flighthq._internal.dom.HTMLStyleElement).id = id) #else _Runtime.setField(style, 'id', id) #end);
+    (#if js ((cast style : flighthq._internal.dom.HTMLStyleElement).textContent = '@keyframes flight-caret-blink{0%,100%{opacity:1}50%{opacity:0}}') #else _Runtime.setField(style, 'textContent', '@keyframes flight-caret-blink{0%,100%{opacity:1}50%{opacity:0}}') #end);
+    (#if js (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(style) #else _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'), 'appendChild', cast ([style] : Array<Dynamic>)) #end);
   }
 
   public static final caretRectangle__domTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };

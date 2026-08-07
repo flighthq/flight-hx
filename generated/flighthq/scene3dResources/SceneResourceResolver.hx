@@ -44,7 +44,7 @@ class SceneResourceResolver {
     _Runtime.callValue(cancelResourceLoad, cast ([_Runtime.field(runtime, 'loader')] : Array<Dynamic>));
     _Runtime.callValue(disposeResourceLoader, cast ([_Runtime.field(runtime, 'loader')] : Array<Dynamic>));
     for (entry in _Runtime.iterable(((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).values()))) {
-      (cast entry.controller : flighthq._internal.dom.AbortController).abort();
+      (#if js (cast entry.controller : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(entry.controller, 'abort', cast ([] : Array<Dynamic>)) #end);
     }
     ((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).clear());
     ((cast _Runtime.field(runtime, 'resolved') : flighthq._internal._Map).clear());

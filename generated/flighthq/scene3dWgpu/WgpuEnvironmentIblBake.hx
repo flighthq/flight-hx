@@ -32,7 +32,7 @@ class WgpuEnvironmentIblBake {
     irradiance = _Runtime.callValue(WgpuEnvironmentIblBake.bakeWgpuIrradiance__wgpuEnvironmentIblBake, cast ([state, programs, sourceBindGroup] : Array<Dynamic>));
     prefiltered = _Runtime.callValue(WgpuEnvironmentIblBake.bakeWgpuPrefiltered__wgpuEnvironmentIblBake, cast ([state, programs, sourceBindGroup] : Array<Dynamic>));
     brdf = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(scene, 'ibl'), 'brdfLut'), function():Dynamic return cast _Runtime.callValue(WgpuEnvironmentIblBake.bakeWgpuBrdfLut__wgpuEnvironmentIblBake, cast ([state, programs] : Array<Dynamic>)));
-    brdfView = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(scene, 'ibl'), 'brdfLutView'), function():Dynamic return cast (cast brdf : flighthq._internal.dom.GPUTexture).createView());
+    brdfView = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(scene, 'ibl'), 'brdfLutView'), function():Dynamic return cast (#if js (cast brdf : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(brdf, 'createView', cast ([] : Array<Dynamic>)) #end));
     ibl = { brdfLut: brdf, brdfLutView: brdfView, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: _Runtime.field(irradiance, 'texture'), irradianceCubeView: _Runtime.field(irradiance, 'view'), prefilteredCube: _Runtime.field(prefiltered, 'texture'), prefilteredCubeView: _Runtime.field(prefiltered, 'view'), prefilteredMipCount: WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake };
     _Runtime.setField(scene, 'ibl', ibl);
   }
@@ -42,27 +42,27 @@ class WgpuEnvironmentIblBake {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null) : Bool)) {
-      (cast _Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut') : flighthq._internal.dom.GPUTexture).destroy();
-      (cast _Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube') : flighthq._internal.dom.GPUTexture).destroy();
-      (cast _Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube') : flighthq._internal.dom.GPUTexture).destroy();
+      (#if js (cast _Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+      (#if js (cast _Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+      (#if js (cast _Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'ibl', null);
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCube'), null) : Bool)) {
-      (cast _Runtime.field(scene, 'environmentSourceCube') : flighthq._internal.dom.GPUTexture).destroy();
+      (#if js (cast _Runtime.field(scene, 'environmentSourceCube') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(scene, 'environmentSourceCube'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'environmentSourceCube', null);
       _Runtime.setField(scene, 'environmentSourceCubeView', null);
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null) : Bool)) {
-      (cast _Runtime.field(scene, 'iblUniformBuffer') : flighthq._internal.dom.GPUBuffer).destroy();
+      (#if js (cast _Runtime.field(scene, 'iblUniformBuffer') : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(_Runtime.field(scene, 'iblUniformBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'iblUniformBuffer', null);
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeTexture'), null) : Bool)) {
-      (cast _Runtime.field(scene, 'iblDummyCubeTexture') : flighthq._internal.dom.GPUTexture).destroy();
+      (#if js (cast _Runtime.field(scene, 'iblDummyCubeTexture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'iblDummyCubeTexture', null);
       _Runtime.setField(scene, 'iblDummyCubeView', null);
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyLutTexture'), null) : Bool)) {
-      (cast _Runtime.field(scene, 'iblDummyLutTexture') : flighthq._internal.dom.GPUTexture).destroy();
+      (#if js (cast _Runtime.field(scene, 'iblDummyLutTexture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'iblDummyLutTexture', null);
       _Runtime.setField(scene, 'iblDummyLutView', null);
     }
@@ -79,7 +79,7 @@ class WgpuEnvironmentIblBake {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.callValue(WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake, cast ([state, WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake, 1.0] : Array<Dynamic>));
     _Runtime.callValue(WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake, cast ([state, _Runtime.field(programs, 'irradiancePipeline'), programs, texture, WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake, 0.0, 0.0, sourceBindGroup] : Array<Dynamic>));
-    return cast { texture: texture, view: (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) };
+    return cast { texture: texture, view: (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) #else _Runtime.callProperty(texture, 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)) #end) };
     return cast null;
   }
 
@@ -95,7 +95,7 @@ class WgpuEnvironmentIblBake {
         mip++;
       }
     }
-    return cast { texture: texture, view: (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) };
+    return cast { texture: texture, view: (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) #else _Runtime.callProperty(texture, 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)) #end) };
     return cast null;
   }
 
@@ -107,11 +107,11 @@ class WgpuEnvironmentIblBake {
     device = _Runtime.field(state, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([WgpuEnvironmentIblBake.BRDF_LUT_SIZE__wgpuEnvironmentIblBake, WgpuEnvironmentIblBake.BRDF_LUT_SIZE__wgpuEnvironmentIblBake, 1.0] : Array<Dynamic>), format: WgpuEnvironmentIblBake.IBL_BAKE_FORMAT__wgpuEnvironmentIblBake, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
     encoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
-    pass = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: (cast texture : flighthq._internal.dom.GPUTexture).createView(), clearValue: WgpuEnvironmentIblBake.BAKE_CLEAR__wgpuEnvironmentIblBake, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>) });
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(programs, 'brdfPipeline'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish()] : Array<Dynamic>)] : Array<Dynamic>));
+    pass = (#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) #end), clearValue: WgpuEnvironmentIblBake.BAKE_CLEAR__wgpuEnvironmentIblBake, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>) }) #else _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) #end), clearValue: WgpuEnvironmentIblBake.BAKE_CLEAR__wgpuEnvironmentIblBake, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>) }] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(programs, 'brdfPipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(programs, 'brdfPipeline')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0) #else _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>)) #end);
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish() #else _Runtime.callProperty(encoder, 'finish', cast ([] : Array<Dynamic>)) #end)] : Array<Dynamic>)] : Array<Dynamic>));
     return cast texture;
     return cast null;
   }
@@ -141,16 +141,16 @@ class WgpuEnvironmentIblBake {
         flighthq._internal._StaticIndex.writeFloat32Array(u, 14.0, 0.0);
         flighthq._internal._StaticIndex.writeFloat32Array(u, 15.0, 0.0);
         flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(programs, 'uniformBuffer'), 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuEnvironmentIblBake.BAKE_UNIFORM_BYTES__wgpuEnvironmentIblBake] : Array<Dynamic>));
-        var view:Dynamic = cube.createView({ dimension: '2d', baseArrayLayer: face, arrayLayerCount: 1.0, baseMipLevel: mipLevel, mipLevelCount: 1.0 });
+        var view:Dynamic = (#if js cube.createView({ dimension: '2d', baseArrayLayer: face, arrayLayerCount: 1.0, baseMipLevel: mipLevel, mipLevelCount: 1.0 }) #else _Runtime.callProperty(cube, 'createView', cast ([{ dimension: '2d', baseArrayLayer: face, arrayLayerCount: 1.0, baseMipLevel: mipLevel, mipLevelCount: 1.0 }] : Array<Dynamic>)) #end);
         var encoder:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
-        var pass:Dynamic = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: view, clearValue: WgpuEnvironmentIblBake.BAKE_CLEAR__wgpuEnvironmentIblBake, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>) });
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, size, size, 0.0, 1.0);
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(programs, 'uniformBindGroup'));
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, sourceBindGroup);
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
-        flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish()] : Array<Dynamic>)] : Array<Dynamic>));
+        var pass:Dynamic = (#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: view, clearValue: WgpuEnvironmentIblBake.BAKE_CLEAR__wgpuEnvironmentIblBake, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>) }) #else _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: view, clearValue: WgpuEnvironmentIblBake.BAKE_CLEAR__wgpuEnvironmentIblBake, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>) }] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, size, size, 0.0, 1.0) #else _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, size, size, 0.0, 1.0] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline) #else _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(programs, 'uniformBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(programs, 'uniformBindGroup')] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, sourceBindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, sourceBindGroup] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0) #else _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>)) #end);
+        flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish() #else _Runtime.callProperty(encoder, 'finish', cast ([] : Array<Dynamic>)) #end)] : Array<Dynamic>)] : Array<Dynamic>));
         face++;
       }
     }

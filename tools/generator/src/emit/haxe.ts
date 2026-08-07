@@ -1763,6 +1763,19 @@ function emitInt32Operand(expression: IrExpression): string {
   return `_Runtime.toInt32(${emitExpression(expression)})`;
 }
 
+function emitInt32OperandFromText(expression: IrExpression, emitted: string): string {
+  if (
+    expression.kind === 'literal' &&
+    typeof expression.value === 'number' &&
+    Number.isInteger(expression.value) &&
+    expression.value >= -2147483648 &&
+    expression.value <= 2147483647
+  ) {
+    return String(expression.value);
+  }
+  return `_Runtime.toInt32(${emitted})`;
+}
+
 const runtimeNumberMethods: Readonly<Record<string, string>> = {
   '+': 'addNumbers',
   '-': 'subtractNumbers',
@@ -1784,6 +1797,22 @@ function emitCompoundOperation(current: string, operator: string, right: IrExpre
     return `(_Runtime.toInt32(${current}) ${operator} ${emitInt32Operand(right)})`;
   }
   return emitArithmeticOperation(current, operator, emitExpression(right), runtimeNumber);
+}
+
+function emitCompoundOperationFromText(
+  current: string,
+  operator: string,
+  right: IrExpression,
+  emittedRight: string,
+  runtimeNumber = false,
+): string {
+  if (operator === '>>>') {
+    return `_Runtime.unsignedShiftRight(_Runtime.toInt32(${current}), ${emitInt32OperandFromText(right, emittedRight)})`;
+  }
+  if (['&', '|', '^', '<<', '>>'].includes(operator)) {
+    return `(_Runtime.toInt32(${current}) ${operator} ${emitInt32OperandFromText(right, emittedRight)})`;
+  }
+  return emitArithmeticOperation(current, operator, emittedRight, runtimeNumber);
 }
 
 function propertyReadEmitsDynamic(expression: Extract<IrExpression, { kind: 'property' }>): boolean {
@@ -2188,14 +2217,20 @@ function emitExpression(expression: IrExpression): string {
             throw new Error(`Optional host-type assignment is not supported: ${expression.left.name}`);
           }
           const field = directHostTypeField(expression.left, object);
-          if (expression.operator === '=') return `(${field} = ${emitExpression(expression.right)})`;
-          if (expression.operator === '%=') {
-            return `(${field} = ${emitArithmeticOperation(field, '%', emitExpression(expression.right))})`;
-          }
-          if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
-            return `(${field} = ${emitCompoundOperation(field, expression.operator.slice(0, -1), expression.right)})`;
-          }
-          return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
+          const right = emitExpression(expression.right);
+          const direct =
+            expression.operator === '='
+              ? `(${field} = ${right})`
+              : expression.operator === '%='
+                ? `(${field} = ${emitArithmeticOperation(field, '%', right)})`
+                : ['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)
+                  ? `(${field} = ${emitCompoundOperationFromText(field, expression.operator.slice(0, -1), expression.right, right)})`
+                  : `(${field} ${expression.operator} ${right})`;
+          const fallback =
+            expression.operator === '='
+              ? `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${right})`
+              : `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperationFromText(`_Runtime.field(${object}, ${quote(expression.left.name)})`, expression.operator.slice(0, -1), expression.right, right, compoundUsesRuntimeNumber(expression))})`;
+          return emitHostTypePlatformExpression(direct, fallback);
         }
         if (expression.left.typedStructBinding) {
           if (expression.left.optional) {
@@ -2634,7 +2669,11 @@ function emitExpression(expression: IrExpression): string {
         }
         if (expression.operand.kind === 'property' && expression.operand.hostTypeBinding) {
           const owner = emitExpression(expression.operand.object);
-          return `Reflect.deleteField(${expression.operand.hostTypeBinding.receiverCast ? `(cast ${owner} : ${expression.operand.hostTypeBinding.haxeType})` : owner}, ${quote(expression.operand.name)})`;
+          const direct = `Reflect.deleteField(${expression.operand.hostTypeBinding.receiverCast ? `(cast ${owner} : ${expression.operand.hostTypeBinding.haxeType})` : owner}, ${quote(expression.operand.name)})`;
+          return emitHostTypePlatformExpression(
+            direct,
+            `_Runtime.deleteField(${owner}, ${quote(expression.operand.name)})`,
+          );
         }
         if (expression.operand.kind === 'property')
           return `_Runtime.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
@@ -2660,8 +2699,13 @@ function emitExpression(expression: IrExpression): string {
           if (expression.operand.optional) {
             throw new Error(`Optional host-type mutation is not supported: ${expression.operand.name}`);
           }
-          const field = directHostTypeField(expression.operand);
-          return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
+          const owner = emitExpression(expression.operand.object);
+          const field = directHostTypeField(expression.operand, owner);
+          const direct = expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
+          return emitHostTypePlatformExpression(
+            direct,
+            `_Runtime.incrementField(${owner}, ${quote(expression.operand.name)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`,
+          );
         }
         if (expression.operand.typedStructBinding) {
           if (expression.operand.optional) {
@@ -2748,11 +2792,23 @@ function directHostTypeField(
   return `${typedOwner}.${safeName(expression.name)}`;
 }
 
+function emitHostTypePlatformExpression(direct: string, fallback: string): string {
+  return `(#if js ${direct} #else ${fallback} #end)`;
+}
+
 function emitHostTypeRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
   const owner = emitExpression(expression.object);
-  if (!expression.optional) return directHostTypeField(expression, owner);
-  const temporary = `__hostType${String(temporaryIndex++)}`;
-  return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directHostTypeField(expression, temporary)}; })`;
+  let direct: string;
+  if (!expression.optional) {
+    direct = directHostTypeField(expression, owner);
+  } else {
+    const temporary = `__hostType${String(temporaryIndex++)}`;
+    direct = `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directHostTypeField(expression, temporary)}; })`;
+  }
+  const fallback = expression.optional
+    ? `_Runtime.optionalField(${owner}, ${quote(expression.name)})`
+    : `_Runtime.field(${owner}, ${quote(expression.name)})`;
+  return emitHostTypePlatformExpression(direct, fallback);
 }
 
 function emitHostTypeCall(
@@ -2766,15 +2822,25 @@ function emitHostTypeCall(
     const field = directHostTypeField(callee, target);
     return spread ? `Reflect.callMethod(${target}, ${field}, ${arguments_})` : `${field}(${arguments_})`;
   };
-  if (!expression.optional && !callee.optional) return call(owner);
-  const temporary = `__hostTypeCall${String(temporaryIndex++)}`;
-  const direct = call(temporary);
-  const optionalMethod = expression.optional
-    ? `${directHostTypeField(callee, temporary)} == null ? _Runtime.UNDEFINED : ${direct}`
-    : direct;
-  return callee.optional
-    ? `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${optionalMethod}; })`
-    : `({ final ${temporary} = ${owner}; ${optionalMethod}; })`;
+  let directCall: string;
+  if (!expression.optional && !callee.optional) {
+    directCall = call(owner);
+  } else {
+    const temporary = `__hostTypeCall${String(temporaryIndex++)}`;
+    const direct = call(temporary);
+    const optionalMethod = expression.optional
+      ? `${directHostTypeField(callee, temporary)} == null ? _Runtime.UNDEFINED : ${direct}`
+      : direct;
+    directCall = callee.optional
+      ? `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${optionalMethod}; })`
+      : `({ final ${temporary} = ${owner}; ${optionalMethod}; })`;
+  }
+  const fallbackArguments = spread ? arguments_ : `cast ([${arguments_}] : Array<Dynamic>)`;
+  const fallbackMethod = expression.optional || callee.optional ? 'callOptionalProperty' : 'callProperty';
+  return emitHostTypePlatformExpression(
+    directCall,
+    `_Runtime.${fallbackMethod}(${owner}, ${quote(callee.name)}, ${fallbackArguments})`,
+  );
 }
 
 function directTypedStructField(

@@ -15,7 +15,7 @@ class Scene2DDocumentSource {
       flighthq._internal._Async.protect(function():Dynamic {
         var signal:Dynamic = cast _Runtime.UNDEFINED;
         var source:Dynamic = cast _Runtime.UNDEFINED;
-        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(_Runtime.globalValue('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
+        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (#if js (cast _Runtime.construct(_Runtime.globalValue('AbortController'), []) : flighthq._internal.dom.AbortController).signal #else _Runtime.field(_Runtime.construct(_Runtime.globalValue('AbortController'), []), 'signal') #end));
         return flighthq._internal._Async.flatMap(_Runtime.callValue(fetchDocument, cast ([url, signal, _Runtime.coalesce(_Runtime.optionalField(options, 'progress'), function():Dynamic return cast null)] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
           source = __awaitValue0;
           var __flowBranch1:Dynamic;

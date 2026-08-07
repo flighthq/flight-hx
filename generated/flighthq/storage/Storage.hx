@@ -68,7 +68,7 @@ class Storage {
       ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast null; }
       try {
-        return cast (cast ls : flighthq._internal.dom.Storage).getItem(key);
+        return cast (#if js (cast ls : flighthq._internal.dom.Storage).getItem(key) #else _Runtime.callProperty(ls, 'getItem', cast ([key] : Array<Dynamic>)) #end);
       } catch (__error:Dynamic) {
         return cast null;
       }
@@ -77,7 +77,7 @@ class Storage {
       ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
-        (cast ls : flighthq._internal.dom.Storage).setItem(key, value);
+        (#if js (cast ls : flighthq._internal.dom.Storage).setItem(key, value) #else _Runtime.callProperty(ls, 'setItem', cast ([key, value] : Array<Dynamic>)) #end);
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -87,7 +87,7 @@ class Storage {
       ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
-        (cast ls : flighthq._internal.dom.Storage).removeItem(key);
+        (#if js (cast ls : flighthq._internal.dom.Storage).removeItem(key) #else _Runtime.callProperty(ls, 'removeItem', cast ([key] : Array<Dynamic>)) #end);
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -97,7 +97,7 @@ class Storage {
       ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
-        (cast ls : flighthq._internal.dom.Storage).clear();
+        (#if js (cast ls : flighthq._internal.dom.Storage).clear() #else _Runtime.callProperty(ls, 'clear', cast ([] : Array<Dynamic>)) #end);
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -110,8 +110,8 @@ class Storage {
         var out:Array<String> = cast ([] : Array<Dynamic>);
         {
           var i:Dynamic = 0.0;
-          while ((cast ((cast i : Float) < (cast (cast ls : flighthq._internal.dom.Storage).length : Float)) : Bool)) {
-            var key:Dynamic = (cast ls : flighthq._internal.dom.Storage).key(i);
+          while ((cast ((cast i : Float) < (cast (#if js (cast ls : flighthq._internal.dom.Storage).length #else _Runtime.field(ls, 'length') #end) : Float)) : Bool)) {
+            var key:Dynamic = (#if js (cast ls : flighthq._internal.dom.Storage).key(i) #else _Runtime.callProperty(ls, 'key', cast ([i] : Array<Dynamic>)) #end);
             if ((cast !_Runtime.strictEquals(key, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([key] : Array<Dynamic>)); }
             (i = cast ((i + 1.0) : Dynamic));
           }
@@ -126,7 +126,7 @@ class Storage {
 
       }; }
       handler = function(event:flighthq._internal.dom.StorageEvent) {
-        _Runtime.callValue(listener, cast ([{ key: event.key, oldValue: event.oldValue, newValue: event.newValue }] : Array<Dynamic>));
+        _Runtime.callValue(listener, cast ([{ key: (#if js event.key #else _Runtime.field(event, 'key') #end), oldValue: (#if js event.oldValue #else _Runtime.field(event, 'oldValue') #end), newValue: (#if js event.newValue #else _Runtime.field(event, 'newValue') #end) }] : Array<Dynamic>));
       };
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
       return cast function() return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
@@ -363,7 +363,7 @@ class Storage {
         return flighthq._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
           storage = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic), 'storage');
           var __flowBranch15:Dynamic;
-          if ((cast _Runtime.strictEquals(({ final __hostType14 = storage; __hostType14 == null ? _Runtime.UNDEFINED : (cast __hostType14 : flighthq._internal.dom.StorageManager).estimate; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          if ((cast _Runtime.strictEquals((#if js ({ final __hostType14 = storage; __hostType14 == null ? _Runtime.UNDEFINED : (cast __hostType14 : flighthq._internal.dom.StorageManager).estimate; }) #else _Runtime.optionalField(storage, 'estimate') #end), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
@@ -375,10 +375,10 @@ class Storage {
               var estimate:Dynamic = cast _Runtime.UNDEFINED;
               var used:Dynamic = cast _Runtime.UNDEFINED;
               var available:Dynamic = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast storage : flighthq._internal.dom.StorageManager).estimate(), function(__awaitValue16:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((#if js (cast storage : flighthq._internal.dom.StorageManager).estimate() #else _Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)) #end), function(__awaitValue16:Dynamic):Dynamic {
                 estimate = __awaitValue16;
-                used = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast estimate : flighthq._internal.dom.StorageEstimate).usage), 'number') : Bool) ? (cast (cast estimate : flighthq._internal.dom.StorageEstimate).usage : Dynamic) : (cast -1.0 : Dynamic));
-                available = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast estimate : flighthq._internal.dom.StorageEstimate).quota), 'number') : Bool) && (cast ((cast (cast estimate : flighthq._internal.dom.StorageEstimate).quota : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.subtractNumbers((cast estimate : flighthq._internal.dom.StorageEstimate).quota, ((cast ((cast used : Float) >= (cast 0.0 : Float)) : Bool) ? (cast used : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic) : (cast -1.0 : Dynamic));
+                used = ((cast _Runtime.strictEquals(_Runtime.typeofValue((#if js (cast estimate : flighthq._internal.dom.StorageEstimate).usage #else _Runtime.field(estimate, 'usage') #end)), 'number') : Bool) ? (cast (#if js (cast estimate : flighthq._internal.dom.StorageEstimate).usage #else _Runtime.field(estimate, 'usage') #end) : Dynamic) : (cast -1.0 : Dynamic));
+                available = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((#if js (cast estimate : flighthq._internal.dom.StorageEstimate).quota #else _Runtime.field(estimate, 'quota') #end)), 'number') : Bool) && (cast ((cast (#if js (cast estimate : flighthq._internal.dom.StorageEstimate).quota #else _Runtime.field(estimate, 'quota') #end) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.subtractNumbers((#if js (cast estimate : flighthq._internal.dom.StorageEstimate).quota #else _Runtime.field(estimate, 'quota') #end), ((cast ((cast used : Float) >= (cast 0.0 : Float)) : Bool) ? (cast used : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic) : (cast -1.0 : Dynamic));
                 return flighthq._internal._Async.flowReturn({ used: used, available: available });
               });
             }), function(__caughtError:Dynamic):Dynamic {

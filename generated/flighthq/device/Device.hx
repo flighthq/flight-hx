@@ -53,7 +53,7 @@ class Device {
       nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
       maxTouch = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic));
       (out.hasMouse = cast (_Runtime.strictEquals(maxTouch, 0.0) : Dynamic));
-      ua = _Runtime.coalesce(({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
+      ua = _Runtime.coalesce((#if js ({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).userAgent; }) #else _Runtime.optionalField(nav, 'userAgent') #end), function():Dynamic return cast '');
       (out.hasKeyboard = cast (_Runtime.callValue(Device.detectDesktopUa__device, cast ([ua] : Array<Dynamic>)) : Dynamic));
       (out.hasStylus = cast (false : Dynamic));
       return cast out;
@@ -63,23 +63,23 @@ class Device {
       var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
       win = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : (cast null : Dynamic));
       scr = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined') : Bool) ? (cast _Runtime.globalValue('screen') : Dynamic) : (cast null : Dynamic));
-      (out.colorDepth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast (cast scr : flighthq._internal.dom.Screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.colorDepth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast (#if js (cast scr : flighthq._internal.dom.Screen).colorDepth #else _Runtime.field(scr, 'colorDepth') #end) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.densityDpi = cast (-1.0 : Dynamic));
-      (out.logicalHeight = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast (cast scr : flighthq._internal.dom.Screen).height : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.logicalWidth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast (cast scr : flighthq._internal.dom.Screen).width : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.logicalHeight = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast (#if js (cast scr : flighthq._internal.dom.Screen).height #else _Runtime.field(scr, 'height') #end) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.logicalWidth = cast (((cast !_Runtime.strictEquals(scr, null) : Bool) ? (cast (#if js (cast scr : flighthq._internal.dom.Screen).width #else _Runtime.field(scr, 'width') #end) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       pixelRatio = ((cast !_Runtime.strictEquals(win, null) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(win, 'devicePixelRatio') : Dynamic) : (cast -1.0 : Dynamic));
       (out.pixelRatio = cast (pixelRatio : Dynamic));
-      (out.physicalWidth = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers((cast scr : flighthq._internal.dom.Screen).width, pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.physicalHeight = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers((cast scr : flighthq._internal.dom.Screen).height, pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.physicalWidth = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers((#if js (cast scr : flighthq._internal.dom.Screen).width #else _Runtime.field(scr, 'width') #end), pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.physicalHeight = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers((#if js (cast scr : flighthq._internal.dom.Screen).height #else _Runtime.field(scr, 'height') #end), pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       return cast out;
     }, getId: function() {
       try {
         var key:Dynamic = '__flighthq_device_id';
-        var existing:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('localStorage'), 'undefined') : Bool) ? (cast (cast _Runtime.globalValue('localStorage') : flighthq._internal.dom.Storage).getItem(key) : Dynamic) : (cast null : Dynamic));
+        var existing:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('localStorage'), 'undefined') : Bool) ? (cast (#if js (cast _Runtime.globalValue('localStorage') : flighthq._internal.dom.Storage).getItem(key) #else _Runtime.callProperty(_Runtime.globalValue('localStorage'), 'getItem', cast ([key] : Array<Dynamic>)) #end) : Dynamic) : (cast null : Dynamic));
         if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast existing; }
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('crypto'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast _Runtime.globalValue('crypto') : flighthq._internal.dom.Crypto).randomUUID), 'function') : Bool)) : Bool)) { return cast ''; }
-        var id:Dynamic = (cast _Runtime.globalValue('crypto') : flighthq._internal.dom.Crypto).randomUUID();
-        if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('localStorage'), 'undefined') : Bool)) { (cast _Runtime.globalValue('localStorage') : flighthq._internal.dom.Storage).setItem(key, id); }
+        if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('crypto'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((#if js (cast _Runtime.globalValue('crypto') : flighthq._internal.dom.Crypto).randomUUID #else _Runtime.field(_Runtime.globalValue('crypto'), 'randomUUID') #end)), 'function') : Bool)) : Bool)) { return cast ''; }
+        var id:Dynamic = (#if js (cast _Runtime.globalValue('crypto') : flighthq._internal.dom.Crypto).randomUUID() #else _Runtime.callProperty(_Runtime.globalValue('crypto'), 'randomUUID', cast ([] : Array<Dynamic>)) #end);
+        if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('localStorage'), 'undefined') : Bool)) { (#if js (cast _Runtime.globalValue('localStorage') : flighthq._internal.dom.Storage).setItem(key, id) #else _Runtime.callProperty(_Runtime.globalValue('localStorage'), 'setItem', cast ([key, id] : Array<Dynamic>)) #end); }
         return cast id;
       } catch (__error:Dynamic) {
         return cast '';
@@ -92,13 +92,13 @@ class Device {
       var gpuInfo:Dynamic = cast _Runtime.UNDEFINED;
       var devMem:Dynamic = cast _Runtime.UNDEFINED;
       nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
-      ua = _Runtime.coalesce(({ final __hostType1 = nav; __hostType1 == null ? _Runtime.UNDEFINED : (cast __hostType1 : flighthq._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
+      ua = _Runtime.coalesce((#if js ({ final __hostType1 = nav; __hostType1 == null ? _Runtime.UNDEFINED : (cast __hostType1 : flighthq._internal.dom.Navigator).userAgent; }) #else _Runtime.optionalField(nav, 'userAgent') #end), function():Dynamic return cast '');
       uadPlatform = _Runtime.optionalField(_Runtime.optionalField((cast nav : Null<{ @:optional var userAgentData:{ @:optional var platform:String; }; }>), 'userAgentData'), 'platform');
       (out.arch = cast (_Runtime.callValue(parseUserAgentArch, cast ([ua, uadPlatform] : Array<Dynamic>)) : Dynamic));
       (out.availableMemory = cast (-1.0 : Dynamic));
       (out.boardName = cast ('' : Dynamic));
       (out.colorGamut = cast ('' : Dynamic));
-      cores = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'hardwareConcurrency') : Bool)) : Bool) ? (cast _Runtime.coalesce((cast nav : flighthq._internal.dom.Navigator).hardwareConcurrency, function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
+      cores = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'hardwareConcurrency') : Bool)) : Bool) ? (cast _Runtime.coalesce((#if js (cast nav : flighthq._internal.dom.Navigator).hardwareConcurrency #else _Runtime.field(nav, 'hardwareConcurrency') #end), function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
       (out.cpuCores = cast (cores : Dynamic));
       (out.fontScale = cast (-1.0 : Dynamic));
       (out.formFactor = cast (_Runtime.callValue(parseUserAgentFormFactor, cast ([ua, ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'maxTouchPoints') : Bool)) : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.field(nav, 'maxTouchPoints') : Dynamic) : (cast -1.0 : Dynamic))] : Array<Dynamic>)) : Dynamic));
@@ -161,20 +161,20 @@ class Device {
     readInsets = function readInsets():Void {
       var style:Dynamic = cast _Runtime.UNDEFINED;
       style = _Runtime.callValue(_Runtime.globalValue('getComputedStyle'), cast ([el] : Array<Dynamic>));
-      (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).bottom] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).left] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).right] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).top] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
+      (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(#if js (cast style : flighthq._internal.dom.CSSStyleDeclaration).bottom #else _Runtime.field(style, 'bottom') #end)] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(#if js (cast style : flighthq._internal.dom.CSSStyleDeclaration).left #else _Runtime.field(style, 'left') #end)] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(#if js (cast style : flighthq._internal.dom.CSSStyleDeclaration).right #else _Runtime.field(style, 'right') #end)] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([(#if js (cast style : flighthq._internal.dom.CSSStyleDeclaration).top #else _Runtime.field(style, 'top') #end)] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
     };
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
 
     }; }
     el = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
-    ((cast (cast el : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;'));
-    (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(el);
+    (#if js ((cast (#if js (cast el : flighthq._internal.dom.HTMLDivElement).style #else _Runtime.field(el, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).cssText = (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;')) #else _Runtime.setField((#if js (cast el : flighthq._internal.dom.HTMLDivElement).style #else _Runtime.field(el, 'style') #end), 'cssText', (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;')) #end);
+    (#if js (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(el) #else _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([el] : Array<Dynamic>)) #end);
     _Runtime.callValue(readInsets, cast ([] : Array<Dynamic>));
     observer = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('ResizeObserver'), 'undefined') : Bool) ? (cast _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [readInsets]) : Dynamic) : (cast null : Dynamic));
-    if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (cast observer : flighthq._internal.dom.ResizeObserver).observe(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')); }
+    if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (#if js (cast observer : flighthq._internal.dom.ResizeObserver).observe(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')) #else _Runtime.callProperty(observer, 'observe', cast ([flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')] : Array<Dynamic>)) #end); }
     return cast function() {
-      if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (cast observer : flighthq._internal.dom.ResizeObserver).disconnect(); }
-      ({ final __hostTypeCall2 = (cast el : flighthq._internal.dom.HTMLDivElement).parentNode; __hostTypeCall2 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2 : flighthq._internal.dom.ParentNode).removeChild(el); });
+      if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (#if js (cast observer : flighthq._internal.dom.ResizeObserver).disconnect() #else _Runtime.callProperty(observer, 'disconnect', cast ([] : Array<Dynamic>)) #end); }
+      (#if js ({ final __hostTypeCall2 = (#if js (cast el : flighthq._internal.dom.HTMLDivElement).parentNode #else _Runtime.field(el, 'parentNode') #end); __hostTypeCall2 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2 : flighthq._internal.dom.ParentNode).removeChild(el); }) #else _Runtime.callOptionalProperty((#if js (cast el : flighthq._internal.dom.HTMLDivElement).parentNode #else _Runtime.field(el, 'parentNode') #end), 'removeChild', cast ([el] : Array<Dynamic>)) #end);
       (Device._safeAreaInsets__device = cast (null : Dynamic));
     };
     return cast null;
@@ -218,10 +218,10 @@ class Device {
       var canvas:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<flighthq._internal.dom.WebGLRenderingContext>), function():Dynamic return cast (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<flighthq._internal.dom.WebGLRenderingContext>));
       if ((cast _Runtime.strictEquals(gl, null) : Bool)) { return cast { renderer: '', vendor: '' }; }
-      var ext:Dynamic = (cast gl : flighthq._internal.dom.WebGLRenderingContext).getExtension('WEBGL_debug_renderer_info');
+      var ext:Dynamic = (#if js (cast gl : flighthq._internal.dom.WebGLRenderingContext).getExtension('WEBGL_debug_renderer_info') #else _Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>)) #end);
       if ((cast _Runtime.strictEquals(ext, null) : Bool)) { return cast { renderer: '', vendor: '' }; }
-      var vendor:Dynamic = _Runtime.coalesce((cast (cast gl : flighthq._internal.dom.WebGLRenderingContext).getParameter((cast ext : flighthq._internal.dom.WEBGL_debug_renderer_info).UNMASKED_VENDOR_WEBGL) : String), function():Dynamic return cast '');
-      var renderer:Dynamic = _Runtime.coalesce((cast (cast gl : flighthq._internal.dom.WebGLRenderingContext).getParameter((cast ext : flighthq._internal.dom.WEBGL_debug_renderer_info).UNMASKED_RENDERER_WEBGL) : String), function():Dynamic return cast '');
+      var vendor:Dynamic = _Runtime.coalesce((cast (#if js (cast gl : flighthq._internal.dom.WebGLRenderingContext).getParameter((#if js (cast ext : flighthq._internal.dom.WEBGL_debug_renderer_info).UNMASKED_VENDOR_WEBGL #else _Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL') #end)) #else _Runtime.callProperty(gl, 'getParameter', cast ([(#if js (cast ext : flighthq._internal.dom.WEBGL_debug_renderer_info).UNMASKED_VENDOR_WEBGL #else _Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL') #end)] : Array<Dynamic>)) #end) : String), function():Dynamic return cast '');
+      var renderer:Dynamic = _Runtime.coalesce((cast (#if js (cast gl : flighthq._internal.dom.WebGLRenderingContext).getParameter((#if js (cast ext : flighthq._internal.dom.WEBGL_debug_renderer_info).UNMASKED_RENDERER_WEBGL #else _Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL') #end)) #else _Runtime.callProperty(gl, 'getParameter', cast ([(#if js (cast ext : flighthq._internal.dom.WEBGL_debug_renderer_info).UNMASKED_RENDERER_WEBGL #else _Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL') #end)] : Array<Dynamic>)) #end) : String), function():Dynamic return cast '');
       return cast { renderer: renderer, vendor: vendor };
     } catch (__error:Dynamic) {
       return cast { renderer: '', vendor: '' };

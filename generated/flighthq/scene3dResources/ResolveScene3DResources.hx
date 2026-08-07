@@ -139,7 +139,7 @@ class ResolveScene3DResources {
         }
         continue;
       }
-      (cast entry.controller : flighthq._internal.dom.AbortController).abort();
+      (#if js (cast entry.controller : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(entry.controller, 'abort', cast ([] : Array<Dynamic>)) #end);
       ((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).delete_(ref));
       if ((cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Loading) : Bool)) {
         _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
@@ -173,7 +173,7 @@ class ResolveScene3DResources {
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
     if ((cast !_Runtime.strictEquals(((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).get(ref)), entry) : Bool)) { return; }
     ((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).delete_(ref));
-    if ((cast (cast (cast entry.controller : flighthq._internal.dom.AbortController).signal : flighthq._internal.dom.AbortSignal).aborted : Bool)) { return; }
+    if ((cast (#if js (cast (#if js (cast entry.controller : flighthq._internal.dom.AbortController).signal #else _Runtime.field(entry.controller, 'signal') #end) : flighthq._internal.dom.AbortSignal).aborted #else _Runtime.field((#if js (cast entry.controller : flighthq._internal.dom.AbortController).signal #else _Runtime.field(entry.controller, 'signal') #end), 'aborted') #end) : Bool)) { return; }
     _Runtime.setField(ref, 'failure', _Runtime.callValue(createImageResourceFailure, cast ([cause] : Array<Dynamic>)));
     _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
     for (texture in _Runtime.iterable(entry.subscribers)) {
@@ -235,8 +235,8 @@ class ResolveScene3DResources {
         }
       }
       var handle:Dynamic = _Runtime.callValue(queueResourceLoad, cast ([_Runtime.field(runtime, 'loader'), { load: function(loaderSignal:Dynamic) {
-        if ((cast (cast loaderSignal : flighthq._internal.dom.AbortSignal).aborted : Bool)) { (cast controller : flighthq._internal.dom.AbortController).abort((cast loaderSignal : flighthq._internal.dom.AbortSignal).reason); } else { (cast loaderSignal : flighthq._internal.dom.AbortSignal).addEventListener('abort', function() return (cast controller : flighthq._internal.dom.AbortController).abort((cast loaderSignal : flighthq._internal.dom.AbortSignal).reason), { once: true }); }
-        return cast _Runtime.callValue(resolveOneScene3DResourceTexture, cast ([resolver, ref, (cast controller : flighthq._internal.dom.AbortController).signal] : Array<Dynamic>));
+        if ((cast (#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).aborted #else _Runtime.field(loaderSignal, 'aborted') #end) : Bool)) { (#if js (cast controller : flighthq._internal.dom.AbortController).abort((#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).reason #else _Runtime.field(loaderSignal, 'reason') #end)) #else _Runtime.callProperty(controller, 'abort', cast ([(#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).reason #else _Runtime.field(loaderSignal, 'reason') #end)] : Array<Dynamic>)) #end); } else { (#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).addEventListener('abort', function() return (#if js (cast controller : flighthq._internal.dom.AbortController).abort((#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).reason #else _Runtime.field(loaderSignal, 'reason') #end)) #else _Runtime.callProperty(controller, 'abort', cast ([(#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).reason #else _Runtime.field(loaderSignal, 'reason') #end)] : Array<Dynamic>)) #end), { once: true }) #else _Runtime.callProperty(loaderSignal, 'addEventListener', cast (['abort', function() return (#if js (cast controller : flighthq._internal.dom.AbortController).abort((#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).reason #else _Runtime.field(loaderSignal, 'reason') #end)) #else _Runtime.callProperty(controller, 'abort', cast ([(#if js (cast loaderSignal : flighthq._internal.dom.AbortSignal).reason #else _Runtime.field(loaderSignal, 'reason') #end)] : Array<Dynamic>)) #end), { once: true }] : Array<Dynamic>)) #end); }
+        return cast _Runtime.callValue(resolveOneScene3DResourceTexture, cast ([resolver, ref, (#if js (cast controller : flighthq._internal.dom.AbortController).signal #else _Runtime.field(controller, 'signal') #end)] : Array<Dynamic>));
       }, priority: priority }] : Array<Dynamic>));
       var entry:Scene3DResourceInFlight = { controller: controller, promise: ResolveScene3DResources._resolvedVoid__resolveScene3DResources, subscribers: _Runtime.construct(_Runtime.globalValue('Set'), [subscribers]) };
       (entry.promise = cast (_Runtime.callProperty(handle.promise, 'then', cast ([function(image:Dynamic) return _Runtime.callValue(ResolveScene3DResources.finishScene3DResourceResolution__resolveScene3DResources, cast ([resolver, ref, entry, image] : Array<Dynamic>)), function(cause:Dynamic) return _Runtime.callValue(ResolveScene3DResources.failScene3DResourceResolution__resolveScene3DResources, cast ([resolver, ref, entry, cause] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));

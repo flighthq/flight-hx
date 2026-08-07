@@ -28,8 +28,8 @@ class WgpuShapeMesh {
     device = _Runtime.field(state, 'device');
     queue = flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue');
     _Runtime.callValue(WgpuShapeMesh.shapeMeshMatrix__wgpuShapeMesh, cast ([state, renderProxy, uniformData] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipelineEntry, 'pipeline'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.field(runtime, 'currentMaskDepth'));
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipelineEntry, 'pipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipelineEntry, 'pipeline')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.field(runtime, 'currentMaskDepth')) #else _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.field(runtime, 'currentMaskDepth')] : Array<Dynamic>)) #end);
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     {
       var i:Dynamic = 0.0;
@@ -51,10 +51,10 @@ class WgpuShapeMesh {
         flighthq._internal._StaticIndex.writeFloat32Array(uniformData, 14.0, (b * a));
         flighthq._internal._StaticIndex.writeFloat32Array(uniformData, 15.0, a);
         flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeBuffer', cast ([flighthq._internal._StaticIndex.readArray(uniformBuffers, i), 0.0, _Runtime.field(uniformData, 'buffer'), _Runtime.field(uniformData, 'byteOffset'), _Runtime.field(uniformData, 'byteLength')] : Array<Dynamic>));
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, flighthq._internal._StaticIndex.readArray(bindGroups, i));
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, vertexBuffer);
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(indexBuffer, 'uint16');
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'));
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, flighthq._internal._StaticIndex.readArray(bindGroups, i)) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, flighthq._internal._StaticIndex.readArray(bindGroups, i)] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, vertexBuffer) #else _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, vertexBuffer] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(indexBuffer, 'uint16') #else _Runtime.callProperty(pass, 'setIndexBuffer', cast ([indexBuffer, 'uint16'] : Array<Dynamic>)) #end);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length')) #else _Runtime.callProperty(pass, 'drawIndexed', cast ([_Runtime.field(_Runtime.field(mesh, 'indices'), 'length')] : Array<Dynamic>)) #end);
         i++;
       }
     }

@@ -15,19 +15,32 @@ import {
 } from '../../tools/generator/src/emit/haxe.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 
-function typedSource(fileName: string, text: string): { checker: ts.TypeChecker; source: ts.SourceFile } {
+function typedSource(
+  fileName: string,
+  text: string,
+  additionalSources: Readonly<Record<string, string>> = {},
+): { checker: ts.TypeChecker; source: ts.SourceFile } {
   const options: ts.CompilerOptions = {
     lib: ['lib.es2022.d.ts', 'lib.dom.d.ts'],
     skipLibCheck: true,
     strict: true,
     target: ts.ScriptTarget.ESNext,
   };
-  const source = ts.createSourceFile(fileName, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const virtualSources = new Map(
+    Object.entries({ [fileName]: text, ...additionalSources }).map(([name, contents]) => [
+      name,
+      ts.createSourceFile(name, contents, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS),
+    ]),
+  );
   const host = ts.createCompilerHost(options);
   const getSourceFile = host.getSourceFile.bind(host);
+  const fileExists = host.fileExists.bind(host);
+  const readFile = host.readFile.bind(host);
   host.getSourceFile = (requested, languageVersion, onError, shouldCreateNewSourceFile) =>
-    requested === fileName ? source : getSourceFile(requested, languageVersion, onError, shouldCreateNewSourceFile);
-  const program = ts.createProgram([fileName], options, host);
+    virtualSources.get(requested) ?? getSourceFile(requested, languageVersion, onError, shouldCreateNewSourceFile);
+  host.fileExists = (requested) => virtualSources.has(requested) || fileExists(requested);
+  host.readFile = (requested) => virtualSources.get(requested)?.text ?? readFile(requested);
+  const program = ts.createProgram([...virtualSources.keys()], options, host);
   const programSource = program.getSourceFile(fileName);
   if (!programSource) throw new Error(`Fixture program is missing ${fileName}`);
   return { checker: program.getTypeChecker(), source: programSource };
@@ -1523,9 +1536,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('media:Dynamic');
     expect(output).toContain('message:flighthq._internal.dom.MessageEvent<Dynamic>');
     expect(output).toContain('local:HTMLFlightLocal');
-    expect(output).toContain('width = image.width;');
+    expect(output).toContain("width = (#if js image.width #else _Runtime.field(image, 'width') #end);");
     expect(output).toContain('(image.src = url)');
     expect(output).toContain('image.decode()');
+    expect(output).toContain("#else _Runtime.setField(image, 'src', url) #end");
+    expect(output).toContain("#else _Runtime.callProperty(image, 'decode', cast ([] : Array<Dynamic>)) #end");
     expect(output).toContain('__hostType');
     expect(output).toContain('.height; })');
     expect(output).toContain("_Runtime.field(media, 'src')");
@@ -1539,14 +1554,120 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.construct(_Runtime.globalValue('TextDecoder')");
     expect(output).toContain('unresolvedGpuName = GPUFlightMissing;');
     expect(output).not.toContain("_Runtime.globalValue('GPUFlightMissing')");
-    expect(output).not.toContain("_Runtime.field(image, 'width')");
-    expect(output).not.toContain("_Runtime.callProperty(image, 'decode'");
     expect(lowered.hostTypes.map((use) => use.name)).toContain('HTMLImageElement');
     expect(lowered.hostTypes.some((use) => use.kind === 'member' && use.member === 'decode')).toBe(true);
     expect(lowered.hostTypes.some((use) => use.name === 'HTMLFlightLocal')).toBe(false);
     const audit = createHostTypeAudit('fixture', lowered.hostTypes);
     expect(audit.types.find((type) => type.name === 'ReadableStream')?.arities).toEqual([1]);
     expect(audit).toEqual(createHostTypeAudit('fixture', [...lowered.hostTypes].reverse()));
+  });
+
+  it('preserves tolerant host-stub reads and receiver-aware calls on Neko', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/audio/src/hostStub.ts',
+      `
+        export function readMissing(buffer: AudioBuffer): unknown {
+          return buffer.pattern;
+        }
+        export function callWithStubArity(buffer: AudioBuffer): void {
+          buffer.copyToChannel(null as any, 0, 1);
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/audio', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'HostStub',
+      packageName: '@flighthq/audio',
+    });
+    const fixtureDirectory = path.resolve('build/haxe-host-stub-neko-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const nekoOutput = path.join(fixtureDirectory, 'main.n');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'HostStub.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'StubAudioBuffer.hx'),
+      `
+        class StubAudioBuffer {
+          public var calls:Int = 0;
+          public function new() {}
+          public function copyToChannel(_value:Dynamic):Void calls++;
+        }
+      `,
+    );
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        class Main {
+          static function main() {
+            final receiver = new StubAudioBuffer();
+            if (flighthq.HostStub.readMissing(cast receiver) != null) throw 'missing field was not null';
+            flighthq.HostStub.callWithStubArity(cast receiver);
+            if (receiver.calls != 1) throw 'receiver-aware call did not execute exactly once';
+          }
+        }
+      `,
+    );
+
+    expect(output).toContain("#if js buffer.pattern #else _Runtime.field(buffer, 'pattern') #end");
+    expect(output).toContain(
+      "#else _Runtime.callProperty(buffer, 'copyToChannel', cast ([(cast null : Dynamic), 0.0, 1.0] : Array<Dynamic>)) #end",
+    );
+    execFileSync(
+      'node',
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        fixtureDirectory,
+        '-cp',
+        'src',
+        '-cp',
+        'generated',
+        '--main',
+        'Main',
+        '-neko',
+        nekoOutput,
+      ],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    execFileSync('neko', [nekoOutput], { cwd: path.resolve('.'), stdio: 'pipe' });
+  });
+
+  it('does not route an imported host-typed value as an ambient global', () => {
+    const sourceFile = '/workspace/upstream/packages/scene3d-wgpu/src/shadow.ts';
+    const constantsFile = '/workspace/upstream/packages/scene3d-wgpu/src/constants.ts';
+    const ambientFile = '/workspace/node_modules/@webgpu/types/index.d.ts';
+    const { checker, source } = typedSource(
+      sourceFile,
+      `
+        import { SHADOW_DEPTH_FORMAT } from './constants';
+        export function shadowFormat(): GPUTextureFormat { return SHADOW_DEPTH_FORMAT; }
+        export function textureUsage(): number { return GPUTextureUsage.TEXTURE_BINDING; }
+      `,
+      {
+        [constantsFile]: "export const SHADOW_DEPTH_FORMAT: GPUTextureFormat = 'depth32float';",
+        [ambientFile]: `
+          export {};
+          declare global {
+            type GPUTextureFormat = 'depth32float';
+            const GPUTextureUsage: { readonly TEXTURE_BINDING: number };
+          }
+        `,
+      },
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/scene3d-wgpu', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Shadow',
+      packageName: '@flighthq/scene3d-wgpu',
+    });
+
+    expect(output).toContain('return cast SHADOW_DEPTH_FORMAT;');
+    expect(output).not.toContain("_Runtime.globalValue('SHADOW_DEPTH_FORMAT')");
+    expect(output).toContain("WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')");
   });
 
   it('leaves unresolved type names visible so Haxe compilation fails loudly', () => {

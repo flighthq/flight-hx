@@ -50,8 +50,8 @@ class CanvasVignetteEffect {
     r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
     g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
     b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
-    (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)');
-    (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')');
+    (#if js (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)') #else _Runtime.callProperty(gradient, 'addColorStop', cast ([0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)'] : Array<Dynamic>)) #end);
+    (#if js (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')') #else _Runtime.callProperty(gradient, 'addColorStop', cast ([1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')'] : Array<Dynamic>)) #end);
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'multiply');

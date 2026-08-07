@@ -85,9 +85,9 @@ class Statusbar {
     var expandedHex:Dynamic = cast _Runtime.UNDEFINED;
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast 0.0; }
-    meta = ({ final __hostTypeCall4 = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'); __hostTypeCall4 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall4 : flighthq._internal.dom.HTMLHeadElement).querySelector('meta[name="theme-color"]'); });
+    meta = (#if js ({ final __hostTypeCall4 = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'); __hostTypeCall4 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall4 : flighthq._internal.dom.HTMLHeadElement).querySelector('meta[name="theme-color"]'); }) #else _Runtime.callOptionalProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'), 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>)) #end);
     if ((cast ((cast _Runtime.strictEquals(meta, null) : Bool) || (cast _Runtime.strictEquals(meta, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast 0.0; }
-    content = (cast meta : flighthq._internal.dom.Element).getAttribute('content');
+    content = (#if js (cast meta : flighthq._internal.dom.Element).getAttribute('content') #else _Runtime.callProperty(meta, 'getAttribute', cast (['content'] : Array<Dynamic>)) #end);
     if ((cast ((cast _Runtime.strictEquals(content, null) : Bool) || (cast !(cast StringTools.startsWith(content, '#') : Bool) : Bool)) : Bool)) { return cast 0.0; }
     hex = _Runtime.slice(content, 1.0, null);
     if ((cast !(cast _Runtime.callProperty(_Runtime.regexp('^(?:[\\da-f]{3}|[\\da-f]{6})$$', 'i'), 'test', cast ([hex] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
@@ -140,13 +140,13 @@ class Statusbar {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
       head = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head');
       if ((cast ((cast _Runtime.strictEquals(head, null) : Bool) || (cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-      meta = (cast head : flighthq._internal.dom.HTMLHeadElement).querySelector('meta[name="theme-color"]');
+      meta = (#if js (cast head : flighthq._internal.dom.HTMLHeadElement).querySelector('meta[name="theme-color"]') #else _Runtime.callProperty(head, 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>)) #end);
       if ((cast _Runtime.strictEquals(meta, null) : Bool)) {
         (meta = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['meta'] : Array<Dynamic>)) : Dynamic));
-        (cast meta : flighthq._internal.dom.Element).setAttribute('name', 'theme-color');
-        (cast head : flighthq._internal.dom.HTMLHeadElement).appendChild(meta);
+        (#if js (cast meta : flighthq._internal.dom.Element).setAttribute('name', 'theme-color') #else _Runtime.callProperty(meta, 'setAttribute', cast (['name', 'theme-color'] : Array<Dynamic>)) #end);
+        (#if js (cast head : flighthq._internal.dom.HTMLHeadElement).appendChild(meta) #else _Runtime.callProperty(head, 'appendChild', cast ([meta] : Array<Dynamic>)) #end);
       }
-      (cast meta : flighthq._internal.dom.Element).setAttribute('content', _Runtime.callValue(Statusbar.packedRgbaToHexColor__statusbar, cast ([color] : Array<Dynamic>)));
+      (#if js (cast meta : flighthq._internal.dom.Element).setAttribute('content', _Runtime.callValue(Statusbar.packedRgbaToHexColor__statusbar, cast ([color] : Array<Dynamic>))) #else _Runtime.callProperty(meta, 'setAttribute', cast (['content', _Runtime.callValue(Statusbar.packedRgbaToHexColor__statusbar, cast ([color] : Array<Dynamic>))] : Array<Dynamic>)) #end);
     }, setOverlaysContent: function(_overlay:Bool) {
 
     }, setStyle: function(_style:StatusBarStyle) {

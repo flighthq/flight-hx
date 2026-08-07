@@ -50,10 +50,10 @@ class WgpuEnvironmentSkybox {
       _Runtime.setField(sky, 'cubeBindGroup', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(sky, 'cubeBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: cubeView }, { binding: 1.0, resource: _Runtime.callValue(WgpuEnvironmentSkybox.getWgpuSkyboxSampler__wgpuEnvironmentSkybox, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>)));
       _Runtime.setField(sky, 'cubeView', cubeView);
     }
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(sky, 'pipeline'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(sky, 'uniformBindGroup'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, _Runtime.field(sky, 'cubeBindGroup'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(sky, 'pipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(sky, 'pipeline')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(sky, 'uniformBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(sky, 'uniformBindGroup')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, _Runtime.field(sky, 'cubeBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, _Runtime.field(sky, 'cubeBindGroup')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0) #else _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>)) #end);
     _Runtime.voidValue(scene);
   }
 

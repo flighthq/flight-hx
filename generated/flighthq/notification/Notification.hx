@@ -372,21 +372,32 @@ class Notification {
           var n:Dynamic = _Runtime.construct(_Runtime.globalValue('Notification'), [request.title, (cast { body: request.body, badge: request.badge, data: request.data, dir: request.dir, icon: request.icon, image: request.image, lang: request.lang, renotify: request.renotify, requireInteraction: request.requireInteraction, silent: request.silent, tag: _Runtime.coalesce(request.tag, function():Dynamic return cast id), timestamp: request.timestamp, vibrate: _Runtime.select(request.vibrate, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(request.vibrate)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) } : flighthq._internal.dom.NotificationOptions)]);
           ((cast _live : flighthq._internal._Map).set(id, n));
           ((cast _requests : flighthq._internal._Map).set(id, request));
-          ((cast n : flighthq._internal.dom.Notification).onshow = function() {
+          (#if js ((cast n : flighthq._internal.dom.Notification).onshow = function() {
             _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
-          });
-          ((cast n : flighthq._internal.dom.Notification).onclick = function() {
+          }) #else _Runtime.setField(n, 'onshow', function() {
+            _Runtime.callValue(_fire, cast ([_showListeners, id] : Array<Dynamic>));
+          }) #end);
+          (#if js ((cast n : flighthq._internal.dom.Notification).onclick = function() {
             _Runtime.callValue(_fire, cast ([_clickListeners, id] : Array<Dynamic>));
-          });
-          ((cast n : flighthq._internal.dom.Notification).onclose = function() {
+          }) #else _Runtime.setField(n, 'onclick', function() {
+            _Runtime.callValue(_fire, cast ([_clickListeners, id] : Array<Dynamic>));
+          }) #end);
+          (#if js ((cast n : flighthq._internal.dom.Notification).onclose = function() {
             ((cast _live : flighthq._internal._Map).delete_(id));
             ((cast _requests : flighthq._internal._Map).delete_(id));
             _Runtime.callValue(_fire, cast ([_dismissListeners, id] : Array<Dynamic>));
-          });
-          ((cast n : flighthq._internal.dom.Notification).onerror = function() {
+          }) #else _Runtime.setField(n, 'onclose', function() {
             ((cast _live : flighthq._internal._Map).delete_(id));
             ((cast _requests : flighthq._internal._Map).delete_(id));
-          });
+            _Runtime.callValue(_fire, cast ([_dismissListeners, id] : Array<Dynamic>));
+          }) #end);
+          (#if js ((cast n : flighthq._internal.dom.Notification).onerror = function() {
+            ((cast _live : flighthq._internal._Map).delete_(id));
+            ((cast _requests : flighthq._internal._Map).delete_(id));
+          }) #else _Runtime.setField(n, 'onerror', function() {
+            ((cast _live : flighthq._internal._Map).delete_(id));
+            ((cast _requests : flighthq._internal._Map).delete_(id));
+          }) #end);
           return cast id;
         } catch (__error:Dynamic) {
           return cast '';
@@ -415,7 +426,7 @@ class Notification {
         var id:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
         var n:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         try {
-          (cast n : flighthq._internal.dom.Notification).close();
+          (#if js (cast n : flighthq._internal.dom.Notification).close() #else _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>)) #end);
         } catch (__error:Dynamic) {
         }
         ((cast _live : flighthq._internal._Map).delete_(id));
@@ -426,7 +437,7 @@ class Notification {
       n = ((cast _live : flighthq._internal._Map).get(id));
       if ((cast !_Runtime.strictEquals(n, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         try {
-          (cast n : flighthq._internal.dom.Notification).close();
+          (#if js (cast n : flighthq._internal.dom.Notification).close() #else _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>)) #end);
         } catch (__error:Dynamic) {
         }
         ((cast _live : flighthq._internal._Map).delete_(id));
@@ -548,7 +559,7 @@ class Notification {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              (cast existing : flighthq._internal.dom.Notification).close();
+              (#if js (cast existing : flighthq._internal.dom.Notification).close() #else _Runtime.callProperty(existing, 'close', cast ([] : Array<Dynamic>)) #end);
               ((cast _live : flighthq._internal._Map).delete_(id));
               ((cast _requests : flighthq._internal._Map).delete_(id));
               return flighthq._internal._Async.flowNormal();

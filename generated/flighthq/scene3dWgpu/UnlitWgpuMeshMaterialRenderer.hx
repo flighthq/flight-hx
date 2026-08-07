@@ -50,7 +50,7 @@ class UnlitWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuUnlitSurface, cast ([state, pipeline, unlit, UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer, 1.0, _Runtime.field(unlit, 'alphaCutoff'), _Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>)) #end);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

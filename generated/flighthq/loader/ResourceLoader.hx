@@ -88,10 +88,10 @@ class ResourceLoader {
     _Runtime.setField(internal, 'cancelled', true);
     cancelError = _Runtime.construct(_Runtime.globalValue('DOMException'), ['Load cancelled', 'AbortError']);
     for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(cancelError);
+      (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(cancelError) #else _Runtime.callProperty(_Runtime.field(entry, 'abortController'), 'abort', cast ([cancelError] : Array<Dynamic>)) #end);
     }
     for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(cancelError);
+      (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(cancelError) #else _Runtime.callProperty(_Runtime.field(entry, 'abortController'), 'abort', cast ([cancelError] : Array<Dynamic>)) #end);
       var report:ResourceLoadReport = { attempts: 0.0, bytes: 0.0, elapsedMs: 0.0, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'cancelled' };
       _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
       _Runtime.callProperty(entry, 'reject', cast ([cancelError] : Array<Dynamic>));
@@ -308,10 +308,10 @@ class ResourceLoader {
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
     _Runtime.incrementField(internal, 'generation', 1, true);
     for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort();
+      (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(_Runtime.field(entry, 'abortController'), 'abort', cast ([] : Array<Dynamic>)) #end);
     }
     for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort();
+      (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(_Runtime.field(entry, 'abortController'), 'abort', cast ([] : Array<Dynamic>)) #end);
       _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
     }
     _Runtime.setField(internal, 'cancelled', false);
@@ -448,13 +448,15 @@ class ResourceLoader {
 
   public static function abortSignalPromise__resourceLoader(signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Dynamic> {
     return cast flighthq._internal._Async.create(function(_resolve:Dynamic, reject:Dynamic) {
-      if ((cast signal.aborted : Bool)) {
-        _Runtime.callValue(reject, cast ([_Runtime.coalesce(signal.reason, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
+      if ((cast (#if js signal.aborted #else _Runtime.field(signal, 'aborted') #end) : Bool)) {
+        _Runtime.callValue(reject, cast ([_Runtime.coalesce((#if js signal.reason #else _Runtime.field(signal, 'reason') #end), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
         return;
       }
-      signal.addEventListener('abort', function() {
-        _Runtime.callValue(reject, cast ([_Runtime.coalesce(signal.reason, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
-      }, { once: true });
+      (#if js signal.addEventListener('abort', function() {
+        _Runtime.callValue(reject, cast ([_Runtime.coalesce((#if js signal.reason #else _Runtime.field(signal, 'reason') #end), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
+      }, { once: true }) #else _Runtime.callProperty(signal, 'addEventListener', cast (['abort', function() {
+        _Runtime.callValue(reject, cast ([_Runtime.coalesce((#if js signal.reason #else _Runtime.field(signal, 'reason') #end), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
+      }, { once: true }] : Array<Dynamic>)) #end);
     });
     return cast null;
   }
@@ -486,7 +488,7 @@ class ResourceLoader {
             __flowBranch24 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
-            signal = (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).signal;
+            signal = (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).signal #else _Runtime.field(_Runtime.field(entry, 'abortController'), 'signal') #end);
             live = true;
             reportBytes = function(loaded:Dynamic, total:Dynamic) {
               if ((cast !(cast live : Bool) : Bool)) { return; }
@@ -497,7 +499,7 @@ class ResourceLoader {
             if ((cast ((cast _Runtime.field(entry, 'timeoutMs') : Float) > (cast 0.0 : Float)) : Bool)) {
               __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
                 (timeoutId = cast (_Runtime.setTimeout(function() {
-                  (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(_Runtime.construct(_Runtime.globalValue('DOMException'), ['Load timed out', 'TimeoutError']));
+                  (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(_Runtime.construct(_Runtime.globalValue('DOMException'), ['Load timed out', 'TimeoutError'])) #else _Runtime.callProperty(_Runtime.field(entry, 'abortController'), 'abort', cast ([_Runtime.construct(_Runtime.globalValue('DOMException'), ['Load timed out', 'TimeoutError'])] : Array<Dynamic>)) #end);
                 }, _Runtime.field(entry, 'timeoutMs')) : Dynamic));
                 return flighthq._internal._Async.flowNormal();
               });
@@ -612,7 +614,7 @@ class ResourceLoader {
                         __flowBranch33 = flighthq._internal._Async.flowNormal();
                       }
                       return flighthq._internal._Async.continueFlow(__flowBranch33, function():Dynamic {
-                        isAbortOrTimeout = ((cast _Runtime.isInstanceOf(error, _Runtime.globalValue('DOMException')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'AbortError'), function():Dynamic return cast _Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'TimeoutError')) : Bool));
+                        isAbortOrTimeout = ((cast _Runtime.isInstanceOf(error, _Runtime.globalValue('DOMException')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals((#if js (cast error : flighthq._internal.dom.DOMException).name #else _Runtime.field(error, 'name') #end), 'AbortError'), function():Dynamic return cast _Runtime.strictEquals((#if js (cast error : flighthq._internal.dom.DOMException).name #else _Runtime.field(error, 'name') #end), 'TimeoutError')) : Bool));
                         var __flowBranch34:Dynamic;
                         if ((cast ((cast ((cast attempt : Float) < (cast _Runtime.field(entry, 'retries') : Float)) : Bool) && (cast !(cast isAbortOrTimeout : Bool) : Bool)) : Bool)) {
                           __flowBranch34 = flighthq._internal._Async.protect(function():Dynamic {
@@ -717,7 +719,7 @@ class ResourceLoader {
 
   public static function cancelRemainingEntries__resourceLoader(internal:ResourceLoaderInternal__resourceLoader):Void {
     for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort();
+      (#if js (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(_Runtime.field(entry, 'abortController'), 'abort', cast ([] : Array<Dynamic>)) #end);
       var report:ResourceLoadReport = { attempts: 0.0, bytes: 0.0, elapsedMs: 0.0, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'skipped' };
       _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
       _Runtime.callProperty(entry, 'reject', cast ([_Runtime.construct(_Runtime.globalValue('DOMException'), ['Load skipped due to fail-fast error policy', 'AbortError'])] : Array<Dynamic>));

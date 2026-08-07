@@ -34,7 +34,7 @@ class Share {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        return cast _Runtime.coalesce(({ final __hostTypeCall0 = flighthq._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare(data); }), function():Dynamic return cast false);
+        return cast _Runtime.coalesce((#if js ({ final __hostTypeCall0 = flighthq._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare(data); }) #else _Runtime.callOptionalProperty(flighthq._internal.backend.DomNavigatorBackend.value(), 'canShare', cast ([data] : Array<Dynamic>)) #end), function():Dynamic return cast false);
       } catch (__error:Dynamic) {
         return cast false;
       }
@@ -152,11 +152,11 @@ class Share {
   public static function shareContentToNavigatorData__share(content:ShareContent):flighthq._internal.dom.ShareData {
     var data:flighthq._internal.dom.ShareData = cast _Runtime.UNDEFINED;
     data = {  };
-    if ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.title = content.title); }
-    if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.text = content.text); }
-    if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.url = content.url); }
+    if ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (data.title = content.title) #else _Runtime.setField(data, 'title', content.title) #end); }
+    if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (data.text = content.text) #else _Runtime.setField(data, 'text', content.text) #end); }
+    if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (data.url = content.url) #else _Runtime.setField(data, 'url', content.url) #end); }
     if ((cast ((cast !_Runtime.strictEquals(content.files, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(content.files, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>)));
+      (#if js (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>))) #else _Runtime.setField(data, 'files', _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>))) #end);
     }
     return cast data;
     return cast null;
@@ -215,7 +215,7 @@ class Share {
       }
     } else {
       var decoded:Dynamic = _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([body] : Array<Dynamic>));
-      var encoded:Dynamic = (cast _Runtime.construct(_Runtime.globalValue('TextEncoder'), []) : flighthq._internal.dom.TextEncoder).encode(decoded);
+      var encoded:Dynamic = (#if js (cast _Runtime.construct(_Runtime.globalValue('TextEncoder'), []) : flighthq._internal.dom.TextEncoder).encode(decoded) #else _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextEncoder'), []), 'encode', cast ([decoded] : Array<Dynamic>)) #end);
       (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(encoded, 'length')])) : Dynamic));
       (cast bytes : flighthq._internal._UInt8Array).set(encoded);
     }

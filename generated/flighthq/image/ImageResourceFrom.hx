@@ -18,7 +18,7 @@ class ImageResourceFrom {
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', bitmap.width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', bitmap.height);
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [bitmap.width, bitmap.height]);
-    (cast (cast domImageData : flighthq._internal.dom.ImageData).data : flighthq._internal._UInt8ClampedArray).set(bitmap.data);
+    (cast (#if js (cast domImageData : flighthq._internal.dom.ImageData).data #else _Runtime.field(domImageData, 'data') #end) : flighthq._internal._UInt8ClampedArray).set(bitmap.data);
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>));
     return cast null;
@@ -30,19 +30,19 @@ class ImageResourceFrom {
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):Image {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: (#if js bitmap.height #else _Runtime.field(bitmap, 'height') #end), kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: (#if js bitmap.width #else _Runtime.field(bitmap, 'width') #end) }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:flighthq._internal.dom.HTMLImageElement):Image {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: (#if js img.height #else _Runtime.field(img, 'height') #end), kind: ImageTextureSourceKind, source: img, version: 0.0, width: (#if js img.width #else _Runtime.field(img, 'width') #end) }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function isImageUrlSameOrigin(url:String):Bool {
     if ((cast ((cast StringTools.startsWith(url, 'data:') : Bool) || (cast StringTools.startsWith(url, 'blob:') : Bool)) : Bool)) { return cast true; }
     try {
-      return cast _Runtime.strictEquals((cast _Runtime.construct(_Runtime.globalValue('URL'), [url, (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).href]) : flighthq._internal.dom.URL).origin, (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).origin);
+      return cast _Runtime.strictEquals((#if js (cast _Runtime.construct(_Runtime.globalValue('URL'), [url, (#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).href #else _Runtime.field(_Runtime.globalValue('location'), 'href') #end)]) : flighthq._internal.dom.URL).origin #else _Runtime.field(_Runtime.construct(_Runtime.globalValue('URL'), [url, (#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).href #else _Runtime.field(_Runtime.globalValue('location'), 'href') #end)]), 'origin') #end), (#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).origin #else _Runtime.field(_Runtime.globalValue('location'), 'origin') #end));
     } catch (__error:Dynamic) {
       return cast true;
     }
@@ -92,19 +92,19 @@ class ImageResourceFrom {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var img:Dynamic = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall5 = signal; __hostTypeCall5 == null ? _Runtime.UNDEFINED : __hostTypeCall5.throwIfAborted(); });
+        (#if js ({ final __hostTypeCall5 = signal; __hostTypeCall5 == null ? _Runtime.UNDEFINED : __hostTypeCall5.throwIfAborted(); }) #else _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>)) #end);
         img = _Runtime.construct(_Runtime.globalValue('Image'), []);
         var __flowBranch6:Dynamic;
         if ((cast !_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
-            ((cast img : flighthq._internal.dom.HTMLImageElement).crossOrigin = crossOrigin);
+            (#if js ((cast img : flighthq._internal.dom.HTMLImageElement).crossOrigin = crossOrigin) #else _Runtime.setField(img, 'crossOrigin', crossOrigin) #end);
             return flighthq._internal._Async.flowNormal();
           });
         } else {
           __flowBranch6 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
-          ((cast img : flighthq._internal.dom.HTMLImageElement).src = url);
+          (#if js ((cast img : flighthq._internal.dom.HTMLImageElement).src = url) #else _Runtime.setField(img, 'src', url) #end);
           var __flowBranch7:Dynamic;
           if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
@@ -118,17 +118,17 @@ class ImageResourceFrom {
                 (rejectAbort = cast (reject : Dynamic));
               });
               onAbort = function() {
-                ((cast img : flighthq._internal.dom.HTMLImageElement).src = '');
-                _Runtime.callValue(rejectAbort, cast ([signal.reason] : Array<Dynamic>));
+                (#if js ((cast img : flighthq._internal.dom.HTMLImageElement).src = '') #else _Runtime.setField(img, 'src', '') #end);
+                _Runtime.callValue(rejectAbort, cast ([(#if js signal.reason #else _Runtime.field(signal, 'reason') #end)] : Array<Dynamic>));
               };
-              signal.addEventListener('abort', onAbort, { once: true });
+              (#if js signal.addEventListener('abort', onAbort, { once: true }) #else _Runtime.callProperty(signal, 'addEventListener', cast (['abort', onAbort, { once: true }] : Array<Dynamic>)) #end);
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap(flighthq._internal._Async.race(cast ([(cast img : flighthq._internal.dom.HTMLImageElement).decode(), abortPromise] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap(flighthq._internal._Async.race(cast ([(#if js (cast img : flighthq._internal.dom.HTMLImageElement).decode() #else _Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)) #end), abortPromise] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
                   __awaitValue8;
                   return flighthq._internal._Async.flowNormal();
                 });
               }), function():Dynamic {
-                signal.removeEventListener('abort', onAbort);
+                (#if js signal.removeEventListener('abort', onAbort) #else _Runtime.callProperty(signal, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)) #end);
                 return flighthq._internal._Async.flowNormal();
               }), function():Dynamic {
                 return flighthq._internal._Async.flowNormal();
@@ -136,7 +136,7 @@ class ImageResourceFrom {
             });
           } else {
             __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast img : flighthq._internal.dom.HTMLImageElement).decode(), function(__awaitValue9:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((#if js (cast img : flighthq._internal.dom.HTMLImageElement).decode() #else _Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)) #end), function(__awaitValue9:Dynamic):Dynamic {
                 __awaitValue9;
                 return flighthq._internal._Async.flowNormal();
               });

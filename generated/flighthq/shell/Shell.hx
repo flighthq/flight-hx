@@ -70,7 +70,7 @@ class Shell {
   public static function isShellUrlAllowed(url:String):Bool {
     if ((cast _Runtime.strictEquals(Shell._urlSchemeAllowlist__shell, null) : Bool)) { return cast true; }
     try {
-      var scheme:Dynamic = _Runtime.replace((cast _Runtime.construct(_Runtime.globalValue('URL'), [url]) : flighthq._internal.dom.URL).protocol, _Runtime.regexp(':$$', ''), '', false);
+      var scheme:Dynamic = _Runtime.replace((#if js (cast _Runtime.construct(_Runtime.globalValue('URL'), [url]) : flighthq._internal.dom.URL).protocol #else _Runtime.field(_Runtime.construct(_Runtime.globalValue('URL'), [url]), 'protocol') #end), _Runtime.regexp(':$$', ''), '', false);
       return cast _Runtime.includes(Shell._urlSchemeAllowlist__shell, scheme);
     } catch (__error:Dynamic) {
       return cast false;

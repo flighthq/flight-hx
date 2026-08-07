@@ -117,8 +117,8 @@ class _WgpuTestHelper {
   public static function createReadyImageElementForTest(width:Dynamic = 1.0, height:Dynamic = 1.0):flighthq._internal.dom.HTMLImageElement {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>));
-    ((cast image : flighthq._internal.dom.HTMLImageElement).width = width);
-    ((cast image : flighthq._internal.dom.HTMLImageElement).height = height);
+    (#if js ((cast image : flighthq._internal.dom.HTMLImageElement).width = width) #else _Runtime.setField(image, 'width', width) #end);
+    (#if js ((cast image : flighthq._internal.dom.HTMLImageElement).height = height) #else _Runtime.setField(image, 'height', height) #end);
     flighthq._internal.DynamicObject.defineProperties(image, { complete: { configurable: true, value: true }, naturalHeight: { configurable: true, value: height }, naturalWidth: { configurable: true, value: width } });
     return cast image;
     return cast null;
@@ -145,7 +145,7 @@ class _WgpuTestHelper {
       flighthq._internal.DynamicObject.defineProperty(_Runtime.globalValue('globalThis'), 'navigator', { value: {  }, configurable: true, writable: true });
     }
     flighthq._internal.DynamicObject.defineProperty(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), 'gpu', { value: gpu, configurable: true, writable: true });
-    origGetContext = (cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : flighthq._internal.dom.HTMLCanvasElement).getContext;
+    origGetContext = (#if js (cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : flighthq._internal.dom.HTMLCanvasElement).getContext #else _Runtime.field(_Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype'), 'getContext') #end);
     _Runtime.setField((cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : { var getContext:Dynamic; }), 'getContext', function(contextId:String, ?options:Dynamic) {
       var __thisValue0:Dynamic = _Runtime.thisValue();
       if ((cast _Runtime.strictEquals(contextId, 'webgpu') : Bool)) {

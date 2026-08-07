@@ -9,7 +9,7 @@ class VideoFormat {
   public static function canPlayVideoType(mimeType:String):Bool {
     var probe:Dynamic = cast _Runtime.UNDEFINED;
     probe = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
-    return cast !_Runtime.strictEquals((cast probe : flighthq._internal.dom.HTMLVideoElement).canPlayType(mimeType), '');
+    return cast !_Runtime.strictEquals((#if js (cast probe : flighthq._internal.dom.HTMLVideoElement).canPlayType(mimeType) #else _Runtime.callProperty(probe, 'canPlayType', cast ([mimeType] : Array<Dynamic>)) #end), '');
     return cast null;
   }
 

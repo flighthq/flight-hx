@@ -100,8 +100,8 @@ class Lifecycle {
     }, getLaunchKind: function() {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool)) { return cast 'cold'; }
-      entries = (cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).getEntriesByType('navigation') : Array<flighthq._internal.dom.PerformanceNavigationTiming>);
-      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(entries, 0.0) : flighthq._internal.dom.PerformanceNavigationTiming).type, 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
+      entries = (cast (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).getEntriesByType('navigation') #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'getEntriesByType', cast (['navigation'] : Array<Dynamic>)) #end) : Array<flighthq._internal.dom.PerformanceNavigationTiming>);
+      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((#if js (cast flighthq._internal._StaticIndex.readArray(entries, 0.0) : flighthq._internal.dom.PerformanceNavigationTiming).type #else _Runtime.field(flighthq._internal._StaticIndex.readArray(entries, 0.0), 'type') #end), 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
       return cast 'cold';
     }, subscribeMemoryWarning: function(listener:Dynamic) {
       var onPressure:Dynamic = cast _Runtime.UNDEFINED;
@@ -112,7 +112,7 @@ class Lifecycle {
       onPressure = function(e:flighthq._internal.dom.Event) {
         var detail:Dynamic = cast _Runtime.UNDEFINED;
         var pressure:Dynamic = cast _Runtime.UNDEFINED;
-        detail = (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
+        detail = (#if js (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail #else _Runtime.field((cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>), 'detail') #end);
         pressure = _Runtime.optionalField(detail, 'pressure');
         if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
           _Runtime.callValue(listener, cast (['critical'] : Array<Dynamic>));

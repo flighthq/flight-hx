@@ -76,26 +76,26 @@ class InputManager {
       var pad:Dynamic = cast _Runtime.UNDEFINED;
       var prev:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
-      pad = (cast e : flighthq._internal.dom.GamepadEvent).gamepad;
+      pad = (#if js (cast e : flighthq._internal.dom.GamepadEvent).gamepad #else _Runtime.field((cast e : flighthq._internal.dom.GamepadEvent), 'gamepad') #end);
       prev = _Runtime.callValue(InputManager.getOrCreateGamepadPollState__inputManager, cast ([manager] : Array<Dynamic>));
-      ((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).set((cast pad : flighthq._internal.dom.Gamepad).index, _Runtime.toArray((cast pad : flighthq._internal.dom.Gamepad).axes)));
-      ((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).set((cast pad : flighthq._internal.dom.Gamepad).index, _Runtime.toArray((cast pad : flighthq._internal.dom.Gamepad).buttons, function(b:Dynamic) return (cast b : flighthq._internal.dom.GamepadButton).pressed)));
-      (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
-      (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : Dynamic));
-      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : Dynamic));
+      ((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).set((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end), _Runtime.toArray((#if js (cast pad : flighthq._internal.dom.Gamepad).axes #else _Runtime.field(pad, 'axes') #end))));
+      ((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).set((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end), _Runtime.toArray((#if js (cast pad : flighthq._internal.dom.Gamepad).buttons #else _Runtime.field(pad, 'buttons') #end), function(b:Dynamic) return (#if js (cast b : flighthq._internal.dom.GamepadButton).pressed #else _Runtime.field(b, 'pressed') #end))));
+      (InputManager._connectData__inputManager.gamepad = cast ((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end) : Dynamic));
+      (InputManager._connectData__inputManager.id = cast ((#if js (cast pad : flighthq._internal.dom.Gamepad).id #else _Runtime.field(pad, 'id') #end) : Dynamic));
+      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((#if js (cast pad : flighthq._internal.dom.Gamepad).mapping #else _Runtime.field(pad, 'mapping') #end), 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((#if js (cast pad : flighthq._internal.dom.Gamepad).mapping #else _Runtime.field(pad, 'mapping') #end), '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : Dynamic));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadConnect')], [InputManager._connectData__inputManager]]), 1);
     };
     onGamepadDisconnected = function(e:flighthq._internal.dom.Event) {
       var pad:Dynamic = cast _Runtime.UNDEFINED;
       var prev:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
-      pad = (cast e : flighthq._internal.dom.GamepadEvent).gamepad;
+      pad = (#if js (cast e : flighthq._internal.dom.GamepadEvent).gamepad #else _Runtime.field((cast e : flighthq._internal.dom.GamepadEvent), 'gamepad') #end);
       prev = _Runtime.callValue(InputManager.getOrCreateGamepadPollState__inputManager, cast ([manager] : Array<Dynamic>));
-      ((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
-      ((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
-      (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
-      (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : Dynamic));
-      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : Dynamic));
+      ((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).delete_((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end)));
+      ((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).delete_((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end)));
+      (InputManager._connectData__inputManager.gamepad = cast ((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end) : Dynamic));
+      (InputManager._connectData__inputManager.id = cast ((#if js (cast pad : flighthq._internal.dom.Gamepad).id #else _Runtime.field(pad, 'id') #end) : Dynamic));
+      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((#if js (cast pad : flighthq._internal.dom.Gamepad).mapping #else _Runtime.field(pad, 'mapping') #end), 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((#if js (cast pad : flighthq._internal.dom.Gamepad).mapping #else _Runtime.field(pad, 'mapping') #end), '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : Dynamic));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadDisconnect')], [InputManager._connectData__inputManager]]), 1);
     };
     rafId = 0.0;
@@ -123,7 +123,7 @@ class InputManager {
       var ke:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
       ke = (cast e : flighthq._internal.dom.KeyboardEvent);
-      if ((cast preventDefault : Bool)) { (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault() #else _Runtime.callProperty(ke, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
       _Runtime.callValue(InputManager.setInputKeyboardData__inputManager, cast ([InputManager._keyboardData__inputManager, ke] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onKeyDown')], [InputManager._keyboardData__inputManager]]), 1);
     };
@@ -131,15 +131,15 @@ class InputManager {
       var ke:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
       ke = (cast e : flighthq._internal.dom.KeyboardEvent);
-      if ((cast preventDefault : Bool)) { (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault() #else _Runtime.callProperty(ke, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
       _Runtime.callValue(InputManager.setInputKeyboardData__inputManager, cast ([InputManager._keyboardData__inputManager, ke] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onKeyUp')], [InputManager._keyboardData__inputManager]]), 1);
     };
-    target.addEventListener('keydown', onKeyDown);
-    target.addEventListener('keyup', onKeyUp);
+    (#if js target.addEventListener('keydown', onKeyDown) #else _Runtime.callProperty(target, 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>)) #end);
+    (#if js target.addEventListener('keyup', onKeyUp) #else _Runtime.callProperty(target, 'addEventListener', cast (['keyup', onKeyUp] : Array<Dynamic>)) #end);
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, target, InputManager.kKeyboardInput__inputManager, function() {
-      target.removeEventListener('keydown', onKeyDown);
-      target.removeEventListener('keyup', onKeyUp);
+      (#if js target.removeEventListener('keydown', onKeyDown) #else _Runtime.callProperty(target, 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>)) #end);
+      (#if js target.removeEventListener('keyup', onKeyUp) #else _Runtime.callProperty(target, 'removeEventListener', cast (['keyup', onKeyUp] : Array<Dynamic>)) #end);
     }] : Array<Dynamic>));
   }
 
@@ -152,43 +152,43 @@ class InputManager {
     var onPointerUp:Dynamic = cast _Runtime.UNDEFINED;
     preventDefault = _Runtime.coalesce(_Runtime.optionalField(options, 'preventDefault'), function():Dynamic return cast true);
     onContextMenu = function(e:flighthq._internal.dom.Event) {
-      if ((cast preventDefault : Bool)) { e.preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
     };
     onPointerCancel = function(e:flighthq._internal.dom.Event) {
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
-      if ((cast preventDefault : Bool)) { e.preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : flighthq._internal.dom.PointerEvent), 0.0, 0.0] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerCancel')], [InputManager._pointerData__inputManager]]), 1);
     };
     onPointerDown = function(e:flighthq._internal.dom.Event) {
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
-      if ((cast preventDefault : Bool)) { e.preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : flighthq._internal.dom.PointerEvent), 0.0, 0.0] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerDown')], [InputManager._pointerData__inputManager]]), 1);
     };
     onPointerMove = function(e:flighthq._internal.dom.Event) {
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
-      if ((cast preventDefault : Bool)) { e.preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : flighthq._internal.dom.PointerEvent), 0.0, 0.0] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerMove')], [InputManager._pointerData__inputManager]]), 1);
     };
     onPointerUp = function(e:flighthq._internal.dom.Event) {
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
-      if ((cast preventDefault : Bool)) { e.preventDefault(); }
+      if ((cast preventDefault : Bool)) { (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
       _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, (cast e : flighthq._internal.dom.PointerEvent), 0.0, 0.0] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerUp')], [InputManager._pointerData__inputManager]]), 1);
     };
-    element.addEventListener('contextmenu', onContextMenu);
-    element.addEventListener('pointercancel', onPointerCancel);
-    element.addEventListener('pointerdown', onPointerDown);
-    element.addEventListener('pointermove', onPointerMove);
-    element.addEventListener('pointerup', onPointerUp);
+    (#if js element.addEventListener('contextmenu', onContextMenu) #else _Runtime.callProperty(element, 'addEventListener', cast (['contextmenu', onContextMenu] : Array<Dynamic>)) #end);
+    (#if js element.addEventListener('pointercancel', onPointerCancel) #else _Runtime.callProperty(element, 'addEventListener', cast (['pointercancel', onPointerCancel] : Array<Dynamic>)) #end);
+    (#if js element.addEventListener('pointerdown', onPointerDown) #else _Runtime.callProperty(element, 'addEventListener', cast (['pointerdown', onPointerDown] : Array<Dynamic>)) #end);
+    (#if js element.addEventListener('pointermove', onPointerMove) #else _Runtime.callProperty(element, 'addEventListener', cast (['pointermove', onPointerMove] : Array<Dynamic>)) #end);
+    (#if js element.addEventListener('pointerup', onPointerUp) #else _Runtime.callProperty(element, 'addEventListener', cast (['pointerup', onPointerUp] : Array<Dynamic>)) #end);
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kPointerInput__inputManager, function() {
-      element.removeEventListener('contextmenu', onContextMenu);
-      element.removeEventListener('pointercancel', onPointerCancel);
-      element.removeEventListener('pointerdown', onPointerDown);
-      element.removeEventListener('pointermove', onPointerMove);
-      element.removeEventListener('pointerup', onPointerUp);
+      (#if js element.removeEventListener('contextmenu', onContextMenu) #else _Runtime.callProperty(element, 'removeEventListener', cast (['contextmenu', onContextMenu] : Array<Dynamic>)) #end);
+      (#if js element.removeEventListener('pointercancel', onPointerCancel) #else _Runtime.callProperty(element, 'removeEventListener', cast (['pointercancel', onPointerCancel] : Array<Dynamic>)) #end);
+      (#if js element.removeEventListener('pointerdown', onPointerDown) #else _Runtime.callProperty(element, 'removeEventListener', cast (['pointerdown', onPointerDown] : Array<Dynamic>)) #end);
+      (#if js element.removeEventListener('pointermove', onPointerMove) #else _Runtime.callProperty(element, 'removeEventListener', cast (['pointermove', onPointerMove] : Array<Dynamic>)) #end);
+      (#if js element.removeEventListener('pointerup', onPointerUp) #else _Runtime.callProperty(element, 'removeEventListener', cast (['pointerup', onPointerUp] : Array<Dynamic>)) #end);
     }] : Array<Dynamic>));
   }
 
@@ -197,13 +197,13 @@ class InputManager {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     preventDefault = _Runtime.coalesce(_Runtime.optionalField(options, 'preventDefault'), function():Dynamic return cast true);
-    target = element.ownerDocument;
+    target = (#if js element.ownerDocument #else _Runtime.field(element, 'ownerDocument') #end);
     handler = function(e:flighthq._internal.dom.Event) {
       var me:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
       me = (cast e : flighthq._internal.dom.MouseEvent);
-      if ((cast preventDefault : Bool)) { (cast me : flighthq._internal.dom.MouseEvent).preventDefault(); }
-      _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, me, (cast me : flighthq._internal.dom.MouseEvent).movementX, (cast me : flighthq._internal.dom.MouseEvent).movementY] : Array<Dynamic>));
+      if ((cast preventDefault : Bool)) { (#if js (cast me : flighthq._internal.dom.MouseEvent).preventDefault() #else _Runtime.callProperty(me, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
+      _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, me, (#if js (cast me : flighthq._internal.dom.MouseEvent).movementX #else _Runtime.field(me, 'movementX') #end), (#if js (cast me : flighthq._internal.dom.MouseEvent).movementY #else _Runtime.field(me, 'movementY') #end)] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onPointerMoveRelative')], [InputManager._pointerData__inputManager]]), 1);
     };
     flighthq._internal.backend.DomDocumentBackend.call(target, 'addEventListener', cast (['mousemove', handler] : Array<Dynamic>));
@@ -218,8 +218,8 @@ class InputManager {
       var text:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
       ie = (cast e : flighthq._internal.dom.InputEvent);
-      text = _Runtime.coalesce((cast ie : flighthq._internal.dom.InputEvent).data, function():Dynamic return cast '');
-      (InputManager._textData__inputManager.isComposing = cast ((cast ie : flighthq._internal.dom.InputEvent).isComposing : Dynamic));
+      text = _Runtime.coalesce((#if js (cast ie : flighthq._internal.dom.InputEvent).data #else _Runtime.field(ie, 'data') #end), function():Dynamic return cast '');
+      (InputManager._textData__inputManager.isComposing = cast ((#if js (cast ie : flighthq._internal.dom.InputEvent).isComposing #else _Runtime.field(ie, 'isComposing') #end) : Dynamic));
       (InputManager._textData__inputManager.text = cast (text : Dynamic));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onTextInput')], [InputManager._textData__inputManager]]), 1);
     };
@@ -228,16 +228,16 @@ class InputManager {
       var text:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
       ce = (cast e : flighthq._internal.dom.CompositionEvent);
-      text = _Runtime.coalesce((cast ce : flighthq._internal.dom.CompositionEvent).data, function():Dynamic return cast '');
+      text = _Runtime.coalesce((#if js (cast ce : flighthq._internal.dom.CompositionEvent).data #else _Runtime.field(ce, 'data') #end), function():Dynamic return cast '');
       (InputManager._textData__inputManager.isComposing = cast (true : Dynamic));
       (InputManager._textData__inputManager.text = cast (text : Dynamic));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onTextEdit')], [InputManager._textData__inputManager]]), 1);
     };
-    element.addEventListener('beforeinput', onBeforeInput);
-    element.addEventListener('compositionupdate', onCompositionUpdate);
+    (#if js element.addEventListener('beforeinput', onBeforeInput) #else _Runtime.callProperty(element, 'addEventListener', cast (['beforeinput', onBeforeInput] : Array<Dynamic>)) #end);
+    (#if js element.addEventListener('compositionupdate', onCompositionUpdate) #else _Runtime.callProperty(element, 'addEventListener', cast (['compositionupdate', onCompositionUpdate] : Array<Dynamic>)) #end);
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kTextInput__inputManager, function() {
-      element.removeEventListener('beforeinput', onBeforeInput);
-      element.removeEventListener('compositionupdate', onCompositionUpdate);
+      (#if js element.removeEventListener('beforeinput', onBeforeInput) #else _Runtime.callProperty(element, 'removeEventListener', cast (['beforeinput', onBeforeInput] : Array<Dynamic>)) #end);
+      (#if js element.removeEventListener('compositionupdate', onCompositionUpdate) #else _Runtime.callProperty(element, 'removeEventListener', cast (['compositionupdate', onCompositionUpdate] : Array<Dynamic>)) #end);
     }] : Array<Dynamic>));
     _Runtime.voidValue(options);
   }
@@ -250,13 +250,13 @@ class InputManager {
       var we:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool)) { return; }
       we = (cast e : flighthq._internal.dom.WheelEvent);
-      if ((cast preventDefault : Bool)) { (cast we : flighthq._internal.dom.WheelEvent).preventDefault(); }
-      _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, we, (cast we : flighthq._internal.dom.WheelEvent).deltaX, (cast we : flighthq._internal.dom.WheelEvent).deltaY] : Array<Dynamic>));
+      if ((cast preventDefault : Bool)) { (#if js (cast we : flighthq._internal.dom.WheelEvent).preventDefault() #else _Runtime.callProperty(we, 'preventDefault', cast ([] : Array<Dynamic>)) #end); }
+      _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, we, (#if js (cast we : flighthq._internal.dom.WheelEvent).deltaX #else _Runtime.field(we, 'deltaX') #end), (#if js (cast we : flighthq._internal.dom.WheelEvent).deltaY #else _Runtime.field(we, 'deltaY') #end)] : Array<Dynamic>));
       _Runtime.setField(InputManager._pointerData__inputManager, 'wheelMode', _Runtime.callValue(getMouseWheelModeFromDomWheelEvent, cast ([we] : Array<Dynamic>)));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onWheel')], [InputManager._pointerData__inputManager]]), 1);
     };
-    element.addEventListener('wheel', handler, { passive: !(cast preventDefault : Bool) });
-    _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kWheelInput__inputManager, function() return element.removeEventListener('wheel', handler)] : Array<Dynamic>));
+    (#if js element.addEventListener('wheel', handler, { passive: !(cast preventDefault : Bool) }) #else _Runtime.callProperty(element, 'addEventListener', cast (['wheel', handler, { passive: !(cast preventDefault : Bool) }] : Array<Dynamic>)) #end);
+    _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kWheelInput__inputManager, function() return (#if js element.removeEventListener('wheel', handler) #else _Runtime.callProperty(element, 'removeEventListener', cast (['wheel', handler] : Array<Dynamic>)) #end)] : Array<Dynamic>));
   }
 
   public static function connectInputStateToInputManager(state:InputState, manager:flighthq.types.InputManager):Dynamic {
@@ -455,7 +455,7 @@ class InputManager {
 
   public static function getCoalescedInputPointerEvents(event:flighthq._internal.dom.PointerEvent, callback:Dynamic):Void {
     var coalesced:Dynamic = cast _Runtime.UNDEFINED;
-    coalesced = ((cast _Runtime.strictEquals(_Runtime.typeofValue(event.getCoalescedEvents), 'function') : Bool) ? (cast event.getCoalescedEvents() : Dynamic) : (cast null : Dynamic));
+    coalesced = ((cast _Runtime.strictEquals(_Runtime.typeofValue((#if js event.getCoalescedEvents #else _Runtime.field(event, 'getCoalescedEvents') #end)), 'function') : Bool) ? (cast (#if js event.getCoalescedEvents() #else _Runtime.callProperty(event, 'getCoalescedEvents', cast ([] : Array<Dynamic>)) #end) : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast !_Runtime.strictEquals(coalesced, null) : Bool) && (cast ((cast _Runtime.field(coalesced, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       for (e in _Runtime.iterable(coalesced)) {
         _Runtime.callValue(InputManager.setInputPointerData__inputManager, cast ([InputManager._pointerData__inputManager, e, 0.0, 0.0] : Array<Dynamic>));
@@ -539,21 +539,21 @@ class InputManager {
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     var gamepads:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.field(manager, 'enabled') : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads')), 'function') : Bool)) : Bool)) { return; }
-    now = (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now();
+    now = (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) #end);
     prev = _Runtime.callValue(InputManager.getOrCreateGamepadPollState__inputManager, cast ([manager] : Array<Dynamic>));
     gamepads = flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads', cast ([] : Array<Dynamic>));
     for (pad in _Runtime.iterable(gamepads)) {
       if ((cast _Runtime.strictEquals(pad, null) : Bool)) { continue; }
-      var prevAxes:Dynamic = _Runtime.coalesce(((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).get((cast pad : flighthq._internal.dom.Gamepad).index)), function():Dynamic return cast cast ([] : Array<Dynamic>));
-      var prevButtons:Dynamic = _Runtime.coalesce(((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).get((cast pad : flighthq._internal.dom.Gamepad).index)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      var prevAxes:Dynamic = _Runtime.coalesce(((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).get((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end))), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      var prevButtons:Dynamic = _Runtime.coalesce(((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).get((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end))), function():Dynamic return cast cast ([] : Array<Dynamic>));
       {
         var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field((cast pad : flighthq._internal.dom.Gamepad).axes, 'length') : Float)) : Bool)) {
-          var value:Dynamic = flighthq._internal._StaticIndex.readArray((cast pad : flighthq._internal.dom.Gamepad).axes, i);
+        while ((cast ((cast i : Float) < (cast _Runtime.field((#if js (cast pad : flighthq._internal.dom.Gamepad).axes #else _Runtime.field(pad, 'axes') #end), 'length') : Float)) : Bool)) {
+          var value:Dynamic = flighthq._internal._StaticIndex.readArray((#if js (cast pad : flighthq._internal.dom.Gamepad).axes #else _Runtime.field(pad, 'axes') #end), i);
           if ((cast !_Runtime.strictEquals(value, flighthq._internal._StaticIndex.readArray(prevAxes, i)) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(prevAxes, i, value);
             (InputManager._axisData__inputManager.axis = cast (i : Dynamic));
-            (InputManager._axisData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
+            (InputManager._axisData__inputManager.gamepad = cast ((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end) : Dynamic));
             (InputManager._axisData__inputManager.timeStamp = cast (now : Dynamic));
             (InputManager._axisData__inputManager.value = cast (value : Dynamic));
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadAxisMove')], [InputManager._axisData__inputManager]]), 1);
@@ -563,16 +563,16 @@ class InputManager {
       }
       {
         var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field((cast pad : flighthq._internal.dom.Gamepad).buttons, 'length') : Float)) : Bool)) {
-          var btn:Dynamic = flighthq._internal._StaticIndex.readArray((cast pad : flighthq._internal.dom.Gamepad).buttons, i);
+        while ((cast ((cast i : Float) < (cast _Runtime.field((#if js (cast pad : flighthq._internal.dom.Gamepad).buttons #else _Runtime.field(pad, 'buttons') #end), 'length') : Float)) : Bool)) {
+          var btn:Dynamic = flighthq._internal._StaticIndex.readArray((#if js (cast pad : flighthq._internal.dom.Gamepad).buttons #else _Runtime.field(pad, 'buttons') #end), i);
           var wasPressed:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(prevButtons, i), function():Dynamic return cast false);
-          if ((cast !_Runtime.strictEquals((cast btn : flighthq._internal.dom.GamepadButton).pressed, wasPressed) : Bool)) {
-            flighthq._internal._StaticIndex.writeArray(prevButtons, i, (cast btn : flighthq._internal.dom.GamepadButton).pressed);
+          if ((cast !_Runtime.strictEquals((#if js (cast btn : flighthq._internal.dom.GamepadButton).pressed #else _Runtime.field(btn, 'pressed') #end), wasPressed) : Bool)) {
+            flighthq._internal._StaticIndex.writeArray(prevButtons, i, (#if js (cast btn : flighthq._internal.dom.GamepadButton).pressed #else _Runtime.field(btn, 'pressed') #end));
             (InputManager._buttonData__inputManager.button = cast (i : Dynamic));
-            (InputManager._buttonData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
+            (InputManager._buttonData__inputManager.gamepad = cast ((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end) : Dynamic));
             (InputManager._buttonData__inputManager.timeStamp = cast (now : Dynamic));
-            (InputManager._buttonData__inputManager.value = cast ((cast btn : flighthq._internal.dom.GamepadButton).value : Dynamic));
-            if ((cast (cast btn : flighthq._internal.dom.GamepadButton).pressed : Bool)) {
+            (InputManager._buttonData__inputManager.value = cast ((#if js (cast btn : flighthq._internal.dom.GamepadButton).value #else _Runtime.field(btn, 'value') #end) : Dynamic));
+            if ((cast (#if js (cast btn : flighthq._internal.dom.GamepadButton).pressed #else _Runtime.field(btn, 'pressed') #end) : Bool)) {
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadButtonDown')], [InputManager._buttonData__inputManager]]), 1);
             } else {
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(manager, 'onGamepadButtonUp')], [InputManager._buttonData__inputManager]]), 1);
@@ -581,21 +581,21 @@ class InputManager {
           i++;
         }
       }
-      ((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).set((cast pad : flighthq._internal.dom.Gamepad).index, prevAxes));
-      ((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).set((cast pad : flighthq._internal.dom.Gamepad).index, prevButtons));
+      ((cast _Runtime.field(prev, 'axes') : flighthq._internal._Map).set((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end), prevAxes));
+      ((cast _Runtime.field(prev, 'buttons') : flighthq._internal._Map).set((#if js (cast pad : flighthq._internal.dom.Gamepad).index #else _Runtime.field(pad, 'index') #end), prevButtons));
     }
   }
 
   public static function releaseInputPointerCapture(element:flighthq._internal.dom.HTMLElement, pointerId:Float):Void {
     try {
-      element.releasePointerCapture(pointerId);
+      (#if js element.releasePointerCapture(pointerId) #else _Runtime.callProperty(element, 'releasePointerCapture', cast ([pointerId] : Array<Dynamic>)) #end);
     } catch (__error:Dynamic) {
     }
   }
 
   public static function requestInputPointerLock(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<Bool> {
     try {
-      var result:Dynamic = element.requestPointerLock();
+      var result:Dynamic = (#if js element.requestPointerLock() #else _Runtime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>)) #end);
       if ((cast flighthq._internal._Async.isPromise(result) : Bool)) {
         return cast _Runtime.callProperty(result, 'then', cast ([function() return true, function() return false] : Array<Dynamic>));
       }
@@ -607,7 +607,7 @@ class InputManager {
   }
 
   public static function setInputPointerCapture(element:flighthq._internal.dom.HTMLElement, pointerId:Float):Void {
-    element.setPointerCapture(pointerId);
+    (#if js element.setPointerCapture(pointerId) #else _Runtime.callProperty(element, 'setPointerCapture', cast ([pointerId] : Array<Dynamic>)) #end);
   }
 
   public static function wasInputGamepadButtonPressed(state:InputState, gamepad:Float, button:Float):Bool {
@@ -646,19 +646,19 @@ class InputManager {
   public static function setInputKeyboardData__inputManager(out:InputKeyboardData, event:flighthq._internal.dom.KeyboardEvent):Void {
     var modifier:Dynamic = cast _Runtime.UNDEFINED;
     modifier = _Runtime.callValue(getKeyModifierFromDomKeyboardEvent, cast ([event] : Array<Dynamic>));
-    _Runtime.setField(out, 'altKey', event.altKey);
+    _Runtime.setField(out, 'altKey', (#if js event.altKey #else _Runtime.field(event, 'altKey') #end));
     _Runtime.setField(out, 'capsLock', !_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32(KeyModifierValue.CAPS_LOCK)), 0.0));
-    _Runtime.setField(out, 'code', event.code);
-    _Runtime.setField(out, 'ctrlKey', event.ctrlKey);
-    _Runtime.setField(out, 'key', event.key);
+    _Runtime.setField(out, 'code', (#if js event.code #else _Runtime.field(event, 'code') #end));
+    _Runtime.setField(out, 'ctrlKey', (#if js event.ctrlKey #else _Runtime.field(event, 'ctrlKey') #end));
+    _Runtime.setField(out, 'key', (#if js event.key #else _Runtime.field(event, 'key') #end));
     _Runtime.setField(out, 'keyCode', _Runtime.callValue(getKeyCodeFromDomKeyboardEvent, cast ([event] : Array<Dynamic>)));
-    _Runtime.setField(out, 'location', event.location);
-    _Runtime.setField(out, 'metaKey', event.metaKey);
+    _Runtime.setField(out, 'location', (#if js event.location #else _Runtime.field(event, 'location') #end));
+    _Runtime.setField(out, 'metaKey', (#if js event.metaKey #else _Runtime.field(event, 'metaKey') #end));
     _Runtime.setField(out, 'modifier', modifier);
     _Runtime.setField(out, 'numLock', !_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32(KeyModifierValue.NUM_LOCK)), 0.0));
-    _Runtime.setField(out, 'repeat', event.repeat);
-    _Runtime.setField(out, 'shiftKey', event.shiftKey);
-    _Runtime.setField(out, 'timeStamp', event.timeStamp);
+    _Runtime.setField(out, 'repeat', (#if js event.repeat #else _Runtime.field(event, 'repeat') #end));
+    _Runtime.setField(out, 'shiftKey', (#if js event.shiftKey #else _Runtime.field(event, 'shiftKey') #end));
+    _Runtime.setField(out, 'timeStamp', (#if js event.timeStamp #else _Runtime.field(event, 'timeStamp') #end));
   }
 
   public static function setInputPointerData__inputManager(out:InputPointerData, event:Dynamic, deltaX:Float, deltaY:Float):Void {
@@ -668,19 +668,19 @@ class InputManager {
     _Runtime.setField(out, 'ctrlKey', _Runtime.field(event, 'ctrlKey'));
     _Runtime.setField(out, 'deltaX', deltaX);
     _Runtime.setField(out, 'deltaY', deltaY);
-    _Runtime.setField(out, 'height', ((cast _Runtime.hasField(event, 'height') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).height : Dynamic) : (cast 1.0 : Dynamic)));
-    _Runtime.setField(out, 'isPrimary', ((cast _Runtime.hasField(event, 'isPrimary') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).isPrimary : Dynamic) : (cast true : Dynamic)));
+    _Runtime.setField(out, 'height', ((cast _Runtime.hasField(event, 'height') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).height #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'height') #end) : Dynamic) : (cast 1.0 : Dynamic)));
+    _Runtime.setField(out, 'isPrimary', ((cast _Runtime.hasField(event, 'isPrimary') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).isPrimary #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'isPrimary') #end) : Dynamic) : (cast true : Dynamic)));
     _Runtime.setField(out, 'metaKey', _Runtime.field(event, 'metaKey'));
-    _Runtime.setField(out, 'pointerId', ((cast _Runtime.hasField(event, 'pointerId') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).pointerId : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'pointerId', ((cast _Runtime.hasField(event, 'pointerId') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).pointerId #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'pointerId') #end) : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setField(out, 'pointerType', ((cast _Runtime.hasField(event, 'pointerType') : Bool) ? (cast _Runtime.callValue(InputManager.getPointerTypeFromDomPointerEvent__inputManager, cast ([(cast event : flighthq._internal.dom.PointerEvent)] : Array<Dynamic>)) : Dynamic) : (cast 'mouse' : Dynamic)));
-    _Runtime.setField(out, 'pressure', ((cast _Runtime.hasField(event, 'pressure') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).pressure : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'pressure', ((cast _Runtime.hasField(event, 'pressure') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).pressure #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'pressure') #end) : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setField(out, 'shiftKey', _Runtime.field(event, 'shiftKey'));
-    _Runtime.setField(out, 'tiltX', ((cast _Runtime.hasField(event, 'tiltX') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).tiltX : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setField(out, 'tiltY', ((cast _Runtime.hasField(event, 'tiltY') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).tiltY : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'tiltX', ((cast _Runtime.hasField(event, 'tiltX') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).tiltX #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'tiltX') #end) : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'tiltY', ((cast _Runtime.hasField(event, 'tiltY') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).tiltY #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'tiltY') #end) : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setField(out, 'timeStamp', _Runtime.field(event, 'timeStamp'));
-    _Runtime.setField(out, 'twist', ((cast _Runtime.hasField(event, 'twist') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).twist : Dynamic) : (cast 0.0 : Dynamic)));
+    _Runtime.setField(out, 'twist', ((cast _Runtime.hasField(event, 'twist') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).twist #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'twist') #end) : Dynamic) : (cast 0.0 : Dynamic)));
     _Runtime.setField(out, 'wheelMode', 'unknown');
-    _Runtime.setField(out, 'width', ((cast _Runtime.hasField(event, 'width') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).width : Dynamic) : (cast 1.0 : Dynamic)));
+    _Runtime.setField(out, 'width', ((cast _Runtime.hasField(event, 'width') : Bool) ? (cast (#if js (cast event : flighthq._internal.dom.PointerEvent).width #else _Runtime.field((cast event : flighthq._internal.dom.PointerEvent), 'width') #end) : Dynamic) : (cast 1.0 : Dynamic)));
     _Runtime.setField(out, 'x', _Runtime.field(event, 'clientX'));
     _Runtime.setField(out, 'y', _Runtime.field(event, 'clientY'));
   }

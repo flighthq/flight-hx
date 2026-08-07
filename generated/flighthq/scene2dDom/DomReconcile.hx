@@ -64,10 +64,10 @@ class DomReconcile {
         i++;
       }
     }
-    child = container.firstChild;
+    child = (#if js container.firstChild #else _Runtime.field(container, 'firstChild') #end);
     while ((cast !_Runtime.strictEquals(child, null) : Bool)) {
-      var next:Dynamic = (cast child : flighthq._internal.dom.ChildNode).nextSibling;
-      if ((cast !(cast ((cast keepSet : flighthq._internal._Set).has((cast child : flighthq._internal.dom.HTMLElement))) : Bool) : Bool)) { container.removeChild(child); }
+      var next:Dynamic = (#if js (cast child : flighthq._internal.dom.ChildNode).nextSibling #else _Runtime.field(child, 'nextSibling') #end);
+      if ((cast !(cast ((cast keepSet : flighthq._internal._Set).has((cast child : flighthq._internal.dom.HTMLElement))) : Bool) : Bool)) { (#if js container.removeChild(child) #else _Runtime.callProperty(container, 'removeChild', cast ([child] : Array<Dynamic>)) #end); }
       (child = cast (next : Dynamic));
     }
     nextSibling = null;
@@ -76,8 +76,8 @@ class DomReconcile {
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i)));
         if ((cast _Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i--; continue; }
-        if ((cast ((cast !_Runtime.strictEquals((cast el : flighthq._internal.dom.HTMLElement).nextSibling, nextSibling) : Bool) || (cast !_Runtime.strictEquals((cast el : flighthq._internal.dom.HTMLElement).parentNode, container) : Bool)) : Bool)) {
-          container.insertBefore(el, nextSibling);
+        if ((cast ((cast !_Runtime.strictEquals((#if js (cast el : flighthq._internal.dom.HTMLElement).nextSibling #else _Runtime.field(el, 'nextSibling') #end), nextSibling) : Bool) || (cast !_Runtime.strictEquals((#if js (cast el : flighthq._internal.dom.HTMLElement).parentNode #else _Runtime.field(el, 'parentNode') #end), container) : Bool)) : Bool)) {
+          (#if js container.insertBefore(el, nextSibling) #else _Runtime.callProperty(container, 'insertBefore', cast ([el, nextSibling] : Array<Dynamic>)) #end);
         }
         (nextSibling = cast (el : Dynamic));
         i--;

@@ -159,7 +159,7 @@ class Log {
   public static final _spanStack__log:Array<LogSpan> = cast ([] : Array<Dynamic>);
 
   public static function _timestamp__log():Float {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool) ? (cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool) ? (cast (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) #end) : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -173,7 +173,7 @@ class Log {
     __destructure13 = entry;
     level = _Runtime.field(__destructure13, 'level');
     channel = _Runtime.field(__destructure13, 'channel');
-    (cast _Runtime.globalValue('console') : flighthq._internal.dom.Console).debug(_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>)));
+    (#if js (cast _Runtime.globalValue('console') : flighthq._internal.dom.Console).debug(_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>))) #else _Runtime.callProperty(_Runtime.globalValue('console'), 'debug', cast ([_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>))] : Array<Dynamic>)) #end);
     if ((cast ((cast !_Runtime.strictEquals(level, LogLevel.None) : Bool) && (cast ((cast Log._consoleLevel__log : Float) >= (cast level : Float)) : Bool)) : Bool)) {
       var method:Dynamic = _Runtime.getIndex(Log._consoleMethods__log, level);
       var prefix:Dynamic = ((cast !_Runtime.strictEquals(channel, null) : Bool) ? (cast '[' + Std.string(channel) + ']' : Dynamic) : (cast '[flight]' : Dynamic));

@@ -15,8 +15,8 @@ class VideoResource {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) {
-      (cast element : flighthq._internal.dom.HTMLVideoElement).removeAttribute('src');
-      (cast element : flighthq._internal.dom.HTMLVideoElement).load();
+      (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).removeAttribute('src') #else _Runtime.callProperty(element, 'removeAttribute', cast (['src'] : Array<Dynamic>)) #end);
+      (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).load() #else _Runtime.callProperty(element, 'load', cast ([] : Array<Dynamic>)) #end);
     }
     if ((cast !_Runtime.strictEquals(resource.objectUrl, null) : Bool)) {
       _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([resource.objectUrl] : Array<Dynamic>));
@@ -28,21 +28,21 @@ class VideoResource {
   public static function getVideoResourceDuration(resource:flighthq.types.VideoResource):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
-    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).duration : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).duration #else _Runtime.field(element, 'duration') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoResourceHeight(resource:flighthq.types.VideoResource):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
-    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoResourceWidth(resource:flighthq.types.VideoResource):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
-    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -54,14 +54,14 @@ class VideoResource {
   public static function isVideoResourceEmpty(resource:flighthq.types.VideoResource):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
-    return cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) <= (cast 0.0 : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end) : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end) : Float) <= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function isVideoResourceReady(resource:flighthq.types.VideoResource):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
-    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).readyState : Float) >= (cast VideoResource.HAVE_CURRENT_DATA__videoResource : Float)) : Bool));
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).readyState #else _Runtime.field(element, 'readyState') #end) : Float) >= (cast VideoResource.HAVE_CURRENT_DATA__videoResource : Float)) : Bool));
     return cast null;
   }
 

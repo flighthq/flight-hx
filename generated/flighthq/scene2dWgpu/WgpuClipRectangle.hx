@@ -27,11 +27,11 @@ class WgpuClipRectangle {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
       var viewport:Dynamic = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height'));
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')) #else _Runtime.callProperty(pass, 'setScissorRect', cast ([0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')] : Array<Dynamic>)) #end);
     } else { if ((cast ((cast ((cast _Runtime.field(previous, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(previous, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, 1.0, 1.0);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, 1.0, 1.0) #else _Runtime.callProperty(pass, 'setScissorRect', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>)) #end);
     } else {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height'));
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')) #else _Runtime.callProperty(pass, 'setScissorRect', cast ([_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')] : Array<Dynamic>)) #end);
     } }
   }
 
@@ -48,9 +48,9 @@ class WgpuClipRectangle {
     pass = _Runtime.field(runtime, 'renderPass');
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     if ((cast ((cast ((cast _Runtime.field(next, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(next, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, 1.0, 1.0);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, 1.0, 1.0) #else _Runtime.callProperty(pass, 'setScissorRect', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>)) #end);
     } else {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height'));
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')) #else _Runtime.callProperty(pass, 'setScissorRect', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>)) #end);
     }
   }
 

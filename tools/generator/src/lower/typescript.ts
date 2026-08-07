@@ -2333,9 +2333,7 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
   }
   const domRootBinding = locallyBound ? undefined : domRootBindings[name as keyof typeof domRootBindings];
   if (domRootBinding) return { domRootBinding, kind: 'identifier', name };
-  const checkerHostGlobal = locallyBound
-    ? undefined
-    : (hostTypeIdentityForExpression(node, context.checker) ?? hostTypeIdentityForValueSymbol(node, context.checker));
+  const checkerHostGlobal = locallyBound ? undefined : hostTypeIdentityForValueSymbol(node, context.checker);
   if (!locallyBound && (platformGlobalValues.has(name) || standardGlobalValues.has(name) || checkerHostGlobal)) {
     return {
       arguments: [{ kind: 'literal', value: name }],

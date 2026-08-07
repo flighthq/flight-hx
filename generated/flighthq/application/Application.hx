@@ -156,7 +156,7 @@ class Application {
     }, cancelFrame: function(handle:Dynamic) {
       _Runtime.callValue(_Runtime.globalValue('cancelAnimationFrame'), cast ([(cast handle : Float)] : Array<Dynamic>));
     }, now: function() {
-      return cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now();
+      return cast (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) #end);
     } };
     return cast null;
   }

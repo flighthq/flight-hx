@@ -8,9 +8,9 @@ import flighthq.types.DomRenderState;
 class DomBackground {
   public static function renderDomBackground(state:DomRenderState):Void {
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & 255), 0.0) : Bool)) {
-      ((cast (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = _Runtime.field(state, 'backgroundColorString'));
+      (#if js ((cast (#if js (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(_Runtime.field(state, 'element'), 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = _Runtime.field(state, 'backgroundColorString')) #else _Runtime.setField((#if js (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(_Runtime.field(state, 'element'), 'style') #end), 'backgroundColor', _Runtime.field(state, 'backgroundColorString')) #end);
     } else {
-      ((cast (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = '');
+      (#if js ((cast (#if js (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(_Runtime.field(state, 'element'), 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = '') #else _Runtime.setField((#if js (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(_Runtime.field(state, 'element'), 'style') #end), 'backgroundColor', '') #end);
     }
   }
 }

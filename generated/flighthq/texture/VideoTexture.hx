@@ -48,7 +48,7 @@ class VideoTexture {
   public static function getVideoTextureHeight(texture:TextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
-    return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast -1.0 : Dynamic));
+    return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end) : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end) : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -64,14 +64,14 @@ class VideoTexture {
   public static function getVideoTextureWidth(texture:TextureLike):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
-    return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast -1.0 : Dynamic));
+    return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end) : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end) : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isVideoTextureFrameReady(texture:TextureLike):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
-    return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).readyState : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)));
+    return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).readyState #else _Runtime.field(element, 'readyState') #end) : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end) : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end) : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 
@@ -110,8 +110,8 @@ class VideoTexture {
   public static function updateVideoImageSize__videoTexture(image:Image):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = (cast _Runtime.field(image, 'source') : flighthq._internal.dom.HTMLVideoElement);
-    _Runtime.setField(image, 'width', _Runtime.orValue((cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth, function():Dynamic return cast 0.0));
-    _Runtime.setField(image, 'height', _Runtime.orValue((cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight, function():Dynamic return cast 0.0));
+    _Runtime.setField(image, 'width', _Runtime.orValue((#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end), function():Dynamic return cast 0.0));
+    _Runtime.setField(image, 'height', _Runtime.orValue((#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end), function():Dynamic return cast 0.0));
   }
 
   public static final HAVE_CURRENT_DATA__videoTexture:Dynamic = 2.0;

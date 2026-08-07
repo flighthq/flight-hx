@@ -32,27 +32,27 @@ class Mediasession {
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       if ((cast _Runtime.strictEquals(metadata, null) : Bool)) {
-        ((cast session : flighthq._internal.dom.MediaSession).metadata = null);
+        (#if js ((cast session : flighthq._internal.dom.MediaSession).metadata = null) #else _Runtime.setField(session, 'metadata', null) #end);
         return;
       }
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('MediaMetadata'), 'undefined') : Bool)) { return; }
-      ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }]));
+      (#if js ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }])) #else _Runtime.setField(session, 'metadata', _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }])) #end);
     }, setPlaybackState: function(state:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
-      ((cast session : flighthq._internal.dom.MediaSession).playbackState = state);
+      (#if js ((cast session : flighthq._internal.dom.MediaSession).playbackState = state) #else _Runtime.setField(session, 'playbackState', state) #end);
     }, setPositionState: function(state:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flighthq._internal.dom.MediaSession).setPositionState), 'function') : Bool)) : Bool)) { return; }
-      (cast session : flighthq._internal.dom.MediaSession).setPositionState(_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((#if js (cast session : flighthq._internal.dom.MediaSession).setPositionState #else _Runtime.field(session, 'setPositionState') #end)), 'function') : Bool)) : Bool)) { return; }
+      (#if js (cast session : flighthq._internal.dom.MediaSession).setPositionState(_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))) #else _Runtime.callProperty(session, 'setPositionState', cast ([_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) #end);
     }, setActionHandler: function(action:Dynamic, handler:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       try {
-        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:Dynamic) return _Runtime.callValue(handler, cast ([(cast details : MediaSessionActionDetails)] : Array<Dynamic>)), function():Dynamic return cast null));
+        (#if js (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:Dynamic) return _Runtime.callValue(handler, cast ([(cast details : MediaSessionActionDetails)] : Array<Dynamic>)), function():Dynamic return cast null)) #else _Runtime.callProperty(session, 'setActionHandler', cast ([action, _Runtime.select(handler, function():Dynamic return cast function(details:Dynamic) return _Runtime.callValue(handler, cast ([(cast details : MediaSessionActionDetails)] : Array<Dynamic>)), function():Dynamic return cast null)] : Array<Dynamic>)) #end);
       } catch (__error:Dynamic) {
       }
     } };

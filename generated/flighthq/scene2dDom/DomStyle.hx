@@ -12,19 +12,19 @@ class DomStyle {
   @:noCompletion
   public static function applyDomStyle(state:DomRenderState, element:flighthq._internal.dom.HTMLElement, node:RenderProxy2D):Void {
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(node, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(node, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(node, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')); }
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(node, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(node, 'alpha')) : Dynamic) : (cast '' : Dynamic))) #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'opacity', ((cast ((cast _Runtime.field(node, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(node, 'alpha')) : Dynamic) : (cast '' : Dynamic))) #end);
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic))) #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic))) #end);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) { (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')) #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')) #end); }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([element, _Runtime.field(node, 'blendMode')] : Array<Dynamic>));
   }
 
   @:noCompletion
   public static function prepareDomElement(element:flighthq._internal.dom.HTMLElement):Void {
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).left = '0');
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transformOrigin = '0 0');
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).pointerEvents = 'none');
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'position', 'absolute') #end);
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).left = '0') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'left', '0') #end);
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).top = '0') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'top', '0') #end);
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).transformOrigin = '0 0') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'transformOrigin', '0 0') #end);
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).pointerEvents = 'none') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'pointerEvents', 'none') #end);
   }
 
   @:noCompletion

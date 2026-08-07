@@ -144,7 +144,7 @@ class App {
     }, relaunch: function() {
       if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) {
         try {
-          (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).reload();
+          (#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).reload() #else _Runtime.callProperty(_Runtime.globalValue('location'), 'reload', cast ([] : Array<Dynamic>)) #end);
         } catch (__error:Dynamic) {
         }
       }
@@ -159,7 +159,7 @@ class App {
     }, setBadgeCount: function(count:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
-        (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic).setAppBadge(count);
+        (#if js (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic).setAppBadge(count) #else _Runtime.callProperty((cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic), 'setAppBadge', cast ([count] : Array<Dynamic>)) #end);
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;

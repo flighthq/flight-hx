@@ -32,7 +32,7 @@ class WgpuMotionBlurEffect {
       }] : Array<Dynamic>));
       return;
     }
-    velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
+    velocitySource = (cast { view: (#if js velocityTexture.createView() #else _Runtime.callProperty(velocityTexture, 'createView', cast ([] : Array<Dynamic>)) #end) } : WgpuRenderTarget);
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), velocitySource, (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);

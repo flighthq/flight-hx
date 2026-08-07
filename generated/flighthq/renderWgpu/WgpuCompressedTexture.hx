@@ -18,7 +18,7 @@ typedef WgpuCompressedFormatInfo__wgpuCompressedTexture = { var blockHeight:Floa
 class WgpuCompressedTexture {
   @:noCompletion
   public static function detectWgpuCompressedTextureSupport(device:flighthq._internal.dom.GPUDevice):WgpuCompressedTextureSupport {
-    return cast { astc: ((cast device.features : flighthq._internal._Set).has('texture-compression-astc')), bc: ((cast device.features : flighthq._internal._Set).has('texture-compression-bc')), etc2: ((cast device.features : flighthq._internal._Set).has('texture-compression-etc2')) };
+    return cast { astc: ((cast (#if js device.features #else _Runtime.field(device, 'features') #end) : flighthq._internal._Set).has('texture-compression-astc')), bc: ((cast (#if js device.features #else _Runtime.field(device, 'features') #end) : flighthq._internal._Set).has('texture-compression-bc')), etc2: ((cast (#if js device.features #else _Runtime.field(device, 'features') #end) : flighthq._internal._Set).has('texture-compression-etc2')) };
     return cast null;
   }
 
@@ -121,7 +121,7 @@ class WgpuCompressedTexture {
     } : Dynamic));
     texture = _Runtime.callValue(uploadWgpuCompressedTextureContainer, cast ([state, container, compressed.payload, fallback, colorSpace] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast null; }
-    view = (cast texture : flighthq._internal.dom.GPUTexture).createView();
+    view = (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) #end);
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     sampler = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime, 'nearestSampler') : Dynamic));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(runtime, 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));

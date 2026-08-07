@@ -27,11 +27,11 @@ class WgpuClipContours {
     pass = _Runtime.field(runtime, 'renderPass');
     if ((cast ((cast !_Runtime.strictEquals(pass, null) : Bool) && (cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       var pipelines:Dynamic = _Runtime.callValue(WgpuClipContours.ensureClipContourPipelines__wgpuClipContours, cast ([state] : Array<Dynamic>));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipelines, 'erase'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(entry, 'bindGroup'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(entry, 'vertexBuffer'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.addNumbers(_Runtime.field(entry, 'depth'), 1.0));
-      if ((cast ((cast _Runtime.field(entry, 'vertexCount') : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(_Runtime.field(entry, 'vertexCount')); }
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipelines, 'erase')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipelines, 'erase')] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(entry, 'bindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(entry, 'bindGroup')] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(entry, 'vertexBuffer')) #else _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(entry, 'vertexBuffer')] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.addNumbers(_Runtime.field(entry, 'depth'), 1.0)) #else _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.addNumbers(_Runtime.field(entry, 'depth'), 1.0)] : Array<Dynamic>)) #end);
+      if ((cast ((cast _Runtime.field(entry, 'vertexCount') : Float) > (cast 0.0 : Float)) : Bool)) { (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(_Runtime.field(entry, 'vertexCount')) #else _Runtime.callProperty(pass, 'draw', cast ([_Runtime.field(entry, 'vertexCount')] : Array<Dynamic>)) #end); }
     }
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.pushMany(_Runtime.coalesce(_Runtime.field(runtime, 'retiredBuffers'), function():Dynamic return cast _Runtime.setField(runtime, 'retiredBuffers', cast ([] : Array<Dynamic>))), cast ([_Runtime.field(entry, 'vertexBuffer'), _Runtime.field(entry, 'uniformBuffer')] : Array<Dynamic>));
@@ -63,11 +63,11 @@ class WgpuClipContours {
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(pipelines, 'bindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
     if ((cast !_Runtime.strictEquals(pass, null) : Bool)) {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipelines, 'write'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, vertexBuffer);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(depth);
-      if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(vertexCount); }
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipelines, 'write')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipelines, 'write')] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, bindGroup] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, vertexBuffer) #else _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, vertexBuffer] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(depth) #else _Runtime.callProperty(pass, 'setStencilReference', cast ([depth] : Array<Dynamic>)) #end);
+      if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(vertexCount) #else _Runtime.callProperty(pass, 'draw', cast ([vertexCount] : Array<Dynamic>)) #end); }
     }
     _Runtime.callProperty(_Runtime.field(runtime, 'clipContourStack'), 'push', cast ([{ vertexBuffer: vertexBuffer, vertexCount: vertexCount, uniformBuffer: uniformBuffer, bindGroup: bindGroup, depth: depth }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentMaskDepth', (depth + 1.0));

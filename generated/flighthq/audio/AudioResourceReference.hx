@@ -119,7 +119,7 @@ class AudioResourceReference {
           var cause:Dynamic = __caughtError;
           return flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch4:Dynamic;
-            if ((cast signal.aborted : Bool)) {
+            if ((cast (#if js signal.aborted #else _Runtime.field(signal, 'aborted') #end) : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
                 _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
                 return flighthq._internal._Async.reject(cause);

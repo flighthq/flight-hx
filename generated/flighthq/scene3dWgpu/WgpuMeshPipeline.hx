@@ -61,15 +61,15 @@ class WgpuMeshPipeline {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(scene, 'activeMeshPipeline', pipeline);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(scene, 'frameBindGroup'));
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(scene, 'frameBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(scene, 'frameBindGroup')] : Array<Dynamic>)) #end);
     if ((cast _Runtime.field(pipeline, 'hasPbrSampleGroup') : Bool)) {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, _Runtime.callValue(ensureWgpuPbrSampleBindGroup, cast ([state] : Array<Dynamic>)));
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, _Runtime.callValue(ensureWgpuPbrSampleBindGroup, cast ([state] : Array<Dynamic>))) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, _Runtime.callValue(ensureWgpuPbrSampleBindGroup, cast ([state] : Array<Dynamic>))] : Array<Dynamic>)) #end);
     } else { if ((cast _Runtime.field(pipeline, 'hasShadowGroup') : Bool)) {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, _Runtime.callValue(ensureWgpuShadowSampleBindGroup, cast ([state] : Array<Dynamic>)));
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, _Runtime.callValue(ensureWgpuShadowSampleBindGroup, cast ([state] : Array<Dynamic>))) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, _Runtime.callValue(ensureWgpuShadowSampleBindGroup, cast ([state] : Array<Dynamic>))] : Array<Dynamic>)) #end);
     } }
     if ((cast _Runtime.field(pipeline, 'hasIblGroup') : Bool)) {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(4.0, _Runtime.callValue(ensureWgpuIblSampleBindGroup, cast ([state] : Array<Dynamic>)));
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(4.0, _Runtime.callValue(ensureWgpuIblSampleBindGroup, cast ([state] : Array<Dynamic>))) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([4.0, _Runtime.callValue(ensureWgpuIblSampleBindGroup, cast ([state] : Array<Dynamic>))] : Array<Dynamic>)) #end);
     }
   }
 
@@ -174,10 +174,10 @@ class WgpuMeshPipeline {
     skinning = (cast _Runtime.field(scene, 'skinningAdapter') : Null<WgpuSkinningAdapter>);
     boundDrawGroup = ((cast ((cast ((cast _Runtime.field(activePipeline, 'skinned') : Bool) && (cast !_Runtime.strictEquals(jointMatrices, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.callProperty(skinning, 'getDrawBindGroup', cast ([state, jointMatrices] : Array<Dynamic>)) : Dynamic) : (cast drawBindGroup : Dynamic));
     flighthq._internal._StaticIndex.writeUint32Array(WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, boundDrawGroup, WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(upload, 'vertexBuffer'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(subset.indexCount, 1.0, subset.indexOffset, 0.0, 0.0);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, boundDrawGroup, WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, boundDrawGroup, WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(upload, 'vertexBuffer')) #else _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')) #else _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(subset.indexCount, 1.0, subset.indexOffset, 0.0, 0.0) #else _Runtime.callProperty(pass, 'drawIndexed', cast ([subset.indexCount, 1.0, subset.indexOffset, 0.0, 0.0] : Array<Dynamic>)) #end);
   }
 
   @:noCompletion
@@ -213,9 +213,9 @@ class WgpuMeshPipeline {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeView'), null) : Bool)) {
       _Runtime.setField(scene, 'iblDummyCubeTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'iblDummyCubeView', (cast _Runtime.field(scene, 'iblDummyCubeTexture') : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }));
+      _Runtime.setField(scene, 'iblDummyCubeView', (#if js (cast _Runtime.field(scene, 'iblDummyCubeTexture') : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) #else _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)) #end));
       _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'iblDummyLutView', (cast _Runtime.field(scene, 'iblDummyLutTexture') : flighthq._internal.dom.GPUTexture).createView());
+      _Runtime.setField(scene, 'iblDummyLutView', (#if js (cast _Runtime.field(scene, 'iblDummyLutTexture') : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)) #end));
     }
     ibl = _Runtime.field(scene, 'ibl');
     u = WgpuMeshPipeline._iblSampleScratch__wgpuMeshPipeline;
@@ -303,7 +303,7 @@ class WgpuMeshPipeline {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyView'), null) : Bool)) {
       _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'shadowDummyView', (cast _Runtime.field(scene, 'shadowDummyTexture') : flighthq._internal.dom.GPUTexture).createView());
+      _Runtime.setField(scene, 'shadowDummyView', (#if js (cast _Runtime.field(scene, 'shadowDummyTexture') : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)) #end));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null) : Bool)) {
       _Runtime.setField(scene, 'iblUniformBuffer', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
@@ -313,9 +313,9 @@ class WgpuMeshPipeline {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeView'), null) : Bool)) {
       _Runtime.setField(scene, 'iblDummyCubeTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'iblDummyCubeView', (cast _Runtime.field(scene, 'iblDummyCubeTexture') : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }));
+      _Runtime.setField(scene, 'iblDummyCubeView', (#if js (cast _Runtime.field(scene, 'iblDummyCubeTexture') : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) #else _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)) #end));
       _Runtime.setField(scene, 'iblDummyLutTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'iblDummyLutView', (cast _Runtime.field(scene, 'iblDummyLutTexture') : flighthq._internal.dom.GPUTexture).createView());
+      _Runtime.setField(scene, 'iblDummyLutView', (#if js (cast _Runtime.field(scene, 'iblDummyLutTexture') : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)) #end));
     }
     shadow = _Runtime.callValue(WgpuMeshPipeline.writeWgpuShadowSampleUniform__wgpuMeshPipeline, cast ([state] : Array<Dynamic>));
     ibl = _Runtime.field(scene, 'ibl');
@@ -383,7 +383,7 @@ class WgpuMeshPipeline {
     if ((cast _Runtime.strictEquals(view, null) : Bool)) {
       var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture }, WgpuMeshPipeline.WHITE_PIXEL__wgpuMeshPipeline, { bytesPerRow: 4.0 }, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
-      (view = cast ((cast texture : flighthq._internal.dom.GPUTexture).createView() : Dynamic));
+      (view = cast ((#if js (cast texture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) #end) : Dynamic));
       _Runtime.setField(scene, 'placeholderView', view);
     }
     return cast view;
@@ -441,7 +441,7 @@ class WgpuMeshPipeline {
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyView'), null) : Bool)) {
       _Runtime.setField(scene, 'shadowDummyTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
-      _Runtime.setField(scene, 'shadowDummyView', (cast _Runtime.field(scene, 'shadowDummyTexture') : flighthq._internal.dom.GPUTexture).createView());
+      _Runtime.setField(scene, 'shadowDummyView', (#if js (cast _Runtime.field(scene, 'shadowDummyTexture') : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)) #end));
     }
     shadow = _Runtime.callValue(WgpuMeshPipeline.writeWgpuShadowSampleUniform__wgpuMeshPipeline, cast ([state] : Array<Dynamic>));
     view = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast _Runtime.field(shadow, 'depthView') : Dynamic) : (cast _Runtime.field(scene, 'shadowDummyView') : Dynamic));

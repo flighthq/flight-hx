@@ -38,16 +38,16 @@ class WgpuShadowMap {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'shadow'), null) : Bool)) {
-      (cast _Runtime.field(_Runtime.field(scene, 'shadow'), 'depthTexture') : flighthq._internal.dom.GPUTexture).destroy();
+      (#if js (cast _Runtime.field(_Runtime.field(scene, 'shadow'), 'depthTexture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(_Runtime.field(scene, 'shadow'), 'depthTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'shadow', null);
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyTexture'), null) : Bool)) {
-      (cast _Runtime.field(scene, 'shadowDummyTexture') : flighthq._internal.dom.GPUTexture).destroy();
+      (#if js (cast _Runtime.field(scene, 'shadowDummyTexture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'shadowDummyTexture', null);
       _Runtime.setField(scene, 'shadowDummyView', null);
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'shadowUniformBuffer'), null) : Bool)) {
-      (cast _Runtime.field(scene, 'shadowUniformBuffer') : flighthq._internal.dom.GPUBuffer).destroy();
+      (#if js (cast _Runtime.field(scene, 'shadowUniformBuffer') : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(_Runtime.field(scene, 'shadowUniformBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(scene, 'shadowUniformBuffer', null);
     }
     _Runtime.setField(scene, 'shadowComparisonSampler', null);
@@ -82,8 +82,8 @@ class WgpuShadowMap {
     }
     shadow = _Runtime.field(sceneRuntime, 'shadow');
     if ((cast _Runtime.strictEquals(shadow, null) : Bool)) {
-      var depthTexture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([DIRECTIONAL_SHADOW_MAP_SIZE, DIRECTIONAL_SHADOW_MAP_SIZE, 1.0] : Array<Dynamic>), format: _Runtime.globalValue('SHADOW_DEPTH_FORMAT'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
-      (shadow = cast ({ depthTexture: depthTexture, depthView: (cast depthTexture : flighthq._internal.dom.GPUTexture).createView(), enabled: false, mapHeight: DIRECTIONAL_SHADOW_MAP_SIZE, mapWidth: DIRECTIONAL_SHADOW_MAP_SIZE, matrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4), normalBiasWorld: 0.0, pcfRadius: 0.0, shadowBias: 0.0 } : Dynamic));
+      var depthTexture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([DIRECTIONAL_SHADOW_MAP_SIZE, DIRECTIONAL_SHADOW_MAP_SIZE, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+      (shadow = cast ({ depthTexture: depthTexture, depthView: (#if js (cast depthTexture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(depthTexture, 'createView', cast ([] : Array<Dynamic>)) #end), enabled: false, mapHeight: DIRECTIONAL_SHADOW_MAP_SIZE, mapWidth: DIRECTIONAL_SHADOW_MAP_SIZE, matrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4), normalBiasWorld: 0.0, pcfRadius: 0.0, shadowBias: 0.0 } : Dynamic));
       _Runtime.setField(sceneRuntime, 'shadow', shadow);
     }
     normalBiasWorld = _Runtime.multiplyNumbers(_Runtime.field(directionalLight, 'normalBias'), _Runtime.callValue(getOrthographicProjectionTexelSize, cast ([shadowCamera.projection, _Runtime.field(shadow, 'mapWidth'), _Runtime.field(shadow, 'mapHeight')] : Array<Dynamic>)));
@@ -91,8 +91,8 @@ class WgpuShadowMap {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([lightMatrix, shadowCamera, 1.0] : Array<Dynamic>));
     skinning = _Runtime.callValue(getWgpuSkinningAdapter, cast ([state] : Array<Dynamic>));
     rigidPipeline = _Runtime.callValue(WgpuShadowMap.ensureWgpuShadowDepthPipeline__wgpuShadowMap, cast ([state, false] : Array<Dynamic>));
-    pass = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(shadow, 'depthView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'store' } });
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, _Runtime.field(shadow, 'mapWidth'), _Runtime.field(shadow, 'mapHeight'), 0.0, 1.0);
+    pass = (#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(shadow, 'depthView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'store' } }) #else _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(shadow, 'depthView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'store' } }] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, _Runtime.field(shadow, 'mapWidth'), _Runtime.field(shadow, 'mapHeight'), 0.0, 1.0) #else _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, _Runtime.field(shadow, 'mapWidth'), _Runtime.field(shadow, 'mapHeight'), 0.0, 1.0] : Array<Dynamic>)) #end);
     boundPipeline = null;
     _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) {
       var mesh:Dynamic = cast _Runtime.UNDEFINED;
@@ -110,7 +110,7 @@ class WgpuShadowMap {
       upload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, mesh.geometry, skinned] : Array<Dynamic>));
       if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) : Bool)) { return; }
       if ((cast !_Runtime.strictEquals(pipeline, boundPipeline) : Bool)) {
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
+        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline) #else _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>)) #end);
         (boundPipeline = cast (pipeline : Dynamic));
       }
       world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
@@ -120,12 +120,12 @@ class WgpuShadowMap {
       rigidDrawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, WgpuShadowMap._shadowProxy__wgpuShadowMap] : Array<Dynamic>));
       drawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast rigidDrawBindGroup : Dynamic) : (cast _Runtime.callProperty(skinning, 'getDrawBindGroup', cast ([state, jointMatrices] : Array<Dynamic>)) : Dynamic));
       flighthq._internal._StaticIndex.writeUint32Array(WgpuShadowMap._dynamicOffsets__wgpuShadowMap, 0.0, _Runtime.field(sceneRuntime, 'pendingDrawOffset'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(upload, 'vertexBuffer'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat'));
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(_Runtime.field(upload, 'indexCount'), 1.0, 0.0, 0.0, 0.0);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(upload, 'vertexBuffer')) #else _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')) #else _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>)) #end);
+      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(_Runtime.field(upload, 'indexCount'), 1.0, 0.0, 0.0, 0.0) #else _Runtime.callProperty(pass, 'drawIndexed', cast ([_Runtime.field(upload, 'indexCount'), 1.0, 0.0, 0.0, 0.0] : Array<Dynamic>)) #end);
     }] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>)) #end);
     _Runtime.setField(shadow, 'enabled', true);
     _Runtime.setField(shadow, 'normalBiasWorld', normalBiasWorld);
     _Runtime.setField(shadow, 'pcfRadius', _Runtime.callValue(WgpuShadowMap.normalizeDirectionalShadowPcfRadius__wgpuShadowMap, cast ([_Runtime.field(directionalLight, 'pcfRadius')] : Array<Dynamic>)));
@@ -153,7 +153,7 @@ class WgpuShadowMap {
     skinning = _Runtime.callValue(getWgpuSkinningAdapter, cast ([state] : Array<Dynamic>));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.callProperty(skinning, 'extendShadowDepthPrelude', cast ([WgpuShadowMap.SHADOW_DEPTH_WGSL__wgpuShadowMap] : Array<Dynamic>)) : Dynamic) : (cast WgpuShadowMap.SHADOW_DEPTH_WGSL__wgpuShadowMap : Dynamic)) }] : Array<Dynamic>));
     layout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.callProperty(skinning, 'getDrawLayout', cast ([state] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.field(_Runtime.callValue(ensureWgpuScene3DLayouts, cast ([state] : Array<Dynamic>)), 'drawBindGroupLayout') : Dynamic))] : Array<Dynamic>) }] : Array<Dynamic>));
-    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.field(skinning, 'vertexBufferLayouts') : Dynamic) : (cast WgpuShadowMap.SHADOW_VERTEX_BUFFER_LAYOUTS__wgpuShadowMap : Dynamic)) }, primitive: { topology: 'triangle-list', frontFace: 'ccw', cullMode: 'front' }, depthStencil: { format: _Runtime.globalValue('SHADOW_DEPTH_FORMAT'), depthWriteEnabled: true, depthCompare: 'less' } }] : Array<Dynamic>));
+    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.field(skinning, 'vertexBufferLayouts') : Dynamic) : (cast WgpuShadowMap.SHADOW_VERTEX_BUFFER_LAYOUTS__wgpuShadowMap : Dynamic)) }, primitive: { topology: 'triangle-list', frontFace: 'ccw', cullMode: 'front' }, depthStencil: { format: SHADOW_DEPTH_FORMAT, depthWriteEnabled: true, depthCompare: 'less' } }] : Array<Dynamic>));
     if ((cast skinned : Bool)) { _Runtime.setField(scene, 'shadowDepthSkinnedPipeline', pipeline); } else { _Runtime.setField(scene, 'shadowDepthPipeline', pipeline); }
     return cast pipeline;
     return cast null;

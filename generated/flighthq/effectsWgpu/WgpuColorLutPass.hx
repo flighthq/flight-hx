@@ -28,19 +28,19 @@ class WgpuColorLutPass {
     fs = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
     texture = _Runtime.callValue(WgpuColorLutPass.uploadLutTexture__wgpuColorLutPass, cast ([state, lut, cache] : Array<Dynamic>));
     sourceBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field((cast source : WgpuRenderTarget), 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-    lutBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: '3d' }) }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
+    lutBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: '3d' }) #else _Runtime.callProperty(texture, 'createView', cast ([{ dimension: '3d' }] : Array<Dynamic>)) #end) }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = _Runtime.callValue(WgpuColorLutPass.getLutPipeline__wgpuColorLutPass, cast ([state, _Runtime.field((cast dest : WgpuRenderTarget), 'format')] : Array<Dynamic>));
     slotOffset = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([slotOffset, function(f32:Dynamic) {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.field(lut, 'size'));
     }] : Array<Dynamic>));
     pass = _Runtime.callProperty(fs, 'beginPass', cast ([(cast dest : WgpuRenderTarget), 'load'] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, sourceBG);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, lutBG);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>)) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>)] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, sourceBG) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, sourceBG] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, lutBG) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, lutBG] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0) #else _Runtime.callProperty(pass, 'draw', cast ([6.0] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>)) #end);
   }
 
   public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
@@ -88,7 +88,7 @@ class WgpuColorLutPass {
     n = _Runtime.field(lut, 'size');
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut) : Bool)) : Bool)) { return cast _Runtime.field(cache, 'texture'); }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(cache, 'texture'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(cache, 'size'), n) : Bool)) : Bool)) {
-      ({ final __hostTypeCall0 = _Runtime.field(cache, 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
+      (#if js ({ final __hostTypeCall0 = _Runtime.field(cache, 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(cache, 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(cache, 'texture', flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(cache, 'size', n);
     }

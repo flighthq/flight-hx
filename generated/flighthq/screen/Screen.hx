@@ -105,8 +105,8 @@ class Screen {
       if ((cast ((cast _cursorTracking : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) : Bool)) { return; }
       (_cursorTracking = cast (true : Dynamic));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pointermove', function(e:flighthq._internal.dom.PointerEvent) {
-        (_cursorX = cast (e.screenX : Dynamic));
-        (_cursorY = cast (e.screenY : Dynamic));
+        (_cursorX = cast ((#if js e.screenX #else _Runtime.field(e, 'screenX') #end) : Dynamic));
+        (_cursorY = cast ((#if js e.screenY #else _Runtime.field(e, 'screenY') #end) : Dynamic));
       }] : Array<Dynamic>));
     };
     upgradeToScreenDetails = function upgradeToScreenDetails(details:ScreenDetails__screen):Void {
@@ -158,17 +158,17 @@ class Screen {
       (out.id = cast (0.0 : Dynamic));
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
-      (out.width = cast ((cast s : flighthq._internal.dom.Screen).width : Dynamic));
-      (out.height = cast ((cast s : flighthq._internal.dom.Screen).height : Dynamic));
-      (out.workWidth = cast ((cast s : flighthq._internal.dom.Screen).availWidth : Dynamic));
-      (out.workHeight = cast ((cast s : flighthq._internal.dom.Screen).availHeight : Dynamic));
+      (out.width = cast ((#if js (cast s : flighthq._internal.dom.Screen).width #else _Runtime.field(s, 'width') #end) : Dynamic));
+      (out.height = cast ((#if js (cast s : flighthq._internal.dom.Screen).height #else _Runtime.field(s, 'height') #end) : Dynamic));
+      (out.workWidth = cast ((#if js (cast s : flighthq._internal.dom.Screen).availWidth #else _Runtime.field(s, 'availWidth') #end) : Dynamic));
+      (out.workHeight = cast ((#if js (cast s : flighthq._internal.dom.Screen).availHeight #else _Runtime.field(s, 'availHeight') #end) : Dynamic));
       (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
       (out.isPrimary = cast (true : Dynamic));
       (out.rotation = cast (_Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
       (out.orientation = cast (_Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
       (out.refreshRate = cast (-1.0 : Dynamic));
-      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).colorDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).pixelDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((#if js (cast s : flighthq._internal.dom.Screen).colorDepth #else _Runtime.field(s, 'colorDepth') #end)), 'number') : Bool) ? (cast (#if js (cast s : flighthq._internal.dom.Screen).colorDepth #else _Runtime.field(s, 'colorDepth') #end) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((#if js (cast s : flighthq._internal.dom.Screen).pixelDepth #else _Runtime.field(s, 'pixelDepth') #end)), 'number') : Bool) ? (cast (#if js (cast s : flighthq._internal.dom.Screen).pixelDepth #else _Runtime.field(s, 'pixelDepth') #end) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
       (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
       (out.isHdr = cast (_Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -521,9 +521,9 @@ class Screen {
         return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var status:Dynamic = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), function(__awaitValue11:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((#if js (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }) #else _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }] : Array<Dynamic>)) #end), function(__awaitValue11:Dynamic):Dynamic {
               status = __awaitValue11;
-              return flighthq._internal._Async.flowReturn((cast (cast status : flighthq._internal.dom.PermissionStatus).state : String));
+              return flighthq._internal._Async.flowReturn((cast (#if js (cast status : flighthq._internal.dom.PermissionStatus).state #else _Runtime.field(status, 'state') #end) : String));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -639,15 +639,15 @@ class Screen {
 
   public static function getWebColorSpace__screen():ScreenColorSpace {
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia')), 'function') : Bool)) : Bool)) { return cast 'srgb'; }
-    if ((cast (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'rec2020'; }
-    if ((cast (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'display-p3'; }
+    if ((cast (#if js (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches #else _Runtime.field(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)), 'matches') #end) : Bool)) { return cast 'rec2020'; }
+    if ((cast (#if js (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches #else _Runtime.field(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)), 'matches') #end) : Bool)) { return cast 'display-p3'; }
     return cast 'srgb';
     return cast null;
   }
 
   public static function getWebIsHdr__screen():Bool {
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia')), 'function') : Bool)) : Bool)) { return cast false; }
-    return cast (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches;
+    return cast (#if js (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches #else _Runtime.field(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)), 'matches') #end);
     return cast null;
   }
 
@@ -677,7 +677,7 @@ class Screen {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) { return cast null; }
     s = (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen') : Dynamic);
-    return cast _Runtime.coalesce((cast s : flighthq._internal.dom.Screen).orientation, function():Dynamic return cast null);
+    return cast _Runtime.coalesce((#if js (cast s : flighthq._internal.dom.Screen).orientation #else _Runtime.field(s, 'orientation') #end), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -696,18 +696,18 @@ class Screen {
     status = null;
     cancelled = false;
     handleChange = function() {
-      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { _Runtime.callValue(listener, cast ([(cast status.state : String)] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { _Runtime.callValue(listener, cast ([(cast (#if js status.state #else _Runtime.field(status, 'state') #end) : String)] : Array<Dynamic>)); }
     };
-    flighthq._internal._Async.recover(_Runtime.callProperty((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), 'then', cast ([function(s:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((#if js (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }) #else _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }] : Array<Dynamic>)) #end), 'then', cast ([function(s:Dynamic) {
       if ((cast cancelled : Bool)) { return; }
       (status = cast (s : Dynamic));
-      (cast s : flighthq._internal.dom.PermissionStatus).addEventListener('change', handleChange);
+      (#if js (cast s : flighthq._internal.dom.PermissionStatus).addEventListener('change', handleChange) #else _Runtime.callProperty(s, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>)) #end);
     }] : Array<Dynamic>)), function() {
 
     });
     return cast function() {
       (cancelled = cast (true : Dynamic));
-      ({ final __hostTypeCall20 = status; __hostTypeCall20 == null ? _Runtime.UNDEFINED : __hostTypeCall20.removeEventListener('change', handleChange); });
+      (#if js ({ final __hostTypeCall20 = status; __hostTypeCall20 == null ? _Runtime.UNDEFINED : __hostTypeCall20.removeEventListener('change', handleChange); }) #else _Runtime.callOptionalProperty(status, 'removeEventListener', cast (['change', handleChange] : Array<Dynamic>)) #end);
     };
     return cast null;
   }

@@ -3275,10 +3275,10 @@
     "lowered": 13067,
     "packages": 142,
     "staticEmission": {
-      "booleanAndExpressions": 2019,
-      "booleanConditionalExpressions": 2829,
-      "booleanOrExpressions": 2502,
-      "booleanTruthinessUses": 12898,
+      "booleanAndExpressions": 2022,
+      "booleanConditionalExpressions": 2861,
+      "booleanOrExpressions": 2504,
+      "booleanTruthinessUses": 12910,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,
@@ -3375,12 +3375,12 @@
         "asyncFlowForOfValues": 8
       },
       "indexedAccesses": {
-        "reads": 7245,
+        "reads": 7267,
         "writes": 3421
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 4590,
+          "reads": 4612,
           "writes": 715
         },
         "ArrayOrFloat32Array": {
@@ -3428,7 +3428,7 @@
           "writes": 379
         }
       },
-      "numericRelations": 6109,
+      "numericRelations": 6116,
       "syntheticArrayReads": {
         "highArityArguments": 27,
         "iterationBindings": 138

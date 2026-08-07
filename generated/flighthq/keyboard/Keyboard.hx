@@ -112,11 +112,11 @@ class Keyboard {
       if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function() {
 
       }; }
-      (cast viewport : flighthq._internal.dom.VisualViewport).addEventListener('resize', fire);
-      (cast viewport : flighthq._internal.dom.VisualViewport).addEventListener('scroll', fire);
+      (#if js (cast viewport : flighthq._internal.dom.VisualViewport).addEventListener('resize', fire) #else _Runtime.callProperty(viewport, 'addEventListener', cast (['resize', fire] : Array<Dynamic>)) #end);
+      (#if js (cast viewport : flighthq._internal.dom.VisualViewport).addEventListener('scroll', fire) #else _Runtime.callProperty(viewport, 'addEventListener', cast (['scroll', fire] : Array<Dynamic>)) #end);
       return cast function() {
-        (cast viewport : flighthq._internal.dom.VisualViewport).removeEventListener('resize', fire);
-        (cast viewport : flighthq._internal.dom.VisualViewport).removeEventListener('scroll', fire);
+        (#if js (cast viewport : flighthq._internal.dom.VisualViewport).removeEventListener('resize', fire) #else _Runtime.callProperty(viewport, 'removeEventListener', cast (['resize', fire] : Array<Dynamic>)) #end);
+        (#if js (cast viewport : flighthq._internal.dom.VisualViewport).removeEventListener('scroll', fire) #else _Runtime.callProperty(viewport, 'removeEventListener', cast (['scroll', fire] : Array<Dynamic>)) #end);
       };
     }, show: function() {
       var vk:Dynamic = cast _Runtime.UNDEFINED;
@@ -190,14 +190,14 @@ class Keyboard {
     vk = _Runtime.callValue(Keyboard.getVirtualKeyboard__keyboard, cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
       var rect:Dynamic = _Runtime.field(vk, 'boundingRect');
-      return cast { height: (cast rect : flighthq._internal.dom.DOMRect).height, width: (cast rect : flighthq._internal.dom.DOMRect).width, x: (cast rect : flighthq._internal.dom.DOMRect).x, y: (cast rect : flighthq._internal.dom.DOMRect).y };
+      return cast { height: (#if js (cast rect : flighthq._internal.dom.DOMRect).height #else _Runtime.field(rect, 'height') #end), width: (#if js (cast rect : flighthq._internal.dom.DOMRect).width #else _Runtime.field(rect, 'width') #end), x: (#if js (cast rect : flighthq._internal.dom.DOMRect).x #else _Runtime.field(rect, 'x') #end), y: (#if js (cast rect : flighthq._internal.dom.DOMRect).y #else _Runtime.field(rect, 'y') #end) };
     }
     viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
     if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    shrink = _Runtime.subtractNumbers(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), (cast viewport : flighthq._internal.dom.VisualViewport).height);
+    shrink = _Runtime.subtractNumbers(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), (#if js (cast viewport : flighthq._internal.dom.VisualViewport).height #else _Runtime.field(viewport, 'height') #end));
     height = ((cast ((cast shrink : Float) > (cast 0.0 : Float)) : Bool) ? (cast shrink : Dynamic) : (cast 0.0 : Dynamic));
     width = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
-    y = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast viewport : flighthq._internal.dom.VisualViewport).height : Dynamic) : (cast 0.0 : Dynamic));
+    y = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast (#if js (cast viewport : flighthq._internal.dom.VisualViewport).height #else _Runtime.field(viewport, 'height') #end) : Dynamic) : (cast 0.0 : Dynamic));
     return cast { height: height, width: width, x: 0.0, y: y };
     return cast null;
   }

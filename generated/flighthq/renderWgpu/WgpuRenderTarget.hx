@@ -22,8 +22,8 @@ class WgpuRenderTarget {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = (cast _Runtime.field(runtime, 'commandEncoder') : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: colorView, loadOp: loadOp, storeOp: 'store', clearValue: clearColor }] : Array<Dynamic>), depthStencilAttachment: { view: depthStencilView, depthClearValue: depthClearValue, depthLoadOp: depthLoadOp, depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } });
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, width, height, 0.0, 1.0);
+    pass = (#if js (cast _Runtime.field(runtime, 'commandEncoder') : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: colorView, loadOp: loadOp, storeOp: 'store', clearValue: clearColor }] : Array<Dynamic>), depthStencilAttachment: { view: depthStencilView, depthClearValue: depthClearValue, depthLoadOp: depthLoadOp, depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } }) #else _Runtime.callProperty(_Runtime.field(runtime, 'commandEncoder'), 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: colorView, loadOp: loadOp, storeOp: 'store', clearValue: clearColor }] : Array<Dynamic>), depthStencilAttachment: { view: depthStencilView, depthClearValue: depthClearValue, depthLoadOp: depthLoadOp, depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } }] : Array<Dynamic>)) #end);
+    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, width, height, 0.0, 1.0) #else _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, width, height, 0.0, 1.0] : Array<Dynamic>)) #end);
     return cast pass;
     return cast null;
   }
@@ -34,7 +34,7 @@ class WgpuRenderTarget {
     var depthLoadOp:flighthq._internal.dom.GPULoadOp = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
-      (cast _Runtime.field(runtime, 'renderPass') : flighthq._internal.dom.GPURenderPassEncoder).end();
+      (#if js (cast _Runtime.field(runtime, 'renderPass') : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(runtime, 'renderPass', null);
     }
     _Runtime.callProperty(_Runtime.field(runtime, 'renderTargetStack'), 'push', cast ([{ canvasTextureView: _Runtime.field(runtime, 'canvasTextureView'), canvasViewCleared: _Runtime.field(runtime, 'canvasViewCleared'), depthStencilView: _Runtime.field(runtime, 'depthStencilView'), renderTargetViewport: _Runtime.field(runtime, 'renderTargetViewport'), renderTransform2D: _Runtime.field(state, 'renderTransform2D'), colorFormat: _Runtime.field(runtime, 'currentColorFormat'), renderTarget: _Runtime.field(runtime, 'currentRenderTarget') }] : Array<Dynamic>));
@@ -64,10 +64,10 @@ class WgpuRenderTarget {
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
-    view = (cast texture : flighthq._internal.dom.GPUTexture).createView();
+    view = (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) #end);
     bindGroup = _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, view] : Array<Dynamic>));
     depthStencilTexture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
-    depthStencilView = (cast depthStencilTexture : flighthq._internal.dom.GPUTexture).createView();
+    depthStencilView = (#if js (cast depthStencilTexture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(depthStencilTexture, 'createView', cast ([] : Array<Dynamic>)) #end);
     return cast { bindGroup: bindGroup, colorSpace: colorSpace, texture: texture, view: view, depthStencilTexture: depthStencilTexture, depthStencilView: depthStencilView, format: format, clearColors: cast ([] : Array<Dynamic>), clearDepth: 1.0, width: w, height: h };
     return cast null;
   }
@@ -86,8 +86,8 @@ class WgpuRenderTarget {
 
   @:noCompletion
   public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget):Void {
-    (cast _Runtime.field(target, 'texture') : flighthq._internal.dom.GPUTexture).destroy();
-    (cast _Runtime.field(target, 'depthStencilTexture') : flighthq._internal.dom.GPUTexture).destroy();
+    (#if js (cast _Runtime.field(target, 'texture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+    (#if js (cast _Runtime.field(target, 'depthStencilTexture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
   }
 
   @:noCompletion
@@ -134,7 +134,7 @@ class WgpuRenderTarget {
     var saved:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
-      (cast _Runtime.field(runtime, 'renderPass') : flighthq._internal.dom.GPURenderPassEncoder).end();
+      (#if js (cast _Runtime.field(runtime, 'renderPass') : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>)) #end);
       _Runtime.setField(runtime, 'renderPass', null);
     }
     saved = _Runtime.callProperty(_Runtime.field(runtime, 'renderTargetStack'), 'pop', cast ([] : Array<Dynamic>));
@@ -169,15 +169,15 @@ class WgpuRenderTarget {
     if ((cast ((cast _Runtime.strictEquals(w, _Runtime.field(target, 'width')) : Bool) && (cast _Runtime.strictEquals(h, _Runtime.field(target, 'height')) : Bool)) : Bool)) { return; }
     _Runtime.setField(target, 'width', w);
     _Runtime.setField(target, 'height', h);
-    (cast _Runtime.field(target, 'texture') : flighthq._internal.dom.GPUTexture).destroy();
-    (cast _Runtime.field(target, 'depthStencilTexture') : flighthq._internal.dom.GPUTexture).destroy();
+    (#if js (cast _Runtime.field(target, 'texture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+    (#if js (cast _Runtime.field(target, 'depthStencilTexture') : flighthq._internal.dom.GPUTexture).destroy() #else _Runtime.callProperty(_Runtime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
     newTexture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
     _Runtime.setField(target, 'texture', newTexture);
-    _Runtime.setField(target, 'view', (cast newTexture : flighthq._internal.dom.GPUTexture).createView());
+    _Runtime.setField(target, 'view', (#if js (cast newTexture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(newTexture, 'createView', cast ([] : Array<Dynamic>)) #end));
     _Runtime.setField(target, 'bindGroup', _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, _Runtime.field(target, 'view')] : Array<Dynamic>)));
     newDepth = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
     _Runtime.setField(target, 'depthStencilTexture', newDepth);
-    _Runtime.setField(target, 'depthStencilView', (cast newDepth : flighthq._internal.dom.GPUTexture).createView());
+    _Runtime.setField(target, 'depthStencilView', (#if js (cast newDepth : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(newDepth, 'createView', cast ([] : Array<Dynamic>)) #end));
   }
 
   public static function isWgpuColorPreserved__wgpuRenderTarget(preserve:Dynamic, index:Float):Bool {

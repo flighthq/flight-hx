@@ -17,7 +17,7 @@ class DomMaterials {
 
   @:noCompletion
   public static function applyDomBlendMode(element:flighthq._internal.dom.HTMLElement, value:Null<BlendMode>):Void {
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).mixBlendMode = _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(DomMaterials.DOM_BLEND_MODE__domMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ''));
+    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).mixBlendMode = _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(DomMaterials.DOM_BLEND_MODE__domMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast '')) #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'mixBlendMode', _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(DomMaterials.DOM_BLEND_MODE__domMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast '')) #end);
   }
 
   public static function enableDomBlendModeSupport(state:DomRenderState):Void {

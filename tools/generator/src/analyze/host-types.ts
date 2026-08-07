@@ -262,7 +262,12 @@ export function hostTypeIdentityForValueSymbol(
   node: ts.Identifier,
   checker: ts.TypeChecker | undefined,
 ): HostTypeIdentity | undefined {
-  return checker ? identityForSymbol(checker.getSymbolAtLocation(node), checker) : undefined;
+  if (!checker) return undefined;
+  const symbol = unaliasSymbol(checker.getSymbolAtLocation(node), checker);
+  const declarations = symbol?.declarations ?? [];
+  if (declarations.some((declaration) => isEcmaScriptLibrary(declaration.getSourceFile()))) return undefined;
+  if (!declarations.some(isHostAmbientDeclaration)) return undefined;
+  return hostTypeIdentity(checker.getTypeAtLocation(node), checker) ?? identityForSymbol(symbol, checker);
 }
 
 export function hostTypeIdentityForExpression(

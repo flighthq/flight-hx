@@ -718,10 +718,10 @@ class Sensors {
             __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
                 var status:Dynamic = cast _Runtime.UNDEFINED;
-                return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast permissionName : flighthq._internal.dom.PermissionName) }), function(__awaitValue8:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((#if js (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast permissionName : flighthq._internal.dom.PermissionName) }) #else _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions'), 'query', cast ([{ name: (cast permissionName : flighthq._internal.dom.PermissionName) }] : Array<Dynamic>)) #end), function(__awaitValue8:Dynamic):Dynamic {
                   status = __awaitValue8;
                   var __flowBranch9:Dynamic;
-                  if ((cast _Runtime.strictEquals((cast status : flighthq._internal.dom.PermissionStatus).state, 'granted') : Bool)) {
+                  if ((cast _Runtime.strictEquals((#if js (cast status : flighthq._internal.dom.PermissionStatus).state #else _Runtime.field(status, 'state') #end), 'granted') : Bool)) {
                     __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
                       return flighthq._internal._Async.flowReturn('granted');
                     });
@@ -730,7 +730,7 @@ class Sensors {
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
                     var __flowBranch10:Dynamic;
-                    if ((cast _Runtime.strictEquals((cast status : flighthq._internal.dom.PermissionStatus).state, 'denied') : Bool)) {
+                    if ((cast _Runtime.strictEquals((#if js (cast status : flighthq._internal.dom.PermissionStatus).state #else _Runtime.field(status, 'state') #end), 'denied') : Bool)) {
                       __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
                         return flighthq._internal._Async.flowReturn('denied');
                       });

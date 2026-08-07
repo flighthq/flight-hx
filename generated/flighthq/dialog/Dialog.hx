@@ -293,15 +293,15 @@ class Dialog {
     return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
       try {
         var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
-        ((cast input : flighthq._internal.dom.HTMLInputElement).type = 'file');
-        if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) { ((cast input : flighthq._internal.dom.HTMLInputElement).multiple = true); }
-        ((cast input : Dynamic).webkitdirectory = true);
-        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('change', function() {
+        (#if js ((cast input : flighthq._internal.dom.HTMLInputElement).type = 'file') #else _Runtime.setField(input, 'type', 'file') #end);
+        if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) { (#if js ((cast input : flighthq._internal.dom.HTMLInputElement).multiple = true) #else _Runtime.setField(input, 'multiple', true) #end); }
+        (#if js ((cast input : Dynamic).webkitdirectory = true) #else _Runtime.setField((cast input : Dynamic), 'webkitdirectory', true) #end);
+        (#if js (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('change', function() {
           var files:Dynamic = cast _Runtime.UNDEFINED;
           var seenDirs:Dynamic = cast _Runtime.UNDEFINED;
           var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
-          files = (cast input : flighthq._internal.dom.HTMLInputElement).files;
-          if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((cast files : flighthq._internal.dom.FileList).length, 0.0) : Bool)) : Bool)) {
+          files = (#if js (cast input : flighthq._internal.dom.HTMLInputElement).files #else _Runtime.field(input, 'files') #end);
+          if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end), 0.0) : Bool)) : Bool)) {
             _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
             return;
           }
@@ -309,9 +309,9 @@ class Dialog {
           handles = cast ([] : Array<Dynamic>);
           {
             var i:Dynamic = 0.0;
-            while ((cast ((cast i : Float) < (cast (cast files : flighthq._internal.dom.FileList).length : Float)) : Bool)) {
-              var rel:Dynamic = _Runtime.coalesce((cast _Runtime.getIndex(files, i) : Dynamic).webkitRelativePath, function():Dynamic return cast '');
-              var dirName:Dynamic = _Runtime.orValue(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(rel, 'split', cast (['/'] : Array<Dynamic>)), 0.0), function():Dynamic return cast (cast _Runtime.getIndex(files, i) : flighthq._internal.dom.File).name);
+            while ((cast ((cast i : Float) < (cast (#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end) : Float)) : Bool)) {
+              var rel:Dynamic = _Runtime.coalesce((#if js (cast _Runtime.getIndex(files, i) : Dynamic).webkitRelativePath #else _Runtime.field((cast _Runtime.getIndex(files, i) : Dynamic), 'webkitRelativePath') #end), function():Dynamic return cast '');
+              var dirName:Dynamic = _Runtime.orValue(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(rel, 'split', cast (['/'] : Array<Dynamic>)), 0.0), function():Dynamic return cast (#if js (cast _Runtime.getIndex(files, i) : flighthq._internal.dom.File).name #else _Runtime.field(_Runtime.getIndex(files, i), 'name') #end));
               if ((cast !(cast ((cast seenDirs : flighthq._internal._Set).has(dirName)) : Bool) : Bool)) {
                 ((cast seenDirs : flighthq._internal._Set).add(dirName));
                 _Runtime.callProperty(handles, 'push', cast ([{ kind: 'Directory', name: dirName, path: null }] : Array<Dynamic>));
@@ -320,9 +320,33 @@ class Dialog {
             }
           }
           _Runtime.callValue(resolve, cast ([handles] : Array<Dynamic>));
-        });
-        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function() return _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>)));
-        (cast input : flighthq._internal.dom.HTMLInputElement).click();
+        }) #else _Runtime.callProperty(input, 'addEventListener', cast (['change', function() {
+          var files:Dynamic = cast _Runtime.UNDEFINED;
+          var seenDirs:Dynamic = cast _Runtime.UNDEFINED;
+          var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
+          files = (#if js (cast input : flighthq._internal.dom.HTMLInputElement).files #else _Runtime.field(input, 'files') #end);
+          if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end), 0.0) : Bool)) : Bool)) {
+            _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
+            return;
+          }
+          seenDirs = _Runtime.construct(_Runtime.globalValue('Set'), []);
+          handles = cast ([] : Array<Dynamic>);
+          {
+            var i:Dynamic = 0.0;
+            while ((cast ((cast i : Float) < (cast (#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end) : Float)) : Bool)) {
+              var rel:Dynamic = _Runtime.coalesce((#if js (cast _Runtime.getIndex(files, i) : Dynamic).webkitRelativePath #else _Runtime.field((cast _Runtime.getIndex(files, i) : Dynamic), 'webkitRelativePath') #end), function():Dynamic return cast '');
+              var dirName:Dynamic = _Runtime.orValue(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(rel, 'split', cast (['/'] : Array<Dynamic>)), 0.0), function():Dynamic return cast (#if js (cast _Runtime.getIndex(files, i) : flighthq._internal.dom.File).name #else _Runtime.field(_Runtime.getIndex(files, i), 'name') #end));
+              if ((cast !(cast ((cast seenDirs : flighthq._internal._Set).has(dirName)) : Bool) : Bool)) {
+                ((cast seenDirs : flighthq._internal._Set).add(dirName));
+                _Runtime.callProperty(handles, 'push', cast ([{ kind: 'Directory', name: dirName, path: null }] : Array<Dynamic>));
+              }
+              i++;
+            }
+          }
+          _Runtime.callValue(resolve, cast ([handles] : Array<Dynamic>));
+        }] : Array<Dynamic>)) #end);
+        (#if js (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function() return _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>))) #else _Runtime.callProperty(input, 'addEventListener', cast (['cancel', function() return _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>))] : Array<Dynamic>)) #end);
+        (#if js (cast input : flighthq._internal.dom.HTMLInputElement).click() #else _Runtime.callProperty(input, 'click', cast ([] : Array<Dynamic>)) #end);
       } catch (__error:Dynamic) {
         _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
       }
@@ -340,33 +364,50 @@ class Dialog {
     return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
       try {
         var input:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
-        ((cast input : flighthq._internal.dom.HTMLInputElement).type = 'file');
-        if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) { ((cast input : flighthq._internal.dom.HTMLInputElement).multiple = true); }
+        (#if js ((cast input : flighthq._internal.dom.HTMLInputElement).type = 'file') #else _Runtime.setField(input, 'type', 'file') #end);
+        if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) { (#if js ((cast input : flighthq._internal.dom.HTMLInputElement).multiple = true) #else _Runtime.setField(input, 'multiple', true) #end); }
         if ((cast _Runtime.strictEquals(options.directory, true) : Bool)) {
-          ((cast input : Dynamic).webkitdirectory = true);
+          (#if js ((cast input : Dynamic).webkitdirectory = true) #else _Runtime.setField((cast input : Dynamic), 'webkitdirectory', true) #end);
         }
         var accept:Dynamic = _Runtime.callValue(Dialog.buildAcceptAttribute__dialog, cast ([options.filters] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(accept, '') : Bool)) { ((cast input : flighthq._internal.dom.HTMLInputElement).accept = accept); }
-        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('change', function() {
+        if ((cast !_Runtime.strictEquals(accept, '') : Bool)) { (#if js ((cast input : flighthq._internal.dom.HTMLInputElement).accept = accept) #else _Runtime.setField(input, 'accept', accept) #end); }
+        (#if js (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('change', function() {
           var files:Dynamic = cast _Runtime.UNDEFINED;
           var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
-          files = (cast input : flighthq._internal.dom.HTMLInputElement).files;
-          if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((cast files : flighthq._internal.dom.FileList).length, 0.0) : Bool)) : Bool)) {
+          files = (#if js (cast input : flighthq._internal.dom.HTMLInputElement).files #else _Runtime.field(input, 'files') #end);
+          if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end), 0.0) : Bool)) : Bool)) {
             _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
             return;
           }
           handles = cast ([] : Array<Dynamic>);
           {
             var i:Dynamic = 0.0;
-            while ((cast ((cast i : Float) < (cast (cast files : flighthq._internal.dom.FileList).length : Float)) : Bool)) {
-              _Runtime.callProperty(handles, 'push', cast ([{ kind: 'File', name: (cast _Runtime.getIndex(files, i) : flighthq._internal.dom.File).name, path: null }] : Array<Dynamic>));
+            while ((cast ((cast i : Float) < (cast (#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end) : Float)) : Bool)) {
+              _Runtime.callProperty(handles, 'push', cast ([{ kind: 'File', name: (#if js (cast _Runtime.getIndex(files, i) : flighthq._internal.dom.File).name #else _Runtime.field(_Runtime.getIndex(files, i), 'name') #end), path: null }] : Array<Dynamic>));
               i++;
             }
           }
           _Runtime.callValue(resolve, cast ([handles] : Array<Dynamic>));
-        });
-        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function() return _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>)));
-        (cast input : flighthq._internal.dom.HTMLInputElement).click();
+        }) #else _Runtime.callProperty(input, 'addEventListener', cast (['change', function() {
+          var files:Dynamic = cast _Runtime.UNDEFINED;
+          var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
+          files = (#if js (cast input : flighthq._internal.dom.HTMLInputElement).files #else _Runtime.field(input, 'files') #end);
+          if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end), 0.0) : Bool)) : Bool)) {
+            _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
+            return;
+          }
+          handles = cast ([] : Array<Dynamic>);
+          {
+            var i:Dynamic = 0.0;
+            while ((cast ((cast i : Float) < (cast (#if js (cast files : flighthq._internal.dom.FileList).length #else _Runtime.field(files, 'length') #end) : Float)) : Bool)) {
+              _Runtime.callProperty(handles, 'push', cast ([{ kind: 'File', name: (#if js (cast _Runtime.getIndex(files, i) : flighthq._internal.dom.File).name #else _Runtime.field(_Runtime.getIndex(files, i), 'name') #end), path: null }] : Array<Dynamic>));
+              i++;
+            }
+          }
+          _Runtime.callValue(resolve, cast ([handles] : Array<Dynamic>));
+        }] : Array<Dynamic>)) #end);
+        (#if js (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function() return _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>))) #else _Runtime.callProperty(input, 'addEventListener', cast (['cancel', function() return _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>))] : Array<Dynamic>)) #end);
+        (#if js (cast input : flighthq._internal.dom.HTMLInputElement).click() #else _Runtime.callProperty(input, 'click', cast ([] : Array<Dynamic>)) #end);
       } catch (__error:Dynamic) {
         _Runtime.callValue(resolve, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
       }
